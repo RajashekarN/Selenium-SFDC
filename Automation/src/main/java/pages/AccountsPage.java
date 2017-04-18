@@ -12,7 +12,7 @@ import supportlibraries.ReusableLibrary;
 import supportlibraries.ScriptHelper;
 import supportlibraries.Utility_Functions;
 
-public class accountsPage extends ReusableLibrary {
+public class AccountsPage extends ReusableLibrary {
 	/*
 	 * Constructor to initialize the business component library
 	 * 
@@ -20,71 +20,86 @@ public class accountsPage extends ReusableLibrary {
 	 * {@link DriverScript}
 	 */
 
-	public accountsPage(ScriptHelper scriptHelper) {
+	public AccountsPage(ScriptHelper scriptHelper) {
 		super(scriptHelper);
 		PageFactory.initElements(driver, this);
 		// new WebDriverUtil(driver);
 		utility = new Utility_Functions(scriptHelper);
 	}
 
-	@FindBy(xpath = "//*[text()='Accounts']")
+	@FindBy(xpath = "//div[@class='slds-context-bar oneGlobalNav']//span[text()='Accounts']")
 	WebElement menu_Accounts;
 
-	@FindBy(xpath = ".//ul[@class='slds-button-group slds-m-left--xx-small oneActionsRibbon forceActionsContainer']//li/a/div[text()='New']")
+	@FindBy(xpath = "//ul[@class='slds-button-group slds-m-left--xx-small oneActionsRibbon forceActionsContainer']//li/a/div[text()='New']")
 	WebElement newAccount;
 
-	@FindBy(xpath = ".//button[text()='Continue']")
+	@FindBy(xpath = "//div[@class='slds-page-header slds-grid slds-grid--align-spread slds-grid--vertical-align-center']//button[text()='Continue']")
 	WebElement continueButton;
 
-
-	@FindBy(xpath = ".//*[@id='showHideButton']")
+	@FindBy(xpath = "//*[@id='showHideButton']")
 	WebElement viewAllFieldsButton;	
 
-	@FindBy(xpath = "//*[text()='Related']")
+	@FindBy(xpath = "//a[@class='tabHeader']//span[text()='Related']")
 	WebElement related_Accounts;
 
-	@FindBy(xpath = ".//article[14]//a/div[@title ='New']")
+	@FindBy(xpath = "//article[contains(@class,'Private Notes')]//div[text()='New']")
 	WebElement new_PrivateNotes;
 
-	@FindBy(xpath = ".//article[7]/div[1]/div/div/ul/li/a/div[@title ='New']")
-	WebElement new_cm_PrivateNotes;
-
-	@FindBy(xpath = ".//div[@class='forceChangeRecordTypeFooter']//span[text()='Next']")
+	@FindBy(xpath = "//button[@class='slds-button slds-button--neutral uiButton--default uiButton--brand uiButton']/span[text()='Next']")
 	WebElement next_PrivateNotes;
 
-	@FindBy(xpath = ".//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[contains(text(), 'Title')]/parent::label/parent::div/input")
+	@FindBy(xpath = "//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[contains(text(), 'Title')]/parent::label/parent::div/input")
 	WebElement title_PrivateNotes;
 
-	@FindBy(xpath = ".//div[@class='autocompleteWrapper']/input[@placeholder='Search Leads']")
+	@FindBy(xpath = "//div[@class='autocompleteWrapper']/input[@placeholder='Search Leads']")
 	WebElement searchLeads_PrivateNotes;
 
-	@FindBy(xpath = ".//div[@class='contentWrapper slds-box--border']//ul[@class='orderedList']//span[@class='pillText']")
+	@FindBy(xpath = "//div[@class='contentWrapper slds-box--border']//ul[@class='orderedList']//span[@class='pillText']")
 	WebElement account_PrivateNotes;
 
-	@FindBy(xpath = ".//div[@class='autocompleteWrapper']/input[@placeholder='Search Contacts']")
+	@FindBy(xpath = "//div[@class='autocompleteWrapper']/input[@placeholder='Search Contacts']")
 	WebElement searchContacts_PrivateNotes;
 
-	@FindBy(xpath = ".//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[contains(text(), 'Title')]")
+	@FindBy(xpath = "//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[contains(text(), 'Title')]")
 	WebElement title;
 
-	@FindBy(xpath = ".//div[@class='autocompleteWrapper']/input[@placeholder='Search Leads']")
+	@FindBy(xpath = "//div[@class='autocompleteWrapper']/input[@placeholder='Search Leads']")
 	WebElement searchLeads;
 
-	@FindBy(xpath = ".//div[@class='autocompleteWrapper']/input[@placeholder='Search Contacts']")
+	@FindBy(xpath = "//div[@class='autocompleteWrapper']/input[@placeholder='Search Contacts']")
 	WebElement searchContacts;
 
-	@FindBy(xpath = ".//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[contains(text(), 'Body')]/parent::label/parent::div/textarea")
+	@FindBy(xpath = "//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[contains(text(), 'Body')]/parent::label/parent::div/textarea")
 	WebElement body;
 
-	@FindBy(xpath = ".//button[@class='slds-button slds-button--neutral uiButton--default uiButton--brand uiButton forceActionButton']/span[contains(text(), 'Save')]")
+	@FindBy(xpath = "//button[@class='slds-button slds-button--neutral uiButton--default uiButton--brand uiButton forceActionButton']/span[contains(text(), 'Save')]")
 	WebElement saveButton;
 
-	@FindBy(xpath = ".//span[@class='toastMessage slds-text-heading--small forceActionsText'][contains(text(), 'was created.')]")
+	@FindBy(xpath = "//span[@class='toastMessage slds-text-heading--small forceActionsText'][contains(text(), 'was created.')]")
 	WebElement wasCreated;
+	
+	@FindBy(xpath = ".//div[@class='changeRecordTypeOptionRightColumn']/span[text()='Personal Information']/parent::div/parent::label/div[1]/span")
+	WebElement selectPersonalInformation;
 
-	homePage hp = new homePage(scriptHelper);
+	@FindBy(xpath = ".//button[@class='slds-button slds-button--neutral uiButton--default uiButton--brand uiButton']/span[contains(text(), 'Next')]")
+	WebElement next;
+	
+	@FindBy(xpath = ".//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[contains(text(),'Title')]/parent::label/parent::div/input")
+	WebElement titleName;
+	
+	@FindBy(xpath = "//article[@class='slds-card test-Private Notes forceBaseCard forceRelatedListCardDesktop']//span[@class='view-all-label']")
+	WebElement viewAllButton;
+	
+	HomePage hp = new HomePage(scriptHelper);
 	static ArrayList<String> accountsPageDetailsList = new ArrayList<String>();
 
+
+	/**
+	 * Account Landing Page functionality Header information
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
 	public void accountDetailsPage() {
 		accountsPageDetailsList.add("Tagging");
 		accountsPageDetailsList.add("Account Information");
@@ -103,16 +118,24 @@ public class accountsPage extends ReusableLibrary {
 		System.out.println("Account Details Page information are:: " + accountsPageDetailsList);
 	}
 
+
+	/**
+	 * Validating the Account Landing Page functionality 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+
 	public void accountDetailsPagebyDefault() {
 		accountDetailsPage();
 		hp.validate_Menu_Accounts();
 		Utility_Functions.timeWait(3);
 		List<WebElement> accountList = driver.findElements(
-				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+				By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
 		Utility_Functions.xclickgetTextofFirstElementfromList(accountList);
 		Utility_Functions.timeWait(3);
 		List<WebElement> accountsPageInfoList = driver.findElements(
-				By.xpath(".//button[@class='slds-button slds-button--neutral sectionHeaderButton uiButton']"));
+				By.xpath("//button[@class='slds-button slds-button--neutral sectionHeaderButton uiButton']"));
 		Utility_Functions.xScrollWindow(driver);
 		Utility_Functions.timeWait(1);
 		String[] linkTexts = new String[accountsPageInfoList.size()];
@@ -153,11 +176,18 @@ public class accountsPage extends ReusableLibrary {
 
 	}
 
+	/**
+	 * Validating the addition of Private Notes functionality 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+
 	public void addPrivateNote() {
 		hp.validate_Menu_Accounts();
 		Utility_Functions.timeWait(4);
 		List<WebElement> accountList = driver.findElements(
-				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+				By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
 		String accountSelected = Utility_Functions.xclickgetTextofFirstElementfromList(accountList);
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xClick(driver, related_Accounts, true);
@@ -165,12 +195,10 @@ public class accountsPage extends ReusableLibrary {
 		try {
 			if (dataTable.getData("General_Data", "Username").contains("cmbroker")) {
 				Utility_Functions.xScrollWindow(driver);
-				//Utility_Functions.xScrollWindowToElement(driver, new_cm_PrivateNotes);
 				Utility_Functions.timeWait(3);
-				Utility_Functions.xClick(driver, new_cm_PrivateNotes, true);
+				Utility_Functions.xClick(driver, new_PrivateNotes, true);
 			} else {
 				Utility_Functions.xScrollWindow(driver);
-				//Utility_Functions.xScrollWindowToElement(driver, new_PrivateNotes);
 				Utility_Functions.timeWait(3);
 				Utility_Functions.xClick(driver, new_PrivateNotes, true);
 			}
@@ -178,7 +206,7 @@ public class accountsPage extends ReusableLibrary {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
 		}
-		Utility_Functions.timeWait(1);
+		Utility_Functions.timeWait(4);
 		Utility_Functions.xClick(driver, next_PrivateNotes, true);
 		Utility_Functions.timeWait(2);
 		String accountPopulated = account_PrivateNotes.getText();
@@ -194,7 +222,7 @@ public class accountsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xClick(driver, searchContacts, true);
 		List<WebElement> contactsList = driver.findElements(By.xpath(
-				".//div[@class='lookup__menu uiAbstractList uiAutocompleteList uiInput uiAutocomplete uiInput--default uiInput--lookup']//div[@class='listContent']/ul/li"));
+				"//div[@class='lookup__menu uiAbstractList uiAutocompleteList uiInput uiAutocomplete uiInput--default uiInput--lookup']//div[@class='listContent']/ul/li"));
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xclickOnFirstElementfromList(contactsList);
 		Utility_Functions.timeWait(2);
@@ -210,6 +238,12 @@ public class accountsPage extends ReusableLibrary {
 
 	}
 
+	/**
+	 * Accounts Page Label List
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
 
 	static ArrayList<String> labelList = new ArrayList<String>();
 	public void labelsAccountPage() {
@@ -240,11 +274,11 @@ public class accountsPage extends ReusableLibrary {
 		labelList.add("Immediate Parent Account");
 		labelList.add("Brand Parent");
 		labelList.add("Global Brand");
-		
+
 		labelList.add("Client Type");
 		labelList.add("Key Client Account for");
 		labelList.add("Key Pursuit Account for");
-		
+
 		labelList.add("Shipping Street");
 		labelList.add("Shipping City");
 		labelList.add("Shipping Country]");
@@ -261,7 +295,7 @@ public class accountsPage extends ReusableLibrary {
 		labelList.add("Local Shipping City");
 		labelList.add("Local Billing State/Province");
 		labelList.add("Local Shipping State/Province");
-	
+
 		labelList.add("Number of Family Members");
 		labelList.add("Investor Profile");
 		labelList.add("Lender Type");
@@ -282,7 +316,7 @@ public class accountsPage extends ReusableLibrary {
 		labelList.add("Verified Date");
 		labelList.add("Source Created Date Time");
 		labelList.add("Source Last Updated Date Time");
-		
+
 		labelList.add("NAICS Code");
 		labelList.add("SIC Code 1");
 		labelList.add("SIC Code 2");
@@ -299,9 +333,9 @@ public class accountsPage extends ReusableLibrary {
 		labelList.add("SIC Code 5 Description");
 		labelList.add("SIC Code 6 Description");
 		labelList.add("TBD Industry Code Description");
-		
+
 		labelList.add("Account Description");
-		
+
 		labelList.add("Created By");
 		labelList.add("Record Type");
 		labelList.add("Translation Status");
@@ -315,6 +349,13 @@ public class accountsPage extends ReusableLibrary {
 		System.out.println("Labels present in the new account page are:: " + labelList);
 
 	}
+
+	/**
+	 * Accounts Page Header Section List 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
 
 	static ArrayList<String> headerSectionList = new ArrayList<String>();
 	public void headerSectionAccountPage() {
@@ -330,22 +371,31 @@ public class accountsPage extends ReusableLibrary {
 		System.out.println("Header Section Details present in the new account page are:: " + headerSectionList);
 	}
 
+	/**
+	 * Validating the New Account Page Layout fields
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+
 	public void newAccountPageLayout() {	
 		headerSectionAccountPage();
 		labelsAccountPage();
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xClick(driver, menu_Accounts, true);
-		Utility_Functions.timeWait(1);
+		Utility_Functions.timeWait(2);
 		Utility_Functions.xClick(driver, newAccount, true);
 		Utility_Functions.timeWait(2);
-		driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[contains(@src,'AccountRedirectPage')]")));
+		driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@src,'AccountRedirectPage')]")));
 		Utility_Functions.timeWait(1);
+		Utility_Functions.xClick(driver, continueButton, true);
+		Utility_Functions.timeWait(2);
 		Utility_Functions.xScrollWindow(driver);
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xClick(driver, viewAllFieldsButton, true);
 		Utility_Functions.timeWait(1);		
 		Utility_Functions.xScrollWindowTop(driver);
-		List<WebElement> headerList = driver.findElements(By.xpath(".//h2[@class='slds-text-heading--medium slds-m-top--x-large slds-m-bottom--large']"));
+		List<WebElement> headerList = driver.findElements(By.xpath("//h2[@class='slds-text-heading--medium slds-m-top--x-large slds-m-bottom--large']"));
 		try {
 			int i2 =0, count =0;
 			String[] headerTexts = new String[headerList.size()];
@@ -369,7 +419,7 @@ public class accountsPage extends ReusableLibrary {
 		}	
 
 		try {
-			List<WebElement> labelListAccountPage = driver.findElements(By.xpath(".//label[@class='slds-form-element__label']"));
+			List<WebElement> labelListAccountPage = driver.findElements(By.xpath("//label[@class='slds-form-element__label']"));
 			int i1 =0, countLabelList = 0;
 			String[] labelTexts = new String[labelListAccountPage.size()];
 			for(WebElement element: labelListAccountPage) {
@@ -384,14 +434,133 @@ public class accountsPage extends ReusableLibrary {
 
 			System.out.println(countLabelList);		
 			if(countLabelList==79) {
-				report.updateTestLog("Verify Add Account Page Label List", "labels are present in Add Account Page", Status.PASS);
+				report.updateTestLog("Verify Add Account Page Label List", "Labels are present in Add Account Page", Status.PASS);
 			} else {
-				report.updateTestLog("Verify Add Account Page Label List", "labels are not present in Add Account Page", Status.FAIL);
+				report.updateTestLog("Verify Add Account Page Label List", "Labels are not present in Add Account Page", Status.FAIL);
 			}
 
 		} catch(Exception e) {
 			System.out.println(e.getMessage());
 		}		
 	}	
+
+	/**
+	 * Validating the addition of New Personal information 
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+	public void addNewPersonalInformation() {
+		Utility_Functions.xClick(driver, menu_Accounts, true);
+		Utility_Functions.timeWait(3);
+		List<WebElement> accountNamesList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+/*		for(int i=0;i<accountNamesList.size();i++){
+			//System.out.println("The accounts are :" +i+accountNamesList.get(i).getText());
+		}*/
+		Utility_Functions.xclickOnFirstElementfromList(accountNamesList);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, related_Accounts, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xClick(driver, new_PrivateNotes, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, selectPersonalInformation, true);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xClick(driver, selectPersonalInformation,isContinue);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, next, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, titleName, true);
+		Utility_Functions.xClick(driver, account_PrivateNotes, true);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xSendKeys(driver, titleName, "Test Personal Information Note");
+		Utility_Functions.timeWait(5);
+		List<WebElement> newPersonalInformationList = driver.findElements(By.xpath(".//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']"));
+
+		try{
+			if((!titleName.getText().equals("")) || (!account_PrivateNotes.getText().equals(""))) {
+				System.out.println("Title Name and Accounts fields are having the values:::");
+				report.updateTestLog("Accounts New Personal Information Page", "Title Name and  Accounts fields are having the values::",
+						Status.PASS);		
+			} else {
+				System.out.println("Title Name and Account fields are not having the values:::");
+				report.updateTestLog("Accounts New Personal Information Page ", "Title Name and Accounts fields are not having the values::",
+						Status.FAIL);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		List<WebElement> personalInformation = driver.findElements(By.xpath(".//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']"));
+		int count=0; 
+		try {
+			for(WebElement element: personalInformation) {
+				if((count==0) && (element.getText().contains("Title"))) {
+					System.out.println("Title field is present in the Create Private Notes Personal Information Page");
+					report.updateTestLog("Create Private Note Personal Information Page", "Create Private Note Personal Information Page is having the " + element.getText() +" Status field::",Status.PASS);	
+					count++;						
+				} else if((count==1) && (element.getText().contains("Lead"))) {
+					System.out.println("Lead field is present in the Create Private Notes Personal Information Page");
+					report.updateTestLog("Create Private Notes Personal Information Page", "Create Private Notes Personal Information Page is having the " + element.getText() +" Status field::",Status.PASS);
+					count++;						
+				} else if((count==2) && (element.getText().contains("Account"))) {
+					System.out.println("Account field is present in the Create Private Notes Personal Information Page");
+					report.updateTestLog("Create Private Notes Personal Information Page", "Create Private Notes Personal Information Page is having the " + element.getText() +" Status field::",Status.PASS);
+					count++;
+				}else if((count==3) && (element.getText().contains("SPOC"))) {
+					System.out.println("Account field is present in the Create Private Notes Personal Information Page");
+					report.updateTestLog("Create Private Notes Personal Information Page", "Create Private Notes Personal Information Page is having the " + element.getText() +" Status field::",Status.PASS);
+					count++;
+				}else if((count==4) && (element.getText().contains("Contact"))) {
+					System.out.println("Contact field is present in the Create Private Notes Personal Information Page");
+					report.updateTestLog("Create Private Notes Personal Information Page", "Create Private Notes Personal Information Page is having the " + element.getText() +" Status field::",Status.PASS);
+					count++;
+				}else if((count==5) && (element.getText().contains("Property"))) {
+					System.out.println("Property field is present in the Create Private Notes Personal Information Page");
+					report.updateTestLog("Create Private Notes Personal Information Page", "Create Private Notes Personal Information Page is having the " + element.getText() +" Status field::",Status.PASS);
+					count++;
+				}else if((count==6) && (element.getText().contains("Direct Line"))) {
+					System.out.println("Direct Line field is present in the Create Private Notes Personal Information Page");
+					report.updateTestLog("Create Private Notes Personal Information Page", "Create Private Notes Personal Information Page is having the " + element.getText() +" Status field::",Status.PASS);
+					count++;
+				}else if((count==7) && (element.getText().contains("Personal Email"))) {
+					System.out.println("Personal Email field is present in the Create Private Notes Personal Information Page");
+					report.updateTestLog("Create Private Notes Personal Information Page", "Create Private Notes Personal Information Page is having the " + element.getText() +" Status field::",Status.PASS);
+					count++;
+				}else if((count==8) && (element.getText().contains("Mobile"))) {
+					System.out.println("Mobile field is present in the Create Private Notes Personal Information Page");
+					report.updateTestLog("Create Private Notes Personal Information Page", "Create Private Notes Personal Information Page is having the " + element.getText() +" Status field::",Status.PASS);	
+					count++;
+
+				}else if((count==9) && (element.getText().contains("Entertainment Preferences"))) {
+					System.out.println("Entertainment Preferences field is present in the Create Private Notes Personal Information Page");
+					report.updateTestLog("Create Private Notes Personal Information Page", "Create Private Notes Personal Information Page is having the " + element.getText() +" Status field::",Status.PASS);
+
+
+				}
+			} if(count!=9) {				
+				report.updateTestLog("Create Private Notes Personal Information Page", "Create Private Notes Personal Information Page is not having all the fields::",Status.FAIL);							
+
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		Utility_Functions.xClick(driver, saveButton, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xClick(driver, viewAllButton, true);
+		Utility_Functions.timeWait(3);
+		System.out.println("New Private Notes are displayed");
+		report.updateTestLog("New Private Notes are displayed", " New Private notes are displayed", Status.PASS);
+
+
+	}
 
 }

@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
+import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -1002,7 +1003,7 @@ public class Utility_Functions extends ReusableLibrary {
 
 	public static String DateAdd(String effectiveDate, int days) {
 		//		effectiveDate = effectiveDate.split("T")[0];
-		DateFormat df1 = new SimpleDateFormat("M/d/yyyy");
+		DateFormat df1 = new SimpleDateFormat("yyyy-MM-DD");
 		Calendar c = Calendar.getInstance();
 		try {
 			//			Date date = new SimpleDateFormat("yyyy-M-d").parse(effectiveDate);
@@ -1145,6 +1146,30 @@ public class Utility_Functions extends ReusableLibrary {
 	
 	/*
 	 * *******************************************************************
+	 * Function Name: xHighlight Author : CBRE SF Automation Purpose :
+	 * Highlight the element Parameters: driver, webelement, color = e.g yellow,
+	 * green etc
+	 * ******************************************************************
+	 */
+	
+	public static String xclickRandomElement(List<WebElement> list) {
+		String text = null;
+		boolean isStatus = false;
+		Random random = new Random();
+		while(!isStatus) {			
+			for(WebElement elememt: list) {
+				int randomValue = random.nextInt(list.size());
+				text = elememt.getText();
+				list.get(randomValue).click();
+				isStatus = true;
+				break;
+			}
+		}	
+		return text;		
+	}
+		
+	/*
+	 * *******************************************************************
 	 * Function Name: xSwitc Author : CBRE SF Automation Purpose :
 	 * Highlight the element Parameters: driver, webelement, color = e.g yellow,
 	 * green etc
@@ -1180,6 +1205,7 @@ public class Utility_Functions extends ReusableLibrary {
 
 	 * ******************************************************************
 	 */
+
 
 
 }

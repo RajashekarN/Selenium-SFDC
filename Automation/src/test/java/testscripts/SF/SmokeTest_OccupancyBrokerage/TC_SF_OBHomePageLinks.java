@@ -11,9 +11,11 @@ import supportlibraries.DriverScript;
 import supportlibraries.TestCase;
 
 
-/* *
- * Test for login with valid user credentials
- * @author Cognizant
+/**
+ * Test Script for validating the Home Page Links
+ * 
+ * @author Vishnuvardhan
+ *
  */
 public class TC_SF_OBHomePageLinks extends TestCase
 {

@@ -1,11 +1,11 @@
 package businesscomponents;
 
-import pages.contactsPage;
-import pages.leadsPage;
+import pages.ContactsPage;
+import pages.LeadsPage;
 import supportlibraries.*;
 
 /**
- * Class for storing login and home page links validation business components
+ * Business Components Class for validating functionalities related to Contacts Page
  * 
  * @author Vishnuvardhan
  *
@@ -24,12 +24,14 @@ public class BC_Salesforce_ContactsPage extends ReusableLibrary {
 	}
 
 	BC_Salesforce_Login sfBC_Login = new BC_Salesforce_Login(scriptHelper);
-	contactsPage sfContactsPage = new contactsPage(scriptHelper);
+	ContactsPage sfContactsPage = new ContactsPage(scriptHelper);
 	
 	/**
+	 * Validating the Login functionality 
 	 * 
-	 * Smoke Test business components related to Login
-	 */
+	 * @author Vishnuvardhan
+	 *
+	 */	
 
 	public void bc_login() throws InterruptedException {
 		sfBC_Login.bc_invokeApplication();
@@ -38,15 +40,35 @@ public class BC_Salesforce_ContactsPage extends ReusableLibrary {
 	}
 
 	/**
+	 * Validating the activity Lightning Time line fields 
 	 * 
-	 * Smoke Test business components related to Opportunities Page
-	 */
+	 * @author Vishnuvardhan
+	 *
+	 */	
 
 	public void bc_activityLightningTimeline() throws InterruptedException {
 		sfContactsPage.activityLightningTimeline();
 	}
 	
+	/**
+	 * Validating the New Contact Page Layout fields
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+
 	public void bc_newContactPageLayout() {
 		sfContactsPage.newContactPageLayout();
+	}
+	
+	/**
+	 * Validating the Account Lookup detail in New Contact 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+
+	public void bc_accountLookUpNewContactPage() {
+		sfContactsPage.accountLookUpNewContactPage();
 	}
 }

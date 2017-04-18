@@ -1,10 +1,10 @@
 package businesscomponents;
 
-import pages.accountsPage;
+import pages.AccountsPage;
 import supportlibraries.*;
 
 /**
- * Class for storing login and home page links validation business components
+ * Business Components Class for validating functionalities related to Accounts Page
  * 
  * @author Vishnuvardhan
  *
@@ -23,12 +23,15 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 	}
 
 	BC_Salesforce_Login sfBC_Login = new BC_Salesforce_Login(scriptHelper);
-	accountsPage sfAccountsPage = new accountsPage(scriptHelper);
+	AccountsPage sfAccountsPage = new AccountsPage(scriptHelper);
+
 
 	/**
+	 * Validating the Login functionality 
 	 * 
-	 * Smoke Test business components related to Login
-	 */
+	 * @author Vishnuvardhan
+	 *
+	 */	
 
 	public void bc_login() throws InterruptedException {
 		sfBC_Login.bc_invokeApplication();
@@ -36,24 +39,48 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 		sfBC_Login.bc_verifyLoginSuccessful();
 	}
 
+
 	/**
+	 * Validating the Account Landing Page functionality 
 	 * 
-	 * Smoke Test business components related to Accounts Page
-	 */
+	 * @author Vishnuvardhan
+	 *
+	 */	
 
 	public void bc_accountDetailsLandingPage() throws InterruptedException {
 		sfAccountsPage.accountDetailsPagebyDefault();
 	}
 
+	/**
+	 * Validating the addition of Private Notes functionality 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+
 	public void bc_addPrivateNote() throws InterruptedException {
 		sfAccountsPage.addPrivateNote();
 	}
-	
-/*	public void bc_createAccount() throws InterruptedException {
-		sfAccountsPage.createAccount();
-	}*/
+
+	/**
+	 * Validating the New Account Page Layout fields
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
 	
 	public void bc_newAccountPageLayout() throws InterruptedException {
 		sfAccountsPage.newAccountPageLayout();
+	}
+	
+	/**
+	 * Validating the addition of New Personal information 
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+	
+	public void bc_addNewPersonalInformatiom() throws InterruptedException {
+		sfAccountsPage.addNewPersonalInformation();
 	}
 }

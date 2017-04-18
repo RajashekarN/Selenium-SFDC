@@ -1,14 +1,16 @@
 package businesscomponents;
 
 
-import pages.homePage;
+import pages.HomePage;
+import pages.LoginPage;
 import supportlibraries.*;
 
- /**
-  * Class for storing login and home page links validation business components
-  * @author Vishnuvardhan
-  *
-  */
+/**
+ * Business Components Class for validating functionalities related to Home Page
+ * 
+ * @author Vishnuvardhan
+ *
+ */
 
 public class BC_Salesforce_HomePage extends ReusableLibrary {
 	/**
@@ -23,12 +25,15 @@ public class BC_Salesforce_HomePage extends ReusableLibrary {
 	}
 	
 	BC_Salesforce_Login sfBC_Login = new BC_Salesforce_Login(scriptHelper);
-	homePage sfHomePage = new homePage(scriptHelper);
+	HomePage sfHomePage = new HomePage(scriptHelper);
+	LoginPage sfLogin = new LoginPage(scriptHelper);
+	
 	/**
+	 * Validating the Login functionality 
 	 * 
-	 * Smoke Test business components related to Login
-	 */
-
+	 * @author Vishnuvardhan
+	 *
+	 */	
 	public void bc_login() throws InterruptedException {
 		sfBC_Login.bc_invokeApplication();
 		sfBC_Login.bc_login();
@@ -36,15 +41,23 @@ public class BC_Salesforce_HomePage extends ReusableLibrary {
 	}
 
 	/**
+	 * Validating the Home Page and Welcome Links
 	 * 
-	 * Smoke Test business components related to validating Home Page Links and Menu's 
-	 */
+	 * @author Vishnuvardhan
+	 *
+	 */	
 		
 	public void bc_verifyHomePageLinks() throws InterruptedException {
 		sfHomePage.verify_Home_Page();
 		sfHomePage.verify_Welcome_Links();
 	}
 	
+	/**
+	 * Validating the Home Page Menu
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
 	
 	public void bc_verifyHomePageMenus() throws InterruptedException {
 		sfHomePage.validate_Menu_Accounts();
@@ -56,4 +69,15 @@ public class BC_Salesforce_HomePage extends ReusableLibrary {
 		}
 	}
 	
+	/**
+	 * Validating the Logout functionality 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	
+	public void bc_logout() throws InterruptedException {
+		sfLogin.logout();
+	}
+ 	
 }

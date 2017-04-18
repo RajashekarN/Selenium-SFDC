@@ -10,10 +10,11 @@ import com.cognizant.framework.selenium.Browser;
 import supportlibraries.DriverScript;
 import supportlibraries.TestCase;
 
-
-/* *
- * Test for login with valid user credentials
- * @author Cognizant
+/**
+ * Test Script for valdiating the New Contact Page layout
+ * 
+ * @author Vishnuvardhan
+ *
  */
 public class TC_SF_OBNewContactPageLayout extends TestCase
 {

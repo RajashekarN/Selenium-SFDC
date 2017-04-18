@@ -1,16 +1,17 @@
 package businesscomponents;
 
-import pages.accountsPage;
-import pages.homePage;
-import pages.loginPage;
-import pages.opportunitiesPage;
+import pages.AccountsPage;
+import pages.HomePage;
+import pages.LoginPage;
+import pages.OpportunitiesPage;
 import supportlibraries.*;
 
- /**
-  * Class for storing login and home page links validation business components
-  * @author Vishnuvardhan
-  *
-  */
+/**
+ * Business Components Class for validating functionalities related to Login Page
+ * 
+ * @author Vishnuvardhan
+ *
+ */
 
 public class BC_Salesforce_Login extends ReusableLibrary {
 	/**
@@ -24,26 +25,53 @@ public class BC_Salesforce_Login extends ReusableLibrary {
 		super(scriptHelper);
 	}
 
-	loginPage sfLogin = new loginPage(scriptHelper);
-	homePage sfHomePage = new homePage(scriptHelper);
-	accountsPage sfAccountPage = new accountsPage(scriptHelper);
-	opportunitiesPage sfOpportunityPage = new opportunitiesPage(scriptHelper);
+	LoginPage sfLogin = new LoginPage(scriptHelper);
+	HomePage sfHomePage = new HomePage(scriptHelper);
+	AccountsPage sfAccountPage = new AccountsPage(scriptHelper);
+	OpportunitiesPage sfOpportunityPage = new OpportunitiesPage(scriptHelper);
 	
 	/**
+	 * Validating the launching the browser functionality 
 	 * 
-	 * Smoke Test business components related to Login
-	 */
+	 * @author Vishnuvardhan
+	 *
+	 */	
 	
 	public void bc_invokeApplication() throws InterruptedException {
 		sfLogin.invokeApplication();
 	}
+	
+	/**
+	 * Validating the Login functionality 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
 
 	public void bc_login() throws InterruptedException {
 		sfLogin.login();
 	}
+	
+	/**
+	 * Validating the Login functionality 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
 
 	public void bc_verifyLoginSuccessful() throws InterruptedException {
 		sfLogin.verifyLoginSuccessful();
+	}
+	
+	/**
+	 * Validating the Logout functionality 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	
+	public void bc_logout() throws InterruptedException {
+		sfLogin.logout();
 	}
 	
 }

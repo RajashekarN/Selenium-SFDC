@@ -15,7 +15,7 @@ import supportlibraries.ReusableLibrary;
 import supportlibraries.ScriptHelper;
 import supportlibraries.Utility_Functions;
 
-public class contactsPage extends ReusableLibrary {
+public class ContactsPage extends ReusableLibrary {
 	/*
 	 * Constructor to initialize the business component library
 	 * 
@@ -23,70 +23,82 @@ public class contactsPage extends ReusableLibrary {
 	 * {@link DriverScript}
 	 */
 
-	public contactsPage(ScriptHelper scriptHelper) {
+	public ContactsPage(ScriptHelper scriptHelper) {
 		super(scriptHelper);
 		PageFactory.initElements(driver, this);
 		// new WebDriverUtil(driver);
 		utility = new Utility_Functions(scriptHelper);
 	}
 
-	@FindBy(xpath = "//*[text()='Contacts']")
+	@FindBy(xpath = "//div[@class='slds-context-bar oneGlobalNav']//span[text()='Contacts']")
 	WebElement menu_Contacts;
 
-	@FindBy(xpath = ".//*[text()='Related']")
+	@FindBy(xpath = "//a[@class='tabHeader']//span[text()='Related']")
 	WebElement related;
 
-	@FindBy(xpath = ".//*[text()='No Next Steps. Open And Upcoming Activities Show Up Here.']")
+	@FindBy(xpath = "//*[text()='No Next Steps. Open And Upcoming Activities Show Up Here.']")
 	WebElement activityTimeline;
 
-	@FindBy(xpath = ".//p[@class='slds-tile__title slds-truncate']/a")
+	@FindBy(xpath = "//p[@class='slds-tile__title slds-truncate']/a")
 	WebElement activity;
 
-	@FindBy(xpath = ".//p[@class='slds-tile__title slds-truncate']/a/parent::p/parent::div/parent::div//div[2]")
+	@FindBy(xpath = "//p[@class='slds-tile__title slds-truncate']/a/parent::p/parent::div/parent::div//div[2]")
 	WebElement activityType;
 
-	@FindBy(xpath = ".//p[@class='slds-tile__title slds-truncate']/a/parent::p/parent::div/parent::div//div[3]")
+	@FindBy(xpath = "//p[@class='slds-tile__title slds-truncate']/a/parent::p/parent::div/parent::div//div[3]")
 	WebElement status;
 
-	@FindBy(xpath = ".//p[@class='slds-tile__title slds-truncate']/a/parent::p/parent::div/parent::div//div[4]")
+	@FindBy(xpath = "//p[@class='slds-tile__title slds-truncate']/a/parent::p/parent::div/parent::div//div[4]")
 	WebElement comments;
 
-	@FindBy(xpath = ".//div[@class='slds-media']//p[@class='slds-timeline__date']")
+	@FindBy(xpath = "//div[@class='slds-media']//p[@class='slds-timeline__date']")
 	WebElement dueDate;
 
-	@FindBy(xpath = ".//span[@class='slds-checkbox--faux']")
+	@FindBy(xpath = "//span[@class='slds-checkbox--faux']")
 	WebElement statusCheckbox;
 
-	@FindBy(xpath = ".//ul[@class='slds-button-group slds-m-left--xx-small oneActionsRibbon forceActionsContainer']//li/a/div[text()='New']")
+	@FindBy(xpath = "//ul[@class='slds-button-group slds-m-left--xx-small oneActionsRibbon forceActionsContainer']//li/a/div[text()='New']")
 	WebElement newContact;
 
-	@FindBy(xpath = ".//button[text()='Continue']")
+	@FindBy(xpath = "//div[@class='slds-page-header slds-grid slds-grid--align-spread slds-grid--vertical-align-center']//button[text()='Continue']")
 	WebElement continueButton;
 	
-	@FindBy(xpath = ".//*[@id='acctSearchBox']")
+	@FindBy(xpath = "//*[@id='acctSearchBox']")
 	WebElement accountSearch;
 	
-	@FindBy(xpath = ".//div[@class='tt-dataset-acctSearchBoxTypeahead']//div[1]/p")
+	@FindBy(xpath = "//div[@class='tt-dataset-acctSearchBoxTypeahead']//div[1]/p")
 	WebElement accountNames;
 	
-	
+	/**
+	 * Selecting the Contact from a list of contacts
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
 	
 	public void selectContact() {
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xClick(driver, menu_Contacts, true);
 		Utility_Functions.timeWait(1);
 		List<WebElement> accountList = driver.findElements(
-				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+				By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
 		Utility_Functions.xclickgetTextofFirstElementfromList(accountList);
 		Utility_Functions.timeWait(2);
 	}
+	
+	/**
+	 * Validating the activity Lightning Time line fields 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
 
 	public void activityLightningTimeline() {
 		/*
 		 * tility_Functions.timeWait(1); Utility_Functions.xClick(driver,
 		 * menu_Contacts, true); Utility_Functions.timeWait(1); List<WebElement>
 		 * accountList = driver.findElements(By.
-		 * xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"
+		 * xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"
 		 * ));
 		 * Utility_Functions.xclickgetTextofFirstElementfromList(accountList);
 		 * Utility_Functions.timeWait(2);
@@ -160,15 +172,21 @@ public class contactsPage extends ReusableLibrary {
 		}
 
 	}
-
-	public void newContactPageLayout() {
+	/**
+	 * Validating the Account Lookup detail in New Contact 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	
+	public void accountLookUpNewContactPage() {
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xClick(driver, menu_Contacts, true);
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xClick(driver, newContact, true);
 		Utility_Functions.timeWait(2);
-		driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[contains(@src,'ContactRedirectPage')]")));
-		//Utility_Functions.xClick(driver, continueButton, true);
+		driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@src,'ContactRedirectPage')]")));
+		Utility_Functions.xClick(driver, continueButton, true);
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xSendKeys(driver, accountSearch, dataTable.getData("General_Data", "Account Name"));
 		Utility_Functions.xSendKeys(driver, accountSearch, Keys.SPACE);
@@ -186,6 +204,17 @@ public class contactsPage extends ReusableLibrary {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
 		}
+	}
+	
+	/**
+	 * Validating the New Contact Page Layout fields
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	
+	public void newContactPageLayout() {
+		
 	}
 
 }

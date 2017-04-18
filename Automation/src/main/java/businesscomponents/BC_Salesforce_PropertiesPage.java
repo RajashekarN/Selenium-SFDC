@@ -1,10 +1,10 @@
 package businesscomponents;
 
-import pages.propertiesPage;
+import pages.PropertiesPage;
 import supportlibraries.*;
 
 /**
- * Class for storing login and home page links validation business components
+ * Business Components Class for validating functionalities related to Properties Page
  * 
  * @author Vishnuvardhan
  *
@@ -23,12 +23,14 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	}
 
 	BC_Salesforce_Login sfBC_Login = new BC_Salesforce_Login(scriptHelper);
-	propertiesPage sfPropertiesPage = new propertiesPage(scriptHelper);
+	PropertiesPage sfPropertiesPage = new PropertiesPage(scriptHelper);
 
 	/**
+	 * Validating the Login functionality 
 	 * 
-	 * Smoke Test business components related to Login
-	 */
+	 * @author Vishnuvardhan
+	 *
+	 */	
 
 	public void bc_login() throws InterruptedException {
 		sfBC_Login.bc_invokeApplication();
@@ -36,10 +38,13 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 		sfBC_Login.bc_verifyLoginSuccessful();
 	}
 
+
 	/**
+	 * Validating the Customer Property Page fields 
 	 * 
-	 * Smoke Test business components related to Accounts Page
-	 */
+	 * @author Vishnuvardhan
+	 *
+	 */	
 	
 	public void bc_validateCustomerPropertyPage() {
 		sfPropertiesPage.validateCustomPropertyPage();

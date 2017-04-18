@@ -11,9 +11,11 @@ import supportlibraries.DriverScript;
 import supportlibraries.TestCase;
 
 
-/* *
- * Test for login with valid user credentials
- * @author Cognizant
+/**
+ * Test Script for validating the Login functionality
+ * 
+ * @author Vishnuvardhan
+ *
  */
 public class TC_SF_OBLogin extends TestCase
 {

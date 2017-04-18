@@ -3,17 +3,58 @@
 <suite name="Suite1" verbose="1">
 	<test name="Smoke Test">
 		<classes>
-		<!-- Admin Profile Test Scripts -->
-			<!-- <class name="testscripts.SF.SmokeTest_Admin.TC_SF_AdminConvertLead" />
+<!-- 		
+		<class name="testscripts.SF.SmokeTest_OccupancyBrokerage.TC_SF_OBAddPrivateNote" />
+				<class name="testscripts.SF.SmokeTest_OccupancyBrokerage.TC_SF_OBNewAccountPageLayout" />
+			<class name="testscripts.SF.SmokeTest_OccupancyBrokerage.TC_SF_OBConvertLeadNewAccount" />
+		<class name="testscripts.SF.SmokeTest_OccupancyBrokerage.TC_SF_OBConvertLeadExistingAccount" />
+				<class name="testscripts.SF.SmokeTest_OccupancyBrokerage.TC_SF_OBConvertLead" /> -->
+		
+		<class name="testscripts.SF.SmokeTest_OccupancyBrokerage.TC_SF_OBLogin" />
+		<class name="testscripts.SF.SmokeTest_OccupancyBrokerage.TC_SF_OBHomePageLinks" />
+		<class name="testscripts.SF.SmokeTest_OccupancyBrokerage.TC_SF_OBAccountsLandingPage" />
+		<class name="testscripts.SF.SmokeTest_OccupancyBrokerage.TC_SF_OBAddPrivateNote" />
+		<class name="testscripts.SF.SmokeTest_OccupancyBrokerage.TC_SF_OBNewAccountPageLayout" />
+		<class name="testscripts.SF.SmokeTest_OccupancyBrokerage.TC_SF_OBAccountLookUpNewContactPage" />
+		<class name="testscripts.SF.SmokeTest_OccupancyBrokerage.TC_SF_OBActivityLightningTimeline" />
+		<class name="testscripts.SF.SmokeTest_OccupancyBrokerage.TC_SF_OBAddNewPersonalInformation" />
+		<class name="testscripts.SF.SmokeTest_OccupancyBrokerage.TC_SF_OBConvertLead" />
+		<class name="testscripts.SF.SmokeTest_OccupancyBrokerage.TC_SF_OBCreateLead" />
+		<class name="testscripts.SF.SmokeTest_OccupancyBrokerage.TC_SF_OBCloneEditLeadDetailPage" />
+		<class name="testscripts.SF.SmokeTest_OccupancyBrokerage.TC_SF_OBRelatedListsLeadLandingPage" />
+		<class name="testscripts.SF.SmokeTest_OccupancyBrokerage.TC_SF_OBAddPrivateNoteLead" />
+		<class name="testscripts.SF.SmokeTest_OccupancyBrokerage.TC_SF_OBConvertLeadNewAccount" />
+		<class name="testscripts.SF.SmokeTest_OccupancyBrokerage.TC_SF_OBConvertLeadExistingAccount" />
+ 
+		<class name="testscripts.SF.SmokeTest_Admin.TC_SF_AdminConvertLead" />
+		<class name="testscripts.SF.SmokeTest_Admin.TC_SF_AdminHomePageLinks" />
+		<class name="testscripts.SF.SmokeTest_Admin.TC_SF_AdminLogin" />
+		<class name="testscripts.SF.SmokeTest_Admin.TC_SF_AdminValidateCustomerPropertyPage" />
+		
+		
+		<class name="testscripts.SF.SmokeTest_Manager.TC_SF_ManagerLogin" />
+		<class name="testscripts.SF.SmokeTest_Manager.TC_SF_ManagerCreateGreenspaceLead" />
+		<class name="testscripts.SF.SmokeTest_Manager.TC_SF_ManagerHomePageLinks" />
+		
+		<class name="testscripts.SF.SmokeTest_OccupancyBrokerage.TC_SF_OBRequiredFieldsOnSalesStage03_05" />
+		<class name="testscripts.SF.SmokeTest_OccupancyBrokerage.TC_SF_OBRequiredFieldsOnSalesStage16_19" />
+		<class name="testscripts.SF.SmokeTest_OccupancyBrokerage.TC_SF_OBAssociateProperty" />
+		
+			<class name="testscripts.SF.SmokeTest_OccupancyBrokerage.TC_SF_OBRequiredFieldsOnSalesStage03_05" />
+			<class name="testscripts.SF.SmokeTest_OccupancyBrokerage.TC_SF_OBRequiredFieldsOnSalesStage16_19" />
+			<class name="testscripts.SF.SmokeTest_OccupancyBrokerage.TC_SF_OBAssociateProperty" />
+		
+		<!-- Admin Profile Test Scripts 
+			<class name="testscripts.SF.SmokeTest_Admin.TC_SF_AdminConvertLead" />
 			<class name="testscripts.SF.SmokeTest_Admin.TC_SF_AdminHomePageLinks" />
 			<class name="testscripts.SF.SmokeTest_Admin.TC_SF_AdminLogin" />
-			<class name="testscripts.SF.SmokeTest_Admin.TC_SF_AdminValidateCustomerPropertyPage" /> -->	
+			<class name="testscripts.SF.SmokeTest_Admin.TC_SF_AdminValidateCustomerPropertyPage" />	
 			
-		<!-- Manager Profile Test Scripts -->
+		Manager Profile Test Scripts
 			<class name="testscripts.SF.SmokeTest_Manager.TC_SF_ManagerLogin" />
 			<class name="testscripts.SF.SmokeTest_Manager.TC_SF_ManagerHomePageLinks" />
 		
-		<!-- Occupancy Brokerage Profile Test Scripts -->
+		Occupancy Brokerage Profile Test Scripts
 			<class name="testscripts.SF.SmokeTest_OccupancyBrokerage.TC_SF_OBAccountsLandingPage" />
 			<class name="testscripts.SF.SmokeTest_OccupancyBrokerage.TC_SF_OBActivityLightningTimeline" />
 			<class name="testscripts.SF.SmokeTest_OccupancyBrokerage.TC_SF_OBAddPrivateNote" />
@@ -21,9 +62,9 @@
 			<class name="testscripts.SF.SmokeTest_OccupancyBrokerage.TC_SF_OBLogin" />
 			<class name="testscripts.SF.SmokeTest_OccupancyBrokerage.TC_SF_OBOpportunity" />
 					
-		<!-- API Test Scripts -->
+		API Test Scripts
 					
-			<!--<class name="testscripts.SF.SmokeTest_API.TC_SF_API_Accounts" />
+			<class name="testscripts.SF.SmokeTest_API.TC_SF_API_Accounts" />
 			<class name="testscripts.SF.SmokeTest_API.TC_SF_API_Contacts" />
 			<class name="testscripts.SF.SmokeTest_API.TC_SF_API_Opportunities" />
 			<class name="testscripts.SF.SmokeTest_API.TC_SF_API_PageValidations"/> -->

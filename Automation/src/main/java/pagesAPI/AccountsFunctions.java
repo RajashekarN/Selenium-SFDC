@@ -26,7 +26,7 @@ import supportlibraries.ReusableLibrary;
 import supportlibraries.ScriptHelper;
 import supportlibraries.Utility_Functions;
 
-public class accountsFunctions extends ReusableLibrary {
+public class AccountsFunctions extends ReusableLibrary {
 	/*
 	 * Constructor to initialize the business component library
 	 * 
@@ -34,7 +34,7 @@ public class accountsFunctions extends ReusableLibrary {
 	 * {@link DriverScript}
 	 */
 
-	public accountsFunctions(ScriptHelper scriptHelper) {
+	public AccountsFunctions(ScriptHelper scriptHelper) {
 		super(scriptHelper);
 		PageFactory.initElements(driver, this);
 		// new WebDriverUtil(driver);

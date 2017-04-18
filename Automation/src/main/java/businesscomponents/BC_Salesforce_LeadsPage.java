@@ -1,10 +1,10 @@
 package businesscomponents;
 
-import pages.leadsPage;
+import pages.LeadsPage;
 import supportlibraries.*;
 
 /**
- * Class for storing login and home page links validation business components
+ * Business Components Class for validating functionalities related to Leads Page
  * 
  * @author Vishnuvardhan
  *
@@ -23,13 +23,14 @@ public class BC_Salesforce_LeadsPage extends ReusableLibrary {
 	}
 
 	BC_Salesforce_Login sfBC_Login = new BC_Salesforce_Login(scriptHelper);
-	leadsPage sfLeadsPage = new leadsPage(scriptHelper);
+	LeadsPage sfLeadsPage = new LeadsPage(scriptHelper);
 
 	/**
+	 * Validating the Login functionality 
 	 * 
-	 * Smoke Test business components related to Login
-	 */
-
+	 * @author Vishnuvardhan
+	 *
+	 */	
 	public void bc_login() throws InterruptedException {
 		sfBC_Login.bc_invokeApplication();
 		sfBC_Login.bc_login();
@@ -37,12 +38,90 @@ public class BC_Salesforce_LeadsPage extends ReusableLibrary {
 	}
 
 	/**
+	 * Validating the Convert Lead functionality 
 	 * 
-	 * Smoke Test business components related to Opportunities Page
-	 */
+	 * @author Vishnuvardhan
+	 *
+	 */	
 
 	public void bc_convertLead() throws InterruptedException {
 		sfLeadsPage.convertLead();
 	}
+	
+	/**
+	 * Validating the Create Lead functionality 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	
+	public void bc_createLead_UI() throws InterruptedException {
+		sfLeadsPage.createLead();
+	}
+	
+	/**
+	 * Validating the Create Greenspace Lead functionality 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	
+	public void bc_createGreenspaceLead() throws InterruptedException {
+		sfLeadsPage.createGreenspaceLead();
+	}
+	
+	/**
+	 * Validating the Clone and Edit buttons in Lead Detail page
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	
+	public void bc_cloneAndEditButtons() throws InterruptedException {
+		sfLeadsPage.cloneAndEditButtons();
+	}
+	
+	/**
+	 * Validating the Related lists of a Lead in the Lead Landing page
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	
+	public void bc_relatedListsLeadLandingPage() {
+		sfLeadsPage.relatedListsLeadLandingPage();
+	}
+	
+	/**
+	 * Validating the Private Note functionality for Lead
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	
+	public void bc_privateNoteLead() {
+		sfLeadsPage.privateNoteLead();
+	}
+	
+	/**
+	 * Validating the Convert Lead by adding the new account in the Convert Lead page
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
 
+	public void bc_convertLeadNewAccount() {
+		sfLeadsPage.convertLeadNewAccount();
+	}
+	
+	/**
+	 * Validating the Convert Lead by selecting the existing account in the Convert Lead page
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+
+	public void bc_convertLeadExistingAccount() {
+		sfLeadsPage.convertLeadExistingAccount();
+	}
 }

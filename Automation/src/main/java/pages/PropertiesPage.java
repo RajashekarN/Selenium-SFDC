@@ -13,7 +13,7 @@ import supportlibraries.ReusableLibrary;
 import supportlibraries.ScriptHelper;
 import supportlibraries.Utility_Functions;
 
-public class propertiesPage extends ReusableLibrary {
+public class PropertiesPage extends ReusableLibrary {
 	/*
 	 * Constructor to initialize the business component library
 	 * 
@@ -21,50 +21,50 @@ public class propertiesPage extends ReusableLibrary {
 	 * {@link DriverScript}
 	 */
 
-	public propertiesPage(ScriptHelper scriptHelper) {
+	public PropertiesPage(ScriptHelper scriptHelper) {
 		super(scriptHelper);
 		PageFactory.initElements(driver, this);
 		// new WebDriverUtil(driver);
 		utility = new Utility_Functions(scriptHelper);
 	}
 
-	@FindBy(xpath = "//*[text()='More']")
+	@FindBy(xpath = "//span[@class='moreLabel'][text()='More']")
 	WebElement menu_More;
 
-	@FindBy(xpath = ".//div[@class='overflowList']//li/a[@title='Properties']")
+	@FindBy(xpath = "//div[@class='overflowList']//li/a[@title='Properties']")
 	WebElement properties;	
 
-	@FindBy(xpath = ".//div[@class='slds-truncate'][@title='New']")
+	@FindBy(xpath = "//div[@class='slds-truncate'][@title='New']")
 	WebElement newProperty;	
 
-	@FindBy(xpath = ".//*[@id='bottomButtonRow']/input[1]")
+	@FindBy(xpath = "//*[@id='bottomButtonRow']/input[1]")
 	WebElement continueButton;	
 	
-	@FindBy(xpath = ".//div[@class='slds-media']//input[@value='Save Property']")
+	@FindBy(xpath = "//div[@class='slds-media']//input[@value='Save Property']")
 	WebElement saveProperty;	
 	
-	@FindBy(xpath = ".//div[@class='slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2']/div/label[@for='property-name']/parent::div//div/input")
+	@FindBy(xpath = "//div[@class='slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2']/div/label[@for='property-name']/parent::div//div/input")
 	WebElement buildingPropertyName;	
 	
-	@FindBy(xpath = ".//*[@id='j_id0:propertyEditForm:countryPicklist']/option")
+	@FindBy(xpath = "//*[contains(@id,'propertyEditForm:countryPicklist']/option")
 	WebElement countrySelect;	
 	
-	@FindBy(xpath = "	.//*[@id='j_id0:propertyEditForm:countryPicklist']")
+	@FindBy(xpath = "//*[contains(@id,'propertyEditForm:countryPicklist')]")
 	WebElement countryDropdown;	
 	
-	@FindBy(xpath = ".//*[@id='j_id0:propertyEditForm:statePicklist']")
+	@FindBy(xpath = "//*[contains(@id,'propertyEditForm:statePicklist')]")
 	WebElement stateDropdown;	
 	
-	@FindBy(xpath = "//*[@id='j_id0:propertyEditForm:statePicklist']/option")
+	@FindBy(xpath = "//*[contains(@id,'propertyEditForm:statePicklist)']/option")
 	WebElement stateSelect;	
 	
-	@FindBy(xpath = ".//*[@id='j_id0:propertyEditForm:City']")
+	@FindBy(xpath = "//*[contains(@id,'propertyEditForm:City')]")
 	WebElement city;	
 	
-	@FindBy(xpath = ".//*[@id='j_id0:propertyEditForm:Street']")
+	@FindBy(xpath = "//*[contains(@id,'propertyEditForm:Street')]")
 	WebElement street;	
 	
-	@FindBy(xpath = "	.//h1[@class='slds-page-header__title slds-m-right--small slds-truncate slds-align-middle']/span")
+	@FindBy(xpath = "//h1[@class='slds-page-header__title slds-m-right--small slds-truncate slds-align-middle']/span")
 	WebElement createdProperty;	
 	
 		
@@ -76,13 +76,13 @@ public class propertiesPage extends ReusableLibrary {
 			Utility_Functions.timeWait(4);
 			Utility_Functions.xClick(driver, newProperty, true);
 			Utility_Functions.timeWait(2);
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[contains(@title,'New Property: Select Property Record Type ~ Salesforce - Enterprise Edition')]")));
+			driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@title,'New Property: Select Property Record Type ~ Salesforce - Enterprise Edition')]")));
 			Utility_Functions.timeWait(1);
 			Utility_Functions.xClick(driver, continueButton, true);
 			Utility_Functions.timeWait(2);
 			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[contains(@src,'recordtypeselect')]")));
-			List<WebElement> propertyEditPage = driver.findElements(By.xpath(".//div[@class='slds-grid slds-wrap slds-grid slds-wrap slds-grid--pull-padded slds-form--stacked']/div/h2"));
+			driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@src,'recordtypeselect')]")));
+			List<WebElement> propertyEditPage = driver.findElements(By.xpath("//div[@class='slds-grid slds-wrap slds-grid slds-wrap slds-grid--pull-padded slds-form--stacked']/div/h2"));
 			int count=0; 
 			for(WebElement element: propertyEditPage) {
 				if((count==0) && (element.getText().contains("Property Information"))) {
@@ -128,7 +128,7 @@ public class propertiesPage extends ReusableLibrary {
 	}
 	
 	public void validateFieldsSection() {
-		List<WebElement> propertyPageLabels = driver.findElements(By.xpath(".//div[@class='slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2']/div/label"));
+		List<WebElement> propertyPageLabels = driver.findElements(By.xpath("//div[@class='slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2']/div/label"));
 		int count =0;
 		for(WebElement element: propertyPageLabels) {
 			//System.out.println("Property Information Section field lables::");
@@ -257,11 +257,11 @@ public class propertiesPage extends ReusableLibrary {
 	}
 	
 	public void validateFieldsSubSections() {
-		List<WebElement> propertyPageSections = driver.findElements(By.xpath(".//div[@class='slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2']/div/label/parent::div/parent::div/parent::div/div/h2"));
+		List<WebElement> propertyPageSections = driver.findElements(By.xpath("//div[@class='slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2']/div/label/parent::div/parent::div/parent::div/div/h2"));
 		int count =0;
 		for(WebElement element: propertyPageSections) {
 			if((element.getText().equals("Property Management")) || (element.getText().equals("Listing Management")) || (element.getText().equals("Asset Management"))) {
-				List<WebElement> propertyPageLabels = driver.findElements(By.xpath(".//div[@class='slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2']/div/label"));
+				List<WebElement> propertyPageLabels = driver.findElements(By.xpath("//div[@class='slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2']/div/label"));
 					for(WebElement element1: propertyPageLabels) {
 						if(element.getText().contains("Company")) {
 							report.updateTestLog(element.getText() + " Section", "Property Management Section has the field" + element1.getText()+ ":::" , Status.PASS);

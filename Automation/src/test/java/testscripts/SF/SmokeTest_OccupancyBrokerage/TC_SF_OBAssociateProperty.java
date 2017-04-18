@@ -11,17 +11,19 @@ import supportlibraries.DriverScript;
 import supportlibraries.TestCase;
 
 
-/* *
- * Test for login with valid user credentials
- * @author Cognizant
+/**
+ * Test Script for the Opportunity page
+ * 
+ * @author Vishnuvardhan
+ *
  */
-public class TC_SF_OBOpportunity extends TestCase
+public class TC_SF_OBAssociateProperty extends TestCase
 {
 	@Test(groups = {"SF SmokeTestScripts" , "Salesforce Portal"})
 	@Parameters("environment")
-	public void runTC_SF_OBOpportunity(@Optional("Sandbox") String environment)
+	public void runTC_SF_OBAssociateProperty(@Optional("Sandbox") String environment)
 	{
-		testParameters.setCurrentTestDescription("Test");
+		testParameters.setCurrentTestDescription("Test for validating the Opportunity Page");
 		testParameters.setIterationMode(IterationOptions.RUN_ONE_ITERATION_ONLY);
 		testParameters.setBrowser(Browser.CHROME);
 		

@@ -12,18 +12,18 @@ import supportlibraries.TestCase;
 
 
 /**
- * Test Script for validating the Activity Ligtning Timeline for Contacts Page
+ * Test Script for the Opportunity page
  * 
  * @author Vishnuvardhan
  *
  */
-public class TC_SF_OBActivityLightningTimeline extends TestCase
+public class TC_SF_OBRequiredFieldsOnSalesStage16_19 extends TestCase
 {
 	@Test(groups = {"SF SmokeTestScripts" , "Salesforce Portal"})
 	@Parameters("environment")
-	public void run_TC_SF_OBActivityLightningTimeline(@Optional("Sandbox") String environment)
+	public void runTC_SF_OBRequiredFieldsOnSalesStage16_19(@Optional("Sandbox") String environment)
 	{
-		testParameters.setCurrentTestDescription("Test for validating the Activity Lightning Timeline contacts page");
+		testParameters.setCurrentTestDescription("Test for validating the Opportunity Page");
 		testParameters.setIterationMode(IterationOptions.RUN_ONE_ITERATION_ONLY);
 		testParameters.setBrowser(Browser.CHROME);
 		
