@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="2" guice-stage="DEVELOPMENT" name="Failed suite [Regression]" parallel="methods">
+  <test name="Smoke Test">
+    <classes>
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_ManagerLogin"/>
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_ManagerHomePageLinks"/>
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_CSSLogin"/>
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_CSSHomePageLinks"/>
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAccountsLandingPage"/>
+    </classes>
+  </test> <!-- Smoke Test -->
+  <test name="Smoke Test(failed)" parallel="methods">
+    <classes>
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_ManagerHomePageLinks">
+        <methods>
+          <include name="runTC_SF_ManagerLogin"/>
+        </methods>
+      </class> <!-- testscripts.SF.SmokeTestScripts.TC_SF_ManagerHomePageLinks -->
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_CSSHomePageLinks">
+        <methods>
+          <include name="runTC_SF_CSSHomePageLinks"/>
+        </methods>
+      </class> <!-- testscripts.SF.SmokeTestScripts.TC_SF_CSSHomePageLinks -->
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAccountsLandingPage">
+        <methods>
+          <include name="setUpTestRunner"/>
+          <include name="runTC_SF_OBAccountsLandingPage" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- testscripts.SF.SmokeTestScripts.TC_SF_OBAccountsLandingPage -->
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_ManagerLogin">
+        <methods>
+          <include name="tearDownTestSuite"/>
+          <include name="setUpTestSuite"/>
+          <include name="runTC_SF_ManagerLogin"/>
+        </methods>
+      </class> <!-- testscripts.SF.SmokeTestScripts.TC_SF_ManagerLogin -->
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_CSSLogin">
+        <methods>
+          <include name="runTC_SF_ManagerLogin"/>
+        </methods>
+      </class> <!-- testscripts.SF.SmokeTestScripts.TC_SF_CSSLogin -->
+    </classes>
+  </test> <!-- Smoke Test(failed) -->
+</suite> <!-- Failed suite [Regression] -->

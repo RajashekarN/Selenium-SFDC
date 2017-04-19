@@ -1,0 +1,42 @@
+SSttaarrttiing ChromeDriver 2.28.455520 (cc17746adff54984afff480136733114c6b3704b) on port 5853
+Only local connections are alnlgo wCehdr.om
+eDriver 2.28.455520 (cc17746adff54984afff480136733114c6b3704b) on port 15878
+Only local connections are allowed.
+Apr 18, 2017 9:42:23 PM org.openqa.selenium.remote.ProtocolHandshake createSession
+INFO: Attempting bi-dialect session, assuming Postel's Law holds true on the remote end
+Apr 18, 2017 9:42:23 PM org.openqa.selenium.remote.ProtocolHandshake createSession
+INFO: Attempting bi-dialect session, assuming Postel's Law holds true on the remote end
+Apr 18, 2017 9:42:26 PM org.openqa.selenium.remote.ProtocolHandshake createSession
+INFO: Detected dialect: OSS
+Apr 18, 2017 9:42:26 PM org.openqa.selenium.remote.ProtocolHandshake createSession
+INFO: Detected dialect: OSS
+Starting ChromeDriver 2.28.455520 (cc17746adff54984afff480136733114c6b3704b) on port 12897
+Only local connections are allowed.
+Apr 18, 2017 9:42:40 PM org.openqa.selenium.remote.ProtocolHandshake createSession
+INFO: Attempting bi-dialect session, assuming Postel's Law holds true on the remote end
+Apr 18, 2017 9:42:42 PM org.openqa.selenium.remote.ProtocolHandshake createSession
+INFO: Detected dialect: OSS
+Starting ChromeDriver 2.28.455520 (cc17746adff54984afff480136733114c6b3704b) on port 9913
+Only local connections are allowed.
+Apr 18, 2017 9:42:51 PM org.openqa.selenium.remote.ProtocolHandshake createSession
+INFO: Attempting bi-dialect session, assuming Postel's Law holds true on the remote end
+Apr 18, 2017 9:42:53 PM org.openqa.selenium.remote.ProtocolHandshake createSession
+INFO: Detected dialect: OSS
+Starting ChromeDriver 2.28.455520 (cc17746adff54984afff480136733114c6b3704b) on port 4277
+Only local connections are allowed.
+Apr 18, 2017 9:43:06 PM org.openqa.selenium.remote.ProtocolHandshake createSession
+INFO: Attempting bi-dialect session, assuming Postel's Law holds true on the remote end
+Apr 18, 2017 9:43:08 PM org.openqa.selenium.remote.ProtocolHandshake createSession
+INFO: Detected dialect: OSS
+Starting ChromeDriver 2.28.455520 (cc17746adff54984afff480136733114c6b3704b) on port 34737
+Only local connections are allowed.
+Apr 18, 2017 9:43:20 PM org.openqa.selenium.remote.ProtocolHandshake createSession
+INFO: Attempting bi-dialect session, assuming Postel's Law holds true on the remote end
+Apr 18, 2017 9:43:22 PM org.openqa.selenium.remote.ProtocolHandshake createSession
+INFO: Detected dialect: OSS
+Starting ChromeDriver 2.28.455520 (cc17746adff54984afff480136733114c6b3704b) on port 30451
+Only local connections are allowed.
+Apr 18, 2017 9:43:28 PM org.openqa.selenium.remote.ProtocolHandshake createSession
+INFO: Attempting bi-dialect session, assuming Postel's Law holds true on the remote end
+Apr 18, 2017 9:43:29 PM org.openqa.selenium.remote.ProtocolHandshake createSession
+INFO: Detected dialect: OSS

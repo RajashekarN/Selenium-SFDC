@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="SmokeTestScripts" parallel="methods" thread-count="2">
+	<test name="Smoke Test">
+		<classes>
+		
+			<class name="testscripts.SF.SmokeTest_API.TC_SF_API_Accounts" />
+<!-- 			<class name="testscripts.SF.SmokeTest_API.TC_SF_API_Contacts" />
+			<class name="testscripts.SF.SmokeTest_API.TC_SF_API_Leads" />
+			<class name="testscripts.SF.SmokeTest_API.TC_SF_API_Opportunities" />
+			<class name="testscripts.SF.SmokeTest_API.TC_SF_API_PageValidations" />
+			<class name="testscripts.SF.SmokeTest_API.TC_SF_API_SearchLeadName" />
+			<class name="testscripts.SF.SmokeTest_API.TC_SF_API_FetchRecord" /> -->
+		
+		
+<!--  		<class name="testscripts.SF.SmokeTestScripts.TC_SF_AdminLogin" />
+			<class name="testscripts.SF.SmokeTestScripts.TC_SF_AdminHomePageLinks" />
+			<class name="testscripts.SF.SmokeTestScripts.TC_SF_AdminConvertLead" />
+			<class name="testscripts.SF.SmokeTestScripts.TC_SF_AdminValidateCustomerPropertyPage" />	
+			
+			<class name="testscripts.SF.SmokeTestScripts.TC_SF_CSSLogin" />
+			<class name="testscripts.SF.SmokeTestScripts.TC_SF_CSSHomePageLinks" />	
+			
+			<class name="testscripts.SF.SmokeTestScripts.TC_SF_ManagerLogin" />
+			<class name="testscripts.SF.SmokeTestScripts.TC_SF_ManagerHomePageLinks" />	
+			<class name="testscripts.SF.SmokeTestScripts.TC_SF_ManagerCreateGreenspaceLead" />  
+			
+			
+			<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBNewOpportunityPageLayout" />
+			<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBRequiredFieldsOnSalesStage03_05" />
+			<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBRequiredFieldsOnSalesStage16_19" /> 
+			
+			
+			<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBLogin" />
+			<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBHomePageLinks"	/>
+			<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAddPrivateNote" />
+			<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAccountsLandingPage" />	
+			
+				
+			<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBActivityLightningTimeline" />
+			<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBConvertLead" />
+			<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBCreateLead" />
+			<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBCloneEditLeadDetailPage" />
+			<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBRelatedListsLeadLandingPage" />
+			<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAddPrivateNoteLead" />
+			<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBConvertLeadExistingAccount" />
+			<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBConvertLeadNewAccount" />  -->
+			
+<!-- 			<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAccountLookUpNewContactPage" />			
+			<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBNewContactPageLayout" /> 
+			<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAddNewPersonalInformation" />			
+			<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAssociateProperty" /> 
+			<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBNewAccountPageLayout" />
+			<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBOpportunitySharing" /> -->
+			
+			
+<!-- 			Failed Test Case need to look - 
+			<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBOpportunitySharing" />			
+			<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAccountLookUpNewContactPage" />			
+			<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBNewContactPageLayout" /> 
+			<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAddNewPersonalInformation" />			
+			<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAssociateProperty" /> 
+			<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBNewAccountPageLayout" />
+					-->			
+			
+			
+			 
+		</classes>
+	</test>
+</suite>
+

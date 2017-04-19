@@ -1,0 +1,18 @@
+Starting ChromeDriver 2.28.455520 (cc17746adff54984afff480136733114c6b3704b) on port 32308
+Only local connections are allowed.
+java.io.FileNotFoundException: C:\Users\vbommiset\Desktop\Vishnu\Latest CRAFT Framework_04122017\Craft\Craft\src\test\resources\Datatables\LoginScenario.xls (The system cannot find the file specified)
+	at java.io.FileInputStream.open0(Native Method)
+	at java.io.FileInputStream.open(FileInputStream.java:195)
+	at java.io.FileInputStream.<init>(FileInputStream.java:138)
+	at java.io.FileInputStream.<init>(FileInputStream.java:93)
+	at com.cognizant.framework.ExcelDataAccess.openFileForReading(ExcelDataAccess.java:83)
+	at com.cognizant.framework.ExcelDataAccess.getRowNum(ExcelDataAccess.java:156)
+	at com.cognizant.framework.ExcelDataAccess.getRowNum(ExcelDataAccess.java:231)
+	at com.cognizant.Craft.DriverScript.initializeBusinessFlow(DriverScript.java:550)
+	at com.cognizant.Craft.DriverScript.initializeTestScript(DriverScript.java:538)
+	at com.cognizant.Craft.DriverScript.executeCraft(DriverScript.java:156)
+	at com.cognizant.Craft.DriverScript.driveTestExecution(DriverScript.java:150)
+	at runners.ParallelRunner.run(ParallelRunner.java:48)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)

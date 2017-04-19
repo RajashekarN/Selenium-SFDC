@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="2" guice-stage="DEVELOPMENT" name="Failed suite [Regression]" parallel="methods">
+  <test name="Smoke Test">
+    <classes>
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_AdminLogin"/>
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_AdminHomePageLinks"/>
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_AdminConvertLead"/>
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_AdminValidateCustomerPropertyPage"/>
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_CSSLogin"/>
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_CSSHomePageLinks"/>
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_ManagerLogin"/>
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_ManagerHomePageLinks"/>
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_ManagerCreateGreenspaceLead"/>
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_OBNewOpportunityPageLayout"/>
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_OBRequiredFieldsOnSalesStage03_05"/>
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_OBRequiredFieldsOnSalesStage16_19"/>
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_OBLogin"/>
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_OBHomePageLinks"/>
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAddPrivateNote"/>
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAccountsLandingPage"/>
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_OBActivityLightningTimeline"/>
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_OBConvertLead"/>
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_OBCreateLead"/>
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_OBCloneEditLeadDetailPage"/>
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_OBRelatedListsLeadLandingPage"/>
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAddPrivateNoteLead"/>
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_OBConvertLeadExistingAccount"/>
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_OBConvertLeadNewAccount"/>
+    </classes>
+  </test> <!-- Smoke Test -->
+  <test name="Smoke Test(failed)" parallel="methods">
+    <classes>
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_ManagerLogin">
+        <methods>
+          <include name="setUpTestRunner"/>
+          <include name="runTC_SF_ManagerLogin" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- testscripts.SF.SmokeTestScripts.TC_SF_ManagerLogin -->
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_AdminHomePageLinks">
+        <methods>
+          <include name="setUpTestRunner"/>
+          <include name="runTC_SF_AdminHomePageLinks" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- testscripts.SF.SmokeTestScripts.TC_SF_AdminHomePageLinks -->
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_OBConvertLeadExistingAccount">
+        <methods>
+          <include name="setUpTestRunner"/>
+          <include name="runTC_SF_OBConvertLeadExistingAccount" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- testscripts.SF.SmokeTestScripts.TC_SF_OBConvertLeadExistingAccount -->
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_OBLogin">
+        <methods>
+          <include name="setUpTestRunner"/>
+          <include name="runTC_SF_OBLogin" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- testscripts.SF.SmokeTestScripts.TC_SF_OBLogin -->
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_ManagerCreateGreenspaceLead">
+        <methods>
+          <include name="setUpTestRunner"/>
+          <include name="runTC_SF_ManagerCreateGreenspaceLead" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- testscripts.SF.SmokeTestScripts.TC_SF_ManagerCreateGreenspaceLead -->
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_CSSHomePageLinks">
+        <methods>
+          <include name="setUpTestRunner"/>
+          <include name="runTC_SF_CSSHomePageLinks" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- testscripts.SF.SmokeTestScripts.TC_SF_CSSHomePageLinks -->
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_AdminValidateCustomerPropertyPage">
+        <methods>
+          <include name="setUpTestRunner"/>
+          <include name="runTC_SF_AdminValidateCustomerPropertyPage" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- testscripts.SF.SmokeTestScripts.TC_SF_AdminValidateCustomerPropertyPage -->
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_OBCloneEditLeadDetailPage">
+        <methods>
+          <include name="setUpTestRunner"/>
+          <include name="runTC_SF_OBCloneEditLeadDetailPage" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- testscripts.SF.SmokeTestScripts.TC_SF_OBCloneEditLeadDetailPage -->
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_OBCreateLead">
+        <methods>
+          <include name="setUpTestRunner"/>
+          <include name="runTC_SF_OBCreateLead" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- testscripts.SF.SmokeTestScripts.TC_SF_OBCreateLead -->
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_OBRequiredFieldsOnSalesStage16_19">
+        <methods>
+          <include name="setUpTestRunner"/>
+          <include name="runTC_SF_OBRequiredFieldsOnSalesStage16_19" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- testscripts.SF.SmokeTestScripts.TC_SF_OBRequiredFieldsOnSalesStage16_19 -->
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAddPrivateNoteLead">
+        <methods>
+          <include name="setUpTestRunner"/>
+          <include name="runTC_SF_OBAddPrivateNoteLead" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- testscripts.SF.SmokeTestScripts.TC_SF_OBAddPrivateNoteLead -->
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_AdminLogin">
+        <methods>
+          <include name="setUpTestRunner"/>
+          <include name="tearDownTestSuite"/>
+          <include name="setUpTestSuite"/>
+          <include name="runTC_SF_AdminLogin" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- testscripts.SF.SmokeTestScripts.TC_SF_AdminLogin -->
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAddPrivateNote">
+        <methods>
+          <include name="setUpTestRunner"/>
+          <include name="runTC_SF_OBAddPrivateNote" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- testscripts.SF.SmokeTestScripts.TC_SF_OBAddPrivateNote -->
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_AdminConvertLead">
+        <methods>
+          <include name="setUpTestRunner"/>
+          <include name="runTC_SF_AdminConvertLead" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- testscripts.SF.SmokeTestScripts.TC_SF_AdminConvertLead -->
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_OBRelatedListsLeadLandingPage">
+        <methods>
+          <include name="setUpTestRunner"/>
+          <include name="runTC_SF_OBRelatedListsLeadLandingPage" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- testscripts.SF.SmokeTestScripts.TC_SF_OBRelatedListsLeadLandingPage -->
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_OBActivityLightningTimeline">
+        <methods>
+          <include name="setUpTestRunner"/>
+          <include name="runTC_SF_OBActivityLightningTimeline" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- testscripts.SF.SmokeTestScripts.TC_SF_OBActivityLightningTimeline -->
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_OBConvertLeadNewAccount">
+        <methods>
+          <include name="setUpTestRunner"/>
+          <include name="runTC_SF_OBConvertLeadNewAccount" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- testscripts.SF.SmokeTestScripts.TC_SF_OBConvertLeadNewAccount -->
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_OBHomePageLinks">
+        <methods>
+          <include name="setUpTestRunner"/>
+          <include name="runTC_SF_OBHomePageLinks" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- testscripts.SF.SmokeTestScripts.TC_SF_OBHomePageLinks -->
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_ManagerHomePageLinks">
+        <methods>
+          <include name="setUpTestRunner"/>
+          <include name="runTC_SF_ManagerHomePageLinks" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- testscripts.SF.SmokeTestScripts.TC_SF_ManagerHomePageLinks -->
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_OBNewOpportunityPageLayout">
+        <methods>
+          <include name="setUpTestRunner"/>
+          <include name="runTC_SF_OBNewOpportunityPageLayout" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- testscripts.SF.SmokeTestScripts.TC_SF_OBNewOpportunityPageLayout -->
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_OBConvertLead">
+        <methods>
+          <include name="setUpTestRunner"/>
+          <include name="runTC_SF_OBConvertLead" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- testscripts.SF.SmokeTestScripts.TC_SF_OBConvertLead -->
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_OBRequiredFieldsOnSalesStage03_05">
+        <methods>
+          <include name="setUpTestRunner"/>
+          <include name="runTC_SF_OBRequiredFieldsOnSalesStage03_05" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- testscripts.SF.SmokeTestScripts.TC_SF_OBRequiredFieldsOnSalesStage03_05 -->
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_CSSLogin">
+        <methods>
+          <include name="setUpTestRunner"/>
+          <include name="runTC_SF_CSSLogin" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- testscripts.SF.SmokeTestScripts.TC_SF_CSSLogin -->
+      <class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAccountsLandingPage">
+        <methods>
+          <include name="setUpTestRunner"/>
+          <include name="runTC_SF_OBAccountsLandingPage" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- testscripts.SF.SmokeTestScripts.TC_SF_OBAccountsLandingPage -->
+    </classes>
+  </test> <!-- Smoke Test(failed) -->
+</suite> <!-- Failed suite [Regression] -->

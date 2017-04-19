@@ -1,0 +1,957 @@
+<!DOCTYPE html> 
+<html> 
+	 <head> 
+		 <meta charset='UTF-8'> 
+		 <title>Mercury Tours Application - SF.SmokeTestScripts_TC_SF_OBNewAccountPageLayout_Instance1 Automation Execution Results</title> 
+
+		 <style type='text/css'> 
+			 body { 
+				 background-color: #C1E1A6; 
+				 font-family: Verdana, Geneva, sans-serif; 
+				 text-align: center; 
+			 } 
+
+			 small { 
+				 font-size: 0.7em; 
+			 } 
+
+			 table { 
+				 width: 95%; 
+				 margin-left: auto; 
+				 margin-right: auto; 
+			 } 
+
+			 tr.heading { 
+				 background-color: #A9D0F5; 
+				 color: #000000; 
+				 font-size: 0.9em; 
+				 font-weight: bold; 
+			 } 
+
+			 tr.subheading { 
+				 background-color: #E0E6F8; 
+				 color: #34495E; 
+				 font-weight: bold; 
+				 font-size: 0.9em; 
+				 text-align: justify; 
+			 } 
+
+			 tr.section { 
+				 background-color: #E0E6F8; 
+				 color: #333300; 
+				 cursor: pointer; 
+				 font-weight: bold; 
+				 font-size: 0.9em; 
+				 text-align: justify; 
+			 } 
+
+			 tr.subsection { 
+				 background-color: #EDEEF0; 
+				 cursor: pointer; 
+			 } 
+
+			 tr.content { 
+				 background-color: #EDEEF0; 
+				 color: #000000; 
+				 font-size: 0.9em; 
+				 display: table-row; 
+			 } 
+
+			 td { 
+				 padding: 4px; 
+				 text-align: inherit\0/; 
+				 word-wrap: break-word; 
+				 max-width: 450px; 
+			 } 
+
+			 th { 
+				 padding: 4px; 
+				 text-align: inherit\0/; 
+				 word-break: break-all; 
+				 max-width: 450px; 
+			 } 
+
+			 td.justified { 
+				 text-align: justify; 
+			 } 
+
+			 td.pass { 
+				 font-weight: bold; 
+				 color: green; 
+			 } 
+
+			 td.fail { 
+				 font-weight: bold; 
+				 color: red; 
+			 } 
+
+			 td.done, td.screenshot { 
+				 font-weight: bold; 
+				 color: black; 
+			 } 
+
+			 td.debug { 
+				 font-weight: bold; 
+				 color: blue; 
+			 } 
+
+			 td.warning { 
+				 font-weight: bold; 
+				 color: orange; 
+			 } 
+			 img { 
+				 width:400px; 
+				 height:300px; 
+			 } 
+		 </style> 
+
+		 <script> 
+			 function toggleMenu(objID) { 
+				 if (!document.getElementById) return; 
+				 var ob = document.getElementById(objID).style; 
+				 if(ob.display === 'none') { 
+					 try { 
+						 ob.display='table-row-group'; 
+					 } catch(ex) { 
+						 ob.display='block'; 
+					 } 
+				 } 
+				 else { 
+					 ob.display='none'; 
+				 } 
+			 } 
+			 function toggleSubMenu(objId) { 
+				 for(i=1; i<10000; i++) { 
+					 var ob = document.getElementById(objId.concat(i)); 
+					 if(ob === null) { 
+						 break; 
+					 } 
+					 if(ob.style.display === 'none') { 
+						 try { 
+							 ob.style.display='table-row'; 
+						 } catch(ex) { 
+							 ob.style.display='block'; 
+						 } 
+					 } 
+					 else { 
+						 ob.style.display='none'; 
+					 } 
+				 } 
+			 } 
+		 </script> 
+	 </head> 
+
+	 <body> 
+		 <table id='header'> 
+			 <thead> 
+				 <tr class='heading'> 
+					 <th colspan='4' style='font-family:Copperplate Gothic; font-size:1.4em;'> 
+						 Mercury Tours Application - SF.SmokeTestScripts_TC_SF_OBNewAccountPageLayout_Instance1 Automation Execution Results 
+					 </th> 
+				 </tr> 
+				 <tr class='subheading'> 
+					 <th>&nbsp;Date&nbsp;&&nbsp;Time</th> 
+					 <th>&nbsp;:&nbsp;19-Apr-2017&nbsp;09:45:29&nbsp;AM</th> 
+					 <th>&nbsp;Iteration&nbsp;Mode</th> 
+					 <th>&nbsp;:&nbsp;RUN_ONE_ITERATION_ONLY</th> 
+				 </tr> 
+				 <tr class='subheading'> 
+					 <th>&nbsp;Start&nbsp;Iteration</th> 
+					 <th>&nbsp;:&nbsp;1</th> 
+					 <th>&nbsp;End&nbsp;Iteration</th> 
+					 <th>&nbsp;:&nbsp;1</th> 
+				 </tr> 
+				 <tr class='subheading'> 
+					 <th>&nbsp;Browser/Platform</th> 
+					 <th>&nbsp;:&nbsp;CHROME&nbsp;on&nbsp;WINDOWS</th> 
+					 <th>&nbsp;Execution&nbsp;on</th> 
+					 <th>&nbsp;:&nbsp;Local&nbsp;Machine</th> 
+				 </tr> 
+			 </thead> 
+		 </table> 
+
+		 <table id='main'> 
+			 <thead> 
+				 <tr class='heading'> 
+					 <th>Step No</th> 
+					 <th>Step Name</th> 
+					 <th>Description</th> 
+					 <th>Status</th> 
+					 <th>Step Time</th> 
+					 <th>ScreenShot</th> 
+				 </tr> 
+			 </thead> 
+
+			 <tbody> 
+				 <tr class='section'> 
+					 <td colspan='6' onclick="toggleMenu('Iteration1')">+ Iteration: 1</td> 
+				 </tr> 
+			 </tbody> 
+			 <tbody id='Iteration1' style='display:table-row-group'> 
+				 <tr class='subheading subsection'> 
+					 <td colspan='6' onclick="toggleSubMenu('Iteration1bclogin')">&nbsp;+ bc_login</td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bclogin1'> 
+					 <td>1</td> 
+					 <td class='justified'>Invoke Application</td> 
+					 <td class='justified'>Invoke the application under test @ https://test.salesforce.com/  </td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:45:34 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bclogin2'> 
+					 <td>2</td> 
+					 <td class='justified'>Login</td> 
+					 <td class='justified'>Click the sign-in button</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:45:42 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bclogin3'> 
+					 <td>3</td> 
+					 <td class='justified'>Verify Login</td> 
+					 <td class='justified'>Login is successful</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:45:53 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='subheading subsection'> 
+					 <td colspan='6' onclick="toggleSubMenu('Iteration1bcnewAccountPageLayout')">&nbsp;+ bc_newAccountPageLayout</td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout1'> 
+					 <td>4</td> 
+					 <td class='justified'>Verify Add Account Header List</td> 
+					 <td class='justified'>Account Information header is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:19 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout2'> 
+					 <td>5</td> 
+					 <td class='justified'>Verify Add Account Header List</td> 
+					 <td class='justified'>Account Segmentation header is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:19 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout3'> 
+					 <td>6</td> 
+					 <td class='justified'>Verify Add Account Header List</td> 
+					 <td class='justified'>Address Information header is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:19 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout4'> 
+					 <td>7</td> 
+					 <td class='justified'>Verify Add Account Header List</td> 
+					 <td class='justified'>Local Address Information header is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:19 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout5'> 
+					 <td>8</td> 
+					 <td class='justified'>Verify Add Account Header List</td> 
+					 <td class='justified'>Additional Information header is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:19 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout6'> 
+					 <td>9</td> 
+					 <td class='justified'>Verify Add Account Header List</td> 
+					 <td class='justified'>SIC/NAICS Codes header is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:19 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout7'> 
+					 <td>10</td> 
+					 <td class='justified'>Verify Add Account Header List</td> 
+					 <td class='justified'>Description Information header is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:19 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout8'> 
+					 <td>11</td> 
+					 <td class='justified'>Verify Add Account Header List</td> 
+					 <td class='justified'>System Information header is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:19 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout9'> 
+					 <td>12</td> 
+					 <td class='justified'>Verify Add Account Header List</td> 
+					 <td class='justified'>header is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:19 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout10'> 
+					 <td>13</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>* Account Name label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:19 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout11'> 
+					 <td>14</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>* Billing Street label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:19 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout12'> 
+					 <td>15</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>* Billing City label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:19 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout13'> 
+					 <td>16</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>* Billing Country label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:19 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout14'> 
+					 <td>17</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Billing State/Province label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:19 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout15'> 
+					 <td>18</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Billing Zip/Postal Code label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:19 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout16'> 
+					 <td>19</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Website label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:20 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout17'> 
+					 <td>20</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Phone label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:20 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout18'> 
+					 <td>21</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Industry label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:20 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout19'> 
+					 <td>22</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Account Site label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:20 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout20'> 
+					 <td>23</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Tradestyle Name label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:20 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout21'> 
+					 <td>24</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Legal Status label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:20 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout22'> 
+					 <td>25</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Account Opportunity History label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:20 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout23'> 
+					 <td>26</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Tax Label 1 label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:20 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout24'> 
+					 <td>27</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Tax Code 1 label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:20 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout25'> 
+					 <td>28</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Tax Code 2 label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:20 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout26'> 
+					 <td>29</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Staging Record Id label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:20 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout27'> 
+					 <td>30</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Created By Country label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:20 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout28'> 
+					 <td>31</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Last updated by Country label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:20 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout29'> 
+					 <td>32</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Original Account Name label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:20 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout30'> 
+					 <td>33</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Local Account Name label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:20 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout31'> 
+					 <td>34</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Account Fax label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:20 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout32'> 
+					 <td>35</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Immediate Parent Account label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:20 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout33'> 
+					 <td>36</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Brand Parent label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:20 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout34'> 
+					 <td>37</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Global Brand label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:20 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout35'> 
+					 <td>38</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Client Type label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:20 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout36'> 
+					 <td>39</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Key Client Account for: label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:21 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout37'> 
+					 <td>40</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Key Pursuit Account for: label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:21 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout38'> 
+					 <td>41</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Shipping Street label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:21 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout39'> 
+					 <td>42</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Shipping City label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:21 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout40'> 
+					 <td>43</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Shipping State/Province label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:21 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout41'> 
+					 <td>44</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Shipping Zip/Postal Code label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:21 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout42'> 
+					 <td>45</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Local Billing Country label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:21 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout43'> 
+					 <td>46</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Local Billing Street label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:21 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout44'> 
+					 <td>47</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Local Billing City label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:21 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout45'> 
+					 <td>48</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Local Shipping Country label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:21 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout46'> 
+					 <td>49</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Local Shipping Street label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:21 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout47'> 
+					 <td>50</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Local Shipping City label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:21 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout48'> 
+					 <td>51</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Number of Family Members label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:21 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout49'> 
+					 <td>52</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Investor Profile label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:21 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout50'> 
+					 <td>53</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Lender Type label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:21 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout51'> 
+					 <td>54</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>D-U-N-S # label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:21 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout52'> 
+					 <td>55</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Previous D-U-N-S # label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:22 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout53'> 
+					 <td>56</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Integration Id label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:22 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout54'> 
+					 <td>57</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Tax Code Label Type label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:22 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout55'> 
+					 <td>58</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Status label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:22 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout56'> 
+					 <td>59</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Reason for Inactivating label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:22 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout57'> 
+					 <td>60</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Inactivation Date label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:22 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout58'> 
+					 <td>61</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Marketability label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:22 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout59'> 
+					 <td>62</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Account Source label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:22 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout60'> 
+					 <td>63</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Ticker Symbol label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:22 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout61'> 
+					 <td>64</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Annual Revenue label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:22 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout62'> 
+					 <td>65</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Verified System Id label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:22 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout63'> 
+					 <td>66</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Verified Date label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:22 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout64'> 
+					 <td>67</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Source Created Date Time label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:22 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout65'> 
+					 <td>68</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Source Last Updated Date Time label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:22 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout66'> 
+					 <td>69</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>NAICS Code label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:22 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout67'> 
+					 <td>70</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>SIC Code 1 label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:22 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout68'> 
+					 <td>71</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>SIC Code 2 label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:22 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout69'> 
+					 <td>72</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>SIC Code 3 label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:23 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout70'> 
+					 <td>73</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>SIC Code 4 label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:23 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout71'> 
+					 <td>74</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>SIC Code 5 label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:23 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout72'> 
+					 <td>75</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>SIC Code 6 label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:23 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout73'> 
+					 <td>76</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>NAICS Code Description label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:23 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout74'> 
+					 <td>77</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>SIC Code 1 Description label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:23 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout75'> 
+					 <td>78</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>SIC Code 2 Description label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:23 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout76'> 
+					 <td>79</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>SIC Code 3 Description label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:23 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout77'> 
+					 <td>80</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>SIC Code 4 Description label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:23 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout78'> 
+					 <td>81</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>SIC Code 5 Description label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:23 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout79'> 
+					 <td>82</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>SIC Code 6 Description label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:23 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout80'> 
+					 <td>83</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Account Description label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:23 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout81'> 
+					 <td>84</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Record Type label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:23 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout82'> 
+					 <td>85</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Translation Status label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:23 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout83'> 
+					 <td>86</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Account Creator Country label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:24 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout84'> 
+					 <td>87</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>DIG Review Comments label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:24 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout85'> 
+					 <td>88</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Account Owner label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:24 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout86'> 
+					 <td>89</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Unique Account ID label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:24 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout87'> 
+					 <td>90</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Family Id Formula label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:24 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout88'> 
+					 <td>91</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Source System label list is present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:24 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcnewAccountPageLayout89'> 
+					 <td>92</td> 
+					 <td class='justified'>Verify Add Account Page Label List</td> 
+					 <td class='justified'>Labels are present in Add Account Page</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>19-Apr-2017 09:46:24 AM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+			 </tbody> 
+		 </table> 
+
+		 <table id='footer'> 
+			 <colgroup> 
+				 <col style='width: 25%' /> 
+				 <col style='width: 25%' /> 
+				 <col style='width: 25%' /> 
+				 <col style='width: 25%' /> 
+			 </colgroup> 
+
+			 <tfoot> 
+				 <tr class='heading'> 
+					 <th colspan='4'>Execution Duration: 0 minute(s), 55 second(s)</th> 
+				 </tr> 
+				 <tr class='subheading'> 
+					 <td class='pass'>&nbsp;Steps passed</td> 
+					 <td class='pass'>&nbsp;: 92</td> 
+					 <td class='fail'>&nbsp;Steps failed</td> 
+					 <td class='fail'>&nbsp;: 0</td> 
+				 </tr> 
+			 </tfoot> 
+		 </table> 
+	 </body> 
+</html>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="19619" started-at="2017-04-19T19:36:13Z" finished-at="2017-04-19T19:36:32Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="19619" started-at="2017-04-19T19:36:13Z" finished-at="2017-04-19T19:36:32Z">
+      <class name="testscripts.SF.SmokeTest_API.TC_SF_API_Opportunities">
+        <test-method status="PASS" signature="setUpTestSuite(org.testng.ITestContext)[pri:0, instance:testscripts.SF.SmokeTest_API.TC_SF_API_Opportunities@5bcab519]" name="setUpTestSuite" is-config="true" duration-ms="66" started-at="2017-04-19T14:36:12Z" finished-at="2017-04-19T14:36:13Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@1ce61929]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpTestSuite -->
+        <test-method status="PASS" signature="setUpTestRunner()[pri:0, instance:testscripts.SF.SmokeTest_API.TC_SF_API_Opportunities@5bcab519]" name="setUpTestRunner" is-config="true" duration-ms="0" started-at="2017-04-19T14:36:13Z" finished-at="2017-04-19T14:36:13Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpTestRunner -->
+        <test-method status="PASS" signature="runTC_SF_API_Opportunities(java.lang.String, com.cognizant.framework.selenium.ExecutionMode, org.openqa.selenium.Platform)[pri:0, instance:testscripts.SF.SmokeTest_API.TC_SF_API_Opportunities@5bcab519]" name="runTC_SF_API_Opportunities" duration-ms="19593" started-at="2017-04-19T14:36:13Z" data-provider="SmokeTestScripts" finished-at="2017-04-19T14:36:32Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Instance1]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[LOCAL]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[WINDOWS]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runTC_SF_API_Opportunities -->
+        <test-method status="PASS" signature="tearDownTestSuite()[pri:0, instance:testscripts.SF.SmokeTest_API.TC_SF_API_Opportunities@5bcab519]" name="tearDownTestSuite" is-config="true" duration-ms="32" started-at="2017-04-19T14:36:32Z" finished-at="2017-04-19T14:36:32Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownTestSuite -->
+      </class> <!-- testscripts.SF.SmokeTest_API.TC_SF_API_Opportunities -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

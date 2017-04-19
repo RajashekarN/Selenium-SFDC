@@ -1,0 +1,757 @@
+<!DOCTYPE html> 
+<html> 
+	 <head> 
+		 <meta charset='UTF-8'> 
+		 <title>Mercury Tours Application - SF.SmokeTestScripts_TC_SF_AdminValidateCustomerPropertyPage_Instance1 Automation Execution Results</title> 
+
+		 <style type='text/css'> 
+			 body { 
+				 background-color: #C1E1A6; 
+				 font-family: Verdana, Geneva, sans-serif; 
+				 text-align: center; 
+			 } 
+
+			 small { 
+				 font-size: 0.7em; 
+			 } 
+
+			 table { 
+				 width: 95%; 
+				 margin-left: auto; 
+				 margin-right: auto; 
+			 } 
+
+			 tr.heading { 
+				 background-color: #A9D0F5; 
+				 color: #000000; 
+				 font-size: 0.9em; 
+				 font-weight: bold; 
+			 } 
+
+			 tr.subheading { 
+				 background-color: #E0E6F8; 
+				 color: #34495E; 
+				 font-weight: bold; 
+				 font-size: 0.9em; 
+				 text-align: justify; 
+			 } 
+
+			 tr.section { 
+				 background-color: #E0E6F8; 
+				 color: #333300; 
+				 cursor: pointer; 
+				 font-weight: bold; 
+				 font-size: 0.9em; 
+				 text-align: justify; 
+			 } 
+
+			 tr.subsection { 
+				 background-color: #EDEEF0; 
+				 cursor: pointer; 
+			 } 
+
+			 tr.content { 
+				 background-color: #EDEEF0; 
+				 color: #000000; 
+				 font-size: 0.9em; 
+				 display: table-row; 
+			 } 
+
+			 td { 
+				 padding: 4px; 
+				 text-align: inherit\0/; 
+				 word-wrap: break-word; 
+				 max-width: 450px; 
+			 } 
+
+			 th { 
+				 padding: 4px; 
+				 text-align: inherit\0/; 
+				 word-break: break-all; 
+				 max-width: 450px; 
+			 } 
+
+			 td.justified { 
+				 text-align: justify; 
+			 } 
+
+			 td.pass { 
+				 font-weight: bold; 
+				 color: green; 
+			 } 
+
+			 td.fail { 
+				 font-weight: bold; 
+				 color: red; 
+			 } 
+
+			 td.done, td.screenshot { 
+				 font-weight: bold; 
+				 color: black; 
+			 } 
+
+			 td.debug { 
+				 font-weight: bold; 
+				 color: blue; 
+			 } 
+
+			 td.warning { 
+				 font-weight: bold; 
+				 color: orange; 
+			 } 
+			 img { 
+				 width:400px; 
+				 height:300px; 
+			 } 
+		 </style> 
+
+		 <script> 
+			 function toggleMenu(objID) { 
+				 if (!document.getElementById) return; 
+				 var ob = document.getElementById(objID).style; 
+				 if(ob.display === 'none') { 
+					 try { 
+						 ob.display='table-row-group'; 
+					 } catch(ex) { 
+						 ob.display='block'; 
+					 } 
+				 } 
+				 else { 
+					 ob.display='none'; 
+				 } 
+			 } 
+			 function toggleSubMenu(objId) { 
+				 for(i=1; i<10000; i++) { 
+					 var ob = document.getElementById(objId.concat(i)); 
+					 if(ob === null) { 
+						 break; 
+					 } 
+					 if(ob.style.display === 'none') { 
+						 try { 
+							 ob.style.display='table-row'; 
+						 } catch(ex) { 
+							 ob.style.display='block'; 
+						 } 
+					 } 
+					 else { 
+						 ob.style.display='none'; 
+					 } 
+				 } 
+			 } 
+		 </script> 
+	 </head> 
+
+	 <body> 
+		 <table id='header'> 
+			 <thead> 
+				 <tr class='heading'> 
+					 <th colspan='4' style='font-family:Copperplate Gothic; font-size:1.4em;'> 
+						 Mercury Tours Application - SF.SmokeTestScripts_TC_SF_AdminValidateCustomerPropertyPage_Instance1 Automation Execution Results 
+					 </th> 
+				 </tr> 
+				 <tr class='subheading'> 
+					 <th>&nbsp;Date&nbsp;&&nbsp;Time</th> 
+					 <th>&nbsp;:&nbsp;18-Apr-2017&nbsp;10:04:02&nbsp;PM</th> 
+					 <th>&nbsp;Iteration&nbsp;Mode</th> 
+					 <th>&nbsp;:&nbsp;RUN_ONE_ITERATION_ONLY</th> 
+				 </tr> 
+				 <tr class='subheading'> 
+					 <th>&nbsp;Start&nbsp;Iteration</th> 
+					 <th>&nbsp;:&nbsp;1</th> 
+					 <th>&nbsp;End&nbsp;Iteration</th> 
+					 <th>&nbsp;:&nbsp;1</th> 
+				 </tr> 
+				 <tr class='subheading'> 
+					 <th>&nbsp;Browser/Platform</th> 
+					 <th>&nbsp;:&nbsp;CHROME&nbsp;on&nbsp;WINDOWS</th> 
+					 <th>&nbsp;Execution&nbsp;on</th> 
+					 <th>&nbsp;:&nbsp;Local&nbsp;Machine</th> 
+				 </tr> 
+			 </thead> 
+		 </table> 
+
+		 <table id='main'> 
+			 <thead> 
+				 <tr class='heading'> 
+					 <th>Step No</th> 
+					 <th>Step Name</th> 
+					 <th>Description</th> 
+					 <th>Status</th> 
+					 <th>Step Time</th> 
+					 <th>ScreenShot</th> 
+				 </tr> 
+			 </thead> 
+
+			 <tbody> 
+				 <tr class='section'> 
+					 <td colspan='6' onclick="toggleMenu('Iteration1')">+ Iteration: 1</td> 
+				 </tr> 
+			 </tbody> 
+			 <tbody id='Iteration1' style='display:table-row-group'> 
+				 <tr class='subheading subsection'> 
+					 <td colspan='6' onclick="toggleSubMenu('Iteration1bclogin')">&nbsp;+ bc_login</td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bclogin1'> 
+					 <td>1</td> 
+					 <td class='justified'>Invoke Application</td> 
+					 <td class='justified'>Invoke the application under test @ https://test.salesforce.com/  </td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:04:06 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bclogin2'> 
+					 <td>2</td> 
+					 <td class='justified'>Login</td> 
+					 <td class='justified'>Click the sign-in button</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:04:16 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bclogin3'> 
+					 <td>3</td> 
+					 <td class='justified'>Verify Login</td> 
+					 <td class='justified'>Login is successful</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:04:31 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='subheading subsection'> 
+					 <td colspan='6' onclick="toggleSubMenu('Iteration1bcvalidateCustomerPropertyPage')">&nbsp;+ bc_validateCustomerPropertyPage</td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage1'> 
+					 <td>4</td> 
+					 <td class='justified'>Property Information page</td> 
+					 <td class='justified'>Propety page contains the section - Property Information</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:07 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage2'> 
+					 <td>5</td> 
+					 <td class='justified'>Property Information page</td> 
+					 <td class='justified'>Propety page contains the section - Address Information</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:07 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage3'> 
+					 <td>6</td> 
+					 <td class='justified'>Property Information page</td> 
+					 <td class='justified'>Propety page contains the section - Property Financials</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:07 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage4'> 
+					 <td>7</td> 
+					 <td class='justified'>Property Information page</td> 
+					 <td class='justified'>Propety page contains the section - Property Summary</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:07 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage5'> 
+					 <td>8</td> 
+					 <td class='justified'>Property Information page</td> 
+					 <td class='justified'>Propety page contains the section - Property Management</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:08 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage6'> 
+					 <td>9</td> 
+					 <td class='justified'>Property Information page</td> 
+					 <td class='justified'>Propety page contains the section - Asset Management</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:08 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage7'> 
+					 <td>10</td> 
+					 <td class='justified'>Property Information page</td> 
+					 <td class='justified'>Propety page contains the section - Listing Management</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:08 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage8'> 
+					 <td>11</td> 
+					 <td class='justified'>Property Information page</td> 
+					 <td class='justified'>Property Information page has the field*Building/Property Name:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:08 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage9'> 
+					 <td>12</td> 
+					 <td class='justified'>Property Information page</td> 
+					 <td class='justified'>Property Information page has the fieldProperty Website:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:08 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage10'> 
+					 <td>13</td> 
+					 <td class='justified'>Property Information page</td> 
+					 <td class='justified'>Property Information page has the field*Country:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:10 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage11'> 
+					 <td>14</td> 
+					 <td class='justified'>Property Information page</td> 
+					 <td class='justified'>Property Information page has the field*Street:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:10 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage12'> 
+					 <td>15</td> 
+					 <td class='justified'>Property Information page</td> 
+					 <td class='justified'>Property Information page has the field*City:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:10 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage13'> 
+					 <td>16</td> 
+					 <td class='justified'>Property Information page</td> 
+					 <td class='justified'>Property Information page has the fieldRegion:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:11 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage14'> 
+					 <td>17</td> 
+					 <td class='justified'>Property Information page</td> 
+					 <td class='justified'>Property Information page has the fieldMarket:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:11 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage15'> 
+					 <td>18</td> 
+					 <td class='justified'>Property Information page</td> 
+					 <td class='justified'>Property Information page has the fieldSub Market:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:12 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage16'> 
+					 <td>19</td> 
+					 <td class='justified'>Property Information page</td> 
+					 <td class='justified'>Property Information page has the fieldDistrict:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:12 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage17'> 
+					 <td>20</td> 
+					 <td class='justified'>Property Information page</td> 
+					 <td class='justified'>Property Information page has the fieldLast Purchase/Sale Price:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:13 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage18'> 
+					 <td>21</td> 
+					 <td class='justified'>Property Information page</td> 
+					 <td class='justified'>Property Information page has the field*Currency ISO Code:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:13 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage19'> 
+					 <td>22</td> 
+					 <td class='justified'>Property Information page</td> 
+					 <td class='justified'>Property Information page has the fieldLast Purchase/Sale Date:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:13 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage20'> 
+					 <td>23</td> 
+					 <td class='justified'>Property Information page</td> 
+					 <td class='justified'>Property Information page has the fieldConstruction Type:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:14 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage21'> 
+					 <td>24</td> 
+					 <td class='justified'>Property Information page</td> 
+					 <td class='justified'>Property Information page has the fieldLocation:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:14 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage22'> 
+					 <td>25</td> 
+					 <td class='justified'>Property Information page</td> 
+					 <td class='justified'>Property Information page has the fieldClass:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:14 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage23'> 
+					 <td>26</td> 
+					 <td class='justified'>Property Information page</td> 
+					 <td class='justified'>Property Information page has the fieldNet Rentable Area:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:14 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage24'> 
+					 <td>27</td> 
+					 <td class='justified'>Property Information page</td> 
+					 <td class='justified'>Property Information page has the fieldTotal Size:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:15 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage25'> 
+					 <td>28</td> 
+					 <td class='justified'>Property Information page</td> 
+					 <td class='justified'>Property Information page has the fieldTotal # of Units:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:16 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage26'> 
+					 <td>29</td> 
+					 <td class='justified'>Property Information page</td> 
+					 <td class='justified'>Property Information page has the fieldUnit of Comparison:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:16 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage27'> 
+					 <td>30</td> 
+					 <td class='justified'>Property Information page</td> 
+					 <td class='justified'>Property Information page has the fieldTenancy:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:17 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage28'> 
+					 <td>31</td> 
+					 <td class='justified'>Property Information page</td> 
+					 <td class='justified'>Property Information page has the field# of Buildings:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:18 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage29'> 
+					 <td>32</td> 
+					 <td class='justified'>Property Information page</td> 
+					 <td class='justified'>Property Information page has the field# of Floors:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:18 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage30'> 
+					 <td>33</td> 
+					 <td class='justified'>Property Information page</td> 
+					 <td class='justified'>Property Information page has the fieldBuilding Status:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:18 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage31'> 
+					 <td>34</td> 
+					 <td class='justified'>Property Information page</td> 
+					 <td class='justified'>Property Information page has the fieldMonth Built:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:19 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage32'> 
+					 <td>35</td> 
+					 <td class='justified'>Property Information page</td> 
+					 <td class='justified'>Property Information page has the fieldYear Built:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:19 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage33'> 
+					 <td>36</td> 
+					 <td class='justified'>Property Information page</td> 
+					 <td class='justified'>Property Information page has the fieldYear Renovated:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:20 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage34'> 
+					 <td>37</td> 
+					 <td class='justified'>Property Information page</td> 
+					 <td class='justified'>Property Information page has the fieldOccupancy Percent:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:20 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage35'> 
+					 <td>38</td> 
+					 <td class='justified'>Property Information page</td> 
+					 <td class='justified'>Property Information page has the fieldOwner Occupied:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:21 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage36'> 
+					 <td>39</td> 
+					 <td class='justified'>Property Information page</td> 
+					 <td class='justified'>Property Information page has the fieldVacant:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:21 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage37'> 
+					 <td>40</td> 
+					 <td class='justified'>Property Management Section</td> 
+					 <td class='justified'>Property Management Section has the fieldAddress:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:31 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage38'> 
+					 <td>41</td> 
+					 <td class='justified'>Property Management Section</td> 
+					 <td class='justified'>Property Management Section has the fieldPhone:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:31 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage39'> 
+					 <td>42</td> 
+					 <td class='justified'>Property Management Section</td> 
+					 <td class='justified'>Property Management Section has the fieldEmail:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:31 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage40'> 
+					 <td>43</td> 
+					 <td class='justified'>Property Management Section</td> 
+					 <td class='justified'>Property Management Section has the fieldAddress:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:31 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage41'> 
+					 <td>44</td> 
+					 <td class='justified'>Property Management Section</td> 
+					 <td class='justified'>Property Management Section has the fieldPhone:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:31 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage42'> 
+					 <td>45</td> 
+					 <td class='justified'>Property Management Section</td> 
+					 <td class='justified'>Property Management Section has the fieldEmail:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:31 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage43'> 
+					 <td>46</td> 
+					 <td class='justified'>Property Management Section</td> 
+					 <td class='justified'>Property Management Section has the fieldAddress:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:32 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage44'> 
+					 <td>47</td> 
+					 <td class='justified'>Property Management Section</td> 
+					 <td class='justified'>Property Management Section has the fieldPhone:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:32 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage45'> 
+					 <td>48</td> 
+					 <td class='justified'>Property Management Section</td> 
+					 <td class='justified'>Property Management Section has the fieldEmail:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:32 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage46'> 
+					 <td>49</td> 
+					 <td class='justified'>Asset Management Section</td> 
+					 <td class='justified'>Property Management Section has the fieldAddress:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:35 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage47'> 
+					 <td>50</td> 
+					 <td class='justified'>Asset Management Section</td> 
+					 <td class='justified'>Property Management Section has the fieldPhone:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:35 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage48'> 
+					 <td>51</td> 
+					 <td class='justified'>Asset Management Section</td> 
+					 <td class='justified'>Property Management Section has the fieldEmail:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:35 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage49'> 
+					 <td>52</td> 
+					 <td class='justified'>Asset Management Section</td> 
+					 <td class='justified'>Property Management Section has the fieldAddress:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:36 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage50'> 
+					 <td>53</td> 
+					 <td class='justified'>Asset Management Section</td> 
+					 <td class='justified'>Property Management Section has the fieldPhone:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:36 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage51'> 
+					 <td>54</td> 
+					 <td class='justified'>Asset Management Section</td> 
+					 <td class='justified'>Property Management Section has the fieldEmail:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:36 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage52'> 
+					 <td>55</td> 
+					 <td class='justified'>Asset Management Section</td> 
+					 <td class='justified'>Property Management Section has the fieldAddress:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:36 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage53'> 
+					 <td>56</td> 
+					 <td class='justified'>Asset Management Section</td> 
+					 <td class='justified'>Property Management Section has the fieldPhone:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:36 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage54'> 
+					 <td>57</td> 
+					 <td class='justified'>Asset Management Section</td> 
+					 <td class='justified'>Property Management Section has the fieldEmail:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:37 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage55'> 
+					 <td>58</td> 
+					 <td class='justified'>Listing Management Section</td> 
+					 <td class='justified'>Property Management Section has the fieldAddress:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:39 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage56'> 
+					 <td>59</td> 
+					 <td class='justified'>Listing Management Section</td> 
+					 <td class='justified'>Property Management Section has the fieldPhone:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:40 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage57'> 
+					 <td>60</td> 
+					 <td class='justified'>Listing Management Section</td> 
+					 <td class='justified'>Property Management Section has the fieldEmail:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:40 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage58'> 
+					 <td>61</td> 
+					 <td class='justified'>Listing Management Section</td> 
+					 <td class='justified'>Property Management Section has the fieldAddress:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:40 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage59'> 
+					 <td>62</td> 
+					 <td class='justified'>Listing Management Section</td> 
+					 <td class='justified'>Property Management Section has the fieldPhone:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:40 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage60'> 
+					 <td>63</td> 
+					 <td class='justified'>Listing Management Section</td> 
+					 <td class='justified'>Property Management Section has the fieldEmail:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:41 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage61'> 
+					 <td>64</td> 
+					 <td class='justified'>Listing Management Section</td> 
+					 <td class='justified'>Property Management Section has the fieldAddress:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:41 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage62'> 
+					 <td>65</td> 
+					 <td class='justified'>Listing Management Section</td> 
+					 <td class='justified'>Property Management Section has the fieldPhone:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:41 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage63'> 
+					 <td>66</td> 
+					 <td class='justified'>Listing Management Section</td> 
+					 <td class='justified'>Property Management Section has the fieldEmail:::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:05:41 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+				 <tr class='content' id='Iteration1bcvalidateCustomerPropertyPage64'> 
+					 <td>67</td> 
+					 <td class='justified'>Save Property</td> 
+					 <td class='justified'>Property has been created successfully :::</td> 
+					 <td class='pass'>PASS</td> 
+					 <td><small>18-Apr-2017 10:06:15 PM</small></td> 
+					 <td> N/A </td> 
+				 </tr> 
+			 </tbody> 
+		 </table> 
+
+		 <table id='footer'> 
+			 <colgroup> 
+				 <col style='width: 25%' /> 
+				 <col style='width: 25%' /> 
+				 <col style='width: 25%' /> 
+				 <col style='width: 25%' /> 
+			 </colgroup> 
+
+			 <tfoot> 
+				 <tr class='heading'> 
+					 <th colspan='4'>Execution Duration: 2 minute(s), 14 second(s)</th> 
+				 </tr> 
+				 <tr class='subheading'> 
+					 <td class='pass'>&nbsp;Steps passed</td> 
+					 <td class='pass'>&nbsp;: 67</td> 
+					 <td class='fail'>&nbsp;Steps failed</td> 
+					 <td class='fail'>&nbsp;: 0</td> 
+				 </tr> 
+			 </tfoot> 
+		 </table> 
+	 </body> 
+</html>
