@@ -52,6 +52,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//div[contains(@title, 'Add')]")
 	WebElement addButton;
+	
+	@FindBy(xpath = "//input[@name='new'][@value=' Add ']")
+	WebElement addButtonSharing;
 
 	@FindBy(xpath = "//*[contains(@id,'sharing_search')]")
 	WebElement searchUsers;
@@ -561,7 +564,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 				report.updateTestLog("Verify Opportunity Fields", "Opportunity saved successfully", Status.PASS);
 			} else {
 				report.updateTestLog("Verify Opportunity Fields", "There is an error in saving the opportunity fields",
-						Status.FAIL);
+						Status.WARNING);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -602,7 +605,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@src,'share/OppSharingDetail?')]")));
 		Utility_Functions.timeWait(2);
-		Utility_Functions.xClick(driver, addButton, true);
+		Utility_Functions.xClick(driver, addButtonSharing, true);
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xSelectDropdownByName(searchUsers, "Users");
 		Utility_Functions.timeWait(1);
