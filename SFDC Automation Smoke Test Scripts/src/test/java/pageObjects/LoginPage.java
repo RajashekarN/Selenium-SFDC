@@ -107,13 +107,19 @@ public class LoginPage extends ReusableLibrary {
 					Utility_Functions.timeWait(1);
 				} else if(dataTable.getData("General_Data", "TC_ID").contains("CSS")) {
 					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("FTEOccupierBrokerageCSSUsername"));
-					Utility_Functions.timeWait(1);				
+					Utility_Functions.timeWait(1);	
+					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTEPassword"));
+					Utility_Functions.timeWait(1);	
 				} else if(dataTable.getData("General_Data", "TC_ID").contains("Manager")) {
 					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("FTEOccupierBrokerageManagerageUsername"));
 					Utility_Functions.timeWait(1);
+					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTEPassword"));
+					Utility_Functions.timeWait(1);	
 				} else if(dataTable.getData("General_Data", "TC_ID").contains("OB")) {
 					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("FTEOccupierBrokerageBrokerUsername"));
 					Utility_Functions.timeWait(1);
+					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTEPassword"));
+					Utility_Functions.timeWait(1);	
 				}	
 		}
 		/*	Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("UATPassword"));

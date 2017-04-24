@@ -645,10 +645,10 @@ public class DriverScript {
 						+ Util.getFileSeparator() + "target"
 						+ Util.getFileSeparator() + "test-classes"
 						+ Util.getFileSeparator() + "businessComponents"),
-				new File(frameworkParameters.getRelativePath()
+				/*new File(frameworkParameters.getRelativePath()
 						+ Util.getFileSeparator() + "target"
 						+ Util.getFileSeparator() + "test-classes"
-						+ Util.getFileSeparator() + "componentGroups") };
+						+ Util.getFileSeparator() + "componentGroups")*/ };
 
 		for (File packageDirectory : packageDirectories) {
 			File[] packageFiles = packageDirectory.listFiles();

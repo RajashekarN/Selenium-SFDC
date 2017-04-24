@@ -191,7 +191,7 @@ public class ContactsPage extends ReusableLibrary {
 			Utility_Functions.xClick(driver, continueButton, true);
 		}
 		Utility_Functions.timeWait(2);
-		Utility_Functions.xSendKeys(driver, accountSearch, dataTable.getData("General_Data", "Account Name"));
+		Utility_Functions.xSendKeys(driver, accountSearch, "Test");
 		Utility_Functions.xSendKeys(driver, accountSearch, Keys.SPACE);
 		Utility_Functions.timeWait(3);
 		String accountName = accountNames.getText();

@@ -3,12 +3,18 @@ package pageObjects;
 import java.util.ArrayList;
 import java.util.List;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
+import com.sforce.soap.partner.PartnerConnection;
+import com.sforce.soap.partner.QueryResult;
+import com.sforce.soap.partner.sobject.SObject;
+import com.sforce.ws.ConnectorConfig;
+
 import pagesAPI.OpportunitiesFunctions;
 import pagesAPI.SearchTextSOQL;
 import supportLibraries.Utility_Functions;
@@ -44,7 +50,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//div[@title='Sharing'][text()='Sharing']")
 	WebElement sharingButton;
 
-	@FindBy(xpath = "//input[@name='new'][@value=' Add ']")
+	@FindBy(xpath = "//div[contains(@title, 'Add')]")
 	WebElement addButton;
 
 	@FindBy(xpath = "//*[contains(@id,'sharing_search')]")
@@ -137,9 +143,12 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//span[text()='Preferred Property Type']/parent::div/parent::div/div[2]/div/span")
 	WebElement preferredPropertyTypeValue;
 
-	@FindBy(xpath = "//*[text()='Clone']/parent::a/parent::li/parent::ul/li/a/div[text()='Edit']")
-	WebElement editButton;
+/*	@FindBy(xpath = "//*[text()='Clone']/parent::a/parent::li/parent::ul/li/a/div[text()='Edit']")
+	WebElement editButton;*/
 
+	@FindBy(xpath="//li[contains(@class,'slds-button slds-button--neutral slds-truncate')]//a[@class='forceActionLink']/div[@class='slds-truncate'][text()='Edit']")
+    WebElement editButton; 
+	
 	@FindBy(xpath = "//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Opportunity Name']/parent::label/parent::div/input")
 	WebElement opportunityNameUpdate;
 
@@ -181,6 +190,50 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//div[@class='slds-text-heading--medium slds-m-bottom--x-large']/parent::div//button/span[text()='Save']")
 	WebElement saveButtonProperty;
 
+	@FindBy(xpath = ".//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[contains(text(),'Estimated Gross Fee/Commission')]/parent::label/parent::div/input")
+	WebElement estimatedGrossFeeField;
+
+	@FindBy(xpath = "//tr[contains(@class,'parent')][1]//input[contains(@id,'acctSearchBox')]")
+	WebElement user1;
+
+	@FindBy(xpath = "//tr[contains(@class,'parent')][2]//input[contains(@id,'acctSearchBox')]")
+	WebElement user2;
+
+	@FindBy(xpath = "//input[@id='acctSearchBox2'][@class='tt-search-box slds-input tt-input']")
+	WebElement userField1;
+
+	@FindBy(xpath = "//input[@id='acctSearchBox3'][@class='tt-search-box slds-input tt-input']")
+	WebElement userField2;
+
+	@FindBy(xpath="//select[@class='slds-select']/option[@value='Team Member']")
+	WebElement selectTeamRole; 
+
+	@FindBy(xpath = "//select[@class='slds-select']/option[@value='Originating Broker']")
+	WebElement selectSecondaryMemberRole;
+
+	@FindBy(xpath = "//select[@class='slds-select']/option[@value='Edit']")
+	WebElement selectOpportunityAccess;
+
+	@FindBy(xpath = "//table[@class='slds-table slds-no-row-hover']//tr[2]/td[3]//option[@value='Revenue Partner']")
+	WebElement selectTeamRole2;
+
+	@FindBy(xpath = "//table[@class='slds-table slds-no-row-hover']//tr[2]/td[4]//option[@value='Receiving Broker']")
+	WebElement selectSecondaryMemberRole2;
+	
+	@FindBy(xpath = "//div[contains(@class, 'slds-truncate') and text()='Manage Opportunity Splits']")
+	WebElement manageOpportunitySplits;
+
+	@FindBy(xpath = "// input [@value= 'Save']")
+	WebElement saveOpportunitySplit;
+	
+	@FindBy(xpath = "//td[contains(@data-label,'Split Percent')]//input")
+	WebElement splitPercent;
+	
+	@FindBy(xpath = "//input[@value= 'Save']")
+	WebElement saveButtonSplit;
+
+	  
+	
 	HomePage hp = new HomePage(scriptHelper);
 
 	/**
@@ -527,17 +580,21 @@ public class OpportunitiesPage extends ReusableLibrary {
 	public void opportunitySharing() {
 
 		SearchTextSOQL searchOpportunity = new SearchTextSOQL(scriptHelper);
-		String queryOpp = "SELECT Id, Name FROM Opportunity where StageName > '16-In Escrow' and StageName < '19-Closed' and Total_Size__c !=null limit 10";
+		String queryOpp = "SELECT Id, Name FROM Opportunity where StageName > '16-In Escrow' and StageName < '17-Closed' and Total_Size__c !=null limit 10";
 		String Opportunity = searchOpportunity.searchOpportunity(queryOpp);
 		String url = driver.getCurrentUrl().split("#")[0];
 		String newUrl = url + "#/sObject/" + Opportunity;
 		newUrl = newUrl + "/view";
 		driver.get(newUrl);
-/*		Utility_Functions.xClick(driver, menu_Opportunities, true);
-		Utility_Functions.timeWait(2);
-		List<WebElement> OpportunitiesList = driver
-				.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-		String opportunity = Utility_Functions.xclickgetTextofFirstElementfromList(OpportunitiesList);*/
+		/*
+		 * Utility_Functions.xClick(driver, menu_Opportunities, true);
+		 * Utility_Functions.timeWait(2); List<WebElement> OpportunitiesList =
+		 * driver .findElements(By.
+		 * xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"
+		 * )); String opportunity =
+		 * Utility_Functions.xclickgetTextofFirstElementfromList(
+		 * OpportunitiesList);
+		 */
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xClick(driver, sharingButton, true);
 		Utility_Functions.timeWait(2);
@@ -553,30 +610,33 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xClick(driver, findValue, true);
 		Utility_Functions.timeWait(1);
-		Utility_Functions.xSelectDropdownByName(selectUser, "User: Vishnuvardhan Bommisetty");
+		if (properties.getProperty("RunEnvironment").equals("UAT")) {
+			Utility_Functions.xSelectDropdownByName(selectUser, "User: Vishnuvardhan Bommisetty");
+		} else {
+			Utility_Functions.xSelectDropdownByName(selectUser, "User: vishnuvardhan bommisetty");
+		}
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xClick(driver, rightArrow, true);
 		Utility_Functions.timeWait(1);
-		Utility_Functions.xSelectDropdownByName(access, "Read/Write");
+		Utility_Functions.xSelectDropdownByName(access, "Read Only");
 		Utility_Functions.xClick(driver, saveButton, true);
 		Utility_Functions.timeWait(1);
 		driver.switchTo().defaultContent();
 		LoginPage login = new LoginPage(scriptHelper);
 		login.logout();
 
-		OpportunitiesFunctions update = new OpportunitiesFunctions(scriptHelper);
 		String newopportunityID = "'" + Opportunity + "' ";
-		update.updateOpportunityField("StageName", newopportunityID);
+		updateOpportunityStatus("StageName", newopportunityID);
 		String updateQuery = "SELECT Id, Name, StageName FROM Opportunity where Id = " + newopportunityID;
 		searchOpportunity.searchOpportunity(updateQuery);
 		String resultQuery = "SELECT Id, Name, StageName FROM Opportunity where Id = " + newopportunityID;
 		String opportunityStage = searchOpportunity.fetchRecordFieldValue("StageName", resultQuery);
 		System.out.println(opportunityStage);
 		if (opportunityStage.contains("Closed")) {
-			report.updateTestLog("Verify Opportunity Update", "Opportunity has been updated successfully", Status.PASS);
+			report.updateTestLog("Verify Opportunity Update", "Opportunity has been updated successfully", Status.FAIL);
 		} else {
 			report.updateTestLog("Verify Opportunity Update",
-					"Sales Stage updation has been failed which is working as expected", Status.FAIL);
+					"Sales Stage updation has been failed which is working as expected", Status.PASS);
 		}
 
 		/*
@@ -612,6 +672,56 @@ public class OpportunitiesPage extends ReusableLibrary {
 		 * executor.executeScript("arguments[0].click();", salesStageLabel);
 		 */
 
+	}
+
+	/**
+	 * Validating the Opportunity Status field update
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	static PartnerConnection connection = null;
+	static ConnectorConfig config;
+
+	public void updateOpportunityStatus(String FieldName, String OpportunityID) {
+		try {
+			if (properties.getProperty("RunEnvironment").equals("UAT")) {
+				String UAT_AuthEndpoint = properties.getProperty("UATAuthEndpoint");
+				config = new ConnectorConfig();
+				config.setUsername("vishnuvardhan.bommisetty@cbre.com.crm.uat2");
+				config.setPassword("Vishnu3704");
+				config.setAuthEndpoint(UAT_AuthEndpoint);
+			} else if (properties.getProperty("RunEnvironment").equals("FTE")) {
+				String FTE_AuthEndpoint = properties.getProperty("FTEAuthEndpoint");
+				config = new ConnectorConfig();
+				config.setUsername("vishnuvardhan.bommisetty@cbre.com.crm.fte");
+				config.setPassword("Vishnu3604");
+				config.setAuthEndpoint(FTE_AuthEndpoint);
+			}
+			connection = new PartnerConnection(config);
+
+			String fieldName = FieldName;
+			String opportunityID = OpportunityID;
+			SObject[] records = new SObject[1];
+			QueryResult queryResults = connection.query("SELECT Id FROM Opportunity Where ID = " + opportunityID);
+			System.out.println(queryResults);
+			if (queryResults.getSize() > 0) {
+				for (int i = 0; i < queryResults.getRecords().length; i++) {
+					SObject so = (SObject) queryResults.getRecords()[i];
+					SObject soUpdate = new SObject();
+					soUpdate.setType("Opportunity");
+					soUpdate.setId(so.getId());
+					if (fieldName.equals("StageName")) {
+						soUpdate.setField(fieldName, "17-Closed");
+					}
+					records[i] = soUpdate;
+					System.out.println(records[i]);
+				}
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println(e.getStackTrace());
+		}
 	}
 
 	/**
@@ -786,4 +896,127 @@ public class OpportunitiesPage extends ReusableLibrary {
 			report.updateTestLog("Verify Opportunity", "Associat property to an opportunity failed ", Status.FAIL);
 		}
 	}
+
+	/**
+	 * Validating the manage Opportunity split functionality
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void opportunitySplitFunctionality() {
+
+		Utility_Functions.xClick(driver, menu_Opportunities, true);
+		Utility_Functions.timeWait(4);
+		List<WebElement> allActiveOpportunitiesList = driver.findElements(
+				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xclickgetTextofFirstElementfromList(allActiveOpportunitiesList);
+		Utility_Functions.timeWait(5);
+		Utility_Functions.xClick(driver, editButton, true);
+		Utility_Functions.timeWait(4);
+		Utility_Functions.xScrollWindowToElement(driver, estimatedGrossFeeField);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, estimatedGrossFeeField, true);
+		Utility_Functions.timeWait(4);
+		Utility_Functions.xSendKeys(driver, estimatedGrossFeeField, "10,000.00");
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, save, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, related, true);
+		Utility_Functions.timeWait(5);
+		Utility_Functions.xClick(driver, addButton, true);
+		Utility_Functions.timeWait(3);
+		int size = driver.findElements(By.tagName("iframe")).size();
+		System.out.println(size);
+		Utility_Functions.timeWait(2);
+		List<WebElement> iframeList = driver.findElements(By.tagName("iframe"));
+		System.out.println(iframeList.size());
+		for (WebElement element : iframeList) {
+			System.out.println(element.getAttribute("id"));
+		}
+		driver.switchTo().frame(4);
+		// System.out.println("Frame Identified");
+		Utility_Functions.timeWait(5);
+		List<WebElement> opportunityList = driver.findElements(By.xpath("//div[contains(@class, 'slds-truncate')]"));
+		int count = 0;
+		System.out.println(opportunityList.size());
+		try {
+			for (WebElement element : opportunityList) {
+
+				if ((count == 0) && (element.getText().equals("USER"))) {
+					System.out.println("USER  field is present in the Add New Team Member Page");
+					report.updateTestLog("Add New Team Member Page",
+							"Add New Team Member Page is having the " + element.getText() + " Status field::",
+							Status.PASS);
+					count++;
+				} else if ((count == 1) && (element.getText().equals("TEAM MEMBER DESCRIPTION"))) {
+					System.out.println("Team Member Description field is present in the Add New Team Member Page");
+					report.updateTestLog("Add New Team Member Page",
+							"Add New Team Member Page is having the " + element.getText() + " Status field::",
+							Status.PASS);
+					count++;
+				} else if ((count == 2) && (element.getText().equals("TEAM ROLE"))) {
+					System.out.println("TEAM ROLE field is present in the Add New Team Member Page");
+					report.updateTestLog("Add New Team Member Page",
+							"Add New Team Member Page is having the " + element.getText() + " Status field::",
+							Status.PASS);
+					count++;
+				} else if ((count == 3) && (element.getText().equals("SECONDARY MEMBER ROLE"))) {
+					System.out.println("SECONDARY MEMBER ROLE field is present in the Add New Team Member Page");
+					report.updateTestLog("Add New Team Member Page",
+							"Add New Team Member Page is having the " + element.getText() + " Status field::",
+							Status.PASS);
+					count++;
+				} else if ((count == 4) && (element.getText().equals("OPPORTUNITY ACCESS"))) {
+					System.out.println("OPPORTUNITY ACCESS field is present in the Add New Team Member Page");
+					report.updateTestLog("Add New Team Member Page",
+							"Add New Team Member Page is having the " + element.getText() + " Status field::",
+							Status.PASS);
+
+				}
+			}
+			if (count != 4)
+				report.updateTestLog("Add New Team Member Page",
+						"Add New Team Member Page is not having all the fields::", Status.FAIL);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xSendKeys(driver, user1, "Inactive User");
+		Utility_Functions.timeWait(1);
+		user1.sendKeys(Keys.ARROW_DOWN);
+		user1.sendKeys(Keys.ENTER);
+		Utility_Functions.xClick(driver, selectTeamRole, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, selectSecondaryMemberRole, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, selectOpportunityAccess, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xSendKeys(driver, user2, "Test Broker1");
+		Utility_Functions.timeWait(2);
+		user2.sendKeys(Keys.ARROW_DOWN);
+		user2.sendKeys(Keys.ENTER);
+		Utility_Functions.xClick(driver, selectTeamRole2, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, selectSecondaryMemberRole2, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, saveButtonSplit, true);
+		Utility_Functions.timeWait(3);
+		driver.navigate().refresh();
+		Utility_Functions.timeWait(1);
+		driver.switchTo().defaultContent();
+		driver.navigate().refresh();
+		Utility_Functions.xWaitForElementVisible(driver, manageOpportunitySplits, 3);
+		Utility_Functions.xClick(driver, manageOpportunitySplits, true);
+		Utility_Functions.timeWait(4);
+		driver.switchTo().frame(driver.findElement(By.xpath("//iframe")));
+		splitPercent.clear();
+		Utility_Functions.timeWait(3);
+		splitPercent.sendKeys("100");
+		Utility_Functions.xClick(driver, saveOpportunitySplit, true);
+		report.updateTestLog("Opportunity Saved",
+				"Opportunity Saved successfully::", Status.PASS);
+		Utility_Functions.timeWait(3);
+	}
+
 }

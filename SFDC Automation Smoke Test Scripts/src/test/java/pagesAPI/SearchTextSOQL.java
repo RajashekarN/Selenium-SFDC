@@ -6,12 +6,9 @@ import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
 import com.sforce.soap.partner.DeleteResult;
-import com.sforce.soap.partner.PartnerConnection;
 import com.sforce.soap.partner.QueryResult;
 import com.sforce.soap.partner.SaveResult;
 import com.sforce.soap.partner.sobject.SObject;
-import com.sforce.ws.ConnectionException;
-import com.sforce.ws.ConnectorConfig;
 
 /**
  * API Class for searching the text using SOQL calls
@@ -34,37 +31,12 @@ public class SearchTextSOQL extends ReusableLibrary {
 		// Utility_Functions utility = new Utility_Functions(scriptHelper);
 	}
 
-	static PartnerConnection connection = null;
-	static ConnectorConfig config;
 	static SaveResult[] results;
 	static DeleteResult[] deleteResults;
 	static com.sforce.soap.partner.Error[] errors;
 	static boolean status = false;
-	static String result;
-
-	/**
-	 * Validating the Connection functionality
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-	public void establishConnection() {
-		String username = dataTable.getData("General_Data", "Username");
-		String password = dataTable.getData("General_Data", "Password");
-		String authEndpoint = dataTable.getData("General_Data", "AuthEndpoint");
-		try {
-			config = new ConnectorConfig();
-			config.setUsername(username);
-			config.setPassword(password);
-			System.out.println("AuthEndPoint: " + authEndpoint);
-			config.setAuthEndpoint(authEndpoint);
-			connection = new PartnerConnection(config);
-		} catch (ConnectionException ce) {
-			ce.printStackTrace();
-			System.out.println(ce.getMessage());
-		}
-	}
-
+	
+	EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
 	/**
 	 * Validating the Search Lead functionality
 	 * 
@@ -75,7 +47,7 @@ public class SearchTextSOQL extends ReusableLibrary {
 	public void searchLead() {
 		try
 		{
-			establishConnection();
+			establishConnection.establishConnection();
 			//List<String> lstLeadName = new ArrayList<String>();
 			//Suppose you have filled lstIds with your ids.
 			/*	String query = "select Id, Name from lead "; 
@@ -90,7 +62,7 @@ public class SearchTextSOQL extends ReusableLibrary {
 			}
 			query += "where id in (" + strLeadName + ")";*/
 			String query = "SELECT Id FROM Lead where Country !=null limit 10";
-			QueryResult result = connection.query(query);
+			QueryResult result = EstablishConnection.connection.query(query);
 			if(result.getSize()>0)
 			{
 				boolean done=false;
@@ -104,7 +76,7 @@ public class SearchTextSOQL extends ReusableLibrary {
 					if (result.isDone()) {
 						done = true;
 					} else {
-						result = connection.queryMore(result.getQueryLocator());
+						result = EstablishConnection.connection.queryMore(result.getQueryLocator());
 					}
 				}
 			}			
@@ -128,10 +100,10 @@ public class SearchTextSOQL extends ReusableLibrary {
 		String recordID = null;
 		try
 		{
-			establishConnection();
+			establishConnection.establishConnection();
 			String Query = query; 
 			//Query = "SELECT Id FROM Lead where Country !=null limit 10";
-			QueryResult result = connection.query(Query);
+			QueryResult result = EstablishConnection.connection.query(Query);
 			if(result.getSize()>0)
 			{
 				boolean done=false;
@@ -152,7 +124,7 @@ public class SearchTextSOQL extends ReusableLibrary {
 					if (result.isDone()) {
 						done = true;
 					} else {
-						result = connection.queryMore(result.getQueryLocator());
+						result = EstablishConnection.connection.queryMore(result.getQueryLocator());
 					}
 				}
 			}			
@@ -176,10 +148,10 @@ public class SearchTextSOQL extends ReusableLibrary {
 		String name = Name;
 		try
 		{
-			establishConnection();
+			establishConnection.establishConnection();
 			String tableName = table; 
 			String query = "select Id, Name from " +  tableName + " order by CreatedDate asc";
-			QueryResult result = connection.query(query);
+			QueryResult result = EstablishConnection.connection.query(query);
 			if(result.getSize()>0)
 			{
 				boolean done=false;
@@ -207,7 +179,7 @@ public class SearchTextSOQL extends ReusableLibrary {
 					if (result.isDone()) {
 						done = true;
 					} else {
-						result = connection.queryMore(result.getQueryLocator());
+						result = EstablishConnection.connection.queryMore(result.getQueryLocator());
 					}
 				}
 			}			
@@ -232,9 +204,9 @@ public class SearchTextSOQL extends ReusableLibrary {
 		String fieldname = FieldName;
 		try
 		{
-			establishConnection();
+			establishConnection.establishConnection();
 			String query = Query;
-			QueryResult result = connection.query(query);
+			QueryResult result = EstablishConnection.connection.query(query);
 			if(result.getSize()>0)
 			{
 				boolean done=false;
@@ -262,7 +234,7 @@ public class SearchTextSOQL extends ReusableLibrary {
 					if (result.isDone()) {
 						done = true;
 					} else {
-						result = connection.queryMore(result.getQueryLocator());
+						result = EstablishConnection.connection.queryMore(result.getQueryLocator());
 					}
 				}
 			}			

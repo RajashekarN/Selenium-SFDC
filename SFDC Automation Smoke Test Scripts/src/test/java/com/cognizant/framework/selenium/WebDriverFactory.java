@@ -22,6 +22,9 @@ import org.openqa.selenium.remote.*;
 import com.cognizant.framework.FrameworkException;
 import com.cognizant.framework.Settings;
 
+import io.github.bonigarcia.wdm.ChromeDriverManager;
+import io.github.bonigarcia.wdm.InternetExplorerDriverManager;
+
 
 /**
  * Factory class for creating the {@link WebDriver} object as required
@@ -48,8 +51,10 @@ public class WebDriverFactory {
 		case CHROME:
 			// Takes the system proxy settings automatically
 			
-			System.setProperty("webdriver.chrome.driver",
+			/*System.setProperty("webdriver.chrome.driver",
 									properties.getProperty("ChromeDriverPath"));
+			*/
+			ChromeDriverManager.getInstance().setup();
 			driver = new ChromeDriver();
 			break;
 			
@@ -70,8 +75,9 @@ public class WebDriverFactory {
 		case INTERNET_EXPLORER:
 			// Takes the system proxy settings automatically
 			
-			System.setProperty("webdriver.ie.driver",
-									properties.getProperty("InternetExplorerDriverPath"));
+			/*System.setProperty("webdriver.ie.driver",
+									properties.getProperty("InternetExplorerDriverPath"));*/
+			InternetExplorerDriverManager.getInstance().setup();
 			driver = new InternetExplorerDriver();
 			break;
 			

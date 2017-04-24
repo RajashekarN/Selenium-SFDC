@@ -40,7 +40,7 @@ public class LeadsPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//div[@class='slds-context-bar oneGlobalNav']//span[text()='Home']")
 	WebElement menu_Home;
-	
+
 	@FindBy(xpath = "//div[@class='slds-context-bar oneGlobalNav']//span[text()='Leads']")
 	WebElement menu_Leads;
 
@@ -118,7 +118,7 @@ public class LeadsPage extends ReusableLibrary {
 
 
 	// //div[@class='slds-input-has-icon slds-input-has-icon--right']//input[@id='j_id0:CustomLeadConversionFrom:accname']
-	@FindBy(xpath = "//*[@id='acc_id']")
+	@FindBy(xpath = "//input[contains(@id,'acc_id')]")
 	WebElement accountNameConvert;	
 
 	@FindBy(xpath = "//div[@class='tt-dataset-acc_idTypeahead']//div[1]/p")
@@ -151,55 +151,87 @@ public class LeadsPage extends ReusableLibrary {
 	@FindBy(xpath = "//button[@class='slds-button slds-button--neutral uiButton forceActionButton'][@title='Save & New']")
 	WebElement cloneSaveNewButton;
 
-/*	@FindBy(xpath = "//li/parent::ul/parent::div/parent::div/parent::div/header/div[2]/h2/a/span[text()='Private Notes']/parent::a/parent::h2/parent::div/parent::header/parent::div//ul[@class='slds-button-group slds-m-left--xx-small small oneActionsRibbon forceActionsContainer']")
+	/*	@FindBy(xpath = "//li/parent::ul/parent::div/parent::div/parent::div/header/div[2]/h2/a/span[text()='Private Notes']/parent::a/parent::h2/parent::div/parent::header/parent::div//ul[@class='slds-button-group slds-m-left--xx-small small oneActionsRibbon forceActionsContainer']")
 	WebElement new_PrivateNotes;*/
-	
+
 	@FindBy(xpath = "//article[contains(@class,'Private Notes')]//div[@title='New']")
 	WebElement new_PrivateNotes;
-	
+
 	@FindBy(xpath = "//div[@class='forceChangeRecordTypeFooter']//span[text()='Next']")
 	WebElement next_PrivateNotes;
-	
+
 	@FindBy(xpath = "//div[@class='contentWrapper slds-box--border']//ul[@class='orderedList']//span[@class='pillText']")
 	WebElement lead_PrivateNotes;
-	
+
 	@FindBy(xpath = "//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[contains(text(), 'Title')]/parent::label/parent::div/input")
 	WebElement title_PrivateNotes;
-	
+
 	@FindBy(xpath = "//div[@class='autocompleteWrapper']/input[@placeholder='Search Contacts']")
 	WebElement searchContacts;
-	
+
 	@FindBy(xpath = "//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[contains(text(), 'Body')]/parent::label/parent::div/textarea")
 	WebElement body;
-	
+
 	@FindBy(xpath = "//span[@class='toastMessage slds-text-heading--small forceActionsText'][contains(text(), 'was created.')]")
 	WebElement wasCreated;	
-	
+
 	@FindBy(xpath = "//button[@class='slds-button slds-button--neutral uiButton--default uiButton--brand uiButton forceActionButton']/span[text()='Save']")
 	WebElement savePrivateNote;
-	
+
 	@FindBy(xpath = "//*[text()='Street']/parent::div/div/div/textarea")
 	WebElement streetField;
-	
+
 	@FindBy(xpath = "//*[contains(@id,'CustomLeadConversionFrom:country')]")
 	WebElement countryField;
-	
+
 	@FindBy(xpath = "//*[contains(@id,'CustomLeadConversionFrom:state')]")
 	WebElement stateField;	
-	
+
 	@FindBy(xpath = "//*[contains(@id,'CustomLeadConversionFrom:city')]")
 	WebElement cityField;
-	
+
 	@FindBy(xpath = "//*[text()='Zip/Postal Code']/parent::div/div/div/input")
 	WebElement zipCodeField;
-	
+
 	@FindBy(xpath = ".//*[contains(@id,'CustomLeadConversionFrom')]//input[@value='Convert']")
 	WebElement convertButton;
-	
+
 	@FindBy(xpath = "//div[@title='Convert']")
 	WebElement saveConvertButton;
+
+	@FindBy(xpath = "//h1//span[text()='Recently Viewed']")
+	WebElement recentlyViewed;
+
+	@FindBy(xpath = "//span[contains(@class,'virtualAutocompleteOptionText')][text()='All Leads']")
+	WebElement allLeadsMenu;
 	
-		
+	@FindBy(xpath="//span[contains(@class, 'slds-text-heading--small slds-truncate') and text() = 'Files']")
+	WebElement files;
+	
+	@FindBy(xpath="//div[@title='Add File']")
+	WebElement addFile;
+	
+	@FindBy(xpath="//a[@title='Recent']")
+	WebElement recentFile;
+	
+	@FindBy(xpath="//div[@class='filerow']")
+	WebElement addFileAttachment;
+	
+	@FindBy(xpath=".//*[text()='Add']")
+	WebElement add;
+	
+	@FindBy(xpath="//span[contains(text(),'Related Contacts')]")
+	WebElement accountsRelatedContacts;
+	
+	@FindBy(xpath="//span[contains(@class, 'slds-text-heading--small slds-truncate') and text() = 'Contacts']")
+	WebElement accountsContacts;
+	
+	@FindBy(xpath="//span[contains(@class, 'slds-text-heading--small slds-truncate') and text() = 'Opportunities']")
+	WebElement accountsRelatedOpportunities;
+
+	@FindBy(xpath="//[contains(@id='CustomLeadConversionFrom')]//a/img")
+	WebElement accName;
+	
 	/**
 	 * Validating the Convert Lead functionality
 	 * 
@@ -210,10 +242,25 @@ public class LeadsPage extends ReusableLibrary {
 	public void convertLead() {
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xClick(driver, menu_Leads, true);
-		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(2);		
 		List<WebElement> leadsList = driver.findElements(
 				By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-		Utility_Functions.xclickgetTextofFirstElementfromList(leadsList);
+		try {
+			if(leadsList.isEmpty()) {
+				System.out.println("Recently Viewed List is empty");
+				Utility_Functions.xClick(driver, recentlyViewed, true);
+				Utility_Functions.timeWait(1);
+				Utility_Functions.xClick(driver, allLeadsMenu, true);	
+				List<WebElement> allLeadsList = driver.findElements(
+						By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+				Utility_Functions.xclickgetTextofFirstElementfromList(allLeadsList);
+			} else {
+				Utility_Functions.xclickgetTextofFirstElementfromList(leadsList);
+			}
+		} catch (Exception e2) {
+			e2.printStackTrace();
+			System.out.println(e2.getMessage());
+		}			
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xScrollWindowToElement(driver, addressDetails);
 		Utility_Functions.xScrollWindowToElement(driver, directLine);
@@ -281,11 +328,9 @@ public class LeadsPage extends ReusableLibrary {
 				System.out.println("Record Owner field is having the record owner autopopulated");
 				report.updateTestLog("Convert Lead Page", "Convert Lead Page is not having the record owner value as null::",Status.PASS);
 			}
-			//Utility_Functions.xClick(driver, accountNameConvert, true);
-			Utility_Functions.xClick(driver, accountNameSearch, true);
-			Utility_Functions.timeWait(1);
 			accountNameConvert.clear();
-			Utility_Functions.xSendKeys(driver, accountNameConvert, dataTable.getData("General_Data", "Account Name"));
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xSendKeys(driver, accountNameConvert, "Test");
 			Utility_Functions.xSendKeys(driver, accountNameConvert, Keys.SPACE);
 			Utility_Functions.timeWait(2);
 			try {
@@ -295,7 +340,7 @@ public class LeadsPage extends ReusableLibrary {
 					report.updateTestLog("Verify Acccount Name", "Account name doesn't contain the space between the Account First Name and Account Last Name:::", Status.FAIL);
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 				System.out.println(e.getMessage());
 			}			
 		} catch (Exception e) {
@@ -303,7 +348,7 @@ public class LeadsPage extends ReusableLibrary {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	/**
 	 * Function to validate the Convert List elements
 	 * 
@@ -340,7 +385,7 @@ public class LeadsPage extends ReusableLibrary {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	/**
 	 * Adding the Web Elements to the Related Page Element List
 	 * 
@@ -633,7 +678,7 @@ public class LeadsPage extends ReusableLibrary {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Validating the Related lists of a Lead in the Lead Landing page
 	 * 
@@ -669,7 +714,7 @@ public class LeadsPage extends ReusableLibrary {
 			report.updateTestLog("Lead Related Section", "Lead Related Section doesn't contains all the related lists for the lead:::",Status.FAIL);
 		}
 	}
-	
+
 	/**
 	 * Validating the Private Note functionality for Lead
 	 * 
@@ -684,12 +729,12 @@ public class LeadsPage extends ReusableLibrary {
 				By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
 		String leadSelected = Utility_Functions.xclickgetTextofFirstElementfromList(leadsList);
 		Utility_Functions.timeWait(3);
-/*		
+		/*		
 		searchTextSOQL searchRecord = new searchTextSOQL(scriptHelper);
 		String recordID = searchRecord.fetchRecord("lead");
 		String url = driver.getCurrentUrl();
 		url.replaceAll("sObject/", "sObject/"+recordID);*/
-				
+
 		Utility_Functions.xClick(driver, related, true);
 		Utility_Functions.timeWait(2);
 
@@ -730,7 +775,7 @@ public class LeadsPage extends ReusableLibrary {
 			report.updateTestLog("Verify Private Note", "Private Note is created successfully", Status.FAIL);
 		}
 		Utility_Functions.timeWait(4);
-/*		try {
+		/*		try {
 			if (wasCreated.isDisplayed()) {
 				report.updateTestLog("Verify Private Note", "Private Note is created successfully", Status.PASS);
 			} else {
@@ -741,7 +786,7 @@ public class LeadsPage extends ReusableLibrary {
 		}*/
 
 	}
-	
+
 	/**
 	 * Function for validating the Convert Lead by adding the new account in the Convert Lead page
 	 * 
@@ -786,14 +831,14 @@ public class LeadsPage extends ReusableLibrary {
 		} else {
 			report.updateTestLog("Verify Convert Lead", "Convert Lead failed", Status.FAIL);
 		}
-/*		Utility_Functions.timeWait(4);
+		/*		Utility_Functions.timeWait(4);
 		if(menu_Home.isDisplayed()) {
 			report.updateTestLog("Verify Convert Lead", "Convert Lead done successfully", Status.PASS);
 		} else {
 			report.updateTestLog("Verify Convert Lead", "Convert Lead failed", Status.FAIL);
 		}*/
 	}
-	
+
 	/**
 	 * Function for validating the Convert Lead by adding the new account in the Convert Lead page
 	 * 
@@ -830,12 +875,144 @@ public class LeadsPage extends ReusableLibrary {
 			report.updateTestLog("Verify Convert Lead", "Convert Lead failed", Status.FAIL);
 		}		
 		Utility_Functions.timeWait(4);
-/*		if(menu_Home.isDisplayed()) {
+		/*		if(menu_Home.isDisplayed()) {
 			report.updateTestLog("Verify Convert Lead", "Convert Lead done successfully", Status.PASS);
 		} else {
 			report.updateTestLog("Verify Convert Lead", "Convert Lead failed", Status.FAIL);
 		}*/
 	}
-		
+
+	/**
+	 * Validating the Convert Lead Note by adding an attachment and verifying it 
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void convertLeadNote(){
+		Utility_Functions.xClick(driver, menu_Leads, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver,recentlyViewed, true);
+		Utility_Functions.timeWait(4);
+		Utility_Functions.xClick(driver, allLeadsMenu, true);
+		Utility_Functions.timeWait(4);
+		List<WebElement> leadsList = driver.findElements(
+				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xclickgetTextofFirstElementfromList(leadsList);
+		Utility_Functions.timeWait(4);
+		Utility_Functions.xClick(driver, related, true);
+		Utility_Functions.timeWait(5);
+		Utility_Functions.xScrollWindowOnce(driver);
+		Utility_Functions.timeWait(5);
+		/*Utility_Functions.xClick(driver, recentFile, true);
+		Utility_Functions.timeWait(2);*/		
+		Utility_Functions.xClick(driver, addFile, true);
+		Utility_Functions.timeWait(5);
+		Utility_Functions.xClick(driver, addFileAttachment, true);
+		Utility_Functions.timeWait(4);
+		Utility_Functions.xClick(driver, add, true);
+		Utility_Functions.timeWait(4);	
+		Utility_Functions.xClick(driver, convert, true);
+		Utility_Functions.timeWait(3);
+/*		int size = driver.findElements(By.tagName("iframe")).size();
+		System.out.println(size);*/
+		driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[contains(@src,'LeadConversionRed')]")));
+		Utility_Functions.timeWait(3);
+		List<WebElement> convertList = driver.findElements(By.xpath(".//label[@class='slds-form-element__label']"));
+		int count=0; 
+		try {
+			for(WebElement element: convertList) {
+				if((count==0) && (element.getText().equals("*Converted Status"))) {
+					System.out.println("Converted Status field is present in the Convert Lead Page");
+					report.updateTestLog("Convert Lead Page", "Convert Lead Page is having the " + element.getText() +" Status field::",Status.PASS);	
+					count++;						
+				} else if((count==1) && (element.getText().equals("*Record Owner"))) {
+					System.out.println("Record Owner field is present in the Convert Lead Page");
+					report.updateTestLog("Convert Lead Page", "Convert Lead Page is having the " + element.getText() +" Status field::",Status.PASS);
+					count++;						
+				} else if((count==2) && (element.getText().equals("*Account Name"))) {
+					System.out.println("Account Name field is present in the Convert Lead Page");
+					report.updateTestLog("Convert Lead Page", "Convert Lead Page is having the " + element.getText() +" Status field::",Status.PASS);
+				} 										
+			}
+			if(count!=2) 
+				report.updateTestLog("Convert Lead Page", "Convert Lead Page is not having all the fields::",Status.FAIL);							
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		try {
+			if(convertedStatus.getText().contains("Qualified")) {
+				System.out.println("Converted Status field is having the option as Qualified by default");
+				report.updateTestLog("Convert Lead Page", "Convert Lead Page is having the option as ::" + convertedStatus.getText() + "" ,Status.PASS);
+			} else if(recordOwnerText != null) {
+				System.out.println("Record Owner field is having the record owner autopopulated");
+				report.updateTestLog("Convert Lead Page", "Convert Lead Page is not having the record owner value as null::",Status.PASS);
+			} else {
+				System.out.println("Fields are not having the values expected");
+				report.updateTestLog("Convert Lead Page", "Convert Lead Page is not having the fields expected::",Status.FAIL);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());		}
+		Utility_Functions.xClick(driver, accName, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xSendKeys(driver, accountNameConvert, dataTable.getData("General_Data", "Account Name"));
+		Utility_Functions.xSendKeys(driver, accountNameConvert, Keys.TAB);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindowOnce(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xSendKeys(driver, streetField, dataTable.getData("General_Data", "Street"));
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xSelectDropdownByName(countryField, dataTable.getData("General_Data", "Country"));
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xSelectDropdownByName(stateField, dataTable.getData("General_Data", "State"));
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xSendKeys(driver, cityField, dataTable.getData("General_Data", "City"));
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xSendKeys(driver, zipCodeField, dataTable.getData("General_Data", "Zipcode"));
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, convertButton, true);
+		Utility_Functions.timeWait(5);
+		driver.navigate().refresh();
+		driver.switchTo().defaultContent();
+		Utility_Functions.timeWait(4);
+		Utility_Functions.xClick(driver, related, true);
+		Utility_Functions.timeWait(4);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, accountsContacts, true);
+		Utility_Functions.timeWait(4);
+		List<WebElement> contactsList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'] "));
+		for(int i=0;i<contactsList.size();i++){
+			System.out.println("The accounts are :" +i+contactsList.get(i).getText());
+			report.updateTestLog("Convert Lead Note Attachment","The Accounts are:::"+ i + contactsList.get(i).getText() + "::",Status.PASS);
+		}
+		Utility_Functions.xclickOnFirstElementfromList(contactsList);
+		Utility_Functions.timeWait(4);
+		driver.navigate().refresh();
+		driver.switchTo().defaultContent();
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, related, true);
+		Utility_Functions.timeWait(4);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xClick(driver, files, true);
+		Utility_Functions.timeWait(3);
+		List<WebElement> filesContact = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		if (filesContact.isEmpty() == true) {
+			System.out.println("File is not associated with the contact");
+			report.updateTestLog("Convert Lead Note Attachment","File is not associated with the Contact",Status.PASS);
+		}else{
+			System.out.println("File is associated with the contact ");
+			report.updateTestLog("Convert Lead Note Attachment","File is associated with the Contact",Status.PASS);
+		}
+
+	}
+
 }
 
