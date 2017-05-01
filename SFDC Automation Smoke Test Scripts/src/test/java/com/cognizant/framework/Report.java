@@ -9,6 +9,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +18,8 @@ import javax.imageio.ImageIO;
 
 import com.cognizant.framework.selenium.SeleniumTestParameters;
 //import supportlibraries.RESTclient;
+
+import supportLibraries.SendDataDevOps;
 
 /**
  * Class to encapsulate all the reporting features of the framework
@@ -39,6 +43,9 @@ public class Report {
 
 	private String testStatus;
 	private String failureDescription;
+	
+	private String startTime;
+
 
 	/**
 	 * Constructor to initialize the Report
@@ -499,8 +506,11 @@ public class Report {
 	 */
 	public void addResultSummaryFooter(String totalExecutionTime) {
 		for (int i = 0; i < reportTypes.size(); i++) {
-			reportTypes.get(i).addResultSummaryFooter(totalExecutionTime,
-					nTestsPassed, nTestsFailed);
+			reportTypes.get(i).addResultSummaryFooter(totalExecutionTime,nTestsPassed, nTestsFailed);
+			startTime = LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);						
+			SendDataDevOps sendData = new SendDataDevOps();
+			sendData.sendData("6", "14", "19", "SFDC Smoke Test", "4.0", "Build", Integer.valueOf(nTestsPassed).toString(), Integer.valueOf(nStepsFailed).toString(), "0", startTime, startTime, "", false);			
 		}
 	}
+	
 }

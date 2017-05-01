@@ -402,6 +402,14 @@ public class Utility_Functions extends ReusableLibrary {
 	}
 
 	// ******************************************************************
+	// wait for element present
+	public static boolean xWaitForElementPresent(CraftDriver driver, WebElement el, int timeWait) {
+		WebDriverWait wait = new WebDriverWait(driver.getWebDriver(), timeWait);
+		wait.until(ExpectedConditions.visibilityOf(el));
+		return true;
+	}
+
+		// ******************************************************************
 	// wait for element to disappear
 	public static boolean xWaitForElementDisappear(CraftDriver driver, By locator, int timeWait) {
 		try {

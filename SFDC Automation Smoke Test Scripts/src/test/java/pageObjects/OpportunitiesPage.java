@@ -1,20 +1,27 @@
 package pageObjects;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
 import com.sforce.soap.partner.PartnerConnection;
 import com.sforce.soap.partner.QueryResult;
+import com.sforce.soap.partner.SaveResult;
 import com.sforce.soap.partner.sobject.SObject;
 import com.sforce.ws.ConnectorConfig;
 
+import pagesAPI.AccountsFunctions;
+import pagesAPI.EstablishConnection;
 import pagesAPI.OpportunitiesFunctions;
 import pagesAPI.SearchTextSOQL;
 import supportLibraries.Utility_Functions;
@@ -52,7 +59,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//div[contains(@title, 'Add')]")
 	WebElement addButton;
-	
+
 	@FindBy(xpath = "//input[@name='new'][@value=' Add ']")
 	WebElement addButtonSharing;
 
@@ -146,12 +153,12 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//span[text()='Preferred Property Type']/parent::div/parent::div/div[2]/div/span")
 	WebElement preferredPropertyTypeValue;
 
-/*	@FindBy(xpath = "//*[text()='Clone']/parent::a/parent::li/parent::ul/li/a/div[text()='Edit']")
+	/*	@FindBy(xpath = "//*[text()='Clone']/parent::a/parent::li/parent::ul/li/a/div[text()='Edit']")
 	WebElement editButton;*/
 
 	@FindBy(xpath="//li[contains(@class,'slds-button slds-button--neutral slds-truncate')]//a[@class='forceActionLink']/div[@class='slds-truncate'][text()='Edit']")
-    WebElement editButton; 
-	
+	WebElement editButton; 
+
 	@FindBy(xpath = "//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Opportunity Name']/parent::label/parent::div/input")
 	WebElement opportunityNameUpdate;
 
@@ -222,22 +229,34 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//table[@class='slds-table slds-no-row-hover']//tr[2]/td[4]//option[@value='Receiving Broker']")
 	WebElement selectSecondaryMemberRole2;
-	
+
 	@FindBy(xpath = "//div[contains(@class, 'slds-truncate') and text()='Manage Opportunity Splits']")
 	WebElement manageOpportunitySplits;
 
 	@FindBy(xpath = "// input [@value= 'Save']")
 	WebElement saveOpportunitySplit;
-	
+
 	@FindBy(xpath = "//td[contains(@data-label,'Split Percent')]//input")
 	WebElement splitPercent;
-	
+
 	@FindBy(xpath = "//input[@value= 'Save']")
 	WebElement saveButtonSplit;
 
-	  
-	
+	@FindBy(xpath = "//span[text()='Press Delete to Remove']/parent::a/span[@class='deleteIcon']")
+	WebElement deleteAccountName;
+
+	@FindBy(xpath = "//input[@placeholder='Search Accounts']")
+	WebElement enterNewAccountName;
+
+	@FindBy(xpath = "//div[@class='dotSpinner']")
+	WebElement dotSpinner;
+
+
+	//input[@placeholder='Search Accounts']
+
 	HomePage hp = new HomePage(scriptHelper);
+	SearchTextSOQL searchOpportunity = new SearchTextSOQL(scriptHelper);
+	OpportunitiesFunctions opportunitiesFunctions = new OpportunitiesFunctions(scriptHelper);
 
 	/**
 	 * Adding the Web Elements to the Label List
@@ -1022,4 +1041,127 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(3);
 	}
 
+	/**
+	 * Function for retrieving the Opportunity 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+
+	public String retriveOpportunity() {
+		String query = "SELECT Id, Name FROM Opportunity where StageName < '16-In Escrow'";
+		String OpportunityID = searchOpportunity.searchOpportunity(query);
+		report.updateTestLog("Verify Opportunity Required Fields",
+				"Opportunity retrived from database is:::" + OpportunityID, Status.PASS);
+		String url = driver.getCurrentUrl().split("#")[0];
+		String newUrl = url + "#/sObject/" + OpportunityID;
+		newUrl = newUrl + "/view";
+		driver.get(newUrl);
+		Utility_Functions.timeWait(1);
+		return OpportunityID;
+	}
+
+
+	/**
+	 * Validating the Opportunity Account Name modification
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+
+	public void modifyAccountName() {
+		String accountName;
+		String OpportunityID = retriveOpportunity();
+		//Utility_Functions.xWaitForElementVisible(driver, edit, 5);
+		driver.navigate().refresh();
+		Utility_Functions.timeWait(5);
+		Utility_Functions.xClick(driver, edit, true);
+		Utility_Functions.xWaitForElementVisible(driver, deleteAccountName, 5);
+		Utility_Functions.xClick(driver, deleteAccountName, true);
+		Utility_Functions.xSendKeys(driver, enterNewAccountName, "Test");
+		Utility_Functions.timeWait(1);
+		List<WebElement> accountList = driver.findElements(By.xpath("//li[@class='lookup__item force default uiAutocompleteOption forceSearchInputLookupDesktopOption']"));
+		try {
+			if(accountList.isEmpty()) {
+				AccountsFunctions accountsFunctions = new AccountsFunctions(scriptHelper);
+				accountsFunctions.createAccount();
+				accountName = searchOpportunity.fetchRecord("Account", "Name");
+				Utility_Functions.xSendKeys(driver, enterNewAccountName, accountName);
+			} else {
+				accountName = Utility_Functions.xclickRandomElement(accountList);
+			}
+			Utility_Functions.timeWait(1);
+			Utility_Functions.xClick(driver, save, true);	
+			Utility_Functions.timeWait(5);
+			String query = "SELECT Name FROM Opportunity where Id = " + "'" + OpportunityID + "'";
+			String opportunityName = searchOpportunity.fetchRecordFieldValue("Name", query);
+			opportunitiesFunctions.updateOpportunityField("StageName", OpportunityID);
+			opportunitiesFunctions.updateOpportunityField("Service__c", OpportunityID);
+			if(accountName.contains(opportunityName)) {
+				report.updateTestLog("Opportunity Name","Opportunity name modified successfully::" , Status.PASS);
+				report.updateTestLog("Opportunity Name","Opportunity Assignment Type modified successfully::", Status.PASS);
+			} else {
+				report.updateTestLog("Opportunity Name","Opportunity name modification failed::" , Status.FAIL);
+			}
+			if(opportunityName.split("-")[1].contains("Project Management")) {
+				report.updateTestLog("Opportunity Name","Opportunity name saved with Opportunity Name followed by Assignment Type successfully", Status.PASS);
+			} else {
+				report.updateTestLog("Opportunity Name","Opportunity name saved with Opportunity Name followed by Assignment Type failed", Status.FAIL);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	/**
+	 * Validate Opportunity Name is not auto generated when manually added by the user 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	
+	static SaveResult[] results;
+	static String result;
+
+	public void manualOpportunityCreation() {
+		try {
+			EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
+			establishConnection.establishConnection();
+			SObject opportunity = new SObject();
+			Random random= new Random();
+			int value = random.nextInt();
+			String opportunityName = "Test Automation_Opportunity" + value;
+			opportunity.setType("Opportunity");		
+			opportunity.setField("Name", opportunityName);
+			SearchTextSOQL accountID = new SearchTextSOQL(scriptHelper);
+			String accountId = accountID.fetchRecord("Account", "Id");
+			opportunity.setField("AccountId", accountId);
+			opportunity.setField("CloseDate",Calendar.getInstance());
+			opportunity.setField("RecordTypeId", "012i0000000405n");
+			opportunity.setField("StageName","Qualification");
+			
+			SObject[] opportunities = new SObject[1];
+			opportunities[0] = opportunity;
+			results = EstablishConnection.connection.create(opportunities);
+			System.out.println("Result:::" + results);
+			for (int j = 0; j < results.length; j++) {
+				if (results[j].isSuccess()) {
+					result = results[j].getId();
+				}
+			}
+			System.out.println(result);
+			SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
+			String query = "Select Name from Opportunity where Id = '" +result +"'";
+			String generatedOpportunityName = searchTextSOQL.fetchRecordFieldValue("Name", query);
+			Utility_Functions.timeWait(1);
+			if(opportunityName.equals(generatedOpportunityName)) {
+				report.updateTestLog("Opportunity Name","Opportunity Name is not auto generated when Opportunity is manually added by the User::" , Status.PASS);
+			} else {
+				report.updateTestLog("Opportunity Name","Failure in the Opportunity Name generation:::" , Status.FAIL);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println(e.getStackTrace());
+		}		
+	}
+	
 }

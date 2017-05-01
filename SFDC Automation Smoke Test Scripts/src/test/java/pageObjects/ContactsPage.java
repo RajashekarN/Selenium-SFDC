@@ -187,7 +187,7 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@src,'ContactRedirectPage')]")));
 		Utility_Functions.timeWait(1);
-		if(!dataTable.getData("General_Data", "Username").contains("ob")) {
+		if(!dataTable.getData("General_Data", "TC_ID").contains("Broker")) {
 			Utility_Functions.xClick(driver, continueButton, true);
 		}
 		Utility_Functions.timeWait(2);

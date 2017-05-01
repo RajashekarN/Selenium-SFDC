@@ -1,6 +1,12 @@
 package pagesAPI;
 
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+
 import org.openqa.selenium.support.PageFactory;
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
@@ -9,6 +15,8 @@ import com.sforce.soap.partner.DeleteResult;
 import com.sforce.soap.partner.QueryResult;
 import com.sforce.soap.partner.SaveResult;
 import com.sforce.soap.partner.sobject.SObject;
+import com.sforce.ws.ConnectionException;
+
 
 /**
  * API Class for searching the text using SOQL calls
@@ -245,6 +253,130 @@ public class SearchTextSOQL extends ReusableLibrary {
 			System.out.println("Exception in main : " + ex);
 		}
 		return recordID;
+	}
+	
+	/**
+	 * Function for uploading an Attachment
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	
+	public void uploadAttachment() {
+		establishConnection.establishConnection();
+		String accountID = fetchRecord("Account", "Id");
+		System.out.println(accountID);
+		byte[] inbuff = null;
+		String fileName = new File("src/test/resources/SampleDocument.doc").getAbsolutePath();
+		
+		/*File fileName = new File("..\\SampleDocument.doc");
+		String path = fileName.getPath();*/
+		InputStream inputStream;
+		try {
+			inputStream = new FileInputStream(fileName);
+			inbuff = new byte[(int)fileName.length()];
+			try {
+				inputStream.read(inbuff);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
+				
+		SObject attachment = new SObject();
+		attachment.setType("Attachment");
+
+		attachment.setField("Body", inbuff);
+		attachment.setField("ParentID",accountID);
+		
+		attachment.setField("Name", "SampleDocument.doc");
+		
+		SObject[] attachments = new SObject[1];
+		attachments[0] = attachment;
+		try {
+			results = EstablishConnection.connection.create(attachments);
+		} catch (ConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Result:::" + results);
+		status = establishConnection.saveResults(results);
+	}
+	
+	/**
+	 * Function for uploading File
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void uploadFile() {
+		establishConnection.establishConnection();
+		String accountID = fetchRecord("Account", "Id");
+		System.out.println(accountID);
+		byte[] inbuff = null;
+		String fileName = new File("src/test/resources/SampleDocument.doc").getAbsolutePath();
+		InputStream inputStream;
+		try {
+			inputStream = new FileInputStream(fileName);
+			inbuff = new byte[(int)fileName.length()];
+			try {
+				inputStream.read(inbuff);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
+				
+		SObject file = new SObject();
+		file.setType("Attachment");
+
+		file.setField("Body", inbuff);
+		file.setField("ParentID",accountID);
+		
+		file.setField("Name", "SampleDocument.doc");
+		
+		SObject[] files = new SObject[1];
+		files[0] = file;
+		try {
+			results = EstablishConnection.connection.create(files);
+		} catch (ConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Result:::" + results);
+		status = establishConnection.saveResults(results);
+	}
+	
+
+	
+	public void contentDocumentLink() {
+		establishConnection.establishConnection();
+		String accountID = fetchRecord("Account", "Id");
+		/*String query = "Select Id from ContentDocument";
+		String contentDocumentID = fetchRecordFieldValue("Id", query);*/
+		System.out.println(accountID);
+		//System.out.println(contentDocumentID);
+
+		SObject contentDocumentLink = new SObject();
+		contentDocumentLink.setType("ContentDocumentLink");
+
+		contentDocumentLink.setField("ContentDocumentId", "0690S0000004WkFQAU");
+		contentDocumentLink.setField("LinkedEntityID", accountID);
+		contentDocumentLink.setField("ShareType", "V");
+		SObject[] contentDocumentLinks = new SObject[1];
+		contentDocumentLinks[0] = contentDocumentLink;
+		try {
+			results = EstablishConnection.connection.create(contentDocumentLinks);
+		} catch (ConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Result:::" + results);
+		status = establishConnection.saveResults(results);
 	}
 }
 

@@ -26,7 +26,7 @@ public class EstablishConnection extends ReusableLibrary {
 		// Utility_Functions utility = new Utility_Functions(scriptHelper);
 	}
 
-	static PartnerConnection connection = null;
+	public static PartnerConnection connection = null;
 	static ConnectorConfig config;
 	static com.sforce.soap.partner.Error[] errors;
 	static boolean status = false;

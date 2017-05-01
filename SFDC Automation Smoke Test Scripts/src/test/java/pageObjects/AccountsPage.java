@@ -153,13 +153,13 @@ public class AccountsPage extends ReusableLibrary {
 				}
 				i++;
 			}
-			if (dataTable.getData("General_Data", "Username").contains("cmbroker")) {
+			if (dataTable.getData("General_Data", "TC_ID").contains("Broker")) {
 				if (count == 9) {
 					System.out.println("All the links are present in Home Page:::");
 					report.updateTestLog("Verify Account Landing Page Information",
 							"Account Details Page is having all the details in account landing page:::", Status.PASS);
 				}
-			} else if (!dataTable.getData("General_Data", "Username").contains("cmbroker")) {
+			} else if (!dataTable.getData("General_Data", "TC_ID").contains("Broker")) {
 				if (count == 14) {
 					System.out.println("All the links are present in Home Page:::");
 					report.updateTestLog("Verify Account Landing Page Information",
@@ -193,7 +193,10 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, related_Accounts, true);
 		Utility_Functions.timeWait(2);
 		try {
-			if (dataTable.getData("General_Data", "Username").contains("cmbroker")) {
+			Utility_Functions.xScrollWindow(driver);
+			Utility_Functions.timeWait(3);
+			Utility_Functions.xClick(driver, new_PrivateNotes, true);
+			/*if (dataTable.getData("General_Data", "Username").contains("cmbroker")) {
 				Utility_Functions.xScrollWindow(driver);
 				Utility_Functions.timeWait(3);
 				Utility_Functions.xClick(driver, new_PrivateNotes, true);
@@ -201,7 +204,7 @@ public class AccountsPage extends ReusableLibrary {
 				Utility_Functions.xScrollWindow(driver);
 				Utility_Functions.timeWait(3);
 				Utility_Functions.xClick(driver, new_PrivateNotes, true);
-			}
+			}*/
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
@@ -391,7 +394,7 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@src,'AccountRedirectPage')]")));
 		Utility_Functions.timeWait(1);
-		if (!dataTable.getData("General_Data", "Username").contains("ob")) {
+		if (!dataTable.getData("General_Data", "TC_ID").contains("Broker")) {
 			Utility_Functions.xClick(driver, continueButton, true);
 		}
 		Utility_Functions.timeWait(2);

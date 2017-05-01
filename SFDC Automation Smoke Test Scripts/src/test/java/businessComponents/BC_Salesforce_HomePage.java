@@ -38,7 +38,6 @@ public class BC_Salesforce_HomePage extends ReusableLibrary {
 	public void bc_login() throws InterruptedException {
 		sfBC_Login.bc_invokeApplication();
 		sfBC_Login.bc_login();
-		sfBC_Login.bc_verifyLoginSuccessful();
 	}
 
 	/**
@@ -63,7 +62,7 @@ public class BC_Salesforce_HomePage extends ReusableLibrary {
 	public void bc_verifyHomePageMenus() throws InterruptedException {
 		sfHomePage.validate_Menu_Accounts();
 		sfHomePage.validate_Menu_Opportunities();
-		if((dataTable.getData("General_Data", "Username").contains("cmbroker")) || (dataTable.getData("General_Data", "Username").contains("cmmanager"))) {
+		if((dataTable.getData("General_Data", "TC_ID").contains("Broker")) || (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
 			System.out.println("Leads Menu doesn't present for Occupier Brokerage or Manager");
 		} else {
 			sfHomePage.validate_Menu_Leads();

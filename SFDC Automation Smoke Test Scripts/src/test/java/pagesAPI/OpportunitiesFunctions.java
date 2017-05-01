@@ -125,7 +125,7 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 			String fieldName = FieldName;
 			String opportunityID = OpportunityID;
 			SObject[] records = new SObject[1];
-			QueryResult queryResults = EstablishConnection.connection.query("SELECT Id FROM Opportunity Where ID = " +  opportunityID);
+			QueryResult queryResults = EstablishConnection.connection.query("SELECT Id FROM Opportunity Where ID = " +  "'" + opportunityID + "'");
 			System.out.println(queryResults);
 			if (queryResults.getSize() > 0) {
 				for (int i = 0; i < queryResults.getRecords().length; i++) {
@@ -155,6 +155,12 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 						soUpdate.setField(fieldName,12000);
 					} else if(fieldName.equals("Lease_Rate_Rent_Basis__c")) {
 						soUpdate.setField(fieldName,"Per Year");
+					} else if(fieldName.equals("Service__c")) {
+						soUpdate.setField(fieldName,"Project Management");
+					} else if(fieldName.equals("CloseDate")) {
+						Calendar calendar = Calendar.getInstance();
+						calendar.add(Calendar.DAY_OF_MONTH, 365);
+						soUpdate.setField(fieldName,calendar);
 					}
 					records[i] = soUpdate;
 				}

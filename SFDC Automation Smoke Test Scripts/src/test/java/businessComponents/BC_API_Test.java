@@ -348,8 +348,28 @@ public class BC_API_Test extends ReusableLibrary {
 		} else if(dataTable.getData("General_Data", "Record").equals("Opportunities")) {
 			opportunityID = sfSearchText.fetchRecord("opportunity", "Name");
 			System.out.println("Opportunity ID retrieved" + opportunityID);
+		
 		}
 	} 
+	/**
+	 * Function for uploading an attachment
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	public void bc_uploadAttachment() {
+		sfSearchText.uploadAttachment();
+	}
+	/**
+	 * Function for uploading an attachment
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	public void bc_uploadFile() {
+		sfSearchText.contentDocumentLink();
+		//sfSearchText.uploadFile();		
+	}
 	
 	
 }

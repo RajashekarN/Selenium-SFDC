@@ -38,7 +38,6 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 	public void bc_login() throws InterruptedException {
 		sfBC_Login.bc_invokeApplication();
 		sfBC_Login.bc_login();
-		sfBC_Login.bc_verifyLoginSuccessful();
 	}
 
 
