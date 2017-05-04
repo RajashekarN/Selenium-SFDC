@@ -197,7 +197,7 @@ public class LoginPage extends ReusableLibrary {
 					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("FTEABAMERCSS"));
 				} else if((dataTable.getData("General_Data", "TC_ID").contains("AB")) && (dataTable.getData("General_Data", "TC_ID").contains("AMER")) && 
 						(dataTable.getData("General_Data", "TC_ID").contains("Manager")))  { 
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("FTEABAMEManager"));
+					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("FTEABAMERManager"));
 				} else if((dataTable.getData("General_Data", "TC_ID").contains("AB")) && (dataTable.getData("General_Data", "TC_ID").contains("AMER")) && 
 						(dataTable.getData("General_Data", "TC_ID").contains("Broker")))  { 
 					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("FTEABAMERBroker"));

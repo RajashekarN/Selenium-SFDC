@@ -4,6 +4,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -67,6 +68,80 @@ public class ContactsPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//div[@class='tt-dataset-acctSearchBoxTypeahead']//div[1]/p")
 	WebElement accountNames;
+	/**
+	 * 
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	@FindBy(xpath = "//header//a/span[text()='Notes']/parent::a/parent::h2/parent::div/parent::header/parent::div/div//div[text()='New']")
+	WebElement newNotes;
+
+	@FindBy(xpath = "//div[@class='uiInput uiInputText uiInput--default uiInput--input notesTitle']/input[@class='inputText input']")
+	WebElement noteTitle;
+
+	@FindBy(xpath = "//div[@class='slds-form-element']")
+	WebElement noteEditArea;
+
+	@FindBy(xpath = "//button[@class='slds-button slds-button--neutral hideDoneButton uiButton--default uiButton--brand uiButton']/span[contains(text(),'Done')]")
+	WebElement doneButton;
+
+	@FindBy(xpath = "//div[@title='Add File']")
+	WebElement addFile;
+
+	@FindBy(xpath = "//li[@class='slds-p-horizontal--small desktop forceContentListStencilCommon forceRecordLayout']/a/div[@class='filerow']")
+	WebElement addFileAttachment;
+
+	@FindBy(xpath = ".//*[text()='Add']")
+	WebElement add;
+
+	@FindBy(xpath = "//div[@class='uiInput uiInputText uiInput--default uiInput--input notesTitle']")
+	WebElement untitledPageTitle;
+
+	@FindBy(xpath = "//div[@class='ql-editor ql-blank']")
+	WebElement untitledNoteText;
+
+	@FindBy(xpath = "//ul[@class='orderedList']//span[@class='pillText']")
+	WebElement untitledNoteSelectedAccount;
+
+	@FindBy(xpath = "//h1//span[text()='Recently Viewed']")
+	WebElement recentlyViewed;
+
+	@FindBy(xpath = "//span[contains(@class,'virtualAutocompleteOptionText')][text()='All Contacts']")
+	WebElement allContacts;
+
+	@FindBy(xpath = "//span[contains(@class,'virtualAutocompleteOptionText')][text()='Employee Contacts']")
+	WebElement clientContacts;
+
+	@FindBy(xpath = "//article[contains(@class,'Activities')]//div[text()='New Activity']")
+	WebElement newActivity;
+
+	@FindBy(xpath = "//input[@class='slds-input'][@type='text']")
+	WebElement subject;
+
+	@FindBy(xpath = "//select[@class='slds-select']/option[@value='Private - Client Intelligence']")
+	WebElement activityType1;
+
+	@FindBy(xpath = "// input [@value= 'Save & New']")
+	WebElement saveAndNewActivity;
+
+	@FindBy(xpath = "//select[@class='slds-select']/option[@value='Private - Initial Meeting']")
+	WebElement activityType2;
+
+	@FindBy(xpath = "// input [@value= 'Save']")
+	WebElement saveActivity;
+
+	@FindBy(xpath = "//span[contains(@class, 'slds-text-heading--small slds-truncate') and text() = 'Activities']")
+	WebElement relatedActivities;
+
+	@FindBy(xpath = "//a[@title='Show more actions for this record']")
+	WebElement selectCreateFollowUpCustomActivity;
+
+	@FindBy(xpath = "//div[contains(@title, 'Create Follow-up Custom Activity')]")
+	WebElement createCustomActivity;
+
+	@FindBy(xpath = "//select[@class='slds-select']/option[@value='Private - Follow-Up Meeting']")
+	WebElement activityType3;
 
 	/**
 	 * Selecting the Contact from a list of contacts
@@ -226,5 +301,405 @@ public class ContactsPage extends ReusableLibrary {
 		ContactsFunctions contactFunctions = new ContactsFunctions(scriptHelper);
 		contactFunctions.contactsPageFieldsValidation();
 	}
+	/**
+	 * Validating the Account Lookup detail in New Contact
+	 * 
+	 * @author Ramya
+	 *
+	 */
 
+	public void verifyNewNotesAndFileAttachment() {
+
+		Utility_Functions.xWaitForElementValuePresent(driver, menu_Contacts, 3);
+		Utility_Functions.xClick(driver, menu_Contacts, true);
+		Utility_Functions.xWaitForElementValuePresent(driver, recentlyViewed, 3);
+		Utility_Functions.xClick(driver, recentlyViewed, true);
+		Utility_Functions.xWaitForElementValuePresent(driver, allContacts, 3);
+		Utility_Functions.xClick(driver, allContacts, true);
+		Utility_Functions.timeWait(3);
+
+		List<WebElement> contactNamesList = driver.findElements(
+				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+
+		Utility_Functions.xclickOnFirstElementfromList(contactNamesList);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementValuePresent(driver, related, 3);
+		Utility_Functions.xClick(driver, related, true);
+
+		List<WebElement> relatedPageList = driver.findElements(By.xpath("//*[@id='header']/a/span[1]"));
+		try {
+
+			for (WebElement element : relatedPageList) {
+
+				if (element.getText().contains("Notes")) {
+					System.out.println("Notes is present in the Accounts Related page :" + element.getText());
+					report.updateTestLog("Verify Notes in the Accounts Related Page ",
+							"Notes is present in the Accounts related page are :" + element.getText(), Status.PASS);
+
+				} else if (element.getText().contains("Files")) {
+
+					System.out.println("Files is present in the Accounts Related page " + element.getText());
+					report.updateTestLog("Files is present in the Accounts Related Page Elements",
+							"Files is present present in the Accounts Related Page", Status.PASS);
+
+				} else if (!element.getText().contains("Notes and Attachments")) {
+
+					System.out.println("Notes and Attachments is not present in the Accounts Related Page");
+					report.updateTestLog("Verify Notes and Attachments ",
+							"Verifying Notes and Attachments is not present in the Accounts Related page", Status.PASS);
+
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementValuePresent(driver, newNotes, 3);
+		Utility_Functions.xClick(driver, newNotes, true);
+
+		if (!noteTitle.getText().isEmpty()) {
+
+			System.out.println("Untitled Note is present in the Note Page");
+		} else {
+			System.out.println("Untitled Note is not present in the Note Page");
+		}
+
+		if (!noteEditArea.getText().isEmpty()) {
+
+			System.out.println("Text is present in the Note Page");
+		} else {
+			System.out.println("Text is not present in the Note Page");
+		}
+
+		if (!untitledNoteSelectedAccount.getText().isEmpty()) {
+
+			System.out
+			.println("Selected Account is present in the Note Page :" + untitledNoteSelectedAccount.getText());
+		} else {
+			System.out.println("Selected Account is not present in the Note Page");
+		}
+
+		List<WebElement> untitledNotePageListDone = driver.findElements(By.xpath(
+				"//button[@class='slds-button slds-button--neutral hideDoneButton uiButton--default uiButton--brand uiButton']/span[contains(text(),'Done')]"));
+		try {
+
+			for (WebElement element : untitledNotePageListDone) {
+
+				if (element.getText().contains("Done")) {
+					System.out.println("Done Button is present in the Notes page :" + element.getText());
+					report.updateTestLog("Done Button is present in the Untitled Notes Page ",
+							" Done Button is present in the Untitled Notes page are :" + element.getText(),
+							Status.PASS);
+
+				} else {
+
+					System.out.println("Done Button is not present in the Untitled Notes page " + element.getText());
+					report.updateTestLog("Done Button is not present in the Untitled Notes Page Elements",
+							"Done Button is not present in the Untitled Notes Page", Status.FAIL);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, noteTitle, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xSendKeys(driver, noteTitle, "test");
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementPresent(driver, By.xpath("//div[@data-placeholder='Enter a note...']"), 5);
+
+		Actions action = new Actions(driver.getWebDriver());
+		action.moveToElement(noteEditArea);
+		action.click();
+		action.sendKeys("Testing");
+		action.build().perform();
+		Utility_Functions.xWaitForElementValuePresent(driver, doneButton, 3);
+		Utility_Functions.xClick(driver, doneButton, true);
+		Utility_Functions.xWaitForElementValuePresent(driver, addFile, 3);
+		Utility_Functions.xClick(driver, addFile, true);
+		Utility_Functions.xWaitForElementValuePresent(driver, addFileAttachment, 3);
+		Utility_Functions.xClick(driver, addFileAttachment, true);
+		Utility_Functions.xWaitForElementValuePresent(driver, add, 3);
+		Utility_Functions.xClick(driver, add, true);
+	}
+	/**
+	 * Validating the Account Lookup detail in New Contact
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void verifyClientContactsNewNotesAndFileAttachment() {
+
+		Utility_Functions.xWaitForElementValuePresent(driver, menu_Contacts, 3);
+		Utility_Functions.xClick(driver, menu_Contacts, true);
+		Utility_Functions.xWaitForElementValuePresent(driver, recentlyViewed, 3);
+		Utility_Functions.xClick(driver, recentlyViewed, true);
+		Utility_Functions.xWaitForElementValuePresent(driver, clientContacts, 3);
+		Utility_Functions.xClick(driver, clientContacts, true);
+		Utility_Functions.timeWait(3);
+
+		List<WebElement> contactNamesList = driver.findElements(
+				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+
+		Utility_Functions.xclickOnFirstElementfromList(contactNamesList);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementValuePresent(driver, related, 3);
+		Utility_Functions.xClick(driver, related, true);
+
+		List<WebElement> relatedPageList = driver.findElements(By.xpath("//*[@id='header']/a/span[1]"));
+		try {
+
+			for (WebElement element : relatedPageList) {
+
+				if (element.getText().contains("Notes")) {
+					System.out.println("Notes is present in the Accounts Related page :" + element.getText());
+					report.updateTestLog("Verify Notes in the Accounts Related Page ",
+							"Notes is present in the Accounts related page are :" + element.getText(), Status.PASS);
+
+				} else if (element.getText().contains("Files")) {
+
+					System.out.println("Files is present in the Accounts Related page " + element.getText());
+					report.updateTestLog("Files is present in the Accounts Related Page Elements",
+							"Files is present present in the Accounts Related Page", Status.PASS);
+
+				} else if (!element.getText().contains("Notes and Attachments")) {
+
+					System.out.println("Notes and Attachments is not present in the Accounts Related Page");
+					report.updateTestLog("Verify Notes and Attachments ",
+							"Verifying Notes and Attachments is not present in the Accounts Related page", Status.PASS);
+
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementValuePresent(driver, newNotes, 3);
+		Utility_Functions.xClick(driver, newNotes, true);
+
+		if (!noteTitle.getText().isEmpty()) {
+
+			System.out.println("Untitled Note is present in the Note Page");
+		} else {
+			System.out.println("Untitled Note is not present in the Note Page");
+		}
+
+		if (!noteEditArea.getText().isEmpty()) {
+
+			System.out.println("Text is present in the Note Page");
+		} else {
+			System.out.println("Text is not present in the Note Page");
+		}
+
+		if (!untitledNoteSelectedAccount.getText().isEmpty()) {
+
+			System.out
+			.println("Selected Account is present in the Note Page :" + untitledNoteSelectedAccount.getText());
+		} else {
+			System.out.println("Selected Account is not present in the Note Page");
+		}
+
+		List<WebElement> untitledNotePageListDone = driver.findElements(By.xpath(
+				"//button[@class='slds-button slds-button--neutral hideDoneButton uiButton--default uiButton--brand uiButton']/span[contains(text(),'Done')]"));
+		try {
+
+			for (WebElement element : untitledNotePageListDone) {
+
+				if (element.getText().contains("Done")) {
+					System.out.println("Done Button is present in the Notes page :" + element.getText());
+					report.updateTestLog("Done Button is present in the Untitled Notes Page ",
+							" Done Button is present in the Untitled Notes page are :" + element.getText(),
+							Status.PASS);
+
+				} else {
+
+					System.out.println("Done Button is not present in the Untitled Notes page " + element.getText());
+					report.updateTestLog("Done Button is not present in the Untitled Notes Page Elements",
+							"Done Button is not present in the Untitled Notes Page", Status.FAIL);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, noteTitle, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xSendKeys(driver, noteTitle, "test");
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementPresent(driver, By.xpath("//div[@data-placeholder='Enter a note...']"), 5);
+
+		Actions action = new Actions(driver.getWebDriver());
+		action.moveToElement(noteEditArea);
+		action.click();
+		action.sendKeys("Testing");
+		action.build().perform();
+		Utility_Functions.xWaitForElementValuePresent(driver, doneButton, 3);
+		Utility_Functions.xClick(driver, doneButton, true);
+		Utility_Functions.xWaitForElementValuePresent(driver, addFile, 3);
+		Utility_Functions.xClick(driver, addFile, true);
+		Utility_Functions.xWaitForElementValuePresent(driver, addFileAttachment, 3);
+		Utility_Functions.xClick(driver, addFileAttachment, true);
+		Utility_Functions.xWaitForElementValuePresent(driver, add, 3);
+		Utility_Functions.xClick(driver, add, true);
+	}
+	/**
+	 * Validating the creation of new activity for contacts
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void verifyCreateActivityContact() {
+
+		Utility_Functions.xWaitForElementValuePresent(driver, menu_Contacts, 3);
+		Utility_Functions.xClick(driver, menu_Contacts, true);
+		report.updateTestLog("Verify Create Activity Contact ","Contacts is Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementValuePresent(driver, recentlyViewed, 3);
+		Utility_Functions.xClick(driver, recentlyViewed, true);
+		report.updateTestLog("Verify Create Activity Contact ","Recently viewed Contacts are Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementValuePresent(driver, allContacts, 3);
+		Utility_Functions.xClick(driver, allContacts, true);
+		Utility_Functions.timeWait(3);
+		report.updateTestLog("Verify Create Activity Contact ","All Contacts are Displayed ",  Status.PASS);
+		List<WebElement> contactNamesList = driver.findElements(
+				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+
+		Utility_Functions.xclickOnFirstElementfromList(contactNamesList);
+		Utility_Functions.timeWait(3);
+		report.updateTestLog("Verify Create Activity Contact ","The Contact is Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementValuePresent(driver, related, 3);
+		Utility_Functions.xClick(driver, related, true);
+		report.updateTestLog("Verify Create Activity Contact ","The related page is Displayed ",  Status.PASS);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementValuePresent(driver, newActivity, 3);
+		Utility_Functions.xClick(driver, newActivity, true);
+		report.updateTestLog("Verify Create Activity Contact ","The New Activity in the related page is Displayed ",  Status.PASS);
+		int size = driver.findElements(By.tagName("iframe")).size();
+		System.out.println(size);
+		Utility_Functions.timeWait(2);
+		List<WebElement> iframeList = driver.findElements(By.tagName("iframe"));
+		System.out.println(iframeList.size());
+		for (WebElement element : iframeList) {
+			System.out.println(element.getAttribute("id"));
+		}
+
+		driver.switchTo().frame(4);
+		Utility_Functions.timeWait(5);
+		System.out.println("Frame Identified");
+		Utility_Functions.timeWait(3);
+
+		Utility_Functions.xClick(driver, subject, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xSendKeys(driver, subject, "test1");
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, activityType1, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, saveAndNewActivity, true);
+		Utility_Functions.timeWait(3);
+		report.updateTestLog("Verify Create Activity Contact ","The Activity is saved and New Activity is displayed ",  Status.PASS);
+		Utility_Functions.xClick(driver, subject, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xSendKeys(driver, subject, "test2");
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, activityType2, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, saveActivity, true);
+		Utility_Functions.timeWait(3);
+		report.updateTestLog("Verify Create Activity Contact ","The second Activity is saved ",  Status.PASS);	
+		driver.navigate().refresh();
+		Utility_Functions.timeWait(1);
+		driver.switchTo().defaultContent();
+		driver.navigate().refresh();
+		Utility_Functions.xWaitForElementVisible(driver, related, 3);
+		Utility_Functions.xClick(driver, related, true);
+		Utility_Functions.timeWait(4);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xClick(driver, relatedActivities, true);
+		Utility_Functions.timeWait(4);
+		List<WebElement> activitiesList = driver.findElements(
+				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'] "));
+		for (int i = 0; i < activitiesList.size(); i++) {
+			System.out.println("The activities are :" + i + activitiesList.get(i).getText());
+		}
+		Utility_Functions.xclickOnFirstElementfromList(activitiesList);
+		Utility_Functions.timeWait(4);
+		driver.navigate().refresh();
+		Utility_Functions.timeWait(1);
+		driver.switchTo().defaultContent();
+		driver.navigate().refresh();
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver,  selectCreateFollowUpCustomActivity, true);
+		Utility_Functions.timeWait(4);
+		report.updateTestLog("Verify Create Activity Contact","The Follow up Activity Page is Displayed",  Status.PASS);
+		Utility_Functions.xWaitForElementValuePresent(driver, createCustomActivity, 5);
+		//Utility_Functions.xClick(driver, createCustomActivity, true);
+		Actions action  = new Actions(driver.getWebDriver());
+		action.moveToElement(createCustomActivity);
+		action.click();
+		action.build().perform();
+		Utility_Functions.timeWait(3);
+		int size1 = driver.findElements(By.tagName("iframe")).size();
+		System.out.println(size1);
+		Utility_Functions.timeWait(2);
+		List<WebElement> iframeList1 = driver.findElements(By.tagName("iframe"));
+		System.out.println(iframeList1.size());
+		for (WebElement element : iframeList1) {
+			System.out.println(element.getAttribute("id"));
+		}
+
+		driver.switchTo().frame(2);
+		Utility_Functions.timeWait(5);
+		System.out.println("Frame Identified");
+
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, subject, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xSendKeys(driver, subject, "test3");
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, activityType3, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, saveActivity, true);
+		Utility_Functions.timeWait(3);
+		report.updateTestLog("Verify Create Activity Contact ","The Custom Activity is created ",  Status.PASS);
+		driver.navigate().refresh();
+		Utility_Functions.timeWait(1);
+		driver.switchTo().defaultContent();
+		driver.navigate().refresh();
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementValuePresent(driver,menu_Contacts, 3);
+		Utility_Functions.xClick(driver, menu_Contacts, true);
+		//Utility_Functions.xClick(driver, recentlyViewed, true);
+		//Utility_Functions.timeWait(3);
+		List<WebElement> recentlyViewedpropertiesList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+
+		Utility_Functions.xclickOnFirstElementfromList(recentlyViewedpropertiesList);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementVisible(driver, related, 5);
+		Utility_Functions.xClick(driver, related, true);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+
+		Utility_Functions.xWaitForElementValuePresent(driver, relatedActivities, 5);
+		Utility_Functions.xClick(driver, relatedActivities, true);
+
+		List<WebElement> relatedActivitiesList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'] "));
+		for(int i=0;i<relatedActivitiesList.size();i++){
+			System.out.println("The activities are :" +i+relatedActivitiesList.get(i).getText());	
+		}
+		report.updateTestLog("Verify Create Activity Contact","The New Activity for contacts is created ",Status.PASS);
+
+	}
 }

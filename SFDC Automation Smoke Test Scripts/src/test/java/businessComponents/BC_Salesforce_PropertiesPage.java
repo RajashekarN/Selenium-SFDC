@@ -46,10 +46,20 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	 * @author Vishnuvardhan
 	 *
 	 */	
-	
+
 	public void bc_validateCustomerPropertyPage() {
 		sfPropertiesPage.validateCustomPropertyPage();
 	}
+	/**
+	 * Validating the Creation of Activity for properties
+	 * 
+	 * @author Ramya
+	 *
+	 */	
 
-	
+	public void bc_verifyCreationOfActivity(){
+		sfPropertiesPage.verifyCreationOfActivity();
+	}
+
+
 }

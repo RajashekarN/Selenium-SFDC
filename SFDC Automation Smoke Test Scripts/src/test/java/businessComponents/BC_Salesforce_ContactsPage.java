@@ -26,7 +26,7 @@ public class BC_Salesforce_ContactsPage extends ReusableLibrary {
 
 	BC_Salesforce_Login sfBC_Login = new BC_Salesforce_Login(scriptHelper);
 	ContactsPage sfContactsPage = new ContactsPage(scriptHelper);
-	
+
 	/**
 	 * Validating the Login functionality 
 	 * 
@@ -49,7 +49,7 @@ public class BC_Salesforce_ContactsPage extends ReusableLibrary {
 	public void bc_activityLightningTimeline() throws InterruptedException {
 		sfContactsPage.activityLightningTimeline();
 	}
-	
+
 	/**
 	 * Validating the New Contact Page Layout fields
 	 * 
@@ -60,7 +60,7 @@ public class BC_Salesforce_ContactsPage extends ReusableLibrary {
 	public void bc_newContactPageLayout() {
 		sfContactsPage.newContactPageLayout();
 	}
-	
+
 	/**
 	 * Validating the Account Lookup detail in New Contact 
 	 * 
@@ -70,5 +70,34 @@ public class BC_Salesforce_ContactsPage extends ReusableLibrary {
 
 	public void bc_accountLookUpNewContactPage() {
 		sfContactsPage.accountLookUpNewContactPage();
+	}
+
+	/**
+	 * Validating the New notes and files attachment in Contact 
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+	public void bc_verifyNewNotesAndFileAttachment()throws InterruptedException{
+		sfContactsPage.verifyNewNotesAndFileAttachment();
+	}
+	/**
+	 * Validating the Attachment of new notes and files in Contact 
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_verifyClientContactsNewNotesAndFileAttachment()throws InterruptedException{
+		sfContactsPage.verifyClientContactsNewNotesAndFileAttachment();
+	}
+	/**
+	 * Validating the creation of new Activity in Contact 
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+	public void bc_verifyCreateActivityContact()throws InterruptedException{
+		sfContactsPage.verifyCreateActivityContact();
 	}
 }

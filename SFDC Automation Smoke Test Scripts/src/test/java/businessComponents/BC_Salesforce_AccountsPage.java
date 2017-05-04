@@ -69,19 +69,53 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 	 * @author Vishnuvardhan
 	 *
 	 */	
-	
+
 	public void bc_newAccountPageLayout() throws InterruptedException {
 		sfAccountsPage.newAccountPageLayout();
 	}
-	
+
 	/**
 	 * Validating the addition of New Personal information 
 	 * 
 	 * @author Ramya
 	 *
 	 */	
-	
+
 	public void bc_addNewPersonalInformatiom() throws InterruptedException {
 		sfAccountsPage.addNewPersonalInformation();
+	}
+	/**
+	 * Validating the attachment of New Notes and Files
+	 * 
+	 * @author Ramya
+	 *
+	 */
+
+	public void bc_verifyNewNotesAndFilesAttachment() throws InterruptedException{
+
+		sfAccountsPage.verifyNewNotesAndFilesAttachment();
+
+	}
+	/**
+	 * Validating the creation of new Activity for Accounts 
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyCreateActivityAccount() throws InterruptedException{
+
+		sfAccountsPage.verifyCreateActivityAccount();
+
+	}
+	/**
+	 * Validating the New Activity Page Layout
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyNewActivityPageLayout() throws InterruptedException{
+
+		sfAccountsPage.verifyNewActivityPageLayout();
+
 	}
 }

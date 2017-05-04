@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -65,7 +66,59 @@ public class PropertiesPage extends ReusableLibrary {
 	WebElement street;	
 	
 	@FindBy(xpath = "//h1[@class='slds-page-header__title slds-m-right--small slds-truncate slds-align-middle']/span")
-	WebElement createdProperty;	
+	WebElement createdProperty;
+	
+
+	/**
+	 * 
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+	
+	@FindBy(xpath = "//h1//span[text()='Recently Viewed']")
+	WebElement recentlyViewed;
+
+	@FindBy(xpath="//span[contains(@class,'virtualAutocompleteOptionText')][text()='All Properties']")
+	WebElement allProperties;
+	
+	@FindBy(xpath = "//a[@class='tabHeader']//span[text()='Related']")
+	WebElement related;
+
+	@FindBy(xpath="//div[@class='slds-context-bar oneGlobalNav']//span[text()='Properties']")
+	WebElement menu_Properties;
+	
+	@FindBy(xpath="//article[contains(@class,'Activities')]//div[text()='New Activity']")
+	WebElement newActivity;
+	
+	@FindBy(xpath="//input[@class='slds-input'][@type='text']")
+	WebElement subject;
+	
+	@FindBy(xpath="//select[@class='slds-select']/option[@value='Private - Client Intelligence']")
+	WebElement activityType;
+	
+	@FindBy(xpath="// input [@value= 'Save & New']")
+	WebElement saveAndNewActivity;
+	
+	@FindBy(xpath="//select[@class='slds-select']/option[@value='Private - Initial Meeting']")
+	WebElement activityType2;
+	
+	@FindBy(xpath="// input [@value= 'Save']")
+	WebElement saveActivity;
+	
+	@FindBy(xpath="//span[contains(@class, 'slds-text-heading--small slds-truncate') and text() = 'Activities']")
+	WebElement relatedActivities;
+	
+	
+	@FindBy(xpath="//a[@title='Show more actions for this record']")
+	WebElement selectCreateFollowUpCustomActivity;
+	
+	@FindBy(xpath="//div[contains(@title, 'Create Follow-up Custom Activity')]")
+	WebElement createCustomActivity;
+	
+	@FindBy(xpath="//select[@class='slds-select']/option[@value='Private - Follow-Up Meeting']")
+	WebElement activityType3;
+	
 
 	/**
 	 * Validating the Customer Property Page fields 
@@ -349,5 +402,159 @@ public class PropertiesPage extends ReusableLibrary {
 			System.out.println(e.getMessage());
 		}
 	}
+	/**
+	 * Validating the Creation of Activity in the Properties
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+	public void verifyCreationOfActivity(){
+		
+		Utility_Functions.xWaitForElementValuePresent(driver,menu_Properties, 3);
+		Utility_Functions.xClick(driver, menu_Properties, true);
+		report.updateTestLog("Verify Create Activity Properties ","Properties is Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementValuePresent(driver, recentlyViewed, 3);
+		Utility_Functions.xClick(driver, recentlyViewed, true);
+		report.updateTestLog("Verify Create Activity Properties ","Recently viewed Properties are Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementValuePresent(driver, allProperties, 3);
+		Utility_Functions.xClick(driver, allProperties, true);
+		Utility_Functions.timeWait(3);
+		report.updateTestLog("Verify Create Activity Properties ","All Properties are Displayed ",  Status.PASS);
+		
+		List<WebElement> propertiesList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+
+		Utility_Functions.xclickOnFirstElementfromList(propertiesList);	
+		Utility_Functions.timeWait(3);
+		report.updateTestLog("Verify Create Activity Properties ","The property is Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementValuePresent(driver, related, 3);
+		Utility_Functions.xClick(driver, related, true);
+		report.updateTestLog("Verify Create Activity Properties ","The related page is Displayed ",  Status.PASS);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementValuePresent(driver, newActivity, 3);
+		Utility_Functions.xClick(driver, newActivity, true);
+		report.updateTestLog("Verify Create Activity Properties ","The New Activity in the related page is Displayed ",  Status.PASS);
+		int size = driver.findElements(By.tagName("iframe")).size();
+		System.out.println(size);
+		Utility_Functions.timeWait(2);
+		List<WebElement> iframeList = driver.findElements(By.tagName("iframe"));
+		System.out.println(iframeList.size());
+		for (WebElement element : iframeList) {
+			System.out.println(element.getAttribute("id"));
+		}
+		driver.switchTo().frame(2);
+		Utility_Functions.timeWait(5);
+		System.out.println("Frame Identified");
+		Utility_Functions.timeWait(3);
+	
+		
+		Utility_Functions.xClick(driver, subject, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xSendKeys(driver, subject, "test1");
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, activityType, true);
+		Utility_Functions.timeWait(3);
+		
+		Utility_Functions.xClick(driver, saveAndNewActivity, true);
+		Utility_Functions.timeWait(3);
+		report.updateTestLog("Verify Create Activity Properties ","The Activity is saved and New Activity is displayed ",  Status.PASS);
+		Utility_Functions.xClick(driver, subject, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xSendKeys(driver, subject, "test2");
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, activityType2, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, saveActivity, true);
+		Utility_Functions.timeWait(3);
+		report.updateTestLog("Verify Create Activity Properties ","The second Activity is saved ",  Status.PASS);	
+		driver.navigate().refresh();
+		Utility_Functions.timeWait(1);
+		driver.switchTo().defaultContent();
+		driver.navigate().refresh();
+		Utility_Functions.xWaitForElementVisible(driver, related, 3);
+		Utility_Functions.xClick(driver, related, true);
+		Utility_Functions.timeWait(4);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xClick(driver, relatedActivities, true);
+		Utility_Functions.timeWait(4);
+		List<WebElement> activitiesList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'] "));
+		for(int i=0;i<activitiesList.size();i++){
+			System.out.println("The activities are :" +i+activitiesList.get(i).getText());
+		}
+		Utility_Functions.xclickOnFirstElementfromList(activitiesList);
+		Utility_Functions.timeWait(4);
+		driver.navigate().refresh();
+		Utility_Functions.timeWait(1);
+		driver.switchTo().defaultContent();
+		driver.navigate().refresh();
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver,  selectCreateFollowUpCustomActivity, true);
+		Utility_Functions.timeWait(3);
+		report.updateTestLog("Verify Create Activity Properties","The Follow up Activity Page is Displayed",  Status.PASS);
+		Utility_Functions.xWaitForElementValuePresent(driver, createCustomActivity, 5);
+		//Utility_Functions.xClick(driver, createCustomActivity, true);
+		Actions action  = new Actions(driver.getWebDriver());
+		action.moveToElement(createCustomActivity);
+		action.click();
+		action.build().perform();
+		Utility_Functions.timeWait(3);
+		int size1 = driver.findElements(By.tagName("iframe")).size();
+		System.out.println(size1);
+		Utility_Functions.timeWait(2);
+		List<WebElement> iframeList1 = driver.findElements(By.tagName("iframe"));
+		System.out.println(iframeList1.size());
+		for (WebElement element : iframeList1) {
+			System.out.println(element.getAttribute("id"));
+		}
+		driver.switchTo().frame(2);
+		Utility_Functions.timeWait(5);
+		System.out.println("Frame Identified");
+	
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, subject, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xSendKeys(driver, subject, "test3");
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, activityType3, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, saveActivity, true);
+		Utility_Functions.timeWait(3);
+		report.updateTestLog("Verify Create Activity Properties ","The Custom Activity is created ",  Status.PASS);
+		driver.navigate().refresh();
+		Utility_Functions.timeWait(1);
+		driver.switchTo().defaultContent();
+		driver.navigate().refresh();
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementValuePresent(driver,menu_Properties, 3);
+		Utility_Functions.xClick(driver, menu_Properties, true);
+		//Utility_Functions.xClick(driver, recentlyViewed, true);
+		//Utility_Functions.timeWait(3);
+		List<WebElement> recentlyViewedpropertiesList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+
+		Utility_Functions.xclickOnFirstElementfromList(recentlyViewedpropertiesList);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementVisible(driver, related, 5);
+		Utility_Functions.xClick(driver, related, true);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		
+		Utility_Functions.xWaitForElementValuePresent(driver, relatedActivities, 5);
+		Utility_Functions.xClick(driver, relatedActivities, true);
+		
+		List<WebElement> relatedActivitiesList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'] "));
+		for(int i=0;i<relatedActivitiesList.size();i++){
+			System.out.println("The activities are :" +i+relatedActivitiesList.get(i).getText());	
+		}
+		report.updateTestLog("Verify Create Activity Properties","The New Activity for Contacts is created ",Status.PASS);
+	}
+
+	
 	
 }
