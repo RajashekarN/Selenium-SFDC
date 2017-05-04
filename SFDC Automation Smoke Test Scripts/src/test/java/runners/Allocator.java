@@ -64,9 +64,9 @@ public class Allocator {
 		resultSummaryManager.copyReportsFolder();
 		
 		
-		resultSummaryManager.launchResultSummary();
+		//resultSummaryManager.launchResultSummary();
 			
-		System.exit(testBatchStatus);
+		//System.exit(testBatchStatus);
 	}
 
 	/***** When working with SeeTest/Perfecto Parellel *****/

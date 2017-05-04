@@ -75,7 +75,8 @@ public class DriverScript {
 
 	private final SeleniumTestParameters testParameters;
 	private String reportPath;
-	
+
+	private ExecutionMode executionMode = ExecutionMode.LOCAL;
 
 	/**
 	 * DriverScript constructor
@@ -135,8 +136,8 @@ public class DriverScript {
 	public String getExecutionTime() {
 		return executionTime;
 	}
-	
-	
+
+
 	/**
 	 * Function to execute the given test case
 	 */
@@ -260,7 +261,8 @@ public class DriverScript {
 	}
 
 	private void initializeWebDriver() {
-		switch (testParameters.getExecutionMode()) {
+		executionMode = ExecutionMode.valueOf(properties.getProperty("ExecutionMode"));
+		switch (executionMode) {
 
 		case LOCAL:
 			WebDriver webDriver = WebDriverFactory.getWebDriver(testParameters
@@ -440,6 +442,11 @@ public class DriverScript {
 			report.addTestLogSubHeading("Browser/Platform", ": "
 					+ testParameters.getBrowserAndPlatform(), "Execution on",
 					": " + "Local Machine");
+			break;
+			
+		case REMOTE:
+			report.addTestLogSubHeading("Browser", ": " + testParameters.getBrowser(), "Executed on",
+					": " + properties.getProperty("RemoteUrl"));
 			break;
 
 		case MOBILE:
@@ -831,5 +838,4 @@ public class DriverScript {
 		return isMobileAutomation;
 
 	}
-
 }

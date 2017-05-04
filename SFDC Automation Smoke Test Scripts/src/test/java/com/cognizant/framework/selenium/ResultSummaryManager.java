@@ -5,7 +5,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Properties;
 import java.util.Scanner;
 
@@ -19,6 +21,9 @@ import com.cognizant.framework.ReportThemeFactory;
 import com.cognizant.framework.Settings;
 import com.cognizant.framework.TimeStamp;
 import com.cognizant.framework.Util;
+
+import supportLibraries.SendDataDevOps;
+
 import com.cognizant.framework.ReportThemeFactory.Theme;
 
 /**
@@ -41,6 +46,9 @@ public class ResultSummaryManager {
 
 	private static final ResultSummaryManager RESULT_SUMMARY_MANAGER = new ResultSummaryManager();
 	private SeleniumTestParameters testParameters;
+	
+	public supportLibraries.SendDataDevOps resultObj;
+
 
 	private ResultSummaryManager() {
 		// To prevent external instantiation of this class
@@ -193,7 +201,8 @@ public class ResultSummaryManager {
 		String totalExecutionTime = Util.getTimeDifference(overallStartTime,
 				overallEndTime);
 		summaryReport.addResultSummaryFooter(totalExecutionTime);
-
+		HashMap<String,Integer>hash=summaryReport.addResultSummaryFooter(totalExecutionTime);
+		setUpData(hash);
 		if (testExecutedInUnitTestFramework
 				&& System.getProperty("ReportPath") == null) {
 			File testNgResultSrc = new File(
@@ -221,16 +230,44 @@ public class ResultSummaryManager {
 		}
 	}
 
+	
+	public void setUpData(HashMap<String,Integer>hash){
+		System.out.println("Passed:- "+hash.get("Passed"));
+		System.out.println("Failed:- "+hash.get("Failed"));
+		//Format formatter = new SimpleDateFormat("yyyy-MM-dd-hh.mm.ss");
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+		String startTime = formatter.format(overallStartTime);
+		String endTime = formatter.format(overallEndTime);
+		resultObj= new SendDataDevOps();
+		/*	resultObj.ApplicationId= Integer.parseInt(properties.getProperty("ProjectID")) ;
+		resultObj.AutomationProcessId= Integer.parseInt(properties.getProperty("AutomationProcessId"));
+		resultObj.AutomationToolId= Integer.parseInt(properties.getProperty("AutomationToolId"));
+		resultObj.Version=Integer.parseInt(properties.getProperty("Version"));
+		resultObj.Cycle=properties.getProperty("Cycle");
+		resultObj.Description=properties.getProperty("Description");
+		resultObj.Passed=hash.get("Passed");
+		resultObj.Failed=hash.get("Failed");
+		resultObj.Blocked= 0;
+		resultObj.StartDateTime= startTime;
+		resultObj.EndDateTime= endTime;
+		resultObj.Metadata="";*/
+
+		resultObj.sendData(properties.getProperty("ApplicationId"), properties.getProperty("AutomationProcessId"), properties.getProperty("AutomationToolId"), properties.getProperty("Description"), 
+				properties.getProperty("Version"), properties.getProperty("Cycle"), hash.get("Passed").toString(), hash.get("Failed").toString(), "0", startTime, 
+				endTime, " ");			
+	}
+	
 	/**
 	 * Function to launch the summary report at the end of the test batch
 	 * execution
-	 */
+	 *//*
 	public void launchResultSummary() {
 		if (reportSettings.shouldGenerateHtmlReports()) {
 			try {
-				/**
+				*//**
 				 * below logic is used for sending mails
-				 */
+				 *//*
 				// sendReport(reportPath + "\\HTML Results\\Summary.Html");
 				if (checkExceptionInErrorLogTxt()) {
 					File f = new File(reportPath + "\\ErrorLog.txt");
@@ -245,9 +282,9 @@ public class ResultSummaryManager {
 			}
 		} else if (reportSettings.shouldGenerateExcelReports()) {
 			try {
-				/**
+				*//**
 				 * below logic is used for sending mails
-				 */
+				 *//*
 				// sendReport(reportPath + "\\Excel Results\\Summary.xls");
 				File excelFile = new File(reportPath
 						+ "\\Excel Results\\Summary.xls");
@@ -256,7 +293,7 @@ public class ResultSummaryManager {
 				e.printStackTrace();
 			}
 		}
-	}
+	}*/
 
 	@SuppressWarnings("resource")
 	private boolean checkExceptionInErrorLogTxt() throws IOException {
@@ -303,6 +340,4 @@ public class ResultSummaryManager {
 		TimeStamp.reportPathWithTimeStamp = null;
 
 	}
-
-
 }

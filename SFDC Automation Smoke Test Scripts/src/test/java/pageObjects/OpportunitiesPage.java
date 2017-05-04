@@ -18,6 +18,7 @@ import com.sforce.soap.partner.PartnerConnection;
 import com.sforce.soap.partner.QueryResult;
 import com.sforce.soap.partner.SaveResult;
 import com.sforce.soap.partner.sobject.SObject;
+import com.sforce.ws.ConnectionException;
 import com.sforce.ws.ConnectorConfig;
 
 import pagesAPI.AccountsFunctions;
@@ -1113,32 +1114,32 @@ public class OpportunitiesPage extends ReusableLibrary {
 		}
 	}
 	/**
-	 * Validate Opportunity Name is not auto generated when manually added by the user 
+	 * Validate Opportunity Name is not auto generated when manually added by
+	 * the user
 	 * 
 	 * @author Vishnuvardhan
 	 *
-	 */	
-	
+	 */
+
 	static SaveResult[] results;
 	static String result;
 
 	public void manualOpportunityCreation() {
 		try {
-			EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
-			establishConnection.establishConnection();
+			establishConnection();
 			SObject opportunity = new SObject();
-			Random random= new Random();
+			Random random = new Random();
 			int value = random.nextInt();
 			String opportunityName = "Test Automation_Opportunity" + value;
-			opportunity.setType("Opportunity");		
+			opportunity.setType("Opportunity");
 			opportunity.setField("Name", opportunityName);
 			SearchTextSOQL accountID = new SearchTextSOQL(scriptHelper);
 			String accountId = accountID.fetchRecord("Account", "Id");
 			opportunity.setField("AccountId", accountId);
-			opportunity.setField("CloseDate",Calendar.getInstance());
+			opportunity.setField("CloseDate", Calendar.getInstance());
 			opportunity.setField("RecordTypeId", "012i0000000405n");
-			opportunity.setField("StageName","Qualification");
-			
+			opportunity.setField("StageName", "Qualification");
+
 			SObject[] opportunities = new SObject[1];
 			opportunities[0] = opportunity;
 			results = EstablishConnection.connection.create(opportunities);
@@ -1150,18 +1151,91 @@ public class OpportunitiesPage extends ReusableLibrary {
 			}
 			System.out.println(result);
 			SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
-			String query = "Select Name from Opportunity where Id = '" +result +"'";
+			String query = "Select Name from Opportunity where Id = '" + result + "'";
 			String generatedOpportunityName = searchTextSOQL.fetchRecordFieldValue("Name", query);
 			Utility_Functions.timeWait(1);
-			if(opportunityName.equals(generatedOpportunityName)) {
-				report.updateTestLog("Opportunity Name","Opportunity Name is not auto generated when Opportunity is manually added by the User::" , Status.PASS);
+			if (opportunityName.equals(generatedOpportunityName)) {
+				report.updateTestLog("Opportunity Name",
+						"Opportunity Name is not auto generated when Opportunity is manually added by the User::",
+						Status.PASS);
 			} else {
-				report.updateTestLog("Opportunity Name","Failure in the Opportunity Name generation:::" , Status.FAIL);
+				report.updateTestLog("Opportunity Name", "Failure in the Opportunity Name generation:::", Status.FAIL);
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println(e.getStackTrace());
-		}		
+		}
+	}
+	
+	/**
+	 * Function for establishing the connection
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+
+	public void establishConnection() {
+		try {
+			if (properties.getProperty("RunEnvironment").equals("FTE")) {
+				config = new ConnectorConfig();
+				if ((dataTable.getData("General_Data", "TC_ID").contains("GWS")) && (dataTable.getData("General_Data", "TC_ID").contains("APAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
+					config.setUsername(properties.getProperty("FTEGWSAPACManager"));
+					config.setPassword(properties.getProperty("Password"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("GWS"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("EMEA"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
+					config.setUsername(properties.getProperty("FTEGWSEMEABroker"));
+					config.setPassword(properties.getProperty("FTEGWSEMEABrokerPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VAS"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("AMER"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
+					config.setUsername(properties.getProperty("VASAMERManager"));
+					config.setPassword(properties.getProperty("VASAMERManagerPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VAS"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("EMEA"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
+					config.setUsername(properties.getProperty("VASEMEABroker"));
+					config.setPassword(properties.getProperty("VASEMEABrokerPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("AS"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("AMER"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
+					config.setUsername(properties.getProperty("ASAMERManager"));
+					config.setPassword(properties.getProperty("ASAMERManagerPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("AS"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("APAC"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
+					config.setUsername(properties.getProperty("ASAPACBroker"));
+					config.setPassword(properties.getProperty("ASAPACBrokerPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("AB"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("AMER"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
+					config.setUsername(properties.getProperty("FTEABAMERCSS"));
+					config.setPassword(properties.getProperty("Password"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("AB"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("APAC"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
+					config.setUsername(properties.getProperty("FTEABAPACManager"));
+					config.setPassword(properties.getProperty("Password"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OB"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("AMER"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
+					config.setUsername(properties.getProperty("FTEOBAMERCSS"));
+					config.setPassword(properties.getProperty("Password"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OB"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("AMER"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
+					config.setUsername(properties.getProperty("FTEOBAMERManager"));
+					config.setPassword(properties.getProperty("Password"));
+				}
+				config.setAuthEndpoint(properties.getProperty("FTEAuthEndpoint"));
+				connection = new PartnerConnection(config);
+			} else if (properties.getProperty("RunEnvironment").equals("UAT")) {
+				EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
+				establishConnection.establishConnection();
+			}
+		} catch (ConnectionException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }
