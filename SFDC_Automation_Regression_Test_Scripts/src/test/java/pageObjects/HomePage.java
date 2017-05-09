@@ -36,13 +36,13 @@ public class HomePage extends ReusableLibrary {
 		// Utility_Functions utility = new Utility_Functions(scriptHelper);
 	}
 
-	@FindBy(xpath = "//div[@class='slds-context-bar oneGlobalNav']//span[text()='Accounts']")
+	@FindBy(xpath = "//div[@class='bBottom']//span[text()='Accounts']")
 	WebElement menu_Accounts;
 
-	@FindBy(xpath = "//div[@class='slds-context-bar oneGlobalNav']//span[text()='Leads']")
+	@FindBy(xpath = "//div[@class='bBottom']//span[text()='Leads']")
 	WebElement menu_Leads;
 
-	@FindBy(xpath = "//div[@class='slds-context-bar oneGlobalNav']//span[text()='Opportunities']")
+	@FindBy(xpath = "//div[@class='bBottom']//span[text()='Opportunities']")
 	WebElement menu_Opportunities;
 
 	@FindBy(xpath = "//span[@class='uiOutputText'][text()='Accounts']")

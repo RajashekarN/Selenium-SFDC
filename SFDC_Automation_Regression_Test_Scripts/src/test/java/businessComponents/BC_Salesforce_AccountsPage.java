@@ -81,7 +81,7 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 	 *
 	 */	
 
-	public void bc_addNewPersonalInformatiom() throws InterruptedException {
+	public void bc_addNewPersonalInformation() throws InterruptedException {
 		sfAccountsPage.addNewPersonalInformation();
 	}
 	/**

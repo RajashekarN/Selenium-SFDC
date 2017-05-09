@@ -28,8 +28,6 @@ public class LoginPage extends ReusableLibrary {
 	public LoginPage(ScriptHelper scriptHelper) {
 		super(scriptHelper);
 		PageFactory.initElements(driver.getWebDriver(), this);
-		// new WebDriverUtil(driver);
-		// Utility_Functions utility = new Utility_Functions(scriptHelper);
 	}
 
 	@FindBy(id = "username")
@@ -41,13 +39,13 @@ public class LoginPage extends ReusableLibrary {
 	@FindBy(id = "Login")
 	WebElement btn_LogIn;
 
-	@FindBy(xpath = "//div[@class='slds-context-bar oneGlobalNav']//span[text()='Home']")
-	WebElement home_Tab;
+	@FindBy(xpath = "//div[@class='bBottom']//span[text()='Home']")
+	WebElement menu_Home;
 
-	@FindBy(xpath = "//button[@class='bare slds-button uiButton forceHeaderButton oneUserProfileCardTrigger']")
+	@FindBy(xpath = "//button[contains(@class,'forceHeaderButton') and contains(@class,'oneUserProfileCardTrigger')]")
 	WebElement logOutButton;
 
-	@FindBy(xpath = "//div[@class='profile-card-indent']//a[text()='Log Out']")
+	@FindBy(xpath = "//div[contains(@class,'profile')]//a[contains(text(),'Log') and contains(text(),'Out')]")
 	WebElement logOut;
 
 	@FindBy(xpath = "//a[@class='continue][text()='Continue']")
@@ -65,7 +63,7 @@ public class LoginPage extends ReusableLibrary {
 		report.updateTestLog("Invoke Application",
 				"Invoke the application under test @ " + properties.getProperty("ApplicationUrl"), Status.PASS);
 		driver.get(properties.getProperty("ApplicationUrl"));
-		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, txt_userName, 10);
 	}
 
 	/**
@@ -307,10 +305,10 @@ public class LoginPage extends ReusableLibrary {
 					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("Password"));
 				}
 			} 
-			Utility_Functions.timeWait(1);
+			//Utility_Functions.timeWait(1);
 			report.updateTestLog("Login", "Click the sign-in button", Status.PASS);
 			Utility_Functions.xClick(driver, btn_LogIn, true);
-			Utility_Functions.timeWait(1);
+			//Utility_Functions.timeWait(1);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
@@ -331,9 +329,9 @@ public class LoginPage extends ReusableLibrary {
 	 */
 
 	public void verifyLoginSuccessful() {
-		Utility_Functions.timeWait(5);
+		Utility_Functions.xWaitForElementPresent(driver, menu_Home, 5);
 		try {
-			if (home_Tab.isDisplayed()) {
+			if (menu_Home.isDisplayed()) {
 				report.updateTestLog("Verify Login", "Login is successful", Status.PASS);
 			} else {
 				frameworkParameters.setStopExecution(true);
@@ -354,9 +352,7 @@ public class LoginPage extends ReusableLibrary {
 
 	public void logout() {
 		try {
-			Utility_Functions.timeWait(2);
 			Utility_Functions.xClick(driver, logOutButton, true);
-			Utility_Functions.timeWait(1);
 			Utility_Functions.xClick(driver, logOut, true);		
 			report.updateTestLog("Verify Logout", "User has been logged out successfully:::",Status.PASS);
 		} catch (Exception e) {

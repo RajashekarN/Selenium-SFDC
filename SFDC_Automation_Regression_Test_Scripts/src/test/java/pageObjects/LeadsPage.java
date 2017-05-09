@@ -38,10 +38,10 @@ public class LeadsPage extends ReusableLibrary {
 		// Utility_Functions utility = new Utility_Functions(scriptHelper);
 	}
 
-	@FindBy(xpath = "//div[@class='slds-context-bar oneGlobalNav']//span[text()='Home']")
+	@FindBy(xpath = "//div[@class='bBottom']//span[text()='Home']")
 	WebElement menu_Home;
 
-	@FindBy(xpath = "//div[@class='slds-context-bar oneGlobalNav']//span[text()='Leads']")
+	@FindBy(xpath = "//div[@class='bBottom']//span[text()='Leads']")
 	WebElement menu_Leads;
 
 	@FindBy(xpath = "//div[@title='New']")
@@ -50,7 +50,7 @@ public class LeadsPage extends ReusableLibrary {
 	@FindBy(xpath = "//*[@id='record-type-select']")
 	WebElement leadRecordTypeSelection;	
 
-	@FindBy(xpath = "//div[@class='slds-page-header slds-grid slds-grid--align-spread slds-grid--vertical-align-center']//button[text()='Continue']")
+	@FindBy(xpath = "//button[text()='Continue']")
 	WebElement continueButton;	
 
 	@FindBy(xpath = "//*[@id='record-type-select']/option[text()='Agency Brokerage']")
@@ -62,21 +62,28 @@ public class LeadsPage extends ReusableLibrary {
 	@FindBy(xpath = "//*[@id='record-type-select']/option[text()='Occupier Brokerage']")
 	WebElement occupierBrokerage;	
 
-	@FindBy(xpath = "//*[text()='Address']/parent::div/parent::div/div[@class='itemBody']")
+	@FindBy(xpath = "//span[text()='Address']/parent::div/parent::div//span[contains(@class,'test-id__field-value')]")
 	WebElement addressDetails;	
 
-	@FindBy(xpath = "//div[@class='dataCol readonly slds-no-space']/span[@class='uiOutputPhone']/parent::div/parent::div/parent::div/div/span[contains(text(), 'Direct Line')]/parent::div/parent::div/div[2]/div/span")
+	@FindBy(xpath = "//span[contains(text(), 'Direct Line')]/parent::div/parent::div//span[contains(@class,'test-id__field-value')]")
 	WebElement directLine;	
 
-	@FindBy(xpath = "//div[@class='dataCol readonly slds-no-space']/span[@class='uiOutputPhone']/parent::div/parent::div/parent::div/div/span[contains(text(), 'Direct Line')]/parent::div/parent::div/div[2]//button")
+	@FindBy(xpath = "//button[contains(@title,'Edit') and contains(@title,'Direct') and contains(@title,'Line')]")
 	WebElement directLineEditButton;	
+	
+
+	@FindBy(xpath = "//span[text()='Direct Line']/parent::label/parent::div/input[@type='tel']")
+	WebElement enterDirectLIne;	
 
 	@FindBy(xpath = "//span[@class='uiOutputEmail']/parent::p/parent::li/p[contains(text(), 'Email')]")
 	WebElement email;	
 
-	@FindBy(xpath = "//div[@class='desktop container forceStyle oneOne oneAppLayoutContainer']//*[text()='Convert']")
+	@FindBy(xpath = "//div[@title='Convert']")
 	WebElement convert;		
-
+	
+	@FindBy(xpath = "//p[@title='Convert Lead Title']")
+	WebElement convertLeadTitle;		
+	
 	@FindBy(xpath = "//*[@id='convertedStatus']")
 	WebElement convertedStatus;	
 
@@ -86,10 +93,10 @@ public class LeadsPage extends ReusableLibrary {
 	@FindBy(xpath = "//input[contains(@id,'CustomLeadConversionFrom:OwnerName']")
 	WebElement recordOwner;	
 
-	@FindBy(xpath = "//label[@for='first-name']/following-sibling::div//input")
+	@FindBy(xpath = "//div[@class='slds-form-element__row']//label[@for='first-name']/parent::div//input")
 	WebElement firstName;	
 
-	@FindBy(xpath = "//label[@for='last-name']/following-sibling::div//input")
+	@FindBy(xpath = "//div[@class='slds-form-element__row']//label[@for='last-name']/parent::div//input")
 	WebElement lastName;
 
 	@FindBy(xpath = "//label[@for='company']/following-sibling::div//input")
@@ -253,9 +260,9 @@ public class LeadsPage extends ReusableLibrary {
 				Utility_Functions.xClick(driver, allLeadsMenu, true);	
 				List<WebElement> allLeadsList = driver.findElements(
 						By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-				Utility_Functions.xclickgetTextofFirstElementfromList(allLeadsList);
+				Utility_Functions.xclickRandomElement(allLeadsList);
 			} else {
-				Utility_Functions.xclickgetTextofFirstElementfromList(leadsList);
+				Utility_Functions.xclickRandomElement(leadsList);
 			}
 		} catch (Exception e2) {
 			e2.printStackTrace();
@@ -271,9 +278,11 @@ public class LeadsPage extends ReusableLibrary {
 				System.out.println("Address Details, DirectLine and Email field are not having the values:::");
 				report.updateTestLog("Lead Page", "Address Details, DirectLine and Email field are not having the values::",
 						Status.FAIL);	
-				/*				Utility_Functions.timeWait(1);
+				Utility_Functions.timeWait(1);
 				Utility_Functions.xClick(driver, directLineEditButton, true);
-				Utility_Functions.timeWait(1);*/
+				Utility_Functions.timeWait(1);
+				Utility_Functions.xSendKeys(driver, enterDirectLIne, dataTable.getData("General_Data", "Direct Line"));
+				
 			} else {
 				System.out.println("Address Details, DirectLine and Email field are having the values:::");
 				report.updateTestLog("Lead Page", "Address Details, DirectLine and Email field are having the values::",
@@ -284,37 +293,10 @@ public class LeadsPage extends ReusableLibrary {
 			System.out.println(e1.getMessage());
 		}
 		Utility_Functions.xClick(driver, convert, true);
-		Utility_Functions.timeWait(3);
-		driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@src,'LeadConversionRed')]")));
+		Utility_Functions.timeWait(3);		
+		//driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@id,'CustomLeadConversionFrom')]")));
+		Utility_Functions.xSwitchtoFrame(driver, convertLeadTitle);
 		Utility_Functions.timeWait(1);
-		/*List<WebElement> convertList = driver.findElements(By.xpath("//label[@class='slds-form-element__label']"));
-		int count=0; 
-		try {
-			for(WebElement element: convertList) {
-				if((count==0) && (element.getText().equals("*Converted Status"))) {
-					System.out.println("Converted Status field is present in the Convert Lead Page");
-					report.updateTestLog("Convert Lead Page", "Convert Lead Page is having the " + element.getText() +" Status field::",Status.PASS);	
-					count++;						
-				} else if((count==1) && (element.getText().equals("*Record Owner"))) {
-					System.out.println("Record Owner field is present in the Convert Lead Page");
-					report.updateTestLog("Convert Lead Page", "Convert Lead Page is having the " + element.getText() +" Status field::",Status.PASS);
-					count++;						
-				} else if((count==2) && (element.getText().equals("*Account Name"))) {
-					System.out.println("Account Name field is present in the Convert Lead Page");
-					report.updateTestLog("Convert Lead Page", "Convert Lead Page is having the " + element.getText() +" Status field::",Status.PASS);
-					count++;
-				} 										
-			}
-			if(count!=3) {
-				report.updateTestLog("Convert Lead Page", "Convert Lead Page is not having all the fields::",Status.FAIL);
-			} else {
-				report.updateTestLog("Convert Lead Page", "Convert Lead Page is having all the fields::",Status.PASS);
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
-		}*/
 		convertListValidation();
 		try {
 			if(convertedStatus.getText().contains("Qualified")) {
@@ -429,13 +411,16 @@ public class LeadsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@src,'LeadDefaultUoM')]")));
-		Utility_Functions.timeWait(3);
+		//driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@src,'LeadDefaultUoM')]")));
+		Utility_Functions.xSwitchtoFrame(driver, continueButton);
+		Utility_Functions.xWaitForElementPresent(driver, continueButton, 3);
 		Utility_Functions.xClick(driver, continueButton, true);
 		Utility_Functions.timeWait(2);
 		Random random = new Random();
 		int value = random.nextInt(1000);
-		String companyName = dataTable.getData("General_Data", "Company") + value;
+		String companyName = dataTable.getData("General_Data", "Company") + value;		
+		Utility_Functions.xSwitchtoFrame(driver, firstName);
+		Utility_Functions.xWaitForElementPresent(driver, firstName, 5);
 		Utility_Functions.xSendKeys(driver, firstName, dataTable.getData("General_Data", "First Name"));
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xSendKeys(driver, lastName, dataTable.getData("General_Data", "Last Name"));
@@ -727,7 +712,7 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		List<WebElement> leadsList = driver.findElements(
 				By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-		String leadSelected = Utility_Functions.xclickgetTextofFirstElementfromList(leadsList);
+		String leadSelected = Utility_Functions.xclickRandomElement(leadsList);
 		Utility_Functions.timeWait(3);
 		/*		
 		searchTextSOQL searchRecord = new searchTextSOQL(scriptHelper);
@@ -739,6 +724,8 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 
 		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindowTop(driver);
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xClick(driver, new_PrivateNotes, true);
 
@@ -809,8 +796,10 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(3);		
 		Utility_Functions.xClick(driver, saveConvertButton, true);
 		Utility_Functions.timeWait(3);
-		driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@src,'LeadConversionRed')]")));
-		Utility_Functions.timeWait(1);
+		//driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@src,'LeadConversionRed')]")));
+		driver.switchTo().defaultContent();
+		Utility_Functions.xSwitchtoFrame(driver, streetField);
+		Utility_Functions.xWaitForElementPresent(driver, streetField, 5);
 		convertListValidation();
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xScrollWindow(driver);
@@ -864,7 +853,10 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementVisible(driver, saveConvertButton, 4);
 		Utility_Functions.xClick(driver, saveConvertButton, true);
 		Utility_Functions.timeWait(3);
-		driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@src,'LeadConversionRed')]")));
+		
+		//driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@src,'LeadConversionRed')]")));
+		Utility_Functions.xSwitchtoFrame(driver, convertLeadTitle);
+		
 		Utility_Functions.timeWait(1);
 		convertListValidation();
 		Utility_Functions.timeWait(3);

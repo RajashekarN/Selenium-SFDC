@@ -134,7 +134,7 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 					soUpdate.setType("Opportunity");
 					soUpdate.setId(so.getId());
 					if(fieldName.equals("StageName")) {
-						soUpdate.setField(fieldName,"17-Closed");
+						soUpdate.setField(fieldName,"19-Closed");
 					} else if(fieldName.equals("Total_Size__c")) {
 						soUpdate.setField(fieldName,"2500");
 					} else if(fieldName.equals("CBRE_Preferred_Property_Type_c__c")) {
@@ -149,14 +149,14 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 						soUpdate.setField(fieldName,calendar);
 					} else if(fieldName.equals("Lease_Term__c")) {
 						soUpdate.setField(fieldName,12);
-					} else if(fieldName.equals("Lease_Term__c")) {
-						soUpdate.setField(fieldName,12);
 					} else if(fieldName.equals("Lease_Rate_Rent__c")) {
 						soUpdate.setField(fieldName,12000);
 					} else if(fieldName.equals("Lease_Rate_Rent_Basis__c")) {
 						soUpdate.setField(fieldName,"Per Year");
 					} else if(fieldName.equals("Service__c")) {
 						soUpdate.setField(fieldName,"Project Management");
+					} else if(fieldName.equals("EMEA_Success_Probability__c")) {
+						soUpdate.setField(fieldName,"100%");
 					} else if(fieldName.equals("CloseDate")) {
 						Calendar calendar = Calendar.getInstance();
 						calendar.add(Calendar.DAY_OF_MONTH, 365);
@@ -172,7 +172,6 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 			System.out.println(e.getStackTrace());
 		}
 	}
-	
 	
 	/**
 	 * Function for deleting the Opportunity

@@ -29,10 +29,10 @@ public class PropertiesPage extends ReusableLibrary {
 		// Utility_Functions utility = new Utility_Functions(scriptHelper);
 	}
 
-	@FindBy(xpath = "//span[@class='moreLabel'][text()='More']")
+	@FindBy(xpath = "//button[contains(@class,'context-bar__label-action')][text()='More']")
 	WebElement menu_More;
 
-	@FindBy(xpath = "//div[@class='overflowList']//li/a[@title='Properties']")
+	@FindBy(xpath = "//a[@role='menuitem']/span[contains(@class,'slds-truncate')][text()='Properties']")
 	WebElement properties;	
 
 	@FindBy(xpath = "//div[@class='slds-truncate'][@title='New']")
@@ -69,6 +69,10 @@ public class PropertiesPage extends ReusableLibrary {
 	WebElement createdProperty;
 	
 
+	@FindBy(xpath = "//h2[contains(@class,'slds-m-bottom--large')][text()='Property Information']")
+	WebElement propertyInformationFrame;
+	
+	
 	/**
 	 * 
 	 * 
@@ -140,7 +144,9 @@ public class PropertiesPage extends ReusableLibrary {
 			Utility_Functions.xClick(driver, continueButton, true);
 			Utility_Functions.timeWait(2);
 			driver.switchTo().defaultContent();
-			driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@src,'recordtypeselect')]")));
+			Utility_Functions.xSwitchtoFrame(driver, propertyInformationFrame);
+			
+			//driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@src,'recordtypeselect')]")));
 			List<WebElement> propertyEditPage = driver.findElements(By.xpath("//div[@class='slds-grid slds-wrap slds-grid slds-wrap slds-grid--pull-padded slds-form--stacked']/div/h2"));
 			int count=0; 
 			for(WebElement element: propertyEditPage) {

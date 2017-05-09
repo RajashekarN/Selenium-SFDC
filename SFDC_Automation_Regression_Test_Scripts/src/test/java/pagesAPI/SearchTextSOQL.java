@@ -228,6 +228,30 @@ public class SearchTextSOQL extends ReusableLibrary {
 						} else if(fieldname.equals("StageName")) {
 							recordID = (String)record.getField("StageName");
 							report.updateTestLog("Verify Fetch Record", "Record has been fetched successfully:::" + recordID, Status.PASS);
+						} else if(fieldname.equals("RecordTypeId")) {
+							recordID = (String)record.getField("RecordTypeId");
+							report.updateTestLog("Verify Fetch Record", "Record has been fetched successfully:::" + recordID, Status.PASS);
+						} else if(fieldname.equals("Total_Size__c")) {
+							recordID = (String)record.getField("Total_Size__c");
+							report.updateTestLog("Verify Fetch Record", "Record has been fetched successfully:::" + recordID, Status.PASS);
+						} else if(fieldname.equals("CBRE_Preferred_Property_Type_c__c")) {
+							recordID = (String)record.getField("CBRE_Preferred_Property_Type_c__c");
+							report.updateTestLog("Verify Fetch Record", "Record has been fetched successfully:::" + recordID, Status.PASS);
+						} else if(fieldname.equals("Lease_From__c")) {
+							recordID = (String)record.getField("Lease_From__c");
+							report.updateTestLog("Verify Fetch Record", "Record has been fetched successfully:::" + recordID, Status.PASS);
+						} else if(fieldname.equals("Lease_To__c")) {
+							recordID = (String)record.getField("Lease_To__c");
+							report.updateTestLog("Verify Fetch Record", "Record has been fetched successfully:::" + recordID, Status.PASS);
+						} else if(fieldname.equals("Lease_Term__c")) {
+							recordID = (String)record.getField("Lease_Term__c");
+							report.updateTestLog("Verify Fetch Record", "Record has been fetched successfully:::" + recordID, Status.PASS);
+						} else if(fieldname.equals("Lease_Rate_Rent__c")) {
+							recordID = (String)record.getField("Lease_Rate_Rent__c");
+							report.updateTestLog("Verify Fetch Record", "Record has been fetched successfully:::" + recordID, Status.PASS);
+						} else if(fieldname.equals("Lease_Rate_Rent_Basis__c")) {
+							recordID = (String)record.getField("Lease_Rate_Rent_Basis__c");
+							report.updateTestLog("Verify Fetch Record", "Record has been fetched successfully:::" + recordID, Status.PASS);
 						} else {
 							recordID = (String)record.getField("Id");
 							report.updateTestLog("Verify Fetch Record", "Record has been fetched successfully:::" + recordID, Status.PASS);

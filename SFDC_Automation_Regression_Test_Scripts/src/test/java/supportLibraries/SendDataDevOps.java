@@ -25,17 +25,7 @@ public class SendDataDevOps {
 			json.put("StartDateTime", startDateTime);
 			json.put("EndDateTime", endDateTime);
 			json.put("Metadata", metadata);
-
 			URL url = new URL("https://devopsmetricsservice.azurewebsites.net/api/metrics/submit");
-
-			/*
-			 * URL url = new URL(
-			 * "https://stg-devopsmetricsservice.azurewebsites.net/api/metrics/submit"
-			 * );; if(isProd){ url = new URL(
-			 * "https://devopsmetricsservice.azurewebsites.net/api/metrics/submit"
-			 * ); }else{ }
-			 */
-
 			HttpURLConnection httpcon = (HttpURLConnection) url.openConnection();
 			httpcon.setDoOutput(true);
 			httpcon.setDoInput(true);

@@ -30,7 +30,7 @@ public class ContactsPage extends ReusableLibrary {
 		// Utility_Functions utility = new Utility_Functions(scriptHelper);
 	}
 
-	@FindBy(xpath = "//div[@class='slds-context-bar oneGlobalNav']//span[text()='Contacts']")
+	@FindBy(xpath = "//div[@class='bBottom']//span[text()='Contacts']")
 	WebElement menu_Contacts;
 
 	@FindBy(xpath = "//a[@class='tabHeader']//span[text()='Related']")
@@ -59,7 +59,10 @@ public class ContactsPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//ul[@class='slds-button-group slds-m-left--xx-small oneActionsRibbon forceActionsContainer']//li/a/div[text()='New']")
 	WebElement newContact;
-
+	
+	@FindBy(xpath = "//p[@title='Create a Contact']")
+	WebElement createContact;
+		
 	@FindBy(xpath = "//div[@class='slds-page-header slds-grid slds-grid--align-spread slds-grid--vertical-align-center']//button[text()='Continue']")
 	WebElement continueButton;
 
@@ -260,7 +263,10 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xClick(driver, newContact, true);
 		Utility_Functions.timeWait(2);
-		driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@src,'ContactRedirectPage')]")));
+		
+		//driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@src,'ContactRedirectPage')]")));
+		Utility_Functions.xSwitchtoFrame(driver, createContact );
+		
 		Utility_Functions.timeWait(1);
 		if(!dataTable.getData("General_Data", "TC_ID").contains("Broker")) {
 			Utility_Functions.xClick(driver, continueButton, true);

@@ -1,6 +1,5 @@
 package supportLibraries;
 
-
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -27,7 +26,6 @@ import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
 import com.cognizant.framework.selenium.CraftDriver;
-
 
 /*import freemarker.core.ReturnInstruction.Return;
 import supportlibraries.api.FileZipper;*/
@@ -56,19 +54,19 @@ public class Utility_Functions extends ReusableLibrary {
 
 	/*
 	 * *******************************************************************
-	 * Function Name: xClick Author : CBRE SFDC Automation Purpose : 
-	 * Click on element with or without highlight Parameters: driver, webelement,
+	 * Function Name: xClick Author : CBRE SFDC Automation Purpose : Click on
+	 * element with or without highlight Parameters: driver, webelement,
 	 * highlight = true/false
 	 * ******************************************************************
 	 */
 	public static boolean xClick(CraftDriver driver, WebElement el, boolean highlight) {
 
-		if (highlight == true) { 
+		if (highlight == true) {
 			// if the element needs to be highlighted before click.
 			xHighlight(driver, el, "yellow");
 		}
 
-		el.click();			
+		el.click();
 
 		// timeWait(2);
 		return true;
@@ -76,8 +74,8 @@ public class Utility_Functions extends ReusableLibrary {
 
 	/*
 	 * *******************************************************************
-	 * Function Name: inputValueWithReport Author : CBRE SFDC Automation Purpose :
-	 * Inputs the value with in the report: tagID, value, label
+	 * Function Name: inputValueWithReport Author : CBRE SFDC Automation Purpose
+	 * : Inputs the value with in the report: tagID, value, label
 	 * ******************************************************************
 	 */
 
@@ -88,14 +86,15 @@ public class Utility_Functions extends ReusableLibrary {
 			System.out.println(
 					"WARNING : Problem Encountered while Entering value for field: " + label + " for Value : " + Value);
 		} else {
-			report.updateTestLog("Input Value", "Entering value for field: <i>" + label + "</i> Value : " + Value, Status.PASS);
+			report.updateTestLog("Input Value", "Entering value for field: <i>" + label + "</i> Value : " + Value,
+					Status.PASS);
 		}
 	}
 
 	/*
 	 * *******************************************************************
-	 * Function Name: inputData Author : CBRE SFDC Automation Purpose :
-	 * Inputs the data: tagID, value
+	 * Function Name: inputData Author : CBRE SFDC Automation Purpose : Inputs
+	 * the data: tagID, value
 	 * ******************************************************************
 	 */
 
@@ -116,7 +115,7 @@ public class Utility_Functions extends ReusableLibrary {
 					// Utility_Functions.xHighlight(driver, GenRisk,
 					// Color.YELLOW.toString());
 					Utility_Functions.xSendKeys(driver, GenRisk, Value);
-					//					Utility_Functions.xSendKeys(driver, GenRisk, Keys.TAB);
+					// Utility_Functions.xSendKeys(driver, GenRisk, Keys.TAB);
 					isElementFound = true;
 				}
 				if (GenRisk.getTagName().equals("select")) {
@@ -138,12 +137,12 @@ public class Utility_Functions extends ReusableLibrary {
 	/*
 	 * *******************************************************************
 	 * Function Name: validateFieldMatch Author : CBRE SFDC Automation Purpose :
-	 * Validates field match: driver, webelement, expression value 
+	 * Validates field match: driver, webelement, expression value
 	 * ******************************************************************
 	 */
-	public static boolean validateFieldMatch(CraftDriver driver, WebElement tar, String expValue){
+	public static boolean validateFieldMatch(CraftDriver driver, WebElement tar, String expValue) {
 		String val = tar.getAttribute("value");
-		if(val.equalsIgnoreCase(expValue)){
+		if (val.equalsIgnoreCase(expValue)) {
 			xHighlight(driver, tar, "green");
 			return true;
 		} else {
@@ -151,34 +150,34 @@ public class Utility_Functions extends ReusableLibrary {
 			return false;
 		}
 	}
-	
+
 	/*
 	 * *******************************************************************
-	 * Function Name: xClickButton Author : CBRE SFDC Automation Purpose :
-	 * Added to click on Button items of bootstrap : driver, webelement, highlight
+	 * Function Name: xClickButton Author : CBRE SFDC Automation Purpose : Added
+	 * to click on Button items of bootstrap : driver, webelement, highlight
 	 * ******************************************************************
 	 */
 
-	public static void xClickButton(CraftDriver driver, WebElement el, boolean highlight){
+	public static void xClickButton(CraftDriver driver, WebElement el, boolean highlight) {
 		Utility_Functions.xSendKeys(driver, el, Keys.ENTER);
-		try{
+		try {
 			Utility_Functions.xClick(driver, el, highlight);
-		}catch(Exception e){
+		} catch (Exception e) {
 			// Stale elements should land here and be harmless
 		}
 	}
-	
+
 	/*
 	 * *******************************************************************
 	 * Function Name: xSelectRadio Author : CBRE SFDC Automation Purpose :
-	 * Selects the radio button : driver, webelement 
+	 * Selects the radio button : driver, webelement
 	 * ******************************************************************
 	 */
-	
-	public static void xSelectRadio(CraftDriver driver, WebElement el){
+
+	public static void xSelectRadio(CraftDriver driver, WebElement el) {
 		boolean orig = el.isSelected();
 		Utility_Functions.xClickButton(driver, el, true);
-		if(orig==el.isSelected()){
+		if (orig == el.isSelected()) {
 			Utility_Functions.xSendKeys(driver, el, " ");
 		}
 
@@ -186,9 +185,8 @@ public class Utility_Functions extends ReusableLibrary {
 
 	/*
 	 * *******************************************************************
-	 * Function Name: xSendKeys Author : CBRE SFDC Automation Purpose : 
-	 * Send keys to the input field: driver, webelement,
-	 * highlight = true/false
+	 * Function Name: xSendKeys Author : CBRE SFDC Automation Purpose : Send
+	 * keys to the input field: driver, webelement, highlight = true/false
 	 * ******************************************************************
 	 */
 	public static void xSendKeys(CraftDriver driver, WebElement el, String strVal) {
@@ -201,9 +199,9 @@ public class Utility_Functions extends ReusableLibrary {
 
 	public static void xSendKeysNonEmpty(CraftDriver driver, WebElement el, String strVal) {
 		if (!(strVal.equals("") || strVal.isEmpty())) {
-			//			xHighlight(driver, el, "yellow");
-			//			el.clear();
-			//			timeWait(1);
+			// xHighlight(driver, el, "yellow");
+			// el.clear();
+			// timeWait(1);
 			el.sendKeys(strVal);
 			el.sendKeys(Keys.TAB);
 		}
@@ -211,9 +209,9 @@ public class Utility_Functions extends ReusableLibrary {
 
 	}
 
-	public static void xEraseField(CraftDriver driver, WebElement el){
+	public static void xEraseField(CraftDriver driver, WebElement el) {
 		String entry = el.getAttribute("value");
-		for(int i = 0; i < entry.length(); i++){
+		for (int i = 0; i < entry.length(); i++) {
 			el.sendKeys(Keys.BACK_SPACE);
 		}
 	}
@@ -223,50 +221,51 @@ public class Utility_Functions extends ReusableLibrary {
 		el.sendKeys(keyName);
 
 	}
+
 	/*
 	 * *******************************************************************
-	 * Function Name: xmouseOver Author : CBRE SFDC Automation Purpose : 
-	 * xHoverElement,xHoverElementDblClk,xHoverElementclicks : 
-	 * Hover and action Parameters: webelement, driver
+	 * Function Name: xmouseOver Author : CBRE SFDC Automation Purpose :
+	 * xHoverElement,xHoverElementDblClk,xHoverElementclicks : Hover and action
+	 * Parameters: webelement, driver
 	 * ******************************************************************
 	 */
 	public static void xmouseOver(CraftDriver driver, WebElement el) {
-		String mouseOverScript = "if(document.createEvent){"
-				+ "var evObj = document.createEvent('MouseEvents');"
-				+ "evObj.initEvent('mouseover', true, false); "
-				+ "arguments[0].dispatchEvent(evObj);"
-				+ "} "
-				+ "else if(document.createEventObject) { "
-				+ "arguments[0].fireEvent('onmouseover');"
-				+ "}";
+		String mouseOverScript = "if(document.createEvent){" + "var evObj = document.createEvent('MouseEvents');"
+				+ "evObj.initEvent('mouseover', true, false); " + "arguments[0].dispatchEvent(evObj);" + "} "
+				+ "else if(document.createEventObject) { " + "arguments[0].fireEvent('onmouseover');" + "}";
 		JavascriptExecutor js = (JavascriptExecutor) driver.getWebDriver();
 		js.executeScript(mouseOverScript, el);
 	}
-	public static void xmouseOut(CraftDriver driver, WebElement el){
+
+	public static void xmouseOut(CraftDriver driver, WebElement el) {
 		String mouseOffScript = "if(document.createEvent){var evObj = document.createEvent('MouseEvents');"
 				+ "evObj.initEvent('mouseout', true, false); arguments[0].dispatchEvent(evObj);"
 				+ "} else if(document.createEventObject) { arguments[0].fireEvent('onmouseout');}";
 		JavascriptExecutor js = (JavascriptExecutor) driver.getWebDriver();
 		js.executeScript(mouseOffScript, el);
 	}
-	public static void xMouseOut(CraftDriver driver, WebElement el){
+
+	public static void xMouseOut(CraftDriver driver, WebElement el) {
 		String mouseOffScript = "$(arguments[0]).mouseout();";
 		JavascriptExecutor js = (JavascriptExecutor) driver.getWebDriver();
 		js.executeScript(mouseOffScript, el);
 	}
+
 	public static void xMouseOver(CraftDriver driver, WebElement el) {
 		String mouseOverScript = "$(arguments[0]).mouseover();";
 		JavascriptExecutor js = (JavascriptExecutor) driver.getWebDriver();
 		js.executeScript(mouseOverScript, el);
 	}
 
-	public static void xMouseClick(CraftDriver driver, WebElement el){
-		/*String mouseScript = "if(document.createEvent){"
-				+ "var evObj = document.createEvent('MouseEvents');"
-				+ "evObj.initEvent('click', true, false); "
-				+ "arguments[0].dispatchEvent(evObj);} "
-				+ "else if(document.createEventObject) { "
-				+ "arguments[0].fireEvent('click');}";*/
+	public static void xMouseClick(CraftDriver driver, WebElement el) {
+		/*
+		 * String mouseScript = "if(document.createEvent){" +
+		 * "var evObj = document.createEvent('MouseEvents');" +
+		 * "evObj.initEvent('click', true, false); " +
+		 * "arguments[0].dispatchEvent(evObj);} " +
+		 * "else if(document.createEventObject) { " +
+		 * "arguments[0].fireEvent('click');}";
+		 */
 		String mouseScript = "arguments[0].click();";
 		JavascriptExecutor js = (JavascriptExecutor) driver.getWebDriver();
 		js.executeScript(mouseScript, el);
@@ -323,8 +322,8 @@ public class Utility_Functions extends ReusableLibrary {
 
 	/*
 	 * *******************************************************************
-	 * Function Name: findWebElementByName Author : CBRE SF Automation Purpose
-	 * : Element finder by Name
+	 * Function Name: findWebElementByName Author : CBRE SF Automation Purpose :
+	 * Element finder by Name
 	 * ******************************************************************
 	 */
 	public static WebElement findWebElementByName(CraftDriver driver, String string) {
@@ -367,7 +366,7 @@ public class Utility_Functions extends ReusableLibrary {
 	 */
 
 	public static boolean findElementByXpath(CraftDriver driver, String element_xpath) {
-		int count =0;
+		int count = 0;
 		count = driver.findElements(By.xpath(element_xpath)).size();
 		if (count == 0) {
 			System.out.println("The element is not found " + element_xpath);
@@ -409,7 +408,7 @@ public class Utility_Functions extends ReusableLibrary {
 		return true;
 	}
 
-		// ******************************************************************
+	// ******************************************************************
 	// wait for element to disappear
 	public static boolean xWaitForElementDisappear(CraftDriver driver, By locator, int timeWait) {
 		try {
@@ -459,8 +458,8 @@ public class Utility_Functions extends ReusableLibrary {
 
 	/*
 	 * *******************************************************************
-	 * Function Name: xScrollWindow Author : CBRE SFDC Automation Purpose : Hover
-	 * and action Parameters: driver
+	 * Function Name: xScrollWindow Author : CBRE SFDC Automation Purpose :
+	 * Hover and action Parameters: driver
 	 * ******************************************************************
 	 */
 	public static void xScrollWindow(CraftDriver driver) {
@@ -473,7 +472,7 @@ public class Utility_Functions extends ReusableLibrary {
 			timeWait(2);
 		}
 	}
-	
+
 	public static void xScrollWindowOnce(CraftDriver driver) {
 		for (int timeout = 0;; timeout++) {
 			if (timeout >= 5) {
@@ -486,37 +485,39 @@ public class Utility_Functions extends ReusableLibrary {
 	}
 
 	/**
-	 * Use this for scrolling directly to an object (javascript scroll).
-	 * Will attempt to put that object near the top of the screen.
+	 * Use this for scrolling directly to an object (javascript scroll). Will
+	 * attempt to put that object near the top of the screen.
+	 * 
 	 * @param driver
 	 * @param el
 	 */
-	public static void xScrollWindowToElement(CraftDriver driver, WebElement el){
+	public static void xScrollWindowToElement(CraftDriver driver, WebElement el) {
 		try {
 			JavascriptExecutor js = (JavascriptExecutor) driver.getWebDriver();
 			js.executeScript("arguments[0].scrollIntoView(true);", el);
 			timeWait(2);
 		} catch (Exception e) {
 			// Added to prevent false erroring for referencing a "hidden" object
-			System.out.println("Internal error: "+e.getMessage()+"\nContinuing after error.");
+			System.out.println("Internal error: " + e.getMessage() + "\nContinuing after error.");
 		}
 	}
 
 	public static void xScrollWindowTop(CraftDriver driver) {
-		//		for (int timeout = 0;; timeout++) {
-		//			if (timeout >= 5) {
-		//				break;
-		//			}
+		// for (int timeout = 0;; timeout++) {
+		// if (timeout >= 5) {
+		// break;
+		// }
 		JavascriptExecutor js = (JavascriptExecutor) driver.getWebDriver();
 		js.executeScript("window.scroll(0,0)", "");
 		timeWait(2);
-		//		}
+		// }
 	}
 
 	public static void xClickHiddenElement(CraftDriver driver, WebElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) driver.getWebDriver();
 		js.executeScript("arguments[0].click()", element);
 	}
+
 	/*
 	 * *******************************************************************
 	 * Function Name: xSelectDropdown,xSelectDropdownByName Author : CBRE SFDC
@@ -573,6 +574,7 @@ public class Utility_Functions extends ReusableLibrary {
 
 	/**
 	 * Window switch by window number
+	 * 
 	 * @param driver
 	 * @param windowNumber
 	 */
@@ -593,18 +595,22 @@ public class Utility_Functions extends ReusableLibrary {
 	}
 
 	/**
-	 * Opens a new window based on click. Built on the assumption that only 1 window opens per link click
-	 * @param driver - active webdriver
-	 * @param tar - target webelement, applies xClickButton(driver,tar,true)
+	 * Opens a new window based on click. Built on the assumption that only 1
+	 * window opens per link click
+	 * 
+	 * @param driver
+	 *            - active webdriver
+	 * @param tar
+	 *            - target webelement, applies xClickButton(driver,tar,true)
 	 * @param waitInSecs
 	 */
-	public static void xClickSwitchNewWindow(CraftDriver driver, WebElement tar, int waitInSecs){
+	public static void xClickSwitchNewWindow(CraftDriver driver, WebElement tar, int waitInSecs) {
 		Set<String> baseWindows = driver.getWindowHandles();
 		Utility_Functions.xClickButton(driver, tar, true);
-		Utility_Functions.xWaitUntilnoOfWindows(driver, baseWindows.size()+1, waitInSecs*100);
+		Utility_Functions.xWaitUntilnoOfWindows(driver, baseWindows.size() + 1, waitInSecs * 100);
 		Set<String> newWindows = driver.getWindowHandles();
-		for(String window : newWindows){
-			if(!baseWindows.contains(window)){
+		for (String window : newWindows) {
+			if (!baseWindows.contains(window)) {
 				driver.switchTo().window(window);
 				return;
 			}
@@ -635,10 +641,10 @@ public class Utility_Functions extends ReusableLibrary {
 		return dateFormat.format(date);
 	}
 
-	public static String parseDateFormat(String inDate){
+	public static String parseDateFormat(String inDate) {
 		String Date = inDate;
-		//		System.out.println(Date.length());
-		if(Date.length()<= 8){
+		// System.out.println(Date.length());
+		if (Date.length() <= 8) {
 			DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 			try {
 				Date date = new SimpleDateFormat("MM/dd/yy").parse(inDate);
@@ -719,7 +725,7 @@ public class Utility_Functions extends ReusableLibrary {
 
 					System.out.println("Sucessful on clicking the tab " + current_element);
 					if (Optional_xpath2 != "") // to check if the tab is empty
-						// or not
+					// or not
 					{
 						if (!Utility_Functions.findElementByXpath(driver, Optional_xpath2)) {
 							System.out.println("tab is empty");
@@ -760,9 +766,10 @@ public class Utility_Functions extends ReusableLibrary {
 		}
 
 	}
+
 	/*
-	 * Function will fetch the data form validation board and retrieve all
-	 * the validation present with validation id
+	 * Function will fetch the data form validation board and retrieve all the
+	 * validation present with validation id
 	 */
 	public static List<List<String>> getErrorTableData(CraftDriver driver) {
 		Utility_Functions.xWaitForElementDisappear(driver, By.cssSelector("span[id *='status.start']"), 60);
@@ -795,7 +802,7 @@ public class Utility_Functions extends ReusableLibrary {
 		return errorTable;
 	}
 
-	public static boolean validateErrorMessage(CraftDriver driver){
+	public static boolean validateErrorMessage(CraftDriver driver) {
 		Utility_Functions.xWaitForElementDisappear(driver, By.cssSelector("span[id *='status.start']"), 60);
 		List<List<String>> messageTable = getErrorTableData(driver);
 		int errorCount = 0;
@@ -820,14 +827,14 @@ public class Utility_Functions extends ReusableLibrary {
 	 * 
 	 */
 
-	public static void validateAndClickInformation(CraftDriver driver, String ExpectedValidationText){
+	public static void validateAndClickInformation(CraftDriver driver, String ExpectedValidationText) {
 		Utility_Functions.xWaitForElementDisappear(driver, By.cssSelector("span[id *='status.start']"), 60);
 		String xpathToTable = "//table[@id='q2iForm:validationTableRndr']/tbody/tr/td[2]";
 		List<WebElement> informations = driver.findElements(By.xpath(xpathToTable));
 		boolean found = false;
-		for(WebElement info: informations){
+		for (WebElement info : informations) {
 			System.out.println(info.getText());
-			if(info.getText().contains(ExpectedValidationText)){
+			if (info.getText().contains(ExpectedValidationText)) {
 				found = true;
 				xClick(driver, info, false);
 				Utility_Functions.xWaitForElementDisappear(driver, By.id("workbench:status.start"), 30);
@@ -835,7 +842,7 @@ public class Utility_Functions extends ReusableLibrary {
 			}
 		}
 
-		if(!found){
+		if (!found) {
 			System.out.println("unable to find validations");
 		}
 
@@ -849,108 +856,86 @@ public class Utility_Functions extends ReusableLibrary {
 		String returnValue = dataTable.getData(tableName, Columnname);
 		if (returnValue.startsWith("*")) {
 			returnValue = returnValue.split("\\*")[1];
-			//returnValue = getEnvParameterDataTable(returnValue);
-			//returnValue = getConfiguration(returnValue);
+			// returnValue = getEnvParameterDataTable(returnValue);
+			// returnValue = getConfiguration(returnValue);
 		}
 		return returnValue;
 	}
 
-	/*public String getEnvParameterDataTable(String dataValue) {
-		String path = frameworkParameters.getRelativePath() + System.getProperty("file.separator") + "Datatables" + System.getProperty("file.separator");
-		ExcelDataAccess commonDataAccess = new ExcelDataAccess(path, "Common_Testdata");
-		commonDataAccess.setDatasheetName("Env Parameters");
-
-		int rowNum = commonDataAccess.getRowNum(dataValue, 0, 1);
-		if (rowNum == -1) {
-			throw new FrameworkException("The common test data row identified by \"" + dataValue + "\""
-					+ "is not found in the common test data sheet!");
-		}
-
-		dataValue = commonDataAccess.getValue(rowNum, envParameters.getEnv().toUpperCase());
-
-		return dataValue;
-	}
-
-
-	public String getConfiguration(String Key){
-		String Value = "";
-		String sqlStatement = "select value from configuration where client_name = '" + envParameters.getClient() 
-		+ "' and env_name = '"+ envParameters.getEnv()+ "' and parameter = '"+ Key +"'";
-		DBConnection connection = getInternalDBConnection();
-		connection.setSqlStatement(sqlStatement);
-		Value = connection.getResultString("value", true);
-		return Value;
-	}
-
-	
-	 * Get configuration parameter from DB when client  has to be pass specifically
-	 
-	public String getConfiguration(String client, String env, String Key){
-		String Value = "";
-		String sqlStatement = "select value from configuration where client_name = '" + client 
-				+ "' and env_name = '"+ env+ "' and parameter = '"+ Key +"'";
-		DBConnection connection = getInternalDBConnection();
-		connection.setSqlStatement(sqlStatement);
-		Value = connection.getResultString("value", true);
-		return Value;
-	}
-
-
-	public static DBConnection getInternalDBConnection(){
-		Properties property = new Properties();
-		try {
-			property.load(new FileInputStream("Global Settings.properties"));
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		DBConnection connection = new DBConnection();
-		connection.setURL(property.getProperty("localdb.url"));
-		connection.setUsername(property.getProperty("localdb.username"));
-		connection.setPassword(property.getProperty("localdb.password"));
-		return connection;
-	}
-
-	public static Properties setCraftProperty(){
-		DBConnection connection = getInternalDBConnection();
-		Properties property = new Properties();
-		String sqlStatement = "select KEYNAME, VALUE from craft_config";
-		connection.setSqlStatement(sqlStatement);
-		try {
-			ResultSet rset = connection.executeStatement();//pstmt.executeQuery();
-			while(rset.next()){
-				String key = rset.getString("keyname");
-				String value = rset.getString("value");
-				property.setProperty(key, value);
-
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return property;
-	}
-
-	
+	/*
+	 * public String getEnvParameterDataTable(String dataValue) { String path =
+	 * frameworkParameters.getRelativePath() +
+	 * System.getProperty("file.separator") + "Datatables" +
+	 * System.getProperty("file.separator"); ExcelDataAccess commonDataAccess =
+	 * new ExcelDataAccess(path, "Common_Testdata");
+	 * commonDataAccess.setDatasheetName("Env Parameters");
+	 * 
+	 * int rowNum = commonDataAccess.getRowNum(dataValue, 0, 1); if (rowNum ==
+	 * -1) { throw new
+	 * FrameworkException("The common test data row identified by \"" +
+	 * dataValue + "\"" + "is not found in the common test data sheet!"); }
+	 * 
+	 * dataValue = commonDataAccess.getValue(rowNum,
+	 * envParameters.getEnv().toUpperCase());
+	 * 
+	 * return dataValue; }
+	 * 
+	 * 
+	 * public String getConfiguration(String Key){ String Value = ""; String
+	 * sqlStatement = "select value from configuration where client_name = '" +
+	 * envParameters.getClient() + "' and env_name = '"+ envParameters.getEnv()+
+	 * "' and parameter = '"+ Key +"'"; DBConnection connection =
+	 * getInternalDBConnection(); connection.setSqlStatement(sqlStatement);
+	 * Value = connection.getResultString("value", true); return Value; }
+	 * 
+	 * 
+	 * Get configuration parameter from DB when client has to be pass
+	 * specifically
+	 * 
+	 * public String getConfiguration(String client, String env, String Key){
+	 * String Value = ""; String sqlStatement =
+	 * "select value from configuration where client_name = '" + client +
+	 * "' and env_name = '"+ env+ "' and parameter = '"+ Key +"'"; DBConnection
+	 * connection = getInternalDBConnection();
+	 * connection.setSqlStatement(sqlStatement); Value =
+	 * connection.getResultString("value", true); return Value; }
+	 * 
+	 * 
+	 * public static DBConnection getInternalDBConnection(){ Properties property
+	 * = new Properties(); try { property.load(new
+	 * FileInputStream("Global Settings.properties")); } catch
+	 * (FileNotFoundException e) { // TODO Auto-generated catch block
+	 * e.printStackTrace(); } catch (IOException e) { // TODO Auto-generated
+	 * catch block e.printStackTrace(); } DBConnection connection = new
+	 * DBConnection(); connection.setURL(property.getProperty("localdb.url"));
+	 * connection.setUsername(property.getProperty("localdb.username"));
+	 * connection.setPassword(property.getProperty("localdb.password")); return
+	 * connection; }
+	 * 
+	 * public static Properties setCraftProperty(){ DBConnection connection =
+	 * getInternalDBConnection(); Properties property = new Properties(); String
+	 * sqlStatement = "select KEYNAME, VALUE from craft_config";
+	 * connection.setSqlStatement(sqlStatement); try { ResultSet rset =
+	 * connection.executeStatement();//pstmt.executeQuery(); while(rset.next()){
+	 * String key = rset.getString("keyname"); String value =
+	 * rset.getString("value"); property.setProperty(key, value);
+	 * 
+	 * } } catch (SQLException e) { // TODO Auto-generated catch block
+	 * e.printStackTrace(); }
+	 * 
+	 * return property; }
+	 * 
+	 * 
 	 * Purpose: get DB connection element from common Functions excel sheet
-	 
-	public void getDBDetails(String client) {
-		String DBString = "";
-		try{
-			DBString = getConfiguration("DB_DETAILS");
-		}catch(Exception e){
-
-		}
-		if (DBString.contains(";")) {
-			envParameters.setDBUrl(DBString.split(";")[0]);
-			envParameters.setDBUserName(DBString.split(";")[1]);
-			envParameters.setDBPassword(DBString.split(";")[2]);
-		}
-	}*/
+	 * 
+	 * public void getDBDetails(String client) { String DBString = ""; try{
+	 * DBString = getConfiguration("DB_DETAILS"); }catch(Exception e){
+	 * 
+	 * } if (DBString.contains(";")) {
+	 * envParameters.setDBUrl(DBString.split(";")[0]);
+	 * envParameters.setDBUserName(DBString.split(";")[1]);
+	 * envParameters.setDBPassword(DBString.split(";")[2]); } }
+	 */
 
 	/*
 	 * Function to Navigate to the top menu with Hover properties*
@@ -966,7 +951,8 @@ public class Utility_Functions extends ReusableLibrary {
 	 * purpose: Login to a page with username, password and click btn
 	 */
 
-	// public static boolean loginToPage(CraftDriver driver, WebElement UserName,
+	// public static boolean loginToPage(CraftDriver driver, WebElement
+	// UserName,
 	// WebElement Password, )
 	public static List<WebElement> findElementsByTagName(WebElement Ele, String tagName) {
 		try {
@@ -982,27 +968,29 @@ public class Utility_Functions extends ReusableLibrary {
 		Boolean result = false;
 		try {
 			String value = element.getAttribute(attribute);
-			if (value != null){
+			if (value != null) {
 				result = true;
 			}
-		} catch (Exception e) {}
+		} catch (Exception e) {
+		}
 
 		return result;
 	}
 
-	/*public static void ZipResults(String reportPath) {
-		// TODO Auto-generated method stub
-		FileZipper appZip = new FileZipper();
-		appZip.ZipFiles(reportPath);
-	}*/
+	/*
+	 * public static void ZipResults(String reportPath) { // TODO Auto-generated
+	 * method stub FileZipper appZip = new FileZipper();
+	 * appZip.ZipFiles(reportPath); }
+	 */
 
 	public static String DateAdd(String effectiveDate, int days) {
-		//		effectiveDate = effectiveDate.split("T")[0];
+		// effectiveDate = effectiveDate.split("T")[0];
 		DateFormat df1 = new SimpleDateFormat("M/d/yyyy");
 		Calendar c = Calendar.getInstance();
 		try {
-			//			Date date = new SimpleDateFormat("yyyy-M-d").parse(effectiveDate);
-			//			effectiveDate = df1.format(effectiveDate);
+			// Date date = new
+			// SimpleDateFormat("yyyy-M-d").parse(effectiveDate);
+			// effectiveDate = df1.format(effectiveDate);
 			c.setTime(df1.parse(effectiveDate));
 
 		} catch (ParseException e) {
@@ -1014,25 +1002,25 @@ public class Utility_Functions extends ReusableLibrary {
 		return df1.format(c.getTime());
 	}
 
-
-	public static void HtmlZoomOut(CraftDriver driver, int zoomOutlevel){
+	public static void HtmlZoomOut(CraftDriver driver, int zoomOutlevel) {
 		WebElement html = driver.findElement(By.tagName("html"));
-		//		html.sendKeys(Keys.chord(Keys.CONTROL, "0"));
-		for(int i=0; i < zoomOutlevel;i++){
+		// html.sendKeys(Keys.chord(Keys.CONTROL, "0"));
+		for (int i = 0; i < zoomOutlevel; i++) {
 			html.sendKeys(Keys.chord(org.openqa.selenium.Keys.CONTROL, org.openqa.selenium.Keys.SUBTRACT));
 		}
-		if(zoomOutlevel == 0 )
+		if (zoomOutlevel == 0)
 			html.sendKeys(Keys.chord(Keys.CONTROL, "0"));
 		Utility_Functions.timeWait(1);
 	}
 
 	public static String dateAddition(String date_claim, int days) {
-		//		effectiveDate = effectiveDate.split("T")[0];
+		// effectiveDate = effectiveDate.split("T")[0];
 		DateFormat df1 = new SimpleDateFormat("MM/dd/yyyy");
 		Calendar c = Calendar.getInstance();
 		try {
-			//			Date date = new SimpleDateFormat("yyyy-M-d").parse(effectiveDate);
-			//			effectiveDate = df1.format(effectiveDate);
+			// Date date = new
+			// SimpleDateFormat("yyyy-M-d").parse(effectiveDate);
+			// effectiveDate = df1.format(effectiveDate);
 			c.setTime(df1.parse(date_claim));
 
 		} catch (ParseException e) {
@@ -1047,194 +1035,164 @@ public class Utility_Functions extends ReusableLibrary {
 		return df1.format(c.getTime());
 	}
 
-
-
 	/*
 	 * Web Element detail sniffer: give it the same xpath to get details
 	 */
-	public static void printElementDetailsByXPath(CraftDriver driver, String xpath){
+	public static void printElementDetailsByXPath(CraftDriver driver, String xpath) {
 		List<WebElement> list = driver.findElements(By.xpath(xpath));
-		if(list.size()>0){
+		if (list.size() > 0) {
 			WebElement tar = list.get(0);
-			System.out.println("["+xpath+"]:\nEnabled:"+tar.isEnabled()
-			+"\tSelected:"+tar.isSelected()
-			+"\tDisplayed:"+tar.isDisplayed()
-			+"\tSize:"+list.size());
+			System.out.println("[" + xpath + "]:\nEnabled:" + tar.isEnabled() + "\tSelected:" + tar.isSelected()
+					+ "\tDisplayed:" + tar.isDisplayed() + "\tSize:" + list.size());
 		} else {
-			System.out.println("Could not find any element based on XPath:["+xpath+"]");
+			System.out.println("Could not find any element based on XPath:[" + xpath + "]");
 		}
 	}
-	
+
 	/*
 	 * *******************************************************************
-	 * Function Name: xHighlight Author : CBRE SF Automation Purpose :
-	 * Highlight the element Parameters: driver, webelement, color = e.g yellow,
-	 * green etc
+	 * Function Name: xHighlight Author : CBRE SF Automation Purpose : Highlight
+	 * the element Parameters: driver, webelement, color = e.g yellow, green etc
 	 * ******************************************************************
 	 */
 
-	/*public boolean validatePDFViewer(){
-		boolean isPdfPresent = false;
-		String pdfPageSource = driver.getPageSource();
-		switch(envParameters.getBrowser()){
-		case INTERNET_EXPLORER:
-			if(pdfPageSource.equals("")) isPdfPresent=true;
-			break;
-		case FIREFOX:
-			if(pdfPageSource.contains("pdfViewer")) isPdfPresent=true;
-			break;
-		case CHROME:
-			if(pdfPageSource.contains("application/pdf")) isPdfPresent=true;
-			break;
-		default:
-			break;
-		}
+	/*
+	 * public boolean validatePDFViewer(){ boolean isPdfPresent = false; String
+	 * pdfPageSource = driver.getPageSource();
+	 * switch(envParameters.getBrowser()){ case INTERNET_EXPLORER:
+	 * if(pdfPageSource.equals("")) isPdfPresent=true; break; case FIREFOX:
+	 * if(pdfPageSource.contains("pdfViewer")) isPdfPresent=true; break; case
+	 * CHROME: if(pdfPageSource.contains("application/pdf")) isPdfPresent=true;
+	 * break; default: break; }
+	 * 
+	 * return isPdfPresent; }
+	 */
 
-		return isPdfPresent;
-	}*/
-	
 	/*
 	 * *******************************************************************
-	 * Function Name: xHighlight Author : CBRE SF Automation Purpose :
-	 * Highlight the element Parameters: driver, webelement, color = e.g yellow,
-	 * green etc
+	 * Function Name: xHighlight Author : CBRE SF Automation Purpose : Highlight
+	 * the element Parameters: driver, webelement, color = e.g yellow, green etc
 	 * ******************************************************************
 	 */
-	
+
 	public static boolean validateLinks(List<WebElement> list, String webElementText) {
-		for(WebElement element: list) {
-			if(element.getText().equals(webElementText)) {
+		for (WebElement element : list) {
+			if (element.getText().equals(webElementText)) {
 				return true;
 			}
 		}
 		return false;
 	}
-	
+
 	public static void xclickOnFirstElementfromList(List<WebElement> list) {
-		for(WebElement elememt: list) {
+		for (WebElement elememt : list) {
 			elememt.click();
 			return;
-		}		
+		}
 	}
-	
+
 	/*
 	 * *******************************************************************
-	 * Function Name: xHighlight Author : CBRE SF Automation Purpose :
-	 * Highlight the element Parameters: driver, webelement, color = e.g yellow,
-	 * green etc
+	 * Function Name: xHighlight Author : CBRE SF Automation Purpose : Highlight
+	 * the element Parameters: driver, webelement, color = e.g yellow, green etc
 	 * ******************************************************************
 	 */
-	
+
 	public static String xclickRandomElement(List<WebElement> list) {
 		String text = null;
 		boolean isStatus = false;
 		Random random = new Random();
-		while(!isStatus) {			
-			for(WebElement elememt: list) {
+		while (!isStatus) {
+			for (WebElement elememt : list) {
 				int randomValue = random.nextInt(list.size());
 				text = elememt.getText();
 				list.get(randomValue).click();
 				isStatus = true;
 				break;
 			}
-		}	
-		return text;		
+		}
+		return text;
 	}
-		
-	
+
 	/*
 	 * *******************************************************************
-	 * Function Name: xHighlight Author : CBRE SF Automation Purpose :
-	 * Highlight the element Parameters: driver, webelement, color = e.g yellow,
-	 * green etc
+	 * Function Name: xHighlight Author : CBRE SF Automation Purpose : Highlight
+	 * the element Parameters: driver, webelement, color = e.g yellow, green etc
 	 * ******************************************************************
 	 */
-	
+
 	public static String xclickgetTextofFirstElementfromList(List<WebElement> list) {
 		String text = null;
 		boolean isStatus = false;
-		while(!isStatus) {
-			for(WebElement elememt: list) {
+		while (!isStatus) {
+			for (WebElement elememt : list) {
 				text = elememt.getText();
 				elememt.click();
 				isStatus = true;
 				break;
 			}
-		}	
-		return text;		
+		}
+		return text;
 	}
-	
+
 	/*
 	 * *******************************************************************
-	 * Function Name: xSwitc Author : CBRE SF Automation Purpose :
-	 * Highlight the element Parameters: driver, webelement, color = e.g yellow,
-	 * green etc
+	 * Function Name: xSwitc Author : CBRE SF Automation Purpose : Highlight the
+	 * element Parameters: driver, webelement, color = e.g yellow, green etc
 	 * ******************************************************************
 	 */
-	
+
 	public static void xSwitchToWindow(CraftDriver driver, String windowName) {
-        WebDriver popup = driver.getWebDriver();
+		WebDriver popup = driver.getWebDriver();
 		Set<String> windowIterator = driver.getWindowHandles();
-        System.err.println("No of windows :  " + windowIterator.size());
-        for (String s : windowIterator) {
-            String windowHandle = s;
-            popup = driver.switchTo().window(windowHandle);
-            System.out.println("Window Title : " + popup.getTitle());
-            System.out.println("Window Url : " + popup.getCurrentUrl());
-            if (popup.getTitle().contains(windowName)) {
+		System.err.println("No of windows :  " + windowIterator.size());
+		for (String s : windowIterator) {
+			String windowHandle = s;
+			popup = driver.switchTo().window(windowHandle);
+			System.out.println("Window Title : " + popup.getTitle());
+			System.out.println("Window Url : " + popup.getCurrentUrl());
+			if (popup.getTitle().contains(windowName)) {
 				System.out.println("Selected Window Title : " + popup.getTitle());
-				//driver = popup;
-               break;
+				// driver = popup;
+				break;
 
-           }
-        }
-    }
-	
-	public static String getText(CraftDriver driver, WebElement element){
-	    return (String) ((JavascriptExecutor) driver).executeScript(
-	        "return jQuery(arguments[0]).text();", element);
+			}
+		}
+	}
+
+	public static String getText(CraftDriver driver, WebElement element) {
+		return (String) ((JavascriptExecutor) driver).executeScript("return jQuery(arguments[0]).text();", element);
+	}
+
+	/*
+	 * *******************************************************************
+	 * Function Name: xSwitchFrames Author : CBRE SF Automation Purpose :
+	 * 
+	 * ******************************************************************
+	 */
+	public static void xSwitchtoFrame(CraftDriver driver, WebElement webElement) {
+		List<WebElement> iframeList = driver.findElements(By.tagName("iframe"));
+		driver.switchTo().defaultContent();
+		for (WebElement element : iframeList) {
+			driver.switchTo().frame(element);
+			try {
+				boolean isTextValuePresent = Utility_Functions.xWaitForElementPresent(driver, webElement, 3);
+				if (isTextValuePresent) {
+					break;
+				} else {
+					driver.switchTo().defaultContent();
+				}
+			} catch (Exception ex) {
+				driver.switchTo().defaultContent();
+			}
+
+		}
 	}
 	
 	/*
 	 * *******************************************************************
-	 * Function Name: xCreateAccount Author : CBRE SF Automation Purpose :
-
+	 * 
 	 * ******************************************************************
 	 */
-
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
