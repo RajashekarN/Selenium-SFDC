@@ -118,4 +118,15 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 		sfAccountsPage.verifyNewActivityPageLayout();
 
 	}
+	/**
+	 * Validating the New Activity Page Layout
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyFollowUpCustomActivity() throws InterruptedException{
+
+		sfAccountsPage.verifyFollowUpCustomActivity();
+
+	} 
 }

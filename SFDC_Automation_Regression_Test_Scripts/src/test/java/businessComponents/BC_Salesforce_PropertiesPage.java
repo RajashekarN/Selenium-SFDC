@@ -60,6 +60,17 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	public void bc_verifyCreationOfActivity(){
 		sfPropertiesPage.verifyCreationOfActivity();
 	}
+	
+	/**
+	 * Validating the Creation of New Activity Page Layout
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+	
+	public void bc_verifyPropertiesNewActivityPageLayout(){
+		sfPropertiesPage.verifyPropertiesNewActivityPageLayout();
+	}
 
 
 }
