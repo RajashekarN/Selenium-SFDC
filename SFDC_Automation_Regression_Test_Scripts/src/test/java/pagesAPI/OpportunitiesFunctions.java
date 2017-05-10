@@ -136,7 +136,7 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 					if(fieldName.equals("StageName")) {
 						soUpdate.setField(fieldName,"19-Closed");
 					} else if(fieldName.equals("Total_Size__c")) {
-						soUpdate.setField(fieldName,"2500");
+						soUpdate.setField(fieldName,"2900");
 					} else if(fieldName.equals("CBRE_Preferred_Property_Type_c__c")) {
 						soUpdate.setField(fieldName,"Office");
 					} else if(fieldName.equals("Preferred_Property_Sub_Type__c")) {
@@ -157,6 +157,8 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 						soUpdate.setField(fieldName,"Project Management");
 					} else if(fieldName.equals("EMEA_Success_Probability__c")) {
 						soUpdate.setField(fieldName,"100%");
+					} else if(fieldName.equals("Unit_of_Measure__c")) {
+						soUpdate.setField(fieldName,"Hectares");
 					} else if(fieldName.equals("CloseDate")) {
 						Calendar calendar = Calendar.getInstance();
 						calendar.add(Calendar.DAY_OF_MONTH, 365);

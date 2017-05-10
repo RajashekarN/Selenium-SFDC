@@ -252,6 +252,15 @@ public class SearchTextSOQL extends ReusableLibrary {
 						} else if(fieldname.equals("Lease_Rate_Rent_Basis__c")) {
 							recordID = (String)record.getField("Lease_Rate_Rent_Basis__c");
 							report.updateTestLog("Verify Fetch Record", "Record has been fetched successfully:::" + recordID, Status.PASS);
+						} else if(fieldname.equals("Service__c")) {
+							recordID = (String)record.getField("Service__c");
+							report.updateTestLog("Verify Fetch Record", "Record has been fetched successfully:::" + recordID, Status.PASS);
+						} else if(fieldname.equals("CloseDate")) {
+							recordID = (String)record.getField("CloseDate");
+							report.updateTestLog("Verify Fetch Record", "Record has been fetched successfully:::" + recordID, Status.PASS);
+						} else if(fieldname.equals("Unit_of_Measure__c")) {
+							recordID = (String)record.getField("Unit_of_Measure__c");
+							report.updateTestLog("Verify Fetch Record", "Record has been fetched successfully:::" + recordID, Status.PASS);
 						} else {
 							recordID = (String)record.getField("Id");
 							report.updateTestLog("Verify Fetch Record", "Record has been fetched successfully:::" + recordID, Status.PASS);

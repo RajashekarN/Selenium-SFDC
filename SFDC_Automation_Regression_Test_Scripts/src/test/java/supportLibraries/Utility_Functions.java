@@ -1191,8 +1191,14 @@ public class Utility_Functions extends ReusableLibrary {
 	
 	/*
 	 * *******************************************************************
-	 * 
+	 * Function Name: Random Function Author : CBRE SF Automation Purpose :
 	 * ******************************************************************
 	 */
+	
+	public static int xRandomFunction() {
+		Random random = new Random();
+		int value = random.nextInt();
+		return value;
+	}
 
 }
