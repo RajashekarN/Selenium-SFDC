@@ -728,7 +728,7 @@ public class AccountsPage extends ReusableLibrary {
 	}
 
 	public void verifyNewNotesAndFilesAttachment() {
-		Utility_Functions.xWaitForElementValuePresent(driver, menu_Accounts, 3);
+		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
 		Utility_Functions.xClick(driver, menu_Accounts, true);
 		Utility_Functions.timeWait(3);
 		List<WebElement> accountNamesList = driver.findElements(
@@ -736,7 +736,7 @@ public class AccountsPage extends ReusableLibrary {
 
 		Utility_Functions.xclickOnFirstElementfromList(accountNamesList);
 		Utility_Functions.timeWait(3);
-		Utility_Functions.xWaitForElementValuePresent(driver, related_Accounts, 3);
+		Utility_Functions.xWaitForElementPresent(driver, related_Accounts, 3);
 		Utility_Functions.xClick(driver, related_Accounts, true);
 
 		List<WebElement> relatedPageList = driver.findElements(By.xpath("//*[@id='header']/a/span[1]"));
@@ -770,7 +770,7 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xScrollWindowTop(driver);
 		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementValuePresent(driver, newNotes, 3);
+		Utility_Functions.xWaitForElementPresent(driver, newNotes, 3);
 		Utility_Functions.xClick(driver, newNotes, true);
 
 		if (!noteTitle.getText().isEmpty()) {
@@ -829,13 +829,13 @@ public class AccountsPage extends ReusableLibrary {
 		action.click();
 		action.sendKeys("Testing");
 		action.build().perform();
-		Utility_Functions.xWaitForElementValuePresent(driver, doneButton, 3);
+		Utility_Functions.xWaitForElementPresent(driver, doneButton, 3);
 		Utility_Functions.xClick(driver, doneButton, true);
-		Utility_Functions.xWaitForElementValuePresent(driver, addFile, 3);
+		Utility_Functions.xWaitForElementPresent(driver, addFile, 3);
 		Utility_Functions.xClick(driver, addFile, true);
-		Utility_Functions.xWaitForElementValuePresent(driver, addFileAttachment, 3);
+		Utility_Functions.xWaitForElementPresent(driver, addFileAttachment, 3);
 		Utility_Functions.xClick(driver, addFileAttachment, true);
-		Utility_Functions.xWaitForElementValuePresent(driver, add, 3);
+		Utility_Functions.xWaitForElementPresent(driver, add, 3);
 		Utility_Functions.xClick(driver, add, true);
 
 		System.out.println("File is Added");
@@ -851,13 +851,13 @@ public class AccountsPage extends ReusableLibrary {
 	 *
 	 */
 	public void verifyCreateActivityAccount() {
-		Utility_Functions.xWaitForElementValuePresent(driver, menu_Accounts, 3);
+		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
 		Utility_Functions.xClick(driver, menu_Accounts, true);
 		report.updateTestLog("Verify Create Activity Account","Accounts is Displayed ",  Status.PASS);
-		Utility_Functions.xWaitForElementValuePresent(driver, recentlyViewed, 3);
+		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
 		Utility_Functions.xClick(driver, recentlyViewed, true);
 		report.updateTestLog("Verify Create Activity Account","Recently viewed Accounts are Displayed ",  Status.PASS);
-		Utility_Functions.xWaitForElementValuePresent(driver, allAccounts, 3);
+		Utility_Functions.xWaitForElementPresent(driver, allAccounts, 3);
 		Utility_Functions.xClick(driver, allAccounts, true);
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify Create Activity Account","All accounts are displayed successfully:::",  Status.PASS);
@@ -867,14 +867,14 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xclickOnFirstElementfromList(accountNamesList);
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify Create Activity Account ","The Account is Displayed ",  Status.PASS);
-		Utility_Functions.xWaitForElementValuePresent(driver,related_Accounts , 3);
+		Utility_Functions.xWaitForElementPresent(driver,related_Accounts , 3);
 		Utility_Functions.xClick(driver, related_Accounts, true);
 		report.updateTestLog("Verify Create Activity Account ","The related page is Displayed ",  Status.PASS);
 		Utility_Functions.xScrollWindow(driver);
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xScrollWindowTop(driver);
 		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementValuePresent(driver, newActivity, 3);
+		Utility_Functions.xWaitForElementPresent(driver, newActivity, 3);
 		Utility_Functions.xClick(driver, newActivity, true);
 		report.updateTestLog("Verify Create Activity Account ","The New Activity in the related page is Displayed ",  Status.PASS);
 		/*int size = driver.findElements(By.tagName("iframe")).size();
@@ -888,8 +888,7 @@ public class AccountsPage extends ReusableLibrary {
 
 		driver.switchTo().frame(5);
 		
-		/*System.out.println("Frame Identified");
-		Utility_Functions.timeWait(3);*/
+		
 		List<WebElement> newActivityPageLayoutSections = driver
 				.findElements(By.xpath("//div[@class='slds-grid']"));
 		int countHeader =0;
@@ -1027,13 +1026,13 @@ public class AccountsPage extends ReusableLibrary {
 	
 	public void verifyFollowUpCustomActivity(){
 
-		    Utility_Functions.xWaitForElementValuePresent(driver, menu_Accounts, 3);
+		    Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
 			Utility_Functions.xClick(driver, menu_Accounts, true);
 			report.updateTestLog("Verify Create Activity Account","Accounts is Displayed ",  Status.PASS);
-			Utility_Functions.xWaitForElementValuePresent(driver, recentlyViewed, 3);
+			Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
 			Utility_Functions.xClick(driver, recentlyViewed, true);
 			report.updateTestLog("Verify Create Activity Account","Recently viewed Accounts are Displayed ",  Status.PASS);
-			Utility_Functions.xWaitForElementValuePresent(driver, allAccounts, 3);
+			Utility_Functions.xWaitForElementPresent(driver, allAccounts, 3);
 			Utility_Functions.xClick(driver, allAccounts, true);
 			Utility_Functions.timeWait(3);
 			report.updateTestLog("Verify Create Activity Account","All accounts are displayed successfully:::",  Status.PASS);
@@ -1050,39 +1049,11 @@ public class AccountsPage extends ReusableLibrary {
 			Utility_Functions.timeWait(1);
 			Utility_Functions.xScrollWindowTop(driver);
 			Utility_Functions.timeWait(2);
-			Utility_Functions.xWaitForElementValuePresent(driver, newActivity, 3);
+			Utility_Functions.xWaitForElementPresent(driver, newActivity, 3);
 			Utility_Functions.xClick(driver, newActivity, true);
 			report.updateTestLog("Verify Create Activity Account ","The New Activity in the related page is Displayed ",  Status.PASS);
-		
-			//int size = driver.findElements(By.tagName("iframe")).size();
-			//System.out.println(size);
-			//driver.switchTo().defaultContent();
-
 			Utility_Functions.xSwitchtoFrame(driver, subject);
 			Utility_Functions.xWaitForElementPresent(driver, subject, 5);
-			
-			/*List<WebElement> iframeList = driver.findElements(By.tagName("iframe"));
-			
-			for (WebElement element : iframeList) {
-				driver.switchTo().frame(element);
-				try{
-					boolean isTextValuePresent  = Utility_Functions.xWaitForElementPresent(driver, subject, 3);
-					if(isTextValuePresent){
-						break;
-					}else{
-						driver.switchTo().defaultContent();
-					}
-				}catch(Exception ex){
-					driver.switchTo().defaultContent();
-				}
-				
-			}*/
-			
-			
-			//Utility_Functions.timeWait(3);
-			/*System.out.println("Frame Identified");
-			Utility_Functions.timeWait(3);*/
-			//Utility_Functions.xWaitForElementValuePresent(driver, subject, 3);
 			Utility_Functions.xClick(driver, subject, true);
 			Utility_Functions.timeWait(3);
 			Utility_Functions.xSendKeys(driver, subject, "test1");
@@ -1129,69 +1100,25 @@ public class AccountsPage extends ReusableLibrary {
 			
 		
 			report.updateTestLog("Verify Create Activity Account ","The second Activity is saved ",  Status.PASS);		
-			/*driver.navigate().refresh();
-			Utility_Functions.timeWait(1);
-			driver.switchTo().defaultContent();
-			driver.navigate().refresh();*/
-			/*Utility_Functions.xWaitForElementVisible(driver, related_Accounts, 3);
-			Utility_Functions.xClick(driver, related_Accounts, true);
-			Utility_Functions.timeWait(4);
-			report.updateTestLog("Verify Create Activity Account ","The related Accounts is Displayed ",  Status.PASS);
-			Utility_Functions.xScrollWindow(driver);
-			Utility_Functions.timeWait(1);
-			Utility_Functions.xScrollWindowTop(driver);
-			Utility_Functions.timeWait(2);
-			Utility_Functions.xClick(driver, relatedActivities, true);
-			Utility_Functions.timeWait(4);
-			report.updateTestLog("Verify Create Activity Account ","The related activities is Displayed ",  Status.PASS);
-			
-
-			List<WebElement> activitiesList = driver.findElements(
-					By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'] "));
-			for (int i = 0; i < activitiesList.size(); i++) {
-				System.out.println("The activities are :" + i + activitiesList.get(i).getText());
-
-			}*/
-			//Utility_Functions.xclickOnFirstElementfromList(activitiesList);
+		
 			Utility_Functions.timeWait(4);
 			driver.navigate().refresh();
 			Utility_Functions.timeWait(1);
 			driver.switchTo().defaultContent();
 			driver.navigate().refresh();
-			Utility_Functions.xWaitForElementValuePresent(driver, selectCreateFollowUpCustomActivity, 3);
+			Utility_Functions.xWaitForElementPresent(driver, selectCreateFollowUpCustomActivity, 3);
 			Utility_Functions.xClick(driver,  selectCreateFollowUpCustomActivity, true);
 			Utility_Functions.timeWait(4);
 			report.updateTestLog("Verify Create Activity Account ","The Follow up Activity Page is Displayed",  Status.PASS);
-			Utility_Functions.xWaitForElementValuePresent(driver, createCustomActivity, 5);
+			Utility_Functions.xWaitForElementPresent(driver, createCustomActivity, 5);
 			//Utility_Functions.xClick(driver, createCustomActivity, true);
 			Actions action  = new Actions(driver.getWebDriver());
 			action.moveToElement(createCustomActivity);
 			action.click();
-			action.build().perform();
-			
-		
-		//	driver.switchTo().frame(2);
-			Utility_Functions.timeWait(3);
-             List<WebElement> iframeList1 = driver.findElements(By.tagName("iframe"));
-			
-			for (WebElement element : iframeList1) {
-				driver.switchTo().frame(element);
-				try{
-					boolean isTextValuePresent  = Utility_Functions.xWaitForElementPresent(driver, subject, 3);
-					if(isTextValuePresent){
-						break;
-					}else{
-						driver.switchTo().defaultContent();
-					}
-				}catch(Exception ex){
-					driver.switchTo().defaultContent();
-				}
-				
-			}
-			
+			action.build().perform();	
 			
 			Utility_Functions.timeWait(3);
-	
+			Utility_Functions.xSwitchtoFrame(driver, subject);
 			Utility_Functions.xClick(driver, subject, true);
 			Utility_Functions.timeWait(3);
 			Utility_Functions.xSendKeys(driver, subject, "test3");
@@ -1206,10 +1133,9 @@ public class AccountsPage extends ReusableLibrary {
 			driver.switchTo().defaultContent();
 			driver.navigate().refresh();
 			Utility_Functions.timeWait(3);
-			Utility_Functions.xWaitForElementValuePresent(driver,menu_Accounts, 3);
+			Utility_Functions.xWaitForElementPresent(driver,menu_Accounts, 3);
 			Utility_Functions.xClick(driver, menu_Accounts, true);
-			//Utility_Functions.xClick(driver, recentlyViewed, true);
-			//Utility_Functions.timeWait(3);
+			
 			List<WebElement> recentlyViewedpropertiesList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
 
 			Utility_Functions.xclickOnFirstElementfromList(recentlyViewedpropertiesList);
@@ -1221,11 +1147,11 @@ public class AccountsPage extends ReusableLibrary {
 			Utility_Functions.xScrollWindowTop(driver);
 			Utility_Functions.timeWait(2);
 
-			Utility_Functions.xWaitForElementValuePresent(driver, relatedActivities, 5);
+			Utility_Functions.xWaitForElementPresent(driver, relatedActivities, 5);
 			Utility_Functions.xClick(driver, relatedActivities, true);
 
 			List<WebElement> relatedActivitiesList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'] "));
-	
+			
 			report.updateTestLog("Verify Create Activity Account","The New Activity for the Accounts is created",Status.PASS);
 
 		}
@@ -1240,10 +1166,10 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, menu_Accounts, true);
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify New Activity Page Layout ","Accounts is Displayed ",  Status.PASS);
-		Utility_Functions.xWaitForElementValuePresent(driver, recentlyViewed, 3);
+		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
 		Utility_Functions.xClick(driver, recentlyViewed, true);
 		report.updateTestLog("Verify New Activity Page Layout ","Recently viewed Accounts are Displayed ",  Status.PASS);
-		Utility_Functions.xWaitForElementValuePresent(driver, allAccounts, 3);
+		Utility_Functions.xWaitForElementPresent(driver, allAccounts, 3);
 		Utility_Functions.xClick(driver, allAccounts, true);
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify New Activity Page Layout ","All Accounts are Displayed ",  Status.PASS);
@@ -1260,7 +1186,7 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xScrollWindowTop(driver);
 		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementValuePresent(driver, newActivity, 3);
+		Utility_Functions.xWaitForElementPresent(driver, newActivity, 3);
 		Utility_Functions.xClick(driver, newActivity, true);
 		report.updateTestLog("Verify New Activity Page Layout ","The New Activity in the related page is Displayed ",  Status.PASS);
 		/*int size = driver.findElements(By.tagName("iframe")).size();

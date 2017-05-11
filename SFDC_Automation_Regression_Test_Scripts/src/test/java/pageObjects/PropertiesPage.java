@@ -105,7 +105,7 @@ public class PropertiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//a[@class='tabHeader']//span[text()='Related']")
 	WebElement related;
 
-	@FindBy(xpath="//div[@class='slds-context-bar oneGlobalNav']//span[text()='Properties']")
+	@FindBy(xpath="//div[@class='bBottom']//span[text()='Properties']")
 	WebElement menu_Properties;
 	
 	@FindBy(xpath="//article[contains(@class,'Activities')]//div[text()='New Activity']")
@@ -432,13 +432,13 @@ public class PropertiesPage extends ReusableLibrary {
 	 */	
 	public void verifyCreationOfActivity(){
 		
-		Utility_Functions.xWaitForElementValuePresent(driver,menu_Properties, 3);
+		Utility_Functions.xWaitForElementPresent(driver,menu_Properties, 3);
 		Utility_Functions.xClick(driver, menu_Properties, true);
 		report.updateTestLog("Verify Create Activity Properties ","Properties is Displayed ",  Status.PASS);
-		Utility_Functions.xWaitForElementValuePresent(driver, recentlyViewed, 3);
+		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
 		Utility_Functions.xClick(driver, recentlyViewed, true);
 		report.updateTestLog("Verify Create Activity Properties ","Recently viewed Properties are Displayed ",  Status.PASS);
-		Utility_Functions.xWaitForElementValuePresent(driver, allProperties, 3);
+		Utility_Functions.xWaitForElementPresent(driver, allProperties, 3);
 		Utility_Functions.xClick(driver, allProperties, true);
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify Create Activity Properties ","All Properties are Displayed ",  Status.PASS);
@@ -448,14 +448,14 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.xclickOnFirstElementfromList(propertiesList);	
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify Create Activity Properties ","The property is Displayed ",  Status.PASS);
-		Utility_Functions.xWaitForElementValuePresent(driver, related, 3);
+		Utility_Functions.xWaitForElementPresent(driver, related, 3);
 		Utility_Functions.xClick(driver, related, true);
 		report.updateTestLog("Verify Create Activity Properties ","The related page is Displayed ",  Status.PASS);
 		Utility_Functions.xScrollWindow(driver);
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xScrollWindowTop(driver);
 		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementValuePresent(driver, newActivity, 3);
+		Utility_Functions.xWaitForElementPresent(driver, newActivity, 3);
 		Utility_Functions.xClick(driver, newActivity, true);
 		report.updateTestLog("Verify Create Activity Properties ","The New Activity in the related page is Displayed ",  Status.PASS);
 		/*int size = driver.findElements(By.tagName("iframe")).size();
@@ -513,26 +513,7 @@ public class PropertiesPage extends ReusableLibrary {
 		driver.navigate().refresh();
 		
 		
-		/*Utility_Functions.timeWait(3);
-		report.updateTestLog("Verify Create Activity Properties ","The second Activity is saved ",  Status.PASS);	
-		driver.navigate().refresh();
-		Utility_Functions.timeWait(1);
-		driver.switchTo().defaultContent();
-		driver.navigate().refresh();
-		Utility_Functions.xWaitForElementVisible(driver, related, 3);
-		Utility_Functions.xClick(driver, related, true);
-		Utility_Functions.timeWait(4);
-		Utility_Functions.xScrollWindow(driver);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xScrollWindowTop(driver);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xClick(driver, relatedActivities, true);
-		Utility_Functions.timeWait(4);
-		List<WebElement> activitiesList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'] "));
-		/*for(int i=0;i<activitiesList.size();i++){
-			System.out.println("The activities are :" +i+activitiesList.get(i).getText());
-		}*/
-		//Utility_Functions.xclickOnFirstElementfromList(activitiesList);
+		
 		Utility_Functions.timeWait(4);
 		driver.navigate().refresh();
 		Utility_Functions.timeWait(1);
@@ -542,29 +523,15 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver,  selectCreateFollowUpCustomActivity, true);
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify Create Activity Properties","The Follow up Activity Page is Displayed",  Status.PASS);
-		Utility_Functions.xWaitForElementValuePresent(driver, createCustomActivity, 5);
-		//Utility_Functions.xClick(driver, createCustomActivity, true);
+		Utility_Functions.xWaitForElementPresent(driver, createCustomActivity, 5);
+
 		Actions action  = new Actions(driver.getWebDriver());
 		action.moveToElement(createCustomActivity);
 		action.click();
 		action.build().perform();
 		Utility_Functions.timeWait(3);
-		List<WebElement> iframeList1 = driver.findElements(By.tagName("iframe"));
 		
-		for (WebElement element : iframeList1) {
-			driver.switchTo().frame(element);
-			try{
-				boolean isTextValuePresent  = Utility_Functions.xWaitForElementPresent(driver, subject, 3);
-				if(isTextValuePresent){
-					break;
-				}else{
-					driver.switchTo().defaultContent();
-				}
-			}catch(Exception ex){
-				driver.switchTo().defaultContent();
-			}
-			
-		}
+		Utility_Functions.xSwitchtoFrame(driver, subject );
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xClick(driver, subject, true);
 		Utility_Functions.timeWait(3);
@@ -580,7 +547,7 @@ public class PropertiesPage extends ReusableLibrary {
 		driver.switchTo().defaultContent();
 		driver.navigate().refresh();
 		Utility_Functions.timeWait(3);
-		Utility_Functions.xWaitForElementValuePresent(driver,menu_Properties, 3);
+		Utility_Functions.xWaitForElementPresent(driver,menu_Properties, 3);
 		Utility_Functions.xClick(driver, menu_Properties, true);
 		//Utility_Functions.xClick(driver, recentlyViewed, true);
 		//Utility_Functions.timeWait(3);
@@ -595,13 +562,11 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.xScrollWindowTop(driver);
 		Utility_Functions.timeWait(2);
 		
-		Utility_Functions.xWaitForElementValuePresent(driver, relatedActivities, 5);
+		Utility_Functions.xWaitForElementPresent(driver, relatedActivities, 5);
 		Utility_Functions.xClick(driver, relatedActivities, true);
 		
 		List<WebElement> relatedActivitiesList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'] "));
-		/*for(int i=0;i<relatedActivitiesList.size();i++){
-			System.out.println("The activities are :" +i+relatedActivitiesList.get(i).getText());	
-		}*/
+		
 		report.updateTestLog("Verify Create Activity Properties","The New Activity for Contacts is created ",Status.PASS);
 	}
 
@@ -614,13 +579,13 @@ public class PropertiesPage extends ReusableLibrary {
 	 */
 	public void verifyPropertiesNewActivityPageLayout() {
 
-		Utility_Functions.xWaitForElementValuePresent(driver, menu_Properties, 3);
+		Utility_Functions.xWaitForElementPresent(driver, menu_Properties, 3);
 		Utility_Functions.xClick(driver, menu_Properties, true);
 		report.updateTestLog("Verify New Activity Page Layout ","Properties is Displayed ",  Status.PASS);
-		Utility_Functions.xWaitForElementValuePresent(driver, recentlyViewed, 3);
+		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
 		Utility_Functions.xClick(driver, recentlyViewed, true);
 		report.updateTestLog("Verify New Activity Page Layout ","Recently viewed Accounts are Displayed ",  Status.PASS);
-		Utility_Functions.xWaitForElementValuePresent(driver, allProperties, 3);
+		Utility_Functions.xWaitForElementPresent(driver, allProperties, 3);
 		Utility_Functions.xClick(driver, allProperties, true);
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify New Activity Page Layout ","All Properties are Displayed ",  Status.PASS);
@@ -637,7 +602,7 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xScrollWindowTop(driver);
 		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementValuePresent(driver, newActivity, 3);
+		Utility_Functions.xWaitForElementPresent(driver, newActivity, 3);
 		Utility_Functions.xClick(driver, newActivity, true);
 		report.updateTestLog("Verify New Activity Page Layout ","The New Activity in the related page is Displayed ",  Status.PASS);
 		/*int size = driver.findElements(By.tagName("iframe")).size();

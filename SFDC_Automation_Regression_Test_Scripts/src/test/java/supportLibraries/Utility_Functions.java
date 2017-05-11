@@ -385,13 +385,6 @@ public class Utility_Functions extends ReusableLibrary {
 		return true;
 	}
 
-	// wait for the element value is present
-	public static boolean xWaitForElementValuePresent(CraftDriver driver, WebElement el, int timeWait) {
-		WebDriverWait wait = new WebDriverWait(driver.getWebDriver(), timeWait * 1000);
-		wait.until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElementValue(el, null)));
-		return true;
-	}
-
 	// ******************************************************************
 	// wait for element present
 	public static boolean xWaitForElementPresent(CraftDriver driver, By locator, int timeWait) {

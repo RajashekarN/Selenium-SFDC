@@ -334,11 +334,11 @@ public class ContactsPage extends ReusableLibrary {
 
 	public void verifyNewNotesAndFileAttachment() {
 
-		Utility_Functions.xWaitForElementValuePresent(driver, menu_Contacts, 3);
+		Utility_Functions.xWaitForElementPresent(driver, menu_Contacts, 3);
 		Utility_Functions.xClick(driver, menu_Contacts, true);
-		Utility_Functions.xWaitForElementValuePresent(driver, recentlyViewed, 3);
+		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
 		Utility_Functions.xClick(driver, recentlyViewed, true);
-		Utility_Functions.xWaitForElementValuePresent(driver, allContacts, 3);
+		Utility_Functions.xWaitForElementPresent(driver, allContacts, 3);
 		Utility_Functions.xClick(driver, allContacts, true);
 		Utility_Functions.timeWait(3);
 
@@ -347,7 +347,7 @@ public class ContactsPage extends ReusableLibrary {
 
 		Utility_Functions.xclickOnFirstElementfromList(contactNamesList);
 		Utility_Functions.timeWait(3);
-		Utility_Functions.xWaitForElementValuePresent(driver, related, 3);
+		Utility_Functions.xWaitForElementPresent(driver, related, 3);
 		Utility_Functions.xClick(driver, related, true);
 
 		List<WebElement> relatedPageList = driver.findElements(By.xpath("//*[@id='header']/a/span[1]"));
@@ -381,7 +381,7 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xScrollWindowTop(driver);
 		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementValuePresent(driver, newNotes, 3);
+		Utility_Functions.xWaitForElementPresent(driver, newNotes, 3);
 		Utility_Functions.xClick(driver, newNotes, true);
 
 		if (!noteTitle.getText().isEmpty()) {
@@ -440,13 +440,13 @@ public class ContactsPage extends ReusableLibrary {
 		action.click();
 		action.sendKeys("Testing");
 		action.build().perform();
-		Utility_Functions.xWaitForElementValuePresent(driver, doneButton, 3);
+		Utility_Functions.xWaitForElementPresent(driver, doneButton, 3);
 		Utility_Functions.xClick(driver, doneButton, true);
-		Utility_Functions.xWaitForElementValuePresent(driver, addFile, 3);
+		Utility_Functions.xWaitForElementPresent(driver, addFile, 3);
 		Utility_Functions.xClick(driver, addFile, true);
-		Utility_Functions.xWaitForElementValuePresent(driver, addFileAttachment, 3);
+		Utility_Functions.xWaitForElementPresent(driver, addFileAttachment, 3);
 		Utility_Functions.xClick(driver, addFileAttachment, true);
-		Utility_Functions.xWaitForElementValuePresent(driver, add, 3);
+		Utility_Functions.xWaitForElementPresent(driver, add, 3);
 		Utility_Functions.xClick(driver, add, true);
 	}
 	/**
@@ -457,11 +457,11 @@ public class ContactsPage extends ReusableLibrary {
 	 */
 	public void verifyClientContactsNewNotesAndFileAttachment() {
 
-		Utility_Functions.xWaitForElementValuePresent(driver, menu_Contacts, 3);
+		Utility_Functions.xWaitForElementPresent(driver, menu_Contacts, 3);
 		Utility_Functions.xClick(driver, menu_Contacts, true);
-		Utility_Functions.xWaitForElementValuePresent(driver, recentlyViewed, 3);
+		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
 		Utility_Functions.xClick(driver, recentlyViewed, true);
-		Utility_Functions.xWaitForElementValuePresent(driver, clientContacts, 3);
+		Utility_Functions.xWaitForElementPresent(driver, clientContacts, 3);
 		Utility_Functions.xClick(driver, clientContacts, true);
 		Utility_Functions.timeWait(3);
 
@@ -470,7 +470,7 @@ public class ContactsPage extends ReusableLibrary {
 
 		Utility_Functions.xclickOnFirstElementfromList(contactNamesList);
 		Utility_Functions.timeWait(3);
-		Utility_Functions.xWaitForElementValuePresent(driver, related, 3);
+		Utility_Functions.xWaitForElementPresent(driver, related, 3);
 		Utility_Functions.xClick(driver, related, true);
 
 		List<WebElement> relatedPageList = driver.findElements(By.xpath("//*[@id='header']/a/span[1]"));
@@ -504,7 +504,7 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xScrollWindowTop(driver);
 		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementValuePresent(driver, newNotes, 3);
+		Utility_Functions.xWaitForElementPresent(driver, newNotes, 3);
 		Utility_Functions.xClick(driver, newNotes, true);
 
 		if (!noteTitle.getText().isEmpty()) {
@@ -563,13 +563,13 @@ public class ContactsPage extends ReusableLibrary {
 		action.click();
 		action.sendKeys("Testing");
 		action.build().perform();
-		Utility_Functions.xWaitForElementValuePresent(driver, doneButton, 3);
+		Utility_Functions.xWaitForElementPresent(driver, doneButton, 3);
 		Utility_Functions.xClick(driver, doneButton, true);
-		Utility_Functions.xWaitForElementValuePresent(driver, addFile, 3);
+		Utility_Functions.xWaitForElementPresent(driver, addFile, 3);
 		Utility_Functions.xClick(driver, addFile, true);
-		Utility_Functions.xWaitForElementValuePresent(driver, addFileAttachment, 3);
+		Utility_Functions.xWaitForElementPresent(driver, addFileAttachment, 3);
 		Utility_Functions.xClick(driver, addFileAttachment, true);
-		Utility_Functions.xWaitForElementValuePresent(driver, add, 3);
+		Utility_Functions.xWaitForElementPresent(driver, add, 3);
 		Utility_Functions.xClick(driver, add, true);
 	}
 	
@@ -581,13 +581,13 @@ public class ContactsPage extends ReusableLibrary {
 	 */
 	public void verifyCreateActivityContact() {
 
-		Utility_Functions.xWaitForElementValuePresent(driver, menu_Contacts, 3);
+		Utility_Functions.xWaitForElementPresent(driver, menu_Contacts, 3);
 		Utility_Functions.xClick(driver, menu_Contacts, true);
 		report.updateTestLog("Verify Create Activity Contact ","Contacts is Displayed ",  Status.PASS);
-		Utility_Functions.xWaitForElementValuePresent(driver, recentlyViewed, 3);
+		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
 		Utility_Functions.xClick(driver, recentlyViewed, true);
 		report.updateTestLog("Verify Create Activity Contact ","Recently viewed Contacts are Displayed ",  Status.PASS);
-		Utility_Functions.xWaitForElementValuePresent(driver, allContacts, 3);
+		Utility_Functions.xWaitForElementPresent(driver, allContacts, 3);
 		Utility_Functions.xClick(driver, allContacts, true);
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify Create Activity Contact ","All Contacts are Displayed ",  Status.PASS);
@@ -597,14 +597,14 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.xclickOnFirstElementfromList(contactNamesList);
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify Create Activity Contact ","The Contact is Displayed ",  Status.PASS);
-		Utility_Functions.xWaitForElementValuePresent(driver, related, 3);
+		Utility_Functions.xWaitForElementPresent(driver, related, 3);
 		Utility_Functions.xClick(driver, related, true);
 		report.updateTestLog("Verify Create Activity Contact ","The related page is Displayed ",  Status.PASS);
 		Utility_Functions.xScrollWindow(driver);
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xScrollWindowTop(driver);
 		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementValuePresent(driver, newActivity, 3);
+		Utility_Functions.xWaitForElementPresent(driver, newActivity, 3);
 		Utility_Functions.xClick(driver, newActivity, true);
 		report.updateTestLog("Verify Create Activity Contact ","The New Activity in the related page is Displayed ",  Status.PASS);
 		/*int size = driver.findElements(By.tagName("iframe")).size();
@@ -716,30 +716,15 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver,  selectCreateFollowUpCustomActivity, true);
 		Utility_Functions.timeWait(4);
 		report.updateTestLog("Verify Create Activity Contact","The Follow up Activity Page is Displayed",  Status.PASS);
-		Utility_Functions.xWaitForElementValuePresent(driver, createCustomActivity, 5);
+		Utility_Functions.xWaitForElementPresent(driver, createCustomActivity, 5);
 		//Utility_Functions.xClick(driver, createCustomActivity, true);
 		Actions action  = new Actions(driver.getWebDriver());
 		action.moveToElement(createCustomActivity);
 		action.click();
 		action.build().perform();
 		Utility_Functions.timeWait(3);
-		List<WebElement> iframeList1 = driver.findElements(By.tagName("iframe"));
 		
-		for (WebElement element : iframeList1) {
-			driver.switchTo().frame(element);
-			try{
-				boolean isTextValuePresent  = Utility_Functions.xWaitForElementPresent(driver, subject, 3);
-				if(isTextValuePresent){
-					break;
-				}else{
-					driver.switchTo().defaultContent();
-				}
-			}catch(Exception ex){
-				driver.switchTo().defaultContent();
-			}
-			
-		}
-
+		Utility_Functions.xSwitchtoFrame(driver, subject);
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xClick(driver, subject, true);
 		Utility_Functions.timeWait(3);
@@ -755,7 +740,7 @@ public class ContactsPage extends ReusableLibrary {
 		driver.switchTo().defaultContent();
 		driver.navigate().refresh();
 		Utility_Functions.timeWait(3);
-		Utility_Functions.xWaitForElementValuePresent(driver,menu_Contacts, 3);
+		Utility_Functions.xWaitForElementPresent(driver,menu_Contacts, 3);
 		Utility_Functions.xClick(driver, menu_Contacts, true);
 		//Utility_Functions.xClick(driver, recentlyViewed, true);
 		//Utility_Functions.timeWait(3);
@@ -770,7 +755,7 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.xScrollWindowTop(driver);
 		Utility_Functions.timeWait(2);
 
-		Utility_Functions.xWaitForElementValuePresent(driver, relatedActivities, 5);
+		Utility_Functions.xWaitForElementPresent(driver, relatedActivities, 5);
 		Utility_Functions.xClick(driver, relatedActivities, true);
 
 		List<WebElement> relatedActivitiesList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'] "));
@@ -788,13 +773,13 @@ public class ContactsPage extends ReusableLibrary {
 	 */
 	public void verifyContactNewActivityPageLayout() {
 		
-		Utility_Functions.xWaitForElementValuePresent(driver, menu_Contacts, 3);
+		Utility_Functions.xWaitForElementPresent(driver, menu_Contacts, 3);
 		Utility_Functions.xClick(driver, menu_Contacts, true);
 		report.updateTestLog("Verify New Activity Page Layout ","Contacts is Displayed ",  Status.PASS);
-		Utility_Functions.xWaitForElementValuePresent(driver, recentlyViewed, 3);
+		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
 		Utility_Functions.xClick(driver, recentlyViewed, true);
 		report.updateTestLog("Verify New Activity Page Layout ","Recently viewed Accounts are Displayed ",  Status.PASS);
-		Utility_Functions.xWaitForElementValuePresent(driver, allContacts, 3);
+		Utility_Functions.xWaitForElementPresent(driver, allContacts, 3);
 		Utility_Functions.xClick(driver, allContacts, true);
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify New Activity Page Layout ","All Contacts are Displayed ",  Status.PASS);
@@ -811,21 +796,13 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xScrollWindowTop(driver);
 		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementValuePresent(driver, newActivity, 3);
+		Utility_Functions.xWaitForElementPresent(driver, newActivity, 3);
 		Utility_Functions.xClick(driver, newActivity, true);
 		report.updateTestLog("Verify New Activity Page Layout ","The New Activity in the related page is Displayed ",  Status.PASS);
-		/*int size = driver.findElements(By.tagName("iframe")).size();
-		System.out.println(size);
-		Utility_Functions.timeWait(2);
-		List<WebElement> iframeList = driver.findElements(By.tagName("iframe"));
-		System.out.println(iframeList.size());
-		for (WebElement element : iframeList) {
-			System.out.println(element.getAttribute("id"));
-		}*/
+		
 		driver.switchTo().frame(4);
 		Utility_Functions.timeWait(5);
-		/*System.out.println("Frame Identified");
-		Utility_Functions.timeWait(5);*/
+		
 		List<WebElement> newActivityPageLayoutSections = driver
 				.findElements(By.xpath("//div[@class='slds-grid']"));
 		int countHeader =0;
