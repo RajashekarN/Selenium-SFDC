@@ -42,37 +42,37 @@ public class PropertiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//*[@id='bottomButtonRow']/input[1]")
 	WebElement continueButton;	
-	
+
 	@FindBy(xpath = "//div[@class='slds-media']//input[@value='Save Property']")
 	WebElement saveProperty;	
-	
+
 	@FindBy(xpath = "//div[@class='slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2']/div/label[@for='property-name']/parent::div//div/input")
 	WebElement buildingPropertyName;	
-	
+
 	@FindBy(xpath = "//*[contains(@id,'propertyEditForm:countryPicklist']/option")
 	WebElement countrySelect;	
-	
+
 	@FindBy(xpath = "//*[contains(@id,'propertyEditForm:countryPicklist')]")
 	WebElement countryDropdown;	
-	
+
 	@FindBy(xpath = "//*[contains(@id,'propertyEditForm:statePicklist')]")
 	WebElement stateDropdown;	
-	
+
 	@FindBy(xpath = "//*[contains(@id,'propertyEditForm:statePicklist)']/option")
 	WebElement stateSelect;	
-	
+
 	@FindBy(xpath = "//*[contains(@id,'propertyEditForm:City')]")
 	WebElement city;	
-	
+
 	@FindBy(xpath = "//*[contains(@id,'propertyEditForm:Street')]")
 	WebElement street;	
-	
+
 	@FindBy(xpath = "//h1[@class='slds-page-header__title slds-m-right--small slds-truncate slds-align-middle']/span")
 	WebElement createdProperty;
-	
+
 	@FindBy(xpath = "//h2[contains(@class,'slds-m-bottom--large')][text()='Property Information']")
 	WebElement propertyInformationFrame;
-	
+
 	@FindBy(xpath="//*[@id='assignedToBox']")
 	WebElement assignedTo;
 
@@ -87,58 +87,58 @@ public class PropertiesPage extends ReusableLibrary {
 
 	@FindBy(xpath="//select[@class='slds-select']/option[@value='Open']")
 	WebElement status;
-	
-	
+
+
 	/**
 	 * 
 	 * 
 	 * @author Ramya
 	 *
 	 */	
-	
+
 	@FindBy(xpath = "//h1//span[text()='Recently Viewed']")
 	WebElement recentlyViewed;
 
 	@FindBy(xpath="//span[contains(@class,'virtualAutocompleteOptionText')][text()='All Properties']")
 	WebElement allProperties;
-	
+
 	@FindBy(xpath = "//a[@class='tabHeader']//span[text()='Related']")
 	WebElement related;
 
 	@FindBy(xpath="//span[contains(@class,'slds-truncate')][text()='Properties']")
 	WebElement menu_Properties;
-	
+
 	@FindBy(xpath="//article[contains(@class,'Activities')]//div[text()='New Activity']")
 	WebElement newActivity;
-	
+
 	@FindBy(xpath="//input[@class='slds-input'][@type='text']")
 	WebElement subject;
-	
+
 	@FindBy(xpath="//select[@class='slds-select']/option[@value='Private - Client Intelligence']")
 	WebElement activityType;
-	
+
 	@FindBy(xpath="// input [@value= 'Save & New']")
 	WebElement saveAndNewActivity;
-	
+
 	@FindBy(xpath="//select[@class='slds-select']/option[@value='Private - Initial Meeting']")
 	WebElement activityType2;
-	
+
 	@FindBy(xpath="// input [@value= 'Save']")
 	WebElement saveActivity;
-	
+
 	@FindBy(xpath="//span[contains(@class, 'slds-text-heading--small slds-truncate') and text() = 'Activities']")
 	WebElement relatedActivities;
-	
-	
+
+
 	@FindBy(xpath="//a[@title='Show more actions for this record']")
 	WebElement selectCreateFollowUpCustomActivity;
-	
+
 	@FindBy(xpath="//div[contains(@title, 'Create Follow-up Custom Activity')]")
 	WebElement createCustomActivity;
-	
+
 	@FindBy(xpath="//select[@class='slds-select']/option[@value='Private - Follow-Up Meeting']")
 	WebElement activityType3;
-	
+
 
 	/**
 	 * Validating the Customer Property Page fields 
@@ -146,7 +146,7 @@ public class PropertiesPage extends ReusableLibrary {
 	 * @author Vishnuvardhan
 	 *
 	 */	
-		
+
 	public void validateCustomPropertyPage() {
 		try {
 			Utility_Functions.xClick(driver, menu_More, true);
@@ -161,7 +161,7 @@ public class PropertiesPage extends ReusableLibrary {
 			Utility_Functions.timeWait(2);
 			driver.switchTo().defaultContent();
 			Utility_Functions.xSwitchtoFrame(driver, propertyInformationFrame);
-			
+
 			//driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@src,'recordtypeselect')]")));
 			List<WebElement> propertyEditPage = driver.findElements(By.xpath("//div[@class='slds-grid slds-wrap slds-grid slds-wrap slds-grid--pull-padded slds-form--stacked']/div/h2"));
 			int count=0; 
@@ -207,7 +207,7 @@ public class PropertiesPage extends ReusableLibrary {
 		}
 
 	}
-	
+
 
 	/**
 	 * Validating the Customer Property Page fields 
@@ -215,7 +215,7 @@ public class PropertiesPage extends ReusableLibrary {
 	 * @author Vishnuvardhan
 	 *
 	 */	
-	
+
 	public void validateFieldsSection() {
 		List<WebElement> propertyPageLabels = driver.findElements(By.xpath("//div[@class='slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2']/div/label"));
 		int count =0;
@@ -344,7 +344,7 @@ public class PropertiesPage extends ReusableLibrary {
 		if(count!=28) 
 			report.updateTestLog("Property Information page", "Property Information page is not having all the fields:::" , Status.FAIL);	
 	}
-	
+
 
 	/**
 	 * Validating the Customer Property Page fields sub sections 
@@ -352,37 +352,37 @@ public class PropertiesPage extends ReusableLibrary {
 	 * @author Vishnuvardhan
 	 *
 	 */	
-	
+
 	public void validateFieldsSubSections() {
 		List<WebElement> propertyPageSections = driver.findElements(By.xpath("//div[@class='slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2']/div/label/parent::div/parent::div/parent::div/div/h2"));
 		int count =0;
 		for(WebElement element: propertyPageSections) {
 			if((element.getText().equals("Property Management")) || (element.getText().equals("Listing Management")) || (element.getText().equals("Asset Management"))) {
 				List<WebElement> propertyPageLabels = driver.findElements(By.xpath("//div[@class='slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2']/div/label"));
-					for(WebElement element1: propertyPageLabels) {
-						if(element.getText().contains("Company")) {
-							report.updateTestLog(element.getText() + " Section", "Property Management Section has the field" + element1.getText()+ ":::" , Status.PASS);
-							count++;		
-						} else if(element1.getText().contains("Address")) {
-							report.updateTestLog(element.getText() + " Section", "Property Management Section has the field" + element1.getText()+ ":::" , Status.PASS);
-							count++;		
-						} else if(element1.getText().contains("ContactName")) {
-							report.updateTestLog(element.getText() + " Section", "Property Management Section has the field" + element1.getText()+ ":::" , Status.PASS);
-							count++;		
-						} else if(element1.getText().contains("Phone")) {
-							report.updateTestLog(element.getText() + " Section", "Property Management Section has the field" + element1.getText()+ ":::" , Status.PASS);
-							count++;		
-						} else if(element1.getText().contains("Email")) {
-							report.updateTestLog(element.getText() + " Section", "Property Management Section has the field" + element1.getText()+ ":::" , Status.PASS);
-						} 
-					}
+				for(WebElement element1: propertyPageLabels) {
+					if(element.getText().contains("Company")) {
+						report.updateTestLog(element.getText() + " Section", "Property Management Section has the field" + element1.getText()+ ":::" , Status.PASS);
+						count++;		
+					} else if(element1.getText().contains("Address")) {
+						report.updateTestLog(element.getText() + " Section", "Property Management Section has the field" + element1.getText()+ ":::" , Status.PASS);
+						count++;		
+					} else if(element1.getText().contains("ContactName")) {
+						report.updateTestLog(element.getText() + " Section", "Property Management Section has the field" + element1.getText()+ ":::" , Status.PASS);
+						count++;		
+					} else if(element1.getText().contains("Phone")) {
+						report.updateTestLog(element.getText() + " Section", "Property Management Section has the field" + element1.getText()+ ":::" , Status.PASS);
+						count++;		
+					} else if(element1.getText().contains("Email")) {
+						report.updateTestLog(element.getText() + " Section", "Property Management Section has the field" + element1.getText()+ ":::" , Status.PASS);
+					} 
+				}
 			}
 		} 
 		if(count!=18) 
 			report.updateTestLog("Property, Asset and Listing Management Sections", "Sections doesn't have all the fields", Status.FAIL);
-		
+
 	}
-	
+
 
 	/**
 	 * Function for Creating a property
@@ -390,35 +390,35 @@ public class PropertiesPage extends ReusableLibrary {
 	 * @author Vishnuvardhan
 	 *
 	 */	
-	
+
 	public void createProperty() {
 		Utility_Functions.timeWait(1);
 		try {
-				Utility_Functions.timeWait(1);
-				buildingPropertyName.clear();
-				Utility_Functions.timeWait(1);
-				Utility_Functions.xSendKeys(driver, buildingPropertyName, dataTable.getData("General_Data", "Building/ Property Name"));
-				Utility_Functions.timeWait(1);
-				Utility_Functions.xScrollWindowOnce(driver);
-				Utility_Functions.timeWait(1);
-				//Utility_Functions.xClick(driver, countryDropdown, true);
-				Utility_Functions.xSelectDropdownByIndex(countryDropdown, 229);
-				Utility_Functions.timeWait(1);
-				Utility_Functions.xSendKeys(driver, street, dataTable.getData("General_Data", "Street"));
-				Utility_Functions.timeWait(1);
-				Utility_Functions.xSendKeys(driver, city, dataTable.getData("General_Data", "City"));
-				Utility_Functions.timeWait(1);
-				//Utility_Functions.xClick(driver, stateDropdown, true);
-				Utility_Functions.xSelectDropdownByIndex(stateDropdown, 54);
-				Utility_Functions.timeWait(1);
-				Utility_Functions.xClick(driver, saveProperty, true);
-				Utility_Functions.timeWait(4);
-				driver.switchTo().defaultContent();
-				if(createdProperty.getText().contains(dataTable.getData("General_Data", "Street"))) {
-					report.updateTestLog("Save Property", "Property has been created successfully :::" , Status.PASS);
-				} else {
-					report.updateTestLog("Save Property", "Unable to save the property:::" , Status.FAIL);
-				}
+			Utility_Functions.timeWait(1);
+			buildingPropertyName.clear();
+			Utility_Functions.timeWait(1);
+			Utility_Functions.xSendKeys(driver, buildingPropertyName, dataTable.getData("General_Data", "Building/ Property Name"));
+			Utility_Functions.timeWait(1);
+			Utility_Functions.xScrollWindowOnce(driver);
+			Utility_Functions.timeWait(1);
+			//Utility_Functions.xClick(driver, countryDropdown, true);
+			Utility_Functions.xSelectDropdownByIndex(countryDropdown, 229);
+			Utility_Functions.timeWait(1);
+			Utility_Functions.xSendKeys(driver, street, dataTable.getData("General_Data", "Street"));
+			Utility_Functions.timeWait(1);
+			Utility_Functions.xSendKeys(driver, city, dataTable.getData("General_Data", "City"));
+			Utility_Functions.timeWait(1);
+			//Utility_Functions.xClick(driver, stateDropdown, true);
+			Utility_Functions.xSelectDropdownByIndex(stateDropdown, 54);
+			Utility_Functions.timeWait(1);
+			Utility_Functions.xClick(driver, saveProperty, true);
+			Utility_Functions.timeWait(4);
+			driver.switchTo().defaultContent();
+			if(createdProperty.getText().contains(dataTable.getData("General_Data", "Street"))) {
+				report.updateTestLog("Save Property", "Property has been created successfully :::" , Status.PASS);
+			} else {
+				report.updateTestLog("Save Property", "Unable to save the property:::" , Status.FAIL);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
@@ -430,15 +430,16 @@ public class PropertiesPage extends ReusableLibrary {
 	 * @author Ramya
 	 *
 	 */	
-	public void verifyCreationOfActivity(){
-		
-/*		Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
-		Utility_Functions.xClick(driver, menu_More, true);
-		Utility_Functions.xWaitForElementPresent(driver, properties, 2);
-		Utility_Functions.xClick(driver, properties, true);*/
-		
-		Utility_Functions.xWaitForElementPresent(driver,menu_Properties, 3);
-		Utility_Functions.xClick(driver, menu_Properties, true);
+	public void verifyCreationOfActivity() {
+		try{
+			Utility_Functions.xWaitForElementPresent(driver,menu_Properties, 3);
+			Utility_Functions.xClick(driver, menu_Properties, true);
+		}catch(Exception e){
+			Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
+			Utility_Functions.xClick(driver, menu_More, true);
+			Utility_Functions.xWaitForElementPresent(driver, properties, 2);
+			Utility_Functions.xClick(driver, properties, true);	
+		}
 		report.updateTestLog("Verify Create Activity Properties ","Properties is Displayed ",  Status.PASS);
 		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
 		Utility_Functions.xClick(driver, recentlyViewed, true);
@@ -447,7 +448,7 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, allProperties, true);
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify Create Activity Properties ","All Properties are Displayed ",  Status.PASS);
-		
+
 		List<WebElement> propertiesList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
 
 		Utility_Functions.xclickOnFirstElementfromList(propertiesList);	
@@ -476,7 +477,7 @@ public class PropertiesPage extends ReusableLibrary {
 		System.out.println("Frame Identified");*/
 		Utility_Functions.xSwitchtoFrame(driver, subject);
 		Utility_Functions.xWaitForElementPresent(driver, subject, 5);
-		
+
 		Utility_Functions.xClick(driver, subject, true);
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xSendKeys(driver, subject, "test1");
@@ -489,13 +490,13 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, subject, true);
 		Random random = new Random();
 		int value = random.nextInt();
-		
+
 		Utility_Functions.xSendKeys(driver, subject, "Test Activity Created by Automation" + value);
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xClick(driver, activityType2, true);
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xClick(driver, saveActivity, true);
-		
+
 		SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
 		String query = "select Name from Activity__C where Subject__C = " + "'" + "Test Activity Created by Automation" + value + "'";
 		String nameActivity = searchTextSOQL.fetchRecordFieldValue("Name", query);
@@ -508,7 +509,7 @@ public class PropertiesPage extends ReusableLibrary {
 		}
 		String queryId = "select Id from Activity__C where Name = " + "'" + nameActivity + "'";
 		String activityId = searchTextSOQL.fetchRecordFieldValue("Id", queryId);
-		
+
 		String url = driver.getCurrentUrl().split("#")[0];
 		String newUrl = url + "#/sObject/" + activityId;
 		newUrl = newUrl + "/view";
@@ -516,9 +517,9 @@ public class PropertiesPage extends ReusableLibrary {
 				"URL has been replaced with the new URL having the retrieved Opportunity:::" + newUrl, Status.PASS);
 		driver.get(newUrl);
 		driver.navigate().refresh();
-		
-		
-		
+
+
+
 		Utility_Functions.timeWait(4);
 		driver.navigate().refresh();
 		Utility_Functions.timeWait(1);
@@ -535,7 +536,7 @@ public class PropertiesPage extends ReusableLibrary {
 		action.click();
 		action.build().perform();
 		Utility_Functions.timeWait(3);
-		
+
 		Utility_Functions.xSwitchtoFrame(driver, subject );
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xClick(driver, subject, true);
@@ -566,12 +567,12 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xScrollWindowTop(driver);
 		Utility_Functions.timeWait(2);
-		
+
 		Utility_Functions.xWaitForElementPresent(driver, relatedActivities, 5);
 		Utility_Functions.xClick(driver, relatedActivities, true);
-		
+
 		List<WebElement> relatedActivitiesList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'] "));
-		
+
 		report.updateTestLog("Verify Create Activity Properties","The New Activity for Contacts is created ",Status.PASS);
 	}
 
@@ -583,14 +584,15 @@ public class PropertiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void verifyPropertiesNewActivityPageLayout() {
-		
-/*		Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
-		Utility_Functions.xClick(driver, menu_More, true);
-		Utility_Functions.xWaitForElementPresent(driver, properties, 2);
-		Utility_Functions.xClick(driver, properties, true);*/
-		
-		Utility_Functions.xWaitForElementPresent(driver, menu_Properties, 3);
-		Utility_Functions.xClick(driver, menu_Properties, true);
+		try{
+			Utility_Functions.xWaitForElementPresent(driver,menu_Properties, 3);
+			Utility_Functions.xClick(driver, menu_Properties, true);
+		}catch(Exception e){
+			Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
+			Utility_Functions.xClick(driver, menu_More, true);
+			Utility_Functions.xWaitForElementPresent(driver, properties, 2);
+			Utility_Functions.xClick(driver, properties, true);	
+		}
 		report.updateTestLog("Verify New Activity Page Layout ","Properties is Displayed ",  Status.PASS);
 		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
 		Utility_Functions.xClick(driver, recentlyViewed, true);
@@ -735,7 +737,7 @@ public class PropertiesPage extends ReusableLibrary {
 			System.out.println(e.getMessage());
 
 		}
-	
+
 
 		if(!driver.findElements(By.xpath("// input [@value= 'Save']")).isEmpty()){
 			System.out.println("Save button is present in the New Activity Layout Page");
@@ -758,7 +760,7 @@ public class PropertiesPage extends ReusableLibrary {
 			System.out.println("Cancel button is not present in the New Activity Layout Page");
 			report.updateTestLog("Verify New Activity Page Layout","The Cancel Button is not present in the New Activity Page",  Status.FAIL);
 		}
-		
+
 		List<WebElement> newActivityPageFields = driver
 				.findElements(By.xpath("//label[@class='slds-form-element__label']"));
 		int count = 0;
@@ -949,6 +951,6 @@ public class PropertiesPage extends ReusableLibrary {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
 		}
-		
+
 	}
 }
