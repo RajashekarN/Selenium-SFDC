@@ -105,7 +105,7 @@ public class PropertiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//a[@class='tabHeader']//span[text()='Related']")
 	WebElement related;
 
-	@FindBy(xpath="//div[@class='bBottom']//span[text()='Properties']")
+	@FindBy(xpath="//span[contains(@class,'slds-truncate')][text()='Properties']")
 	WebElement menu_Properties;
 	
 	@FindBy(xpath="//article[contains(@class,'Activities')]//div[text()='New Activity']")
@@ -432,6 +432,11 @@ public class PropertiesPage extends ReusableLibrary {
 	 */	
 	public void verifyCreationOfActivity(){
 		
+/*		Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
+		Utility_Functions.xClick(driver, menu_More, true);
+		Utility_Functions.xWaitForElementPresent(driver, properties, 2);
+		Utility_Functions.xClick(driver, properties, true);*/
+		
 		Utility_Functions.xWaitForElementPresent(driver,menu_Properties, 3);
 		Utility_Functions.xClick(driver, menu_Properties, true);
 		report.updateTestLog("Verify Create Activity Properties ","Properties is Displayed ",  Status.PASS);
@@ -578,7 +583,12 @@ public class PropertiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void verifyPropertiesNewActivityPageLayout() {
-
+		
+/*		Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
+		Utility_Functions.xClick(driver, menu_More, true);
+		Utility_Functions.xWaitForElementPresent(driver, properties, 2);
+		Utility_Functions.xClick(driver, properties, true);*/
+		
 		Utility_Functions.xWaitForElementPresent(driver, menu_Properties, 3);
 		Utility_Functions.xClick(driver, menu_Properties, true);
 		report.updateTestLog("Verify New Activity Page Layout ","Properties is Displayed ",  Status.PASS);
