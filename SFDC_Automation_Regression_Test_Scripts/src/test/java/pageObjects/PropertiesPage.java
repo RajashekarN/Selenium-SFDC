@@ -553,8 +553,15 @@ public class PropertiesPage extends ReusableLibrary {
 		driver.switchTo().defaultContent();
 		driver.navigate().refresh();
 		Utility_Functions.timeWait(3);
-		Utility_Functions.xWaitForElementPresent(driver,menu_Properties, 3);
-		Utility_Functions.xClick(driver, menu_Properties, true);
+		try{
+			Utility_Functions.xWaitForElementPresent(driver,menu_Properties, 3);
+			Utility_Functions.xClick(driver, menu_Properties, true);
+		}catch(Exception e){
+			Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
+			Utility_Functions.xClick(driver, menu_More, true);
+			Utility_Functions.xWaitForElementPresent(driver, properties, 2);
+			Utility_Functions.xClick(driver, properties, true);	
+		}
 		//Utility_Functions.xClick(driver, recentlyViewed, true);
 		//Utility_Functions.timeWait(3);
 		List<WebElement> recentlyViewedpropertiesList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
@@ -572,11 +579,15 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, relatedActivities, true);
 
 		List<WebElement> relatedActivitiesList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'] "));
-
-		report.updateTestLog("Verify Create Activity Properties","The New Activity for Contacts is created ",Status.PASS);
+		for (WebElement element : relatedActivitiesList ) {
+			if ((!element.getText().equals(" "))){
+		report.updateTestLog("Verify Create Activity Properties","The New Activity for Properties are created ",Status.PASS);
+	}else
+	{
+		report.updateTestLog("Verify Create Activity Properties","The New Activity for Properties are not created ",Status.FAIL);
 	}
-
-
+		}
+		}
 	/**
 	 * Validating the New Activity Page Layout in the Properties
 	 * 
