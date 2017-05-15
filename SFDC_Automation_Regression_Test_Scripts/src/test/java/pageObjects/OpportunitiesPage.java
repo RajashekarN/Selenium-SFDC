@@ -1,5 +1,7 @@
 package pageObjects;
 
+
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -8,6 +10,7 @@ import java.util.Random;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -272,7 +275,62 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//p[contains(@class,'slds-page-header__title')][@title='Add an Opportunity'][text()='Add an Opportunity']")
 	WebElement addAnOpportunityTitle;
 
+	/*@FindBy(xpath = "//*[text()='Opportunities']")
+	WebElement menu_Opportunities;
 
+	 *
+	 */
+
+	/****
+	 * Ramya
+	 */
+	@FindBy(xpath="//a[@title='Show more actions for this record']")
+	WebElement selectNewEvent;
+
+	@FindBy(xpath="//div[@class='forceActionLink'][@title='New Event']")
+	WebElement newEvent;
+
+	@FindBy(xpath="//div[@class='slds-media__body']")
+	WebElement addAnEventPage;
+
+	@FindBy(xpath="//input[@class='slds-input'][@type='text'][@required='required']")
+	WebElement subject;
+
+	@FindBy(xpath="//*[@id='assignedToBox']")
+	WebElement assignedTo;
+
+	@FindBy(xpath="//input[@value='Cancel']")
+	WebElement cancelCustomEventPageButton;
+
+	@FindBy(xpath="//input[@value='Save & New Event']")
+	WebElement saveAndNewEventCustomEventPageButton;
+
+	@FindBy(xpath="//input[@value='Save Event']")
+	WebElement saveEventCustomEventPageButton;
+
+	@FindBy(xpath="//span[text()='Quick Create an Event']")
+	WebElement quickCreateanEvent;
+
+	@FindBy(xpath=" //div[@class='slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2']/h2")
+	WebElement relatedTo;
+
+	@FindBy(xpath="//input[@class='slds-input'][@type='checkbox']")
+	WebElement setReminderCheckBox;
+
+	@FindBy(xpath=".//*[@id='assignedToBox']")
+	WebElement assignedToNewCustomEventPage;
+
+	@FindBy(xpath="//input[contains(@id,'StartDate')]")
+	WebElement startDateNewCustomEventPage;
+
+	@FindBy(xpath="//input[contains(@id,'StartTime')]")
+	WebElement startTimeNewCustomEventPage;
+
+	@FindBy(xpath="//input[contains(@id,'EndDate')]")
+	WebElement endDateNewCustomEventPage;
+
+	@FindBy(xpath="//input[contains(@id,'EndTime')]")
+	WebElement endTimeNewCustomEventPage;
 
 	//input[@placeholder='Search Accounts']
 
@@ -1116,45 +1174,45 @@ public class OpportunitiesPage extends ReusableLibrary {
 			SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
 			String opportunityID = searchTextSOQL.fetchRecordFieldValue("Id", query);
 			while(!isStatus) {
-					if(opportunityID==null) {	
-						report.updateTestLog("Opportunity", "No Opportunities present for the Record Type selected:::", Status.PASS);
-						isStatus = false;
-						break;
+				if(opportunityID==null) {	
+					report.updateTestLog("Opportunity", "No Opportunities present for the Record Type selected:::", Status.PASS);
+					isStatus = false;
+					break;
+				} else {
+					String opportunityName = searchTextSOQL.fetchRecordFieldValue("Name", query);
+					String assignmentType = searchTextSOQL.fetchRecordFieldValue("Service__c", query);
+					String totalSize = searchTextSOQL.fetchRecordFieldValue("Total_Size__c", query);
+					String unitOfMeasure = searchTextSOQL.fetchRecordFieldValue("Unit_of_Measure__c", query);
+					report.updateTestLog("Fetched Opportunity Name", "Opportunity Name:::" + opportunityName, Status.PASS);
+					report.updateTestLog("Fetched Opportunity Name", "Opportunity Assignment Type:::" + assignmentType, Status.PASS);
+					report.updateTestLog("Fetched Opportunity Name", "Opportunity Total Size:::" + totalSize, Status.PASS);
+					report.updateTestLog("Fetched Opportunity Name", "Opportunity Unit of Measure:::" + unitOfMeasure, Status.PASS);
+					OpportunitiesFunctions opportunitiesFunctions = new OpportunitiesFunctions(scriptHelper);			
+					opportunitiesFunctions.updateOpportunityField("Service__c", opportunityID);
+					opportunitiesFunctions.updateOpportunityField("Total_Size__c", opportunityID);
+					opportunitiesFunctions.updateOpportunityField("Unit_of_Measure__c", opportunityID);
+
+					String updatedAssignmentType = searchTextSOQL.fetchRecordFieldValue("Service__c", query);
+					String updatedTotalSize = searchTextSOQL.fetchRecordFieldValue("Total_Size__c", query);
+					String updatedUnitOfMeasure = searchTextSOQL.fetchRecordFieldValue("Unit_of_Measure__c", query);
+					if(updatedAssignmentType.equals("Project Management")) {
+						report.updateTestLog("Modified Opportunity Name", "Opportunity Name modified according to the AssignmentType selected:::" + updatedAssignmentType, Status.PASS);
 					} else {
-						String opportunityName = searchTextSOQL.fetchRecordFieldValue("Name", query);
-						String assignmentType = searchTextSOQL.fetchRecordFieldValue("Service__c", query);
-						String totalSize = searchTextSOQL.fetchRecordFieldValue("Total_Size__c", query);
-						String unitOfMeasure = searchTextSOQL.fetchRecordFieldValue("Unit_of_Measure__c", query);
-						report.updateTestLog("Fetched Opportunity Name", "Opportunity Name:::" + opportunityName, Status.PASS);
-						report.updateTestLog("Fetched Opportunity Name", "Opportunity Assignment Type:::" + assignmentType, Status.PASS);
-						report.updateTestLog("Fetched Opportunity Name", "Opportunity Total Size:::" + totalSize, Status.PASS);
-						report.updateTestLog("Fetched Opportunity Name", "Opportunity Unit of Measure:::" + unitOfMeasure, Status.PASS);
-						OpportunitiesFunctions opportunitiesFunctions = new OpportunitiesFunctions(scriptHelper);			
-						opportunitiesFunctions.updateOpportunityField("Service__c", opportunityID);
-						opportunitiesFunctions.updateOpportunityField("Total_Size__c", opportunityID);
-						opportunitiesFunctions.updateOpportunityField("Unit_of_Measure__c", opportunityID);
-	
-						String updatedAssignmentType = searchTextSOQL.fetchRecordFieldValue("Service__c", query);
-						String updatedTotalSize = searchTextSOQL.fetchRecordFieldValue("Total_Size__c", query);
-						String updatedUnitOfMeasure = searchTextSOQL.fetchRecordFieldValue("Unit_of_Measure__c", query);
-						if(updatedAssignmentType.equals("Project Management")) {
-							report.updateTestLog("Modified Opportunity Name", "Opportunity Name modified according to the AssignmentType selected:::" + updatedAssignmentType, Status.PASS);
-						} else {
-							report.updateTestLog("Modified Opportunity Name", "Opportunity Name didn't get modified according to the AssignmentType selected:::" + updatedAssignmentType, Status.FAIL);
-						}
-						if(updatedTotalSize.equals("2900.0")) {
-							report.updateTestLog("Modified Opportunity Name", "Opportunity Name modified according to the Total Size selected:::" + updatedTotalSize, Status.PASS);
-						} else {
-							report.updateTestLog("Modified Opportunity Name", "Opportunity Name didn't get modified according to the Total Size selected:::" + updatedTotalSize, Status.FAIL);
-						}
-						if(updatedUnitOfMeasure.equals("Hectares")) {
-							report.updateTestLog("Modified Opportunity Name", "Opportunity Name modified according to the Unit of Measure selected:::" + updatedUnitOfMeasure, Status.PASS);
-						} else {
-							report.updateTestLog("Modified Opportunity Name", "Opportunity Name didn't get modified according to the Unit of Measure selected:::" + updatedUnitOfMeasure, Status.FAIL);
-						}
-						isStatus = true;
-					}	
-				}
+						report.updateTestLog("Modified Opportunity Name", "Opportunity Name didn't get modified according to the AssignmentType selected:::" + updatedAssignmentType, Status.FAIL);
+					}
+					if(updatedTotalSize.equals("2900.0")) {
+						report.updateTestLog("Modified Opportunity Name", "Opportunity Name modified according to the Total Size selected:::" + updatedTotalSize, Status.PASS);
+					} else {
+						report.updateTestLog("Modified Opportunity Name", "Opportunity Name didn't get modified according to the Total Size selected:::" + updatedTotalSize, Status.FAIL);
+					}
+					if(updatedUnitOfMeasure.equals("Hectares")) {
+						report.updateTestLog("Modified Opportunity Name", "Opportunity Name modified according to the Unit of Measure selected:::" + updatedUnitOfMeasure, Status.PASS);
+					} else {
+						report.updateTestLog("Modified Opportunity Name", "Opportunity Name didn't get modified according to the Unit of Measure selected:::" + updatedUnitOfMeasure, Status.FAIL);
+					}
+					isStatus = true;
+				}	
+			}
 		} catch(Exception e) {
 			e.getMessage();
 		}
@@ -1446,6 +1504,178 @@ public class OpportunitiesPage extends ReusableLibrary {
 			}
 		}
 		Utility_Functions.xclickgetTextofFirstElementfromList(accountNameList);*/
+
+	}
+
+	static ArrayList<String> labelsOpportunitiesNewCustomEvent = new ArrayList<String>(); 
+	public void labelsOpportunitiesNewCustomEvent() {
+		labelsOpportunitiesNewCustomEvent.add("Subject");
+		labelsOpportunitiesNewCustomEvent.add("Activity Type");
+		labelsOpportunitiesNewCustomEvent.add("Type");
+		labelsOpportunitiesNewCustomEvent.add("Location");
+		labelsOpportunitiesNewCustomEvent.add("Start ");
+		labelsOpportunitiesNewCustomEvent.add("Start Date");
+		labelsOpportunitiesNewCustomEvent.add("Time");
+		labelsOpportunitiesNewCustomEvent.add("EndDate");
+		labelsOpportunitiesNewCustomEvent.add("Due Date");
+		labelsOpportunitiesNewCustomEvent.add("Time");
+		labelsOpportunitiesNewCustomEvent.add("Attachment");
+		labelsOpportunitiesNewCustomEvent.add("Description");
+		labelsOpportunitiesNewCustomEvent.add("Assigned To");
+		labelsOpportunitiesNewCustomEvent.add("Opportunity");
+		labelsOpportunitiesNewCustomEvent.add("Contact");
+		labelsOpportunitiesNewCustomEvent.add("Set Reminder");
+
+
+	}
+	/**
+	 * Validating the manage Opportunity verify Custom Event Page
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+	public void opportunityVerifyCustomEventPage() {
+
+		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
+		Utility_Functions.xClick(driver, menu_Opportunities, true);
+		List<WebElement> allActiveOpportunitiesList = driver.findElements(
+				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xclickgetTextofFirstElementfromList(allActiveOpportunitiesList);
+		Utility_Functions.timeWait(5);
+		Utility_Functions.xWaitForElementPresent(driver, selectNewEvent, 3);
+		Utility_Functions.xClick(driver, selectNewEvent, true);
+		Utility_Functions.xWaitForElementPresent(driver, newEvent, 3);
+		Actions action  = new Actions(driver.getWebDriver());
+		action.moveToElement(newEvent);
+		action.click();
+		action.build().perform();
+		Utility_Functions.timeWait(3);
+
+		driver.switchTo().frame(4);
+		Utility_Functions.timeWait(5);
+
+		if(addAnEventPage.getText().contains("Add an Event")){	
+
+			System.out.println("The New Custom Event Page is displayed");
+			report.updateTestLog("Verify Opportunity Custom Event Page", "The New Custom Event Page is Displayed", Status.PASS);
+		}else{
+			System.out.println("The New Custom Event Page is not displayed");
+			report.updateTestLog("Verify Opportunity Custom Event Page", "The New Custom Event Page is not Displayed", Status.FAIL);
+		}
+
+
+		List<WebElement> drop = driver.findElements(By.xpath("//div[@class='slds-select_container']"));
+
+		java.util.Iterator<WebElement> i = drop.iterator();
+		while(i.hasNext()) {
+			WebElement row = i.next();
+			System.out.println(row.getText());
+			if(!row.getText().equals("")) { 
+				System.out.println("All the values for the Activity Type and Type pick list are present in  the Add an Event page");
+				report.updateTestLog("Verify New Opportunity Custom Event Page", "Verifying the Activity Type and Type pick list values", Status.PASS);
+			}else{
+				System.out.println("All the values for the Activity Type and Type pick list are not present in  the Add an Event page");
+				report.updateTestLog("Verify New Opportunity Custom Event Page", "Verifying the Activity Type and Type pick list values", Status.FAIL);  
+			}
+
+
+		}
+
+		if(relatedTo.getText().contains("Related To")){
+			System.out.println("Related To section is present in the New Activity Layout Page");
+			report.updateTestLog("Verify New Opportunity Custom Event Page ","Related To section is present in the New Custom Event Page",  Status.PASS);
+		}else{
+			System.out.println("Related To section is not present in the New Activity Layout Page");
+			report.updateTestLog("Verify New Opportunity Custom Event Page ","Related To section is not present in the New Custom Event Page",  Status.FAIL);
+
+		}
+		if(quickCreateanEvent.getText().contains("Quick Create an Event")){
+			System.out.println("Quick Create an Event section is present in the New Activity Layout Page");
+			report.updateTestLog("Verify New Opportunity Custom Event Page ","Quick Create an Event section is present in the New Activity Page",  Status.PASS);
+		}else{
+			System.out.println("Quick Create an Event section is not present in the New Activity Layout Page");
+			report.updateTestLog("Verify New Opportunity Custom Event Page ","Quick Create an Event section is not present in the New Activity Page",  Status.FAIL);
+
+		}
+
+		if(!setReminderCheckBox.isSelected()){
+			System.out.println("Set Reminder check box is present and not checked");
+			report.updateTestLog("Verify New Opportunity Custom Event Page ","Set Reminder checkbox is present in the New Custom Event Page",  Status.PASS);
+
+		}else{
+			System.out.println("Set Reminder check box is not present ");
+			report.updateTestLog("Verify New Opportunity Custom Event Page ","Set Reminder checkbox is not present in the New Custom Event Page",  Status.FAIL);
+		}
+
+		if(!cancelCustomEventPageButton.getText().equals(" ")){
+			System.out.println("Cancel button is present");
+			report.updateTestLog("Verify New Opportunity Custom Event Page ","Cancel button is present in the New Custom Event Page",  Status.PASS);
+		}else{
+			System.out.println("Cancel button is not present ");
+			report.updateTestLog("Verify New Opportunity Custom Event Page ","Cancel button is not present in the New Custom Event Page",  Status.FAIL);
+		}
+		if(!saveAndNewEventCustomEventPageButton.getText().equals(" ")){
+			System.out.println("Save and New Custom event button is present");
+			report.updateTestLog("Verify New Opportunity Custom Event Page ","Save and New Event button is present in the New Custom Event Page",  Status.PASS);
+		}else{
+			System.out.println("Save and New Custom event button is not present ");
+			report.updateTestLog("Verify New Opportunity Custom Event Page ","Save and New Event button  is not present in the New Custom Event Page",  Status.FAIL);
+		}
+		if(!saveEventCustomEventPageButton.getText().equals(" ")){
+			System.out.println("Save Event button is present");
+			report.updateTestLog("Verify New Opportunity Custom Event Page ","Save Event button is present in the New Custom Event Page",  Status.PASS);
+		}else{
+			System.out.println("Save Event button is not present ");
+			report.updateTestLog("Verify New Opportunity Custom Event Page ","Save Event button is not present in the New Custom Event Page",  Status.FAIL);
+		}
+		try {
+				
+
+			if ((!assignedToNewCustomEventPage.getAttribute("value").equals(""))||(!startDateNewCustomEventPage.getAttribute("value").equals(""))||(!startTimeNewCustomEventPage.getAttribute("value").equals(""))||(!endDateNewCustomEventPage.getAttribute("value").equals(""))||(!endTimeNewCustomEventPage.getAttribute("value").equals(""))) {
+				System.out.println("Assigned To, Start Date, Start Time, End Date and End Time fields are having the values ");
+				report.updateTestLog("Verify New Opportunity Custom Event Page ",
+						"Verify New Opportunity Custom Event Page is having the default values in the required fields ", Status.PASS);
+			} else {
+				System.out.println("New Activity Layout Page is not having the deafault values ");
+				report.updateTestLog("Verify New Opportunity Custom Event Page",
+						"Verify New Opportunity Custom Event Page is not having the default values in the required fields", Status.FAIL);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}	
+
+		List<WebElement> customEventpageFields = driver.findElements(By.xpath("//div[contains(@class,'slds-col--padded') and contains(@class,' slds-size--1-of-1')]//label "));
+		int count = 0, i1 = 0;
+		String labelArray[] = new String[customEventpageFields.size()];
+		System.out.println(customEventpageFields.size());
+
+		try {
+			labelsOpportunitiesNewCustomEvent();
+			for (WebElement element:customEventpageFields) {
+				labelArray[i1] = element.getText();
+				if (labelArray[i1].contains(labelsOpportunitiesNewCustomEvent.get(i1))) {
+					report.updateTestLog("Verify New Opportunity Custom Event Page",
+							"New Opportunity Custom Event Page is having the " + labelArray[i1]
+									+ " field ",
+									Status.PASS);
+					count++;
+				}
+				i1++;
+			}
+			System.out.println(count);
+			if (count != 15) {
+				report.updateTestLog("Verify New Opportunity Custom Event Page", "All Labels are not present in the Add New Event Page",
+						Status.FAIL);
+			} else {
+				
+				report.updateTestLog("Verify New Opportunity Custom Event Page", "All Labels are present in the Add New Event Page",
+						Status.PASS);
+			}
+
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 
 
 

@@ -137,4 +137,14 @@ public class BC_Salesforce_LeadsPage extends ReusableLibrary {
 	public void bc_convertLeadNote() {
 		sfLeadsPage.convertLeadNote();
 	}
+	/**
+	 * Validating the Custom Event Page in Leads 
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_leadsVerifyCustomEventPage() {
+		sfLeadsPage.leadsVerifyCustomEventPage();
+	}
 }

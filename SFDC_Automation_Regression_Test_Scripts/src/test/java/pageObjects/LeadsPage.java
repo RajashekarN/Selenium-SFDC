@@ -7,6 +7,7 @@ import java.util.Random;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import com.cognizant.Craft.ReusableLibrary;
@@ -70,7 +71,7 @@ public class LeadsPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//button[contains(@title,'Edit') and contains(@title,'Direct') and contains(@title,'Line')]")
 	WebElement directLineEditButton;	
-	
+
 
 	@FindBy(xpath = "//span[text()='Direct Line']/parent::label/parent::div/input[@type='tel']")
 	WebElement enterDirectLIne;	
@@ -80,10 +81,10 @@ public class LeadsPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//div[@title='Convert']")
 	WebElement convert;		
-	
+
 	@FindBy(xpath = "//p[@title='Convert Lead Title']")
 	WebElement convertLeadTitle;		
-	
+
 	@FindBy(xpath = "//*[@id='convertedStatus']")
 	WebElement convertedStatus;	
 
@@ -211,34 +212,88 @@ public class LeadsPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//span[contains(@class,'virtualAutocompleteOptionText')][text()='All Leads']")
 	WebElement allLeadsMenu;
-	
+
 	@FindBy(xpath="//span[contains(@class, 'slds-text-heading--small slds-truncate') and text() = 'Files']")
 	WebElement files;
-	
+
 	@FindBy(xpath="//div[@title='Add File']")
 	WebElement addFile;
-	
+
 	@FindBy(xpath="//a[@title='Recent']")
 	WebElement recentFile;
-	
+
 	@FindBy(xpath="//div[@class='filerow']")
 	WebElement addFileAttachment;
-	
+
 	@FindBy(xpath=".//*[text()='Add']")
 	WebElement add;
-	
+
 	@FindBy(xpath="//span[contains(text(),'Related Contacts')]")
 	WebElement accountsRelatedContacts;
-	
+
 	@FindBy(xpath="//span[contains(@class, 'slds-text-heading--small slds-truncate') and text() = 'Contacts']")
 	WebElement accountsContacts;
-	
+
 	@FindBy(xpath="//span[contains(@class, 'slds-text-heading--small slds-truncate') and text() = 'Opportunities']")
 	WebElement accountsRelatedOpportunities;
 
 	@FindBy(xpath="//[contains(@id='CustomLeadConversionFrom')]//a/img")
 	WebElement accName;
-	
+
+
+
+	/****
+	 * Ramya
+	 */
+	@FindBy(xpath="//a[@title='Show more actions for this record']")
+	WebElement selectNewEvent;
+
+	@FindBy(xpath="//div[@class='forceActionLink'][@title='New Event']")
+	WebElement newEvent;
+
+	@FindBy(xpath="//div[@class='slds-media__body']")
+	WebElement addAnEventPage;
+
+	@FindBy(xpath="//input[@class='slds-input'][@type='text'][@required='required']")
+	WebElement subject;
+
+	@FindBy(xpath="//*[@id='assignedToBox']")
+	WebElement assignedTo;
+
+	@FindBy(xpath="//input[@value='Cancel']")
+	WebElement cancelCustomEventPageButton;
+
+	@FindBy(xpath="//input[@value='Save & New Event']")
+	WebElement saveAndNewEventCustomEventPageButton;
+
+	@FindBy(xpath="//input[@value='Save Event']")
+	WebElement saveEventCustomEventPageButton;
+
+	@FindBy(xpath="//span[text()='Quick Create an Event']")
+	WebElement quickCreateanEvent;
+
+	@FindBy(xpath=" //div[@class='slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2']/h2")
+	WebElement relatedTo;
+
+	@FindBy(xpath="//input[@class='slds-input'][@type='checkbox']")
+	WebElement setReminderCheckBox;
+
+	@FindBy(xpath=".//*[@id='assignedToBox']")
+	WebElement assignedToNewCustomEventPage;
+
+	@FindBy(xpath="//input[contains(@id,'StartDate')]")
+	WebElement startDateNewCustomEventPage;
+
+	@FindBy(xpath="//input[contains(@id,'StartTime')]")
+	WebElement startTimeNewCustomEventPage;
+
+	@FindBy(xpath="//input[contains(@id,'EndDate')]")
+	WebElement endDateNewCustomEventPage;
+
+	@FindBy(xpath="//input[contains(@id,'EndTime')]")
+	WebElement endTimeNewCustomEventPage;
+
+
 	/**
 	 * Validating the Convert Lead functionality
 	 * 
@@ -282,7 +337,7 @@ public class LeadsPage extends ReusableLibrary {
 				Utility_Functions.xClick(driver, directLineEditButton, true);
 				Utility_Functions.timeWait(1);
 				Utility_Functions.xSendKeys(driver, enterDirectLIne, dataTable.getData("General_Data", "Direct Line"));
-				
+
 			} else {
 				System.out.println("Address Details, DirectLine and Email field are having the values:::");
 				report.updateTestLog("Lead Page", "Address Details, DirectLine and Email field are having the values::",
@@ -853,10 +908,10 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementVisible(driver, saveConvertButton, 4);
 		Utility_Functions.xClick(driver, saveConvertButton, true);
 		Utility_Functions.timeWait(3);
-		
+
 		//driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@src,'LeadConversionRed')]")));
 		Utility_Functions.xSwitchtoFrame(driver, convertLeadTitle);
-		
+
 		Utility_Functions.timeWait(1);
 		convertListValidation();
 		Utility_Functions.timeWait(3);
@@ -906,7 +961,7 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(4);	
 		Utility_Functions.xClick(driver, convert, true);
 		Utility_Functions.timeWait(3);
-/*		int size = driver.findElements(By.tagName("iframe")).size();
+		/*		int size = driver.findElements(By.tagName("iframe")).size();
 		System.out.println(size);*/
 		driver.switchTo().frame(driver.findElement(By.xpath(".//iframe[contains(@src,'LeadConversionRed')]")));
 		Utility_Functions.timeWait(3);
@@ -1005,6 +1060,186 @@ public class LeadsPage extends ReusableLibrary {
 		}
 
 	}
+	static ArrayList<String> labelsLeadsNewCustomEvent = new ArrayList<String>(); 
+	public void labelsLeadsNewCustomEvent() {
+		labelsLeadsNewCustomEvent.add("*Subject");
+		labelsLeadsNewCustomEvent.add(" Activity Type");
+		labelsLeadsNewCustomEvent.add(" Type");
+		labelsLeadsNewCustomEvent.add("Location");
+		labelsLeadsNewCustomEvent.add(" Start ");
+		labelsLeadsNewCustomEvent.add("Start Date");
+		labelsLeadsNewCustomEvent.add("Time");
+		labelsLeadsNewCustomEvent.add("EndDate");
+		labelsLeadsNewCustomEvent.add("Due Date");
+		labelsLeadsNewCustomEvent.add("Time");
+		labelsLeadsNewCustomEvent.add("Attachment");
+		labelsLeadsNewCustomEvent.add("Description");
+		labelsLeadsNewCustomEvent.add("*Assigned To");
+		labelsLeadsNewCustomEvent.add("Lead");
 
+
+
+	}
+	/**
+	 * Validating the manage Opportunity verify Custom Event Page
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+	public void leadsVerifyCustomEventPage() {
+
+		Utility_Functions.xWaitForElementPresent(driver, menu_Leads, 3);
+		Utility_Functions.xClick(driver, menu_Leads, true);
+		List<WebElement> allActiveLeadsList = driver.findElements(
+				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xclickgetTextofFirstElementfromList(allActiveLeadsList);
+		Utility_Functions.timeWait(5);
+		Utility_Functions.xWaitForElementPresent(driver, selectNewEvent, 3);
+		Utility_Functions.xClick(driver, selectNewEvent, true);
+		Utility_Functions.xWaitForElementPresent(driver, newEvent, 3);
+		Actions action  = new Actions(driver.getWebDriver());
+		action.moveToElement(newEvent);
+		action.click();
+		action.build().perform();
+		Utility_Functions.timeWait(3);
+
+		/*int size = driver.findElements(By.tagName("iframe")).size();
+		System.out.println(size);
+		Utility_Functions.timeWait(2);
+		List<WebElement> iframeList = driver.findElements(By.tagName("iframe"));
+		System.out.println(iframeList.size());
+		for (WebElement element : iframeList) {
+			System.out.println(element.getAttribute("id"));
+		}*/
+
+		driver.switchTo().frame(2);
+		Utility_Functions.timeWait(5);
+
+		if(addAnEventPage.getText().contains("Add an Event")){	
+
+			System.out.println("The New Custom Event Page is displayed");
+			report.updateTestLog("Verify Leads Custom Event Page", "The New Custom Event Page is Displayed", Status.PASS);
+		}else{
+			System.out.println("The New Custom Event Page is not displayed");
+			report.updateTestLog("Verify Leads Custom Event Page", "The New Custom Event Page is not Displayed", Status.FAIL);
+		}
+
+
+		List<WebElement> drop = driver.findElements(By.xpath("//div[@class='slds-select_container']"));
+
+		java.util.Iterator<WebElement> i = drop.iterator();
+		while(i.hasNext()) {
+			WebElement row = i.next();
+			System.out.println(row.getText());
+			if(!row.getText().equals("")) { 
+				System.out.println("All the values for the Activity Type and Type pick list are present in  the Add an Event page");
+				report.updateTestLog("Verify Leads Custom Event Page", "Verifying the Activity Type and Type pick list values", Status.PASS);
+			}else{
+				System.out.println("All the values for the Activity Type and Type pick list are not present in  the Add an Event page");
+				report.updateTestLog("Verify Leads Custom Event Page", "Verifying the Activity Type and Type pick list values", Status.FAIL);  
+			}
+
+
+		}
+
+		if(relatedTo.getText().contains("Related To")){
+			System.out.println("Related To section is present in the New Activity Layout Page");
+			report.updateTestLog("Verify Leads Custom Event Page ","Related To section is present in the New Custom Event Page",  Status.PASS);
+		}else{
+			System.out.println("Related To section is not present in the New Activity Layout Page");
+			report.updateTestLog("Verify Leads Custom Event Page ","Related To section is not present in the New Custom Event Page",  Status.FAIL);
+
+		}
+		if(quickCreateanEvent.getText().contains("Quick Create an Event")){
+			System.out.println("Quick Create an Event section is present in the New Activity Layout Page");
+			report.updateTestLog("Verify Leads Custom Event Page ","Quick Create an Event section is present in the New Activity Page",  Status.PASS);
+		}else{
+			System.out.println("Quick Create an Event section is not present in the New Activity Layout Page");
+			report.updateTestLog("Verify Leads Custom Event Page ","Quick Create an Event section is not present in the New Activity Page",  Status.FAIL);
+
+		}
+
+		if(!setReminderCheckBox.isSelected()){
+			System.out.println("Set Reminder check box is present and not checked");
+			report.updateTestLog("Verify Leads Custom Event Page ","Set Reminder checkbox is present in the New Custom Event Page",  Status.PASS);
+
+		}else{
+			System.out.println("Set Reminder check box is not present ");
+			report.updateTestLog("Verify Leads Custom Event Page ","Set Reminder checkbox is not present in the New Custom Event Page",  Status.FAIL);
+		}
+
+		if(!cancelCustomEventPageButton.getText().equals(" ")){
+			System.out.println("Cancel button is present");
+			report.updateTestLog("Verify New Opportunity Custom Event Page ","Cancel button is present in the New Custom Event Page",  Status.PASS);
+		}else{
+			System.out.println("Cancel button is not present ");
+			report.updateTestLog("Verify Leads Custom Event Page ","Cancel button is not present in the New Custom Event Page",  Status.FAIL);
+		}
+		if(!saveAndNewEventCustomEventPageButton.getText().equals(" ")){
+			System.out.println("Save and New Custom event button is present");
+			report.updateTestLog("Verify Leads Custom Event Page ","Save and New Event button is present in the New Custom Event Page",  Status.PASS);
+		}else{
+			System.out.println("Save and New Custom event button is not present ");
+			report.updateTestLog("Verify Leads Custom Event Page ","Save and New Event button  is not present in the New Custom Event Page",  Status.FAIL);
+		}
+		if(!saveEventCustomEventPageButton.getText().equals(" ")){
+			System.out.println("Save Event button is present");
+			report.updateTestLog("Verify Leads Custom Event Page ","Save Event button is present in the New Custom Event Page",  Status.PASS);
+		}else{
+			System.out.println("Save Event button is not present ");
+			report.updateTestLog("Verify Leads Custom Event Page ","Save Event button is not present in the New Custom Event Page",  Status.FAIL);
+		}
+		try {
+
+
+			if ((!startDateNewCustomEventPage.getAttribute("value").equals(""))||(!startTimeNewCustomEventPage.getAttribute("value").equals(""))||(!endDateNewCustomEventPage.getAttribute("value").equals(""))||(!endTimeNewCustomEventPage.getAttribute("value").equals(""))) {
+				System.out.println("Assigned To, Start Date, Start Time, End Date and End Time fields are having the values ");
+				report.updateTestLog("Verify Leads Custom Event Page ",
+						"Verify Leads Custom Event Page is having the default values in the required fields ", Status.PASS);
+			} else {
+				System.out.println("New Activity Layout Page is not having the deafault values ");
+				report.updateTestLog("Verify New Opportunity Custom Event Page",
+						"Verify Leads Custom Event Page is not having the default values in the required fields", Status.FAIL);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}	
+
+		List<WebElement> customEventpageFields = driver.findElements(By.xpath("//label[@class='slds-form-element__label'] "));
+		int count = 0, i1 = 0;
+		String labelArray[] = new String[customEventpageFields.size()];
+		System.out.println(customEventpageFields.size());
+
+		try {
+			labelsLeadsNewCustomEvent();
+			for (WebElement element:customEventpageFields) {
+				labelArray[i1] = element.getText();
+				if (labelArray[i1].contains(labelsLeadsNewCustomEvent.get(i1))) {
+					report.updateTestLog("Verify New Opportunity Custom Event Page",
+							"New Leads Custom Event Page is having the " + labelArray[i1]
+									+ " field ",
+									Status.PASS);
+					count++;
+				}
+				i1++;
+			}
+			System.out.println(count);
+			if (count != 11) {
+				report.updateTestLog("Verify Leads Custom Event Page", "All Labels are not present in the Add New Event Page",
+						Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify Leads Custom Event Page", "All Labels are present in the Add New Event Page",
+						Status.PASS);
+			}
+
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+
+
+	}
 }
 
