@@ -1,9 +1,10 @@
 package pageObjects;
 
-
-
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -162,11 +163,14 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//span[text()='Preferred Property Type']/parent::div/parent::div/div[2]/div/span")
 	WebElement preferredPropertyTypeValue;
 
-	/*	@FindBy(xpath = "//*[text()='Clone']/parent::a/parent::li/parent::ul/li/a/div[text()='Edit']")
-	WebElement editButton;*/
+	/*
+	 * @FindBy(xpath =
+	 * "//*[text()='Clone']/parent::a/parent::li/parent::ul/li/a/div[text()='Edit']")
+	 * WebElement editButton;
+	 */
 
-	@FindBy(xpath="//li[contains(@class,'slds-button slds-button--neutral slds-truncate')]//a[@class='forceActionLink']/div[@class='slds-truncate'][text()='Edit']")
-	WebElement editButton; 
+	@FindBy(xpath = "//li[contains(@class,'slds-button slds-button--neutral slds-truncate')]//a[@class='forceActionLink']/div[@class='slds-truncate'][text()='Edit']")
+	WebElement editButton;
 
 	@FindBy(xpath = "//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Opportunity Name']/parent::label/parent::div/input")
 	WebElement opportunityNameUpdate;
@@ -224,8 +228,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//input[@id='acctSearchBox3'][@class='tt-search-box slds-input tt-input']")
 	WebElement userField2;
 
-	@FindBy(xpath="//select[@class='slds-select']/option[@value='Team Member']")
-	WebElement selectTeamRole; 
+	@FindBy(xpath = "//select[@class='slds-select']/option[@value='Team Member']")
+	WebElement selectTeamRole;
 
 	@FindBy(xpath = "//select[@class='slds-select']/option[@value='Originating Broker']")
 	WebElement selectSecondaryMemberRole;
@@ -267,7 +271,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	WebElement allActiveOpportunities;
 
 	@FindBy(xpath = "//h2[contains(@id,'title')]")
-	WebElement title;	
+	WebElement title;
 
 	@FindBy(xpath = "//input[@id='acctSearchBox']")
 	WebElement accountName;
@@ -275,12 +279,67 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//p[contains(@class,'slds-page-header__title')][@title='Add an Opportunity'][text()='Add an Opportunity']")
 	WebElement addAnOpportunityTitle;
 
-	/*@FindBy(xpath = "//*[text()='Opportunities']")
-	WebElement menu_Opportunities;
+	@FindBy(xpath = "//select[contains(@id,'assignmentType')]")
+	WebElement assignmentTypeOpp;
 
-	 *
-	 */
+	@FindBy(xpath = "//input[contains(@id,'closeDate')]")
+	WebElement closeDateOpp;
 
+	@FindBy(xpath = "//span[text()='Total Size']/parent::div//input")
+	WebElement totalSizeOpp;
+
+	@FindBy(xpath = "//span[text()='Unit of Measure']/parent::div//select")
+	WebElement unitofMeasure;
+
+	@FindBy(xpath = "//span[contains(text(),'Commission')]/parent::span//input")
+	WebElement estimatedGrossFee;
+
+	@FindBy(xpath = "//label[contains(text(),'Lead Source')]/parent::div//select")
+	WebElement leadSource;
+
+	@FindBy(xpath = "//span[contains(text(),'Preferred')][contains(text(),'Property')]/parent::div//select")
+	WebElement preferredPropertyTypeOpp;
+
+	@FindBy(xpath = "//div[contains(@class,'slds-media__body')]//input[@value='Save']")
+	WebElement saveNewOpportunity;
+
+	@FindBy(xpath = "h1[contains(@class,'slds-page-header__title')]//span[contains(text(),'-')]")
+	WebElement newOpportunityName;
+	
+	@FindBy(xpath = "//table[contains(@class,'forceRecordLayout')]//span[contains(@class,'forceOutputCurrency')]")
+	WebElement installmentAmount;
+	
+	@FindBy(xpath = "//table[contains(@class,'forceRecordLayout')]//tr[1]//span[contains(@class,'forceOutputCurrency')]")
+	WebElement installmentAmountOne;
+	
+	@FindBy(xpath = "//table[contains(@class,'forceRecordLayout')]//tr[2]//span[contains(@class,'forceOutputCurrency')]")
+	WebElement installmentAmountTwo;	
+	
+	@FindBy(xpath = "//li[contains(@class,'oneActionsDropDown')]//a")
+	WebElement showMoreActions;
+	
+	@FindBy(xpath = "//div[contains(@class,'actionMenu')]//a[@title='Recalculate']")
+	WebElement recalculate;
+	
+	@FindBy(xpath = "//input[contains(@id,'opportunityRefractorPageLightningForm') and contains(@id,'Quantity')]")
+	WebElement installmentQuantity;
+	
+	@FindBy(xpath = "//*[@id='Page:opportunityRefractorPageLightningForm:saveButton']")
+	WebElement proceed;
+	
+	@FindBy(xpath = "//*[@id='Page:opportunityRefractorPageLightningForm:ContinueButton']")
+	WebElement continueButtonInstallment;
+	
+	@FindBy(xpath = "//div[contains(@class,'actionsContainer')]//div[text()='Edit']")
+	WebElement editButtonInstallment;
+	
+	@FindBy(xpath = "//div[@class='slds-form-element__control']//span[text()='Estimated Gross Fee/Commission']/parent::label/parent::div/input")
+	WebElement estimatedGrossFeeEdit;
+	
+	@FindBy(xpath = "//div[@class='modal-footer slds-modal__footer']//span[text()='Save']")
+	WebElement saveInstallmentButton;
+	
+	
 	/****
 	 * Ramya
 	 */
@@ -331,9 +390,6 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath="//input[contains(@id,'EndTime')]")
 	WebElement endTimeNewCustomEventPage;
-
-	//input[@placeholder='Search Accounts']
-
 	HomePage hp = new HomePage(scriptHelper);
 	SearchTextSOQL searchOpportunity = new SearchTextSOQL(scriptHelper);
 	OpportunitiesFunctions opportunitiesFunctions = new OpportunitiesFunctions(scriptHelper);
@@ -419,11 +475,11 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
 		Utility_Functions.xClick(driver, menu_Opportunities, true);
 		Utility_Functions.xClick(driver, newOpportunity, true);
-		//driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@src,'OpportunityDefault')]")));
+		// driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@src,'OpportunityDefault')]")));
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xSwitchtoFrame(driver, continueButton);
-		Utility_Functions.xWaitForElementPresent(driver, continueButton, 5);		
-		Utility_Functions.xClick(driver, continueButton, true);		
+		Utility_Functions.xWaitForElementPresent(driver, continueButton, 5);
+		Utility_Functions.xClick(driver, continueButton, true);
 		driver.switchTo().defaultContent();
 		Utility_Functions.xSwitchtoFrame(driver, viewAllFieldsButton);
 		Utility_Functions.xWaitForElementPresent(driver, viewAllFieldsButton, 5);
@@ -516,8 +572,6 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void requiredFieldsbetweenw03_05Stages() {
-
-		SearchTextSOQL searchOpportunity = new SearchTextSOQL(scriptHelper);
 		String query = "SELECT Id, Name FROM Opportunity where StageName > '03-RFP/Proposal' and StageName < '15-Signed Lease' and Total_Size__c !=null and CBRE_Preferred_Property_Type_c__c !=null limit 10";
 		String OpportunityID = searchOpportunity.searchOpportunity(query);
 		report.updateTestLog("Verify Opportunity Required Fields",
@@ -528,16 +582,14 @@ public class OpportunitiesPage extends ReusableLibrary {
 		report.updateTestLog("Verify Add Opportunity Page Fields",
 				"URL has been replaced with the new URL having the retrieved Opportunity:::" + newUrl, Status.PASS);
 		driver.get(newUrl);
-		/*Utility_Functions.timeWait(1);
-		Utility_Functions.xScrollWindowOnce(driver);
-		Utility_Functions.xScrollWindowTop(driver);
-		Utility_Functions.xWaitForElementVisible(driver, totalSizeValue, 5);
-		Utility_Functions.xWaitForElementVisible(driver, preferredPropertyTypeValue, 3);*/
+
 		SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
 		String query_TotalSize = "Select Total_Size__c from Opportunity where Id = " + "'" + OpportunityID + "'";
 		String totalSize = searchTextSOQL.fetchRecordFieldValue("Total_Size__c", query_TotalSize);
-		String query_PreferredPropertyType = "Select CBRE_Preferred_Property_Type_c__c  from Opportunity where Id = " + "'" + OpportunityID + "'";
-		String preferredPropertyType = searchTextSOQL.fetchRecordFieldValue("CBRE_Preferred_Property_Type_c__c", query_PreferredPropertyType);
+		String query_PreferredPropertyType = "Select CBRE_Preferred_Property_Type_c__c  from Opportunity where Id = "
+				+ "'" + OpportunityID + "'";
+		String preferredPropertyType = searchTextSOQL.fetchRecordFieldValue("CBRE_Preferred_Property_Type_c__c",
+				query_PreferredPropertyType);
 
 		try {
 			if (!(totalSize.equals("")) && !(preferredPropertyType.equals(" "))) {
@@ -574,7 +626,6 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void requiredFieldsbetweenw16_19Stages() {
-		SearchTextSOQL searchOpportunity = new SearchTextSOQL(scriptHelper);
 		String query = "SELECT Id, Name FROM Opportunity where StageName > '16-In Escrow' and StageName < '19-Closed' and Total_Size__c !=null limit 10";
 		String OpportunityID = searchOpportunity.searchOpportunity(query);
 		report.updateTestLog("Verify Opportunity Required Fields",
@@ -585,8 +636,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 		report.updateTestLog("Verify Add Opportunity Page Fields",
 				"URL has been replaced with the new URL having the retrieved Opportunity:::" + newUrl, Status.PASS);
 		driver.get(newUrl);
-		Utility_Functions.timeWait(1); 
-		validateOpportunityFields(OpportunityID);		
+		Utility_Functions.timeWait(1);
+		validateOpportunityFields(OpportunityID);
 	}
 
 	/**
@@ -598,12 +649,12 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	public void opportunitySharing() {
 
-		SearchTextSOQL searchOpportunity = new SearchTextSOQL(scriptHelper);
 		String queryOpp = "SELECT Id, Name FROM Opportunity where StageName > '16-In Escrow' and StageName < '17-Closed' and Total_Size__c !=null limit 10";
 		String Opportunity = searchOpportunity.searchOpportunity(queryOpp);
 		Utility_Functions.xClick(driver, menu_Opportunities, true);
 		Utility_Functions.timeWait(2);
-		List<WebElement> opportunitiesList = driver.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'006')]"));
+		List<WebElement> opportunitiesList = driver.findElements(By.xpath(
+				"//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'006')]"));
 		Utility_Functions.xclickRandomElement(opportunitiesList);
 		Utility_Functions.timeWait(1);
 		String url = driver.getCurrentUrl().split("#")[0];
@@ -616,17 +667,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xSwitchtoFrame(driver, opportunitySharing);
 		Utility_Functions.xWaitForElementPresent(driver, opportunitySharing, 4);
-		driver.switchTo().defaultContent();		
-		Utility_Functions.timeWait(2);
-		/*Utility_Functions.xSwitchtoFrame(driver, createNewLink);
-		Utility_Functions.xWaitForElementPresent(driver, createNewLink, 4);
-		Utility_Functions.timeWait(2);
 		driver.switchTo().defaultContent();
-		Utility_Functions.timeWait(2);*/
-		/*Utility_Functions.xSwitchtoFrame(driver, addButtonSharing);		
-		Utility_Functions.xWaitForElementPresent(driver, addButtonSharing, 5);*/
-		/*	driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@src,'OpportunitySharingRedirect?')]")));
-		Utility_Functions.timeWait(2);*/
+		Utility_Functions.timeWait(2);
 		driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@src,'share/OppSharingDetail?')]")));
 		Utility_Functions.xWaitForElementPresent(driver, addButtonSharing, 5);
 		Utility_Functions.xClick(driver, addButtonSharing, true);
@@ -718,7 +760,6 @@ public class OpportunitiesPage extends ReusableLibrary {
 		}
 	}
 
-
 	/**
 	 * Function for validating the Opportunity fields
 	 * 
@@ -742,14 +783,16 @@ public class OpportunitiesPage extends ReusableLibrary {
 		String query_TotalSize = "Select Total_Size__c from Opportunity where Id = " + "'" + OpportunityID + "'";
 		totalSize = searchTextSOQL.fetchRecordFieldValue("Total_Size__c", query_TotalSize);
 
-		String query_PreferredPropertyType = "Select CBRE_Preferred_Property_Type_c__c from Opportunity where Id = " + "'" + OpportunityID + "'";
-		preferredPropertyType = searchTextSOQL.fetchRecordFieldValue("CBRE_Preferred_Property_Type_c__c", query_PreferredPropertyType);
+		String query_PreferredPropertyType = "Select CBRE_Preferred_Property_Type_c__c from Opportunity where Id = "
+				+ "'" + OpportunityID + "'";
+		preferredPropertyType = searchTextSOQL.fetchRecordFieldValue("CBRE_Preferred_Property_Type_c__c",
+				query_PreferredPropertyType);
 
 		String query_LeaseFrom = "Select Lease_From__c from Opportunity where Id = " + "'" + OpportunityID + "'";
 		leaseFrom = searchTextSOQL.fetchRecordFieldValue("Lease_From__c", query_LeaseFrom);
 
 		String query_LeaseTo = "Select Lease_To__c from Opportunity where Id = " + "'" + OpportunityID + "'";
-		leaseTo = searchTextSOQL.fetchRecordFieldValue("Lease_To__c", query_LeaseTo);		
+		leaseTo = searchTextSOQL.fetchRecordFieldValue("Lease_To__c", query_LeaseTo);
 
 		String query_LeaseTerm = "Select Lease_Term__c	from Opportunity where Id = " + "'" + OpportunityID + "'";
 		leaseTerm = searchTextSOQL.fetchRecordFieldValue("Lease_Term__c", query_LeaseTerm);
@@ -757,14 +800,14 @@ public class OpportunitiesPage extends ReusableLibrary {
 		String query_LeaseRate = "Select Lease_Rate_Rent__c	 from Opportunity where Id = " + "'" + OpportunityID + "'";
 		leaseRate = searchTextSOQL.fetchRecordFieldValue("Lease_Rate_Rent__c", query_LeaseRate);
 
-		String query_LeaseRateRentBasis = "Select Lease_Rate_Rent_Basis__c from Opportunity where Id = " + "'" + OpportunityID + "'";
+		String query_LeaseRateRentBasis = "Select Lease_Rate_Rent_Basis__c from Opportunity where Id = " + "'"
+				+ OpportunityID + "'";
 		leaseRateRentBasis = searchTextSOQL.fetchRecordFieldValue("Lease_Rate_Rent_Basis__c", query_LeaseRateRentBasis);
-
 
 		try {
 			if (!totalSize.equals("")) {
-				report.updateTestLog("Verify Opportunity Fields",
-						"Total Size field is not blank:::" + totalSize, Status.PASS);
+				report.updateTestLog("Verify Opportunity Fields", "Total Size field is not blank:::" + totalSize,
+						Status.PASS);
 			} else {
 				report.updateTestLog("Verify Opportunity Fields", "Total Size field is blank:::" + totalSize,
 						Status.WARNING);
@@ -781,8 +824,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 				update.updateOpportunityField("Preferred_Property_Sub_Type__c", newopportunityID);
 			}
 			if (!leaseFrom.equals("")) {
-				report.updateTestLog("Verify Opportunity Fields",
-						"LeaseFrom field is not blank:::" + leaseFrom, Status.PASS);
+				report.updateTestLog("Verify Opportunity Fields", "LeaseFrom field is not blank:::" + leaseFrom,
+						Status.PASS);
 			} else {
 				report.updateTestLog("Verify Opportunity Fields", "LeaseFrom field is blank:::" + leaseFrom,
 						Status.WARNING);
@@ -798,16 +841,16 @@ public class OpportunitiesPage extends ReusableLibrary {
 				update.updateOpportunityField("Lease_To__c", newopportunityID);
 			}
 			if (!leaseTerm.equals("")) {
-				report.updateTestLog("Verify Opportunity Fields",
-						"LeaseTerm field is not blank:::" + leaseTerm, Status.PASS);
+				report.updateTestLog("Verify Opportunity Fields", "LeaseTerm field is not blank:::" + leaseTerm,
+						Status.PASS);
 			} else {
 				report.updateTestLog("Verify Opportunity Fields", "LeaseTerm field is blank:::" + leaseTo,
 						Status.WARNING);
 				update.updateOpportunityField("Lease_Term__c", newopportunityID);
 			}
 			if (!leaseRate.equals("")) {
-				report.updateTestLog("Verify Opportunity Fields",
-						"LeaseRate field is not blank:::" + leaseRate, Status.PASS);
+				report.updateTestLog("Verify Opportunity Fields", "LeaseRate field is not blank:::" + leaseRate,
+						Status.PASS);
 			} else {
 				report.updateTestLog("Verify Opportunity Fields", "LeaseRate field is blank:::" + leaseRate,
 						Status.WARNING);
@@ -844,31 +887,28 @@ public class OpportunitiesPage extends ReusableLibrary {
 			}
 			if (!leaseFrom.equals("")) {
 				report.updateTestLog("Verify Opportunity Fields",
-						"LeaseFrom field is blank:::" + leaseFrom + " opportunity saved successfully",
-						Status.PASS);
+						"LeaseFrom field is blank:::" + leaseFrom + " opportunity saved successfully", Status.PASS);
 				count++;
 			}
 			if (!leaseTo.equals("")) {
 				report.updateTestLog("Verify Opportunity Fields",
-						"LeaseTo field is blank:::" + leaseTo + " opportunity saved successfully",
-						Status.PASS);
+						"LeaseTo field is blank:::" + leaseTo + " opportunity saved successfully", Status.PASS);
 				count++;
 			}
 			if (!leaseTerm.equals("")) {
 				report.updateTestLog("Verify Opportunity Fields",
-						"LeaseTerm field is blank:::" + leaseTerm + " opportunity saved successfully",
-						Status.PASS);
+						"LeaseTerm field is blank:::" + leaseTerm + " opportunity saved successfully", Status.PASS);
 				count++;
 			}
 			if (!leaseRate.equals("")) {
 				report.updateTestLog("Verify Opportunity Fields",
-						"LeaseRate field is blank:::" + leaseRate + " opportunity saved successfully",
-						Status.PASS);
+						"LeaseRate field is blank:::" + leaseRate + " opportunity saved successfully", Status.PASS);
 				count++;
 			}
 			if (!leaseRateRentBasis.equals("")) {
-				report.updateTestLog("Verify Opportunity Fields", "LeaseRateRentBasis field is blank:::"
-						+ leaseRateRentBasis + " opportunity saved successfully", Status.PASS);
+				report.updateTestLog("Verify Opportunity Fields",
+						"LeaseRateRentBasis field is blank:::" + leaseRateRentBasis + " opportunity saved successfully",
+						Status.PASS);
 				count++;
 			}
 			System.out.println(count);
@@ -898,11 +938,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		List<WebElement> OpportunitiesList = driver
 				.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-		/*
-		 * Random random = new Random(); int randomValue =
-		 * random.nextInt(OpportunitiesList.size());
-		 * OpportunitiesList.get(randomValue).click();
-		 */
+
 		Utility_Functions.xclickOnFirstElementfromList(OpportunitiesList);
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xClick(driver, related, true);
@@ -1061,17 +1097,16 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(3);
 		splitPercent.sendKeys("100");
 		Utility_Functions.xClick(driver, saveOpportunitySplit, true);
-		report.updateTestLog("Opportunity Saved",
-				"Opportunity Saved successfully::", Status.PASS);
+		report.updateTestLog("Opportunity Saved", "Opportunity Saved successfully::", Status.PASS);
 		Utility_Functions.timeWait(3);
 	}
 
 	/**
-	 * Function for retrieving the Opportunity 
+	 * Function for retrieving the Opportunity
 	 * 
 	 * @author Vishnuvardhan
 	 *
-	 */	
+	 */
 
 	public String retriveOpportunity() {
 		String query = "SELECT Id, Name FROM Opportunity where StageName < '16-In Escrow'";
@@ -1087,42 +1122,62 @@ public class OpportunitiesPage extends ReusableLibrary {
 	}
 
 	/**
-	 * Function for creating  an Opportunity
+	 * Function for creating an Opportunity
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */
 
-	public String createOpportunity() {
+	public String opportunityNameAutoGenerate_API() {
 		String accountName = null;
 		try {
 			establishConnection();
 			SObject opportunity = new SObject();
 			opportunity.setType("Opportunity");
-			//Random random = new Random();
-			//int value = random.nextInt(1000);
-			//opportunity.setField("Name", "Test Automation_Opportunity" + value);
-			//String accountId = createAccount();					
-			SearchTextSOQL accountID = new SearchTextSOQL(scriptHelper);
-			String accountId = accountID.fetchRecord("Account", "Id");
-			String query = "Select Name from Account where Id = " + "'"+ accountId + "'";
-			accountName = accountID.fetchRecordFieldValue("Name", query);
-			opportunity.setField("AccountId", accountId);
+			/*	SearchTextSOQL accountID = new SearchTextSOQL(scriptHelper);
+			String accountId = accountID.fetchRecord("Account", "Id");*/
+			int value = Utility_Functions.xRandomFunction();
+			opportunity.setField("Name", "Test Automation_" + value);
+			opportunity.setField("AccountId", "0010S000004SaIHQA0");
 			opportunity.setField("CloseDate", Calendar.getInstance());
-			opportunity.setField("RecordTypeId", "012i0000000405n");
-			opportunity.setField("StageName", "Qualification");
-			opportunity.setField("Service__c", "Business Valuation");
+			opportunity.setField("RecordTypeId", "012i0000000405jAAA");
+			opportunity.setField("StageName", "1-Target");
+			//opportunity.setField("Service__c", "Business Valuation");
 			opportunity.setField("Total_Size__c", 5000);
-			opportunity.setField("Unit_of_Measure__c", "Acres");			
+			opportunity.setField("Unit_of_Measure__c", "Acres");
+			opportunity.setField("Type_of_Client__c", "New Business");
 
+			opportunity.setField("Leasing__c", "Yes");
+			opportunity.setField("Management__c", "Yes");
+			opportunity.setField("Capital_Markets__c", "Yes");
+			opportunity.setField("Accounting__c", "Yes");
+			opportunity.setField("Tech_Services__c", "Yes");
+			opportunity.setField("Project_Management__c	", "Yes");
+			opportunity.setField("Sustainability__c", "Yes");
+			opportunity.setField("Consultancy__c", "Yes");
+			opportunity.setField("FM_Lite__c", "Yes");
+
+
+			if (dataTable.getData("General_Data", "TC_ID").contains("AMER")) {
+				opportunity.setField("Region__c	", "US National");
+				opportunity.setField("Market__c	", "Boston");				
+			} else if (dataTable.getData("General_Data", "TC_ID").contains("EMEA")) {
+				opportunity.setField("Region__c	", "EMEA");
+				opportunity.setField("Market__c	", "Africa");
+			} else if (dataTable.getData("General_Data", "TC_ID").contains("APAC")) {
+				opportunity.setField("Region__c	", "APAC");
+				opportunity.setField("Market__c	", "Australia");
+			}			
 			SObject[] opportunities = new SObject[1];
 			opportunities[0] = opportunity;
 			results = EstablishConnection.connection.create(opportunities);
+			report.updateTestLog("Opportunity Name", "Opportunity for the record type Asset Services is created successfully:::", Status.PASS);
 			System.out.println("Result:::" + results);
 			for (int j = 0; j < results.length; j++) {
 				if (results[j].isSuccess()) {
 					result = results[j].getId();
 					System.out.println("Save Results:::" + result);
+					report.updateTestLog("Opportunity Name", "Opportunity Id:::" + result +" successfully:::", Status.PASS);
 				}
 			}
 		} catch (Exception e) {
@@ -1138,44 +1193,48 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 * 
 	 * @author Vishnuvardhan
 	 *
-	 */	
+	 */
 
 	public void modifyAutoGeneratedOpportunityName() {
-
 		try {
 			String recordTypeId;
-			if(dataTable.getData("General_Data", "TC_ID").contains("DSF")) {
+			if (dataTable.getData("General_Data", "TC_ID").contains("DSF")) {
 				recordTypeId = "012i0000000405lAAA";
-				report.updateTestLog("Opportunity Name", "Record type is set as Capital Markets - Debt & Structured Finance:::", Status.PASS);
-			} else if(dataTable.getData("General_Data", "TC_ID").contains("PS")) {
+				report.updateTestLog("Opportunity Name",
+						"Record type is set as Capital Markets - Debt & Structured Finance:::", Status.PASS);
+			} else if (dataTable.getData("General_Data", "TC_ID").contains("PS")) {
 				recordTypeId = "012i0000000405kAAA";
 				report.updateTestLog("Opportunity Name", "Record type is set as Property Sales", Status.PASS);
-			} else if(dataTable.getData("General_Data", "TC_ID").contains("GWS")) {
+			} else if (dataTable.getData("General_Data", "TC_ID").contains("GWS")) {
 				recordTypeId = "012i0000000405mAAA";
-				report.updateTestLog("Opportunity Name", "Record type is set as Global Workplace Solutions", Status.PASS);
-			} else if(dataTable.getData("General_Data", "TC_ID").contains("VAS")) {
+				report.updateTestLog("Opportunity Name", "Record type is set as Global Workplace Solutions",
+						Status.PASS);
+			} else if (dataTable.getData("General_Data", "TC_ID").contains("VAS")) {
 				recordTypeId = "012i0000000405oAAA";
-				report.updateTestLog("Opportunity Name", "Record type is set as Valuation & Advisory Services", Status.PASS);
-			} /*else if(dataTable.getData("General_Data", "TC_ID").contains("AS")) {
-				opportunity.setField("RecordTypeId", "012i0000000405jAAA");	
-				report.updateTestLog("Opportunity Name", "Record type is set as Asset Services", Status.PASS);
-			} */else if(dataTable.getData("General_Data", "TC_ID").contains("AB")) {
+				report.updateTestLog("Opportunity Name", "Record type is set as Valuation & Advisory Services",
+						Status.PASS);
+			} else if(dataTable.getData("General_Data","TC_ID").contains("AS")) {
+				recordTypeId = "012i0000000405jAAA";
+				report.updateTestLog("Opportunity Name","Record type is set as Asset Services", Status.PASS); 
+			} else if (dataTable.getData("General_Data", "TC_ID").contains("AB")) {
 				recordTypeId = "012i0000001622CAAQ";
 				report.updateTestLog("Opportunity Name", "Record type is set as Agency Brokerage", Status.PASS);
-			} else if(dataTable.getData("General_Data", "TC_ID").contains("OB")) {
+			} else if (dataTable.getData("General_Data", "TC_ID").contains("OB")) {
 				recordTypeId = "012i0000000405nAAA";
 				report.updateTestLog("Opportunity Name", "Record type is set as Occupier Brokerage", Status.PASS);
-			}  else {
+			} else {
 				recordTypeId = "012i0000000405n";
 			}
-			boolean isStatus = false; 
+			boolean isStatus = false;
 			String query = "SELECT Name, Id, Service__C, Total_Size__c, Unit_of_Measure__c FROM Opportunity where Name like "
-					+ "'%-%-%-%' and StageName > '03-RFP/Proposal' and StageName < '15-Signed Lease' and RecordTypeId = " + "'" + recordTypeId + "'";
+					+ "'%-%-%-%' and StageName > '03-RFP/Proposal' and StageName < '15-Signed Lease' and RecordTypeId = "
+					+ "'" + recordTypeId + "'";
 			SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
 			String opportunityID = searchTextSOQL.fetchRecordFieldValue("Id", query);
-			while(!isStatus) {
-				if(opportunityID==null) {	
-					report.updateTestLog("Opportunity", "No Opportunities present for the Record Type selected:::", Status.PASS);
+			while (!isStatus) {
+				if (opportunityID == null) {
+					report.updateTestLog("Opportunity", "No Opportunities present for the Record Type selected:::",
+							Status.PASS);
 					isStatus = false;
 					break;
 				} else {
@@ -1183,11 +1242,14 @@ public class OpportunitiesPage extends ReusableLibrary {
 					String assignmentType = searchTextSOQL.fetchRecordFieldValue("Service__c", query);
 					String totalSize = searchTextSOQL.fetchRecordFieldValue("Total_Size__c", query);
 					String unitOfMeasure = searchTextSOQL.fetchRecordFieldValue("Unit_of_Measure__c", query);
-					report.updateTestLog("Fetched Opportunity Name", "Opportunity Name:::" + opportunityName, Status.PASS);
-					report.updateTestLog("Fetched Opportunity Name", "Opportunity Assignment Type:::" + assignmentType, Status.PASS);
-					report.updateTestLog("Fetched Opportunity Name", "Opportunity Total Size:::" + totalSize, Status.PASS);
-					report.updateTestLog("Fetched Opportunity Name", "Opportunity Unit of Measure:::" + unitOfMeasure, Status.PASS);
-					OpportunitiesFunctions opportunitiesFunctions = new OpportunitiesFunctions(scriptHelper);			
+					report.updateTestLog("Fetched Opportunity Name", "Opportunity Name:::" + opportunityName,
+							Status.PASS);
+					report.updateTestLog("Fetched Opportunity Name", "Opportunity Assignment Type:::" + assignmentType,
+							Status.PASS);
+					report.updateTestLog("Fetched Opportunity Name", "Opportunity Total Size:::" + totalSize,
+							Status.PASS);
+					report.updateTestLog("Fetched Opportunity Name", "Opportunity Unit of Measure:::" + unitOfMeasure,
+							Status.PASS);
 					opportunitiesFunctions.updateOpportunityField("Service__c", opportunityID);
 					opportunitiesFunctions.updateOpportunityField("Total_Size__c", opportunityID);
 					opportunitiesFunctions.updateOpportunityField("Unit_of_Measure__c", opportunityID);
@@ -1195,104 +1257,109 @@ public class OpportunitiesPage extends ReusableLibrary {
 					String updatedAssignmentType = searchTextSOQL.fetchRecordFieldValue("Service__c", query);
 					String updatedTotalSize = searchTextSOQL.fetchRecordFieldValue("Total_Size__c", query);
 					String updatedUnitOfMeasure = searchTextSOQL.fetchRecordFieldValue("Unit_of_Measure__c", query);
-					if(updatedAssignmentType.equals("Project Management")) {
-						report.updateTestLog("Modified Opportunity Name", "Opportunity Name modified according to the AssignmentType selected:::" + updatedAssignmentType, Status.PASS);
+					if (updatedAssignmentType.equals("Project Management")) {
+						report.updateTestLog("Modified Opportunity Name",
+								"Opportunity Name modified according to the AssignmentType selected:::"
+										+ updatedAssignmentType,
+										Status.PASS);
 					} else {
-						report.updateTestLog("Modified Opportunity Name", "Opportunity Name didn't get modified according to the AssignmentType selected:::" + updatedAssignmentType, Status.FAIL);
+						report.updateTestLog("Modified Opportunity Name",
+								"Opportunity Name didn't get modified according to the AssignmentType selected:::"
+										+ updatedAssignmentType,
+										Status.FAIL);
 					}
-					if(updatedTotalSize.equals("2900.0")) {
-						report.updateTestLog("Modified Opportunity Name", "Opportunity Name modified according to the Total Size selected:::" + updatedTotalSize, Status.PASS);
+					if (updatedTotalSize.equals("2900.0")) {
+						report.updateTestLog("Modified Opportunity Name",
+								"Opportunity Name modified according to the Total Size selected:::" + updatedTotalSize,
+								Status.PASS);
 					} else {
-						report.updateTestLog("Modified Opportunity Name", "Opportunity Name didn't get modified according to the Total Size selected:::" + updatedTotalSize, Status.FAIL);
+						report.updateTestLog("Modified Opportunity Name",
+								"Opportunity Name didn't get modified according to the Total Size selected:::"
+										+ updatedTotalSize,
+										Status.FAIL);
 					}
-					if(updatedUnitOfMeasure.equals("Hectares")) {
-						report.updateTestLog("Modified Opportunity Name", "Opportunity Name modified according to the Unit of Measure selected:::" + updatedUnitOfMeasure, Status.PASS);
+					if (updatedUnitOfMeasure.equals("Hectares")) {
+						report.updateTestLog("Modified Opportunity Name",
+								"Opportunity Name modified according to the Unit of Measure selected:::"
+										+ updatedUnitOfMeasure,
+										Status.PASS);
 					} else {
-						report.updateTestLog("Modified Opportunity Name", "Opportunity Name didn't get modified according to the Unit of Measure selected:::" + updatedUnitOfMeasure, Status.FAIL);
+						report.updateTestLog("Modified Opportunity Name",
+								"Opportunity Name didn't get modified according to the Unit of Measure selected:::"
+										+ updatedUnitOfMeasure,
+										Status.FAIL);
 					}
 					isStatus = true;
-				}	
+				}
 			}
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.getMessage();
 		}
 
-
 	}
 
-	/*public void modifyAccountNameOpportunity() {
-		createOpportunity();
-		String accountName;
-		String OpportunityID = retriveOpportunity();
-		Utility_Functions.xWaitForElementVisible(driver, edit, 5);
-		Utility_Functions.timeWait(3);
-		Utility_Functions.xClick(driver, menu_Opportunities, true);
-		Utility_Functions.timeWait(2);		
-		Utility_Functions.xClick(driver, recentlyViewed, true);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xClick(driver, allActiveOpportunities, true);	
-		Utility_Functions.timeWait(2);
-		List<WebElement> allOpportunitiesList = driver.findElements(
-				By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'006i')]"));
-		Utility_Functions.xclickRandomElement(allOpportunitiesList);			
-		//driver.navigate().refresh();
-		Utility_Functions.timeWait(3);
-		Utility_Functions.xClick(driver, edit, true);
-		Utility_Functions.timeWait(2);
-		try {
-
-			if(title.isDisplayed()) {
-				Utility_Functions.xWaitForElementVisible(driver, deleteAccountName, 5);
-				Utility_Functions.xClick(driver, deleteAccountName, true);
-				Utility_Functions.xSendKeys(driver, enterNewAccountName, "Test");
-				Utility_Functions.timeWait(1);
-				List<WebElement> accountList = driver.findElements(By.xpath("//li[@class='lookup__item force default uiAutocompleteOption forceSearchInputLookupDesktopOption']"));
-				accountName = Utility_Functions.xclickRandomElement(accountList);
-				Utility_Functions.timeWait(1);
-				Utility_Functions.xScrollWindow(driver);
-				Utility_Functions.timeWait(1);
-				Utility_Functions.xScrollWindowTop(driver);
-				Utility_Functions.timeWait(1);
-
-			}
-
-
-		} catch(Exception e) {
-			System.out.println(e.getMessage());
-		}
-
-
-		try {
-			if(accountList.isEmpty()) {
-				AccountsFunctions accountsFunctions = new AccountsFunctions(scriptHelper);
-				accountsFunctions.createAccount();
-				accountName = searchOpportunity.fetchRecord("Account", "Name");
-				Utility_Functions.xSendKeys(driver, enterNewAccountName, accountName);
-			} else {
-				accountName = Utility_Functions.xclickRandomElement(accountList);
-			}
-			Utility_Functions.timeWait(1);
-			Utility_Functions.xClick(driver, save, true);	
-			Utility_Functions.timeWait(5);
-			String query = "SELECT Name FROM Opportunity where Id = " + "'" + OpportunityID + "'";
-			String opportunityName = searchOpportunity.fetchRecordFieldValue("Name", query);
-			opportunitiesFunctions.updateOpportunityField("StageName", OpportunityID);
-			opportunitiesFunctions.updateOpportunityField("Service__c", OpportunityID);
-			if(accountName.contains(opportunityName)) {
-				report.updateTestLog("Opportunity Name","Opportunity name modified successfully::" , Status.PASS);
-				report.updateTestLog("Opportunity Name","Opportunity Assignment Type modified successfully::", Status.PASS);
-			} else {
-				report.updateTestLog("Opportunity Name","Opportunity name modification failed::" , Status.FAIL);
-			}
-			if(opportunityName.split("-")[1].contains("Project Management")) {
-				report.updateTestLog("Opportunity Name","Opportunity name saved with Opportunity Name followed by Assignment Type successfully", Status.PASS);
-			} else {
-				report.updateTestLog("Opportunity Name","Opportunity name saved with Opportunity Name followed by Assignment Type failed", Status.FAIL);
-			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-	}*/
+	/*
+	 * public void modifyAccountNameOpportunity() { createOpportunity(); String
+	 * accountName; String OpportunityID = retriveOpportunity();
+	 * Utility_Functions.xWaitForElementVisible(driver, edit, 5);
+	 * Utility_Functions.timeWait(3); Utility_Functions.xClick(driver,
+	 * menu_Opportunities, true); Utility_Functions.timeWait(2);
+	 * Utility_Functions.xClick(driver, recentlyViewed, true);
+	 * Utility_Functions.timeWait(1); Utility_Functions.xClick(driver,
+	 * allActiveOpportunities, true); Utility_Functions.timeWait(2);
+	 * List<WebElement> allOpportunitiesList = driver.findElements( By.
+	 * xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'006i')]"
+	 * )); Utility_Functions.xclickRandomElement(allOpportunitiesList);
+	 * //driver.navigate().refresh(); Utility_Functions.timeWait(3);
+	 * Utility_Functions.xClick(driver, edit, true);
+	 * Utility_Functions.timeWait(2); try {
+	 * 
+	 * if(title.isDisplayed()) {
+	 * Utility_Functions.xWaitForElementVisible(driver, deleteAccountName, 5);
+	 * Utility_Functions.xClick(driver, deleteAccountName, true);
+	 * Utility_Functions.xSendKeys(driver, enterNewAccountName, "Test");
+	 * Utility_Functions.timeWait(1); List<WebElement> accountList =
+	 * driver.findElements(By.
+	 * xpath("//li[@class='lookup__item force default uiAutocompleteOption forceSearchInputLookupDesktopOption']"
+	 * )); accountName = Utility_Functions.xclickRandomElement(accountList);
+	 * Utility_Functions.timeWait(1); Utility_Functions.xScrollWindow(driver);
+	 * Utility_Functions.timeWait(1);
+	 * Utility_Functions.xScrollWindowTop(driver);
+	 * Utility_Functions.timeWait(1);
+	 * 
+	 * }
+	 * 
+	 * 
+	 * } catch(Exception e) { System.out.println(e.getMessage()); }
+	 * 
+	 * 
+	 * try { if(accountList.isEmpty()) { AccountsFunctions accountsFunctions =
+	 * new AccountsFunctions(scriptHelper); accountsFunctions.createAccount();
+	 * accountName = searchOpportunity.fetchRecord("Account", "Name");
+	 * Utility_Functions.xSendKeys(driver, enterNewAccountName, accountName); }
+	 * else { accountName = Utility_Functions.xclickRandomElement(accountList);
+	 * } Utility_Functions.timeWait(1); Utility_Functions.xClick(driver, save,
+	 * true); Utility_Functions.timeWait(5); String query =
+	 * "SELECT Name FROM Opportunity where Id = " + "'" + OpportunityID + "'";
+	 * String opportunityName = searchOpportunity.fetchRecordFieldValue("Name",
+	 * query); opportunitiesFunctions.updateOpportunityField("StageName",
+	 * OpportunityID);
+	 * opportunitiesFunctions.updateOpportunityField("Service__c",
+	 * OpportunityID); if(accountName.contains(opportunityName)) {
+	 * report.updateTestLog("Opportunity Name"
+	 * ,"Opportunity name modified successfully::" , Status.PASS);
+	 * report.updateTestLog("Opportunity Name"
+	 * ,"Opportunity Assignment Type modified successfully::", Status.PASS); }
+	 * else { report.updateTestLog("Opportunity Name"
+	 * ,"Opportunity name modification failed::" , Status.FAIL); }
+	 * if(opportunityName.split("-")[1].contains("Project Management")) {
+	 * report.updateTestLog("Opportunity Name"
+	 * ,"Opportunity name saved with Opportunity Name followed by Assignment Type successfully"
+	 * , Status.PASS); } else { report.updateTestLog("Opportunity Name"
+	 * ,"Opportunity name saved with Opportunity Name followed by Assignment Type failed"
+	 * , Status.FAIL); } } catch (Exception e) {
+	 * System.out.println(e.getMessage()); } }
+	 */
 	/**
 	 * Validate Opportunity Name is not auto generated when manually added by
 	 * the user
@@ -1306,87 +1373,105 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	public void manualOpportunityCreation() {
 		try {
-			establishConnection();
-			SObject opportunity = new SObject();
-			Random random = new Random();
-			int value = random.nextInt();
-			String opportunityName = "Test Automation_Opportunity" + value;
-			opportunity.setType("Opportunity");
-			opportunity.setField("Name", opportunityName);
-			SearchTextSOQL accountID = new SearchTextSOQL(scriptHelper);
-			String accountId = accountID.fetchRecord("Account", "Id");
-			opportunity.setField("AccountId", accountId);
-			opportunity.setField("CloseDate", Calendar.getInstance());
-			opportunity.setField("StageName", "Qualification");
 
-			if(dataTable.getData("General_Data", "TC_ID").contains("DSF")) {
-				opportunity.setField("RecordTypeId", "012i0000000405lAAA");	
-				report.updateTestLog("Opportunity Name", "Record type is set as Capital Markets - Debt & Structured Finance:::", Status.PASS);
-			} else if(dataTable.getData("General_Data", "TC_ID").contains("PS")) {
-				opportunity.setField("RecordTypeId", "012i0000000405kAAA");	
-				report.updateTestLog("Opportunity Name", "Record type is set as Property Sales", Status.PASS);
-			} else if(dataTable.getData("General_Data", "TC_ID").contains("GWS")) {
-				opportunity.setField("RecordTypeId", "012i0000000405mAAA");	
-				report.updateTestLog("Opportunity Name", "Record type is set as Global Workplace Solutions", Status.PASS);
-			} else if(dataTable.getData("General_Data", "TC_ID").contains("VAS")) {
-				opportunity.setField("RecordTypeId", "012i0000000405oAAA");	
-				report.updateTestLog("Opportunity Name", "Record type is set as Valuation & Advisory Services", Status.PASS);
-			} /*else if(dataTable.getData("General_Data", "TC_ID").contains("AS")) {
-				opportunity.setField("RecordTypeId", "012i0000000405jAAA");	
-				report.updateTestLog("Opportunity Name", "Record type is set as Asset Services", Status.PASS);
-			} */else if(dataTable.getData("General_Data", "TC_ID").contains("AB")) {
-				opportunity.setField("RecordTypeId", "012i0000001622CAAQ");	
-				report.updateTestLog("Opportunity Name", "Record type is set as Agency Brokerage", Status.PASS);
-			} else if(dataTable.getData("General_Data", "TC_ID").contains("OB")) {
-				opportunity.setField("RecordTypeId", "012i0000000405nAAA");	
-				report.updateTestLog("Opportunity Name", "Record type is set as Occupier Brokerage", Status.PASS);
-			}  else {
-				opportunity.setField("RecordTypeId", "012i0000000405n");
-			}
+			boolean isStatus = false;			
+			while(!isStatus) {
+				establishConnection();
+				SObject opportunity = new SObject();
+				Random random = new Random();
+				int value = random.nextInt();
+				String opportunityName = "Test Automation_Opportunity" + value;
+				opportunity.setType("Opportunity");
+				opportunity.setField("Name", opportunityName);
+				SearchTextSOQL accountID = new SearchTextSOQL(scriptHelper);
+				String accountId = accountID.fetchRecord("Account", "Id");
+				opportunity.setField("AccountId", accountId);
+				opportunity.setField("CloseDate", Calendar.getInstance());
+				opportunity.setField("StageName", "Qualification");
 
-
-			SObject[] opportunities = new SObject[1];
-			opportunities[0] = opportunity;
-			results = EstablishConnection.connection.create(opportunities);
-			System.out.println("Result:::" + results);
-			for (int j = 0; j < results.length; j++) {
-				if (results[j].isSuccess()) {
-					result = results[j].getId();
-				}
-			}
-			System.out.println(result);
-			SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
-			String query = "Select Name from Opportunity where Id = '" + result + "'";
-			String generatedOpportunityName = searchTextSOQL.fetchRecordFieldValue("Name", query);
-			Utility_Functions.timeWait(1);
-			if (opportunityName.equals(generatedOpportunityName)) {
-				report.updateTestLog("Opportunity Name",
-						"Opportunity Name is not auto generated when Opportunity is manually added by the User::",
-						Status.PASS);
-			} else {
-				report.updateTestLog("Opportunity Name", "Failure in the Opportunity Name generation:::", Status.FAIL);
-			}
-			if(dataTable.getData("General_Data", "TC_ID").contains("DSF")) {
-				String queryRecordType = "Select RecordTypeId from Opportunity where Id = '" + result + "'";
-				String recordType = searchTextSOQL.fetchRecordFieldValue("RecordTypeId", queryRecordType);
-				if(recordType.equals("012i0000000405lAAA")) {
-					report.updateTestLog("Opportunity Name", "Opportunity is created by selecting the Record Type as Capital Markets - Debt & Structured Finance:::", Status.PASS);
-				} else if(recordType.equals("012i0000000405kAAA")) {
-					report.updateTestLog("Opportunity Name", "Opportunity is created by selecting the Record Type  as Property Sales:::", Status.PASS);
-				} else if(recordType.equals("012i0000000405mAAA")) {
-					report.updateTestLog("Opportunity Name", "Opportunity is created by selecting the Record Type  as Global Workplace Solutions:::", Status.PASS);
-				} else if(recordType.equals("012i0000000405oAAA")) {
-					report.updateTestLog("Opportunity Name", "Opportunity is created by selecting the Record Type  as Valuation & Advisory Services:::", Status.PASS);
-				} /*else if(recordType.equals("012i0000000405jAAA")) {
-					report.updateTestLog("Opportunity Name", "Opportunity is created by selecting the Record Type  as Asset Services:::", Status.PASS);
-				}*/ else if(recordType.equals("012i0000001622CAAQ")) {
-					report.updateTestLog("Opportunity Name", "Opportunity is created by selecting the Record Type  as Agency Brokerage:::", Status.PASS);
-				} else if(recordType.equals("012i0000000405nAAA")) {
-					report.updateTestLog("Opportunity Name", "Opportunity is created by selecting the Record Type  as Occupier Brokerage:::", Status.PASS);
+				if (dataTable.getData("General_Data", "TC_ID").contains("DSF")) {
+					opportunity.setField("RecordTypeId", "012i0000000405lAAA");
+					report.updateTestLog("Opportunity Name",
+							"Record type is set as Capital Markets - Debt & Structured Finance:::", Status.PASS);
+				} else if (dataTable.getData("General_Data", "TC_ID").contains("PS")) {
+					opportunity.setField("RecordTypeId", "012i0000000405kAAA");
+					report.updateTestLog("Opportunity Name", "Record type is set as Property Sales", Status.PASS);
+				} else if (dataTable.getData("General_Data", "TC_ID").contains("GWS")) {
+					opportunity.setField("RecordTypeId", "012i0000000405mAAA");
+					report.updateTestLog("Opportunity Name", "Record type is set as Global Workplace Solutions",
+							Status.PASS);
+				} else if (dataTable.getData("General_Data", "TC_ID").contains("VAS")) {
+					opportunity.setField("RecordTypeId", "012i0000000405oAAA");
+					report.updateTestLog("Opportunity Name", "Record type is set as Valuation & Advisory Services",
+							Status.PASS);
+				} else if(dataTable.getData("General_Data","TC_ID").contains("AS")) {
+					opportunityNameAutoGenerate_API();
+					isStatus = false;		
+					break;
+				} else if (dataTable.getData("General_Data", "TC_ID").contains("AB")) {
+					opportunity.setField("RecordTypeId", "012i0000001622CAAQ");
+					report.updateTestLog("Opportunity Name", "Record type is set as Agency Brokerage", Status.PASS);
+				} else if (dataTable.getData("General_Data", "TC_ID").contains("OB")) {
+					opportunity.setField("RecordTypeId", "012i0000000405nAAA");
+					report.updateTestLog("Opportunity Name", "Record type is set as Occupier Brokerage", Status.PASS);
 				} else {
-					report.updateTestLog("Opportunity Name", "Opportunity is not as created as per the selection:::", Status.FAIL);
+					opportunity.setField("RecordTypeId", "012i0000000405n");
 				}
+
+				SObject[] opportunities = new SObject[1];
+				opportunities[0] = opportunity;
+				results = EstablishConnection.connection.create(opportunities);
+				System.out.println("Result:::" + results);
+				for (int j = 0; j < results.length; j++) {
+					if (results[j].isSuccess()) {
+						result = results[j].getId();
+					}
+				}
+				System.out.println(result);
+				SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
+				String query = "Select Name from Opportunity where Id = '" + result + "'";
+				String generatedOpportunityName = searchTextSOQL.fetchRecordFieldValue("Name", query);
+				Utility_Functions.timeWait(1);
+				if (opportunityName.equals(generatedOpportunityName)) {
+					report.updateTestLog("Opportunity Name",
+							"Opportunity Name is not auto generated when Opportunity is manually added by the User::",
+							Status.PASS);
+				} else {
+					report.updateTestLog("Opportunity Name", "Failure in the Opportunity Name generation:::", Status.FAIL);
+				}
+				if (dataTable.getData("General_Data", "TC_ID").contains("DSF")) {
+					String queryRecordType = "Select RecordTypeId from Opportunity where Id = '" + result + "'";
+					String recordType = searchTextSOQL.fetchRecordFieldValue("RecordTypeId", queryRecordType);
+					if (recordType.equals("012i0000000405lAAA")) {
+						report.updateTestLog("Opportunity Name",
+								"Opportunity is created by selecting the Record Type as Capital Markets - Debt & Structured Finance:::",
+								Status.PASS);
+					} else if (recordType.equals("012i0000000405kAAA")) {
+						report.updateTestLog("Opportunity Name",
+								"Opportunity is created by selecting the Record Type  as Property Sales:::", Status.PASS);
+					} else if (recordType.equals("012i0000000405mAAA")) {
+						report.updateTestLog("Opportunity Name",
+								"Opportunity is created by selecting the Record Type  as Global Workplace Solutions:::",
+								Status.PASS);
+					} else if (recordType.equals("012i0000000405oAAA")) {
+						report.updateTestLog("Opportunity Name",
+								"Opportunity is created by selecting the Record Type  as Valuation & Advisory Services:::",
+								Status.PASS);
+					} else if (recordType.equals("012i0000001622CAAQ")) {
+						 report.updateTestLog("Opportunity Name",
+								 "Opportunity is created by selecting the Record Type  as Agency Brokerage:::", Status.PASS);
+					 } else if (recordType.equals("012i0000000405nAAA")) {
+						 report.updateTestLog("Opportunity Name",
+								 "Opportunity is created by selecting the Record Type  as Occupier Brokerage:::",
+								 Status.PASS);
+					 } else {
+						 report.updateTestLog("Opportunity Name", "Opportunity is not as created as per the selection:::",
+								 Status.FAIL);
+					 }
+				}
+				isStatus = true;
 			}
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println(e.getStackTrace());
@@ -1404,7 +1489,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 		try {
 			if (properties.getProperty("RunEnvironment").equals("FTE")) {
 				config = new ConnectorConfig();
-				if ((dataTable.getData("General_Data", "TC_ID").contains("GWS")) && (dataTable.getData("General_Data", "TC_ID").contains("APAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
+				if ((dataTable.getData("General_Data", "TC_ID").contains("GWS"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("APAC"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
 					config.setUsername(properties.getProperty("FTEGWSAPACManager"));
 					config.setPassword(properties.getProperty("Password"));
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("GWS"))
@@ -1463,50 +1550,143 @@ public class OpportunitiesPage extends ReusableLibrary {
 			e.printStackTrace();
 		}
 	}
+
 	/**
-	 * Validate Opportunity Name is not auto generated when manually added by the user
+	 * Validate Opportunity Name is not auto generated when manually added by
+	 * the user
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */
 
-	public void autoGeneratedOpportunityNameFormat() {
-		/*String opportunityID_AccountName = createOpportunity();
-		String opportunityId = opportunityID_AccountName.split(":")[0];
-		String accountName = opportunityID_AccountName.split(":")[1];
-		System.out.println(opportunityID_AccountName + "??????????????" + opportunityId + "????????????????" + accountName);*/
-
+	public void opportunityNameAutoGenerate() {
+		String sAccountName = searchOpportunity.fetchRecord("Account", "Name");
+		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
 		Utility_Functions.xClick(driver, menu_Opportunities, true);
 		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
 		Utility_Functions.xClick(driver, newOpportunity, true);
 		Utility_Functions.timeWait(2);
-		Utility_Functions.xSwitchtoFrame(driver, continueButton);		
+		Utility_Functions.xSwitchtoFrame(driver, continueButton);
 		Utility_Functions.xWaitForElementPresent(driver, continueButton, 3);
-		Utility_Functions.xClick(driver, continueButton, true);	
+		Utility_Functions.xClick(driver, continueButton, true);
 		Utility_Functions.timeWait(2);
-		Utility_Functions.xSwitchtoFrame(driver, accountName);
+		Utility_Functions.xSwitchtoFrame(driver, closeDateOpp);
 		Utility_Functions.timeWait(2);
-		Utility_Functions.xSendKeys(driver, accountName, "Test");
-		//accountName.sendKeys(Keys.ARROW_DOWN);
-		accountName.sendKeys(Keys.SPACE);
-		Utility_Functions.timeWait(2);
+		Utility_Functions.xSendKeys(driver, accountName, sAccountName);
 		accountName.sendKeys(Keys.ARROW_DOWN);
-
-		/*List<WebElement> accountNameList = driver.findElements(By.xpath("//span[@class='tt-dropdown-menu']//div[@class='tt-suggestion']/p"));
 		Utility_Functions.timeWait(2);
-		for(WebElement element: accountNameList) {
-			Random random = new Random();
-			int value = random.nextInt(accountNameList.size());
-			for(int i=0;i<=accountNameList.size();i++) {
-				if(i==value) {
-					Utility_Functions.xSelectDropdownByIndex(accountNameList, value);
-				}
-			}
+		accountName.sendKeys(Keys.ENTER);
+		Utility_Functions.xSelectDropdownByIndex(assignmentTypeOpp, 1);
+		System.out.println(Calendar.getInstance());
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		Date date = new Date();
+		Utility_Functions.xSelectDropdownByIndex(leadSource, 1);
+		Utility_Functions.xSendKeys(driver, closeDateOpp, dateFormat.format(date).toString());
+		Utility_Functions.xSendKeys(driver, closeDateOpp, Keys.TAB);	
+		Random random = new Random();
+		int value = random.nextInt(999);		
+		Utility_Functions.xSendKeys(driver, totalSizeOpp, Integer.toString(value));
+		Utility_Functions.xSelectDropdownByName(unitofMeasure, "Acres");
+		Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFee, 3);
+		Utility_Functions.xSendKeys(driver, estimatedGrossFee, dataTable.getData("General_Data", "InstallmentAmount"));
+		try {
+			Utility_Functions.xSelectDropdownByIndex(preferredPropertyTypeOpp, 1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+		Utility_Functions.xClick(driver, saveNewOpportunity, true);
+		Utility_Functions.timeWait(4);
+		driver.navigate().refresh();
+		Utility_Functions.xWaitForElementPresent(driver, related, 4);
+		if(related.isDisplayed()) {
+				report.updateTestLog("Opportunity Created", "Opportunity created successfully:::", Status.PASS);
+		} else {
+			report.updateTestLog("Opportunity Created", "Opportunity creation failed:::", Status.FAIL);			
 		}
-		Utility_Functions.xclickgetTextofFirstElementfromList(accountNameList);*/
+		Utility_Functions.timeWait(2);
+/*		String sTotalSize = Integer.toString(value);		
+		String formatTotalSize = sTotalSize.substring(0,1) + "," + sTotalSize.substring(1,3);
+		System.out.println(formatTotalSize);*/
+		String query = "Select Name from opportunity where Name like  " + "'" + sAccountName + "-" + '%' + "-" + value
+				+ "-" + "Acres" + "'";
+		String opportunityName = searchOpportunity.fetchRecordFieldValue("Name", query);
+		report.updateTestLog("Opportunity Created", "Opportunity Name:::" + opportunityName, Status.PASS);
 
+		if (opportunityName.contains(sAccountName) && opportunityName.contains(Integer.toString(value))
+				&& opportunityName.contains("Acres")) {
+			report.updateTestLog("Opportunity Created",
+					"Opportunity Name created as per the format expected -- Account Name - Assignment Type - Total Size - Unit of Measure:::",
+					Status.PASS);
+		} else {
+			report.updateTestLog("Opportunity Created", "Opportunity Name is not created as per the expected format:::",
+					Status.FAIL);
+		}
 	}
 
+	/**
+	 * Verify editing of multiple Installments from Opportunity based on Even Percent
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+
+	public void multipleInstallmentsOpportunityEvenPercent() {
+		opportunityNameAutoGenerate();
+		Utility_Functions.timeWait(2);
+		//driver.navigate().refresh();
+		Utility_Functions.xWaitForElementPresent(driver, related, 5);
+		Utility_Functions.xClick(driver, related, true);
+		Utility_Functions.xWaitForElementPresent(driver, installmentAmount, 3);
+		String sInstallmentAmount = installmentAmount.getText();
+		sInstallmentAmount = sInstallmentAmount.split(" ")[1];
+		//String formatInstallmentAmount = sInstallmentAmount.replace(",", "");
+		if(sInstallmentAmount.equals((dataTable.getData("General_Data", "InstallmentAmount") + ".00"))) {
+			report.updateTestLog("Opportunities Installments", "Opportunity installment amount record is present in the opportunity installment related list:::", Status.PASS);
+		} else {
+			report.updateTestLog("Opportunities Installments", "Opportunity installment amount record is present in the opportunity installment related list:::", Status.PASS);
+		}
+		Utility_Functions.xWaitForElementPresent(driver, showMoreActions, 2);
+		Utility_Functions.xClick(driver, showMoreActions, true);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xWaitForElementPresent(driver, recalculate, 2);
+		Utility_Functions.xClick(driver, recalculate, true);
+		Utility_Functions.xSwitchtoFrame(driver, installmentQuantity);
+		Utility_Functions.xWaitForElementPresent(driver, installmentQuantity, 3);
+		installmentQuantity.clear();
+		Utility_Functions.xSendKeys(driver, installmentQuantity, "2");
+		Utility_Functions.xWaitForElementPresent(driver, proceed, 3);
+		Utility_Functions.xClick(driver, proceed, true);
+		Utility_Functions.xWaitForElementPresent(driver, continueButtonInstallment, 3);
+		Utility_Functions.xClick(driver, continueButtonInstallment, true);
+		driver.switchTo().defaultContent();
+		Utility_Functions.xWaitForElementPresent(driver, installmentAmountOne, 3);
+		Utility_Functions.xWaitForElementPresent(driver, installmentAmountTwo, 3);
+		String sInstallmentAmountOne = installmentAmountOne.getText();
+		String sInstallmentAmountTwo = installmentAmountTwo.getText();
+		report.updateTestLog("Opportunities Installments", "Opportunity installment amount one and two after changing the quantity to two from one:::"+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo, Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, editButtonInstallment, 5);
+		Utility_Functions.xClick(driver, editButtonInstallment, true);
+		/*Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);*/
+		Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeEdit, 3);
+		estimatedGrossFeeEdit.clear();
+		Utility_Functions.xSendKeys(driver, estimatedGrossFeeEdit, "20,000");
+		Utility_Functions.xWaitForElementPresent(driver, save, 3);
+		Utility_Functions.xClick(driver, save, true);
+		Utility_Functions.xWaitForElementPresent(driver, related, 3);
+		Utility_Functions.xClick(driver, related, true);
+		sInstallmentAmountOne = installmentAmountOne.getText();
+		sInstallmentAmountTwo = installmentAmountTwo.getText();
+		System.out.println(sInstallmentAmountOne);
+		System.out.println(sInstallmentAmountTwo);
+		if(sInstallmentAmountOne.equals("USD 10,000.00") && sInstallmentAmountTwo.equals("USD 10,000.00")) {
+			report.updateTestLog("Opportunities Installments", "Opportunity installment amounts recalculated successfully after editing the Estimated Gross Fee:::"+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo, Status.PASS);
+		} else {
+			report.updateTestLog("Opportunities Installments", "Opportunity installment amounts recalculation failed:::"+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo, Status.FAIL);
+		}
+	}
+	
 	static ArrayList<String> labelsOpportunitiesNewCustomEvent = new ArrayList<String>(); 
 	public void labelsOpportunitiesNewCustomEvent() {
 		labelsOpportunitiesNewCustomEvent.add("Subject");
@@ -1629,7 +1809,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			report.updateTestLog("Verify New Opportunity Custom Event Page ","Save Event button is not present in the New Custom Event Page",  Status.FAIL);
 		}
 		try {
-				
+
 
 			if ((!assignedToNewCustomEventPage.getAttribute("value").equals(""))||(!startDateNewCustomEventPage.getAttribute("value").equals(""))||(!startTimeNewCustomEventPage.getAttribute("value").equals(""))||(!endDateNewCustomEventPage.getAttribute("value").equals(""))||(!endTimeNewCustomEventPage.getAttribute("value").equals(""))) {
 				System.out.println("Assigned To, Start Date, Start Time, End Date and End Time fields are having the values ");
@@ -1668,7 +1848,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 				report.updateTestLog("Verify New Opportunity Custom Event Page", "All Labels are not present in the Add New Event Page",
 						Status.FAIL);
 			} else {
-				
+
 				report.updateTestLog("Verify New Opportunity Custom Event Page", "All Labels are present in the Add New Event Page",
 						Status.PASS);
 			}
@@ -1680,4 +1860,5 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 
 	}
+
 }
