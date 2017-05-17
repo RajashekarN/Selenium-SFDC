@@ -256,6 +256,26 @@ public class SearchTextSOQL extends ReusableLibrary {
 							recordID = (String) record.getField("Unit_of_Measure__c");
 							report.updateTestLog("Verify Fetch Record",
 									"Record has been fetched successfully:::" + recordID, Status.PASS);
+						} else if (fieldname.equals("Installment_Amount__c")) {
+							recordID = (String) record.getField("Installment_Amount__c");
+							report.updateTestLog("Verify Fetch Record",
+									"Record has been fetched successfully:::" + recordID, Status.PASS);
+						} else if (fieldname.equals("Installment_Quantity__c")) {
+							recordID = (String) record.getField("Installment_Quantity__c");
+							report.updateTestLog("Verify Fetch Record",
+									"Record has been fetched successfully:::" + recordID, Status.PASS);
+						} else if (fieldname.equals("Installments_Total__c")) {
+							recordID = (String) record.getField("Installments_Total__c");
+							report.updateTestLog("Verify Fetch Record",
+									"Record has been fetched successfully:::" + recordID, Status.PASS);
+						}  else if (fieldname.equals("Installment_Count__c")) {
+							recordID = (String) record.getField("Installment_Count__c");
+							report.updateTestLog("Verify Fetch Record",
+									"Record has been fetched successfully:::" + recordID, Status.PASS);
+						} else if (fieldname.equals("Estimated_Gross_Fee_Commission__c")) {
+							recordID = (String) record.getField("Estimated_Gross_Fee_Commission__c");
+							report.updateTestLog("Verify Fetch Record",
+									"Record has been fetched successfully:::" + recordID, Status.PASS);
 						} else {
 							recordID = (String) record.getField("Id");
 							report.updateTestLog("Verify Fetch Record",

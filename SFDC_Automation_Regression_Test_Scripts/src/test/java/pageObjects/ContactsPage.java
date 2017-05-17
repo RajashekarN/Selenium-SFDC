@@ -119,7 +119,7 @@ public class ContactsPage extends ReusableLibrary {
 	@FindBy(xpath = "//span[contains(@class,'virtualAutocompleteOptionText')][text()='Employee Contacts']")
 	WebElement clientContacts;
 
-	@FindBy(xpath = "//article[contains(@class,'Activities')]//div[text()='New Activity']")
+	@FindBy(xpath = "//article[contains(@class,'forceRelatedListSingleContainer')]//span[contains(text(),'Activities')]/ancestor::article//div[text()='New Activity']")
 	WebElement newActivity;
 
 	@FindBy(xpath = "//input[@class='slds-input'][@type='text']")
@@ -758,7 +758,7 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, relatedActivities, 5);
 		Utility_Functions.xClick(driver, relatedActivities, true);
 
-		List<WebElement> relatedActivitiesList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'] "));
+		//List<WebElement> relatedActivitiesList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'] "));
 		/*for(int i=0;i<relatedActivitiesList.size();i++){
 			System.out.println("The activities are :" +i+relatedActivitiesList.get(i).getText());	
 		}*/

@@ -167,8 +167,32 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 *
 	 */	
 	
-	public void bc_opportunityMultipleInstallments() {
-		sfOpportunitiesPage.multipleInstallmentsOpportunityEvenPercent();
+	public void bc_opportunityMultipleInstallmentsEven() {
+		sfOpportunitiesPage.multipleInstallmentsOpportunityEvenPercent();		
+		//sfOpportunitiesPage.multipleInstallmentsOpportunityEvenPercent_API();
+	}
+	
+	/**
+	 * Verify editing of multiple Installments from Opportunity based on UnEven Percent
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	
+	public void bc_opportunityMultipleInstallmentsUnEven() {
+		sfOpportunitiesPage.multipleInstallmentsUnEvenPercent();		
+		//sfOpportunitiesPage.multipleInstallmentsOpportunityEvenPercent_API();
+	}
+	
+	/**
+	 * Verify editing of multiple Installments from Opportunity based on Uneven Percent
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	
+	public void bc_opportunityMultipleInstallments_API() {
+		sfOpportunitiesPage.multipleInstallmentsUnevenPercent_API();
 	}
 
 	/**

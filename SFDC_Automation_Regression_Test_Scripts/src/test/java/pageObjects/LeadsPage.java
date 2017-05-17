@@ -141,7 +141,7 @@ public class LeadsPage extends ReusableLibrary {
 	@FindBy(xpath = "//span[@class='slds-icon_container slds-icon-utility-down slds-button__icon forceIcon']")
 	WebElement showMoreActions;
 
-	@FindBy(xpath = "//*[text()='Edit']")
+	@FindBy(xpath = "//div[contains(@class,'actionsContainer') and contains(@class,'slds-grid slds-align-middle')]//a[@title='Edit']")
 	WebElement editButton;
 
 	@FindBy(xpath = "//label[@class='uiLabel-top form-element__label uiLabel']/span[text()='First Name']/parent::label/parent::div/input")

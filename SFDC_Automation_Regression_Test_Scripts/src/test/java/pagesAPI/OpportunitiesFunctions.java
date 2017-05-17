@@ -159,6 +159,18 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 						soUpdate.setField(fieldName,"100%");
 					} else if(fieldName.equals("Unit_of_Measure__c")) {
 						soUpdate.setField(fieldName,"Hectares");
+					} else if(fieldName.equals("Estimated_Gross_Fee_Commission__c")) {
+						soUpdate.setField(fieldName,"50,000");
+					} else if(fieldName.equals("Installment_Amount__c")) {
+						soUpdate.setField(fieldName,"50,000");
+					} else if(fieldName.equals("Installment_Count__c")) {
+						soUpdate.setField(fieldName,"2");
+					} else if(fieldName.equals("Installment_Quantity__c")) {
+						soUpdate.setField(fieldName,"2");
+					} else if(fieldName.equals("Installments_Total__c")) {
+						soUpdate.setField(fieldName,"30,000");
+					} else if(fieldName.equals("Installment_Status__c")) {
+						soUpdate.setField(fieldName,"Pending");
 					} else if(fieldName.equals("CloseDate")) {
 						Calendar calendar = Calendar.getInstance();
 						calendar.add(Calendar.DAY_OF_MONTH, 365);

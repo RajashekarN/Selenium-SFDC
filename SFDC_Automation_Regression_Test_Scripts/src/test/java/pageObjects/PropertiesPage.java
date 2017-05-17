@@ -108,7 +108,7 @@ public class PropertiesPage extends ReusableLibrary {
 	@FindBy(xpath="//span[contains(@class,'slds-truncate')][text()='Properties']")
 	WebElement menu_Properties;
 
-	@FindBy(xpath="//article[contains(@class,'Activities')]//div[text()='New Activity']")
+	@FindBy(xpath="//article[contains(@class,'forceRelatedListSingleContainer')]//span[contains(text(),'Activities')]/ancestor::article//div[text()='New Activity']")
 	WebElement newActivity;
 
 	@FindBy(xpath="//input[@class='slds-input'][@type='text']")

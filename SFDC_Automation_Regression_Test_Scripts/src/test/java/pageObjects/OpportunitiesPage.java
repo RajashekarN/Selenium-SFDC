@@ -127,8 +127,11 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//div[@class='select-options']/ul[@role='presentation']/li")
 	WebElement selectStage;
 
-	@FindBy(xpath = "//div[@class='modal-footer slds-modal__footer']//button[@title='Save']")
+	@FindBy(css = ".modal-footer [title='Save']")
 	WebElement save;
+
+	@FindBy(xpath = ".modal-footer [title='Save & New']")
+	WebElement saveAndNew;
 
 	@FindBy(xpath = "//div[@class='toastContent']//span[@class='slds-icon_container slds-icon-utility-success toastIcon slds-button__icon forceIcon']")
 	WebElement opportunitySaved;
@@ -192,9 +195,12 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//a[@class='tabHeader']//span[text()='Related']")
 	WebElement related;
 
-	@FindBy(xpath = "//article[contains(@class,'Property')]//div[text()='Associate Property']")
-	WebElement associateProperty;
+/*	@FindBy(xpath = "//article[contains(@class,'Property')]//div[text()='Associate Property']")
+	WebElement associateProperty;*/
 
+	@FindBy(xpath = "//article[contains(@class,'forceRelatedListSingleContainer')]//span[contains(text(),'Property')]//ancestor::article//div[text()='Associate Property']")
+	WebElement associateProperty;
+	
 	@FindBy(xpath = "//div[@class='slds-form-element']/label[text()='Opportunity']")
 	WebElement opportunityLabel;
 
@@ -305,90 +311,106 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "h1[contains(@class,'slds-page-header__title')]//span[contains(text(),'-')]")
 	WebElement newOpportunityName;
-	
+
 	@FindBy(xpath = "//table[contains(@class,'forceRecordLayout')]//span[contains(@class,'forceOutputCurrency')]")
 	WebElement installmentAmount;
-	
+
 	@FindBy(xpath = "//table[contains(@class,'forceRecordLayout')]//tr[1]//span[contains(@class,'forceOutputCurrency')]")
 	WebElement installmentAmountOne;
-	
+
 	@FindBy(xpath = "//table[contains(@class,'forceRecordLayout')]//tr[2]//span[contains(@class,'forceOutputCurrency')]")
-	WebElement installmentAmountTwo;	
-	
+	WebElement installmentAmountTwo;
+
 	@FindBy(xpath = "//li[contains(@class,'oneActionsDropDown')]//a")
 	WebElement showMoreActions;
-	
+
 	@FindBy(xpath = "//div[contains(@class,'actionMenu')]//a[@title='Recalculate']")
 	WebElement recalculate;
+
+	@FindBy(xpath = "//div[contains(@class,'actionMenu')]//a[@title='New Opportunity Installment']")
+	WebElement newOpportunityInstallment;
 	
 	@FindBy(xpath = "//input[contains(@id,'opportunityRefractorPageLightningForm') and contains(@id,'Quantity')]")
 	WebElement installmentQuantity;
-	
+
 	@FindBy(xpath = "//*[@id='Page:opportunityRefractorPageLightningForm:saveButton']")
 	WebElement proceed;
-	
+
 	@FindBy(xpath = "//*[@id='Page:opportunityRefractorPageLightningForm:ContinueButton']")
 	WebElement continueButtonInstallment;
-	
+
 	@FindBy(xpath = "//div[contains(@class,'actionsContainer')]//div[text()='Edit']")
 	WebElement editButtonInstallment;
-	
+
 	@FindBy(xpath = "//div[@class='slds-form-element__control']//span[text()='Estimated Gross Fee/Commission']/parent::label/parent::div/input")
-	WebElement estimatedGrossFeeEdit;
+	WebElement estimatedGrossFeeEdit;	
+
+	@FindBy(xpath = "//span[@class='slds-form-element__label'][text()='Estimated Gross Fee/Commission']/parent::span/input")
+	WebElement estimatedGrossFeeEditAB;	
 	
-	@FindBy(xpath = "//div[@class='modal-footer slds-modal__footer']//span[text()='Save']")
-	WebElement saveInstallmentButton;
+	@FindBy(xpath = "//div[@class='slds-form-element__control']//span[text()='Installment Number']/parent::label/parent::div/input")
+	WebElement installmentNumber;
+	
+	@FindBy(xpath = "//div[@class='slds-form-element__control']//span[text()='Installment Amount']/parent::label/parent::div/input")
+	WebElement editInstallmentAmount;
+	
+	@FindBy(xpath = "//div[@class='slds-form-element__control']//span[text()='Installment Date']/parent::label/parent::div/div/input")
+	WebElement installmentDate;
+	
+	@FindBy(xpath = "//div[contains(@class,'modal-footer')]//span[text()='Save']")
+	WebElement saveNewOpportunityInstallment;
 	
 	
+
 	/****
 	 * Ramya
 	 */
-	@FindBy(xpath="//a[@title='Show more actions for this record']")
+	@FindBy(xpath = "//a[@title='Show more actions for this record']")
 	WebElement selectNewEvent;
 
-	@FindBy(xpath="//div[@class='forceActionLink'][@title='New Event']")
+	@FindBy(xpath = "//div[@class='forceActionLink'][@title='New Event']")
 	WebElement newEvent;
 
-	@FindBy(xpath="//div[@class='slds-media__body']")
+	@FindBy(xpath = "//div[@class='slds-media__body']")
 	WebElement addAnEventPage;
 
-	@FindBy(xpath="//input[@class='slds-input'][@type='text'][@required='required']")
+	@FindBy(xpath = "//input[@class='slds-input'][@type='text'][@required='required']")
 	WebElement subject;
 
-	@FindBy(xpath="//*[@id='assignedToBox']")
+	@FindBy(xpath = "//*[@id='assignedToBox']")
 	WebElement assignedTo;
 
-	@FindBy(xpath="//input[@value='Cancel']")
+	@FindBy(xpath = "//input[@value='Cancel']")
 	WebElement cancelCustomEventPageButton;
 
-	@FindBy(xpath="//input[@value='Save & New Event']")
+	@FindBy(xpath = "//input[@value='Save & New Event']")
 	WebElement saveAndNewEventCustomEventPageButton;
 
-	@FindBy(xpath="//input[@value='Save Event']")
+	@FindBy(xpath = "//input[@value='Save Event']")
 	WebElement saveEventCustomEventPageButton;
 
-	@FindBy(xpath="//span[text()='Quick Create an Event']")
+	@FindBy(xpath = "//span[text()='Quick Create an Event']")
 	WebElement quickCreateanEvent;
 
-	@FindBy(xpath=" //div[@class='slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2']/h2")
+	@FindBy(xpath = " //div[@class='slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2']/h2")
 	WebElement relatedTo;
 
-	@FindBy(xpath="//input[@class='slds-input'][@type='checkbox']")
+	@FindBy(xpath = "//input[@class='slds-input'][@type='checkbox']")
 	WebElement setReminderCheckBox;
 
-	@FindBy(xpath=".//*[@id='assignedToBox']")
+	@FindBy(xpath = ".//*[@id='assignedToBox']")
 	WebElement assignedToNewCustomEventPage;
 
-	@FindBy(xpath="//input[contains(@id,'StartDate')]")
+	@FindBy(xpath = "//input[contains(@id,'StartDate')]")
 	WebElement startDateNewCustomEventPage;
 
-	@FindBy(xpath="//input[contains(@id,'StartTime')]")
+	@FindBy(xpath = "//input[contains(@id,'StartTime')]")
 	WebElement startTimeNewCustomEventPage;
 
-	@FindBy(xpath="//input[contains(@id,'EndDate')]")
+	@FindBy(xpath = "//input[contains(@id,'EndDate')]")
 	WebElement endDateNewCustomEventPage;
 
-	@FindBy(xpath="//input[contains(@id,'EndTime')]")
+	@FindBy(xpath = "//input[contains(@id,'EndTime')]")
 	WebElement endTimeNewCustomEventPage;
 	HomePage hp = new HomePage(scriptHelper);
 	SearchTextSOQL searchOpportunity = new SearchTextSOQL(scriptHelper);
@@ -1134,15 +1156,17 @@ public class OpportunitiesPage extends ReusableLibrary {
 			establishConnection();
 			SObject opportunity = new SObject();
 			opportunity.setType("Opportunity");
-			/*	SearchTextSOQL accountID = new SearchTextSOQL(scriptHelper);
-			String accountId = accountID.fetchRecord("Account", "Id");*/
+			/*
+			 * SearchTextSOQL accountID = new SearchTextSOQL(scriptHelper);
+			 * String accountId = accountID.fetchRecord("Account", "Id");
+			 */
 			int value = Utility_Functions.xRandomFunction();
 			opportunity.setField("Name", "Test Automation_" + value);
 			opportunity.setField("AccountId", "0010S000004SaIHQA0");
 			opportunity.setField("CloseDate", Calendar.getInstance());
 			opportunity.setField("RecordTypeId", "012i0000000405jAAA");
 			opportunity.setField("StageName", "1-Target");
-			//opportunity.setField("Service__c", "Business Valuation");
+			// opportunity.setField("Service__c", "Business Valuation");
 			opportunity.setField("Total_Size__c", 5000);
 			opportunity.setField("Unit_of_Measure__c", "Acres");
 			opportunity.setField("Type_of_Client__c", "New Business");
@@ -1157,27 +1181,28 @@ public class OpportunitiesPage extends ReusableLibrary {
 			opportunity.setField("Consultancy__c", "Yes");
 			opportunity.setField("FM_Lite__c", "Yes");
 
-
 			if (dataTable.getData("General_Data", "TC_ID").contains("AMER")) {
 				opportunity.setField("Region__c	", "US National");
-				opportunity.setField("Market__c	", "Boston");				
+				opportunity.setField("Market__c	", "Boston");
 			} else if (dataTable.getData("General_Data", "TC_ID").contains("EMEA")) {
 				opportunity.setField("Region__c	", "EMEA");
 				opportunity.setField("Market__c	", "Africa");
 			} else if (dataTable.getData("General_Data", "TC_ID").contains("APAC")) {
 				opportunity.setField("Region__c	", "APAC");
 				opportunity.setField("Market__c	", "Australia");
-			}			
+			}
 			SObject[] opportunities = new SObject[1];
 			opportunities[0] = opportunity;
 			results = EstablishConnection.connection.create(opportunities);
-			report.updateTestLog("Opportunity Name", "Opportunity for the record type Asset Services is created successfully:::", Status.PASS);
+			report.updateTestLog("Opportunity Name",
+					"Opportunity for the record type Asset Services is created successfully:::", Status.PASS);
 			System.out.println("Result:::" + results);
 			for (int j = 0; j < results.length; j++) {
 				if (results[j].isSuccess()) {
 					result = results[j].getId();
 					System.out.println("Save Results:::" + result);
-					report.updateTestLog("Opportunity Name", "Opportunity Id:::" + result +" successfully:::", Status.PASS);
+					report.updateTestLog("Opportunity Name", "Opportunity Id:::" + result + " successfully:::",
+							Status.PASS);
 				}
 			}
 		} catch (Exception e) {
@@ -1213,9 +1238,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 				recordTypeId = "012i0000000405oAAA";
 				report.updateTestLog("Opportunity Name", "Record type is set as Valuation & Advisory Services",
 						Status.PASS);
-			} else if(dataTable.getData("General_Data","TC_ID").contains("AS")) {
+			} else if (dataTable.getData("General_Data", "TC_ID").contains("AS")) {
 				recordTypeId = "012i0000000405jAAA";
-				report.updateTestLog("Opportunity Name","Record type is set as Asset Services", Status.PASS); 
+				report.updateTestLog("Opportunity Name", "Record type is set as Asset Services", Status.PASS);
 			} else if (dataTable.getData("General_Data", "TC_ID").contains("AB")) {
 				recordTypeId = "012i0000001622CAAQ";
 				report.updateTestLog("Opportunity Name", "Record type is set as Agency Brokerage", Status.PASS);
@@ -1374,8 +1399,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 	public void manualOpportunityCreation() {
 		try {
 
-			boolean isStatus = false;			
-			while(!isStatus) {
+			boolean isStatus = false;
+			while (!isStatus) {
 				establishConnection();
 				SObject opportunity = new SObject();
 				Random random = new Random();
@@ -1404,9 +1429,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 					opportunity.setField("RecordTypeId", "012i0000000405oAAA");
 					report.updateTestLog("Opportunity Name", "Record type is set as Valuation & Advisory Services",
 							Status.PASS);
-				} else if(dataTable.getData("General_Data","TC_ID").contains("AS")) {
+				} else if (dataTable.getData("General_Data", "TC_ID").contains("AS")) {
 					opportunityNameAutoGenerate_API();
-					isStatus = false;		
+					isStatus = false;
 					break;
 				} else if (dataTable.getData("General_Data", "TC_ID").contains("AB")) {
 					opportunity.setField("RecordTypeId", "012i0000001622CAAQ");
@@ -1437,7 +1462,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 							"Opportunity Name is not auto generated when Opportunity is manually added by the User::",
 							Status.PASS);
 				} else {
-					report.updateTestLog("Opportunity Name", "Failure in the Opportunity Name generation:::", Status.FAIL);
+					report.updateTestLog("Opportunity Name", "Failure in the Opportunity Name generation:::",
+							Status.FAIL);
 				}
 				if (dataTable.getData("General_Data", "TC_ID").contains("DSF")) {
 					String queryRecordType = "Select RecordTypeId from Opportunity where Id = '" + result + "'";
@@ -1448,7 +1474,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 								Status.PASS);
 					} else if (recordType.equals("012i0000000405kAAA")) {
 						report.updateTestLog("Opportunity Name",
-								"Opportunity is created by selecting the Record Type  as Property Sales:::", Status.PASS);
+								"Opportunity is created by selecting the Record Type  as Property Sales:::",
+								Status.PASS);
 					} else if (recordType.equals("012i0000000405mAAA")) {
 						report.updateTestLog("Opportunity Name",
 								"Opportunity is created by selecting the Record Type  as Global Workplace Solutions:::",
@@ -1458,16 +1485,17 @@ public class OpportunitiesPage extends ReusableLibrary {
 								"Opportunity is created by selecting the Record Type  as Valuation & Advisory Services:::",
 								Status.PASS);
 					} else if (recordType.equals("012i0000001622CAAQ")) {
-						 report.updateTestLog("Opportunity Name",
-								 "Opportunity is created by selecting the Record Type  as Agency Brokerage:::", Status.PASS);
-					 } else if (recordType.equals("012i0000000405nAAA")) {
-						 report.updateTestLog("Opportunity Name",
-								 "Opportunity is created by selecting the Record Type  as Occupier Brokerage:::",
-								 Status.PASS);
-					 } else {
-						 report.updateTestLog("Opportunity Name", "Opportunity is not as created as per the selection:::",
-								 Status.FAIL);
-					 }
+						report.updateTestLog("Opportunity Name",
+								"Opportunity is created by selecting the Record Type  as Agency Brokerage:::",
+								Status.PASS);
+					} else if (recordType.equals("012i0000000405nAAA")) {
+						report.updateTestLog("Opportunity Name",
+								"Opportunity is created by selecting the Record Type  as Occupier Brokerage:::",
+								Status.PASS);
+					} else {
+						report.updateTestLog("Opportunity Name",
+								"Opportunity is not as created as per the selection:::", Status.FAIL);
+					}
 				}
 				isStatus = true;
 			}
@@ -1582,9 +1610,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Date date = new Date();
 		Utility_Functions.xSelectDropdownByIndex(leadSource, 1);
 		Utility_Functions.xSendKeys(driver, closeDateOpp, dateFormat.format(date).toString());
-		Utility_Functions.xSendKeys(driver, closeDateOpp, Keys.TAB);	
+		Utility_Functions.xSendKeys(driver, closeDateOpp, Keys.TAB);
 		Random random = new Random();
-		int value = random.nextInt(999);		
+		int value = random.nextInt(999);
 		Utility_Functions.xSendKeys(driver, totalSizeOpp, Integer.toString(value));
 		Utility_Functions.xSelectDropdownByName(unitofMeasure, "Acres");
 		Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFee, 3);
@@ -1593,20 +1621,22 @@ public class OpportunitiesPage extends ReusableLibrary {
 			Utility_Functions.xSelectDropdownByIndex(preferredPropertyTypeOpp, 1);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}		
+		}
 		Utility_Functions.xClick(driver, saveNewOpportunity, true);
 		Utility_Functions.timeWait(4);
 		driver.navigate().refresh();
 		Utility_Functions.xWaitForElementPresent(driver, related, 4);
-		if(related.isDisplayed()) {
-				report.updateTestLog("Opportunity Created", "Opportunity created successfully:::", Status.PASS);
+		if (related.isDisplayed()) {
+			report.updateTestLog("Opportunity Created", "Opportunity created successfully:::", Status.PASS);
 		} else {
-			report.updateTestLog("Opportunity Created", "Opportunity creation failed:::", Status.FAIL);			
+			report.updateTestLog("Opportunity Created", "Opportunity creation failed:::", Status.FAIL);
 		}
 		Utility_Functions.timeWait(2);
-/*		String sTotalSize = Integer.toString(value);		
-		String formatTotalSize = sTotalSize.substring(0,1) + "," + sTotalSize.substring(1,3);
-		System.out.println(formatTotalSize);*/
+		/*
+		 * String sTotalSize = Integer.toString(value); String formatTotalSize =
+		 * sTotalSize.substring(0,1) + "," + sTotalSize.substring(1,3);
+		 * System.out.println(formatTotalSize);
+		 */
 		String query = "Select Name from opportunity where Name like  " + "'" + sAccountName + "-" + '%' + "-" + value
 				+ "-" + "Acres" + "'";
 		String opportunityName = searchOpportunity.fetchRecordFieldValue("Name", query);
@@ -1624,27 +1654,44 @@ public class OpportunitiesPage extends ReusableLibrary {
 	}
 
 	/**
-	 * Verify editing of multiple Installments from Opportunity based on Even Percent
+	 * Function for multiple installments
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+
+	public void multipleInstallmentsFunction() {
+		opportunityNameAutoGenerate();
+		Utility_Functions.timeWait(2);
+		// driver.navigate().refresh();
+		Utility_Functions.xWaitForElementPresent(driver, related, 5);
+		Utility_Functions.xClick(driver, related, true);
+		Utility_Functions.xWaitForElementPresent(driver, installmentAmount, 3);
+		String sInstallmentAmount = installmentAmount.getText();
+		sInstallmentAmount = sInstallmentAmount.split(" ")[1];
+		// String formatInstallmentAmount = sInstallmentAmount.replace(",", "");
+		if (sInstallmentAmount.equals((dataTable.getData("General_Data", "InstallmentAmount") + ".00"))) {
+			report.updateTestLog("Opportunities Installments",
+					"Opportunity installment amount record is present in the opportunity installment related list:::",
+					Status.PASS);
+		} else {
+			report.updateTestLog("Opportunities Installments",
+					"Opportunity installment amount record is present in the opportunity installment related list:::",
+					Status.PASS);
+		}
+	}
+
+
+	/**
+	 * Verify editing of multiple Installments from Opportunity based on Even
+	 * Percent
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */
 
 	public void multipleInstallmentsOpportunityEvenPercent() {
-		opportunityNameAutoGenerate();
-		Utility_Functions.timeWait(2);
-		//driver.navigate().refresh();
-		Utility_Functions.xWaitForElementPresent(driver, related, 5);
-		Utility_Functions.xClick(driver, related, true);
-		Utility_Functions.xWaitForElementPresent(driver, installmentAmount, 3);
-		String sInstallmentAmount = installmentAmount.getText();
-		sInstallmentAmount = sInstallmentAmount.split(" ")[1];
-		//String formatInstallmentAmount = sInstallmentAmount.replace(",", "");
-		if(sInstallmentAmount.equals((dataTable.getData("General_Data", "InstallmentAmount") + ".00"))) {
-			report.updateTestLog("Opportunities Installments", "Opportunity installment amount record is present in the opportunity installment related list:::", Status.PASS);
-		} else {
-			report.updateTestLog("Opportunities Installments", "Opportunity installment amount record is present in the opportunity installment related list:::", Status.PASS);
-		}
+		multipleInstallmentsFunction();
 		Utility_Functions.xWaitForElementPresent(driver, showMoreActions, 2);
 		Utility_Functions.xClick(driver, showMoreActions, true);
 		Utility_Functions.timeWait(1);
@@ -1663,17 +1710,28 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, installmentAmountTwo, 3);
 		String sInstallmentAmountOne = installmentAmountOne.getText();
 		String sInstallmentAmountTwo = installmentAmountTwo.getText();
-		report.updateTestLog("Opportunities Installments", "Opportunity installment amount one and two after changing the quantity to two from one:::"+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo, Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, editButtonInstallment, 5);
+		report.updateTestLog("Opportunities Installments",
+				"Opportunity installment amount one and two after changing the quantity to two from one:::"
+						+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo,
+						Status.PASS);
+
+		Utility_Functions.xWaitForElementPresent(driver, editButtonInstallment, 5); 
 		Utility_Functions.xClick(driver, editButtonInstallment, true);
-		/*Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.xScrollWindow(driver);
 		Utility_Functions.timeWait(1);
-		Utility_Functions.xScrollWindowTop(driver);*/
-		Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeEdit, 3);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeEdit, 3); 
 		estimatedGrossFeeEdit.clear();
 		Utility_Functions.xSendKeys(driver, estimatedGrossFeeEdit, "20,000");
-		Utility_Functions.xWaitForElementPresent(driver, save, 3);
-		Utility_Functions.xClick(driver, save, true);
+		Utility_Functions.timeWait(5);
+		Utility_Functions.xWaitForElementPresent(driver, save, 4);
+		//Utility_Functions.xWaitForElementPresent(driver, save, 3);
+		Actions actions = new Actions(driver.getWebDriver());
+		Utility_Functions.xHighlight(driver, save, "yellow");
+		actions.moveToElement(save).click().perform();
+		Utility_Functions.timeWait(4);
+		// Utility_Functions.xClick(driver, save, true);
 		Utility_Functions.xWaitForElementPresent(driver, related, 3);
 		Utility_Functions.xClick(driver, related, true);
 		sInstallmentAmountOne = installmentAmountOne.getText();
@@ -1681,13 +1739,197 @@ public class OpportunitiesPage extends ReusableLibrary {
 		System.out.println(sInstallmentAmountOne);
 		System.out.println(sInstallmentAmountTwo);
 		if(sInstallmentAmountOne.equals("USD 10,000.00") && sInstallmentAmountTwo.equals("USD 10,000.00")) {
-			report.updateTestLog("Opportunities Installments", "Opportunity installment amounts recalculated successfully after editing the Estimated Gross Fee:::"+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo, Status.PASS);
+			report.updateTestLog("Opportunities Installments","Opportunity installment amounts recalculated successfully after editing the Estimated Gross Fee:::"  + sInstallmentAmountOne + ":::" + sInstallmentAmountTwo, Status.PASS); 
 		} else {
 			report.updateTestLog("Opportunities Installments", "Opportunity installment amounts recalculation failed:::"+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo, Status.FAIL);
 		}
+
 	}
-	
-	static ArrayList<String> labelsOpportunitiesNewCustomEvent = new ArrayList<String>(); 
+
+	/**
+	 * Verify editing of multiple Installments from Opportunity based on UnEven Percent
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+
+	public void multipleInstallmentsUnEvenPercent() {
+		multipleInstallmentsFunction();
+		Utility_Functions.xWaitForElementPresent(driver, editButtonInstallment, 5); 
+		Utility_Functions.xClick(driver, editButtonInstallment, true);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);	
+		Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeEdit, 3); 
+		estimatedGrossFeeEdit.clear();
+		Utility_Functions.xSendKeys(driver, estimatedGrossFeeEdit, "6,000");	
+		report.updateTestLog("Opportunities Installments","Opportunity installment entered as 6,000 successfully:::", Status.PASS); 
+		Utility_Functions.timeWait(5);
+		Utility_Functions.xWaitForElementPresent(driver, save, 4);
+		//Utility_Functions.xWaitForElementPresent(driver, save, 3);
+		Actions actions = new Actions(driver.getWebDriver());
+		Utility_Functions.xHighlight(driver, save, "yellow");
+		actions.moveToElement(save).click().perform();
+		Utility_Functions.timeWait(4);
+		Utility_Functions.xWaitForElementPresent(driver, showMoreActions, 2);
+		Utility_Functions.xClick(driver, showMoreActions, true);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xWaitForElementPresent(driver, newOpportunityInstallment, 2);	
+		Utility_Functions.xClick(driver, newOpportunityInstallment, true);
+		Utility_Functions.xWaitForElementPresent(driver, installmentNumber, 4);
+		Utility_Functions.xSendKeys(driver, installmentNumber, "2");
+		Utility_Functions.xSendKeys(driver, editInstallmentAmount, "4,000");
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		Date date = new Date();
+		Utility_Functions.xSendKeys(driver, installmentDate, dateFormat.format(date).toString());
+		actions.moveToElement(saveNewOpportunityInstallment).click().perform();
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementPresent(driver, related, 3);
+		Utility_Functions.xClick(driver, related, true);
+		String sInstallmentAmountOne = installmentAmountOne.getText();
+		String sInstallmentAmountTwo = installmentAmountTwo.getText();
+		System.out.println(sInstallmentAmountOne);
+		System.out.println(sInstallmentAmountTwo);
+		if(sInstallmentAmountOne.equals("USD 6,000.00") && sInstallmentAmountTwo.equals("USD 4,000.00")) {
+			report.updateTestLog("Opportunities Installments","Opportunity installment amounts recalculated successfully after editing the Estimated Gross Fee:::"  + sInstallmentAmountOne + ":::" + sInstallmentAmountTwo, Status.PASS); 
+		} else {
+			report.updateTestLog("Opportunities Installments", "Opportunity installment amounts recalculation failed:::"+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo, Status.FAIL);
+		}
+		Utility_Functions.xWaitForElementPresent(driver, editButtonInstallment, 5); 
+		Utility_Functions.xWaitForElementPresent(driver, editButtonInstallment, 5); 
+		Utility_Functions.xClick(driver, editButtonInstallment, true);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeEdit, 3); 
+		estimatedGrossFeeEdit.clear();
+		Utility_Functions.xSendKeys(driver, estimatedGrossFeeEdit, "20,000");		
+		Utility_Functions.timeWait(5);
+		Utility_Functions.xWaitForElementPresent(driver, save, 4);
+		Utility_Functions.xHighlight(driver, save, "yellow");
+		actions.moveToElement(save).click().perform();
+		Utility_Functions.timeWait(4);
+		Utility_Functions.xWaitForElementPresent(driver, related, 3);
+		Utility_Functions.xClick(driver, related, true);
+		sInstallmentAmountOne = installmentAmountOne.getText();
+		sInstallmentAmountTwo = installmentAmountTwo.getText();
+		System.out.println(sInstallmentAmountOne);
+		System.out.println(sInstallmentAmountTwo);
+		if(sInstallmentAmountOne.equals("USD 12,000.00") && sInstallmentAmountTwo.equals("USD 8,000.00")) {
+			report.updateTestLog("Opportunities Installments","Opportunity installment amounts recalculated successfully after editing the Estimated Gross Fee:::"  + sInstallmentAmountOne + ":::" + sInstallmentAmountTwo, Status.PASS); 
+		} else {
+			report.updateTestLog("Opportunities Installments", "Opportunity installment amounts recalculation failed:::"+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo, Status.FAIL);
+		}
+		
+	}
+
+	/**
+	 * Verify editing of multiple Installments from Opportunity based on Uneven Percent using API
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+
+	public String opportunityWithInstallmentAmount() {
+		EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
+		try {
+			establishConnection.establishConnection();
+			SObject opportunity = new SObject();
+			opportunity.setType("Opportunity");
+			String accountId = searchOpportunity.fetchRecord("Account", "Id");
+			int value = Utility_Functions.xRandomFunction();
+			opportunity.setField("Name", "Test Automation_" + value);
+			opportunity.setField("AccountId", accountId);
+			opportunity.setField("CloseDate", Calendar.getInstance());
+			opportunity.setField("RecordTypeId", "012i0000000405nAAA");
+			opportunity.setField("StageName", "02-Meeting");
+			opportunity.setField("Service__c", "Occupier Buyer");
+			opportunity.setField("Total_Size__c", 5000);
+			opportunity.setField("Unit_of_Measure__c", "Acres");
+			opportunity.setField("Amount", "50000");
+
+			SObject[] opportunities = new SObject[1];
+			opportunities[0] = opportunity;
+			results = EstablishConnection.connection.create(opportunities);
+			report.updateTestLog("Opportunity Name", "Opportunity for the record type Asset Services is created successfully:::", Status.PASS);
+			System.out.println("Result:::" + results);
+			for (int j = 0; j < results.length; j++) {
+				if (results[j].isSuccess()) {
+					result = results[j].getId();
+					System.out.println("Save Results:::" + result);
+					report.updateTestLog("Opportunity Name", "Opportunity Id:::" + result +" successfully:::", Status.PASS);
+				}
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println(e.getStackTrace());
+		}
+		String queryAmount = "Select Estimated_Gross_Fee_Commission__c from opportunity where Id = " + "'" + result +"'";
+		String queryCount = "Select Installment_Count__c from opportunity where Id = " + "'" + result +"'";
+		String queryQuantity = "Select Installment_Quantity__c from opportunity where Id = " + "'" + result +"'";
+		String queryTotal = "Select Installments_Total__c from opportunity where Id = " + "'" + result +"'";
+
+		String sInstallmentAmount = searchOpportunity.fetchRecordFieldValue("Estimated_Gross_Fee_Commission__c", queryAmount);
+		String sInstallmentCount = searchOpportunity.fetchRecordFieldValue("Installment_Count__c", queryCount);
+		String sInstallmentQuantity = searchOpportunity.fetchRecordFieldValue("Installment_Quantity__c", queryQuantity);
+		String sInstallmentTotal = searchOpportunity.fetchRecordFieldValue("Installments_Total__c", queryTotal);
+
+		System.out.println("Installment Amount:: " + sInstallmentAmount);
+		if(sInstallmentAmount.equals("50000.0")) {
+			report.updateTestLog("Opportunity Name", "Installment Record has been created successfully:::" + result +":::InstallmentAmount:::" + sInstallmentAmount + ":::", Status.PASS);	
+			report.updateTestLog("Opportunity Name", "Installment Record has been created successfully:::" + result +":::InstallmentCount:::" + sInstallmentCount + ":::", Status.PASS);	
+			report.updateTestLog("Opportunity Name", "Installment Record has been created successfully:::" + result +":::InstallmentQuanity:::" + sInstallmentQuantity + ":::", Status.PASS);	
+			report.updateTestLog("Opportunity Name", "Installment Record has been created successfully:::" + result +":::InstallmentTotal:::" + sInstallmentTotal + ":::", Status.PASS);	
+		} else {
+			report.updateTestLog("Opportunity Name", "Installment Record creation failed:::" + result +":::" + sInstallmentAmount + ":::", Status.FAIL);
+		}		
+		return result;
+
+	}
+
+	public void multipleInstallmentsOpportunityEvenPercent_API() {
+		String opportunityID = opportunityWithInstallmentAmount();
+
+		String queryQuantity = "Select Installment_Quantity__c from opportunity where Id = " + "'" + result +"'";
+		opportunitiesFunctions.updateOpportunityField("Installment_Quantity__c", opportunityID);
+		String siInstallmentQuantity = searchOpportunity.fetchRecordFieldValue("Installment_Quantity__c", queryQuantity);
+		if(siInstallmentQuantity.equals("2.0")) {
+			report.updateTestLog("Opportunity Name", "Installment Quantity has been created successfully:::" + result +":::InstallmentQuanity:::" + siInstallmentQuantity + ":::", Status.PASS);	
+		} else {
+			report.updateTestLog("Opportunity Name", "Installment Quantity updation failed:::" + result +":::InstallmentQuanity:::" + siInstallmentQuantity + ":::", Status.FAIL);	
+		}
+		/*		String queryCount = "Select count() from Opportunity_Installments__c where Id = " + "'" + result +"'";
+		String sOpportunityRecords = searchOpportunity.fetchRecordFieldValue("Id", queryCount);
+		if(sOpportunityRecords.equals("2.0")) {
+			report.updateTestLog("Opportunity Name", "Installment Records has been created successfully:::" + result +":::InstallmentCount:::" + sOpportunityRecords + ":::", Status.PASS);	
+		} else {
+			report.updateTestLog("Opportunity Name", "Installment Count updation failed:::" + result +":::InstallmentCount:::" + sOpportunityRecords + ":::", Status.FAIL);	
+		}*/
+
+		/*		String sInstallmentCount = searchOpportunity.fetchRecordFieldValue("Installment_Count__c", queryCount);
+		if(sInstallmentCount.equals("2.0")) {
+			report.updateTestLog("Opportunity Name", "Installment Count has been created successfully:::" + result +":::InstallmentCount:::" + sInstallmentCount + ":::", Status.PASS);	
+		} else {
+			report.updateTestLog("Opportunity Name", "Installment Count updation failed:::" + result +":::InstallmentCount:::" + sInstallmentCount + ":::", Status.FAIL);	
+		}*/
+	}
+
+	public void multipleInstallmentsUnevenPercent_API() {
+
+	}
+
+
+	/**
+	 * Validating the manage Opportunity verify Custom Event Page
+	 * 
+	 * @author Ramya
+	 *
+	 */
+
+	static ArrayList<String> labelsOpportunitiesNewCustomEvent = new ArrayList<String>();
+
 	public void labelsOpportunitiesNewCustomEvent() {
 		labelsOpportunitiesNewCustomEvent.add("Subject");
 		labelsOpportunitiesNewCustomEvent.add("Activity Type");
@@ -1706,14 +1948,14 @@ public class OpportunitiesPage extends ReusableLibrary {
 		labelsOpportunitiesNewCustomEvent.add("Contact");
 		labelsOpportunitiesNewCustomEvent.add("Set Reminder");
 
-
 	}
+
 	/**
 	 * Validating the manage Opportunity verify Custom Event Page
 	 * 
 	 * @author Ramya
 	 *
-	 */	
+	 */
 	public void opportunityVerifyCustomEventPage() {
 
 		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
@@ -1725,7 +1967,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, selectNewEvent, 3);
 		Utility_Functions.xClick(driver, selectNewEvent, true);
 		Utility_Functions.xWaitForElementPresent(driver, newEvent, 3);
-		Actions action  = new Actions(driver.getWebDriver());
+		Actions action = new Actions(driver.getWebDriver());
 		action.moveToElement(newEvent);
 		action.click();
 		action.build().perform();
@@ -1734,130 +1976,150 @@ public class OpportunitiesPage extends ReusableLibrary {
 		driver.switchTo().frame(4);
 		Utility_Functions.timeWait(5);
 
-		if(addAnEventPage.getText().contains("Add an Event")){	
+		if (addAnEventPage.getText().contains("Add an Event")) {
 
 			System.out.println("The New Custom Event Page is displayed");
-			report.updateTestLog("Verify Opportunity Custom Event Page", "The New Custom Event Page is Displayed", Status.PASS);
-		}else{
+			report.updateTestLog("Verify Opportunity Custom Event Page", "The New Custom Event Page is Displayed",
+					Status.PASS);
+		} else {
 			System.out.println("The New Custom Event Page is not displayed");
-			report.updateTestLog("Verify Opportunity Custom Event Page", "The New Custom Event Page is not Displayed", Status.FAIL);
+			report.updateTestLog("Verify Opportunity Custom Event Page", "The New Custom Event Page is not Displayed",
+					Status.FAIL);
 		}
-
 
 		List<WebElement> drop = driver.findElements(By.xpath("//div[@class='slds-select_container']"));
 
 		java.util.Iterator<WebElement> i = drop.iterator();
-		while(i.hasNext()) {
+		while (i.hasNext()) {
 			WebElement row = i.next();
 			System.out.println(row.getText());
-			if(!row.getText().equals("")) { 
-				System.out.println("All the values for the Activity Type and Type pick list are present in  the Add an Event page");
-				report.updateTestLog("Verify New Opportunity Custom Event Page", "Verifying the Activity Type and Type pick list values", Status.PASS);
-			}else{
-				System.out.println("All the values for the Activity Type and Type pick list are not present in  the Add an Event page");
-				report.updateTestLog("Verify New Opportunity Custom Event Page", "Verifying the Activity Type and Type pick list values", Status.FAIL);  
+			if (!row.getText().equals("")) {
+				System.out.println(
+						"All the values for the Activity Type and Type pick list are present in  the Add an Event page");
+				report.updateTestLog("Verify New Opportunity Custom Event Page",
+						"Verifying the Activity Type and Type pick list values", Status.PASS);
+			} else {
+				System.out.println(
+						"All the values for the Activity Type and Type pick list are not present in  the Add an Event page");
+				report.updateTestLog("Verify New Opportunity Custom Event Page",
+						"Verifying the Activity Type and Type pick list values", Status.FAIL);
 			}
 
-
 		}
 
-		if(relatedTo.getText().contains("Related To")){
+		if (relatedTo.getText().contains("Related To")) {
 			System.out.println("Related To section is present in the New Activity Layout Page");
-			report.updateTestLog("Verify New Opportunity Custom Event Page ","Related To section is present in the New Custom Event Page",  Status.PASS);
-		}else{
+			report.updateTestLog("Verify New Opportunity Custom Event Page ",
+					"Related To section is present in the New Custom Event Page", Status.PASS);
+		} else {
 			System.out.println("Related To section is not present in the New Activity Layout Page");
-			report.updateTestLog("Verify New Opportunity Custom Event Page ","Related To section is not present in the New Custom Event Page",  Status.FAIL);
+			report.updateTestLog("Verify New Opportunity Custom Event Page ",
+					"Related To section is not present in the New Custom Event Page", Status.FAIL);
 
 		}
-		if(quickCreateanEvent.getText().contains("Quick Create an Event")){
+		if (quickCreateanEvent.getText().contains("Quick Create an Event")) {
 			System.out.println("Quick Create an Event section is present in the New Activity Layout Page");
-			report.updateTestLog("Verify New Opportunity Custom Event Page ","Quick Create an Event section is present in the New Activity Page",  Status.PASS);
-		}else{
+			report.updateTestLog("Verify New Opportunity Custom Event Page ",
+					"Quick Create an Event section is present in the New Activity Page", Status.PASS);
+		} else {
 			System.out.println("Quick Create an Event section is not present in the New Activity Layout Page");
-			report.updateTestLog("Verify New Opportunity Custom Event Page ","Quick Create an Event section is not present in the New Activity Page",  Status.FAIL);
+			report.updateTestLog("Verify New Opportunity Custom Event Page ",
+					"Quick Create an Event section is not present in the New Activity Page", Status.FAIL);
 
 		}
 
-		if(!setReminderCheckBox.isSelected()){
+		if (!setReminderCheckBox.isSelected()) {
 			System.out.println("Set Reminder check box is present and not checked");
-			report.updateTestLog("Verify New Opportunity Custom Event Page ","Set Reminder checkbox is present in the New Custom Event Page",  Status.PASS);
+			report.updateTestLog("Verify New Opportunity Custom Event Page ",
+					"Set Reminder checkbox is present in the New Custom Event Page", Status.PASS);
 
-		}else{
+		} else {
 			System.out.println("Set Reminder check box is not present ");
-			report.updateTestLog("Verify New Opportunity Custom Event Page ","Set Reminder checkbox is not present in the New Custom Event Page",  Status.FAIL);
+			report.updateTestLog("Verify New Opportunity Custom Event Page ",
+					"Set Reminder checkbox is not present in the New Custom Event Page", Status.FAIL);
 		}
 
-		if(!cancelCustomEventPageButton.getText().equals(" ")){
+		if (!cancelCustomEventPageButton.getText().equals(" ")) {
 			System.out.println("Cancel button is present");
-			report.updateTestLog("Verify New Opportunity Custom Event Page ","Cancel button is present in the New Custom Event Page",  Status.PASS);
-		}else{
+			report.updateTestLog("Verify New Opportunity Custom Event Page ",
+					"Cancel button is present in the New Custom Event Page", Status.PASS);
+		} else {
 			System.out.println("Cancel button is not present ");
-			report.updateTestLog("Verify New Opportunity Custom Event Page ","Cancel button is not present in the New Custom Event Page",  Status.FAIL);
+			report.updateTestLog("Verify New Opportunity Custom Event Page ",
+					"Cancel button is not present in the New Custom Event Page", Status.FAIL);
 		}
-		if(!saveAndNewEventCustomEventPageButton.getText().equals(" ")){
+		if (!saveAndNewEventCustomEventPageButton.getText().equals(" ")) {
 			System.out.println("Save and New Custom event button is present");
-			report.updateTestLog("Verify New Opportunity Custom Event Page ","Save and New Event button is present in the New Custom Event Page",  Status.PASS);
-		}else{
+			report.updateTestLog("Verify New Opportunity Custom Event Page ",
+					"Save and New Event button is present in the New Custom Event Page", Status.PASS);
+		} else {
 			System.out.println("Save and New Custom event button is not present ");
-			report.updateTestLog("Verify New Opportunity Custom Event Page ","Save and New Event button  is not present in the New Custom Event Page",  Status.FAIL);
+			report.updateTestLog("Verify New Opportunity Custom Event Page ",
+					"Save and New Event button  is not present in the New Custom Event Page", Status.FAIL);
 		}
-		if(!saveEventCustomEventPageButton.getText().equals(" ")){
+		if (!saveEventCustomEventPageButton.getText().equals(" ")) {
 			System.out.println("Save Event button is present");
-			report.updateTestLog("Verify New Opportunity Custom Event Page ","Save Event button is present in the New Custom Event Page",  Status.PASS);
-		}else{
+			report.updateTestLog("Verify New Opportunity Custom Event Page ",
+					"Save Event button is present in the New Custom Event Page", Status.PASS);
+		} else {
 			System.out.println("Save Event button is not present ");
-			report.updateTestLog("Verify New Opportunity Custom Event Page ","Save Event button is not present in the New Custom Event Page",  Status.FAIL);
+			report.updateTestLog("Verify New Opportunity Custom Event Page ",
+					"Save Event button is not present in the New Custom Event Page", Status.FAIL);
 		}
 		try {
 
-
-			if ((!assignedToNewCustomEventPage.getAttribute("value").equals(""))||(!startDateNewCustomEventPage.getAttribute("value").equals(""))||(!startTimeNewCustomEventPage.getAttribute("value").equals(""))||(!endDateNewCustomEventPage.getAttribute("value").equals(""))||(!endTimeNewCustomEventPage.getAttribute("value").equals(""))) {
-				System.out.println("Assigned To, Start Date, Start Time, End Date and End Time fields are having the values ");
+			if ((!assignedToNewCustomEventPage.getAttribute("value").equals(""))
+					|| (!startDateNewCustomEventPage.getAttribute("value").equals(""))
+					|| (!startTimeNewCustomEventPage.getAttribute("value").equals(""))
+					|| (!endDateNewCustomEventPage.getAttribute("value").equals(""))
+					|| (!endTimeNewCustomEventPage.getAttribute("value").equals(""))) {
+				System.out.println(
+						"Assigned To, Start Date, Start Time, End Date and End Time fields are having the values ");
 				report.updateTestLog("Verify New Opportunity Custom Event Page ",
-						"Verify New Opportunity Custom Event Page is having the default values in the required fields ", Status.PASS);
+						"Verify New Opportunity Custom Event Page is having the default values in the required fields ",
+						Status.PASS);
 			} else {
 				System.out.println("New Activity Layout Page is not having the deafault values ");
 				report.updateTestLog("Verify New Opportunity Custom Event Page",
-						"Verify New Opportunity Custom Event Page is not having the default values in the required fields", Status.FAIL);
+						"Verify New Opportunity Custom Event Page is not having the default values in the required fields",
+						Status.FAIL);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
-		}	
+		}
 
-		List<WebElement> customEventpageFields = driver.findElements(By.xpath("//div[contains(@class,'slds-col--padded') and contains(@class,' slds-size--1-of-1')]//label "));
+		List<WebElement> customEventpageFields = driver.findElements(By
+				.xpath("//div[contains(@class,'slds-col--padded') and contains(@class,' slds-size--1-of-1')]//label "));
 		int count = 0, i1 = 0;
 		String labelArray[] = new String[customEventpageFields.size()];
 		System.out.println(customEventpageFields.size());
 
 		try {
 			labelsOpportunitiesNewCustomEvent();
-			for (WebElement element:customEventpageFields) {
+			for (WebElement element : customEventpageFields) {
 				labelArray[i1] = element.getText();
 				if (labelArray[i1].contains(labelsOpportunitiesNewCustomEvent.get(i1))) {
 					report.updateTestLog("Verify New Opportunity Custom Event Page",
-							"New Opportunity Custom Event Page is having the " + labelArray[i1]
-									+ " field ",
-									Status.PASS);
+							"New Opportunity Custom Event Page is having the " + labelArray[i1] + " field ",
+							Status.PASS);
 					count++;
 				}
 				i1++;
 			}
 			System.out.println(count);
 			if (count != 15) {
-				report.updateTestLog("Verify New Opportunity Custom Event Page", "All Labels are not present in the Add New Event Page",
-						Status.FAIL);
+				report.updateTestLog("Verify New Opportunity Custom Event Page",
+						"All Labels are not present in the Add New Event Page", Status.FAIL);
 			} else {
 
-				report.updateTestLog("Verify New Opportunity Custom Event Page", "All Labels are present in the Add New Event Page",
-						Status.PASS);
+				report.updateTestLog("Verify New Opportunity Custom Event Page",
+						"All Labels are present in the Add New Event Page", Status.PASS);
 			}
 
-		}catch (Exception e) {
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-
-
 
 	}
 
