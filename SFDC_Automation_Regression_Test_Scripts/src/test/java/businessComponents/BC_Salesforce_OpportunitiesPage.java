@@ -192,7 +192,63 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 */	
 	
 	public void bc_opportunityMultipleInstallments_API() {
-		sfOpportunitiesPage.multipleInstallmentsUnevenPercent_API();
+		//sfOpportunitiesPage.multipleInstallmentsUnevenPercent_API();
+	}
+	
+	/**
+	 * Verify editing of multiple Installments from Opportunity based Pending and Paid Status
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	
+	public void bc_opportunityInstallmentsPendingPaid() {
+		sfOpportunitiesPage.multipleInstallmentsPendingPaid();
+	}
+	
+	/**
+	 * Verify editing of multiple Installments from Opportunity based Pending and Paid Status
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	
+	public void bc_estimatedGrossFeeCommissionRollingUp() {
+		sfOpportunitiesPage.multipleInstallmentsOpportunityEvenPercent();
+	}
+	
+	/**
+	 * Verify editing of multiple Installments from Opportunity based in-line Edit for Even Percent
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	
+	public void bc_inLineEditEvenPercent() {
+		sfOpportunitiesPage.multipleInstallmentsOpportunityEvenPercent();
+	}
+	
+	/**
+	 * Verify editing of multiple Installments from Opportunity based in-line Edit for UnEven Percent
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	
+	public void bc_inLineEditUnEvenPercent() {
+		sfOpportunitiesPage.multipleInstallmentsUnEvenPercent();
+	}
+	
+	
+	/**
+	 * Verify editing of ability to delete the installment
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	
+	public void bc_deleteInstallment() {
+		sfOpportunitiesPage.deleteInstallment();
 	}
 
 	/**
