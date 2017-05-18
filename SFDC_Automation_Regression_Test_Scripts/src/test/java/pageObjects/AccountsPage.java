@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -196,6 +197,18 @@ public class AccountsPage extends ReusableLibrary {
 
 	@FindBy(xpath="//div[@class='slds-small-order--1 slds-medium-order--2 slds-large-order--3']")
 	WebElement createNewActivity;
+	
+	@FindBy(xpath=".//*[@id='relatedContactBox']")
+	WebElement relatedToContactField;
+	
+	@FindBy(xpath=".//*[@id='relatedOpportunityBox']")
+	WebElement relatedToOpportunityField;
+	
+	@FindBy(xpath=".//*[@id='relatedPropertyBox']")
+	WebElement relatedToPropertyField;
+	
+	@FindBy(xpath="//input[@class='slds-input'][@type='checkbox']/following-sibling::span[text()='Notification Email']")
+	WebElement notificationEmail;
 	
 	HomePage hp = new HomePage(scriptHelper);
 	static ArrayList<String> accountsPageDetailsList = new ArrayList<String>();
@@ -891,7 +904,7 @@ public class AccountsPage extends ReusableLibrary {
 
 		driver.switchTo().frame(5);
 		
-		
+		Utility_Functions.timeWait(5);
 		List<WebElement> newActivityPageLayoutSections = driver
 				.findElements(By.xpath("//div[@class='slds-grid']"));
 		int countHeader =0;
@@ -1000,23 +1013,23 @@ public class AccountsPage extends ReusableLibrary {
 			System.out.println(e.getMessage());
 
 		}
-		Utility_Functions.timeWait(3);
-		Utility_Functions.xClick(driver, subject, true);
-		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementPresent(driver, subject, 3);
 		Utility_Functions.xSendKeys(driver, subject, "test1");
-		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementPresent(driver, activityType1, 3);
 		Utility_Functions.xClick(driver, activityType1, true);
-		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementPresent(driver, saveAndNewActivity, 3);
 		Utility_Functions.xClick(driver, saveAndNewActivity, true);
-		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementPresent(driver, createNewActivity, 3);
 		if(!createNewActivity.getText().isEmpty()){
 
 			System.out.println("The New Activity Page is displayed");
+			report.updateTestLog("Verify Create Activity Account ","The Activity is saved and New Activity is displayed ",  Status.PASS);
 		}else{
 			System.out.println("The New Activity Page is not displayed");
+			report.updateTestLog("Verify Create Activity Account ","The Activity is not saved ",  Status.FAIL);
 		}
 		
-		report.updateTestLog("Verify Create Activity Account ","The Activity is saved and New Activity is displayed ",  Status.PASS);
+		
 		
 
 	}
@@ -1037,16 +1050,16 @@ public class AccountsPage extends ReusableLibrary {
 			report.updateTestLog("Verify Create Activity Account","Recently viewed Accounts are Displayed ",  Status.PASS);
 			Utility_Functions.xWaitForElementPresent(driver, allAccounts, 3);
 			Utility_Functions.xClick(driver, allAccounts, true);
-			Utility_Functions.timeWait(3);
+			Utility_Functions.timeWait(2);
 			report.updateTestLog("Verify Create Activity Account","All accounts are displayed successfully:::",  Status.PASS);
 			List<WebElement> accountNamesList = driver.findElements(
 					By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
 
 			Utility_Functions.xclickOnFirstElementfromList(accountNamesList);
-			Utility_Functions.timeWait(3);
+			Utility_Functions.xWaitForElementPresent(driver, related_Accounts, 5);
 			report.updateTestLog("Verify Create Activity Account ","The Account is Displayed ",  Status.PASS);
 			Utility_Functions.xClick(driver, related_Accounts, true);
-			Utility_Functions.timeWait(3);
+			Utility_Functions.timeWait(2);
 			report.updateTestLog("Verify Create Activity Account ","The related page is Displayed ",  Status.PASS);
 			Utility_Functions.xScrollWindow(driver);
 			Utility_Functions.timeWait(1);
@@ -1055,28 +1068,26 @@ public class AccountsPage extends ReusableLibrary {
 			Utility_Functions.xWaitForElementPresent(driver, newActivity, 3);
 			Utility_Functions.xClick(driver, newActivity, true);
 			report.updateTestLog("Verify Create Activity Account ","The New Activity in the related page is Displayed ",  Status.PASS);
-			Utility_Functions.xSwitchtoFrame(driver, subject);
+			Utility_Functions.xSwitchtoFrame(driver, saveAndNewActivity);
+			Utility_Functions.timeWait(3);
 			Utility_Functions.xWaitForElementPresent(driver, subject, 5);
-			Utility_Functions.xClick(driver, subject, true);
-			Utility_Functions.timeWait(3);
 			Utility_Functions.xSendKeys(driver, subject, "test1");
-			Utility_Functions.timeWait(3);
+			Utility_Functions.xWaitForElementPresent(driver, activityType1, 3);
 			Utility_Functions.xClick(driver, activityType1, true);
-			Utility_Functions.timeWait(3);
+			Utility_Functions.xWaitForElementPresent(driver, saveAndNewActivity, 3);
 			Utility_Functions.xClick(driver, saveAndNewActivity, true);
 			Utility_Functions.timeWait(3);
-		
-			
 			report.updateTestLog("Verify Create Activity Account ","The Activity is saved and New Activity is displayed ",  Status.PASS);
+			/*Utility_Functions.xSwitchtoFrame(driver, subject);
+			Utility_Functions.timeWait(3);*/
 			Utility_Functions.xClick(driver, subject, true);
 			Utility_Functions.timeWait(3);
 			Random random = new Random();
 			int value = random.nextInt();
-			
+			Utility_Functions.xWaitForElementPresent(driver, subject, 5);
 			Utility_Functions.xSendKeys(driver, subject, "Test Activity Created by Automation" + value);
-			Utility_Functions.timeWait(3);
 			Utility_Functions.xClick(driver, activityType2, true);
-			Utility_Functions.timeWait(3);
+			Utility_Functions.xWaitForElementPresent(driver,saveActivity, 5);
 			Utility_Functions.xClick(driver, saveActivity, true);
 			
 			SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
@@ -1098,7 +1109,7 @@ public class AccountsPage extends ReusableLibrary {
 			report.updateTestLog("Verify Add Opportunity Page Fields",
 					"URL has been replaced with the new URL having the retrieved Opportunity:::" + newUrl, Status.PASS);
 			driver.get(newUrl);
-			driver.navigate().refresh();
+			//driver.navigate().refresh();
 			
 			
 		
@@ -1122,12 +1133,12 @@ public class AccountsPage extends ReusableLibrary {
 			
 			Utility_Functions.timeWait(3);
 			Utility_Functions.xSwitchtoFrame(driver, subject);
-			Utility_Functions.xClick(driver, subject, true);
 			Utility_Functions.timeWait(3);
+			Utility_Functions.xWaitForElementPresent(driver,subject, 3);
 			Utility_Functions.xSendKeys(driver, subject, "test3");
-			Utility_Functions.timeWait(3);
+			Utility_Functions.xWaitForElementPresent(driver,activityType3, 3);
 			Utility_Functions.xClick(driver, activityType3, true);
-			Utility_Functions.timeWait(3);
+			Utility_Functions.xWaitForElementPresent(driver,saveActivity, 3);
 			Utility_Functions.xClick(driver, saveActivity, true);
 			Utility_Functions.timeWait(3);
 			report.updateTestLog("Verify Create Activity Account ","The Custom Activity is created ",  Status.PASS);
@@ -1166,8 +1177,10 @@ public class AccountsPage extends ReusableLibrary {
 	 */
 	public void verifyNewActivityPageLayout() {
 
+		
+		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
 		Utility_Functions.xClick(driver, menu_Accounts, true);
-		Utility_Functions.timeWait(3);
+		
 		report.updateTestLog("Verify New Activity Page Layout ","Accounts is Displayed ",  Status.PASS);
 		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
 		Utility_Functions.xClick(driver, recentlyViewed, true);
@@ -1182,8 +1195,8 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xclickOnFirstElementfromList(accountNamesList);
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify New Activity Page Layout ","The Account is Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, related_Accounts, 3);
 		Utility_Functions.xClick(driver, related_Accounts, true);
-		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify New Activity Page Layout ","The related page is Displayed ",  Status.PASS);
 		Utility_Functions.xScrollWindow(driver);
 		Utility_Functions.timeWait(1);
@@ -1202,8 +1215,7 @@ public class AccountsPage extends ReusableLibrary {
 		}*/
 		driver.switchTo().frame(5);
 		Utility_Functions.timeWait(5);
-		System.out.println("Frame Identified");
-		Utility_Functions.timeWait(5);
+	
 		List<WebElement> newActivityPageLayoutSections = driver
 				.findElements(By.xpath("//div[@class='slds-grid']"));
 		int countHeader =0;
@@ -1524,5 +1536,156 @@ public class AccountsPage extends ReusableLibrary {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
 		}
+	}
+	/**
+	 * Validating the New Activity Page Layout for the Accounts for incorrect data
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void verifyNewActivityPageForIncorrectData(){
+	
+			Utility_Functions.xClick(driver, menu_Accounts, true);
+			Utility_Functions.timeWait(3);
+			report.updateTestLog("Verify New Activity Page Layout ","Accounts is Displayed ",  Status.PASS);
+			
+			List<WebElement> accountNamesList = driver.findElements(
+					By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+
+			Utility_Functions.xclickOnFirstElementfromList(accountNamesList);
+			Utility_Functions.timeWait(3);
+			report.updateTestLog("Verify New Activity Page Layout ","The Account is Displayed ",  Status.PASS);
+			Utility_Functions.xClick(driver, related_Accounts, true);
+			Utility_Functions.timeWait(3);
+			report.updateTestLog("Verify New Activity Page Layout ","The related page is Displayed ",  Status.PASS);
+			Utility_Functions.xScrollWindow(driver);
+			Utility_Functions.timeWait(1);
+			Utility_Functions.xScrollWindowTop(driver);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xWaitForElementPresent(driver, newActivity, 3);
+			Utility_Functions.xClick(driver, newActivity, true);
+			report.updateTestLog("Verify New Activity Page Layout ","The New Activity in the related page is Displayed ",  Status.PASS);
+			Utility_Functions.xSwitchtoFrame(driver, subject);
+
+			Utility_Functions.timeWait(3);
+			
+			Utility_Functions.xWaitForElementPresent(driver, subject, 3);
+			Utility_Functions.xClick(driver, subject, true);
+			Utility_Functions.xWaitForElementPresent(driver, subject, 3);
+			Utility_Functions.xSendKeys(driver, subject, "test1");
+			report.updateTestLog("Verify New Activity Page Layout ","The New Activity in the related page is Displayed ",  Status.PASS);
+			Utility_Functions.xWaitForElementPresent(driver, activityType1, 3);
+			Utility_Functions.xClick(driver, activityType1, true);
+			report.updateTestLog("Verify New Activity Page Layout ","The New Activity in the related page is Displayed ",  Status.PASS);
+			Utility_Functions.xSendKeys(driver, relatedToContactField, "Adarsh Mehta");
+			relatedToContactField.sendKeys(Keys.ARROW_DOWN);
+			relatedToContactField.sendKeys(Keys.TAB);
+			report.updateTestLog("Verify New Activity Page Layout ","Verifying the New Activity Page Contact Field is populated with the user data ",  Status.PASS);
+			Utility_Functions.xSendKeys(driver, relatedToOpportunityField, "ABC Telecom-Consulting-134-Acres");
+			relatedToOpportunityField.sendKeys(Keys.ARROW_DOWN);
+			relatedToOpportunityField.sendKeys(Keys.TAB);
+			report.updateTestLog("Verify New Activity Page Layout ","Verifying the New Activity Page Opportunity Field is populated with the user data ",  Status.PASS);
+			Utility_Functions.xSendKeys(driver, relatedToPropertyField, "test25APR - South Lamar Street");
+			
+			relatedToPropertyField.sendKeys(Keys.ARROW_DOWN);
+			relatedToPropertyField.sendKeys(Keys.TAB);
+			report.updateTestLog("Verify New Activity Page Layout ","Verifying the New Activity Page Property Field is populated with the user data ",  Status.PASS);
+			Utility_Functions.xWaitForElementPresent(driver, saveActivity, 3);
+			Utility_Functions.xClick(driver, saveActivity, true);
+			report.updateTestLog("Verify New Activity Page Layout ","Verifying whether the New Activity page is saved  ",  Status.PASS);
+	       /* if(errorMessage.getText().contains("Review the errors on this page")){
+	        	System.out.println("Contact Account and Account mismatch");
+	        
+	        }else{
+	        	System.out.println("No errors found in the page");
+	        }*/
+	        /*driver.navigate().refresh();
+			Utility_Functions.timeWait(1);
+			driver.switchTo().defaultContent();
+			driver.navigate().refresh();
+			Utility_Functions.timeWait(3);
+			Utility_Functions.xScrollWindow(driver);
+			Utility_Functions.timeWait(1);
+			Utility_Functions.xScrollWindowTop(driver);
+			Utility_Functions.timeWait(2);*/
+			/*Utility_Functions.xWaitForElementPresent(driver, relatedToContactField, 4);
+			relatedToContactField.clear();
+			Utility_Functions.xWaitForElementPresent(driver, relatedToOpportunityField, 4);
+			relatedToOpportunityField.clear();
+			Utility_Functions.xWaitForElementPresent(driver, relatedToPropertyField, 4);
+			relatedToPropertyField.clear();
+			Utility_Functions.xWaitForElementPresent(driver, saveActivity, 3);
+			Utility_Functions.xClick(driver, saveActivity, true);*/
+			
+			/*if ((!savedActivityAfterChanges.getText().equals(""))) {
+				System.out.println("The activity is saved");
+			}else{
+				System.out.println("The Activity is not saved");
+			}*/
+		
+	
+	}
+	/**
+	 * Validating the New Activity Page send Notification Email to the Assigned Person
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	
+	public void verifyAccountsNewActivityPageSendNotificationEmail(){
+		
+		
+		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
+		Utility_Functions.xClick(driver, menu_Accounts, true);
+		
+		report.updateTestLog("Verify New Activity Page send Notification Email ","Verifying the Accounts is Displayed ",  Status.PASS);
+		
+		List<WebElement> accountNamesList = driver.findElements(
+				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+
+		Utility_Functions.xclickOnFirstElementfromList(accountNamesList);
+		report.updateTestLog("Verify New Activity Page send Notification Email ","Verifying the selected Account is Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, related_Accounts, 3);
+		Utility_Functions.xClick(driver, related_Accounts, true);
+		report.updateTestLog("Verify New Activity Page Layout ","Verifying the related page is Displayed ",  Status.PASS);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, newActivity, 3);
+		Utility_Functions.xClick(driver, newActivity, true);
+		Utility_Functions.timeWait(3);
+		report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the New Activity in the related page is Displayed ",  Status.PASS);
+		//Utility_Functions.xSwitchtoFrame(driver, subject);
+		
+        driver.switchTo().frame(5);
+		Utility_Functions.timeWait(3);
+		
+		Utility_Functions.xWaitForElementPresent(driver, subject, 3);
+		Utility_Functions.xClick(driver, subject, true);
+		Utility_Functions.xWaitForElementPresent(driver, subject, 3);
+		Utility_Functions.xSendKeys(driver, subject, "test1");
+		report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the subject field is populated with the user defined value ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, activityType1, 3);
+		Utility_Functions.xClick(driver, activityType1, true);
+		report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the Activity Type field is populated with one of the pick list values ",  Status.PASS);
+		
+		if(!notificationEmail.isSelected()){
+	        //notificationEmail.click();
+		
+			Utility_Functions.xClick(driver, notificationEmail, true);
+	        System.out.println("Notification email is checked");
+	        report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the notification email check box is checked or else checking it",  Status.PASS);
+	        
+	    }else{
+	    	System.out.println("Notification email is not checked");
+	    	report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the notification email check box is checked or not ",  Status.FAIL);
+	    }
+	Utility_Functions.xWaitForElementPresent(driver,assignedTo, 3);
+	Utility_Functions.xSendKeys(driver, assignedTo, "vishnuvardhan bommisetty");
+	report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the Assigned To field is populated with the appropriate value ",  Status.PASS);
+	Utility_Functions.xWaitForElementPresent(driver, saveActivity, 3);
+	Utility_Functions.xClick(driver, saveActivity, true);
+	report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the notification email issent to the Assigned To person in the New Activity page ",  Status.PASS);
 	}
 }

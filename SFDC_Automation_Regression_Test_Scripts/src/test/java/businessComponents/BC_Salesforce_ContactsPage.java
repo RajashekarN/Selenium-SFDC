@@ -109,4 +109,13 @@ public class BC_Salesforce_ContactsPage extends ReusableLibrary {
 	public void bc_verifyContactNewActivityPageLayout()throws InterruptedException{
 		sfContactsPage.verifyContactNewActivityPageLayout();
 	}
+	/**
+	 * Validating the creation of new Activity in Contact 
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+	public void bc_verifyContactNewActivityPageSendNotificationEmail()throws InterruptedException{
+		sfContactsPage.verifyContactNewActivityPageSendNotificationEmail();
+	}
 }

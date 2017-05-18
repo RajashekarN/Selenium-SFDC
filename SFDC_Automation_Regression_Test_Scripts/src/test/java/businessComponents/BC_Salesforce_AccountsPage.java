@@ -129,4 +129,15 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 		sfAccountsPage.verifyFollowUpCustomActivity();
 
 	} 
+	/**
+	 * Validating the New Activity Page Notification email
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyAccountsNewActivityPageSendNotificationEmail() throws InterruptedException{
+
+		sfAccountsPage.verifyAccountsNewActivityPageSendNotificationEmail();
+
+	} 
 }

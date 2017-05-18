@@ -138,6 +138,9 @@ public class PropertiesPage extends ReusableLibrary {
 
 	@FindBy(xpath="//select[@class='slds-select']/option[@value='Private - Follow-Up Meeting']")
 	WebElement activityType3;
+	
+	@FindBy(xpath="//input[@class='slds-input'][@type='checkbox']/following-sibling::span[text()='Notification Email']")
+	WebElement notificationEmail;
 
 
 	/**
@@ -479,11 +482,11 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, subject, 5);
 
 		Utility_Functions.xClick(driver, subject, true);
-		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementPresent(driver, subject, 5);
 		Utility_Functions.xSendKeys(driver, subject, "test1");
-		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementPresent(driver, activityType, 5);
 		Utility_Functions.xClick(driver, activityType, true);
-		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementPresent(driver, saveAndNewActivity, 5);
 		Utility_Functions.xClick(driver, saveAndNewActivity, true);
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify Create Activity Properties ","The Activity is saved and New Activity is displayed ",  Status.PASS);
@@ -492,9 +495,9 @@ public class PropertiesPage extends ReusableLibrary {
 		int value = random.nextInt();
 
 		Utility_Functions.xSendKeys(driver, subject, "Test Activity Created by Automation" + value);
-		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementPresent(driver, activityType2, 5);
 		Utility_Functions.xClick(driver, activityType2, true);
-		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementPresent(driver, saveActivity, 5);
 		Utility_Functions.xClick(driver, saveActivity, true);
 
 		SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
@@ -540,11 +543,11 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.xSwitchtoFrame(driver, subject );
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xClick(driver, subject, true);
-		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementPresent(driver, subject , 3);
 		Utility_Functions.xSendKeys(driver, subject, "test3");
-		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementPresent(driver,activityType3, 3);
 		Utility_Functions.xClick(driver, activityType3, true);
-		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementPresent(driver,saveActivity, 3);
 		Utility_Functions.xClick(driver, saveActivity, true);
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify Create Activity Properties ","The Custom Activity is created ",  Status.PASS);
@@ -963,5 +966,84 @@ public class PropertiesPage extends ReusableLibrary {
 			System.out.println(e.getMessage());
 		}
 
+	}
+	/**
+	 * Validating the New Activity Page send Notification Email to the Assigned Person
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	
+	public void verifyNewActivityPropertiesPageSendNotificationEmail(){
+		
+		try{
+			Utility_Functions.xWaitForElementPresent(driver,menu_Properties, 3);
+			Utility_Functions.xClick(driver, menu_Properties, true);
+		}catch(Exception e){
+			Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
+			Utility_Functions.xClick(driver, menu_More, true);
+			Utility_Functions.xWaitForElementPresent(driver, properties, 2);
+			Utility_Functions.xClick(driver, properties, true);	
+		}
+		
+		
+		
+		
+		report.updateTestLog("Verify New Activity Page send Notification Email ","Verifying the Accounts is Displayed ",  Status.PASS);
+		
+		List<WebElement> propertiesList = driver.findElements(
+				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+
+		Utility_Functions.xclickOnFirstElementfromList(propertiesList);
+		report.updateTestLog("Verify New Activity Page send Notification Email ","Verifying the selected Account is Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, related, 3);
+		Utility_Functions.xClick(driver, related, true);
+		report.updateTestLog("Verify New Activity Page Layout ","Verifying the related page is Displayed ",  Status.PASS);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, newActivity, 3);
+		Utility_Functions.xClick(driver, newActivity, true);
+		Utility_Functions.timeWait(3);
+		report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the New Activity in the related page is Displayed ",  Status.PASS);
+		//Utility_Functions.xSwitchtoFrame(driver, subject);
+		/*int size = driver.findElements(By.tagName("iframe")).size();
+		System.out.println(size);
+		Utility_Functions.timeWait(2);
+		List<WebElement> iframeList = driver.findElements(By.tagName("iframe"));
+		System.out.println(iframeList.size());
+		for (WebElement element : iframeList) {
+			System.out.println(element.getAttribute("id"));
+		}*/
+        driver.switchTo().frame(2);
+		Utility_Functions.timeWait(3);
+		
+		Utility_Functions.xWaitForElementPresent(driver, subject, 3);
+		Utility_Functions.xClick(driver, subject, true);
+		Utility_Functions.xWaitForElementPresent(driver, subject, 3);
+		Utility_Functions.xSendKeys(driver, subject, "test1");
+		report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the subject field is populated with the user defined value ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, activityType, 3);
+		Utility_Functions.xClick(driver, activityType, true);
+		report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the Activity Type field is populated with one of the pick list values ",  Status.PASS);
+		
+		if(!notificationEmail.isSelected()){
+	        //notificationEmail.click();
+		
+			Utility_Functions.xClick(driver, notificationEmail, true);
+	        System.out.println("Notification email is checked");
+	        report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the notification email check box is checked or else checking it",  Status.PASS);
+	        
+	    }else{
+	    	System.out.println("Notification email is not checked");
+	    	report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the notification email check box is checked or not ",  Status.FAIL);
+	    }
+	Utility_Functions.xWaitForElementPresent(driver,assignedTo, 3);
+	Utility_Functions.xSendKeys(driver, assignedTo, "vishnuvardhan bommisetty");
+	report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the Assigned To field is populated with the appropriate value ",  Status.PASS);
+	Utility_Functions.xWaitForElementPresent(driver, saveActivity, 3);
+	Utility_Functions.xClick(driver, saveActivity, true);
+	report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the notification email issent to the Assigned To person in the New Activity page ",  Status.PASS);
 	}
 }
