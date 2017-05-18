@@ -1163,12 +1163,18 @@ public class AccountsPage extends ReusableLibrary {
 
 			Utility_Functions.xWaitForElementPresent(driver, relatedActivities, 5);
 			Utility_Functions.xClick(driver, relatedActivities, true);
-
-			//List<WebElement> relatedActivitiesList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'] "));
-			
-			report.updateTestLog("Verify Create Activity Account","The New Activity for the Accounts is created",Status.PASS);
-
+			List<WebElement> relatedActivitiesList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'] "));
+			for (WebElement element : relatedActivitiesList ) {
+				if ((!element.getText().equals(" "))){
+			report.updateTestLog("Verify Create Activity Account","The New Activity for Accounts are created ",Status.PASS);
+		}else
+		{
+			report.updateTestLog("Verify Create Activity Account","The New Activity for Accounts are not created ",Status.FAIL);
 		}
+			}
+
+			
+	}
 	/**
 	 * Validating the New Activity Page Layout for the Accounts
 	 * 
@@ -1324,28 +1330,24 @@ public class AccountsPage extends ReusableLibrary {
 			System.out.println(e.getMessage());
 
 		}
+		
+		if ((!saveNewActivityLayoutPage.getText().equals(" "))
+				|| (!saveAndNewActivityLayoutPage.getText().equals(" "))
+				|| (!cancelNewActivityLayoutPage.getText().equals(" ")))
+			 {
+			System.out.println(
+					"Save, Save and New and Cancel buttons are prsent in the New Activity Layout Page ");
+			report.updateTestLog("Verify New Activity Page Layout ",
+					"Verifying New Activity Page is having the Save, Save and New and Cancel buttons ",
+					Status.PASS);
+		} else {
+			System.out.println("Save, Save and New and Cancel buttons are not prsent in the New Activity Layout Page  ");
+			report.updateTestLog("Verify New Activity Page Layout",
+					"Verifying New Activity Page is having the Save, Save and New and Cancel buttons",
+					Status.FAIL);
+		}
 
-		if(!driver.findElements(By.xpath("// input [@value= 'Save']")).isEmpty()){
-			System.out.println("Save button is present in the New Activity Layout Page");
-			report.updateTestLog("Verify New Activity Page Layout ","The Save Button is present in the New Activity Page",  Status.PASS);
-		}else{
-			System.out.println("Save button is not present in the New Activity Layout Page");
-			report.updateTestLog("Verify New Activity Page Layout ","The Save Button is not present in the New Activity Page",  Status.FAIL);
-		}
-		if(!driver.findElements(By.xpath("// input [@value= 'Save & New']")).isEmpty()){
-			System.out.println("Save&New button is present in the New Activity Layout Page");
-			report.updateTestLog("Verify New Activity Page Layout ","The Save&New Button is present in the New Activity Page",  Status.PASS);
-		}else{
-			System.out.println("Save&New button is not present in the New Activity Layout Page");
-			report.updateTestLog("Verify New Activity Page Layout ","The Save&New Button is not present in the New Activity Page",  Status.FAIL);
-		}
-		if(!driver.findElements(By.xpath("// input [@value= 'Cancel']")).isEmpty()){
-			System.out.println("Cancel button is present in the New Activity Layout Page");
-			report.updateTestLog("Verify New Activity Page Layout","The Cancel Button is present in the New Activity Page",  Status.PASS);
-		}else{
-			System.out.println("Cancel button is not present in the New Activity Layout Page");
-			report.updateTestLog("Verify New Activity Page Layout","The Cancel Button is not present in the New Activity Page",  Status.FAIL);
-		}
+	
 		List<WebElement> newActivityPageFields = driver
 				.findElements(By.xpath("//label[@class='slds-form-element__label']"));
 		int count = 0;

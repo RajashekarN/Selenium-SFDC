@@ -2185,34 +2185,22 @@ public class OpportunitiesPage extends ReusableLibrary {
 			report.updateTestLog("Verify New Opportunity Custom Event Page ",
 					"Set Reminder checkbox is not present in the New Custom Event Page", Status.FAIL);
 		}
+		if ((!cancelCustomEventPageButton.getText().equals(" "))
+				|| (!saveAndNewEventCustomEventPageButton.getText().equals(" "))
+				|| (!saveEventCustomEventPageButton.getText().equals(" ")))
+			 {
+			System.out.println(
+					"Save, Save and New and Cancel buttons are prsent in the New Activity Layout Page ");
+			report.updateTestLog("Verify New Opportunity Custom Event Page  ",
+					"Verifying New Custom Event Page is having the Save, Save and New and Cancel buttons ",
+					Status.PASS);
+		} else {
+			System.out.println("Save, Save and New and Cancel buttons are not prsent in the New Activity Layout Page  ");
+			report.updateTestLog("Verify New Opportunity Custom Event Page ",
+					"Verifying New Custom Event Page is having the Save, Save and New and Cancel buttons",
+					Status.FAIL);
+		}
 
-		if (!cancelCustomEventPageButton.getText().equals(" ")) {
-			System.out.println("Cancel button is present");
-			report.updateTestLog("Verify New Opportunity Custom Event Page ",
-					"Cancel button is present in the New Custom Event Page", Status.PASS);
-		} else {
-			System.out.println("Cancel button is not present ");
-			report.updateTestLog("Verify New Opportunity Custom Event Page ",
-					"Cancel button is not present in the New Custom Event Page", Status.FAIL);
-		}
-		if (!saveAndNewEventCustomEventPageButton.getText().equals(" ")) {
-			System.out.println("Save and New Custom event button is present");
-			report.updateTestLog("Verify New Opportunity Custom Event Page ",
-					"Save and New Event button is present in the New Custom Event Page", Status.PASS);
-		} else {
-			System.out.println("Save and New Custom event button is not present ");
-			report.updateTestLog("Verify New Opportunity Custom Event Page ",
-					"Save and New Event button  is not present in the New Custom Event Page", Status.FAIL);
-		}
-		if (!saveEventCustomEventPageButton.getText().equals(" ")) {
-			System.out.println("Save Event button is present");
-			report.updateTestLog("Verify New Opportunity Custom Event Page ",
-					"Save Event button is present in the New Custom Event Page", Status.PASS);
-		} else {
-			System.out.println("Save Event button is not present ");
-			report.updateTestLog("Verify New Opportunity Custom Event Page ",
-					"Save Event button is not present in the New Custom Event Page", Status.FAIL);
-		}
 		try {
 
 			if ((!assignedToNewCustomEventPage.getAttribute("value").equals(""))

@@ -141,6 +141,15 @@ public class PropertiesPage extends ReusableLibrary {
 	
 	@FindBy(xpath="//input[@class='slds-input'][@type='checkbox']/following-sibling::span[text()='Notification Email']")
 	WebElement notificationEmail;
+	
+	@FindBy(xpath = "// input [@value= 'Save']")
+	WebElement saveNewActivityLayoutPage;
+
+	@FindBy(xpath = "// input [@value= 'Save & New']")
+	WebElement saveAndNewActivityLayoutPage;
+
+	@FindBy(xpath = "// input [@value= 'Cancel']")
+	WebElement cancelNewActivityLayoutPage;
 
 
 	/**
@@ -751,9 +760,24 @@ public class PropertiesPage extends ReusableLibrary {
 			System.out.println(e.getMessage());
 
 		}
+		if ((!saveNewActivityLayoutPage.getText().equals(" "))
+				|| (!saveAndNewActivityLayoutPage.getText().equals(" "))
+				|| (!cancelNewActivityLayoutPage.getText().equals(" ")))
+			 {
+			System.out.println(
+					"Save, Save and New and Cancel buttons are prsent in the New Activity Layout Page ");
+			report.updateTestLog("Verify New Activity Page Layout ",
+					"Verifying New Activity Page is having the Save, Save and New and Cancel buttons ",
+					Status.PASS);
+		} else {
+			System.out.println("Save, Save and New and Cancel buttons are not prsent in the New Activity Layout Page  ");
+			report.updateTestLog("Verify New Activity Page Layout",
+					"Verifying New Activity Page is having the Save, Save and New and Cancel buttons",
+					Status.FAIL);
+		}
+		
 
-
-		if(!driver.findElements(By.xpath("// input [@value= 'Save']")).isEmpty()){
+		/*if(!driver.findElements(By.xpath("// input [@value= 'Save']")).isEmpty()){
 			System.out.println("Save button is present in the New Activity Layout Page");
 			report.updateTestLog("Verify New Activity Page Layout ","The Save Button is present in the New Activity Page",  Status.PASS);
 		}else{
@@ -773,7 +797,7 @@ public class PropertiesPage extends ReusableLibrary {
 		}else{
 			System.out.println("Cancel button is not present in the New Activity Layout Page");
 			report.updateTestLog("Verify New Activity Page Layout","The Cancel Button is not present in the New Activity Page",  Status.FAIL);
-		}
+		}*/
 
 		List<WebElement> newActivityPageFields = driver
 				.findElements(By.xpath("//label[@class='slds-form-element__label']"));
