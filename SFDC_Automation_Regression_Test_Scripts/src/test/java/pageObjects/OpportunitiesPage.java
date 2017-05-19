@@ -374,11 +374,11 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "div[contains(@class,'slds-modal__footer')]//button[@title='Delete']")
 	WebElement deleteButton;
-	
+
 	@FindBy(xpath = "//h2[text()='Quick Create: Agency Brokerage']")
 	WebElement agencyBrokerageFrame;	
-	
-	
+
+
 	//
 
 	/****
@@ -431,10 +431,14 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//input[contains(@id,'EndTime')]")
 	WebElement endTimeNewCustomEventPage;
+
+
 	HomePage hp = new HomePage(scriptHelper);
 	SearchTextSOQL searchOpportunity = new SearchTextSOQL(scriptHelper);
 	OpportunitiesFunctions opportunitiesFunctions = new OpportunitiesFunctions(scriptHelper);
+	Actions actions = new Actions(driver.getWebDriver());
 
+	
 	/**
 	 * Adding the Web Elements to the Label List
 	 * 
@@ -1305,12 +1309,12 @@ public class OpportunitiesPage extends ReusableLibrary {
 						report.updateTestLog("Modified Opportunity Name",
 								"Opportunity Name modified according to the AssignmentType selected:::"
 										+ updatedAssignmentType,
-								Status.PASS);
+										Status.PASS);
 					} else {
 						report.updateTestLog("Modified Opportunity Name",
 								"Opportunity Name didn't get modified according to the AssignmentType selected:::"
 										+ updatedAssignmentType,
-								Status.FAIL);
+										Status.FAIL);
 					}
 					if (updatedTotalSize.equals("2900.0")) {
 						report.updateTestLog("Modified Opportunity Name",
@@ -1320,18 +1324,18 @@ public class OpportunitiesPage extends ReusableLibrary {
 						report.updateTestLog("Modified Opportunity Name",
 								"Opportunity Name didn't get modified according to the Total Size selected:::"
 										+ updatedTotalSize,
-								Status.FAIL);
+										Status.FAIL);
 					}
 					if (updatedUnitOfMeasure.equals("Hectares")) {
 						report.updateTestLog("Modified Opportunity Name",
 								"Opportunity Name modified according to the Unit of Measure selected:::"
 										+ updatedUnitOfMeasure,
-								Status.PASS);
+										Status.PASS);
 					} else {
 						report.updateTestLog("Modified Opportunity Name",
 								"Opportunity Name didn't get modified according to the Unit of Measure selected:::"
 										+ updatedUnitOfMeasure,
-								Status.FAIL);
+										Status.FAIL);
 					}
 					isStatus = true;
 				}
@@ -1699,6 +1703,72 @@ public class OpportunitiesPage extends ReusableLibrary {
 					Status.PASS);
 		}
 	}
+	
+	/**
+	 * Verify editing of multiple Installments functions for Opportunity based on Even Percent Occupier Brokerage
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	
+	public void occupierBrokerage() {
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeEdit, 3);
+		estimatedGrossFeeEdit.clear();
+		if((dataTable.getData("General_Data", "TC_ID").contains("MultipleInstallmentsEven")) || (dataTable.getData("General_Data", "TC_ID").contains("EstimatedGrossFeeCommission")) 
+				||(dataTable.getData("General_Data", "TC_ID").contains("InLineEditEvenPercent")))  {
+			Utility_Functions.xSendKeys(driver, estimatedGrossFeeEdit, "20,000");
+			report.updateTestLog("Opportunities Installments", "Opportunity installment entered as 20,000 successfully:::",
+					Status.PASS);
+		} else if((dataTable.getData("General_Data", "TC_ID").contains("MultipleInstallmentsUnEven")) ||(dataTable.getData("General_Data", "TC_ID").contains("InLineEditUnEvenPercent"))) {
+			Utility_Functions.xSendKeys(driver, estimatedGrossFeeEdit, "6,000");
+			report.updateTestLog("Opportunities Installments", "Opportunity installment entered as 6,000 successfully:::",
+					Status.PASS);
+		}
+		Utility_Functions.timeWait(5);
+		Utility_Functions.xWaitForElementPresent(driver, save, 4);
+		Utility_Functions.xHighlight(driver, save, "yellow");
+		actions.moveToElement(save).click().perform();
+		Utility_Functions.timeWait(4);
+	}
+	
+	/**
+	 * Verify editing of multiple Installments functions for Opportunity based on Even Percent Agency Brokerage
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	
+	public void agencyBrokerage() {
+		driver.navigate().refresh();
+		Utility_Functions.xSwitchtoFrame(driver, agencyBrokerageFrame);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFee, 3);
+		estimatedGrossFee.clear();
+		if((dataTable.getData("General_Data", "TC_ID").contains("MultipleInstallmentsEven")) || (dataTable.getData("General_Data", "TC_ID").contains("EstimatedGrossFeeCommission")) 
+				||(dataTable.getData("General_Data", "TC_ID").contains("InLineEditEvenPercent"))) {
+			Utility_Functions.xSendKeys(driver, estimatedGrossFee, "20,000");
+			report.updateTestLog("Opportunities Installments", "Opportunity installment entered as 20,000 successfully:::",
+					Status.PASS);
+		} else if((dataTable.getData("General_Data", "TC_ID").contains("MultipleInstallmentsUnEven")) ||(dataTable.getData("General_Data", "TC_ID").contains("InLineEditUnEvenPercent"))) {
+			Utility_Functions.xSendKeys(driver, estimatedGrossFee, "6,000");
+			report.updateTestLog("Opportunities Installments", "Opportunity installment entered as 6,000 successfully:::",
+					Status.PASS);
+		}
+		Utility_Functions.xWaitForElementPresent(driver, saveButton_AB, 3);
+		Utility_Functions.xClick(driver, saveButton_AB, true);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xSwitchtoFrame(driver, related);
+		Utility_Functions.timeWait(2);
+	}
+	
 
 	/**
 	 * Verify editing of multiple Installments from Opportunity based on Even
@@ -1731,47 +1801,14 @@ public class OpportunitiesPage extends ReusableLibrary {
 		report.updateTestLog("Opportunities Installments",
 				"Opportunity installment amount one and two after changing the quantity to two from one:::"
 						+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo,
-				Status.PASS);
+						Status.PASS);
 
 		Utility_Functions.xWaitForElementPresent(driver, editButtonInstallment, 5);
 		Utility_Functions.xClick(driver, editButtonInstallment, true);
 		if (dataTable.getData("General_Data", "TC_ID").contains("OB")) {
-			Utility_Functions.xScrollWindow(driver);
-			Utility_Functions.timeWait(1);
-			Utility_Functions.xScrollWindowTop(driver);
-			Utility_Functions.timeWait(2);
-			Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeEdit, 3);
-			estimatedGrossFeeEdit.clear();
-			Utility_Functions.xSendKeys(driver, estimatedGrossFeeEdit, "20,000");
-			Utility_Functions.timeWait(5);
-			Utility_Functions.xWaitForElementPresent(driver, save, 4);
-			// Utility_Functions.xWaitForElementPresent(driver, save, 3);
-			Actions actions = new Actions(driver.getWebDriver());
-			Utility_Functions.xHighlight(driver, save, "yellow");
-			actions.moveToElement(save).click().perform();
-			Utility_Functions.timeWait(4);
-			// Utility_Functions.xClick(driver, save, true);
+			occupierBrokerage();
 		} else if (dataTable.getData("General_Data", "TC_ID").contains("AB")) {
-			driver.navigate().refresh();
-/*			Utility_Functions.xSwitchtoFrame(driver, accountName);
-			Utility_Functions.timeWait(2);
-			System.out.println(accountName.getText());
-			Utility_Functions.xSwitchtoFrame(driver, estimatedGrossFee);
-			Utility_Functions.timeWait(2);*/
-			Utility_Functions.xSwitchtoFrame(driver, agencyBrokerageFrame);
-			Utility_Functions.timeWait(2);
-			Utility_Functions.xScrollWindow(driver);
-			Utility_Functions.timeWait(1);
-			Utility_Functions.xScrollWindowTop(driver);
-			Utility_Functions.timeWait(2);
-			Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFee, 3);
-			estimatedGrossFee.clear();
-			Utility_Functions.xSendKeys(driver, estimatedGrossFee, "20,000");
-			Utility_Functions.xWaitForElementPresent(driver, saveButton_AB, 3);
-			Utility_Functions.xClick(driver, saveButton_AB, true);
-			Utility_Functions.timeWait(1);
-			Utility_Functions.xSwitchtoFrame(driver, related);
-			Utility_Functions.timeWait(2);
+			agencyBrokerage();
 		}
 		Utility_Functions.xWaitForElementPresent(driver, related, 3);
 		Utility_Functions.xClick(driver, related, true);
@@ -1783,7 +1820,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			report.updateTestLog("Opportunities Installments",
 					"Opportunity installment amounts recalculated successfully after editing the Estimated Gross Fee:::"
 							+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo,
-					Status.PASS);
+							Status.PASS);
 		} else {
 			report.updateTestLog("Opportunities Installments", "Opportunity installment amounts recalculation failed:::"
 					+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo, Status.FAIL);
@@ -1798,27 +1835,15 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 * @author Vishnuvardhan
 	 *
 	 */
-
 	public void multipleInstallmentsUnEvenPercent() {
 		multipleInstallmentsFunction();
 		Utility_Functions.xWaitForElementPresent(driver, editButtonInstallment, 5);
-		Utility_Functions.xClick(driver, editButtonInstallment, true);
-		Utility_Functions.xScrollWindow(driver);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xScrollWindowTop(driver);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeEdit, 3);
-		estimatedGrossFeeEdit.clear();
-		Utility_Functions.xSendKeys(driver, estimatedGrossFeeEdit, "6,000");
-		report.updateTestLog("Opportunities Installments", "Opportunity installment entered as 6,000 successfully:::",
-				Status.PASS);
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xWaitForElementPresent(driver, save, 4);
-		// Utility_Functions.xWaitForElementPresent(driver, save, 3);
-		Actions actions = new Actions(driver.getWebDriver());
-		Utility_Functions.xHighlight(driver, save, "yellow");
-		actions.moveToElement(save).click().perform();
-		Utility_Functions.timeWait(4);
+		Utility_Functions.xClick(driver, editButtonInstallment, true);		
+		if (dataTable.getData("General_Data", "TC_ID").contains("OB")) {
+			occupierBrokerage();
+		} else if (dataTable.getData("General_Data", "TC_ID").contains("AB")) {
+			agencyBrokerage();
+		}
 		Utility_Functions.xWaitForElementPresent(driver, showMoreActions, 2);
 		Utility_Functions.xClick(driver, showMoreActions, true);
 		Utility_Functions.timeWait(1);
@@ -1842,26 +1867,43 @@ public class OpportunitiesPage extends ReusableLibrary {
 			report.updateTestLog("Opportunities Installments",
 					"Opportunity installment amounts recalculated successfully after editing the Estimated Gross Fee:::"
 							+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo,
-					Status.PASS);
+							Status.PASS);
 		} else {
 			report.updateTestLog("Opportunities Installments", "Opportunity installment amounts recalculation failed:::"
-					+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo, Status.FAIL);
+					+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo, Status.WARNING);
 		}
 		Utility_Functions.xWaitForElementPresent(driver, editButtonInstallment, 5);
-		Utility_Functions.xWaitForElementPresent(driver, editButtonInstallment, 5);
 		Utility_Functions.xClick(driver, editButtonInstallment, true);
-		Utility_Functions.xScrollWindow(driver);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xScrollWindowTop(driver);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeEdit, 3);
-		estimatedGrossFeeEdit.clear();
-		Utility_Functions.xSendKeys(driver, estimatedGrossFeeEdit, "20,000");
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xWaitForElementPresent(driver, save, 4);
-		Utility_Functions.xHighlight(driver, save, "yellow");
-		actions.moveToElement(save).click().perform();
-		Utility_Functions.timeWait(4);
+		if (dataTable.getData("General_Data", "TC_ID").contains("OB")) {
+			Utility_Functions.xScrollWindow(driver);
+			Utility_Functions.timeWait(1);
+			Utility_Functions.xScrollWindowTop(driver);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeEdit, 3);
+			estimatedGrossFeeEdit.clear();
+			Utility_Functions.xSendKeys(driver, estimatedGrossFeeEdit, "20,000");
+			Utility_Functions.timeWait(5);
+			Utility_Functions.xWaitForElementPresent(driver, save, 4);
+			Utility_Functions.xHighlight(driver, save, "yellow");
+			actions.moveToElement(save).click().perform();
+			Utility_Functions.timeWait(4);
+		} else if (dataTable.getData("General_Data", "TC_ID").contains("AB")) {
+			driver.navigate().refresh();
+			Utility_Functions.xSwitchtoFrame(driver, agencyBrokerageFrame);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xScrollWindow(driver);
+			Utility_Functions.timeWait(1);
+			Utility_Functions.xScrollWindowTop(driver);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFee, 3);
+			estimatedGrossFee.clear();
+			Utility_Functions.xSendKeys(driver, estimatedGrossFee, "20,000");
+			Utility_Functions.xWaitForElementPresent(driver, saveButton_AB, 3);
+			Utility_Functions.xClick(driver, saveButton_AB, true);
+			Utility_Functions.timeWait(1);
+			Utility_Functions.xSwitchtoFrame(driver, related);
+			Utility_Functions.timeWait(2);
+		}		
 		Utility_Functions.xWaitForElementPresent(driver, related, 3);
 		Utility_Functions.xClick(driver, related, true);
 		sInstallmentAmountOne = installmentAmountOne.getText();
@@ -1872,10 +1914,10 @@ public class OpportunitiesPage extends ReusableLibrary {
 			report.updateTestLog("Opportunities Installments",
 					"Opportunity installment amounts recalculated successfully after editing the Estimated Gross Fee:::"
 							+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo,
-					Status.PASS);
+							Status.PASS);
 		} else {
 			report.updateTestLog("Opportunities Installments", "Opportunity installment amounts recalculation failed:::"
-					+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo, Status.FAIL);
+					+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo, Status.WARNING);
 		}
 
 	}
@@ -2037,31 +2079,16 @@ public class OpportunitiesPage extends ReusableLibrary {
 			Utility_Functions.xWaitForElementPresent(driver, arrowDown, 3);
 			Utility_Functions.xClick(driver, arrowDown, true);
 			Utility_Functions.timeWait(1);
-			if (deleteInstallment.isDisplayed()) {
-				report.updateTestLog("Opportunities Installments",
-						"Installment cannot be deleted as the Delete button is not getting displayed when we try to delete the installment via script:",
-						Status.PASS);
-			} else {
-				report.updateTestLog("Opportunities Installments", "Installment Deletion Failed", Status.FAIL);
+			List<WebElement> actionList = driver.findElements(By.xpath("//div[@class='actionMenu']//a"));
+			for(WebElement element: actionList) {
+				if(!element.getText().contains("Delete")) {
+					report.updateTestLog("Opportunities Installments",
+							"Installment cannot be deleted as the Delete button is not getting displayed when we try to delete the installment via script:",
+							Status.PASS);
+				} else {
+					report.updateTestLog("Opportunities Installments", "Installment Deletion Failed", Status.FAIL);
+				}
 			}
-			/*
-			 * Utility_Functions.xWaitForElementPresent(driver,
-			 * deleteInstallment, 3); Utility_Functions.xClick(driver,
-			 * deleteInstallment, true);
-			 * Utility_Functions.xWaitForElementPresent(driver, deleteButton,
-			 * 3); Utility_Functions.xClick(driver, deleteButton, true);
-			 * driver.navigate().refresh();
-			 * Utility_Functions.xWaitForElementPresent(driver, related, 4);
-			 * String sInstallmentAmountOne = installmentAmountOne.getText();
-			 * System.out.println(sInstallmentAmountOne);
-			 * if(sInstallmentAmountOne.equals("USD 20,000.00")) {
-			 * report.updateTestLog("Opportunities Installments"
-			 * ,"Opportunity installment amounts recalculated successfully after editing the Estimated Gross Fee:::"
-			 * + sInstallmentAmountOne, Status.PASS); } else {
-			 * report.updateTestLog("Opportunities Installments",
-			 * "Opportunity installment amounts recalculation failed:::"+
-			 * sInstallmentAmountOne , Status.FAIL); }
-			 */
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -2114,10 +2141,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, selectNewEvent, 3);
 		Utility_Functions.xClick(driver, selectNewEvent, true);
 		Utility_Functions.xWaitForElementPresent(driver, newEvent, 3);
-		Actions action = new Actions(driver.getWebDriver());
-		action.moveToElement(newEvent);
-		action.click();
-		action.build().perform();
+		actions.moveToElement(newEvent);
+		actions.click();
+		actions.build().perform();
 		Utility_Functions.timeWait(3);
 
 		driver.switchTo().frame(4);
@@ -2188,7 +2214,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		if ((!cancelCustomEventPageButton.getText().equals(" "))
 				|| (!saveAndNewEventCustomEventPageButton.getText().equals(" "))
 				|| (!saveEventCustomEventPageButton.getText().equals(" ")))
-			 {
+		{
 			System.out.println(
 					"Save, Save and New and Cancel buttons are prsent in the New Activity Layout Page ");
 			report.updateTestLog("Verify New Opportunity Custom Event Page  ",

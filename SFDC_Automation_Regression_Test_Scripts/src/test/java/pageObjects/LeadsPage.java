@@ -162,7 +162,10 @@ public class LeadsPage extends ReusableLibrary {
 	/*	@FindBy(xpath = "//li/parent::ul/parent::div/parent::div/parent::div/header/div[2]/h2/a/span[text()='Private Notes']/parent::a/parent::h2/parent::div/parent::header/parent::div//ul[@class='slds-button-group slds-m-left--xx-small small oneActionsRibbon forceActionsContainer']")
 	WebElement new_PrivateNotes;*/
 
-	@FindBy(xpath = "//article[contains(@class,'Private Notes')]//div[@title='New']")
+/*	@FindBy(xpath = "//article[contains(@class,'Private Notes')]//div[@title='New']")
+	WebElement new_PrivateNotes;*/
+	
+	@FindBy(xpath = "//article[contains(@class,'forceRelatedListSingleContainer')]//span[contains(text(),'Private Notes')]/ancestor::article//div[text()='New']")
 	WebElement new_PrivateNotes;
 
 	@FindBy(xpath = "//div[@class='forceChangeRecordTypeFooter']//span[text()='Next']")
