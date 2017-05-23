@@ -131,7 +131,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(css = ".modal-footer [title='Save']")
 	WebElement save;
-	
+
 	@FindBy(css = ".modal-footer [title='Cancel']")
 	WebElement cancel;
 
@@ -456,6 +456,12 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//input[contains(@id,'EndTime')]")
 	WebElement endTimeNewCustomEventPage;
+
+	@FindBy(xpath=".//*[@id='record-type-select']")
+	WebElement opportunityRecordType;
+
+	@FindBy(xpath="//div/a[@class='select'][text()='Occupier Lease']")
+	WebElement assignmentTypeEditPage;
 
 	HomePage hp = new HomePage(scriptHelper);
 	SearchTextSOQL searchOpportunity = new SearchTextSOQL(scriptHelper);
@@ -1217,7 +1223,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			} else if(dataTable.getData("General_Data", "TC_ID").contains("CM") && (dataTable.getData("General_Data", "TC_ID").contains("DSF"))) {
 				opportunity.setField("RecordTypeId", "012i0000000405lAAA");				
 			}
-			
+
 			opportunity.setField("StageName", "1-Target");
 			// opportunity.setField("Service__c", "Business Valuation");
 			opportunity.setField("Total_Size__c", 5000);
@@ -2305,12 +2311,12 @@ public class OpportunitiesPage extends ReusableLibrary {
 				Utility_Functions.xWaitForElementPresent(driver, installmentOption, 3);
 				Utility_Functions.xClick(driver, installmentOption, true);
 				if(installmentOption.getText().contains("Paid")) {
-						report.updateTestLog("Opportunities Installments", "Opportunity not is eligible as the installment amount is already paid::",Status.WARNING);
-						isStatus = false;
-						Utility_Functions.xWaitForElementPresent(driver, cancel, 3);
-						Utility_Functions.xClick(driver, cancel, true);		
-						Utility_Functions.timeWait(2);
-						break labelA;
+					report.updateTestLog("Opportunities Installments", "Opportunity not is eligible as the installment amount is already paid::",Status.WARNING);
+					isStatus = false;
+					Utility_Functions.xWaitForElementPresent(driver, cancel, 3);
+					Utility_Functions.xClick(driver, cancel, true);		
+					Utility_Functions.timeWait(2);
+					break labelA;
 				}
 				DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 				Date date = new Date();
@@ -2365,7 +2371,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 				break labelA;
 			}
 
-			}
+		}
 		}
 
 	}
@@ -2556,5 +2562,196 @@ public class OpportunitiesPage extends ReusableLibrary {
 		}
 
 	}
+	/**
+	 * Validating the Opportunity record type for Occupancy Brokerage
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void verifyOpportunityRecordTypeForOccupancyBrokerage(){
+		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
+		Utility_Functions.xClick(driver, menu_Opportunities, true);
+		report.updateTestLog("Verify Opportunity Record Type  ",
+				"Verifying the Opportunities page is displayed", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
+		Utility_Functions.xClick(driver, newOpportunity, true);
+		report.updateTestLog("Verify Opportunity Record Type  ",
+				"Verifying the new opportunity page is displayed", Status.PASS);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xSwitchtoFrame(driver, continueButton);
+		//driver.switchTo().frame(1);
+		Utility_Functions.timeWait(3);
+
+		if (opportunityRecordType.getText().contains("Occupier Brokerage")) {
+			System.out.println("Occupier Brokerage is present as the default value in the select record type opportunity page");
+			report.updateTestLog("Verify Opportunity Record Type ",
+					"Verifying the Occupier Brokerage is present as the default value", Status.PASS);
+		} else {
+			System.out.println("Occupier Brokerage is not present as the default value in the select record type opportunity page");
+			report.updateTestLog("Verify Opportunity Record Type  ",
+					"Verifying the Occupier Brokerage is present as the default value", Status.FAIL);
+
+		}	
+
+	}
+	/**
+	 * Validating the Opportunity record type for Agency Broker
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void verifyOpportunityRecordTypeForAgencyBroker(){
+		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
+		Utility_Functions.xClick(driver, menu_Opportunities, true);
+		report.updateTestLog("Verify Opportunity Record Type  ",
+				"Verifying the Opportunities page is displayed", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
+		Utility_Functions.xClick(driver, newOpportunity, true);
+		report.updateTestLog("Verify Opportunity Record Type  ",
+				"Verifying the new opportunity page is displayed", Status.PASS);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xSwitchtoFrame(driver, continueButton);
+		//driver.switchTo().frame(1);
+		Utility_Functions.timeWait(3);
+
+		if (opportunityRecordType.getText().contains("Agency Brokerage")) {
+			System.out.println("Agency Broker is present as the default value in the select record type opportunity page");
+			report.updateTestLog("Verify Opportunity Record Type ",
+					"Verifying the Agency Broker is present as the default value", Status.PASS);
+		} else {
+			System.out.println("Agency Broker is not present as the default value in the select record type opportunity page");
+			report.updateTestLog("Verify Opportunity Record Type  ",
+					"Verifying the Agency Broker is present as the default value", Status.FAIL);
+
+		}	
+
+	}
+
+	/**
+	 * Validating the Opportunity record type for the Capital Markets
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void verifyOpportunityRecordTypeForCapitalMarkets(){
+		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
+		Utility_Functions.xClick(driver, menu_Opportunities, true);
+		report.updateTestLog("Verify Opportunity Record Type  ",
+				"Verifying the Opportunities page is displayed", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
+		Utility_Functions.xClick(driver, newOpportunity, true);
+		report.updateTestLog("Verify Opportunity Record Type  ",
+				"Verifying the new opportunity page is displayed", Status.PASS);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xSwitchtoFrame(driver, continueButton);
+		//driver.switchTo().frame(1);
+		Utility_Functions.timeWait(3);
+
+		if (opportunityRecordType.getText().contains("Capital Markets – Property Sales")) {
+			System.out.println("Capital Markets – Property Sales is present as the default value in the select record type opportunity page");
+			report.updateTestLog("Verify Opportunity Record Type ",
+					"Verifying the Capital Markets – Property Sales is present as the default value", Status.PASS);
+		} else {
+			System.out.println("Capital Markets – Property Sales is not present as the default value in the select record type opportunity page");
+			report.updateTestLog("Verify Opportunity Record Type  ",
+					"Verifying the Capital Markets – Property Sales is present as the default value", Status.FAIL);
+
+		}	
+
+	}
+
+	public void opportunitySplitRegression() {
+		opportunityNameAutoGenerate();
+
+		Utility_Functions.xClick(driver, related, true);
+		Utility_Functions.timeWait(5);
+		Utility_Functions.xClick(driver, addButton, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xSwitchtoFrame(driver, saveButtonSplit);
+		//driver.switchTo().frame(3);
+
+		Utility_Functions.timeWait(5);
+		List<WebElement> opportunityList = driver.findElements(By.xpath("//div[contains(@class, 'slds-truncate')]"));
+		int count = 0;
+		System.out.println(opportunityList.size());
+		try {
+			for (WebElement element : opportunityList) {
+
+				if ((count == 0) && (element.getText().equals("USER"))) {
+					System.out.println("USER  field is present in the Add New Team Member Page");
+					report.updateTestLog("Verify Opportunity Split in Opportunity Team Members Page",
+							"Add New Team Member Page is having the " + element.getText() + " Status field::",
+							Status.PASS);
+					count++;
+				} else if ((count == 1) && (element.getText().equals("TEAM MEMBER DESCRIPTION"))) {
+					System.out.println("Team Member Description field is present in the Add New Team Member Page");
+					report.updateTestLog("Verify Opportunity Split in Opportunity Team Members Page",
+							"Add New Team Member Page is having the " + element.getText() + " Status field::",
+							Status.PASS);
+					count++;
+				} else if ((count == 2) && (element.getText().equals("TEAM ROLE"))) {
+					System.out.println("TEAM ROLE field is present in the Add New Team Member Page");
+					report.updateTestLog("Verify Opportunity Split in Opportunity Team Members Page",
+							"Add New Team Member Page is having the " + element.getText() + " Status field::",
+							Status.PASS);
+					count++;
+				} else if ((count == 3) && (element.getText().equals("SECONDARY MEMBER ROLE"))) {
+					System.out.println("SECONDARY MEMBER ROLE field is present in the Add New Team Member Page");
+					report.updateTestLog("Verify Opportunity Split in Opportunity Team Members Page",
+							"Add New Team Member Page is having the " + element.getText() + " Status field::",
+							Status.PASS);
+					count++;
+				} else if ((count == 4) && (element.getText().equals("OPPORTUNITY ACCESS"))) {
+					System.out.println("OPPORTUNITY ACCESS field is present in the Add New Team Member Page");
+					report.updateTestLog("Verify Opportunity Split in Opportunity Team Members Page",
+							"Add New Team Member Page is having the " + element.getText() + " Status field::",
+							Status.PASS);
+
+				}
+			}
+			if (count != 4)
+				report.updateTestLog("Verify Opportunity Split in Opportunity Team Members Page",
+						"Add New Team Member Page is not having all the fields::", Status.FAIL);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xSendKeys(driver, user1, "Inactive User");
+		Utility_Functions.timeWait(1);
+		user1.sendKeys(Keys.ARROW_DOWN);
+		user1.sendKeys(Keys.ENTER);
+		Utility_Functions.xClick(driver, selectTeamRole, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, selectSecondaryMemberRole, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, selectOpportunityAccess, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xSendKeys(driver, user2, "Test Broker1");
+		Utility_Functions.timeWait(2);
+		user2.sendKeys(Keys.ARROW_DOWN);
+		user2.sendKeys(Keys.ENTER);
+		Utility_Functions.xClick(driver, selectTeamRole2, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, selectSecondaryMemberRole2, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, saveButtonSplit, true);
+		Utility_Functions.timeWait(3);
+		driver.navigate().refresh();
+		Utility_Functions.timeWait(1);
+		driver.switchTo().defaultContent();
+		driver.navigate().refresh();
+		Utility_Functions.xWaitForElementVisible(driver, manageOpportunitySplits, 3);
+		Utility_Functions.xClick(driver, manageOpportunitySplits, true);
+		Utility_Functions.timeWait(4);
+		driver.switchTo().frame(driver.findElement(By.xpath("//iframe")));
+		splitPercent.clear();
+		Utility_Functions.timeWait(3);
+		splitPercent.sendKeys("100");
+		Utility_Functions.xClick(driver, saveOpportunitySplit, true);
+		report.updateTestLog("Verify Opportunity Split in Opportunity Team Members Page", "Opportunity Saved successfully::", Status.PASS);
+		Utility_Functions.timeWait(3);
+	}
+
 
 }

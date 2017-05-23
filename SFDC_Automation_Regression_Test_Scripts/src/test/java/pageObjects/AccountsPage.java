@@ -15,6 +15,7 @@ import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
 
+
 import pagesAPI.SearchTextSOQL;
 import supportLibraries.Utility_Functions;
 
@@ -209,6 +210,39 @@ public class AccountsPage extends ReusableLibrary {
 	
 	@FindBy(xpath="//input[@class='slds-input'][@type='checkbox']/following-sibling::span[text()='Notification Email']")
 	WebElement notificationEmail;
+	
+	@FindBy(xpath = "//button[contains(@class,'context-bar__label-action')][text()='More']")
+	WebElement menu_More;
+	
+	@FindBy(xpath="//a[@role='menuitem']/span[contains(@class,'slds-truncate')][text()='Bulk Tagging']")
+	WebElement bulkTagging;
+	
+	@FindBy(xpath="//input[@class='slds-input'][@placeholder='Search Account/Contact/Lead/Opportunities…'][@type='text']")
+	WebElement accountSearch;
+	
+	@FindBy(xpath="//div[@class='slds-form-element ']//input[@value='Search']")
+	WebElement search;
+	
+	@FindBy(xpath="//div[@id='Accountsection']//tr[3]//span[@class='slds-checkbox--faux']")
+	WebElement selectAccount1;
+	
+	@FindBy(xpath="//div[@id='Accountsection']//tr[4]//span[@class='slds-checkbox--faux']")
+	WebElement selectAccount2;
+	
+	@FindBy(xpath="//div[@class='slds-form-element']//input[@value='Assign Tag']")
+	WebElement assignTag;
+	
+	@FindBy(xpath="//div[@class='slds-form-element ']//input[@value='Advanced Search']")
+	WebElement advancedSearch;
+	
+	@FindBy(xpath="//select[@class='slds-select']/option[@value='Account']")
+	WebElement advancedSearchAccountOption;
+	
+	@FindBy(xpath="//select[@class='slds-select']/option[@value='BillingPostalCode']")
+	WebElement accountFieldNameCondition;
+	
+	@FindBy(xpath="//select[@class='slds-select']/option[@value='=']")
+	WebElement accountOperatorCondition;
 	
 	HomePage hp = new HomePage(scriptHelper);
 	static ArrayList<String> accountsPageDetailsList = new ArrayList<String>();
@@ -1633,7 +1667,7 @@ public class AccountsPage extends ReusableLibrary {
 	 * @author Ramya
 	 *
 	 */
-	
+
 	public void verifyAccountsNewActivityPageSendNotificationEmail(){
 		
 		
@@ -1690,4 +1724,288 @@ public class AccountsPage extends ReusableLibrary {
 	Utility_Functions.xClick(driver, saveActivity, true);
 	report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the notification email issent to the Assigned To person in the New Activity page ",  Status.PASS);
 	}
+	/**
+	 * Validating the  Private Tags Bulk Tagging page layout and the Search functionalities
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	static ArrayList<String> labelsBulkTaggingPageAccountDetails = new ArrayList<String>();
+	
+	public void labelsBulkTaggingPageAccountDetails() {
+		
+		
+		labelsBulkTaggingPageAccountDetails.add("Account Name");
+		labelsBulkTaggingPageAccountDetails.add("Tags");
+		labelsBulkTaggingPageAccountDetails.add("Industry");
+		labelsBulkTaggingPageAccountDetails.add("Account Phone");
+		labelsBulkTaggingPageAccountDetails.add("Billing Street");
+		labelsBulkTaggingPageAccountDetails.add("Billing City");
+		labelsBulkTaggingPageAccountDetails.add("Billing State/Province");
+		labelsBulkTaggingPageAccountDetails.add("Billing Zip/Postal Code");
+		labelsBulkTaggingPageAccountDetails.add("Billing Country");
+		
+	}
+	
+static ArrayList<String> labelsBulkTaggingPageContactDetails = new ArrayList<String>();
+public void labelsBulkTaggingPageContactDetails() {
+		
+		
+		labelsBulkTaggingPageContactDetails.add("Full Name");
+		labelsBulkTaggingPageContactDetails.add("Tags");
+		labelsBulkTaggingPageContactDetails.add("Title");
+		labelsBulkTaggingPageContactDetails.add("Account");
+		labelsBulkTaggingPageContactDetails.add("Direct Line");
+		labelsBulkTaggingPageContactDetails.add("Email");
+		labelsBulkTaggingPageContactDetails.add("Mailing Street");
+		labelsBulkTaggingPageContactDetails.add("Mailing City");
+		labelsBulkTaggingPageContactDetails.add("Mailing State/Province");
+		labelsBulkTaggingPageContactDetails.add("Mailing Zip/Postal Code");
+		labelsBulkTaggingPageContactDetails.add("Mailing Country");
+		
+		
+	}
+static ArrayList<String> labelsBulkTaggingPageLeadDetails = new ArrayList<String>();
+public void labelsBulkTaggingPageLeadDetails() {
+		
+		
+		labelsBulkTaggingPageLeadDetails.add("Full Name");
+		labelsBulkTaggingPageLeadDetails.add("Tags");
+		labelsBulkTaggingPageLeadDetails.add("Title");
+		labelsBulkTaggingPageLeadDetails.add("Direct Line");
+		labelsBulkTaggingPageLeadDetails.add("Email");
+		labelsBulkTaggingPageLeadDetails.add("Street");
+		labelsBulkTaggingPageLeadDetails.add("City");
+		labelsBulkTaggingPageLeadDetails.add("State/Province");
+		labelsBulkTaggingPageLeadDetails.add("Zip/Postal Code");
+		labelsBulkTaggingPageLeadDetails.add("Country");
+		
+		
+	}
+static ArrayList<String> labelsBulkTaggingPageOpportunityDetails = new ArrayList<String>();
+public void labelsBulkTaggingPageOpportunityDetails() {
+		
+		
+		labelsBulkTaggingPageOpportunityDetails.add("Name");
+		labelsBulkTaggingPageOpportunityDetails.add("Tags");
+		labelsBulkTaggingPageOpportunityDetails.add("Phase");
+		labelsBulkTaggingPageOpportunityDetails.add("Sales Stage");
+		labelsBulkTaggingPageOpportunityDetails.add("Account");
+		labelsBulkTaggingPageOpportunityDetails.add("Preferred Property Type");
+		
+		
+		
+	}
+	public void verifyPrivateTags(){
+		Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
+		Utility_Functions.xClick(driver, menu_More, true);
+		Utility_Functions.xWaitForElementPresent(driver, bulkTagging, 3);
+		Utility_Functions.xClick(driver, bulkTagging, true);
+		Utility_Functions.timeWait(5);
+		Utility_Functions.xSwitchtoFrame(driver, accountSearch);
+		Utility_Functions.timeWait(5);
+		Utility_Functions.xWaitForElementPresent(driver, accountSearch, 3);
+		Utility_Functions.xClick(driver, accountSearch, true);
+		//accountSearch.clear();
+		Utility_Functions.xWaitForElementPresent(driver, accountSearch, 3);
+		Utility_Functions.xSendKeys(driver, accountSearch, "Test");
+		Utility_Functions.xWaitForElementPresent(driver, search, 3);
+		Utility_Functions.xClick(driver, search, true);
+		
+		Utility_Functions.xWaitForElementPresent(driver, selectAccount1, 3);
+		Utility_Functions.xClick(driver, selectAccount1, true);
+		Utility_Functions.xWaitForElementPresent(driver, selectAccount2, 3);
+		Utility_Functions.xClick(driver, selectAccount2, true);	
+		Utility_Functions.xWaitForElementPresent(driver, assignTag, 3);
+		Utility_Functions.xClick(driver, assignTag, true);
+		Utility_Functions.timeWait(2);
+		List<WebElement> accountFieldLabels = driver.findElements(By.xpath("//div[@id='Accountsection']//div[@class='slds-truncate']"));
+		int count = 0, i1 = 0;
+		String labelArray[] = new String[accountFieldLabels.size()];
+		System.out.println(accountFieldLabels.size());
+
+		try {
+			labelsBulkTaggingPageAccountDetails();
+			for (WebElement element : accountFieldLabels) {
+				System.out.println(element.getText());
+				labelArray[i1] = element.getText();
+				if (labelArray[i1].equalsIgnoreCase(labelsBulkTaggingPageAccountDetails.get(i1))) {
+					report.updateTestLog("Verify Private Tags Page",
+							"Bulk Tagging Page Account Details is having the " + labelArray[i1] + " field ",
+							Status.PASS);
+					count++;
+				}
+				i1++;
+			}
+			System.out.println(count);
+			if (count != 9) {
+				report.updateTestLog("Verify Private Tags Page",
+						"All Labels are not present in the Bulk Tagging Page Account Details", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify Private Tags Page",
+						"All Labels are present in the Bulk Tagging Page Account Details", Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+	
+  Utility_Functions.timeWait(2);
+	List<WebElement> contactFieldLabels = driver.findElements(By.xpath("//div[@id='Contactsection']//div[@class='slds-truncate']"));
+	int count1 = 0, i2 = 0;
+	String labelArray1[] = new String[contactFieldLabels.size()];
+	System.out.println(contactFieldLabels.size());
+
+	try {
+		labelsBulkTaggingPageContactDetails();
+		for (WebElement element : contactFieldLabels) {
+			System.out.println(element.getText());
+			labelArray1[i2] = element.getText();
+			if (labelArray1[i2].equalsIgnoreCase(labelsBulkTaggingPageContactDetails.get(i2))) {
+				report.updateTestLog("Verify Private Tags Page",
+						"Bulk Tagging Page Contact Details is having the " + labelArray1[i2] + " field ",
+						Status.PASS);
+				count1++;
+			}
+			i2++;
+		}
+		System.out.println(count1);
+		if (count1 != 11) {
+			report.updateTestLog("Verify Private Tags Page",
+					"All Labels are not present in the Bulk Tagging Page Contact Details", Status.FAIL);
+		} else {
+
+			report.updateTestLog("Verify Private Tags Page",
+					"All Labels are present in the Bulk Tagging Page Contact Details", Status.PASS);
+		}
+
+	} catch (Exception e) {
+		System.out.println(e.getMessage());
+	}
+
+	  Utility_Functions.timeWait(2);
+		List<WebElement> leadFieldLabels = driver.findElements(By.xpath("//div[@id='Leadsection']//div[@class='slds-truncate']"));
+		int count2 = 0, i3 = 0;
+		String labelArray2[] = new String[leadFieldLabels.size()];
+		System.out.println(leadFieldLabels.size());
+
+		try {
+			labelsBulkTaggingPageLeadDetails();
+			for (WebElement element : leadFieldLabels) {
+				System.out.println(element.getText());
+				labelArray2[i3] = element.getText();
+				if (labelArray2[i3].equalsIgnoreCase(labelsBulkTaggingPageLeadDetails.get(i3))) {
+					report.updateTestLog("Verify Private Tags Page",
+							"Bulk Tagging Page Lead Details is having the " + labelArray1[i3] + " field ",
+							Status.PASS);
+					count2++;
+				}
+				i3++;
+			}
+			System.out.println(count2);
+			if (count2 != 10) {
+				report.updateTestLog("Verify Private Tags Page",
+						"All Labels are not present in the Bulk Tagging Page Lead Details", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify Private Tags Page",
+						"All Labels are present in the Bulk Tagging Page Lead Details", Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		   Utility_Functions.timeWait(2);
+			List<WebElement> oppFieldLabels = driver.findElements(By.xpath("//div[@id='Oppsection']//div[@class='slds-truncate']"));
+			int count3 = 0, i4 = 0;
+			String labelArray3[] = new String[oppFieldLabels.size()];
+			System.out.println(oppFieldLabels.size());
+
+			try {
+				labelsBulkTaggingPageOpportunityDetails();
+				for (WebElement element : oppFieldLabels) {
+					System.out.println(element.getText());
+					labelArray3[i4] = element.getText();
+					if (labelArray3[i4].equalsIgnoreCase(labelsBulkTaggingPageOpportunityDetails.get(i4))) {
+						report.updateTestLog("Verify Private Tags Page",
+								"Bulk Tagging Page Opportunity Details is having the " + labelArray1[i4] + " field ",
+								Status.PASS);
+						count3++;
+					}
+					i4++;
+				}
+				System.out.println(count3);
+				if (count3 != 6) {
+					report.updateTestLog("Verify Private Tags Page",
+							"All Labels are not present in the Bulk Tagging Page Opportunity Details", Status.FAIL);
+				} else {
+
+					report.updateTestLog("Verify Private Tags Page",
+							"All Labels are present in the Bulk Tagging Page Opportunity Details", Status.PASS);
+				}
+
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xScrollWindow(driver);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xScrollWindowTop(driver);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xWaitForElementPresent(driver, advancedSearch, 3);
+			Utility_Functions.xClick(driver, advancedSearch, true);	
+			Utility_Functions.xWaitForElementPresent(driver, advancedSearchAccountOption, 3);
+			Utility_Functions.xClick(driver, advancedSearchAccountOption, true);
+			Utility_Functions.timeWait(2);
+			List<WebElement> advancedSearchFields = driver.findElements(By.xpath("//span[contains(@id,'SearchBlock')]//div[@class='slds-truncate']"));
+			int count5 = 0;
+			try {
+				for (WebElement element : advancedSearchFields) {
+					if ((count5 == 0) && (element.getText().equalsIgnoreCase("Field Name"))) {
+						System.out.println("Field name is present in the Advanced Search Page");
+						report.updateTestLog("Verify Private Tags Page",
+								"Advanced Search Private Tags Page is having the " + element.getText()
+										+ " Status field::",
+								Status.PASS);
+						count5++;
+					} else if ((count5 == 1) && (element.getText().equalsIgnoreCase("Operator"))) {
+						System.out.println("Operator is present in the Advanced Search Page");
+						report.updateTestLog("Verify Private Tags Page",
+								"Advanced Search Private Tags Page is having the " + element.getText()
+										+ " Status field::",
+								Status.PASS);
+						count5++;
+					} else if ((count5 == 2) && (element.getText().equalsIgnoreCase("Value"))) {
+						System.out
+								.println("Value is present in the Advanced Search Page");
+						report.updateTestLog("Verify Private Tags Page",
+								"Advanced Search Private Tags Page is having the " + element.getText()
+										+ " Status field::",
+								Status.PASS);
+						
+					}
+				}
+				System.out.println(count5);
+				if (count5 != 2) {
+					report.updateTestLog("Verify Private Tags Page",
+							"All Labels are not present in the Bulk Tagging Page Opportunity Details", Status.FAIL);
+				} else {
+
+					report.updateTestLog("Verify Private Tags Page",
+							"All Labels are present in the Bulk Tagging Page Opportunity Details", Status.PASS);
+				}
+			}catch (Exception e) {
+					e.printStackTrace();
+					System.out.println(e.getMessage());
+				}
+			
+			//div[@class='slds-form-element']/label/abbr	
+	
 }
+		  
+
+			}
+

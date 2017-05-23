@@ -140,4 +140,15 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 		sfAccountsPage.verifyAccountsNewActivityPageSendNotificationEmail();
 
 	} 
+	/**
+	 * Validating the Private Tags Bulk Tagging page layout and the Search functionalities
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyPrivateTags() throws InterruptedException{
+
+		sfAccountsPage.verifyPrivateTags();
+
+	} 
 }

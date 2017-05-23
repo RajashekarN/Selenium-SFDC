@@ -284,4 +284,50 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	public void bc_opportunityVerifyCustomEventPage() {
 		sfOpportunitiesPage.opportunityVerifyCustomEventPage();
 	}
+	
+	/**
+	 * Validating the Opportunity record type from the opportunity for Occupancy Brokerage 
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+	
+	
+	public void bc_verifyOpportunityRecordTypeForOccupancyBrokerage() {
+		sfOpportunitiesPage.verifyOpportunityRecordTypeForOccupancyBrokerage();
+	}
+	/**
+	 * Validating the Opportunity record type from the opportunity for Agency Broker 
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+	
+	
+	public void bc_verifyOpportunityRecordTypeForAgencyBroker() {
+		sfOpportunitiesPage.verifyOpportunityRecordTypeForAgencyBroker();
+	}
+	/**
+	 * Validating the Opportunity record type from the opportunity for Capital Markets
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+	
+	
+	public void bc_verifyOpportunityRecordTypeForCapitalMarkets() {
+		sfOpportunitiesPage.verifyOpportunityRecordTypeForCapitalMarkets();
+	}
+	/**
+	 * Validating the Opportunity record type from the opportunity for Capital Markets
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+	
+	
+	public void bc_opportunitySplitRegression() {
+		sfOpportunitiesPage.opportunitySplitRegression();
+	}
+
 }
