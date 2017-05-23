@@ -159,6 +159,10 @@ public class SearchTextSOQL extends ReusableLibrary {
 							recordID = (String) record.getField("StageName");
 							report.updateTestLog("Verify Fetch Record",
 									"Record has been fetched successfully:::" + recordID, Status.PASS);
+						} else if (name.equals("Opportunity_ID__c ")) {
+							recordID = (String) record.getField("Opportunity_ID__c ");
+							report.updateTestLog("Verify Fetch Record",
+									"Record has been fetched successfully:::" + recordID, Status.PASS);
 						} else {
 							recordID = (String) record.getField("Id");
 							report.updateTestLog("Verify Fetch Record",
@@ -274,6 +278,10 @@ public class SearchTextSOQL extends ReusableLibrary {
 									"Record has been fetched successfully:::" + recordID, Status.PASS);
 						} else if (fieldname.equals("Estimated_Gross_Fee_Commission__c")) {
 							recordID = (String) record.getField("Estimated_Gross_Fee_Commission__c");
+							report.updateTestLog("Verify Fetch Record",
+									"Record has been fetched successfully:::" + recordID, Status.PASS);
+						} else if (fieldname.equals("Opportunity_ID__c")) {
+							recordID = (String) record.getField("Opportunity_ID__c");
 							report.updateTestLog("Verify Fetch Record",
 									"Record has been fetched successfully:::" + recordID, Status.PASS);
 						} else {

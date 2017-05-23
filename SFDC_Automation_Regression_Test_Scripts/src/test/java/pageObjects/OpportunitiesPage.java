@@ -1,6 +1,8 @@
 package pageObjects;
 
+import java.math.BigDecimal;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -129,6 +131,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(css = ".modal-footer [title='Save']")
 	WebElement save;
+	
+	@FindBy(css = ".modal-footer [title='Cancel']")
+	WebElement cancel;
 
 	@FindBy(xpath = "//div[@class='slds-media']//input[@value='Save']")
 	WebElement saveButton_AB;
@@ -327,6 +332,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//table[contains(@class,'forceRecordLayout')]//tr[2]//span[contains(@class,'forceOutputCurrency')]")
 	WebElement installmentAmountTwo;
 
+	@FindBy(xpath = "//table[contains(@class,'forceRecordLayout')]//tr[3]//span[contains(@class,'forceOutputCurrency')]")
+	WebElement installmentAmountThree;
+
 	@FindBy(xpath = "//li[contains(@class,'oneActionsDropDown')]//a")
 	WebElement showMoreActions;
 
@@ -376,8 +384,25 @@ public class OpportunitiesPage extends ReusableLibrary {
 	WebElement deleteButton;
 
 	@FindBy(xpath = "//h2[text()='Quick Create: Agency Brokerage']")
-	WebElement agencyBrokerageFrame;	
+	WebElement agencyBrokerageFrame;
 
+	@FindBy(xpath = "//span[text()='Installment Status']/parent::span/parent::div//a")
+	WebElement installmentOption;
+
+	@FindBy(xpath = "//div[@class='select-options']/ul/li[contains(@class,'uiMenuItem') and contains(@class,'uiRadioMenuItem')]/a[@title='Paid']")
+	WebElement installmentStatus;
+
+	@FindBy(xpath = "//span[text()='Date Paid']/parent::label/parent::div//input")
+	WebElement datePaid;	
+
+	@FindBy(xpath = "//span[text()='Account Role']/parent::span/parent::div//a")
+	WebElement accountRoleOption;
+
+	@FindBy(xpath = "//div[@class='select-options']/ul/li[contains(@class,'uiMenuItem') and contains(@class,'uiRadioMenuItem')]/a[@title='Developer']")
+	WebElement accountRole;
+
+	@FindBy(xpath = "//span[text()='Installment Amount']/parent::label/parent::div//input")
+	WebElement installmentAmountEdit;	
 
 	//
 
@@ -432,13 +457,11 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//input[contains(@id,'EndTime')]")
 	WebElement endTimeNewCustomEventPage;
 
-
 	HomePage hp = new HomePage(scriptHelper);
 	SearchTextSOQL searchOpportunity = new SearchTextSOQL(scriptHelper);
 	OpportunitiesFunctions opportunitiesFunctions = new OpportunitiesFunctions(scriptHelper);
 	Actions actions = new Actions(driver.getWebDriver());
 
-	
 	/**
 	 * Adding the Web Elements to the Label List
 	 * 
@@ -1187,7 +1210,14 @@ public class OpportunitiesPage extends ReusableLibrary {
 			opportunity.setField("Name", "Test Automation_" + value);
 			opportunity.setField("AccountId", "0010S000004SaIHQA0");
 			opportunity.setField("CloseDate", Calendar.getInstance());
-			opportunity.setField("RecordTypeId", "012i0000000405jAAA");
+			if(dataTable.getData("General_Data", "TC_ID").contains("AS")) {
+				opportunity.setField("RecordTypeId", "012i0000000405jAAA");
+			} else if(dataTable.getData("General_Data", "TC_ID").contains("GWS")) {
+				opportunity.setField("RecordTypeId", "012i0000000405mAAA");				
+			} else if(dataTable.getData("General_Data", "TC_ID").contains("CM") && (dataTable.getData("General_Data", "TC_ID").contains("DSF"))) {
+				opportunity.setField("RecordTypeId", "012i0000000405lAAA");				
+			}
+			
 			opportunity.setField("StageName", "1-Target");
 			// opportunity.setField("Service__c", "Business Valuation");
 			opportunity.setField("Total_Size__c", 5000);
@@ -1703,14 +1733,15 @@ public class OpportunitiesPage extends ReusableLibrary {
 					Status.PASS);
 		}
 	}
-	
+
 	/**
-	 * Verify editing of multiple Installments functions for Opportunity based on Even Percent Occupier Brokerage
+	 * Verify editing of multiple Installments functions for Opportunity based
+	 * on Even Percent Occupier Brokerage
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */
-	
+
 	public void occupierBrokerage() {
 		Utility_Functions.xScrollWindow(driver);
 		Utility_Functions.timeWait(1);
@@ -1718,15 +1749,17 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeEdit, 3);
 		estimatedGrossFeeEdit.clear();
-		if((dataTable.getData("General_Data", "TC_ID").contains("MultipleInstallmentsEven")) || (dataTable.getData("General_Data", "TC_ID").contains("EstimatedGrossFeeCommission")) 
-				||(dataTable.getData("General_Data", "TC_ID").contains("InLineEditEvenPercent")))  {
+		if ((dataTable.getData("General_Data", "TC_ID").contains("MultipleInstallmentsEven"))
+				|| (dataTable.getData("General_Data", "TC_ID").contains("EstimatedGrossFeeCommission"))
+				|| (dataTable.getData("General_Data", "TC_ID").contains("InLineEditEvenPercent"))) {
 			Utility_Functions.xSendKeys(driver, estimatedGrossFeeEdit, "20,000");
-			report.updateTestLog("Opportunities Installments", "Opportunity installment entered as 20,000 successfully:::",
-					Status.PASS);
-		} else if((dataTable.getData("General_Data", "TC_ID").contains("MultipleInstallmentsUnEven")) ||(dataTable.getData("General_Data", "TC_ID").contains("InLineEditUnEvenPercent"))) {
+			report.updateTestLog("Opportunities Installments",
+					"Opportunity installment entered as 20,000 successfully:::", Status.PASS);
+		} else if ((dataTable.getData("General_Data", "TC_ID").contains("MultipleInstallmentsUnEven"))
+				|| (dataTable.getData("General_Data", "TC_ID").contains("InLineEditUnEvenPercent"))) {
 			Utility_Functions.xSendKeys(driver, estimatedGrossFeeEdit, "6,000");
-			report.updateTestLog("Opportunities Installments", "Opportunity installment entered as 6,000 successfully:::",
-					Status.PASS);
+			report.updateTestLog("Opportunities Installments",
+					"Opportunity installment entered as 6,000 successfully:::", Status.PASS);
 		}
 		Utility_Functions.timeWait(5);
 		Utility_Functions.xWaitForElementPresent(driver, save, 4);
@@ -1734,14 +1767,15 @@ public class OpportunitiesPage extends ReusableLibrary {
 		actions.moveToElement(save).click().perform();
 		Utility_Functions.timeWait(4);
 	}
-	
+
 	/**
-	 * Verify editing of multiple Installments functions for Opportunity based on Even Percent Agency Brokerage
+	 * Verify editing of multiple Installments functions for Opportunity based
+	 * on Even Percent Agency Brokerage
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */
-	
+
 	public void agencyBrokerage() {
 		driver.navigate().refresh();
 		Utility_Functions.xSwitchtoFrame(driver, agencyBrokerageFrame);
@@ -1752,15 +1786,17 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFee, 3);
 		estimatedGrossFee.clear();
-		if((dataTable.getData("General_Data", "TC_ID").contains("MultipleInstallmentsEven")) || (dataTable.getData("General_Data", "TC_ID").contains("EstimatedGrossFeeCommission")) 
-				||(dataTable.getData("General_Data", "TC_ID").contains("InLineEditEvenPercent"))) {
+		if ((dataTable.getData("General_Data", "TC_ID").contains("MultipleInstallmentsEven"))
+				|| (dataTable.getData("General_Data", "TC_ID").contains("EstimatedGrossFeeCommission"))
+				|| (dataTable.getData("General_Data", "TC_ID").contains("InLineEditEvenPercent"))) {
 			Utility_Functions.xSendKeys(driver, estimatedGrossFee, "20,000");
-			report.updateTestLog("Opportunities Installments", "Opportunity installment entered as 20,000 successfully:::",
-					Status.PASS);
-		} else if((dataTable.getData("General_Data", "TC_ID").contains("MultipleInstallmentsUnEven")) ||(dataTable.getData("General_Data", "TC_ID").contains("InLineEditUnEvenPercent"))) {
+			report.updateTestLog("Opportunities Installments",
+					"Opportunity installment entered as 20,000 successfully:::", Status.PASS);
+		} else if ((dataTable.getData("General_Data", "TC_ID").contains("MultipleInstallmentsUnEven"))
+				|| (dataTable.getData("General_Data", "TC_ID").contains("InLineEditUnEvenPercent"))) {
 			Utility_Functions.xSendKeys(driver, estimatedGrossFee, "6,000");
-			report.updateTestLog("Opportunities Installments", "Opportunity installment entered as 6,000 successfully:::",
-					Status.PASS);
+			report.updateTestLog("Opportunities Installments",
+					"Opportunity installment entered as 6,000 successfully:::", Status.PASS);
 		}
 		Utility_Functions.xWaitForElementPresent(driver, saveButton_AB, 3);
 		Utility_Functions.xClick(driver, saveButton_AB, true);
@@ -1768,7 +1804,31 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xSwitchtoFrame(driver, related);
 		Utility_Functions.timeWait(2);
 	}
-	
+
+	/**
+	 * Function for adding the installments for Opportunities
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+
+	public void addingInstallmentsOpportunities() {
+		Utility_Functions.xWaitForElementPresent(driver, showMoreActions, 2);
+		Utility_Functions.xClick(driver, showMoreActions, true);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xWaitForElementPresent(driver, recalculate, 2);
+		Utility_Functions.xClick(driver, recalculate, true);
+		Utility_Functions.xSwitchtoFrame(driver, installmentQuantity);
+		Utility_Functions.xWaitForElementPresent(driver, installmentQuantity, 3);
+		installmentQuantity.clear();
+		Utility_Functions.xSendKeys(driver, installmentQuantity,
+				dataTable.getData("General_Data", "InstallmentQuantity"));
+		Utility_Functions.xWaitForElementPresent(driver, proceed, 3);
+		Utility_Functions.xClick(driver, proceed, true);
+		Utility_Functions.xWaitForElementPresent(driver, continueButtonInstallment, 3);
+		Utility_Functions.xClick(driver, continueButtonInstallment, true);
+		driver.switchTo().defaultContent();
+	}
 
 	/**
 	 * Verify editing of multiple Installments from Opportunity based on Even
@@ -1780,20 +1840,23 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	public void multipleInstallmentsOpportunityEvenPercent() {
 		multipleInstallmentsFunction();
-		Utility_Functions.xWaitForElementPresent(driver, showMoreActions, 2);
-		Utility_Functions.xClick(driver, showMoreActions, true);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xWaitForElementPresent(driver, recalculate, 2);
-		Utility_Functions.xClick(driver, recalculate, true);
-		Utility_Functions.xSwitchtoFrame(driver, installmentQuantity);
-		Utility_Functions.xWaitForElementPresent(driver, installmentQuantity, 3);
-		installmentQuantity.clear();
-		Utility_Functions.xSendKeys(driver, installmentQuantity, "2");
-		Utility_Functions.xWaitForElementPresent(driver, proceed, 3);
-		Utility_Functions.xClick(driver, proceed, true);
-		Utility_Functions.xWaitForElementPresent(driver, continueButtonInstallment, 3);
-		Utility_Functions.xClick(driver, continueButtonInstallment, true);
-		driver.switchTo().defaultContent();
+		/*
+		 * Utility_Functions.xWaitForElementPresent(driver, showMoreActions, 2);
+		 * Utility_Functions.xClick(driver, showMoreActions, true);
+		 * Utility_Functions.timeWait(1);
+		 * Utility_Functions.xWaitForElementPresent(driver, recalculate, 2);
+		 * Utility_Functions.xClick(driver, recalculate, true);
+		 * Utility_Functions.xSwitchtoFrame(driver, installmentQuantity);
+		 * Utility_Functions.xWaitForElementPresent(driver, installmentQuantity,
+		 * 3); installmentQuantity.clear(); Utility_Functions.xSendKeys(driver,
+		 * installmentQuantity, "2");
+		 * Utility_Functions.xWaitForElementPresent(driver, proceed, 3);
+		 * Utility_Functions.xClick(driver, proceed, true);
+		 * Utility_Functions.xWaitForElementPresent(driver,
+		 * continueButtonInstallment, 3); Utility_Functions.xClick(driver,
+		 * continueButtonInstallment, true); driver.switchTo().defaultContent();
+		 */
+		addingInstallmentsOpportunities();
 		Utility_Functions.xWaitForElementPresent(driver, installmentAmountOne, 3);
 		Utility_Functions.xWaitForElementPresent(driver, installmentAmountTwo, 3);
 		String sInstallmentAmountOne = installmentAmountOne.getText();
@@ -1838,7 +1901,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	public void multipleInstallmentsUnEvenPercent() {
 		multipleInstallmentsFunction();
 		Utility_Functions.xWaitForElementPresent(driver, editButtonInstallment, 5);
-		Utility_Functions.xClick(driver, editButtonInstallment, true);		
+		Utility_Functions.xClick(driver, editButtonInstallment, true);
 		if (dataTable.getData("General_Data", "TC_ID").contains("OB")) {
 			occupierBrokerage();
 		} else if (dataTable.getData("General_Data", "TC_ID").contains("AB")) {
@@ -1903,7 +1966,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			Utility_Functions.timeWait(1);
 			Utility_Functions.xSwitchtoFrame(driver, related);
 			Utility_Functions.timeWait(2);
-		}		
+		}
 		Utility_Functions.xWaitForElementPresent(driver, related, 3);
 		Utility_Functions.xClick(driver, related, true);
 		sInstallmentAmountOne = installmentAmountOne.getText();
@@ -2080,8 +2143,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 			Utility_Functions.xClick(driver, arrowDown, true);
 			Utility_Functions.timeWait(1);
 			List<WebElement> actionList = driver.findElements(By.xpath("//div[@class='actionMenu']//a"));
-			for(WebElement element: actionList) {
-				if(!element.getText().contains("Delete")) {
+			for (WebElement element : actionList) {
+				if (!element.getText().contains("Delete")) {
 					report.updateTestLog("Opportunities Installments",
 							"Installment cannot be deleted as the Delete button is not getting displayed when we try to delete the installment via script:",
 							Status.PASS);
@@ -2090,9 +2153,221 @@ public class OpportunitiesPage extends ReusableLibrary {
 				}
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * Verify the round off functionality for Opportunity Installments
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+
+	static ArrayList<String> installmentList = new ArrayList<String>();
+	static ArrayList<String> installmentList1 = new ArrayList<String>();
+
+
+	public void recalculateRoundOffRule() {
+		multipleInstallmentsFunction();
+		addingInstallmentsOpportunities();
+		Utility_Functions.xWaitForElementPresent(driver, installmentAmountOne, 3);
+		Utility_Functions.xWaitForElementPresent(driver, installmentAmountTwo, 3);
+		Utility_Functions.xWaitForElementPresent(driver, installmentAmountThree, 3);
+		String sInstallmentAmountOne = installmentAmountOne.getText();
+		String sInstallmentAmountTwo = installmentAmountTwo.getText();
+		String sInstallmentAmountThree = installmentAmountThree.getText();
+		report.updateTestLog("Opportunities Installments",
+				"Opportunity installment amount one and two after changing the quantity to two from one:::"
+						+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo + ":::" + sInstallmentAmountThree,
+						Status.PASS);
+		String sEstimatedGrossAmount = dataTable.getData("General_Data", "InstallmentAmount").replace(",", "");
+		String sInstallments = dataTable.getData("General_Data", "InstallmentQuantity");
+		double dInstallment = ((double) Integer.parseInt(sEstimatedGrossAmount)) / Integer.parseInt(sInstallments);
+		System.out.println(dInstallment);
+		BigDecimal bFirstInstallmentAmount = truncateDecimal(dInstallment, 2);
+		String sThirdInstallment = (new DecimalFormat(".##").format(dInstallment));
+		System.out.println(sThirdInstallment);
+		installmentList.add(sThirdInstallment);
+		installmentList.add(sThirdInstallment);
+		installmentList.add(bFirstInstallmentAmount.toString());
+		int count =0;
+		for(int i=0; i<installmentList.size();i++) {
+			if(sInstallmentAmountOne.replaceAll(",", "").contains(installmentList.get(i))) {
+				count++;
+			} else if(sInstallmentAmountTwo.replaceAll(",", "").contains(installmentList.get(i))) {
+				count++;
+			} else if(sInstallmentAmountThree.replaceAll(",", "").contains(installmentList.get(i))) {
+				count++;
+			}
+		}
+		if(count==3) {
+			report.updateTestLog("Opportunities Installments",
+					"First, Second and Third Installment amounts calculated successfully:::" + bFirstInstallmentAmount
+					+ "::::" + bFirstInstallmentAmount + "::::" + sThirdInstallment,
+					Status.PASS);
+		} else {
+			installmentList1.add(bFirstInstallmentAmount.toString());
+			installmentList1.add(bFirstInstallmentAmount.toString());
+			installmentList1.add(sThirdInstallment);
+			int count1 =0;
+			for(int i=0; i<installmentList1.size();i++) {
+				if(sInstallmentAmountOne.replaceAll(",", "").contains(installmentList1.get(i))) {
+					count++;
+				} else if(sInstallmentAmountTwo.replaceAll(",", "").contains(installmentList1.get(i))) {
+					count++;
+				} else if(sInstallmentAmountThree.replaceAll(",", "").contains(installmentList1.get(i))) {
+					count++;
+				}
+			}
+			if(count1==3) {
+				report.updateTestLog("Opportunities Installments",
+						"First, Second and Third Installment amounts calculated successfully:::" + bFirstInstallmentAmount
+						+ "::::" + bFirstInstallmentAmount + "::::" + sThirdInstallment,
+						Status.PASS);
+			} else {
+				report.updateTestLog(
+						"Opportunities Installments", "First, Second and Third Installment calculation failed:::"
+								+ bFirstInstallmentAmount + "::::" + bFirstInstallmentAmount + "::::" + sThirdInstallment,
+								Status.WARNING);
+			}			
+		}
+	}
+
+	private static BigDecimal truncateDecimal(double installmentAmount, int numberofDecimals) {
+		if (installmentAmount > 0) {
+			return new BigDecimal(String.valueOf(installmentAmount)).setScale(numberofDecimals, BigDecimal.ROUND_FLOOR);
+		} else {
+			return new BigDecimal(String.valueOf(installmentAmount)).setScale(numberofDecimals,
+					BigDecimal.ROUND_CEILING);
+		}
+	}
+
+	/**
+	 * Verify for validating the Opportunity eligibility
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+
+	public void opportunityEligibility() {
+		Utility_Functions.xClick(driver, menu_Opportunities, true);
+		Utility_Functions.timeWait(2);
+		List<WebElement> opportunitiesList = driver.findElements(By.xpath(
+				"//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'006')]"));
+		Utility_Functions.xclickRandomElement(opportunitiesList);	
+	}
+	/**
+	 * Verify whether the user able to edit the paid installment
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+
+	public void editPaidInstallmentAmount() {		
+		/*	String query = "SELECT Opportunity_ID__c FROM Opportunity_Installments__c WHERE Installment_Amount__c != 0 limit 1";
+		String sOpportunityID = searchOpportunity.fetchRecordFieldValue("Opportunity_ID__c", query);
+		report.updateTestLog("Verify Opportunity", "Opportunity retrived from database successfully:::" + sOpportunityID, Status.PASS);
+		String url = driver.getCurrentUrl().split("#")[0];
+		String newUrl = url + "#/sObject/" + sOpportunityID;
+		newUrl = newUrl + "/view";
+		report.updateTestLog("Verify Opportunity","URL has been replaced with the new URL having the retrieved Opportunity:::" + newUrl, Status.PASS);
+		driver.get(newUrl);*/
+
+		boolean isStatus = false;
+		int iInstallmentAmountOne = 0;
+		while(!isStatus) {			
+			labelA: {
+			opportunityEligibility();
+			driver.navigate().refresh();
+			Utility_Functions.xWaitForElementPresent(driver, related, 5);
+			Utility_Functions.xClick(driver, related, true);
+			Utility_Functions.xWaitForElementPresent(driver, installmentAmountOne, 3);
+			String sInstallmentAmountOne = installmentAmountOne.getText();
+			sInstallmentAmountOne = sInstallmentAmountOne.split(" ")[1];
+			sInstallmentAmountOne = sInstallmentAmountOne.replaceAll(",", "");
+			double dInstallmentAmountOne = Double.parseDouble(sInstallmentAmountOne);
+			iInstallmentAmountOne = Double.valueOf(dInstallmentAmountOne).intValue();				
+			if(iInstallmentAmountOne > 0) {
+				report.updateTestLog("Opportunities Installments", "Opportunity is eligible for editing the Installments::",Status.PASS);
+				Utility_Functions.xWaitForElementPresent(driver, arrowDown, 3);
+				Utility_Functions.xClick(driver, arrowDown, true);
+				Utility_Functions.timeWait(1);
+				List<WebElement> actionList = driver.findElements(By.xpath("//div[@class='actionMenu']//a"));
+				for (WebElement element : actionList) {
+					if (element.getText().contains("Edit")) {
+						element.click();
+						report.updateTestLog("Opportunities Installments", "Clicked on edit installments button successfully::",Status.PASS);				
+					} else {
+						report.updateTestLog("Opportunities Installments", "Unable to click on edit installment button", Status.FAIL);
+					}
+				}
+				Utility_Functions.xWaitForElementPresent(driver, installmentOption, 3);
+				Utility_Functions.xClick(driver, installmentOption, true);
+				if(installmentOption.getText().contains("Paid")) {
+						report.updateTestLog("Opportunities Installments", "Opportunity not is eligible as the installment amount is already paid::",Status.WARNING);
+						isStatus = false;
+						Utility_Functions.xWaitForElementPresent(driver, cancel, 3);
+						Utility_Functions.xClick(driver, cancel, true);		
+						Utility_Functions.timeWait(2);
+						break labelA;
+				}
+				DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+				Date date = new Date();
+				Utility_Functions.timeWait(1);
+				Utility_Functions.xClick(driver, installmentStatus, true);
+				Utility_Functions.xSendKeys(driver, datePaid, dateFormat.format(date).toString());
+				Utility_Functions.xWaitForElementPresent(driver, accountRoleOption, 3);
+				Utility_Functions.xClick(driver, accountRoleOption, true);
+				Utility_Functions.timeWait(1);
+				Utility_Functions.xClick(driver, accountRole, true);
+				Utility_Functions.timeWait(2);
+				Utility_Functions.xWaitForElementPresent(driver, save, 4);
+				Utility_Functions.xClick(driver, save, true);
+				report.updateTestLog("Opportunities Installments", "Installment Amount has been paid successfully::",Status.PASS);				
+				Utility_Functions.xWaitForElementPresent(driver, related, 3);
+				driver.navigate().refresh();
+				Utility_Functions.xWaitForElementPresent(driver, related, 3);
+				Utility_Functions.xClick(driver, related, true);
+				Utility_Functions.xWaitForElementPresent(driver, arrowDown, 3);
+				Utility_Functions.xClick(driver, arrowDown, true);
+				Utility_Functions.timeWait(1);
+				List<WebElement> actionListEdit = driver.findElements(By.xpath("//div[@class='actionMenu']//a"));
+				for (WebElement element : actionListEdit) {
+					if (element.getText().contains("Edit")) {
+						Utility_Functions.xWaitForElementPresent(driver, element, 3);
+						element.click();
+						report.updateTestLog("Opportunities Installments", "Clicked on edit installments button successfully::",Status.PASS);				
+					} else {
+						report.updateTestLog("Opportunities Installments", "Unable to click on edit installment button", Status.FAIL);
+					}
+				}
+				Utility_Functions.xWaitForElementPresent(driver, installmentAmountEdit, 3);
+				int iInstallmentAmount = iInstallmentAmountOne + 100;
+				Utility_Functions.xSendKeys(driver, installmentAmountEdit, Integer.toString(iInstallmentAmount));
+				Utility_Functions.timeWait(2);
+				Utility_Functions.xWaitForElementPresent(driver, save, 3);
+				Utility_Functions.xClick(driver, save, true);
+				Utility_Functions.timeWait(2);
+				Utility_Functions.xWaitForElementPresent(driver, related, 3);
+				if(related.isDisplayed()) {
+					report.updateTestLog("Opportunities Installments", "Editing the Paid installment amount is successfull::",Status.PASS);
+					isStatus = true;
+					break;	
+				} else {
+					report.updateTestLog("Opportunities Installments", "Editing the Paid installment amount is failed::",Status.FAIL);
+					isStatus = true;
+					break;	
+				}
+			} else {
+				report.updateTestLog("Opportunities Installments", "Opportunity not is eligible for editing the Installments::",Status.WARNING);
+				isStatus = false;
+				break labelA;
+			}
+
+			}
+		}
+
 	}
 
 	/**
@@ -2213,18 +2488,16 @@ public class OpportunitiesPage extends ReusableLibrary {
 		}
 		if ((!cancelCustomEventPageButton.getText().equals(" "))
 				|| (!saveAndNewEventCustomEventPageButton.getText().equals(" "))
-				|| (!saveEventCustomEventPageButton.getText().equals(" ")))
-		{
-			System.out.println(
-					"Save, Save and New and Cancel buttons are prsent in the New Activity Layout Page ");
+				|| (!saveEventCustomEventPageButton.getText().equals(" "))) {
+			System.out.println("Save, Save and New and Cancel buttons are prsent in the New Activity Layout Page ");
 			report.updateTestLog("Verify New Opportunity Custom Event Page  ",
 					"Verifying New Custom Event Page is having the Save, Save and New and Cancel buttons ",
 					Status.PASS);
 		} else {
-			System.out.println("Save, Save and New and Cancel buttons are not prsent in the New Activity Layout Page  ");
+			System.out
+			.println("Save, Save and New and Cancel buttons are not prsent in the New Activity Layout Page  ");
 			report.updateTestLog("Verify New Opportunity Custom Event Page ",
-					"Verifying New Custom Event Page is having the Save, Save and New and Cancel buttons",
-					Status.FAIL);
+					"Verifying New Custom Event Page is having the Save, Save and New and Cancel buttons", Status.FAIL);
 		}
 
 		try {
