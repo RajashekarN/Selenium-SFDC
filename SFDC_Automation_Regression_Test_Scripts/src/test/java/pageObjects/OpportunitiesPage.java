@@ -1819,7 +1819,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void addingInstallmentsOpportunities() {
-		Utility_Functions.xWaitForElementPresent(driver, showMoreActions, 2);
+		Utility_Functions.xWaitForElementPresent(driver, showMoreActions, 4);
 		Utility_Functions.xClick(driver, showMoreActions, true);
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xWaitForElementPresent(driver, recalculate, 2);
@@ -1834,6 +1834,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, continueButtonInstallment, 3);
 		Utility_Functions.xClick(driver, continueButtonInstallment, true);
 		driver.switchTo().defaultContent();
+		Utility_Functions.timeWait(2);
 	}
 
 	/**
@@ -1863,6 +1864,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 		 * continueButtonInstallment, true); driver.switchTo().defaultContent();
 		 */
 		addingInstallmentsOpportunities();
+		Utility_Functions.xWaitForElementPresent(driver, related, 4);
+		Utility_Functions.xClick(driver, related, true);
 		Utility_Functions.xWaitForElementPresent(driver, installmentAmountOne, 3);
 		Utility_Functions.xWaitForElementPresent(driver, installmentAmountTwo, 3);
 		String sInstallmentAmountOne = installmentAmountOne.getText();
@@ -2177,6 +2180,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 	public void recalculateRoundOffRule() {
 		multipleInstallmentsFunction();
 		addingInstallmentsOpportunities();
+		Utility_Functions.xWaitForElementPresent(driver, related, 3);
+		Utility_Functions.xClick(driver, related, true);
 		Utility_Functions.xWaitForElementPresent(driver, installmentAmountOne, 3);
 		Utility_Functions.xWaitForElementPresent(driver, installmentAmountTwo, 3);
 		Utility_Functions.xWaitForElementPresent(driver, installmentAmountThree, 3);
