@@ -47,9 +47,9 @@ public class AccountsPage extends ReusableLibrary {
 	@FindBy(xpath = "//a[@class='tabHeader']//span[text()='Related']")
 	WebElement related_Accounts;
 
-/*	@FindBy(xpath = "//article[contains(@class,'Private Notes')]//div[text()='New']")
+	/*	@FindBy(xpath = "//article[contains(@class,'Private Notes')]//div[text()='New']")
 	WebElement new_PrivateNotes;*/
-	
+
 	@FindBy(xpath = "//article[contains(@class,'forceRelatedListSingleContainer')]//span[contains(text(),'Private Notes')]/ancestor::article//div[text()='New']")
 	WebElement new_PrivateNotes;
 
@@ -198,51 +198,55 @@ public class AccountsPage extends ReusableLibrary {
 
 	@FindBy(xpath="//div[@class='slds-small-order--1 slds-medium-order--2 slds-large-order--3']")
 	WebElement createNewActivity;
-	
+
 	@FindBy(xpath=".//*[@id='relatedContactBox']")
 	WebElement relatedToContactField;
-	
+
 	@FindBy(xpath=".//*[@id='relatedOpportunityBox']")
 	WebElement relatedToOpportunityField;
-	
+
 	@FindBy(xpath=".//*[@id='relatedPropertyBox']")
 	WebElement relatedToPropertyField;
-	
+
 	@FindBy(xpath="//input[@class='slds-input'][@type='checkbox']/following-sibling::span[text()='Notification Email']")
 	WebElement notificationEmail;
-	
+
 	@FindBy(xpath = "//button[contains(@class,'context-bar__label-action')][text()='More']")
 	WebElement menu_More;
-	
+
 	@FindBy(xpath="//a[@role='menuitem']/span[contains(@class,'slds-truncate')][text()='Bulk Tagging']")
 	WebElement bulkTagging;
-	
+
 	@FindBy(xpath="//input[@class='slds-input'][@placeholder='Search Account/Contact/Lead/Opportunities…'][@type='text']")
 	WebElement accountSearch;
-	
+
 	@FindBy(xpath="//div[@class='slds-form-element ']//input[@value='Search']")
 	WebElement search;
-	
+
 	@FindBy(xpath="//div[@id='Accountsection']//tr[3]//span[@class='slds-checkbox--faux']")
 	WebElement selectAccount1;
-	
+
 	@FindBy(xpath="//div[@id='Accountsection']//tr[4]//span[@class='slds-checkbox--faux']")
 	WebElement selectAccount2;
-	
+
 	@FindBy(xpath="//div[@class='slds-form-element']//input[@value='Assign Tag']")
 	WebElement assignTag;
-	
+
 	@FindBy(xpath="//div[@class='slds-form-element ']//input[@value='Advanced Search']")
 	WebElement advancedSearch;
-	
+
 	@FindBy(xpath="//select[@class='slds-select']/option[@value='Account']")
 	WebElement advancedSearchAccountOption;
-	
+
 	@FindBy(xpath="//select[@class='slds-select']/option[@value='BillingPostalCode']")
 	WebElement accountFieldNameCondition;
-	
+
 	@FindBy(xpath="//select[@class='slds-select']/option[@value='=']")
 	WebElement accountOperatorCondition;
+	
+	@FindBy(xpath="//span[text()='Investor Services Account']/parent::div/parent::div//div//span[contains(@class,'uiOutputCheckbox')]")
+	WebElement accountServicesCheckbox;
+	
 	
 	HomePage hp = new HomePage(scriptHelper);
 	static ArrayList<String> accountsPageDetailsList = new ArrayList<String>();
@@ -677,46 +681,46 @@ public class AccountsPage extends ReusableLibrary {
 					System.out.println("Title field is present in the Create Private Notes Personal Information Page");
 					report.updateTestLog("Create Private Note Personal Information Page",
 							"Create Private Note Personal Information Page is having the " + element.getText()
-									+ " Status field::",
+							+ " Status field::",
 							Status.PASS);
 					count++;
 				} else if ((count == 1) && (element.getText().contains("Lead"))) {
 					System.out.println("Lead field is present in the Create Private Notes Personal Information Page");
 					report.updateTestLog("Create Private Notes Personal Information Page",
 							"Create Private Notes Personal Information Page is having the " + element.getText()
-									+ " Status field::",
+							+ " Status field::",
 							Status.PASS);
 					count++;
 				} else if ((count == 2) && (element.getText().contains("Account"))) {
 					System.out
-							.println("Account field is present in the Create Private Notes Personal Information Page");
+					.println("Account field is present in the Create Private Notes Personal Information Page");
 					report.updateTestLog("Create Private Notes Personal Information Page",
 							"Create Private Notes Personal Information Page is having the " + element.getText()
-									+ " Status field::",
+							+ " Status field::",
 							Status.PASS);
 					count++;
 				} else if ((count == 3) && (element.getText().contains("SPOC"))) {
 					System.out
-							.println("Account field is present in the Create Private Notes Personal Information Page");
+					.println("Account field is present in the Create Private Notes Personal Information Page");
 					report.updateTestLog("Create Private Notes Personal Information Page",
 							"Create Private Notes Personal Information Page is having the " + element.getText()
-									+ " Status field::",
+							+ " Status field::",
 							Status.PASS);
 					count++;
 				} else if ((count == 4) && (element.getText().contains("Contact"))) {
 					System.out
-							.println("Contact field is present in the Create Private Notes Personal Information Page");
+					.println("Contact field is present in the Create Private Notes Personal Information Page");
 					report.updateTestLog("Create Private Notes Personal Information Page",
 							"Create Private Notes Personal Information Page is having the " + element.getText()
-									+ " Status field::",
+							+ " Status field::",
 							Status.PASS);
 					count++;
 				} else if ((count == 5) && (element.getText().contains("Property"))) {
 					System.out
-							.println("Property field is present in the Create Private Notes Personal Information Page");
+					.println("Property field is present in the Create Private Notes Personal Information Page");
 					report.updateTestLog("Create Private Notes Personal Information Page",
 							"Create Private Notes Personal Information Page is having the " + element.getText()
-									+ " Status field::",
+							+ " Status field::",
 							Status.PASS);
 					count++;
 				} else if ((count == 6) && (element.getText().contains("Direct Line"))) {
@@ -724,7 +728,7 @@ public class AccountsPage extends ReusableLibrary {
 							"Direct Line field is present in the Create Private Notes Personal Information Page");
 					report.updateTestLog("Create Private Notes Personal Information Page",
 							"Create Private Notes Personal Information Page is having the " + element.getText()
-									+ " Status field::",
+							+ " Status field::",
 							Status.PASS);
 					count++;
 				} else if ((count == 7) && (element.getText().contains("Personal Email"))) {
@@ -732,14 +736,14 @@ public class AccountsPage extends ReusableLibrary {
 							"Personal Email field is present in the Create Private Notes Personal Information Page");
 					report.updateTestLog("Create Private Notes Personal Information Page",
 							"Create Private Notes Personal Information Page is having the " + element.getText()
-									+ " Status field::",
+							+ " Status field::",
 							Status.PASS);
 					count++;
 				} else if ((count == 8) && (element.getText().contains("Mobile"))) {
 					System.out.println("Mobile field is present in the Create Private Notes Personal Information Page");
 					report.updateTestLog("Create Private Notes Personal Information Page",
 							"Create Private Notes Personal Information Page is having the " + element.getText()
-									+ " Status field::",
+							+ " Status field::",
 							Status.PASS);
 					count++;
 
@@ -748,7 +752,7 @@ public class AccountsPage extends ReusableLibrary {
 							"Entertainment Preferences field is present in the Create Private Notes Personal Information Page");
 					report.updateTestLog("Create Private Notes Personal Information Page",
 							"Create Private Notes Personal Information Page is having the " + element.getText()
-									+ " Status field::",
+							+ " Status field::",
 							Status.PASS);
 
 				}
@@ -840,7 +844,7 @@ public class AccountsPage extends ReusableLibrary {
 		if (!untitledNoteSelectedAccount.getText().isEmpty()) {
 
 			System.out
-					.println("Selected Account is present in the Note Page :" + untitledNoteSelectedAccount.getText());
+			.println("Selected Account is present in the Note Page :" + untitledNoteSelectedAccount.getText());
 		} else {
 			System.out.println("Selected Account is not present in the Note Page");
 		}
@@ -937,7 +941,7 @@ public class AccountsPage extends ReusableLibrary {
 		}*/
 
 		driver.switchTo().frame(5);
-		
+
 		Utility_Functions.timeWait(5);
 		List<WebElement> newActivityPageLayoutSections = driver
 				.findElements(By.xpath("//div[@class='slds-grid']"));
@@ -1062,9 +1066,9 @@ public class AccountsPage extends ReusableLibrary {
 			System.out.println("The New Activity Page is not displayed");
 			report.updateTestLog("Verify Create Activity Account ","The Activity is not saved ",  Status.FAIL);
 		}
-		
-		
-		
+
+
+
 
 	}
 	/**
@@ -1073,141 +1077,141 @@ public class AccountsPage extends ReusableLibrary {
 	 * @author Ramya
 	 *
 	 */
-	
+
 	public void verifyFollowUpCustomActivity(){
 
-		    Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
-			Utility_Functions.xClick(driver, menu_Accounts, true);
-			report.updateTestLog("Verify Create Activity Account","Accounts is Displayed ",  Status.PASS);
-			Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
-			Utility_Functions.xClick(driver, recentlyViewed, true);
-			report.updateTestLog("Verify Create Activity Account","Recently viewed Accounts are Displayed ",  Status.PASS);
-			Utility_Functions.xWaitForElementPresent(driver, allAccounts, 3);
-			Utility_Functions.xClick(driver, allAccounts, true);
-			Utility_Functions.timeWait(2);
-			report.updateTestLog("Verify Create Activity Account","All accounts are displayed successfully:::",  Status.PASS);
-			List<WebElement> accountNamesList = driver.findElements(
-					By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
+		Utility_Functions.xClick(driver, menu_Accounts, true);
+		report.updateTestLog("Verify Create Activity Account","Accounts is Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
+		Utility_Functions.xClick(driver, recentlyViewed, true);
+		report.updateTestLog("Verify Create Activity Account","Recently viewed Accounts are Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, allAccounts, 3);
+		Utility_Functions.xClick(driver, allAccounts, true);
+		Utility_Functions.timeWait(2);
+		report.updateTestLog("Verify Create Activity Account","All accounts are displayed successfully:::",  Status.PASS);
+		List<WebElement> accountNamesList = driver.findElements(
+				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
 
-			Utility_Functions.xclickOnFirstElementfromList(accountNamesList);
-			Utility_Functions.xWaitForElementPresent(driver, related_Accounts, 5);
-			report.updateTestLog("Verify Create Activity Account ","The Account is Displayed ",  Status.PASS);
-			Utility_Functions.xClick(driver, related_Accounts, true);
-			Utility_Functions.timeWait(2);
-			report.updateTestLog("Verify Create Activity Account ","The related page is Displayed ",  Status.PASS);
-			Utility_Functions.xScrollWindow(driver);
-			Utility_Functions.timeWait(1);
-			Utility_Functions.xScrollWindowTop(driver);
-			Utility_Functions.timeWait(2);
-			Utility_Functions.xWaitForElementPresent(driver, newActivity, 3);
-			Utility_Functions.xClick(driver, newActivity, true);
-			report.updateTestLog("Verify Create Activity Account ","The New Activity in the related page is Displayed ",  Status.PASS);
-			Utility_Functions.xSwitchtoFrame(driver, saveAndNewActivity);
-			Utility_Functions.timeWait(3);
-			Utility_Functions.xWaitForElementPresent(driver, subject, 5);
-			Utility_Functions.xSendKeys(driver, subject, "test1");
-			Utility_Functions.xWaitForElementPresent(driver, activityType1, 3);
-			Utility_Functions.xClick(driver, activityType1, true);
-			Utility_Functions.xWaitForElementPresent(driver, saveAndNewActivity, 3);
-			Utility_Functions.xClick(driver, saveAndNewActivity, true);
-			Utility_Functions.timeWait(3);
-			report.updateTestLog("Verify Create Activity Account ","The Activity is saved and New Activity is displayed ",  Status.PASS);
-			/*Utility_Functions.xSwitchtoFrame(driver, subject);
+		Utility_Functions.xclickOnFirstElementfromList(accountNamesList);
+		Utility_Functions.xWaitForElementPresent(driver, related_Accounts, 5);
+		report.updateTestLog("Verify Create Activity Account ","The Account is Displayed ",  Status.PASS);
+		Utility_Functions.xClick(driver, related_Accounts, true);
+		Utility_Functions.timeWait(2);
+		report.updateTestLog("Verify Create Activity Account ","The related page is Displayed ",  Status.PASS);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, newActivity, 3);
+		Utility_Functions.xClick(driver, newActivity, true);
+		report.updateTestLog("Verify Create Activity Account ","The New Activity in the related page is Displayed ",  Status.PASS);
+		Utility_Functions.xSwitchtoFrame(driver, saveAndNewActivity);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementPresent(driver, subject, 5);
+		Utility_Functions.xSendKeys(driver, subject, "test1");
+		Utility_Functions.xWaitForElementPresent(driver, activityType1, 3);
+		Utility_Functions.xClick(driver, activityType1, true);
+		Utility_Functions.xWaitForElementPresent(driver, saveAndNewActivity, 3);
+		Utility_Functions.xClick(driver, saveAndNewActivity, true);
+		Utility_Functions.timeWait(3);
+		report.updateTestLog("Verify Create Activity Account ","The Activity is saved and New Activity is displayed ",  Status.PASS);
+		/*Utility_Functions.xSwitchtoFrame(driver, subject);
 			Utility_Functions.timeWait(3);*/
-			Utility_Functions.xClick(driver, subject, true);
-			Utility_Functions.timeWait(3);
-			Random random = new Random();
-			int value = random.nextInt();
-			Utility_Functions.xWaitForElementPresent(driver, subject, 5);
-			Utility_Functions.xSendKeys(driver, subject, "Test Activity Created by Automation" + value);
-			Utility_Functions.xClick(driver, activityType2, true);
-			Utility_Functions.xWaitForElementPresent(driver,saveActivity, 5);
-			Utility_Functions.xClick(driver, saveActivity, true);
-			
-			SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
-			String query = "select Name from Activity__C where Subject__C = " + "'" + "Test Activity Created by Automation" + value + "'";
-			String nameActivity = searchTextSOQL.fetchRecordFieldValue("Name", query);
-			if(nameActivity.isEmpty()) {
-				System.out.println("Activity has not been retrieved");
-				report.updateTestLog("Verify Create Activity Account ","The newly created Activity has not been retrieved ",  Status.FAIL);
-			} else {
-				System.out.println("Activity has been retrieved");
-				report.updateTestLog("Verify Create Activity Account ","The newly created Activity has been retrieved",  Status.PASS);
-			}
-			String queryId = "select Id from Activity__C where Name = " + "'" + nameActivity + "'";
-			String activityId = searchTextSOQL.fetchRecordFieldValue("Id", queryId);
-			
-			String url = driver.getCurrentUrl().split("#")[0];
-			String newUrl = url + "#/sObject/" + activityId;
-			newUrl = newUrl + "/view";
-			report.updateTestLog("Verify Add Opportunity Page Fields",
-					"URL has been replaced with the new URL having the retrieved Opportunity:::" + newUrl, Status.PASS);
-			driver.get(newUrl);
-			//driver.navigate().refresh();
-			
-			
-		
-			report.updateTestLog("Verify Create Activity Account ","The second Activity is saved ",  Status.PASS);		
-		
-			Utility_Functions.timeWait(4);
-			driver.navigate().refresh();
-			Utility_Functions.timeWait(1);
-			driver.switchTo().defaultContent();
-			driver.navigate().refresh();
-			Utility_Functions.xWaitForElementPresent(driver, selectCreateFollowUpCustomActivity, 3);
-			Utility_Functions.xClick(driver,  selectCreateFollowUpCustomActivity, true);
-			Utility_Functions.timeWait(4);
-			report.updateTestLog("Verify Create Activity Account ","The Follow up Activity Page is Displayed",  Status.PASS);
-			Utility_Functions.xWaitForElementPresent(driver, createCustomActivity, 5);
-			//Utility_Functions.xClick(driver, createCustomActivity, true);
-			Actions action  = new Actions(driver.getWebDriver());
-			action.moveToElement(createCustomActivity);
-			action.click();
-			action.build().perform();	
-			
-			Utility_Functions.timeWait(3);
-			Utility_Functions.xSwitchtoFrame(driver, subject);
-			Utility_Functions.timeWait(3);
-			Utility_Functions.xWaitForElementPresent(driver,subject, 3);
-			Utility_Functions.xSendKeys(driver, subject, "test3");
-			Utility_Functions.xWaitForElementPresent(driver,activityType3, 3);
-			Utility_Functions.xClick(driver, activityType3, true);
-			Utility_Functions.xWaitForElementPresent(driver,saveActivity, 3);
-			Utility_Functions.xClick(driver, saveActivity, true);
-			Utility_Functions.timeWait(3);
-			report.updateTestLog("Verify Create Activity Account ","The Custom Activity is created ",  Status.PASS);
-			driver.navigate().refresh();
-			Utility_Functions.timeWait(1);
-			driver.switchTo().defaultContent();
-			driver.navigate().refresh();
-			Utility_Functions.timeWait(3);
-			Utility_Functions.xWaitForElementPresent(driver,menu_Accounts, 3);
-			Utility_Functions.xClick(driver, menu_Accounts, true);
-			
-			List<WebElement> recentlyViewedpropertiesList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xClick(driver, subject, true);
+		Utility_Functions.timeWait(3);
+		Random random = new Random();
+		int value = random.nextInt();
+		Utility_Functions.xWaitForElementPresent(driver, subject, 5);
+		Utility_Functions.xSendKeys(driver, subject, "Test Activity Created by Automation" + value);
+		Utility_Functions.xClick(driver, activityType2, true);
+		Utility_Functions.xWaitForElementPresent(driver,saveActivity, 5);
+		Utility_Functions.xClick(driver, saveActivity, true);
 
-			Utility_Functions.xclickOnFirstElementfromList(recentlyViewedpropertiesList);
-			Utility_Functions.timeWait(3);
-			Utility_Functions.xWaitForElementVisible(driver,  related_Accounts, 5);
-			Utility_Functions.xClick(driver,  related_Accounts, true);
-			Utility_Functions.xScrollWindow(driver);
-			Utility_Functions.timeWait(1);
-			Utility_Functions.xScrollWindowTop(driver);
-			Utility_Functions.timeWait(2);
-
-			Utility_Functions.xWaitForElementPresent(driver, relatedActivities, 5);
-			Utility_Functions.xClick(driver, relatedActivities, true);
-			List<WebElement> relatedActivitiesList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'] "));
-			for (WebElement element : relatedActivitiesList ) {
-				if ((!element.getText().equals(" "))){
-			report.updateTestLog("Verify Create Activity Account","The New Activity for Accounts are created ",Status.PASS);
-		}else
-		{
-			report.updateTestLog("Verify Create Activity Account","The New Activity for Accounts are not created ",Status.FAIL);
+		SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
+		String query = "select Name from Activity__C where Subject__C = " + "'" + "Test Activity Created by Automation" + value + "'";
+		String nameActivity = searchTextSOQL.fetchRecordFieldValue("Name", query);
+		if(nameActivity.isEmpty()) {
+			System.out.println("Activity has not been retrieved");
+			report.updateTestLog("Verify Create Activity Account ","The newly created Activity has not been retrieved ",  Status.FAIL);
+		} else {
+			System.out.println("Activity has been retrieved");
+			report.updateTestLog("Verify Create Activity Account ","The newly created Activity has been retrieved",  Status.PASS);
 		}
-			}
+		String queryId = "select Id from Activity__C where Name = " + "'" + nameActivity + "'";
+		String activityId = searchTextSOQL.fetchRecordFieldValue("Id", queryId);
 
-			
+		String url = driver.getCurrentUrl().split("#")[0];
+		String newUrl = url + "#/sObject/" + activityId;
+		newUrl = newUrl + "/view";
+		report.updateTestLog("Verify Add Opportunity Page Fields",
+				"URL has been replaced with the new URL having the retrieved Opportunity:::" + newUrl, Status.PASS);
+		driver.get(newUrl);
+		//driver.navigate().refresh();
+
+
+
+		report.updateTestLog("Verify Create Activity Account ","The second Activity is saved ",  Status.PASS);		
+
+		Utility_Functions.timeWait(4);
+		driver.navigate().refresh();
+		Utility_Functions.timeWait(1);
+		driver.switchTo().defaultContent();
+		driver.navigate().refresh();
+		Utility_Functions.xWaitForElementPresent(driver, selectCreateFollowUpCustomActivity, 3);
+		Utility_Functions.xClick(driver,  selectCreateFollowUpCustomActivity, true);
+		Utility_Functions.timeWait(4);
+		report.updateTestLog("Verify Create Activity Account ","The Follow up Activity Page is Displayed",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, createCustomActivity, 5);
+		//Utility_Functions.xClick(driver, createCustomActivity, true);
+		Actions action  = new Actions(driver.getWebDriver());
+		action.moveToElement(createCustomActivity);
+		action.click();
+		action.build().perform();	
+
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xSwitchtoFrame(driver, subject);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementPresent(driver,subject, 3);
+		Utility_Functions.xSendKeys(driver, subject, "test3");
+		Utility_Functions.xWaitForElementPresent(driver,activityType3, 3);
+		Utility_Functions.xClick(driver, activityType3, true);
+		Utility_Functions.xWaitForElementPresent(driver,saveActivity, 3);
+		Utility_Functions.xClick(driver, saveActivity, true);
+		Utility_Functions.timeWait(3);
+		report.updateTestLog("Verify Create Activity Account ","The Custom Activity is created ",  Status.PASS);
+		driver.navigate().refresh();
+		Utility_Functions.timeWait(1);
+		driver.switchTo().defaultContent();
+		driver.navigate().refresh();
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementPresent(driver,menu_Accounts, 3);
+		Utility_Functions.xClick(driver, menu_Accounts, true);
+
+		List<WebElement> recentlyViewedpropertiesList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+
+		Utility_Functions.xclickOnFirstElementfromList(recentlyViewedpropertiesList);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementVisible(driver,  related_Accounts, 5);
+		Utility_Functions.xClick(driver,  related_Accounts, true);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+
+		Utility_Functions.xWaitForElementPresent(driver, relatedActivities, 5);
+		Utility_Functions.xClick(driver, relatedActivities, true);
+		List<WebElement> relatedActivitiesList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'] "));
+		for (WebElement element : relatedActivitiesList ) {
+			if ((!element.getText().equals(" "))){
+				report.updateTestLog("Verify Create Activity Account","The New Activity for Accounts are created ",Status.PASS);
+			}else
+			{
+				report.updateTestLog("Verify Create Activity Account","The New Activity for Accounts are not created ",Status.FAIL);
+			}
+		}
+
+
 	}
 	/**
 	 * Validating the New Activity Page Layout for the Accounts
@@ -1217,10 +1221,10 @@ public class AccountsPage extends ReusableLibrary {
 	 */
 	public void verifyNewActivityPageLayout() {
 
-		
+
 		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
 		Utility_Functions.xClick(driver, menu_Accounts, true);
-		
+
 		report.updateTestLog("Verify New Activity Page Layout ","Accounts is Displayed ",  Status.PASS);
 		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
 		Utility_Functions.xClick(driver, recentlyViewed, true);
@@ -1255,7 +1259,7 @@ public class AccountsPage extends ReusableLibrary {
 		}*/
 		driver.switchTo().frame(5);
 		Utility_Functions.timeWait(5);
-	
+
 		List<WebElement> newActivityPageLayoutSections = driver
 				.findElements(By.xpath("//div[@class='slds-grid']"));
 		int countHeader =0;
@@ -1364,11 +1368,11 @@ public class AccountsPage extends ReusableLibrary {
 			System.out.println(e.getMessage());
 
 		}
-		
+
 		if ((!saveNewActivityLayoutPage.getText().equals(" "))
 				|| (!saveAndNewActivityLayoutPage.getText().equals(" "))
 				|| (!cancelNewActivityLayoutPage.getText().equals(" ")))
-			 {
+		{
 			System.out.println(
 					"Save, Save and New and Cancel buttons are prsent in the New Activity Layout Page ");
 			report.updateTestLog("Verify New Activity Page Layout ",
@@ -1381,7 +1385,7 @@ public class AccountsPage extends ReusableLibrary {
 					Status.FAIL);
 		}
 
-	
+
 		List<WebElement> newActivityPageFields = driver
 				.findElements(By.xpath("//label[@class='slds-form-element__label']"));
 		int count = 0;
@@ -1580,62 +1584,62 @@ public class AccountsPage extends ReusableLibrary {
 	 *
 	 */
 	public void verifyNewActivityPageForIncorrectData(){
-	
-			Utility_Functions.xClick(driver, menu_Accounts, true);
-			Utility_Functions.timeWait(3);
-			report.updateTestLog("Verify New Activity Page Layout ","Accounts is Displayed ",  Status.PASS);
-			
-			List<WebElement> accountNamesList = driver.findElements(
-					By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
 
-			Utility_Functions.xclickOnFirstElementfromList(accountNamesList);
-			Utility_Functions.timeWait(3);
-			report.updateTestLog("Verify New Activity Page Layout ","The Account is Displayed ",  Status.PASS);
-			Utility_Functions.xClick(driver, related_Accounts, true);
-			Utility_Functions.timeWait(3);
-			report.updateTestLog("Verify New Activity Page Layout ","The related page is Displayed ",  Status.PASS);
-			Utility_Functions.xScrollWindow(driver);
-			Utility_Functions.timeWait(1);
-			Utility_Functions.xScrollWindowTop(driver);
-			Utility_Functions.timeWait(2);
-			Utility_Functions.xWaitForElementPresent(driver, newActivity, 3);
-			Utility_Functions.xClick(driver, newActivity, true);
-			report.updateTestLog("Verify New Activity Page Layout ","The New Activity in the related page is Displayed ",  Status.PASS);
-			Utility_Functions.xSwitchtoFrame(driver, subject);
+		Utility_Functions.xClick(driver, menu_Accounts, true);
+		Utility_Functions.timeWait(3);
+		report.updateTestLog("Verify New Activity Page Layout ","Accounts is Displayed ",  Status.PASS);
 
-			Utility_Functions.timeWait(3);
-			
-			Utility_Functions.xWaitForElementPresent(driver, subject, 3);
-			Utility_Functions.xClick(driver, subject, true);
-			Utility_Functions.xWaitForElementPresent(driver, subject, 3);
-			Utility_Functions.xSendKeys(driver, subject, "test1");
-			report.updateTestLog("Verify New Activity Page Layout ","The New Activity in the related page is Displayed ",  Status.PASS);
-			Utility_Functions.xWaitForElementPresent(driver, activityType1, 3);
-			Utility_Functions.xClick(driver, activityType1, true);
-			report.updateTestLog("Verify New Activity Page Layout ","The New Activity in the related page is Displayed ",  Status.PASS);
-			Utility_Functions.xSendKeys(driver, relatedToContactField, "Adarsh Mehta");
-			relatedToContactField.sendKeys(Keys.ARROW_DOWN);
-			relatedToContactField.sendKeys(Keys.TAB);
-			report.updateTestLog("Verify New Activity Page Layout ","Verifying the New Activity Page Contact Field is populated with the user data ",  Status.PASS);
-			Utility_Functions.xSendKeys(driver, relatedToOpportunityField, "ABC Telecom-Consulting-134-Acres");
-			relatedToOpportunityField.sendKeys(Keys.ARROW_DOWN);
-			relatedToOpportunityField.sendKeys(Keys.TAB);
-			report.updateTestLog("Verify New Activity Page Layout ","Verifying the New Activity Page Opportunity Field is populated with the user data ",  Status.PASS);
-			Utility_Functions.xSendKeys(driver, relatedToPropertyField, "test25APR - South Lamar Street");
-			
-			relatedToPropertyField.sendKeys(Keys.ARROW_DOWN);
-			relatedToPropertyField.sendKeys(Keys.TAB);
-			report.updateTestLog("Verify New Activity Page Layout ","Verifying the New Activity Page Property Field is populated with the user data ",  Status.PASS);
-			Utility_Functions.xWaitForElementPresent(driver, saveActivity, 3);
-			Utility_Functions.xClick(driver, saveActivity, true);
-			report.updateTestLog("Verify New Activity Page Layout ","Verifying whether the New Activity page is saved  ",  Status.PASS);
-	       /* if(errorMessage.getText().contains("Review the errors on this page")){
+		List<WebElement> accountNamesList = driver.findElements(
+				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+
+		Utility_Functions.xclickOnFirstElementfromList(accountNamesList);
+		Utility_Functions.timeWait(3);
+		report.updateTestLog("Verify New Activity Page Layout ","The Account is Displayed ",  Status.PASS);
+		Utility_Functions.xClick(driver, related_Accounts, true);
+		Utility_Functions.timeWait(3);
+		report.updateTestLog("Verify New Activity Page Layout ","The related page is Displayed ",  Status.PASS);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, newActivity, 3);
+		Utility_Functions.xClick(driver, newActivity, true);
+		report.updateTestLog("Verify New Activity Page Layout ","The New Activity in the related page is Displayed ",  Status.PASS);
+		Utility_Functions.xSwitchtoFrame(driver, subject);
+
+		Utility_Functions.timeWait(3);
+
+		Utility_Functions.xWaitForElementPresent(driver, subject, 3);
+		Utility_Functions.xClick(driver, subject, true);
+		Utility_Functions.xWaitForElementPresent(driver, subject, 3);
+		Utility_Functions.xSendKeys(driver, subject, "test1");
+		report.updateTestLog("Verify New Activity Page Layout ","The New Activity in the related page is Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, activityType1, 3);
+		Utility_Functions.xClick(driver, activityType1, true);
+		report.updateTestLog("Verify New Activity Page Layout ","The New Activity in the related page is Displayed ",  Status.PASS);
+		Utility_Functions.xSendKeys(driver, relatedToContactField, "Adarsh Mehta");
+		relatedToContactField.sendKeys(Keys.ARROW_DOWN);
+		relatedToContactField.sendKeys(Keys.TAB);
+		report.updateTestLog("Verify New Activity Page Layout ","Verifying the New Activity Page Contact Field is populated with the user data ",  Status.PASS);
+		Utility_Functions.xSendKeys(driver, relatedToOpportunityField, "ABC Telecom-Consulting-134-Acres");
+		relatedToOpportunityField.sendKeys(Keys.ARROW_DOWN);
+		relatedToOpportunityField.sendKeys(Keys.TAB);
+		report.updateTestLog("Verify New Activity Page Layout ","Verifying the New Activity Page Opportunity Field is populated with the user data ",  Status.PASS);
+		Utility_Functions.xSendKeys(driver, relatedToPropertyField, "test25APR - South Lamar Street");
+
+		relatedToPropertyField.sendKeys(Keys.ARROW_DOWN);
+		relatedToPropertyField.sendKeys(Keys.TAB);
+		report.updateTestLog("Verify New Activity Page Layout ","Verifying the New Activity Page Property Field is populated with the user data ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, saveActivity, 3);
+		Utility_Functions.xClick(driver, saveActivity, true);
+		report.updateTestLog("Verify New Activity Page Layout ","Verifying whether the New Activity page is saved  ",  Status.PASS);
+		/* if(errorMessage.getText().contains("Review the errors on this page")){
 	        	System.out.println("Contact Account and Account mismatch");
-	        
+
 	        }else{
 	        	System.out.println("No errors found in the page");
 	        }*/
-	        /*driver.navigate().refresh();
+		/*driver.navigate().refresh();
 			Utility_Functions.timeWait(1);
 			driver.switchTo().defaultContent();
 			driver.navigate().refresh();
@@ -1644,7 +1648,7 @@ public class AccountsPage extends ReusableLibrary {
 			Utility_Functions.timeWait(1);
 			Utility_Functions.xScrollWindowTop(driver);
 			Utility_Functions.timeWait(2);*/
-			/*Utility_Functions.xWaitForElementPresent(driver, relatedToContactField, 4);
+		/*Utility_Functions.xWaitForElementPresent(driver, relatedToContactField, 4);
 			relatedToContactField.clear();
 			Utility_Functions.xWaitForElementPresent(driver, relatedToOpportunityField, 4);
 			relatedToOpportunityField.clear();
@@ -1652,14 +1656,14 @@ public class AccountsPage extends ReusableLibrary {
 			relatedToPropertyField.clear();
 			Utility_Functions.xWaitForElementPresent(driver, saveActivity, 3);
 			Utility_Functions.xClick(driver, saveActivity, true);*/
-			
-			/*if ((!savedActivityAfterChanges.getText().equals(""))) {
+
+		/*if ((!savedActivityAfterChanges.getText().equals(""))) {
 				System.out.println("The activity is saved");
 			}else{
 				System.out.println("The Activity is not saved");
 			}*/
-		
-	
+
+
 	}
 	/**
 	 * Validating the New Activity Page send Notification Email to the Assigned Person
@@ -1669,13 +1673,13 @@ public class AccountsPage extends ReusableLibrary {
 	 */
 
 	public void verifyAccountsNewActivityPageSendNotificationEmail(){
-		
-		
+
+
 		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
 		Utility_Functions.xClick(driver, menu_Accounts, true);
-		
+
 		report.updateTestLog("Verify New Activity Page send Notification Email ","Verifying the Accounts is Displayed ",  Status.PASS);
-		
+
 		List<WebElement> accountNamesList = driver.findElements(
 				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
 
@@ -1693,10 +1697,10 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the New Activity in the related page is Displayed ",  Status.PASS);
 		//Utility_Functions.xSwitchtoFrame(driver, subject);
-		
-        driver.switchTo().frame(5);
+
+		driver.switchTo().frame(5);
 		Utility_Functions.timeWait(3);
-		
+
 		Utility_Functions.xWaitForElementPresent(driver, subject, 3);
 		Utility_Functions.xClick(driver, subject, true);
 		Utility_Functions.xWaitForElementPresent(driver, subject, 3);
@@ -1705,24 +1709,24 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, activityType1, 3);
 		Utility_Functions.xClick(driver, activityType1, true);
 		report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the Activity Type field is populated with one of the pick list values ",  Status.PASS);
-		
+
 		if(!notificationEmail.isSelected()){
-	        //notificationEmail.click();
-		
+			//notificationEmail.click();
+
 			Utility_Functions.xClick(driver, notificationEmail, true);
-	        System.out.println("Notification email is checked");
-	        report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the notification email check box is checked or else checking it",  Status.PASS);
-	        
-	    }else{
-	    	System.out.println("Notification email is not checked");
-	    	report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the notification email check box is checked or not ",  Status.FAIL);
-	    }
-	Utility_Functions.xWaitForElementPresent(driver,assignedTo, 3);
-	Utility_Functions.xSendKeys(driver, assignedTo, "vishnuvardhan bommisetty");
-	report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the Assigned To field is populated with the appropriate value ",  Status.PASS);
-	Utility_Functions.xWaitForElementPresent(driver, saveActivity, 3);
-	Utility_Functions.xClick(driver, saveActivity, true);
-	report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the notification email issent to the Assigned To person in the New Activity page ",  Status.PASS);
+			System.out.println("Notification email is checked");
+			report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the notification email check box is checked or else checking it",  Status.PASS);
+
+		}else{
+			System.out.println("Notification email is not checked");
+			report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the notification email check box is checked or not ",  Status.FAIL);
+		}
+		Utility_Functions.xWaitForElementPresent(driver,assignedTo, 3);
+		Utility_Functions.xSendKeys(driver, assignedTo, "vishnuvardhan bommisetty");
+		report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the Assigned To field is populated with the appropriate value ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, saveActivity, 3);
+		Utility_Functions.xClick(driver, saveActivity, true);
+		report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the notification email issent to the Assigned To person in the New Activity page ",  Status.PASS);
 	}
 	/**
 	 * Validating the  Private Tags Bulk Tagging page layout and the Search functionalities
@@ -1731,10 +1735,10 @@ public class AccountsPage extends ReusableLibrary {
 	 *
 	 */
 	static ArrayList<String> labelsBulkTaggingPageAccountDetails = new ArrayList<String>();
-	
+
 	public void labelsBulkTaggingPageAccountDetails() {
-		
-		
+
+
 		labelsBulkTaggingPageAccountDetails.add("Account Name");
 		labelsBulkTaggingPageAccountDetails.add("Tags");
 		labelsBulkTaggingPageAccountDetails.add("Industry");
@@ -1744,13 +1748,13 @@ public class AccountsPage extends ReusableLibrary {
 		labelsBulkTaggingPageAccountDetails.add("Billing State/Province");
 		labelsBulkTaggingPageAccountDetails.add("Billing Zip/Postal Code");
 		labelsBulkTaggingPageAccountDetails.add("Billing Country");
-		
+
 	}
-	
-static ArrayList<String> labelsBulkTaggingPageContactDetails = new ArrayList<String>();
-public void labelsBulkTaggingPageContactDetails() {
-		
-		
+
+	static ArrayList<String> labelsBulkTaggingPageContactDetails = new ArrayList<String>();
+	public void labelsBulkTaggingPageContactDetails() {
+
+
 		labelsBulkTaggingPageContactDetails.add("Full Name");
 		labelsBulkTaggingPageContactDetails.add("Tags");
 		labelsBulkTaggingPageContactDetails.add("Title");
@@ -1762,13 +1766,13 @@ public void labelsBulkTaggingPageContactDetails() {
 		labelsBulkTaggingPageContactDetails.add("Mailing State/Province");
 		labelsBulkTaggingPageContactDetails.add("Mailing Zip/Postal Code");
 		labelsBulkTaggingPageContactDetails.add("Mailing Country");
-		
-		
+
+
 	}
-static ArrayList<String> labelsBulkTaggingPageLeadDetails = new ArrayList<String>();
-public void labelsBulkTaggingPageLeadDetails() {
-		
-		
+	static ArrayList<String> labelsBulkTaggingPageLeadDetails = new ArrayList<String>();
+	public void labelsBulkTaggingPageLeadDetails() {
+
+
 		labelsBulkTaggingPageLeadDetails.add("Full Name");
 		labelsBulkTaggingPageLeadDetails.add("Tags");
 		labelsBulkTaggingPageLeadDetails.add("Title");
@@ -1779,22 +1783,22 @@ public void labelsBulkTaggingPageLeadDetails() {
 		labelsBulkTaggingPageLeadDetails.add("State/Province");
 		labelsBulkTaggingPageLeadDetails.add("Zip/Postal Code");
 		labelsBulkTaggingPageLeadDetails.add("Country");
-		
-		
+
+
 	}
-static ArrayList<String> labelsBulkTaggingPageOpportunityDetails = new ArrayList<String>();
-public void labelsBulkTaggingPageOpportunityDetails() {
-		
-		
+	static ArrayList<String> labelsBulkTaggingPageOpportunityDetails = new ArrayList<String>();
+	public void labelsBulkTaggingPageOpportunityDetails() {
+
+
 		labelsBulkTaggingPageOpportunityDetails.add("Name");
 		labelsBulkTaggingPageOpportunityDetails.add("Tags");
 		labelsBulkTaggingPageOpportunityDetails.add("Phase");
 		labelsBulkTaggingPageOpportunityDetails.add("Sales Stage");
 		labelsBulkTaggingPageOpportunityDetails.add("Account");
 		labelsBulkTaggingPageOpportunityDetails.add("Preferred Property Type");
-		
-		
-		
+
+
+
 	}
 	public void verifyPrivateTags(){
 		Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
@@ -1811,7 +1815,7 @@ public void labelsBulkTaggingPageOpportunityDetails() {
 		Utility_Functions.xSendKeys(driver, accountSearch, "Test");
 		Utility_Functions.xWaitForElementPresent(driver, search, 3);
 		Utility_Functions.xClick(driver, search, true);
-		
+
 		Utility_Functions.xWaitForElementPresent(driver, selectAccount1, 3);
 		Utility_Functions.xClick(driver, selectAccount1, true);
 		Utility_Functions.xWaitForElementPresent(driver, selectAccount2, 3);
@@ -1851,41 +1855,41 @@ public void labelsBulkTaggingPageOpportunityDetails() {
 			System.out.println(e.getMessage());
 		}
 
-	
-  Utility_Functions.timeWait(2);
-	List<WebElement> contactFieldLabels = driver.findElements(By.xpath("//div[@id='Contactsection']//div[@class='slds-truncate']"));
-	int count1 = 0, i2 = 0;
-	String labelArray1[] = new String[contactFieldLabels.size()];
-	System.out.println(contactFieldLabels.size());
 
-	try {
-		labelsBulkTaggingPageContactDetails();
-		for (WebElement element : contactFieldLabels) {
-			System.out.println(element.getText());
-			labelArray1[i2] = element.getText();
-			if (labelArray1[i2].equalsIgnoreCase(labelsBulkTaggingPageContactDetails.get(i2))) {
-				report.updateTestLog("Verify Private Tags Page",
-						"Bulk Tagging Page Contact Details is having the " + labelArray1[i2] + " field ",
-						Status.PASS);
-				count1++;
+		Utility_Functions.timeWait(2);
+		List<WebElement> contactFieldLabels = driver.findElements(By.xpath("//div[@id='Contactsection']//div[@class='slds-truncate']"));
+		int count1 = 0, i2 = 0;
+		String labelArray1[] = new String[contactFieldLabels.size()];
+		System.out.println(contactFieldLabels.size());
+
+		try {
+			labelsBulkTaggingPageContactDetails();
+			for (WebElement element : contactFieldLabels) {
+				System.out.println(element.getText());
+				labelArray1[i2] = element.getText();
+				if (labelArray1[i2].equalsIgnoreCase(labelsBulkTaggingPageContactDetails.get(i2))) {
+					report.updateTestLog("Verify Private Tags Page",
+							"Bulk Tagging Page Contact Details is having the " + labelArray1[i2] + " field ",
+							Status.PASS);
+					count1++;
+				}
+				i2++;
 			}
-			i2++;
+			System.out.println(count1);
+			if (count1 != 11) {
+				report.updateTestLog("Verify Private Tags Page",
+						"All Labels are not present in the Bulk Tagging Page Contact Details", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify Private Tags Page",
+						"All Labels are present in the Bulk Tagging Page Contact Details", Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
-		System.out.println(count1);
-		if (count1 != 11) {
-			report.updateTestLog("Verify Private Tags Page",
-					"All Labels are not present in the Bulk Tagging Page Contact Details", Status.FAIL);
-		} else {
 
-			report.updateTestLog("Verify Private Tags Page",
-					"All Labels are present in the Bulk Tagging Page Contact Details", Status.PASS);
-		}
-
-	} catch (Exception e) {
-		System.out.println(e.getMessage());
-	}
-
-	  Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(2);
 		List<WebElement> leadFieldLabels = driver.findElements(By.xpath("//div[@id='Leadsection']//div[@class='slds-truncate']"));
 		int count2 = 0, i3 = 0;
 		String labelArray2[] = new String[leadFieldLabels.size()];
@@ -1917,95 +1921,206 @@ public void labelsBulkTaggingPageOpportunityDetails() {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
-		   Utility_Functions.timeWait(2);
-			List<WebElement> oppFieldLabels = driver.findElements(By.xpath("//div[@id='Oppsection']//div[@class='slds-truncate']"));
-			int count3 = 0, i4 = 0;
-			String labelArray3[] = new String[oppFieldLabels.size()];
-			System.out.println(oppFieldLabels.size());
 
-			try {
-				labelsBulkTaggingPageOpportunityDetails();
-				for (WebElement element : oppFieldLabels) {
-					System.out.println(element.getText());
-					labelArray3[i4] = element.getText();
-					if (labelArray3[i4].equalsIgnoreCase(labelsBulkTaggingPageOpportunityDetails.get(i4))) {
-						report.updateTestLog("Verify Private Tags Page",
-								"Bulk Tagging Page Opportunity Details is having the " + labelArray1[i4] + " field ",
-								Status.PASS);
-						count3++;
-					}
-					i4++;
-				}
-				System.out.println(count3);
-				if (count3 != 6) {
+		Utility_Functions.timeWait(2);
+		List<WebElement> oppFieldLabels = driver.findElements(By.xpath("//div[@id='Oppsection']//div[@class='slds-truncate']"));
+		int count3 = 0, i4 = 0;
+		String labelArray3[] = new String[oppFieldLabels.size()];
+		System.out.println(oppFieldLabels.size());
+
+		try {
+			labelsBulkTaggingPageOpportunityDetails();
+			for (WebElement element : oppFieldLabels) {
+				System.out.println(element.getText());
+				labelArray3[i4] = element.getText();
+				if (labelArray3[i4].equalsIgnoreCase(labelsBulkTaggingPageOpportunityDetails.get(i4))) {
 					report.updateTestLog("Verify Private Tags Page",
-							"All Labels are not present in the Bulk Tagging Page Opportunity Details", Status.FAIL);
-				} else {
-
-					report.updateTestLog("Verify Private Tags Page",
-							"All Labels are present in the Bulk Tagging Page Opportunity Details", Status.PASS);
+							"Bulk Tagging Page Opportunity Details is having the " + labelArray1[i4] + " field ",
+							Status.PASS);
+					count3++;
 				}
-
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
+				i4++;
 			}
-			Utility_Functions.timeWait(2);
-			Utility_Functions.xScrollWindow(driver);
-			Utility_Functions.timeWait(2);
-			Utility_Functions.xScrollWindowTop(driver);
-			Utility_Functions.timeWait(2);
-			Utility_Functions.xWaitForElementPresent(driver, advancedSearch, 3);
-			Utility_Functions.xClick(driver, advancedSearch, true);	
-			Utility_Functions.xWaitForElementPresent(driver, advancedSearchAccountOption, 3);
-			Utility_Functions.xClick(driver, advancedSearchAccountOption, true);
-			Utility_Functions.timeWait(2);
-			List<WebElement> advancedSearchFields = driver.findElements(By.xpath("//span[contains(@id,'SearchBlock')]//div[@class='slds-truncate']"));
-			int count5 = 0;
-			try {
-				for (WebElement element : advancedSearchFields) {
-					if ((count5 == 0) && (element.getText().equalsIgnoreCase("Field Name"))) {
-						System.out.println("Field name is present in the Advanced Search Page");
-						report.updateTestLog("Verify Private Tags Page",
-								"Advanced Search Private Tags Page is having the " + element.getText()
-										+ " Status field::",
-								Status.PASS);
-						count5++;
-					} else if ((count5 == 1) && (element.getText().equalsIgnoreCase("Operator"))) {
-						System.out.println("Operator is present in the Advanced Search Page");
-						report.updateTestLog("Verify Private Tags Page",
-								"Advanced Search Private Tags Page is having the " + element.getText()
-										+ " Status field::",
-								Status.PASS);
-						count5++;
-					} else if ((count5 == 2) && (element.getText().equalsIgnoreCase("Value"))) {
-						System.out
-								.println("Value is present in the Advanced Search Page");
-						report.updateTestLog("Verify Private Tags Page",
-								"Advanced Search Private Tags Page is having the " + element.getText()
-										+ " Status field::",
-								Status.PASS);
-						
-					}
-				}
-				System.out.println(count5);
-				if (count5 != 2) {
-					report.updateTestLog("Verify Private Tags Page",
-							"All Labels are not present in the Bulk Tagging Page Opportunity Details", Status.FAIL);
-				} else {
+			System.out.println(count3);
+			if (count3 != 6) {
+				report.updateTestLog("Verify Private Tags Page",
+						"All Labels are not present in the Bulk Tagging Page Opportunity Details", Status.FAIL);
+			} else {
 
+				report.updateTestLog("Verify Private Tags Page",
+						"All Labels are present in the Bulk Tagging Page Opportunity Details", Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, advancedSearch, 3);
+		Utility_Functions.xClick(driver, advancedSearch, true);	
+		Utility_Functions.xWaitForElementPresent(driver, advancedSearchAccountOption, 3);
+		Utility_Functions.xClick(driver, advancedSearchAccountOption, true);
+		Utility_Functions.timeWait(2);
+		List<WebElement> advancedSearchFields = driver.findElements(By.xpath("//span[contains(@id,'SearchBlock')]//div[@class='slds-truncate']"));
+		int count5 = 0;
+		try {
+			for (WebElement element : advancedSearchFields) {
+				if ((count5 == 0) && (element.getText().equalsIgnoreCase("Field Name"))) {
+					System.out.println("Field name is present in the Advanced Search Page");
 					report.updateTestLog("Verify Private Tags Page",
-							"All Labels are present in the Bulk Tagging Page Opportunity Details", Status.PASS);
+							"Advanced Search Private Tags Page is having the " + element.getText()
+							+ " Status field::",
+							Status.PASS);
+					count5++;
+				} else if ((count5 == 1) && (element.getText().equalsIgnoreCase("Operator"))) {
+					System.out.println("Operator is present in the Advanced Search Page");
+					report.updateTestLog("Verify Private Tags Page",
+							"Advanced Search Private Tags Page is having the " + element.getText()
+							+ " Status field::",
+							Status.PASS);
+					count5++;
+				} else if ((count5 == 2) && (element.getText().equalsIgnoreCase("Value"))) {
+					System.out
+					.println("Value is present in the Advanced Search Page");
+					report.updateTestLog("Verify Private Tags Page",
+							"Advanced Search Private Tags Page is having the " + element.getText()
+							+ " Status field::",
+							Status.PASS);
+
 				}
-			}catch (Exception e) {
-					e.printStackTrace();
-					System.out.println(e.getMessage());
+			}
+			System.out.println(count5);
+			if (count5 != 2) {
+				report.updateTestLog("Verify Private Tags Page",
+						"All Labels are not present in the Bulk Tagging Page Opportunity Details", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify Private Tags Page",
+						"All Labels are present in the Bulk Tagging Page Opportunity Details", Status.PASS);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+
+		//div[@class='slds-form-element']/label/abbr	
+
+	}
+	
+	/**
+	 * Validating the accounts function
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	
+	public void accountsFunction() {
+		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 4);
+		Utility_Functions.xClick(driver, menu_Accounts, true);
+		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
+		Utility_Functions.xClick(driver, recentlyViewed, true);
+		report.updateTestLog("Verify Additional Activity","Recently viewed Accounts are Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, allAccounts, 3);
+		Utility_Functions.xClick(driver, allAccounts, true);
+		Utility_Functions.timeWait(3);
+		report.updateTestLog("Verify Additional Activity","All accounts are displayed successfully:::",  Status.PASS);
+		List<WebElement> accountNamesList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xclickRandomElement(accountNamesList);
+		Utility_Functions.xWaitForElementPresent(driver, related_Accounts, 3);
+		Utility_Functions.xClick(driver, related_Accounts, true);
+	}
+	
+	/**
+	 * Validating the additional Activity Types in the new Activity List
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	
+	static ArrayList<String> activityTypeListValues = new ArrayList<String>();
+
+	public void additionalActivityTypeList() {
+		activityTypeListValues.add("--None--");
+		activityTypeListValues.add("Private - Client Intelligence");
+		activityTypeListValues.add("Private - Cold Call");
+		activityTypeListValues.add("Private - Follow-Up Meeting");
+		activityTypeListValues.add("Private - Follow-Up Task");
+		activityTypeListValues.add("Private - Initial Meeting");
+		activityTypeListValues.add("Private - Networking");
+		activityTypeListValues.add("Private - Pitch");
+		activityTypeListValues.add("Private - Task");
+		activityTypeListValues.add("Private - Warm Call");
+		activityTypeListValues.add("Public - Client Intelligence (All)");
+		activityTypeListValues.add("Public - Client Intelligence (CML)");
+		activityTypeListValues.add("Public - Client Intelligence (Investor Services)");
+		activityTypeListValues.add("Public - Client Meeting (CML)");
+		activityTypeListValues.add("Public - Client Meeting (Investor Services)");
+		System.out.println("Additional Activity Type values are added to the list successfully::::");
+	}
+	
+	/**
+	 * Validating the additional Activity Types in the new Activity on an Account
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	public void additionalActivityTypes() {
+		accountsFunction();
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xWaitForElementPresent(driver, newActivity, 4);
+		Utility_Functions.xClick(driver, newActivity, true);	
+		Utility_Functions.xSwitchtoFrame(driver, subject);
+		Utility_Functions.timeWait(2);
+		List<WebElement> activityTypeList = driver.findElements(By.xpath("//select[contains(@id,'CustomActivityForm:activity-activityType')]/option"));
+		additionalActivityTypeList();		
+		String[] linkTexts = new String[activityTypeList.size()];
+		int i = 0, count = 0;
+		try {
+			for (WebElement element : activityTypeList) {
+				linkTexts[i] = element.getText();
+				if (linkTexts[i].equals(activityTypeListValues.get(i))) {
+					count++;
+					report.updateTestLog("Verify Additional Acitivty", "Value " +  element.getText() + "is present under Additional Activity List", Status.PASS);
+					System.out.println(element.getText());	
 				}
-			
-			//div[@class='slds-form-element']/label/abbr	
+				i++;
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		if(count==15) {
+			report.updateTestLog("Verify Additional Acitivty", "All the values are present under Additional Activity List", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Additional Acitivty", "All the values are not present under Additional Activity List", Status.FAIL);
+		}
+	}
+
+	/**
+	 * Validating the Investor services checkbox for multi business line users 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	public void validateInvestorServicesCheckbox() {
+		accountsFunction();
+		try {
+			Utility_Functions.timeWait(2);
+			driver.navigate().refresh();
+			Utility_Functions.xWaitForElementPresent(driver, accountServicesCheckbox, 3);
+			if(accountServicesCheckbox.isDisplayed()) {
+				System.out.println("Investor Services Checkbox is visible for Multi Business Users");
+				report.updateTestLog("Verify Investor Services", "Investor Services Checkbox is visible for Multi Business Users", Status.PASS);
+			} else {
+				report.updateTestLog("Verify Investor Services", "Investor Services Checkbox is not present for Multi Business Users", Status.FAIL);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 }
-		  
-
-			}
 

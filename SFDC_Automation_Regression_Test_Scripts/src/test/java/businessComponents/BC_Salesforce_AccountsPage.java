@@ -151,4 +151,19 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 		sfAccountsPage.verifyPrivateTags();
 
 	} 
+	
+	/**
+	 * Validating the additional Activity Types in the new Activity on an Account
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+
+	public void bc_additionalActivityTypes() throws InterruptedException {
+		sfAccountsPage.additionalActivityTypes();
+	}
+	
+	public void bc_validateInvestorServices() throws InterruptedException {
+		sfAccountsPage.validateInvestorServicesCheckbox();
+	}
 }

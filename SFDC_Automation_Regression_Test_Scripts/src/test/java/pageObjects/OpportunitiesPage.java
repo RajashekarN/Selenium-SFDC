@@ -1738,6 +1738,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 					"Opportunity installment amount record is present in the opportunity installment related list:::",
 					Status.PASS);
 		}
+		Utility_Functions.timeWait(2);
 	}
 
 	/**
@@ -1819,6 +1820,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void addingInstallmentsOpportunities() {
+		Utility_Functions.timeWait(1);
 		Utility_Functions.xWaitForElementPresent(driver, showMoreActions, 4);
 		Utility_Functions.xClick(driver, showMoreActions, true);
 		Utility_Functions.timeWait(1);
@@ -2742,8 +2744,6 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xClick(driver, saveButtonSplit, true);
 		Utility_Functions.timeWait(3);
-		driver.navigate().refresh();
-		Utility_Functions.timeWait(1);
 		driver.switchTo().defaultContent();
 		driver.navigate().refresh();
 		Utility_Functions.xWaitForElementVisible(driver, manageOpportunitySplits, 3);
