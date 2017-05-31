@@ -329,5 +329,27 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	public void bc_opportunitySplitRegression() {
 		sfOpportunitiesPage.opportunitySplitRegression();
 	}
+	
+	/**
+	 * Verify the Occupier Record Type should default to 'Occupier' opportunity type field 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	
+	public void bc_OpportunityOccupierRecordType() {
+		sfOpportunitiesPage.occupierRecordType();
+	}
+	
+	/**
+	 * Verify the Annual Revenue field is renamed to Management Annual Revenue for Broker Profile
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	
+	public void bc_ManagementAnnualRevenue() {
+		sfOpportunitiesPage.managementAnnualRevenue();
+	}
 
 }

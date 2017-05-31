@@ -393,7 +393,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	WebElement installmentStatus;
 
 	@FindBy(xpath = "//span[text()='Date Paid']/parent::label/parent::div//input")
-	WebElement datePaid;	
+	WebElement datePaid;
 
 	@FindBy(xpath = "//span[text()='Account Role']/parent::span/parent::div//a")
 	WebElement accountRoleOption;
@@ -402,8 +402,52 @@ public class OpportunitiesPage extends ReusableLibrary {
 	WebElement accountRole;
 
 	@FindBy(xpath = "//span[text()='Installment Amount']/parent::label/parent::div//input")
-	WebElement installmentAmountEdit;	
+	WebElement installmentAmountEdit;
 
+	@FindBy(xpath = "//span[text()='Opportunity Name']/parent::label/parent::div//input")
+	WebElement opportunityName_AS;
+
+	@FindBy(xpath = "//span[text()='Total Size']/parent::label/parent::div//input")
+	WebElement totalSize_AS;
+
+	@FindBy(xpath = "//a[@aria-label='Unit of Measure']")
+	WebElement unitofMeasure_AS;
+
+	@FindBy(xpath = "//a[@title='Square Feet']")
+	WebElement unitofMeasureValue_AS;
+
+	@FindBy(xpath = "//a[@aria-label='Type']")
+	WebElement type_AS;
+
+	@FindBy(xpath = "//a[@title='New Business']")
+	WebElement typeNewBusiness_AS;
+
+	@FindBy(xpath = "//a[@aria-label='Region']")
+	WebElement region_AS;
+
+	@FindBy(xpath = "//a[@title='APAC']")
+	WebElement regionValue_AS;
+
+	@FindBy(xpath = "//span[text()='Sales Stage']/parent::label/parent::div//a")
+	WebElement salesStage_AS;
+
+	@FindBy(xpath = "//a[@title='2-Client Engaged']")
+	WebElement salesStageValue_AS;
+
+	@FindBy(xpath = "//span[text()='Close Date']/parent::label/parent::div//input")
+	WebElement closeDate_AS;
+
+	@FindBy(xpath = "//input[@placeholder='Search Accounts']")
+	WebElement accountName_AS;
+
+	@FindBy(xpath = "//span[text()='Market']/parent::label/parent::div//option[1]")
+	WebElement market_AS;
+	
+	@FindBy(xpath = "//select[@id='record-type-select']/option[@selected='selected']")
+	WebElement defaultOpportutnityRecordType;
+
+	//
+	
 	//
 
 	/****
@@ -457,10 +501,10 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//input[contains(@id,'EndTime')]")
 	WebElement endTimeNewCustomEventPage;
 
-	@FindBy(xpath=".//*[@id='record-type-select']")
+	@FindBy(xpath = ".//*[@id='record-type-select']")
 	WebElement opportunityRecordType;
 
-	@FindBy(xpath="//div/a[@class='select'][text()='Occupier Lease']")
+	@FindBy(xpath = "//div/a[@class='select'][text()='Occupier Lease']")
 	WebElement assignmentTypeEditPage;
 
 	HomePage hp = new HomePage(scriptHelper);
@@ -1216,12 +1260,13 @@ public class OpportunitiesPage extends ReusableLibrary {
 			opportunity.setField("Name", "Test Automation_" + value);
 			opportunity.setField("AccountId", "0010S000004SaIHQA0");
 			opportunity.setField("CloseDate", Calendar.getInstance());
-			if(dataTable.getData("General_Data", "TC_ID").contains("AS")) {
+			if (dataTable.getData("General_Data", "TC_ID").contains("AS")) {
 				opportunity.setField("RecordTypeId", "012i0000000405jAAA");
-			} else if(dataTable.getData("General_Data", "TC_ID").contains("GWS")) {
-				opportunity.setField("RecordTypeId", "012i0000000405mAAA");				
-			} else if(dataTable.getData("General_Data", "TC_ID").contains("CM") && (dataTable.getData("General_Data", "TC_ID").contains("DSF"))) {
-				opportunity.setField("RecordTypeId", "012i0000000405lAAA");				
+			} else if (dataTable.getData("General_Data", "TC_ID").contains("GWS")) {
+				opportunity.setField("RecordTypeId", "012i0000000405mAAA");
+			} else if (dataTable.getData("General_Data", "TC_ID").contains("CM")
+					&& (dataTable.getData("General_Data", "TC_ID").contains("DSF"))) {
+				opportunity.setField("RecordTypeId", "012i0000000405lAAA");
 			}
 
 			opportunity.setField("StageName", "1-Target");
@@ -1345,12 +1390,12 @@ public class OpportunitiesPage extends ReusableLibrary {
 						report.updateTestLog("Modified Opportunity Name",
 								"Opportunity Name modified according to the AssignmentType selected:::"
 										+ updatedAssignmentType,
-										Status.PASS);
+								Status.PASS);
 					} else {
 						report.updateTestLog("Modified Opportunity Name",
 								"Opportunity Name didn't get modified according to the AssignmentType selected:::"
 										+ updatedAssignmentType,
-										Status.FAIL);
+								Status.FAIL);
 					}
 					if (updatedTotalSize.equals("2900.0")) {
 						report.updateTestLog("Modified Opportunity Name",
@@ -1360,18 +1405,18 @@ public class OpportunitiesPage extends ReusableLibrary {
 						report.updateTestLog("Modified Opportunity Name",
 								"Opportunity Name didn't get modified according to the Total Size selected:::"
 										+ updatedTotalSize,
-										Status.FAIL);
+								Status.FAIL);
 					}
 					if (updatedUnitOfMeasure.equals("Hectares")) {
 						report.updateTestLog("Modified Opportunity Name",
 								"Opportunity Name modified according to the Unit of Measure selected:::"
 										+ updatedUnitOfMeasure,
-										Status.PASS);
+								Status.PASS);
 					} else {
 						report.updateTestLog("Modified Opportunity Name",
 								"Opportunity Name didn't get modified according to the Unit of Measure selected:::"
 										+ updatedUnitOfMeasure,
-										Status.FAIL);
+								Status.FAIL);
 					}
 					isStatus = true;
 				}
@@ -1875,7 +1920,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		report.updateTestLog("Opportunities Installments",
 				"Opportunity installment amount one and two after changing the quantity to two from one:::"
 						+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo,
-						Status.PASS);
+				Status.PASS);
 
 		Utility_Functions.xWaitForElementPresent(driver, editButtonInstallment, 5);
 		Utility_Functions.xClick(driver, editButtonInstallment, true);
@@ -1894,7 +1939,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			report.updateTestLog("Opportunities Installments",
 					"Opportunity installment amounts recalculated successfully after editing the Estimated Gross Fee:::"
 							+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo,
-							Status.PASS);
+					Status.PASS);
 		} else {
 			report.updateTestLog("Opportunities Installments", "Opportunity installment amounts recalculation failed:::"
 					+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo, Status.FAIL);
@@ -1941,7 +1986,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			report.updateTestLog("Opportunities Installments",
 					"Opportunity installment amounts recalculated successfully after editing the Estimated Gross Fee:::"
 							+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo,
-							Status.PASS);
+					Status.PASS);
 		} else {
 			report.updateTestLog("Opportunities Installments", "Opportunity installment amounts recalculation failed:::"
 					+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo, Status.WARNING);
@@ -1988,7 +2033,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			report.updateTestLog("Opportunities Installments",
 					"Opportunity installment amounts recalculated successfully after editing the Estimated Gross Fee:::"
 							+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo,
-							Status.PASS);
+					Status.PASS);
 		} else {
 			report.updateTestLog("Opportunities Installments", "Opportunity installment amounts recalculation failed:::"
 					+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo, Status.WARNING);
@@ -2178,7 +2223,6 @@ public class OpportunitiesPage extends ReusableLibrary {
 	static ArrayList<String> installmentList = new ArrayList<String>();
 	static ArrayList<String> installmentList1 = new ArrayList<String>();
 
-
 	public void recalculateRoundOffRule() {
 		multipleInstallmentsFunction();
 		addingInstallmentsOpportunities();
@@ -2193,7 +2237,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		report.updateTestLog("Opportunities Installments",
 				"Opportunity installment amount one and two after changing the quantity to two from one:::"
 						+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo + ":::" + sInstallmentAmountThree,
-						Status.PASS);
+				Status.PASS);
 		String sEstimatedGrossAmount = dataTable.getData("General_Data", "InstallmentAmount").replace(",", "");
 		String sInstallments = dataTable.getData("General_Data", "InstallmentQuantity");
 		double dInstallment = ((double) Integer.parseInt(sEstimatedGrossAmount)) / Integer.parseInt(sInstallments);
@@ -2204,46 +2248,47 @@ public class OpportunitiesPage extends ReusableLibrary {
 		installmentList.add(sThirdInstallment);
 		installmentList.add(sThirdInstallment);
 		installmentList.add(bFirstInstallmentAmount.toString());
-		int count =0;
-		for(int i=0; i<installmentList.size();i++) {
-			if(sInstallmentAmountOne.replaceAll(",", "").contains(installmentList.get(i))) {
+		int count = 0;
+		for (int i = 0; i < installmentList.size(); i++) {
+			if (sInstallmentAmountOne.replaceAll(",", "").contains(installmentList.get(i))) {
 				count++;
-			} else if(sInstallmentAmountTwo.replaceAll(",", "").contains(installmentList.get(i))) {
+			} else if (sInstallmentAmountTwo.replaceAll(",", "").contains(installmentList.get(i))) {
 				count++;
-			} else if(sInstallmentAmountThree.replaceAll(",", "").contains(installmentList.get(i))) {
+			} else if (sInstallmentAmountThree.replaceAll(",", "").contains(installmentList.get(i))) {
 				count++;
 			}
 		}
-		if(count==3) {
+		if (count == 3) {
 			report.updateTestLog("Opportunities Installments",
 					"First, Second and Third Installment amounts calculated successfully:::" + bFirstInstallmentAmount
-					+ "::::" + bFirstInstallmentAmount + "::::" + sThirdInstallment,
+							+ "::::" + bFirstInstallmentAmount + "::::" + sThirdInstallment,
 					Status.PASS);
 		} else {
 			installmentList1.add(bFirstInstallmentAmount.toString());
 			installmentList1.add(bFirstInstallmentAmount.toString());
 			installmentList1.add(sThirdInstallment);
-			int count1 =0;
-			for(int i=0; i<installmentList1.size();i++) {
-				if(sInstallmentAmountOne.replaceAll(",", "").contains(installmentList1.get(i))) {
+			int count1 = 0;
+			for (int i = 0; i < installmentList1.size(); i++) {
+				if (sInstallmentAmountOne.replaceAll(",", "").contains(installmentList1.get(i))) {
 					count++;
-				} else if(sInstallmentAmountTwo.replaceAll(",", "").contains(installmentList1.get(i))) {
+				} else if (sInstallmentAmountTwo.replaceAll(",", "").contains(installmentList1.get(i))) {
 					count++;
-				} else if(sInstallmentAmountThree.replaceAll(",", "").contains(installmentList1.get(i))) {
+				} else if (sInstallmentAmountThree.replaceAll(",", "").contains(installmentList1.get(i))) {
 					count++;
 				}
 			}
-			if(count1==3) {
+			if (count1 == 3) {
 				report.updateTestLog("Opportunities Installments",
-						"First, Second and Third Installment amounts calculated successfully:::" + bFirstInstallmentAmount
-						+ "::::" + bFirstInstallmentAmount + "::::" + sThirdInstallment,
+						"First, Second and Third Installment amounts calculated successfully:::"
+								+ bFirstInstallmentAmount + "::::" + bFirstInstallmentAmount + "::::"
+								+ sThirdInstallment,
 						Status.PASS);
 			} else {
-				report.updateTestLog(
-						"Opportunities Installments", "First, Second and Third Installment calculation failed:::"
-								+ bFirstInstallmentAmount + "::::" + bFirstInstallmentAmount + "::::" + sThirdInstallment,
-								Status.WARNING);
-			}			
+				report.updateTestLog("Opportunities Installments",
+						"First, Second and Third Installment calculation failed:::" + bFirstInstallmentAmount + "::::"
+								+ bFirstInstallmentAmount + "::::" + sThirdInstallment,
+						Status.WARNING);
+			}
 		}
 	}
 
@@ -2261,124 +2306,142 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 * 
 	 * @author Vishnuvardhan
 	 *
-	 */	
+	 */
 
 	public void opportunityEligibility() {
 		Utility_Functions.xClick(driver, menu_Opportunities, true);
 		Utility_Functions.timeWait(2);
 		List<WebElement> opportunitiesList = driver.findElements(By.xpath(
 				"//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'006')]"));
-		Utility_Functions.xclickRandomElement(opportunitiesList);	
+		Utility_Functions.xclickRandomElement(opportunitiesList);
 	}
+
 	/**
 	 * Verify whether the user able to edit the paid installment
 	 * 
 	 * @author Vishnuvardhan
 	 *
-	 */	
+	 */
 
-	public void editPaidInstallmentAmount() {		
-		/*	String query = "SELECT Opportunity_ID__c FROM Opportunity_Installments__c WHERE Installment_Amount__c != 0 limit 1";
-		String sOpportunityID = searchOpportunity.fetchRecordFieldValue("Opportunity_ID__c", query);
-		report.updateTestLog("Verify Opportunity", "Opportunity retrived from database successfully:::" + sOpportunityID, Status.PASS);
-		String url = driver.getCurrentUrl().split("#")[0];
-		String newUrl = url + "#/sObject/" + sOpportunityID;
-		newUrl = newUrl + "/view";
-		report.updateTestLog("Verify Opportunity","URL has been replaced with the new URL having the retrieved Opportunity:::" + newUrl, Status.PASS);
-		driver.get(newUrl);*/
+	public void editPaidInstallmentAmount() {
+		/*
+		 * String query =
+		 * "SELECT Opportunity_ID__c FROM Opportunity_Installments__c WHERE Installment_Amount__c != 0 limit 1"
+		 * ; String sOpportunityID =
+		 * searchOpportunity.fetchRecordFieldValue("Opportunity_ID__c", query);
+		 * report.updateTestLog("Verify Opportunity",
+		 * "Opportunity retrived from database successfully:::" +
+		 * sOpportunityID, Status.PASS); String url =
+		 * driver.getCurrentUrl().split("#")[0]; String newUrl = url +
+		 * "#/sObject/" + sOpportunityID; newUrl = newUrl + "/view";
+		 * report.updateTestLog("Verify Opportunity"
+		 * ,"URL has been replaced with the new URL having the retrieved Opportunity:::"
+		 * + newUrl, Status.PASS); driver.get(newUrl);
+		 */
 
 		boolean isStatus = false;
 		int iInstallmentAmountOne = 0;
-		while(!isStatus) {			
+		while (!isStatus) {
 			labelA: {
-			opportunityEligibility();
-			driver.navigate().refresh();
-			Utility_Functions.xWaitForElementPresent(driver, related, 5);
-			Utility_Functions.xClick(driver, related, true);
-			Utility_Functions.xWaitForElementPresent(driver, installmentAmountOne, 3);
-			String sInstallmentAmountOne = installmentAmountOne.getText();
-			sInstallmentAmountOne = sInstallmentAmountOne.split(" ")[1];
-			sInstallmentAmountOne = sInstallmentAmountOne.replaceAll(",", "");
-			double dInstallmentAmountOne = Double.parseDouble(sInstallmentAmountOne);
-			iInstallmentAmountOne = Double.valueOf(dInstallmentAmountOne).intValue();				
-			if(iInstallmentAmountOne > 0) {
-				report.updateTestLog("Opportunities Installments", "Opportunity is eligible for editing the Installments::",Status.PASS);
-				Utility_Functions.xWaitForElementPresent(driver, arrowDown, 3);
-				Utility_Functions.xClick(driver, arrowDown, true);
-				Utility_Functions.timeWait(1);
-				List<WebElement> actionList = driver.findElements(By.xpath("//div[@class='actionMenu']//a"));
-				for (WebElement element : actionList) {
-					if (element.getText().contains("Edit")) {
-						element.click();
-						report.updateTestLog("Opportunities Installments", "Clicked on edit installments button successfully::",Status.PASS);				
-					} else {
-						report.updateTestLog("Opportunities Installments", "Unable to click on edit installment button", Status.FAIL);
+				opportunityEligibility();
+				driver.navigate().refresh();
+				Utility_Functions.xWaitForElementPresent(driver, related, 5);
+				Utility_Functions.xClick(driver, related, true);
+				Utility_Functions.xWaitForElementPresent(driver, installmentAmountOne, 3);
+				String sInstallmentAmountOne = installmentAmountOne.getText();
+				sInstallmentAmountOne = sInstallmentAmountOne.split(" ")[1];
+				sInstallmentAmountOne = sInstallmentAmountOne.replaceAll(",", "");
+				double dInstallmentAmountOne = Double.parseDouble(sInstallmentAmountOne);
+				iInstallmentAmountOne = Double.valueOf(dInstallmentAmountOne).intValue();
+				if (iInstallmentAmountOne > 0) {
+					report.updateTestLog("Opportunities Installments",
+							"Opportunity is eligible for editing the Installments::", Status.PASS);
+					Utility_Functions.xWaitForElementPresent(driver, arrowDown, 3);
+					Utility_Functions.xClick(driver, arrowDown, true);
+					Utility_Functions.timeWait(1);
+					List<WebElement> actionList = driver.findElements(By.xpath("//div[@class='actionMenu']//a"));
+					for (WebElement element : actionList) {
+						if (element.getText().contains("Edit")) {
+							element.click();
+							report.updateTestLog("Opportunities Installments",
+									"Clicked on edit installments button successfully::", Status.PASS);
+						} else {
+							report.updateTestLog("Opportunities Installments",
+									"Unable to click on edit installment button", Status.FAIL);
+						}
 					}
-				}
-				Utility_Functions.xWaitForElementPresent(driver, installmentOption, 3);
-				Utility_Functions.xClick(driver, installmentOption, true);
-				if(installmentOption.getText().contains("Paid")) {
-					report.updateTestLog("Opportunities Installments", "Opportunity not is eligible as the installment amount is already paid::",Status.WARNING);
-					isStatus = false;
-					Utility_Functions.xWaitForElementPresent(driver, cancel, 3);
-					Utility_Functions.xClick(driver, cancel, true);		
+					Utility_Functions.xWaitForElementPresent(driver, installmentOption, 3);
+					Utility_Functions.xClick(driver, installmentOption, true);
+					if (installmentOption.getText().contains("Paid")) {
+						report.updateTestLog("Opportunities Installments",
+								"Opportunity not is eligible as the installment amount is already paid::",
+								Status.WARNING);
+						isStatus = false;
+						Utility_Functions.xWaitForElementPresent(driver, cancel, 3);
+						Utility_Functions.xClick(driver, cancel, true);
+						Utility_Functions.timeWait(2);
+						break labelA;
+					}
+					DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+					Date date = new Date();
+					Utility_Functions.timeWait(1);
+					Utility_Functions.xClick(driver, installmentStatus, true);
+					Utility_Functions.xSendKeys(driver, datePaid, dateFormat.format(date).toString());
+					Utility_Functions.xWaitForElementPresent(driver, accountRoleOption, 3);
+					Utility_Functions.xClick(driver, accountRoleOption, true);
+					Utility_Functions.timeWait(1);
+					Utility_Functions.xClick(driver, accountRole, true);
 					Utility_Functions.timeWait(2);
+					Utility_Functions.xWaitForElementPresent(driver, save, 4);
+					Utility_Functions.xClick(driver, save, true);
+					report.updateTestLog("Opportunities Installments",
+							"Installment Amount has been paid successfully::", Status.PASS);
+					Utility_Functions.xWaitForElementPresent(driver, related, 3);
+					driver.navigate().refresh();
+					Utility_Functions.xWaitForElementPresent(driver, related, 3);
+					Utility_Functions.xClick(driver, related, true);
+					Utility_Functions.xWaitForElementPresent(driver, arrowDown, 3);
+					Utility_Functions.xClick(driver, arrowDown, true);
+					Utility_Functions.timeWait(1);
+					List<WebElement> actionListEdit = driver.findElements(By.xpath("//div[@class='actionMenu']//a"));
+					for (WebElement element : actionListEdit) {
+						if (element.getText().contains("Edit")) {
+							Utility_Functions.xWaitForElementPresent(driver, element, 3);
+							element.click();
+							report.updateTestLog("Opportunities Installments",
+									"Clicked on edit installments button successfully::", Status.PASS);
+						} else {
+							report.updateTestLog("Opportunities Installments",
+									"Unable to click on edit installment button", Status.FAIL);
+						}
+					}
+					Utility_Functions.xWaitForElementPresent(driver, installmentAmountEdit, 3);
+					int iInstallmentAmount = iInstallmentAmountOne + 100;
+					Utility_Functions.xSendKeys(driver, installmentAmountEdit, Integer.toString(iInstallmentAmount));
+					Utility_Functions.timeWait(2);
+					Utility_Functions.xWaitForElementPresent(driver, save, 3);
+					Utility_Functions.xClick(driver, save, true);
+					Utility_Functions.timeWait(2);
+					Utility_Functions.xWaitForElementPresent(driver, related, 3);
+					if (related.isDisplayed()) {
+						report.updateTestLog("Opportunities Installments",
+								"Editing the Paid installment amount is successfull::", Status.PASS);
+						isStatus = true;
+						break;
+					} else {
+						report.updateTestLog("Opportunities Installments",
+								"Editing the Paid installment amount is failed::", Status.FAIL);
+						isStatus = true;
+						break;
+					}
+				} else {
+					report.updateTestLog("Opportunities Installments",
+							"Opportunity not is eligible for editing the Installments::", Status.WARNING);
+					isStatus = false;
 					break labelA;
 				}
-				DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-				Date date = new Date();
-				Utility_Functions.timeWait(1);
-				Utility_Functions.xClick(driver, installmentStatus, true);
-				Utility_Functions.xSendKeys(driver, datePaid, dateFormat.format(date).toString());
-				Utility_Functions.xWaitForElementPresent(driver, accountRoleOption, 3);
-				Utility_Functions.xClick(driver, accountRoleOption, true);
-				Utility_Functions.timeWait(1);
-				Utility_Functions.xClick(driver, accountRole, true);
-				Utility_Functions.timeWait(2);
-				Utility_Functions.xWaitForElementPresent(driver, save, 4);
-				Utility_Functions.xClick(driver, save, true);
-				report.updateTestLog("Opportunities Installments", "Installment Amount has been paid successfully::",Status.PASS);				
-				Utility_Functions.xWaitForElementPresent(driver, related, 3);
-				driver.navigate().refresh();
-				Utility_Functions.xWaitForElementPresent(driver, related, 3);
-				Utility_Functions.xClick(driver, related, true);
-				Utility_Functions.xWaitForElementPresent(driver, arrowDown, 3);
-				Utility_Functions.xClick(driver, arrowDown, true);
-				Utility_Functions.timeWait(1);
-				List<WebElement> actionListEdit = driver.findElements(By.xpath("//div[@class='actionMenu']//a"));
-				for (WebElement element : actionListEdit) {
-					if (element.getText().contains("Edit")) {
-						Utility_Functions.xWaitForElementPresent(driver, element, 3);
-						element.click();
-						report.updateTestLog("Opportunities Installments", "Clicked on edit installments button successfully::",Status.PASS);				
-					} else {
-						report.updateTestLog("Opportunities Installments", "Unable to click on edit installment button", Status.FAIL);
-					}
-				}
-				Utility_Functions.xWaitForElementPresent(driver, installmentAmountEdit, 3);
-				int iInstallmentAmount = iInstallmentAmountOne + 100;
-				Utility_Functions.xSendKeys(driver, installmentAmountEdit, Integer.toString(iInstallmentAmount));
-				Utility_Functions.timeWait(2);
-				Utility_Functions.xWaitForElementPresent(driver, save, 3);
-				Utility_Functions.xClick(driver, save, true);
-				Utility_Functions.timeWait(2);
-				Utility_Functions.xWaitForElementPresent(driver, related, 3);
-				if(related.isDisplayed()) {
-					report.updateTestLog("Opportunities Installments", "Editing the Paid installment amount is successfull::",Status.PASS);
-					isStatus = true;
-					break;	
-				} else {
-					report.updateTestLog("Opportunities Installments", "Editing the Paid installment amount is failed::",Status.FAIL);
-					isStatus = true;
-					break;	
-				}
-			} else {
-				report.updateTestLog("Opportunities Installments", "Opportunity not is eligible for editing the Installments::",Status.WARNING);
-				isStatus = false;
-				break labelA;
-			}
 
-		}
+			}
 		}
 
 	}
@@ -2508,7 +2571,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 					Status.PASS);
 		} else {
 			System.out
-			.println("Save, Save and New and Cancel buttons are not prsent in the New Activity Layout Page  ");
+					.println("Save, Save and New and Cancel buttons are not prsent in the New Activity Layout Page  ");
 			report.updateTestLog("Verify New Opportunity Custom Event Page ",
 					"Verifying New Custom Event Page is having the Save, Save and New and Cancel buttons", Status.FAIL);
 		}
@@ -2569,68 +2632,74 @@ public class OpportunitiesPage extends ReusableLibrary {
 		}
 
 	}
+
 	/**
 	 * Validating the Opportunity record type for Occupancy Brokerage
 	 * 
 	 * @author Ramya
 	 *
 	 */
-	public void verifyOpportunityRecordTypeForOccupancyBrokerage(){
+	public void verifyOpportunityRecordTypeForOccupancyBrokerage() {
 		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
 		Utility_Functions.xClick(driver, menu_Opportunities, true);
-		report.updateTestLog("Verify Opportunity Record Type  ",
-				"Verifying the Opportunities page is displayed", Status.PASS);
+		report.updateTestLog("Verify Opportunity Record Type  ", "Verifying the Opportunities page is displayed",
+				Status.PASS);
 		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
 		Utility_Functions.xClick(driver, newOpportunity, true);
-		report.updateTestLog("Verify Opportunity Record Type  ",
-				"Verifying the new opportunity page is displayed", Status.PASS);
+		report.updateTestLog("Verify Opportunity Record Type  ", "Verifying the new opportunity page is displayed",
+				Status.PASS);
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xSwitchtoFrame(driver, continueButton);
-		//driver.switchTo().frame(1);
+		// driver.switchTo().frame(1);
 		Utility_Functions.timeWait(3);
 
 		if (opportunityRecordType.getText().contains("Occupier Brokerage")) {
-			System.out.println("Occupier Brokerage is present as the default value in the select record type opportunity page");
+			System.out.println(
+					"Occupier Brokerage is present as the default value in the select record type opportunity page");
 			report.updateTestLog("Verify Opportunity Record Type ",
 					"Verifying the Occupier Brokerage is present as the default value", Status.PASS);
 		} else {
-			System.out.println("Occupier Brokerage is not present as the default value in the select record type opportunity page");
+			System.out.println(
+					"Occupier Brokerage is not present as the default value in the select record type opportunity page");
 			report.updateTestLog("Verify Opportunity Record Type  ",
 					"Verifying the Occupier Brokerage is present as the default value", Status.FAIL);
 
-		}	
+		}
 
 	}
+
 	/**
 	 * Validating the Opportunity record type for Agency Broker
 	 * 
 	 * @author Ramya
 	 *
 	 */
-	public void verifyOpportunityRecordTypeForAgencyBroker(){
+	public void verifyOpportunityRecordTypeForAgencyBroker() {
 		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
 		Utility_Functions.xClick(driver, menu_Opportunities, true);
-		report.updateTestLog("Verify Opportunity Record Type  ",
-				"Verifying the Opportunities page is displayed", Status.PASS);
+		report.updateTestLog("Verify Opportunity Record Type  ", "Verifying the Opportunities page is displayed",
+				Status.PASS);
 		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
 		Utility_Functions.xClick(driver, newOpportunity, true);
-		report.updateTestLog("Verify Opportunity Record Type  ",
-				"Verifying the new opportunity page is displayed", Status.PASS);
+		report.updateTestLog("Verify Opportunity Record Type  ", "Verifying the new opportunity page is displayed",
+				Status.PASS);
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xSwitchtoFrame(driver, continueButton);
-		//driver.switchTo().frame(1);
+		// driver.switchTo().frame(1);
 		Utility_Functions.timeWait(3);
 
 		if (opportunityRecordType.getText().contains("Agency Brokerage")) {
-			System.out.println("Agency Broker is present as the default value in the select record type opportunity page");
+			System.out.println(
+					"Agency Broker is present as the default value in the select record type opportunity page");
 			report.updateTestLog("Verify Opportunity Record Type ",
 					"Verifying the Agency Broker is present as the default value", Status.PASS);
 		} else {
-			System.out.println("Agency Broker is not present as the default value in the select record type opportunity page");
+			System.out.println(
+					"Agency Broker is not present as the default value in the select record type opportunity page");
 			report.updateTestLog("Verify Opportunity Record Type  ",
 					"Verifying the Agency Broker is present as the default value", Status.FAIL);
 
-		}	
+		}
 
 	}
 
@@ -2640,30 +2709,32 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 * @author Ramya
 	 *
 	 */
-	public void verifyOpportunityRecordTypeForCapitalMarkets(){
+	public void verifyOpportunityRecordTypeForCapitalMarkets() {
 		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
 		Utility_Functions.xClick(driver, menu_Opportunities, true);
-		report.updateTestLog("Verify Opportunity Record Type  ",
-				"Verifying the Opportunities page is displayed", Status.PASS);
+		report.updateTestLog("Verify Opportunity Record Type  ", "Verifying the Opportunities page is displayed",
+				Status.PASS);
 		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
 		Utility_Functions.xClick(driver, newOpportunity, true);
-		report.updateTestLog("Verify Opportunity Record Type  ",
-				"Verifying the new opportunity page is displayed", Status.PASS);
+		report.updateTestLog("Verify Opportunity Record Type  ", "Verifying the new opportunity page is displayed",
+				Status.PASS);
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xSwitchtoFrame(driver, continueButton);
-		//driver.switchTo().frame(1);
+		// driver.switchTo().frame(1);
 		Utility_Functions.timeWait(3);
 
 		if (opportunityRecordType.getText().contains("Capital Markets – Property Sales")) {
-			System.out.println("Capital Markets – Property Sales is present as the default value in the select record type opportunity page");
+			System.out.println(
+					"Capital Markets – Property Sales is present as the default value in the select record type opportunity page");
 			report.updateTestLog("Verify Opportunity Record Type ",
 					"Verifying the Capital Markets – Property Sales is present as the default value", Status.PASS);
 		} else {
-			System.out.println("Capital Markets – Property Sales is not present as the default value in the select record type opportunity page");
+			System.out.println(
+					"Capital Markets – Property Sales is not present as the default value in the select record type opportunity page");
 			report.updateTestLog("Verify Opportunity Record Type  ",
 					"Verifying the Capital Markets – Property Sales is present as the default value", Status.FAIL);
 
-		}	
+		}
 
 	}
 
@@ -2675,7 +2746,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, addButton, true);
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xSwitchtoFrame(driver, saveButtonSplit);
-		//driver.switchTo().frame(3);
+		// driver.switchTo().frame(3);
 
 		Utility_Functions.timeWait(5);
 		List<WebElement> opportunityList = driver.findElements(By.xpath("//div[contains(@class, 'slds-truncate')]"));
@@ -2754,9 +2825,84 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(3);
 		splitPercent.sendKeys("100");
 		Utility_Functions.xClick(driver, saveOpportunitySplit, true);
-		report.updateTestLog("Verify Opportunity Split in Opportunity Team Members Page", "Opportunity Saved successfully::", Status.PASS);
+		report.updateTestLog("Verify Opportunity Split in Opportunity Team Members Page",
+				"Opportunity Saved successfully::", Status.PASS);
 		Utility_Functions.timeWait(3);
 	}
+	/**
+	 * Verify the Occupier Record Type should default to 'Occupier' opportunity type field 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	
+	public void occupierRecordType() {
+		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 4);
+		Utility_Functions.xClick(driver, menu_Opportunities, true);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
+		Utility_Functions.xClick(driver, newOpportunity, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xSwitchtoFrame(driver, continueButton);
+		Utility_Functions.timeWait(2);
+		//driver.navigate().refresh();
+		if(defaultOpportutnityRecordType.getText().equals("Occupier Brokerage")) {
+			report.updateTestLog("Verify Opportunity Occupier Record Type","Occupier record type is defaulted to Occupier Opportunity type field when selected:::",  Status.PASS);
+		} else {
+			report.updateTestLog("Verify Opportunity Occupier Record Type","Occupier record type is not defaulted to 'Occupier' Opportunity type field when selected:::",  Status.FAIL);
+		}		
+	}
+	
+	/**
+	 * Verify the Annual Revenue field is renamed to Management Annual Revenue
+	 * for Broker Profile
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
 
+	public void managementAnnualRevenue() {
+		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 4);
+		Utility_Functions.xClick(driver, menu_Opportunities, true);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
+		Utility_Functions.xClick(driver, newOpportunity, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xSwitchtoFrame(driver, continueButton);
+		Utility_Functions.xClick(driver, continueButton, true);
+		driver.switchTo().defaultContent();
+		Utility_Functions.xWaitForElementPresent(driver, opportunityName_AS, 4);
+		int value = Utility_Functions.xRandomFunction();
+		Utility_Functions.xSendKeys(driver, opportunityName_AS,
+				dataTable.getData("General_Data", "Account Name") + value);
+		Utility_Functions.xWaitForElementPresent(driver, accountName_AS, 3);
+		Utility_Functions.xSendKeys(driver, accountName_AS, "Test ");
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xClick(driver, driver.findElement(By.xpath("//div[@title='BP Test Account']")), true);
+		Utility_Functions.xWaitForElementPresent(driver, totalSize_AS, 4);
+		Utility_Functions.xSendKeys(driver, totalSize_AS, "5000");
+		Utility_Functions.xWaitForElementPresent(driver, unitofMeasure_AS, 4);
+		Utility_Functions.xClick(driver, unitofMeasure_AS, true);
+		Utility_Functions.xClick(driver, unitofMeasureValue_AS, true);
+		Utility_Functions.xWaitForElementPresent(driver, type_AS, 3);
+		Utility_Functions.xClick(driver, type_AS, true);
+		Utility_Functions.xClick(driver, typeNewBusiness_AS, true);
+		Utility_Functions.xWaitForElementPresent(driver, region_AS, 3);
+		Utility_Functions.xClick(driver, region_AS, true);
+		Utility_Functions.xClick(driver, regionValue_AS, true);
+		Utility_Functions.xWaitForElementPresent(driver, salesStage_AS, 4);
+		Utility_Functions.xClick(driver, salesStage_AS, true);
+		Utility_Functions.xClick(driver, salesStageValue_AS, true);
+		System.out.println(Calendar.getInstance());
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		Date date = new Date();
+		Utility_Functions.xWaitForElementPresent(driver, closeDate_AS, 3);
+		Utility_Functions.xSendKeys(driver, closeDate_AS, dateFormat.format(date).toString());
+		Utility_Functions.xWaitForElementPresent(driver, market_AS, 4);
+		Utility_Functions.xClick(driver, market_AS, true);
+		Utility_Functions.xWaitForElementPresent(driver, save, 3);
+		Utility_Functions.xClick(driver, save, true);
+		report.updateTestLog("Verify Management Annual Revenue", "Opportunity Saved successfully::", Status.PASS);
+	}
 
 }

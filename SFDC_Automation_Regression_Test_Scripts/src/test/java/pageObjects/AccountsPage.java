@@ -172,6 +172,9 @@ public class AccountsPage extends ReusableLibrary {
 	@FindBy(xpath = "//span[contains(@class,'virtualAutocompleteOptionText')][text()='All Accounts']")
 	WebElement allAccounts;
 
+	@FindBy(xpath = "//span[contains(@class,'virtualAutocompleteOptionText')][text()='Recently Viewed']")
+	WebElement recentlyViewedList;
+
 	@FindBy(xpath = ".//*[@id='assignedToBox']")
 	WebElement assignedTo;
 
@@ -243,11 +246,11 @@ public class AccountsPage extends ReusableLibrary {
 
 	@FindBy(xpath="//select[@class='slds-select']/option[@value='=']")
 	WebElement accountOperatorCondition;
-	
+
 	@FindBy(xpath="//span[text()='Investor Services Account']/parent::div/parent::div//div//span[contains(@class,'uiOutputCheckbox')]")
 	WebElement accountServicesCheckbox;
-	
-	
+
+
 	HomePage hp = new HomePage(scriptHelper);
 	static ArrayList<String> accountsPageDetailsList = new ArrayList<String>();
 
@@ -2009,14 +2012,14 @@ public class AccountsPage extends ReusableLibrary {
 		//div[@class='slds-form-element']/label/abbr	
 
 	}
-	
+
 	/**
 	 * Validating the accounts function
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */	
-	
+
 	public void accountsFunction() {
 		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 4);
 		Utility_Functions.xClick(driver, menu_Accounts, true);
@@ -2032,14 +2035,14 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, related_Accounts, 3);
 		Utility_Functions.xClick(driver, related_Accounts, true);
 	}
-	
+
 	/**
 	 * Validating the additional Activity Types in the new Activity List
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */	
-	
+
 	static ArrayList<String> activityTypeListValues = new ArrayList<String>();
 
 	public void additionalActivityTypeList() {
@@ -2060,7 +2063,7 @@ public class AccountsPage extends ReusableLibrary {
 		activityTypeListValues.add("Public - Client Meeting (Investor Services)");
 		System.out.println("Additional Activity Type values are added to the list successfully::::");
 	}
-	
+
 	/**
 	 * Validating the additional Activity Types in the new Activity on an Account
 	 * 
@@ -2120,7 +2123,38 @@ public class AccountsPage extends ReusableLibrary {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
+	/**
+	 * Validating the Account Record Type Field in Record Type of Accounts
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+
+	public void accountRecordTypeField() {
+		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 4);
+		Utility_Functions.xClick(driver, menu_Accounts, true);
+		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
+		Utility_Functions.xClick(driver, recentlyViewed, true);
+		report.updateTestLog("Verify Account Record Type Field","Recently viewed Accounts are Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, allAccounts, 3);
+		Utility_Functions.xClick(driver, recentlyViewedList, true);
+		Utility_Functions.timeWait(3);
+		report.updateTestLog("Verify Account Record Type Field","Recently Viewed List is selecte successfully:::",  Status.PASS);
+		List<WebElement> columnList = driver.findElements(By.xpath("//table[contains(@class,'uiVirtualDataTable')]//div[@class='slds-cell-fixed']//span[@class='slds-truncate']"));
+		int count =0;
+		for(WebElement element: columnList) {
+			String sColumnList = element.getText();
+			System.out.println(sColumnList);
+			if(sColumnList.contains("ACCOUNT RECORD TYPE")) {
+				count++;
+			}
+		}
+		if(count==1) {
+			report.updateTestLog("Verify Account Record Type Field","Account Record Type column is present:::",  Status.PASS);
+		} else {
+			report.updateTestLog("Verify Account Record Type Field","Account Record Type column is not there:::",  Status.FAIL);
+		}
+	}
 }
 

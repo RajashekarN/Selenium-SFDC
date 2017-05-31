@@ -163,7 +163,26 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 		sfAccountsPage.additionalActivityTypes();
 	}
 	
+	/**
+	 * Validating the Investor Services Checkbox
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	
 	public void bc_validateInvestorServices() throws InterruptedException {
 		sfAccountsPage.validateInvestorServicesCheckbox();
 	}
+	
+	/**
+	 * Validating the Account Record Type Field in Record Type of Accounts
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	public void bc_accountRecordType() {
+		sfAccountsPage.accountRecordTypeField();
+	}
+
+
 }
