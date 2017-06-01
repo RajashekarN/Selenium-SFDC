@@ -428,7 +428,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//a[@title='APAC']")
 	WebElement regionValue_AS;
 
-	@FindBy(xpath = "//span[text()='Sales Stage']/parent::label/parent::div//a")
+/*	@FindBy(xpath = "//span[text()='Sales Stage']/parent::label/parent::div//a")
 	WebElement salesStage_AS;
 
 	@FindBy(xpath = "//a[@title='2-Client Engaged']")
@@ -438,17 +438,13 @@ public class OpportunitiesPage extends ReusableLibrary {
 	WebElement closeDate_AS;
 
 	@FindBy(xpath = "//input[@placeholder='Search Accounts']")
-	WebElement accountName_AS;
+	WebElement accountName_AS;*/
 
 	@FindBy(xpath = "//span[text()='Market']/parent::label/parent::div//option[1]")
 	WebElement market_AS;
-	
+
 	@FindBy(xpath = "//select[@id='record-type-select']/option[@selected='selected']")
 	WebElement defaultOpportutnityRecordType;
-
-	//
-	
-	//
 
 	/****
 	 * Ramya
@@ -506,6 +502,125 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//div/a[@class='select'][text()='Occupier Lease']")
 	WebElement assignmentTypeEditPage;
+	
+	/**Release 37*/
+	
+	@FindBy(xpath="//span[text()='Opportunity Currency']")
+	WebElement opportunityCurrency;
+
+	@FindBy(xpath="//a[@aria-label='Reason for Loss']")
+	WebElement reasonForLoss;
+
+	@FindBy(xpath="//div[@class='select-options']//a[@title='Client Action Postponed']/parent::li/parent::ul/li")
+	WebElement reasonForLossValuesList;
+
+	@FindBy(xpath="//a[@aria-label='Accounting Awarded To:']")
+	WebElement accountingAwardedTo;
+
+	@FindBy(xpath="//a[@aria-label='Mgmt Awarded To:']")
+	WebElement mgmtAwardedTo;
+	
+	@FindBy(xpath="//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Term of Contract']/parent::label/parent::div/input")
+	WebElement termOfContract;
+	
+	@FindBy(xpath="//a[@aria-label='Lead Source']")
+	WebElement leadSourceNewOpportunity;
+	
+	@FindBy(xpath="//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Opportunity Name']/parent::label/parent::div/input")
+    WebElement opportunityNameNewOpportunity;
+	
+	@FindBy(xpath="//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Total Size']/parent::label/parent::div/input")
+	WebElement totalSizeNewOpportunity;
+	
+	@FindBy(xpath="//a[@aria-label='Unit of Measure']")
+	WebElement unitOfMeasureNewOpportunity;
+	
+	@FindBy(xpath="//a[@title='Square Feet']")
+	WebElement selectUnitOfMeasureNewOpportunity;
+	
+	@FindBy(xpath="//a[@aria-label='Region']")
+	WebElement regionNewOpportunity;
+	
+	@FindBy(xpath="//a[@title='US National']")
+	WebElement selectRegionNewOpportunity;
+
+	@FindBy(xpath="//select[@class=' select']/option[@value='Dallas/Ft. Worth']")
+	WebElement selectMarket;
+	
+	@FindBy(xpath="//input[@placeholder='Search Accounts']")
+	WebElement searchAccountsNewOpportunity;
+	
+	@FindBy(xpath="//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Sales Stage']")
+	WebElement salesStageNewopportunity;
+	
+	@FindBy(xpath="//a[@class='select'][text()='1-Target']")
+	WebElement selectSalesStageNewOpportunity;
+	
+	@FindBy(xpath="//div[@class='form-element']/a[@class='datePicker-openIcon display']/span[text()='Date Picker']")
+	WebElement closeDateCreateopportunity;
+	
+	@FindBy(xpath="//div[@class='uiDatePickerGrid--default uiDatePickerGrid']/table/thead/tr/th[4]")
+	WebElement selectCloseDateCreateOpportunity;
+	
+	@FindBy(xpath="//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Capital Markets Revenue']/parent::label/parent::div/input")
+	WebElement capitalRevenueFieldNewOpportunity;
+	
+	@FindBy(xpath = "//span[text()='Sales Stage']/parent::label/parent::div//a")
+    WebElement salesStage_AS;
+
+    @FindBy(xpath = "//a[@title='2-Client Engaged']")
+    WebElement salesStageValue_AS;
+
+    @FindBy(xpath = "//span[text()='Close Date']/parent::label/parent::div//input")
+    WebElement closeDate_AS;
+
+    @FindBy(xpath = "//input[@placeholder='Search Accounts']")
+    WebElement accountName_AS;
+    
+    @FindBy(xpath="//button[@class='slds-button slds-button--neutral uiButton--default uiButton--brand uiButton forceActionButton']/span[text()='Save']")
+    WebElement saveNewOpportunity_AS;
+	
+	@FindBy(xpath="//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Est. EBITDA ($) - Won']/parent::label/parent::div/input")
+	WebElement newOpportunityEBITDAWon;
+	
+	@FindBy(xpath="//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Est. EBITDA ($) - Lost']/parent::label/parent::div/input")
+	WebElement newOpportunityEBITDALost;
+	
+	@FindBy(xpath="//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Est. EBITDA ($)']/parent::label/parent::div/input")
+	WebElement newOpportunityEBITDA;
+	
+	@FindBy(xpath="//div[@class='slds-form-element']/label[contains(text(),'Specialty Group')]")
+	WebElement specialityGroup;
+	
+	@FindBy(xpath="//select[@class='slds-select']/option[@value='Occupier Buyer']")
+	WebElement selectAssignmentType;
+	
+	@FindBy(xpath="//span[text()='RFP Due Date']/parent::label/parent::div//input")
+	WebElement rfpDueDate;
+	
+	@FindBy(xpath="//span[text()='Pitch Date']/parent::label/parent::div//input")
+	WebElement pitchDueDate;
+	
+	@FindBy(xpath="//span[text()='Average Annual Leasing Commission']/parent::label/parent::div//input")
+	WebElement annualAverageLeasingCommission;
+	
+	@FindBy(xpath="//span[contains(text(),'Preferred Property Type')]/span/abbr[text()='*']")
+	WebElement preferedPropertyTypeRequiredField;
+	
+	@FindBy(xpath="//li[contains(text(),'Preferred Property Type: You must enter a value')]")
+	WebElement errorMessageForPreferedPropertyType;
+	
+	@FindBy(xpath="//a[@aria-label='Leasing']")
+	WebElement leasing;
+	
+	@FindBy(xpath="//a[@aria-label='Leasing'][text()='No']")
+	WebElement selectleasing;
+	
+	@FindBy(xpath="//div[@class='select-options']/ul/li[3]/a[@title='No']")
+	WebElement noOption;
+	
+	
+	
 
 	HomePage hp = new HomePage(scriptHelper);
 	SearchTextSOQL searchOpportunity = new SearchTextSOQL(scriptHelper);
@@ -1390,12 +1505,12 @@ public class OpportunitiesPage extends ReusableLibrary {
 						report.updateTestLog("Modified Opportunity Name",
 								"Opportunity Name modified according to the AssignmentType selected:::"
 										+ updatedAssignmentType,
-								Status.PASS);
+										Status.PASS);
 					} else {
 						report.updateTestLog("Modified Opportunity Name",
 								"Opportunity Name didn't get modified according to the AssignmentType selected:::"
 										+ updatedAssignmentType,
-								Status.FAIL);
+										Status.FAIL);
 					}
 					if (updatedTotalSize.equals("2900.0")) {
 						report.updateTestLog("Modified Opportunity Name",
@@ -1405,18 +1520,18 @@ public class OpportunitiesPage extends ReusableLibrary {
 						report.updateTestLog("Modified Opportunity Name",
 								"Opportunity Name didn't get modified according to the Total Size selected:::"
 										+ updatedTotalSize,
-								Status.FAIL);
+										Status.FAIL);
 					}
 					if (updatedUnitOfMeasure.equals("Hectares")) {
 						report.updateTestLog("Modified Opportunity Name",
 								"Opportunity Name modified according to the Unit of Measure selected:::"
 										+ updatedUnitOfMeasure,
-								Status.PASS);
+										Status.PASS);
 					} else {
 						report.updateTestLog("Modified Opportunity Name",
 								"Opportunity Name didn't get modified according to the Unit of Measure selected:::"
 										+ updatedUnitOfMeasure,
-								Status.FAIL);
+										Status.FAIL);
 					}
 					isStatus = true;
 				}
@@ -1920,7 +2035,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		report.updateTestLog("Opportunities Installments",
 				"Opportunity installment amount one and two after changing the quantity to two from one:::"
 						+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo,
-				Status.PASS);
+						Status.PASS);
 
 		Utility_Functions.xWaitForElementPresent(driver, editButtonInstallment, 5);
 		Utility_Functions.xClick(driver, editButtonInstallment, true);
@@ -1939,7 +2054,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			report.updateTestLog("Opportunities Installments",
 					"Opportunity installment amounts recalculated successfully after editing the Estimated Gross Fee:::"
 							+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo,
-					Status.PASS);
+							Status.PASS);
 		} else {
 			report.updateTestLog("Opportunities Installments", "Opportunity installment amounts recalculation failed:::"
 					+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo, Status.FAIL);
@@ -1986,7 +2101,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			report.updateTestLog("Opportunities Installments",
 					"Opportunity installment amounts recalculated successfully after editing the Estimated Gross Fee:::"
 							+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo,
-					Status.PASS);
+							Status.PASS);
 		} else {
 			report.updateTestLog("Opportunities Installments", "Opportunity installment amounts recalculation failed:::"
 					+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo, Status.WARNING);
@@ -2033,7 +2148,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			report.updateTestLog("Opportunities Installments",
 					"Opportunity installment amounts recalculated successfully after editing the Estimated Gross Fee:::"
 							+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo,
-					Status.PASS);
+							Status.PASS);
 		} else {
 			report.updateTestLog("Opportunities Installments", "Opportunity installment amounts recalculation failed:::"
 					+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo, Status.WARNING);
@@ -2237,7 +2352,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		report.updateTestLog("Opportunities Installments",
 				"Opportunity installment amount one and two after changing the quantity to two from one:::"
 						+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo + ":::" + sInstallmentAmountThree,
-				Status.PASS);
+						Status.PASS);
 		String sEstimatedGrossAmount = dataTable.getData("General_Data", "InstallmentAmount").replace(",", "");
 		String sInstallments = dataTable.getData("General_Data", "InstallmentQuantity");
 		double dInstallment = ((double) Integer.parseInt(sEstimatedGrossAmount)) / Integer.parseInt(sInstallments);
@@ -2261,7 +2376,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		if (count == 3) {
 			report.updateTestLog("Opportunities Installments",
 					"First, Second and Third Installment amounts calculated successfully:::" + bFirstInstallmentAmount
-							+ "::::" + bFirstInstallmentAmount + "::::" + sThirdInstallment,
+					+ "::::" + bFirstInstallmentAmount + "::::" + sThirdInstallment,
 					Status.PASS);
 		} else {
 			installmentList1.add(bFirstInstallmentAmount.toString());
@@ -2282,12 +2397,12 @@ public class OpportunitiesPage extends ReusableLibrary {
 						"First, Second and Third Installment amounts calculated successfully:::"
 								+ bFirstInstallmentAmount + "::::" + bFirstInstallmentAmount + "::::"
 								+ sThirdInstallment,
-						Status.PASS);
+								Status.PASS);
 			} else {
 				report.updateTestLog("Opportunities Installments",
 						"First, Second and Third Installment calculation failed:::" + bFirstInstallmentAmount + "::::"
 								+ bFirstInstallmentAmount + "::::" + sThirdInstallment,
-						Status.WARNING);
+								Status.WARNING);
 			}
 		}
 	}
@@ -2343,105 +2458,105 @@ public class OpportunitiesPage extends ReusableLibrary {
 		int iInstallmentAmountOne = 0;
 		while (!isStatus) {
 			labelA: {
-				opportunityEligibility();
-				driver.navigate().refresh();
-				Utility_Functions.xWaitForElementPresent(driver, related, 5);
-				Utility_Functions.xClick(driver, related, true);
-				Utility_Functions.xWaitForElementPresent(driver, installmentAmountOne, 3);
-				String sInstallmentAmountOne = installmentAmountOne.getText();
-				sInstallmentAmountOne = sInstallmentAmountOne.split(" ")[1];
-				sInstallmentAmountOne = sInstallmentAmountOne.replaceAll(",", "");
-				double dInstallmentAmountOne = Double.parseDouble(sInstallmentAmountOne);
-				iInstallmentAmountOne = Double.valueOf(dInstallmentAmountOne).intValue();
-				if (iInstallmentAmountOne > 0) {
-					report.updateTestLog("Opportunities Installments",
-							"Opportunity is eligible for editing the Installments::", Status.PASS);
-					Utility_Functions.xWaitForElementPresent(driver, arrowDown, 3);
-					Utility_Functions.xClick(driver, arrowDown, true);
-					Utility_Functions.timeWait(1);
-					List<WebElement> actionList = driver.findElements(By.xpath("//div[@class='actionMenu']//a"));
-					for (WebElement element : actionList) {
-						if (element.getText().contains("Edit")) {
-							element.click();
-							report.updateTestLog("Opportunities Installments",
-									"Clicked on edit installments button successfully::", Status.PASS);
-						} else {
-							report.updateTestLog("Opportunities Installments",
-									"Unable to click on edit installment button", Status.FAIL);
-						}
-					}
-					Utility_Functions.xWaitForElementPresent(driver, installmentOption, 3);
-					Utility_Functions.xClick(driver, installmentOption, true);
-					if (installmentOption.getText().contains("Paid")) {
+			opportunityEligibility();
+			driver.navigate().refresh();
+			Utility_Functions.xWaitForElementPresent(driver, related, 5);
+			Utility_Functions.xClick(driver, related, true);
+			Utility_Functions.xWaitForElementPresent(driver, installmentAmountOne, 3);
+			String sInstallmentAmountOne = installmentAmountOne.getText();
+			sInstallmentAmountOne = sInstallmentAmountOne.split(" ")[1];
+			sInstallmentAmountOne = sInstallmentAmountOne.replaceAll(",", "");
+			double dInstallmentAmountOne = Double.parseDouble(sInstallmentAmountOne);
+			iInstallmentAmountOne = Double.valueOf(dInstallmentAmountOne).intValue();
+			if (iInstallmentAmountOne > 0) {
+				report.updateTestLog("Opportunities Installments",
+						"Opportunity is eligible for editing the Installments::", Status.PASS);
+				Utility_Functions.xWaitForElementPresent(driver, arrowDown, 3);
+				Utility_Functions.xClick(driver, arrowDown, true);
+				Utility_Functions.timeWait(1);
+				List<WebElement> actionList = driver.findElements(By.xpath("//div[@class='actionMenu']//a"));
+				for (WebElement element : actionList) {
+					if (element.getText().contains("Edit")) {
+						element.click();
 						report.updateTestLog("Opportunities Installments",
-								"Opportunity not is eligible as the installment amount is already paid::",
-								Status.WARNING);
-						isStatus = false;
-						Utility_Functions.xWaitForElementPresent(driver, cancel, 3);
-						Utility_Functions.xClick(driver, cancel, true);
-						Utility_Functions.timeWait(2);
-						break labelA;
-					}
-					DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-					Date date = new Date();
-					Utility_Functions.timeWait(1);
-					Utility_Functions.xClick(driver, installmentStatus, true);
-					Utility_Functions.xSendKeys(driver, datePaid, dateFormat.format(date).toString());
-					Utility_Functions.xWaitForElementPresent(driver, accountRoleOption, 3);
-					Utility_Functions.xClick(driver, accountRoleOption, true);
-					Utility_Functions.timeWait(1);
-					Utility_Functions.xClick(driver, accountRole, true);
-					Utility_Functions.timeWait(2);
-					Utility_Functions.xWaitForElementPresent(driver, save, 4);
-					Utility_Functions.xClick(driver, save, true);
-					report.updateTestLog("Opportunities Installments",
-							"Installment Amount has been paid successfully::", Status.PASS);
-					Utility_Functions.xWaitForElementPresent(driver, related, 3);
-					driver.navigate().refresh();
-					Utility_Functions.xWaitForElementPresent(driver, related, 3);
-					Utility_Functions.xClick(driver, related, true);
-					Utility_Functions.xWaitForElementPresent(driver, arrowDown, 3);
-					Utility_Functions.xClick(driver, arrowDown, true);
-					Utility_Functions.timeWait(1);
-					List<WebElement> actionListEdit = driver.findElements(By.xpath("//div[@class='actionMenu']//a"));
-					for (WebElement element : actionListEdit) {
-						if (element.getText().contains("Edit")) {
-							Utility_Functions.xWaitForElementPresent(driver, element, 3);
-							element.click();
-							report.updateTestLog("Opportunities Installments",
-									"Clicked on edit installments button successfully::", Status.PASS);
-						} else {
-							report.updateTestLog("Opportunities Installments",
-									"Unable to click on edit installment button", Status.FAIL);
-						}
-					}
-					Utility_Functions.xWaitForElementPresent(driver, installmentAmountEdit, 3);
-					int iInstallmentAmount = iInstallmentAmountOne + 100;
-					Utility_Functions.xSendKeys(driver, installmentAmountEdit, Integer.toString(iInstallmentAmount));
-					Utility_Functions.timeWait(2);
-					Utility_Functions.xWaitForElementPresent(driver, save, 3);
-					Utility_Functions.xClick(driver, save, true);
-					Utility_Functions.timeWait(2);
-					Utility_Functions.xWaitForElementPresent(driver, related, 3);
-					if (related.isDisplayed()) {
-						report.updateTestLog("Opportunities Installments",
-								"Editing the Paid installment amount is successfull::", Status.PASS);
-						isStatus = true;
-						break;
+								"Clicked on edit installments button successfully::", Status.PASS);
 					} else {
 						report.updateTestLog("Opportunities Installments",
-								"Editing the Paid installment amount is failed::", Status.FAIL);
-						isStatus = true;
-						break;
+								"Unable to click on edit installment button", Status.FAIL);
 					}
-				} else {
+				}
+				Utility_Functions.xWaitForElementPresent(driver, installmentOption, 3);
+				Utility_Functions.xClick(driver, installmentOption, true);
+				if (installmentOption.getText().contains("Paid")) {
 					report.updateTestLog("Opportunities Installments",
-							"Opportunity not is eligible for editing the Installments::", Status.WARNING);
+							"Opportunity not is eligible as the installment amount is already paid::",
+							Status.WARNING);
 					isStatus = false;
+					Utility_Functions.xWaitForElementPresent(driver, cancel, 3);
+					Utility_Functions.xClick(driver, cancel, true);
+					Utility_Functions.timeWait(2);
 					break labelA;
 				}
-
+				DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+				Date date = new Date();
+				Utility_Functions.timeWait(1);
+				Utility_Functions.xClick(driver, installmentStatus, true);
+				Utility_Functions.xSendKeys(driver, datePaid, dateFormat.format(date).toString());
+				Utility_Functions.xWaitForElementPresent(driver, accountRoleOption, 3);
+				Utility_Functions.xClick(driver, accountRoleOption, true);
+				Utility_Functions.timeWait(1);
+				Utility_Functions.xClick(driver, accountRole, true);
+				Utility_Functions.timeWait(2);
+				Utility_Functions.xWaitForElementPresent(driver, save, 4);
+				Utility_Functions.xClick(driver, save, true);
+				report.updateTestLog("Opportunities Installments",
+						"Installment Amount has been paid successfully::", Status.PASS);
+				Utility_Functions.xWaitForElementPresent(driver, related, 3);
+				driver.navigate().refresh();
+				Utility_Functions.xWaitForElementPresent(driver, related, 3);
+				Utility_Functions.xClick(driver, related, true);
+				Utility_Functions.xWaitForElementPresent(driver, arrowDown, 3);
+				Utility_Functions.xClick(driver, arrowDown, true);
+				Utility_Functions.timeWait(1);
+				List<WebElement> actionListEdit = driver.findElements(By.xpath("//div[@class='actionMenu']//a"));
+				for (WebElement element : actionListEdit) {
+					if (element.getText().contains("Edit")) {
+						Utility_Functions.xWaitForElementPresent(driver, element, 3);
+						element.click();
+						report.updateTestLog("Opportunities Installments",
+								"Clicked on edit installments button successfully::", Status.PASS);
+					} else {
+						report.updateTestLog("Opportunities Installments",
+								"Unable to click on edit installment button", Status.FAIL);
+					}
+				}
+				Utility_Functions.xWaitForElementPresent(driver, installmentAmountEdit, 3);
+				int iInstallmentAmount = iInstallmentAmountOne + 100;
+				Utility_Functions.xSendKeys(driver, installmentAmountEdit, Integer.toString(iInstallmentAmount));
+				Utility_Functions.timeWait(2);
+				Utility_Functions.xWaitForElementPresent(driver, save, 3);
+				Utility_Functions.xClick(driver, save, true);
+				Utility_Functions.timeWait(2);
+				Utility_Functions.xWaitForElementPresent(driver, related, 3);
+				if (related.isDisplayed()) {
+					report.updateTestLog("Opportunities Installments",
+							"Editing the Paid installment amount is successfull::", Status.PASS);
+					isStatus = true;
+					break;
+				} else {
+					report.updateTestLog("Opportunities Installments",
+							"Editing the Paid installment amount is failed::", Status.FAIL);
+					isStatus = true;
+					break;
+				}
+			} else {
+				report.updateTestLog("Opportunities Installments",
+						"Opportunity not is eligible for editing the Installments::", Status.WARNING);
+				isStatus = false;
+				break labelA;
 			}
+
+		}
 		}
 
 	}
@@ -2571,7 +2686,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 					Status.PASS);
 		} else {
 			System.out
-					.println("Save, Save and New and Cancel buttons are not prsent in the New Activity Layout Page  ");
+			.println("Save, Save and New and Cancel buttons are not prsent in the New Activity Layout Page  ");
 			report.updateTestLog("Verify New Opportunity Custom Event Page ",
 					"Verifying New Custom Event Page is having the Save, Save and New and Cancel buttons", Status.FAIL);
 		}
@@ -2835,7 +2950,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 * @author Vishnuvardhan
 	 *
 	 */	
-	
+
 	public void occupierRecordType() {
 		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 4);
 		Utility_Functions.xClick(driver, menu_Opportunities, true);
@@ -2852,7 +2967,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			report.updateTestLog("Verify Opportunity Occupier Record Type","Occupier record type is not defaulted to 'Occupier' Opportunity type field when selected:::",  Status.FAIL);
 		}		
 	}
-	
+
 	/**
 	 * Verify the Annual Revenue field is renamed to Management Annual Revenue
 	 * for Broker Profile
@@ -2905,4 +3020,1135 @@ public class OpportunitiesPage extends ReusableLibrary {
 		report.updateTestLog("Verify Management Annual Revenue", "Opportunity Saved successfully::", Status.PASS);
 	}
 
+	/**
+	 * Validating the Quick create Opportunity page from the Opportunity tab with existing Account 
+	 * 
+	 * @author Ramya
+	 *
+	 */
+
+	public void verifyQuickCreateOpportunityPage(){
+		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
+		Utility_Functions.xClick(driver, menu_Opportunities, true);
+		report.updateTestLog("Verify Quick Create Opportunity Page  ",
+				"Verifying the Opportunities page is displayed", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
+		Utility_Functions.xClick(driver, newOpportunity, true);
+		report.updateTestLog("Verify Quick Create Opportunity Page   ",
+				"Verifying the new opportunity page is displayed", Status.PASS);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xSwitchtoFrame(driver, continueButton);
+		Utility_Functions.timeWait(3);
+		List<WebElement> newOpportunityPageRequiredFields = driver.findElements(By.xpath("//label[contains(@class,'label')]//span[contains(text(),'*')]/parent::label/span"));
+		int countRequiredFiles =0;
+		try {
+			for (WebElement element : newOpportunityPageRequiredFields  ) {
+				if ((element.getText().contains("Opportunity Name"))) {
+					System.out.println("Opportunity Name required field is present in the Quick Create Opportunity Page");
+					report.updateTestLog("Verify Quick Create Opportunity Page ",
+							"Quick Create Opportunity Page is having the " + element.getText()
+							+ " Status field::",
+							Status.PASS);
+					countRequiredFiles++;
+
+				} else if ((element.getText().contains("Account Name"))) {
+					System.out.println("Account Name required field is present in the Quick Create Opportunity Page");
+					report.updateTestLog("Verify Quick Create Opportunity Page ",
+							"Quick Create Opportunity Page is having the " + element.getText()
+							+ " Status field::",
+							Status.PASS);
+					countRequiredFiles++;
+
+				} else if ((element.getText().contains("Success Probability"))) {
+					System.out.println(" Success Probability required field is present in the Quick Create Opportunity Page");
+					report.updateTestLog("Verify Quick Create Opportunity Page ",
+							"Quick Create Opportunity Page is having the " + element.getText()
+							+ " Status field::",
+							Status.PASS);
+					countRequiredFiles++;
+
+
+				} else if ((element.getText().contains("Close Date"))) {
+					System.out.println(" Close Date required field is present in the Quick Create Opportunity Page");
+					report.updateTestLog("Verify Quick Create Opportunity Page ",
+							"Quick Create Opportunity Page is having the " + element.getText()
+							+ " Status field::",
+							Status.PASS);
+					countRequiredFiles++;
+
+				}
+				else if ((element.getText().contains("Sales Stage"))) {
+					System.out.println(" Sales Stage required field is present in the Quick Create Opportunity Page");
+					report.updateTestLog("Verify Quick Create Opportunity Page ",
+							"Quick Create Opportunity Page is having the " + element.getText()
+							+ " Status field::",
+							Status.PASS);
+					countRequiredFiles++;
+
+				}
+
+			} 
+			System.out.println(countRequiredFiles);
+			if(countRequiredFiles!=5) {
+				System.out.println("Quick Create Opportunity Page does not contain the required fields ");
+				report.updateTestLog("Verify Quick Create Opportunity Page ",
+						"Quick Create Opportunity Page is not having all the required fields",
+						Status.FAIL);
+			}
+
+
+		}catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+
+		}
+		if ((!opportunityCurrency.getText().equals(" ")))
+		{
+			System.out.println(
+					"Opportunity Currency required field is present in the Create Opportunity Page ");
+			report.updateTestLog("Verify Quick Create Opportunity Page ",
+					"Verifying New Custom Event Page is having the Opportunity Currency required field ",
+					Status.PASS);
+		} else {
+			System.out.println("Opportunity Currency required field is not present in the Create Opportunity Page ");
+			report.updateTestLog("Verify Quick Create Opportunity Page ",
+					"Verifying New Custom Event Page is not having the Opportunity Currency required field ",
+					Status.FAIL);
+		}
+
+	}
+	/**
+	 * Validating the Quick create Opportunity page from the Opportunity tab with existing Account for Asset Services
+	 * 
+	 * @author Ramya
+	 *
+	 */
+
+	public void verifyQuickCreateOpportunityPageAssetServices(){
+		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
+		Utility_Functions.xClick(driver, menu_Opportunities, true);
+		report.updateTestLog("Verify Quick Create Opportunity Page Asset Services ",
+				"Verifying the Opportunities page is displayed", Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
+		Utility_Functions.xClick(driver, newOpportunity, true);
+		report.updateTestLog("Verify Quick Create Opportunity Page Asset Services   ",
+				"Verifying the new opportunity page is displayed", Status.PASS);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xSwitchtoFrame(driver, continueButton);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, continueButton, true);
+		driver.switchTo().defaultContent();
+		Utility_Functions.timeWait(2);		
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, reasonForLoss, 3);
+		Utility_Functions.xClick(driver, reasonForLoss, true);
+		Utility_Functions.timeWait(1);
+		List<WebElement> reasonForLossValuesList = driver.findElements(By.xpath("//div[@class='select-options']//a[@title='Client Action Postponed']/parent::li/parent::ul/li"));
+		for(WebElement element: reasonForLossValuesList) {
+			element.getText();
+			System.out.println(element.getText());
+			report.updateTestLog("Verify Quick Create Opportunity Page Asset Services   ",
+					"Verifying the new opportunity page Reason For Loss Pick list values are present", Status.PASS);
+		}
+
+
+	}
+	/**
+	 * Validating the Quick create Opportunity page from the Opportunity tab with existing Account for Asset Services
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void verifyQuickCreateOpportunityPageAssetServicesManager(){
+		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
+		Utility_Functions.xClick(driver, menu_Opportunities, true);
+		report.updateTestLog("Verify Quick Create Opportunity Page Asset Services ",
+				"Verifying the Opportunities page is displayed", Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
+		Utility_Functions.xClick(driver, newOpportunity, true);
+		report.updateTestLog("Verify Quick Create Opportunity Page Asset Services  ",
+				"Verifying the new opportunity page is displayed", Status.PASS);
+		Utility_Functions.timeWait(3);
+
+		Utility_Functions.timeWait(2);		
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, reasonForLoss, 3);
+		Utility_Functions.xClick(driver, reasonForLoss, true);
+		Utility_Functions.timeWait(1);
+		List<WebElement> reasonForLossValuesList = driver.findElements(By.xpath("//div[@class='select-options']//a[@title='Client Action Postponed']/parent::li/parent::ul/li"));
+		for(WebElement element: reasonForLossValuesList) {
+			element.getText();
+			System.out.println(element.getText());
+			report.updateTestLog("Verify Quick Create Opportunity Page Asset Services   ",
+					"Verifying the new opportunity page Reason For Loss Pick list values are present", Status.PASS);
+		}
+
+
+	}
+
+	/**
+	 * Validating the Quick create Opportunity page from the Opportunity tab with existing Account for AwardedTo
+	 * 
+	 * @author Ramya
+	 *
+	 */
+
+	static ArrayList<String> managementAwardToList = new ArrayList<String>();
+	public void managementAwardToList() {
+		managementAwardToList.add("--None--");
+		managementAwardToList.add("BNP");
+		managementAwardToList.add("CBRE");
+		managementAwardToList.add("Colliers");
+		managementAwardToList.add("Cushman");
+		managementAwardToList.add("DTZ");
+		managementAwardToList.add("JLL");
+		managementAwardToList.add("Knight Frank");
+		managementAwardToList.add("Savills");
+		managementAwardToList.add("Self Perform");
+		managementAwardToList.add("State Street");
+		managementAwardToList.add("Transwestern");
+		managementAwardToList.add("Other");
+
+	}
+
+	static ArrayList<String> awardToArrayList = new ArrayList<String>();
+
+	public void verifyQuickCreateOpportunityPageAwardedPickList(){
+		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
+		Utility_Functions.xClick(driver, menu_Opportunities, true);
+		report.updateTestLog("Verify Quick Create Opportunity Page Awarded To Pick List ",
+				"Verifying the Opportunities page is displayed", Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
+		Utility_Functions.xClick(driver, newOpportunity, true);
+		report.updateTestLog("Verify Quick Create Opportunity Page Awarded To Pick List   ",
+				"Verifying the new opportunity page is displayed", Status.PASS);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xSwitchtoFrame(driver, continueButton);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, continueButton, true);
+		driver.switchTo().defaultContent();
+		Utility_Functions.timeWait(2);		
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, accountingAwardedTo, 3);
+		Utility_Functions.xClick(driver, accountingAwardedTo, true);
+		report.updateTestLog("Verify Quick Create Opportunity Page Awarded To Pick List   ",
+				"Verifying the new opportunity page Accounting Awarded To Pick List is displayed", Status.PASS);
+		Utility_Functions.timeWait(1);
+		int count =0;
+		List<WebElement> awardedToList = driver.findElements(By.xpath("//div[@class='select-options']//a[@title='BNP']/parent::li/parent::ul/li"));
+		for(WebElement element: awardedToList ) {
+			element.getText();
+			if(count<14) {
+				awardToArrayList.add(element.getText());
+			}
+			System.out.println(element.getText());
+		}
+		List<WebElement> managementAwardListFields = driver.findElements(By.xpath("//div[@class='select-options']//a[@title='BNP']/parent::li/parent::ul/li"));
+		int count1 = 0, i1 = 0;
+		String labelArray[] = new String[awardedToList.size()];
+		try {
+			managementAwardToList();
+			for (WebElement element : managementAwardListFields) {
+				labelArray[i1] = element.getText();
+				if (labelArray[i1].contains(managementAwardToList.get(i1))) {
+					report.updateTestLog("Verify Quick Create Opportunity Page Awarded To Pick List ",
+							"Management Awarded to Pick list Field is having the " + labelArray[i1] + " field ",
+							Status.PASS);
+					count1++;
+				}
+				i1++;
+			}
+			System.out.println(count1);
+			if (count1!= 13) {
+				report.updateTestLog("Verify Quick Create Opportunity Page Awarded To Pick List ",
+						"All the pick list values are not prsent in the Management Awarded to Pick list Field", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify Quick Create Opportunity Page Awarded To Pick List ",
+						"All the pick list values are prsent in the Management Awarded to Pick list Field", Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	/**
+	 * Validating the Quick create Opportunity page from the Opportunity  for state street pick list value
+	 * 
+	 * @author Ramya
+	 *
+	 */
+
+
+	public void verifyQuickCreateOpportunityPageStateStreetPickList(){
+		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
+		Utility_Functions.xClick(driver, menu_Opportunities, true);
+		report.updateTestLog("Verify Quick Create Opportunity Page State Street Pick List ",
+				"Verifying the Opportunities page is displayed", Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
+		Utility_Functions.xClick(driver, newOpportunity, true);
+		report.updateTestLog("Verify Quick Create Opportunity Page State Street Pick List  ",
+				"Verifying the new opportunity page is displayed", Status.PASS);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xSwitchtoFrame(driver, continueButton);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, continueButton, true);
+		driver.switchTo().defaultContent();
+		Utility_Functions.timeWait(2);		
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, accountingAwardedTo, 3);
+		Utility_Functions.xClick(driver, accountingAwardedTo, true);
+		report.updateTestLog("Verify Quick Create Opportunity Page State Street Pick List  ",
+				"Verifying the new opportunity page Accounting Awarded To Pick List is displayed", Status.PASS);
+		Utility_Functions.timeWait(1);
+		String sStateStreet = "State Street";
+		List<WebElement> awardedToList = driver.findElements(By.xpath("//div[@class='select-options']//a[@title='BNP']/parent::li/parent::ul/li"));
+		int count =0;
+
+		for(WebElement element: awardedToList ) {
+			element.getText();
+			System.out.println(element.getText());
+			if(element.getText().equals(sStateStreet)) {
+				System.out.println("State street pick list value is present in the AwardedTo pick list values");
+				report.updateTestLog("Verify Quick Create Opportunity Page State Street Pick List  ",
+						"Verifying the new opportunity page Accounting Awarded To State Street Pick List is displayed", Status.PASS);
+				count++;
+			}
+		}
+		if(count==1) {
+			System.out.println("State street pick list value is present in the AwardedTo pick list values");
+			report.updateTestLog("Verify Quick Create Opportunity Page State Street Pick List  ",
+					"Verifying the new opportunity page Awarded To State Street Pick List Pick List value is displayed", Status.PASS);
+		} else {
+			System.out.println("State street pick list value is not present");
+			report.updateTestLog("Verify Quick Create Opportunity Page State Street Pick List  ",
+					"Verifying the new opportunity page Awarded To State Street Pick List Pick List value is displayed", Status.FAIL);
+
+		}
+		Utility_Functions.xWaitForElementPresent(driver, mgmtAwardedTo, 3);
+		Utility_Functions.xClick(driver, mgmtAwardedTo, true);
+		report.updateTestLog("Verify Quick Create Opportunity Page State Street Pick List  ",
+				"Verifying the new opportunity page Accounting Awarded To Pick List is displayed", Status.PASS);
+		Utility_Functions.timeWait(1);
+		String stateStreet = "State Street";
+		List<WebElement> mgmtAwardedToList = driver.findElements(By.xpath("//div[@class='select-options']//a[@title='BNP']/parent::li/parent::ul/li"));
+		int count1 =0;
+
+		for(WebElement element1: mgmtAwardedToList ) {
+			element1.getText();
+			System.out.println(element1.getText());
+			if(element1.getText().equals(stateStreet)) {
+				System.out.println("State street pick list value is present in the Management AwardedTo pick list");
+				report.updateTestLog("Verify Quick Create Opportunity Page State Street Pick List  ",
+						"Verifying the new opportunity page Management Awarded To State Street Pick List is displayed", Status.PASS);
+				count1++;
+			}
+		}
+		if(count1==1) {
+			System.out.println("State street pick list value is present in the Management Awarded pick list");
+			report.updateTestLog("Verify Quick Create Opportunity Page State Street Pick List  ",
+					"Verifying the new opportunity page Management Awarded To State Street Pick List Pick List value is displayed", Status.PASS);
+		} else {
+			System.out.println("State street pick list value is not present in the Management pick list");
+			report.updateTestLog("Verify Quick Create Opportunity Page State Street Pick List  ",
+					"Verifying the new opportunity page Management Awarded To State Street Pick List Pick List value is displayed", Status.FAIL);
+
+		}
+
+	}
+	/**
+	 * Validating the Quick create Opportunity page from the Opportunity  for state street pick list value
+	 * 
+	 * @author Ramya
+	 *
+	 */
+
+
+	public void verifyNewOpportunityPageTermOfContract(){
+		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
+		Utility_Functions.xClick(driver, menu_Opportunities, true);
+		report.updateTestLog("Verify Quick Create Opportunity Page Term Of Contract ",
+				"Verifying the Opportunities page is displayed", Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
+		Utility_Functions.xClick(driver, newOpportunity, true);
+		report.updateTestLog("Verify Quick Create Opportunity Page Term Of Contract   ",
+				"Verifying the new opportunity page is displayed", Status.PASS);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xSwitchtoFrame(driver, continueButton);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, continueButton, true);
+		Utility_Functions.timeWait(2);	
+		driver.switchTo().defaultContent();
+		Utility_Functions.timeWait(2);		
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, termOfContract, 3);
+		if ((!termOfContract.getText().equals(" "))){
+			System.out.println("The Term of Contract Field is present");
+			report.updateTestLog("Verify Quick Create Opportunity Page Term Of Contract","The Term of Contract Field is present ",Status.PASS);
+		}else
+		{
+			System.out.println("The Term of Contract Field is not present");
+			report.updateTestLog("Verify Quick Create Opportunity Page Term Of Contract","The Term of Contract Field is not present ",Status.FAIL);
+		}
+	}
+	/**
+	 * Validating the Quick create Opportunity page from the Opportunity  for Lead Source
+	 * 
+	 * @author Ramya
+	 *
+	 */
+
+
+	public void verifyNewOpportunityPageLeadSource(){
+		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
+		Utility_Functions.xClick(driver, menu_Opportunities, true);
+		report.updateTestLog("Verify Quick Create Opportunity Page Asset Services ",
+				"Verifying the Opportunities page is displayed", Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
+		Utility_Functions.xClick(driver, newOpportunity, true);
+		report.updateTestLog("Verify Quick Create Opportunity Page Asset Services   ",
+				"Verifying the new opportunity page is displayed", Status.PASS);
+		Utility_Functions.timeWait(3);	
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, leadSourceNewOpportunity, 3);
+		Utility_Functions.xClick(driver, leadSourceNewOpportunity, true);
+		Utility_Functions.timeWait(1);
+		List<WebElement> leadSourceValuesList = driver.findElements(By.xpath("//div[@class='select-options']//a[@title='Capital Markets']/parent::li/parent::ul/li"));
+		for(WebElement element: leadSourceValuesList) {
+			element.getText();
+			System.out.println(element.getText());
+		}
+
+
+
+	}
+
+	/**
+	 * Validating the Quick create Opportunity page from the Opportunity  for the New Opportunity Fields
+	 * 
+	 * @author Ramya
+	 *
+	 */
+
+
+	public void verifyOpportunityLeasingAnnualRevenueField(){
+		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
+		Utility_Functions.xClick(driver, menu_Opportunities, true);
+		report.updateTestLog("Verify Opportunity Leasing AnnualRevenue Field  ",
+				"Verifying the Opportunities page is displayed", Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
+		Utility_Functions.xClick(driver, newOpportunity, true);
+		report.updateTestLog("Verify Opportunity Leasing AnnualRevenue Field   ",
+				"Verifying the new opportunity page is displayed", Status.PASS);
+		Utility_Functions.timeWait(3);	
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, opportunityNameNewOpportunity, 3);
+		Utility_Functions.xClick(driver, opportunityNameNewOpportunity, true);
+		Utility_Functions.xWaitForElementPresent(driver, opportunityNameNewOpportunity, 3);
+		Utility_Functions.xSendKeys(driver, opportunityNameNewOpportunity, "test");
+		report.updateTestLog("Verify Opportunity Leasing AnnualRevenue Field  ",
+				"Verifying the Opportunities Name is entered", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, totalSizeNewOpportunity, 3);
+		Utility_Functions.xClick(driver, totalSizeNewOpportunity, true);
+
+		Utility_Functions.xWaitForElementPresent(driver, totalSizeNewOpportunity, 3);
+		Utility_Functions.xSendKeys(driver, totalSizeNewOpportunity, "100");
+		report.updateTestLog("Verify Opportunity Leasing AnnualRevenue Field  ",
+				"Verifying the total size in New Opportunity Page is entered", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, unitOfMeasureNewOpportunity, 3);
+		Utility_Functions.xClick(driver, unitOfMeasureNewOpportunity, true);
+		Utility_Functions.xWaitForElementPresent(driver, selectUnitOfMeasureNewOpportunity, 3);
+		Utility_Functions.xClick(driver, selectUnitOfMeasureNewOpportunity, true);
+		report.updateTestLog("Verify Opportunity Leasing AnnualRevenue Field  ",
+				"Verifying the unit of Measure in New Opportunity Page is selected", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, regionNewOpportunity, 3);
+		Utility_Functions.xClick(driver, regionNewOpportunity, true);
+		Utility_Functions.xWaitForElementPresent(driver, selectRegionNewOpportunity, 3);
+		Utility_Functions.xClick(driver, selectRegionNewOpportunity, true);
+		report.updateTestLog("Verify Opportunity Leasing AnnualRevenue Field  ",
+				"Verifying the Region field in New Opportunity Page is selected", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, selectMarket, 3);
+		Utility_Functions.xClick(driver, selectMarket, true);
+		report.updateTestLog("Verify Opportunity Leasing AnnualRevenue Field  ",
+				"Verifying the market field in New Opportunity Page is selected", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, searchAccountsNewOpportunity, 3);
+		Utility_Functions.xSendKeys(driver, searchAccountsNewOpportunity, "Test");
+		report.updateTestLog("Verify Opportunity Leasing AnnualRevenue Field  ",
+				"Verifying the Account Name in New Opportunity Page is entered", Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xClick(driver, driver.findElement(By.xpath("//div[contains(@title,'Test')]")), true);
+		Utility_Functions.timeWait(3);	
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xWaitForElementPresent(driver, salesStage_AS, 4);
+		Utility_Functions.xClick(driver, salesStage_AS, true);
+		Utility_Functions.xClick(driver, salesStageValue_AS, true);
+		report.updateTestLog("Verify Opportunity Leasing AnnualRevenue Field  ",
+				"Verifying the Sales Stage in New Opportunity Page is entered", Status.PASS);
+		System.out.println(Calendar.getInstance());
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		Date date = new Date();
+		Utility_Functions.xWaitForElementPresent(driver, closeDate_AS, 3);
+		Utility_Functions.xSendKeys(driver, closeDate_AS, dateFormat.format(date).toString());
+		report.updateTestLog("Verify Opportunity Leasing AnnualRevenue Field  ",
+				"Verifying the close date in New Opportunity Page is entered", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, saveNewOpportunity_AS, 3);
+		Utility_Functions.xClick(driver, saveNewOpportunity_AS, true);
+		report.updateTestLog("Verify Opportunity Leasing AnnualRevenue Field ", "Opportunity Saved successfully::", Status.PASS);
+
+
+	}
+
+
+	/**
+	 * Validating the Quick create Opportunity page from the Opportunity  for the Capital Markets Revenue Field
+	 * 
+	 * @author Ramya
+	 *
+	 */
+
+
+	public void verifyCapitalMarketsRevenueField(){
+		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
+		Utility_Functions.xClick(driver, menu_Opportunities, true);
+		report.updateTestLog("Verify Capital Markets Revenue Field Opportunity Page  ",
+				"Verifying the Opportunities page is displayed", Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
+		Utility_Functions.xClick(driver, newOpportunity, true);
+		report.updateTestLog("Verify Capital Markets Revenue Field Opportunity Page   ",
+				"Verifying the new opportunity page is displayed", Status.PASS);
+		Utility_Functions.timeWait(3);	
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, capitalRevenueFieldNewOpportunity, 3);
+		Utility_Functions.xClick(driver, capitalRevenueFieldNewOpportunity, true);
+		if ((!capitalRevenueFieldNewOpportunity.getText().equals(" "))){
+			System.out.println("The Capital Revenue Field is present");
+			report.updateTestLog("Verify Capital Markets Revenue Field Opportunity Page ","Verifying the Capital Markets Revenue Field is present ",Status.PASS);
+		}else
+		{
+			System.out.println("The Capital Revenue Field is not present");
+			report.updateTestLog("Verify Capital Markets Revenue Field Opportunity Page ","Verifying the Capital Markets Revenue Field is present ",Status.FAIL);
+		}
+
+
+
+	}
+	/**
+	 * Validating the EBIDTAFields for the new opportunity page
+	 * 
+	 * @author Ramya
+	 *
+	 */
+
+	public void verifyNewOpportunityEBIDTAFields(){
+		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
+		Utility_Functions.xClick(driver, menu_Opportunities, true);
+		report.updateTestLog("Verify New Opportunity EBIDTA Fields ",
+				"Verifying the Opportunities page is displayed", Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
+		Utility_Functions.xClick(driver, newOpportunity, true);
+		report.updateTestLog("Verify New Opportunity EBIDTA Fields  ",
+				"Verifying the new opportunity page is displayed", Status.PASS);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xSwitchtoFrame(driver, continueButton);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, continueButton, true);
+		driver.switchTo().defaultContent();
+		Utility_Functions.timeWait(2);		
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+
+		Utility_Functions.xWaitForElementPresent(driver, newOpportunityEBITDAWon, 3);
+		if ((!newOpportunityEBITDAWon.getText().equals(" "))){
+			System.out.println("The EBITD Won Field is present");
+			report.updateTestLog("Verify New Opportunity EBIDTA Fields","Verifying the EBITD Won Field is present ",Status.PASS);
+		}else
+		{
+			System.out.println("The EBITD Won Field is not present");
+			report.updateTestLog("Verify New Opportunity EBIDTA Fields","Verifying the EBITD Won Field is present ",Status.FAIL);
+		}
+
+		Utility_Functions.xWaitForElementPresent(driver, newOpportunityEBITDALost, 3);
+		if ((!newOpportunityEBITDALost.getText().equals(" "))){
+			System.out.println("The EBITD Lost Field is present");
+			report.updateTestLog("Verify New Opportunity EBIDTA Fields","Verifying the EBITD Lost Field is present ",Status.PASS);
+		}else
+		{
+			System.out.println("The EBITD Lost Field is not present");
+			report.updateTestLog("Verify New Opportunity EBIDTA Fields","Verifying the EBITD Lost Field is present ",Status.FAIL);
+		}
+		Utility_Functions.timeWait(2);		
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+
+		Utility_Functions.xWaitForElementPresent(driver, newOpportunityEBITDA, 3);
+		Utility_Functions.xClick(driver, newOpportunityEBITDA, true);
+		Utility_Functions.xWaitForElementPresent(driver, newOpportunityEBITDA, 3);
+		Utility_Functions.xSendKeys(driver, newOpportunityEBITDA, "100");
+
+		report.updateTestLog("Verify New Opportunity EBIDTA Fields","The EBITD Field is present and value is entered ",Status.PASS);
+	}
+	/**
+	 * Validating Speciality Group Attribute in the new opportunity page
+	 * 
+	 * @author Ramya
+	 *
+	 */
+
+	public void verifySpecialityGroupAttribute(){
+		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
+		Utility_Functions.xClick(driver, menu_Opportunities, true);
+		report.updateTestLog("Verify New Opportunity Speciality Group Field ",
+				"Verifying the Opportunities page is displayed", Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
+		Utility_Functions.xClick(driver, newOpportunity, true);
+		report.updateTestLog("Verify New Opportunity Speciality Group Field ",
+				"Verifying the new opportunity page is displayed", Status.PASS);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xSwitchtoFrame(driver, continueButton);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, continueButton, true);
+		driver.switchTo().defaultContent();
+		Utility_Functions.timeWait(2);		
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xSwitchtoFrame(driver, viewAllFieldsButton);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver,viewAllFieldsButton, true);
+
+		Utility_Functions.xWaitForElementPresent(driver, specialityGroup, 3);
+		if ((!specialityGroup.getText().equals(" "))){
+			System.out.println("The Speciality Group Field is present");
+			report.updateTestLog("Verify New Opportunity Speciality Group Field","Verifying the Speciality Group Field is present ",Status.PASS);
+		}else
+		{
+			System.out.println("The Speciality Group Field is not present");
+			report.updateTestLog("Verify New Opportunity Speciality Group Field","Verifying the Speciality Group Field is present ",Status.FAIL);
+		}
+
+		Utility_Functions.xWaitForElementPresent(driver, specialityGroup, 3);
+		Utility_Functions.xClick(driver, specialityGroup, true);
+		Utility_Functions.timeWait(1);
+		List<WebElement> specialityGroupValuesList = driver.findElements(By.xpath("//label[contains(text(),'Specialty Group')]/parent::div//div[@class='slds-form-element__control']//option"));
+		for(WebElement element: specialityGroupValuesList) {
+			element.getText();
+			System.out.println(element.getText());
+		}
+		Utility_Functions.xSendKeys(driver, accountName, "Test");
+		accountName.sendKeys(Keys.ARROW_DOWN);
+		Utility_Functions.timeWait(2);
+		accountName.sendKeys(Keys.ENTER);
+		Utility_Functions.xSelectDropdownByIndex(assignmentTypeOpp, 1);
+		System.out.println(Calendar.getInstance());
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		Date date = new Date();
+		Utility_Functions.xSelectDropdownByIndex(leadSource, 1);
+		Utility_Functions.xSendKeys(driver, closeDateOpp, dateFormat.format(date).toString());
+		Utility_Functions.xSendKeys(driver, closeDateOpp, Keys.TAB);
+		Utility_Functions.xWaitForElementPresent(driver, totalSizeOpp, 3);
+		Utility_Functions.xSendKeys(driver, totalSizeOpp, "100");
+		Utility_Functions.xSelectDropdownByIndex(preferredPropertyTypeOpp, 1);
+		Utility_Functions.xWaitForElementPresent(driver, saveNewOpportunity, 3);
+		Utility_Functions.xClick(driver, saveNewOpportunity, true);
+		report.updateTestLog("Verify New Opportunity Speciality Group Field","Verifying all the required values are entered in the new Opportunity Page are entered ",Status.PASS);
+
+
+	}
+
+	/**
+	 * Validating RFP Due Date and Pitch Due Date Fields in the new opportunity page
+	 * 
+	 * @author Ramya
+	 *
+	 */
+
+	public void verifyRFPAndPitchDueDateNewopportunityPage(){
+		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
+		Utility_Functions.xClick(driver, menu_Opportunities, true);
+		report.updateTestLog("Verify New Opportunity RFP and Pitch Due Date Fields  ",
+				"Verifying the Opportunities page is displayed", Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
+		Utility_Functions.xClick(driver, newOpportunity, true);
+		report.updateTestLog("Verify New Opportunity RFP and Pitch Due Date Fields    ",
+				"Verifying the new opportunity page is displayed", Status.PASS);
+		Utility_Functions.timeWait(3);	
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, opportunityNameNewOpportunity, 3);
+		Utility_Functions.xClick(driver, opportunityNameNewOpportunity, true);
+		Utility_Functions.xWaitForElementPresent(driver, opportunityNameNewOpportunity, 3);
+		Utility_Functions.xSendKeys(driver, opportunityNameNewOpportunity, "test");
+		report.updateTestLog("Verify New Opportunity RFP and Pitch Due Date Fields   ",
+				"Verifying the Opportunities Name is entered", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, totalSizeNewOpportunity, 3);
+		Utility_Functions.xClick(driver, totalSizeNewOpportunity, true);
+		Utility_Functions.xWaitForElementPresent(driver, totalSizeNewOpportunity, 3);
+		Utility_Functions.xSendKeys(driver, totalSizeNewOpportunity, "100");
+		report.updateTestLog("Verify New Opportunity RFP and Pitch Due Date Fields   ",
+				"Verifying the total size in new opportunity page is entered", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, unitOfMeasureNewOpportunity, 3);
+		Utility_Functions.xClick(driver, unitOfMeasureNewOpportunity, true);
+		Utility_Functions.xWaitForElementPresent(driver, selectUnitOfMeasureNewOpportunity, 3);
+		Utility_Functions.xClick(driver, selectUnitOfMeasureNewOpportunity, true);
+		report.updateTestLog("Verify New Opportunity RFP and Pitch Due Date Fields   ",
+				"Verifying the unit of measure is selected in the New Opportunity Page", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, regionNewOpportunity, 3);
+		Utility_Functions.xClick(driver, regionNewOpportunity, true);
+		Utility_Functions.xWaitForElementPresent(driver, selectRegionNewOpportunity, 3);
+		Utility_Functions.xClick(driver, selectRegionNewOpportunity, true);
+		report.updateTestLog("Verify New Opportunity RFP and Pitch Due Date Fields   ",
+				"Verifying the region is selected in the new opportunity Page", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, selectMarket, 3);
+		Utility_Functions.xClick(driver, selectMarket, true);
+		report.updateTestLog("Verify New Opportunity RFP and Pitch Due Date Fields   ",
+				"Verifying the market field is selected in the new opportunity page", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, searchAccountsNewOpportunity, 3);
+		Utility_Functions.xSendKeys(driver, searchAccountsNewOpportunity, "Test");
+		report.updateTestLog("Verify New Opportunity RFP and Pitch Due Date Fields   ",
+				"Verifying the Account field is selected with the appropriate user in the new opportunity page", Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xClick(driver, driver.findElement(By.xpath("//div[contains(@title,'Test')]")), true);
+		Utility_Functions.timeWait(3);	
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xWaitForElementPresent(driver, salesStage_AS, 4);
+		Utility_Functions.xClick(driver, salesStage_AS, true);
+		Utility_Functions.xClick(driver, salesStageValue_AS, true);
+		System.out.println(Calendar.getInstance());
+		report.updateTestLog("Verify New Opportunity RFP and Pitch Due Date Fields   ",
+				"Verifying the sales stage field is selected in the new opportunity page", Status.PASS);
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		Date date = new Date();
+		Utility_Functions.xWaitForElementPresent(driver, closeDate_AS, 3);
+		Utility_Functions.xSendKeys(driver, closeDate_AS, dateFormat.format(date).toString());
+		System.out.println(Calendar.getInstance());
+		report.updateTestLog("Verify New Opportunity RFP and Pitch Due Date Fields   ",
+				"Verifying the closed date field is selected in the new opportunity page", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, rfpDueDate, 3);
+		Utility_Functions.xSendKeys(driver, rfpDueDate, dateFormat.format(date).toString());
+		report.updateTestLog("Verify New Opportunity RFP and Pitch Due Date Fields   ",
+				"Verifying the rfp due date field is selected in the new opportunity page", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, saveNewOpportunity_AS, 3);
+		System.out.println(Calendar.getInstance());
+		Utility_Functions.xWaitForElementPresent(driver, pitchDueDate, 3);
+		Utility_Functions.xSendKeys(driver, pitchDueDate, dateFormat.format(date).toString());
+		report.updateTestLog("Verify New Opportunity RFP and Pitch Due Date Fields   ",
+				"Verifying the pitch due date field is selected in the new opportunity page", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, saveNewOpportunity_AS, 3);
+		Utility_Functions.xClick(driver, saveNewOpportunity_AS, true);
+		report.updateTestLog("Verify New Opportunity RFP and Pitch Due Date Fields ","Verifying all the required values are entered in the new Opportunity Page are entered along with the RFP Due Date and Pitch Due Date ",Status.PASS);
+	}
+	
+	/**
+	 * Validating the new Opportunity page for the Annual Leasing Commission Field
+	 * 
+	 * @author Ramya
+	 *
+	 */
+
+
+	public void verifyOpportunityAverageAnnualLeasingCommissionField(){
+		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
+		Utility_Functions.xClick(driver, menu_Opportunities, true);
+		report.updateTestLog("Verify Opportunity Annual Average Leasing Commission Field  ",
+				"Verifying the Opportunities page is displayed", Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
+		Utility_Functions.xClick(driver, newOpportunity, true);
+		report.updateTestLog("Verify Opportunity Annual Average Leasing Commission Field   ",
+				"Verifying the new opportunity page is displayed", Status.PASS);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xSwitchtoFrame(driver, continueButton);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, continueButton, true);
+		driver.switchTo().defaultContent();		
+		Utility_Functions.timeWait(3);	
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, opportunityNameNewOpportunity, 3);
+		Utility_Functions.xClick(driver, opportunityNameNewOpportunity, true);
+		Utility_Functions.xWaitForElementPresent(driver, opportunityNameNewOpportunity, 3);
+		Utility_Functions.xSendKeys(driver, opportunityNameNewOpportunity, "test");
+		report.updateTestLog("Verify Opportunity Annual Average Leasing Commission Field   ",
+				"Verifying the opportunity name is entered", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, totalSizeNewOpportunity, 3);
+		Utility_Functions.xClick(driver, totalSizeNewOpportunity, true);
+		Utility_Functions.xWaitForElementPresent(driver, totalSizeNewOpportunity, 3);
+		Utility_Functions.xSendKeys(driver, totalSizeNewOpportunity, "100");
+		report.updateTestLog("Verify Opportunity Annual Average Leasing Commission Field   ",
+				"Verifying the total size value is entered", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, unitOfMeasureNewOpportunity, 3);
+		Utility_Functions.xClick(driver, unitOfMeasureNewOpportunity, true);
+		Utility_Functions.xWaitForElementPresent(driver, selectUnitOfMeasureNewOpportunity, 3);
+		Utility_Functions.xClick(driver, selectUnitOfMeasureNewOpportunity, true);
+		report.updateTestLog("Verify Opportunity Annual Average Leasing Commission Field   ",
+				"Verifying the unit of measure value is selected", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, regionNewOpportunity, 3);
+		Utility_Functions.xClick(driver, regionNewOpportunity, true);
+		Utility_Functions.xWaitForElementPresent(driver, selectRegionNewOpportunity, 3);
+		Utility_Functions.xClick(driver, selectRegionNewOpportunity, true);
+		report.updateTestLog("Verify Opportunity Annual Average Leasing Commission Field   ",
+				"Verifying the region is selected", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, selectMarket, 3);
+		Utility_Functions.xClick(driver, selectMarket, true);
+		report.updateTestLog("Verify Opportunity Annual Average Leasing Commission Field   ",
+				"Verifying the market field is selected", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, searchAccountsNewOpportunity, 3);
+		Utility_Functions.xSendKeys(driver, searchAccountsNewOpportunity, "Test");
+		report.updateTestLog("Verify Opportunity Annual Average Leasing Commission Field   ",
+				"Verifying the Account  name is entered", Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xClick(driver, driver.findElement(By.xpath("//div[contains(@title,'Test')]")), true);
+		Utility_Functions.timeWait(3);	
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xWaitForElementPresent(driver, salesStage_AS, 4);
+		Utility_Functions.xClick(driver, salesStage_AS, true);
+		Utility_Functions.xClick(driver, salesStageValue_AS, true);
+		report.updateTestLog("Verify Opportunity Annual Average Leasing Commission Field   ",
+				"Verifying the Sales stage value is entered", Status.PASS);
+		System.out.println(Calendar.getInstance());
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		Date date = new Date();
+		Utility_Functions.xWaitForElementPresent(driver, closeDate_AS, 3);
+		Utility_Functions.xSendKeys(driver, closeDate_AS, dateFormat.format(date).toString());
+		report.updateTestLog("Verify Opportunity Annual Average Leasing Commission Field   ",
+				"Verifying the closed date value is entered", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, annualAverageLeasingCommission, 3);
+		Utility_Functions.xSendKeys(driver, annualAverageLeasingCommission, "10");
+		report.updateTestLog("Verify Opportunity Annual Average Leasing Commission Field   ",
+				"Verifying the Annual Average Leasing Commission value is entered", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, saveNewOpportunity_AS, 3);
+		Utility_Functions.xClick(driver, saveNewOpportunity_AS, true);
+		report.updateTestLog("Verify Opportunity Annual Average Leasing Commission Field ", "Opportunity Saved successfully::", Status.PASS);
+
+
+	}
+	/**
+	 * Validating the new Opportunity page for the Annual Leasing Commission Field for the AMER Manager or Broker
+	 * 
+	 * @author Ramya
+	 *
+	 */
+
+
+	public void verifyOpportunityAverageAnnualLeasingCommissionFieldForAMERManager(){
+		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
+		Utility_Functions.xClick(driver, menu_Opportunities, true);
+		report.updateTestLog("Verify Opportunity Annual Average Leasing Commission Field  ",
+				"Verifying the Opportunities page is displayed", Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
+		Utility_Functions.xClick(driver, newOpportunity, true);
+		report.updateTestLog("Verify Opportunity Annual Average Leasing Commission Field   ",
+				"Verifying the new opportunity page is displayed", Status.PASS);	
+		Utility_Functions.timeWait(3);	
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, opportunityNameNewOpportunity, 3);
+		Utility_Functions.xClick(driver, opportunityNameNewOpportunity, true);
+		Utility_Functions.xWaitForElementPresent(driver, opportunityNameNewOpportunity, 3);
+		Utility_Functions.xSendKeys(driver, opportunityNameNewOpportunity, "test");
+		report.updateTestLog("Verify Opportunity Annual Average Leasing Commission Field   ",
+				"Verifying the opportunity name is entered", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, totalSizeNewOpportunity, 3);
+		Utility_Functions.xClick(driver, totalSizeNewOpportunity, true);
+		Utility_Functions.xWaitForElementPresent(driver, totalSizeNewOpportunity, 3);
+		Utility_Functions.xSendKeys(driver, totalSizeNewOpportunity, "100");
+		report.updateTestLog("Verify Opportunity Annual Average Leasing Commission Field   ",
+				"Verifying the total size value is entered", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, unitOfMeasureNewOpportunity, 3);
+		Utility_Functions.xClick(driver, unitOfMeasureNewOpportunity, true);
+		Utility_Functions.xWaitForElementPresent(driver, selectUnitOfMeasureNewOpportunity, 3);
+		Utility_Functions.xClick(driver, selectUnitOfMeasureNewOpportunity, true);
+		report.updateTestLog("Verify Opportunity Annual Average Leasing Commission Field   ",
+				"Verifying the unit of measure value is selected", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, regionNewOpportunity, 3);
+		Utility_Functions.xClick(driver, regionNewOpportunity, true);
+		Utility_Functions.xWaitForElementPresent(driver, selectRegionNewOpportunity, 3);
+		Utility_Functions.xClick(driver, selectRegionNewOpportunity, true);
+		report.updateTestLog("Verify Opportunity Annual Average Leasing Commission Field   ",
+				"Verifying the region value is selected", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, selectMarket, 3);
+		Utility_Functions.xClick(driver, selectMarket, true);
+		report.updateTestLog("Verify Opportunity Annual Average Leasing Commission Field   ",
+				"Verifying the market value field is selected", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, searchAccountsNewOpportunity, 3);
+		Utility_Functions.xSendKeys(driver, searchAccountsNewOpportunity, "Test");
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xClick(driver, driver.findElement(By.xpath("//div[contains(@title,'Test')]")), true);
+		Utility_Functions.timeWait(3);	
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xWaitForElementPresent(driver, salesStage_AS, 4);
+		Utility_Functions.xClick(driver, salesStage_AS, true);
+		Utility_Functions.xClick(driver, salesStageValue_AS, true);
+		System.out.println(Calendar.getInstance());
+		report.updateTestLog("Verify Opportunity Annual Average Leasing Commission Field   ",
+				"Verifying the sales stage value is entered", Status.PASS);
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		Date date = new Date();
+		Utility_Functions.xWaitForElementPresent(driver, closeDate_AS, 3);
+		Utility_Functions.xSendKeys(driver, closeDate_AS, dateFormat.format(date).toString());
+		report.updateTestLog("Verify Opportunity Annual Average Leasing Commission Field   ",
+				"Verifying the closed date value is entered", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, annualAverageLeasingCommission, 3);
+		Utility_Functions.xSendKeys(driver, annualAverageLeasingCommission, "10");
+		report.updateTestLog("Verify Opportunity Annual Average Leasing Commission Field   ",
+				"Verifying the Annual Average Leasing Commission value is entered", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, saveNewOpportunity_AS, 3);
+		Utility_Functions.xClick(driver, saveNewOpportunity_AS, true);
+		report.updateTestLog("Verify Opportunity Annual Average Leasing Commission Field ", "Opportunity Saved successfully::", Status.PASS);
+
+
+	}
+	/**
+	 * Validating Prefered Property Type Mandatory Field in the new opportunity page
+	 * 
+	 * @author Ramya
+	 *
+	 */
+
+	public void verifyPreferedPropertyTypeMandatoryField(){
+		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
+		Utility_Functions.xClick(driver, menu_Opportunities, true);
+		report.updateTestLog("Verify New Opportunity Speciality Group Field ",
+				"Verifying the Opportunities page is displayed", Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
+		Utility_Functions.xClick(driver, newOpportunity, true);
+		report.updateTestLog("Verify New Opportunity Speciality Group Field ",
+				"Verifying the new opportunity page is displayed", Status.PASS);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xSwitchtoFrame(driver, continueButton);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, continueButton, true);
+		driver.switchTo().defaultContent();
+		Utility_Functions.timeWait(2);		
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xSwitchtoFrame(driver, viewAllFieldsButton);
+		Utility_Functions.timeWait(3);
+
+
+		Utility_Functions.xWaitForElementPresent(driver, preferedPropertyTypeRequiredField, 3);
+		if ((!preferedPropertyTypeRequiredField.getText().equals(" "))){
+			System.out.println("The prefered Property Type Required Field is present");
+			report.updateTestLog("Verify New Opportunity Page prefered Property Type Required Field","Verifying the prefered Property Type Required Field is present ",Status.PASS);
+		}else
+		{
+			System.out.println("The prefered Property Type Required Field is not present");
+			report.updateTestLog("Verify New Opportunity Page prefered Property Type Required Field","Verifying the prefered Property Type Required Field is present ",Status.FAIL);
+		}
+
+
+		Utility_Functions.xSendKeys(driver, accountName, "Test");
+		accountName.sendKeys(Keys.ARROW_DOWN);
+		Utility_Functions.timeWait(2);
+		accountName.sendKeys(Keys.ENTER);
+		Utility_Functions.xSelectDropdownByIndex(assignmentTypeOpp, 1);
+		System.out.println(Calendar.getInstance());
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		Date date = new Date();
+		Utility_Functions.xSelectDropdownByIndex(leadSource, 1);
+		Utility_Functions.xSendKeys(driver, closeDateOpp, dateFormat.format(date).toString());
+		Utility_Functions.xSendKeys(driver, closeDateOpp, Keys.TAB);
+		Utility_Functions.xWaitForElementPresent(driver, totalSizeOpp, 3);
+		Utility_Functions.xSendKeys(driver, totalSizeOpp, "100");
+		Utility_Functions.xWaitForElementPresent(driver, saveNewOpportunity, 3);
+		Utility_Functions.xClick(driver, saveNewOpportunity, true);
+		if ((!errorMessageForPreferedPropertyType.getText().equals(" "))){
+			System.out.println("The error message is displayed for the prefered property type");
+			report.updateTestLog("Verify New Opportunity Page prefered Property Type Required Field","Verifying the prefered Property Type Required Field is present ",Status.PASS);
+		}else
+		{
+			System.out.println("The The error message is not displayed for the prefered property type");
+			report.updateTestLog("Verify New Opportunity Page prefered Property Type Required Field","Verifying the prefered Property Type Required Field is  present ",Status.FAIL);
+		}
+
+		Utility_Functions.xSelectDropdownByIndex(preferredPropertyTypeOpp, 1);
+		Utility_Functions.xWaitForElementPresent(driver, saveNewOpportunity, 3);
+		Utility_Functions.xClick(driver, saveNewOpportunity, true);
+		report.updateTestLog("Verify New Opportunity Page prefered Property Type Required Field","Verifying the prefered property type required field is present and selected with a value ",Status.PASS);
+
+
+	}
+	/**
+	 * Validating the Management Annual Revenue  Field in the new opportunity page
+	 * 
+	 * @author Ramya
+	 *
+	 */
+
+	public void verifyManagementAnnualRevenueField(){
+		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
+		Utility_Functions.xClick(driver, menu_Opportunities, true);
+		report.updateTestLog("Verify Opportunity Management Annual Average Leasing Commission Field  ",
+				"Verifying the Opportunities page is displayed", Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
+		Utility_Functions.xClick(driver, newOpportunity, true);
+		report.updateTestLog("Verify Opportunity Management Annual Average Leasing Commission Field   ",
+				"Verifying the new opportunity page is displayed", Status.PASS);	
+		Utility_Functions.timeWait(3);	
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, opportunityNameNewOpportunity, 3);
+		Utility_Functions.xClick(driver, opportunityNameNewOpportunity, true);
+		Utility_Functions.xWaitForElementPresent(driver, opportunityNameNewOpportunity, 3);
+		Utility_Functions.xSendKeys(driver, opportunityNameNewOpportunity, "test");
+		report.updateTestLog("Verify Opportunity Management Annual Average Leasing Commission Field   ",
+				"Verifying the opportunity name is entered", Status.PASS);	
+		Utility_Functions.xWaitForElementPresent(driver, totalSizeNewOpportunity, 3);
+		Utility_Functions.xClick(driver, totalSizeNewOpportunity, true);
+		Utility_Functions.xWaitForElementPresent(driver, totalSizeNewOpportunity, 3);
+		Utility_Functions.xSendKeys(driver, totalSizeNewOpportunity, "100");
+		report.updateTestLog("Verify Opportunity Management Annual Average Leasing Commission Field   ",
+				"Verifying the total size field value is displayed", Status.PASS);	
+		Utility_Functions.xWaitForElementPresent(driver, unitOfMeasureNewOpportunity, 3);
+		Utility_Functions.xClick(driver, unitOfMeasureNewOpportunity, true);
+		Utility_Functions.xWaitForElementPresent(driver, selectUnitOfMeasureNewOpportunity, 3);
+		Utility_Functions.xClick(driver, selectUnitOfMeasureNewOpportunity, true);
+		report.updateTestLog("Verify Opportunity Management Annual Average Leasing Commission Field   ",
+				"Verifying the unit of measure field is selected", Status.PASS);	
+		Utility_Functions.xWaitForElementPresent(driver, regionNewOpportunity, 3);
+		Utility_Functions.xClick(driver, regionNewOpportunity, true);
+		Utility_Functions.xWaitForElementPresent(driver, selectRegionNewOpportunity, 3);
+		Utility_Functions.xClick(driver, selectRegionNewOpportunity, true);
+		report.updateTestLog("Verify Opportunity Management Annual Average Leasing Commission Field   ",
+				"Verifying the region field is selected", Status.PASS);	
+		Utility_Functions.xWaitForElementPresent(driver, selectMarket, 3);
+		Utility_Functions.xClick(driver, selectMarket, true);
+		report.updateTestLog("Verify Opportunity Management Annual Average Leasing Commission Field   ",
+				"Verifying the market field is selected", Status.PASS);	
+		Utility_Functions.xWaitForElementPresent(driver, searchAccountsNewOpportunity, 3);
+		Utility_Functions.xSendKeys(driver, searchAccountsNewOpportunity, "Test");
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xClick(driver, driver.findElement(By.xpath("//div[contains(@title,'Test')]")), true);
+		report.updateTestLog("Verify Opportunity Management Annual Average Leasing Commission Field   ",
+				"Verifying the Account name is selected", Status.PASS);	
+		Utility_Functions.timeWait(3);	
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+
+		Utility_Functions.xWaitForElementPresent(driver, salesStage_AS, 4);
+		Utility_Functions.xClick(driver, salesStage_AS, true);
+		Utility_Functions.xClick(driver, salesStageValue_AS, true);
+		System.out.println(Calendar.getInstance());
+		report.updateTestLog("Verify Opportunity Management Annual Average Leasing Commission Field   ",
+				"Verifying the Sales Stage value is selected", Status.PASS);	
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		Date date = new Date();
+		Utility_Functions.xWaitForElementPresent(driver, closeDate_AS, 3);
+		Utility_Functions.xSendKeys(driver, closeDate_AS, dateFormat.format(date).toString());
+		report.updateTestLog("Verify Opportunity Management Annual Average Leasing Commission Field   ",
+				"Verifying the closed date value is selected", Status.PASS);	
+		Utility_Functions.xWaitForElementPresent(driver, leasing, 4);
+		Utility_Functions.xClick(driver, leasing, true);
+		Utility_Functions.xWaitForElementPresent(driver, noOption, 3);
+		Utility_Functions.xClick(driver, noOption, true);
+
+
+		/*       Utility_Functions.xWaitForElementPresent(driver, selectLeasingNewOpportunity, 4);
+       Utility_Functions.xClick(driver, selectLeasingNewOpportunity, true);
+
+		 */
+	}
+
+	/**
+	 * Validating the Quick create Opportunity page from the Opportunity  for state street pick list value
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void verifyNewOpportunityPageTermOfContractForAPACManager(){
+		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
+		Utility_Functions.xClick(driver, menu_Opportunities, true);
+		report.updateTestLog("Verify Quick Create Opportunity Page Term Of Contract ",
+				"Verifying the Opportunities page is displayed", Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
+		Utility_Functions.xClick(driver, newOpportunity, true);
+		report.updateTestLog("Verify Quick Create Opportunity Page Term Of Contract   ",
+				"Verifying the new opportunity page is displayed", Status.PASS);
+		Utility_Functions.timeWait(3);	
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, termOfContract, 3);
+		if ((!termOfContract.getText().equals(" "))){
+			System.out.println("The Term of Contract Field is present");
+			report.updateTestLog("Verify Quick Create Opportunity Page Term Of Contract","The Term of Contract Field is present ",Status.PASS);
+		}else
+		{
+			System.out.println("The Term of Contract Field is not present");
+			report.updateTestLog("Verify Quick Create Opportunity Page Term Of Contract","The Term of Contract Field is not present ",Status.FAIL);
+		}
+	}
 }

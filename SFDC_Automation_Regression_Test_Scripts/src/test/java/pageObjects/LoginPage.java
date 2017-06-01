@@ -362,11 +362,15 @@ public class LoginPage extends ReusableLibrary {
 				Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTEVASEMEABrokerPassword"));
 				
 			} else if((dataTable.getData("General_Data", "TC_ID").contains("ASAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
-				Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTEASAMERManagerPassowrd"));
+				Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTEASAMERManagerPassword"));
 			} else if((dataTable.getData("General_Data", "TC_ID").contains("ASAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
 				Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTEASAPACBrokerPassword"));
 			} else if((dataTable.getData("General_Data", "TC_ID").contains("ASEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
 				Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTEASEMEAManagerPassword"));
+			} else if((dataTable.getData("General_Data", "TC_ID").contains("ASEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
+				Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTEASEMEABrokerPassword"));
+			} else if((dataTable.getData("General_Data", "TC_ID").contains("ASAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
+				Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTEASAMERBrokerPassword"));
 			} else {
 				Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTEPassword"));
 			}

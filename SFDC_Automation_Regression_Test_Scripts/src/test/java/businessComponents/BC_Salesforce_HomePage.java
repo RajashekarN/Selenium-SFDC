@@ -79,5 +79,16 @@ public class BC_Salesforce_HomePage extends ReusableLibrary {
 	public void bc_logout() throws InterruptedException {
 		sfLogin.logout();
 	}
+	
+	/**
+	 * Validating the tabs on the Home Page for the APAC broker Capital Markets
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+	
+	public void bc_validateHomePageTabsForAPACCapitalMarkets() throws InterruptedException {
+		sfHomePage.validateHomePageTabsForAPACCapitalMarkets();
+	}
  	
 }

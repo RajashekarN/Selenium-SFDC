@@ -151,7 +151,7 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 		sfAccountsPage.verifyPrivateTags();
 
 	} 
-	
+
 	/**
 	 * Validating the additional Activity Types in the new Activity on an Account
 	 * 
@@ -162,18 +162,18 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 	public void bc_additionalActivityTypes() throws InterruptedException {
 		sfAccountsPage.additionalActivityTypes();
 	}
-	
+
 	/**
 	 * Validating the Investor Services Checkbox
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */	
-	
+
 	public void bc_validateInvestorServices() throws InterruptedException {
 		sfAccountsPage.validateInvestorServicesCheckbox();
 	}
-	
+
 	/**
 	 * Validating the Account Record Type Field in Record Type of Accounts
 	 * 
@@ -189,7 +189,7 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 	 * @author Vishnuvardhan
 	 *
 	 */	
-	
+
 	public void bc_areaOfOperationsAccountCreation() {
 		sfAccountsPage.areaOfOperationsAccountCreation();
 	}
@@ -200,8 +200,36 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 	 * @author Vishnuvardhan
 	 *
 	 */	
-	
+
 	public void bc_reportsCIM() {
 		sfAccountsPage.reportsCIMDataAdmin();
 	}
+
+	/**
+	 * Validating the Quick create Accounts page from the Accounts tab  for Investor Profile
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyQuickCreateAccountsPageInvestorProfile() throws InterruptedException {
+		sfAccountsPage.verifyQuickCreateAccountsPageInvestorProfile();
+	} 
+	/**
+	 * Validating the Accounts related Page for Investor Service Check Box
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyAccountsInvestorServiceCheckBox() throws InterruptedException {
+		sfAccountsPage.verifyAccountsInvestorServiceCheckBox();
+	} 
+	/**
+	 * Validating the additional Activity Type in the New Activity
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyAccountsNewActivityType() throws InterruptedException {
+		sfAccountsPage.verifyAccountsNewActivityType();
+	} 
 }

@@ -63,12 +63,12 @@ public class HomePage extends ReusableLibrary {
 	@FindBy(xpath = "//*[text()='Salesforce Training Videos/Tools']/parent::div/parent::div/div[1]/span/img[@alt='logo']")
 	WebElement cbreImage;
 
-/*	@FindBy(xpath = "//button[@class='bare slds-button uiButton forceHeaderButton oneUserProfileCardTrigger']")
+	/*	@FindBy(xpath = "//button[@class='bare slds-button uiButton forceHeaderButton oneUserProfileCardTrigger']")
 	WebElement logOutButton;
 
 	@FindBy(xpath = "//div[@class='profile-card-indent']//a[text()='Log Out']")
 	WebElement logOut;*/
-		
+
 
 	/**
 	 * Validating the Home Page login functionality
@@ -76,7 +76,7 @@ public class HomePage extends ReusableLibrary {
 	 * @author Vishnuvardhan
 	 *
 	 */
-	
+
 	public void verify_Home_Page() {
 		try {
 			if(welcomeToSalesforce.isDisplayed()) {
@@ -95,17 +95,17 @@ public class HomePage extends ReusableLibrary {
 		}
 		validate_Support_Custom_Links();
 		//verify_Welcome_Links();
-	
+
 	}
-	
+
 	/**
 	 * Validating the Welcome Links on the Home Page 
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */
-	
-	
+
+
 	public void verify_Welcome_Links() {
 		try {
 			List <WebElement> welcomeLinks= driver.findElements(By.xpath("//div[@class='slds-p-around--medium']/a"));
@@ -120,17 +120,17 @@ public class HomePage extends ReusableLibrary {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
 		}
-		
+
 	}
-	
+
 	/**
 	 * Validating the Home Page Menu for Accounts tab
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */
-	
-	
+
+
 	public void validate_Menu_Accounts() {
 		Utility_Functions.timeWait(4);
 		try {
@@ -151,14 +151,14 @@ public class HomePage extends ReusableLibrary {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	/**
 	 * Validating the Home Page Menu for Opportunities tab
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */
-	
+
 	public void validate_Menu_Opportunities() {
 		Utility_Functions.timeWait(4);
 		try {
@@ -182,14 +182,14 @@ public class HomePage extends ReusableLibrary {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	/**
 	 * Validating the Home Page Menu for Leads tab
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */
-	
+
 
 	public void validate_Menu_Leads() {
 		Utility_Functions.timeWait(4);
@@ -211,7 +211,7 @@ public class HomePage extends ReusableLibrary {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	/**
 	 * Adding the links to the List 
 	 * 
@@ -234,14 +234,14 @@ public class HomePage extends ReusableLibrary {
 		list.add("Vouchers Online");
 		System.out.println("Home Page Links added to the list are:::" + list);
 	}
-	
+
 	/**
 	 * Validating the Support Custom Links on Home Page 
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */
-	
+
 	public void validate_Support_Custom_Links() {
 		add_LinkstoList();
 		Utility_Functions.timeWait(2);
@@ -276,14 +276,14 @@ public class HomePage extends ReusableLibrary {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	/**
 	 * Validating the Logout functionality
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 *//*
-	
+
 	public void logout() {
 		try {
 			Utility_Functions.timeWait(2);
@@ -295,4 +295,70 @@ public class HomePage extends ReusableLibrary {
 			e.printStackTrace();
 		}
 	}*/
+
+	/**
+	 * Validating the tabs on Home Page for the APAC Capital Markets 
+	 * 
+	 * @author Ramya
+	 *
+	 */
+
+	static ArrayList<String> tabsList = new ArrayList<String>();
+	public void homePageTabsList() {
+		tabsList.add("Accounts");
+		tabsList.add("Contacts");
+		tabsList.add("Opportunities");
+		tabsList.add("Reports");
+		tabsList.add("Dashboards");
+		tabsList.add("Properties");
+		tabsList.add("Private Tags");
+		tabsList.add("Bulk Tagging");
+		tabsList.add("Campaigns");
+		tabsList.add("Cases");
+		System.out.println("The Home Page Tabs for the APAC Capital Markets are" + tabsList);
+	}
+
+
+	/**
+	 * Validating the tabs on the Home Page for the APAC broker Capital Markets
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+
+	public void validateHomePageTabsForAPACCapitalMarkets() {
+		homePageTabsList();
+		Utility_Functions.timeWait(2);
+		List<WebElement> homePageTabsList = driver
+				.findElements(By.xpath("//div[contains(@class,'slds-context-bar')]//span[@class='slds-truncate']"));
+		String[] homePageTabs = new String[homePageTabsList.size()];
+		System.out.println(homePageTabs);
+		Utility_Functions.timeWait(1);
+		int i = 0, count = 0;
+		try {
+			for (WebElement element : homePageTabsList) {
+				homePageTabs[i] = element.getText();
+				if (homePageTabs[i].equals(tabsList.get(i))) {
+					count++;
+					System.out.println("Tabs " + homePageTabs[i] + "matches " + "Home Page Menu" + tabsList.get(i));
+					report.updateTestLog("Verify Home Page Tabs", "Tabs " + homePageTabs[i] + " present in APAC Capital Markets Home Page Menu",
+							Status.PASS);
+				}
+				i++;
+			}
+			System.out.println(count);
+			if (count == 10) {
+				System.out.println("All the Tabs are present in Home Page ");
+				report.updateTestLog("Verify Home Page Tabs", "All the Tabs are present in Home Page",
+						Status.PASS);
+			} else {
+				report.updateTestLog("Verify Home Page Tabs", "All the Tabs are not present in Home Page",
+						Status.FAIL);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+	}	
 }

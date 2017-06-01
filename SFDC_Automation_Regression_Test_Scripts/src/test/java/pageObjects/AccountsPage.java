@@ -255,7 +255,7 @@ public class AccountsPage extends ReusableLibrary {
 
 	@FindBy(xpath="//select[@id='record-type-select']/option[text()='EMEA Reporting Account']")
 	WebElement recordType_EMEAReporting;
-	
+
 	@FindBy(xpath="//input[contains(@id,'acctForm:Name')]")
 	WebElement accountNameQuickCreate;
 
@@ -264,7 +264,7 @@ public class AccountsPage extends ReusableLibrary {
 
 	@FindBy(xpath="//input[contains(@id,'BillingCity')]")
 	WebElement billingCityQuickCreate;
-	
+
 	@FindBy(xpath="//select[contains(@id,'countryBillingPicklist')]")
 	WebElement billingCountryQuickCreate;
 
@@ -273,22 +273,34 @@ public class AccountsPage extends ReusableLibrary {
 
 	@FindBy(xpath="//select[contains(@id,'EMEAAreaofOperations')]")
 	WebElement areaOfOperationsQuickCreate;
-				
+
 	@FindBy(xpath="//select[contains(@id,'EMEAAreaofOperations')]/option[text()='Regional']")
 	WebElement areaOfOperationsRegionalQuickCreate;
-				
+
 	@FindBy(xpath="//input[@type='submit'][@value='Save']")
 	WebElement saveQuickCreate;
-	
+
 	@FindBy(xpath="//div[@class='bBottom']//span[text()='Reports']")
 	WebElement menu_Reports;
-	
+
 	@FindBy(xpath="//div[@title='New Report'][text()='New Report']")
 	WebElement newReport;
-	
+
 	@FindBy(xpath="//input[@id='quickFindInput']")
 	WebElement reportTypeInput;	
 	
+	@FindBy(xpath = "//div[@class='slds-truncate'][text()='New']")
+	WebElement newAccountMenuPage;
+	
+	@FindBy(xpath="//a[@aria-label='Investor Profile']")
+	WebElement investorProfile;
+	
+	@FindBy(xpath="//div[@class='slds-form-element__control slds-grid']/span/span/img")
+	WebElement investorServicesCheckBox;
+	
+	@FindBy(xpath="//select[contains(@id,'CustomActivityForm:activity-activityType')]")
+	WebElement selectActivityType;
+
 	HomePage hp = new HomePage(scriptHelper);
 	SearchTextSOQL searchAccount = new SearchTextSOQL(scriptHelper);
 	static ArrayList<String> accountsPageDetailsList = new ArrayList<String>();
@@ -1828,20 +1840,31 @@ public class AccountsPage extends ReusableLibrary {
 
 
 	}
+	
+
+	/**
+	 * Validating the Private Tags List
+	 * 
+	 * @author Ramya
+	 *
+	 */
 	static ArrayList<String> labelsBulkTaggingPageOpportunityDetails = new ArrayList<String>();
 	public void labelsBulkTaggingPageOpportunityDetails() {
-
-
 		labelsBulkTaggingPageOpportunityDetails.add("Name");
 		labelsBulkTaggingPageOpportunityDetails.add("Tags");
 		labelsBulkTaggingPageOpportunityDetails.add("Phase");
 		labelsBulkTaggingPageOpportunityDetails.add("Sales Stage");
 		labelsBulkTaggingPageOpportunityDetails.add("Account");
 		labelsBulkTaggingPageOpportunityDetails.add("Preferred Property Type");
-
-
-
 	}
+	
+
+	/**
+	 * Validating the Private Tags
+	 * 
+	 * @author Ramya
+	 *
+	 */
 	public void verifyPrivateTags(){
 		Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
 		Utility_Functions.xClick(driver, menu_More, true);
@@ -2195,7 +2218,7 @@ public class AccountsPage extends ReusableLibrary {
 			report.updateTestLog("Verify Account Record Type Field","Account Record Type column is not there:::",  Status.FAIL);
 		}
 	}
-	
+
 	/**
 	 * Account Creation - Area of Operations field in Reporting Account Creation Page 
 	 * 
@@ -2245,15 +2268,15 @@ public class AccountsPage extends ReusableLibrary {
 
 		}
 	}
-	
-	
+
+
 	/**
 	 * CBRE Data Admin Access to CIM reports (CLASSIC) 
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */	
-	
+
 	static ArrayList<String> reportsCIMList = new ArrayList<String>();
 
 	public void reportsCIMList() {
@@ -2273,7 +2296,7 @@ public class AccountsPage extends ReusableLibrary {
 		reportsCIMList.add("CIM Opportunity Outbound");
 		System.out.println("Reports CIM List are :::"+ reportsCIMList);
 	}
-	
+
 	/**
 	 * CBRE Data Admin Access to CIM reports (CLASSIC) 
 	 * 
@@ -2311,6 +2334,128 @@ public class AccountsPage extends ReusableLibrary {
 		} else {
 			report.updateTestLog("Verify Reports CIM", "All the reports with respect CIM are not present", Status.FAIL);
 		}	
+	}
+
+	/**
+	 * Validating the Quick create Accounts page from the Accounts tab for the Investor Profile
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void verifyQuickCreateAccountsPageInvestorProfile(){
+		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
+		Utility_Functions.xClick(driver, menu_Accounts, true);
+		report.updateTestLog("Verify Quick Create Accounts Page Investor Profile ",
+				"Verifying the Opportunities page is displayed", Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, newAccountMenuPage, 3);
+		Utility_Functions.xClick(driver, newAccountMenuPage, true);
+		report.updateTestLog("Verify Quick Create Accounts Page Investor Profile  ",
+				"Verifying the new Accounts Quick Create page is displayed", Status.PASS);
+		Utility_Functions.timeWait(4);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, investorProfile, 3);
+		Utility_Functions.xClick(driver, investorProfile, true);
+		Utility_Functions.timeWait(1);
+		List<WebElement> reasonForLossValuesList = driver.findElements(By.xpath("//div[@class='select-options']//a[@title='Bank']/parent::li/parent::ul/li"));
+		for(WebElement element: reasonForLossValuesList) {
+			element.getText();
+			System.out.println(element.getText());
+		}
+	}	
+	/**
+	 * Validating the Quick create Accounts page from the Accounts tab for the Investor Services Check Box
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void verifyAccountsInvestorServiceCheckBox(){
+		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
+		Utility_Functions.xClick(driver, menu_Accounts, true);
+
+		report.updateTestLog("Verify Accounts Investor Services Check Box ","Verifying the Accounts is Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
+		Utility_Functions.xClick(driver, recentlyViewed, true);
+		report.updateTestLog("Verify Accounts Investor Services Check Box","Recently viewed Accounts are Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, allAccounts, 3);
+		Utility_Functions.xClick(driver, allAccounts, true);
+		Utility_Functions.timeWait(2);
+		report.updateTestLog("Verify Accounts Investor Services Check Box","All accounts are displayed successfully:::",  Status.PASS);
+		List<WebElement> accountNamesList = driver.findElements(
+				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+
+		Utility_Functions.xclickOnFirstElementfromList(accountNamesList);
+		report.updateTestLog("Verify Accounts Investor Services Check Box ","Verifying the selected Account is Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, related_Accounts, 3);
+		Utility_Functions.xClick(driver, related_Accounts, true);
+		report.updateTestLog("Verify New Activity Page Layout ","Verifying the related page is Displayed ",  Status.PASS);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(3);
+
+
+
+		if(!investorServicesCheckBox.isSelected()){
+
+
+			//Utility_Functions.xClick(driver, notificationEmail, true);
+			System.out.println("Investor Services CheckBox is present and not checked");
+			report.updateTestLog("Verify Accounts Investor Services Check Box  ","Verifying the Investor Services check box is checked or else checking it",  Status.PASS);
+
+		}else{
+			System.out.println("Investor Services CheckBox is not present and not checked");
+			report.updateTestLog("Verify Accounts Investor Services Check Box  ","Verifying the Investor Services check box is checked or not ",  Status.FAIL);
+		}
+
+	}	
+	/**
+	 * Validating the Accounts for the New Activity Type
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void verifyAccountsNewActivityType(){
+		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
+		Utility_Functions.xClick(driver, menu_Accounts, true);
+
+		report.updateTestLog("Verify New Activity Type ","Accounts is Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
+		Utility_Functions.xClick(driver, recentlyViewed, true);
+		report.updateTestLog("Verify New Activity Type ","Recently viewed Accounts are Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, allAccounts, 3);
+		Utility_Functions.xClick(driver, allAccounts, true);
+		Utility_Functions.timeWait(3);
+		report.updateTestLog("Verify New Activity Type ","All Accounts are Displayed ",  Status.PASS);
+		List<WebElement> accountNamesList = driver.findElements(
+				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+
+		Utility_Functions.xclickOnFirstElementfromList(accountNamesList);
+		Utility_Functions.timeWait(3);
+		report.updateTestLog("Verify New Activity Type ","The Account is Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, related_Accounts, 3);
+		Utility_Functions.xClick(driver, related_Accounts, true);
+		report.updateTestLog("Verify New Activity Type ","The related page is Displayed ",  Status.PASS);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, newActivity, 3);
+		Utility_Functions.xClick(driver, newActivity, true);
+		report.updateTestLog("Verify New Activity Type ","The New Activity in the related page is Displayed ",  Status.PASS);
+		Utility_Functions.xSwitchtoFrame(driver, saveAndNewActivity);
+		Utility_Functions.xWaitForElementPresent(driver, selectActivityType, 3);
+		Utility_Functions.xClick(driver, selectActivityType, true);
+		List<WebElement> activityTypeValuesList = driver.findElements(By.xpath("//div[@class='slds-form-element__control']//select[contains(@id,'CustomActivityForm:activity-activityType')]/option"));
+		for(WebElement element: activityTypeValuesList) {
+			element.getText();
+			System.out.println(element.getText());
+
+			report.updateTestLog("Verify New Activity Type ","The Activity Type Values list is Displayed ",  Status.PASS);
+		}
 	}
 }
 
