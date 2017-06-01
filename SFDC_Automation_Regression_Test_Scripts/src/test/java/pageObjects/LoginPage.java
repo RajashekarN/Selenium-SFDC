@@ -328,25 +328,13 @@ public class LoginPage extends ReusableLibrary {
 				}  else if((dataTable.getData("General_Data", "TC_ID").contains("GWSAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS")))  { 
 					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("FTEGWSAPACCSS"));
 				
-				} else if((dataTable.getData("General_Data", "TC_ID").contains("DAAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager")))  { 
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("FTEDAAMERManager"));
-				} else if((dataTable.getData("General_Data", "TC_ID").contains("DAAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker")))  { 
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("FTEDAAMERBroker"));
-				} else if((dataTable.getData("General_Data", "TC_ID").contains("DAAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS")))  { 
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("FTEDAAMERCSS"));
-				} else if((dataTable.getData("General_Data", "TC_ID").contains("DAEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager")))  { 
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("FTEDAEMEAManager"));
-				} else if((dataTable.getData("General_Data", "TC_ID").contains("DAEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker")))  { 
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("FTEDAEMEABroker"));
-				} else if((dataTable.getData("General_Data", "TC_ID").contains("DAEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS")))  { 
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("FTEDAEMEACSS"));
-				} else if((dataTable.getData("General_Data", "TC_ID").contains("DAAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager")))  { 
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("FTEDAAPACManager"));
-				} else if((dataTable.getData("General_Data", "TC_ID").contains("DAAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker")))  { 
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("FTEDAAPACBroker"));
-				}  else if((dataTable.getData("General_Data", "TC_ID").contains("DAAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS")))  { 
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("FTEDAAPACCSS"));
-				} 
+				} else if((dataTable.getData("General_Data", "TC_ID").contains("DAAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Data")))  { 
+					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("FTEDAAMERData"));
+				} else if((dataTable.getData("General_Data", "TC_ID").contains("DAEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Data")))  { 
+					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("FTEDAEMEAData"));
+				} else if((dataTable.getData("General_Data", "TC_ID").contains("DAAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Data")))  { 
+					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("FTEDAAPACData"));
+				}
 		}
 		Utility_Functions.timeWait(1);	
 		if(properties.getProperty("RunEnvironment").equals("UAT")) { 

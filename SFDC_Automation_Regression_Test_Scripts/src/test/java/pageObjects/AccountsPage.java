@@ -250,8 +250,47 @@ public class AccountsPage extends ReusableLibrary {
 	@FindBy(xpath="//span[text()='Investor Services Account']/parent::div/parent::div//div//span[contains(@class,'uiOutputCheckbox')]")
 	WebElement accountServicesCheckbox;
 
+	@FindBy(xpath="//select[@id='record-type-select']")
+	WebElement recordType;
 
+	@FindBy(xpath="//select[@id='record-type-select']/option[text()='EMEA Reporting Account']")
+	WebElement recordType_EMEAReporting;
+	
+	@FindBy(xpath="//input[contains(@id,'acctForm:Name')]")
+	WebElement accountNameQuickCreate;
+
+	@FindBy(xpath="//textarea[contains(@id,'BillingStreet')]")
+	WebElement billingStreetQuickCreate;
+
+	@FindBy(xpath="//input[contains(@id,'BillingCity')]")
+	WebElement billingCityQuickCreate;
+	
+	@FindBy(xpath="//select[contains(@id,'countryBillingPicklist')]")
+	WebElement billingCountryQuickCreate;
+
+	@FindBy(xpath="//select[contains(@id,'countryBillingPicklist')]/option[text()='United States']")
+	WebElement billingCountryUnitedStatesQuickCreate;				
+
+	@FindBy(xpath="//select[contains(@id,'EMEAAreaofOperations')]")
+	WebElement areaOfOperationsQuickCreate;
+				
+	@FindBy(xpath="//select[contains(@id,'EMEAAreaofOperations')]/option[text()='Regional']")
+	WebElement areaOfOperationsRegionalQuickCreate;
+				
+	@FindBy(xpath="//input[@type='submit'][@value='Save']")
+	WebElement saveQuickCreate;
+	
+	@FindBy(xpath="//div[@class='bBottom']//span[text()='Reports']")
+	WebElement menu_Reports;
+	
+	@FindBy(xpath="//div[@title='New Report'][text()='New Report']")
+	WebElement newReport;
+	
+	@FindBy(xpath="//input[@id='quickFindInput']")
+	WebElement reportTypeInput;	
+	
 	HomePage hp = new HomePage(scriptHelper);
+	SearchTextSOQL searchAccount = new SearchTextSOQL(scriptHelper);
 	static ArrayList<String> accountsPageDetailsList = new ArrayList<String>();
 
 	/**
@@ -2155,6 +2194,123 @@ public class AccountsPage extends ReusableLibrary {
 		} else {
 			report.updateTestLog("Verify Account Record Type Field","Account Record Type column is not there:::",  Status.FAIL);
 		}
+	}
+	
+	/**
+	 * Account Creation - Area of Operations field in Reporting Account Creation Page 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	public void areaOfOperationsAccountCreation() {
+		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 4);
+		Utility_Functions.xClick(driver, menu_Accounts, true);
+		Utility_Functions.xWaitForElementPresent(driver, newAccount, 3);
+		Utility_Functions.xClick(driver, newAccount, true);
+		Utility_Functions.xSwitchtoFrame(driver, continueButton);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, recordType, 3);
+		Utility_Functions.xClick(driver, recordType, true);
+		Utility_Functions.xWaitForElementPresent(driver, recordType_EMEAReporting, 3);
+		Utility_Functions.xClick(driver, recordType_EMEAReporting, true);
+		Utility_Functions.xWaitForElementPresent(driver, continueButton, 2);
+		Utility_Functions.xClick(driver, continueButton, true);
+		Utility_Functions.xSwitchtoFrame(driver, accountNameQuickCreate);
+		Utility_Functions.timeWait(2);
+		String accountName = searchAccount.fetchRecord("Account", "Name");
+		Utility_Functions.xSendKeys(driver, accountNameQuickCreate, accountName);
+		Utility_Functions.xWaitForElementPresent(driver, billingStreetQuickCreate, 3);
+		Utility_Functions.xSendKeys(driver, billingStreetQuickCreate, dataTable.getData("General_Data", "Street"));
+		Utility_Functions.xWaitForElementPresent(driver, billingCityQuickCreate, 3);
+		Utility_Functions.xSendKeys(driver, billingCityQuickCreate, dataTable.getData("General_Data", "City"));
+		Utility_Functions.xWaitForElementPresent(driver, billingCountryQuickCreate, 3);
+		Utility_Functions.xClick(driver, billingCountryQuickCreate, true);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xClick(driver, billingCountryUnitedStatesQuickCreate, true);
+		Utility_Functions.xWaitForElementPresent(driver, areaOfOperationsQuickCreate, 3);
+		Utility_Functions.xClick(driver, areaOfOperationsQuickCreate, true);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xClick(driver, areaOfOperationsRegionalQuickCreate, true);
+		report.updateTestLog("Verify Area of Operations","Area of Operations field is selected while creating the account successfully:::",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, saveQuickCreate, 3);
+		Utility_Functions.xClick(driver, saveQuickCreate, true);
+		Utility_Functions.timeWait(2);		
+		driver.switchTo().defaultContent();
+		driver.navigate().refresh();
+		Utility_Functions.xWaitForElementPresent(driver, related_Accounts, 3);
+		if(related_Accounts.isDisplayed()) {
+			report.updateTestLog("Verify Area of Operations","Account creation is successful:::",  Status.PASS);
+		} else {
+			report.updateTestLog("Verify Area of Operations","Account creation failed::",  Status.FAIL);
+
+		}
+	}
+	
+	
+	/**
+	 * CBRE Data Admin Access to CIM reports (CLASSIC) 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	
+	static ArrayList<String> reportsCIMList = new ArrayList<String>();
+
+	public void reportsCIMList() {
+		reportsCIMList.add("Activities with CIM Comp Account Contact Rels Inbound");
+		reportsCIMList.add("CIM Account Inbounds");
+		reportsCIMList.add("CIM Account Outbounds");
+		reportsCIMList.add("CIM Comp Account Contact Rels Inbound");
+		reportsCIMList.add("CIM Comps Inbound");
+		reportsCIMList.add("CIM Contact Inbounds");
+		reportsCIMList.add("CIM Contact Outbound");
+		reportsCIMList.add("CIM Inbound Staging Status");
+		reportsCIMList.add("CIM Orphan Relationships");
+		reportsCIMList.add("CIM Outbound Staging Status");
+		reportsCIMList.add("CIM Project Enquiry Inbound");
+		reportsCIMList.add("CIM Properties Inbound");
+		reportsCIMList.add("CIM Batch Notifications");
+		reportsCIMList.add("CIM Opportunity Outbound");
+		System.out.println("Reports CIM List are :::"+ reportsCIMList);
+	}
+	
+	/**
+	 * CBRE Data Admin Access to CIM reports (CLASSIC) 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	public void reportsCIMDataAdmin() {
+		Utility_Functions.xWaitForElementPresent(driver, menu_Reports, 3);
+		Utility_Functions.xClick(driver, menu_Reports, true);
+		Utility_Functions.xWaitForElementPresent(driver, newReport, 3);
+		Utility_Functions.xClick(driver, newReport, true);
+		Utility_Functions.xSwitchtoFrame(driver, reportTypeInput);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xSendKeys(driver, reportTypeInput, "CIM");
+		List<WebElement> reportsList = driver.findElements(By.xpath("//div[@class='x-tree-root-node']//span[contains(text(),'CIM')]"));
+		reportsCIMList();		
+		String[] linkTexts = new String[reportsCIMList.size()];
+		int i = 0, count = 0;
+		try {
+			for (WebElement element : reportsList) {
+				linkTexts[i] = element.getText();
+				if (linkTexts[i].equals(reportsCIMList.get(i))) {
+					count++;
+					report.updateTestLog("Verify Reports CIM", "Value " +  element.getText() + "is present under CIM Reports List", Status.PASS);
+					//System.out.println(element.getText());	
+				}
+				i++;
+			}
+		} catch (Exception e) {
+			//System.out.println(e.getMessage());
+		}
+		System.out.println(count);
+		if(count==14) {
+			report.updateTestLog("Verify Reports CIM", "All the reports with respect CIM are present", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Reports CIM", "All the reports with respect CIM are not present", Status.FAIL);
+		}	
 	}
 }
 

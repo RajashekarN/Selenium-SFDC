@@ -88,6 +88,8 @@ public class PropertiesPage extends ReusableLibrary {
 	@FindBy(xpath="//select[@class='slds-select']/option[@value='Open']")
 	WebElement status;
 
+	@FindBy(xpath = "//a[@role='menuitem']/span[contains(@class,'slds-truncate')][text()='Campaigns']")
+	WebElement campaigns;	
 
 	/**
 	 * 
@@ -138,10 +140,10 @@ public class PropertiesPage extends ReusableLibrary {
 
 	@FindBy(xpath="//select[@class='slds-select']/option[@value='Private - Follow-Up Meeting']")
 	WebElement activityType3;
-	
+
 	@FindBy(xpath="//input[@class='slds-input'][@type='checkbox']/following-sibling::span[text()='Notification Email']")
 	WebElement notificationEmail;
-	
+
 	@FindBy(xpath = "// input [@value= 'Save']")
 	WebElement saveNewActivityLayoutPage;
 
@@ -593,13 +595,13 @@ public class PropertiesPage extends ReusableLibrary {
 		List<WebElement> relatedActivitiesList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'] "));
 		for (WebElement element : relatedActivitiesList ) {
 			if ((!element.getText().equals(" "))){
-		report.updateTestLog("Verify Create Activity Properties","The New Activity for Properties are created ",Status.PASS);
-	}else
-	{
-		report.updateTestLog("Verify Create Activity Properties","The New Activity for Properties are not created ",Status.FAIL);
+				report.updateTestLog("Verify Create Activity Properties","The New Activity for Properties are created ",Status.PASS);
+			}else
+			{
+				report.updateTestLog("Verify Create Activity Properties","The New Activity for Properties are not created ",Status.FAIL);
+			}
+		}
 	}
-		}
-		}
 	/**
 	 * Validating the New Activity Page Layout in the Properties
 	 * 
@@ -763,7 +765,7 @@ public class PropertiesPage extends ReusableLibrary {
 		if ((!saveNewActivityLayoutPage.getText().equals(" "))
 				|| (!saveAndNewActivityLayoutPage.getText().equals(" "))
 				|| (!cancelNewActivityLayoutPage.getText().equals(" ")))
-			 {
+		{
 			System.out.println(
 					"Save, Save and New and Cancel buttons are prsent in the New Activity Layout Page ");
 			report.updateTestLog("Verify New Activity Page Layout ",
@@ -775,7 +777,7 @@ public class PropertiesPage extends ReusableLibrary {
 					"Verifying New Activity Page is having the Save, Save and New and Cancel buttons",
 					Status.FAIL);
 		}
-		
+
 
 		/*if(!driver.findElements(By.xpath("// input [@value= 'Save']")).isEmpty()){
 			System.out.println("Save button is present in the New Activity Layout Page");
@@ -997,9 +999,9 @@ public class PropertiesPage extends ReusableLibrary {
 	 * @author Ramya
 	 *
 	 */
-	
+
 	public void verifyNewActivityPropertiesPageSendNotificationEmail(){
-		
+
 		try{
 			Utility_Functions.xWaitForElementPresent(driver,menu_Properties, 3);
 			Utility_Functions.xClick(driver, menu_Properties, true);
@@ -1009,12 +1011,12 @@ public class PropertiesPage extends ReusableLibrary {
 			Utility_Functions.xWaitForElementPresent(driver, properties, 2);
 			Utility_Functions.xClick(driver, properties, true);	
 		}
-		
-		
-		
-		
+
+
+
+
 		report.updateTestLog("Verify New Activity Page send Notification Email ","Verifying the Accounts is Displayed ",  Status.PASS);
-		
+
 		List<WebElement> propertiesList = driver.findElements(
 				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
 
@@ -1040,9 +1042,9 @@ public class PropertiesPage extends ReusableLibrary {
 		for (WebElement element : iframeList) {
 			System.out.println(element.getAttribute("id"));
 		}*/
-        driver.switchTo().frame(2);
+		driver.switchTo().frame(2);
 		Utility_Functions.timeWait(3);
-		
+
 		Utility_Functions.xWaitForElementPresent(driver, subject, 3);
 		Utility_Functions.xClick(driver, subject, true);
 		Utility_Functions.xWaitForElementPresent(driver, subject, 3);
@@ -1051,23 +1053,59 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, activityType, 3);
 		Utility_Functions.xClick(driver, activityType, true);
 		report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the Activity Type field is populated with one of the pick list values ",  Status.PASS);
-		
+
 		if(!notificationEmail.isSelected()){
-	        //notificationEmail.click();
-		
+			//notificationEmail.click();
+
 			Utility_Functions.xClick(driver, notificationEmail, true);
-	        System.out.println("Notification email is checked");
-	        report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the notification email check box is checked or else checking it",  Status.PASS);
-	        
-	    }else{
-	    	System.out.println("Notification email is not checked");
-	    	report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the notification email check box is checked or not ",  Status.FAIL);
-	    }
-	Utility_Functions.xWaitForElementPresent(driver,assignedTo, 3);
-	Utility_Functions.xSendKeys(driver, assignedTo, "vishnuvardhan bommisetty");
-	report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the Assigned To field is populated with the appropriate value ",  Status.PASS);
-	Utility_Functions.xWaitForElementPresent(driver, saveActivity, 3);
-	Utility_Functions.xClick(driver, saveActivity, true);
-	report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the notification email issent to the Assigned To person in the New Activity page ",  Status.PASS);
+			System.out.println("Notification email is checked");
+			report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the notification email check box is checked or else checking it",  Status.PASS);
+
+		}else{
+			System.out.println("Notification email is not checked");
+			report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the notification email check box is checked or not ",  Status.FAIL);
+		}
+		Utility_Functions.xWaitForElementPresent(driver,assignedTo, 3);
+		Utility_Functions.xSendKeys(driver, assignedTo, "vishnuvardhan bommisetty");
+		report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the Assigned To field is populated with the appropriate value ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, saveActivity, 3);
+		Utility_Functions.xClick(driver, saveActivity, true);
+		report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the notification email issent to the Assigned To person in the New Activity page ",  Status.PASS);
 	}
+
+	/**
+	 * Validating the Campaigns tab present in the dropdown after loggin in
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	public void validateCampaignsTab() {
+		Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
+		Utility_Functions.xClick(driver, menu_More, true);
+		int count=0;
+		if(dataTable.getData("General_Data", "TC_ID").contains("OBAMERBrokerCampaignsTab")) {
+			List<WebElement> overFlowList = driver.findElements(By.xpath("//div[@class='overflowList']//a"));
+			for(WebElement element: overFlowList) {
+				if(element.getText().equals("Campaigns")) {
+					count++;
+					System.out.println(element.getText());
+				}
+			}
+			if(count==0) {
+				report.updateTestLog("Verify Campaigns Tab","Campaigns tab is not present in the dropdown:::", Status.PASS);
+			} else {
+				report.updateTestLog("Verify Campaigns Tab","Campaigns tab is present in the dropdown:::", Status.FAIL);
+			}
+		} 
+		if(dataTable.getData("General_Data", "TC_ID").contains("OBAPACBrokerCampaignsTab")) {
+			Utility_Functions.xWaitForElementPresent(driver, campaigns, 2);
+			if(campaigns.isDisplayed()) {
+				report.updateTestLog("Verify Campaigns Tab","Campaigns tab is present in the dropdown:::", Status.PASS);
+			} else {
+				report.updateTestLog("Verify Campaigns Tab","Campaigns tab doesn't present in the dropdown:::", Status.FAIL);
+			}
+		}	
+
+	}
+
 }

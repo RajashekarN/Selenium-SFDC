@@ -183,6 +183,25 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 	public void bc_accountRecordType() {
 		sfAccountsPage.accountRecordTypeField();
 	}
+	/**
+	 * Account Creation - Area of Operations field in Reporting Account Creation Page 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	
+	public void bc_areaOfOperationsAccountCreation() {
+		sfAccountsPage.areaOfOperationsAccountCreation();
+	}
 
-
+	/**
+	 * CBRE Data Admin Access to CIM reports (CLASSIC) 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	
+	public void bc_reportsCIM() {
+		sfAccountsPage.reportsCIMDataAdmin();
+	}
 }

@@ -79,7 +79,18 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	 */	
 	
 	public void bc_verifyNewActivityPropertiesPageSendNotificationEmail() throws InterruptedException {
-		sfPropertiesPage. verifyNewActivityPropertiesPageSendNotificationEmail();
+		sfPropertiesPage.verifyNewActivityPropertiesPageSendNotificationEmail();
 	}
 
+	/**
+	 * Validating the Campaigns tab present in the dropdown after loggin in
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	public void bc_campaignsTab() {
+		sfPropertiesPage.validateCampaignsTab();
+	}
+
+	
 }
