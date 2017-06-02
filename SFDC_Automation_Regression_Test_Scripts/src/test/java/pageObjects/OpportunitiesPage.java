@@ -59,6 +59,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//div[@class='bBottom']//span[text()='Opportunities']")
 	WebElement menu_Opportunities;
+	
+	@FindBy(xpath = "//div[@class='bBottom']//span[text()='Accounts']")
+	WebElement menu_Accounts;
 
 	@FindBy(xpath = "//div[@class='slds-truncate'][@title='Sharing'][text()='Sharing']")
 	WebElement sharingButton;
@@ -4149,6 +4152,50 @@ public class OpportunitiesPage extends ReusableLibrary {
 		{
 			System.out.println("The Term of Contract Field is not present");
 			report.updateTestLog("Verify Quick Create Opportunity Page Term Of Contract","The Term of Contract Field is not present ",Status.FAIL);
+		}
+	}
+	
+	/**
+	 * Validating the Active Opportunities related to Account
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	
+	public String retriveAccountOpp() {
+		String query = "SELECT Id, Total_Number_Of_Opps__c FROM Account where Total_Number_Of_Opps__c > 1 limit 1 offset 9";
+		String sAccountID = searchOpportunity.fetchRecordFieldValue("Id", query);
+		report.updateTestLog("Verify Active Opportunities", "Account ID retrived from database is:::" + sAccountID, Status.PASS);
+		String url = driver.getCurrentUrl().split("#")[0];
+		String newUrl = url + "#/sObject/" + sAccountID;
+		newUrl = newUrl + "/view";
+		driver.get(newUrl);
+		Utility_Functions.timeWait(1);
+		return sAccountID;
+	}
+	
+	public void validateActiveOpportunities() {
+		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
+		Utility_Functions.xClick(driver, menu_Accounts, true);
+		List<WebElement> accountList = driver.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xclickRandomElement(accountList);		
+		retriveAccountOpp();
+		driver.navigate().refresh();
+		Utility_Functions.xWaitForElementPresent(driver, related, 3);
+		Utility_Functions.xClick(driver, related, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		int count=0;
+		List<WebElement> opportunitiesList = driver.findElements(By.xpath("//article[contains(@class,'forceRelatedListCardDesktop')]//a[contains(@href,'006')]"));
+		for(WebElement element: opportunitiesList) {
+			report.updateTestLog("Verify Active Opportunities", "Opportunities associated to this Account are :::" + element.getText(), Status.PASS);
+			count++;
+		}
+		if(count!=0) {
+			report.updateTestLog("Verify Active Opportunities", "Opportunities hyperlinks are present in Related section for Account", Status.PASS);		
+		} else {
+			report.updateTestLog("Verify Active Opportunities", "Opportunities hyperlinks are not present in Related section for Account", Status.FAIL);		
 		}
 	}
 }

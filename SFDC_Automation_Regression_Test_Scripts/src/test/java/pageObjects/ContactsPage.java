@@ -74,6 +74,14 @@ public class ContactsPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//div[@class='tt-dataset-acctSearchBoxTypeahead']//div[1]/p")
 	WebElement accountNames;
+	
+	@FindBy(xpath = "//div[@class='bBottom']//span[text()='Accounts']")
+	WebElement menu_Accounts;
+	
+	@FindBy(xpath = "//input[@placeholder='Search Salesforce']")
+	WebElement inputAccountName;
+	
+	
 	/**
 	 * 
 	 * 
@@ -177,6 +185,8 @@ public class ContactsPage extends ReusableLibrary {
 	WebElement cancelNewActivityLayoutPage;
 
 
+	SearchTextSOQL searchAccountName = new SearchTextSOQL(scriptHelper);
+	
 	/**
 	 * Selecting the Contact from a list of contacts
 	 * 
@@ -1183,4 +1193,46 @@ public class ContactsPage extends ReusableLibrary {
 	Utility_Functions.xClick(driver, saveActivity, true);
 	report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the notification email issent to the Assigned To person in the New Activity page ",  Status.PASS);
 	}
+	
+	/**
+	 * Validating the hyperlink for number of Contacts related to Account
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	
+	public String retriveAccount() {
+		String query = "SELECT Id, Total_Number_Of_Contact_Parent_Formula__c FROM Account where Total_Number_Of_Contact_Parent_Formula__c  > 1 limit 1 offset 9";
+		String sAccountID = searchAccountName.fetchRecordFieldValue("Id", query);
+		report.updateTestLog("Verify Contact hyperlink", "Account ID retrived from database is:::" + sAccountID, Status.PASS);
+		String url = driver.getCurrentUrl().split("#")[0];
+		String newUrl = url + "#/sObject/" + sAccountID;
+		newUrl = newUrl + "/view";
+		driver.get(newUrl);
+		Utility_Functions.timeWait(1);
+		return sAccountID;
+	}
+	
+	public void validateHyperlinkContacts() {
+		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
+		Utility_Functions.xClick(driver, menu_Accounts, true);
+		List<WebElement> accountList = driver.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xclickRandomElement(accountList);		
+		retriveAccount();
+		driver.navigate().refresh();
+		Utility_Functions.xWaitForElementPresent(driver, related, 3);
+		Utility_Functions.xClick(driver, related, true);
+		int count=0;
+		List<WebElement> contactsList = driver.findElements(By.xpath("//article[contains(@class,'forceRelatedListCardDesktop')]//a[contains(@href,'003')]"));
+		for(WebElement element: contactsList) {
+			report.updateTestLog("Verify Contact hyperlink", "Contacts associated to this Account are :::" + element.getText(), Status.PASS);
+			count++;
+		}
+		if(count!=0) {
+			report.updateTestLog("Verify Contact hyperlink", "Contacts hyperlinks are present in Related section for Account", Status.PASS);		
+		} else {
+			report.updateTestLog("Verify Contact hyperlink", "Contacts hyperlinks are not present in Related section for Account", Status.FAIL);		
+		}
+	}	
+	
 }

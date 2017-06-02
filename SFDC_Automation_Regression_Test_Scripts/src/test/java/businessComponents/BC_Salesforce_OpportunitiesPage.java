@@ -530,5 +530,14 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	public void bc_verifyNewOpportunityPageTermOfContractForAPACManager() {
 		sfOpportunitiesPage.verifyNewOpportunityPageTermOfContractForAPACManager();
 	}
-
+	
+	/**
+	 * Validating the Active Opportunities related to Account
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	public void bc_activeOpportunities() {
+		sfOpportunitiesPage.validateActiveOpportunities();
+	}
 }
