@@ -972,6 +972,12 @@ public class OpportunitiesPage extends ReusableLibrary {
 				config.setUsername("vishnuvardhan.bommisetty@cbre.com.crm.fte");
 				config.setPassword("Vishnu3604");
 				config.setAuthEndpoint(FTE_AuthEndpoint);
+			} else if (properties.getProperty("RunEnvironment").equals("FTE2")) {
+				String FTE2_AuthEndpoint = properties.getProperty("FTE2AuthEndpoint");
+				config = new ConnectorConfig();
+				config.setUsername("soumya.sarkar@cbre.com.crm.fte2");
+				config.setPassword("Belgharia12");
+				config.setAuthEndpoint(FTE2_AuthEndpoint);
 			}
 			connection = new PartnerConnection(config);
 
@@ -1742,58 +1748,73 @@ public class OpportunitiesPage extends ReusableLibrary {
 		try {
 			if (properties.getProperty("RunEnvironment").equals("FTE")) {
 				config = new ConnectorConfig();
-				if ((dataTable.getData("General_Data", "TC_ID").contains("GWS"))
-						&& (dataTable.getData("General_Data", "TC_ID").contains("APAC"))
-						&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
+				if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
 					config.setUsername(properties.getProperty("FTEGWSAPACManager"));
-					config.setPassword(properties.getProperty("Password"));
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("GWS"))
-						&& (dataTable.getData("General_Data", "TC_ID").contains("EMEA"))
-						&& (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
+					config.setPassword(properties.getProperty("FTEGWSAPACManagerPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
 					config.setUsername(properties.getProperty("FTEGWSEMEABroker"));
 					config.setPassword(properties.getProperty("FTEGWSEMEABrokerPassword"));
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VAS"))
-						&& (dataTable.getData("General_Data", "TC_ID").contains("AMER"))
-						&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
-					config.setUsername(properties.getProperty("VASAMERManager"));
-					config.setPassword(properties.getProperty("VASAMERManagerPassword"));
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VAS"))
-						&& (dataTable.getData("General_Data", "TC_ID").contains("EMEA"))
-						&& (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
-					config.setUsername(properties.getProperty("VASEMEABroker"));
-					config.setPassword(properties.getProperty("VASEMEABrokerPassword"));
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("AS"))
-						&& (dataTable.getData("General_Data", "TC_ID").contains("AMER"))
-						&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
-					config.setUsername(properties.getProperty("ASAMERManager"));
-					config.setPassword(properties.getProperty("ASAMERManagerPassword"));
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("AS"))
-						&& (dataTable.getData("General_Data", "TC_ID").contains("APAC"))
-						&& (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
-					config.setUsername(properties.getProperty("ASAPACBroker"));
-					config.setPassword(properties.getProperty("ASAPACBrokerPassword"));
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("AB"))
-						&& (dataTable.getData("General_Data", "TC_ID").contains("AMER"))
-						&& (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VASAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
+					config.setUsername(properties.getProperty("FTEVASAMERManager"));
+					config.setPassword(properties.getProperty("FTEVASAMERManagerPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VASEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
+					config.setUsername(properties.getProperty("FTEVASEMEABroker"));
+					config.setPassword(properties.getProperty("FTEVASEMEABrokerPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
+					config.setUsername(properties.getProperty("FTEASAMERManager"));
+					config.setPassword(properties.getProperty("FTEASAMERManagerPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
+					config.setUsername(properties.getProperty("FTEASAPACBroker"));
+					config.setPassword(properties.getProperty("FTEASAPACBrokerPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
 					config.setUsername(properties.getProperty("FTEABAMERCSS"));
-					config.setPassword(properties.getProperty("Password"));
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("AB"))
-						&& (dataTable.getData("General_Data", "TC_ID").contains("APAC"))
-						&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
+					config.setPassword(properties.getProperty("FTEPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
 					config.setUsername(properties.getProperty("FTEABAPACManager"));
-					config.setPassword(properties.getProperty("Password"));
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OB"))
-						&& (dataTable.getData("General_Data", "TC_ID").contains("AMER"))
-						&& (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
+					config.setPassword(properties.getProperty("FTEPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
 					config.setUsername(properties.getProperty("FTEOBAMERCSS"));
-					config.setPassword(properties.getProperty("Password"));
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OB"))
-						&& (dataTable.getData("General_Data", "TC_ID").contains("AMER"))
-						&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
+					config.setPassword(properties.getProperty("FTEPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
 					config.setUsername(properties.getProperty("FTEOBAMERManager"));
-					config.setPassword(properties.getProperty("Password"));
+					config.setPassword(properties.getProperty("FTEPassword"));
 				}
 				config.setAuthEndpoint(properties.getProperty("FTEAuthEndpoint"));
+				connection = new PartnerConnection(config);
+			} else if (properties.getProperty("RunEnvironment").equals("FTE2")) {
+				config = new ConnectorConfig();
+				if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
+					config.setUsername(properties.getProperty("FTE2GWSAPACManager"));
+					config.setPassword(properties.getProperty("FTE2GWSAPACManagerPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
+					config.setUsername(properties.getProperty("FTE2GWSEMEABroker"));
+					config.setPassword(properties.getProperty("FTE2GWSEMEABrokerPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VASAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
+					config.setUsername(properties.getProperty("FTE2VASAMERManager"));
+					config.setPassword(properties.getProperty("FTE2VASAMERManagerPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VASEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
+					config.setUsername(properties.getProperty("FTE2VASEMEABroker"));
+					config.setPassword(properties.getProperty("FTE2VASEMEABrokerPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
+					config.setUsername(properties.getProperty("FTE2ASAMERManager"));
+					config.setPassword(properties.getProperty("FTE2ASAMERManagerPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
+					config.setUsername(properties.getProperty("FTE2ASAPACBroker"));
+					config.setPassword(properties.getProperty("FTE2ASAPACBrokerPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
+					config.setUsername(properties.getProperty("FTE2ABAMERCSS"));
+					config.setPassword(properties.getProperty("FTE2Password"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
+					config.setUsername(properties.getProperty("FTE2ABAPACManager"));
+					config.setPassword(properties.getProperty("FTE2Password"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
+					config.setUsername(properties.getProperty("FTE2OBAMERCSS"));
+					config.setPassword(properties.getProperty("FTE2Password"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
+					config.setUsername(properties.getProperty("FTE2OBAMERManager"));
+					config.setPassword(properties.getProperty("FTE2Password"));
+				}
+				config.setAuthEndpoint(properties.getProperty("FTE2AuthEndpoint"));
 				connection = new PartnerConnection(config);
 			} else if (properties.getProperty("RunEnvironment").equals("UAT")) {
 				EstablishConnection establishConnection = new EstablishConnection(scriptHelper);

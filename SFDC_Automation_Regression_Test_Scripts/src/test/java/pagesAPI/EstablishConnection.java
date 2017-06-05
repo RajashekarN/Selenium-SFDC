@@ -61,6 +61,16 @@ public class EstablishConnection extends ReusableLibrary {
 				System.out.println("AuthEndPoint: " + FTE_AuthEndpoint);
 				config.setAuthEndpoint(FTE_AuthEndpoint);
 				connection = new PartnerConnection(config);
+			} else if (properties.getProperty("RunEnvironment").equals("FTE2")) {
+				String FTE2_Username = properties.getProperty("FTE2SystemAdminUsername");
+				String FTE2_Password = properties.getProperty("FTE2AdminPassword");
+				String FTE2_AuthEndpoint = properties.getProperty("FTE2AuthEndpoint");
+				config = new ConnectorConfig();
+				config.setUsername(FTE2_Username);
+				config.setPassword(FTE2_Password);
+				System.out.println("AuthEndPoint: " + FTE2_AuthEndpoint);
+				config.setAuthEndpoint(FTE2_AuthEndpoint);
+				connection = new PartnerConnection(config);
 			}
 		} catch (ConnectionException e) {
 			e.printStackTrace();
