@@ -448,6 +448,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//select[@id='record-type-select']/option[@selected='selected']")
 	WebElement defaultOpportutnityRecordType;
+	
+	@FindBy(xpath = "//div[@class='slds-form-element']/span[text()='Opportunity Record Type']/parent::div/div/span")
+	WebElement opportunityRecordTypeByDefault;	
 
 	/****
 	 * Ramya
@@ -4196,6 +4199,36 @@ public class OpportunitiesPage extends ReusableLibrary {
 			report.updateTestLog("Verify Active Opportunities", "Opportunities hyperlinks are present in Related section for Account", Status.PASS);		
 		} else {
 			report.updateTestLog("Verify Active Opportunities", "Opportunities hyperlinks are not present in Related section for Account", Status.FAIL);		
+		}
+	}
+	/**
+	 * Validating the Occupier Record Type should default to 'Occupier Brokerage'
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	
+	public void defaultOppRecordType() {
+		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
+		Utility_Functions.xClick(driver, menu_Opportunities, true);
+		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
+		Utility_Functions.xClick(driver, newOpportunity, true);
+		Utility_Functions.xSwitchtoFrame(driver, continueButton);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xClick(driver, continueButton, true);
+		Utility_Functions.xSwitchtoFrame(driver, closeDateOpp);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, viewAllFieldsButton, 3);
+		Utility_Functions.xClick(driver, viewAllFieldsButton, true);
+		Utility_Functions.xScrollWindowOnce(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, opportunityRecordTypeByDefault, 3);
+		if(opportunityRecordTypeByDefault.getText().equals("Occupier Brokerage")) {
+			report.updateTestLog("Verify Default Opportunity Record Type", "Opportunity Record Type is having the value as:::" + opportunityRecordTypeByDefault.getText(), Status.PASS);	
+		} else {
+			report.updateTestLog("Verify Default Opportunity Record Type", "Opportunity Record Type is not having the value as:::" + opportunityRecordTypeByDefault.getText(), Status.FAIL);
 		}
 	}
 }

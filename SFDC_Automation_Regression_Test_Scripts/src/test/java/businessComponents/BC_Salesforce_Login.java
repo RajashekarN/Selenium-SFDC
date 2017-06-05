@@ -52,6 +52,7 @@ public class BC_Salesforce_Login extends ReusableLibrary {
 
 	public void bc_login() throws InterruptedException {
 		sfLogin.login();
+		sfLogin.verifyLoginSuccessful();
 	}
 	
 	/**

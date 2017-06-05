@@ -540,4 +540,15 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	public void bc_activeOpportunities() {
 		sfOpportunitiesPage.validateActiveOpportunities();
 	}
+	
+	/**
+	 * Validating the Occupier Record Type should default to 'Occupier Brokerage'
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	
+	public void bc_occupierRecordType() {
+		sfOpportunitiesPage.defaultOppRecordType();
+	}
 }
