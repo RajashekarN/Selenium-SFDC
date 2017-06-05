@@ -462,7 +462,7 @@ public class LoginPage extends ReusableLibrary {
 			} else if (properties.getProperty("RunEnvironment").equals("FTE2")) {
 				if (dataTable.getData("General_Data", "TC_ID").contains("Admin")) {
 					Utility_Functions.xSendKeys(driver, txt_userName,
-							properties.getProperty("FTE22SystemAdminUsername"));
+							properties.getProperty("FTE2SystemAdminUsername"));
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER"))
 						&& (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
 					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("FTE2OBAMERCSS"));
