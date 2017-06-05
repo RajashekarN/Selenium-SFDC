@@ -465,10 +465,10 @@ public class LoginPage extends ReusableLibrary {
 							properties.getProperty("FTE22SystemAdminUsername"));
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER"))
 						&& (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("FTE22OBAMERCSS"));
+					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("FTE2OBAMERCSS"));
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER"))
 						&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("FTE22OBAMERManager"));
+					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("FTE2OBAMERManager"));
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER"))
 						&& (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
 					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("FTE2OBAMERBroker"));
@@ -734,7 +734,7 @@ public class LoginPage extends ReusableLibrary {
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VASAPAC"))
 						&& (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
 					Utility_Functions.xSendKeys(driver, txt_password,
-							properties.getProperty("FFTE2VASAPACBrokerPassword"));
+							properties.getProperty("FTE2VASAPACBrokerPassword"));
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VASEMEA"))
 						&& (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
 					Utility_Functions.xSendKeys(driver, txt_password,
