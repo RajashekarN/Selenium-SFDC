@@ -1311,7 +1311,7 @@ public class AccountsPage extends ReusableLibrary {
 		for (WebElement element : iframeList) {
 			System.out.println(element.getAttribute("id"));
 		}*/
-		driver.switchTo().frame(5);
+		Utility_Functions.xSwitchtoFrame(driver, subject);
 		Utility_Functions.timeWait(5);
 
 		List<WebElement> newActivityPageLayoutSections = driver

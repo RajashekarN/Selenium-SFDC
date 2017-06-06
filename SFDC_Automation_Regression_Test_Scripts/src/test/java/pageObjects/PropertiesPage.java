@@ -650,7 +650,7 @@ public class PropertiesPage extends ReusableLibrary {
 		for (WebElement element : iframeList) {
 			System.out.println(element.getAttribute("id"));
 		}*/
-		driver.switchTo().frame(2);
+		Utility_Functions.xSwitchtoFrame(driver, subject);
 		Utility_Functions.timeWait(5);
 		/*System.out.println("Frame Identified");
 		Utility_Functions.timeWait(5);*/

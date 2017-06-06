@@ -802,7 +802,7 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, newActivity, true);
 		report.updateTestLog("Verify New Activity Page Layout ","The New Activity in the related page is Displayed ",  Status.PASS);
 		
-		driver.switchTo().frame(4);
+		Utility_Functions.xSwitchtoFrame(driver, subject); 
 		Utility_Functions.timeWait(5);
 		
 		List<WebElement> newActivityPageLayoutSections = driver

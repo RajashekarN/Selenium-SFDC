@@ -59,7 +59,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//div[@class='bBottom']//span[text()='Opportunities']")
 	WebElement menu_Opportunities;
-	
+
 	@FindBy(xpath = "//div[@class='bBottom']//span[text()='Accounts']")
 	WebElement menu_Accounts;
 
@@ -431,7 +431,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//a[@title='APAC']")
 	WebElement regionValue_AS;
 
-/*	@FindBy(xpath = "//span[text()='Sales Stage']/parent::label/parent::div//a")
+	/*	@FindBy(xpath = "//span[text()='Sales Stage']/parent::label/parent::div//a")
 	WebElement salesStage_AS;
 
 	@FindBy(xpath = "//a[@title='2-Client Engaged']")
@@ -448,7 +448,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//select[@id='record-type-select']/option[@selected='selected']")
 	WebElement defaultOpportutnityRecordType;
-	
+
 	@FindBy(xpath = "//div[@class='slds-form-element']/span[text()='Opportunity Record Type']/parent::div/div/span")
 	WebElement opportunityRecordTypeByDefault;	
 
@@ -508,9 +508,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//div/a[@class='select'][text()='Occupier Lease']")
 	WebElement assignmentTypeEditPage;
-	
+
 	/**Release 37*/
-	
+
 	@FindBy(xpath="//span[text()='Opportunity Currency']")
 	WebElement opportunityCurrency;
 
@@ -525,108 +525,109 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath="//a[@aria-label='Mgmt Awarded To:']")
 	WebElement mgmtAwardedTo;
-	
+
 	@FindBy(xpath="//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Term of Contract']/parent::label/parent::div/input")
 	WebElement termOfContract;
-	
+
 	@FindBy(xpath="//a[@aria-label='Lead Source']")
 	WebElement leadSourceNewOpportunity;
-	
+
 	@FindBy(xpath="//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Opportunity Name']/parent::label/parent::div/input")
-    WebElement opportunityNameNewOpportunity;
-	
+	WebElement opportunityNameNewOpportunity;
+
 	@FindBy(xpath="//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Total Size']/parent::label/parent::div/input")
 	WebElement totalSizeNewOpportunity;
-	
+
 	@FindBy(xpath="//a[@aria-label='Unit of Measure']")
 	WebElement unitOfMeasureNewOpportunity;
-	
+
 	@FindBy(xpath="//a[@title='Square Feet']")
 	WebElement selectUnitOfMeasureNewOpportunity;
-	
+
 	@FindBy(xpath="//a[@aria-label='Region']")
 	WebElement regionNewOpportunity;
-	
+
 	@FindBy(xpath="//a[@title='US National']")
 	WebElement selectRegionNewOpportunity;
 
 	@FindBy(xpath="//select[@class=' select']/option[@value='Dallas/Ft. Worth']")
 	WebElement selectMarket;
-	
+
 	@FindBy(xpath="//input[@placeholder='Search Accounts']")
 	WebElement searchAccountsNewOpportunity;
-	
+
 	@FindBy(xpath="//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Sales Stage']")
 	WebElement salesStageNewopportunity;
-	
+
 	@FindBy(xpath="//a[@class='select'][text()='1-Target']")
 	WebElement selectSalesStageNewOpportunity;
-	
+
 	@FindBy(xpath="//div[@class='form-element']/a[@class='datePicker-openIcon display']/span[text()='Date Picker']")
 	WebElement closeDateCreateopportunity;
-	
+
 	@FindBy(xpath="//div[@class='uiDatePickerGrid--default uiDatePickerGrid']/table/thead/tr/th[4]")
 	WebElement selectCloseDateCreateOpportunity;
-	
+
 	@FindBy(xpath="//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Capital Markets Revenue']/parent::label/parent::div/input")
 	WebElement capitalRevenueFieldNewOpportunity;
-	
+
 	@FindBy(xpath = "//span[text()='Sales Stage']/parent::label/parent::div//a")
-    WebElement salesStage_AS;
+	WebElement salesStage_AS;
 
-    @FindBy(xpath = "//a[@title='2-Client Engaged']")
-    WebElement salesStageValue_AS;
+	@FindBy(xpath = "//a[@title='2-Client Engaged']")
+	WebElement salesStageValue_AS;
 
-    @FindBy(xpath = "//span[text()='Close Date']/parent::label/parent::div//input")
-    WebElement closeDate_AS;
+	@FindBy(xpath = "//span[text()='Close Date']/parent::label/parent::div//input")
+	WebElement closeDate_AS;
 
-    @FindBy(xpath = "//input[@placeholder='Search Accounts']")
-    WebElement accountName_AS;
-    
-    @FindBy(xpath="//button[@class='slds-button slds-button--neutral uiButton--default uiButton--brand uiButton forceActionButton']/span[text()='Save']")
-    WebElement saveNewOpportunity_AS;
-	
+	@FindBy(xpath = "//input[@placeholder='Search Accounts']")
+	WebElement accountName_AS;
+
+	@FindBy(xpath="//button[@class='slds-button slds-button--neutral uiButton--default uiButton--brand uiButton forceActionButton']/span[text()='Save']")
+	WebElement saveNewOpportunity_AS;
+
 	@FindBy(xpath="//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Est. EBITDA ($) - Won']/parent::label/parent::div/input")
 	WebElement newOpportunityEBITDAWon;
-	
+
 	@FindBy(xpath="//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Est. EBITDA ($) - Lost']/parent::label/parent::div/input")
 	WebElement newOpportunityEBITDALost;
-	
+
 	@FindBy(xpath="//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Est. EBITDA ($)']/parent::label/parent::div/input")
 	WebElement newOpportunityEBITDA;
-	
+
 	@FindBy(xpath="//div[@class='slds-form-element']/label[contains(text(),'Specialty Group')]")
 	WebElement specialityGroup;
-	
+
 	@FindBy(xpath="//select[@class='slds-select']/option[@value='Occupier Buyer']")
 	WebElement selectAssignmentType;
-	
+
 	@FindBy(xpath="//span[text()='RFP Due Date']/parent::label/parent::div//input")
 	WebElement rfpDueDate;
-	
+
 	@FindBy(xpath="//span[text()='Pitch Date']/parent::label/parent::div//input")
 	WebElement pitchDueDate;
-	
+
 	@FindBy(xpath="//span[text()='Average Annual Leasing Commission']/parent::label/parent::div//input")
 	WebElement annualAverageLeasingCommission;
-	
+
 	@FindBy(xpath="//span[contains(text(),'Preferred Property Type')]/span/abbr[text()='*']")
 	WebElement preferedPropertyTypeRequiredField;
-	
+
 	@FindBy(xpath="//li[contains(text(),'Preferred Property Type: You must enter a value')]")
 	WebElement errorMessageForPreferedPropertyType;
-	
+
 	@FindBy(xpath="//a[@aria-label='Leasing']")
 	WebElement leasing;
-	
+
 	@FindBy(xpath="//a[@aria-label='Leasing'][text()='No']")
 	WebElement selectleasing;
-	
+
 	@FindBy(xpath="//div[@class='select-options']/ul/li[3]/a[@title='No']")
 	WebElement noOption;
-	
-	
-	
+
+	@FindBy(xpath="//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Success Probability (%)']/parent::label/parent::div/input")
+	WebElement successProbability;
+
 
 	HomePage hp = new HomePage(scriptHelper);
 	SearchTextSOQL searchOpportunity = new SearchTextSOQL(scriptHelper);
@@ -825,7 +826,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			report.updateTestLog("Verify Add Opportunity Page Fields",
 					"URL has been replaced with the new URL having the retrieved Opportunity:::" + newUrl, Status.PASS);
 			driver.get(newUrl);
-	
+
 			SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
 			String query_TotalSize = "Select Total_Size__c from Opportunity where Id = " + "'" + OpportunityID + "'";
 			String totalSize = searchTextSOQL.fetchRecordFieldValue("Total_Size__c", query_TotalSize);
@@ -833,7 +834,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 					+ "'" + OpportunityID + "'";
 			String preferredPropertyType = searchTextSOQL.fetchRecordFieldValue("CBRE_Preferred_Property_Type_c__c",
 					query_PreferredPropertyType);
-	
+
 			try {
 				if (!(totalSize.equals("")) && !(preferredPropertyType.equals(" "))) {
 					report.updateTestLog("Verify Add Opportunity Page Fields",
@@ -3503,7 +3504,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, newOpportunity, true);
 		report.updateTestLog("Verify Opportunity Leasing AnnualRevenue Field   ",
 				"Verifying the new opportunity page is displayed", Status.PASS);
-		Utility_Functions.timeWait(3);	
+		Utility_Functions.timeWait(3);     
 		Utility_Functions.xScrollWindow(driver);
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xScrollWindowTop(driver);
@@ -3514,29 +3515,34 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xSendKeys(driver, opportunityNameNewOpportunity, "test");
 		report.updateTestLog("Verify Opportunity Leasing AnnualRevenue Field  ",
 				"Verifying the Opportunities Name is entered", Status.PASS);
+
+		Utility_Functions.xWaitForElementPresent(driver, successProbability, 3);
+		Utility_Functions.xClick(driver, successProbability, true);
+		Utility_Functions.xWaitForElementPresent(driver, successProbability, 3);
+		Utility_Functions.xSendKeys(driver,successProbability, "100");
 		Utility_Functions.xWaitForElementPresent(driver, totalSizeNewOpportunity, 3);
 		Utility_Functions.xClick(driver, totalSizeNewOpportunity, true);
 
-		Utility_Functions.xWaitForElementPresent(driver, totalSizeNewOpportunity, 3);
-		Utility_Functions.xSendKeys(driver, totalSizeNewOpportunity, "100");
-		report.updateTestLog("Verify Opportunity Leasing AnnualRevenue Field  ",
-				"Verifying the total size in New Opportunity Page is entered", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, unitOfMeasureNewOpportunity, 3);
-		Utility_Functions.xClick(driver, unitOfMeasureNewOpportunity, true);
-		Utility_Functions.xWaitForElementPresent(driver, selectUnitOfMeasureNewOpportunity, 3);
-		Utility_Functions.xClick(driver, selectUnitOfMeasureNewOpportunity, true);
-		report.updateTestLog("Verify Opportunity Leasing AnnualRevenue Field  ",
-				"Verifying the unit of Measure in New Opportunity Page is selected", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, regionNewOpportunity, 3);
-		Utility_Functions.xClick(driver, regionNewOpportunity, true);
-		Utility_Functions.xWaitForElementPresent(driver, selectRegionNewOpportunity, 3);
-		Utility_Functions.xClick(driver, selectRegionNewOpportunity, true);
-		report.updateTestLog("Verify Opportunity Leasing AnnualRevenue Field  ",
-				"Verifying the Region field in New Opportunity Page is selected", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, selectMarket, 3);
-		Utility_Functions.xClick(driver, selectMarket, true);
-		report.updateTestLog("Verify Opportunity Leasing AnnualRevenue Field  ",
-				"Verifying the market field in New Opportunity Page is selected", Status.PASS);
+		/*Utility_Functions.xWaitForElementPresent(driver, totalSizeNewOpportunity, 3);
+        Utility_Functions.xSendKeys(driver, totalSizeNewOpportunity, "100");
+        report.updateTestLog("Verify Opportunity Leasing AnnualRevenue Field  ",
+                                      "Verifying the total size in New Opportunity Page is entered", Status.PASS);
+        Utility_Functions.xWaitForElementPresent(driver, unitOfMeasureNewOpportunity, 3);
+        Utility_Functions.xClick(driver, unitOfMeasureNewOpportunity, true);
+        Utility_Functions.xWaitForElementPresent(driver, selectUnitOfMeasureNewOpportunity, 3);
+        Utility_Functions.xClick(driver, selectUnitOfMeasureNewOpportunity, true);
+        report.updateTestLog("Verify Opportunity Leasing AnnualRevenue Field  ",
+                                      "Verifying the unit of Measure in New Opportunity Page is selected", Status.PASS);
+        Utility_Functions.xWaitForElementPresent(driver, regionNewOpportunity, 3);
+        Utility_Functions.xClick(driver, regionNewOpportunity, true);
+        Utility_Functions.xWaitForElementPresent(driver, selectRegionNewOpportunity, 3);
+        Utility_Functions.xClick(driver, selectRegionNewOpportunity, true);
+        report.updateTestLog("Verify Opportunity Leasing AnnualRevenue Field  ",
+                                      "Verifying the Region field in New Opportunity Page is selected", Status.PASS);
+        Utility_Functions.xWaitForElementPresent(driver, selectMarket, 3);
+        Utility_Functions.xClick(driver, selectMarket, true);
+        report.updateTestLog("Verify Opportunity Leasing AnnualRevenue Field  ",
+                                      "Verifying the market field in New Opportunity Page is selected", Status.PASS);*/
 		Utility_Functions.xWaitForElementPresent(driver, searchAccountsNewOpportunity, 3);
 		Utility_Functions.xSendKeys(driver, searchAccountsNewOpportunity, "Test");
 		report.updateTestLog("Verify Opportunity Leasing AnnualRevenue Field  ",
@@ -3544,12 +3550,12 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		try {
 			Utility_Functions.xClick(driver, driver.findElement(By.xpath("//div[contains(@title,'Test')]")), true);
-			Utility_Functions.timeWait(3);	
-			Utility_Functions.xScrollWindow(driver);
+			Utility_Functions.timeWait(3);     
+			/*Utility_Functions.xScrollWindow(driver);
 			Utility_Functions.timeWait(2);
 			Utility_Functions.xScrollWindowTop(driver);
 			Utility_Functions.timeWait(2);
-			Utility_Functions.timeWait(1);
+			Utility_Functions.timeWait(1);*/
 			Utility_Functions.xWaitForElementPresent(driver, salesStage_AS, 4);
 			Utility_Functions.xClick(driver, salesStage_AS, true);
 			Utility_Functions.xClick(driver, salesStageValue_AS, true);
@@ -3566,8 +3572,11 @@ public class OpportunitiesPage extends ReusableLibrary {
 			Utility_Functions.xClick(driver, saveNewOpportunity_AS, true);
 			report.updateTestLog("Verify Opportunity Leasing AnnualRevenue Field ", "Opportunity Saved successfully::", Status.PASS);
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+
 	}
 
 
@@ -3827,7 +3836,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, saveNewOpportunity_AS, true);
 		report.updateTestLog("Verify New Opportunity RFP and Pitch Due Date Fields ","Verifying all the required values are entered in the new Opportunity Page are entered along with the RFP Due Date and Pitch Due Date ",Status.PASS);
 	}
-	
+
 	/**
 	 * Validating the new Opportunity page for the Annual Leasing Commission Field
 	 * 
@@ -4191,14 +4200,14 @@ public class OpportunitiesPage extends ReusableLibrary {
 			report.updateTestLog("Verify Quick Create Opportunity Page Term Of Contract","The Term of Contract Field is not present ",Status.FAIL);
 		}
 	}
-	
+
 	/**
 	 * Validating the Active Opportunities related to Account
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */	
-	
+
 	public String retriveAccountOpp() {
 		String query = "SELECT Id, Total_Number_Of_Opps__c FROM Account where Total_Number_Of_Opps__c > 1 limit 1 offset 9";
 		String sAccountID = searchOpportunity.fetchRecordFieldValue("Id", query);
@@ -4210,7 +4219,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(1);
 		return sAccountID;
 	}
-	
+
 	public void validateActiveOpportunities() {
 		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
 		Utility_Functions.xClick(driver, menu_Accounts, true);
@@ -4241,7 +4250,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 * @author Vishnuvardhan
 	 *
 	 */	
-	
+
 	public void defaultOppRecordType() {
 		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
 		Utility_Functions.xClick(driver, menu_Opportunities, true);
