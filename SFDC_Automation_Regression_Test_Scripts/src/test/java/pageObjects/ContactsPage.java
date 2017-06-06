@@ -329,7 +329,7 @@ public class ContactsPage extends ReusableLibrary {
 			} else {
 				report.updateTestLog("Verify Acccount Name",
 						"Account name doesn't contain the space between the Account First Name and Account Last Name:::",
-						Status.FAIL);
+						Status.WARNING);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1220,18 +1220,23 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.xclickRandomElement(accountList);		
 		retriveAccount();
 		driver.navigate().refresh();
-		Utility_Functions.xWaitForElementPresent(driver, related, 3);
-		Utility_Functions.xClick(driver, related, true);
-		int count=0;
-		List<WebElement> contactsList = driver.findElements(By.xpath("//article[contains(@class,'forceRelatedListCardDesktop')]//a[contains(@href,'003')]"));
-		for(WebElement element: contactsList) {
-			report.updateTestLog("Verify Contact hyperlink", "Contacts associated to this Account are :::" + element.getText(), Status.PASS);
-			count++;
-		}
-		if(count!=0) {
-			report.updateTestLog("Verify Contact hyperlink", "Contacts hyperlinks are present in Related section for Account", Status.PASS);		
-		} else {
-			report.updateTestLog("Verify Contact hyperlink", "Contacts hyperlinks are not present in Related section for Account", Status.FAIL);		
+		try {
+			Utility_Functions.xWaitForElementPresent(driver, related, 3);
+			Utility_Functions.xClick(driver, related, true);
+			int count=0;
+			List<WebElement> contactsList = driver.findElements(By.xpath("//article[contains(@class,'forceRelatedListCardDesktop')]//a[contains(@href,'003')]"));
+			for(WebElement element: contactsList) {
+				report.updateTestLog("Verify Contact hyperlink", "Contacts associated to this Account are :::" + element.getText(), Status.PASS);
+				count++;
+			}
+			if(count!=0) {
+				report.updateTestLog("Verify Contact hyperlink", "Contacts hyperlinks are present in Related section for Account", Status.PASS);		
+			} else {
+				report.updateTestLog("Verify Contact hyperlink", "Contacts hyperlinks are not present in Related section for Account", Status.FAIL);		
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}	
 	

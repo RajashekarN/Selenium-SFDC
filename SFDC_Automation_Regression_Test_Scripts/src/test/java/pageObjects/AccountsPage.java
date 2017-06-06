@@ -2308,31 +2308,36 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, menu_Reports, true);
 		Utility_Functions.xWaitForElementPresent(driver, newReport, 3);
 		Utility_Functions.xClick(driver, newReport, true);
-		Utility_Functions.xSwitchtoFrame(driver, reportTypeInput);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xSendKeys(driver, reportTypeInput, "CIM");
-		List<WebElement> reportsList = driver.findElements(By.xpath("//div[@class='x-tree-root-node']//span[contains(text(),'CIM')]"));
-		reportsCIMList();		
-		String[] linkTexts = new String[reportsCIMList.size()];
-		int i = 0, count = 0;
 		try {
-			for (WebElement element : reportsList) {
-				linkTexts[i] = element.getText();
-				if (linkTexts[i].equals(reportsCIMList.get(i))) {
-					count++;
-					report.updateTestLog("Verify Reports CIM", "Value " +  element.getText() + "is present under CIM Reports List", Status.PASS);
-					//System.out.println(element.getText());	
+			Utility_Functions.xSwitchtoFrame(driver, reportTypeInput);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xWaitForElementPresent(driver, reportTypeInput, 3);
+			Utility_Functions.xSendKeys(driver, reportTypeInput, "CIM");
+			List<WebElement> reportsList = driver.findElements(By.xpath("//div[@class='x-tree-root-node']//span[contains(text(),'CIM')]"));
+			reportsCIMList();		
+			String[] linkTexts = new String[reportsCIMList.size()];
+			int i = 0, count = 0;
+			try {
+				for (WebElement element : reportsList) {
+					linkTexts[i] = element.getText();
+					if (linkTexts[i].equals(reportsCIMList.get(i))) {
+						count++;
+						report.updateTestLog("Verify Reports CIM", "Value " +  element.getText() + "is present under CIM Reports List", Status.PASS);
+						//System.out.println(element.getText());	
+					}
+					i++;
 				}
-				i++;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			System.out.println(count);
+			if(count==14) {
+				report.updateTestLog("Verify Reports CIM", "All the reports with respect CIM are present", Status.PASS);
+			} else {
+				report.updateTestLog("Verify Reports CIM", "All the reports with respect CIM are not present", Status.FAIL);
 			}
 		} catch (Exception e) {
-			//System.out.println(e.getMessage());
-		}
-		System.out.println(count);
-		if(count==14) {
-			report.updateTestLog("Verify Reports CIM", "All the reports with respect CIM are present", Status.PASS);
-		} else {
-			report.updateTestLog("Verify Reports CIM", "All the reports with respect CIM are not present", Status.FAIL);
+			e.printStackTrace();
 		}	
 	}
 

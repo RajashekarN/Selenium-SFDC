@@ -31,7 +31,7 @@ public class PropertiesPage extends ReusableLibrary {
 		// Utility_Functions utility = new Utility_Functions(scriptHelper);
 	}
 
-	@FindBy(xpath = "//button[contains(@class,'context-bar__label-action')][text()='More']")
+	@FindBy(xpath = "//a[contains(@class,'context-bar__label-action')]/span[text()='More']")
 	WebElement menu_More;
 
 	@FindBy(xpath = "//a[@role='menuitem']/span[contains(@class,'slds-truncate')][text()='Properties']")

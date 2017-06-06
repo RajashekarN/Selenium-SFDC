@@ -813,46 +813,51 @@ public class OpportunitiesPage extends ReusableLibrary {
 	public void requiredFieldsbetweenw03_05Stages() {
 		String query = "SELECT Id, Name FROM Opportunity where StageName > '03-RFP/Proposal' and StageName < '15-Signed Lease' and Total_Size__c !=null and CBRE_Preferred_Property_Type_c__c !=null limit 10";
 		String OpportunityID = searchOpportunity.searchOpportunity(query);
-		report.updateTestLog("Verify Opportunity Required Fields",
-				"Opportunity retrived from database is:::" + OpportunityID, Status.PASS);
-		String url = driver.getCurrentUrl().split("#")[0];
-		String newUrl = url + "#/sObject/" + OpportunityID;
-		newUrl = newUrl + "/view";
-		report.updateTestLog("Verify Add Opportunity Page Fields",
-				"URL has been replaced with the new URL having the retrieved Opportunity:::" + newUrl, Status.PASS);
-		driver.get(newUrl);
-
-		SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
-		String query_TotalSize = "Select Total_Size__c from Opportunity where Id = " + "'" + OpportunityID + "'";
-		String totalSize = searchTextSOQL.fetchRecordFieldValue("Total_Size__c", query_TotalSize);
-		String query_PreferredPropertyType = "Select CBRE_Preferred_Property_Type_c__c  from Opportunity where Id = "
-				+ "'" + OpportunityID + "'";
-		String preferredPropertyType = searchTextSOQL.fetchRecordFieldValue("CBRE_Preferred_Property_Type_c__c",
-				query_PreferredPropertyType);
-
-		try {
-			if (!(totalSize.equals("")) && !(preferredPropertyType.equals(" "))) {
-				report.updateTestLog("Verify Add Opportunity Page Fields",
-						"Total Size Value and Preferred Property Type fields has values present", Status.PASS);
-			} else {
-				report.updateTestLog("Verify Add Opportunity Page Fields",
-						"Total Size Value and Preferred Property Type fields has values present", Status.FAIL);
-			}
-		} catch (Exception e) {
-			e.getMessage();
-		}
-		OpportunitiesFunctions update = new OpportunitiesFunctions(scriptHelper);
-		update.updateOpportunityField("StageName", OpportunityID);
-		update.updateOpportunityField("EMEA_Success_Probability__c", OpportunityID);
-		String updateQuery = "SELECT Id, Name, StageName FROM Opportunity where Id = " + "'" + OpportunityID + "'";
-		searchOpportunity.searchOpportunity(updateQuery);
-		String resultQuery = "SELECT Id, Name, StageName FROM Opportunity where Id = " + "'" + OpportunityID + "'";
-		String opportunityStage = searchOpportunity.fetchRecordFieldValue("StageName", resultQuery);
-		System.out.println(opportunityStage);
-		if (opportunityStage.contains("Closed")) {
-			report.updateTestLog("Verify Opportunity Update", "Sales Stage has been updated successfully", Status.PASS);
+		if(OpportunityID==null) {
+			report.updateTestLog("Verify Opportunity",
+					"There are no Opportunities that falls under this category:::", Status.PASS);
 		} else {
-			report.updateTestLog("Verify Opportunity Update", "Sales Stage updation has been failed", Status.FAIL);
+			report.updateTestLog("Verify Opportunity Required Fields",
+					"Opportunity retrived from database is:::" + OpportunityID, Status.PASS);
+			String url = driver.getCurrentUrl().split("#")[0];
+			String newUrl = url + "#/sObject/" + OpportunityID;
+			newUrl = newUrl + "/view";
+			report.updateTestLog("Verify Add Opportunity Page Fields",
+					"URL has been replaced with the new URL having the retrieved Opportunity:::" + newUrl, Status.PASS);
+			driver.get(newUrl);
+	
+			SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
+			String query_TotalSize = "Select Total_Size__c from Opportunity where Id = " + "'" + OpportunityID + "'";
+			String totalSize = searchTextSOQL.fetchRecordFieldValue("Total_Size__c", query_TotalSize);
+			String query_PreferredPropertyType = "Select CBRE_Preferred_Property_Type_c__c  from Opportunity where Id = "
+					+ "'" + OpportunityID + "'";
+			String preferredPropertyType = searchTextSOQL.fetchRecordFieldValue("CBRE_Preferred_Property_Type_c__c",
+					query_PreferredPropertyType);
+	
+			try {
+				if (!(totalSize.equals("")) && !(preferredPropertyType.equals(" "))) {
+					report.updateTestLog("Verify Add Opportunity Page Fields",
+							"Total Size Value and Preferred Property Type fields has values present", Status.PASS);
+				} else {
+					report.updateTestLog("Verify Add Opportunity Page Fields",
+							"Total Size Value and Preferred Property Type fields has values present", Status.FAIL);
+				}
+			} catch (Exception e) {
+				e.getMessage();
+			}
+			OpportunitiesFunctions update = new OpportunitiesFunctions(scriptHelper);
+			update.updateOpportunityField("StageName", OpportunityID);
+			update.updateOpportunityField("EMEA_Success_Probability__c", OpportunityID);
+			String updateQuery = "SELECT Id, Name, StageName FROM Opportunity where Id = " + "'" + OpportunityID + "'";
+			searchOpportunity.searchOpportunity(updateQuery);
+			String resultQuery = "SELECT Id, Name, StageName FROM Opportunity where Id = " + "'" + OpportunityID + "'";
+			String opportunityStage = searchOpportunity.fetchRecordFieldValue("StageName", resultQuery);
+			System.out.println(opportunityStage);
+			if (opportunityStage.contains("Closed")) {
+				report.updateTestLog("Verify Opportunity Update", "Sales Stage has been updated successfully", Status.PASS);
+			} else {
+				report.updateTestLog("Verify Opportunity Update", "Sales Stage updation has been failed", Status.FAIL);
+			}
 		}
 	}
 
@@ -867,16 +872,22 @@ public class OpportunitiesPage extends ReusableLibrary {
 	public void requiredFieldsbetweenw16_19Stages() {
 		String query = "SELECT Id, Name FROM Opportunity where StageName > '16-In Escrow' and StageName < '19-Closed' and Total_Size__c !=null limit 10";
 		String OpportunityID = searchOpportunity.searchOpportunity(query);
-		report.updateTestLog("Verify Opportunity Required Fields",
-				"Opportunity retrived from database is:::" + OpportunityID, Status.PASS);
-		String url = driver.getCurrentUrl().split("#")[0];
-		String newUrl = url + "#/sObject/" + OpportunityID;
-		newUrl = newUrl + "/view";
-		report.updateTestLog("Verify Add Opportunity Page Fields",
-				"URL has been replaced with the new URL having the retrieved Opportunity:::" + newUrl, Status.PASS);
-		driver.get(newUrl);
-		Utility_Functions.timeWait(1);
-		validateOpportunityFields(OpportunityID);
+		System.out.println(OpportunityID);
+		if(OpportunityID==null) {
+			report.updateTestLog("Verify Opportunity",
+					"There are no Opportunities that falls under this category:::", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Opportunity Required Fields",
+					"Opportunity retrived from database is:::" + OpportunityID, Status.PASS);
+			String url = driver.getCurrentUrl().split("#")[0];
+			String newUrl = url + "#/sObject/" + OpportunityID;
+			newUrl = newUrl + "/view";
+			report.updateTestLog("Verify Add Opportunity Page Fields",
+					"URL has been replaced with the new URL having the retrieved Opportunity:::" + newUrl, Status.PASS);
+			driver.get(newUrl);
+			Utility_Functions.timeWait(1);
+			validateOpportunityFields(OpportunityID);
+		}	
 	}
 
 	/**
@@ -3531,30 +3542,32 @@ public class OpportunitiesPage extends ReusableLibrary {
 		report.updateTestLog("Verify Opportunity Leasing AnnualRevenue Field  ",
 				"Verifying the Account Name in New Opportunity Page is entered", Status.PASS);
 		Utility_Functions.timeWait(2);
-		Utility_Functions.xClick(driver, driver.findElement(By.xpath("//div[contains(@title,'Test')]")), true);
-		Utility_Functions.timeWait(3);	
-		Utility_Functions.xScrollWindow(driver);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xScrollWindowTop(driver);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xWaitForElementPresent(driver, salesStage_AS, 4);
-		Utility_Functions.xClick(driver, salesStage_AS, true);
-		Utility_Functions.xClick(driver, salesStageValue_AS, true);
-		report.updateTestLog("Verify Opportunity Leasing AnnualRevenue Field  ",
-				"Verifying the Sales Stage in New Opportunity Page is entered", Status.PASS);
-		System.out.println(Calendar.getInstance());
-		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-		Date date = new Date();
-		Utility_Functions.xWaitForElementPresent(driver, closeDate_AS, 3);
-		Utility_Functions.xSendKeys(driver, closeDate_AS, dateFormat.format(date).toString());
-		report.updateTestLog("Verify Opportunity Leasing AnnualRevenue Field  ",
-				"Verifying the close date in New Opportunity Page is entered", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, saveNewOpportunity_AS, 3);
-		Utility_Functions.xClick(driver, saveNewOpportunity_AS, true);
-		report.updateTestLog("Verify Opportunity Leasing AnnualRevenue Field ", "Opportunity Saved successfully::", Status.PASS);
-
-
+		try {
+			Utility_Functions.xClick(driver, driver.findElement(By.xpath("//div[contains(@title,'Test')]")), true);
+			Utility_Functions.timeWait(3);	
+			Utility_Functions.xScrollWindow(driver);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xScrollWindowTop(driver);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.timeWait(1);
+			Utility_Functions.xWaitForElementPresent(driver, salesStage_AS, 4);
+			Utility_Functions.xClick(driver, salesStage_AS, true);
+			Utility_Functions.xClick(driver, salesStageValue_AS, true);
+			report.updateTestLog("Verify Opportunity Leasing AnnualRevenue Field  ",
+					"Verifying the Sales Stage in New Opportunity Page is entered", Status.PASS);
+			System.out.println(Calendar.getInstance());
+			DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+			Date date = new Date();
+			Utility_Functions.xWaitForElementPresent(driver, closeDate_AS, 3);
+			Utility_Functions.xSendKeys(driver, closeDate_AS, dateFormat.format(date).toString());
+			report.updateTestLog("Verify Opportunity Leasing AnnualRevenue Field  ",
+					"Verifying the close date in New Opportunity Page is entered", Status.PASS);
+			Utility_Functions.xWaitForElementPresent(driver, saveNewOpportunity_AS, 3);
+			Utility_Functions.xClick(driver, saveNewOpportunity_AS, true);
+			report.updateTestLog("Verify Opportunity Leasing AnnualRevenue Field ", "Opportunity Saved successfully::", Status.PASS);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 

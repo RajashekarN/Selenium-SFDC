@@ -377,7 +377,7 @@ public class LeadsPage extends ReusableLibrary {
 				if(accountNames.getText().contains(" ")) {
 					report.updateTestLog("Verify Acccount Name", "Account name contains the space between the Account First Name and Account Last Name:::", Status.PASS);
 				} else {
-					report.updateTestLog("Verify Acccount Name", "Account name doesn't contain the space between the Account First Name and Account Last Name:::", Status.FAIL);
+					report.updateTestLog("Verify Acccount Name", "Account name doesn't contain the space between the Account First Name and Account Last Name:::", Status.WARNING);
 				}
 			} catch (Exception e) {
 				//e.printStackTrace();
