@@ -33,7 +33,7 @@ public class EstablishConnection extends ReusableLibrary {
 	static com.sforce.soap.partner.Error[] errors;
 	static boolean status = false;
 	static String result;
-	static String environment = LoginPage.environment;
+	String environment = LoginPage.environment;
 	
 	/**
 	 * Function for establishing the connection
@@ -44,6 +44,7 @@ public class EstablishConnection extends ReusableLibrary {
 
 	public void establishConnection() {
 		try {
+			System.out.println(LoginPage.environment);
 			if (environment.equals("UAT")) {
 				String UAT_Username = properties.getProperty("UATSystemAdminUsername");
 				String UAT_Password = properties.getProperty("UATAdminPassword");

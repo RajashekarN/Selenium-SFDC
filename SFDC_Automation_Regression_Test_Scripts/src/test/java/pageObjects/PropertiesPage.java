@@ -37,7 +37,7 @@ public class PropertiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//a[@role='menuitem']/span[contains(@class,'slds-truncate')][text()='Properties']")
 	WebElement properties;	
 	
-	@FindBy(xpath = "//a[@title='Properties'][text()='Properties']")
+	@FindBy(xpath = "//div[@class='overflowList']//a[@title='Properties'][text()='Properties']")
 	WebElement propertiesEnv;	
 
 	@FindBy(xpath = "//div[@class='slds-truncate'][@title='New']")
@@ -94,6 +94,9 @@ public class PropertiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//a[@role='menuitem']/span[contains(@class,'slds-truncate')][text()='Campaigns']")
 	WebElement campaigns;	
 
+	@FindBy(xpath = "//div[@class='overflowList']//a[@title='Campaigns'][text()='Campaigns']")
+	WebElement campaignsEnv;	
+	
 	/**
 	 * 
 	 * 
@@ -166,10 +169,24 @@ public class PropertiesPage extends ReusableLibrary {
 
 	public void validateCustomPropertyPage() {
 		try {
-			Utility_Functions.xClick(driver, menu_More, true);
+			/*Utility_Functions.xClick(driver, menu_More, true);
 			Utility_Functions.timeWait(2);
 			Utility_Functions.xClick(driver, properties, true);
-			Utility_Functions.timeWait(4);
+			Utility_Functions.timeWait(4);*/
+			try{
+				Utility_Functions.xWaitForElementPresent(driver,menu_Properties, 3);
+				Utility_Functions.xClick(driver, menu_Properties, true);
+			}catch(Exception e){
+				Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
+				Utility_Functions.xClick(driver, menu_More, true);
+				try {
+					Utility_Functions.xWaitForElementPresent(driver, properties, 2);
+					Utility_Functions.xClick(driver, properties, true);
+				} catch (Exception e1) {
+					Utility_Functions.xWaitForElementPresent(driver, propertiesEnv, 2);
+					Utility_Functions.xClick(driver, propertiesEnv, true);
+				}	
+			}
 			Utility_Functions.xClick(driver, newProperty, true);
 			Utility_Functions.timeWait(2);
 			driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@title,'New Property: Select Property Record Type ~ Salesforce - Enterprise Edition')]")));
@@ -454,8 +471,13 @@ public class PropertiesPage extends ReusableLibrary {
 		}catch(Exception e){
 			Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
 			Utility_Functions.xClick(driver, menu_More, true);
-			Utility_Functions.xWaitForElementPresent(driver, properties, 2);
-			Utility_Functions.xClick(driver, properties, true);	
+			try {
+				Utility_Functions.xWaitForElementPresent(driver, properties, 2);
+				Utility_Functions.xClick(driver, properties, true);
+			} catch (Exception e1) {
+				Utility_Functions.xWaitForElementPresent(driver, propertiesEnv, 2);
+				Utility_Functions.xClick(driver, propertiesEnv, true);
+			}	
 		}
 		report.updateTestLog("Verify Create Activity Properties ","Properties is Displayed ",  Status.PASS);
 		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
@@ -497,7 +519,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 		Utility_Functions.xClick(driver, subject, true);
 		Utility_Functions.xWaitForElementPresent(driver, subject, 5);
-		Utility_Functions.xSendKeys(driver, subject, "test1");
+		Utility_Functions.xSendKeys(driver, subject, "Test Activity Created by Automation");
 		Utility_Functions.xWaitForElementPresent(driver, activityType, 5);
 		Utility_Functions.xClick(driver, activityType, true);
 		Utility_Functions.xWaitForElementPresent(driver, saveAndNewActivity, 5);
@@ -517,7 +539,7 @@ public class PropertiesPage extends ReusableLibrary {
 		SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
 		String query = "select Name from Activity__C where Subject__C = " + "'" + "Test Activity Created by Automation" + value + "'";
 		String nameActivity = searchTextSOQL.fetchRecordFieldValue("Name", query);
-		if(nameActivity.isEmpty()) {
+		if(nameActivity==null) {
 			System.out.println("Activity has not been retrieved");
 			report.updateTestLog("Verify Create Activity Properties ","The newly created Activity has not been retrieved ",  Status.FAIL);
 		} else {
@@ -534,9 +556,6 @@ public class PropertiesPage extends ReusableLibrary {
 				"URL has been replaced with the new URL having the retrieved Opportunity:::" + newUrl, Status.PASS);
 		driver.get(newUrl);
 		driver.navigate().refresh();
-
-
-
 		Utility_Functions.timeWait(4);
 		driver.navigate().refresh();
 		Utility_Functions.timeWait(1);
@@ -576,8 +595,13 @@ public class PropertiesPage extends ReusableLibrary {
 		}catch(Exception e){
 			Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
 			Utility_Functions.xClick(driver, menu_More, true);
-			Utility_Functions.xWaitForElementPresent(driver, properties, 2);
-			Utility_Functions.xClick(driver, properties, true);	
+			try {
+				Utility_Functions.xWaitForElementPresent(driver, properties, 2);
+				Utility_Functions.xClick(driver, properties, true);
+			} catch (Exception e1) {
+				Utility_Functions.xWaitForElementPresent(driver, propertiesEnv, 2);
+				Utility_Functions.xClick(driver, propertiesEnv, true);
+			}	
 		}
 		//Utility_Functions.xClick(driver, recentlyViewed, true);
 		//Utility_Functions.timeWait(3);
@@ -618,14 +642,14 @@ public class PropertiesPage extends ReusableLibrary {
 		}catch(Exception e){
 			Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
 			Utility_Functions.xClick(driver, menu_More, true);			
-		}
-		try {
-			Utility_Functions.xWaitForElementPresent(driver, properties, 2);
-			Utility_Functions.xClick(driver, properties, true);
-		} catch (Exception e1) {
-			Utility_Functions.xWaitForElementPresent(driver, propertiesEnv, 2);
-			Utility_Functions.xClick(driver, propertiesEnv, true);
-		}	
+			try {
+				Utility_Functions.xWaitForElementPresent(driver, properties, 2);
+				Utility_Functions.xClick(driver, properties, true);
+			} catch (Exception e1) {
+				Utility_Functions.xWaitForElementPresent(driver, propertiesEnv, 2);
+				Utility_Functions.xClick(driver, propertiesEnv, true);
+			}	
+		}		
 		report.updateTestLog("Verify New Activity Page Layout ","Properties is Displayed ",  Status.PASS);
 		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
 		Utility_Functions.xClick(driver, recentlyViewed, true);
@@ -1009,20 +1033,20 @@ public class PropertiesPage extends ReusableLibrary {
 	 */
 
 	public void verifyNewActivityPropertiesPageSendNotificationEmail(){
-
 		try{
 			Utility_Functions.xWaitForElementPresent(driver,menu_Properties, 3);
 			Utility_Functions.xClick(driver, menu_Properties, true);
 		}catch(Exception e){
 			Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
-			Utility_Functions.xClick(driver, menu_More, true);
-			Utility_Functions.xWaitForElementPresent(driver, properties, 2);
-			Utility_Functions.xClick(driver, properties, true);	
+			Utility_Functions.xClick(driver, menu_More, true);			
+			try {
+				Utility_Functions.xWaitForElementPresent(driver, properties, 2);
+				Utility_Functions.xClick(driver, properties, true);
+			} catch (Exception e1) {
+				Utility_Functions.xWaitForElementPresent(driver, propertiesEnv, 2);
+				Utility_Functions.xClick(driver, propertiesEnv, true);
+			}	
 		}
-
-
-
-
 		report.updateTestLog("Verify New Activity Page send Notification Email ","Verifying the Accounts is Displayed ",  Status.PASS);
 
 		List<WebElement> propertiesList = driver.findElements(
@@ -1100,17 +1124,27 @@ public class PropertiesPage extends ReusableLibrary {
 				}
 			}
 			if(count==0) {
-				report.updateTestLog("Verify Campaigns Tab","Campaigns tab is not present in the dropdown:::", Status.PASS);
+				report.updateTestLog("Verify Campaigns Tab","Campaigns tab is not present in the dropdown:::", Status.FAIL);
 			} else {
-				report.updateTestLog("Verify Campaigns Tab","Campaigns tab is present in the dropdown:::", Status.FAIL);
+				report.updateTestLog("Verify Campaigns Tab","Campaigns tab is present in the dropdown:::", Status.PASS);
 			}
 		} 
 		if(dataTable.getData("General_Data", "TC_ID").contains("OBAPACBrokerCampaignsTab")) {
-			Utility_Functions.xWaitForElementPresent(driver, campaigns, 2);
-			if(campaigns.isDisplayed()) {
-				report.updateTestLog("Verify Campaigns Tab","Campaigns tab is present in the dropdown:::", Status.PASS);
-			} else {
-				report.updateTestLog("Verify Campaigns Tab","Campaigns tab doesn't present in the dropdown:::", Status.FAIL);
+			try {
+				Utility_Functions.xWaitForElementPresent(driver, campaigns, 2);
+			} catch (Exception e) {
+				Utility_Functions.xWaitForElementPresent(driver, campaignsEnv, 2);
+			}
+			try {
+				if(campaigns.isDisplayed()) {
+					report.updateTestLog("Verify Campaigns Tab","Campaigns tab is present in the dropdown:::", Status.PASS);
+				} else if(campaignsEnv.isDisplayed()) {
+					report.updateTestLog("Verify Campaigns Tab","Campaigns tab is present in the dropdown:::", Status.PASS);
+				} else {
+					report.updateTestLog("Verify Campaigns Tab","Campaigns tab doesn't present in the dropdown:::", Status.FAIL);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}	
 

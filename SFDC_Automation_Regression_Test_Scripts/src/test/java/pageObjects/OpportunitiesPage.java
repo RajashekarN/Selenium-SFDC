@@ -969,7 +969,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 */
 	static PartnerConnection connection = null;
 	static ConnectorConfig config;
-	static String environment = LoginPage.environment;
+	String environment = LoginPage.environment;
 	
 	public void updateOpportunityStatus(String FieldName, String OpportunityID) {
 		try {
