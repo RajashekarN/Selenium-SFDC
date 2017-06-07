@@ -11,8 +11,6 @@ import com.sforce.soap.partner.SaveResult;
 import com.sforce.ws.ConnectionException;
 import com.sforce.ws.ConnectorConfig;
 
-import pageObjects.LoginPage;
-
 public class EstablishConnection extends ReusableLibrary {
 	/*
 	 * Constructor to initialize the business component library
@@ -33,7 +31,7 @@ public class EstablishConnection extends ReusableLibrary {
 	static com.sforce.soap.partner.Error[] errors;
 	static boolean status = false;
 	static String result;
-	String environment = LoginPage.environment;
+	public String environment = System.getProperty("RunEnvironment");
 	
 	/**
 	 * Function for establishing the connection
@@ -44,7 +42,7 @@ public class EstablishConnection extends ReusableLibrary {
 
 	public void establishConnection() {
 		try {
-			System.out.println(LoginPage.environment);
+			System.out.println(environment);
 			if (environment.equals("UAT")) {
 				String UAT_Username = properties.getProperty("UATSystemAdminUsername");
 				String UAT_Password = properties.getProperty("UATAdminPassword");

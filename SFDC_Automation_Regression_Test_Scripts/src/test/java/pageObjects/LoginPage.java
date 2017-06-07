@@ -56,18 +56,19 @@ public class LoginPage extends ReusableLibrary {
 	 * @author Vishnuvardhan
 	 *
 	 */
-	public static String environment = System.getProperty("RunEnvironment");
+	// public static String environment = System.getProperty("RunEnvironment");
+	public String environment = System.getProperty("RunEnvironment");
 
 	public void invokeApplication() {
 		report.updateTestLog("Invoke Application",
 				"Invoke the application under test @ " + properties.getProperty("ApplicationUrl"), Status.PASS);
-		if(environment.equals("UAT")) {
+		if (environment.equals("UAT")) {
 			driver.get(properties.getProperty("ApplicationUATUrl"));
-		} else if(environment.equals("FTE")) {
+		} else if (environment.equals("FTE")) {
 			driver.get(properties.getProperty("ApplicationFTEUrl"));
-		} else if(environment.equals("FTE2")) {
+		} else if (environment.equals("FTE2")) {
 			driver.get(properties.getProperty("ApplicationFTE2Url"));
-		} 
+		}
 		Utility_Functions.xWaitForElementPresent(driver, txt_userName, 10);
 	}
 

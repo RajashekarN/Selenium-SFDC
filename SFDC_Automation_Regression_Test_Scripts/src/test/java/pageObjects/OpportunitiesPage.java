@@ -969,7 +969,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 */
 	static PartnerConnection connection = null;
 	static ConnectorConfig config;
-	String environment = LoginPage.environment;
+	//String environment = LoginPage.environment;
+	public String environment = System.getProperty("RunEnvironment");
+
 	
 	public void updateOpportunityStatus(String FieldName, String OpportunityID) {
 		try {
