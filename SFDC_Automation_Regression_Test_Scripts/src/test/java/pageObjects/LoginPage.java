@@ -56,15 +56,16 @@ public class LoginPage extends ReusableLibrary {
 	 * @author Vishnuvardhan
 	 *
 	 */
+	public static String environment = System.getProperty("RunEnvironment");
 
 	public void invokeApplication() {
 		report.updateTestLog("Invoke Application",
 				"Invoke the application under test @ " + properties.getProperty("ApplicationUrl"), Status.PASS);
-		if(properties.getProperty("RunEnvironment").equals("UAT")) {
+		if(environment.equals("UAT")) {
 			driver.get(properties.getProperty("ApplicationUATUrl"));
-		} else if(properties.getProperty("RunEnvironment").equals("FTE")) {
+		} else if(environment.equals("FTE")) {
 			driver.get(properties.getProperty("ApplicationFTEUrl"));
-		} else if(properties.getProperty("RunEnvironment").equals("FTE2")) {
+		} else if(environment.equals("FTE2")) {
 			driver.get(properties.getProperty("ApplicationFTE2Url"));
 		} 
 		Utility_Functions.xWaitForElementPresent(driver, txt_userName, 10);
@@ -79,7 +80,7 @@ public class LoginPage extends ReusableLibrary {
 
 	public void login() {
 		try {
-			if (properties.getProperty("RunEnvironment").equals("UAT")) {
+			if (environment.equals("UAT")) {
 				if (dataTable.getData("General_Data", "TC_ID").contains("Admin")) {
 					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("UATSystemAdminUsername"));
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER"))
@@ -278,7 +279,7 @@ public class LoginPage extends ReusableLibrary {
 						&& (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
 					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("UATDAAPACCSS"));
 				}
-			} else if (properties.getProperty("RunEnvironment").equals("FTE")) {
+			} else if (environment.equals("FTE")) {
 				if (dataTable.getData("General_Data", "TC_ID").contains("Admin")) {
 					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("FTESystemAdminUsername"));
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER"))
@@ -459,7 +460,7 @@ public class LoginPage extends ReusableLibrary {
 						&& (dataTable.getData("General_Data", "TC_ID").contains("Data"))) {
 					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("FTEDAAPACData"));
 				}
-			} else if (properties.getProperty("RunEnvironment").equals("FTE2")) {
+			} else if (environment.equals("FTE2")) {
 				if (dataTable.getData("General_Data", "TC_ID").contains("Admin")) {
 					Utility_Functions.xSendKeys(driver, txt_userName,
 							properties.getProperty("FTE2SystemAdminUsername"));
@@ -643,13 +644,13 @@ public class LoginPage extends ReusableLibrary {
 				}
 			}
 			Utility_Functions.timeWait(1);
-			if (properties.getProperty("RunEnvironment").equals("UAT")) {
+			if (environment.equals("UAT")) {
 				if (dataTable.getData("General_Data", "TC_ID").contains("Admin")) {
 					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("UATAdminPassword"));
 				} else {
 					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("UATPassword"));
 				}
-			} else if (properties.getProperty("RunEnvironment").equals("FTE")) {
+			} else if (environment.equals("FTE")) {
 				if (dataTable.getData("General_Data", "TC_ID").contains("Admin")) {
 					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTEAdminPassword"));
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAMER"))
@@ -701,7 +702,7 @@ public class LoginPage extends ReusableLibrary {
 				} else {
 					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTEPassword"));
 				}
-			} else if (properties.getProperty("RunEnvironment").equals("FTE2")) {
+			} else if (environment.equals("FTE2")) {
 				if (dataTable.getData("General_Data", "TC_ID").contains("Admin")) {
 					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTE2AdminPassword"));
 

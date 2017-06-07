@@ -214,7 +214,7 @@ public class AccountsPage extends ReusableLibrary {
 	@FindBy(xpath="//input[@class='slds-input'][@type='checkbox']/following-sibling::span[text()='Notification Email']")
 	WebElement notificationEmail;
 
-	@FindBy(xpath = "//button[contains(@class,'context-bar__label-action')][text()='More']")
+	@FindBy(xpath = "//*[text()='More']")
 	WebElement menu_More;
 
 	@FindBy(xpath="//a[@role='menuitem']/span[contains(@class,'slds-truncate')][text()='Bulk Tagging']")
@@ -2461,6 +2461,7 @@ public class AccountsPage extends ReusableLibrary {
 
 			report.updateTestLog("Verify New Activity Type ","The Activity Type Values list is Displayed ",  Status.PASS);
 		}
-	}
+	}	
+	
 }
 

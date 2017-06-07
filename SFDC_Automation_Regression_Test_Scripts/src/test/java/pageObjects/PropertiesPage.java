@@ -31,11 +31,14 @@ public class PropertiesPage extends ReusableLibrary {
 		// Utility_Functions utility = new Utility_Functions(scriptHelper);
 	}
 
-	@FindBy(xpath = "//a[contains(@class,'context-bar__label-action')]/span[text()='More']")
+	@FindBy(xpath = "//*[text()='More']")
 	WebElement menu_More;
 
 	@FindBy(xpath = "//a[@role='menuitem']/span[contains(@class,'slds-truncate')][text()='Properties']")
 	WebElement properties;	
+	
+	@FindBy(xpath = "//a[@title='Properties'][text()='Properties']")
+	WebElement propertiesEnv;	
 
 	@FindBy(xpath = "//div[@class='slds-truncate'][@title='New']")
 	WebElement newProperty;	
@@ -614,10 +617,15 @@ public class PropertiesPage extends ReusableLibrary {
 			Utility_Functions.xClick(driver, menu_Properties, true);
 		}catch(Exception e){
 			Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
-			Utility_Functions.xClick(driver, menu_More, true);
-			Utility_Functions.xWaitForElementPresent(driver, properties, 2);
-			Utility_Functions.xClick(driver, properties, true);	
+			Utility_Functions.xClick(driver, menu_More, true);			
 		}
+		try {
+			Utility_Functions.xWaitForElementPresent(driver, properties, 2);
+			Utility_Functions.xClick(driver, properties, true);
+		} catch (Exception e1) {
+			Utility_Functions.xWaitForElementPresent(driver, propertiesEnv, 2);
+			Utility_Functions.xClick(driver, propertiesEnv, true);
+		}	
 		report.updateTestLog("Verify New Activity Page Layout ","Properties is Displayed ",  Status.PASS);
 		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
 		Utility_Functions.xClick(driver, recentlyViewed, true);

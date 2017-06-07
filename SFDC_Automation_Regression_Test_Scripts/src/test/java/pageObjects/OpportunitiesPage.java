@@ -930,7 +930,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xClick(driver, findValue, true);
 		Utility_Functions.timeWait(1);
-		if (properties.getProperty("RunEnvironment").equals("UAT")) {
+		if (environment.equals("UAT")) {
 			Utility_Functions.xSelectDropdownByName(selectUser, "User: Vishnuvardhan Bommisetty");
 		} else {
 			Utility_Functions.xSelectDropdownByName(selectUser, "User: vishnuvardhan bommisetty");
@@ -969,22 +969,23 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 */
 	static PartnerConnection connection = null;
 	static ConnectorConfig config;
-
+	static String environment = LoginPage.environment;
+	
 	public void updateOpportunityStatus(String FieldName, String OpportunityID) {
 		try {
-			if (properties.getProperty("RunEnvironment").equals("UAT")) {
+			if (environment.equals("UAT")) {
 				String UAT_AuthEndpoint = properties.getProperty("UATAuthEndpoint");
 				config = new ConnectorConfig();
 				config.setUsername("vishnuvardhan.bommisetty@cbre.com.crm.uat2");
 				config.setPassword("Vishnu3704");
 				config.setAuthEndpoint(UAT_AuthEndpoint);
-			} else if (properties.getProperty("RunEnvironment").equals("FTE")) {
+			} else if (environment.equals("FTE")) {
 				String FTE_AuthEndpoint = properties.getProperty("FTEAuthEndpoint");
 				config = new ConnectorConfig();
 				config.setUsername("vishnuvardhan.bommisetty@cbre.com.crm.fte");
 				config.setPassword("Vishnu3604");
 				config.setAuthEndpoint(FTE_AuthEndpoint);
-			} else if (properties.getProperty("RunEnvironment").equals("FTE2")) {
+			} else if (environment.equals("FTE2")) {
 				String FTE2_AuthEndpoint = properties.getProperty("FTE2AuthEndpoint");
 				config = new ConnectorConfig();
 				config.setUsername("soumya.sarkar@cbre.com.crm.fte2");
@@ -1758,7 +1759,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	public void establishConnection() {
 		try {
-			if (properties.getProperty("RunEnvironment").equals("FTE")) {
+			if (environment.equals("FTE")) {
 				config = new ConnectorConfig();
 				if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
 					config.setUsername(properties.getProperty("FTEGWSAPACManager"));
@@ -1793,7 +1794,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 				}
 				config.setAuthEndpoint(properties.getProperty("FTEAuthEndpoint"));
 				connection = new PartnerConnection(config);
-			} else if (properties.getProperty("RunEnvironment").equals("FTE2")) {
+			} else if (environment.equals("FTE2")) {
 				config = new ConnectorConfig();
 				if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
 					config.setUsername(properties.getProperty("FTE2GWSAPACManager"));
@@ -1828,7 +1829,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 				}
 				config.setAuthEndpoint(properties.getProperty("FTE2AuthEndpoint"));
 				connection = new PartnerConnection(config);
-			} else if (properties.getProperty("RunEnvironment").equals("UAT")) {
+			} else if (environment.equals("UAT")) {
 				EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
 				establishConnection.establishConnection();
 			}

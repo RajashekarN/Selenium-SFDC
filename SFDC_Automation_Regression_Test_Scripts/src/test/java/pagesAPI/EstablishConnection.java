@@ -11,6 +11,8 @@ import com.sforce.soap.partner.SaveResult;
 import com.sforce.ws.ConnectionException;
 import com.sforce.ws.ConnectorConfig;
 
+import pageObjects.LoginPage;
+
 public class EstablishConnection extends ReusableLibrary {
 	/*
 	 * Constructor to initialize the business component library
@@ -31,7 +33,8 @@ public class EstablishConnection extends ReusableLibrary {
 	static com.sforce.soap.partner.Error[] errors;
 	static boolean status = false;
 	static String result;
-
+	static String environment = LoginPage.environment;
+	
 	/**
 	 * Function for establishing the connection
 	 * 
@@ -41,7 +44,7 @@ public class EstablishConnection extends ReusableLibrary {
 
 	public void establishConnection() {
 		try {
-			if (properties.getProperty("RunEnvironment").equals("UAT")) {
+			if (environment.equals("UAT")) {
 				String UAT_Username = properties.getProperty("UATSystemAdminUsername");
 				String UAT_Password = properties.getProperty("UATAdminPassword");
 				String UAT_AuthEndpoint = properties.getProperty("UATAuthEndpoint");
@@ -51,7 +54,7 @@ public class EstablishConnection extends ReusableLibrary {
 				System.out.println("AuthEndPoint: " + UAT_AuthEndpoint);
 				config.setAuthEndpoint(UAT_AuthEndpoint);
 				connection = new PartnerConnection(config);
-			} else if (properties.getProperty("RunEnvironment").equals("FTE")) {
+			} else if (environment.equals("FTE")) {
 				String FTE_Username = properties.getProperty("FTESystemAdminUsername");
 				String FTE_Password = properties.getProperty("FTEAdminPassword");
 				String FTE_AuthEndpoint = properties.getProperty("FTEAuthEndpoint");
@@ -61,7 +64,7 @@ public class EstablishConnection extends ReusableLibrary {
 				System.out.println("AuthEndPoint: " + FTE_AuthEndpoint);
 				config.setAuthEndpoint(FTE_AuthEndpoint);
 				connection = new PartnerConnection(config);
-			} else if (properties.getProperty("RunEnvironment").equals("FTE2")) {
+			} else if (environment.equals("FTE2")) {
 				String FTE2_Username = properties.getProperty("FTE2SystemAdminUsername");
 				String FTE2_Password = properties.getProperty("FTE2AdminPassword");
 				String FTE2_AuthEndpoint = properties.getProperty("FTE2AuthEndpoint");
