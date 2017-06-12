@@ -90,5 +90,16 @@ public class BC_Salesforce_HomePage extends ReusableLibrary {
 	public void bc_validateHomePageTabsForAPACCapitalMarkets() throws InterruptedException {
 		sfHomePage.validateHomePageTabsForAPACCapitalMarkets();
 	}
+	
+	/**
+	 * Validating the Support Links for Home Page
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+		
+	public void bc_verifySupportLinks() throws InterruptedException {
+		sfHomePage.validate_Support_Custom_Links();
+	}
  	
 }

@@ -31,7 +31,8 @@ public class EstablishConnection extends ReusableLibrary {
 	static com.sforce.soap.partner.Error[] errors;
 	static boolean status = false;
 	static String result;
-	public String environment = System.getProperty("RunEnvironment");
+	public String environment = properties.getProperty("RunEnvironment");
+	//public String environment = System.getProperty("RunEnvironment");
 	
 	/**
 	 * Function for establishing the connection

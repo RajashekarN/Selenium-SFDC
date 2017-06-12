@@ -450,8 +450,11 @@ public class OpportunitiesPage extends ReusableLibrary {
 	WebElement defaultOpportutnityRecordType;
 
 	@FindBy(xpath = "//div[@class='slds-form-element']/span[text()='Opportunity Record Type']/parent::div/div/span")
-	WebElement opportunityRecordTypeByDefault;	
-
+	WebElement opportunityRecordTypeByDefault;
+	
+	@FindBy(xpath = "//h2[contains(@class,'slds-text-heading--medium') and contains(@class,'slds-m-bottom--small')]")
+	WebElement opportunityRecordTypeQuickCreate;
+	
 	/****
 	 * Ramya
 	 */
@@ -970,7 +973,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 	static PartnerConnection connection = null;
 	static ConnectorConfig config;
 	//String environment = LoginPage.environment;
-	public String environment = System.getProperty("RunEnvironment");
+	public String environment = properties.getProperty("RunEnvironment");
+	//public String environment = System.getProperty("RunEnvironment");
 
 	
 	public void updateOpportunityStatus(String FieldName, String OpportunityID) {
@@ -3000,10 +3004,11 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
 		Utility_Functions.xClick(driver, newOpportunity, true);
 		Utility_Functions.timeWait(3);
-		Utility_Functions.xSwitchtoFrame(driver, continueButton);
+		//Utility_Functions.xSwitchtoFrame(driver, continueButton);
+		Utility_Functions.xSwitchtoFrame(driver, opportunityRecordTypeQuickCreate);
 		Utility_Functions.timeWait(2);
 		//driver.navigate().refresh();
-		if(defaultOpportutnityRecordType.getText().equals("Occupier Brokerage")) {
+		if(opportunityRecordTypeQuickCreate.getText().contains("EMEA A&T Occupier")) {
 			report.updateTestLog("Verify Opportunity Occupier Record Type","Occupier record type is defaulted to Occupier Opportunity type field when selected:::",  Status.PASS);
 		} else {
 			report.updateTestLog("Verify Opportunity Occupier Record Type","Occupier record type is not defaulted to 'Occupier' Opportunity type field when selected:::",  Status.FAIL);

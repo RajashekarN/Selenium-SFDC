@@ -1111,11 +1111,17 @@ public class PropertiesPage extends ReusableLibrary {
 	 * @author Vishnuvardhan
 	 *
 	 */	
+	/**
+	 * Validating the Campaigns tab present in the dropdown after loggin in
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
 	public void validateCampaignsTab() {
 		Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
 		Utility_Functions.xClick(driver, menu_More, true);
-		int count=0;
-		if(dataTable.getData("General_Data", "TC_ID").contains("OBAMERBrokerCampaignsTab")) {
+/*		int count=0;
+*/		/*if(dataTable.getData("General_Data", "TC_ID").contains("OBAMERBrokerCampaignsTab")) {
 			List<WebElement> overFlowList = driver.findElements(By.xpath("//div[@class='overflowList']//a"));
 			for(WebElement element: overFlowList) {
 				if(element.getText().equals("Campaigns")) {
@@ -1128,8 +1134,8 @@ public class PropertiesPage extends ReusableLibrary {
 			} else {
 				report.updateTestLog("Verify Campaigns Tab","Campaigns tab is present in the dropdown:::", Status.PASS);
 			}
-		} 
-		if(dataTable.getData("General_Data", "TC_ID").contains("OBAPACBrokerCampaignsTab")) {
+		} */
+		//if(dataTable.getData("General_Data", "TC_ID").contains("OBAPACBrokerCampaignsTab")) {
 			try {
 				Utility_Functions.xWaitForElementPresent(driver, campaigns, 2);
 			} catch (Exception e) {
@@ -1146,8 +1152,9 @@ public class PropertiesPage extends ReusableLibrary {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}	
+		//}	
 
 	}
+
 
 }

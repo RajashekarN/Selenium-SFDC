@@ -2230,6 +2230,7 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, menu_Accounts, true);
 		Utility_Functions.xWaitForElementPresent(driver, newAccount, 3);
 		Utility_Functions.xClick(driver, newAccount, true);
+		Utility_Functions.timeWait(2);
 		Utility_Functions.xSwitchtoFrame(driver, continueButton);
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, recordType, 3);

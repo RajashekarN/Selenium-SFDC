@@ -56,8 +56,8 @@ public class LoginPage extends ReusableLibrary {
 	 * @author Vishnuvardhan
 	 *
 	 */
-	// public static String environment = System.getProperty("RunEnvironment");
-	public String environment = System.getProperty("RunEnvironment");
+	public String environment = properties.getProperty("RunEnvironment");
+	//public String environment = System.getProperty("RunEnvironment");
 
 	public void invokeApplication() {
 		report.updateTestLog("Invoke Application",
@@ -549,6 +549,16 @@ public class LoginPage extends ReusableLibrary {
 						&& (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
 					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("FTE2CMAPACBroker"));
 
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("CSSIP"))) {
+					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("FTE2CMEMEACSS"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("ManagerIP"))) {
+					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("FTE2CMEMEAManager"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("BrokerIP"))) {
+					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("FTE2CMEMEABroker"));
+					
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VASAMER"))
 						&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
 					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("FTE2VASAMERManager"));
@@ -771,6 +781,27 @@ public class LoginPage extends ReusableLibrary {
 						&& (dataTable.getData("General_Data", "TC_ID").contains("Data"))) {
 					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTE2DAEMEADataPassword"));
 
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBEMEA"))&& (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
+					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTE2OBEMEABrokerPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBEMEA"))&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
+					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTE2OBEMEAManagerPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBEMEA"))&& (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
+					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTE2OBEMEACSSPassword"));
+					
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ABEMEA"))&& (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
+					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTE2ABEMEABrokerPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ABEMEA"))&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
+					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTE2ABEMEAManagerPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ABEMEA"))&& (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
+					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTE2ABEMEACSSPassword"));
+				
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA"))&& (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
+					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTE2CMEMEABrokerPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA"))&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
+					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTE2CMEMEAManagerPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA"))&& (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
+					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTE2DAEMEACSSPassword"));
+					
 				} else {
 					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTE2Password"));
 				}
