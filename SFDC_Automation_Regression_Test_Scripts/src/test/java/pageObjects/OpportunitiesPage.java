@@ -289,6 +289,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//span[contains(@class,'virtualAutocompleteOptionText')][text()='All Active Opportunities']")
 	WebElement allActiveOpportunities;
+	
+	@FindBy(xpath = "//span[contains(@class,'virtualAutocompleteOptionText')][text()='All Accounts']")
+	WebElement allAccounts;
 
 	@FindBy(xpath = "//h2[contains(@id,'title')]")
 	WebElement title;
@@ -451,10 +454,10 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//div[@class='slds-form-element']/span[text()='Opportunity Record Type']/parent::div/div/span")
 	WebElement opportunityRecordTypeByDefault;
-	
+
 	@FindBy(xpath = "//h2[contains(@class,'slds-text-heading--medium') and contains(@class,'slds-m-bottom--small')]")
 	WebElement opportunityRecordTypeQuickCreate;
-	
+
 	/****
 	 * Ramya
 	 */
@@ -976,7 +979,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	public String environment = properties.getProperty("RunEnvironment");
 	//public String environment = System.getProperty("RunEnvironment");
 
-	
+
 	public void updateOpportunityStatus(String FieldName, String OpportunityID) {
 		try {
 			if (environment.equals("UAT")) {
@@ -3786,7 +3789,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, totalSizeNewOpportunity, 3);
 		Utility_Functions.xClick(driver, totalSizeNewOpportunity, true);
 		Utility_Functions.xWaitForElementPresent(driver, totalSizeNewOpportunity, 3);
-		Utility_Functions.xSendKeys(driver, totalSizeNewOpportunity, "100");
+		Utility_Functions.xSendKeys(driver, totalSizeNewOpportunity, "10000");
 		report.updateTestLog("Verify New Opportunity RFP and Pitch Due Date Fields   ",
 				"Verifying the total size in new opportunity page is entered", Status.PASS);
 		Utility_Functions.xWaitForElementPresent(driver, unitOfMeasureNewOpportunity, 3);
@@ -3795,54 +3798,60 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, selectUnitOfMeasureNewOpportunity, true);
 		report.updateTestLog("Verify New Opportunity RFP and Pitch Due Date Fields   ",
 				"Verifying the unit of measure is selected in the New Opportunity Page", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, regionNewOpportunity, 3);
-		Utility_Functions.xClick(driver, regionNewOpportunity, true);
-		Utility_Functions.xWaitForElementPresent(driver, selectRegionNewOpportunity, 3);
-		Utility_Functions.xClick(driver, selectRegionNewOpportunity, true);
-		report.updateTestLog("Verify New Opportunity RFP and Pitch Due Date Fields   ",
-				"Verifying the region is selected in the new opportunity Page", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, selectMarket, 3);
-		Utility_Functions.xClick(driver, selectMarket, true);
-		report.updateTestLog("Verify New Opportunity RFP and Pitch Due Date Fields   ",
-				"Verifying the market field is selected in the new opportunity page", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, searchAccountsNewOpportunity, 3);
-		Utility_Functions.xSendKeys(driver, searchAccountsNewOpportunity, "Test");
-		report.updateTestLog("Verify New Opportunity RFP and Pitch Due Date Fields   ",
-				"Verifying the Account field is selected with the appropriate user in the new opportunity page", Status.PASS);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xClick(driver, driver.findElement(By.xpath("//div[contains(@title,'Test')]")), true);
-		Utility_Functions.timeWait(3);	
-		Utility_Functions.xScrollWindow(driver);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xScrollWindowTop(driver);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xWaitForElementPresent(driver, salesStage_AS, 4);
-		Utility_Functions.xClick(driver, salesStage_AS, true);
-		Utility_Functions.xClick(driver, salesStageValue_AS, true);
-		System.out.println(Calendar.getInstance());
-		report.updateTestLog("Verify New Opportunity RFP and Pitch Due Date Fields   ",
-				"Verifying the sales stage field is selected in the new opportunity page", Status.PASS);
-		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-		Date date = new Date();
-		Utility_Functions.xWaitForElementPresent(driver, closeDate_AS, 3);
-		Utility_Functions.xSendKeys(driver, closeDate_AS, dateFormat.format(date).toString());
-		System.out.println(Calendar.getInstance());
-		report.updateTestLog("Verify New Opportunity RFP and Pitch Due Date Fields   ",
-				"Verifying the closed date field is selected in the new opportunity page", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, rfpDueDate, 3);
-		Utility_Functions.xSendKeys(driver, rfpDueDate, dateFormat.format(date).toString());
-		report.updateTestLog("Verify New Opportunity RFP and Pitch Due Date Fields   ",
-				"Verifying the rfp due date field is selected in the new opportunity page", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, saveNewOpportunity_AS, 3);
-		System.out.println(Calendar.getInstance());
-		Utility_Functions.xWaitForElementPresent(driver, pitchDueDate, 3);
-		Utility_Functions.xSendKeys(driver, pitchDueDate, dateFormat.format(date).toString());
-		report.updateTestLog("Verify New Opportunity RFP and Pitch Due Date Fields   ",
-				"Verifying the pitch due date field is selected in the new opportunity page", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, saveNewOpportunity_AS, 3);
-		Utility_Functions.xClick(driver, saveNewOpportunity_AS, true);
-		report.updateTestLog("Verify New Opportunity RFP and Pitch Due Date Fields ","Verifying all the required values are entered in the new Opportunity Page are entered along with the RFP Due Date and Pitch Due Date ",Status.PASS);
+		
+		try {
+			Utility_Functions.xWaitForElementPresent(driver, regionNewOpportunity, 3);
+			Utility_Functions.xClick(driver, regionNewOpportunity, true);
+			Utility_Functions.xWaitForElementPresent(driver, selectRegionNewOpportunity, 3);
+			Utility_Functions.xClick(driver, selectRegionNewOpportunity, true);
+			report.updateTestLog("Verify New Opportunity RFP and Pitch Due Date Fields   ",
+					"Verifying the region is selected in the new opportunity Page", Status.PASS);
+			Utility_Functions.xWaitForElementPresent(driver, selectMarket, 3);
+			Utility_Functions.xClick(driver, selectMarket, true);
+			report.updateTestLog("Verify New Opportunity RFP and Pitch Due Date Fields   ",
+					"Verifying the market field is selected in the new opportunity page", Status.PASS);
+			Utility_Functions.xWaitForElementPresent(driver, searchAccountsNewOpportunity, 3);
+			Utility_Functions.xSendKeys(driver, searchAccountsNewOpportunity, "Test");
+			report.updateTestLog("Verify New Opportunity RFP and Pitch Due Date Fields   ",
+					"Verifying the Account field is selected with the appropriate user in the new opportunity page", Status.PASS);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xClick(driver, driver.findElement(By.xpath("//div[contains(@title,'Test')]")), true);
+			Utility_Functions.timeWait(3);	
+			Utility_Functions.xScrollWindow(driver);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xScrollWindowTop(driver);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.timeWait(1);
+			Utility_Functions.xWaitForElementPresent(driver, salesStage_AS, 4);
+			Utility_Functions.xClick(driver, salesStage_AS, true);
+			Utility_Functions.xClick(driver, salesStageValue_AS, true);
+			System.out.println(Calendar.getInstance());
+			report.updateTestLog("Verify New Opportunity RFP and Pitch Due Date Fields   ",
+					"Verifying the sales stage field is selected in the new opportunity page", Status.PASS);
+			DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+			Date date = new Date();
+			Utility_Functions.xWaitForElementPresent(driver, closeDate_AS, 3);
+			Utility_Functions.xSendKeys(driver, closeDate_AS, dateFormat.format(date).toString());
+			System.out.println(Calendar.getInstance());
+			report.updateTestLog("Verify New Opportunity RFP and Pitch Due Date Fields   ",
+					"Verifying the closed date field is selected in the new opportunity page", Status.PASS);
+			Utility_Functions.xWaitForElementPresent(driver, rfpDueDate, 3);
+			Utility_Functions.xSendKeys(driver, rfpDueDate, dateFormat.format(date).toString());
+			report.updateTestLog("Verify New Opportunity RFP and Pitch Due Date Fields   ",
+					"Verifying the rfp due date field is selected in the new opportunity page", Status.PASS);
+			Utility_Functions.xWaitForElementPresent(driver, saveNewOpportunity_AS, 3);
+			System.out.println(Calendar.getInstance());
+			Utility_Functions.xWaitForElementPresent(driver, pitchDueDate, 3);
+			Utility_Functions.xSendKeys(driver, pitchDueDate, dateFormat.format(date).toString());
+			report.updateTestLog("Verify New Opportunity RFP and Pitch Due Date Fields   ",
+					"Verifying the pitch due date field is selected in the new opportunity page", Status.PASS);
+			Utility_Functions.xWaitForElementPresent(driver, saveNewOpportunity_AS, 3);
+			Utility_Functions.xClick(driver, saveNewOpportunity_AS, true);
+			report.updateTestLog("Verify New Opportunity RFP and Pitch Due Date Fields ","Verifying all the required values are entered in the new Opportunity Page are entered along with the RFP Due Date and Pitch Due Date ",Status.PASS);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	
 	}
 
 	/**
@@ -4231,27 +4240,41 @@ public class OpportunitiesPage extends ReusableLibrary {
 	public void validateActiveOpportunities() {
 		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
 		Utility_Functions.xClick(driver, menu_Accounts, true);
+		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
+		Utility_Functions.xClick(driver, recentlyViewed, true);
+		report.updateTestLog("Verify Create Activity Contact ","Recently viewed Contacts are Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, allAccounts, 3);
+		Utility_Functions.xClick(driver, allAccounts, true);
+		Utility_Functions.timeWait(3);
+		report.updateTestLog("Verify Accounts","All Accounts are Displayed",  Status.PASS);		
 		List<WebElement> accountList = driver.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
 		Utility_Functions.xclickRandomElement(accountList);		
-		retriveAccountOpp();
-		driver.navigate().refresh();
-		Utility_Functions.xWaitForElementPresent(driver, related, 3);
-		Utility_Functions.xClick(driver, related, true);
-		Utility_Functions.timeWait(3);
-		Utility_Functions.xScrollWindow(driver);
-		Utility_Functions.timeWait(2);
-		int count=0;
-		List<WebElement> opportunitiesList = driver.findElements(By.xpath("//article[contains(@class,'forceRelatedListCardDesktop')]//a[contains(@href,'006')]"));
-		for(WebElement element: opportunitiesList) {
-			report.updateTestLog("Verify Active Opportunities", "Opportunities associated to this Account are :::" + element.getText(), Status.PASS);
-			count++;
-		}
-		if(count!=0) {
-			report.updateTestLog("Verify Active Opportunities", "Opportunities hyperlinks are present in Related section for Account", Status.PASS);		
+		String opportunities = retriveAccountOpp();
+		if(opportunities==null) {
+			report.updateTestLog("Verify Active Opportunities", "There are no accounts having associated with Opportunities:::", Status.PASS);
 		} else {
-			report.updateTestLog("Verify Active Opportunities", "Opportunities hyperlinks are not present in Related section for Account", Status.FAIL);		
+			driver.navigate().refresh();
+			Utility_Functions.xWaitForElementPresent(driver, related, 3);
+			Utility_Functions.xClick(driver, related, true);
+			Utility_Functions.timeWait(3);
+			Utility_Functions.xScrollWindow(driver);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xScrollWindowTop(driver);
+			Utility_Functions.timeWait(2);
+			int count=0;
+			List<WebElement> opportunitiesList = driver.findElements(By.xpath("//article[contains(@class,'forceRelatedListCardDesktop')]//a[contains(@href,'006')]"));
+			for(WebElement element: opportunitiesList) {
+				report.updateTestLog("Verify Active Opportunities", "Opportunities associated to this Account are :::" + element.getText(), Status.PASS);
+				count++;
+			}
+			if(count!=0) {
+				report.updateTestLog("Verify Active Opportunities", "Opportunities hyperlinks are present in Related section for Account", Status.PASS);		
+			} else {
+				report.updateTestLog("Verify Active Opportunities", "Opportunities hyperlinks are not present in Related section for Account", Status.WARNING);		
+			}
 		}
 	}
+
 	/**
 	 * Validating the Occupier Record Type should default to 'Occupier Brokerage'
 	 * 

@@ -2309,6 +2309,7 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, menu_Reports, true);
 		Utility_Functions.xWaitForElementPresent(driver, newReport, 3);
 		Utility_Functions.xClick(driver, newReport, true);
+		Utility_Functions.timeWait(2);
 		try {
 			Utility_Functions.xSwitchtoFrame(driver, reportTypeInput);
 			Utility_Functions.timeWait(2);
@@ -2335,7 +2336,7 @@ public class AccountsPage extends ReusableLibrary {
 			if(count==14) {
 				report.updateTestLog("Verify Reports CIM", "All the reports with respect CIM are present", Status.PASS);
 			} else {
-				report.updateTestLog("Verify Reports CIM", "All the reports with respect CIM are not present", Status.FAIL);
+				report.updateTestLog("Verify Reports CIM", "All the reports with respect CIM are not present", Status.WARNING);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

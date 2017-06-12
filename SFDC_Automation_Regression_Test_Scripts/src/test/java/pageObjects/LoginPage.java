@@ -800,7 +800,7 @@ public class LoginPage extends ReusableLibrary {
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA"))&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
 					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTE2CMEMEAManagerPassword"));
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA"))&& (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
-					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTE2DAEMEACSSPassword"));
+					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTE2CMEMEACSSPassword"));
 					
 				} else {
 					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTE2Password"));

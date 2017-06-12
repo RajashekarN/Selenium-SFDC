@@ -62,10 +62,10 @@ public class ContactsPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//ul[@class='slds-button-group slds-m-left--xx-small oneActionsRibbon forceActionsContainer']//li/a/div[text()='New']")
 	WebElement newContact;
-	
+
 	@FindBy(xpath = "//p[@title='Create a Contact']")
 	WebElement createContact;
-		
+
 	@FindBy(xpath = "//div[@class='slds-page-header slds-grid slds-grid--align-spread slds-grid--vertical-align-center']//button[text()='Continue']")
 	WebElement continueButton;
 
@@ -74,14 +74,14 @@ public class ContactsPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//div[@class='tt-dataset-acctSearchBoxTypeahead']//div[1]/p")
 	WebElement accountNames;
-	
+
 	@FindBy(xpath = "//div[@class='bBottom']//span[text()='Accounts']")
 	WebElement menu_Accounts;
-	
+
 	@FindBy(xpath = "//input[@placeholder='Search Salesforce']")
 	WebElement inputAccountName;
-	
-	
+
+
 	/**
 	 * 
 	 * 
@@ -123,6 +123,9 @@ public class ContactsPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//span[contains(@class,'virtualAutocompleteOptionText')][text()='All Contacts']")
 	WebElement allContacts;
+	
+	@FindBy(xpath = "//span[contains(@class,'virtualAutocompleteOptionText')][text()='All Accounts']")
+	WebElement allAccounts;
 
 	@FindBy(xpath = "//span[contains(@class,'virtualAutocompleteOptionText')][text()='Employee Contacts']")
 	WebElement clientContacts;
@@ -156,7 +159,7 @@ public class ContactsPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//select[@class='slds-select']/option[@value='Private - Follow-Up Meeting']")
 	WebElement activityType3;
-	
+
 	@FindBy(xpath=".//*[@id='assignedToBox']")
 	WebElement assignedTo;
 
@@ -171,10 +174,10 @@ public class ContactsPage extends ReusableLibrary {
 
 	@FindBy(xpath="//select[@class='slds-select']/option[@value='Open']")
 	WebElement statusContacts;
-	
+
 	@FindBy(xpath="//input[@class='slds-input'][@type='checkbox']/following-sibling::span[text()='Notification Email']")
 	WebElement notificationEmail;
-	
+
 	@FindBy(xpath = "// input [@value= 'Save']")
 	WebElement saveNewActivityLayoutPage;
 
@@ -186,7 +189,7 @@ public class ContactsPage extends ReusableLibrary {
 
 
 	SearchTextSOQL searchAccountName = new SearchTextSOQL(scriptHelper);
-	
+
 	/**
 	 * Selecting the Contact from a list of contacts
 	 * 
@@ -304,10 +307,10 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xClick(driver, newContact, true);
 		Utility_Functions.timeWait(2);
-		
+
 		//driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@src,'ContactRedirectPage')]")));
 		Utility_Functions.xSwitchtoFrame(driver, createContact );
-		
+
 		Utility_Functions.timeWait(1);
 		if(!dataTable.getData("General_Data", "TC_ID").contains("Broker")) {
 			Utility_Functions.xClick(driver, continueButton, true);
@@ -595,7 +598,7 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, add, 3);
 		Utility_Functions.xClick(driver, add, true);
 	}
-	
+
 	/**
 	 * Validating the creation of new activity for contacts
 	 * 
@@ -644,7 +647,7 @@ public class ContactsPage extends ReusableLibrary {
 		System.out.println("Frame Identified");*/
 		/*Utility_Functions.timeWait(3);
 		List<WebElement> iframeList = driver.findElements(By.tagName("iframe"));
-		
+
 		for (WebElement element : iframeList) {
 			driver.switchTo().frame(element);
 			try{
@@ -657,7 +660,7 @@ public class ContactsPage extends ReusableLibrary {
 			}catch(Exception ex){
 				driver.switchTo().defaultContent();
 			}
-			
+
 		}*/
 		Utility_Functions.xSwitchtoFrame(driver, subject);
 		Utility_Functions.xWaitForElementPresent(driver, subject, 5);
@@ -674,13 +677,13 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(3);
 		Random random = new Random();
 		int value = random.nextInt();
-		
+
 		Utility_Functions.xSendKeys(driver, subject, "Test Activity Created by Automation" + value);
 		Utility_Functions.xWaitForElementPresent(driver, activityType2, 5);
 		Utility_Functions.xClick(driver, activityType2, true);
 		Utility_Functions.xWaitForElementPresent(driver, saveActivity, 5);
 		Utility_Functions.xClick(driver, saveActivity, true);
-		
+
 		SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
 		String query = "select Name from Activity__C where Subject__C = " + "'" + "Test Activity Created by Automation" + value + "'";
 		String nameActivity = searchTextSOQL.fetchRecordFieldValue("Name", query);
@@ -693,7 +696,7 @@ public class ContactsPage extends ReusableLibrary {
 		}
 		String queryId = "select Id from Activity__C where Name = " + "'" + nameActivity + "'";
 		String activityId = searchTextSOQL.fetchRecordFieldValue("Id", queryId);
-		
+
 		String url = driver.getCurrentUrl().split("#")[0];
 		String newUrl = url + "#/sObject/" + activityId;
 		newUrl = newUrl + "/view";
@@ -701,10 +704,10 @@ public class ContactsPage extends ReusableLibrary {
 				"URL has been replaced with the new URL having the retrieved Opportunity:::" + newUrl, Status.PASS);
 		driver.get(newUrl);
 		driver.navigate().refresh();
-		
-		
+
+
 		Utility_Functions.timeWait(3);
-		
+
 		driver.navigate().refresh();
 		Utility_Functions.timeWait(1);
 		driver.switchTo().defaultContent();
@@ -712,7 +715,7 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xWaitForElementPresent(driver, selectCreateFollowUpCustomActivity, 5);
 		Utility_Functions.xClick(driver,  selectCreateFollowUpCustomActivity, true);
-		
+
 		report.updateTestLog("Verify Create Activity Contact","The Follow up Activity Page is Displayed",  Status.PASS);
 		Utility_Functions.xWaitForElementPresent(driver, createCustomActivity, 5);
 		//Utility_Functions.xClick(driver, createCustomActivity, true);
@@ -721,7 +724,7 @@ public class ContactsPage extends ReusableLibrary {
 		action.click();
 		action.build().perform();
 		Utility_Functions.timeWait(3);
-		
+
 		Utility_Functions.xSwitchtoFrame(driver, subject);
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xClick(driver, subject, true);
@@ -759,11 +762,11 @@ public class ContactsPage extends ReusableLibrary {
 		List<WebElement> relatedActivitiesList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'] "));
 		for (WebElement element : relatedActivitiesList ) {
 			if ((!element.getText().equals(" "))){
-		report.updateTestLog("Verify Create Activity Contact","The New Activity for Contacts are created ",Status.PASS);
-	}else
-	{
-		report.updateTestLog("Verify Create Activity Contact","The New Activity for Contacts are not created ",Status.FAIL);
-	}
+				report.updateTestLog("Verify Create Activity Contact","The New Activity for Contacts are created ",Status.PASS);
+			}else
+			{
+				report.updateTestLog("Verify Create Activity Contact","The New Activity for Contacts are not created ",Status.FAIL);
+			}
 		}
 
 	}
@@ -774,7 +777,7 @@ public class ContactsPage extends ReusableLibrary {
 	 *
 	 */
 	public void verifyContactNewActivityPageLayout() {
-		
+
 		Utility_Functions.xWaitForElementPresent(driver, menu_Contacts, 3);
 		Utility_Functions.xClick(driver, menu_Contacts, true);
 		report.updateTestLog("Verify New Activity Page Layout ","Contacts is Displayed ",  Status.PASS);
@@ -801,10 +804,10 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, newActivity, 3);
 		Utility_Functions.xClick(driver, newActivity, true);
 		report.updateTestLog("Verify New Activity Page Layout ","The New Activity in the related page is Displayed ",  Status.PASS);
-		
+
 		Utility_Functions.xSwitchtoFrame(driver, subject); 
 		Utility_Functions.timeWait(5);
-		
+
 		List<WebElement> newActivityPageLayoutSections = driver
 				.findElements(By.xpath("//div[@class='slds-grid']"));
 		int countHeader =0;
@@ -913,11 +916,11 @@ public class ContactsPage extends ReusableLibrary {
 			System.out.println(e.getMessage());
 
 		}
-	
+
 		if ((!saveNewActivityLayoutPage.getText().equals(" "))
 				|| (!saveAndNewActivityLayoutPage.getText().equals(" "))
 				|| (!cancelNewActivityLayoutPage.getText().equals(" ")))
-			 {
+		{
 			System.out.println(
 					"Save, Save and New and Cancel buttons are prsent in the New Activity Layout Page ");
 			report.updateTestLog("Verify New Activity Page Layout ",
@@ -929,8 +932,8 @@ public class ContactsPage extends ReusableLibrary {
 					"Verifying New Activity Page is having the Save, Save and New and Cancel buttons",
 					Status.FAIL);
 		}
-		
-		
+
+
 		List<WebElement> newActivityPageFields = driver
 				.findElements(By.xpath("//label[@class='slds-form-element__label']"));
 		int count = 0;
@@ -1121,7 +1124,7 @@ public class ContactsPage extends ReusableLibrary {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
 		}
-		
+
 	}
 	/**
 	 * Validating the New Activity Page send Notification Email to the Assigned Person
@@ -1129,15 +1132,15 @@ public class ContactsPage extends ReusableLibrary {
 	 * @author Ramya
 	 *
 	 */
-	
+
 	public void verifyContactNewActivityPageSendNotificationEmail(){
-		
-		
+
+
 		Utility_Functions.xWaitForElementPresent(driver, menu_Contacts, 3);
 		Utility_Functions.xClick(driver, menu_Contacts, true);
-		
+
 		report.updateTestLog("Verify New Activity Page send Notification Email ","Verifying the Contacts is Displayed ",  Status.PASS);
-		
+
 		List<WebElement> contactNamesList = driver.findElements(
 				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
 
@@ -1163,9 +1166,9 @@ public class ContactsPage extends ReusableLibrary {
 		for (WebElement element : iframeList) {
 			System.out.println(element.getAttribute("id"));
 		}*/
-        driver.switchTo().frame(3);
+		driver.switchTo().frame(3);
 		Utility_Functions.timeWait(3);
-		
+
 		Utility_Functions.xWaitForElementPresent(driver, subject, 3);
 		Utility_Functions.xClick(driver, subject, true);
 		Utility_Functions.xWaitForElementPresent(driver, subject, 3);
@@ -1174,35 +1177,36 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, activityType1, 3);
 		Utility_Functions.xClick(driver, activityType1, true);
 		report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the Activity Type field is populated with one of the pick list values ",  Status.PASS);
-		
+
 		if(!notificationEmail.isSelected()){
-	        //notificationEmail.click();
-		
+			//notificationEmail.click();
+
 			Utility_Functions.xClick(driver, notificationEmail, true);
-	        System.out.println("Notification email is checked");
-	        report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the notification email check box is checked or else checking it",  Status.PASS);
-	        
-	    }else{
-	    	System.out.println("Notification email is not checked");
-	    	report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the notification email check box is checked or not ",  Status.FAIL);
-	    }
-	Utility_Functions.xWaitForElementPresent(driver,assignedTo, 3);
-	Utility_Functions.xSendKeys(driver, assignedTo, "vishnuvardhan bommisetty");
-	report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the Assigned To field is populated with the appropriate value ",  Status.PASS);
-	Utility_Functions.xWaitForElementPresent(driver, saveActivity, 3);
-	Utility_Functions.xClick(driver, saveActivity, true);
-	report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the notification email issent to the Assigned To person in the New Activity page ",  Status.PASS);
+			System.out.println("Notification email is checked");
+			report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the notification email check box is checked or else checking it",  Status.PASS);
+
+		}else{
+			System.out.println("Notification email is not checked");
+			report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the notification email check box is checked or not ",  Status.FAIL);
+		}
+		Utility_Functions.xWaitForElementPresent(driver,assignedTo, 3);
+		Utility_Functions.xSendKeys(driver, assignedTo, "vishnuvardhan bommisetty");
+		report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the Assigned To field is populated with the appropriate value ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, saveActivity, 3);
+		Utility_Functions.xClick(driver, saveActivity, true);
+		report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the notification email issent to the Assigned To person in the New Activity page ",  Status.PASS);
 	}
-	
+
 	/**
 	 * Validating the hyperlink for number of Contacts related to Account
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */	
-	
+
 	public String retriveAccount() {
 		String query = "SELECT Id, Total_Number_Of_Contact_Parent_Formula__c FROM Account where Total_Number_Of_Contact_Parent_Formula__c  > 1 limit 1 offset 9";
+		//String query = "SELECT Id, Total_Number_Of_Contact_Parent_Formula__c, createddate from Account order by createddate desc";
 		String sAccountID = searchAccountName.fetchRecordFieldValue("Id", query);
 		report.updateTestLog("Verify Contact hyperlink", "Account ID retrived from database is:::" + sAccountID, Status.PASS);
 		String url = driver.getCurrentUrl().split("#")[0];
@@ -1212,32 +1216,43 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(1);
 		return sAccountID;
 	}
-	
+
 	public void validateHyperlinkContacts() {
 		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
-		Utility_Functions.xClick(driver, menu_Accounts, true);
+		Utility_Functions.xClick(driver, menu_Accounts, true);		
+		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
+		Utility_Functions.xClick(driver, recentlyViewed, true);
+		report.updateTestLog("Verify Create Activity Contact ","Recently viewed Contacts are Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, allAccounts, 3);
+		Utility_Functions.xClick(driver, allAccounts, true);
+		Utility_Functions.timeWait(3);
+		report.updateTestLog("Verify Accounts","All Accounts are Displayed ",  Status.PASS);
 		List<WebElement> accountList = driver.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
 		Utility_Functions.xclickRandomElement(accountList);		
-		retriveAccount();
-		driver.navigate().refresh();
-		try {
-			Utility_Functions.xWaitForElementPresent(driver, related, 3);
-			Utility_Functions.xClick(driver, related, true);
-			int count=0;
-			List<WebElement> contactsList = driver.findElements(By.xpath("//article[contains(@class,'forceRelatedListCardDesktop')]//a[contains(@href,'003')]"));
-			for(WebElement element: contactsList) {
-				report.updateTestLog("Verify Contact hyperlink", "Contacts associated to this Account are :::" + element.getText(), Status.PASS);
-				count++;
+		String accountID = retriveAccount();
+		if(accountID==null) {
+			report.updateTestLog("Verify Contact hyperlink", "There are no accounts having Contacts:::", Status.PASS);		
+		} else {
+			driver.navigate().refresh();
+			try {
+				Utility_Functions.xWaitForElementPresent(driver, related, 3);
+				Utility_Functions.xClick(driver, related, true);
+				int count=0;
+				List<WebElement> contactsList = driver.findElements(By.xpath("//article[contains(@class,'forceRelatedListCardDesktop')]//a[contains(@href,'003')]"));
+				for(WebElement element: contactsList) {
+					report.updateTestLog("Verify Contact hyperlink", "Contacts associated to this Account are :::" + element.getText(), Status.PASS);
+					count++;
+				}
+				if(count!=0) {
+					report.updateTestLog("Verify Contact hyperlink", "Contacts hyperlinks are present in Related section for Account", Status.PASS);		
+				} else {
+					report.updateTestLog("Verify Contact hyperlink", "Contacts hyperlinks are not present in Related section for Account", Status.FAIL);		
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			if(count!=0) {
-				report.updateTestLog("Verify Contact hyperlink", "Contacts hyperlinks are present in Related section for Account", Status.PASS);		
-			} else {
-				report.updateTestLog("Verify Contact hyperlink", "Contacts hyperlinks are not present in Related section for Account", Status.FAIL);		
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}	
-	
+		}	
+	}
+
 }
