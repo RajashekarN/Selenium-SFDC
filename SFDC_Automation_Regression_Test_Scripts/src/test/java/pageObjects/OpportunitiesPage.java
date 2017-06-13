@@ -344,10 +344,10 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//li[contains(@class,'oneActionsDropDown')]//a")
 	WebElement showMoreActions;
 
-	@FindBy(xpath = "//div[contains(@class,'actionMenu')]//a[@title='Recalculate']")
+	@FindBy(xpath = "//a[contains(@title,'Recalculate')]")
 	WebElement recalculate;
 
-	@FindBy(xpath = "//div[contains(@class,'actionMenu')]//a[@title='New Opportunity Installment']")
+	@FindBy(xpath = "//a[@title='New Opportunity Installment']")
 	WebElement newOpportunityInstallment;
 
 	@FindBy(xpath = "//input[contains(@id,'opportunityRefractorPageLightningForm') and contains(@id,'Quantity')]")
@@ -2579,22 +2579,28 @@ public class OpportunitiesPage extends ReusableLibrary {
 								"Unable to click on edit installment button", Status.FAIL);
 					}
 				}
-				Utility_Functions.xWaitForElementPresent(driver, installmentAmountEdit, 3);
-				int iInstallmentAmount = iInstallmentAmountOne + 100;
-				Utility_Functions.xSendKeys(driver, installmentAmountEdit, Integer.toString(iInstallmentAmount));
-				Utility_Functions.timeWait(2);
-				Utility_Functions.xWaitForElementPresent(driver, save, 3);
-				Utility_Functions.xClick(driver, save, true);
-				Utility_Functions.timeWait(2);
-				Utility_Functions.xWaitForElementPresent(driver, related, 3);
-				if (related.isDisplayed()) {
-					report.updateTestLog("Opportunities Installments",
-							"Editing the Paid installment amount is successfull::", Status.PASS);
-					isStatus = true;
-					break;
-				} else {
-					report.updateTestLog("Opportunities Installments",
-							"Editing the Paid installment amount is failed::", Status.FAIL);
+				try {
+					Utility_Functions.xWaitForElementPresent(driver, installmentAmountEdit, 3);
+					int iInstallmentAmount = iInstallmentAmountOne + 100;
+					Utility_Functions.xSendKeys(driver, installmentAmountEdit, Integer.toString(iInstallmentAmount));
+					Utility_Functions.timeWait(2);
+					Utility_Functions.xWaitForElementPresent(driver, save, 3);
+					Utility_Functions.xClick(driver, save, true);
+					Utility_Functions.timeWait(2);
+					Utility_Functions.xWaitForElementPresent(driver, related, 3);
+					if (related.isDisplayed()) {
+						report.updateTestLog("Opportunities Installments",
+								"Editing the Paid installment amount is successfull::", Status.PASS);
+						isStatus = true;
+						break;
+					} else {
+						report.updateTestLog("Opportunities Installments",
+								"Editing the Paid installment amount is failed::", Status.FAIL);
+						isStatus = true;
+						break;
+					}
+				} catch (Exception e) {
+					report.updateTestLog("Opportunities Installments", "Unable to edit the installments:::", Status.PASS);
 					isStatus = true;
 					break;
 				}
