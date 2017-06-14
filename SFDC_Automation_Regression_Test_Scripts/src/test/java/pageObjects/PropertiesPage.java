@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -47,7 +48,7 @@ public class PropertiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//*[@id='bottomButtonRow']/input[1]")
 	WebElement continueButton;	
 
-	@FindBy(xpath = "//div[@class='slds-media']//input[@value='Save Property']")
+	@FindBy(xpath = /*"//div[@class='slds-media']*/ "//*[@value='Save Property']")
 	WebElement saveProperty;	
 
 	@FindBy(xpath = "//div[@class='slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2']/div/label[@for='property-name']/parent::div//div/input")
@@ -1617,16 +1618,17 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, propertyName, 3);
 		Utility_Functions.xClick(driver, propertyName, true);	
 		Utility_Functions.xWaitForElementPresent(driver, propertyName, 5);
-		Utility_Functions.xSendKeys(driver, propertyName, "user");
+		int value = Utility_Functions.xRandomFunction();
+		Utility_Functions.xSendKeys(driver, propertyName, "Test Automation User_" + value);
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xScrollWindow(driver);
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xScrollWindowTop(driver);
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, propertyStreet, 5);
-		Utility_Functions.xSendKeys(driver, propertyStreet, "2100 Ross Ave");
+		Utility_Functions.xSendKeys(driver, propertyStreet, dataTable.getData("General_Data", "Street"));
 		Utility_Functions.xWaitForElementPresent(driver, propertyCity, 5);
-		Utility_Functions.xSendKeys(driver, propertyCity, "Dallas");
+		Utility_Functions.xSendKeys(driver, propertyCity, dataTable.getData("General_Data", "City"));
 		Utility_Functions.xWaitForElementPresent(driver, propertyCountry, 3);
 		Utility_Functions.xClick(driver, propertyCountry, true);
 		Utility_Functions.xWaitForElementPresent(driver, selectPropertyCountry, 3);
@@ -1635,7 +1637,8 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, statePickList, true);
 		Utility_Functions.xWaitForElementPresent(driver, selectPropertyState, 3);
 		Utility_Functions.xClick(driver, selectPropertyState, true);
-		Utility_Functions.xWaitForElementPresent(driver, saveProperty, 3);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, saveProperty, 4);
 		Utility_Functions.xClick(driver, saveProperty, true);
 		report.updateTestLog("Verify Custom Property Page",
 				"The new property is saved with all the required fields", Status.PASS);	
