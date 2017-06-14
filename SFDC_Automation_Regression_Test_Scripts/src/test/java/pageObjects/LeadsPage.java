@@ -162,9 +162,9 @@ public class LeadsPage extends ReusableLibrary {
 	/*	@FindBy(xpath = "//li/parent::ul/parent::div/parent::div/parent::div/header/div[2]/h2/a/span[text()='Private Notes']/parent::a/parent::h2/parent::div/parent::header/parent::div//ul[@class='slds-button-group slds-m-left--xx-small small oneActionsRibbon forceActionsContainer']")
 	WebElement new_PrivateNotes;*/
 
-/*	@FindBy(xpath = "//article[contains(@class,'Private Notes')]//div[@title='New']")
+	/*	@FindBy(xpath = "//article[contains(@class,'Private Notes')]//div[@title='New']")
 	WebElement new_PrivateNotes;*/
-	
+
 	@FindBy(xpath = "//article[contains(@class,'forceRelatedListSingleContainer')]//span[contains(text(),'Private Notes')]/ancestor::article//div[text()='New']")
 	WebElement new_PrivateNotes;
 
@@ -295,6 +295,42 @@ public class LeadsPage extends ReusableLibrary {
 
 	@FindBy(xpath="//input[contains(@id,'EndTime')]")
 	WebElement endTimeNewCustomEventPage;
+
+	@FindBy(xpath = "//div[@class='changeRecordTypeOptionRightColumn']/span[text()='Personal Information']/parent::div/parent::label/div[1]/span")
+	WebElement selectPersonalInformation;
+
+	@FindBy(xpath = "//button[@class='slds-button slds-button--neutral uiButton--default uiButton--brand uiButton']/span[contains(text(), 'Next')]")
+	WebElement next;
+
+	@FindBy(xpath = "//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[contains(text(),'Title')]/parent::label/parent::div/input")
+	WebElement titleName;
+
+	@FindBy(xpath = "//span[text()='Private Notes']/parent::span[@class='view-all-label']")
+	WebElement viewAllButton;
+
+	@FindBy(xpath = "//div[@class='contentWrapper slds-box--border']//ul[@class='orderedList']//span[@class='pillText']")
+	WebElement account_PrivateNotes;
+
+	@FindBy(xpath=" //button[@class='slds-button slds-button--neutral uiButton--default uiButton--brand uiButton forceActionButton']/span[contains(text(), 'Save')]")
+	WebElement savePersonalInformation;
+
+	@FindBy(xpath="//ul[@class='slds-button-group slds-m-left--xx-small oneActionsRibbon forceActionsContainer']//li/a/div[text()='New']")
+	WebElement newLeads;
+
+	@FindBy(xpath="//input[@value='Save']")
+	WebElement saveLead;
+
+	@FindBy(xpath = "//button/span[text()='View All Fields']")
+	WebElement viewAllFieldsButton;
+
+	@FindBy(xpath="//a[@class='tabHeader']//span[text()='Details']")
+	WebElement leadCreated;
+
+	@FindBy(xpath="//label[text()='Requirement Details']/parent::div/parent::div//div[2]/label")
+	WebElement leadStatus;
+
+	@FindBy(xpath="//label[text()='Requirement Details']/parent::div/parent::div//div[3]/label")
+	WebElement leadSourceField;
 
 
 	/**
@@ -1170,11 +1206,11 @@ public class LeadsPage extends ReusableLibrary {
 			System.out.println("Set Reminder check box is not present ");
 			report.updateTestLog("Verify Leads Custom Event Page ","Set Reminder checkbox is not present in the New Custom Event Page",  Status.FAIL);
 		}
-		
+
 		if ((!cancelCustomEventPageButton.getText().equals(" "))
 				|| (!saveAndNewEventCustomEventPageButton.getText().equals(" "))
 				|| (!saveEventCustomEventPageButton.getText().equals(" ")))
-			 {
+		{
 			System.out.println(
 					"Save, Save and New and Cancel buttons are prsent in the New Activity Layout Page ");
 			report.updateTestLog("Verify Leads Custom Event Page  ",
@@ -1187,7 +1223,7 @@ public class LeadsPage extends ReusableLibrary {
 					Status.FAIL);
 		}
 
-		
+
 		try {
 
 
@@ -1236,9 +1272,538 @@ public class LeadsPage extends ReusableLibrary {
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+	}
+
+	/**
+	 * Validating the Lead Private Note personal Information
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+	public void leadsVerifyPrivateNotePersonalInformation() {
+
+		Utility_Functions.xWaitForElementPresent(driver, menu_Leads, 3);
+		Utility_Functions.xClick(driver, menu_Leads, true);
+		Utility_Functions.timeWait(3);
+		List<WebElement> allActiveLeadsList = driver.findElements(
+				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xclickgetTextofFirstElementfromList(allActiveLeadsList);
+		Utility_Functions.xWaitForElementPresent(driver, related, 3);
+		Utility_Functions.xClick(driver, related, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, new_PrivateNotes, 3);
+		Utility_Functions.xClick(driver, new_PrivateNotes, true);
+		Utility_Functions.xWaitForElementPresent(driver, selectPersonalInformation, 3);
+		Utility_Functions.xClick(driver, selectPersonalInformation, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, next, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, titleName, true);
+		Utility_Functions.xClick(driver, account_PrivateNotes, true);
+		Utility_Functions.timeWait(2);
+		Random random = new Random();
+		int value = random.nextInt();
+		Utility_Functions.xSendKeys(driver, titleName, "Test Personal Information Note" + value);
+		Utility_Functions.timeWait(5);
+
+		try {
+			if ((!titleName.getText().equals("")) || (!account_PrivateNotes.getText().equals(""))) {
+				System.out.println("Title Name and Accounts fields are having the values:::");
+				report.updateTestLog("Accounts New Personal Information Page",
+						"Title Name and  Accounts fields are having the values::", Status.PASS);
+			} else {
+				System.out.println("Title Name and Account fields are not having the values:::");
+				report.updateTestLog("Accounts New Personal Information Page ",
+						"Title Name and Accounts fields are not having the values::", Status.FAIL);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		List<WebElement> personalInformation = driver
+				.findElements(By.xpath(".//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']"));
+		int count = 0;
+		try {
+			for (WebElement element : personalInformation) {
+				if ((count == 0) && (element.getText().contains("Title"))) {
+					System.out.println("Title field is present in the Create Private Notes Personal Information Page");
+					report.updateTestLog("Create Private Note Personal Information Page",
+							"Create Private Note Personal Information Page is having the " + element.getText()
+							+ " Status field::",
+							Status.PASS);
+					count++;
+				} else if ((count == 1) && (element.getText().contains("Lead"))) {
+					System.out.println("Lead field is present in the Create Private Notes Personal Information Page");
+					report.updateTestLog("Create Private Notes Personal Information Page",
+							"Create Private Notes Personal Information Page is having the " + element.getText()
+							+ " Status field::",
+							Status.PASS);
+					count++;
+				} else if ((count == 2) && (element.getText().contains("Account"))) {
+					System.out
+					.println("Account field is present in the Create Private Notes Personal Information Page");
+					report.updateTestLog("Create Private Notes Personal Information Page",
+							"Create Private Notes Personal Information Page is having the " + element.getText()
+							+ " Status field::",
+							Status.PASS);
+					count++;
+				} else if ((count == 3) && (element.getText().contains("Property"))) {
+					System.out
+					.println("Property field is present in the Create Private Notes Personal Information Page");
+					report.updateTestLog("Create Private Notes Personal Information Page",
+							"Create Private Notes Personal Information Page is having the " + element.getText()
+							+ " Status field::",
+							Status.PASS);
+					count++;
+				} else if ((count == 4) && (element.getText().contains("Contact"))) {
+					System.out
+					.println("Contact field is present in the Create Private Notes Personal Information Page");
+					report.updateTestLog("Create Private Notes Personal Information Page",
+							"Create Private Notes Personal Information Page is having the " + element.getText()
+							+ " Status field::",
+							Status.PASS);
+					count++;
+				} else if ((count == 5) && (element.getText().contains("Opportunity"))) {
+					System.out
+					.println("Opportunity field is present in the Create Private Notes Personal Information Page");
+					report.updateTestLog("Create Private Notes Personal Information Page",
+							"Create Private Notes Personal Information Page is having the " + element.getText()
+							+ " Status field::",
+							Status.PASS);
+					count++;
+				} else if ((count == 6) && (element.getText().contains("Direct Line"))) {
+					System.out.println(
+							"Direct Line field is present in the Create Private Notes Personal Information Page");
+					report.updateTestLog("Create Private Notes Personal Information Page",
+							"Create Private Notes Personal Information Page is having the " + element.getText()
+							+ " Status field::",
+							Status.PASS);
+					count++;
+				} else if ((count == 7) && (element.getText().contains("Personal Email"))) {
+					System.out.println(
+							"Personal Email field is present in the Create Private Notes Personal Information Page");
+					report.updateTestLog("Create Private Notes Personal Information Page",
+							"Create Private Notes Personal Information Page is having the " + element.getText()
+							+ " Status field::",
+							Status.PASS);
+					count++;
+				} else if ((count == 8) && (element.getText().contains("Mobile"))) {
+					System.out.println("Mobile field is present in the Create Private Notes Personal Information Page");
+					report.updateTestLog("Create Private Notes Personal Information Page",
+							"Create Private Notes Personal Information Page is having the " + element.getText()
+							+ " Status field::",
+							Status.PASS);
+					count++;
+
+				} else if ((count == 9) && (element.getText().contains("Entertainment Preferences"))) {
+					System.out.println(
+							"Entertainment Preferences field is present in the Create Private Notes Personal Information Page");
+					report.updateTestLog("Create Private Notes Personal Information Page",
+							"Create Private Notes Personal Information Page is having the " + element.getText()
+							+ " Status field::",
+							Status.PASS);
+
+				}
+			}
+
+			System.out.println(count);
+			if (count != 9) {
+
+				System.out.println(
+						"All the fields are not present in the new personal information page");
+				report.updateTestLog("Create Private Notes Personal Information Page",
+						"Create Private Notes Personal Information Page is not having all the fields::", Status.FAIL);
+
+			}else{
+
+				System.out.println(
+						"All the fields are present in the new personal information page");
+				report.updateTestLog("Create Private Notes Personal Information Page",
+						"Create Private Notes Personal Information Page is not having all the fields::", Status.PASS);
 
 
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
 
+		Utility_Functions.xClick(driver, savePersonalInformation, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xClick(driver, viewAllButton, true);
+		Utility_Functions.timeWait(3);
+		List<WebElement> relatedActivitiesList = driver.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		for (WebElement element : relatedActivitiesList ) {
+			if ((!element.getText().equals(" "))){
+				report.updateTestLog("Verify Create Activity Account","The New Activity for Accounts are created ",Status.PASS);
+			}else
+			{
+				report.updateTestLog("Verify Create Activity Account","The New Activity for Accounts are not created ",Status.FAIL);
+			}
+		}
+
+	}
+	/**
+	 * Validating the Leads custom Page
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	static ArrayList<String> customPageQuickCreateFieldsList = new ArrayList<String>();
+
+	public void customPageQuickCreateFields() {
+
+
+		customPageQuickCreateFieldsList.add("Salutation");
+		customPageQuickCreateFieldsList.add("* First Name");
+		customPageQuickCreateFieldsList.add("* Last Name");
+		customPageQuickCreateFieldsList.add("* Company");
+		customPageQuickCreateFieldsList.add("Existing Engagement Expiration");
+		customPageQuickCreateFieldsList.add("Total Size");
+		customPageQuickCreateFieldsList.add("Unit of Measure");
+		customPageQuickCreateFieldsList.add("Preferred Property Type");
+		customPageQuickCreateFieldsList.add("Preferred Property Sub-Type");
+		customPageQuickCreateFieldsList.add("Requirement Details");
+		customPageQuickCreateFieldsList.add("* Status");
+		customPageQuickCreateFieldsList.add("Lead Source");
+
+		System.out.println("Custom Page Quick create fields are " + customPageQuickCreateFieldsList);
+	}
+	static ArrayList<String> customPageContactInformationFieldsList = new ArrayList<String>();
+
+	public void customPageContactInformationFields() {
+
+
+		customPageContactInformationFieldsList.add("Country");
+		customPageContactInformationFieldsList.add("Street");
+		customPageContactInformationFieldsList.add("City");
+		customPageContactInformationFieldsList.add("State/Province");
+		customPageContactInformationFieldsList.add("Zip/Postal Code");
+		customPageContactInformationFieldsList.add("Direct Line");
+		customPageContactInformationFieldsList.add("Mobile");
+		customPageContactInformationFieldsList.add("Main Phone");
+		customPageContactInformationFieldsList.add("Email");
+		customPageContactInformationFieldsList.add("Fax");
+
+
+		System.out.println("Custom Page Contact Information fields are " + customPageContactInformationFieldsList);
+	}
+	static ArrayList<String> customPageLeadInformationFieldsList = new ArrayList<String>();
+
+	public void customPageLeadInformationFields() {
+
+
+		customPageLeadInformationFieldsList.add("Record Type");
+		customPageLeadInformationFieldsList.add("Nickname");
+		customPageLeadInformationFieldsList.add("Middle Name");
+		customPageLeadInformationFieldsList.add("Title");
+		customPageLeadInformationFieldsList.add("Department");
+		customPageLeadInformationFieldsList.add("Influence Level");
+		customPageLeadInformationFieldsList.add("Owner");
+		customPageLeadInformationFieldsList.add("Industry");
+		customPageLeadInformationFieldsList.add("Website");
+		customPageLeadInformationFieldsList.add("Rating");
+		customPageLeadInformationFieldsList.add("Represented By (Firm)");
+
+
+		System.out.println("Custom Page Lead Information fields are " + customPageLeadInformationFieldsList);
+	}
+
+	static ArrayList<String> customPageCommunicationPreferencesFieldsList = new ArrayList<String>();
+
+	public void customPageCommunicationPreferencesFields() {
+
+
+		customPageCommunicationPreferencesFieldsList.add("Email Options");
+		customPageCommunicationPreferencesFieldsList.add("Call Options");
+		customPageCommunicationPreferencesFieldsList.add("Mail Options");
+
+		System.out.println("Custom Page Communication Preferences fields are " + customPageCommunicationPreferencesFieldsList);
+	}
+	static ArrayList<String> customPageProspectRequirementsFieldsList = new ArrayList<String>();
+
+	public void customPageProspectRequirementsFields() {
+
+
+		customPageProspectRequirementsFieldsList.add("Total # of Units");
+		customPageProspectRequirementsFieldsList.add("Unit of Comparison");
+
+
+		System.out.println("Custom Page Prospect requirements fields are " + customPageProspectRequirementsFieldsList);
+	}
+	static ArrayList<String> customPageAdditionalInformationFieldsList = new ArrayList<String>();
+
+	public void customPageAdditionalInformationFields() {
+
+
+		customPageAdditionalInformationFieldsList.add("Assistant Name");
+		customPageAdditionalInformationFieldsList.add("Assistant Phone");
+		customPageAdditionalInformationFieldsList.add("Assistant Email");
+		customPageAdditionalInformationFieldsList.add("Unmapped Fields");
+
+		System.out.println("Custom Page Additional Information fields are " + customPageAdditionalInformationFieldsList);
+	}
+	public void verifyLeadsNewCustomPage(){
+		Utility_Functions.xWaitForElementPresent(driver,menu_Leads, 3);
+		Utility_Functions.xClick(driver, menu_Leads, true);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, newLeads, 2);
+		Utility_Functions.xClick(driver, newLeads, true);	
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xSwitchtoFrame(driver, continueButton);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xClick(driver, continueButton, true);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xSwitchtoFrame(driver, saveLead);
+		Utility_Functions.timeWait(5);
+
+		List<WebElement> customPageQuickCreateSectionFieldsList = driver.findElements(
+				By.xpath("//h2[text()='Quick Create']/parent::span/parent::div/div[1]//label[@class='slds-form-element__label']"));
+		int count1 = 0, i1 = 0;
+		String fieldsArray[] = new String[customPageQuickCreateSectionFieldsList.size()];
+		System.out.println(customPageQuickCreateSectionFieldsList.size());
+
+		try {
+			customPageQuickCreateFields();
+			for (WebElement element1 : customPageQuickCreateSectionFieldsList) {
+				System.out.println(element1.getText());
+				fieldsArray[i1] = element1.getText().replace("*", "").replace(" ", "");
+				if (fieldsArray[i1].contains(customPageQuickCreateFieldsList.get(i1).replace("*", "").replace(" ", ""))) {
+					report.updateTestLog("Verify Custom Leads Page",
+							" Custom  page is having the " + fieldsArray[i1] + " fields ",
+							Status.PASS);
+					count1++;
+				}
+				if((i1==4)/* && (dataTable.getData("General_Data", "TC_ID").contains("OBAMER"))*/) {
+					if(fieldsArray[i1].contains("ExistingLeaseExpiration")) {
+						count1++;
+					}
+				}
+				i1++;
+			}
+			System.out.println(count1);
+			if (count1 != 12) {
+				report.updateTestLog("Verify Custom Leads Page",
+						"All fields are not present in the Quick Create Section", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify Custom Leads Page",
+						"All fields are present in the Quick Create Section", Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		List<WebElement> customPageContactInformationSectionFieldsList = driver.findElements(
+				By.xpath("//h2[text()='Address and Contact Information']/parent::div/div[2]//label[@class='slds-form-element__label']"));
+		int count2 = 0, i2 = 0;
+		String fieldsArray1[] = new String[customPageContactInformationSectionFieldsList.size()];
+		System.out.println(customPageContactInformationSectionFieldsList.size());
+
+		try {
+			customPageContactInformationFields();
+			for (WebElement element2 : customPageContactInformationSectionFieldsList) {
+				System.out.println(element2.getText());
+				fieldsArray1[i2] = element2.getText();
+				if (fieldsArray1[i2].equalsIgnoreCase(customPageContactInformationFieldsList.get(i2))) {
+					report.updateTestLog("Verify Custom Leads Page",
+							" Custom  page is having the " + fieldsArray1[i2] + " fields ",
+							Status.PASS);
+					count2++;
+				}
+				i2++;
+			}
+			System.out.println(count2);
+			if (count2 != 10) {
+				report.updateTestLog("Verify Custom Leads Page",
+						"All fields are not present in the Contact Information section", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify Custom Leads Page",
+						"All fields are present in the Contact Information section", Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xClick(driver, viewAllFieldsButton, true);
+		Utility_Functions.timeWait(2);
+		List<WebElement> customPageAdditionalLeadInformationSectionFieldsList = driver.findElements(
+				By.xpath("//h2[text()='Additional Lead Information']/parent::div/div[1]//label[@class='slds-form-element__label']"));
+		int count3 = 0, i3 = 0;
+		String fieldsArray2[] = new String[customPageAdditionalLeadInformationSectionFieldsList.size()];
+		System.out.println(customPageAdditionalLeadInformationSectionFieldsList.size());
+
+		try {
+			customPageLeadInformationFields();
+			for (WebElement element3 : customPageAdditionalLeadInformationSectionFieldsList) {
+				System.out.println(element3.getText());
+				fieldsArray2[i3] = element3.getText();
+				if (fieldsArray2[i3].equalsIgnoreCase(customPageLeadInformationFieldsList.get(i3))) {
+					report.updateTestLog("Verify Custom Leads Page",
+							" Custom  page is having the " + fieldsArray2[i3] + " fields ",
+							Status.PASS);
+					count3++;
+				}
+				i3++;
+			}
+			System.out.println(count3);
+			if (count3 != 11) {
+				report.updateTestLog("Verify Custom Leads Page",
+						"All fields are not present in the Additional Leads Information Section", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify Custom Leads Page",
+						"All fields are present in the Additional Leads Information Section", Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		List<WebElement> customPageCommunicationPreferencesSectionFieldsList = driver.findElements(
+				By.xpath("//h2[text()='Communication Preferences']/parent::div/div[2]//label[@class='slds-form-element__label']"));
+		int count4 = 0, i4 = 0;
+		String fieldsArray3[] = new String[customPageCommunicationPreferencesSectionFieldsList.size()];
+		System.out.println(customPageCommunicationPreferencesSectionFieldsList.size());
+
+		try {
+			customPageCommunicationPreferencesFields();
+			for (WebElement element4 : customPageCommunicationPreferencesSectionFieldsList) {
+				System.out.println(element4.getText());
+				fieldsArray3[i4] = element4.getText();
+				if (fieldsArray3[i4].equalsIgnoreCase(customPageCommunicationPreferencesFieldsList.get(i4))) {
+					report.updateTestLog("Verify Custom Leads Page",
+							" Custom  page is having the " + fieldsArray3[i4] + " fields ",
+							Status.PASS);
+					count4++;
+				}
+				i4++;
+			}
+			System.out.println(count4);
+			if (count4 != 3) {
+				report.updateTestLog("Verify Custom Leads Page",
+						"All fields are not present in the Communication Preferences Section", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify Custom Leads Page",
+						"All fields are present in the Communication Preferences Section", Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		List<WebElement> customPageProspectRequirementsSectionFieldsList = driver.findElements(
+				By.xpath("//h2[text()='Prospect Requirements']/parent::div/div[3]//label[@class='slds-form-element__label']"));
+		int count5 = 0, i5 = 0;
+		String fieldsArray4[] = new String[customPageProspectRequirementsSectionFieldsList.size()];
+		System.out.println(customPageProspectRequirementsSectionFieldsList.size());
+
+		try {
+			customPageProspectRequirementsFields();
+			for (WebElement element5 : customPageProspectRequirementsSectionFieldsList) {
+				System.out.println(element5.getText());
+				fieldsArray4[i5] = element5.getText();
+				if (fieldsArray4[i5].equalsIgnoreCase(customPageProspectRequirementsFieldsList.get(i5))) {
+					report.updateTestLog("Verify Custom Leads Page",
+							" Custom  page is having the " + fieldsArray4[i5] + " fields ",
+							Status.PASS);
+					count5++;
+				}
+				i5++;
+				if(i5==1) {
+					if(fieldsArray4[i5].contains("Existing Termination/Break Option")) {
+						count5++;
+					}
+				}
+			}
+			System.out.println(count5);
+			if (count5 != 2) {
+				report.updateTestLog("Verify Custom Leads Page",
+						"All fields are not present in the Prospect Requirements Section", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify Custom Leads Page",
+						"All fields are present in the Prospect Requirements Section", Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		List<WebElement> customPageAditionalInformationSectionFieldsList = driver.findElements(
+				By.xpath("//h2[text()='Additional Information']/parent::div/div[4]//label[@class='slds-form-element__label']"));
+		int count6 = 0, i6 = 0;
+		String fieldsArray5[] = new String[customPageAditionalInformationSectionFieldsList.size()];
+		System.out.println(customPageAditionalInformationSectionFieldsList.size());
+
+		try {
+			customPageAdditionalInformationFields();
+			for (WebElement element6 : customPageAditionalInformationSectionFieldsList) {
+				System.out.println(element6.getText());
+				fieldsArray5[i6] = element6.getText();
+				if (fieldsArray5[i6].equalsIgnoreCase(customPageAdditionalInformationFieldsList.get(i6))) {
+					report.updateTestLog("Verify Custom Leads Page",
+							" Custom  page is having the " + fieldsArray5[i6] + " fields ",
+							Status.PASS);
+					count6++;
+				}
+				i6++;
+			}
+			System.out.println(count6);
+			if (count6 != 4) {
+				report.updateTestLog("Verify Custom Leads Page",
+						"All fields are not present in the Additional Information Section", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify Custom Leads Page",
+						"All fields are present in the Additional Information Section", Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		System.out.println(leadStatus.getText());
+		System.out.println(leadSourceField.getText());
+
+		if((leadStatus.getText().contains("Status")) && (leadSourceField.getText().contains("Lead Source"))) {
+
+			System.out.println("Lead Status is followed by the requirement details and the Lead Source is followed by the Lead Status");
+
+		} else{
+
+			System.out.println("Lead Status is not followed by the requirement details and the Lead Source is not followed by the Lead Status");
+
+		}
+		Utility_Functions.timeWait(2);
+		int value = Utility_Functions.xRandomFunction();
+		String companyName = dataTable.getData("General_Data", "Company") + value;		
+		Utility_Functions.xSwitchtoFrame(driver, firstName);
+		Utility_Functions.xWaitForElementPresent(driver, firstName, 5);
+		Utility_Functions.xSendKeys(driver, firstName, dataTable.getData("General_Data", "First Name"));
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xSendKeys(driver, lastName, dataTable.getData("General_Data", "Last Name"));
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xSendKeys(driver, company, companyName);
+		Utility_Functions.xWaitForElementPresent(driver,saveLead, 3);
+		Utility_Functions.xClick(driver, saveLead, true);
+		Utility_Functions.timeWait(2);
+
+		report.updateTestLog("Verify Custom Leads Page",
+				"The Lead is saved with all the required fields", Status.PASS);
 	}
 }
 

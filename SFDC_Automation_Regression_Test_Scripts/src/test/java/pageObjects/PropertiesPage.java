@@ -1,5 +1,6 @@
 package pageObjects;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -159,6 +160,57 @@ public class PropertiesPage extends ReusableLibrary {
 	@FindBy(xpath = "// input [@value= 'Cancel']")
 	WebElement cancelNewActivityLayoutPage;
 
+	@FindBy(xpath = "//ul[@class='slds-button-group slds-m-left--xx-small oneActionsRibbon forceActionsContainer']//li/a/div[text()='New']")
+	WebElement newProperties;
+	
+	@FindBy(xpath="//label[text()='Building/Property Name']/parent::div/parent::div//div[contains(@class,'requiredInput')]//input[contains(@id,'propertyEditForm')]")
+	WebElement propertyName;
+	
+	@FindBy(xpath="//select[contains(@id,'countryPicklist')]")
+	WebElement propertyCountry;
+	
+	@FindBy(xpath="//select[contains(@id,'countryPicklist')]/option[text()='United States']")
+	WebElement selectPropertyCountry;
+	
+	@FindBy(xpath="//textarea[contains(@id,'propertyEditForm:Street')]")
+	WebElement propertyStreet;
+	
+	@FindBy(xpath="//input[contains(@id,'propertyEditForm:City')]")
+	WebElement propertyCity;
+	
+	@FindBy(xpath="//select[contains(@id,'propertyEditForm:statePicklist')]")
+	WebElement statePickList;
+	
+	@FindBy(xpath="//select[contains(@id,'statePicklist')]/option[text()='Texas']")
+    WebElement selectPropertyState;
+	
+	@FindBy(xpath="//h1[contains(@class,'slds-page-header__title')]/span")
+	WebElement propertySaved;
+	
+	@FindBy(xpath = "//*[text()='No Next Steps. Open And Upcoming Activities Show Up Here.']")
+	WebElement activityTimeline;
+
+	@FindBy(xpath = "//p[@class='slds-tile__title slds-truncate']/a")
+	WebElement activity;
+
+	@FindBy(xpath = "//p[@class='slds-tile__title slds-truncate']/a/parent::p/parent::div/parent::div//div[2]")
+	WebElement activityTypeProperty;
+
+	@FindBy(xpath = "//p[@class='slds-tile__title slds-truncate']/a/parent::p/parent::div/parent::div//div[3]")
+	WebElement statusProperty;
+
+	@FindBy(xpath = "//p[@class='slds-tile__title slds-truncate']/a/parent::p/parent::div/parent::div//div[4]")
+	WebElement comments;
+
+	@FindBy(xpath = "//div[@class='slds-media']//p[@class='slds-timeline__date']")
+	WebElement dueDate;
+
+	@FindBy(xpath = "//span[@class='slds-checkbox--faux']")
+	WebElement statusCheckbox;
+	
+	@FindBy(xpath="//button[@title='Past Activity']")
+	WebElement pastActivityButton;
+	
 
 	/**
 	 * Validating the Customer Property Page fields 
@@ -1153,6 +1205,542 @@ public class PropertiesPage extends ReusableLibrary {
 				e.printStackTrace();
 			}
 		//}	
+
+	}
+	
+	/**
+	 * Validating the properties custom event page
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	
+	static ArrayList<String> newPropertiesPageSectionsList = new ArrayList<String>();
+
+	public void newPropertiesPageSections() {
+		newPropertiesPageSectionsList.add("Property Information");
+		newPropertiesPageSectionsList.add("Address Information");
+		newPropertiesPageSectionsList.add("Property Financials");
+		newPropertiesPageSectionsList.add("Property Summary");
+		newPropertiesPageSectionsList.add("Property Management");
+		newPropertiesPageSectionsList.add("Asset Management");
+		newPropertiesPageSectionsList.add("Listing Management");
+		System.out.println("New Property Page Sections are " + newPropertiesPageSectionsList);
+	}
+	static ArrayList<String> newpropertyInformationFieldsList = new ArrayList<String>();
+	public void propertyInformationFields() {
+		newpropertyInformationFieldsList.add("*Building/Property Name");
+		newpropertyInformationFieldsList.add("Property Website");
+		newpropertyInformationFieldsList.add("Record Type");
+		newpropertyInformationFieldsList.add("Stacking URL");
+		newpropertyInformationFieldsList.add("GRID Property Record Link");
+		System.out.println("Property Information Fields are " + newpropertyInformationFieldsList);
+	}
+ static ArrayList<String> newPropertyAddressInformationSectionsList = new ArrayList<String>();
+ public void newPropertiesPageAddressInformation() {
+		newPropertyAddressInformationSectionsList.add("*Country");
+		newPropertyAddressInformationSectionsList.add("*Street");
+		newPropertyAddressInformationSectionsList.add("*City");
+		newPropertyAddressInformationSectionsList.add("State/Province");
+		newPropertyAddressInformationSectionsList.add("Zip/Postal Code");
+		newPropertyAddressInformationSectionsList.add("Region");
+		newPropertyAddressInformationSectionsList.add("Market");
+		newPropertyAddressInformationSectionsList.add("Sub Market");
+		newPropertyAddressInformationSectionsList.add("District");
+		newPropertyAddressInformationSectionsList.add("County");
+		System.out.println("New Property Page Sections are " + newPropertyAddressInformationSectionsList);
+	}
+	static ArrayList<String> newpropertyFinancialFieldsList = new ArrayList<String>();
+    public void propertyFinancialFields() {
+		newpropertyFinancialFieldsList.add("Last Purchase/Sale Price");
+		newpropertyFinancialFieldsList.add("*Currency ISO Code");
+		newpropertyFinancialFieldsList.add("Last Purchase/Sale Date");
+		System.out.println("Property Information Fields are " + newpropertyFinancialFieldsList);
+	}
+	 static ArrayList<String> newPropertySummaryFieldsList = new ArrayList<String>();
+	 public void propertySummaryFields() {
+			newPropertySummaryFieldsList.add("Property Type");
+			newPropertySummaryFieldsList.add("Property Sub-Type");
+			newPropertySummaryFieldsList.add("Construction Type");
+			newPropertySummaryFieldsList.add("Location");
+			newPropertySummaryFieldsList.add("Class");
+			newPropertySummaryFieldsList.add("Net Rentable Area");
+			newPropertySummaryFieldsList.add("Total Size");
+			newPropertySummaryFieldsList.add("Units of Measure");
+			newPropertySummaryFieldsList.add("Total # of Units");
+			newPropertySummaryFieldsList.add("Unit of Comparison");
+			newPropertySummaryFieldsList.add("Land Size (Acres)");
+			newPropertySummaryFieldsList.add("Tenancy");
+			newPropertySummaryFieldsList.add("# of Buildings");
+			newPropertySummaryFieldsList.add("# of Floors");
+			newPropertySummaryFieldsList.add("Building Status");
+			newPropertySummaryFieldsList.add("Month Built");
+			newPropertySummaryFieldsList.add("Year Built");
+			newPropertySummaryFieldsList.add("Year Renovated");
+			newPropertySummaryFieldsList.add("Occupancy Percent");
+			newPropertySummaryFieldsList.add("Owner Occupied");
+			newPropertySummaryFieldsList.add("Vacant");
+			System.out.println("New Property Page Summary section fields are " + newPropertySummaryFieldsList);
+		}
+		
+		static ArrayList<String> newpropertyManagementFieldsList = new ArrayList<String>();
+		public void propertyManagementFields() {
+			newpropertyManagementFieldsList.add("Company");
+			newpropertyManagementFieldsList.add("Address");
+			newpropertyManagementFieldsList.add("Contact Name");
+			newpropertyManagementFieldsList.add("Phone");
+			newpropertyManagementFieldsList.add("Email");
+			System.out.println("Property Management Fields are " + newpropertyManagementFieldsList);
+		}
+		
+		static ArrayList<String> newpropertyAssetManagementFieldsList = new ArrayList<String>();
+		public void propertyAssetManagementFields() {
+			newpropertyAssetManagementFieldsList.add("Company");
+			newpropertyAssetManagementFieldsList.add("Address");
+			newpropertyAssetManagementFieldsList.add("Contact Name");
+			newpropertyAssetManagementFieldsList.add("Phone");
+			newpropertyAssetManagementFieldsList.add("Email");
+			System.out.println(" Asset Management Fields are " + newpropertyAssetManagementFieldsList);
+		}
+		
+		static ArrayList<String> newpropertyListingManagementFieldsList = new ArrayList<String>();
+		public void propertyListingManagementFields() {
+			newpropertyListingManagementFieldsList.add("Company");
+			newpropertyListingManagementFieldsList.add("Address");
+			newpropertyListingManagementFieldsList.add("Contact Name");
+			newpropertyListingManagementFieldsList.add("Phone");
+			newpropertyListingManagementFieldsList.add("Email");
+			System.out.println("Listing Management Fields are " + newpropertyListingManagementFieldsList);
+		}
+		
+		/**
+		 * Validating the properties custom event page
+		 * 
+		 * @author Ramya
+		 *
+		 */
+		
+
+	public void verifyNewPropertiesPage(){
+
+        try{
+            Utility_Functions.xWaitForElementPresent(driver,menu_Properties, 3);
+            Utility_Functions.xClick(driver, menu_Properties, true);
+      }catch(Exception e){
+            Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
+            Utility_Functions.xClick(driver, menu_More, true);
+            try {
+                   Utility_Functions.xWaitForElementPresent(driver, properties, 2);
+                   Utility_Functions.xClick(driver, properties, true);
+            } catch (Exception e1) {
+                   Utility_Functions.xWaitForElementPresent(driver, propertiesEnv, 2);
+                   Utility_Functions.xClick(driver, propertiesEnv, true);
+            }      
+      }
+
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, newProperties, 2);
+		Utility_Functions.xClick(driver, newProperties, true);	
+		Utility_Functions.timeWait(2);
+	
+		Utility_Functions.xSwitchtoFrame(driver, saveProperty);
+		Utility_Functions.timeWait(5);
+	
+		List<WebElement> propertiesPageSectionsList = driver.findElements(
+				By.xpath("//div[contains(@class,'slds-col--padded')]/h2"));
+		int count1 = 0, i1 = 0;
+		String sectionArray[] = new String[propertiesPageSectionsList.size()];
+		System.out.println(propertiesPageSectionsList.size());
+
+		try {
+			newPropertiesPageSections();
+			for (WebElement element1 : propertiesPageSectionsList) {
+				System.out.println(element1.getText());
+				sectionArray[i1] = element1.getText();
+				if (sectionArray[i1].equalsIgnoreCase(newPropertiesPageSectionsList.get(i1))) {
+					report.updateTestLog("Verify Custom Property Page",
+							"Properties Custom  page is having the " + sectionArray[i1] + " section ",
+							Status.PASS);
+					count1++;
+				}
+				i1++;
+			}
+			System.out.println(count1);
+			if (count1 != 7) {
+				report.updateTestLog("Verify Custom Property Page",
+						"All sections are not present in the Properties page custom Layout", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify Custom Property Page",
+						"All sections are present in the Properties page custom Layout", Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		List<WebElement> propertyInformationFieldsList = driver.findElements(
+				By.xpath("//h2[text()='Property Information']/parent::div/parent::div//div[@class='slds-form-element']/label"));
+		int count2 = 0, i2 = 0;
+		String fieldsArray[] = new String[propertyInformationFieldsList.size()];
+		System.out.println(propertyInformationFieldsList.size());
+
+		try {
+			propertyInformationFields();
+			for (WebElement element2 : propertyInformationFieldsList) {
+				System.out.println(element2.getText());
+				fieldsArray[i2] = element2.getText();
+				if (fieldsArray[i2].equalsIgnoreCase(newpropertyInformationFieldsList.get(i2))) {
+					report.updateTestLog("Verify Custom Property Page",
+							"Property Information section is having the " + fieldsArray[i2] + " section ",
+							Status.PASS);
+					count2++;
+				}
+				i2++;
+			}
+			System.out.println(count2);
+			if (count2 != 5) {
+				report.updateTestLog("Verify Custom Property Page",
+						"All fields are not present in the Property Information section ", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify Custom Property Page",
+						"All fields are present in the Property Information section ", Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		List<WebElement> propertyAddressFieldsList = driver.findElements(
+				By.xpath("//h2[text()='Address Information']/parent::div/parent::div//div[@class='slds-form-element']/label"));
+		int count3 = 0, i3 = 0;
+		String fieldsArray1[] = new String[propertyAddressFieldsList .size()];
+		System.out.println(propertyAddressFieldsList .size());
+
+		try {
+			newPropertiesPageAddressInformation();
+			for (WebElement element3 : propertyAddressFieldsList) {
+				System.out.println(element3.getText());
+				fieldsArray1[i3] = element3.getText();
+				if (fieldsArray1[i3].equalsIgnoreCase(newPropertyAddressInformationSectionsList.get(i3))) {
+					report.updateTestLog("Verify Custom Property Page",
+							"Address Information section is having the " + fieldsArray1[i3] + " fields ",
+							Status.PASS);
+					count3++;
+				}
+				i3++;
+			}
+			System.out.println(count3);
+			if (count3 != 10) {
+				report.updateTestLog("Verify Custom Property Page",
+						"All fields are not present in the Address Information section", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify Custom Property Page",
+						"All fields are present in the Address Information section", Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		List<WebElement> propertiesFinancialFieldsList = driver.findElements(
+				By.xpath("//h2[text()='Property Financials']/parent::div/parent::div//div[@class='slds-form-element']/label"));
+		int count4 = 0, i4 = 0;
+		String fieldsArray3[] = new String[propertiesFinancialFieldsList.size()];
+		System.out.println(propertiesFinancialFieldsList.size());
+
+		try {
+			propertyFinancialFields();
+			for (WebElement element4 : propertiesFinancialFieldsList) {
+				System.out.println(element4.getText());
+				fieldsArray3[i4] = element4.getText();
+				if (fieldsArray3[i4].equalsIgnoreCase(newpropertyFinancialFieldsList.get(i4))) {
+					report.updateTestLog("Verify Custom Property Page",
+							"Property Financial section is having the " + fieldsArray3[i4] + " fields ",
+							Status.PASS);
+					count4++;
+				}
+				i4++;
+			}
+			System.out.println(count4);
+			if (count4 != 3) {
+				report.updateTestLog("Verify Custom Property Page",
+						"All fields are not present in the Property financial section", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify Custom Property Page",
+						"All fields are present in the Property financial section", Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		List<WebElement> propertiesSummaryFieldsList = driver.findElements(
+				By.xpath("//h2[text()='Property Summary']/parent::div/parent::div//div[@class='slds-form-element']/label"));
+		int count5 = 0, i5 = 0;
+		String fieldsArray4[] = new String[propertiesSummaryFieldsList.size()];
+		System.out.println(propertiesSummaryFieldsList.size());
+
+		try {
+			propertySummaryFields();
+			for (WebElement element5 : propertiesSummaryFieldsList) {
+				System.out.println(element5.getText());
+				
+				fieldsArray4[i5] = element5.getText();
+				if (fieldsArray4[i5].equalsIgnoreCase(newPropertySummaryFieldsList.get(i5))){
+				/*String propertySummaryFieldListValue = newPropertySummaryFieldsList.get(i5);
+				System.out.println(propertySummaryFieldListValue);
+				if (fieldsArray4[i5].contains(propertySummaryFieldListValue))*/ 
+				report.updateTestLog("Verify Custom Property Page",
+							"Property summary section is having the " + fieldsArray4[i5] + " section ",
+							Status.PASS);
+					count5++;
+				}
+				i5++;
+			}
+			System.out.println(count5);
+			if (count5 != 21) {
+				report.updateTestLog("Verify Custom Property Page",
+						"All fields are not present in the Property Summary section", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify Custom Property Page",
+						"All fields are present in the Property Summary section", Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	
+		List<WebElement> propertiesManagementFieldsList = driver.findElements(
+				By.xpath("//h2[text()='Property Management']/parent::div/parent::div//div[@class='slds-form-element']/label"));
+		int count6 = 0, i6 = 0;
+		String fieldsArray5[] = new String[propertiesManagementFieldsList.size()];
+		System.out.println(propertiesManagementFieldsList.size());
+
+		try {
+			propertyManagementFields();
+			for (WebElement element6 : propertiesManagementFieldsList) {
+				System.out.println(element6.getText());
+				fieldsArray5[i6] = element6.getText();
+				if (fieldsArray5[i6].equalsIgnoreCase(newpropertyManagementFieldsList.get(i6))) {
+					report.updateTestLog("Verify Custom Property Page",
+							"Property Management section is having " + fieldsArray5[i6] + " fields ",
+							Status.PASS);
+					count6++;
+				}
+				i6++;
+			}
+			System.out.println(count6);
+			if (count6 != 5) {
+				report.updateTestLog("Verify Custom Property Page",
+						"All fields are not present in the Property Management section", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify Custom Property Page",
+						"All fields are present in the Property Management section", Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	
+		List<WebElement> propertiesAssetManagementFieldsList = driver.findElements(
+				By.xpath("//h2[text()='Asset Management']/parent::div/parent::div//div[@class='slds-form-element']/label"));
+		int count7 = 0, i7 = 0;
+		String fieldsArray6[] = new String[propertiesAssetManagementFieldsList.size()];
+		System.out.println(propertiesAssetManagementFieldsList.size());
+
+		try {
+			propertyAssetManagementFields();
+			for (WebElement element7 : propertiesAssetManagementFieldsList) {
+				System.out.println(element7.getText());
+				fieldsArray6[i7] = element7.getText();
+				if (fieldsArray6[i7].equalsIgnoreCase(newpropertyAssetManagementFieldsList.get(i7))) {
+					report.updateTestLog("Verify Custom Property Page",
+							"Asset Management section is having the " + fieldsArray6[i7] + " Fields ",
+							Status.PASS);
+					count7++;
+				}
+				i7++;
+			}
+			System.out.println(count7);
+			if (count7 != 5) {
+				report.updateTestLog("Verify Custom Property Page",
+						"All Fields are not present in the Asset Management Section", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify Custom Property Page",
+						"All Fields are present in the Asset Management Section", Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		List<WebElement> propertiesListingManagementFieldsList = driver.findElements(
+				By.xpath("//h2[text()='Listing Management']/parent::div/parent::div//div[@class='slds-form-element']/label"));
+		int count8 = 0, i8 = 0;
+		String fieldsArray7[] = new String[propertiesListingManagementFieldsList.size()];
+		System.out.println(propertiesListingManagementFieldsList.size());
+
+		try {
+			propertyListingManagementFields();
+			for (WebElement element8 : propertiesListingManagementFieldsList) {
+				System.out.println(element8.getText());
+				fieldsArray7[i8] = element8.getText();
+				if (fieldsArray7[i8].equalsIgnoreCase(newpropertyListingManagementFieldsList.get(i8))) {
+					report.updateTestLog("Verify Custom Property Page",
+							"Listing Management section is having the  " + fieldsArray7[i8] + " Fields ",
+							Status.PASS);
+					count8++;
+				}
+				i8++;
+			}
+			System.out.println(count8);
+			if (count8 != 5) {
+				report.updateTestLog("Verify Custom Property Page",
+						"All Fields are not present in the Listing Management Section", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify Custom Property Page",
+						"All Fields are present in the Listing Management Section", Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		Utility_Functions.timeWait(5);
+		Utility_Functions.xWaitForElementPresent(driver, propertyName, 3);
+		Utility_Functions.xClick(driver, propertyName, true);	
+		Utility_Functions.xWaitForElementPresent(driver, propertyName, 5);
+		Utility_Functions.xSendKeys(driver, propertyName, "user");
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, propertyStreet, 5);
+		Utility_Functions.xSendKeys(driver, propertyStreet, "2100 Ross Ave");
+		Utility_Functions.xWaitForElementPresent(driver, propertyCity, 5);
+		Utility_Functions.xSendKeys(driver, propertyCity, "Dallas");
+		Utility_Functions.xWaitForElementPresent(driver, propertyCountry, 3);
+		Utility_Functions.xClick(driver, propertyCountry, true);
+		Utility_Functions.xWaitForElementPresent(driver, selectPropertyCountry, 3);
+		Utility_Functions.xClick(driver, selectPropertyCountry, true);
+		Utility_Functions.xWaitForElementPresent(driver, statePickList, 3);
+		Utility_Functions.xClick(driver, statePickList, true);
+		Utility_Functions.xWaitForElementPresent(driver, selectPropertyState, 3);
+		Utility_Functions.xClick(driver, selectPropertyState, true);
+		Utility_Functions.xWaitForElementPresent(driver, saveProperty, 3);
+		Utility_Functions.xClick(driver, saveProperty, true);
+		report.updateTestLog("Verify Custom Property Page",
+				"The new property is saved with all the required fields", Status.PASS);	
+	}
+	/**
+	 * Validating the activity Lightning Time line fields
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	
+	public void selectProperty() {
+		try{
+			Utility_Functions.xWaitForElementPresent(driver,menu_Properties, 3);
+			Utility_Functions.xClick(driver, menu_Properties, true);
+		}catch(Exception e){
+			Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
+			Utility_Functions.xClick(driver, menu_More, true);
+			Utility_Functions.xWaitForElementPresent(driver, properties, 2);
+			Utility_Functions.xClick(driver, properties, true);	
+			
+		}
+		Utility_Functions.timeWait(2);
+		List<WebElement> accountList = driver
+				.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xclickgetTextofFirstElementfromList(accountList);
+		Utility_Functions.timeWait(2);
+	}
+
+	/**
+	 * Validating the activity Lightning Time line fields
+	 * 
+	 * @author Ramya
+	 *
+	 */
+
+	public void activityLightningTimeline() {
+		
+		selectProperty();
+		Utility_Functions.xClick(driver, related, true);
+		Utility_Functions.timeWait(4);
+		int count = 0;
+		try {
+			if (activityTimeline.isDisplayed()) {
+				System.out.println(
+						"There are no activities for present, past and future dates in acitivity related list");
+				report.updateTestLog("Verify Activity Related List",
+						"There are no activities for present, past and future dates in acitivity related list:::",
+						Status.PASS);
+				count++;
+			}
+		} catch (Exception e) {
+			if (activity.isDisplayed()) {
+				System.out.println("Activity is present acitivity related list");
+				report.updateTestLog("Verify Activity Related List",
+						"Acitivity is present in acitivity related list:::", Status.PASS);
+				if (activityTypeProperty.getText().contains("Activity Type")) {
+					System.out.println("Activity Type is present acitivity related list");
+					report.updateTestLog("Verify Activity Related List",
+							"Acitivity Type is present in acitivity related list:::", Status.PASS);
+					count++;
+				}
+				if (statusProperty.getText().contains("Status")) {
+					System.out.println("Status is present acitivity related list");
+					report.updateTestLog("Verify Activity Related List",
+							"Status is present in acitivity related list:::", Status.PASS);
+					count++;
+				}
+				if (comments.getText().contains("Comments")) {
+					System.out.println("Comments sections is present acitivity related list");
+					report.updateTestLog("Verify Activity Related List",
+							"Comments section is present in acitivity related list:::", Status.PASS);
+					count++;
+				}
+				if (dueDate.isDisplayed()) {
+					System.out.println("Duedate is present acitivity related list");
+					report.updateTestLog("Verify Activity Related List",
+							"Duedate is present in acitivity related list:::", Status.PASS);
+					count++;
+				}
+				if (statusCheckbox.isDisplayed()) {
+					System.out.println("Status Checkbox is present acitivity related list");
+					report.updateTestLog("Verify Activity Related List",
+							"Status Checkbox is present in acitivity related list:::", Status.PASS);
+				}
+			}
+			if (count == 4) {
+				System.out.println(
+						"Activity Type, Due Date, Comments and Status Checkbox are present under acitivity related list");
+				report.updateTestLog("Verify Activity Related List",
+						"Activity Type, Due Date, Comments and Status Checkbox are present under activity related list:::",
+						Status.PASS);
+			} else if (count == 1) {
+				System.out.println(
+						"There are no activities for present, past and future dates in acitivity related list");
+			} else {
+				System.out.println(
+						"Activity Type, Due Date, Comments and Status Checkbox are not present under acitivity related list");
+				report.updateTestLog("Verify Activity Related List",
+						"Activity Type, Due Date, Comments and Status Checkbox are not present under activity related list:::",
+						Status.FAIL);
+			}
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
 
 	}
 

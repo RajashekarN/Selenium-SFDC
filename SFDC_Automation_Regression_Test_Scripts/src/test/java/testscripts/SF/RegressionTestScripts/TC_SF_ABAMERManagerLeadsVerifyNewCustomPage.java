@@ -1,11 +1,9 @@
-package testscripts.SF.Release37TestScripts;
-
+package testscripts.SF.RegressionTestScripts;
 
 import org.openqa.selenium.Platform;
-
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
+import com.cognizant.Craft.CRAFTTestCase;
 import com.cognizant.framework.IterationOptions;
 import com.cognizant.framework.selenium.Browser;
 import com.cognizant.framework.selenium.ExecutionMode;
@@ -13,15 +11,16 @@ import com.cognizant.framework.selenium.SeleniumTestParameters;
 
 import com.cognizant.Craft.*;
 /**
- * Validating the Quick create Opportunities page from the Opportunities page for the Annual Revenue field
+ * Test Script for validating the Leads Custom Page
  * 
  * @author Ramya
  *
  */
 
-public class TC_SF_ASEMEAManagerOpportunitiesVerifyLeasingAnnualRevenueFieldPage extends CRAFTTestCase {
+public class TC_SF_ABAMERManagerLeadsVerifyNewCustomPage extends CRAFTTestCase
+{
 	@Test(dataProvider = "RegressionTestScripts")
-	public void runTC_SF_ASEMEAManagerOpportunitiesVerifyLeasingAnnualRevenueFieldPage(String testInstance, ExecutionMode executionMode, Platform platform
+	public void runTC_SF_ABAMERManagerLeadsVerifyCustomPage(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
@@ -43,8 +42,44 @@ public class TC_SF_ASEMEAManagerOpportunitiesVerifyLeasingAnnualRevenueFieldPage
 				"4d005cb2c4938197"*/ },
 			};
 	}
-
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

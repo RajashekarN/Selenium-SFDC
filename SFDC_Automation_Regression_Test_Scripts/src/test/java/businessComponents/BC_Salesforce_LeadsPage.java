@@ -48,62 +48,62 @@ public class BC_Salesforce_LeadsPage extends ReusableLibrary {
 	public void bc_convertLead() throws InterruptedException {
 		sfLeadsPage.convertLead();
 	}
-	
+
 	/**
 	 * Validating the Create Lead functionality 
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */	
-	
+
 	public void bc_createLead_UI() throws InterruptedException {
 		sfLeadsPage.createLead();
 	}
-	
+
 	/**
 	 * Validating the Create Greenspace Lead functionality 
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */	
-	
+
 	public void bc_createGreenspaceLead() throws InterruptedException {
 		sfLeadsPage.createGreenspaceLead();
 	}
-	
+
 	/**
 	 * Validating the Clone and Edit buttons in Lead Detail page
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */	
-	
+
 	public void bc_cloneAndEditButtons() throws InterruptedException {
 		sfLeadsPage.cloneAndEditButtons();
 	}
-	
+
 	/**
 	 * Validating the Related lists of a Lead in the Lead Landing page
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */	
-	
+
 	public void bc_relatedListsLeadLandingPage() {
 		sfLeadsPage.relatedListsLeadLandingPage();
 	}
-	
+
 	/**
 	 * Validating the Private Note functionality for Lead
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */	
-	
+
 	public void bc_privateNoteLead() {
 		sfLeadsPage.privateNoteLead();
 	}
-	
+
 	/**
 	 * Validating the Convert Lead by adding the new account in the Convert Lead page
 	 * 
@@ -114,7 +114,7 @@ public class BC_Salesforce_LeadsPage extends ReusableLibrary {
 	public void bc_convertLeadNewAccount() {
 		sfLeadsPage.convertLeadNewAccount();
 	}
-	
+
 	/**
 	 * Validating the Convert Lead by selecting the existing account in the Convert Lead page
 	 * 
@@ -125,8 +125,8 @@ public class BC_Salesforce_LeadsPage extends ReusableLibrary {
 	public void bc_convertLeadExistingAccount() {
 		sfLeadsPage.convertLeadExistingAccount();
 	}
-	
-	
+
+
 	/**
 	 * Validating the Convert Lead Note by adding an attachment and verifying it 
 	 * 
@@ -146,5 +146,26 @@ public class BC_Salesforce_LeadsPage extends ReusableLibrary {
 
 	public void bc_leadsVerifyCustomEventPage() {
 		sfLeadsPage.leadsVerifyCustomEventPage();
+	}
+	/**
+	 * Validating the personal Information Page from the  Leads
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_leadsVerifyPrivateNotePersonalInformation() {
+		sfLeadsPage.leadsVerifyPrivateNotePersonalInformation();
+	}
+
+	/**
+	 * Validating the Custom Event Page in Leads 
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_verifyLeadsNewCustomPage() {
+		sfLeadsPage.verifyLeadsNewCustomPage();
 	}
 }

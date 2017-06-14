@@ -60,14 +60,14 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	public void bc_verifyCreationOfActivity(){
 		sfPropertiesPage.verifyCreationOfActivity();
 	}
-	
+
 	/**
 	 * Validating the Creation of New Activity Page Layout
 	 * 
 	 * @author Ramya
 	 *
 	 */	
-	
+
 	public void bc_verifyPropertiesNewActivityPageLayout(){
 		sfPropertiesPage.verifyPropertiesNewActivityPageLayout();
 	}
@@ -77,7 +77,7 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	 * @author Ramya
 	 *
 	 */	
-	
+
 	public void bc_verifyNewActivityPropertiesPageSendNotificationEmail() throws InterruptedException {
 		sfPropertiesPage.verifyNewActivityPropertiesPageSendNotificationEmail();
 	}
@@ -91,6 +91,24 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	public void bc_campaignsTab() {
 		sfPropertiesPage.validateCampaignsTab();
 	}
+	/**
+	 * Validating the Campaigns tab present in the dropdown after loggin in
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+	public void bc_verifyNewPropertiesPage() {
+		sfPropertiesPage.verifyNewPropertiesPage();
+	}
+	/**
+	 * Validating the activity Lightning Time line fields 
+	 * 
+	 * @author Ramya
+	 *
+	 */	
 
-	
+	public void bc_activityLightningTimeline() throws InterruptedException {
+		sfPropertiesPage.activityLightningTimeline();
+	}
+
 }

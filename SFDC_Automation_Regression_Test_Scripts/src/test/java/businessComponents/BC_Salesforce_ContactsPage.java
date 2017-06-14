@@ -118,15 +118,35 @@ public class BC_Salesforce_ContactsPage extends ReusableLibrary {
 	public void bc_verifyContactNewActivityPageSendNotificationEmail()throws InterruptedException{
 		sfContactsPage.verifyContactNewActivityPageSendNotificationEmail();
 	}
-	
+
 	/**
 	 * Validating the hyperlink for number of Contacts related to Account
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */	
-	
+
 	public void bc_hyperlinkContacts() {
 		sfContactsPage.validateHyperlinkContacts();		
+	}
+
+	/**
+	 * Validating the Population of all the required Fields in the New Contact Quick create Page
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+	public void bc_contactsPopulatingTheRequiredFields()throws InterruptedException{
+		sfContactsPage.contactsPopulatingTheRequiredFields();
+	}
+
+	/**
+	 * Validating the all the fields in the new contact page
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+	public void bc_newContactPageLayoutFields()throws InterruptedException{
+		sfContactsPage.newContactPageLayoutFields();
 	}
 }

@@ -305,17 +305,21 @@ public class HomePage extends ReusableLibrary {
 
 	static ArrayList<String> tabsList = new ArrayList<String>();
 	public void homePageTabsList() {
+		tabsList.add("Home");
+		tabsList.add("Calendar");
+		tabsList.add("Chatter");
+		tabsList.add("Groups");
+		//tabsList.add("Leads");
 		tabsList.add("Accounts");
 		tabsList.add("Contacts");
 		tabsList.add("Opportunities");
 		tabsList.add("Reports");
-		tabsList.add("Dashboards");
+		tabsList.add("Private Notes");
 		tabsList.add("Properties");
 		tabsList.add("Private Tags");
 		tabsList.add("Bulk Tagging");
-		tabsList.add("Campaigns");
 		tabsList.add("Cases");
-		System.out.println("The Home Page Tabs for the APAC Capital Markets are" + tabsList);
+		System.out.println("The Home Page Tabs for the APAC Capital Markets are:::" + tabsList);
 	}
 
 
@@ -339,20 +343,20 @@ public class HomePage extends ReusableLibrary {
 		try {
 			for (WebElement element : homePageTabsList) {
 				homePageTabs[i] = element.getText();
-				if (homePageTabs[i].equals(tabsList.get(i))) {
+				if (homePageTabs[i].contains(tabsList.get(i))) {
 					count++;
-					System.out.println("Tabs " + homePageTabs[i] + "matches " + "Home Page Menu" + tabsList.get(i));
+					System.out.println( homePageTabs[i] + tabsList.get(i));
 					report.updateTestLog("Verify Home Page Tabs", "Tabs " + homePageTabs[i] + " present in APAC Capital Markets Home Page Menu",
 							Status.PASS);
 				}
 				i++;
 			}
 			System.out.println(count);
-			if (count == 10) {
+			if (count >= 10) {
 				System.out.println("All the Tabs are present in Home Page ");
 				report.updateTestLog("Verify Home Page Tabs", "All the Tabs are present in Home Page",
 						Status.PASS);
-			} else {
+			} else if (count < 10) {
 				report.updateTestLog("Verify Home Page Tabs", "All the Tabs are not present in Home Page",
 						Status.FAIL);
 			}

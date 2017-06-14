@@ -1,5 +1,6 @@
 package pageObjects;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -123,7 +124,7 @@ public class ContactsPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//span[contains(@class,'virtualAutocompleteOptionText')][text()='All Contacts']")
 	WebElement allContacts;
-	
+
 	@FindBy(xpath = "//span[contains(@class,'virtualAutocompleteOptionText')][text()='All Accounts']")
 	WebElement allAccounts;
 
@@ -187,6 +188,33 @@ public class ContactsPage extends ReusableLibrary {
 	@FindBy(xpath = "// input [@value= 'Cancel']")
 	WebElement cancelNewActivityLayoutPage;
 
+	@FindBy(xpath="//input[contains(@id, 'contForm:Lastname')]']")
+	WebElement lastNameQuickCreateContact;
+
+	@FindBy(xpath="//input[contains(@id,'Firstname')]")
+	WebElement firstNameQuickCreate;
+
+	@FindBy(xpath="//input[@id='acctSearchBox']")
+	WebElement accountNameQuickCreateContact;
+
+
+	@FindBy(xpath="//input[contains(@id,'contForm:Phone')]")
+	WebElement directLine;
+
+	@FindBy(xpath = "// input [@value= 'Save']")
+	WebElement saveContact;
+
+	@FindBy(xpath="//h2[text()='Contact Information']/parent::div/parent::div//div[@class='slds-form-element']/label")
+	WebElement contactInformationFields;
+
+	@FindBy(xpath = "//button/span[text()='View All Fields']")
+	WebElement viewAllFieldsButton;
+
+	@FindBy(xpath="//input[contains(@id,'contForm:MiddleName')]")
+	WebElement middleNameQuickCreate;
+
+	@FindBy(xpath="//input[contains(@id,'contForm:NickName')]")
+	WebElement nickNameContact;
 
 	SearchTextSOQL searchAccountName = new SearchTextSOQL(scriptHelper);
 
@@ -1254,5 +1282,176 @@ public class ContactsPage extends ReusableLibrary {
 			}
 		}	
 	}
+	/**
+	 * Validating the New Contact Page by populating the required fields
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void contactsPopulatingTheRequiredFields() {
 
+		Utility_Functions.xWaitForElementPresent(driver, menu_Contacts, 3);
+		Utility_Functions.xClick(driver, menu_Contacts, true);
+		Utility_Functions.timeWait(1);
+		report.updateTestLog("Verify Contact Creation With Required Fields ","Verifying Contacts is Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, newContact, 3);
+		Utility_Functions.xClick(driver, newContact, true);
+		Utility_Functions.timeWait(2);
+		report.updateTestLog("Verify Contact Creation With Required Fields ","Verifying New Contacts Page is Displayed  ",  Status.PASS);
+		//Utility_Functions.xSwitchtoFrame(driver, driver.findElement(By.xpath("//p[@title='Create a Contact']")));
+		Utility_Functions.xSwitchtoFrame(driver, lastNameQuickCreateContact);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, accountNameQuickCreateContact, 5);
+		/*Utility_Functions.xSendKeys(driver, accountNameQuickCreateContact, "Barclay's Test");
+		accountNameQuickCreateContact.sendKeys(Keys.ARROW_DOWN);
+		Utility_Functions.timeWait(2);
+		accountNameQuickCreateContact.sendKeys(Keys.ENTER);
+		 */
+		int value = Utility_Functions.xRandomFunction();		
+		String contactName = "Test Automation" + value;
+
+		/*String query = "select Name from Account limit 1 offset 9";
+		String accountName = searchAccountName.fetchRecordFieldValue("Name", query);*/		
+		Utility_Functions.xSendKeys(driver, accountNameQuickCreateContact, contactName);
+		/*accountNameQuickCreateContact.sendKeys(Keys.ARROW_DOWN);
+		accountNameQuickCreateContact.sendKeys(Keys.ENTER);
+/*		Utility_Functions.xSendKeys(driver, accountNameQuickCreateContact, "Test");
+		accountNameQuickCreateContact.sendKeys(Keys.TAB);
+		accountNameQuickCreateContact.sendKeys(Keys.ARROW_DOWN);
+		//accountNameQuickCreateContact.sendKeys(Keys.ENTER);
+		 */		report.updateTestLog("Verify Contact Creation With Required Fields ","Verifying Account name required field is populated ",  Status.PASS);
+		 Utility_Functions.xWaitForElementPresent(driver, lastNameQuickCreateContact, 5);
+		 Utility_Functions.xSendKeys(driver, lastNameQuickCreateContact, "user");
+		 Utility_Functions.xWaitForElementPresent(driver, directLine, 5);
+		 Utility_Functions.xSendKeys(driver, directLine, dataTable.getData("General_Data", "Direct Line"));
+		 Utility_Functions.xWaitForElementPresent(driver, saveContact, 3);
+		 Utility_Functions.xClick(driver, saveContact, true);
+		 Utility_Functions.xWaitForElementPresent(driver, related, 3);
+		 Utility_Functions.xClick(driver, related, true);
+		 Utility_Functions.timeWait(3);
+
+	}
+	/**
+	 * Validating the New Contact Page layout
+	 * 
+	 * @author Ramya
+	 *
+	 */
+
+	static ArrayList<String> contactInformationSectionList = new ArrayList<String>();
+	public void contactInformationSectionFields() {
+		contactInformationSectionList.add("Middle Name");
+		contactInformationSectionList.add("Nickname");
+		contactInformationSectionList.add("Department");
+		contactInformationSectionList.add("Influence Level");
+		contactInformationSectionList.add("Reports To");
+		contactInformationSectionList.add("Mobile");
+		contactInformationSectionList.add("Main Phone");
+		contactInformationSectionList.add("Inactive Contact");
+		contactInformationSectionList.add("Contact Record Type");
+		System.out.println("Contact Information Section Fields are " + contactInformationSectionList);
+	}
+
+	static ArrayList<String> newContactPageSectionsList = new ArrayList<String>();
+	public void newContactPageSections() {
+		newContactPageSectionsList.add("Contact Information");
+		newContactPageSectionsList.add("Communication Preferences");
+		newContactPageSectionsList.add("Additional Information");
+		newContactPageSectionsList.add("System Information");
+		System.out.println("Contact Page Sections are " + newContactPageSectionsList);
+	}
+	public void newContactPageLayoutFields() {		
+		Utility_Functions.xWaitForElementPresent(driver, menu_Contacts, 3);
+		Utility_Functions.xClick(driver, menu_Contacts, true);
+		Utility_Functions.timeWait(1);
+		report.updateTestLog("Verify New Contact Page Fields ","Verifying Contacts is Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, newContact, 3);
+		Utility_Functions.xClick(driver, newContact, true);
+		Utility_Functions.timeWait(2);
+		report.updateTestLog("Verify New Contact Page Fields ","Verifying New Contacts Page is Displayed  ",  Status.PASS);
+		driver.navigate().refresh();
+		Utility_Functions.xSwitchtoFrame(driver, lastNameQuickCreateContact);
+		Utility_Functions.timeWait(3);
+		System.out.println("Frame Identified");
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementPresent(driver, viewAllFieldsButton, 3);
+		Utility_Functions.xClick(driver,viewAllFieldsButton, true);
+		Utility_Functions.timeWait(2);
+		List<WebElement> contactInformationFieldsList = driver.findElements(
+				By.xpath("//h2[text()='Contact Information']/parent::div/parent::div//div[@class='slds-form-element']/label"));
+		int count = 0, i1 = 0;
+		String labelArray[] = new String[contactInformationFieldsList.size()];
+		System.out.println(contactInformationFieldsList.size());
+
+		try {
+			contactInformationSectionFields();
+			for (WebElement element : contactInformationFieldsList) {
+				System.out.println(element.getText());
+				labelArray[i1] = element.getText();
+				if (labelArray[i1].equalsIgnoreCase(contactInformationSectionList.get(i1))) {
+					report.updateTestLog("Verify Private Tags Page",
+							"Bulk Tagging Page Account Details is having the " + labelArray[i1] + " field ",
+							Status.PASS);
+					count++;
+				}
+				i1++;
+			}
+			System.out.println(count);
+			if (count != 9) {
+				report.updateTestLog("Verify Private Tags Page",
+						"All Labels are not present in the Bulk Tagging Page Account Details", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify Private Tags Page",
+						"All Labels are present in the Bulk Tagging Page Account Details", Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		List<WebElement> contactPageSectionsList = driver.findElements(
+				By.xpath("//div[contains(@class,'slds-col--padded')]/h2"));
+		int count1 = 0, i2 = 0;
+		String labelArray1[] = new String[contactPageSectionsList.size()];
+		System.out.println(contactPageSectionsList.size());
+
+		try {
+			newContactPageSections();
+			for (WebElement element1 : contactPageSectionsList) {
+				System.out.println(element1.getText());
+				labelArray1[i2] = element1.getText();
+				if (labelArray[i2].equalsIgnoreCase(newContactPageSectionsList.get(i2))) {
+					report.updateTestLog("Verify Private Tags Page",
+							"Bulk Tagging Page Account Details is having the " + labelArray[i2] + " section ",
+							Status.PASS);
+					count1++;
+				}
+				i2++;
+			}
+			System.out.println(count1);
+			if (count1 != 4) {
+				report.updateTestLog("Verify Private Tags Page",
+						"All Labels are not present in the Bulk Tagging Page Account Details", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify Private Tags Page",
+						"All Labels are present in the Bulk Tagging Page Account Details", Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		Utility_Functions.xWaitForElementPresent(driver, firstNameQuickCreate, 5);
+		Utility_Functions.xSendKeys(driver, firstNameQuickCreate, "Ema");
+		Utility_Functions.xWaitForElementPresent(driver, lastNameQuickCreateContact, 5);
+		Utility_Functions.xSendKeys(driver, lastNameQuickCreateContact, "Watson");
+		/*Utility_Functions.xWaitForElementPresent(driver, middleNameQuickCreate, 5);
+		Utility_Functions.xSendKeys(driver,middleNameQuickCreate , "S");
+		Utility_Functions.xWaitForElementPresent(driver, nickNameContact, 5);
+		Utility_Functions.xSendKeys(driver,nickNameContact , "Emi");*/
+	}
 }

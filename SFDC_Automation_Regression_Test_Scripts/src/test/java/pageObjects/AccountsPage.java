@@ -288,19 +288,109 @@ public class AccountsPage extends ReusableLibrary {
 
 	@FindBy(xpath="//input[@id='quickFindInput']")
 	WebElement reportTypeInput;	
-	
+
 	@FindBy(xpath = "//div[@class='slds-truncate'][text()='New']")
 	WebElement newAccountMenuPage;
-	
+
 	@FindBy(xpath="//a[@aria-label='Investor Profile']")
 	WebElement investorProfile;
-	
+
 	@FindBy(xpath="//div[@class='slds-form-element__control slds-grid']/span/span/img")
 	WebElement investorServicesCheckBox;
-	
+
 	@FindBy(xpath="//select[contains(@id,'CustomActivityForm:activity-activityType')]")
 	WebElement selectActivityType;
 
+	@FindBy(xpath="//select[contains(@id,'stateBillingPicklist')]")
+	WebElement billingStateQuickCreate;
+
+	@FindBy(xpath="//select[contains(@id,'stateBillingPicklist')]/option[text()='Texas']")
+	WebElement billingStateTexasQuickCreate;
+
+	@FindBy(xpath = "//div[@class='slds-form-element__row']//label[@for='first-name']/parent::div//input")
+	WebElement firstName;	
+
+	@FindBy(xpath = "//div[@class='slds-form-element__row']//label[@for='last-name']/parent::div//input")
+	WebElement lastName;
+
+	@FindBy(xpath = "//label[@for='company']/following-sibling::div//input")
+	WebElement company;	
+
+	@FindBy(xpath = "//label[text()='Status']/following-sibling::div//select")
+	WebElement leadStatusField;
+
+	@FindBy(xpath="//select[contains(@id,'LeadForm')]/option[text()='Open']")
+	WebElement selectLeadStatusField;
+
+	@FindBy(xpath = "//input[@class='btn slds-button slds-button--neutral slds-m-left--small'][@value='Save']")
+	WebElement saveButtonLeads;
+
+	@FindBy(xpath = "//div[@class='bBottom']//span[text()='Leads']")
+	WebElement menu_Leads;
+
+	@FindBy(xpath = "//div[@class='slds-truncate'][@title='Sharing'][text()='Sharing']")
+	WebElement sharingButton;
+
+	/*@FindBy(xpath = "//div[contains(@class,'listRelatedObject')]//input[@class='btn primary']")
+	WebElement addButtonSharing;*/
+
+	@FindBy(xpath="//div[contains(@class,'listRelatedObject')]//td[@class='pbButton']//input[@type='button'][@name='new']")
+	WebElement addButtonSharing;
+
+	@FindBy(xpath = "//*[contains(@id,'sharing_search')]")
+	WebElement searchUsers;
+
+	@FindBy(xpath = "//*[contains(@id,'searchValue_sharing_search')]")
+	WebElement searchUserName;
+
+	@FindBy(xpath = "//*[contains(@title,'Find')]")
+	WebElement findValue;
+
+	@FindBy(xpath = "//label[text()='Available']/parent::div/parent::td/select[@id='duel_select_0']")
+	WebElement selectUser;
+
+	@FindBy(xpath = "//img[@class='rightArrowIcon']")
+	WebElement rightArrow;
+
+	@FindBy(xpath = "//*[@id='p2']")
+	WebElement access;
+
+	@FindBy(xpath = "//*[@id='bottomButtonRow']/input[@name='save']")
+	WebElement saveButtonPrivateTag;
+
+	@FindBy(xpath="//h1[text()='Sharing Detail']")
+	WebElement sharingDetail;
+
+	@FindBy(xpath = "//a[@role='menuitem'][text()='Private Tags']")
+	WebElement more_privateTags;
+
+	@FindBy(xpath = "//div[@class='slds-truncate'][text()='New']")
+	WebElement newAccounts;
+
+	@FindBy(xpath="//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[contains(text(),'Private Tag Name')]/parent::label/parent::div/input")
+	WebElement privateTagName;
+
+	@FindBy(xpath="//button[@title='Save']")
+	WebElement saveNewPrivateTag;
+
+	@FindBy(xpath="//button[contains(@class,'context-bar__label-action')][text()='More']")
+	WebElement more;
+
+	@FindBy(xpath="//a[@role='menuitem']/span[contains(@class,'slds-truncate')][text()='Private Tags']")
+	WebElement more_PrivateTags;
+
+	@FindBy(xpath="//h1[contains(@class,'slds-page-header__title')]/span")
+	WebElement accountNameSaved;
+	
+	@FindBy(xpath="//span[text()='D-U-N-S #']/parent::div/parent::div//span[@class='uiOutputText']")
+	WebElement accountDetailsDUNS;
+	
+	@FindBy(xpath="//li[contains(@class,'oneActionsDropDown')]//a")
+	WebElement showMoreActions;
+	
+	@FindBy(xpath="//div[contains(@class,'actionMenu')]//a[@title='View Hierarchy']")
+	WebElement selectViewHierarchy;
+	
 	HomePage hp = new HomePage(scriptHelper);
 	SearchTextSOQL searchAccount = new SearchTextSOQL(scriptHelper);
 	static ArrayList<String> accountsPageDetailsList = new ArrayList<String>();
@@ -1840,7 +1930,7 @@ public class AccountsPage extends ReusableLibrary {
 
 
 	}
-	
+
 
 	/**
 	 * Validating the Private Tags List
@@ -1857,7 +1947,7 @@ public class AccountsPage extends ReusableLibrary {
 		labelsBulkTaggingPageOpportunityDetails.add("Account");
 		labelsBulkTaggingPageOpportunityDetails.add("Preferred Property Type");
 	}
-	
+
 
 	/**
 	 * Validating the Private Tags
@@ -2403,21 +2493,14 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xScrollWindowTop(driver);
 		Utility_Functions.timeWait(3);
-
-
-
 		if(!investorServicesCheckBox.isSelected()){
-
-
 			//Utility_Functions.xClick(driver, notificationEmail, true);
 			System.out.println("Investor Services CheckBox is present and not checked");
 			report.updateTestLog("Verify Accounts Investor Services Check Box  ","Verifying the Investor Services check box is checked or else checking it",  Status.PASS);
-
 		}else{
 			System.out.println("Investor Services CheckBox is not present and not checked");
 			report.updateTestLog("Verify Accounts Investor Services Check Box  ","Verifying the Investor Services check box is checked or not ",  Status.FAIL);
 		}
-
 	}	
 	/**
 	 * Validating the Accounts for the New Activity Type
@@ -2428,7 +2511,6 @@ public class AccountsPage extends ReusableLibrary {
 	public void verifyAccountsNewActivityType(){
 		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
 		Utility_Functions.xClick(driver, menu_Accounts, true);
-
 		report.updateTestLog("Verify New Activity Type ","Accounts is Displayed ",  Status.PASS);
 		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
 		Utility_Functions.xClick(driver, recentlyViewed, true);
@@ -2439,7 +2521,6 @@ public class AccountsPage extends ReusableLibrary {
 		report.updateTestLog("Verify New Activity Type ","All Accounts are Displayed ",  Status.PASS);
 		List<WebElement> accountNamesList = driver.findElements(
 				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-
 		Utility_Functions.xclickOnFirstElementfromList(accountNamesList);
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify New Activity Type ","The Account is Displayed ",  Status.PASS);
@@ -2460,10 +2541,225 @@ public class AccountsPage extends ReusableLibrary {
 		for(WebElement element: activityTypeValuesList) {
 			element.getText();
 			System.out.println(element.getText());
-
 			report.updateTestLog("Verify New Activity Type ","The Activity Type Values list is Displayed ",  Status.PASS);
 		}
 	}	
-	
+
+	/**
+	 * Validating the Accounts, Leads and Private Tags
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void verifyAccountsLeadsAndPrivateTags(){
+		try{
+			Utility_Functions.xWaitForElementPresent(driver,menu_More, 3);
+			Utility_Functions.xClick(driver, menu_More, true);
+		}catch(Exception e){
+			Utility_Functions.xWaitForElementPresent(driver, more, 3);
+			Utility_Functions.xClick(driver, more, true);
+		}
+		try{
+			Utility_Functions.xWaitForElementPresent(driver,more_privateTags, 3);
+			Utility_Functions.xClick(driver, more_privateTags, true);
+		}catch(Exception e){
+			Utility_Functions.xWaitForElementPresent(driver, more_PrivateTags, 2);
+			Utility_Functions.xClick(driver, more_PrivateTags, true);
+		}
+		Utility_Functions.xWaitForElementPresent(driver, newAccounts, 3);
+		Utility_Functions.xClick(driver, newAccounts, true);
+		report.updateTestLog("Verify Accounts Leads And PrivateTags ","Verifying New Private Tags is Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, privateTagName, 3);
+		Utility_Functions.xSendKeys(driver, privateTagName, "test1");
+		report.updateTestLog("Verify Accounts Leads And PrivateTags ","Verifying the Private Tag name is entered ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, saveNewPrivateTag, 3);
+		Utility_Functions.xClick(driver, saveNewPrivateTag, true);
+		report.updateTestLog("Verify Accounts Leads And PrivateTags ","Verifying the Private Tag is saved ",  Status.PASS);
+		Utility_Functions.timeWait(2);		
+		driver.navigate().refresh();
+		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
+		Utility_Functions.xClick(driver, menu_Accounts, true);
+		report.updateTestLog("Verify Accounts Leads And PrivateTags ","Verifying the Accounts Page is displayed ",  Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, newAccount, 3);
+		Utility_Functions.xClick(driver, newAccount, true);
+		report.updateTestLog("Verify Accounts Leads And PrivateTags ","Verifying the New Accounts Page is displayed ",  Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xSwitchtoFrame(driver, continueButton);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xWaitForElementPresent(driver, continueButton, 5);
+		Utility_Functions.xClick(driver, continueButton, true);
+		driver.switchTo().defaultContent();
+		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
+		Utility_Functions.xClick(driver, menu_Accounts, true);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xWaitForElementPresent(driver, newAccounts, 3);
+		Utility_Functions.xClick(driver, newAccounts, true);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xSwitchtoFrame(driver, continueButton);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, continueButton, 5);
+		Utility_Functions.xClick(driver, continueButton, true);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xSwitchtoFrame(driver, accountNameQuickCreate);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, accountNameQuickCreate, 5);
+		Utility_Functions.xSendKeys(driver, accountNameQuickCreate, "test1");
+		report.updateTestLog("Verify Accounts Leads And PrivateTags ","Verifying the New Accounts Name field is entered ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, billingStreetQuickCreate, 5);
+		Utility_Functions.xSendKeys(driver, billingStreetQuickCreate, "2100 Ross Ave");
+		report.updateTestLog("Verify Accounts Leads And PrivateTags ","Verifying the billing street field is entered with a value ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, billingCityQuickCreate, 5);
+		Utility_Functions.xSendKeys(driver, billingCityQuickCreate, "Dallas");
+		report.updateTestLog("Verify Accounts Leads And PrivateTags ","Verifying the billing city field is entered with a value ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, billingCountryQuickCreate, 3);
+		Utility_Functions.xClick(driver, billingCountryQuickCreate, true);
+		Utility_Functions.xWaitForElementPresent(driver, billingCountryUnitedStatesQuickCreate, 3);
+		Utility_Functions.xClick(driver, billingCountryUnitedStatesQuickCreate, true);
+		report.updateTestLog("Verify Accounts Leads And PrivateTags ","Verifying the billing Country field is entered with a value ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, billingStateQuickCreate, 3);
+		Utility_Functions.xClick(driver, billingStateQuickCreate, true);
+		Utility_Functions.xWaitForElementPresent(driver, billingStateTexasQuickCreate, 3);
+		Utility_Functions.xClick(driver, billingStateTexasQuickCreate, true);
+		report.updateTestLog("Verify Accounts Leads And PrivateTags ","Verifying the billing state field is entered with a value ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, saveQuickCreate, 3);
+		Utility_Functions.xClick(driver, saveQuickCreate, true);
+		report.updateTestLog("Verify Accounts Leads And PrivateTags ","Verifying the Account is saved with all the required fields populated ",  Status.PASS);
+		Utility_Functions.timeWait(2);		
+		driver.navigate().refresh();
+		Utility_Functions.xWaitForElementPresent(driver, menu_Leads, 3);
+		Utility_Functions.xClick(driver, menu_Leads, true);
+		report.updateTestLog("Verify Accounts Leads And PrivateTags ","Verifying the Leads Page is displayed ",  Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, newAccount, 3);
+		Utility_Functions.xClick(driver, newAccount, true);
+		report.updateTestLog("Verify Accounts Leads And PrivateTags ","Verifying the new Leads page is displayed ",  Status.PASS);
+		Utility_Functions.timeWait(2);
+		driver.navigate().refresh();
+		Utility_Functions.xSwitchtoFrame(driver, continueButton);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, continueButton, 5);
+		Utility_Functions.xClick(driver, continueButton, true);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xSwitchtoFrame(driver, firstName);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, firstName, 5);
+		Utility_Functions.xSendKeys(driver, firstName, "test");
+		report.updateTestLog("Verify Accounts Leads And PrivateTags ","Verifying the firstname is entered in the new Leads page ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, lastName, 5);
+		Utility_Functions.xSendKeys(driver, lastName, "User");
+		report.updateTestLog("Verify Accounts Leads And PrivateTags ","Verifying the last name is enetered in the new Leads page" ,  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, company, 5);
+		Utility_Functions.xSendKeys(driver, company, "Cbre");
+		report.updateTestLog("Verify Accounts Leads And PrivateTags ","Verifying the Company field is entered with a value in the new Leads page",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, leadStatusField, 3);
+		Utility_Functions.xClick(driver, leadStatusField, true);
+		Utility_Functions.xWaitForElementPresent(driver, selectLeadStatusField, 3);
+		Utility_Functions.xClick(driver, selectLeadStatusField, true);
+		report.updateTestLog("Verify Accounts Leads And PrivateTags ","Verifying the Status field is selected in the new Leads page ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, saveButtonLeads, 3);
+		Utility_Functions.xClick(driver, saveButtonLeads, true);
+		report.updateTestLog("Verify Accounts Leads And PrivateTags ","Verifying the created Lead is saved successfully ",  Status.PASS);
+	}
+
+
+	/**
+	 * Validating the New Account populating the required fields
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void verifyAccountsPopulatingRequiredFields() {
+		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
+		Utility_Functions.xClick(driver, menu_Accounts, true);
+		Utility_Functions.timeWait(1);
+		report.updateTestLog("Verify Account Creation With Required Fields ","Verifying Accounts is Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, newAccounts, 3);
+		Utility_Functions.xClick(driver, newAccounts, true);
+		Utility_Functions.timeWait(2);
+		report.updateTestLog("Verify Account Creation With Required Fields ","Verifying New Accounts Page is Displayed  ",  Status.PASS);
+		Utility_Functions.xSwitchtoFrame(driver, accountNameQuickCreate);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, accountNameQuickCreate, 5);
+		int value = Utility_Functions.xRandomFunction();
+		String accountName = "Test Automation" + value;
+		Utility_Functions.xSendKeys(driver, accountNameQuickCreate, accountName);
+		report.updateTestLog("Verify Account Creation With Required Fields ","Verifying Account name required field is populated ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, billingStreetQuickCreate, 5);
+		Utility_Functions.xSendKeys(driver, billingStreetQuickCreate, "2100 Ross Ave");
+		report.updateTestLog("Verify Account Creation With Required Fields ","Verifying Billing Street required field is populated ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, billingCityQuickCreate, 5);
+		Utility_Functions.xSendKeys(driver, billingCityQuickCreate, "Dallas");
+		report.updateTestLog("Verify Account Creation With Required Fields ","Verifying Billing City required field is populated ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, billingCountryQuickCreate, 3);
+		Utility_Functions.xClick(driver, billingCountryQuickCreate, true);
+		Utility_Functions.xWaitForElementPresent(driver, billingCountryUnitedStatesQuickCreate, 3);
+		Utility_Functions.xClick(driver, billingCountryUnitedStatesQuickCreate, true);
+		report.updateTestLog("Verify Account Creation With Required Fields ","Verifying Billing Country required field is populated ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, billingStateQuickCreate, 3);
+		Utility_Functions.xClick(driver, billingStateQuickCreate, true);
+		Utility_Functions.xWaitForElementPresent(driver, billingStateTexasQuickCreate, 3);
+		Utility_Functions.xClick(driver, billingStateTexasQuickCreate, true);
+		report.updateTestLog("Verify Account Creation With Required Fields ","Verifying Billing State required field is populated ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, saveQuickCreate, 3);
+		Utility_Functions.xClick(driver, saveQuickCreate, true);
+		report.updateTestLog("Verify Account Creation With Required Fields ","Verifying the Account is saved with all required fields",  Status.PASS);
+		Utility_Functions.timeWait(2);
+		//Utility_Functions.xWaitForElementPresent(driver, accountNameSaved, 3);
+		if (accountNameSaved.getText().equals(accountName)) {
+			System.out.println("The new account is saved with all the required fields");
+			report.updateTestLog("Verify Account Creation With Required Fields ","Verifying the new account is saved with all the required fields ",  Status.PASS);
+		} else {
+			System.out.println("The new account is not saved with all the required fields");
+			report.updateTestLog("Verify Account Creation With Required Fields ","Verifying the new account is saved with all the required fields ",  Status.FAIL);
+		}	
+	}
+	/**
+	 * Validating the New Account populating the required fields
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void verifyAccountsViewHierarchy() {
+		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
+		Utility_Functions.xClick(driver, menu_Accounts, true);
+		report.updateTestLog("Verify Create Accounts View Hierarchy","Verifying the Accounts is Displayed ",  Status.PASS);
+		List<WebElement> accountNamesList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xclickRandomElement(accountNamesList);
+		String query = "SELECT Id FROM Account where D_U_N_S__c != null limit 1 ";
+		String accountId = searchAccount.fetchRecordFieldValue("Id", query);
+		if(accountId==null){
+			report.updateTestLog("Verify Create Accounts View Hierarchy", "verifying the accountid is retrieved", Status.PASS);
+		} else {
+			String url = driver.getCurrentUrl().split("#")[0];
+			String newUrl = url + "#/sObject/" + accountId;
+			newUrl = newUrl + "/view";
+			report.updateTestLog("Verify Create Accounts View Hierarchy",
+					"Verifying the URL has been replaced with the new URL having the retrieved Account" + newUrl, Status.PASS);
+			driver.get(newUrl);
+			Utility_Functions.timeWait(3);
+			Utility_Functions.xScrollWindow(driver);
+			Utility_Functions.timeWait(1);
+			Utility_Functions.xScrollWindowTop(driver);
+			Utility_Functions.timeWait(2);		
+			if (!accountDetailsDUNS.getText().contains(" ")) {
+				System.out.println(
+						"DUNS is populated with the default value");
+				report.updateTestLog("Verify Create Accounts View Hierarchy","Verifying the DUNS is populated in the Accounts Details Page ",  Status.PASS);
+			} else {
+				System.out.println(
+						"DUNS is not populated with the default value");
+				report.updateTestLog("Verify Create Accounts View Hierarchy","Verifying the DUNS is populated in the Accounts Details Page ",  Status.FAIL);
+			}
+			Utility_Functions.timeWait(3);
+			driver.navigate().refresh();
+			Utility_Functions.xWaitForElementPresent(driver,showMoreActions, 3);
+			Utility_Functions.xClick(driver, showMoreActions, true);
+			report.updateTestLog("Verify Create Accounts View Hierarchy","Verifying the show more actions is displayed in the Accounts Details Page ",  Status.PASS);
+			Utility_Functions.xWaitForElementPresent(driver, selectViewHierarchy, 3);
+			Utility_Functions.xClick(driver, selectViewHierarchy, true);
+			report.updateTestLog("Verify Create Accounts View Hierarchy","Verifying the View Hierarchy is displayed in the show more actions and is being able to be clicked",  Status.PASS);
+		}
+	}
 }
 
