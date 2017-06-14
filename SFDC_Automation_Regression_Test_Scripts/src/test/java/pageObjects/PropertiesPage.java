@@ -6,6 +6,7 @@ import java.util.Random;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -1633,15 +1634,32 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, propertyCountry, true);
 		Utility_Functions.xWaitForElementPresent(driver, selectPropertyCountry, 3);
 		Utility_Functions.xClick(driver, selectPropertyCountry, true);
-		Utility_Functions.xWaitForElementPresent(driver, statePickList, 3);
-		Utility_Functions.xClick(driver, statePickList, true);
 		Utility_Functions.xWaitForElementPresent(driver, selectPropertyState, 3);
 		Utility_Functions.xClick(driver, selectPropertyState, true);
-		Utility_Functions.timeWait(2);
+/*		Utility_Functions.timeWait(1);
+		Utility_Functions.xWaitForElementPresent(driver, selectPropertyState, 3);
+		Utility_Functions.xClick(driver, selectPropertyState, true);
+		Utility_Functions.timeWait(2);*/
 		Utility_Functions.xWaitForElementPresent(driver, saveProperty, 4);
 		Utility_Functions.xClick(driver, saveProperty, true);
+		//staleElementHandle(saveProperty);
 		report.updateTestLog("Verify Custom Property Page",
 				"The new property is saved with all the required fields", Status.PASS);	
+	}
+	
+	public void staleElementHandle(WebElement element) {
+		int count = 0;
+		boolean clicked = false;
+		try {
+			while(count < 4 || ! clicked) {
+				saveProperty.click();
+				clicked = true;
+			}
+		} catch (StaleElementReferenceException e) {
+			e.toString();
+			System.out.println("Trying to recover from a stale element :" + e.getMessage());
+		    count = count+1;
+		}
 	}
 	/**
 	 * Validating the activity Lightning Time line fields
