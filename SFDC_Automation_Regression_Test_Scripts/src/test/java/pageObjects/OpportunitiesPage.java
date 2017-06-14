@@ -266,7 +266,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//div[contains(@class, 'slds-truncate') and text()='Manage Opportunity Splits']")
 	WebElement manageOpportunitySplits;
 
-	@FindBy(xpath = "// input [@value= 'Save']")
+	@FindBy(xpath = "//button[text()='Save']")
 	WebElement saveOpportunitySplit;
 
 	@FindBy(xpath = "//td[contains(@data-label,'Split Percent')]//input")
@@ -1284,6 +1284,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			System.out.println(element.getAttribute("id"));
 		}
 		driver.switchTo().frame(4);
+		Utility_Functions.xSwitchtoFrame(driver, saveButtonSplit);
 		// System.out.println("Frame Identified");
 		Utility_Functions.timeWait(5);
 		List<WebElement> opportunityList = driver.findElements(By.xpath("//div[contains(@class, 'slds-truncate')]"));
@@ -2666,8 +2667,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 		actions.click();
 		actions.build().perform();
 		Utility_Functions.timeWait(3);
-
-		driver.switchTo().frame(4);
+		//driver.switchTo().frame(4);
+		Utility_Functions.xSwitchtoFrame(driver, saveEventCustomEventPageButton);
 		Utility_Functions.timeWait(5);
 
 		if (addAnEventPage.getText().contains("Add an Event")) {
