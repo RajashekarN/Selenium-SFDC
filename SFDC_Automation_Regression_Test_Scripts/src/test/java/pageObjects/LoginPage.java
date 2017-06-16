@@ -64,6 +64,8 @@ public class LoginPage extends ReusableLibrary {
 				"Invoke the application under test @ " + properties.getProperty("ApplicationUrl"), Status.PASS);
 		if (environment.equals("UAT")) {
 			driver.get(properties.getProperty("ApplicationUATUrl"));
+		} else if (environment.equals("UAT2")) {
+			driver.get(properties.getProperty("ApplicationUAT2Url"));
 		} else if (environment.equals("FTE")) {
 			driver.get(properties.getProperty("ApplicationFTEUrl"));
 		} else if (environment.equals("FTE2")) {
@@ -78,7 +80,6 @@ public class LoginPage extends ReusableLibrary {
 	 * @author Vishnuvardhan
 	 *
 	 */
-
 	public void login() {
 		try {
 			if (environment.equals("UAT")) {
