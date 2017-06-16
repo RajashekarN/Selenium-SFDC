@@ -54,6 +54,16 @@ public class EstablishConnection extends ReusableLibrary {
 				System.out.println("AuthEndPoint: " + UAT_AuthEndpoint);
 				config.setAuthEndpoint(UAT_AuthEndpoint);
 				connection = new PartnerConnection(config);
+			} else if (environment.equals("UAT2")) {
+				String UAT2_Username = properties.getProperty("UAT2SystemAdminUsername");
+				String UAT2_Password = properties.getProperty("UAT2AdminPassword");
+				String UAT2_AuthEndpoint = properties.getProperty("UAT2AuthEndpoint");
+				config = new ConnectorConfig();
+				config.setUsername(UAT2_Username);
+				config.setPassword(UAT2_Password);
+				System.out.println("AuthEndPoint: " + UAT2_AuthEndpoint);
+				config.setAuthEndpoint(UAT2_AuthEndpoint);
+				connection = new PartnerConnection(config);
 			} else if (environment.equals("FTE")) {
 				String FTE_Username = properties.getProperty("FTESystemAdminUsername");
 				String FTE_Password = properties.getProperty("FTEAdminPassword");
