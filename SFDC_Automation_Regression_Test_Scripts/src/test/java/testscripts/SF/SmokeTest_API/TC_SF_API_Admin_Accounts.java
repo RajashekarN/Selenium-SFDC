@@ -9,29 +9,32 @@ import com.cognizant.framework.selenium.Browser;
 import com.cognizant.framework.selenium.ExecutionMode;
 import com.cognizant.framework.selenium.SeleniumTestParameters;
 
+/*import supportlibraries.DriverScript;
+import supportlibraries.TestCase;*/
+
 import com.cognizant.Craft.*;
 /**
- * Test Script for creation of Contacts using API Calls 
+ * Test Script for creation of Accounts using API Calls 
  * 
  * @author Vishnuvardhan
  *
  */
-public class TC_SF_API_Contacts extends CRAFTTestCase
+public class TC_SF_API_Admin_Accounts extends CRAFTTestCase
 {
 	@Test(dataProvider = "SmokeTestScripts")
-	public void runTC_SF_API_Contacts(String testInstance, ExecutionMode executionMode, Platform platform
+	public void runTC_SF_API_AdminAccounts(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
 		SeleniumTestParameters testParameters = new SeleniumTestParameters(currentScenario, currentTestcase);
-		testParameters.setCurrentTestDescription("Test API Contact related functions for Salesforce Portal");
+		testParameters.setCurrentTestDescription("Test API Account related functions for Salesforce Portal");
 		testParameters.setIterationMode(IterationOptions.RUN_ONE_ITERATION_ONLY);
 		testParameters.setBrowser(Browser.CHROME);
 		testParameters.setExecutionMode(executionMode);
 		testParameters.setPlatform(platform);
 		DriverScript driverScript = new DriverScript(testParameters);
 		driverScript.driveTestExecution();
-		tearDownTestRunner(testParameters, driverScript);
+		tearDownTestRunner(testParameters, driverScript);		
 	}
 	
 	@DataProvider(name = "SmokeTestScripts", parallel = false)

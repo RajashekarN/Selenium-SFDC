@@ -16,7 +16,7 @@ import com.cognizant.Craft.*;
  * @author Vishnuvardhan
  *
  */
-public class TC_SF_API_AdminContacts extends CRAFTTestCase
+public class TC_SF_API_Admin_Contacts extends CRAFTTestCase
 {
 	@Test(dataProvider = "SmokeTestScripts")
 	public void runTC_SF_API_AdminContacts(String testInstance, ExecutionMode executionMode, Platform platform
