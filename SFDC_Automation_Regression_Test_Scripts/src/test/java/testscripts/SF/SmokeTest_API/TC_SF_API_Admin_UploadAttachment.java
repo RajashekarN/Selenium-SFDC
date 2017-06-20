@@ -19,10 +19,10 @@ import com.cognizant.Craft.*;
  * @author Vishnuvardhan
  *
  */
-public class TC_SF_API_AdminUploadAttachment extends CRAFTTestCase
+public class TC_SF_API_Admin_UploadAttachment extends CRAFTTestCase
 {
 	@Test(dataProvider = "SmokeTestScripts")
-	public void runTC_SF_API_AdminUploadAttachment(String testInstance, ExecutionMode executionMode, Platform platform
+	public void runTC_SF_API_Admin_UploadAttachment(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
