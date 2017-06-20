@@ -16,10 +16,10 @@ import com.cognizant.Craft.*;
  * @author Vishnuvardhan
  *
  */
-public class TC_SF_API_AdminFetchRecord extends CRAFTTestCase
+public class TC_SF_API_Admin_FetchRecord extends CRAFTTestCase
 {
 	@Test(dataProvider = "SmokeTestScripts")
-	public void runTC_SF_API_AdminFetchRecord(String testInstance, ExecutionMode executionMode, Platform platform
+	public void runTC_SF_API_Admin_FetchRecord(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
