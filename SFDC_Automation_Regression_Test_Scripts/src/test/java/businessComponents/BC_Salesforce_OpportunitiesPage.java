@@ -562,4 +562,16 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	public void bc_defaultLandingPageDetailsPage() {
 		sfOpportunitiesPage.defaultLandingPageDetailsPage();
 	}
+	
+	/**
+	 * Verify the default values Sales Stage and Phase field on the Opportunity Detail page from a broker profile
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	
+	public void bc_defaultSalesStageandPhaseField() {
+		sfOpportunitiesPage.defaultSalesStageandPhaseField();
+	}
+	
 }

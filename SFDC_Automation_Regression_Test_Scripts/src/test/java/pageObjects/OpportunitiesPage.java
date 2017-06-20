@@ -633,8 +633,16 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath="//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Success Probability (%)']/parent::label/parent::div/input")
 	WebElement successProbability;
-
-
+	
+	@FindBy(xpath="//select[contains(@id,'oppForm:salesStage')]/option[@selected='selected']")
+	WebElement salesStageSelected;
+	
+	@FindBy(xpath="//select[contains(@id,'oppForm:salesStage')]/option[@value='']")
+	WebElement salesStageSelectedEMEA;
+	
+	@FindBy(xpath="//span[contains(@id,'oppForm:phaseField')]/span")
+	WebElement phasePresent;
+	
 	HomePage hp = new HomePage(scriptHelper);
 	SearchTextSOQL searchOpportunity = new SearchTextSOQL(scriptHelper);
 	OpportunitiesFunctions opportunitiesFunctions = new OpportunitiesFunctions(scriptHelper);
@@ -1944,7 +1952,6 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void opportunityNameAutoGenerate() {
-		String sAccountName = searchOpportunity.fetchRecord("Account", "Name");
 		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
 		Utility_Functions.xClick(driver, menu_Opportunities, true);
 		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
@@ -1956,6 +1963,11 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xSwitchtoFrame(driver, closeDateOpp);
 		Utility_Functions.timeWait(2);
+		opportunityNameAutoGenerateFuntion();
+	}
+	
+	public void opportunityNameAutoGenerateFuntion() {
+		String sAccountName = searchOpportunity.fetchRecord("Account", "Name");
 		Utility_Functions.xSendKeys(driver, accountName, sAccountName);
 		accountName.sendKeys(Keys.ARROW_DOWN);
 		Utility_Functions.timeWait(2);
@@ -2008,7 +2020,6 @@ public class OpportunitiesPage extends ReusableLibrary {
 					Status.FAIL);
 		}
 	}
-
 	/**
 	 * Function for multiple installments
 	 * 
@@ -4424,6 +4435,43 @@ public class OpportunitiesPage extends ReusableLibrary {
 				break;
 			} else {
 				report.updateTestLog("Verify Opportunity Landing Page", "Details Page is not displayed by default after clicking on Opportunity", Status.FAIL);
+			}
+		}
+	}
+	
+	/**
+	 * Verify the default values Sales Stage and Phase field on the Opportunity Detail page from a broker profile
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	public void defaultSalesStageandPhaseField() {
+		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
+		Utility_Functions.xClick(driver, menu_Opportunities, true);
+		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
+		Utility_Functions.xClick(driver, newOpportunity, true);
+		if(dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) {
+			Utility_Functions.timeWait(3);
+			Utility_Functions.xSwitchtoFrame(driver, continueButton);
+			Utility_Functions.xWaitForElementPresent(driver, continueButton, 3);
+			Utility_Functions.xClick(driver, continueButton, true);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xSwitchtoFrame(driver, salesStageSelected);
+			Utility_Functions.xWaitForElementPresent(driver, salesStageSelected, 3);
+			if((salesStageSelected.getText().equals("02-Meeting")) && (phasePresent.getText().equals("Prospecting"))) {
+				report.updateTestLog("Verify New Opportunity Page", "Sales Stage and Phase field are having the values as:::" + salesStageSelected.getText()+":::"+phaseField.getText(), Status.PASS);
+			} else {
+				report.updateTestLog("Verify New Opportunity Page", "Sales Stage and Phase field doesn't have the values as expected:::" + salesStageSelected.getText()+":::"+phaseField.getText(), Status.FAIL);
+			}
+			Utility_Functions.timeWait(2);
+			opportunityNameAutoGenerateFuntion();
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("ABEMEA")) {
+			Utility_Functions.xSwitchtoFrame(driver, salesStageSelectedEMEA);
+			Utility_Functions.xWaitForElementPresent(driver, salesStageSelectedEMEA, 3);
+			if((salesStageSelectedEMEA.getText().equals("--None--"))) {
+				report.updateTestLog("Verify New Opportunity Page", "Sales Stage is having the value as:::" + salesStageSelectedEMEA.getText(), Status.PASS);
+			} else {
+				report.updateTestLog("Verify New Opportunity Page", "Sales Stage doesn't have the value as expected:::" + salesStageSelectedEMEA.getText(), Status.FAIL);
 			}
 		}
 	}
