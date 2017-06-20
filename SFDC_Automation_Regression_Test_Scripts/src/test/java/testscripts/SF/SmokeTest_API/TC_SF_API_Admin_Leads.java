@@ -19,7 +19,7 @@ import com.cognizant.Craft.*;
 public class TC_SF_API_Admin_Leads extends CRAFTTestCase
 {
 	@Test(dataProvider = "SmokeTestScripts")
-	public void runTC_SF_API_Admin_Leads.java(String testInstance, ExecutionMode executionMode, Platform platform
+	public void runTC_SF_API_Admin_Leads(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
