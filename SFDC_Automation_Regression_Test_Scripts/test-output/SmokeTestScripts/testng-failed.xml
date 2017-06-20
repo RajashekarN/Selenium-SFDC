@@ -3,55 +3,8 @@
 <suite thread-count="2" guice-stage="DEVELOPMENT" name="Failed suite [SmokeTestScripts]" parallel="methods">
   <test name="Smoke Test">
     <classes>
-      <class name="testscripts.SF.SmokeTest_API.TC_SF_API_Accounts"/>
-      <class name="testscripts.SF.SmokeTest_API.TC_SF_API_Contacts"/>
-      <class name="testscripts.SF.SmokeTest_API.TC_SF_API_Leads"/>
-      <class name="testscripts.SF.SmokeTest_API.TC_SF_API_Opportunities"/>
-      <class name="testscripts.SF.SmokeTest_API.TC_SF_API_PageValidations"/>
-      <class name="testscripts.SF.SmokeTest_API.TC_SF_API_SearchLeadName"/>
-      <class name="testscripts.SF.SmokeTest_API.TC_SF_API_FetchRecord"/>
+      <class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAMERBrokerDefaultSalesPhaseField"/>
+      <class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABEMEABrokerDefaultSalesPhaseField"/>
     </classes>
   </test> <!-- Smoke Test -->
-  <test name="Smoke Test(failed)" parallel="methods">
-    <classes>
-      <class name="testscripts.SF.SmokeTest_API.TC_SF_API_FetchRecord">
-        <methods>
-          <include name="setUpTestRunner"/>
-        </methods>
-      </class> <!-- testscripts.SF.SmokeTest_API.TC_SF_API_FetchRecord -->
-      <class name="testscripts.SF.SmokeTest_API.TC_SF_API_Contacts">
-        <methods>
-          <include name="setUpTestRunner"/>
-        </methods>
-      </class> <!-- testscripts.SF.SmokeTest_API.TC_SF_API_Contacts -->
-      <class name="testscripts.SF.SmokeTest_API.TC_SF_API_SearchLeadName">
-        <methods>
-          <include name="setUpTestRunner"/>
-        </methods>
-      </class> <!-- testscripts.SF.SmokeTest_API.TC_SF_API_SearchLeadName -->
-      <class name="testscripts.SF.SmokeTest_API.TC_SF_API_Opportunities">
-        <methods>
-          <include name="setUpTestRunner"/>
-          <include name="runTC_SF_API_Opportunities" invocation-numbers="0"/>
-        </methods>
-      </class> <!-- testscripts.SF.SmokeTest_API.TC_SF_API_Opportunities -->
-      <class name="testscripts.SF.SmokeTest_API.TC_SF_API_PageValidations">
-        <methods>
-          <include name="setUpTestRunner"/>
-        </methods>
-      </class> <!-- testscripts.SF.SmokeTest_API.TC_SF_API_PageValidations -->
-      <class name="testscripts.SF.SmokeTest_API.TC_SF_API_Accounts">
-        <methods>
-          <include name="setUpTestRunner"/>
-          <include name="tearDownTestSuite"/>
-          <include name="setUpTestSuite"/>
-        </methods>
-      </class> <!-- testscripts.SF.SmokeTest_API.TC_SF_API_Accounts -->
-      <class name="testscripts.SF.SmokeTest_API.TC_SF_API_Leads">
-        <methods>
-          <include name="setUpTestRunner"/>
-        </methods>
-      </class> <!-- testscripts.SF.SmokeTest_API.TC_SF_API_Leads -->
-    </classes>
-  </test> <!-- Smoke Test(failed) -->
 </suite> <!-- Failed suite [SmokeTestScripts] -->

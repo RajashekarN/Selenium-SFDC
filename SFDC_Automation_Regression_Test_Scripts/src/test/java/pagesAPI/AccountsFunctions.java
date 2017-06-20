@@ -51,6 +51,9 @@ public class AccountsFunctions extends ReusableLibrary {
 	 */
 	public boolean createAccount() {
 		try {
+			CreateUsers createuser = new CreateUsers(scriptHelper);
+			createuser.createUsers();
+			
 			establishConnection.establishConnection();
 			SObject account = new SObject();
 
