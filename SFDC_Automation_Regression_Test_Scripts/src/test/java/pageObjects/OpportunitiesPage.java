@@ -1045,26 +1045,26 @@ public class OpportunitiesPage extends ReusableLibrary {
 			if (environment.equals("UAT")) {
 				String UAT_AuthEndpoint = properties.getProperty("UATAuthEndpoint");
 				config = new ConnectorConfig();
-				config.setUsername("vishnuvardhan.bommisetty@cbre.com.crm.uat2");
-				config.setPassword("Vishnu3704");
+				config.setUsername(properties.getProperty("UATSystemAdminUsername"));
+				config.setPassword(properties.getProperty("UATAdminPassword"));
 				config.setAuthEndpoint(UAT_AuthEndpoint);
 			} else if (environment.equals("UAT2")) {
 				String UAT2_AuthEndpoint = properties.getProperty("UAT2AuthEndpoint");
 				config = new ConnectorConfig();
-				config.setUsername("soumya.sarkar@cbre.com");
-				config.setPassword("Belgharia12");
+				config.setUsername(properties.getProperty("UAT2SystemAdminUsername"));
+				config.setPassword(properties.getProperty("UAT2AdminPassword"));
 				config.setAuthEndpoint(UAT2_AuthEndpoint);
 			} else if (environment.equals("FTE")) {
 				String FTE_AuthEndpoint = properties.getProperty("FTEAuthEndpoint");
 				config = new ConnectorConfig();
-				config.setUsername("vishnuvardhan.bommisetty@cbre.com.crm.fte");
-				config.setPassword("Vishnu3604");
+				config.setUsername(properties.getProperty("FTESystemAdminUsername"));
+				config.setPassword(properties.getProperty("FTEAdminPassword"));
 				config.setAuthEndpoint(FTE_AuthEndpoint);
 			} else if (environment.equals("FTE2")) {
 				String FTE2_AuthEndpoint = properties.getProperty("FTE2AuthEndpoint");
 				config = new ConnectorConfig();
-				config.setUsername("soumya.sarkar@cbre.com.crm.fte2");
-				config.setPassword("Belgharia12");
+				config.setUsername(properties.getProperty("FTE2SystemAdminUsername"));
+				config.setPassword(properties.getProperty("FTE2AdminPassword"));
 				config.setAuthEndpoint(FTE2_AuthEndpoint);
 			}
 			connection = new PartnerConnection(config);
@@ -1913,7 +1913,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 				config = new ConnectorConfig();
 				if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
 					config.setUsername(properties.getProperty("UAT2GWSAPACManager"));
-					config.setPassword(properties.getProperty("UAT2GWSAPACManagerPassword"));
+					config.setPassword(properties.getProperty("UATPassword"));
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
 					config.setUsername(properties.getProperty("UAT2GWSEMEABroker"));
 					config.setPassword(properties.getProperty("UAT2GWSEMEABrokerPassword"));
@@ -1945,9 +1945,42 @@ public class OpportunitiesPage extends ReusableLibrary {
 				config.setAuthEndpoint(properties.getProperty("UAT2AuthEndpoint"));
 				connection = new PartnerConnection(config);
 			} else if (environment.equals("UAT")) {
-				EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
-				establishConnection.establishConnection();
+				config = new ConnectorConfig();
+				if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
+					config.setUsername(properties.getProperty("UATGWSAPACManager"));
+					config.setPassword(properties.getProperty("UATPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
+					config.setUsername(properties.getProperty("UATGWSEMEABroker"));
+					config.setPassword(properties.getProperty("UATPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VASAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
+					config.setUsername(properties.getProperty("UATVASAMERManager"));
+					config.setPassword(properties.getProperty("UATPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VASEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
+					config.setUsername(properties.getProperty("UATVASEMEABroker"));
+					config.setPassword(properties.getProperty("UATPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
+					config.setUsername(properties.getProperty("UATASAMERManager"));
+					config.setPassword(properties.getProperty("UATPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
+					config.setUsername(properties.getProperty("UATASAPACBroker"));
+					config.setPassword(properties.getProperty("UATPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
+					config.setUsername(properties.getProperty("UATABAMERCSS"));
+					config.setPassword(properties.getProperty("UATPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
+					config.setUsername(properties.getProperty("UATABAPACManager"));
+					config.setPassword(properties.getProperty("UATPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
+					config.setUsername(properties.getProperty("UATOBAMERCSS"));
+					config.setPassword(properties.getProperty("UATPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
+					config.setUsername(properties.getProperty("UATOBAMERManager"));
+					config.setPassword(properties.getProperty("UATPassword"));
+				}
+				config.setAuthEndpoint(properties.getProperty("UATAuthEndpoint"));
+				connection = new PartnerConnection(config);
 			}
+			
 		} catch (ConnectionException e) {
 			e.printStackTrace();
 		}
