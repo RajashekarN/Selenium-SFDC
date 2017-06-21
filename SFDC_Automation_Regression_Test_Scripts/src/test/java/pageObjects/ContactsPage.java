@@ -140,7 +140,7 @@ public class ContactsPage extends ReusableLibrary {
 	@FindBy(xpath = "//select[@class='slds-select']/option[@value='Private - Client Intelligence']")
 	WebElement activityType1;
 
-	@FindBy(xpath = "//input[@value='Save & New']")
+	@FindBy(xpath = "//input [@value='Save & New']")
 	WebElement saveAndNewActivity;
 
 	@FindBy(xpath = "//select[@class='slds-select']/option[@value='Private - Initial Meeting']")
