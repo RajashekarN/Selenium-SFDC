@@ -21,7 +21,7 @@ import com.cognizant.Craft.*;
 
 public class TC_SF_OBAMERBrokerActiveOpportunities extends CRAFTTestCase {
 	@Test(dataProvider = "RegressionTestScripts")
-	public void runTC_SF_OBAMERBrokerContactsHyperlink(String testInstance, ExecutionMode executionMode, Platform platform
+	public void runTC_SF_OBAMERBrokerActiveOpportunities(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
