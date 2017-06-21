@@ -13,15 +13,15 @@ import com.cognizant.framework.selenium.SeleniumTestParameters;
 
 import com.cognizant.Craft.*;
 /**
- * Validating the Prefered Property Type Mandatory field is present in the New Opportunity Page for the Agency Broker
+ * Validating the Quick create Opportunities page from the Opportunities page for the Awarded pick list values
  * 
  * @author Ramya
  *
  */
 
-public class TC_SF_ASEMEABrokerAccountsVerifyingInvestorServicesCheckBox extends CRAFTTestCase {
+public class TC_SF_ASAPACBrokerStateStreetPickListValue extends CRAFTTestCase {
 	@Test(dataProvider = "RegressionTestScripts")
-	public void runTC_SF_ASEMEABrokerAccountsVerifyingInvestorServicesCheckBox(String testInstance, ExecutionMode executionMode, Platform platform
+	public void runTC_SF_ASAPACBrokerStateStreetPickListValue(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
@@ -45,10 +45,5 @@ public class TC_SF_ASEMEABrokerAccountsVerifyingInvestorServicesCheckBox extends
 	}
 
 }
-
-
-
-
-
 
 

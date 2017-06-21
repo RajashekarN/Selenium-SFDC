@@ -13,15 +13,15 @@ import com.cognizant.framework.selenium.SeleniumTestParameters;
 
 import com.cognizant.Craft.*;
 /**
- * Validating the Quick create Opportunities page from the Opportunities page for the Reasons for Term Of Contract field
+ * Validating the Quick create Opportunities page from the Opportunities page for the Reasons for the Lead Source field
  * 
  * @author Ramya
  *
  */
 
-public class TC_SF_ASAPACBrokerOpportunitiesVerifyingTermOfContractField extends CRAFTTestCase {
+public class TC_SF_ASAPACBrokerEBIDTAField extends CRAFTTestCase {
 	@Test(dataProvider = "RegressionTestScripts")
-	public void runTC_SF_ASAPACBrokerOpportunitiesVerifyingTermOfContractField(String testInstance, ExecutionMode executionMode, Platform platform
+	public void runTC_SF_ASAPACBrokerEBIDTAField(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
@@ -45,4 +45,7 @@ public class TC_SF_ASAPACBrokerOpportunitiesVerifyingTermOfContractField extends
 	}
 
 }
+
+
+
 

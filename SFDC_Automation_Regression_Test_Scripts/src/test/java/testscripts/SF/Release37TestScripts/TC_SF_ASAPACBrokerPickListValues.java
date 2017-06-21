@@ -13,15 +13,15 @@ import com.cognizant.framework.selenium.SeleniumTestParameters;
 
 import com.cognizant.Craft.*;
 /**
- * Validating the Quick create Opportunities page from the Opportunities page for the Reasons for the Lead Source field
+ * Validating the Quick create Opportunities page from the Opportunities page for the Reasons for Loss pick list values
  * 
  * @author Ramya
  *
  */
 
-public class TC_SF_ASEMEAManagerOpportunitiesVerifyingLeadSourceField extends CRAFTTestCase {
+public class TC_SF_ASAPACBrokerPickListValues extends CRAFTTestCase {
 	@Test(dataProvider = "RegressionTestScripts")
-	public void runTC_SF_ASEMEAManagerOpportunitiesVerifyingLeadSourceField(String testInstance, ExecutionMode executionMode, Platform platform
+	public void runTC_SF_ASAPACBrokerPickListValues(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
@@ -45,5 +45,3 @@ public class TC_SF_ASEMEAManagerOpportunitiesVerifyingLeadSourceField extends CR
 	}
 
 }
-
-

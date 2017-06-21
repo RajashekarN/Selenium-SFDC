@@ -13,15 +13,15 @@ import com.cognizant.framework.selenium.SeleniumTestParameters;
 
 import com.cognizant.Craft.*;
 /**
- * Validating the Prefered Property Type Mandatory field is present in the New Opportunity Page for the Occupancy Brokerage
+ * Validating the Quick create Opportunities page from the Opportunities page for the Awarded pick list values
  * 
  * @author Ramya
  *
  */
 
-public class TC_SF_OBAMERBrokerOpportunitiesVerifyingPreferedPropertyTypeField extends CRAFTTestCase {
+public class TC_SF_ASAPACBrokerAwardedPickListValues extends CRAFTTestCase {
 	@Test(dataProvider = "RegressionTestScripts")
-	public void runTC_SF_OBAMERBrokerOpportunitiesVerifyingPreferedPropertyTypeField(String testInstance, ExecutionMode executionMode, Platform platform
+	public void runTC_SF_ASAPACBrokerAwardedPickListValues(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
@@ -45,8 +45,4 @@ public class TC_SF_OBAMERBrokerOpportunitiesVerifyingPreferedPropertyTypeField e
 	}
 
 }
-
-
-
-
 

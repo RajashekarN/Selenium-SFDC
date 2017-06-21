@@ -13,15 +13,15 @@ import com.cognizant.framework.selenium.SeleniumTestParameters;
 
 import com.cognizant.Craft.*;
 /**
- * Validating the Quick create Opportunities page from the Opportunities page for the Awarded pick list values
+ * Validating the Quick create Opportunities page from the Opportunities page for the Reasons for the Lead Source field
  * 
  * @author Ramya
  *
  */
 
-public class TC_SF_ASAPACBrokerOpportunitiesVerifyingStateStreetPickListValue extends CRAFTTestCase {
+public class TC_SF_ASEMEAManagerLeadSourceField extends CRAFTTestCase {
 	@Test(dataProvider = "RegressionTestScripts")
-	public void runTC_SF_ASAPACBrokerOpportunitiesVerifyingStateStreetPickListValue(String testInstance, ExecutionMode executionMode, Platform platform
+	public void RUNTC_SF_ASEMEAManagerLeadSourceField(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{

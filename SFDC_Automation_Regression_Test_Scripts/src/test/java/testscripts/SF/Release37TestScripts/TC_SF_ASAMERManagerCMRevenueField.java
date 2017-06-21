@@ -19,9 +19,9 @@ import com.cognizant.Craft.*;
  *
  */
 
-public class TC_SF_ASAMERManagerOpportunitiesVerifyingCapitalMarketsRevenueField extends CRAFTTestCase {
+public class TC_SF_ASAMERManagerCMRevenueField extends CRAFTTestCase {
 	@Test(dataProvider = "RegressionTestScripts")
-	public void runTC_SF_ASAMERManagerOpportunitiesVerifyingCapitalMarketsRevenueField(String testInstance, ExecutionMode executionMode, Platform platform
+	public void runTC_SF_ASAMERManagerCMRevenueField(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{

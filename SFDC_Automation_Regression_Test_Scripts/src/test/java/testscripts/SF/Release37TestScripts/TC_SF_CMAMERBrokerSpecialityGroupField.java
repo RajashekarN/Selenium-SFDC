@@ -19,9 +19,9 @@ import com.cognizant.Craft.*;
  *
  */
 
-public class TC_SF_CMAMERBrokerOpportunitiesVerifyingSpecialityGroupField extends CRAFTTestCase {
+public class TC_SF_CMAMERBrokerSpecialityGroupField extends CRAFTTestCase {
 	@Test(dataProvider = "RegressionTestScripts")
-	public void runTC_SF_CMAMERBrokerOpportunitiesVerifyingSpecialityGroupField(String testInstance, ExecutionMode executionMode, Platform platform
+	public void runTC_SF_CMAMERBrokerSpecialityGroupField(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{

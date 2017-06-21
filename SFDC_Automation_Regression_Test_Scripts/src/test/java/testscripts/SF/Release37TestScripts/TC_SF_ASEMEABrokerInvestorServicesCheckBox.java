@@ -13,15 +13,15 @@ import com.cognizant.framework.selenium.SeleniumTestParameters;
 
 import com.cognizant.Craft.*;
 /**
- * Validating the Quick create Opportunities page from the Opportunities page for the Reasons for the Lead Source field
+ * Validating the Prefered Property Type Mandatory field is present in the New Opportunity Page for the Agency Broker
  * 
  * @author Ramya
  *
  */
 
-public class TC_SF_ASAPACBrokerOpportunitiesVerifyNewOpportunityEBIDTAField extends CRAFTTestCase {
+public class TC_SF_ASEMEABrokerInvestorServicesCheckBox extends CRAFTTestCase {
 	@Test(dataProvider = "RegressionTestScripts")
-	public void runTC_SF_ASAPACBrokerOpportunitiesVerifyNewOpportunityEBIDTAField(String testInstance, ExecutionMode executionMode, Platform platform
+	public void RUNTC_SF_ASEMEABrokerInvestorServicesCheckBox(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
@@ -45,6 +45,9 @@ public class TC_SF_ASAPACBrokerOpportunitiesVerifyNewOpportunityEBIDTAField exte
 	}
 
 }
+
+
+
 
 
 

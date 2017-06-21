@@ -13,15 +13,15 @@ import com.cognizant.framework.selenium.SeleniumTestParameters;
 
 import com.cognizant.Craft.*;
 /**
- * Validating the Accounts, Leads and Private Tags for the Occupancy Brokerage
+ * Validating the Quick create Opportunities page from the Opportunities page for the Annual Revenue field
  * 
  * @author Ramya
  *
  */
 
-public class TC_SF_OBAMERAdminVerifyAccountsPrivateTagsAndLeadsPage extends CRAFTTestCase {
+public class TC_SF_ASEMEAManagerLeasingAnnualRevenue extends CRAFTTestCase {
 	@Test(dataProvider = "RegressionTestScripts")
-	public void runTC_SF_OBAMERAdminVerifyAccountsPrivateTagsAndLeadsPage(String testInstance, ExecutionMode executionMode, Platform platform
+	public void runTC_SF_ASEMEAManagerLeasingAnnualRevenue(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
@@ -45,10 +45,6 @@ public class TC_SF_OBAMERAdminVerifyAccountsPrivateTagsAndLeadsPage extends CRAF
 	}
 
 }
-
-
-
-
 
 
 

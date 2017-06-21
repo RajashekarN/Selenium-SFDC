@@ -13,15 +13,15 @@ import com.cognizant.framework.selenium.SeleniumTestParameters;
 
 import com.cognizant.Craft.*;
 /**
- * Validating the Term Of Contract field of the New Opportunities Page
+ * Validating the New Opportunities page for the Speciality Group pick list values for the Agency Broker
  * 
  * @author Ramya
  *
  */
 
-public class TC_SF_ASAPACManagerOpportunitiesVerifyingTermOfContractField extends CRAFTTestCase {
+public class TC_SF_ABAMERBrokerSpecialityGroupField extends CRAFTTestCase {
 	@Test(dataProvider = "RegressionTestScripts")
-	public void runTC_SF_ASAPACManagerOpportunitiesVerifyingTermOfContractField(String testInstance, ExecutionMode executionMode, Platform platform
+	public void runTC_SF_ABAMERBrokerSpecialityGroupField(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
@@ -45,5 +45,6 @@ public class TC_SF_ASAPACManagerOpportunitiesVerifyingTermOfContractField extend
 	}
 
 }
+
 
 

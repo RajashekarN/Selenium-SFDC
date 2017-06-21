@@ -13,15 +13,15 @@ import com.cognizant.framework.selenium.SeleniumTestParameters;
 
 import com.cognizant.Craft.*;
 /**
- * Validating the RFP and Pitch Due Date fields in the New Opportunity Fields
+ * Validating the Average Annual Leasing Commission field in the New Opportunity Page 
  * 
  * @author Ramya
  *
  */
 
-public class TC_SF_ASEMEABrokerOpportunitiesVerifyingRFPAndPitchDueDateFields extends CRAFTTestCase {
+public class TC_SF_ASAMERManagerCommissionField extends CRAFTTestCase {
 	@Test(dataProvider = "RegressionTestScripts")
-	public void runTC_SF_ASEMEABrokerOpportunitiesVerifyingRFPAndPitchDueDateFields(String testInstance, ExecutionMode executionMode, Platform platform
+	public void runTC_SF_ASAMERManagerCommissionField(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
@@ -45,7 +45,6 @@ public class TC_SF_ASEMEABrokerOpportunitiesVerifyingRFPAndPitchDueDateFields ex
 	}
 
 }
-
 
 
 

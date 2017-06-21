@@ -13,15 +13,15 @@ import com.cognizant.framework.selenium.SeleniumTestParameters;
 
 import com.cognizant.Craft.*;
 /**
- * Validating the Prefered Property Type Mandatory field is present in the New Opportunity Page for the Agency Broker
+ * Validating the Accounts, Leads and Private Tags for the Occupancy Brokerage
  * 
  * @author Ramya
  *
  */
 
-public class TC_SF_ABAMERBrokerOpportunitiesVerifyingPreferedPropertyTypeField extends CRAFTTestCase {
+public class TC_SF_OBAMERAdminAccountsPrivateTags extends CRAFTTestCase {
 	@Test(dataProvider = "RegressionTestScripts")
-	public void runTC_SF_ABAMERBrokerOpportunitiesVerifyingPreferedPropertyTypeField(String testInstance, ExecutionMode executionMode, Platform platform
+	public void RUNTC_SF_OBAMERAdminAccountsPrivateTags(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
@@ -45,6 +45,7 @@ public class TC_SF_ABAMERBrokerOpportunitiesVerifyingPreferedPropertyTypeField e
 	}
 
 }
+
 
 
 

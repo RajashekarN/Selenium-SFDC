@@ -19,9 +19,9 @@ import com.cognizant.Craft.*;
  *
  */
 
-public class TC_SF_ASAMERManagerOpportunitiesVerifyingCommissionField extends CRAFTTestCase {
+public class TC_SF_ASAPACBrokerCommissionField extends CRAFTTestCase {
 	@Test(dataProvider = "RegressionTestScripts")
-	public void runTC_SF_ASAMERManagerOpportunitiesVerifyingCommissionField(String testInstance, ExecutionMode executionMode, Platform platform
+	public void runTC_SF_ASAPACBrokerCommissionField(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
@@ -45,7 +45,6 @@ public class TC_SF_ASAMERManagerOpportunitiesVerifyingCommissionField extends CR
 	}
 
 }
-
 
 
 

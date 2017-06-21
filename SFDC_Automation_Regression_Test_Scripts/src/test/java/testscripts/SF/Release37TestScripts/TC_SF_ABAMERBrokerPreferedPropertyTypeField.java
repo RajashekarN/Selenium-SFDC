@@ -13,15 +13,15 @@ import com.cognizant.framework.selenium.SeleniumTestParameters;
 
 import com.cognizant.Craft.*;
 /**
- * Validating the New Opportunities page for the Speciality Group pick list values
+ * Validating the Prefered Property Type Mandatory field is present in the New Opportunity Page for the Agency Broker
  * 
  * @author Ramya
  *
  */
 
-public class TC_SF_OBAMERBrokerOpportunitiesVerifyingSpecialityGroupField extends CRAFTTestCase {
+public class TC_SF_ABAMERBrokerPreferedPropertyTypeField extends CRAFTTestCase {
 	@Test(dataProvider = "RegressionTestScripts")
-	public void runTC_SF_OBAMERBrokerOpportunitiesVerifyingSpecialityGroupField(String testInstance, ExecutionMode executionMode, Platform platform
+	public void runTC_SF_ABAMERBrokerPreferedPropertyTypeField(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
@@ -45,5 +45,9 @@ public class TC_SF_OBAMERBrokerOpportunitiesVerifyingSpecialityGroupField extend
 	}
 
 }
+
+
+
+
 
 

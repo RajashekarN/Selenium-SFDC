@@ -13,15 +13,15 @@ import com.cognizant.framework.selenium.SeleniumTestParameters;
 
 import com.cognizant.Craft.*;
 /**
- * Validating the Quick create Opportunities page from the Opportunities page for the Reasons for Loss pick list values
+ * Validating the Quick create Opportunities page from the Opportunities page for the Reasons for Term Of Contract field
  * 
  * @author Ramya
  *
  */
 
-public class TC_SF_ASAPACBrokerOpportunitiesVerifyingPickListValues extends CRAFTTestCase {
+public class TC_SF_ASAPACBrokerTermOfContractField extends CRAFTTestCase {
 	@Test(dataProvider = "RegressionTestScripts")
-	public void runTC_SF_ASAPACBrokerOpportunitiesVerifyingPickListValues(String testInstance, ExecutionMode executionMode, Platform platform
+	public void runTC_SF_ASAPACBrokerTermOfContractField(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
@@ -45,3 +45,4 @@ public class TC_SF_ASAPACBrokerOpportunitiesVerifyingPickListValues extends CRAF
 	}
 
 }
+

@@ -13,15 +13,15 @@ import com.cognizant.framework.selenium.SeleniumTestParameters;
 
 import com.cognizant.Craft.*;
 /**
- * Validating the Average Annual Leasing Commission field in the New Opportunity Page 
+ * Validating the Quick create Opportunities page from the Opportunities page for the Reasons for Loss pick list values
  * 
  * @author Ramya
  *
  */
 
-public class TC_SF_ASAPACBrokerOpportunitiesVerifyingCommissionField extends CRAFTTestCase {
+public class TC_SF_ASAMERManagerPickListValues extends CRAFTTestCase {
 	@Test(dataProvider = "RegressionTestScripts")
-	public void runTC_SF_ASAPACBrokerOpportunitiesVerifyingCommissionField(String testInstance, ExecutionMode executionMode, Platform platform
+	public void runTC_SF_ASAMERManagerPickListValues(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
@@ -45,6 +45,4 @@ public class TC_SF_ASAPACBrokerOpportunitiesVerifyingCommissionField extends CRA
 	}
 
 }
-
-
 
