@@ -131,7 +131,7 @@ public class ContactsPage extends ReusableLibrary {
 	@FindBy(xpath = "//span[contains(@class,'virtualAutocompleteOptionText')][text()='Employee Contacts']")
 	WebElement clientContacts;
 
-	@FindBy(xpath = "//article[contains(@class,'forceRelatedListSingleContainer')]//span[contains(text(),'Activities')]/ancestor::article//div[text()='New Activity']")
+	@FindBy(xpath = "//span[contains(text(),'Activities')]/ancestor::article//div[text()='New Activity']")
 	WebElement newActivity;
 
 	@FindBy(xpath = "//input[@class='slds-input'][@type='text']")
@@ -140,13 +140,13 @@ public class ContactsPage extends ReusableLibrary {
 	@FindBy(xpath = "//select[@class='slds-select']/option[@value='Private - Client Intelligence']")
 	WebElement activityType1;
 
-	@FindBy(xpath = "// input [@value= 'Save & New']")
+	@FindBy(xpath = "//input[@value='Save & New']")
 	WebElement saveAndNewActivity;
 
 	@FindBy(xpath = "//select[@class='slds-select']/option[@value='Private - Initial Meeting']")
 	WebElement activityType2;
 
-	@FindBy(xpath = "// input [@value= 'Save']")
+	@FindBy(xpath = "//input[@value='Save']")
 	WebElement saveActivity;
 
 	@FindBy(xpath = "//span[contains(@class, 'slds-text-heading--small slds-truncate') and text() = 'Activities']")
@@ -161,10 +161,10 @@ public class ContactsPage extends ReusableLibrary {
 	@FindBy(xpath = "//select[@class='slds-select']/option[@value='Private - Follow-Up Meeting']")
 	WebElement activityType3;
 
-	@FindBy(xpath=".//*[@id='assignedToBox']")
+	@FindBy(xpath="//*[@id='assignedToBox']")
 	WebElement assignedTo;
 
-	@FindBy(xpath=".//*[@id='relatedAccountBox']")
+	@FindBy(xpath="//*[@id='relatedAccountBox']")
 	WebElement accountSelected;
 
 	@FindBy(xpath="//select[@class='slds-select']/option[@value='Normal']")

@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Random;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -119,7 +118,7 @@ public class PropertiesPage extends ReusableLibrary {
 	@FindBy(xpath="//span[contains(@class,'slds-truncate')][text()='Properties']")
 	WebElement menu_Properties;
 
-	@FindBy(xpath="//article[contains(@class,'forceRelatedListSingleContainer')]//span[contains(text(),'Activities')]/ancestor::article//div[text()='New Activity']")
+	@FindBy(xpath="//span[contains(text(),'Activities')]/ancestor::article//div[text()='New Activity']")
 	WebElement newActivity;
 
 	@FindBy(xpath="//input[@class='slds-input'][@type='text']")

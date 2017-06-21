@@ -50,7 +50,7 @@ public class AccountsPage extends ReusableLibrary {
 	/*	@FindBy(xpath = "//article[contains(@class,'Private Notes')]//div[text()='New']")
 	WebElement new_PrivateNotes;*/
 
-	@FindBy(xpath = "//article[contains(@class,'forceRelatedListSingleContainer')]//span[contains(text(),'Private Notes')]/ancestor::article//div[text()='New']")
+	@FindBy(xpath = "//span[contains(text(),'Private Notes')]/ancestor::article//div[text()='New']")
 	WebElement new_PrivateNotes;
 
 	@FindBy(xpath = "//button[@class='slds-button slds-button--neutral uiButton--default uiButton--brand uiButton']/span[text()='Next']")
@@ -136,7 +136,7 @@ public class AccountsPage extends ReusableLibrary {
 	@FindBy(xpath = "//input[@class='searchTextField slds-input slds-lookup__search-input input'][@placeholder='Search Files...']")
 	WebElement searchFile;
 
-	@FindBy(xpath = "//article[contains(@class,'forceRelatedListSingleContainer')]//span[contains(text(),'Activities')]/ancestor::article//div[text()='New Activity']")
+	@FindBy(xpath = "//span[contains(text(),'Activities')]/ancestor::article//div[text()='New Activity']")
 	WebElement newActivity;
 
 	@FindBy(xpath = "//input[@class='slds-input'][@type='text']")
@@ -145,7 +145,7 @@ public class AccountsPage extends ReusableLibrary {
 	@FindBy(xpath = "//select[@class='slds-select']/option[@value='Private - Client Intelligence']")
 	WebElement activityType1;
 
-	@FindBy(xpath = "// input [@value= 'Save & New']")
+	@FindBy(xpath = "//input[@value='Save & New']")
 	WebElement saveAndNewActivity;
 
 	@FindBy(xpath = "//select[@class='slds-select']/option[@value='Private - Initial Meeting']")

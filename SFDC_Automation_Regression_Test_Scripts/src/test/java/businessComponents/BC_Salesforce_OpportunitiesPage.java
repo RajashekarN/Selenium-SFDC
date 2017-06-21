@@ -58,8 +58,8 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 *
 	 */	
 
-	public void bc_requiredFields03_05Stages() throws InterruptedException {
-		sfOpportunitiesPage.requiredFieldsbetweenw03_05Stages();
+	public void bc_requiredFields03_15Stages() throws InterruptedException {
+		sfOpportunitiesPage.requiredFieldsbetweenw03_15Stages();
 	}       
 
 	/**

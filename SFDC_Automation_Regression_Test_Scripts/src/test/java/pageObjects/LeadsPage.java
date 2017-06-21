@@ -165,7 +165,7 @@ public class LeadsPage extends ReusableLibrary {
 	/*	@FindBy(xpath = "//article[contains(@class,'Private Notes')]//div[@title='New']")
 	WebElement new_PrivateNotes;*/
 
-	@FindBy(xpath = "//article[contains(@class,'forceRelatedListSingleContainer')]//span[contains(text(),'Private Notes')]/ancestor::article//div[text()='New']")
+	@FindBy(xpath = "//span[contains(text(),'Private Notes')]/ancestor::article//div[text()='New']")
 	WebElement new_PrivateNotes;
 
 	@FindBy(xpath = "//div[@class='forceChangeRecordTypeFooter']//span[text()='Next']")
@@ -1791,7 +1791,9 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		int value = Utility_Functions.xRandomFunction();
 		String companyName = dataTable.getData("General_Data", "Company") + value;		
-		Utility_Functions.xSwitchtoFrame(driver, firstName);
+		//Utility_Functions.xSwitchtoFrame(driver, firstName);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, firstName, 5);
 		Utility_Functions.xSendKeys(driver, firstName, dataTable.getData("General_Data", "First Name"));
 		Utility_Functions.timeWait(1);

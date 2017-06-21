@@ -212,7 +212,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 * ) WebElement associateProperty;
 	 */
 
-	@FindBy(xpath = "//article[contains(@class,'forceRelatedListSingleContainer')]//span[contains(text(),'Property')]//ancestor::article//div[text()='Associate Property']")
+	@FindBy(xpath = "//span[contains(text(),'Property')]//ancestor::article//div[text()='Associate Property']")
 	WebElement associateProperty;
 
 	@FindBy(xpath = "//div[@class='slds-form-element']/label[text()='Opportunity']")
@@ -347,7 +347,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//a[contains(@title,'Recalculate')]")
 	WebElement recalculate;
 
-	@FindBy(xpath = "//a[@title='New Opportunity Installment']")
+	@FindBy(xpath = "//a[@title='New Installment']")
 	WebElement newOpportunityInstallment;
 
 	@FindBy(xpath = "//input[contains(@id,'opportunityRefractorPageLightningForm') and contains(@id,'Quantity')]")
@@ -509,9 +509,15 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//input[contains(@id,'EndTime')]")
 	WebElement endTimeNewCustomEventPage;
 
-	@FindBy(xpath = ".//*[@id='record-type-select']")
+	@FindBy(xpath = "//*[@id='record-type-select']")
 	WebElement opportunityRecordType;
-
+	
+	@FindBy(xpath = "//*[@id='record-type-select']/option[text()='Capital Markets – Property Sales']")
+	WebElement opportunityRecordTypeValuePropertySales;
+	
+	@FindBy(xpath = "//*[@id='record-type-select']/option[text()='Capital Markets – Debt & Structured Finance']")
+	WebElement opportunityRecordTypeDebtStructuredFinance;
+	
 	@FindBy(xpath = "//div/a[@class='select'][text()='Occupier Lease']")
 	WebElement assignmentTypeEditPage;
 
@@ -871,7 +877,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 *
 	 */
 
-	public void requiredFieldsbetweenw03_05Stages() {
+	public void requiredFieldsbetweenw03_15Stages() {
 		String query = "SELECT Id, Name FROM Opportunity where StageName > '03-RFP/Proposal' and StageName < '15-Signed Lease' and Total_Size__c !=null and CBRE_Preferred_Property_Type_c__c !=null limit 10";
 		String OpportunityID = searchOpportunity.searchOpportunity(query);
 		if(OpportunityID==null) {
@@ -1759,7 +1765,11 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 				SObject[] opportunities = new SObject[1];
 				opportunities[0] = opportunity;
-				results = EstablishConnection.connection.create(opportunities);
+				try {
+					results = EstablishConnection.connection.create(opportunities);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				System.out.println("Result:::" + results);
 				for (int j = 0; j < results.length; j++) {
 					if (results[j].isSuccess()) {
@@ -1959,6 +1969,15 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xSwitchtoFrame(driver, continueButton);
 		Utility_Functions.xWaitForElementPresent(driver, continueButton, 3);
+		if(dataTable.getData("General_Data", "TC_ID").contains("DSFOpportunity")) {
+			Utility_Functions.xClick(driver, opportunityRecordType, true);
+			Utility_Functions.xWaitForElementPresent(driver, opportunityRecordTypeDebtStructuredFinance, 2);
+			Utility_Functions.xClick(driver, opportunityRecordTypeDebtStructuredFinance, true);
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("PSOpportunity")) {
+			Utility_Functions.xClick(driver, opportunityRecordType, true);
+			Utility_Functions.xWaitForElementPresent(driver, opportunityRecordTypeValuePropertySales, 2);
+			Utility_Functions.xClick(driver, opportunityRecordTypeValuePropertySales, true);
+		} 
 		Utility_Functions.xClick(driver, continueButton, true);
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xSwitchtoFrame(driver, closeDateOpp);
