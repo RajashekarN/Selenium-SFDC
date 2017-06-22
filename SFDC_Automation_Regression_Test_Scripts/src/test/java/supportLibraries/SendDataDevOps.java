@@ -11,7 +11,7 @@ public class SendDataDevOps {
 	public void sendData(String applicationId, String processId, String toolId, String Description, String version,
 			String cycle, String passed, String failed, String blocked, String startDateTime, String endDateTime,
 			String metadata) {
-/*		try {
+		try {
 			JSONObject json = new JSONObject();
 			json.put("ApplicationId", applicationId);// 6
 			json.put("AutomationProcessId", processId); // 14
@@ -43,7 +43,7 @@ public class SendDataDevOps {
 
 		} catch (Exception e) {
 			System.out.println(e.getLocalizedMessage());
-		}*/
+		}
 
 	}
 }
