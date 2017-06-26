@@ -21,6 +21,8 @@ import com.sforce.soap.partner.SearchResult;
 import com.sforce.soap.partner.sobject.SObject;
 import com.sforce.ws.ConnectionException;
 
+import supportLibraries.Utility_Functions;
+
 public class AccountsFunctions extends ReusableLibrary {
 	/*
 	 * Constructor to initialize the business component library
@@ -51,8 +53,14 @@ public class AccountsFunctions extends ReusableLibrary {
 	 */
 	public boolean createAccount() {
 		try {
+/*			String randomString = Utility_Functions.xGenerateString(20);
+			System.out.println(randomString);
 			CreateUsers createuser = new CreateUsers(scriptHelper);
 			createuser.createUsers();
+			//createuser.resetPassword("0050m000000N8r5AAC");
+			//createuser.setPassword("0050m000000N8r5AAC", "Password8910");
+			
+			readMultipleRowsContacts("Luis Cole%");*/
 			
 			establishConnection.establishConnection();
 			SObject account = new SObject();
@@ -141,6 +149,141 @@ public class AccountsFunctions extends ReusableLibrary {
 		return status;
 	}
 
+	/**
+	 * Function for reading multiple rows from SOQL search
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	
+	public void readMultipleRowsAccounts(String name) {
+	
+		try {
+			establishConnection.establishConnection();
+			String soslQuery = "FIND {" + name + "} IN Name FIELDS RETURNING Account(Id, Name)";	
+			SearchResult sResult;
+			sResult = EstablishConnection.connection.search(soslQuery);
+			SearchRecord[] records = sResult.getSearchRecords();
+			List<SObject> accounts = new ArrayList<SObject>();
+
+			if (records != null && records.length > 0) {
+				for (int i = 0; i < records.length; i++) {
+					SObject record = records[i].getRecord();
+					if (record.getType().toLowerCase().equals("account")) {
+						accounts.add(record);
+					}
+				}
+				if (accounts.size() > 0) {
+					System.out.println("Found " + accounts.size() + " account(s):");
+					for (SObject account : accounts) {
+						System.out.println(
+								account.getId() + " - " + account.getField("Name"));
+					}
+				}
+			}
+			updateMultipleAccounts(accounts);
+		} catch (ConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	/**
+	 * Function for reading multiple rows from SOQL search
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	
+	public void readMultipleRowsContacts(String name) {
+	
+		try {
+			establishConnection.establishConnection();
+			String soslQuery = "FIND {" + name + "} IN Name FIELDS RETURNING Contact(Id, Name)";	
+			SearchResult sResult;
+			sResult = EstablishConnection.connection.search(soslQuery);
+			SearchRecord[] records = sResult.getSearchRecords();
+			List<SObject> contacts = new ArrayList<SObject>();
+
+			if (records != null && records.length > 0) {
+				for (int i = 0; i < records.length; i++) {
+					SObject record = records[i].getRecord();
+					if (record.getType().toLowerCase().equals("contact")) {
+						contacts.add(record);
+					}
+				}
+				if (contacts.size() > 0) {
+					System.out.println("Found " + contacts.size() + " contact(s):");
+					for (SObject account : contacts) {
+						System.out.println(
+								account.getId() + " - " + account.getField("Name"));
+					}
+				}
+			}
+			updateMultipleContacts(contacts);
+		} catch (ConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	public boolean updateMultipleAccounts(List<SObject> accounts) {
+		try {
+			establishConnection.establishConnection();
+			SObject[] records = new SObject[1];
+			//QueryResult queryResults = EstablishConnection.connection.query("SELECT Id, Name FROM Account ORDER BY CreatedDate DESC LIMIT 1");
+			if (((List<SObject>) accounts).size() > 0) {
+				for (int i = 0; i < ((List<SObject>) accounts).size(); i++) {
+					for(SObject account: accounts) {
+						SObject so = (SObject) account;
+						SObject soUpdate = new SObject();
+						soUpdate.setType("Account");
+						soUpdate.setId(so.getId());
+						String accountName = Utility_Functions.xGenerateAlphaNumericString();
+						soUpdate.setField("Name", accountName + so.getField("Name") );
+						records[i] = soUpdate;
+						System.out.println("Test Account Name Updated to::" + records[i].getField("Name"));
+						results = EstablishConnection.connection.update(records);
+					}					
+				}
+			}
+			System.out.println("Result:::" + results);
+			status = establishConnection.saveResults(results);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return status;
+	}
+	
+	public boolean updateMultipleContacts(List<SObject> contacts) {
+		try {
+			establishConnection.establishConnection();
+			SObject[] records = new SObject[1];
+			//QueryResult queryResults = EstablishConnection.connection.query("SELECT Id, Name FROM Account ORDER BY CreatedDate DESC LIMIT 1");
+			if (((List<SObject>) contacts).size() > 0) {
+				for (int i = 0; i < ((List<SObject>) contacts).size(); i++) {
+					for(SObject contact: contacts) {
+						SObject so = (SObject) contact;
+						SObject soUpdate = new SObject();
+						soUpdate.setType("Contact");
+						soUpdate.setId(so.getId());
+						String contactName = Utility_Functions.xGenerateAlphaNumericString();
+						soUpdate.setField("Name", contactName + so.getField("Name") );
+						records[i] = soUpdate;
+						System.out.println("Test Contact Name Updated to::" + records[i].getField("Name"));
+						results = EstablishConnection.connection.update(records);
+					}					
+				}
+			}
+			System.out.println("Result:::" + results);
+			status = establishConnection.saveResults(results);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return status;
+	}
+	
 	/**
 	 * Function for the searching the Phone Number
 	 * 

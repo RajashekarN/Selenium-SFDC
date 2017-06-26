@@ -2,8 +2,6 @@ package pageObjects;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -703,17 +701,16 @@ public class ContactsPage extends ReusableLibrary {
 		report.updateTestLog("Verify Create Activity Contact ","The Activity is saved and New Activity is displayed ",  Status.PASS);
 		Utility_Functions.xClick(driver, subject, true);
 		Utility_Functions.timeWait(3);
-		Random random = new Random();
-		int value = random.nextInt();
+		String value = Utility_Functions.xGenerateAlphaNumericString();
 
-		Utility_Functions.xSendKeys(driver, subject, "Test Activity Created by Automation" + value);
+		Utility_Functions.xSendKeys(driver, subject, "Test Activity Created by Automation_" + value);
 		Utility_Functions.xWaitForElementPresent(driver, activityType2, 5);
 		Utility_Functions.xClick(driver, activityType2, true);
 		Utility_Functions.xWaitForElementPresent(driver, saveActivity, 5);
 		Utility_Functions.xClick(driver, saveActivity, true);
 
 		SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
-		String query = "select Name from Activity__C where Subject__C = " + "'" + "Test Activity Created by Automation" + value + "'";
+		String query = "select Name from Activity__C where Subject__C = " + "'" + "Test Activity Created by Automation_" + value + "'";
 		String nameActivity = searchTextSOQL.fetchRecordFieldValue("Name", query);
 		if(nameActivity.isEmpty()) {
 			System.out.println("Activity has not been retrieved");

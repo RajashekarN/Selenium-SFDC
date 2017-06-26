@@ -1193,5 +1193,23 @@ public class Utility_Functions extends ReusableLibrary {
 		int value = random.nextInt();
 		return value;
 	}
+	
+	/*
+	 * *******************************************************************
+	 * Function Name: Random String Function Author : CBRE SF Automation Purpose :
+	 * ******************************************************************
+	 */
+	private static final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
+	public static String xGenerateAlphaNumericString()
+	{	
+		int count = 25;
+		StringBuilder builder = new StringBuilder();
+		while (count-- != 0) {
+			int character = (int)(Math.random()*ALPHA_NUMERIC_STRING.length());
+			builder.append(ALPHA_NUMERIC_STRING.charAt(character));
+		}
+		return builder.toString();
+	}
+	
 }

@@ -2,7 +2,6 @@ package pageObjects;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -795,9 +794,9 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, titleName, true);
 		Utility_Functions.xClick(driver, account_PrivateNotes, true);
 		Utility_Functions.timeWait(2);
-		Random random = new Random();
-		int value = random.nextInt();
-		Utility_Functions.xSendKeys(driver, titleName, "Test Personal Information Note" + value);
+/*		Random random = new Random();
+		int value = random.nextInt();*/
+		Utility_Functions.xSendKeys(driver, titleName, "Test Personal Information Note_" + Utility_Functions.xGenerateAlphaNumericString());
 		Utility_Functions.timeWait(5);
 		// List<WebElement> newPersonalInformationList =
 		// driver.findElements(By.xpath(".//label[@class='label inputLabel
@@ -1018,7 +1017,7 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xClick(driver, noteTitle, true);
 		Utility_Functions.timeWait(3);
-		Utility_Functions.xSendKeys(driver, noteTitle, "test");
+		Utility_Functions.xSendKeys(driver, noteTitle, "Test Automation Note_" + Utility_Functions.xGenerateAlphaNumericString());
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xWaitForElementPresent(driver, By.xpath("//div[@data-placeholder='Enter a note...']"), 5);
 
@@ -1196,7 +1195,7 @@ public class AccountsPage extends ReusableLibrary {
 
 		}
 		Utility_Functions.xWaitForElementPresent(driver, subject, 3);
-		Utility_Functions.xSendKeys(driver, subject, "test1");
+		Utility_Functions.xSendKeys(driver, subject, "Test Automation Subject_" + Utility_Functions.xGenerateAlphaNumericString());
 		Utility_Functions.xWaitForElementPresent(driver, activityType1, 3);
 		Utility_Functions.xClick(driver, activityType1, true);
 		Utility_Functions.xWaitForElementPresent(driver, saveAndNewActivity, 3);
@@ -1253,7 +1252,7 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xSwitchtoFrame(driver, saveAndNewActivity);
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xWaitForElementPresent(driver, subject, 5);
-		Utility_Functions.xSendKeys(driver, subject, "test1");
+		Utility_Functions.xSendKeys(driver, subject, "Test Automation Subject_" + Utility_Functions.xGenerateAlphaNumericString());
 		Utility_Functions.xWaitForElementPresent(driver, activityType1, 3);
 		Utility_Functions.xClick(driver, activityType1, true);
 		Utility_Functions.xWaitForElementPresent(driver, saveAndNewActivity, 3);
@@ -1264,16 +1263,15 @@ public class AccountsPage extends ReusableLibrary {
 			Utility_Functions.timeWait(3);*/
 		Utility_Functions.xClick(driver, subject, true);
 		Utility_Functions.timeWait(3);
-		Random random = new Random();
-		int value = random.nextInt();
+		String value = Utility_Functions.xGenerateAlphaNumericString();
 		Utility_Functions.xWaitForElementPresent(driver, subject, 5);
-		Utility_Functions.xSendKeys(driver, subject, "Test Activity Created by Automation" + value);
+		Utility_Functions.xSendKeys(driver, subject, "Test Activity Created by Automation_" + value);
 		Utility_Functions.xClick(driver, activityType2, true);
 		Utility_Functions.xWaitForElementPresent(driver,saveActivity, 5);
 		Utility_Functions.xClick(driver, saveActivity, true);
 
 		SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
-		String query = "select Name from Activity__C where Subject__C = " + "'" + "Test Activity Created by Automation" + value + "'";
+		String query = "select Name from Activity__C where Subject__C = " + "'" + "Test Activity Created by Automation_" + value + "'";
 		String nameActivity = searchTextSOQL.fetchRecordFieldValue("Name", query);
 		if(nameActivity.isEmpty()) {
 			System.out.println("Activity has not been retrieved");
@@ -1317,7 +1315,7 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xSwitchtoFrame(driver, subject);
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xWaitForElementPresent(driver,subject, 3);
-		Utility_Functions.xSendKeys(driver, subject, "test3");
+		Utility_Functions.xSendKeys(driver, subject, "Test Automation Subject_" + Utility_Functions.xGenerateAlphaNumericString());
 		Utility_Functions.xWaitForElementPresent(driver,activityType3, 3);
 		Utility_Functions.xClick(driver, activityType3, true);
 		Utility_Functions.xWaitForElementPresent(driver,saveActivity, 3);
@@ -1756,7 +1754,7 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, subject, 3);
 		Utility_Functions.xClick(driver, subject, true);
 		Utility_Functions.xWaitForElementPresent(driver, subject, 3);
-		Utility_Functions.xSendKeys(driver, subject, "test1");
+		Utility_Functions.xSendKeys(driver, subject, "Test Automation Subject_" + Utility_Functions.xGenerateAlphaNumericString());
 		report.updateTestLog("Verify New Activity Page Layout ","The New Activity in the related page is Displayed ",  Status.PASS);
 		Utility_Functions.xWaitForElementPresent(driver, activityType1, 3);
 		Utility_Functions.xClick(driver, activityType1, true);
@@ -1848,7 +1846,7 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, subject, 3);
 		Utility_Functions.xClick(driver, subject, true);
 		Utility_Functions.xWaitForElementPresent(driver, subject, 3);
-		Utility_Functions.xSendKeys(driver, subject, "test1");
+		Utility_Functions.xSendKeys(driver, subject, "Test Automation Subject_" + Utility_Functions.xGenerateAlphaNumericString());
 		report.updateTestLog("Verify New Activity Page send Notification Email  ","Verifying the subject field is populated with the user defined value ",  Status.PASS);
 		Utility_Functions.xWaitForElementPresent(driver, activityType1, 3);
 		Utility_Functions.xClick(driver, activityType1, true);
@@ -2570,7 +2568,7 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, newAccounts, true);
 		report.updateTestLog("Verify Accounts Leads And PrivateTags ","Verifying New Private Tags is Displayed ",  Status.PASS);
 		Utility_Functions.xWaitForElementPresent(driver, privateTagName, 3);
-		Utility_Functions.xSendKeys(driver, privateTagName, "test1");
+		Utility_Functions.xSendKeys(driver, privateTagName, "Test Automation Priavate Tag_" + Utility_Functions.xGenerateAlphaNumericString());
 		report.updateTestLog("Verify Accounts Leads And PrivateTags ","Verifying the Private Tag name is entered ",  Status.PASS);
 		Utility_Functions.xWaitForElementPresent(driver, saveNewPrivateTag, 3);
 		Utility_Functions.xClick(driver, saveNewPrivateTag, true);
@@ -2604,7 +2602,7 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xSwitchtoFrame(driver, accountNameQuickCreate);
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, accountNameQuickCreate, 5);
-		Utility_Functions.xSendKeys(driver, accountNameQuickCreate, "test1");
+		Utility_Functions.xSendKeys(driver, accountNameQuickCreate, Utility_Functions.xGenerateAlphaNumericString()  +"_Test Automation Account");
 		report.updateTestLog("Verify Accounts Leads And PrivateTags ","Verifying the New Accounts Name field is entered ",  Status.PASS);
 		Utility_Functions.xWaitForElementPresent(driver, billingStreetQuickCreate, 5);
 		Utility_Functions.xSendKeys(driver, billingStreetQuickCreate, "2100 Ross Ave");
@@ -2644,10 +2642,10 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xSwitchtoFrame(driver, firstName);
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, firstName, 5);
-		Utility_Functions.xSendKeys(driver, firstName, "test");
+		Utility_Functions.xSendKeys(driver, firstName, "Test User_" + Utility_Functions.xGenerateAlphaNumericString());
 		report.updateTestLog("Verify Accounts Leads And PrivateTags ","Verifying the firstname is entered in the new Leads page ",  Status.PASS);
 		Utility_Functions.xWaitForElementPresent(driver, lastName, 5);
-		Utility_Functions.xSendKeys(driver, lastName, "User");
+		Utility_Functions.xSendKeys(driver, lastName, "Test User_" + Utility_Functions.xGenerateAlphaNumericString());
 		report.updateTestLog("Verify Accounts Leads And PrivateTags ","Verifying the last name is enetered in the new Leads page" ,  Status.PASS);
 		Utility_Functions.xWaitForElementPresent(driver, company, 5);
 		Utility_Functions.xSendKeys(driver, company, "Cbre");
@@ -2681,8 +2679,8 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xSwitchtoFrame(driver, accountNameQuickCreate);
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, accountNameQuickCreate, 5);
-		int value = Utility_Functions.xRandomFunction();
-		String accountName = "Test Automation" + value;
+		String value = Utility_Functions.xGenerateAlphaNumericString();
+		String accountName = value + "_Test Automation Account";
 		Utility_Functions.xSendKeys(driver, accountNameQuickCreate, accountName);
 		report.updateTestLog("Verify Account Creation With Required Fields ","Verifying Account name required field is populated ",  Status.PASS);
 		Utility_Functions.xWaitForElementPresent(driver, billingStreetQuickCreate, 5);

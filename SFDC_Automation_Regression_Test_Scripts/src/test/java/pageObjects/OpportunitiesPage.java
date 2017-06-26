@@ -347,7 +347,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//a[contains(@title,'Recalculate')]")
 	WebElement recalculate;
 
-	@FindBy(xpath = "//a[@title='New Installment']")
+	@FindBy(xpath = "//a[contains(@title,'New') and contains(@title,'Installment')]")
 	WebElement newOpportunityInstallment;
 
 	@FindBy(xpath = "//input[contains(@id,'opportunityRefractorPageLightningForm') and contains(@id,'Quantity')]")
@@ -3680,7 +3680,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, opportunityNameNewOpportunity, 3);
 		Utility_Functions.xClick(driver, opportunityNameNewOpportunity, true);
 		Utility_Functions.xWaitForElementPresent(driver, opportunityNameNewOpportunity, 3);
-		Utility_Functions.xSendKeys(driver, opportunityNameNewOpportunity, "test");
+		Utility_Functions.xSendKeys(driver, opportunityNameNewOpportunity, "Test Automation Opportunity_" + Utility_Functions.xGenerateAlphaNumericString());
 		report.updateTestLog("Verify Opportunity Leasing AnnualRevenue Field  ",
 				"Verifying the Opportunities Name is entered", Status.PASS);
 
