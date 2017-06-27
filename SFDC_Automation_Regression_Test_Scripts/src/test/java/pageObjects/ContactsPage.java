@@ -1,6 +1,10 @@
 package pageObjects;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -213,6 +217,12 @@ public class ContactsPage extends ReusableLibrary {
 
 	@FindBy(xpath="//input[contains(@id,'contForm:NickName')]")
 	WebElement nickNameContact;
+	
+	@FindBy(xpath="//input[@class='slds-input'][@type='checkbox']/following-sibling::span[text()='Set Reminder']")
+	WebElement setReminder;
+	
+	@FindBy(xpath="//input[contains(@id,'dueDate')]")
+	WebElement dueDateNewActrivity;
 
 	SearchTextSOQL searchAccountName = new SearchTextSOQL(scriptHelper);
 
@@ -1450,5 +1460,327 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.xSendKeys(driver,middleNameQuickCreate , "S");
 		Utility_Functions.xWaitForElementPresent(driver, nickNameContact, 5);
 		Utility_Functions.xSendKeys(driver,nickNameContact , "Emi");*/
+	}
+
+	/**
+	 * Validating the contacts Activity reminder functionality
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void verifyContactActivityReminderSentFunctionality() {
+		Utility_Functions.xWaitForElementPresent(driver, menu_Contacts, 3);
+		Utility_Functions.xClick(driver, menu_Contacts, true);
+		report.updateTestLog("Verify Contact Activity Reminder Functionality ","Contacts is Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
+		Utility_Functions.xClick(driver, recentlyViewed, true);
+		report.updateTestLog("Verify Contact Activity Reminder Functionality  ","Recently viewed Contacts are Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, allContacts, 3);
+		Utility_Functions.xClick(driver, allContacts, true);
+		Utility_Functions.timeWait(3);
+		report.updateTestLog("Verify Contact Activity Reminder Functionality  ","All Contacts are Displayed ",  Status.PASS);
+		List<WebElement> contactNamesList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xclickRandomElement(contactNamesList);
+		Utility_Functions.timeWait(3);
+		report.updateTestLog("Verify Contact Activity Reminder Functionality ","The Contact is Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, related, 3);
+		Utility_Functions.xClick(driver, related, true);
+		report.updateTestLog("Verify Contact Activity Reminder Functionality ","The related page is Displayed ",  Status.PASS);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, newActivity, 3);
+		Utility_Functions.xClick(driver, newActivity, true);
+		report.updateTestLog("Verify Contact Activity Reminder Functionality ","The New Activity in the related page is Displayed ",  Status.PASS);
+		Utility_Functions.xSwitchtoFrame(driver, subject);
+		Utility_Functions.xWaitForElementPresent(driver, subject, 5);
+		Utility_Functions.xClick(driver, subject, true);
+		Utility_Functions.xWaitForElementPresent(driver, subject, 5);
+		Utility_Functions.xSendKeys(driver, subject, "test1");
+		Utility_Functions.xWaitForElementPresent(driver, activityType1, 5);
+		Utility_Functions.xClick(driver, activityType1, true);
+		if(!setReminder.isSelected()){
+			Utility_Functions.xClick(driver,setReminder, true);
+			System.out.println("Set Reminder is checked");
+			report.updateTestLog("Verify Contact Activity Reminder Functionality ","Verifying the Reminder sent check box is checked or else checking it",  Status.PASS);
+		} else {
+			System.out.println("Set Reminder is not checked");
+			report.updateTestLog("Verify Contact Activity Reminder Functionality ","Verifying the Reminder sent  check box is checked or not ",  Status.FAIL);
+		}
+		Utility_Functions.timeWait(2);
+		System.out.println(Calendar.getInstance());	
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		Date date = new Date();
+		Utility_Functions.xWaitForElementPresent(driver,dueDateNewActrivity, 3);
+		Utility_Functions.xSendKeys(driver,dueDateNewActrivity, dateFormat.format(date).toString());
+		Utility_Functions.xWaitForElementPresent(driver, saveActivity, 5);
+		Utility_Functions.xClick(driver, saveActivity, true);
+		Utility_Functions.timeWait(3);
+		report.updateTestLog("Verify Contact Activity Reminder Functionality ","The Activity is saved ",  Status.PASS);
+	}
+	/**
+	 * Validating the Contacts Landing Page 
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	static ArrayList<String> contactInformationSectionFieldsList = new ArrayList<String>();
+	public void contactInformationDetailsPageFields() {
+		contactInformationSectionFieldsList.add("Name ");
+		contactInformationSectionFieldsList.add("Account Name");
+		contactInformationSectionFieldsList.add("Middle Name");
+		contactInformationSectionFieldsList.add("Direct Line");
+		contactInformationSectionFieldsList.add("Title");
+		contactInformationSectionFieldsList.add("Main Phone");
+		contactInformationSectionFieldsList.add("Created By Country");
+		contactInformationSectionFieldsList.add("Email");
+		contactInformationSectionFieldsList.add("Last updated by Country");
+		contactInformationSectionFieldsList.add("Status");
+		contactInformationSectionFieldsList.add("Contact Record Type");
+		System.out.println("Contact Information fields are " + contactInformationSectionFieldsList);
+	}
+
+	static ArrayList<String> addressInformationSectionFieldsList = new ArrayList<String>();
+	public void addressInformationFields() {
+		addressInformationSectionFieldsList.add("Address");
+		System.out.println("Address Information section fields are " +addressInformationSectionFieldsList );
+	}
+
+	static ArrayList<String> customLinksSectionFieldsList = new ArrayList<String>();
+	public void customLinksFields() {
+		customLinksSectionFieldsList.add("LinkedIn");
+		customLinksSectionFieldsList.add("Google Maps");
+		customLinksSectionFieldsList.add("Google Search");
+		System.out.println("Custom Links fields are " +customLinksSectionFieldsList);
+	}
+	static ArrayList<String> additionalInformationFieldsList = new ArrayList<String>();
+	public void additionalInformationFields() {
+		additionalInformationFieldsList.add("Integration Id");
+		additionalInformationFieldsList.add("Inactive Date");
+		additionalInformationFieldsList.add("Preferred Comm Method");
+		additionalInformationFieldsList.add("Employee?");
+		additionalInformationFieldsList.add("Comm Email Sent");
+		additionalInformationFieldsList.add("Source Created Date Time");
+		additionalInformationFieldsList.add("Reason for Inactivating");
+		additionalInformationFieldsList.add("Source Last Updated Date Time");
+		additionalInformationFieldsList.add("Inactivation Date");
+		System.out.println("Additional Information fields are " +additionalInformationFieldsList);
+	}
+
+	static ArrayList<String> systemInformationFieldsList = new ArrayList<String>();
+	public void systemInformationFields() {
+		systemInformationFieldsList.add("Contact Owner");
+		systemInformationFieldsList.add("Last Manually Modified Date");
+		systemInformationFieldsList.add("Created By");
+		systemInformationFieldsList.add("Last Manually Modified By");
+		System.out.println("System Information fields are " +systemInformationFieldsList);
+	}
+
+	static ArrayList<String> contactsDeatilsPageHeadersList = new ArrayList<String>();
+	public void contactsDetailsPageHeaders() {
+		contactsDeatilsPageHeadersList.add("Tagging");
+		contactsDeatilsPageHeadersList.add("Contact Information");
+		contactsDeatilsPageHeadersList.add("Address Information");
+		contactsDeatilsPageHeadersList.add("Additional Information");
+		contactsDeatilsPageHeadersList.add("Custom Links");
+		contactsDeatilsPageHeadersList.add("System Information");
+		System.out.println("Contact Details Page headers are:: " +contactsDeatilsPageHeadersList);
+	}
+
+	public void contactsVerifyLandingPage() {
+		Utility_Functions.xWaitForElementPresent(driver, menu_Contacts, 3);
+		Utility_Functions.xClick(driver, menu_Contacts, true);
+		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
+		Utility_Functions.xClick(driver, recentlyViewed, true);
+		Utility_Functions.xWaitForElementPresent(driver, allContacts, 3);
+		Utility_Functions.xClick(driver, allContacts, true);
+		Utility_Functions.timeWait(3);
+		List<WebElement> contactNamesList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xclickOnFirstElementfromList(contactNamesList);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		List<WebElement> contactDetailsPageHeadersList = driver.findElements(By.xpath("//span[contains(@class,'header-title')]"));
+		int count0 = 0, i0 = 0, j0=0;;
+		String fieldsArray0[] = new String[contactDetailsPageHeadersList.size()];
+		System.out.println(contactDetailsPageHeadersList.size());
+		try {
+			contactsDetailsPageHeaders();
+			while(j0<contactDetailsPageHeadersList.size()) {
+				for (WebElement element0 :contactDetailsPageHeadersList) {
+					fieldsArray0[i0] = element0.getText();
+					if (fieldsArray0[i0].contains(contactsDeatilsPageHeadersList.get(j0))){
+						System.out.println("Contacts Details page headers are " + element0.getText());
+						report.updateTestLog("Verify Contacts Landing Page",
+								" Contact Details Page are having the " + fieldsArray0[i0] + " Headers ",
+								Status.PASS);
+						count0++;
+					}
+					i0++;
+				}
+				i0=0;
+				j0++;
+			}
+			System.out.println(count0);
+			if (count0 != 6) {
+				report.updateTestLog("Verify Contacts Landing Page", "All sections are not present in the Contacts Details Page", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify Leads Landing Page", "All sections are present in the Contacts Details Page", Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		List<WebElement> contactInformationFieldsList = driver.findElements(By.xpath("//h3//span[text()='Contact Information']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
+		int count = 0, i = 0, j4=0;
+		String fieldsArray[] = new String[contactInformationFieldsList.size()];
+		System.out.println(contactInformationFieldsList.size());
+		try {
+			contactInformationDetailsPageFields();
+			while(j4<contactInformationFieldsList.size()) {
+				for (WebElement element :contactInformationFieldsList) {
+					fieldsArray[i] = element.getText();
+					if (fieldsArray[i].contains(contactInformationSectionFieldsList.get(j4))){
+						System.out.println("Contact Information fields are " + element.getText());
+						report.updateTestLog("Verify Contacts Landing Page",
+								" Contact Information section is having the " + fieldsArray[i] + " fields ",
+								Status.PASS);
+						count++;
+					}
+					i++;
+				}
+				i=0;
+				j4++;
+			}
+			System.out.println(count);
+			if (count!= 10) {
+				report.updateTestLog("Verify Contacts Landing Page", "All fields are not present in the Contact Information Section", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify Contacts Landing Page", "All fields are present in the Contact Information Section", Status.PASS);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		List<WebElement> addressInformationFieldsList = driver.findElements(By.xpath("//h3//span[text()='Address Information']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
+		int count1 = 0, i1 = 0, j3=0;
+		String fieldsArray1[] = new String[addressInformationFieldsList.size()];
+		System.out.println(addressInformationFieldsList.size());
+		try {
+			addressInformationFields();
+			while(j3<addressInformationFieldsList.size()) {
+				for (WebElement element1 :addressInformationFieldsList) {
+					fieldsArray1[i1] = element1.getText();
+					if (fieldsArray1[i1].contains(addressInformationSectionFieldsList.get(j3))){
+						System.out.println("Address Information fields are " + element1.getText());
+						report.updateTestLog("Verify Contacts Landing Page",
+								" Address Information Section is having the " + fieldsArray1[i1] + " fields ",
+								Status.PASS);
+						count1++;
+					}
+					i1++;
+				}
+				i1=0;
+				j3++;
+			}
+			System.out.println(count1);
+			if (count1!= 1) {
+				report.updateTestLog("Verify Contacts Landing Page", "All fields are not present in the Address Information Section", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify Contacts Landing Page", "All fields are present in the Address Information Section", Status.PASS);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		List<WebElement> additionalInformationList = driver.findElements(By.xpath("//h3//span[text()='Additional Information']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
+		int count5 = 0, i5 = 0,j=0;
+		String fieldsArray5[] = new String[additionalInformationList.size()];
+		System.out.println(additionalInformationList.size());
+		try {
+			additionalInformationFields();
+			while(j<additionalInformationList.size()) {
+				for (WebElement element5 : additionalInformationList) {
+					fieldsArray5[i5] = element5.getText();
+					if (fieldsArray5[i5].contains(additionalInformationFieldsList.get(j))) {
+						System.out.println("Additional Information fields are " + element5.getText());
+						report.updateTestLog("Verify Contacts Landing Page", element5.getText() + "labels  present in the Additional Information section ", Status.PASS);
+						count5++;
+					}
+					i5++;
+				}
+				i5=0;
+				j++;
+			}
+			System.out.println(count5);
+			if (count5!= 9) {
+				report.updateTestLog("Verify Contacts Landing Page", "All fields are not present in the Additional Information section", Status.FAIL);
+			} else {
+				report.updateTestLog("Verify Contacts Landing Page", "All fields are present in the Additional Information section", Status.PASS);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		List<WebElement> systemInformationList = driver.findElements(By.xpath("//h3//span[text()='System Information']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
+		int count6 = 0, i6 = 0,j2=0;
+		String fieldsArray6[] = new String[systemInformationList.size()];
+		System.out.println(systemInformationList.size());
+		try {
+			systemInformationFields();
+			while(j2<systemInformationList.size()) {
+				for (WebElement element6 :systemInformationList) {
+					fieldsArray6[i6] = element6.getText();
+					if (fieldsArray6[i6].contains( systemInformationFieldsList .get(j2))) {
+						System.out.println("System Information fields are " + element6.getText());
+						report.updateTestLog("Verify Contacts Landing Page", element6.getText() + "labels  present in the System Information section ", Status.PASS);
+						count6++;
+					}
+					i6++;
+				}
+				i6=0;
+				j2++;
+			}
+			System.out.println(count6);
+			if (count6!= 4) {
+				report.updateTestLog("Verify Contacts Landing Page", "All fields are not present in the Contact Information section", Status.FAIL);
+			} else {
+				report.updateTestLog("Verify Contacts Landing Page", "All fields are present in the Contact Information section", Status.PASS);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		List<WebElement> customLinksList = driver.findElements(By.xpath("//h3//span[text()='Custom Links']/ancestor::h3/parent::div/div[1]//a"));
+		int count7 = 0, i7 = 0,j1=0;
+		String fieldsArray7[] = new String[customLinksList.size()];
+		System.out.println(customLinksList.size());
+		try {
+			customLinksFields();
+			while(j1<customLinksList.size()) {
+				for (WebElement element7 : customLinksList) {
+					fieldsArray7[i7] = element7.getText();
+					if (fieldsArray7[i7].contains(customLinksSectionFieldsList.get(j1))) {
+						System.out.println("Custom Link fields are " + element7.getText());
+						report.updateTestLog("Verify Contacts Landing Page ", element7.getText() + "labels  present in the Custom Links ", Status.PASS);
+						count7++;
+					}
+					i7++;
+				}
+				i7=0;
+				j1++;
+			}
+			System.out.println(count7);
+			if (count7 != 3) {
+				report.updateTestLog("Verify Contacts Landing Page", "All fields are not present in the Custom Links section", Status.FAIL);
+			} else {
+				report.updateTestLog("Verify Contacts Landing Page", "All fields are present in the Custom Links section", Status.PASS);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }

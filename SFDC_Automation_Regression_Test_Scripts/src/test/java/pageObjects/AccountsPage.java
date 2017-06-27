@@ -380,16 +380,137 @@ public class AccountsPage extends ReusableLibrary {
 
 	@FindBy(xpath="//h1[contains(@class,'slds-page-header__title')]/span")
 	WebElement accountNameSaved;
-	
+
 	@FindBy(xpath="//span[text()='D-U-N-S #']/parent::div/parent::div//span[@class='uiOutputText']")
 	WebElement accountDetailsDUNS;
-	
+
 	@FindBy(xpath="//li[contains(@class,'oneActionsDropDown')]//a")
 	WebElement showMoreActions;
-	
+
 	@FindBy(xpath="//div[contains(@class,'actionMenu')]//a[@title='View Hierarchy']")
 	WebElement selectViewHierarchy;
 	
+	@FindBy(xpath="//input[contains(@id,'LocalAcctName')]")
+	WebElement localAccountName;
+
+	@FindBy(xpath="//input[contains(@id,'acctForm:Fax')]")
+	WebElement accountFax;
+
+	@FindBy(xpath="//button[@id='addressCopy']")
+	WebElement copyAddress;
+
+	@FindBy(xpath="//select[contains(@id,'Local_Billing_Country__c')]")
+	WebElement localBillingCountry;
+
+	@FindBy(xpath="//select[contains(@id,'Local_Billing_Country__c')]/option[text()='United States']")
+	WebElement localBillingCountryValue;
+
+	@FindBy(xpath="//textarea[contains(@id,'Local_Billing_Street__c')]")
+	WebElement localBillingStreet;
+
+	@FindBy(xpath="//input[contains(@id,'Local_Billing_City__c')]")
+	WebElement localBillingCity;
+
+	@FindBy(xpath="//select[contains(@id,'Local_Billing_State_Province__c')]")
+	WebElement localBillingState;
+
+	@FindBy(xpath="//select[contains(@id,'Local_Billing_State_Province__c')]/option[text()='Texas']")
+	WebElement localBillingStateValue;
+
+	@FindBy(xpath="//input[contains(@id,'Local_Billing_Zip_Postal_Code__c')]")
+	WebElement localBillingZipCode;
+
+	@FindBy(xpath="//select[contains(@id,'Local_Shipping_Country__c')]")
+	WebElement localShippingCountry;
+
+	@FindBy(xpath="//select[contains(@id,'Local_Shipping_Country__c')]/option[text()='United States']")
+	WebElement localShippingCountryValue;
+
+	@FindBy(xpath="//textarea[contains(@id,'Local_Shipping_Street__c')]")
+	WebElement localShippingStreet;
+
+	@FindBy(xpath="//input[contains(@id,'Local_Shipping_City__c')]")
+	WebElement localShippingCity;
+
+	@FindBy(xpath="//select[contains(@id,'Local_Shipping_State_Province__c')]")
+	WebElement localShippingState;
+
+	@FindBy(xpath="//select[contains(@id,'Local_Shipping_State_Province__c')]/option[text()='Texas']")
+	WebElement localShippingStateValue;
+
+	@FindBy(xpath="//input[contains(@id,'Local_Shipping_Zip_Postal_Code__c')]")
+	WebElement localShippingZipCode;
+
+	@FindBy(xpath="//input[contains(@id,'acctForm:website')]")
+	WebElement website;
+
+	@FindBy(xpath="//input[contains(@id,'Phone')]")
+	WebElement phone;
+
+	@FindBy(xpath="//select[contains(@id,'EMEAIndustry')]")
+	WebElement industry;
+
+	@FindBy(xpath="//select[contains(@id,'Industry')]")
+	WebElement amerIndustry;
+
+	@FindBy(xpath="//select[contains(@id,'Industry')]/option[text()='Advertising/Marketing/Media']")
+	WebElement amerIndustryValue;
+
+	@FindBy(xpath="//select[contains(@id,'EMEAIndustry')]/option[text()='Agriculture']")
+	WebElement industryValue;
+
+	@FindBy(xpath="//select[contains(@id,'Investor_Profile__c')]/option[text()='Occupier']")
+	WebElement selectIndustryValue;
+
+	@FindBy(xpath="//select[contains(@id,'Lender_Type__c')]")
+	WebElement lenderType;
+
+	@FindBy(xpath="//select[contains(@id,'Lender_Type__c')]/option[text()='Bank']")
+	WebElement selectLenderType;
+
+	@FindBy(xpath="//select[contains(@id,'AccountSource')]/option[text()='Business Relationship']")
+	WebElement accountSourceField;
+
+	@FindBy(xpath="//input[contains(@id,'TickerSymbol')]")
+	WebElement tickerSymbol;
+
+	@FindBy(xpath="//input[contains(@id,'AnnualRevenue')]")
+	WebElement annualRevenue;
+
+	@FindBy(xpath="//input[contains(@id,'NAICS_Code__c')]")
+	WebElement naicsCode;
+
+	@FindBy(xpath="//input[contains(@id,'SIC_Code_1__c')]")
+	WebElement sicCode1;
+
+	@FindBy(xpath="//input[contains(@id,'SIC_Code_2__c')]")
+	WebElement sicCode2;
+
+	@FindBy(xpath="//input[contains(@id,'SIC_Code_3__c')]")
+	WebElement sicCode3;
+
+	@FindBy(xpath="//input[contains(@id,'SIC_Code_4__c')]")
+	WebElement sicCode4;
+
+	@FindBy(xpath="//input[contains(@id,'SIC_Code_5__c')]")
+	WebElement sicCode5;
+
+	@FindBy(xpath="//input[contains(@id,'SIC_Code_6__c')]")
+	WebElement sicCode6;
+
+	@FindBy(xpath="//textarea[contains(@id,'Description')]")
+	WebElement accountDescription;
+
+	@FindBy(xpath="//select[contains(@id,'LegalStatus')]/option[text()='Corporation']")
+	WebElement legalStatusValue;
+	
+   @FindBy(xpath="//article[contains(@class,'forceRelatedListCardDesktop')]//span[contains(text(),'SPOCs')]/ancestor::article//div[text()='New']")
+   WebElement spocsNew;
+   
+   @FindBy(xpath="//span[text()='Migrated Account']/parent::label/span[contains(@class,'checkbox')]")
+   WebElement migratedAccount;
+
+
 	HomePage hp = new HomePage(scriptHelper);
 	SearchTextSOQL searchAccount = new SearchTextSOQL(scriptHelper);
 	static ArrayList<String> accountsPageDetailsList = new ArrayList<String>();
@@ -794,7 +915,7 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, titleName, true);
 		Utility_Functions.xClick(driver, account_PrivateNotes, true);
 		Utility_Functions.timeWait(2);
-/*		Random random = new Random();
+		/*		Random random = new Random();
 		int value = random.nextInt();*/
 		Utility_Functions.xSendKeys(driver, titleName, "Test Personal Information Note_" + Utility_Functions.xGenerateAlphaNumericString());
 		Utility_Functions.timeWait(5);
@@ -2758,6 +2879,1357 @@ public class AccountsPage extends ReusableLibrary {
 			Utility_Functions.xClick(driver, selectViewHierarchy, true);
 			report.updateTestLog("Verify Create Accounts View Hierarchy","Verifying the View Hierarchy is displayed in the show more actions and is being able to be clicked",  Status.PASS);
 		}
+	}
+
+	/**
+	 * Validating the Accounts page Layout
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	static ArrayList<String> deatilsPageFieldsList = new ArrayList<String>();
+
+	public void detailsPageFields() {
+
+		deatilsPageFieldsList.add("Account Name");
+		deatilsPageFieldsList.add("Original Account Name");
+		deatilsPageFieldsList.add("Account Site");
+		deatilsPageFieldsList.add("Local Account Name");
+		deatilsPageFieldsList.add("Tradestyle Name");
+		deatilsPageFieldsList.add("Phone");
+		deatilsPageFieldsList.add("Legal Status");
+		deatilsPageFieldsList.add("Fax");
+		deatilsPageFieldsList.add("Account Opportunity History");
+		deatilsPageFieldsList.add("Website");
+		deatilsPageFieldsList.add("Activities Report");
+		deatilsPageFieldsList.add("Brand Parent");
+		deatilsPageFieldsList.add("Migrated Account");
+		deatilsPageFieldsList.add("Global Brand");
+		deatilsPageFieldsList.add("Client Type");
+		deatilsPageFieldsList.add("Key Client Account for:");
+		deatilsPageFieldsList.add("Client Type Rollup");
+		deatilsPageFieldsList.add("Key Pursuit Account for:");
+		deatilsPageFieldsList.add("Billing Address ");
+		deatilsPageFieldsList.add("Shipping Address");
+		deatilsPageFieldsList.add("Local Billing Country");
+		deatilsPageFieldsList.add("Local Shipping Country");
+		deatilsPageFieldsList.add("Local Billing Street");
+		deatilsPageFieldsList.add("Local Shipping Street");
+		deatilsPageFieldsList.add("Local Billing City");
+		deatilsPageFieldsList.add("Local Shipping City");
+		deatilsPageFieldsList.add("Local Billing State/Province");
+		deatilsPageFieldsList.add("Local Shipping State/Province");
+		deatilsPageFieldsList.add("Local Billing Zip/Postal Code");
+		deatilsPageFieldsList.add("Local Shipping Zip/Postal Code");
+		deatilsPageFieldsList.add("Industry");
+		deatilsPageFieldsList.add("Data Type");
+		deatilsPageFieldsList.add("Employees Here");
+		deatilsPageFieldsList.add("Marketability");
+		deatilsPageFieldsList.add("Investor Profile");
+		deatilsPageFieldsList.add("Account Source");
+		deatilsPageFieldsList.add("Lender Type");
+		deatilsPageFieldsList.add("Ticker Symbol");
+		deatilsPageFieldsList.add("Annual Revenue");
+		deatilsPageFieldsList.add("D-U-N-S #");
+		deatilsPageFieldsList.add("Account Currency");
+		deatilsPageFieldsList.add("Previous D-U-N-S #");
+		deatilsPageFieldsList.add("Tax Label 1");
+		deatilsPageFieldsList.add("Status");
+		deatilsPageFieldsList.add("Reason for Inactivating");
+		deatilsPageFieldsList.add("Tax Code 1");
+		deatilsPageFieldsList.add("Verified Date");
+		deatilsPageFieldsList.add("Inactivation Date");
+		deatilsPageFieldsList.add("NAICS Code");
+		deatilsPageFieldsList.add("NAICS Code Description");
+		deatilsPageFieldsList.add("SIC Code 1");
+		deatilsPageFieldsList.add("SIC Code 1 Description");
+		deatilsPageFieldsList.add("SIC Code 2");
+		deatilsPageFieldsList.add("SIC Code 2 Description");
+		deatilsPageFieldsList.add("SIC Code 3");
+		deatilsPageFieldsList.add("SIC Code 3 Description");
+		deatilsPageFieldsList.add("SIC Code 4");
+		deatilsPageFieldsList.add("SIC Code 4 Description");
+		deatilsPageFieldsList.add("SIC Code 5");
+		deatilsPageFieldsList.add("SIC Code 5 Description");
+		deatilsPageFieldsList.add("SIC Code 6");
+		deatilsPageFieldsList.add("SIC Code 6 Description");
+		deatilsPageFieldsList.add("Description");
+		deatilsPageFieldsList.add("Created By");
+		deatilsPageFieldsList.add("Account Owner");
+		deatilsPageFieldsList.add("Last Manually Modified Date");
+		deatilsPageFieldsList.add("Account Record Type");
+		deatilsPageFieldsList.add("Last Manually Modified By");
+
+
+		System.out.println("The Fields present in the account details page are " + deatilsPageFieldsList);
+
+	}
+	static ArrayList<String> accountsDeatilsPageHeadersList = new ArrayList<String>();
+
+	public void accountDetailsPageHeaders() {
+
+		accountsDeatilsPageHeadersList.add("Tagging");
+		accountsDeatilsPageHeadersList.add("Account Information");
+		accountsDeatilsPageHeadersList.add("Account Segmentation");
+		accountsDeatilsPageHeadersList.add("Account Hierarchy");
+		accountsDeatilsPageHeadersList.add("Address Information");
+		accountsDeatilsPageHeadersList.add("Local Address Information");
+		accountsDeatilsPageHeadersList.add("Additional Information");
+		accountsDeatilsPageHeadersList.add("SIC/NAICS Codes");
+		accountsDeatilsPageHeadersList.add("Description Information");
+		accountsDeatilsPageHeadersList.add("System Information");
+
+		System.out.println("Account Details Page headers are:: " + accountsDeatilsPageHeadersList);
+	}
+
+	static ArrayList<String> accountsRelatedPageHeadersList = new ArrayList<String>();
+
+	public void accountRelatedPageHeaders() {
+
+
+		accountsRelatedPageHeadersList.add("SPOCs");
+		accountsRelatedPageHeadersList.add("Related Contacts");
+		accountsRelatedPageHeadersList.add("Opportunities");
+		accountsRelatedPageHeadersList.add("Deal Relationships");
+		accountsRelatedPageHeadersList.add("Property Relationships");
+		accountsRelatedPageHeadersList.add("Activities");
+		accountsRelatedPageHeadersList.add("Private Notes");
+		accountsRelatedPageHeadersList.add("Notes");
+		accountsRelatedPageHeadersList.add("Files");
+
+		System.out.println("Account related Page sections  are:: " + accountsRelatedPageHeadersList);
+	}
+
+	public void verifyAccountsLandingPageDetailsLayout() {
+		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
+		Utility_Functions.xClick(driver, menu_Accounts, true);
+		report.updateTestLog("Verify Accounts Details Page ","Accounts is Displayed ",  Status.PASS);
+		List<WebElement> accountNamesList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xclickRandomElement(accountNamesList);
+		Utility_Functions.timeWait(5);
+		List<WebElement> accountDetailsPageList = driver.findElements(By.xpath("//div[@class='test-id__field-label-container']/span[text()!='']"));
+		int count1 = 0, i1 = 0,j1=0;
+		String fieldsArray[] = new String[accountDetailsPageList.size()];
+		System.out.println(accountDetailsPageList.size());
+		try {
+			detailsPageFields();
+			while(j1<accountDetailsPageList.size()) {
+				for (WebElement element1 : accountDetailsPageList) {
+					fieldsArray[i1] = element1.getText();
+					if (fieldsArray[i1].equalsIgnoreCase(deatilsPageFieldsList.get(j1))) {
+						System.out.println("Verify Account Details Page " + element1.getText());
+						report.updateTestLog("Verify Account Details Page ", element1.getText() + "labels  present in the Account Detailed Page ", Status.PASS);
+						count1++;
+					}
+					i1++;
+				}
+				i1=0;
+				j1++;
+			}
+			System.out.println(count1);
+			if (count1 != 67) {
+				report.updateTestLog("Verify Accounts Details Page",
+						"All fields are not present in the Accounts Details Page", Status.FAIL);
+			} else {
+				report.updateTestLog("Verify Accounts Details Page",
+						"All fields are present in the Accounts Details Page", Status.PASS);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		List<WebElement> accountDetailsPageHeadersList = driver.findElements(By.xpath("//span[contains(@class,'header-title')]"));
+		int count2 = 0, i2 = 0;
+		String fieldsArray2[] = new String[accountDetailsPageHeadersList.size()];
+		System.out.println(accountDetailsPageHeadersList.size());
+
+		try {
+			accountDetailsPageHeaders();
+			for (WebElement element2 : accountDetailsPageHeadersList) {
+				System.out.println(element2.getText());
+				fieldsArray2[i2] = element2.getText();
+				if (fieldsArray2[i2].contains(accountsDeatilsPageHeadersList.get(i2))) {
+					report.updateTestLog("Verify Accounts Details Page",
+							"Accounts Details  page is having the " + fieldsArray2[i2] + " Headers ",
+							Status.PASS);
+					count2++;
+				}
+				i2++;
+			}
+			System.out.println(count2);
+			if (count2 != 10) {
+				report.updateTestLog("Verify Accounts Details Page", "All sections are not present in the Accounts Details Page", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify Accounts Details Page", "All sections are present in the Accounts Details Page", Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		Utility_Functions.xClick(driver, related_Accounts, true);
+		Utility_Functions.timeWait(5);
+		List<WebElement> accountRelatedPageHeadersList = driver.findElements(By.xpath("//h2[@id='header']/a/span[1]"));
+		int count3 = 0, i3 = 0, j=0;
+		String fieldsArray3[] = new String[accountRelatedPageHeadersList.size()];
+		System.out.println(accountRelatedPageHeadersList.size());
+		try {
+			accountRelatedPageHeaders();
+			while(j<accountRelatedPageHeadersList.size()) {
+				for (WebElement element3 : accountRelatedPageHeadersList) {
+					fieldsArray3[i3] = element3.getText();
+					if (fieldsArray3[i3].equalsIgnoreCase(accountsRelatedPageHeadersList.get(j))) {
+						System.out.println("Verify Account Details Page " + element3.getText());
+						report.updateTestLog("Verify Account Details Page ", element3.getText() + "Headers are  present in the Account Related Page ", Status.PASS);
+						count3++;
+					}
+					i3++;
+				}
+				i3=0;
+				j++;
+			}
+			System.out.println(count3);
+			if (count3 != 9) {
+				report.updateTestLog("Verify Accounts Details Page", "All sections are not present in the Accounts Related Page", Status.FAIL);
+			} else {
+				report.updateTestLog("Verify Accounts Details Page", "All sections are present in the Accounts Related Page", Status.PASS);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+	}
+
+	/**
+	 * Validating the Account Page Layout
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void verifyAccountsLandingPageDetailsLayoutManager() {	
+		Utility_Functions.xClick(driver, menu_Accounts, true);
+		Utility_Functions.timeWait(3);
+		report.updateTestLog("Verify Account Details Page ","Accounts is Displayed ",  Status.PASS);
+		List<WebElement> accountNamesList = driver.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xclickRandomElement(accountNamesList);
+		Utility_Functions.timeWait(3);
+		report.updateTestLog("Verify Account Details Page ","The Account is Displayed ",  Status.PASS);
+		Utility_Functions.xClick(driver, related_Accounts, true);
+		Utility_Functions.timeWait(5);
+		List<WebElement> accountRelatedPageHeadersList = driver.findElements(
+				By.xpath("//h2[@id='header']/a/span[1]"));
+		int count3 = 0, i3 = 0, j=0;
+		String fieldsArray3[] = new String[accountRelatedPageHeadersList.size()];
+		System.out.println(accountRelatedPageHeadersList.size());
+		try {
+			accountRelatedPageHeaders();
+			while(j<accountRelatedPageHeadersList.size()) {
+				for (WebElement element3 : accountRelatedPageHeadersList) {
+					fieldsArray3[i3] = element3.getText();
+					if (fieldsArray3[i3].equalsIgnoreCase(accountsRelatedPageHeadersList.get(j))) {
+						System.out.println("Verify Account Details Page " + element3.getText());
+						report.updateTestLog("Verify Account Details Page ", element3.getText() + "Headers are  present in the Account Related Page ", Status.PASS);
+						count3++;
+					}
+					i3++;
+				}
+				i3=0;
+				j++;
+			}
+			System.out.println(count3);
+			if (count3 != 9) {
+				report.updateTestLog("Verify Accounts Details Page", "All sections are not present in the Accounts Related Page", Status.FAIL);
+			} else {
+				report.updateTestLog("Verify Accounts Details Page", "All sections are present in the Accounts Related Page", Status.PASS);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	/**
+	 * Validating the Accounts Details Page Layout
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	static ArrayList<String> deatilsPageFieldsNotPresentList = new ArrayList<String>();
+
+	public void verifyAccountsLandingPageDetailsLayoutBroker() {
+		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
+		Utility_Functions.xClick(driver, menu_Accounts, true);
+		report.updateTestLog("Verify Accounts Details Page ","Accounts is Displayed ",  Status.PASS);
+		List<WebElement> accountNamesList = driver.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xclickRandomElement(accountNamesList);
+		Utility_Functions.timeWait(5);
+		List<WebElement> accountDetailsPageList = driver.findElements(By.xpath("//div[@class='test-id__field-label-container']/span[text()!='']"));
+		int count1 = 0, i1 = 0,j1=0;
+		String fieldsArray[] = new String[accountDetailsPageList.size()];
+		System.out.println("Account Details xPath Count::" + accountDetailsPageList.size());
+		System.out.println("Details Page Fields list Count::" + deatilsPageFieldsList.size());
+		try {
+			detailsPageFields();
+			while(j1<accountDetailsPageList.size()) {
+				for (WebElement element1 : accountDetailsPageList) {
+					fieldsArray[i1] = element1.getText();
+					if (fieldsArray[i1].equalsIgnoreCase(deatilsPageFieldsList.get(j1))) {
+						System.out.println("Verify Account Details Page " + element1.getText());
+						report.updateTestLog("Verify Account Details Page ", element1.getText() + "labels  present in the Account Detailed Page ", Status.PASS);
+						count1++;
+					} else {
+						deatilsPageFieldsNotPresentList.add(element1.getText());
+					}
+					i1++;
+				}
+				i1=0;
+				j1++;
+			}
+			System.out.println(count1);
+			System.out.println("Elements which are not present in the page are :::" + deatilsPageFieldsNotPresentList);
+			if (count1 != 31) {
+				report.updateTestLog("Verify Accounts Details Page", "All fields are not present in the Accounts Details Page", Status.FAIL);
+			} else {
+				report.updateTestLog("Verify Accounts Details Page", "All fields are present in the Accounts Details Page", Status.PASS);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+
+	/**
+	 * Validating the New Account page layout
+	 * 
+	 * @author Ramya
+	 *
+	 */
+
+	static ArrayList<String> newAccountInformationSectionList = new ArrayList<String>();
+	public void newAccountInformationSection() {
+		newAccountInformationSectionList.add("Account Site");
+		newAccountInformationSectionList.add("Tradestyle Name");
+		newAccountInformationSectionList.add("Legal Status");
+		newAccountInformationSectionList.add("Account Opportunity History");
+		newAccountInformationSectionList.add("Tax Label 1");
+		newAccountInformationSectionList.add("Tax Label 2");
+		newAccountInformationSectionList.add("Tax Code 1");
+		newAccountInformationSectionList.add("Tax Code 2");
+		newAccountInformationSectionList.add("Staging Record Id");
+		newAccountInformationSectionList.add("Created By Country");
+		newAccountInformationSectionList.add("Last updated by Country");
+		newAccountInformationSectionList.add("Original Account Name");
+		newAccountInformationSectionList.add("Local Account Name");
+		newAccountInformationSectionList.add("Account Fax");
+		newAccountInformationSectionList.add("Immediate Parent Account");
+		newAccountInformationSectionList.add("Brand Parent");
+		newAccountInformationSectionList.add("Global Brand");
+		System.out.println("Account Information section fields  are:: " + newAccountInformationSectionList);
+	}
+
+	static ArrayList<String> legalStatusPickListValuesList = new ArrayList<String>();
+	public void legalStatusPickList() {
+		legalStatusPickListValuesList.add("--None--");
+		legalStatusPickListValuesList.add("Corporation");
+		legalStatusPickListValuesList.add("Estate");
+		legalStatusPickListValuesList.add("Foundation");
+		legalStatusPickListValuesList.add("Limited Liability Corporation");
+		legalStatusPickListValuesList.add("Non Profit Organization");
+		legalStatusPickListValuesList.add("Sole Proprietorship");
+		legalStatusPickListValuesList.add("Trust");
+		System.out.println("Legal status pick list values are:: " + legalStatusPickListValuesList);
+	}
+
+	static ArrayList<String> accountSegmentationFieldsList = new ArrayList<String>();
+	public void accountSegmentationFields() {
+		accountSegmentationFieldsList.add("Client Type");
+		System.out.println("Account segmentation section fields are:: " + accountSegmentationFieldsList);
+	}
+
+	static ArrayList<String> clientTypeFieldPickListValuesList = new ArrayList<String>();
+	public void clientTypeFieldPickList() {
+		clientTypeFieldPickListValuesList.add("Developer");
+		clientTypeFieldPickListValuesList.add("Investor/Owner");
+		clientTypeFieldPickListValuesList.add("Lender");
+		clientTypeFieldPickListValuesList.add("Occupier");
+		clientTypeFieldPickListValuesList.add("Service Provider");
+		clientTypeFieldPickListValuesList.add("Corporate");
+		clientTypeFieldPickListValuesList.add("Government");
+		clientTypeFieldPickListValuesList.add("Institutional");
+		clientTypeFieldPickListValuesList.add("International");
+		clientTypeFieldPickListValuesList.add("Other");
+		clientTypeFieldPickListValuesList.add("Private");
+		clientTypeFieldPickListValuesList.add("REIT");
+		System.out.println("Client Type field pick list values  are:: " +clientTypeFieldPickListValuesList);
+	}
+
+	static ArrayList<String> addressInformationSectionFieldsList = new ArrayList<String>();
+	public void addressInformationFields() {
+		addressInformationSectionFieldsList.add("Shipping Street");
+		addressInformationSectionFieldsList.add("Shipping City");
+		addressInformationSectionFieldsList.add("Shipping Country");
+		addressInformationSectionFieldsList.add("Shipping State/Province");
+		addressInformationSectionFieldsList.add("Shipping Zip/Postal Code");
+		System.out.println("Address Information section fields  are:: " +addressInformationSectionFieldsList);
+	}
+
+	static ArrayList<String> localAddressInformationFieldsList = new ArrayList<String>();
+	public void localAddressInformationFields() {
+		localAddressInformationFieldsList.add("Local Billing Country");
+		localAddressInformationFieldsList.add("Local Billing Street");
+		localAddressInformationFieldsList.add("Local Billing City");
+		localAddressInformationFieldsList.add("Local Billing State/Province");
+		localAddressInformationFieldsList.add("Local Billing Zip/Postal Code");
+		localAddressInformationFieldsList.add("Local Shipping Country");
+		localAddressInformationFieldsList.add("Local Shipping Street");
+		localAddressInformationFieldsList.add("Local Shipping City");
+		localAddressInformationFieldsList.add("Local Shipping State/Province");
+		localAddressInformationFieldsList.add("Local Shipping Zip/Postal Code");
+		System.out.println("Local address infomation fields are:: " +localAddressInformationFieldsList);
+	}
+
+	static ArrayList<String> additionalInformationFieldsList = new ArrayList<String>();
+	public void additionalInformationFields() {
+		additionalInformationFieldsList.add("Investor Profile");
+		additionalInformationFieldsList.add("Lender Type");
+		additionalInformationFieldsList.add("D-U-N-S #");
+		additionalInformationFieldsList.add("Previous D-U-N-S #");
+		additionalInformationFieldsList.add("Integration Id");
+		additionalInformationFieldsList.add("Tax Code Label Type");
+		additionalInformationFieldsList.add("Status");
+		additionalInformationFieldsList.add("Reason for Inactivating");
+		additionalInformationFieldsList.add("Inactivation Date");
+		additionalInformationFieldsList.add("Account Source");
+		additionalInformationFieldsList.add("Ticker Symbol");
+		additionalInformationFieldsList.add("Annual Revenue");
+		additionalInformationFieldsList.add("Verified System Id");
+		additionalInformationFieldsList.add("Verified Date");
+		additionalInformationFieldsList.add("Source Created Date Time");
+		additionalInformationFieldsList.add("Source Last Updated Date Time");
+		System.out.println("Additional Information section fields are :: " +additionalInformationFieldsList);
+	}
+
+	static ArrayList<String> investorProfileFieldsList = new ArrayList<String>();
+	public void investorProfilePickListFields() {
+		investorProfileFieldsList.add("--None--");
+		investorProfileFieldsList.add("High-Net-Worth Individual/Private Syndicate");
+		investorProfileFieldsList.add("Insurance Company");
+		investorProfileFieldsList.add("Non-Listed Property Company/Developer (non-REIT)");
+		investorProfileFieldsList.add("Occupier");
+		investorProfileFieldsList.add("Pension Fund");
+		investorProfileFieldsList.add("Private Equity");
+		investorProfileFieldsList.add("Private REIT");
+		investorProfileFieldsList.add("Property Fund");
+		investorProfileFieldsList.add("Public Sector/Non-Profit/Corporate");
+		investorProfileFieldsList.add("REIT/Listed Property Company");
+		investorProfileFieldsList.add("Sovereign Wealth Fund");
+		System.out.println("Investor profile field pick list values  are:: " +investorProfileFieldsList);
+	}
+
+	static ArrayList<String> lenderTypeFieldsList = new ArrayList<String>();
+	public void lenderTypeFields() {
+		lenderTypeFieldsList.add("--None--");
+		lenderTypeFieldsList.add("Agency");
+		lenderTypeFieldsList.add("Bank");
+		lenderTypeFieldsList.add("Credit Company");
+		lenderTypeFieldsList.add("Life Insurance Company");
+		lenderTypeFieldsList.add("Pension Fund");
+		lenderTypeFieldsList.add("Private Investor");
+		lenderTypeFieldsList.add("REIT");
+		lenderTypeFieldsList.add("Savings and Loan");
+		lenderTypeFieldsList.add("Special Servicer");
+		lenderTypeFieldsList.add("Wall St./Securitization/Conduit/CMBS");
+		lenderTypeFieldsList.add("Other");
+		System.out.println("Lender Type field pick list values  are:: " +lenderTypeFieldsList);
+	}
+
+	static ArrayList<String> accountSourceTypeFieldsList = new ArrayList<String>();
+	public void accountSourceTypeFields() {
+		accountSourceTypeFieldsList.add("--None--");
+		accountSourceTypeFieldsList.add("Business Relationship");
+		accountSourceTypeFieldsList.add("Canvass/Cold Call");
+		accountSourceTypeFieldsList.add("CBRE Cross Sell");
+		accountSourceTypeFieldsList.add("CBRE Referral/Existing Mandate");
+		accountSourceTypeFieldsList.add("Direct Award");
+		accountSourceTypeFieldsList.add("Greenspace");
+		accountSourceTypeFieldsList.add("Non CBRE Referral");
+		accountSourceTypeFieldsList.add("Other");
+		accountSourceTypeFieldsList.add("Personal Relationship");
+		accountSourceTypeFieldsList.add("RFP/Proposal/Pitch");
+		accountSourceTypeFieldsList.add("Sales Management");
+		accountSourceTypeFieldsList.add("Speculative Marketing/Business Dev");
+		System.out.println("Account source Type field pick list values  are:: " +accountSourceTypeFieldsList);
+	}
+
+	static ArrayList<String> SICFieldsList = new ArrayList<String>();
+	public void SICSectionFields() {
+		SICFieldsList.add("NAICS Code");
+		SICFieldsList.add("SIC Code 1");
+		SICFieldsList.add("SIC Code 2");
+		SICFieldsList.add("SIC Code 3");
+		SICFieldsList.add("SIC Code 4");
+		SICFieldsList.add("SIC Code 5");
+		SICFieldsList.add("SIC Code 6");
+		SICFieldsList.add("TDB Industry Code");
+		SICFieldsList.add("NAICS Code Description");
+		SICFieldsList.add("SIC Code 1 Description");
+		SICFieldsList.add("SIC Code 2 Description");
+		SICFieldsList.add("SIC Code 3 Description");
+		SICFieldsList.add("SIC Code 4 Description");
+		SICFieldsList.add("SIC Code 5 Description");
+		SICFieldsList.add("SIC Code 6 Description");
+		SICFieldsList.add("TDB Industry Code Description");
+		System.out.println("SIC section fields are:: " +SICFieldsList);
+	}
+
+	static ArrayList<String> descriptionInformationFieldsList = new ArrayList<String>();
+	public void descriptionInformationFields() {
+		descriptionInformationFieldsList.add("Account Description");
+		System.out.println("Description Information section fields are:: " + descriptionInformationFieldsList);
+	}
+
+	static ArrayList<String> systemInformationFieldsList = new ArrayList<String>();
+	public void systemInformationFields() {
+		systemInformationFieldsList.add("CreatedBy");
+		systemInformationFieldsList.add("Record Type");
+		systemInformationFieldsList.add("Translation Status");
+		systemInformationFieldsList.add("Account Creator Country");
+		systemInformationFieldsList.add("DIG Review Comments");
+		systemInformationFieldsList.add("Hierarchy Code");
+		systemInformationFieldsList.add("Account Owner");
+		systemInformationFieldsList.add("Unique Account ID");
+		systemInformationFieldsList.add("Family Id Formula");
+		systemInformationFieldsList.add("Source System");
+		System.out.println("System information fields are:: " +systemInformationFieldsList);
+	}
+
+	static ArrayList<String> countryList = new ArrayList<String>();
+	public void countryList() {
+		countryList.add("--None--");
+		countryList.add("Afghanistan");
+		countryList.add("Aland Islands");
+		countryList.add("Albania");
+		countryList.add("Algeria");
+		countryList.add("American Samoa");
+		countryList.add("Andorra");
+		countryList.add("Angola");
+		countryList.add("Anguilla");
+		countryList.add("Antarctica");
+		countryList.add("Antigua And Barbuda");
+		countryList.add("Argentina");
+		countryList.add("Armenia");
+		countryList.add("Aruba");
+		countryList.add("Australia");
+		countryList.add("Austria");
+		countryList.add("Azerbaijan");
+		countryList.add("Bahamas");
+		countryList.add("Bahrain");
+		countryList.add("Bangladesh");
+		countryList.add("Barbados");
+		countryList.add("Belarus");
+		countryList.add("Belgium");
+		countryList.add("Belize");
+		countryList.add("Benin");
+		countryList.add("Bermuda");
+		countryList.add("Bhutan");
+		countryList.add("Bolivia");
+		countryList.add("Bosnia And Herzegovina");
+		countryList.add("Botswana");
+		countryList.add("Bouvet Island");
+		countryList.add("Brazil");
+		countryList.add("British Indian Ocean Territory");
+		countryList.add("Brunei Darussalam");
+		countryList.add("Bulgaria");
+		countryList.add("Burkina Faso");
+		countryList.add("Burundi");
+		countryList.add("Cambodia");
+		countryList.add("Cameroon");
+		countryList.add("Canada");
+		countryList.add("Cape Verde");
+		countryList.add("Cayman Islands");
+		countryList.add("Central African Republic");
+		countryList.add("Chad");
+		countryList.add("Chile");
+		countryList.add("China");
+		countryList.add("Christmas Island");
+		countryList.add("Cocos (Keeling) Islands");
+		countryList.add("Colombia");
+		countryList.add("Comoros");
+		countryList.add("Congo");
+		countryList.add("Congo, The Democratic Republic Of The");
+		countryList.add("Cook Islands");
+		countryList.add("Costa Rica");
+		countryList.add("Cote D'Ivoire");
+		countryList.add("Croatia");
+		countryList.add("Cuba");
+		countryList.add("Cyprus");
+		countryList.add("Czech Republic");
+		countryList.add("Denmark");
+		countryList.add("Djibouti");
+		countryList.add("Dominica");
+		countryList.add("Dominican Republic");
+		countryList.add("Ecuador");
+		countryList.add("Egypt");
+		countryList.add("El Salvador");
+		countryList.add("Equatorial Guinea");
+		countryList.add("Eritrea");
+		countryList.add("Estonia");
+		countryList.add("Ethiopia");
+		countryList.add("Falkland Islands (Malvinas)");
+		countryList.add("Faroe Islands");
+		countryList.add("Fiji");
+		countryList.add("Finland");
+		countryList.add("France");
+		countryList.add("French Guiana");
+		countryList.add("French Polynesia");
+		countryList.add("French Southern Territories");
+		countryList.add("Gabon");
+		countryList.add("Gambia");
+		countryList.add("Georgia");
+		countryList.add("Germany");
+		countryList.add("Ghana");
+		countryList.add("Gibraltar");
+		countryList.add("Greece");
+		countryList.add("Greenland");
+		countryList.add("Grenada");
+		countryList.add("Guadeloupe");
+		countryList.add("Guam");
+		countryList.add("Guatemala");
+		countryList.add("Guernsey");
+		countryList.add("Guinea");
+		countryList.add("Guinea-Bissau");
+		countryList.add("Guyana");
+		countryList.add("Haiti");
+		countryList.add("Heard Island And Mcdonald Islands");
+		countryList.add("Holy See (Vatican City State)");
+		countryList.add("Honduras");
+		countryList.add("Hong Kong");
+		countryList.add("Hungary");
+		countryList.add("Iceland");
+		countryList.add("India");
+		countryList.add("Indonesia");
+		countryList.add("Iran, Islamic Republic Of");
+		countryList.add("Iraq");
+		countryList.add("Ireland");
+		countryList.add("Isle Of Man");
+		countryList.add("Israel");
+		countryList.add("Italy");
+		countryList.add("Jamaica");
+		countryList.add("Japan");
+		countryList.add("Jersey");
+		countryList.add("Jordan");
+		countryList.add("Kazakhstan");
+		countryList.add("Kenya");
+		countryList.add("Kiribati");
+		countryList.add("Korea, Democratic People'S Republic Of");
+		countryList.add("Korea, Republic Of");
+		countryList.add("Kuwait");
+		countryList.add("Kyrgyzstan");
+		countryList.add("Lao People'S Democratic Republic");
+		countryList.add("Latvia");
+		countryList.add("Lebanon");
+		countryList.add("Lesotho");
+		countryList.add("Liberia");
+		countryList.add("Libyan Arab Jamahiriya");
+		countryList.add("Liechtenstein");
+		countryList.add("Lithuania");
+		countryList.add("Luxembourg");
+		countryList.add("Macau");
+		countryList.add("Macedonia, The Former Yugoslav Republic Of");
+		countryList.add("Madagascar");
+		countryList.add("Malawi");
+		countryList.add("Malaysia");
+		countryList.add("Maldives");
+		countryList.add("Mali");
+		countryList.add("Malta");
+		countryList.add("Marshall Islands");
+		countryList.add("Martinique");
+		countryList.add("Mauritania");
+		countryList.add("Mauritius");
+		countryList.add("Mayotte");
+		countryList.add("Mexico");
+		countryList.add("Micronesia, Federated States Of");
+		countryList.add("Moldova, Republic Of");
+		countryList.add("Monaco");
+		countryList.add("Mongolia");
+		countryList.add("Montserrat");
+		countryList.add("Morocco");
+		countryList.add("Mozambique");
+		countryList.add("Myanmar");
+		countryList.add("Namibia");
+		countryList.add("Nauru");
+		countryList.add("Nepal");
+		countryList.add("Netherlands");
+		countryList.add("Netherlands Antilles");
+		countryList.add("New Caledonia");
+		countryList.add("New Zealand");
+		countryList.add("Nicaragua");
+		countryList.add("Niger");
+		countryList.add("Nigeria");
+		countryList.add("Niue");
+		countryList.add("Norfolk Island");
+		countryList.add("Northern Mariana Islands");
+		countryList.add("Norway");
+		countryList.add("Oman");
+		countryList.add("Pakistan");
+		countryList.add("Palau");
+		countryList.add("Palestinian Territory, Occupied");
+		countryList.add("Panama");
+		countryList.add("Papua New Guinea");
+		countryList.add("Paraguay");
+		countryList.add("Peru");
+		countryList.add("Philippines");
+		countryList.add("Pitcairn");
+		countryList.add("Poland");
+		countryList.add("Portugal");
+		countryList.add("Puerto Rico");
+		countryList.add("Qatar");
+		countryList.add("Reunion");
+		countryList.add("Romania");
+		countryList.add("Russian Federation");
+		countryList.add("Rwanda");
+		countryList.add("Saint Helena");
+		countryList.add("Saint Kitts And Nevis");
+		countryList.add("Saint Lucia");
+		countryList.add("Saint Pierre And Miquelon");
+		countryList.add("Saint Vincent And The Grenadines");
+		countryList.add("Samoa");
+		countryList.add("San Marino");
+		countryList.add("Sao Tome And Principe");
+		countryList.add("Saudi Arabia");
+		countryList.add("Senegal");
+		countryList.add("Serbia And Montenegro");
+		countryList.add("Seychelles");
+		countryList.add("Sierra Leone");
+		countryList.add("Singapore");
+		countryList.add("Slovakia");
+		countryList.add("Slovenia");
+		countryList.add("Solomon Islands");
+		countryList.add("Somalia");
+		countryList.add("South Africa");
+		countryList.add("South Georgia And The South Sandwich Islands");
+		countryList.add("Spain");
+		countryList.add("Sri Lanka");
+		countryList.add("Sudan");
+		countryList.add("Suriname");
+		countryList.add("Svalbard And Jan Mayen");
+		countryList.add("Swaziland");
+		countryList.add("Sweden");
+		countryList.add("Switzerland");
+		countryList.add("Syrian Arab Republic");
+		countryList.add("Taiwan");
+		countryList.add("Tajikistan");
+		countryList.add("Tanzania, United Republic Of");
+		countryList.add("Thailand");
+		countryList.add("Timor-Leste");
+		countryList.add("Togo");
+		countryList.add("Tokelau");
+		countryList.add("Tonga");
+		countryList.add("Trinidad And Tobago");
+		countryList.add("Tunisia");
+		countryList.add("Turkey");
+		countryList.add("Turkmenistan");
+		countryList.add("Turks And Caicos Islands");
+		countryList.add("Tuvalu");
+		countryList.add("Uganda");
+		countryList.add("Ukraine");
+		countryList.add("United Arab Emirates");
+		countryList.add("United Kingdom");
+		countryList.add("United States");
+		countryList.add("United States Minor Outlying Islands");
+		countryList.add("Uruguay");
+		countryList.add("Uzbekistan");
+		countryList.add("Vanuatu");
+		countryList.add("Venezuela");
+		countryList.add("Viet Nam");
+		countryList.add("Virgin Islands, British");
+		countryList.add("Virgin Islands, U.S.");
+		countryList.add("Wallis And Futuna");
+		countryList.add("Western Sahara");
+		countryList.add("Yemen");
+		countryList.add("Zambia");
+		countryList.add("Zimbabwe");
+		System.out.println("Country List are:::+ " + countryList);
+	}
+
+	public void verifyAccountsPageLayout() {
+		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
+		Utility_Functions.xClick(driver, menu_Accounts, true);
+		Utility_Functions.timeWait(1);
+		report.updateTestLog("Verify New Account Page Layout ","Verifying Accounts is Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, newAccounts, 3);
+		Utility_Functions.xClick(driver, newAccounts, true);
+		Utility_Functions.timeWait(2);
+		report.updateTestLog("Verify New Account Page Layout  ","Verifying New Accounts Page is Displayed  ",  Status.PASS);
+		Utility_Functions.xSwitchtoFrame(driver, viewAllFieldsButton);
+		Utility_Functions.xWaitForElementPresent(driver, viewAllFieldsButton, 5);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.xClick(driver, viewAllFieldsButton, true);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(5);
+		List<WebElement> accountInformationSectionList = driver.findElements(By.xpath("//h2[text()='Account Information']/parent::div/parent::div/div//label[@class='slds-form-element__label']"));
+		int count1 = 0, i1 = 0;
+		String fieldsArray2[] = new String[accountInformationSectionList.size()];
+		System.out.println(accountInformationSectionList.size());
+
+		try {
+			newAccountInformationSection();
+			for (WebElement element2 : accountInformationSectionList) {
+				System.out.println(element2.getText());
+				fieldsArray2[i1] = element2.getText();
+				if (fieldsArray2[i1].contains(newAccountInformationSectionList.get(i1))) {
+					report.updateTestLog("Verify New Account Page Layout ",
+							"Accounts Details  page is having the " + fieldsArray2[i1] + " fields ",
+							Status.PASS);
+					count1++;
+				}
+				i1++;
+			}
+			System.out.println(count1);
+			if (count1 != 17) {
+				report.updateTestLog("Verify New Account Page Layout ", "All fields are not present in the Account Information section ", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify New Account Page Layout ", "All fields are present in the Account Information section", Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		List<WebElement> legalStatusPickList = driver.findElements(
+				By.xpath("//select[contains(@id,'LegalStatus')]/option"));
+		int count2 = 0, i2 = 0;
+		String fieldsArray[] = new String[legalStatusPickList.size()];
+		System.out.println(legalStatusPickList.size());
+		try {
+			legalStatusPickList();
+			for (WebElement element : legalStatusPickList) {
+				System.out.println(element.getText());
+				fieldsArray[i2] = element.getText();
+				if (fieldsArray[i2].contains(legalStatusPickListValuesList.get(i2))) {
+					report.updateTestLog("Verify New Account Page Layout ", "Accounts Details  page is having the " + fieldsArray[i2] + " fields ",
+							Status.PASS);
+					count2++;
+				}
+				i2++;
+			}
+			System.out.println(count2);
+			if (count2 != 8) {
+				report.updateTestLog("Verify New Account Page Layout ", "All the pick list values are not present in the Legal Status Pick List field ", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify New Account Page Layout ", "All the pick list values are present in the Legal Status Pick List field", Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		Utility_Functions.xWaitForElementPresent(driver, legalStatusValue, 3);
+		Utility_Functions.xClick(driver,legalStatusValue, true);
+		if(!migratedAccount.isSelected()){ 
+			Utility_Functions.xClick(driver,migratedAccount, true);
+			System.out.println("Migrated Account check box is checked");
+			report.updateTestLog("Verify New Account Page Layout","Verifying the migrated account check box is checked or else checking it",  Status.PASS);
+		} else{
+			System.out.println("Migrated Account checkbox is not checked");
+			report.updateTestLog("Verify New Account Page Layout","Verifying the migrated account check box is checked or not ",  Status.FAIL);
+		}
+		Utility_Functions.xWaitForElementPresent(driver, accountNameQuickCreate, 5);
+		String value = Utility_Functions.xGenerateAlphaNumericString();
+		String accountName = value + "Test Automation";
+		Utility_Functions.xSendKeys(driver, accountNameQuickCreate, accountName);
+		report.updateTestLog("Verify Account Creation With Required Fields ","Verifying Account name required field is populated ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, billingStreetQuickCreate, 5);
+		Utility_Functions.xSendKeys(driver, billingStreetQuickCreate, "2100 Ross Ave");
+		report.updateTestLog("Verify Account Creation With Required Fields ","Verifying Billing Street required field is populated ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, billingCityQuickCreate, 5);
+		Utility_Functions.xSendKeys(driver, billingCityQuickCreate, "Dallas");
+		report.updateTestLog("Verify Account Creation With Required Fields ","Verifying Billing City required field is populated ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, billingCountryQuickCreate, 3);
+		Utility_Functions.xClick(driver, billingCountryQuickCreate, true);
+		Utility_Functions.xWaitForElementPresent(driver, billingCountryUnitedStatesQuickCreate, 3);
+		Utility_Functions.xClick(driver, billingCountryUnitedStatesQuickCreate, true);
+		report.updateTestLog("Verify Account Creation With Required Fields ","Verifying Billing Country required field is populated ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, billingStateQuickCreate, 3);
+		Utility_Functions.xClick(driver, billingStateQuickCreate, true);
+		Utility_Functions.xWaitForElementPresent(driver, billingStateTexasQuickCreate, 3);
+		Utility_Functions.xClick(driver, billingStateTexasQuickCreate, true);
+		report.updateTestLog("Verify Account Creation With Required Fields ","Verifying Billing State required field is populated ",  Status.PASS);
+		Utility_Functions.timeWait(2);
+		if (dataTable.getData("General_Data", "TC_ID").contains("AMER")) {			
+			Utility_Functions.xWaitForElementPresent(driver,amerIndustry, 5);
+			//Utility_Functions.xClick(driver,amerIndustry, true);
+			Utility_Functions.timeWait(2);
+			//Utility_Functions.xWaitForElementPresent(driver,amerIndustryValue, 3);
+			Utility_Functions.xClick(driver, amerIndustryValue, true);
+		} else if (dataTable.getData("General_Data", "TC_ID").contains("EMEA")) {
+			Utility_Functions.xWaitForElementPresent(driver,industry, 3);
+			Utility_Functions.xClick(driver, industry, true);
+			Utility_Functions.xWaitForElementPresent(driver,industryValue, 3);
+			Utility_Functions.xClick(driver, industryValue, true);
+		}
+		Utility_Functions.xWaitForElementPresent(driver, website, 3);
+		Utility_Functions.xSendKeys(driver, website, dataTable.getData("General_Data", "Email"));
+		Utility_Functions.xWaitForElementPresent(driver,phone, 3);
+		Utility_Functions.xSendKeys(driver,phone, dataTable.getData("General_Data", "Phone"));
+		Utility_Functions.xWaitForElementPresent(driver,accountFax, 3);
+		Utility_Functions.xSendKeys(driver, accountFax, dataTable.getData("General_Data", "Phone"));
+		Utility_Functions.xWaitForElementPresent(driver, localAccountName, 3);
+		Utility_Functions.xSendKeys(driver,localAccountName, dataTable.getData("General_Data", "Account Name"));
+		List<WebElement> accountSegmentationSectionList = driver.findElements(By.xpath("//h2[text()='Account Segmentation']/parent::div/parent::div/div//label[@class='slds-form-element__label']"));
+		int count3 = 0, i3 = 0;
+		String fieldsArray3[] = new String[accountSegmentationSectionList.size()];
+		System.out.println(accountSegmentationSectionList.size());
+		try {
+			accountSegmentationFields();
+			for (WebElement element3 : accountSegmentationSectionList) {
+				System.out.println(element3.getText());
+				fieldsArray3[i3] = element3.getText();
+				if (fieldsArray3[i3].contains(accountSegmentationFieldsList.get(i3))) {
+					report.updateTestLog("Verify New Account Page Layout ",
+							"Accounts segmentation section is having the " + fieldsArray3[i3] + " fields ",
+							Status.PASS);
+					count3++;
+				}
+				i3++;
+			}
+			System.out.println(count3);
+			if (count3 != 1) {
+				report.updateTestLog("Verify New Account Page Layout ",
+						"All fields are not present in the Account Segmentation section ", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify New Account Page Layout ",
+						"All fields are present in the Account Segmentation section", Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		/*List<WebElement> clientTypePickList = driver.findElements(By.xpath("//table[@class='multiSelectPicklistTable']//select[contains(@title,'Client Type')]/option"));
+		int count4 = 0, i4 = 0;
+		String fieldsArray4[] = new String[clientTypePickList.size()];
+		System.out.println(clientTypePickList.size());
+
+		try {
+			clientTypeFieldPickList();
+			for (WebElement element4 : clientTypePickList) {
+				System.out.println(element4.getText());
+				fieldsArray4[i4] = element4.getText();
+				if (fieldsArray4[i4].contains(clientTypeFieldPickListValuesList.get(i4))) {
+					report.updateTestLog("Verify New Account Page Layout ",
+							"Client Type pick list is having the " + fieldsArray4[i4] + " values ",
+							Status.PASS);
+					count4++;
+				}
+				i4++;
+			}
+			System.out.println(count4);
+			if (count4 != 12) {
+				report.updateTestLog("Verify New Account Page Layout ",
+						"All the values are not present in the Client type pick list ", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify New Account Page Layout ",
+						"All the values are not present in the client type pick list", Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}*/
+
+		List<WebElement> addressInformationSectionList = driver.findElements(By.xpath("//h2[text()='Address Information']/parent::div/parent::div/div//label[@class='slds-form-element__label']"));
+		int count5 = 0, i5 = 0;
+		String fieldsArray5[] = new String[addressInformationSectionList.size()];
+		System.out.println(addressInformationSectionList.size());
+		try {
+			addressInformationFields();
+			for (WebElement element5 : addressInformationSectionList) {
+				System.out.println(element5.getText());
+				fieldsArray5[i5] = element5.getText();
+				if (fieldsArray5[i5].contains(addressInformationSectionFieldsList.get(i5))) {
+					report.updateTestLog("Verify New Account Page Layout ",
+							"Address Information section is having the " + fieldsArray5[i5] + " fields ",
+							Status.PASS);
+					count5++;
+				}
+				i5++;
+			}
+			System.out.println(count5);
+			if (count5 != 5) {
+				report.updateTestLog("Verify New Account Page Layout ",
+						"All fields are not present in the Address Information section ", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify New Account Page Layout ",
+						"All fields are present in the Address Information section", Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		List<WebElement> localAddressInformationSectionList = driver.findElements(
+				By.xpath("//h2[text()='Local Address Information']/parent::div/parent::div/div//label[@class='slds-form-element__label']"));
+		int count6 = 0, i6 = 0;
+		String fieldsArray6[] = new String[localAddressInformationSectionList.size()];
+		System.out.println(localAddressInformationSectionList.size());
+		try {
+			localAddressInformationFields();
+			for (WebElement element6 : localAddressInformationSectionList) {
+				System.out.println(element6.getText());
+				fieldsArray6[i6] = element6.getText();
+				if (fieldsArray6[i6].contains(localAddressInformationFieldsList.get(i6))) {
+					report.updateTestLog("Verify New Account Page Layout ",
+							"Local Address Information section is having the " + fieldsArray6[i6] + " fields ",
+							Status.PASS);
+					count6++;
+				}
+				i6++;
+			}
+			System.out.println(count6);
+			if (count6 != 10) {
+				report.updateTestLog("Verify New Account Page Layout ",
+						"All fields are not present in the Local Address Information section ", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify New Account Page Layout ",
+						"All fields are present in the Local Address Information section", Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		List<WebElement> countriesList = driver.findElements(By.xpath("//select[contains(@id,'Local_Billing_Country__c')]/option"));
+		int count14 = 0, i14 = 0;
+		String fieldsArray14[] = new String[countriesList.size()];
+		System.out.println(countriesList.size());
+
+		try {
+			countryList();
+			for (WebElement element14 : countriesList) {
+				System.out.println(element14.getText());
+				fieldsArray14[i14] = element14.getText();
+				if (fieldsArray14[i14].contains(countryList.get(i14))) {
+					report.updateTestLog("Verify New Account Page Layout ",
+							"Local Address Information section is having the " + fieldsArray14[i14] + " fields ",
+							Status.PASS);
+					count14++;
+				}
+				i14++;
+			}
+			System.out.println(count14);
+			if (count14!= 244) {
+				report.updateTestLog("Verify New Account Page Layout ",
+						"All countries are not present in the local Billing Countries section ", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify New Account Page Layout ",
+						"All countries are present in the local Billing countries section", Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		Utility_Functions.timeWait(5);
+		Utility_Functions.xWaitForElementPresent(driver, localBillingCountry, 3);
+		Utility_Functions.xClick(driver, localBillingCountry, true);
+		Utility_Functions.xWaitForElementPresent(driver, localBillingCountryValue, 3);
+		Utility_Functions.xClick(driver, localBillingCountryValue, true);
+		Utility_Functions.xWaitForElementPresent(driver,localBillingStreet, 3);
+		Utility_Functions.xSendKeys(driver, localBillingStreet, dataTable.getData("General_Data", "Street"));
+		Utility_Functions.xWaitForElementPresent(driver, localBillingState, 3);
+		Utility_Functions.xClick(driver,localBillingState, true);
+		Utility_Functions.xWaitForElementPresent(driver, localBillingStateValue, 3);
+		Utility_Functions.xClick(driver, localBillingStateValue, true);
+		Utility_Functions.xWaitForElementPresent(driver, localBillingCity, 3);
+		Utility_Functions.xSendKeys(driver, localBillingCity, dataTable.getData("General_Data", "City"));
+		Utility_Functions.xWaitForElementPresent(driver, localBillingZipCode, 3);	
+		Utility_Functions.xSendKeys(driver, localBillingZipCode, dataTable.getData("General_Data", "Zipcode"));
+		Utility_Functions.xWaitForElementPresent(driver, localShippingCountry, 3);
+		//Utility_Functions.xClick(driver, localShippingCountry, true);
+		//Utility_Functions.xWaitForElementPresent(driver, localShippingCountryValue, 3);
+		Utility_Functions.xWaitForElementPresent(driver, localShippingCountry, 3);
+		Utility_Functions.xClick(driver, localShippingCountryValue, true);
+		Utility_Functions.xWaitForElementPresent(driver, localShippingState, 3);
+		Utility_Functions.xClick(driver, localShippingState, true);
+		Utility_Functions.xWaitForElementPresent(driver, localShippingStateValue, 3);
+		Utility_Functions.xClick(driver, localShippingStateValue, true);
+		Utility_Functions.xWaitForElementPresent(driver,localShippingStreet, 3);
+		Utility_Functions.xSendKeys(driver, localShippingStreet, dataTable.getData("General_Data", "Street"));
+		Utility_Functions.xWaitForElementPresent(driver, localShippingCity, 3);
+		Utility_Functions.xSendKeys(driver, localShippingCity, dataTable.getData("General_Data", "City"));
+		Utility_Functions.xWaitForElementPresent(driver, localShippingZipCode, 3);
+		Utility_Functions.xSendKeys(driver, localShippingZipCode, dataTable.getData("General_Data", "Zipcode"));
+		List<WebElement> additionalInformationSectionList = driver.findElements(
+				By.xpath("//h2[text()='Additional Information']/parent::div/parent::div/div//label[@class='slds-form-element__label']"));
+		int count7 = 0, i7 = 0;
+		String fieldsArray7[] = new String[additionalInformationSectionList.size()];
+		System.out.println(additionalInformationSectionList.size());
+
+		try {
+			additionalInformationFields();
+			for (WebElement element7 : additionalInformationSectionList) {
+				System.out.println(element7.getText());
+				fieldsArray7[i7] = element7.getText();
+				if (fieldsArray7[i7].contains(additionalInformationFieldsList.get(i7))) {
+					report.updateTestLog("Verify New Account Page Layout ",
+							"Additional Information section is having the " + fieldsArray7[i7] + " fields ",
+							Status.PASS);
+					count7++;
+				}
+				i7++;
+			}
+			System.out.println(count7);
+			if (count7 != 16) {
+				report.updateTestLog("Verify New Account Page Layout ",
+						"All fields are not present in the Additional Information section ", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify New Account Page Layout ",
+						"All fields are present in the Additional Information section", Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		List<WebElement> investorProfileFieldPickList = driver.findElements(By.xpath("//select[contains(@id,'Investor_Profile__c')]/option"));
+		int count8 = 0, i8 = 0;
+		String fieldsArray8[] = new String[investorProfileFieldPickList.size()];
+		System.out.println(investorProfileFieldPickList.size());
+		try {
+			investorProfilePickListFields();
+			for (WebElement element8 :investorProfileFieldPickList ) {
+				System.out.println(element8.getText());
+				fieldsArray8[i8] = element8.getText();
+				if (fieldsArray8[i8].contains(investorProfileFieldsList.get(i8))) {
+					report.updateTestLog("Verify New Account Page Layout ",
+							"Investor Profile Pick list field is having the " + fieldsArray8[i8] + " values ",
+							Status.PASS);
+					count8++;
+				}
+				i8++;
+			}
+			System.out.println(count8);
+			if (count8 != 12) {
+				report.updateTestLog("Verify New Account Page Layout ",
+						"All the pick list values are not present in the Investor Profile Pick List field ", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify New Account Page Layout ",
+						"All the pick list values are present in the Investor Profile Pick List field", Status.PASS);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		Utility_Functions.xWaitForElementPresent(driver,industryValue , 3);
+		Utility_Functions.xClick(driver, industryValue, true);
+		Utility_Functions.xWaitForElementPresent(driver,selectIndustryValue , 3);
+		Utility_Functions.xClick(driver,selectIndustryValue, true);
+		List<WebElement> lenderTypeFieldPickList = driver.findElements(By.xpath("//select[contains(@id,'Lender_Type__c')]/option"));
+		int count9 = 0, i9 = 0;
+		String fieldsArray9[] = new String[lenderTypeFieldPickList.size()];
+		System.out.println(lenderTypeFieldPickList.size());
+		try {
+			lenderTypeFields();
+			for (WebElement element9 :lenderTypeFieldPickList ) {
+				System.out.println(element9.getText());
+				fieldsArray9[i9] = element9.getText();
+				if (fieldsArray9[i9].contains(lenderTypeFieldsList.get(i9))) {
+					report.updateTestLog("Verify New Account Page Layout ",
+							"Lender Type Pick List field is having the " + fieldsArray9[i9] + " values ",
+							Status.PASS);
+					count9++;
+				}
+				i9++;
+			}
+			System.out.println(count9);
+			if (count9 != 12) {
+				report.updateTestLog("Verify New Account Page Layout ",
+						"All the pick list values are not present in the Lender Type Pick List field ", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify New Account Page Layout ",
+						"All the pick list values are present in the Lender Type Pick List field", Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		Utility_Functions.xWaitForElementPresent(driver,lenderType, 3);
+		Utility_Functions.xClick(driver,lenderType, true);
+		Utility_Functions.xWaitForElementPresent(driver,selectLenderType, 3);
+		Utility_Functions.xClick(driver,selectLenderType, true);
+		List<WebElement> accountSourceFieldPickList = driver.findElements(By.xpath("//select[contains(@id,'AccountSource')]/option"));
+		int count10 = 0, i10 = 0;
+		String fieldsArray10[] = new String[accountSourceFieldPickList.size()];
+		System.out.println(accountSourceFieldPickList.size());
+		try {
+			accountSourceTypeFields();
+			for (WebElement element10 :accountSourceFieldPickList ) {
+				System.out.println(element10.getText());
+				fieldsArray10[i10] = element10.getText();
+				if (fieldsArray10[i10].contains(accountSourceTypeFieldsList.get(i10))) {
+					report.updateTestLog("Verify New Account Page Layout ",
+							"Accounts Details  page is having the " + fieldsArray10[i10] + " fields ",
+							Status.PASS);
+					count10++;
+				}
+				i10++;
+			}
+			System.out.println(count10);
+			if (count10 != 13) {
+				report.updateTestLog("Verify New Account Page Layout ", "All the pick list values are not present in the Account Source Pick List field ", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify New Account Page Layout ", "All the pick list values are present in the Account Source Pick List field", Status.PASS);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		Utility_Functions.xWaitForElementPresent(driver,accountSourceField, 3);
+		Utility_Functions.xClick(driver,accountSourceField, true);
+		Utility_Functions.xClick(driver, tickerSymbol, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementPresent(driver,tickerSymbol, 5);
+		Utility_Functions.xSendKeys(driver, tickerSymbol, "Test Activity Created by Automation_" + Utility_Functions.xGenerateAlphaNumericString());
+		Utility_Functions.xWaitForElementPresent(driver,annualRevenue, 3);
+		Utility_Functions.xSendKeys(driver,naicsCode, dataTable.getData("General_Data", "Annual Revenue"));
+		List<WebElement> SICSectionList = driver.findElements(By.xpath("//h2[text()='SIC/NAICS Codes']/parent::div/parent::div/div//label[@class='slds-form-element__label']"));
+		int count11 = 0, i11 = 0;
+		String fieldsArray11[] = new String[SICSectionList.size()];
+		System.out.println(SICSectionList.size());
+		try {
+			SICSectionFields();
+			for (WebElement element11 : SICSectionList) {
+				System.out.println(element11.getText());
+				fieldsArray11[i11] = element11.getText();
+				if (fieldsArray11[i11].contains(SICFieldsList.get(i11))) {
+					report.updateTestLog("Verify New Account Page Layout ",
+							"SIC section is having the " + fieldsArray11[i11] + " fields ",
+							Status.PASS);
+					count11++;
+				}
+				i11++;
+			}
+			System.out.println(count11);
+			if (count11 != 16) {
+				report.updateTestLog("Verify New Account Page Layout ", "All fields are not present in the SIC section ", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify New Account Page Layout ", "All fields are present in the SIC section", Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		Utility_Functions.xWaitForElementPresent(driver,naicsCode, 3);
+		Utility_Functions.xSendKeys(driver,naicsCode, dataTable.getData("General_Data", "NAICS Code"));
+		Utility_Functions.xWaitForElementPresent(driver,sicCode1, 3);
+		Utility_Functions.xSendKeys(driver,sicCode3, dataTable.getData("General_Data", "SIC Code1"));
+		Utility_Functions.xWaitForElementPresent(driver,sicCode2, 3);
+		Utility_Functions.xSendKeys(driver,sicCode3, dataTable.getData("General_Data", "SIC Code2"));
+		Utility_Functions.xWaitForElementPresent(driver,sicCode3, 3);
+		Utility_Functions.xSendKeys(driver,sicCode3, dataTable.getData("General_Data", "SIC Code3"));
+		Utility_Functions.xWaitForElementPresent(driver, sicCode4, 3);	
+		Utility_Functions.xSendKeys(driver,sicCode4, dataTable.getData("General_Data", "SIC Code4"));
+		Utility_Functions.xWaitForElementPresent(driver,sicCode5, 3);
+		Utility_Functions.xSendKeys(driver,sicCode5, dataTable.getData("General_Data", "SIC Code5"));
+		Utility_Functions.xWaitForElementPresent(driver, sicCode6, 3);	
+		Utility_Functions.xSendKeys(driver,sicCode6, dataTable.getData("General_Data", "SIC Code6"));
+		Utility_Functions.xWaitForElementPresent(driver,accountDescription, 5);
+		String sb = "Twinkle, twinkle, little star,"
+				+ "How I wonder what you are."
+				+ "Up above the world so high,"
+				+ "Like a diamond in the sky."
+
+				+"When the blazing sun is gone,"
+				+"When the nothing shines upon,"
+				+"Then you show your little light,"
+				+"Twinkle, twinkle, all the night."
+
+				+"Then the traveler in the dark,"
+				+"Thanks you for your tiny spark,"
+				+"He could not see which way to go,"
+				+"If you did not twinkle so." 
+
+				+"In the dark blue sky you keep,"
+				+"And often through my curtains peep,"
+				+"For you never shut your eye,"
+				+"Till the sun is in the sky." 
+
+				+"As your bright and tiny spark,"
+				+"Lights the traveler in the dark."
+				+"Though I know not what you are,"
+				+"Twinkle, twinkle, little star." 
+
+				+"Twinkle, twinkle, little star."
+				+"How I wonder what you are."
+				+"Up above the world so high,"
+				+"Like a diamond in the sky." 
+
+				+"Twinkle, twinkle, little star."
+				+"How I wonder what you are."
+				+"How I wonder what you are.  ";
+
+		System.out.println(sb);
+		Utility_Functions.xSendKeys(driver, accountDescription, sb);
+		List<WebElement> descriptionInformationSectionList = driver.findElements(By.xpath("//h2[text()='Description Information']/parent::div/parent::div/div//label[@class='slds-form-element__label']"));
+		int count12 = 0, i12 = 0;
+		String fieldsArray12[] = new String[descriptionInformationSectionList.size()];
+		System.out.println(descriptionInformationSectionList.size());
+		try {
+			descriptionInformationFields();
+			for (WebElement element12 : descriptionInformationSectionList) {
+				System.out.println(element12.getText());
+				fieldsArray12[i12] = element12.getText();
+				if (fieldsArray12[i12].contains(descriptionInformationFieldsList.get(i12))) {
+					report.updateTestLog("Verify New Account Page Layout ",
+							"Description Information section is having the " + fieldsArray12[i12] + " fields ",
+							Status.PASS);
+					count12++;
+				}
+				i12++;
+			}
+			System.out.println(count12);
+			if (count12!= 1) {
+				report.updateTestLog("Verify New Account Page Layout ", "All fields are not present in the Description Information section ", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify New Account Page Layout ", "All fields are present in the Description Information section", Status.PASS);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		List<WebElement> systemInformationSectionList = driver.findElements(By.xpath("//h2[text()='System Information']/parent::div/parent::div/div//label[@class='slds-form-element__label']"));
+		int count13 = 0, i13 = 0;
+		String fieldsArray13[] = new String[systemInformationSectionList.size()];
+		System.out.println(systemInformationSectionList.size());
+		try {
+			systemInformationFields();
+			for (WebElement element13 : systemInformationSectionList) {
+				System.out.println(element13.getText());
+				fieldsArray13[i13] = element13.getText();
+				if (fieldsArray13[i13].contains(systemInformationFieldsList.get(i13))) {
+					report.updateTestLog("Verify New Account Page Layout ",
+							"System Information section is having the " + fieldsArray13[i13] + " fields ", Status.PASS);
+					count13++;
+				}
+				i13++;
+			}
+			System.out.println(count13);
+			if (count13!= 10) {
+				report.updateTestLog("Verify New Account Page Layout ",	"All fields are not present in the System Information section ", Status.FAIL);
+			} else {
+				report.updateTestLog("Verify New Account Page Layout ", "All fields are present in the System Information section", Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		Utility_Functions.xWaitForElementPresent(driver, saveQuickCreate, 3);
+		Utility_Functions.xClick(driver, saveQuickCreate, true);
 	}
 }
 

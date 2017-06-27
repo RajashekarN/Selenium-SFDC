@@ -168,4 +168,57 @@ public class BC_Salesforce_LeadsPage extends ReusableLibrary {
 	public void bc_verifyLeadsNewCustomPage() {
 		sfLeadsPage.verifyLeadsNewCustomPage();
 	}
+	/**
+	 * Validating the Convert Leads page with Direct Line and Private Notes
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_convertLeadWithDirectLineAndPrivateNote() {
+		sfLeadsPage.convertLeadWithDirectLineAndPrivateNote();
+	}
+	/**
+	 * Validating the Convert Leads page with Private Note
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_convertLeadWithPrivateNote() {
+		sfLeadsPage.convertLeadWithPrivateNote();
+	}
+	
+	/**
+	 * Validating the Convert Leads page with Email
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_convertLeadWithEmail() {
+		sfLeadsPage.convertLeadWithEmail();
+	}
+	
+	/**
+	 * Validating the Leads landing page
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_leadsVerifyLandingPage() {
+		sfLeadsPage.leadsVerifyLandingPage();
+	}
+	
+	/**
+	 * Validating the Leads sharing functionality Page
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_leadsSharingFunctionality() {
+		sfLeadsPage.leadsSharingFunctionality();
+	}
 }

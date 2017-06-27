@@ -149,4 +149,23 @@ public class BC_Salesforce_ContactsPage extends ReusableLibrary {
 	public void bc_newContactPageLayoutFields()throws InterruptedException{
 		sfContactsPage.newContactPageLayoutFields();
 	}
+	/**
+	 * Validating the Activity Sent Reminder functionality for the Contacts
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+	
+	public void bc_verifyContactActivityReminderSentFunctionality()throws InterruptedException{
+		sfContactsPage.verifyContactActivityReminderSentFunctionality();
+	}
+	/**
+	 * Validating the Contacts Landing page
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+	public void bc_contactsVerifyLandingPage()throws InterruptedException{
+		sfContactsPage.contactsVerifyLandingPage();
+	}
 }

@@ -274,4 +274,44 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 	public void bc_verifyAccountsViewHierarchy() throws InterruptedException {
 		sfAccountsPage.verifyAccountsViewHierarchy();
 	}
+	
+	/**
+	 * Validating the Accounts Details Page 
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyAccountsLandingPageDetailsLayout() throws InterruptedException {
+		sfAccountsPage.verifyAccountsLandingPageDetailsLayout();
+	}
+	
+	/**
+	 * Validating the Accounts Details Page Manager
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyAccountsLandingPageDetailsLayoutManager() throws InterruptedException {
+		sfAccountsPage.verifyAccountsLandingPageDetailsLayoutManager();
+	}
+	
+	/**
+	 * Validating the Accounts Details Page Broker
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyAccountsLandingPageDetailsLayoutBroker() throws InterruptedException {
+		sfAccountsPage.verifyAccountsLandingPageDetailsLayoutBroker();
+	}
+	
+	/**
+	 * Validating the New Accounts Page Layout
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyAccountsPageLayout() throws InterruptedException {
+		sfAccountsPage.verifyAccountsPageLayout();
+	}
 }
