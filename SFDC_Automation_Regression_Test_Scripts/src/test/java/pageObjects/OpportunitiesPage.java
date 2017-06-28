@@ -214,7 +214,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//span[contains(text(),'Property')]//ancestor::article//div[text()='Associate Property']")
 	WebElement associateProperty;
-
+	
 	@FindBy(xpath = "//div[@class='slds-form-element']/label[text()='Opportunity']")
 	WebElement opportunityLabel;
 
@@ -457,7 +457,18 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//h2[contains(@class,'slds-text-heading--medium') and contains(@class,'slds-m-bottom--small')]")
 	WebElement opportunityRecordTypeQuickCreate;
-
+	
+	@FindBy(xpath = "//span[text()='Property']/ancestor::article//div[text()='New']")
+	WebElement associatePropertyCapitalMarkets;
+	
+	@FindBy(xpath = "//input[@placeholder='Search Properties']")
+	WebElement searchProperties;
+	
+	@FindBy(xpath = "//span[contains(@class,'toastMessage') and contains(@class,'slds-text-heading--small')]")
+	WebElement opportunityPropertyCreated;
+	
+	
+		
 	/****
 	 * Ramya
 	 */
@@ -646,6 +657,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath="//select[contains(@id,'oppForm:salesStage')]/option[@value='']")
 	WebElement salesStageSelectedEMEA;
 	
+/*	@FindBy(xpath="//select[contains(@id,'oppForm:salesStage')]/option[@selected='selected']")
+	WebElement salesStageSelectedCapitalMarkets;*/
+	
 	@FindBy(xpath="//span[contains(@id,'oppForm:phaseField')]/span")
 	WebElement phasePresent;
 	
@@ -822,10 +836,12 @@ public class OpportunitiesPage extends ReusableLibrary {
 				countLabelList = 104;
 			} else if(dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) {
 				countLabelList = 108;
-			} if(dataTable.getData("General_Data", "TC_ID").contains("ABAPAC")) {
+			} else if(dataTable.getData("General_Data", "TC_ID").contains("ABAPAC")) {
 				countLabelList = 138;
-			}
-			if ((countLabelList == 104) || (countLabelList == 108) || (countLabelList ==138)) {
+			} else if(dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) {
+				countLabelList = 66;
+			} 
+			if ((countLabelList == 104) || (countLabelList == 108) || (countLabelList ==138) || (countLabelList ==66)) {
 				report.updateTestLog("Verify Add Opportunity Page Label List", "Labels are present in Add Opportunity Page", Status.PASS);
 			} else {
 				report.updateTestLog("Verify Add Opportunity Page Label List", "Labels are not present in Add Opportunity Page", Status.FAIL);
@@ -1280,36 +1296,56 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xScrollWindowTop(driver);
 		Utility_Functions.timeWait(3);
-		Utility_Functions.xClick(driver, associateProperty, true);
-		Utility_Functions.xWaitForElementVisible(driver, opportunityLabel, 5);
-		Utility_Functions.timeWait(1);
-		if (!opportunitySelected.getText().equals(" ")) {
-			report.updateTestLog("Verify Opportunity Field",
-					"Opportunity field is prepopulated with the Opporturnity " + opportunitySelected.getText(),
-					Status.PASS);
-		} else {
-			report.updateTestLog("Verify Opportunity Field",
-					"Opportunity field not is prepopulated with the Opporturnity " + opportunitySelected.getText(),
-					Status.FAIL);
-		}
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xClick(driver, findPropertyInput, true);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xClick(driver, searchButtonProperty, true);
-		Utility_Functions.timeWait(2);
-		List<WebElement> propertyList = driver.findElements(By.xpath(
-				"//table[@class='slds-table slds-table--bordered slds-table--cell-buffer slds-table--fixed-layout cPropertySearch']//th[@class='slds-truncate']/a"));
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xclickRandomElement(propertyList);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xClick(driver, finalPropertyCheckbox, true);
-		Utility_Functions.timeWait(2);
-		if (saveButtonProperty.isDisplayed()) {
-			Utility_Functions.xClick(driver, saveButtonProperty, true);
-			report.updateTestLog("Verify Opportunity", "Associate property to an opportunity successfully ",
-					Status.PASS);
-		} else {
-			report.updateTestLog("Verify Opportunity", "Associat property to an opportunity failed ", Status.FAIL);
+		try {
+			Utility_Functions.xClick(driver, associateProperty, true);
+			Utility_Functions.xWaitForElementVisible(driver, opportunityLabel, 5);
+			Utility_Functions.timeWait(1);
+			if (!opportunitySelected.getText().equals(" ")) {
+				report.updateTestLog("Verify Opportunity Field",
+						"Opportunity field is prepopulated with the Opporturnity " + opportunitySelected.getText(),
+						Status.PASS);
+			} else {
+				report.updateTestLog("Verify Opportunity Field",
+						"Opportunity field not is prepopulated with the Opporturnity " + opportunitySelected.getText(),
+						Status.FAIL);
+			}
+			Utility_Functions.timeWait(1);
+			Utility_Functions.xClick(driver, findPropertyInput, true);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xClick(driver, searchButtonProperty, true);
+			Utility_Functions.timeWait(2);
+			List<WebElement> propertyList = driver.findElements(By.xpath(
+					"//table[@class='slds-table slds-table--bordered slds-table--cell-buffer slds-table--fixed-layout cPropertySearch']//th[@class='slds-truncate']/a"));
+			Utility_Functions.timeWait(1);
+			Utility_Functions.xclickRandomElement(propertyList);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xClick(driver, finalPropertyCheckbox, true);
+			Utility_Functions.timeWait(2);
+			if (saveButtonProperty.isDisplayed()) {
+				Utility_Functions.xClick(driver, saveButtonProperty, true);
+				report.updateTestLog("Verify Opportunity", "Associate property to an opportunity successfully ",
+						Status.PASS);
+			} else {
+				report.updateTestLog("Verify Opportunity", "Associat property to an opportunity failed ", Status.FAIL);
+			}
+		} catch (Exception e) {
+			Utility_Functions.xWaitForElementPresent(driver, associatePropertyCapitalMarkets, 3);
+			Utility_Functions.xClick(driver, associatePropertyCapitalMarkets, true);
+			Utility_Functions.xWaitForElementPresent(driver, searchProperties, 3);
+			Utility_Functions.xClick(driver, searchProperties, true);
+			Utility_Functions.timeWait(2);
+			List<WebElement> propertiesList = driver.findElements(By.xpath(
+					"//div[@class='undefined lookup__menu uiAbstractList uiAutocompleteList uiInput uiAutocomplete uiInput--default uiInput--lookup']//div[@class='listContent']/ul/li"));
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xclickOnFirstElementfromList(propertiesList);
+			Utility_Functions.xWaitForElementPresent(driver, save, 3);
+			Utility_Functions.xClick(driver, save, true);
+			Utility_Functions.xWaitForElementPresent(driver, opportunityPropertyCreated, 3);
+			if(opportunityPropertyCreated.getText().contains("was created.")) {
+				report.updateTestLog("Verify Opportunity", "Associate property to an opportunity successfully ", Status.PASS);
+			} else {
+				report.updateTestLog("Verify Opportunity", "Associat property to an opportunity failed ", Status.FAIL);
+			}			
 		}
 	}
 
@@ -1476,15 +1512,16 @@ public class OpportunitiesPage extends ReusableLibrary {
 			opportunity.setField("Name", "Test Automation_" + value);
 			opportunity.setField("AccountId", "0010S000004SaIHQA0");
 			opportunity.setField("CloseDate", Calendar.getInstance());
-			if (dataTable.getData("General_Data", "TC_ID").contains("AS")) {
+			if ((dataTable.getData("General_Data", "TC_ID").contains("ASAMER")) || (dataTable.getData("General_Data", "TC_ID").contains("ASAPAC")) || (dataTable.getData("General_Data", "TC_ID").contains("ASEMEA"))) {
 				opportunity.setField("RecordTypeId", "012i0000000405jAAA");
-			} else if (dataTable.getData("General_Data", "TC_ID").contains("GWS")) {
+			} else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAMER")) || (dataTable.getData("General_Data", "TC_ID").contains("GWSAPAC")) || (dataTable.getData("General_Data", "TC_ID").contains("GWSEMEA"))) {
 				opportunity.setField("RecordTypeId", "012i0000000405mAAA");
-			} else if (dataTable.getData("General_Data", "TC_ID").contains("CM")
-					&& (dataTable.getData("General_Data", "TC_ID").contains("DSF"))) {
+			} else if (dataTable.getData("General_Data", "TC_ID").contains("CM") && (dataTable.getData("General_Data", "TC_ID").contains("DSF"))) {
 				opportunity.setField("RecordTypeId", "012i0000000405lAAA");
+			} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) || (dataTable.getData("General_Data", "TC_ID").contains("OBAPAC")) || (dataTable.getData("General_Data", "TC_ID").contains("OBEMEA"))) { 
+				opportunity.setField("RecordTypeId", "012i0000000405nAAA");
 			}
-
+			
 			opportunity.setField("StageName", "1-Target");
 			// opportunity.setField("Service__c", "Business Valuation");
 			opportunity.setField("Total_Size__c", 5000);
@@ -1871,6 +1908,15 @@ public class OpportunitiesPage extends ReusableLibrary {
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
 					config.setUsername(properties.getProperty("FTEOBAMERManager"));
 					config.setPassword(properties.getProperty("FTEPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
+					config.setUsername(properties.getProperty("FTECMAMERBroker"));
+					config.setPassword(properties.getProperty("FTEPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
+					config.setUsername(properties.getProperty("FTECMAMERManager"));
+					config.setPassword(properties.getProperty("FTEPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
+					config.setUsername(properties.getProperty("FTECMAMERCSS"));
+					config.setPassword(properties.getProperty("FTEPassword"));
 				}
 				config.setAuthEndpoint(properties.getProperty("FTEAuthEndpoint"));
 				connection = new PartnerConnection(config);
@@ -1905,6 +1951,15 @@ public class OpportunitiesPage extends ReusableLibrary {
 					config.setPassword(properties.getProperty("FTE2Password"));
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
 					config.setUsername(properties.getProperty("FTE2OBAMERManager"));
+					config.setPassword(properties.getProperty("FTE2Password"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
+					config.setUsername(properties.getProperty("FTE2CMAMERBroker"));
+					config.setPassword(properties.getProperty("FTE2Password"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
+					config.setUsername(properties.getProperty("FTE2CMAMERManager"));
+					config.setPassword(properties.getProperty("FTE2Password"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
+					config.setUsername(properties.getProperty("FTE2CMAMERCSS"));
 					config.setPassword(properties.getProperty("FTE2Password"));
 				}
 				config.setAuthEndpoint(properties.getProperty("FTE2AuthEndpoint"));
@@ -1941,6 +1996,15 @@ public class OpportunitiesPage extends ReusableLibrary {
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
 					config.setUsername(properties.getProperty("UAT2OBAMERManager"));
 					config.setPassword(properties.getProperty("UAT2Password"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
+					config.setUsername(properties.getProperty("UAT2CMAMERBroker"));
+					config.setPassword(properties.getProperty("UAT2Password"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
+					config.setUsername(properties.getProperty("UAT2CMAMERManager"));
+					config.setPassword(properties.getProperty("UAT2Password"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
+					config.setUsername(properties.getProperty("UAT2CMAMERCSS"));
+					config.setPassword(properties.getProperty("UAT2Password"));
 				}
 				config.setAuthEndpoint(properties.getProperty("UAT2AuthEndpoint"));
 				connection = new PartnerConnection(config);
@@ -1975,6 +2039,15 @@ public class OpportunitiesPage extends ReusableLibrary {
 					config.setPassword(properties.getProperty("UATPassword"));
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
 					config.setUsername(properties.getProperty("UATOBAMERManager"));
+					config.setPassword(properties.getProperty("UATPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
+					config.setUsername(properties.getProperty("UATCMAMERBroker"));
+					config.setPassword(properties.getProperty("UATPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
+					config.setUsername(properties.getProperty("UATCMAMERManager"));
+					config.setPassword(properties.getProperty("UATPassword"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
+					config.setUsername(properties.getProperty("UATCMAMERCSS"));
 					config.setPassword(properties.getProperty("UATPassword"));
 				}
 				config.setAuthEndpoint(properties.getProperty("UATAuthEndpoint"));
@@ -4502,18 +4575,40 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, menu_Opportunities, true);
 		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
 		Utility_Functions.xClick(driver, newOpportunity, true);
-		if(dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) {
+		if((dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) || (dataTable.getData("General_Data", "TC_ID").contains("CMAMER"))) {
 			Utility_Functions.timeWait(3);
 			Utility_Functions.xSwitchtoFrame(driver, continueButton);
 			Utility_Functions.xWaitForElementPresent(driver, continueButton, 3);
+			if((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("DSF"))) {
+				Utility_Functions.xWaitForElementPresent(driver, opportunityRecordType, 2);
+				if(defaultOpportutnityRecordType.getText().equals("Capital Markets – Property Sales")) {
+					Utility_Functions.xClick(driver, opportunityRecordType, true);
+					Utility_Functions.timeWait(1);
+					Utility_Functions.xClick(driver, opportunityRecordTypeDebtStructuredFinance, true);
+				}
+			}
 			Utility_Functions.xClick(driver, continueButton, true);
 			Utility_Functions.timeWait(2);
 			Utility_Functions.xSwitchtoFrame(driver, salesStageSelected);
-			Utility_Functions.xWaitForElementPresent(driver, salesStageSelected, 3);
-			if((salesStageSelected.getText().equals("02-Meeting")) && (phasePresent.getText().equals("Prospecting"))) {
-				report.updateTestLog("Verify New Opportunity Page", "Sales Stage and Phase field are having the values as:::" + salesStageSelected.getText()+":::"+phaseField.getText(), Status.PASS);
-			} else {
-				report.updateTestLog("Verify New Opportunity Page", "Sales Stage and Phase field doesn't have the values as expected:::" + salesStageSelected.getText()+":::"+phaseField.getText(), Status.FAIL);
+			Utility_Functions.xWaitForElementPresent(driver, salesStageSelected, 3);			
+			if(dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) {
+				if((salesStageSelected.getText().equals("02-Meeting")) && (phasePresent.getText().equals("Prospecting"))) {
+					report.updateTestLog("Verify New Opportunity Page", "Sales Stage and Phase field are having the values as:::" + salesStageSelected.getText()+":::"+phaseField.getText(), Status.PASS);
+				} else {
+					report.updateTestLog("Verify New Opportunity Page", "Sales Stage and Phase field doesn't have the values as expected:::" + salesStageSelected.getText()+":::"+phaseField.getText(), Status.FAIL);
+				}
+			} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("PS"))) {
+				if((salesStageSelected.getText().equals("01-Preliminary")) && (phasePresent.getText().equals("Prospecting"))) {
+					report.updateTestLog("Verify New Opportunity Page", "Sales Stage and Phase field are having the values as:::" + salesStageSelected.getText()+":::"+phaseField.getText(), Status.PASS);
+				} else {
+					report.updateTestLog("Verify New Opportunity Page", "Sales Stage and Phase field doesn't have the values as expected:::" + salesStageSelected.getText()+":::"+phaseField.getText(), Status.FAIL);
+				}
+			} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("DSF"))) {
+				if((salesStageSelected.getText().equals("01-Screening")) && (phasePresent.getText().equals("Prospecting"))) {
+					report.updateTestLog("Verify New Opportunity Page", "Sales Stage and Phase field are having the values as:::" + salesStageSelected.getText()+":::"+phaseField.getText(), Status.PASS);
+				} else {
+					report.updateTestLog("Verify New Opportunity Page", "Sales Stage and Phase field doesn't have the values as expected:::" + salesStageSelected.getText()+":::"+phaseField.getText(), Status.FAIL);
+				}
 			}
 			Utility_Functions.timeWait(2);
 			opportunityNameAutoGenerateFuntion();
@@ -4527,4 +4622,453 @@ public class OpportunitiesPage extends ReusableLibrary {
 			}
 		}
 	}
+	
+	/**
+	 * Verify the custom Opportunity page layout from a Manager profile
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	
+	static ArrayList<String> quickCreateLabelListSection = new ArrayList<String>();
+	public void quickCreateLabelListSection() {
+		quickCreateLabelListSection.add("*Account Name");
+		quickCreateLabelListSection.add("*Assignment Type");
+		quickCreateLabelListSection.add("Assignment Sub-Type");
+		quickCreateLabelListSection.add("Lead Source");
+		quickCreateLabelListSection.add("*Close Date");
+		quickCreateLabelListSection.add("Total Size");
+		quickCreateLabelListSection.add("Unit of Measure");
+		quickCreateLabelListSection.add("*Opportunity Name");
+		quickCreateLabelListSection.add("*Sales Stage");
+		quickCreateLabelListSection.add("*Phase");
+		quickCreateLabelListSection.add("*Probability (%)");
+		quickCreateLabelListSection.add("Estimated Gross Fee/Commission");
+		quickCreateLabelListSection.add("*Currency");
+		System.out.println("Quick Create Label List:::" + quickCreateLabelListSection);		
+	}
+	
+	static ArrayList<String> opportunityInformationLabelList = new ArrayList<String>();
+	public void opportunityInformationLabelList() {
+		opportunityInformationLabelList.add("Specialty Group");
+		opportunityInformationLabelList.add("Parent Opportunity");
+		opportunityInformationLabelList.add("Cross Sell");
+		opportunityInformationLabelList.add("Confidential Opportunity");
+		opportunityInformationLabelList.add("Priority");
+		opportunityInformationLabelList.add("Hire Date");
+		System.out.println("Opportunity Information Label List:::" + opportunityInformationLabelList);		
+	}
+	
+	static ArrayList<String> opportunityInformationLabelListOBAMER = new ArrayList<String>();
+	public void opportunityInformationLabelListOBAMER() {
+		opportunityInformationLabelListOBAMER.add("Specialty Group");
+		opportunityInformationLabelListOBAMER.add("Parent Opportunity");
+		opportunityInformationLabelListOBAMER.add("Cross Sell");
+		opportunityInformationLabelListOBAMER.add("Confidential Opportunity");
+		opportunityInformationLabelListOBAMER.add("Opportunity Location");
+		opportunityInformationLabelListOBAMER.add("Priority");
+		opportunityInformationLabelListOBAMER.add("Hire Date");
+		opportunityInformationLabelListOBAMER.add("Migrated Opportunity");
+		System.out.println("Opportunity Information Label List:::" + opportunityInformationLabelListOBAMER);		
+	}
+	
+	static ArrayList<String> dealMetricsLabelList = new ArrayList<String>();
+	public void dealMetricsLabelList() {
+		dealMetricsLabelList.add("Investment Profile");
+		dealMetricsLabelList.add("Total # of Units");
+		dealMetricsLabelList.add("Unit of Comparison");
+		dealMetricsLabelList.add("Opportunity Details");
+		dealMetricsLabelList.add("Listing Price");
+		dealMetricsLabelList.add("Listing Expiration");
+		dealMetricsLabelList.add("Portfolio");
+		dealMetricsLabelList.add("Development");
+		dealMetricsLabelList.add("Preferred Property Type");
+		dealMetricsLabelList.add("Preferred Property Sub-Type");
+		System.out.println("Opportunity dealMetricsLabelList are:::" + dealMetricsLabelList);
+		//h2[text()='Deal Metrics']/parent::div/parent::div//label
+	}
+	
+	static ArrayList<String> financialInformationLabelList = new ArrayList<String>();
+	public void financialInformationLabelList() {
+		financialInformationLabelList.add("Estimated Transaction Value");
+		financialInformationLabelList.add("Status Comments");
+		financialInformationLabelList.add("Yield (%)");
+		financialInformationLabelList.add("Yield Type");
+		financialInformationLabelList.add("Next Steps");
+		System.out.println("Opportunity financialInformationLabelList are:::" + financialInformationLabelList);
+		//h2[text()='Financial Information']/parent::div/parent::div//label
+	}
+	
+	static ArrayList<String> closeInformationLabelList = new ArrayList<String>();
+	public void closeInformationLabelList() {
+		closeInformationLabelList.add("Final Transaction Value");
+		closeInformationLabelList.add("Actual CBRE Gross Fee");
+		closeInformationLabelList.add("Actual Yield (%)");
+		closeInformationLabelList.add("Actual Yield Type");
+		closeInformationLabelList.add("Total Property Value");
+		closeInformationLabelList.add("Pitch Approved");
+		closeInformationLabelList.add("Pitch Caveat");
+		closeInformationLabelList.add("Press Approved");
+		closeInformationLabelList.add("Press Caveat");
+		closeInformationLabelList.add("Close comments");
+		System.out.println("Opportunity closeInformationLabelList are:::" + closeInformationLabelList);
+		//h2[text()='Close Information']/parent::div/parent::div//label
+	}
+	
+	static ArrayList<String> closeInformationLabelListOBAMER = new ArrayList<String>();
+	public void closeInformationLabelListOBAMER() {
+		closeInformationLabelListOBAMER.add("Lease From");
+		closeInformationLabelListOBAMER.add("Lease To");
+		closeInformationLabelListOBAMER.add("Lease Term (Months)");
+		closeInformationLabelListOBAMER.add("Lease Rate/Rent");
+		closeInformationLabelListOBAMER.add("Lease Rate/Rent Basis");
+		closeInformationLabelListOBAMER.add("Outside Broker Company");
+		closeInformationLabelListOBAMER.add("Outside Broker Name");
+		closeInformationLabelListOBAMER.add("CBRE Role");
+		closeInformationLabelListOBAMER.add("Sub Lease");
+		System.out.println("Opportunity closeInformationLabelList are:::" + closeInformationLabelListOBAMER);
+		//h2[text()='Close Information']/parent::div/parent::div//label
+	}
+	
+	static ArrayList<String> lossInformationLabelList = new ArrayList<String>();
+	public void lossInformationLabelList() {
+		lossInformationLabelList.add("Reason for Loss");
+		lossInformationLabelList.add("Reason Lost Comments");
+		lossInformationLabelList.add("Competitor");
+		lossInformationLabelList.add("Opportunity Owner");
+		lossInformationLabelList.add("External Deal ID");		
+		System.out.println("Opportunity lossInformationLabelList are:::" + lossInformationLabelList);
+		//h2[text()='Loss Information']/parent::div/parent::div//label
+	}
+	
+	
+	static ArrayList<String> additionalInformationLabelList = new ArrayList<String>();
+	public void additionalInformationLabelList() {
+		additionalInformationLabelList.add("Total # of Units");
+		additionalInformationLabelList.add("Unit of Comparison");
+		additionalInformationLabelList.add("Status Comments");
+		additionalInformationLabelList.add("Desired Commencement");
+		additionalInformationLabelList.add("Existing Lease Expiration");	
+		additionalInformationLabelList.add("Existing Termination/Break Option");
+		additionalInformationLabelList.add("New Termination/Break Option");		
+		additionalInformationLabelList.add("Next Steps");		  		
+		System.out.println("Opportunity additionalInformationLabelList are:::" + additionalInformationLabelList);
+		//h2[text()='Loss Information']/parent::div/parent::div//label
+	}
+	
+	static ArrayList<String> servicesLabelList = new ArrayList<String>();
+	public void servicesLabelList() {
+		servicesLabelList.add("Opportunity Record Type");
+		servicesLabelList.add("Opportunity Team Members");
+		servicesLabelList.add("On Hold");
+		servicesLabelList.add("On Hold Date");
+		servicesLabelList.add("On Hold Comments");		
+		System.out.println("Opportunity additionalInformationLabelList are:::" + servicesLabelList);
+		//h2[text()='Loss Information']/parent::div/parent::div//label
+	}
+	
+	
+	public void customOpportunityPageLayout() {
+		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
+		Utility_Functions.xClick(driver, menu_Opportunities, true);
+		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
+		Utility_Functions.xClick(driver, newOpportunity, true);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xSwitchtoFrame(driver, continueButton);
+		Utility_Functions.xWaitForElementPresent(driver, continueButton, 5);
+		Utility_Functions.xClick(driver, continueButton, true);
+		driver.switchTo().defaultContent();
+		Utility_Functions.xSwitchtoFrame(driver, viewAllFieldsButton);
+		Utility_Functions.xWaitForElementPresent(driver, viewAllFieldsButton, 5);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.xClick(driver, viewAllFieldsButton, true);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);	
+		quickCreateLabelListSection();
+		opportunityInformationLabelList();
+		dealMetricsLabelList();
+		financialInformationLabelList();
+		closeInformationLabelList();
+		lossInformationLabelList();
+		
+		try {
+			List<WebElement> labelListOpportunitiesPage = driver.findElements(By.xpath("//*[@class='slds-form-element__label']"));
+			int i1 = 0, j=0, countLabelList = 0;
+			String[] labelTexts = new String[labelListOpportunitiesPage.size()];
+			while(countLabelList!=13) {
+				while(j<quickCreateLabelListSection.size()) {
+					for (WebElement element : labelListOpportunitiesPage) {
+						labelTexts[i1] = element.getText();
+						if (labelTexts[i1].contains(quickCreateLabelListSection.get(j))) {
+							System.out.println("Verify Add Opportunity Page Label List" + element.getText());
+							report.updateTestLog("Verify Add Opportunity Page Label List", element.getText() + "::::label list is present in Add Opportunity Page", Status.PASS);
+							countLabelList++;
+						}
+						i1++;
+					}
+					i1=0;
+					j++;
+				}
+			}			
+			System.out.println("OpportunityInformationList:::"+ countLabelList);
+			if (countLabelList == 13) {
+				report.updateTestLog("Verify Quick Create Section", "Labels are present in Add Opportunity Page:::", Status.PASS);
+			} else {
+				report.updateTestLog("Verify Quick Create Section", "Labels are not present in Add Opportunity Page:::", Status.FAIL);
+			}
+		} catch (Exception e) {
+				System.out.println(e.getMessage());
+		}
+		
+		if(dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) {
+			List<WebElement> opportunityInformationList = driver.findElements(By.xpath("//h2[text()='Opportunity Information']/parent::div/parent::div//*[@class='slds-form-element__label']"));
+			try {
+				int i2 = 0, count = 0;
+				String[] opportunityInfoTexts = new String[opportunityInformationList.size()];
+				for (WebElement element : opportunityInformationList) {
+					opportunityInfoTexts[i2] = element.getText();
+					if (opportunityInfoTexts[i2].equalsIgnoreCase(opportunityInformationLabelList.get(i2))) {
+						count++;
+						System.out.println("Verify Opportunity Information Section" + element.getText());
+						report.updateTestLog("Verify Opportunity Information Section", element.getText() + " label is present on the page", Status.PASS);
+					}
+					i2++;
+				}
+				System.out.println("OpportunityInformationList:::"+ count);
+				if (count == 6) {
+					report.updateTestLog("Verify Opportunity Information Section", "Labels are present in Add Opportunity Page:::", Status.PASS);
+				} else {
+					report.updateTestLog("Verify Opportunity Information Section", "Labels are not present in Add Opportunity Page:::", Status.FAIL);
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) {
+			List<WebElement> opportunityInformationList = driver.findElements(By.xpath("//h2[text()='Opportunity Information']/parent::div/parent::div//*[@class='slds-form-element__label']"));
+			try {
+				int i2 = 0, count = 0;
+				String[] opportunityInfoTexts = new String[opportunityInformationLabelListOBAMER.size()];
+				for (WebElement element : opportunityInformationList) {
+					opportunityInfoTexts[i2] = element.getText();
+					if (opportunityInfoTexts[i2].equalsIgnoreCase(opportunityInformationLabelListOBAMER.get(i2))) {
+						count++;
+						System.out.println("Verify Opportunity Information Section" + element.getText());
+						report.updateTestLog("Verify Opportunity Information Section", element.getText() + " label is present on the page", Status.PASS);
+					}
+					i2++;
+				}
+				System.out.println("opportunityInformationLabelListOBAMER:::"+ count);
+				if (count == 8) {
+					report.updateTestLog("Verify Opportunity Information Section", "Labels are present in Add Opportunity Page:::", Status.PASS);
+				} else {
+					report.updateTestLog("Verify Opportunity Information Section", "Labels are not present in Add Opportunity Page:::", Status.FAIL);
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}						
+		
+		if(dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) {
+			List<WebElement> servicesListPath = driver.findElements(By.xpath("//h2[text()='Services']/parent::div/parent::div//*[@class='slds-form-element__label']"));
+			try {
+				int i2 = 0, count = 0;
+				String[] opportunityInfoTexts = new String[servicesLabelList.size()];
+				for (WebElement element : servicesListPath) {
+					opportunityInfoTexts[i2] = element.getText();
+					if (opportunityInfoTexts[i2].equalsIgnoreCase(servicesLabelList.get(i2))) {
+						count++;
+						System.out.println("Verify Opportunity Information Section" + element.getText());
+						report.updateTestLog("Verify Opportunity Information Section", element.getText() + " label is present on the page", Status.PASS);
+					}
+					i2++;
+				}
+				System.out.println("ServicesLabelList:::"+ count);
+				if (count == 5) {
+					report.updateTestLog("Verify Opportunity Information Section", "Labels are present in Add Opportunity Page:::", Status.PASS);
+				} else {
+					report.updateTestLog("Verify Opportunity Information Section", "Labels are not present in Add Opportunity Page:::", Status.FAIL);
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			
+			List<WebElement> additionalInformationPath = driver.findElements(By.xpath("//h2[text()='Additional Information']/parent::div/parent::div//*[@class='slds-form-element__label']"));
+			try {
+				int i2 = 0, count = 0;
+				String[] opportunityInfoTexts = new String[additionalInformationLabelList.size()];
+				for (WebElement element : additionalInformationPath) {
+					opportunityInfoTexts[i2] = element.getText();
+					if (opportunityInfoTexts[i2].equalsIgnoreCase(additionalInformationLabelList.get(i2))) {
+						count++;
+						System.out.println("Verify Opportunity Information Section" + element.getText());
+						report.updateTestLog("Verify Opportunity Information Section", element.getText() + " label is present on the page", Status.PASS);
+					}
+					i2++;
+				}
+				System.out.println("AdditionalInformationLabelList:::"+ count);
+				if (count == 8) {
+					report.updateTestLog("Verify Opportunity Information Section", "Labels are present in Add Opportunity Page:::", Status.PASS);
+				} else {
+					report.updateTestLog("Verify Opportunity Information Section", "Labels are not present in Add Opportunity Page:::", Status.FAIL);
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}	
+				
+		if(dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) {
+			List<WebElement> dealMetricsPath = driver.findElements(By.xpath("//h2[text()='Deal Metrics']/parent::div/parent::div//*[@class='slds-form-element__label']"));
+			try {
+				int i2 = 0, count = 0;
+				String[] dealMetricsTexts = new String[dealMetricsLabelList.size()];
+				for (WebElement element : dealMetricsPath) {
+					dealMetricsTexts[i2] = element.getText();
+					if (dealMetricsTexts[i2].equalsIgnoreCase(dealMetricsLabelList.get(i2))) {
+						count++;
+						System.out.println("Verify Deal Metrics Section" + element.getText());
+						report.updateTestLog("Verify Deal Metrics Section", element.getText() + " label is present on the page", Status.PASS);
+					}
+					i2++;
+				}
+				System.out.println("DealMetricsPath:::"+ count);
+				if (count == 10) {
+					report.updateTestLog("Verify Deal Metrics Section", "Labels are present in Add Opportunity Page:::", Status.PASS);
+				} else {
+					report.updateTestLog("Verify Deal Metrics Section", "Labels are not present in Add Opportunity Page:::", Status.FAIL);
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+
+		}
+		
+		if(dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) {
+			List<WebElement> financialInformationPath = driver.findElements(By.xpath("//h2[text()='Financial Information']/parent::div/parent::div//*[@class='slds-form-element__label']"));
+			try {
+				int i2 = 0, count = 0;
+				String[] financialInformationTexts = new String[financialInformationLabelList.size()];
+				for (WebElement element : financialInformationPath) {
+					financialInformationTexts[i2] = element.getText();
+					if (financialInformationTexts[i2].equalsIgnoreCase(financialInformationLabelList.get(i2))) {
+						count++;
+						System.out.println("Verify Financial Information Section" + element.getText());
+						report.updateTestLog("Verify Financial Information Section", element.getText() + " label is present on the page", Status.PASS);
+					}
+					i2++;
+				}
+				System.out.println("FinancialInformationPath:::"+ count);
+				if (count == 5) {
+					report.updateTestLog("Verify Financial Information Section", "Labels are present in Add Opportunity Page:::", Status.PASS);
+				} else {
+					report.updateTestLog("Verify Financial Information Section", "Labels are not present in Add Opportunity Page:::", Status.FAIL);
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			
+		}
+		if(dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) {
+			List<WebElement> closeInformationPath = driver.findElements(By.xpath("//h2[text()='Close Information']/parent::div/parent::div//*[@class='slds-form-element__label']"));
+			try {
+				int i2 = 0, count = 0;
+				String[] closeInformationTexts = new String[closeInformationLabelList.size()];
+				for (WebElement element : closeInformationPath) {
+					closeInformationTexts[i2] = element.getText();
+					if (closeInformationTexts[i2].equalsIgnoreCase(closeInformationLabelList.get(i2))) {
+						count++;
+						System.out.println("Verify Close Information Section" + element.getText());
+						report.updateTestLog("Verify Close Information Section", element.getText() + " label is present on the page", Status.PASS);
+					}
+					i2++;
+				}
+				System.out.println("CloseInformationPath:::"+ count);
+				if (count == 10) {
+					report.updateTestLog("Verify Close Information Section", "Labels are present in Add Opportunity Page:::", Status.PASS);
+				} else {
+					report.updateTestLog("Verify Close Information Section", "Labels are not present in Add Opportunity Page:::", Status.FAIL);
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) {
+			List<WebElement> closeInformationPath = driver.findElements(By.xpath("//h2[text()='Close Information']/parent::div/parent::div//*[@class='slds-form-element__label']"));
+			try {
+				int i2 = 0, count = 0;
+				String[] closeInformationTexts = new String[closeInformationLabelListOBAMER.size()];
+				for (WebElement element : closeInformationPath) {
+					closeInformationTexts[i2] = element.getText();
+					if (closeInformationTexts[i2].equalsIgnoreCase(closeInformationLabelListOBAMER.get(i2))) {
+						count++;
+						System.out.println("Verify Close Information Section" + element.getText());
+						report.updateTestLog("Verify Close Information Section", element.getText() + " label is present on the page", Status.PASS);
+					}
+					i2++;
+				}
+				System.out.println("CloseInformationPath:::"+ count);
+				if (count == 9) {
+					report.updateTestLog("Verify Close Information Section", "Labels are present in Add Opportunity Page:::", Status.PASS);
+				} else {
+					report.updateTestLog("Verify Close Information Section", "Labels are not present in Add Opportunity Page:::", Status.FAIL);
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+			
+		List<WebElement> lossInformationPath = driver.findElements(By.xpath("//h2[text()='Loss Information']/parent::div/parent::div//*[@class='slds-form-element__label']"));
+		try {
+			int i2 = 0, count = 0;
+			String[] lossInformationTexts = new String[lossInformationLabelList.size()];
+			for (WebElement element : lossInformationPath) {
+				lossInformationTexts[i2] = element.getText();
+				if (lossInformationTexts[i2].equalsIgnoreCase(lossInformationLabelList.get(i2))) {
+					count++;
+					System.out.println("Verify Loss Information Section" + element.getText());
+					report.updateTestLog("Verify Loss Information Section", element.getText() + " label is present on the page", Status.PASS);
+				}
+				i2++;
+			}
+			System.out.println("LossInformationPath:::"+ count);
+			if (count == 5) {
+				report.updateTestLog("Verify Loss Information Section", "Labels are present in Add Opportunity Page:::", Status.PASS);
+			} else {
+				report.updateTestLog("Verify Loss Information Section", "Labels are not present in Add Opportunity Page:::", Status.FAIL);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}		
+	
+	/**
+	 * Verify the required fields based on Sales Stage selected between 03-RFP/Proposal to 07-Under Contract on Opportunity from a broker profile
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	
+	public void salesStage03_RFPProposal_07UnderContract() {
+			String query = "SELECT Estimated_Gross_Fee_Commission__c , Id, Name FROM Opportunity where StageName > '03-RFP/Proposal' and StageName < '07-Under Contract' and Estimated_Gross_Fee_Commission__c = 0.0 limit 10";
+			String OpportunityID = searchOpportunity.searchOpportunity(query);
+			System.out.println(OpportunityID);
+			if(OpportunityID==null) {
+				report.updateTestLog("Verify Opportunity", "There are no Opportunities that falls under this category:::", Status.PASS);
+			} else {
+				report.updateTestLog("Verify Opportunity Required Fields", "Opportunity retrived from database is:::" + OpportunityID, Status.PASS);
+				String estimatedGrossFeeCommmission = "SELECT Estimated_Gross_Fee_Commission__c FROM Opportunity where Id = "+ "'" + OpportunityID + "'";
+				String estimatedGrossFeeCommission_Value = searchOpportunity.fetchRecordFieldValue("Estimated_Gross_Fee_Commission__c", estimatedGrossFeeCommmission);
+				report.updateTestLog("Verify Opportunity Required Fields", "Estimated Gross Fee Commission Value is :::" + estimatedGrossFeeCommission_Value, Status.PASS);
+				
+				String stagName = "SELECT stageName FROM Opportunity where Id = "+ "'" + OpportunityID + "'";
+				String stageName_Value = searchOpportunity.fetchRecordFieldValue("StageName", stagName);
+				report.updateTestLog("Verify Opportunity Required Fields", "Stage Name is :::" + stageName_Value, Status.PASS);
+				opportunitiesFunctions.updateOpportunityField("StageName", OpportunityID);
+				String stageName_UpdatedValue = searchOpportunity.fetchRecordFieldValue("StageName", stagName);
+				if(stageName_UpdatedValue.equals("07-Under Contract")) {
+					report.updateTestLog("Verify Opportunity Required Fields", "Opportunity Sales Stage is updated successfully :::" + stageName_UpdatedValue, Status.PASS);
+				} else {
+					report.updateTestLog("Verify Opportunity Required Fields", "Opportunity Sales Stage updation failed:::" + stageName_UpdatedValue, Status.FAIL);
+				}
+			}
+	}
+	
 }

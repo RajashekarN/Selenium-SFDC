@@ -127,58 +127,73 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 			SObject[] records = new SObject[1];
 			QueryResult queryResults = EstablishConnection.connection.query("SELECT Id FROM Opportunity Where ID = " +  "'" + opportunityID + "'");
 			System.out.println(queryResults);
-			if (queryResults.getSize() > 0) {
-				for (int i = 0; i < queryResults.getRecords().length; i++) {
-					SObject so = (SObject) queryResults.getRecords()[i];
-					SObject soUpdate = new SObject();
-					soUpdate.setType("Opportunity");
-					soUpdate.setId(so.getId());
-					if(fieldName.equals("StageName")) {
-						soUpdate.setField(fieldName,"19-Closed");
-					} else if(fieldName.equals("Total_Size__c")) {
-						soUpdate.setField(fieldName,"2900");
-					} else if(fieldName.equals("CBRE_Preferred_Property_Type_c__c")) {
-						soUpdate.setField(fieldName,"Office");
-					} else if(fieldName.equals("Preferred_Property_Sub_Type__c")) {
-						soUpdate.setField(fieldName,"General Office");
-					} else if(fieldName.equals("Lease_From__c")) {
-						soUpdate.setField(fieldName,Calendar.getInstance());
-					} else if(fieldName.equals("Lease_To__c")) {
-						Calendar calendar = Calendar.getInstance();
-						calendar.add(Calendar.DAY_OF_MONTH, 365);
-						soUpdate.setField(fieldName,calendar);
-					} else if(fieldName.equals("Lease_Term__c")) {
-						soUpdate.setField(fieldName,12);
-					} else if(fieldName.equals("Lease_Rate_Rent__c")) {
-						soUpdate.setField(fieldName,12000);
-					} else if(fieldName.equals("Lease_Rate_Rent_Basis__c")) {
-						soUpdate.setField(fieldName,"Per Year");
-					} else if(fieldName.equals("Service__c")) {
-						soUpdate.setField(fieldName,"Project Management");
-					} else if(fieldName.equals("EMEA_Success_Probability__c")) {
-						soUpdate.setField(fieldName,"100%");
-					} else if(fieldName.equals("Unit_of_Measure__c")) {
-						soUpdate.setField(fieldName,"Hectares");
-					} else if(fieldName.equals("Estimated_Gross_Fee_Commission__c")) {
-						soUpdate.setField(fieldName,"50,000");
-					} else if(fieldName.equals("Installment_Amount__c")) {
-						soUpdate.setField(fieldName,"50,000");
-					} else if(fieldName.equals("Installment_Count__c")) {
-						soUpdate.setField(fieldName,"2");
-					} else if(fieldName.equals("Installment_Quantity__c")) {
-						soUpdate.setField(fieldName,"2");
-					} else if(fieldName.equals("Installments_Total__c")) {
-						soUpdate.setField(fieldName,"30,000");
-					} else if(fieldName.equals("Installment_Status__c")) {
-						soUpdate.setField(fieldName,"Pending");
-					} else if(fieldName.equals("CloseDate")) {
-						Calendar calendar = Calendar.getInstance();
-						calendar.add(Calendar.DAY_OF_MONTH, 365);
-						soUpdate.setField(fieldName,calendar);
+			if(dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) {
+				if (queryResults.getSize() > 0) {
+					for (int i = 0; i < queryResults.getRecords().length; i++) {
+						SObject so = (SObject) queryResults.getRecords()[i];
+						SObject soUpdate = new SObject();
+						soUpdate.setType("Opportunity");
+						soUpdate.setId(so.getId());
+						if(fieldName.equals("StageName")) {
+							soUpdate.setField(fieldName,"07-Under Contract");
+						}
+						records[i] = soUpdate;
 					}
-					records[i] = soUpdate;
 				}
-			}
+			} else { 
+				if (queryResults.getSize() > 0) {
+					for (int i = 0; i < queryResults.getRecords().length; i++) {
+						SObject so = (SObject) queryResults.getRecords()[i];
+						SObject soUpdate = new SObject();
+						soUpdate.setType("Opportunity");
+						soUpdate.setId(so.getId());
+						if(fieldName.equals("StageName")) {
+							soUpdate.setField(fieldName,"19-Closed");
+						} else if(fieldName.equals("Total_Size__c")) {
+							soUpdate.setField(fieldName,"2900");
+						} else if(fieldName.equals("CBRE_Preferred_Property_Type_c__c")) {
+							soUpdate.setField(fieldName,"Office");
+						} else if(fieldName.equals("Preferred_Property_Sub_Type__c")) {
+							soUpdate.setField(fieldName,"General Office");
+						} else if(fieldName.equals("Lease_From__c")) {
+							soUpdate.setField(fieldName,Calendar.getInstance());
+						} else if(fieldName.equals("Lease_To__c")) {
+							Calendar calendar = Calendar.getInstance();
+							calendar.add(Calendar.DAY_OF_MONTH, 365);
+							soUpdate.setField(fieldName,calendar);
+						} else if(fieldName.equals("Lease_Term__c")) {
+							soUpdate.setField(fieldName,12);
+						} else if(fieldName.equals("Lease_Rate_Rent__c")) {
+							soUpdate.setField(fieldName,12000);
+						} else if(fieldName.equals("Lease_Rate_Rent_Basis__c")) {
+							soUpdate.setField(fieldName,"Per Year");
+						} else if(fieldName.equals("Service__c")) {
+							soUpdate.setField(fieldName,"Project Management");
+						} else if(fieldName.equals("EMEA_Success_Probability__c")) {
+							soUpdate.setField(fieldName,"100%");
+						} else if(fieldName.equals("Unit_of_Measure__c")) {
+							soUpdate.setField(fieldName,"Hectares");
+						} else if(fieldName.equals("Estimated_Gross_Fee_Commission__c")) {
+							soUpdate.setField(fieldName,"50,000");
+						} else if(fieldName.equals("Installment_Amount__c")) {
+							soUpdate.setField(fieldName,"50,000");
+						} else if(fieldName.equals("Installment_Count__c")) {
+							soUpdate.setField(fieldName,"2");
+						} else if(fieldName.equals("Installment_Quantity__c")) {
+							soUpdate.setField(fieldName,"2");
+						} else if(fieldName.equals("Installments_Total__c")) {
+							soUpdate.setField(fieldName,"30,000");
+						} else if(fieldName.equals("Installment_Status__c")) {
+							soUpdate.setField(fieldName,"Pending");
+						} else if(fieldName.equals("CloseDate")) {
+							Calendar calendar = Calendar.getInstance();
+							calendar.add(Calendar.DAY_OF_MONTH, 365);
+							soUpdate.setField(fieldName,calendar);
+						}
+						records[i] = soUpdate;
+					}
+				}
+			} 
 			results = EstablishConnection.connection.update(records);
 			System.out.println("Result:::" + results);
 		} catch (Exception e) {
