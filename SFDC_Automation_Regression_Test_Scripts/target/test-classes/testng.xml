@@ -4,6 +4,50 @@
 	<test name="Smoke Test">
 		<classes>
 		
+		<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_CMAMERBrokerDefaultLandingPage"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_CMAMERManagerPSNewOppPageLayout"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAMERBrokerAssociateProperty"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_CMAMERBrokerAssociateProperty"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_CMAMERBrokerPSDefaultSalesPhaseField"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_CMAMERManagerPSDefaultSalesPhaseField"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_CMAMERCSSPSDefaultSalesPhaseField"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_CMAMERBrokerDSFDefaultSalesPhaseField"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_CMAMERManagerDSFDefaultSalesPhaseField"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_CMAMERCSSDSFDefaultSalesPhaseField"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERBrokerNewOppPageLayout"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERManagerDefaultLandingPage"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERBrokerAssociateProperty"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERBrokerDefaultSalesPhaseField"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERManagerDefaultSalesPhaseField"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERCSSDefaultSalesPhaseField"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_CMAMERBrokerSalesStage03_07"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_CMAMERManagerSalesStage03_07"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_CMAMERCSSSalesStage03_07"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERBrokerFieldsOnSalesStage03_15"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERManagerFieldsOnSalesStage03_15"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERCSSFieldsOnSalesStage03_15"/>
+		
+		
+<!-- <class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_CMAMERBrokerDefaultLandingPage"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_CMAMERManagerPSNewOppPageLayout"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAMERBrokerAssociateProperty"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_CMAMERBrokerAssociateProperty"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_CMAMERBrokerPSDefaultSalesPhaseField"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_CMAMERManagerPSDefaultSalesPhaseField"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_CMAMERCSSPSDefaultSalesPhaseField"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_CMAMERBrokerDSFDefaultSalesPhaseField"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_CMAMERManagerDSFDefaultSalesPhaseField"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_CMAMERCSSDSFDefaultSalesPhaseField"/>
+		 -->
+		 
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_CMAMERManagerPSNewOppPageLayout"/>
+<!-- <class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERManagerDefaultLandingPage"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERBrokerAssociateProperty"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERBrokerDefaultSalesPhaseField"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERManagerDefaultSalesPhaseField"/> -->
+
+		 
+		
 <!-- <class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERAdminSupporCustomtLinks"/>
 <class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerSupporCustomtLinks"/>
 <class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERAdminSupporCustomtLinks"/>
@@ -22,8 +66,8 @@
 <!-- <class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAMERBrokerAssociateProperty"/>
 <class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAMERBrokerAssociateProperty"/> -->
 
-<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAMERBrokerDefaultSalesPhaseField"/>
-<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABEMEABrokerDefaultSalesPhaseField"/>
+<!-- <class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAMERBrokerDefaultSalesPhaseField"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABEMEABrokerDefaultSalesPhaseField"/> -->
 
 
 		</classes>
