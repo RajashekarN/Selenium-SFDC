@@ -574,30 +574,6 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 		sfOpportunitiesPage.defaultSalesStageandPhaseField();
 	}
 	
-<<<<<<< Updated upstream
-    /**
-     * Verify the custom Opportunity page layout from a Manager profile
-     * 
-     * @author Vishnuvardhan
-     *
-     */    
-    public void bc_customOpportunityPageLayout() {
-        sfOpportunitiesPage.customOpportunityPageLayout();
-    }
-    
-    
-    /**
-     * Verify the required fields based on Sales Stage selected between 03-RFP/Proposal to 07-Under Contract on Opportunity from a broker profile
-     * 
-     * @author Vishnuvardhan
-     *
-     */    
-    public void bc_salesStage03_RFPProposal_07UnderContract() {
-        sfOpportunitiesPage.salesStage03_RFPProposal_07UnderContract();
-    }
-    
-
-=======
 	/**
 	 * Verify the custom Opportunity page layout from a Manager profile
 	 * 
@@ -618,6 +594,5 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	public void bc_salesStage03_RFPProposal_07UnderContract() {
 		sfOpportunitiesPage.salesStage03_RFPProposal_07UnderContract();
 	}
->>>>>>> Stashed changes
-	
+
 }
