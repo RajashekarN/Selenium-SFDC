@@ -57,9 +57,25 @@ public class LoginPage extends ReusableLibrary {
 	 *
 	 */
 	//public String environment = properties.getProperty("RunEnvironment");
-	public String environment = System.getProperty("RunEnvironment");
+	public static String environment = System.getProperty("RunEnvironment");
+
+	public String initializeEnvironment() {
+		try {
+			if(environment.equals(null)) {
+				
+			} else {
+				System.out.println("Environment is set as per the parameters passed from Jenkins:::" + environment );
+				report.updateTestLog("Intialize Environment", "Environment is set as per the parameters passed from Jenkins:::", Status.PASS);
+			}			
+		} catch (Exception e) {
+			environment = properties.getProperty("RunEnvironment");
+			System.out.println("Environment is set as per the RunEnvironment value in Global Settings file:::" + environment );
+		}
+		return environment;	
+	}
 
 	public void invokeApplication() {
+		String environment = initializeEnvironment();
 		report.updateTestLog("Invoke Application",
 				"Invoke the application under test @ " + properties.getProperty("Application"+environment+"Url"), Status.PASS);
 		if (environment.equals("UAT")) {

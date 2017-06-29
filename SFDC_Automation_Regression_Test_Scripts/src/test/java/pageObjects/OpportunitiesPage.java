@@ -1012,6 +1012,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xClick(driver, findValue, true);
 		Utility_Functions.timeWait(1);
+		String environment = loginPage.initializeEnvironment();
 		if (environment.equals("UAT")) {
 			Utility_Functions.xSelectDropdownByName(selectUser, "User: Vishnuvardhan Bommisetty");
 		} else {
@@ -1051,13 +1052,14 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 */
 	static PartnerConnection connection = null;
 	static ConnectorConfig config;
-	//String environment = LoginPage.environment;
-	//public String environment = properties.getProperty("RunEnvironment");
-	public String environment = System.getProperty("RunEnvironment");
 
+	//public String environment = properties.getProperty("RunEnvironment");
+	//public String environment = System.getProperty("RunEnvironment");
+	LoginPage loginPage = new LoginPage(scriptHelper);
 
 	public void updateOpportunityStatus(String FieldName, String OpportunityID) {
 		try {
+			String environment = loginPage.initializeEnvironment();
 			if (environment.equals("UAT")) {
 				String UAT_AuthEndpoint = properties.getProperty("UATAuthEndpoint");
 				config = new ConnectorConfig();
@@ -1876,6 +1878,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	public void establishConnection() {
 		try {
+			String environment = loginPage.initializeEnvironment();
 			if (environment.equals("FTE")) {
 				config = new ConnectorConfig();
 				if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
