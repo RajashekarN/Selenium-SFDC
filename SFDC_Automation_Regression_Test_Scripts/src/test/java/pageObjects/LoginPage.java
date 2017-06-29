@@ -56,8 +56,8 @@ public class LoginPage extends ReusableLibrary {
 	 * @author Vishnuvardhan
 	 *
 	 */
-	public String environment = properties.getProperty("RunEnvironment");
-	//public String environment = System.getProperty("RunEnvironment");
+	//public String environment = properties.getProperty("RunEnvironment");
+	public String environment = System.getProperty("RunEnvironment");
 
 	public void invokeApplication() {
 		report.updateTestLog("Invoke Application",

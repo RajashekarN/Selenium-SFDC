@@ -1052,8 +1052,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 	static PartnerConnection connection = null;
 	static ConnectorConfig config;
 	//String environment = LoginPage.environment;
-	public String environment = properties.getProperty("RunEnvironment");
-	//public String environment = System.getProperty("RunEnvironment");
+	//public String environment = properties.getProperty("RunEnvironment");
+	public String environment = System.getProperty("RunEnvironment");
 
 
 	public void updateOpportunityStatus(String FieldName, String OpportunityID) {
@@ -4786,10 +4786,14 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xScrollWindowTop(driver);	
 		quickCreateLabelListSection();
 		opportunityInformationLabelList();
+		opportunityInformationLabelListOBAMER();
 		dealMetricsLabelList();
 		financialInformationLabelList();
 		closeInformationLabelList();
+		closeInformationLabelListOBAMER();
 		lossInformationLabelList();
+		additionalInformationLabelList();
+		servicesLabelList();
 		
 		try {
 			List<WebElement> labelListOpportunitiesPage = driver.findElements(By.xpath("//*[@class='slds-form-element__label']"));
