@@ -268,6 +268,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//button[text()='Save']")
 	WebElement saveOpportunitySplit;
+	
+	@FindBy(xpath = "//input[@value='Save']")
+	WebElement saveOpportunitySplitUAT;
 
 	@FindBy(xpath = "//td[contains(@data-label,'Split Percent')]//input")
 	WebElement splitPercent;
@@ -654,7 +657,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath="//select[contains(@id,'oppForm:salesStage')]/option[@selected='selected']")
 	WebElement salesStageSelected;
 	
-	@FindBy(xpath="//select[contains(@id,'oppForm:salesStage')]/option[@value='']")
+	@FindBy(xpath="//select[contains(@id,'oppForm:salesStage') or contains(@id,'oppForm:stage')]/option[@value='']")
 	WebElement salesStageSelectedEMEA;
 	
 /*	@FindBy(xpath="//select[contains(@id,'oppForm:salesStage')]/option[@selected='selected']")
@@ -1468,7 +1471,11 @@ public class OpportunitiesPage extends ReusableLibrary {
 		splitPercent.clear();
 		Utility_Functions.timeWait(3);
 		splitPercent.sendKeys("100");
-		Utility_Functions.xClick(driver, saveOpportunitySplit, true);
+		try {
+			Utility_Functions.xClick(driver, saveOpportunitySplit, true);
+		} catch (Exception e) {
+			Utility_Functions.xClick(driver, saveOpportunitySplitUAT, true);
+		}		
 		report.updateTestLog("Opportunity Saved", "Opportunity Saved successfully::", Status.PASS);
 		Utility_Functions.timeWait(3);
 	}
@@ -3221,7 +3228,11 @@ public class OpportunitiesPage extends ReusableLibrary {
 		splitPercent.clear();
 		Utility_Functions.timeWait(3);
 		splitPercent.sendKeys("100");
-		Utility_Functions.xClick(driver, saveOpportunitySplit, true);
+		try {
+			Utility_Functions.xClick(driver, saveOpportunitySplit, true);
+		} catch (Exception e) {
+			Utility_Functions.xClick(driver, saveOpportunitySplitUAT, true);
+		}
 		report.updateTestLog("Verify Opportunity Split in Opportunity Team Members Page",
 				"Opportunity Saved successfully::", Status.PASS);
 		Utility_Functions.timeWait(3);

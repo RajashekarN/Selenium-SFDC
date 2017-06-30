@@ -64,10 +64,10 @@ public class LoginPage extends ReusableLibrary {
 		try {
 			if(environment.equals(null)) {
 				
-			} else {
+			} /*else {
 				System.out.println("Environment is set as per the parameters passed from Jenkins:::" + environment );
 				report.updateTestLog("Intialize Environment", "Environment is set as per the parameters passed from Jenkins:::", Status.PASS);
-			}			
+			}*/			
 		} catch (Exception e) {
 			environment = properties.getProperty("RunEnvironment");
 			System.out.println("Environment is set as per the RunEnvironment value in Global Settings file:::" + environment );

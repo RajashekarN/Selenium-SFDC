@@ -200,7 +200,6 @@ public class ResultSummaryManager {
 		overallEndTime = Util.getCurrentTime();
 		String totalExecutionTime = Util.getTimeDifference(overallStartTime,
 				overallEndTime);
-		summaryReport.addResultSummaryFooter(totalExecutionTime);
 		HashMap<String,Integer>hash=summaryReport.addResultSummaryFooter(totalExecutionTime);
 		setUpData(hash);
 		if (testExecutedInUnitTestFramework
