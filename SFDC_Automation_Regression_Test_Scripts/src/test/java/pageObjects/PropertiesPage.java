@@ -38,7 +38,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//a[@role='menuitem']/span[contains(@class,'slds-truncate')][text()='Properties']")
 	WebElement properties;	
-	
+
 	@FindBy(xpath = "//div[@class='overflowList']//a[@title='Properties'][text()='Properties']")
 	WebElement propertiesEnv;	
 
@@ -98,7 +98,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//div[@class='overflowList']//a[@title='Campaigns'][text()='Campaigns']")
 	WebElement campaignsEnv;	
-	
+
 	/**
 	 * 
 	 * 
@@ -163,31 +163,31 @@ public class PropertiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//ul[@class='slds-button-group slds-m-left--xx-small oneActionsRibbon forceActionsContainer']//li/a/div[text()='New']")
 	WebElement newProperties;
-	
+
 	@FindBy(xpath="//label[text()='Building/Property Name']/parent::div/parent::div//div[contains(@class,'requiredInput')]//input[contains(@id,'propertyEditForm')]")
 	WebElement propertyName;
-	
+
 	@FindBy(xpath="//select[contains(@id,'countryPicklist')]")
 	WebElement propertyCountry;
-	
+
 	@FindBy(xpath="//select[contains(@id,'countryPicklist')]/option[text()='United States']")
 	WebElement selectPropertyCountry;
-	
+
 	@FindBy(xpath="//textarea[contains(@id,'propertyEditForm:Street')]")
 	WebElement propertyStreet;
-	
+
 	@FindBy(xpath="//input[contains(@id,'propertyEditForm:City')]")
 	WebElement propertyCity;
-	
+
 	@FindBy(xpath="//select[contains(@id,'propertyEditForm:statePicklist')]")
 	WebElement statePickList;
-	
+
 	@FindBy(xpath="//select[contains(@id,'statePicklist')]/option[text()='Texas']")
-    WebElement selectPropertyState;
-	
+	WebElement selectPropertyState;
+
 	@FindBy(xpath="//h1[contains(@class,'slds-page-header__title')]/span")
 	WebElement propertySaved;
-	
+
 	@FindBy(xpath = "//*[text()='No Next Steps. Open And Upcoming Activities Show Up Here.']")
 	WebElement activityTimeline;
 
@@ -208,10 +208,10 @@ public class PropertiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//span[@class='slds-checkbox--faux']")
 	WebElement statusCheckbox;
-	
+
 	@FindBy(xpath="//button[@title='Past Activity']")
 	WebElement pastActivityButton;
-	
+
 
 	/**
 	 * Validating the Customer Property Page fields 
@@ -1173,22 +1173,7 @@ public class PropertiesPage extends ReusableLibrary {
 	public void validateCampaignsTab() {
 		Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
 		Utility_Functions.xClick(driver, menu_More, true);
-/*		int count=0;
-*/		/*if(dataTable.getData("General_Data", "TC_ID").contains("OBAMERBrokerCampaignsTab")) {
-			List<WebElement> overFlowList = driver.findElements(By.xpath("//div[@class='overflowList']//a"));
-			for(WebElement element: overFlowList) {
-				if(element.getText().equals("Campaigns")) {
-					count++;
-					System.out.println(element.getText());
-				}
-			}
-			if(count==0) {
-				report.updateTestLog("Verify Campaigns Tab","Campaigns tab is not present in the dropdown:::", Status.FAIL);
-			} else {
-				report.updateTestLog("Verify Campaigns Tab","Campaigns tab is present in the dropdown:::", Status.PASS);
-			}
-		} */
-		//if(dataTable.getData("General_Data", "TC_ID").contains("OBAPACBrokerCampaignsTab")) {
+		if(dataTable.getData("General_Data", "TC_ID").contains("OBAPACBrokerCampaignsTab")) {
 			try {
 				Utility_Functions.xWaitForElementPresent(driver, campaigns, 2);
 			} catch (Exception e) {
@@ -1205,17 +1190,33 @@ public class PropertiesPage extends ReusableLibrary {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		//}	
+		} else if (dataTable.getData("General_Data", "TC_ID").contains("OBAMERBrokerCampaignsTab")) {
+			int count=0;
+			if(dataTable.getData("General_Data", "TC_ID").contains("OBAMERBrokerCampaignsTab")) {
+				List<WebElement> overFlowList = driver.findElements(By.xpath("//div[@class='overflowList']//a"));
+				for(WebElement element: overFlowList) {
+					if(element.getText().equals("Campaigns")) {
+						count++;
+						System.out.println(element.getText());
+					}
+				}
+				if(count==0) {
+					report.updateTestLog("Verify Campaigns Tab","Campaigns tab is not present in the dropdown:::", Status.PASS);
+				} else {
+					report.updateTestLog("Verify Campaigns Tab","Campaigns tab is present in the dropdown:::", Status.FAIL);
+				}
+			} 
+		}
 
 	}
-	
+
 	/**
 	 * Validating the properties custom event page
 	 * 
 	 * @author Ramya
 	 *
 	 */
-	
+
 	static ArrayList<String> newPropertiesPageSectionsList = new ArrayList<String>();
 
 	public void newPropertiesPageSections() {
@@ -1237,8 +1238,8 @@ public class PropertiesPage extends ReusableLibrary {
 		newpropertyInformationFieldsList.add("GRID Property Record Link");
 		System.out.println("Property Information Fields are " + newpropertyInformationFieldsList);
 	}
- static ArrayList<String> newPropertyAddressInformationSectionsList = new ArrayList<String>();
- public void newPropertiesPageAddressInformation() {
+	static ArrayList<String> newPropertyAddressInformationSectionsList = new ArrayList<String>();
+	public void newPropertiesPageAddressInformation() {
 		newPropertyAddressInformationSectionsList.add("*Country");
 		newPropertyAddressInformationSectionsList.add("*Street");
 		newPropertyAddressInformationSectionsList.add("*City");
@@ -1252,101 +1253,101 @@ public class PropertiesPage extends ReusableLibrary {
 		System.out.println("New Property Page Sections are " + newPropertyAddressInformationSectionsList);
 	}
 	static ArrayList<String> newpropertyFinancialFieldsList = new ArrayList<String>();
-    public void propertyFinancialFields() {
+	public void propertyFinancialFields() {
 		newpropertyFinancialFieldsList.add("Last Purchase/Sale Price");
 		newpropertyFinancialFieldsList.add("*Currency ISO Code");
 		newpropertyFinancialFieldsList.add("Last Purchase/Sale Date");
 		System.out.println("Property Information Fields are " + newpropertyFinancialFieldsList);
 	}
-	 static ArrayList<String> newPropertySummaryFieldsList = new ArrayList<String>();
-	 public void propertySummaryFields() {
-			newPropertySummaryFieldsList.add("Property Type");
-			newPropertySummaryFieldsList.add("Property Sub-Type");
-			newPropertySummaryFieldsList.add("Construction Type");
-			newPropertySummaryFieldsList.add("Location");
-			newPropertySummaryFieldsList.add("Class");
-			newPropertySummaryFieldsList.add("Net Rentable Area");
-			newPropertySummaryFieldsList.add("Total Size");
-			newPropertySummaryFieldsList.add("Units of Measure");
-			newPropertySummaryFieldsList.add("Total # of Units");
-			newPropertySummaryFieldsList.add("Unit of Comparison");
-			newPropertySummaryFieldsList.add("Land Size (Acres)");
-			newPropertySummaryFieldsList.add("Tenancy");
-			newPropertySummaryFieldsList.add("# of Buildings");
-			newPropertySummaryFieldsList.add("# of Floors");
-			newPropertySummaryFieldsList.add("Building Status");
-			newPropertySummaryFieldsList.add("Month Built");
-			newPropertySummaryFieldsList.add("Year Built");
-			newPropertySummaryFieldsList.add("Year Renovated");
-			newPropertySummaryFieldsList.add("Occupancy Percent");
-			newPropertySummaryFieldsList.add("Owner Occupied");
-			newPropertySummaryFieldsList.add("Vacant");
-			System.out.println("New Property Page Summary section fields are " + newPropertySummaryFieldsList);
-		}
-		
-		static ArrayList<String> newpropertyManagementFieldsList = new ArrayList<String>();
-		public void propertyManagementFields() {
-			newpropertyManagementFieldsList.add("Company");
-			newpropertyManagementFieldsList.add("Address");
-			newpropertyManagementFieldsList.add("Contact Name");
-			newpropertyManagementFieldsList.add("Phone");
-			newpropertyManagementFieldsList.add("Email");
-			System.out.println("Property Management Fields are " + newpropertyManagementFieldsList);
-		}
-		
-		static ArrayList<String> newpropertyAssetManagementFieldsList = new ArrayList<String>();
-		public void propertyAssetManagementFields() {
-			newpropertyAssetManagementFieldsList.add("Company");
-			newpropertyAssetManagementFieldsList.add("Address");
-			newpropertyAssetManagementFieldsList.add("Contact Name");
-			newpropertyAssetManagementFieldsList.add("Phone");
-			newpropertyAssetManagementFieldsList.add("Email");
-			System.out.println(" Asset Management Fields are " + newpropertyAssetManagementFieldsList);
-		}
-		
-		static ArrayList<String> newpropertyListingManagementFieldsList = new ArrayList<String>();
-		public void propertyListingManagementFields() {
-			newpropertyListingManagementFieldsList.add("Company");
-			newpropertyListingManagementFieldsList.add("Address");
-			newpropertyListingManagementFieldsList.add("Contact Name");
-			newpropertyListingManagementFieldsList.add("Phone");
-			newpropertyListingManagementFieldsList.add("Email");
-			System.out.println("Listing Management Fields are " + newpropertyListingManagementFieldsList);
-		}
-		
-		/**
-		 * Validating the properties custom event page
-		 * 
-		 * @author Ramya
-		 *
-		 */
-		
+	static ArrayList<String> newPropertySummaryFieldsList = new ArrayList<String>();
+	public void propertySummaryFields() {
+		newPropertySummaryFieldsList.add("Property Type");
+		newPropertySummaryFieldsList.add("Property Sub-Type");
+		newPropertySummaryFieldsList.add("Construction Type");
+		newPropertySummaryFieldsList.add("Location");
+		newPropertySummaryFieldsList.add("Class");
+		newPropertySummaryFieldsList.add("Net Rentable Area");
+		newPropertySummaryFieldsList.add("Total Size");
+		newPropertySummaryFieldsList.add("Units of Measure");
+		newPropertySummaryFieldsList.add("Total # of Units");
+		newPropertySummaryFieldsList.add("Unit of Comparison");
+		newPropertySummaryFieldsList.add("Land Size (Acres)");
+		newPropertySummaryFieldsList.add("Tenancy");
+		newPropertySummaryFieldsList.add("# of Buildings");
+		newPropertySummaryFieldsList.add("# of Floors");
+		newPropertySummaryFieldsList.add("Building Status");
+		newPropertySummaryFieldsList.add("Month Built");
+		newPropertySummaryFieldsList.add("Year Built");
+		newPropertySummaryFieldsList.add("Year Renovated");
+		newPropertySummaryFieldsList.add("Occupancy Percent");
+		newPropertySummaryFieldsList.add("Owner Occupied");
+		newPropertySummaryFieldsList.add("Vacant");
+		System.out.println("New Property Page Summary section fields are " + newPropertySummaryFieldsList);
+	}
+
+	static ArrayList<String> newpropertyManagementFieldsList = new ArrayList<String>();
+	public void propertyManagementFields() {
+		newpropertyManagementFieldsList.add("Company");
+		newpropertyManagementFieldsList.add("Address");
+		newpropertyManagementFieldsList.add("Contact Name");
+		newpropertyManagementFieldsList.add("Phone");
+		newpropertyManagementFieldsList.add("Email");
+		System.out.println("Property Management Fields are " + newpropertyManagementFieldsList);
+	}
+
+	static ArrayList<String> newpropertyAssetManagementFieldsList = new ArrayList<String>();
+	public void propertyAssetManagementFields() {
+		newpropertyAssetManagementFieldsList.add("Company");
+		newpropertyAssetManagementFieldsList.add("Address");
+		newpropertyAssetManagementFieldsList.add("Contact Name");
+		newpropertyAssetManagementFieldsList.add("Phone");
+		newpropertyAssetManagementFieldsList.add("Email");
+		System.out.println(" Asset Management Fields are " + newpropertyAssetManagementFieldsList);
+	}
+
+	static ArrayList<String> newpropertyListingManagementFieldsList = new ArrayList<String>();
+	public void propertyListingManagementFields() {
+		newpropertyListingManagementFieldsList.add("Company");
+		newpropertyListingManagementFieldsList.add("Address");
+		newpropertyListingManagementFieldsList.add("Contact Name");
+		newpropertyListingManagementFieldsList.add("Phone");
+		newpropertyListingManagementFieldsList.add("Email");
+		System.out.println("Listing Management Fields are " + newpropertyListingManagementFieldsList);
+	}
+
+	/**
+	 * Validating the properties custom event page
+	 * 
+	 * @author Ramya
+	 *
+	 */
+
 
 	public void verifyNewPropertiesPage(){
 
-        try{
-            Utility_Functions.xWaitForElementPresent(driver,menu_Properties, 3);
-            Utility_Functions.xClick(driver, menu_Properties, true);
-      }catch(Exception e){
-            Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
-            Utility_Functions.xClick(driver, menu_More, true);
-            try {
-                   Utility_Functions.xWaitForElementPresent(driver, properties, 2);
-                   Utility_Functions.xClick(driver, properties, true);
-            } catch (Exception e1) {
-                   Utility_Functions.xWaitForElementPresent(driver, propertiesEnv, 2);
-                   Utility_Functions.xClick(driver, propertiesEnv, true);
-            }      
-      }
+		try{
+			Utility_Functions.xWaitForElementPresent(driver,menu_Properties, 3);
+			Utility_Functions.xClick(driver, menu_Properties, true);
+		}catch(Exception e){
+			Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
+			Utility_Functions.xClick(driver, menu_More, true);
+			try {
+				Utility_Functions.xWaitForElementPresent(driver, properties, 2);
+				Utility_Functions.xClick(driver, properties, true);
+			} catch (Exception e1) {
+				Utility_Functions.xWaitForElementPresent(driver, propertiesEnv, 2);
+				Utility_Functions.xClick(driver, propertiesEnv, true);
+			}      
+		}
 
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, newProperties, 2);
 		Utility_Functions.xClick(driver, newProperties, true);	
 		Utility_Functions.timeWait(2);
-	
+
 		Utility_Functions.xSwitchtoFrame(driver, saveProperty);
 		Utility_Functions.timeWait(5);
-	
+
 		List<WebElement> propertiesPageSectionsList = driver.findElements(
 				By.xpath("//div[contains(@class,'slds-col--padded')]/h2"));
 		int count1 = 0, i1 = 0;
@@ -1379,7 +1380,7 @@ public class PropertiesPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
+
 		List<WebElement> propertyInformationFieldsList = driver.findElements(
 				By.xpath("//h2[text()='Property Information']/parent::div/parent::div//div[@class='slds-form-element']/label"));
 		int count2 = 0, i2 = 0;
@@ -1412,7 +1413,7 @@ public class PropertiesPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
+
 		List<WebElement> propertyAddressFieldsList = driver.findElements(
 				By.xpath("//h2[text()='Address Information']/parent::div/parent::div//div[@class='slds-form-element']/label"));
 		int count3 = 0, i3 = 0;
@@ -1445,7 +1446,7 @@ public class PropertiesPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
+
 		List<WebElement> propertiesFinancialFieldsList = driver.findElements(
 				By.xpath("//h2[text()='Property Financials']/parent::div/parent::div//div[@class='slds-form-element']/label"));
 		int count4 = 0, i4 = 0;
@@ -1489,13 +1490,13 @@ public class PropertiesPage extends ReusableLibrary {
 			propertySummaryFields();
 			for (WebElement element5 : propertiesSummaryFieldsList) {
 				System.out.println(element5.getText());
-				
+
 				fieldsArray4[i5] = element5.getText();
 				if (fieldsArray4[i5].equalsIgnoreCase(newPropertySummaryFieldsList.get(i5))){
-				/*String propertySummaryFieldListValue = newPropertySummaryFieldsList.get(i5);
+					/*String propertySummaryFieldListValue = newPropertySummaryFieldsList.get(i5);
 				System.out.println(propertySummaryFieldListValue);
 				if (fieldsArray4[i5].contains(propertySummaryFieldListValue))*/ 
-				report.updateTestLog("Verify Custom Property Page",
+					report.updateTestLog("Verify Custom Property Page",
 							"Property summary section is having the " + fieldsArray4[i5] + " section ",
 							Status.PASS);
 					count5++;
@@ -1515,7 +1516,7 @@ public class PropertiesPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-	
+
 		List<WebElement> propertiesManagementFieldsList = driver.findElements(
 				By.xpath("//h2[text()='Property Management']/parent::div/parent::div//div[@class='slds-form-element']/label"));
 		int count6 = 0, i6 = 0;
@@ -1548,7 +1549,7 @@ public class PropertiesPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-	
+
 		List<WebElement> propertiesAssetManagementFieldsList = driver.findElements(
 				By.xpath("//h2[text()='Asset Management']/parent::div/parent::div//div[@class='slds-form-element']/label"));
 		int count7 = 0, i7 = 0;
@@ -1581,7 +1582,7 @@ public class PropertiesPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
+
 		List<WebElement> propertiesListingManagementFieldsList = driver.findElements(
 				By.xpath("//h2[text()='Listing Management']/parent::div/parent::div//div[@class='slds-form-element']/label"));
 		int count8 = 0, i8 = 0;
@@ -1635,7 +1636,7 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, selectPropertyCountry, true);
 		Utility_Functions.xWaitForElementPresent(driver, selectPropertyState, 3);
 		Utility_Functions.xClick(driver, selectPropertyState, true);
-/*		Utility_Functions.timeWait(1);
+		/*		Utility_Functions.timeWait(1);
 		Utility_Functions.xWaitForElementPresent(driver, selectPropertyState, 3);
 		Utility_Functions.xClick(driver, selectPropertyState, true);
 		Utility_Functions.timeWait(2);*/
@@ -1645,7 +1646,7 @@ public class PropertiesPage extends ReusableLibrary {
 		report.updateTestLog("Verify Custom Property Page",
 				"The new property is saved with all the required fields", Status.PASS);	
 	}
-	
+
 	public void staleElementHandle(WebElement element) {
 		int count = 0;
 		boolean clicked = false;
@@ -1657,7 +1658,7 @@ public class PropertiesPage extends ReusableLibrary {
 		} catch (StaleElementReferenceException e) {
 			e.toString();
 			System.out.println("Trying to recover from a stale element :" + e.getMessage());
-		    count = count+1;
+			count = count+1;
 		}
 	}
 	/**
@@ -1666,7 +1667,7 @@ public class PropertiesPage extends ReusableLibrary {
 	 * @author Ramya
 	 *
 	 */
-	
+
 	public void selectProperty() {
 		try{
 			Utility_Functions.xWaitForElementPresent(driver,menu_Properties, 3);
@@ -1676,7 +1677,7 @@ public class PropertiesPage extends ReusableLibrary {
 			Utility_Functions.xClick(driver, menu_More, true);
 			Utility_Functions.xWaitForElementPresent(driver, properties, 2);
 			Utility_Functions.xClick(driver, properties, true);	
-			
+
 		}
 		Utility_Functions.timeWait(2);
 		List<WebElement> accountList = driver
@@ -1693,7 +1694,7 @@ public class PropertiesPage extends ReusableLibrary {
 	 */
 
 	public void activityLightningTimeline() {
-		
+
 		selectProperty();
 		Utility_Functions.xClick(driver, related, true);
 		Utility_Functions.timeWait(4);

@@ -50,20 +50,26 @@ public class LoginPage extends ReusableLibrary {
 	@FindBy(xpath = "//a[@class='continue][text()='Continue']")
 	WebElement continueLink;
 
+	@FindBy(xpath = "//*[@id='userNavLabel']")
+	WebElement userName;
+
+	@FindBy(xpath = "//*[@id='userNav-menuItems']/a[text()='Switch to Lightning Experience']")
+	WebElement switchLightningExperience;
+
 	/**
 	 * Validating the browser launch functionality
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */
-	
+
 	//public String environment = properties.getProperty("RunEnvironment");
 	public static String environment = System.getProperty("RunEnvironment");
 
 	public String initializeEnvironment() {
 		try {
 			if(environment.equals(null)) {
-				
+
 			} /*else {
 				System.out.println("Environment is set as per the parameters passed from Jenkins:::" + environment );
 				report.updateTestLog("Intialize Environment", "Environment is set as per the parameters passed from Jenkins:::", Status.PASS);
@@ -165,7 +171,7 @@ public class LoginPage extends ReusableLibrary {
 					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment+"CMEMEAManager"));
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("BrokerIP"))) {
 					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment+"CMEMEABroker"));
-					
+
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VASAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
 					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment+"VASAMERManager"));
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VASAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
@@ -315,28 +321,28 @@ public class LoginPage extends ReusableLibrary {
 					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTE2OBEMEAManagerPassword"));
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBEMEA"))&& (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
 					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTE2OBEMEACSSPassword"));
-					
+
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ABEMEA"))&& (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
 					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTE2ABEMEABrokerPassword"));
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ABEMEA"))&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
 					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTE2ABEMEAManagerPassword"));
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ABEMEA"))&& (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
 					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTE2ABEMEACSSPassword"));
-				
+
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA"))&& (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
 					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTE2CMEMEABrokerPassword"));
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA"))&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
 					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTE2CMEMEAManagerPassword"));
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA"))&& (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
 					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTE2CMEMEACSSPassword"));
-					
+
 				} else {
 					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTE2Password"));
 				}
 			} else if (environment.equals("UAT2")) {
 				if (dataTable.getData("General_Data", "TC_ID").contains("Admin")) { 
 					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("UAT2AdminPassword"));
-					
+
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
 					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("UAT2OBAMERBrokerPassword"));
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
@@ -353,14 +359,14 @@ public class LoginPage extends ReusableLibrary {
 
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
 					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("UAT2ABAPACManagerPassword"));
-					
+
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
 					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("UAT2CMAMERBrokerPassword"));
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manger"))) {
 					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("UAT2CMAMERManagerPassword"));
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
 					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("UAT2CMAMERCSSPassword"));
-					
+
 				} else {
 					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("UAT2Password"));
 				}
@@ -391,18 +397,24 @@ public class LoginPage extends ReusableLibrary {
 	 */
 
 	public void verifyLoginSuccessful() {
-		Utility_Functions.xWaitForElementPresent(driver, menu_Home, 5);
 		try {
-			if (menu_Home.isDisplayed()) {
-				report.updateTestLog("Verify Login", "Login is successful", Status.PASS);
-			} else {
-				frameworkParameters.setStopExecution(true);
-				throw new FrameworkException("Verify Login", "Login failed");
-			}
+			try {
+					Utility_Functions.xWaitForElementPresent(driver, menu_Home, 3);
+					report.updateTestLog("Verify Login", "Login is successful", Status.PASS);
+				} catch (Exception e) {
+					Utility_Functions.xWaitForElementPresent(driver, userName, 3);
+					Utility_Functions.xClick(driver, userName, true);
+					Utility_Functions.timeWait(2);
+					Utility_Functions.xWaitForElementPresent(driver, switchLightningExperience, 3);
+					Utility_Functions.xClick(driver, switchLightningExperience, true);
+					report.updateTestLog("Verify Login", "Switched to Lightning Experience Page", Status.PASS);
+					Utility_Functions.xWaitForElementPresent(driver, menu_Home, 3);
+					report.updateTestLog("Verify Login", "Login is successful", Status.PASS);
+				}
 		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
-		}
+			frameworkParameters.setStopExecution(true);
+			throw new FrameworkException("Verify Login", "Login failed");
+		}	
 	}
 
 	/**
