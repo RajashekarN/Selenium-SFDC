@@ -309,11 +309,12 @@ public class HomePage extends ReusableLibrary {
 		tabsList.add("Calendar");
 		tabsList.add("Chatter");
 		tabsList.add("Groups");
-		//tabsList.add("Leads");
+		tabsList.add("Leads");
 		tabsList.add("Accounts");
 		tabsList.add("Contacts");
 		tabsList.add("Opportunities");
 		tabsList.add("Reports");
+		tabsList.add("Dashboards");
 		tabsList.add("Private Notes");
 		tabsList.add("Properties");
 		tabsList.add("Private Tags");
@@ -333,8 +334,32 @@ public class HomePage extends ReusableLibrary {
 
 	public void validateHomePageTabsForAPACCapitalMarkets() {
 		homePageTabsList();
-		Utility_Functions.timeWait(2);
-		List<WebElement> homePageTabsList = driver
+		Utility_Functions.timeWait(2);		
+		List<WebElement> homePageTabsList = driver.findElements(By.xpath("//div[contains(@class,'slds-context-bar')]//span[@class='slds-truncate']"));
+		int i1 = 0, j=0, countLabelList = 0;
+		String[] labelTexts = new String[tabsList.size()];
+		while(j<tabsList.size()) {
+			for (WebElement element : homePageTabsList) {
+				labelTexts[i1] = element.getText();
+				if (labelTexts[i1].contains(tabsList.get(j))) {
+					System.out.println("Verify Add Opportunity Page Label List" + element.getText());
+					report.updateTestLog("Verify Add Opportunity Page Label List", element.getText() + "::::label list is present in Add Opportunity Page", Status.PASS);
+					countLabelList++;
+				}
+				i1++;
+			}
+			i1=0;
+			j++;
+		}
+		System.out.println("OpportunityInformationList:::"+ countLabelList);
+		if (countLabelList >= 9) {
+			System.out.println("All the Tabs are present in Home Page ");
+			report.updateTestLog("Verify Home Page Tabs", "All the Tabs are present in Home Page", Status.PASS);
+		} else if (countLabelList < 10) {
+			report.updateTestLog("Verify Home Page Tabs", "All the Tabs are not present in Home Page", Status.FAIL);
+		}
+		
+	/*	List<WebElement> homePageTabsList = driver
 				.findElements(By.xpath("//div[contains(@class,'slds-context-bar')]//span[@class='slds-truncate']"));
 		String[] homePageTabs = new String[homePageTabsList.size()];
 		System.out.println(homePageTabs);
@@ -363,6 +388,6 @@ public class HomePage extends ReusableLibrary {
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
-		}
+		}*/
 	}	
 }

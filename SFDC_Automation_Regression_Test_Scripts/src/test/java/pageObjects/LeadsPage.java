@@ -383,6 +383,9 @@ public class LeadsPage extends ReusableLibrary {
 	@FindBy(xpath="//input[contains(@value,'Add')]")
 	WebElement addSharingPage;
 	
+	private String leadConvertWaitSpinnerXPath = "//div[@class='slds-spinner_container']";
+	
+	
 /*	@FindBy(xpath = "//article[contains(@class,'forceRelatedListCardDesktop')]//span[contains(text(),'Private Notes')]/ancestor::article//div[text()='New']")
 	WebElement new_PrivateNotes;*/
 	
@@ -1908,7 +1911,34 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xSwitchtoFrame(driver, convertButton);
 		Utility_Functions.timeWait(5);
+		convertLeadRequiredFields();
 		List<WebElement> convertList = driver.findElements(By.xpath("//label[@class='slds-form-element__label']"));
+		int i1 = 0, j=0, countLabelList = 0;
+		String[] labelTexts = new String[convertList.size()];
+		while(j<convertLeadRequiredFieldsList.size()) {
+			for (WebElement element : convertList) {
+				labelTexts[i1] = element.getText();
+				if (labelTexts[i1].contains(convertLeadRequiredFieldsList.get(j))) {
+					System.out.println("Verify Convert Lead with Direct Line and Private Note" + element.getText());
+					report.updateTestLog("Verify Convert Lead with Direct Line and Private Note", ":::: Lead Convert  page is having the:::" + element.getText(), Status.PASS);
+					countLabelList++;
+				}
+				i1++;
+				if(countLabelList ==8) 
+					break;
+			}
+			i1=0;
+			j++;
+		}
+		System.out.println("Custom Page Lead Information fields are:::"+ countLabelList);
+		if (countLabelList != 8) {
+			report.updateTestLog("Verify Convert Lead with Direct Line and Private Note","All fields are not present in the Lead Convert Page", Status.FAIL);
+		} else {
+
+			report.updateTestLog("Verify Convert Lead with Direct Line and Private Note","All fields are present in the Lead Convert Page", Status.PASS);
+		}
+		
+		/*List<WebElement> convertList = driver.findElements(By.xpath("//label[@class='slds-form-element__label']"));
 		int count1 = 0, i1 = 0;
 		String fieldsArray[] = new String[convertList.size()];
 		System.out.println(convertList.size());
@@ -1936,7 +1966,7 @@ public class LeadsPage extends ReusableLibrary {
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-		}
+		}*/
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xScrollWindow(driver);
 		Utility_Functions.timeWait(2);
@@ -2186,13 +2216,14 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, zipCodeField, 5);
 		Utility_Functions.xSendKeys(driver, zipCodeField, dataTable.getData("General_Data", "Zipcode"));
 		report.updateTestLog("Verify Convert Lead with Email","The New Lead page is entered with the Zipcode", Status.PASS);
+		Utility_Functions.timeWait(1);
 		Utility_Functions.xWaitForElementPresent(driver,convertButton, 3);
 		Utility_Functions.xClick(driver,convertButton, true);
 		report.updateTestLog("Verify Convert Lead with Email","The Lead is converted with the required fields", Status.PASS);
 		Utility_Functions.timeWait(5);
 		driver.switchTo().defaultContent();
 		driver.navigate().refresh();
-		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(3);
 		Utility_Functions.xWaitForElementPresent(driver,related, 3);
 		Utility_Functions.xClick(driver,related, true);
 		Utility_Functions.timeWait(2);
@@ -2223,6 +2254,17 @@ public class LeadsPage extends ReusableLibrary {
 			{
 				report.updateTestLog("Verify Convert Lead with Email","The Private Notes is created with the deafult contact values ",Status.FAIL);
 			}
+		}
+	}
+	
+	public void spinnerAlert() {
+		Utility_Functions.timeWait(1);
+		if(driver.findElement(By.xpath(leadConvertWaitSpinnerXPath)).isDisplayed()){
+			Utility_Functions.xWaitForElementDisappear(driver, By.xpath(leadConvertWaitSpinnerXPath), 30);
+		}
+		if(driver.findElement(By.xpath(leadConvertWaitSpinnerXPath)).isDisplayed()){
+			report.updateTestLog("Lead Convert Warning", "Excessive wait time to convert lead page encountered.", Status.WARNING);
+			Utility_Functions.xWaitForElementDisappear(driver, By.xpath(leadConvertWaitSpinnerXPath), 90);
 		}
 	}
 	/**
