@@ -5,7 +5,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
-import com.cognizant.framework.FrameworkException;
 import com.cognizant.framework.Status;
 import supportLibraries.Utility_Functions;
 
@@ -412,8 +411,9 @@ public class LoginPage extends ReusableLibrary {
 					report.updateTestLog("Verify Login", "Login is successful", Status.PASS);
 				}
 		} catch (Exception e) {
-			frameworkParameters.setStopExecution(true);
-			throw new FrameworkException("Verify Login", "Login failed");
+			report.updateTestLog("Verify Login", "UserName and Password entered are invalid please check the credentials:::", Status.FAIL);
+			/*frameworkParameters.setStopExecution(true);
+			throw new FrameworkException("Verify Login", "Login failed");*/
 		}	
 	}
 
