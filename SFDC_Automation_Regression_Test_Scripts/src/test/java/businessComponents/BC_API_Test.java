@@ -4,8 +4,11 @@ import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
 
+import pageObjects.LoginPage;
 import pagesAPI.AccountsFunctions;
+import pagesAPI.ActivityFunctions;
 import pagesAPI.ContactsFunctions;
+import pagesAPI.CreateUsers;
 import pagesAPI.EstablishConnection;
 import pagesAPI.LeadFunctions;
 import pagesAPI.OpportunitiesFunctions;
@@ -36,7 +39,10 @@ public class BC_API_Test extends ReusableLibrary {
 	OpportunitiesFunctions sfOpportunitiesFunctions = new OpportunitiesFunctions(scriptHelper);
 	LeadFunctions sfLeadsFunctions = new LeadFunctions(scriptHelper);
 	SearchTextSOQL sfSearchText = new SearchTextSOQL(scriptHelper);	
-
+	CreateUsers createUsers = new CreateUsers(scriptHelper);
+	LoginPage loginPage = new LoginPage(scriptHelper);
+	ActivityFunctions activityFunctions = new ActivityFunctions(scriptHelper);
+	
 	/**
 	 * Validating the Login functionality
 	 * 
@@ -371,5 +377,13 @@ public class BC_API_Test extends ReusableLibrary {
 		//sfSearchText.uploadFile();		
 	}
 	
+	public void bc_changePassword() {
+		createUsers.setPassword(dataTable.getData("General_Data", "Password"));
+//		loginPage.changePassword();
+	}
 	
+	
+	public void bc_createActivity() {
+		activityFunctions.createActivity();
+	}
 }

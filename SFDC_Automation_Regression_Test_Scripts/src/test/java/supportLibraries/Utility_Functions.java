@@ -1203,7 +1203,7 @@ public class Utility_Functions extends ReusableLibrary {
 
 	public static String xGenerateAlphaNumericString()
 	{	
-		int count = 25;
+		int count = 10;
 		StringBuilder builder = new StringBuilder();
 		while (count-- != 0) {
 			int character = (int)(Math.random()*ALPHA_NUMERIC_STRING.length());

@@ -53,16 +53,19 @@ public class AccountsFunctions extends ReusableLibrary {
 	 */
 	public boolean createAccount() {
 		try {
-			/*CreateUsers createuser = new CreateUsers(scriptHelper);
-			createuser.setPasswordUsersList();*/
-/*			String randomString = Utility_Functions.xGenerateString(20);
+			
+/*			ActivityFunctions activityFunctions = new ActivityFunctions(scriptHelper);
+			activityFunctions.createActivity();
+			CreateUsers createuser = new CreateUsers(scriptHelper);
+			createuser.setPasswordUsersList();
+			String randomString = Utility_Functions.xGenerateString(20);
 			System.out.println(randomString);
 			CreateUsers createuser = new CreateUsers(scriptHelper);
 			createuser.createUsers();
 			//createuser.resetPassword("0050m000000N8r5AAC");
 			//createuser.setPassword("0050m000000N8r5AAC", "Password8910");
-			
-			readMultipleRowsContacts("Luis Cole%");*/
+*/			
+		/*	readMultipleRowsContacts("Luis Cole%");*/
 			
 			establishConnection.establishConnection();
 			SObject account = new SObject();
