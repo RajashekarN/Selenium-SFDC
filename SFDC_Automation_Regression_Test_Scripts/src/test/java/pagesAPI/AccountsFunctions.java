@@ -53,6 +53,8 @@ public class AccountsFunctions extends ReusableLibrary {
 	 */
 	public boolean createAccount() {
 		try {
+			/*CreateUsers createuser = new CreateUsers(scriptHelper);
+			createuser.setPasswordUsersList();*/
 /*			String randomString = Utility_Functions.xGenerateString(20);
 			System.out.println(randomString);
 			CreateUsers createuser = new CreateUsers(scriptHelper);

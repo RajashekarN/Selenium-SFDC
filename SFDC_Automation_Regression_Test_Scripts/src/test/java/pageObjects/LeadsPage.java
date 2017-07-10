@@ -358,7 +358,13 @@ public class LeadsPage extends ReusableLibrary {
 	
 	@FindBy(xpath="//label[text()='Preferred Property Type']/parent::div/div//select[contains(@id,'LeadForm')]/option[@value='Hotel']")
 	WebElement selectPreferedPropertyTypeValue;
-
+	
+	@FindBy(xpath="//select[contains(@id,'LeadForm:propertySubTypeInput_unselected')]//option[1]")
+	WebElement selectPreferedPropertySubTypeValue;
+	
+	@FindBy(xpath="//td[@class='multiSelectPicklistCell']/a[@title='Add']")
+	WebElement addValuetoCheckList;
+	
 	@FindBy(xpath="//h2[@id='header']/a/span[text()='Private Notes'] ")
 	WebElement privateNotes;
 	
@@ -566,9 +572,8 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, continueButton, 3);
 		Utility_Functions.xClick(driver, continueButton, true);
 		Utility_Functions.timeWait(2);
-		Random random = new Random();
-		int value = random.nextInt(1000);
-		String companyName = dataTable.getData("General_Data", "Company") + value;		
+		String value = Utility_Functions.xGenerateAlphaNumericString();
+		String companyName = value  + dataTable.getData("General_Data", "Company") ;		
 		Utility_Functions.xSwitchtoFrame(driver, firstName);
 		Utility_Functions.xWaitForElementPresent(driver, firstName, 5);
 		Utility_Functions.xSendKeys(driver, firstName, dataTable.getData("General_Data", "First Name"));
@@ -577,6 +582,27 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xSendKeys(driver, company, companyName);
 		//Utility_Functions.xSendKeys(driver, company, Keys.SPACE);		
+	
+		if(dataTable.getData("General_Data", "TC_ID").contains("LeadsConvertPageWithEmail")) {
+			Utility_Functions.xWaitForElementPresent(driver, selectPreferedPropertyType, 2);
+			Utility_Functions.xClick(driver, selectPreferedPropertyType, true);
+			Utility_Functions.xWaitForElementPresent(driver, selectPreferedPropertyTypeValue, 2);
+			Utility_Functions.xClick(driver, selectPreferedPropertyTypeValue, true);
+			Utility_Functions.xWaitForElementPresent(driver, selectPreferedPropertySubTypeValue, 2);
+			Utility_Functions.xClick(driver, selectPreferedPropertySubTypeValue, true);
+			Utility_Functions.xWaitForElementPresent(driver, addValuetoCheckList, 2);
+			Utility_Functions.xClick(driver, addValuetoCheckList, true);
+			report.updateTestLog("Verify Convert Lead with Direct Line and Private Note","The Prefered Property type is selected", Status.PASS);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xScrollWindow(driver);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xScrollWindowTop(driver);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xWaitForElementPresent(driver, emailLead, 2);
+			Utility_Functions.xSendKeys(driver,emailLead, dataTable.getData("General_Data", "Email"));
+			report.updateTestLog("Verify Convert Lead with Email","The Direct Line value is entered", Status.PASS);
+			Utility_Functions.timeWait(2);			
+		}
 	}
 
 	/**
@@ -2168,12 +2194,17 @@ public class LeadsPage extends ReusableLibrary {
 	 */	
 	
 	public void convertLeadWithEmail() {
-		createLeadFunction();
+		convertLeadNewAccount();
+	/*	createLeadFunction();
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, selectPreferedPropertyType, 2);
 		Utility_Functions.xClick(driver, selectPreferedPropertyType, true);
 		Utility_Functions.xWaitForElementPresent(driver, selectPreferedPropertyTypeValue, 2);
 		Utility_Functions.xClick(driver, selectPreferedPropertyTypeValue, true);
+		Utility_Functions.xWaitForElementPresent(driver, selectPreferedPropertySubTypeValue, 2);
+		Utility_Functions.xClick(driver, selectPreferedPropertySubTypeValue, true);
+		Utility_Functions.xWaitForElementPresent(driver, addValuetoCheckList, 2);
+		Utility_Functions.xClick(driver, addValuetoCheckList, true);
 		report.updateTestLog("Verify Convert Lead with Direct Line and Private Note","The Prefered Property type is selected", Status.PASS);
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xScrollWindow(driver);
@@ -2219,7 +2250,7 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xWaitForElementPresent(driver,convertButton, 3);
 		Utility_Functions.xClick(driver,convertButton, true);
-		report.updateTestLog("Verify Convert Lead with Email","The Lead is converted with the required fields", Status.PASS);
+		report.updateTestLog("Verify Convert Lead with Email","The Lead is converted with the required fields", Status.PASS);*/
 		Utility_Functions.timeWait(5);
 		driver.switchTo().defaultContent();
 		driver.navigate().refresh();
