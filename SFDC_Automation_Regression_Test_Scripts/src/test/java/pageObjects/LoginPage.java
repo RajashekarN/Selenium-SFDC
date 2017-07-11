@@ -360,34 +360,9 @@ public class LoginPage extends ReusableLibrary {
 				} else {
 					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTE2Password"));
 				}
-			} else if (environment.equals("UAT2")) {
-				if (dataTable.getData("General_Data", "TC_ID").contains("Admin")) { 
+			} if (environment.equals("UAT2")) {
+				if (dataTable.getData("General_Data", "TC_ID").contains("Admin")) {
 					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("UAT2AdminPassword"));
-
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
-					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("UAT2OBAMERBrokerPassword"));
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
-					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("UAT2OBAMERManagerPassword"));
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
-					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("UAT2OBAMERCSSPassword"));
-
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
-					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("UAT2ABAMERBrokerPassword"));
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manger"))) {
-					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("UAT2ABAMERManagerPassword"));
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
-					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("UAT2ABAMERCSSPassword"));
-
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
-					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("UAT2ABAPACManagerPassword"));
-
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
-					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("UAT2CMAMERBrokerPassword"));
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manger"))) {
-					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("UAT2CMAMERManagerPassword"));
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
-					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("UAT2CMAMERCSSPassword"));
-
 				} else {
 					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("UAT2Password"));
 				}
@@ -448,7 +423,9 @@ public class LoginPage extends ReusableLibrary {
 
 	public void logout() {
 		try {
+			Utility_Functions.xWaitForElementPresent(driver, logOutButton, 3);
 			Utility_Functions.xClick(driver, logOutButton, true);
+			Utility_Functions.xWaitForElementPresent(driver, logOut, 3);
 			Utility_Functions.xClick(driver, logOut, true);
 			report.updateTestLog("Verify Logout", "User has been logged out successfully:::", Status.PASS);
 		} catch (Exception e) {
@@ -468,6 +445,7 @@ public class LoginPage extends ReusableLibrary {
 		String sCurrentPassword = dataTable.getData("General_Data", "Password");
 		if ((environment.equals("UAT")) || (environment.equals("UAT2")) || (environment.equals("FTE")) || (environment.equals("FTE2"))) {				
 			for (int i=0; i < userNamesList.size(); i++) {
+				Utility_Functions.timeWait(1);
 				invokeApplication();
 				String userName = userNamesList.get(i);
 				Utility_Functions.xSendKeys(driver, txt_userName, userName);
@@ -490,7 +468,10 @@ public class LoginPage extends ReusableLibrary {
 				Utility_Functions.xSendKeys(driver, securityAnswer, dataTable.getData("General_Data", "SecurityAnswer"));
 				Utility_Functions.xWaitForElementPresent(driver, changePassword, 3);
 				Utility_Functions.xClick(driver, changePassword, true);
-				report.updateTestLog("Verify Change Password", "Password has been changed successfully:::", Status.PASS);
+				report.updateTestLog("Verify Change Password", "Password has been changed successfully:::" + dataTable.getData("General_Data", "NewPassword"), Status.PASS);
+				Utility_Functions.timeWait(4);
+				logout();
+				Utility_Functions.timeWait(3);
 				//driver.quit();
 			}		
 		}
@@ -506,8 +487,8 @@ public class LoginPage extends ReusableLibrary {
 	public void userNames() {
 		String environment = initializeEnvironment();
 		environment = environment.toLowerCase();
-		userNamesList.add("testuser2@cbre.com.crm."+ environment);
-		userNamesList.add("testuser3@cbre.com.crm."+ environment);
+		//userNamesList.add("testuser2@cbre.com.crm."+ environment);
+/*		userNamesList.add("testuser3@cbre.com.crm."+ environment);
 		userNamesList.add("testuser4@cbre.com.crm."+ environment);
 		userNamesList.add("testuser5@cbre.com.crm."+ environment);
 		userNamesList.add("testuser6@cbre.com.crm."+ environment);
@@ -518,8 +499,8 @@ public class LoginPage extends ReusableLibrary {
 		userNamesList.add("testuser11@cbre.com.crm."+ environment);
 		userNamesList.add("testuser12@cbre.com.crm."+ environment);
 		userNamesList.add("testuser13@cbre.com.crm."+ environment);
-		userNamesList.add("testuser14@cbre.com.crm."+ environment);
-		userNamesList.add("testuser15@cbre.com.crm."+ environment);
+		userNamesList.add("testuser14@cbre.com.crm."+ environment);*/
+		/*userNamesList.add("testuser15@cbre.com.crm."+ environment);
 		userNamesList.add("testuser16@cbre.com.crm."+ environment);
 		userNamesList.add("testuser17@cbre.com.crm."+ environment);
 		userNamesList.add("testuser18@cbre.com.crm."+ environment);
@@ -555,11 +536,10 @@ public class LoginPage extends ReusableLibrary {
 		userNamesList.add("testuser48@cbre.com.crm."+ environment);
 		userNamesList.add("testuser49@cbre.com.crm."+ environment);
 		userNamesList.add("testuser50@cbre.com.crm."+ environment);
-		userNamesList.add("testuser51@cbre.com.crm."+ environment);
-		userNamesList.add("testuser52@cbre.com.crm."+ environment);
-		userNamesList.add("testuser53@cbre.com.crm."+ environment);
-		userNamesList.add("testuser53@cbre.com.crm."+ environment);
-		userNamesList.add("testuser54@cbre.com.crm."+ environment);
+		userNamesList.add("testuser51@cbre.com.crm."+ environment);*/
+		//userNamesList.add("testuser52@cbre.com.crm."+ environment);
+/*		userNamesList.add("testuser53@cbre.com.crm."+ environment);
+*/		userNamesList.add("testuser54@cbre.com.crm."+ environment);
 		userNamesList.add("testuser55@cbre.com.crm."+ environment);
 		userNamesList.add("testuser56@cbre.com.crm."+ environment);
 		userNamesList.add("testuser57@cbre.com.crm."+ environment);

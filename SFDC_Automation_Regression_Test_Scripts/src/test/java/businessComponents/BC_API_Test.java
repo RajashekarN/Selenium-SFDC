@@ -379,7 +379,7 @@ public class BC_API_Test extends ReusableLibrary {
 	
 	public void bc_changePassword() {
 		createUsers.setPassword(dataTable.getData("General_Data", "Password"));
-//		loginPage.changePassword();
+		loginPage.changePassword();
 	}
 	
 	

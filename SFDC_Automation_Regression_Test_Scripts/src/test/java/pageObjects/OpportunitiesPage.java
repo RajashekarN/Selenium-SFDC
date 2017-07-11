@@ -1978,22 +1978,22 @@ public class OpportunitiesPage extends ReusableLibrary {
 				config = new ConnectorConfig();
 				if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
 					config.setUsername(properties.getProperty("UAT2GWSAPACManager"));
-					config.setPassword(properties.getProperty("UATPassword"));
+					config.setPassword(properties.getProperty("UAT2Password"));
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
 					config.setUsername(properties.getProperty("UAT2GWSEMEABroker"));
-					config.setPassword(properties.getProperty("UAT2GWSEMEABrokerPassword"));
+					config.setPassword(properties.getProperty("UAT2Password"));
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VASAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
 					config.setUsername(properties.getProperty("UAT2VASAMERManager"));
-					config.setPassword(properties.getProperty("UAT2VASAMERManagerPassword"));
+					config.setPassword(properties.getProperty("UAT2Password"));
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VASEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
 					config.setUsername(properties.getProperty("UAT2VASEMEABroker"));
-					config.setPassword(properties.getProperty("UAT2VASEMEABrokerPassword"));
+					config.setPassword(properties.getProperty("UAT2Password"));
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
 					config.setUsername(properties.getProperty("UAT2ASAMERManager"));
-					config.setPassword(properties.getProperty("UAT2ASAMERManagerPassword"));
+					config.setPassword(properties.getProperty("UAT2Password"));
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
 					config.setUsername(properties.getProperty("UAT2ASAPACBroker"));
-					config.setPassword(properties.getProperty("UAT2ASAPACBrokerPassword"));
+					config.setPassword(properties.getProperty("UAT2Password"));
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
 					config.setUsername(properties.getProperty("UAT2ABAMERCSS"));
 					config.setPassword(properties.getProperty("UAT2Password"));
