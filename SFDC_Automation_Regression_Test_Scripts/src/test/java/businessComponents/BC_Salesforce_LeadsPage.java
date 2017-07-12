@@ -221,4 +221,14 @@ public class BC_Salesforce_LeadsPage extends ReusableLibrary {
 	public void bc_leadsSharingFunctionality() {
 		sfLeadsPage.leadsSharingFunctionality();
 	}
+	/**
+	 * Validating the Leads sharing functionality Page
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_leadCustomLogACallFunctionality() {
+		sfLeadsPage.leadCustomLogACallFunctionality();
+	}
 }

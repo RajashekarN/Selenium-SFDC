@@ -314,4 +314,32 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 	public void bc_verifyAccountsPageLayout() throws InterruptedException {
 		sfAccountsPage.verifyAccountsPageLayout();
 	}
+	
+	/**
+	 * Validating the SPOCs in the Accounts related Page
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifySPOCsAccount() throws InterruptedException {
+		sfAccountsPage.verifySPOCsAccount();
+	}
+	/**
+	 * Validating the SPOCs Page Layout
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifySPOCsPageLayout() throws InterruptedException {
+		sfAccountsPage.verifySPOCsPageLayout();
+	}
+	/**
+	 * Validating the Accounts Custom Activity time line
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyAccountsActivityTimeline() throws InterruptedException {
+		sfAccountsPage.verifyAccountsActivityTimeline();
+	}
 }

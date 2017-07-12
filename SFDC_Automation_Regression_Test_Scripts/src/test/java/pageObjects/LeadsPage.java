@@ -389,6 +389,24 @@ public class LeadsPage extends ReusableLibrary {
 	@FindBy(xpath="//input[contains(@value,'Add')]")
 	WebElement addSharingPage;
 	
+	@FindBy(xpath="//div[contains(@class,'actionMenu')]//a[@title='Log A Call']")
+	WebElement logACall;
+	
+	@FindBy(xpath="//input[contains(@id,'subject_top')]")
+	WebElement subjectTop;
+	
+	@FindBy(xpath="//select[contains(@id,'activityType_top')]/option[@value='Private - Task']")
+	WebElement activityTop;
+	
+	@FindBy(xpath="//input[contains(@id,'subject_btm')]")
+	WebElement subjectBottom;
+	
+	@FindBy(xpath="//select[contains(@id,'activityType_btm')]/option[@value='Private - Follow-Up Task']")
+	WebElement activityBottom;
+	
+	@FindBy(xpath="//input[contains(@id,'saveButton')]")
+	WebElement saveLogCall;
+	
 	private String leadConvertWaitSpinnerXPath = "//div[@class='slds-spinner_container']";
 	
 	
@@ -2716,5 +2734,97 @@ public class LeadsPage extends ReusableLibrary {
 			System.out.println("User and Group sharing is not present in the Lead Sharing Page");
 		}
 	}
+	
+	/**
+	 * Validating the Lead Log A Call Page functionality
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	static ArrayList<String> logACallPageSectionsList = new ArrayList<String>();
+
+	public void logACallPageHeaders() {
+
+		logACallPageSectionsList.add("Task Information");
+		logACallPageSectionsList.add("Related To");
+		logACallPageSectionsList.add("Schedule follow-up task");
+		logACallPageSectionsList.add("Task Information");
+		logACallPageSectionsList.add("Related To");
+		logACallPageSectionsList.add("Reminder");
+		
+		System.out.println("log A Call Page headers are " +logACallPageSectionsList);
+	}
+	public void leadCustomLogACallFunctionality() {
+		
+		Utility_Functions.xWaitForElementPresent(driver, menu_Leads, 3);
+		Utility_Functions.xClick(driver, menu_Leads, true);
+		Utility_Functions.timeWait(3);
+		List<WebElement> allActiveLeadsList = driver.findElements(
+				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xclickgetTextofFirstElementfromList(allActiveLeadsList);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementPresent(driver,showMoreActions, 3);
+		Utility_Functions.xClick(driver,showMoreActions, true);
+		Utility_Functions.xWaitForElementPresent(driver,logACall, 3);
+		Utility_Functions.xClick(driver,logACall, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xSwitchtoFrame(driver,subjectTop);
+		Utility_Functions.timeWait(3);
+		List<WebElement> logACallSectionsList = driver.findElements(
+				By.xpath("//div/h2"));
+		int count = 0, i = 0;
+		String fieldsArray[] = new String[logACallSectionsList.size()];
+		System.out.println(logACallSectionsList.size());
+
+		try {
+			logACallPageHeaders();
+			for (WebElement element:logACallSectionsList) {
+				System.out.println(element.getText());
+				fieldsArray[i] = element.getText();
+				if (fieldsArray[i].equalsIgnoreCase(logACallPageSectionsList.get(i))) {
+					report.updateTestLog("Verify Leads Log A Call Page",
+							" Log A Call Page is having the " + fieldsArray[i] + " Headers ",
+							Status.PASS);
+					count++;
+				}
+				i++;
+			}
+			System.out.println(count);
+			if (count!= 6) {
+				report.updateTestLog("Verify Leads Log A Call Page",
+						"All Headers are not present in the Leads Log A Call Page", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify Leads Log A Call Page",
+						"All Headers are present in the Leads Log A Call Page", Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		Utility_Functions.xWaitForElementPresent(driver, subjectTop, 5);
+		Utility_Functions.xSendKeys(driver, subject, "Test Automation Subject_" + Utility_Functions.xGenerateAlphaNumericString());
+		Utility_Functions.xWaitForElementPresent(driver,activityTop, 3);
+		Utility_Functions.xClick(driver, activityTop, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver,subjectBottom, 5);
+		Utility_Functions.xSendKeys(driver,subjectBottom, "Test Automation Subject_" + Utility_Functions.xGenerateAlphaNumericString());
+		Utility_Functions.xWaitForElementPresent(driver, activityBottom, 3);
+		Utility_Functions.xClick(driver, activityBottom, true);
+		Utility_Functions.xWaitForElementPresent(driver,saveLogCall, 3);
+		Utility_Functions.xClick(driver, saveLogCall, true);
+		Utility_Functions.timeWait(2);
+		if(related.isDisplayed()) {
+			Utility_Functions.xClick(driver, related, true);
+			report.updateTestLog("Verify Leads Log A Call Page", "Log A Call is saved successfully with all the required fields", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Leads Log A Call Page", "Log A Call is not saved with all the required fields", Status.FAIL);
+		}		
+	}
+
 }
 

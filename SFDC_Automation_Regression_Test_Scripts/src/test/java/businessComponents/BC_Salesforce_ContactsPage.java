@@ -168,4 +168,13 @@ public class BC_Salesforce_ContactsPage extends ReusableLibrary {
 	public void bc_contactsVerifyLandingPage()throws InterruptedException{
 		sfContactsPage.contactsVerifyLandingPage();
 	}
+	/**
+	 * Validating the Contacts Activity Timeline
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+	public void bc_verifyContactsActivityTimeline()throws InterruptedException{
+		sfContactsPage.verifyContactsActivityTimeline();
+	} 
 }
