@@ -4192,7 +4192,7 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver,lenderType, true);
 		Utility_Functions.xWaitForElementPresent(driver,selectLenderType, 3);
 		Utility_Functions.xClick(driver,selectLenderType, true);
-		List<WebElement> accountSourceFieldPickList = driver.findElements(By.xpath("//select[contains(@id,'AccountSource')]/option"));
+/*		List<WebElement> accountSourceFieldPickList = driver.findElements(By.xpath("//select[contains(@id,'AccountSource')]/option"));
 		int count10 = 0, i10 = 0;
 		String fieldsArray10[] = new String[accountSourceFieldPickList.size()];
 		System.out.println(accountSourceFieldPickList.size());
@@ -4219,7 +4219,38 @@ public class AccountsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		accountSourceFieldPickList.clear();
+		accountSourceFieldPickList.clear();*/
+		
+		try {
+			accountSourceTypeFields();
+			List<WebElement> accountSourceFieldPickList = driver.findElements(By.xpath("//select[contains(@id,'AccountSource')]/option"));
+			int i10 = 0, j=0, count10 = 0;
+			String[] fieldsArray10 = new String[accountSourceFieldPickList.size()];
+			while(count10!=13) {
+				while(j<accountSourceFieldPickList.size()) {
+					for (WebElement element : accountSourceFieldPickList) {
+						fieldsArray10[i10] = element.getText();
+						if (fieldsArray10[i10].contains(accountSourceTypeFieldsList.get(j))) {
+							System.out.println("Verify Add Opportunity Page Label List" + element.getText());
+							report.updateTestLog("Verify Add Opportunity Page Label List", element.getText() + "::::label list is present in Add Opportunity Page", Status.PASS);
+							count10++;
+						}
+						i1++;
+					}
+					i1=0;
+					j++;
+				}
+			}			
+			System.out.println("OpportunityInformationList:::"+ count10);
+			if (count10!= 13) {
+				report.updateTestLog("Verify New Account Page Layout ", "All the pick list values are not present in the Account Source Pick List field ", Status.FAIL);
+			} else {
+				report.updateTestLog("Verify New Account Page Layout ", "All the pick list values are present in the Account Source Pick List field", Status.PASS);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
 		Utility_Functions.xWaitForElementPresent(driver,accountSourceField, 3);
 		Utility_Functions.xClick(driver,accountSourceField, true);
 		Utility_Functions.xClick(driver, tickerSymbol, true);
