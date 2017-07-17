@@ -594,5 +594,17 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	public void bc_salesStage03_RFPProposal_07UnderContract() {
 		sfOpportunitiesPage.salesStage03_RFPProposal_07UnderContract();
 	}
+	
+	/**
+	 * Verify the required fields based on Sales Stage selected between 08-Closed - Paid Partial to 09-Closed - Paid Full 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	public void bc_salesStage08_ClosedPartial_09_ClosedPaidFull() {
+		sfOpportunitiesPage.salesStage08_ClosedPartial_09_ClosedPaidFull();
+	}
+	
+	
 
 }

@@ -665,6 +665,43 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath="//span[contains(@id,'oppForm:phaseField')]/span")
 	WebElement phasePresent;
+	
+	@FindBy(xpath="//div[contains(@class,'error strength') and contains(@class,'forceMessage')]//p[contains(text(),'Looks like')]")
+	WebElement accessOpportunity;
+	
+	@FindBy(xpath="//div[@class='slds-truncate'][@title='Edit']")
+	WebElement opportunityEdit;
+	
+	@FindBy(xpath="//a[@aria-label='Assignment Type']")
+	WebElement assignmentTypeOpportunity;
+	
+	@FindBy(xpath="//a[@role='menuitemradio'][text()='Sale']")
+	WebElement assignmentTypeSaleOpportunity;
+	
+	@FindBy(xpath="//label[contains(@class,'label inputLabel')]/parent::div//a[@class='select']")
+	WebElement salesStageOppClosed;
+	
+	@FindBy(xpath="//div[@class='select-options']//a[contains(@title,'08-Closed')]")
+	WebElement salesStageOppClosedOption;
+	
+	@FindBy(xpath="//div[contains(@class,'modal-footer')]//button[@title='Save']")
+	WebElement saveStageOpp;
+	
+	@FindBy(xpath="//span[contains(@class,'genericError')]")
+	WebElement reviewErrors;
+	
+	@FindBy(xpath="//span[text()='Estimated Transaction Value']/parent::label/parent::div/input")
+	WebElement estimatedTransactionValue;
+	
+	@FindBy(xpath="//span[text()='Estimated Gross Fee/Commission']/parent::label/parent::div/input")
+	WebElement estiamtedGrossFeeCommissionValue;
+	
+	@FindBy(xpath="//span[text()='Final Transaction Value']/parent::label/parent::div/input")
+	WebElement finalTransactionValue;
+	
+	@FindBy(xpath="//span[text()='Actual CBRE Gross Fee']/parent::label/parent::div/input")
+	WebElement ActualCBREGrossFeeValue;
+	
 
 	HomePage hp = new HomePage(scriptHelper);
 	SearchTextSOQL searchOpportunity = new SearchTextSOQL(scriptHelper);
@@ -897,7 +934,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void requiredFieldsbetweenw03_15Stages() {
-		String query = "SELECT Id, Name FROM Opportunity where StageName > '03-RFP/Proposal' and StageName < '15-Signed Lease' and Total_Size__c !=null and CBRE_Preferred_Property_Type_c__c !=null limit 10";
+		String query = "SELECT Id, Name FROM Opportunity where StageName > '03-RFP/Proposal' and StageName < '15-Signed Lease' and Total_Size__c !=null and CBRE_Preferred_Property_Type_c__c !=null limit 1 offset 9";
 		String OpportunityID = searchOpportunity.searchOpportunity(query);
 		if(OpportunityID==null) {
 			report.updateTestLog("Verify Opportunity",
@@ -1762,7 +1799,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	static SaveResult[] results;
 	static String result;
 
-	public void manualOpportunityCreation() {
+	public String manualOpportunityCreation() {
 		try {
 
 			boolean isStatus = false;
@@ -1874,6 +1911,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			System.out.println(e.getMessage());
 			System.out.println(e.getStackTrace());
 		}
+		return result;
 	}
 
 	/**
@@ -4832,9 +4870,13 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
 		Utility_Functions.xClick(driver, newOpportunity, true);
 		Utility_Functions.timeWait(2);
-		Utility_Functions.xSwitchtoFrame(driver, continueButton);
-		Utility_Functions.xWaitForElementPresent(driver, continueButton, 5);
-		Utility_Functions.xClick(driver, continueButton, true);
+		try {
+			Utility_Functions.xSwitchtoFrame(driver, continueButton);
+			Utility_Functions.xWaitForElementPresent(driver, continueButton, 5);
+			Utility_Functions.xClick(driver, continueButton, true);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 		driver.switchTo().defaultContent();
 		Utility_Functions.xSwitchtoFrame(driver, viewAllFieldsButton);
 		Utility_Functions.xWaitForElementPresent(driver, viewAllFieldsButton, 5);
@@ -5132,5 +5174,72 @@ public class OpportunitiesPage extends ReusableLibrary {
 			}
 		}
 	}
+	
+	/**
+	 * Verify the required fields based on Sales Stage selected between 08-Closed - Paid Partial to 09-Closed - Paid Full  
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	public void salesStage08_ClosedPartial_09_ClosedPaidFull() {		
+		String query = "SELECT Estimated_Gross_Fee_Commission__c , Id, Name FROM Opportunity where StageName > '08-Closed - Paid Partial' and StageName < '09-Closed - Paid Full' and Estimated_Gross_Fee_Commission__c = 0.0 "
+				+ " and Created_By_User_Role__c != null limit 10";
+		String OpportunityID = searchOpportunity.searchOpportunity(query);
+		System.out.println(OpportunityID);
+		
+		try {			
+			if(OpportunityID==null) {
+				report.updateTestLog("Verify Opportunity", "There are no Opportunities that falls under this category:::", Status.PASS);
+				salesStage08_09ClosedFunction();
+			} else {
+				String url = driver.getCurrentUrl().split("#")[0];
+				String newUrl = url + "#/sObject/" + OpportunityID;
+				newUrl = newUrl + "/view";
+				report.updateTestLog("Verify Add Opportunity Page Fields", "URL has been replaced with the new URL having the retrieved Opportunity:::" + newUrl, Status.PASS);
+				driver.get(newUrl);
+				Utility_Functions.timeWait(1);
+				if(accessOpportunity.isDisplayed()) {
+					report.updateTestLog("Verify Opportunity Page", "Doesn't have access to edit the Opportunity:::", Status.PASS);
+					salesStage08_09ClosedFunction();
+				} 
+			}		
+		} catch (Exception e) {
+				System.out.println(e.getMessage());
+		}		
+	}
 
-}
+	public void salesStage08_09ClosedFunction() {
+		opportunityNameAutoGenerate();
+		String oppUrl = driver.getCurrentUrl().split("#/sObject/")[1];
+		System.out.println("Opp URL" + oppUrl);
+		String OpportunityId = oppUrl.split("/view")[0];
+		validateOpportunityFields(OpportunityId);
+		Utility_Functions.xWaitForElementPresent(driver, opportunityEdit, 3);
+		Utility_Functions.xClick(driver, opportunityEdit, true);
+		Utility_Functions.xWaitForElementPresent(driver, salesStageOppClosed, 3);
+		Utility_Functions.xClick(driver, salesStageOppClosed, true);
+		Utility_Functions.xWaitForElementPresent(driver, salesStageOppClosedOption, 3);
+		Utility_Functions.xClick(driver, salesStageOppClosedOption, true);
+		Utility_Functions.xWaitForElementPresent(driver, assignmentTypeOpportunity, 3);
+		Utility_Functions.xClick(driver, assignmentTypeOpportunity, true);
+		Utility_Functions.xWaitForElementPresent(driver, assignmentTypeSaleOpportunity, 3);
+		Utility_Functions.xClick(driver, assignmentTypeSaleOpportunity, true);				
+		Utility_Functions.xWaitForElementPresent(driver, saveStageOpp, 3);
+		Utility_Functions.xClick(driver, saveStageOpp, true);
+		Utility_Functions.xWaitForElementPresent(driver, reviewErrors, 3);
+		if(reviewErrors.getText().equals("Review the errors on this page.")) {
+			report.updateTestLog("Verify Opportunity", "Unable to save the Opportunity as we don't have entered the required fields:::", Status.PASS);
+			Utility_Functions.xWaitForElementPresent(driver, estimatedTransactionValue, 3);
+			Utility_Functions.xSendKeys(driver, estimatedTransactionValue, dataTable.getData("General_Data", "InstallmentAmount"));						
+			Utility_Functions.xWaitForElementPresent(driver, estiamtedGrossFeeCommissionValue, 3);
+			Utility_Functions.xSendKeys(driver, estiamtedGrossFeeCommissionValue, dataTable.getData("General_Data", "InstallmentAmount"));						
+			Utility_Functions.xWaitForElementPresent(driver, finalTransactionValue, 3);
+			Utility_Functions.xSendKeys(driver, finalTransactionValue, dataTable.getData("General_Data", "InstallmentAmount"));						
+			Utility_Functions.xWaitForElementPresent(driver, ActualCBREGrossFeeValue, 3);
+			Utility_Functions.xSendKeys(driver, ActualCBREGrossFeeValue, dataTable.getData("General_Data", "InstallmentAmount"));						
+			report.updateTestLog("Verify Opportunity", "Opportunity has been saved successfully:::", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Opportunity", "Opportunity has been saved successfully without even entering all the required fields:::", Status.FAIL);
+		}
+	}
+ }
