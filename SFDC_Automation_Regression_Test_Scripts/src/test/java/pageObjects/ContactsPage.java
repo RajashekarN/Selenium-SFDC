@@ -241,6 +241,9 @@ public class ContactsPage extends ReusableLibrary {
 
 	@FindBy(xpath="//a[@class='tabHeader']/span[text()='Activity']")
 	WebElement activityTab;
+	
+	 @FindBy(xpath="//a[@class='tabHeader']//span[text()='Details']")
+	 WebElement details;
 
 
 	SearchTextSOQL searchAccountName = new SearchTextSOQL(scriptHelper);
@@ -1512,7 +1515,67 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, newActivity, 3);
 		Utility_Functions.xClick(driver, newActivity, true);
 		report.updateTestLog("Verify Contact Activity Reminder Functionality ","The New Activity in the related page is Displayed ",  Status.PASS);
+		Utility_Functions.timeWait(2);
 		Utility_Functions.xSwitchtoFrame(driver, subject);
+		Utility_Functions.timeWait(3);
+		List<WebElement> newActivityPageLayoutRequiredFields = driver.findElements(By.xpath("//label[@class='slds-form-element__label']"));
+		int countRequiredFiles =0;
+		try {
+			for (WebElement element : newActivityPageLayoutRequiredFields  ) {
+				if ((element.getText().equals("*Subject"))) {
+					System.out.println("Subject required field is present in the New Activity Layout Page");
+					report.updateTestLog("Verify Contact Activity Reminder Functionality",
+							"New Activity Layout Page is having the " + element.getText()
+							+ " Status field::",
+							Status.PASS);
+					countRequiredFiles++;
+
+				} else if ((element.getText().equals("*Activity Type"))) {
+					System.out.println("Activity Type required field is present in the New Activity Layout Page");
+					report.updateTestLog("Verify Contact Activity Reminder Functionality",
+							"New Activity Layout Page is having the " + element.getText()
+							+ " Status field::",
+							Status.PASS);
+					countRequiredFiles++;
+
+				} else if ((element.getText().equals("*Assigned To"))) {
+					System.out.println(" Assigned To required field is present in the New Activity Layout Page");
+					report.updateTestLog("Verify Contact Activity Reminder Functionality",
+							"New Activity Layout Page is having the " + element.getText()
+							+ " Status field::",
+							Status.PASS);
+					countRequiredFiles++;
+
+
+				} else if ((element.getText().equals("*Status"))) {
+					System.out.println(" Status required field is present in the New Activity Layout Page");
+					report.updateTestLog("Verify Contact Activity Reminder Functionality",
+							"New Activity Layout Page is having the " + element.getText()
+							+ " Status field::",
+							Status.PASS);
+					countRequiredFiles++;
+
+				}
+				else if ((element.getText().equals("*Priority"))) {
+					System.out.println(" Priority required field is present in the New Activity Layout Page");
+					report.updateTestLog("Verify Contact Activity Reminder Functionality",
+							"New Activity Layout Page is having the " + element.getText()
+							+ " Status field::",
+							Status.PASS);
+				}
+			} 
+			System.out.println(countRequiredFiles);
+			if(countRequiredFiles!=4) {
+				System.out.println("New Activity Page Layout does not contain the required fields ");
+				report.updateTestLog("Verify Contact Activity Reminder Functionality",
+						"New Activity Layout Page is having all the required fields",
+						Status.FAIL);
+			}
+
+		}catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
 		Utility_Functions.xWaitForElementPresent(driver, subject, 5);
 		Utility_Functions.xClick(driver, subject, true);
 		Utility_Functions.xWaitForElementPresent(driver, subject, 5);
@@ -1528,15 +1591,22 @@ public class ContactsPage extends ReusableLibrary {
 			report.updateTestLog("Verify Contact Activity Reminder Functionality ","Verifying the Reminder sent  check box is checked or not ",  Status.FAIL);
 		}
 		Utility_Functions.timeWait(2);
-		System.out.println(Calendar.getInstance());	
-		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-		Date date = new Date();
+		Calendar calendar1 = Calendar.getInstance();
+		calendar1.add(Calendar.DAY_OF_MONTH, 10);
+		SimpleDateFormat dateFormat1 = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
+		System.out.println("Date : " + dateFormat1.format(calendar1.getTime())); 
 		Utility_Functions.xWaitForElementPresent(driver,dueDateNewActrivity, 3);
-		Utility_Functions.xSendKeys(driver,dueDateNewActrivity, dateFormat.format(date).toString());
+		Utility_Functions.xSendKeys(driver,dueDateNewActrivity, dateFormat1.format(calendar1.getTime()));
 		Utility_Functions.xWaitForElementPresent(driver, saveActivity, 5);
 		Utility_Functions.xClick(driver, saveActivity, true);
 		Utility_Functions.timeWait(3);
-		report.updateTestLog("Verify Contact Activity Reminder Functionality ","The Activity is saved ",  Status.PASS);
+		if(details.isDisplayed()) {
+			
+			report.updateTestLog("Verify Contact Activity Reminder Functionality", "Contacts Details page is displayed", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Contact Activity Reminder Functionality", "Contacts Details page is not displayed", Status.FAIL);
+		}
+		
 	}
 	/**
 	 * Validating the Contacts Landing Page 

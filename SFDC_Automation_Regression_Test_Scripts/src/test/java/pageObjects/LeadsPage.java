@@ -1,7 +1,9 @@
 package pageObjects;
 
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 import org.openqa.selenium.By;
@@ -406,6 +408,114 @@ public class LeadsPage extends ReusableLibrary {
 	
 	@FindBy(xpath="//input[contains(@id,'saveButton')]")
 	WebElement saveLogCall;
+	
+	@FindBy(xpath="//input[contains(@id,'dueDate')]")
+	WebElement newActivityDueDate;
+	   
+	@FindBy(xpath = "//p[@class='slds-tile__title slds-truncate']/a/parent::p/parent::div/parent::div//div[2]")
+	WebElement activityType;
+
+	@FindBy(xpath = "//p[@class='slds-tile__title slds-truncate']/a/parent::p/parent::div/parent::div//div[3]")
+	WebElement statusActivityTimeLine;
+
+	@FindBy(xpath = "//p[@class='slds-tile__title slds-truncate']/a/parent::p/parent::div/parent::div//div[4]")
+	WebElement comments;
+
+	@FindBy(xpath = "//div[@class='slds-media']//p[@class='slds-timeline__date']")
+	WebElement dueDate;
+
+	@FindBy(xpath = "//span[@class='slds-checkbox--faux']")
+	WebElement statusCheckbox;
+		
+	@FindBy(xpath = "//*[text()='No Next Steps. Open And Upcoming Activities Show Up Here.']")
+	WebElement activityTimeline;
+
+	@FindBy(xpath = "//p[@class='slds-tile__title slds-truncate']/a")
+	WebElement activity;
+		
+	@FindBy(xpath="//button[@title='Past Activity']")
+	WebElement pastActivity;
+		
+	@FindBy(xpath="//button[@title='More Activities']")
+	WebElement moreActivities;
+		
+	@FindBy(xpath="//a[@class='tabHeader']/span[text()='Activity']")
+	WebElement activityTab; 
+	
+	@FindBy(xpath = "//span[contains(text(),'Activities')]/ancestor::article//div[text()='New Activity']")
+	WebElement newActivity;
+	
+	@FindBy(xpath = "//input[@value='Save & New']")
+	WebElement saveAndNewActivity;
+	
+	 @FindBy(xpath="//select[@class='slds-select']/option[@value='Private - Follow-Up Task']")
+	 WebElement activityTypeFollowUpTaskValue;
+	 
+	 @FindBy(xpath = "// input [@value= 'Save']")
+	 WebElement saveActivity;
+	 
+	 @FindBy(xpath="//h2[@id='header']/a/span[text()='Opportunities']")
+	 WebElement relatedOpportunities;
+	 
+	 @FindBy(xpath="//span[text()='Account Name']/parent::div/parent::div//span[contains(@class,'test-id__field-value')]")
+	 WebElement opportunityAccountName;
+	 
+	 @FindBy(xpath="//h2[@id='header']/a/span[text()='Contact Roles']")
+	 WebElement contactRoles;
+	 
+	 @FindBy(xpath="//a[@class='tabHeader']//span[text()='Details']")
+	 WebElement details;
+	 
+	 @FindBy(xpath="//a[@class='select'][@aria-label='Preferred Property Type']")
+	 WebElement leadEditPreferedPropertyType;
+	 
+	 @FindBy(xpath="//div[@class='select-options']//a[@title='Hotel']")
+	 WebElement leadEditPreferedPropertyTypeValue;
+	 
+	 @FindBy(xpath="//ul[contains(@class,'forceActionsContainer')]//a[@class='forceActionLink']/div[text()='Edit']")
+	 WebElement edit;
+	 
+	 @FindBy(xpath="//div[contains(@class,'forceModalActionContainer--footerAction')]/button[@title='Save']")
+	 WebElement save;
+	 
+	 @FindBy(xpath="//div[contains(@class,'actionMenu')]//a[@title='New Private Note']")
+	 WebElement newNote;
+	 
+	 @FindBy(xpath="//span[text()='Title']/parent::label/parent::div//input[@type='text']")
+	 WebElement newNoteTitle;
+	 
+	 @FindBy(xpath="//button[contains(@class,'slds-button--brand cuf-publisherShareButton')]/span[text()='Save']")
+	 WebElement newNoteSave;
+	 
+	 @FindBy(xpath="//span[text()='Street']/parent::label/parent::div//textarea[@placeholder='Street']")
+	 WebElement leadEditStreet;
+	 
+	 @FindBy(xpath="//span[text()='City']/parent::label/parent::div//input[@placeholder='City']")
+	 WebElement leadEditCity;
+	 
+	 @FindBy(xpath="//span[text()='Zip/Postal Code']/parent::label/parent::div//input[@placeholder='Zip/Postal Code']")
+	 WebElement leadEditPostalCode;
+	 
+	 @FindBy(xpath="//a[@class='select'][@aria-label='State/Province Code']")
+	 WebElement leadEditState;
+	 
+	 @FindBy(xpath="//a[@class='select'][@aria-label='Country Code']")
+	 WebElement leadEditCountry;
+	 
+	 @FindBy(xpath="//div[@class='select-options']/ul/li/a[@title='United States']")
+	 WebElement leadEditCountryValue;
+	 
+	 @FindBy(xpath="//div[@class='select-options']/ul/li/a[@title='Texas']")
+	 WebElement leadEditStateValue;
+	 
+	 @FindBy(xpath="//span[text()='First Name']/parent::label/parent::div//input[@placeholder='First Name']")
+	 WebElement leadEditFirstName;
+	 
+	 @FindBy(xpath="//span[text()='Last Name']/parent::label/parent::div//input[@placeholder='Last Name']")
+	 WebElement leadEditLastName;
+	 
+	 @FindBy(xpath="//span[text()='Direct Line']/parent::label/parent::div//input[@type='tel']")
+	 WebElement leadEditDirectLine;
 	
 	private String leadConvertWaitSpinnerXPath = "//div[@class='slds-spinner_container']";
 	
@@ -1189,7 +1299,7 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xClick(driver, files, true);
 		Utility_Functions.timeWait(3);
-		List<WebElement> filesContact = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		List<WebElement> filesContact = driver.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
 		if (filesContact.isEmpty() == true) {
 			System.out.println("File is not associated with the contact");
 			report.updateTestLog("Convert Lead Note Attachment","File is not associated with the Contact",Status.PASS);
@@ -2213,62 +2323,6 @@ public class LeadsPage extends ReusableLibrary {
 	
 	public void convertLeadWithEmail() {
 		convertLeadNewAccount();
-	/*	createLeadFunction();
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, selectPreferedPropertyType, 2);
-		Utility_Functions.xClick(driver, selectPreferedPropertyType, true);
-		Utility_Functions.xWaitForElementPresent(driver, selectPreferedPropertyTypeValue, 2);
-		Utility_Functions.xClick(driver, selectPreferedPropertyTypeValue, true);
-		Utility_Functions.xWaitForElementPresent(driver, selectPreferedPropertySubTypeValue, 2);
-		Utility_Functions.xClick(driver, selectPreferedPropertySubTypeValue, true);
-		Utility_Functions.xWaitForElementPresent(driver, addValuetoCheckList, 2);
-		Utility_Functions.xClick(driver, addValuetoCheckList, true);
-		report.updateTestLog("Verify Convert Lead with Direct Line and Private Note","The Prefered Property type is selected", Status.PASS);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xScrollWindow(driver);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xScrollWindowTop(driver);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, emailLead, 2);
-		Utility_Functions.xSendKeys(driver,emailLead, dataTable.getData("General_Data", "Email"));
-		report.updateTestLog("Verify Convert Lead with Email","The Direct Line value is entered", Status.PASS);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, saveButton, 2);
-		Utility_Functions.xClick(driver, saveButton, true);
-		report.updateTestLog("Verify Convert Lead with Email","The New Lead page is entered with direct Line and Prefered Property type value", Status.PASS);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, convert, 2);
-		Utility_Functions.xClick(driver,convert, true);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xSwitchtoFrame(driver, convertButton);
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xScrollWindow(driver);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xScrollWindowTop(driver);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver,convertLeadStreet, 5);
-		Utility_Functions.xSendKeys(driver,convertLeadStreet, dataTable.getData("General_Data", "Street"));
-		report.updateTestLog("Verify Convert Lead with Email","The New Lead page is entered with the street value", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver,convertLeadCity, 5);
-		Utility_Functions.xSendKeys(driver,convertLeadCity, dataTable.getData("General_Data", "City"));
-		report.updateTestLog("Verify Convert Lead with Email","The New Lead page is entered with the city value", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver,convertLeadCountry, 3);
-		Utility_Functions.xClick(driver,convertLeadCountry, true);
-		Utility_Functions.xWaitForElementPresent(driver,selectConvertLeadCountry, 3);
-		Utility_Functions.xClick(driver,selectConvertLeadCountry, true);
-		report.updateTestLog("Verify Convert Lead with Email","The New Lead page is entered with the Country value", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver,convertLeadState, 3);
-		Utility_Functions.xClick(driver,convertLeadState, true);
-		Utility_Functions.xWaitForElementPresent(driver,selectConvertLeadState, 3);
-		Utility_Functions.xClick(driver,selectConvertLeadState, true);
-		report.updateTestLog("Verify Convert Lead with Email","The New Lead page is entered with the State value", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, zipCodeField, 5);
-		Utility_Functions.xSendKeys(driver, zipCodeField, dataTable.getData("General_Data", "Zipcode"));
-		report.updateTestLog("Verify Convert Lead with Email","The New Lead page is entered with the Zipcode", Status.PASS);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xWaitForElementPresent(driver,convertButton, 3);
-		Utility_Functions.xClick(driver,convertButton, true);
-		report.updateTestLog("Verify Convert Lead with Email","The Lead is converted with the required fields", Status.PASS);*/
 		Utility_Functions.timeWait(5);
 		driver.switchTo().defaultContent();
 		driver.navigate().refresh();
@@ -2825,6 +2879,423 @@ public class LeadsPage extends ReusableLibrary {
 			report.updateTestLog("Verify Leads Log A Call Page", "Log A Call is not saved with all the required fields", Status.FAIL);
 		}		
 	}
-
+	/**
+	 * Validating the Leads Activity Timeline
+	 * @author Ramya
+	 *
+	 */
+	public void verifyLeadsActivityTimeline() {
+		Utility_Functions.xWaitForElementPresent(driver, menu_Leads, 3);
+		Utility_Functions.xClick(driver, menu_Leads, true);
+		report.updateTestLog("Verify Leads Activity Timeline","Leads is Displayed ",  Status.PASS);
+		Utility_Functions.timeWait(3);
+		List<WebElement> allActiveLeadsList = driver.findElements(
+				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xclickgetTextofFirstElementfromList(allActiveLeadsList);
+		Utility_Functions.timeWait(3);
+		report.updateTestLog("Verify Leads Activity Timeline ","The Account is Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, related, 5);
+		Utility_Functions.xClick(driver, related, true);
+		report.updateTestLog("Verify Leads Activity Timeline","The related page is Displayed ",  Status.PASS);
+		Utility_Functions.timeWait(4);
+		Utility_Functions.xWaitForElementPresent(driver,activityTab, 5);
+		Utility_Functions.xClick(driver, activityTab, true);
+		int count = 0;
+		try {
+			if (activityTimeline.isDisplayed()) {
+				System.out.println(
+						"There are no activities for present, past and future dates in acitivity related list");
+				report.updateTestLog("Verify Leads Activity Timeline",
+						"There are no activities for present, past and future dates in acitivity related list:::",
+						Status.PASS);
+				count++;
+			}
+		} catch (Exception e) {
+			if (activity.isDisplayed()) {
+				System.out.println("Activity is present acitivity related list");
+				report.updateTestLog("Verify Leads Activity Timeline",
+						"Acitivity is present in acitivity related list:::", Status.PASS);
+				if (activityType.getText().contains("Activity Type")) {
+					System.out.println("Activity Type is present acitivity related list");
+					report.updateTestLog("Verify Leads Activity Timeline",
+							"Acitivity Type is present in acitivity related list:::", Status.PASS);
+					count++;
+				}
+				if (statusActivityTimeLine.getText().contains("Status")) {
+					System.out.println("Status is present acitivity related list");
+					report.updateTestLog("Verify Leads Activity Timeline",
+							"Status is present in acitivity related list:::", Status.PASS);
+					count++;
+				}
+				if (comments.getText().contains("Comments")) {
+					System.out.println("Comments sections is present acitivity related list");
+					report.updateTestLog("Verify Leads Activity Timeline",
+							"Comments section is present in acitivity related list:::", Status.PASS);
+					count++;
+				}
+				if (dueDate.isDisplayed()) {
+					System.out.println("Duedate is present acitivity related list");
+					report.updateTestLog("Verify Leads Activity Timeline",
+							"Duedate is present in acitivity related list:::", Status.PASS);
+					count++;
+				}
+				if (statusCheckbox.isDisplayed()) {
+					System.out.println("Status Checkbox is present acitivity related list");
+					report.updateTestLog("Verify Leads Activity Timeline",
+							"Status Checkbox is present in acitivity related list:::", Status.PASS);
+				}
+			}
+			if (count == 4) {
+				System.out.println(
+						"Activity Type, Due Date, Comments and Status Checkbox are present under acitivity related list");
+				report.updateTestLog("Verify Leads Activity Timeline",
+						"Activity Type, Due Date, Comments and Status Checkbox are present under activity related list:::",
+						Status.PASS);
+			} else if (count == 1) {
+				System.out.println(
+						"There are no activities for present, past and future dates in acitivity related list");
+			} else {
+				System.out.println(
+						"Activity Type, Due Date, Comments and Status Checkbox are not present under acitivity related list");
+				report.updateTestLog("Verify Leads Activity Timeline",
+						"Activity Type, Due Date, Comments and Status Checkbox are not present under activity related list:::",
+						Status.FAIL);
+			}
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}			
+		Utility_Functions.xWaitForElementPresent(driver,pastActivity, 5);
+		Utility_Functions.xClick(driver, pastActivity, true);
+		report.updateTestLog("Verify Leads Activity Timeline",
+				"The Past Activities is clicked",
+				Status.PASS);
+		
+	}
+	
+	/**
+	 * Validating the convert Lead with the existing Account
+	 * @author Ramya
+	 *
+	 */
+	public void leadConvertWithExistingAccount() {
+		createLeadFunction();
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, selectPreferedPropertyType, 2);
+		Utility_Functions.xClick(driver, selectPreferedPropertyType, true);
+		Utility_Functions.xWaitForElementPresent(driver, selectPreferedPropertyTypeValue, 2);
+		Utility_Functions.xClick(driver, selectPreferedPropertyTypeValue, true);
+		report.updateTestLog("Verify Convert Lead with Existing Account", "The Prefered Property type is selected", Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, directLineLead, 2);
+		Utility_Functions.xSendKeys(driver, directLineLead, dataTable.getData("General_Data", "Direct Line"));
+		report.updateTestLog("Verify Convert Lead with Existing Account","The Direct Line value is entered", Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, saveButton, 2);
+		Utility_Functions.xClick(driver, saveButton, true);
+		report.updateTestLog("Verify Convert Lead with Existing Account","The New Lead page is entered with direct Line and Prefered Property type value", Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, convert, 2);
+		Utility_Functions.xClick(driver,convert, true);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xSwitchtoFrame(driver, convertButton);
+		Utility_Functions.timeWait(5);
+		System.out.println("Frame identified");
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver,convertLeadStreet, 5);
+		Utility_Functions.xSendKeys(driver,convertLeadStreet, dataTable.getData("General_Data", "Street"));
+		report.updateTestLog("Verify Convert Lead with Existing Account","The New Lead page is entered with the street value", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver,convertLeadCity, 5);
+		Utility_Functions.xSendKeys(driver,convertLeadCity, dataTable.getData("General_Data", "City"));
+		report.updateTestLog("Verify Convert Lead with Existing Account","The New Lead page is entered with the city value", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver,convertLeadCountry, 3);
+		Utility_Functions.xClick(driver,convertLeadCountry, true);
+		Utility_Functions.xWaitForElementPresent(driver,selectConvertLeadCountry, 3);
+		Utility_Functions.xClick(driver,selectConvertLeadCountry, true);
+		report.updateTestLog("Verify Convert Lead with Existing Account","The New Lead page is entered with the Country value", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver,convertLeadState, 3);
+		Utility_Functions.xClick(driver,convertLeadState, true);
+		Utility_Functions.xWaitForElementPresent(driver,selectConvertLeadState, 3);
+		Utility_Functions.xClick(driver,selectConvertLeadState, true);
+		report.updateTestLog("Verify Convert Lead with Existing Account","The New Lead page is entered with the State value", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, zipCodeField, 5);
+		Utility_Functions.xSendKeys(driver, zipCodeField, dataTable.getData("General_Data", "Zipcode"));
+		report.updateTestLog("Verify Convert Lead with Existing Account","The New Lead page is entered with the Zipcode", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver,convertButton, 3);
+		Utility_Functions.xClick(driver,convertButton, true);
+		report.updateTestLog("Verify Convert Lead with Existing Account","The Lead is converted with the required fields", Status.PASS);
+		Utility_Functions.timeWait(2);
+		driver.switchTo().defaultContent();
+		driver.navigate().refresh();
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, related, 5);
+		Utility_Functions.xClick(driver, related, true);
+		report.updateTestLog("Verify Convert Lead with Existing Account","The related page is Displayed ",  Status.PASS);
+		Utility_Functions.timeWait(4);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, relatedOpportunities, 5);
+		Utility_Functions.xClick(driver, relatedOpportunities, true);
+		List<WebElement> opportunitiesList = driver.findElements(
+				By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xclickgetTextofFirstElementfromList(opportunitiesList);
+		Utility_Functions.timeWait(4);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		if (!opportunityAccountName.getText().contains(" ")) {
+			System.out.println("Opportunity Account Name is populated with the default value");
+	     report.updateTestLog("Verify Convert Lead with Existing Account","Verifying the Account name is populated with the default value in the Opportunity Information Page ",  Status.PASS);
+		} else {
+			System.out.println("Opportunity Account Name is not populated with the default value");
+      report.updateTestLog("Verify Convert Lead with Existing Account","Verifying the Account name is not populated with the default value in the Opportunity Information Page ",  Status.FAIL);
+		}
+		Utility_Functions.timeWait(2);
+		driver.navigate().refresh();
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, related, 5);
+		Utility_Functions.xClick(driver, related, true);
+		Utility_Functions.xWaitForElementPresent(driver,contactRoles, 5);
+		Utility_Functions.xClick(driver,contactRoles, true);
+		List<WebElement> contactRolesList = driver.findElements(
+				By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xclickgetTextofFirstElementfromList(contactRolesList);
+		Utility_Functions.timeWait(2);
+		driver.navigate().refresh();
+		Utility_Functions.timeWait(2);
+		if(details.isDisplayed()) {
+	
+			report.updateTestLog("Verify Convert Lead with Existing Account", "Contacts Details page is displayed", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Convert Lead with Existing Account", "Contacts Details page is not displayed", Status.FAIL);
+		}
+	
+	}
+	/**
+	 * Validating the convert Lead with the new Account Name
+	 * @author Ramya
+	 *
+	 */
+	public void leadConvertWithNewAccount() {
+		
+		Utility_Functions.xWaitForElementPresent(driver, menu_Leads, 3);
+		Utility_Functions.xClick(driver, menu_Leads, true);
+		report.updateTestLog("Verify Lead Convert with New Account","Leads is Displayed ",  Status.PASS);
+		Utility_Functions.timeWait(3);
+		List<WebElement> allActiveLeadsList = driver.findElements(
+				By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xclickgetTextofFirstElementfromList(allActiveLeadsList);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementPresent(driver, edit, 3);
+		Utility_Functions.xClick(driver, edit, true);
+		report.updateTestLog("Verify Lead Convert with New Account","The Lead is Displayed ",  Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver,leadEditFirstName, 5);
+		Utility_Functions.xSendKeys(driver,leadEditFirstName, "Test Automation Subject_" + Utility_Functions.xGenerateAlphaNumericString());
+		Utility_Functions.xWaitForElementPresent(driver,leadEditLastName, 5);
+		Utility_Functions.xSendKeys(driver,leadEditLastName, "Test Automation Subject_" + Utility_Functions.xGenerateAlphaNumericString());
+		Utility_Functions.xWaitForElementPresent(driver, leadEditStreet, 2);
+		Utility_Functions.xSendKeys(driver, leadEditStreet, dataTable.getData("General_Data", "Street"));
+		Utility_Functions.xWaitForElementPresent(driver,leadEditCity, 2);
+		Utility_Functions.xSendKeys(driver,leadEditCity, dataTable.getData("General_Data", "City"));
+		Utility_Functions.xWaitForElementPresent(driver,leadEditCountry, 2);
+		Utility_Functions.xClick(driver,leadEditCountry, true);
+		Utility_Functions.xWaitForElementPresent(driver, leadEditCountryValue, 2);
+		Utility_Functions.xClick(driver, leadEditCountryValue, true);
+		Utility_Functions.xWaitForElementPresent(driver,leadEditState, 2);
+		Utility_Functions.xClick(driver,leadEditState, true);
+		Utility_Functions.xWaitForElementPresent(driver, leadEditStateValue, 2);
+		Utility_Functions.xClick(driver,leadEditStateValue, true);
+		Utility_Functions.xWaitForElementPresent(driver,leadEditPostalCode, 2);
+		Utility_Functions.xSendKeys(driver,leadEditPostalCode, dataTable.getData("General_Data", "Zipcode"));
+		Utility_Functions.xWaitForElementPresent(driver,leadEditDirectLine, 2);
+		Utility_Functions.xSendKeys(driver,leadEditDirectLine, dataTable.getData("General_Data", "Direct Line"));
+		Utility_Functions.xWaitForElementPresent(driver, leadEditPreferedPropertyType, 3);
+		Utility_Functions.xClick(driver, leadEditPreferedPropertyType, true);
+		Utility_Functions.xWaitForElementPresent(driver, leadEditPreferedPropertyTypeValue, 2);
+		Utility_Functions.xClick(driver, leadEditPreferedPropertyTypeValue, true);
+		report.updateTestLog("Verify Lead Convert with New Account", "The Prefered Property type is selected", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver,save, 3);
+		Utility_Functions.xClick(driver,save, true);
+		report.updateTestLog("Verify Lead Convert with New Account","The New Lead page is entered with direct Line and Prefered Property type value", Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, convert, 2);
+		Utility_Functions.xClick(driver,convert, true);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xSwitchtoFrame(driver, convertButton);
+		Utility_Functions.timeWait(5);
+		convertListValidation();
+		Utility_Functions.timeWait(2);
+		
+		/*Utility_Functions.xWaitForElementPresent(driver,convertLeadStreet, 5);
+		Utility_Functions.xSendKeys(driver,convertLeadStreet, dataTable.getData("General_Data", "Street"));
+		report.updateTestLog("Verify Lead Convert with New Account","The New Lead page is entered with the street value", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver,convertLeadCity, 5);
+		Utility_Functions.xSendKeys(driver,convertLeadCity, dataTable.getData("General_Data", "City"));
+		report.updateTestLog("Verify Lead Convert with New Account","The New Lead page is entered with the city value", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver,convertLeadCountry, 3);
+		Utility_Functions.xClick(driver,convertLeadCountry, true);
+		Utility_Functions.xWaitForElementPresent(driver,selectConvertLeadCountry, 3);
+		Utility_Functions.xClick(driver,selectConvertLeadCountry, true);
+		report.updateTestLog("Verify Lead Convert with New Account","The New Lead page is entered with the Country value", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver,convertLeadState, 3);
+		Utility_Functions.xClick(driver,convertLeadState, true);
+		Utility_Functions.xWaitForElementPresent(driver,selectConvertLeadState, 3);
+		Utility_Functions.xClick(driver,selectConvertLeadState, true);
+		report.updateTestLog("Verify Lead Convert with New Account","The New Lead page is entered with the State value", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, zipCodeField, 5);
+		Utility_Functions.xSendKeys(driver, zipCodeField, dataTable.getData("General_Data", "Zipcode"));
+		report.updateTestLog("Verify Lead Convert with New Account","The New Lead page is entered with the Zipcode", Status.PASS);*/
+		Utility_Functions.xWaitForElementPresent(driver,convertButton, 3);
+		Utility_Functions.xClick(driver,convertButton, true);
+		report.updateTestLog("Verify Lead Convert with New Account","The Lead is converted with the required fields", Status.PASS);
+		Utility_Functions.timeWait(2);
+		driver.switchTo().defaultContent();
+		driver.navigate().refresh();
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, related, 5);
+		Utility_Functions.xClick(driver, related, true);
+		report.updateTestLog("Verify Lead Convert with New Account","The related page is Displayed ",  Status.PASS);
+		Utility_Functions.timeWait(4);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, relatedOpportunities, 5);
+		Utility_Functions.xClick(driver, relatedOpportunities, true);
+		List<WebElement> opportunitiesList = driver.findElements(
+				By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xclickgetTextofFirstElementfromList(opportunitiesList);
+		Utility_Functions.timeWait(4);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		if (!opportunityAccountName.getText().contains(" ")) {
+			System.out.println("Opportunity Account Name is populated with the default value");
+	     report.updateTestLog("Verify Lead Convert with New Account","Verifying the Account name is populated with the default value in the Opportunity Information Page ",  Status.PASS);
+		} else {
+			System.out.println("Opportunity Account Name is not populated with the default value");
+      report.updateTestLog("Verify Lead Convert with New Account","Verifying the Account name is not populated with the default value in the Opportunity Information Page ",  Status.FAIL);
+		}
+		
+	}
+	
+	/**
+	 * Validating the convert Lead associated with convert contact
+	 * @author Ramya
+	 *
+	 */
+	public void convertLeadWithAssociatedContact() {
+		
+		createLeadFunction();
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, selectPreferedPropertyType, 2);
+		Utility_Functions.xClick(driver, selectPreferedPropertyType, true);
+		Utility_Functions.xWaitForElementPresent(driver, selectPreferedPropertyTypeValue, 2);
+		Utility_Functions.xClick(driver, selectPreferedPropertyTypeValue, true);
+		report.updateTestLog("Verify Lead with Associated Contact", "The Prefered Property type is selected", Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, directLineLead, 2);
+		Utility_Functions.xSendKeys(driver, directLineLead, dataTable.getData("General_Data", "Direct Line"));
+		report.updateTestLog("Verify Lead with Associated Contact","The Direct Line value is entered", Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, saveButton, 2);
+		Utility_Functions.xClick(driver, saveButton, true);
+		report.updateTestLog("Verify Lead with Associated Contact","The New Lead page is entered with direct Line and Prefered Property type value", Status.PASS);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementPresent(driver,showMoreActions, 3);
+		Utility_Functions.xClick(driver,showMoreActions, true);
+		Utility_Functions.xWaitForElementPresent(driver, newNote, 2);
+		Utility_Functions.xClick(driver,newNote, true);
+		report.updateTestLog("Verify Lead with Associated Contact", "The Prefered Property type is selected", Status.PASS);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementPresent(driver, newNoteTitle, 2);
+		Utility_Functions.xSendKeys(driver,newNoteTitle, "Test Automation Subject_" + Utility_Functions.xGenerateAlphaNumericString());
+		Utility_Functions.xWaitForElementPresent(driver,newNoteSave, 2);
+		Utility_Functions.xClick(driver,newNoteSave, true);
+		report.updateTestLog("Verify Lead with Associated Contact","The New Lead page is entered with direct Line and Prefered Property type value", Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, convert, 2);
+		Utility_Functions.xClick(driver,convert, true);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xSwitchtoFrame(driver, convertButton);
+		Utility_Functions.timeWait(5);
+		convertListValidation();
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver,convertLeadStreet, 5);
+		Utility_Functions.xSendKeys(driver,convertLeadStreet, dataTable.getData("General_Data", "Street"));
+		report.updateTestLog("Verify Lead with Associated Contact","The New Lead page is entered with the street value", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver,convertLeadCity, 5);
+		Utility_Functions.xSendKeys(driver,convertLeadCity, dataTable.getData("General_Data", "City"));
+		report.updateTestLog("Verify Lead with Associated Contact","The New Lead page is entered with the city value", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver,convertLeadCountry, 3);
+		Utility_Functions.xClick(driver,convertLeadCountry, true);
+		Utility_Functions.xWaitForElementPresent(driver,selectConvertLeadCountry, 3);
+		Utility_Functions.xClick(driver,selectConvertLeadCountry, true);
+		report.updateTestLog("Verify Lead with Associated Contact","The New Lead page is entered with the Country value", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver,convertLeadState, 3);
+		Utility_Functions.xClick(driver,convertLeadState, true);
+		Utility_Functions.xWaitForElementPresent(driver,selectConvertLeadState, 3);
+		Utility_Functions.xClick(driver,selectConvertLeadState, true);
+		report.updateTestLog("Verify Lead with Associated Contact","The New Lead page is entered with the State value", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, zipCodeField, 5);
+		Utility_Functions.xSendKeys(driver, zipCodeField, dataTable.getData("General_Data", "Zipcode"));
+		report.updateTestLog("Verify Lead with Associated Contact","The New Lead page is entered with the Zipcode", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver,convertButton, 3);
+		Utility_Functions.xClick(driver,convertButton, true);
+		report.updateTestLog("Verify Lead with Associated Contact","The Lead is converted with the required fields", Status.PASS);
+		Utility_Functions.timeWait(2);
+		driver.switchTo().defaultContent();
+		driver.navigate().refresh();
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, related, 5);
+		Utility_Functions.xClick(driver, related, true);
+		report.updateTestLog("Verify Lead with Associated Contact","The related page is Displayed ",  Status.PASS);
+		Utility_Functions.timeWait(4);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, relatedOpportunities, 5);
+		Utility_Functions.xClick(driver, relatedOpportunities, true);
+		List<WebElement> opportunitiesList = driver.findElements(
+				By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xclickgetTextofFirstElementfromList(opportunitiesList);
+		Utility_Functions.timeWait(4);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		if (!opportunityAccountName.getText().contains(" ")) {
+			System.out.println("Opportunity Account Name is populated with the default value");
+	     report.updateTestLog("Verify Lead with Associated Contact","Verifying the Account name is populated with the default value in the Opportunity Information Page ",  Status.PASS);
+		} else {
+			System.out.println("Opportunity Account Name is not populated with the default value");
+      report.updateTestLog("Verify Lead with Associated Contact","Verifying the Account name is not populated with the default value in the Opportunity Information Page ",  Status.FAIL);
+		}
+		
+	}
 }
 

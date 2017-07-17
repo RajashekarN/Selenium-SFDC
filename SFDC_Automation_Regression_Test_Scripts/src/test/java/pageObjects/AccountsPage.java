@@ -4885,7 +4885,7 @@ public class AccountsPage extends ReusableLibrary {
 		
 }
 	/**
-	 * Validating the creation of SPOCs in the Accounts
+	 * Validating the Accounts Activity Timeline
 	 * @author Ramya
 	 *
 	 */
@@ -5028,7 +5028,8 @@ public class AccountsPage extends ReusableLibrary {
 			}
 			e.printStackTrace();
 			System.out.println(e.getMessage());
-		}			
+		}
+		
 		Utility_Functions.xWaitForElementPresent(driver,pastActivity, 5);
 		Utility_Functions.xClick(driver, pastActivity, true);
 		report.updateTestLog("Verify Accounts Activity Timeline",

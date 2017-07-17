@@ -1,6 +1,8 @@
 package pageObjects;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
@@ -211,6 +213,37 @@ public class PropertiesPage extends ReusableLibrary {
 
 	@FindBy(xpath="//button[@title='Past Activity']")
 	WebElement pastActivityButton;
+	
+	@FindBy(xpath="//select[@class='slds-select']/option[@value='Private - Follow-Up Task']")
+	WebElement activityTypeFollowUpTaskValue;
+	   
+    @FindBy(xpath="//input[contains(@id,'dueDate')]")
+	WebElement newActivityDueDate;
+    
+    @FindBy(xpath="//button[@title='Past Activity']")
+	WebElement pastActivity;
+	
+	@FindBy(xpath="//button[@title='More Activities']")
+	WebElement moreActivities;
+	
+	@FindBy(xpath="//a[@class='tabHeader']/span[text()='Activity']")
+	WebElement activityTab;  
+	
+	@FindBy(xpath="//div[@id='activityPanelContainer']//a[text()='Expand All']")
+	WebElement expandAll;
+	
+	@FindBy(xpath="//div[@id='activityPanelContainer']//span[text()='Filter Timeline']")
+	WebElement filterTimeline;
+	
+	@FindBy(xpath="//div[contains(@id,'recordLayoutPlaceholder')]//div[@title='Status']")
+	WebElement statusActivityTimeline;
+	
+	@FindBy(xpath="//div[contains(@id,'recordLayoutPlaceholder')]//div/span")
+	WebElement openActivityTimeline;
+	
+	@FindBy(xpath="//div[contains(@id,'recordLayoutPlaceholder')]//div[@title='Description']")
+	WebElement descriptionActivityTimeline;
+
 
 
 	/**
@@ -1693,77 +1726,100 @@ public class PropertiesPage extends ReusableLibrary {
 	 *
 	 */
 
-	public void activityLightningTimeline() {
+	public void propertiesActivityLightningTimeline() {
 
 		selectProperty();
 		Utility_Functions.xClick(driver, related, true);
 		Utility_Functions.timeWait(4);
-		int count = 0;
-		try {
-			if (activityTimeline.isDisplayed()) {
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, newActivity, 3);
+		Utility_Functions.xClick(driver, newActivity, true);
+		report.updateTestLog("Verify Properties Activity Timeline","The New Activity in the related page is Displayed ",  Status.PASS);
+		Utility_Functions.xSwitchtoFrame(driver, saveAndNewActivity);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementPresent(driver, subject, 5);
+		Utility_Functions.xSendKeys(driver, subject, "Test Automation Subject_" + Utility_Functions.xGenerateAlphaNumericString());
+		Utility_Functions.xWaitForElementPresent(driver, activityTypeFollowUpTaskValue, 3);
+		Utility_Functions.xClick(driver, activityTypeFollowUpTaskValue, true);	
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DAY_OF_MONTH, -20);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
+		System.out.println("Date : " + dateFormat.format(calendar.getTime())); 
+		Utility_Functions.xWaitForElementPresent(driver,newActivityDueDate, 3);
+		Utility_Functions.xSendKeys(driver,newActivityDueDate, dateFormat.format(calendar.getTime()));		
+		Utility_Functions.xWaitForElementPresent(driver,saveActivity, 5);
+		Utility_Functions.xClick(driver, saveActivity, true);
+		Utility_Functions.timeWait(4);
+		driver.navigate().refresh();
+		Utility_Functions.timeWait(4);
+		Utility_Functions.xWaitForElementPresent(driver, related, 5);
+		report.updateTestLog("Verify Properties Activity Timeline","The Account is Displayed ",  Status.PASS);
+		Utility_Functions.xClick(driver, related, true);
+		Utility_Functions.timeWait(2);
+		report.updateTestLog("Verify Properties Activity Timeline ","The related page is Displayed ",  Status.PASS);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, newActivity, 3);
+		Utility_Functions.xClick(driver, newActivity, true);
+		report.updateTestLog("Verify Properties Activity Timeline ","The New Activity in the related page is Displayed ",  Status.PASS);
+		Utility_Functions.xSwitchtoFrame(driver, saveAndNewActivity);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementPresent(driver, subject, 5);
+		Utility_Functions.xSendKeys(driver, subject, "Test Automation Subject_" + Utility_Functions.xGenerateAlphaNumericString());
+		Utility_Functions.xWaitForElementPresent(driver, activityTypeFollowUpTaskValue, 3);
+		Utility_Functions.xClick(driver, activityTypeFollowUpTaskValue, true);
+		Calendar calendar1 = Calendar.getInstance();
+		calendar1.add(Calendar.DAY_OF_MONTH, 10);
+		SimpleDateFormat dateFormat1 = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
+		System.out.println("Date : " + dateFormat1.format(calendar1.getTime())); 
+		Utility_Functions.xWaitForElementPresent(driver,newActivityDueDate, 3);
+		Utility_Functions.xSendKeys(driver,newActivityDueDate, dateFormat1.format(calendar1.getTime()));
+		Utility_Functions.xWaitForElementPresent(driver,saveActivity, 5);
+		Utility_Functions.xClick(driver, saveActivity, true);
+		Utility_Functions.timeWait(4);
+		driver.navigate().refresh();
+		Utility_Functions.timeWait(4);
+		Utility_Functions.xWaitForElementPresent(driver,activityTab, 5);
+		Utility_Functions.xClick(driver, activityTab, true);
+		Utility_Functions.xWaitForElementPresent(driver,expandAll, 5);
+		Utility_Functions.xClick(driver, expandAll, true);
+		report.updateTestLog("Verify Properties Activity Timeline",
+				"The expand All button is clicked",
+				Status.PASS);
+		Utility_Functions.timeWait(4);
+		
+			if (filterTimeline.isDisplayed()) {
 				System.out.println(
-						"There are no activities for present, past and future dates in acitivity related list");
-				report.updateTestLog("Verify Activity Related List",
-						"There are no activities for present, past and future dates in acitivity related list:::",
-						Status.PASS);
-				count++;
+						"Filter Timeline is present in acitivity related list");
+				report.updateTestLog("Verify Properties Activity Timeline","Filter Timeline is present in acitivity related list",Status.PASS);
+				
 			}
-		} catch (Exception e) {
-			if (activity.isDisplayed()) {
-				System.out.println("Activity is present acitivity related list");
-				report.updateTestLog("Verify Activity Related List",
-						"Acitivity is present in acitivity related list:::", Status.PASS);
-				if (activityTypeProperty.getText().contains("Activity Type")) {
-					System.out.println("Activity Type is present acitivity related list");
-					report.updateTestLog("Verify Activity Related List",
-							"Acitivity Type is present in acitivity related list:::", Status.PASS);
-					count++;
-				}
-				if (statusProperty.getText().contains("Status")) {
-					System.out.println("Status is present acitivity related list");
-					report.updateTestLog("Verify Activity Related List",
-							"Status is present in acitivity related list:::", Status.PASS);
-					count++;
-				}
-				if (comments.getText().contains("Comments")) {
-					System.out.println("Comments sections is present acitivity related list");
-					report.updateTestLog("Verify Activity Related List",
-							"Comments section is present in acitivity related list:::", Status.PASS);
-					count++;
-				}
-				if (dueDate.isDisplayed()) {
-					System.out.println("Duedate is present acitivity related list");
-					report.updateTestLog("Verify Activity Related List",
-							"Duedate is present in acitivity related list:::", Status.PASS);
-					count++;
-				}
-				if (statusCheckbox.isDisplayed()) {
-					System.out.println("Status Checkbox is present acitivity related list");
-					report.updateTestLog("Verify Activity Related List",
-							"Status Checkbox is present in acitivity related list:::", Status.PASS);
-				}
+			
+			if (statusActivityTimeline.isDisplayed()) {
+				System.out.println(
+						"Status is present in acitivity related list");
+report.updateTestLog("Verify Properties Activity Timeline","Status is present in acitivity related list",Status.PASS);
 			}
-			if (count == 4) {
-				System.out.println(
-						"Activity Type, Due Date, Comments and Status Checkbox are present under acitivity related list");
-				report.updateTestLog("Verify Activity Related List",
-						"Activity Type, Due Date, Comments and Status Checkbox are present under activity related list:::",
-						Status.PASS);
-			} else if (count == 1) {
-				System.out.println(
-						"There are no activities for present, past and future dates in acitivity related list");
-			} else {
-				System.out.println(
-						"Activity Type, Due Date, Comments and Status Checkbox are not present under acitivity related list");
-				report.updateTestLog("Verify Activity Related List",
-						"Activity Type, Due Date, Comments and Status Checkbox are not present under activity related list:::",
-						Status.FAIL);
-			}
-			e.printStackTrace();
-			System.out.println(e.getMessage());
-		}
+		
+				if (openActivityTimeline.getText().contains("Open")) {
+					System.out.println("Open is present acitivity related list");
+report.updateTestLog("Verify Properties Activity Timeline","Open is present in acitivity related list:::", Status.PASS);
+					
+				}
+				if (descriptionActivityTimeline.isDisplayed()) {
+					System.out.println("Description is present acitivity related list");
+report.updateTestLog("Verify Properties Activity Timeline","Description is present in acitivity related list:::", Status.PASS);
+					
+				}
+		
 
 	}
-
-
 }
+	
+
+

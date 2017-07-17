@@ -107,8 +107,8 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	 *
 	 */	
 
-	public void bc_activityLightningTimeline() throws InterruptedException {
-		sfPropertiesPage.activityLightningTimeline();
+	public void bc_propertiesActivityLightningTimeline() throws InterruptedException {
+		sfPropertiesPage.propertiesActivityLightningTimeline();
 	}
 
 }

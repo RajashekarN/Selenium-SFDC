@@ -231,4 +231,46 @@ public class BC_Salesforce_LeadsPage extends ReusableLibrary {
 	public void bc_leadCustomLogACallFunctionality() {
 		sfLeadsPage.leadCustomLogACallFunctionality();
 	}
+	/**
+	 * Validating the Leads Activity Timeline
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_verifyLeadsActivityTimeline() {
+		sfLeadsPage.verifyLeadsActivityTimeline();
+	}
+	/**
+	 * Validating the Lead convert with the existing Account
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_leadConvertWithExistingAccount() {
+		sfLeadsPage.leadConvertWithExistingAccount();
+	}
+	/**
+	 * Validating the Lead convert with the new Account
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_leadConvertWithNewAccount() {
+		sfLeadsPage.leadConvertWithNewAccount();
+	}
+	
+	/**
+	 * Validating the Lead convert with the Associated Contact
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_convertLeadWithAssociatedContact() {
+		sfLeadsPage.convertLeadWithAssociatedContact();
+	}
+	
 }
