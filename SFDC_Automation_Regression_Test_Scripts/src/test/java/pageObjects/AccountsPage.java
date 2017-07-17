@@ -3824,6 +3824,7 @@ public class AccountsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		accountInformationSectionList.clear();
 		List<WebElement> legalStatusPickList = driver.findElements(
 				By.xpath("//select[contains(@id,'LegalStatus')]/option"));
 		int count2 = 0, i2 = 0;
@@ -3852,6 +3853,7 @@ public class AccountsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		legalStatusPickList.clear();
 		Utility_Functions.xWaitForElementPresent(driver, legalStatusValue, 3);
 		Utility_Functions.xClick(driver,legalStatusValue, true);
 		if(!migratedAccount.isSelected()){ 
@@ -3934,6 +3936,7 @@ public class AccountsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		accountSegmentationSectionList.clear();
 		/*List<WebElement> clientTypePickList = driver.findElements(By.xpath("//table[@class='multiSelectPicklistTable']//select[contains(@title,'Client Type')]/option"));
 		int count4 = 0, i4 = 0;
 		String fieldsArray4[] = new String[clientTypePickList.size()];
@@ -3996,6 +3999,7 @@ public class AccountsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		addressInformationSectionList.clear();
 		List<WebElement> localAddressInformationSectionList = driver.findElements(
 				By.xpath("//h2[text()='Local Address Information']/parent::div/parent::div/div//label[@class='slds-form-element__label']"));
 		int count6 = 0, i6 = 0;
@@ -4027,7 +4031,7 @@ public class AccountsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-
+		localAddressInformationSectionList.clear();
 		List<WebElement> countriesList = driver.findElements(By.xpath("//select[contains(@id,'Local_Billing_Country__c')]/option"));
 		int count14 = 0, i14 = 0;
 		String fieldsArray14[] = new String[countriesList.size()];
@@ -4059,6 +4063,7 @@ public class AccountsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		countriesList.clear();
 		Utility_Functions.timeWait(5);
 		Utility_Functions.xWaitForElementPresent(driver, localBillingCountry, 3);
 		Utility_Functions.xClick(driver, localBillingCountry, true);
@@ -4121,6 +4126,7 @@ public class AccountsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		additionalInformationSectionList.clear();
 		List<WebElement> investorProfileFieldPickList = driver.findElements(By.xpath("//select[contains(@id,'Investor_Profile__c')]/option"));
 		int count8 = 0, i8 = 0;
 		String fieldsArray8[] = new String[investorProfileFieldPickList.size()];
@@ -4150,7 +4156,7 @@ public class AccountsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
+		investorProfileFieldPickList.clear();
 		List<WebElement> lenderTypeFieldPickList = driver.findElements(By.xpath("//select[contains(@id,'Lender_Type__c')]/option"));
 		int count9 = 0, i9 = 0;
 		String fieldsArray9[] = new String[lenderTypeFieldPickList.size()];
@@ -4181,6 +4187,7 @@ public class AccountsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		lenderTypeFieldPickList.clear();
 		Utility_Functions.xWaitForElementPresent(driver,lenderType, 3);
 		Utility_Functions.xClick(driver,lenderType, true);
 		Utility_Functions.xWaitForElementPresent(driver,selectLenderType, 3);
@@ -4212,6 +4219,7 @@ public class AccountsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		accountSourceFieldPickList.clear();
 		Utility_Functions.xWaitForElementPresent(driver,accountSourceField, 3);
 		Utility_Functions.xClick(driver,accountSourceField, true);
 		Utility_Functions.xClick(driver, tickerSymbol, true);
@@ -4248,6 +4256,7 @@ public class AccountsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		SICSectionList.clear();
 		Utility_Functions.xWaitForElementPresent(driver,naicsCode, 3);
 		Utility_Functions.xSendKeys(driver,naicsCode, dataTable.getData("General_Data", "NAICS Code"));
 		Utility_Functions.xWaitForElementPresent(driver,sicCode1, 3);
@@ -4326,6 +4335,7 @@ public class AccountsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		descriptionInformationSectionList.clear();
 		List<WebElement> systemInformationSectionList = driver.findElements(By.xpath("//h2[text()='System Information']/parent::div/parent::div/div//label[@class='slds-form-element__label']"));
 		int count13 = 0, i13 = 0;
 		String fieldsArray13[] = new String[systemInformationSectionList.size()];
@@ -4352,6 +4362,7 @@ public class AccountsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		systemInformationSectionList.clear();
 		Utility_Functions.xWaitForElementPresent(driver, saveQuickCreate, 3);
 		Utility_Functions.xClick(driver, saveQuickCreate, true);
 	}

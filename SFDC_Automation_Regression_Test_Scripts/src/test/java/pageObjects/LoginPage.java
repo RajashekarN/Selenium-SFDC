@@ -75,7 +75,9 @@ public class LoginPage extends ReusableLibrary {
 	
 	@FindBy(xpath = "//*[@id='password-button']")
 	WebElement changePassword;
-	
+
+	@FindBy(xpath = "//div[@id='error']")
+	WebElement errorMessage;
 	
 	/**
 	 * Validating the browser launch functionality
@@ -408,7 +410,10 @@ public class LoginPage extends ReusableLibrary {
 					report.updateTestLog("Verify Login", "Login is successful", Status.PASS);
 				}
 		} catch (Exception e) {
-			report.updateTestLog("Verify Login", "UserName and Password entered are invalid please check the credentials:::", Status.FAIL);
+			if(errorMessage.isDisplayed()) {
+				report.updateTestLog("Verify Login", "UserName and Password entered are invalid please check the credentials:::", Status.FAIL);
+				driver.close();
+			}
 			/*frameworkParameters.setStopExecution(true);
 			throw new FrameworkException("Verify Login", "Login failed");*/
 		}	
