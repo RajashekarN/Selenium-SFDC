@@ -651,7 +651,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath="//div[@class='select-options']/ul/li[3]/a[@title='No']")
 	WebElement noOption;
 
-	@FindBy(xpath="//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Success Probability (%)']/parent::label/parent::div/input")
+	@FindBy(xpath="//label[contains(@class,'label') and contains(@class,'inputLabel') and contains(@class,'uiLabel-left') and contains(@class,'form-element__label') and contains(@class,'uiLabel')]/span[contains(text(),'Probability (%)')]/parent::label/parent::div/input")
 	WebElement successProbability;
 
 	@FindBy(xpath="//select[contains(@id,'oppForm:salesStage')]/option[@selected='selected']")
@@ -2286,6 +2286,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			report.updateTestLog("Opportunities Installments",
 					"Opportunity installment entered as 6,000 successfully:::", Status.PASS);
 		}
+		Utility_Functions.timeWait(3);
 		Utility_Functions.xWaitForElementPresent(driver, saveButton_AB, 3);
 		Utility_Functions.xClick(driver, saveButton_AB, true);
 		Utility_Functions.timeWait(1);
@@ -5183,7 +5184,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 */	
 	public void salesStage08_ClosedPartial_09_ClosedPaidFull() {		
 		String query = "SELECT Estimated_Gross_Fee_Commission__c , Id, Name FROM Opportunity where StageName > '08-Closed - Paid Partial' and StageName < '09-Closed - Paid Full' and Estimated_Gross_Fee_Commission__c = 0.0 "
-				+ " and Created_By_User_Role__c != null limit 10";
+				+ " and Created_By_User_Role__c != null limit 1 offset 9";
 		String OpportunityID = searchOpportunity.searchOpportunity(query);
 		System.out.println(OpportunityID);
 		
@@ -5191,6 +5192,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			if(OpportunityID==null) {
 				report.updateTestLog("Verify Opportunity", "There are no Opportunities that falls under this category:::", Status.PASS);
 				salesStage08_09ClosedFunction();
+				salesStage08_08ClosedSubFunction();
 			} else {
 				String url = driver.getCurrentUrl().split("#")[0];
 				String newUrl = url + "#/sObject/" + OpportunityID;
@@ -5198,9 +5200,14 @@ public class OpportunitiesPage extends ReusableLibrary {
 				report.updateTestLog("Verify Add Opportunity Page Fields", "URL has been replaced with the new URL having the retrieved Opportunity:::" + newUrl, Status.PASS);
 				driver.get(newUrl);
 				Utility_Functions.timeWait(1);
-				if(accessOpportunity.isDisplayed()) {
-					report.updateTestLog("Verify Opportunity Page", "Doesn't have access to edit the Opportunity:::", Status.PASS);
-					salesStage08_09ClosedFunction();
+				try {
+					if(accessOpportunity.isDisplayed()) {
+						report.updateTestLog("Verify Opportunity Page", "Doesn't have access to edit the Opportunity:::", Status.PASS);
+						salesStage08_09ClosedFunction();
+						salesStage08_08ClosedSubFunction();
+					}
+				} catch (Exception e) {
+					salesStage08_08ClosedSubFunction();
 				} 
 			}		
 		} catch (Exception e) {
@@ -5208,11 +5215,16 @@ public class OpportunitiesPage extends ReusableLibrary {
 		}		
 	}
 
-	public void salesStage08_09ClosedFunction() {
+	public String salesStage08_09ClosedFunction() {
 		opportunityNameAutoGenerate();
 		String oppUrl = driver.getCurrentUrl().split("#/sObject/")[1];
 		System.out.println("Opp URL" + oppUrl);
 		String OpportunityId = oppUrl.split("/view")[0];
+		return OpportunityId;
+	}
+	
+	public void salesStage08_08ClosedSubFunction() {
+		String OpportunityId = salesStage08_09ClosedFunction();
 		validateOpportunityFields(OpportunityId);
 		Utility_Functions.xWaitForElementPresent(driver, opportunityEdit, 3);
 		Utility_Functions.xClick(driver, opportunityEdit, true);

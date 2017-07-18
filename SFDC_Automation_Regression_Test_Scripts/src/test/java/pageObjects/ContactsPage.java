@@ -1725,6 +1725,7 @@ public class ContactsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		contactDetailsPageHeadersList.clear();
 		List<WebElement> contactInformationFieldsList = driver.findElements(By.xpath("//h3//span[text()='Contact Information']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
 		int count = 0, i = 0, j4=0;
 		String fieldsArray[] = new String[contactInformationFieldsList.size()];
@@ -1756,6 +1757,7 @@ public class ContactsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		contactInformationFieldsList.clear();
 		List<WebElement> addressInformationFieldsList = driver.findElements(By.xpath("//h3//span[text()='Address Information']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
 		int count1 = 0, i1 = 0, j3=0;
 		String fieldsArray1[] = new String[addressInformationFieldsList.size()];
@@ -1787,6 +1789,7 @@ public class ContactsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		addressInformationFieldsList.clear();
 		List<WebElement> additionalInformationList = driver.findElements(By.xpath("//h3//span[text()='Additional Information']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
 		int count5 = 0, i5 = 0,j=0;
 		String fieldsArray5[] = new String[additionalInformationList.size()];
@@ -1815,6 +1818,7 @@ public class ContactsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		additionalInformationList.clear();
 		List<WebElement> systemInformationList = driver.findElements(By.xpath("//h3//span[text()='System Information']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
 		int count6 = 0, i6 = 0,j2=0;
 		String fieldsArray6[] = new String[systemInformationList.size()];
@@ -1843,6 +1847,7 @@ public class ContactsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		systemInformationList.clear();
 		List<WebElement> customLinksList = driver.findElements(By.xpath("//h3//span[text()='Custom Links']/ancestor::h3/parent::div/div[1]//a"));
 		int count7 = 0, i7 = 0,j1=0;
 		String fieldsArray7[] = new String[customLinksList.size()];
@@ -1871,6 +1876,7 @@ public class ContactsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		customLinksList.clear();
 	}
 
 	/**
@@ -2015,8 +2021,7 @@ public class ContactsPage extends ReusableLibrary {
 						"Activity Type, Due Date, Comments and Status Checkbox are not present under activity related list:::",
 						Status.FAIL);
 			}
-			e.printStackTrace();
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 		}			
 		Utility_Functions.xWaitForElementPresent(driver,pastActivity, 5);
 		Utility_Functions.xClick(driver, pastActivity, true);

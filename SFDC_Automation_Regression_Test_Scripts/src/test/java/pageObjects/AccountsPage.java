@@ -595,13 +595,13 @@ public class AccountsPage extends ReusableLibrary {
    @FindBy(xpath="//input[contains(@id,'dueDate')]")
    WebElement newActivityDueDate;
    
-   @FindBy(xpath = "//p[@class='slds-tile__title slds-truncate']/a/parent::p/parent::div/parent::div//div[2]")
+   @FindBy(xpath = "//p[contains(@class,'slds-tile__title') and contains(@class,'slds-truncate')]/a/parent::p/parent::div/parent::div//div[text()='Activity Type']")
 	WebElement activityType;
 
-	@FindBy(xpath = "//p[@class='slds-tile__title slds-truncate']/a/parent::p/parent::div/parent::div//div[3]")
+	@FindBy(xpath = "//p[contains(@class,'slds-tile__title') and contains(@class,'slds-truncate')]/a/parent::p/parent::div/parent::div//div[text()='Status']")
 	WebElement statusActivityTimeLine;
 
-	@FindBy(xpath = "//p[@class='slds-tile__title slds-truncate']/a/parent::p/parent::div/parent::div//div[4]")
+	@FindBy(xpath = "//p[contains(@class,'slds-tile__title') and contains(@class,'slds-truncate')]/a/parent::p/parent::div/parent::div//div[text()='Comments']")
 	WebElement comments;
 
 	@FindBy(xpath = "//div[@class='slds-media']//p[@class='slds-timeline__date']")
@@ -4945,7 +4945,7 @@ public class AccountsPage extends ReusableLibrary {
 		List<WebElement> accountNamesList = driver.findElements(
 				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
 
-		Utility_Functions.xclickOnFirstElementfromList(accountNamesList);
+		Utility_Functions.xclickRandomElement(accountNamesList);
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xWaitForElementPresent(driver, related_Accounts, 5);
 		report.updateTestLog("Verify Accounts Activity Timeline ","The Account is Displayed ",  Status.PASS);
@@ -5018,6 +5018,9 @@ public class AccountsPage extends ReusableLibrary {
 				count++;
 			}
 		} catch (Exception e) {
+			Utility_Functions.xWaitForElementPresent(driver,moreActivities, 5);
+			Utility_Functions.xClick(driver, moreActivities, true);
+			Utility_Functions.xWaitForElementPresent(driver, activity, 3);
 			if (activity.isDisplayed()) {
 				System.out.println("Activity is present acitivity related list");
 				report.updateTestLog("Verify Accounts Activity Timeline",
@@ -5068,18 +5071,17 @@ public class AccountsPage extends ReusableLibrary {
 						"Activity Type, Due Date, Comments and Status Checkbox are not present under activity related list:::",
 						Status.FAIL);
 			}
-			e.printStackTrace();
+		}		
+		try {
+			Utility_Functions.xWaitForElementPresent(driver,pastActivity, 5);
+			Utility_Functions.xClick(driver, pastActivity, true);
+			report.updateTestLog("Verify Accounts Activity Timeline", "The Past Activities is clicked", Status.PASS);
+			Utility_Functions.xWaitForElementPresent(driver,moreActivities, 5);
+			Utility_Functions.xClick(driver, moreActivities, true);
+			report.updateTestLog("Verify Accounts Activity Timeline", "The More Activities is clicked", Status.PASS);
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
-		Utility_Functions.xWaitForElementPresent(driver,pastActivity, 5);
-		Utility_Functions.xClick(driver, pastActivity, true);
-		report.updateTestLog("Verify Accounts Activity Timeline",
-				"The Past Activities is clicked",
-				Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver,moreActivities, 5);
-		Utility_Functions.xClick(driver, moreActivities, true);
-		report.updateTestLog("Verify Accounts Activity Timeline", "The More Activities is clicked", Status.PASS);
 	}
 }
 

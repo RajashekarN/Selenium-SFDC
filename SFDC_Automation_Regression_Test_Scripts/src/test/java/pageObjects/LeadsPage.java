@@ -2091,7 +2091,7 @@ public class LeadsPage extends ReusableLibrary {
 
 			report.updateTestLog("Verify Convert Lead with Direct Line and Private Note","All fields are present in the Lead Convert Page", Status.PASS);
 		}
-		
+		convertList.clear();
 		/*List<WebElement> convertList = driver.findElements(By.xpath("//label[@class='slds-form-element__label']"));
 		int count1 = 0, i1 = 0;
 		String fieldsArray[] = new String[convertList.size()];

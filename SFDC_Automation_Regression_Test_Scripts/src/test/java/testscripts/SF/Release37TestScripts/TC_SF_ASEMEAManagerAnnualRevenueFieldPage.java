@@ -19,9 +19,9 @@ import com.cognizant.Craft.*;
  *
  */
 
-public class TC_SF_ASEMEAManagerLeasingAnnualRevenue extends CRAFTTestCase {
+public class TC_SF_ASEMEAManagerAnnualRevenueFieldPage extends CRAFTTestCase {
 	@Test(dataProvider = "RegressionTestScripts")
-	public void runTC_SF_ASEMEAManagerLeasingAnnualRevenue(String testInstance, ExecutionMode executionMode, Platform platform
+	public void runTC_SF_ASEMEAManagerAnnualRevenueFieldPage(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
