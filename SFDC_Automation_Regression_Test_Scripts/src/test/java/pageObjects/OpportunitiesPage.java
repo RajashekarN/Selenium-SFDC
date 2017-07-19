@@ -2166,6 +2166,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, saveNewOpportunity, true);
 		Utility_Functions.timeWait(4);
 		driver.navigate().refresh();
+		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, related, 4);
 		if (related.isDisplayed()) {
 			report.updateTestLog("Opportunity Created", "Opportunity created successfully:::", Status.PASS);
