@@ -133,10 +133,10 @@ public class ContactsPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//span[contains(text(),'Activities')]/ancestor::article//div[text()='New Activity']")
 	WebElement newActivity;
-	
+
 	@FindBy(xpath = "//div[contains(@class,'slds-page-header')]//div[@title='New Activity'][text()='New Activity']")
 	WebElement newActivityHeader;
-	
+
 	@FindBy(xpath = "//input[@class='slds-input'][@type='text']")
 	WebElement subject;
 
@@ -242,10 +242,162 @@ public class ContactsPage extends ReusableLibrary {
 
 	@FindBy(xpath="//a[@class='tabHeader']/span[text()='Activity']")
 	WebElement activityTab;
-	
-	 @FindBy(xpath="//a[@class='tabHeader']//span[text()='Details']")
-	 WebElement details;
 
+	@FindBy(xpath="//a[@class='tabHeader']//span[text()='Details']")
+	WebElement details;
+	
+	@FindBy(xpath="//ul[contains(@class,'forceActionsContainer')]//a[@class='forceActionLink']/div[text()='Edit']")
+	 WebElement edit;
+	 
+	 @FindBy(xpath="//input[@placeholder='First Name']")
+	 WebElement firstNameEditPage;
+	 
+	 @FindBy(xpath="//input[@placeholder='Last Name']")
+	 WebElement lastNameEditPage;
+	 
+	 @FindBy(xpath="//input[@type='tel']")
+	 WebElement directLineEditPage;
+	 
+	 @FindBy(xpath="//div[contains(@class,'forceModalActionContainer--footerAction')]/button[@title='Save']")
+	 WebElement saveEditPage;
+	 
+	 @FindBy(xpath="//li[contains(@class,'oneActionsDropDown')]//a")
+	 WebElement showMoreActionsDetailsPage;
+	 
+	 @FindBy(xpath="//div[@class='forceActionLink'][text()='Edit']")
+	 WebElement showMoreActionsEditPage;
+	 
+	 @FindBy(xpath="//input[@type='email']")
+	 WebElement emailEditPage;
+	 
+	 @FindBy(xpath="//input[contains(@id,'Firstname')]")
+	 WebElement firstNameNewContactPage;
+	 
+	 @FindBy(xpath="//input[contains(@id,'MiddleName')]")
+	 WebElement middleNameNewContactPage;
+	 
+	 @FindBy(xpath="//input[contains(@id,'NickName')]")
+	 WebElement nickNameNewContactpage;
+	 
+	 @FindBy(xpath="//input[contains(@id,'Tile')]")
+	 WebElement titleNewContactPage;
+	 
+	 @FindBy(xpath="//input[contains(@id,'Department')]")
+	 WebElement departmentNewContactPage;
+	 
+	 @FindBy(xpath="//select[contains(@id,'Influence_Level__c')]")
+	 WebElement influenceLevelPickList;
+	 
+	 @FindBy(xpath="//select[contains(@id,'Influence_Level__c')]/option[@value='Low']")
+	 WebElement influenceLevelPickListValue;
+	 
+	 @FindBy(xpath="//input[@id='reportsToBox']")
+	 WebElement reportsToNewContactPage;
+	 
+	 @FindBy(xpath="//input[contains(@id,'Phone')]")
+	 WebElement directLineNewContactPage;
+	 
+	 @FindBy(xpath="//input[contains(@id,'contForm:Email')]")
+	 WebElement emailNewContactPage;
+	 
+	 @FindBy(xpath="//select[contains(@id,'statusPicklist')]")
+	 WebElement statusPickListNewContactPage;
+	 
+	 @FindBy(xpath="//select[contains(@id,'statusPicklist')]/option[@value='Active']")
+	 WebElement statusPickListValueNewContactPage;
+	 
+	 @FindBy(xpath="//textarea[contains(@id,'MailingStreet')]")
+	 WebElement streetNewContactPage;
+	 
+	 @FindBy(xpath="//input[contains(@id,'MailingCity')]")
+	 WebElement cityNewContactPage;
+	 
+	 @FindBy(xpath="//select[contains(@id,'countryMailingPicklist')]")
+	 WebElement countryNewContactpage;
+	 
+	 @FindBy(xpath="//select[contains(@id,'countryMailingPicklist')]/option[@value='US']")
+	 WebElement countryValueNewContactPage;
+	 
+	 @FindBy(xpath="//select[contains(@id,'stateMailingPicklist')]")
+	 WebElement stateNewContactPage;
+	 
+	 @FindBy(xpath="//select[contains(@id,'stateMailingPicklist')]/option[@value='TX']")
+	 WebElement stateValueNewContactPage;
+	 
+	 @FindBy(xpath="//input[contains(@id,'MailingPostalCode')]")
+	 WebElement zipcodeNewContactPage;
+	 
+	 @FindBy(xpath="//input[contains(@id,'MobilePhone')]")
+	 WebElement mobilePhoneNewContactpage;
+	 
+	 @FindBy(xpath="//input[contains(@id,'Main_Phone__c')]")
+	 WebElement mainPhoneNewContactPage;
+	 
+	 @FindBy(xpath="//input[@id='inactivecontactBox']")
+	 WebElement inactiveContactBox;
+	 
+	 @FindBy(xpath="//select[contains(@id,'Email_Options__c')]")
+	 WebElement emailOptionsNewContactPage;
+	 
+	 @FindBy(xpath="//select[contains(@id,'Email_Options__c')]/option[@value='Email Opt In']")
+	 WebElement emailOptionsValueNewContactPage;
+	 
+	 @FindBy(xpath="//select[contains(@id,'Mail_Options__c')]")
+	 WebElement mailOptionsNewContactPage;
+	 
+	 @FindBy(xpath="//select[contains(@id,'Mail_Options__c')]/option[@value='Mail Opt In']")
+	 WebElement mailOptionsValueNewContactPage;
+	 
+	 @FindBy(xpath="//select[contains(@id,'Call_Options__c')]")
+	 WebElement callOptionsNewContactPage;
+	 
+	 @FindBy(xpath="//select[contains(@id,'Call_Options__c')]/option[@value='Call Opt In']")
+	 WebElement callOptionsValueNewContactPage;
+	 
+	 @FindBy(xpath="//input[contains(@id,'Fax')]")
+	 WebElement faxNewContactpage;
+	 
+	 @FindBy(xpath="//input[contains(@id,'Assistant_Name')]")
+	 WebElement assistantNameNewContactpage;
+	 
+	 @FindBy(xpath="//input[contains(@id,'Assistant_Phone')]")
+	 WebElement assistantPhoneNewContactPage;
+	 
+	 @FindBy(xpath="//label[text()='Comm Email Sent']/parent::div/div//span/input[contains(@class,'js-datepicker')]")
+	 WebElement commEmailSentNewContactpage;
+	 
+	 @FindBy(xpath="//label[text()='Inactivation Date']/parent::div/div//span/input[contains(@class,'js-datepicker')]")
+	 WebElement inactivationDateNewContactPage;
+	 
+	 @FindBy(xpath="//input[contains(@id,'Assistant_Email__c')]")
+	 WebElement assistantEmailNewContactPage;
+	 
+	 @FindBy(xpath="//select[contains(@id,'Preferred_Comm_Method')]")
+	 WebElement preferredCommMethod;
+	 
+	 @FindBy(xpath="//select[contains(@id,'Preferred_Comm_Method')]/option[@value='Call']")
+	 WebElement preferredCommMethodValue;
+	 
+	 @FindBy(xpath="//select[contains(@id,'Reason_for_Inactivating__c')]")
+	 WebElement reasonForInactivating;
+	 
+	 @FindBy(xpath="//select[contains(@id,'Reason_for_Inactivating__c')]/option[@value='Deceased']")
+	 WebElement reasonForInactivatingValue;
+	 
+	 @FindBy(xpath="//select[contains(@id,'APAC_Exclude_Reason__c')]")
+	 WebElement excludedReasonNewContactPage;
+	 
+	 @FindBy(xpath="//select[contains(@id,'APAC_Exclude_Reason__c')]/option[@value='Archived']")
+	 WebElement excludedReasonValueNewContactPage;
+	 
+	 @FindBy(xpath="//label[text()='Excluded On']/parent::div/div//span/input[contains(@class,'js-datepicker')]")
+	 WebElement excludedOnNewContactpage;
+	 
+	 @FindBy(xpath="//input[@id='apacexcludedBox']")
+	 WebElement excludedByNewContactpage;
+	 
+	 @FindBy(xpath = "//button[text()='Continue']")
+	 WebElement continueButtonNewContact;
 
 	SearchTextSOQL searchAccountName = new SearchTextSOQL(scriptHelper);
 
@@ -1602,12 +1754,12 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, saveActivity, true);
 		Utility_Functions.timeWait(3);
 		if(details.isDisplayed()) {
-			
+
 			report.updateTestLog("Verify Contact Activity Reminder Functionality", "Contacts Details page is displayed", Status.PASS);
 		} else {
 			report.updateTestLog("Verify Contact Activity Reminder Functionality", "Contacts Details page is not displayed", Status.FAIL);
 		}
-		
+
 	}
 	/**
 	 * Validating the Contacts Landing Page 
@@ -2046,4 +2198,1295 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, moreActivities, true);
 		report.updateTestLog("Verify Contact Activity Timeline","The More Activities is Clicked successfully",Status.PASS);
 	}
+
+	/**
+	 * Validating the updation of contact records
+	 * @author Ramya
+	 *
+	 */
+	public void verifyUpdationOfContactRecord() {
+
+		Utility_Functions.xWaitForElementPresent(driver, menu_Contacts, 3);
+		Utility_Functions.xClick(driver, menu_Contacts, true);
+		report.updateTestLog("Verify Contact Record Updation ","Contacts is Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
+		Utility_Functions.xClick(driver, recentlyViewed, true);
+		report.updateTestLog("Verify Contact Record Updation","Recently viewed Contacts are Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, allContacts, 3);
+		Utility_Functions.xClick(driver, allContacts, true);
+		Utility_Functions.timeWait(3);
+		report.updateTestLog("Verify Contact Record Updation","All Contacts are Displayed ",  Status.PASS);
+		List<WebElement> contactNamesList = driver.findElements(
+				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+
+		Utility_Functions.xclickRandomElement(contactNamesList);
+		Utility_Functions.timeWait(3);
+		try{
+			Utility_Functions.xWaitForElementPresent(driver, edit, 3);
+			Utility_Functions.xClick(driver, edit, true);
+		}catch(Exception e){
+
+			Utility_Functions.xWaitForElementPresent(driver,showMoreActionsDetailsPage, 3);
+			Utility_Functions.xClick(driver,showMoreActionsDetailsPage, true);
+			Utility_Functions.xWaitForElementPresent(driver, edit, 3);
+			Utility_Functions.xClick(driver, edit, true);
+
+		}
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(4);
+		try{
+			Utility_Functions.xWaitForElementPresent(driver,firstNameEditPage, 5);
+			String value = Utility_Functions.xGenerateAlphaNumericString();
+			String accountName = value + "Test Automation";
+			Utility_Functions.xSendKeys(driver, firstNameEditPage, accountName);
+			Utility_Functions.xWaitForElementPresent(driver,lastNameEditPage, 5);
+			String value2 = Utility_Functions.xGenerateAlphaNumericString();
+			String accountName2 = value2 + "Automation";
+			Utility_Functions.xSendKeys(driver,lastNameEditPage, accountName2);
+			Utility_Functions.xWaitForElementPresent(driver,directLineEditPage, 2);
+			Utility_Functions.xSendKeys(driver,directLineEditPage, dataTable.getData("General_Data", "Direct Line"));
+			if (dataTable.getData("General_Data", "TC_ID").contains("OBEMEA")) {			
+				Utility_Functions.xWaitForElementPresent(driver,emailEditPage, 5);
+				Utility_Functions.xClick(driver,emailEditPage, true);
+				Utility_Functions.xWaitForElementPresent(driver,emailEditPage, 2);
+				Utility_Functions.xSendKeys(driver,emailEditPage, dataTable.getData("General_Data", "Email"));
+			}
+			Utility_Functions.xWaitForElementPresent(driver,saveEditPage, 3);
+			Utility_Functions.xClick(driver, saveEditPage, true);
+			Utility_Functions.timeWait(2);
+			driver.navigate().refresh();
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xWaitForElementPresent(driver,details, 3);
+			if(details.isDisplayed()) {
+
+				report.updateTestLog("Verify Contact Record Updation", "The existing record can be updated and saved successfully", Status.PASS);
+			} else {
+				report.updateTestLog("Verify Contact Record Updation", "The existing record cannot be updated and saved successfully", Status.FAIL);
+			}
+		}catch (Exception e) {
+			report.updateTestLog("Verify Contact Record Updation", "The record cannot be updated as the First name, Last name and Direct Line cannot be edited", Status.PASS);
+
+		}
+
+	}
+	/**
+	 * Validating the New Contact Page layout
+	 * 
+	 * @author Ramya
+	 *
+	 */
+
+	static ArrayList<String> headerSectionList = new ArrayList<String>();
+
+	public void headerSectionNewContactPage() {
+
+		headerSectionList.add("Contact Information");
+		headerSectionList.add("Communication Preferences");
+		headerSectionList.add("Additional Information");
+		headerSectionList.add("System Information");
+
+		System.out.println("Header Sections present in the new contact page are:: " + headerSectionList);
+	}
+
+	static ArrayList<String> newContactInformationSectionList = new ArrayList<String>();
+	public void newContactInformationSection() {
+
+		newContactInformationSectionList.add("Middle Name");
+		newContactInformationSectionList.add("Nickname");
+		newContactInformationSectionList.add("Department");
+		newContactInformationSectionList.add("Influence Level");
+		newContactInformationSectionList.add("Reports To");
+		newContactInformationSectionList.add("Mobile");
+		newContactInformationSectionList.add("Main Phone");
+		newContactInformationSectionList.add("Inactive Contact");
+		newContactInformationSectionList.add("Contact Record Type");
+
+		System.out.println("Contact Information section fields  are:: " + newContactInformationSectionList);
+	}
+	static ArrayList<String> newContactInformationSectionListAdmin = new ArrayList<String>();
+	public void newContactInformationSectionAdmin() {
+
+		newContactInformationSectionListAdmin.add("Middle Name");
+		newContactInformationSectionListAdmin.add("Nickname");
+		newContactInformationSectionListAdmin.add("Department");
+		newContactInformationSectionListAdmin.add("Influence Level");
+		newContactInformationSectionListAdmin.add("Reports To");
+		newContactInformationSectionListAdmin.add("Mobile");
+		newContactInformationSectionListAdmin.add("Main Phone");
+		newContactInformationSectionListAdmin.add("Reason for Inactivating");
+		newContactInformationSectionListAdmin.add("Inactive Contact");
+		newContactInformationSectionListAdmin.add("Contact Record Type");
+
+		System.out.println("Contact Information section fields  are:: " + newContactInformationSectionListAdmin);
+	}
+	static ArrayList<String> InfluenceLevelFieldPickListValuesList = new ArrayList<String>();
+	public void InfluenceLevelFieldPickList() {
+		InfluenceLevelFieldPickListValuesList.add("--None--");
+		InfluenceLevelFieldPickListValuesList.add("Low");
+		InfluenceLevelFieldPickListValuesList.add("Medium");
+		InfluenceLevelFieldPickListValuesList.add("High");
+		System.out.println("Influence Level field pick list values  are:: " +InfluenceLevelFieldPickListValuesList);
+	}
+	static ArrayList<String> statusFieldPickListValuesList = new ArrayList<String>();
+	public void statusFieldPickList() {
+
+		statusFieldPickListValuesList.add("Active");
+		statusFieldPickListValuesList.add("Inactive");
+
+		System.out.println("Status field pick list values  are:: " +statusFieldPickListValuesList);
+	}
+	static ArrayList<String> communicationPreferencesSectionList = new ArrayList<String>();
+	public void communicationPreferencesList() {
+
+		communicationPreferencesSectionList.add("Email Options");
+		communicationPreferencesSectionList.add("Mail Options");
+		communicationPreferencesSectionList.add("Call Options");
+
+		System.out.println("Communication Preferences section fields are:: " +communicationPreferencesSectionList );
+	}
+
+	static ArrayList<String> communicationPreferencesSectionListAPAC = new ArrayList<String>();
+	public void communicationPreferencesListAPAC() {
+
+		communicationPreferencesSectionListAPAC.add("Email Options");
+		communicationPreferencesSectionListAPAC.add("Mail Options");
+		communicationPreferencesSectionListAPAC.add("Call Options");
+		communicationPreferencesSectionListAPAC.add("Exclude Reason");
+		communicationPreferencesSectionListAPAC.add("Excluded On");
+		communicationPreferencesSectionListAPAC.add("Excluded By");
+
+		System.out.println("Communication Preferences section fields are:: " +communicationPreferencesSectionListAPAC );
+	}
+
+	static ArrayList<String> communicationPreferencesSectionListAdmin = new ArrayList<String>();
+	public void communicationPreferencesListAdmin() {
+
+		communicationPreferencesSectionListAdmin.add("Preferred Comm Method");
+		communicationPreferencesSectionListAdmin.add("Email Options");
+		communicationPreferencesSectionListAdmin.add("Mail Options");
+		communicationPreferencesSectionListAdmin.add("Call Options");
+		communicationPreferencesSectionListAdmin.add("Exclude Reason");
+		communicationPreferencesSectionListAdmin.add("Excluded On");
+		communicationPreferencesSectionListAdmin.add("Excluded By");
+		communicationPreferencesSectionListAdmin.add("Dietary Requirements");
+
+		System.out.println("Communication Preferences section fields are:: " +communicationPreferencesSectionListAdmin );
+	}
+
+	static ArrayList<String> excludeReasonPickListValuesList = new ArrayList<String>();
+	public void excludeReasonsPickList() {
+
+		excludeReasonPickListValuesList.add("--None--");
+		excludeReasonPickListValuesList.add("Archived");
+		excludeReasonPickListValuesList.add("CL Suppression");
+		excludeReasonPickListValuesList.add("Email Bounce Back");
+		excludeReasonPickListValuesList.add("Insufficient address");
+		excludeReasonPickListValuesList.add("Left Address");
+		excludeReasonPickListValuesList.add("Return to Sender");
+		excludeReasonPickListValuesList.add("Undelivered");
+		excludeReasonPickListValuesList.add("Unsubscribe");
+
+		System.out.println("Email Option pick list values  are:: " +emailOptionsPickListValuesList);
+	}
+
+	static ArrayList<String> emailOptionsPickListValuesList = new ArrayList<String>();
+	public void emailOptionsPickList() {
+
+		emailOptionsPickListValuesList.add("--None--");
+		emailOptionsPickListValuesList.add("Email Opt In");
+		emailOptionsPickListValuesList.add("Email Opt Out");
+
+		System.out.println("Email Option pick list values  are:: " +emailOptionsPickListValuesList);
+	}
+	static ArrayList<String> mailOptionsPickListValuesList = new ArrayList<String>();
+	public void mailOptionsPickList() {
+
+		mailOptionsPickListValuesList.add("--None--");
+		mailOptionsPickListValuesList.add("Mail Opt In");
+		mailOptionsPickListValuesList.add("Mail Opt Out");
+
+		System.out.println("Mail Option pick list values  are:: " +mailOptionsPickListValuesList);
+	}
+	static ArrayList<String> callOptionsPickListValuesList = new ArrayList<String>();
+	public void callOptionsPickList() {
+
+		callOptionsPickListValuesList.add("--None--");
+		callOptionsPickListValuesList.add("Call Opt In");
+		callOptionsPickListValuesList.add("Call Opt Out");
+
+		System.out.println("Call Option pick list values  are:: " +callOptionsPickListValuesList);
+	}
+	static ArrayList<String> additionalInformationSectionList = new ArrayList<String>();
+	public void additionalInformationSectionList() {
+
+		additionalInformationSectionList.add("Fax");
+		additionalInformationSectionList.add("Preferred Comm Method");
+		additionalInformationSectionList.add("Comm Email Sent");
+		additionalInformationSectionList.add("Reason for Inactivating");
+		additionalInformationSectionList.add("Inactivation Date");
+		additionalInformationSectionList.add("Assistant Name");
+		additionalInformationSectionList.add("Assistant Phone");
+		additionalInformationSectionList.add("Assistant Email");
+
+		System.out.println("Additional Information section fields  are:: " + additionalInformationSectionList);
+	}
+	static ArrayList<String> additionalInformationSectionListAdmin = new ArrayList<String>();
+	public void additionalInformationSectionAdmin() {
+
+		additionalInformationSectionListAdmin.add("Fax");
+		additionalInformationSectionListAdmin.add("Integration Id");
+		additionalInformationSectionListAdmin.add("Comm Email Sent");
+		additionalInformationSectionListAdmin.add("Inactivation Date");
+		additionalInformationSectionListAdmin.add("Source System");
+		additionalInformationSectionListAdmin.add("Assistant Phone");
+		additionalInformationSectionListAdmin.add("Assistant Name");
+		additionalInformationSectionListAdmin.add("Assistant Email");
+		additionalInformationSectionListAdmin.add("Inactive Date");
+		additionalInformationSectionListAdmin.add("Source Created Date Time");
+		additionalInformationSectionListAdmin.add("Source Last Updated Date Time");
+		additionalInformationSectionListAdmin.add("CIF Source System ID");
+
+		System.out.println("Additional Information section fields  are:: " +additionalInformationSectionListAdmin);
+	}
+	static ArrayList<String> preferredCommMethodPickListValuesList = new ArrayList<String>();
+	public void preferredCommMethodPickList() {
+
+		preferredCommMethodPickListValuesList.add("--None--");
+		preferredCommMethodPickListValuesList.add("Call");
+		preferredCommMethodPickListValuesList.add("Email");
+		preferredCommMethodPickListValuesList.add("Mail");
+
+		System.out.println("Preferred Comm method pick list values  are:: " +preferredCommMethodPickListValuesList);
+	}
+	static ArrayList<String> reasonForInactivatingPickListValuesList = new ArrayList<String>();
+	public void reasonForInactivatingPickList() {
+
+		reasonForInactivatingPickListValuesList.add("--None--");
+		reasonForInactivatingPickListValuesList.add("Deceased");
+		reasonForInactivatingPickListValuesList.add("No Longer with the Company");
+		reasonForInactivatingPickListValuesList.add("Retired");
+		reasonForInactivatingPickListValuesList.add("Duplication");
+
+		System.out.println("Reason for Inactivating pick list values  are:: " +reasonForInactivatingPickListValuesList);
+	}
+
+	static ArrayList<String> systemInformationSectionList = new ArrayList<String>();
+	public void systemInformationSectionList() {
+
+		systemInformationSectionList.add("Contact Owner");
+
+		System.out.println("System Information section fields  are:: " + systemInformationSectionList);
+	}	
+	public void contactsNewContactPageLayout() {
+
+		Utility_Functions.xWaitForElementPresent(driver, menu_Contacts, 3);
+		Utility_Functions.xClick(driver, menu_Contacts, true);
+		Utility_Functions.timeWait(1);
+		report.updateTestLog("Verify New Contact Page Layout ","Verifying Contacts is Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, newContact, 3);
+		Utility_Functions.xClick(driver, newContact, true);
+		Utility_Functions.timeWait(2);
+		report.updateTestLog("Verify New Contact Page Layout ","Verifying New Contacts Page is Displayed  ",  Status.PASS);
+		if (dataTable.getData("General_Data", "TC_ID").contains("Admin")) {
+
+			Utility_Functions.xSwitchtoFrame(driver,continueButtonNewContact);
+			Utility_Functions.xWaitForElementPresent(driver,continueButtonNewContact, 3);
+			Utility_Functions.xClick(driver,continueButtonNewContact, true);
+			Utility_Functions.timeWait(2);
+		}
+		Utility_Functions.xSwitchtoFrame(driver, viewAllFieldsButton);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xWaitForElementPresent(driver, viewAllFieldsButton, 5);
+		Utility_Functions.xClick(driver, viewAllFieldsButton, true);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(5);
+
+		List<WebElement> newContactPageSectionsList = driver.findElements(By.xpath("//h2[@class='slds-text-heading--medium slds-m-top--x-large slds-m-bottom--large']"));
+		int count2 = 0, i2 = 0;
+		String fieldsArray2[] = new String[newContactPageSectionsList.size()];
+		System.out.println(newContactPageSectionsList.size());
+
+		try {
+			headerSectionNewContactPage();
+			for (WebElement element2 :newContactPageSectionsList) {
+				System.out.println(element2.getText());
+				fieldsArray2[i2] = element2.getText();
+				if (fieldsArray2[i2].contains(headerSectionList.get(i2))) {
+					report.updateTestLog("Verify New Contact Page Layout ",
+							"Contact Information section is having the " + fieldsArray2[i2] + " sections ",
+							Status.PASS);
+					count2++;
+				}
+				i2++;
+			}
+			System.out.println(count2);
+			if (count2 != 4) {
+				report.updateTestLog("Verify New Contact Page Layout", "All sections are not present in the New Contact Page ", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify New Contact Page Layout", "All sections are present in the New Contact Page", Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		newContactPageSectionsList.clear();
+
+		if (!(dataTable.getData("General_Data", "TC_ID").contains("Admin"))){
+			List<WebElement> contactInformationSectionList = driver.findElements(By.xpath("//h2[text()='Contact Information']/parent::div/parent::div/div//label[@class='slds-form-element__label']"));
+			int count1 = 0, i1 = 0;
+			String fieldsArray1[] = new String[contactInformationSectionList.size()];
+			System.out.println(contactInformationSectionList.size());
+
+			try {
+				newContactInformationSection();
+				for (WebElement element1 :contactInformationSectionList) {
+					System.out.println(element1.getText());
+					fieldsArray1[i1] = element1.getText();
+					if (fieldsArray1[i1].contains(newContactInformationSectionList.get(i1))) {
+						report.updateTestLog("Verify New Contact Page Layout ",
+								"Contact Information section is having the " + fieldsArray1[i1] + " fields ",
+								Status.PASS);
+						count1++;
+					}
+					i1++;
+				}
+				System.out.println(count1);
+				if (count1 != 9) {
+					report.updateTestLog("Verify New Contact Page Layout", "All fields are not present in the Contact Information section ", Status.FAIL);
+				} else {
+
+					report.updateTestLog("Verify New Contact Page Layout", "All fields are present in the Contact Information section", Status.PASS);
+				}
+
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			contactInformationSectionList.clear();
+		}else if (dataTable.getData("General_Data", "TC_ID").contains("OBAMERAdmin")) {
+			List<WebElement> contactInformationSectionListAdmin = driver.findElements(By.xpath("//h2[text()='Contact Information']/parent::div/parent::div/div//label[@class='slds-form-element__label']"));
+			int count20 = 0, i20 = 0;
+			String fieldsArray20[] = new String[contactInformationSectionListAdmin.size()];
+			System.out.println(contactInformationSectionListAdmin.size());
+
+			try {
+				newContactInformationSectionAdmin();
+				for (WebElement element20 :contactInformationSectionListAdmin) {
+					System.out.println(element20.getText());
+					fieldsArray20[i20] = element20.getText();
+					if (fieldsArray20[i20].contains(newContactInformationSectionListAdmin.get(i20))) {
+						report.updateTestLog("Verify New Contact Page Layout ",
+								"Contact Information section is having the " + fieldsArray20[i20] + " fields ",
+								Status.PASS);
+						count20++;
+					}
+					i20++;
+				}
+				System.out.println(count20);
+				if (count20 != 10) {
+					report.updateTestLog("Verify New Contact Page Layout", "All fields are not present in the Contact Information section ", Status.FAIL);
+				} else {
+
+					report.updateTestLog("Verify New Contact Page Layout", "All fields are present in the Contact Information section", Status.PASS);
+				}
+
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			contactInformationSectionListAdmin.clear();
+		}
+		Utility_Functions.xWaitForElementPresent(driver,firstNameNewContactPage, 5);
+		Utility_Functions.xSendKeys(driver,firstNameNewContactPage,"Ema");
+		Utility_Functions.xWaitForElementPresent(driver, accountNameQuickCreateContact, 5);
+		Utility_Functions.xSendKeys(driver, accountNameQuickCreateContact, "Barclay's Test");
+		accountNameQuickCreateContact.sendKeys(Keys.ARROW_DOWN);
+		Utility_Functions.timeWait(2);
+		accountNameQuickCreateContact.sendKeys(Keys.ENTER);
+		Utility_Functions.xWaitForElementPresent(driver, lastNameQuickCreateContact, 5);
+		Utility_Functions.xSendKeys(driver, lastNameQuickCreateContact, "Watson");
+		Utility_Functions.xWaitForElementPresent(driver,directLineNewContactPage, 2);
+		Utility_Functions.xSendKeys(driver,directLineNewContactPage, dataTable.getData("General_Data", "Direct Line"));
+		Utility_Functions.xWaitForElementPresent(driver,titleNewContactPage, 5);
+		Utility_Functions.xSendKeys(driver,titleNewContactPage, "Manager");
+		Utility_Functions.xWaitForElementPresent(driver,emailNewContactPage, 5);
+		Utility_Functions.xSendKeys(driver,emailNewContactPage, dataTable.getData("General_Data", "Email"));
+		List<WebElement> statusTypePickListValues = driver.findElements(By.xpath("//select[contains(@id,'statusPicklist')]/option"));
+		int count5 = 0, i5 = 0;
+		String fieldsArray5[] = new String[statusTypePickListValues.size()];
+		System.out.println(statusTypePickListValues.size());
+		try {
+			statusFieldPickList();
+			for (WebElement element5 :statusTypePickListValues) {
+				System.out.println(element5.getText());
+				fieldsArray5[i5] = element5.getText();
+				if (fieldsArray5[i5].contains(statusFieldPickListValuesList.get(i5))) {
+					report.updateTestLog("Verify SPOC Page Layout",
+							"Role pick list is having the " + fieldsArray5[i5] + " fields ",
+							Status.PASS);
+					count5++;
+				}
+				i5++;
+			}
+			System.out.println(count5);
+			if (count5!= 2) {
+				report.updateTestLog("Verify New Contact Page Layout", "All fields are not present in the Status Type value pick list", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify New Contact Page Layout", "All fields are present in the Status Type value pick list", Status.PASS);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		statusTypePickListValues.clear();
+		Utility_Functions.xWaitForElementPresent(driver,statusPickListNewContactPage, 3);
+		Utility_Functions.xClick(driver,statusPickListNewContactPage, true);
+		Utility_Functions.xWaitForElementPresent(driver,statusPickListValueNewContactPage, 3);
+		Utility_Functions.xClick(driver,statusPickListValueNewContactPage, true);
+
+		Utility_Functions.xWaitForElementPresent(driver,streetNewContactPage, 2);
+		Utility_Functions.xSendKeys(driver,streetNewContactPage, dataTable.getData("General_Data", "Street"));
+		Utility_Functions.xWaitForElementPresent(driver,cityNewContactPage, 2);
+		Utility_Functions.xSendKeys(driver,cityNewContactPage, dataTable.getData("General_Data", "City"));
+
+		Utility_Functions.xWaitForElementPresent(driver,countryNewContactpage, 3);
+		Utility_Functions.xClick(driver,countryNewContactpage, true);
+		Utility_Functions.xWaitForElementPresent(driver,countryValueNewContactPage, 3);
+		Utility_Functions.xClick(driver,countryValueNewContactPage, true);
+
+		Utility_Functions.xWaitForElementPresent(driver,stateNewContactPage, 3);
+		Utility_Functions.xClick(driver,stateNewContactPage, true);
+		Utility_Functions.xWaitForElementPresent(driver,stateValueNewContactPage, 3);
+		Utility_Functions.xClick(driver,stateValueNewContactPage, true);
+		Utility_Functions.xWaitForElementPresent(driver,zipcodeNewContactPage, 3);
+		Utility_Functions.xClick(driver,zipcodeNewContactPage, true);
+		Utility_Functions.xWaitForElementPresent(driver,zipcodeNewContactPage, 3);
+		Utility_Functions.xSendKeys(driver,zipcodeNewContactPage, dataTable.getData("General_Data", "Zipcode"));
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver,middleNameNewContactPage , 5);
+		Utility_Functions.xSendKeys(driver, middleNameNewContactPage, "S");
+		Utility_Functions.xWaitForElementPresent(driver,mobilePhoneNewContactpage, 3);
+		Utility_Functions.xSendKeys(driver,mobilePhoneNewContactpage, dataTable.getData("General_Data", "Phone"));
+		Utility_Functions.xWaitForElementPresent(driver,nickNameNewContactpage, 5);
+		Utility_Functions.xSendKeys(driver,nickNameNewContactpage, "Emi");
+		Utility_Functions.xWaitForElementPresent(driver,mainPhoneNewContactPage, 3);
+		Utility_Functions.xSendKeys(driver,mainPhoneNewContactPage, dataTable.getData("General_Data", "Phone"));
+		Utility_Functions.xWaitForElementPresent(driver,departmentNewContactPage, 5);
+		Utility_Functions.xSendKeys(driver,departmentNewContactPage, "Emi");
+		Utility_Functions.xWaitForElementPresent(driver,inactiveContactBox, 5);
+		Utility_Functions.xSendKeys(driver,inactiveContactBox, "Test");
+		inactiveContactBox.sendKeys(Keys.ARROW_DOWN);
+		Utility_Functions.timeWait(2);
+		inactiveContactBox.sendKeys(Keys.ENTER);
+
+		List<WebElement> InfluenceLevelTypePickList = driver.findElements(By.xpath("//select[contains(@id,'Influence_Level__c')]/option"));
+		int count4 = 0, i4 = 0;
+		String fieldsArray4[] = new String[InfluenceLevelTypePickList.size()];
+		System.out.println(InfluenceLevelTypePickList.size());
+
+		try {
+			InfluenceLevelFieldPickList();
+			for (WebElement element4 :InfluenceLevelTypePickList) {
+				System.out.println(element4.getText());
+				fieldsArray4[i4] = element4.getText();
+				if (fieldsArray4[i4].contains(InfluenceLevelFieldPickListValuesList.get(i4))) {
+					report.updateTestLog("Verify New Contact Page Layout",
+							"Influence Level pick list is having the " + fieldsArray4[i4] + " values ",
+							Status.PASS);
+					count4++;
+				}
+				i4++;
+			}
+			System.out.println(count4);
+			if (count4 != 4) {
+				report.updateTestLog("Verify New Contact Page Layout",
+						"All the values are not present in the Influence Level pick list ", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify New Contact Page Layout",
+						"All the values are present in the Influence Level pick list", Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		InfluenceLevelTypePickList.clear();
+		Utility_Functions.xWaitForElementPresent(driver,influenceLevelPickList, 3);
+		Utility_Functions.xClick(driver,influenceLevelPickList, true);
+		Utility_Functions.xWaitForElementPresent(driver,influenceLevelPickListValue, 3);
+		Utility_Functions.xClick(driver,influenceLevelPickListValue, true);
+		Utility_Functions.xWaitForElementPresent(driver,reportsToNewContactPage, 5);
+		Utility_Functions.xSendKeys(driver,reportsToNewContactPage, "Automation Test");
+		reportsToNewContactPage.sendKeys(Keys.ARROW_DOWN);
+		Utility_Functions.timeWait(2);
+		reportsToNewContactPage.sendKeys(Keys.ENTER);
+
+
+		if (dataTable.getData("General_Data", "TC_ID").contains("AMER")) {
+			List<WebElement> communicationPreferencesSectionListValues = driver.findElements(By.xpath("//h2[text()='Communication Preferences']/parent::div/parent::div/div//label[@class='slds-form-element__label']"));
+			int count3 = 0, i3 = 0;
+			String fieldsArray3[] = new String[communicationPreferencesSectionListValues.size()];
+			System.out.println(communicationPreferencesSectionListValues.size());
+
+			try {
+				communicationPreferencesList();
+				for (WebElement element3 :communicationPreferencesSectionListValues) {
+					System.out.println(element3.getText());
+					fieldsArray3[i3] = element3.getText();
+					if (fieldsArray3[i3].contains(communicationPreferencesSectionList.get(i3))) {
+						report.updateTestLog("Verify New Contact Page Layout ",
+								"Communication Preferences is having the " + fieldsArray3[i3] + " fields ",
+								Status.PASS);
+						count3++;
+					}
+					i3++;
+				}
+				System.out.println(count3);
+				if (count3 != 3) {
+					report.updateTestLog("Verify New Contact Page Layout", "All fields are not present in the Communication Preferences section ", Status.FAIL);
+				} else {
+
+					report.updateTestLog("Verify New Contact Page Layout", "All fields are present in the Communication Preferences section", Status.PASS);
+				}
+
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			communicationPreferencesSectionListValues.clear();
+			List<WebElement> emailOptionsPickListvalues = driver.findElements(By.xpath("//select[contains(@id,'Email_Options__c')]/option"));
+			int count6 = 0, i6 = 0;
+			String fieldsArray6[] = new String[emailOptionsPickListvalues.size()];
+			System.out.println(emailOptionsPickListvalues .size());
+
+			try {
+				emailOptionsPickList();
+				for (WebElement element6 :emailOptionsPickListvalues ) {
+					System.out.println(element6.getText());
+					fieldsArray6[i6] = element6.getText();
+					if (fieldsArray6[i6].contains(emailOptionsPickListValuesList.get(i6))) {
+						report.updateTestLog("Verify New Contact Page Layout ",
+								"Email Options pick list is having the " + fieldsArray6[i6] + " values ",
+								Status.PASS);
+						count6++;
+					}
+					i6++;
+				}
+				System.out.println(count6);
+				if (count6 != 3) {
+					report.updateTestLog("Verify New Contact Page Layout",
+							"All the values are not present in the Email Options pick list ", Status.FAIL);
+				} else {
+
+					report.updateTestLog("Verify New Contact Page Layout",
+							"All the values are present in the Email Options pick list", Status.PASS);
+				}
+
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			emailOptionsPickListvalues.clear();
+			List<WebElement> mailOptionsPickListvalues = driver.findElements(By.xpath("//select[contains(@id,'Mail_Options__c')]/option"));
+			int count7 = 0, i7 = 0;
+			String fieldsArray7[] = new String[mailOptionsPickListvalues.size()];
+			System.out.println(mailOptionsPickListvalues .size());
+
+			try {
+				mailOptionsPickList();
+				for (WebElement element7 :mailOptionsPickListvalues ) {
+					System.out.println(element7.getText());
+					fieldsArray7[i7] = element7.getText();
+					if (fieldsArray6[i6].contains(mailOptionsPickListValuesList.get(i7))) {
+						report.updateTestLog("Verify New Account Page Layout ",
+								"Mail Options pick list is having the " + fieldsArray7[i7] + " values ",
+								Status.PASS);
+						count7++;
+					}
+					i7++;
+				}
+				System.out.println(count7);
+				if (count7 != 3) {
+					report.updateTestLog("Verify New Contact Page Layout",
+							"All the values are not present in the mail Options pick list ", Status.FAIL);
+				} else {
+
+					report.updateTestLog("Verify New Contact Page Layout",
+							"All the values are present in the mail Options pick list", Status.PASS);
+				}
+
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			mailOptionsPickListvalues.clear();
+			List<WebElement> callOptionsPickListvalues = driver.findElements(By.xpath("//select[contains(@id,'Call_Options__c')]/option"));
+			int count8 = 0, i8 = 0;
+			String fieldsArray8[] = new String[callOptionsPickListvalues.size()];
+			System.out.println(callOptionsPickListvalues.size());
+
+			try {
+				callOptionsPickList();
+				for (WebElement element8 :callOptionsPickListvalues) {
+					System.out.println(element8.getText());
+					fieldsArray8[i8] = element8.getText();
+					if (fieldsArray8[i8].contains(callOptionsPickListValuesList.get(i8))) {
+						report.updateTestLog("Verify New Account Page Layout ",
+								"Call Options pick list is having the " + fieldsArray8[i8] + " values ",
+								Status.PASS);
+						count8++;
+					}
+					i8++;
+				}
+				System.out.println(count8);
+				if (count8!= 3) {
+					report.updateTestLog("Verify New Contact Page Layout",
+							"All the values are not present in the call Options pick list ", Status.FAIL);
+				} else {
+
+					report.updateTestLog("Verify New Contact Page Layout ",
+							"All the values are present in the call Options pick list", Status.PASS);
+				}
+
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			callOptionsPickListvalues.clear();
+			Utility_Functions.xWaitForElementPresent(driver,emailOptionsNewContactPage, 3);
+			Utility_Functions.xClick(driver,emailOptionsNewContactPage, true);
+			Utility_Functions.xWaitForElementPresent(driver,emailOptionsValueNewContactPage, 3);
+			Utility_Functions.xClick(driver,emailOptionsValueNewContactPage, true);
+			Utility_Functions.xWaitForElementPresent(driver,mailOptionsNewContactPage, 3);
+			Utility_Functions.xClick(driver,mailOptionsNewContactPage, true);
+			Utility_Functions.xWaitForElementPresent(driver,mailOptionsValueNewContactPage, 3);
+			Utility_Functions.xClick(driver,mailOptionsValueNewContactPage, true);
+			Utility_Functions.xWaitForElementPresent(driver,callOptionsNewContactPage, 3);
+			Utility_Functions.xClick(driver,callOptionsNewContactPage, true);
+			Utility_Functions.xWaitForElementPresent(driver,callOptionsValueNewContactPage, 3);
+			Utility_Functions.xClick(driver,callOptionsValueNewContactPage, true);
+
+		}else if (dataTable.getData("General_Data", "TC_ID").contains("APAC")) {
+			List<WebElement> communicationPreferencesSectionListValues = driver.findElements(By.xpath("//h2[text()='Communication Preferences']/parent::div/parent::div/div//label[@class='slds-form-element__label']"));
+			int count3 = 0, i3 = 0;
+			String fieldsArray3[] = new String[communicationPreferencesSectionListValues.size()];
+			System.out.println(communicationPreferencesSectionListValues.size());
+
+			try {
+				communicationPreferencesListAPAC();
+				for (WebElement element3 :communicationPreferencesSectionListValues) {
+					System.out.println(element3.getText());
+					fieldsArray3[i3] = element3.getText();
+					if (fieldsArray3[i3].contains(communicationPreferencesSectionListAPAC.get(i3))) {
+						report.updateTestLog("Verify New Contact Page Layout ",
+								"Communication Preferences is having the " + fieldsArray3[i3] + " fields ",
+								Status.PASS);
+						count3++;
+					}
+					i3++;
+				}
+				System.out.println(count3);
+				if (count3 != 6) {
+					report.updateTestLog("Verify New Contact Page Layout", "All fields are not present in the Communication Preferences section ", Status.FAIL);
+				} else {
+
+					report.updateTestLog("Verify New Contact Page Layout", "All fields are present in the Communication Preferences section", Status.PASS);
+				}
+
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			communicationPreferencesSectionListValues.clear();
+			List<WebElement> emailOptionsPickListvalues = driver.findElements(By.xpath("//select[contains(@id,'Email_Options__c')]/option"));
+			int count6 = 0, i6 = 0;
+			String fieldsArray6[] = new String[emailOptionsPickListvalues.size()];
+			System.out.println(emailOptionsPickListvalues .size());
+
+			try {
+				emailOptionsPickList();
+				for (WebElement element6 :emailOptionsPickListvalues ) {
+					System.out.println(element6.getText());
+					fieldsArray6[i6] = element6.getText();
+					if (fieldsArray6[i6].contains(emailOptionsPickListValuesList.get(i6))) {
+						report.updateTestLog("Verify New Contact Page Layout ",
+								"Email Options pick list is having the " + fieldsArray6[i6] + " values ",
+								Status.PASS);
+						count6++;
+					}
+					i6++;
+				}
+				System.out.println(count6);
+				if (count6 != 3) {
+					report.updateTestLog("Verify New Contact Page Layout",
+							"All the values are not present in the Email Options pick list ", Status.FAIL);
+				} else {
+
+					report.updateTestLog("Verify New Contact Page Layout",
+							"All the values are present in the Email Options pick list", Status.PASS);
+				}
+
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			emailOptionsPickListvalues.clear();
+			List<WebElement> mailOptionsPickListvalues = driver.findElements(By.xpath("//select[contains(@id,'Mail_Options__c')]/option"));
+			int count7 = 0, i7 = 0;
+			String fieldsArray7[] = new String[mailOptionsPickListvalues.size()];
+			System.out.println(mailOptionsPickListvalues .size());
+
+			try {
+				mailOptionsPickList();
+				for (WebElement element7 :mailOptionsPickListvalues ) {
+					System.out.println(element7.getText());
+					fieldsArray7[i7] = element7.getText();
+					if (fieldsArray6[i6].contains(mailOptionsPickListValuesList.get(i7))) {
+						report.updateTestLog("Verify New Account Page Layout ",
+								"Mail Options pick list is having the " + fieldsArray7[i7] + " values ",
+								Status.PASS);
+						count7++;
+					}
+					i7++;
+				}
+				System.out.println(count7);
+				if (count7 != 3) {
+					report.updateTestLog("Verify New Contact Page Layout",
+							"All the values are not present in the mail Options pick list ", Status.FAIL);
+				} else {
+
+					report.updateTestLog("Verify New Contact Page Layout",
+							"All the values are present in the mail Options pick list", Status.PASS);
+				}
+
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			mailOptionsPickListvalues.clear();
+			List<WebElement> callOptionsPickListvalues = driver.findElements(By.xpath("//select[contains(@id,'Call_Options__c')]/option"));
+			int count8 = 0, i8 = 0;
+			String fieldsArray8[] = new String[callOptionsPickListvalues.size()];
+			System.out.println(callOptionsPickListvalues.size());
+
+			try {
+				callOptionsPickList();
+				for (WebElement element8 :callOptionsPickListvalues) {
+					System.out.println(element8.getText());
+					fieldsArray8[i8] = element8.getText();
+					if (fieldsArray8[i8].contains(callOptionsPickListValuesList.get(i8))) {
+						report.updateTestLog("Verify New Account Page Layout ",
+								"Call Options pick list is having the " + fieldsArray8[i8] + " values ",
+								Status.PASS);
+						count8++;
+					}
+					i8++;
+				}
+				System.out.println(count8);
+				if (count8!= 3) {
+					report.updateTestLog("Verify New Contact Page Layout",
+							"All the values are not present in the call Options pick list ", Status.FAIL);
+				} else {
+
+					report.updateTestLog("Verify New Contact Page Layout ",
+							"All the values are present in the call Options pick list", Status.PASS);
+				}
+
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			callOptionsPickListvalues.clear();
+			List<WebElement> excludeReasonPickListvalues = driver.findElements(By.xpath("//select[contains(@id,'APAC_Exclude_Reason__c')]/option"));
+			int count13 = 0, i13 = 0;
+			String fieldsArray13[] = new String[excludeReasonPickListvalues.size()];
+			System.out.println(excludeReasonPickListvalues.size());
+
+			try {
+				excludeReasonsPickList();
+				for (WebElement element13 :excludeReasonPickListvalues) {
+					System.out.println(element13.getText());
+					fieldsArray13[i13] = element13.getText();
+					if (fieldsArray13[i13].contains(excludeReasonPickListValuesList.get(i13))) {
+						report.updateTestLog("Verify New Account Page Layout ",
+								"Call Options pick list is having the " + fieldsArray13[i13] + " values ",
+								Status.PASS);
+						count13++;
+					}
+					i13++;
+				}
+				System.out.println(count13);
+				if (count13!= 9) {
+					report.updateTestLog("Verify New Contact Page Layout",
+							"All the values are not present in the Exclude reason pick list ", Status.FAIL);
+				} else {
+
+					report.updateTestLog("Verify New Contact Page Layout ",
+							"All the values are present in the Exclude reason pick list", Status.PASS);
+				}
+
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			excludeReasonPickListvalues.clear();
+			Utility_Functions.xWaitForElementPresent(driver,emailOptionsNewContactPage, 3);
+			Utility_Functions.xClick(driver,emailOptionsNewContactPage, true);
+			Utility_Functions.xWaitForElementPresent(driver,emailOptionsValueNewContactPage, 3);
+			Utility_Functions.xClick(driver,emailOptionsValueNewContactPage, true);
+			Utility_Functions.xWaitForElementPresent(driver,excludedReasonNewContactPage, 3);
+			Utility_Functions.xClick(driver,excludedReasonNewContactPage, true);
+			Utility_Functions.xWaitForElementPresent(driver,excludedReasonValueNewContactPage, 3);
+			Utility_Functions.xClick(driver,excludedReasonValueNewContactPage, true);
+			Utility_Functions.xWaitForElementPresent(driver,mailOptionsNewContactPage, 3);
+			Utility_Functions.xClick(driver,mailOptionsNewContactPage, true);
+			Utility_Functions.xWaitForElementPresent(driver,mailOptionsValueNewContactPage, 3);
+			Utility_Functions.xClick(driver,mailOptionsValueNewContactPage, true);
+			Calendar calendar = Calendar.getInstance();
+			calendar.add(Calendar.DAY_OF_MONTH, -20);
+			SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
+			System.out.println("Date : " + dateFormat.format(calendar.getTime())); 
+			Utility_Functions.xWaitForElementPresent(driver,excludedOnNewContactpage, 3);
+			Utility_Functions.xSendKeys(driver,excludedOnNewContactpage, dateFormat.format(calendar.getTime()));
+			Utility_Functions.xWaitForElementPresent(driver,callOptionsNewContactPage, 3);
+			Utility_Functions.xClick(driver,callOptionsNewContactPage, true);
+			Utility_Functions.xWaitForElementPresent(driver,callOptionsValueNewContactPage, 3);
+			Utility_Functions.xClick(driver,callOptionsValueNewContactPage, true);
+			Utility_Functions.xWaitForElementPresent(driver,excludedByNewContactpage, 5);
+			Utility_Functions.xSendKeys(driver,excludedByNewContactpage, "Test");
+			excludedByNewContactpage.sendKeys(Keys.ARROW_DOWN);
+			Utility_Functions.timeWait(2);
+			excludedByNewContactpage.sendKeys(Keys.ENTER);
+
+		}else if (dataTable.getData("General_Data", "TC_ID").contains("OBAMERAdmin")) {
+			List<WebElement> communicationPreferencesSectionListValuesAdmin = driver.findElements(By.xpath("//h2[text()='Communication Preferences']/parent::div/parent::div/div//label[@class='slds-form-element__label']"));
+			int count15 = 0, i15 = 0;
+			String fieldsArray15[] = new String[communicationPreferencesSectionListValuesAdmin.size()];
+			System.out.println(communicationPreferencesSectionListValuesAdmin.size());
+
+			try {
+				communicationPreferencesListAdmin();
+				for (WebElement element15 :communicationPreferencesSectionListValuesAdmin) {
+					System.out.println(element15.getText());
+					fieldsArray15[i15] = element15.getText();
+					if (fieldsArray15[i15].contains(communicationPreferencesSectionListAdmin.get(i15))) {
+						report.updateTestLog("Verify New Contact Page Layout ",
+								"Communication Preferences is having the " + fieldsArray15[i15] + " fields ",
+								Status.PASS);
+						count15++;
+					}
+					i15++;
+				}
+				System.out.println(count15);
+				if (count15 != 8) {
+					report.updateTestLog("Verify New Contact Page Layout", "All fields are not present in the Communication Preferences section ", Status.FAIL);
+				} else {
+
+					report.updateTestLog("Verify New Contact Page Layout", "All fields are present in the Communication Preferences section", Status.PASS);
+				}
+
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			communicationPreferencesSectionListValuesAdmin.clear();
+			List<WebElement> emailOptionsPickListvalues = driver.findElements(By.xpath("//select[contains(@id,'Email_Options__c')]/option"));
+			int count6 = 0, i6 = 0;
+			String fieldsArray6[] = new String[emailOptionsPickListvalues.size()];
+			System.out.println(emailOptionsPickListvalues .size());
+
+			try {
+				emailOptionsPickList();
+				for (WebElement element6 :emailOptionsPickListvalues ) {
+					System.out.println(element6.getText());
+					fieldsArray6[i6] = element6.getText();
+					if (fieldsArray6[i6].contains(emailOptionsPickListValuesList.get(i6))) {
+						report.updateTestLog("Verify New Contact Page Layout ",
+								"Email Options pick list is having the " + fieldsArray6[i6] + " values ",
+								Status.PASS);
+						count6++;
+					}
+					i6++;
+				}
+				System.out.println(count6);
+				if (count6 != 3) {
+					report.updateTestLog("Verify New Contact Page Layout",
+							"All the values are not present in the Email Options pick list ", Status.FAIL);
+				} else {
+
+					report.updateTestLog("Verify New Contact Page Layout",
+							"All the values are present in the Email Options pick list", Status.PASS);
+				}
+
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			emailOptionsPickListvalues.clear();
+			List<WebElement> mailOptionsPickListvalues = driver.findElements(By.xpath("//select[contains(@id,'Mail_Options__c')]/option"));
+			int count7 = 0, i7 = 0;
+			String fieldsArray7[] = new String[mailOptionsPickListvalues.size()];
+			System.out.println(mailOptionsPickListvalues .size());
+
+			try {
+				mailOptionsPickList();
+				for (WebElement element7 :mailOptionsPickListvalues ) {
+					System.out.println(element7.getText());
+					fieldsArray7[i7] = element7.getText();
+					if (fieldsArray6[i6].contains(mailOptionsPickListValuesList.get(i7))) {
+						report.updateTestLog("Verify New Account Page Layout ",
+								"Mail Options pick list is having the " + fieldsArray7[i7] + " values ",
+								Status.PASS);
+						count7++;
+					}
+					i7++;
+				}
+				System.out.println(count7);
+				if (count7 != 3) {
+					report.updateTestLog("Verify New Contact Page Layout",
+							"All the values are not present in the mail Options pick list ", Status.FAIL);
+				} else {
+
+					report.updateTestLog("Verify New Contact Page Layout",
+							"All the values are present in the mail Options pick list", Status.PASS);
+				}
+
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			mailOptionsPickListvalues.clear();
+			List<WebElement> callOptionsPickListvalues = driver.findElements(By.xpath("//select[contains(@id,'Call_Options__c')]/option"));
+			int count8 = 0, i8 = 0;
+			String fieldsArray8[] = new String[callOptionsPickListvalues.size()];
+			System.out.println(callOptionsPickListvalues.size());
+
+			try {
+				callOptionsPickList();
+				for (WebElement element8 :callOptionsPickListvalues) {
+					System.out.println(element8.getText());
+					fieldsArray8[i8] = element8.getText();
+					if (fieldsArray8[i8].contains(callOptionsPickListValuesList.get(i8))) {
+						report.updateTestLog("Verify New Account Page Layout ",
+								"Call Options pick list is having the " + fieldsArray8[i8] + " values ",
+								Status.PASS);
+						count8++;
+					}
+					i8++;
+				}
+				System.out.println(count8);
+				if (count8!= 3) {
+					report.updateTestLog("Verify New Contact Page Layout",
+							"All the values are not present in the call Options pick list ", Status.FAIL);
+				} else {
+
+					report.updateTestLog("Verify New Contact Page Layout ",
+							"All the values are present in the call Options pick list", Status.PASS);
+				}
+
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			callOptionsPickListvalues.clear();
+			List<WebElement> excludeReasonPickListvalues = driver.findElements(By.xpath("//select[contains(@id,'APAC_Exclude_Reason__c')]/option"));
+			int count13 = 0, i13 = 0;
+			String fieldsArray13[] = new String[excludeReasonPickListvalues.size()];
+			System.out.println(excludeReasonPickListvalues.size());
+
+			try {
+				excludeReasonsPickList();
+				for (WebElement element13 :excludeReasonPickListvalues) {
+					System.out.println(element13.getText());
+					fieldsArray13[i13] = element13.getText();
+					if (fieldsArray13[i13].contains(excludeReasonPickListValuesList.get(i13))) {
+						report.updateTestLog("Verify New Account Page Layout ",
+								"Call Options pick list is having the " + fieldsArray13[i13] + " values ",
+								Status.PASS);
+						count13++;
+					}
+					i13++;
+				}
+				System.out.println(count13);
+				if (count13!= 9) {
+					report.updateTestLog("Verify New Contact Page Layout",
+							"All the values are not present in the Exclude reason pick list ", Status.FAIL);
+				} else {
+
+					report.updateTestLog("Verify New Contact Page Layout ",
+							"All the values are present in the Exclude reason pick list", Status.PASS);
+				}
+
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			excludeReasonPickListvalues.clear();
+			List<WebElement> PreferredCommMethodPickListvalues = driver.findElements(By.xpath("//select[contains(@id,'Preferred_Comm_Method')]/option"));
+			int count10 = 0, i10 = 0;
+			String fieldsArray10[] = new String[PreferredCommMethodPickListvalues.size()];
+			System.out.println(PreferredCommMethodPickListvalues.size());
+
+			try {
+				preferredCommMethodPickList();
+				for (WebElement element10 :PreferredCommMethodPickListvalues) {
+					System.out.println(element10.getText());
+					fieldsArray10[i10] = element10.getText();
+					if (fieldsArray10[i10].contains(preferredCommMethodPickListValuesList.get(i10))) {
+						report.updateTestLog("Verify New Account Page Layout ",
+								"Preferred Comm method pick list is having the " + fieldsArray10[i10] + " values ",
+								Status.PASS);
+						count10++;
+					}
+					i10++;
+				}
+				System.out.println(count10);
+				if (count10!= 4) {
+					report.updateTestLog("Verify New Contact Page Layout",
+							"All the values are not present in the preffered Comm method pick list ", Status.FAIL);
+				} else {
+
+					report.updateTestLog("Verify New Contact Page Layout",
+							"All the values are present in the preffered Comm method pick list", Status.PASS);
+				}
+
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			PreferredCommMethodPickListvalues.clear();
+			Utility_Functions.xWaitForElementPresent(driver,preferredCommMethod, 3);
+			Utility_Functions.xClick(driver,preferredCommMethod, true);
+			Utility_Functions.xWaitForElementPresent(driver, preferredCommMethodValue, 3);
+			Utility_Functions.xClick(driver, preferredCommMethodValue, true);
+			Utility_Functions.xWaitForElementPresent(driver,emailOptionsNewContactPage, 3);
+			Utility_Functions.xClick(driver,emailOptionsNewContactPage, true);
+			Utility_Functions.xWaitForElementPresent(driver,emailOptionsValueNewContactPage, 3);
+			Utility_Functions.xClick(driver,emailOptionsValueNewContactPage, true);
+			Utility_Functions.xWaitForElementPresent(driver,excludedReasonNewContactPage, 3);
+			Utility_Functions.xClick(driver,excludedReasonNewContactPage, true);
+			Utility_Functions.xWaitForElementPresent(driver,excludedReasonValueNewContactPage, 3);
+			Utility_Functions.xClick(driver,excludedReasonValueNewContactPage, true);
+			Utility_Functions.xWaitForElementPresent(driver,mailOptionsNewContactPage, 3);
+			Utility_Functions.xClick(driver,mailOptionsNewContactPage, true);
+			Utility_Functions.xWaitForElementPresent(driver,mailOptionsValueNewContactPage, 3);
+			Utility_Functions.xClick(driver,mailOptionsValueNewContactPage, true);
+			Calendar calendar = Calendar.getInstance();
+			calendar.add(Calendar.DAY_OF_MONTH, -20);
+			SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
+			System.out.println("Date : " + dateFormat.format(calendar.getTime())); 
+			Utility_Functions.xWaitForElementPresent(driver,excludedOnNewContactpage, 3);
+			Utility_Functions.xSendKeys(driver,excludedOnNewContactpage, dateFormat.format(calendar.getTime()));
+			Utility_Functions.xWaitForElementPresent(driver,callOptionsNewContactPage, 3);
+			Utility_Functions.xClick(driver,callOptionsNewContactPage, true);
+			Utility_Functions.xWaitForElementPresent(driver,callOptionsValueNewContactPage, 3);
+			Utility_Functions.xClick(driver,callOptionsValueNewContactPage, true);
+			Utility_Functions.xWaitForElementPresent(driver,excludedByNewContactpage, 5);
+			Utility_Functions.xSendKeys(driver,excludedByNewContactpage, "Test");
+			excludedByNewContactpage.sendKeys(Keys.ARROW_DOWN);
+			Utility_Functions.timeWait(2);
+			excludedByNewContactpage.sendKeys(Keys.ENTER);
+
+		}
+
+		if (!(dataTable.getData("General_Data", "TC_ID").contains("Admin"))){
+			List<WebElement> additionalInformationSectionListValues = driver.findElements(By.xpath("//h2[text()='Additional Information']/parent::div/parent::div/div//label[@class='slds-form-element__label']"));
+			int count9 = 0, i9 = 0;
+			String fieldsArray9[] = new String[additionalInformationSectionListValues.size()];
+			System.out.println(additionalInformationSectionListValues.size());
+
+			try {
+				additionalInformationSectionList();
+				for (WebElement element9 :additionalInformationSectionListValues) {
+					System.out.println(element9.getText());
+					fieldsArray9[i9] = element9.getText();
+					if (fieldsArray9[i9].contains(additionalInformationSectionList.get(i9))) {
+						report.updateTestLog("Verify New Contact Page Layout",
+								"Additional Information section is having the " + fieldsArray9[i9] + " fields ",
+								Status.PASS);
+						count9++;
+					}
+					i9++;
+				}
+				System.out.println(count9);
+				if (count9 != 8) {
+					report.updateTestLog("Verify New Contact Page Layout", "All fields are not present in the Additional Information section ", Status.FAIL);
+				} else {
+
+					report.updateTestLog("Verify New Contact Page Layout", "All fields are present in the Additional Information section", Status.PASS);
+				}
+
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			additionalInformationSectionListValues.clear();
+			Utility_Functions.xWaitForElementPresent(driver,faxNewContactpage, 3);
+			Utility_Functions.xSendKeys(driver,faxNewContactpage, dataTable.getData("General_Data", "Phone"));
+			Utility_Functions.xWaitForElementPresent(driver,assistantNameNewContactpage, 5);
+			Utility_Functions.xSendKeys(driver,assistantNameNewContactpage, "Emi");
+			List<WebElement> PreferredCommMethodPickListvalues = driver.findElements(By.xpath("//select[contains(@id,'Preferred_Comm_Method')]/option"));
+			int count10 = 0, i10 = 0;
+			String fieldsArray10[] = new String[PreferredCommMethodPickListvalues.size()];
+			System.out.println(PreferredCommMethodPickListvalues.size());
+
+			try {
+				preferredCommMethodPickList();
+				for (WebElement element10 :PreferredCommMethodPickListvalues) {
+					System.out.println(element10.getText());
+					fieldsArray10[i10] = element10.getText();
+					if (fieldsArray10[i10].contains(preferredCommMethodPickListValuesList.get(i10))) {
+						report.updateTestLog("Verify New Account Page Layout ",
+								"Preferred Comm method pick list is having the " + fieldsArray10[i10] + " values ",
+								Status.PASS);
+						count10++;
+					}
+					i10++;
+				}
+				System.out.println(count10);
+				if (count10!= 4) {
+					report.updateTestLog("Verify New Contact Page Layout",
+							"All the values are not present in the preffered Comm method pick list ", Status.FAIL);
+				} else {
+
+					report.updateTestLog("Verify New Contact Page Layout",
+							"All the values are present in the preffered Comm method pick list", Status.PASS);
+				}
+
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			PreferredCommMethodPickListvalues.clear();
+			Utility_Functions.xWaitForElementPresent(driver,preferredCommMethod, 3);
+			Utility_Functions.xClick(driver,preferredCommMethod, true);
+			Utility_Functions.xWaitForElementPresent(driver, preferredCommMethodValue, 3);
+			Utility_Functions.xClick(driver, preferredCommMethodValue, true);
+			Utility_Functions.xWaitForElementPresent(driver,assistantPhoneNewContactPage, 3);
+			Utility_Functions.xSendKeys(driver,assistantPhoneNewContactPage, dataTable.getData("General_Data", "Phone"));
+			Calendar calendar = Calendar.getInstance();
+			calendar.add(Calendar.DAY_OF_MONTH, -20);
+			SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
+			System.out.println("Date : " + dateFormat.format(calendar.getTime())); 
+			Utility_Functions.xWaitForElementPresent(driver,commEmailSentNewContactpage, 3);
+			Utility_Functions.xSendKeys(driver,commEmailSentNewContactpage, dateFormat.format(calendar.getTime()));	
+			Utility_Functions.xWaitForElementPresent(driver,assistantEmailNewContactPage, 3);
+			Utility_Functions.xSendKeys(driver,assistantEmailNewContactPage, dataTable.getData("General_Data", "Email"));
+			List<WebElement> reasonForInactivatingPickListvalues = driver.findElements(By.xpath("//select[contains(@id,'Reason_for_Inactivating__c')]/option"));
+			int count11 = 0, i11 = 0;
+			String fieldsArray11[] = new String[reasonForInactivatingPickListvalues.size()];
+			System.out.println(reasonForInactivatingPickListvalues.size());
+
+			try {
+				reasonForInactivatingPickList();
+				for (WebElement element11 :reasonForInactivatingPickListvalues) {
+					System.out.println(element11.getText());
+					fieldsArray11[i11] = element11.getText();
+					if (fieldsArray11[i11].contains(reasonForInactivatingPickListValuesList.get(i11))) {
+						report.updateTestLog("Verify New Contact Page Layout",
+								"Reason for Inactivating pick list is having the " + fieldsArray11[i11] + " values ",
+								Status.PASS);
+						count11++;
+					}
+					i11++;
+				}
+				System.out.println(count11);
+				if (count11!= 5) {
+					report.updateTestLog("Verify New Contact Page Layout",
+							"All the values are not present in the reason for Inactivating pick list ", Status.FAIL);
+				} else {
+
+					report.updateTestLog("Verify New Contact Page Layout",
+							"All the values are present in the reason for Inactivating pick list", Status.PASS);
+				}
+
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			reasonForInactivatingPickListvalues.clear();
+			Utility_Functions.xWaitForElementPresent(driver,reasonForInactivating, 3);
+			Utility_Functions.xClick(driver,reasonForInactivating, true);
+			Utility_Functions.xWaitForElementPresent(driver, reasonForInactivatingValue, 3);
+			Utility_Functions.xClick(driver, reasonForInactivatingValue, true);
+			Calendar calendar1 = Calendar.getInstance();
+			calendar1.add(Calendar.DAY_OF_MONTH, 10);
+			SimpleDateFormat dateFormat1 = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
+			System.out.println("Date : " + dateFormat1.format(calendar1.getTime())); 
+			Utility_Functions.xWaitForElementPresent(driver,inactivationDateNewContactPage, 3);
+			Utility_Functions.xSendKeys(driver,inactivationDateNewContactPage, dateFormat1.format(calendar1.getTime()));
+
+		}else if (dataTable.getData("General_Data", "TC_ID").contains("Admin")) {
+
+			List<WebElement> additionalInformationSectionListValuesAdmin = driver.findElements(By.xpath("//h2[text()='Additional Information']/parent::div/parent::div/div//label[@class='slds-form-element__label']"));
+			int count19 = 0, i19 = 0;
+			String fieldsArray19[] = new String[additionalInformationSectionListValuesAdmin.size()];
+			System.out.println(additionalInformationSectionListValuesAdmin.size());
+
+			try {
+				additionalInformationSectionAdmin();
+				for (WebElement element19 :additionalInformationSectionListValuesAdmin) {
+					System.out.println(element19.getText());
+					fieldsArray19[i19] = element19.getText();
+					if (fieldsArray19[i19].contains(additionalInformationSectionListAdmin.get(i19))) {
+						report.updateTestLog("Verify New Contact Page Layout",
+								"Additional Information section is having the " + fieldsArray19[i19] + " fields ",
+								Status.PASS);
+						count19++;
+					}
+					i19++;
+				}
+				System.out.println(count19);
+				if (count19 != 12) {
+					report.updateTestLog("Verify New Contact Page Layout", "All fields are not present in the Additional Information section ", Status.FAIL);
+				} else {
+
+					report.updateTestLog("Verify New Contact Page Layout", "All fields are present in the Additional Information section", Status.PASS);
+				}
+
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			additionalInformationSectionListValuesAdmin.clear();
+			Utility_Functions.xWaitForElementPresent(driver,faxNewContactpage, 3);
+			Utility_Functions.xSendKeys(driver,faxNewContactpage, dataTable.getData("General_Data", "Phone"));
+			Utility_Functions.xWaitForElementPresent(driver,assistantNameNewContactpage, 5);
+			Utility_Functions.xSendKeys(driver,assistantNameNewContactpage, "Emi");
+			Utility_Functions.xWaitForElementPresent(driver,assistantPhoneNewContactPage, 3);
+			Utility_Functions.xSendKeys(driver,assistantPhoneNewContactPage, dataTable.getData("General_Data", "Phone"));
+			Calendar calendar = Calendar.getInstance();
+			calendar.add(Calendar.DAY_OF_MONTH, -20);
+			SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
+			System.out.println("Date : " + dateFormat.format(calendar.getTime())); 
+			Utility_Functions.xWaitForElementPresent(driver,commEmailSentNewContactpage, 3);
+			Utility_Functions.xSendKeys(driver,commEmailSentNewContactpage, dateFormat.format(calendar.getTime()));	
+			Utility_Functions.xWaitForElementPresent(driver,assistantEmailNewContactPage, 3);
+			Utility_Functions.xSendKeys(driver,assistantEmailNewContactPage, dataTable.getData("General_Data", "Email"));
+			Calendar calendar1 = Calendar.getInstance();
+			calendar1.add(Calendar.DAY_OF_MONTH, 10);
+			SimpleDateFormat dateFormat1 = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
+			System.out.println("Date : " + dateFormat1.format(calendar1.getTime())); 
+			Utility_Functions.xWaitForElementPresent(driver,inactivationDateNewContactPage, 3);
+			Utility_Functions.xSendKeys(driver,inactivationDateNewContactPage, dateFormat1.format(calendar1.getTime()));
+
+		}
+		List<WebElement> systemInformationSectionListValues = driver.findElements(By.xpath("//h2[text()='Additional Information']/parent::div/parent::div/div//label[@class='slds-form-element__label']"));
+		int count12 = 0, i12 = 0;
+		String fieldsArray12[] = new String[systemInformationSectionListValues.size()];
+		System.out.println(systemInformationSectionListValues.size());
+
+		try {
+			systemInformationSectionList();
+			for (WebElement element12 :systemInformationSectionListValues) {
+				System.out.println(element12.getText());
+				fieldsArray12[i12] = element12.getText();
+				if (fieldsArray12[i12].contains(systemInformationSectionList.get(i12))) {
+					report.updateTestLog("Verify New Contact Page Layout",
+							"Additional Information section is having the " + fieldsArray12[i12] + " fields ",
+							Status.PASS);
+					count12++;
+				}
+				i12++;
+			}
+			System.out.println(count12);
+			if (count12 != 1) {
+				report.updateTestLog("Verify New Contact Page Layout", "All fields are not present in the System Information section ", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify New Contact Page Layout", "All fields are present in the System Information section", Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		systemInformationSectionListValues.clear();
+	}
+
 }

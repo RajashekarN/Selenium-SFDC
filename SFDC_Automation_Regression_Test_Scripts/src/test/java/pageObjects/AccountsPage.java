@@ -623,7 +623,35 @@ public class AccountsPage extends ReusableLibrary {
 	WebElement moreActivities;
 	
 	@FindBy(xpath="//a[@class='tabHeader']/span[text()='Activity']")
-	WebElement activityTab;   
+	WebElement activityTab;  
+	
+	 @FindBy(xpath="//ul[contains(@class,'forceActionsContainer')]//a[@class='forceActionLink']/div[text()='Edit']")
+	 WebElement edit;
+	 
+	 @FindBy(xpath="//a[@aria-label='APAC Industry Type']")
+	 WebElement apacIndustryEditPage;
+	 
+	 @FindBy(xpath="//div[@class='select-options']//a[@title='Accommodation']")
+	 WebElement apacIndustryValueEditPage;
+	 
+	 @FindBy(xpath="//a[@aria-label='APAC Sub Industry']")
+	 WebElement apacSubIndustryEditPage;
+	 
+	 @FindBy(xpath="//div[@class='select-options']//a[@title='Hospitality']")
+	 WebElement apacSubIndustryValueEditPage;
+	 
+	 @FindBy(xpath="//a[@aria-label='Legal Status']")
+	 WebElement legalStatusEditPage;
+	 
+	 @FindBy(xpath="//div[@class='select-options']//a[@title='Corporation']")
+	 WebElement legalStatusValueEditpage;
+	 
+	 @FindBy(xpath="//div[contains(@class,'forceModalActionContainer--footerAction')]/button[@title='Save']")
+	 WebElement saveEditPage;
+	 
+	 @FindBy(xpath="//a[@class='tabHeader']//span[text()='Details']")
+	 WebElement details;
+	 
 
 	HomePage hp = new HomePage(scriptHelper);
 	SearchTextSOQL searchAccount = new SearchTextSOQL(scriptHelper);
@@ -5083,5 +5111,63 @@ public class AccountsPage extends ReusableLibrary {
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	/**
+	 * Validating the Account Details edit page
+	 * @author Ramya
+	 *
+	 */
+	
+	public void verifyEditingExistingAccount() {
+		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
+		Utility_Functions.xClick(driver, menu_Accounts, true);
+		report.updateTestLog("Verify Editing the Existing Account","Accounts is Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
+		Utility_Functions.xClick(driver, recentlyViewed, true);
+		report.updateTestLog("Verify Editing the Existing Account","Recently viewed Accounts are Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, allAccounts, 3);
+		Utility_Functions.xClick(driver, allAccounts, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.timeWait(3);
+		List<WebElement> accountNamesList = driver.findElements(
+				By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+
+		Utility_Functions.xclickOnFirstElementfromList(accountNamesList);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementPresent(driver, edit, 3);
+		Utility_Functions.xClick(driver, edit, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver,legalStatusEditPage, 3);
+		Utility_Functions.xClick(driver,legalStatusEditPage, true);
+		Utility_Functions.xWaitForElementPresent(driver,legalStatusValueEditpage, 3);
+		Utility_Functions.xClick(driver,legalStatusValueEditpage, true);
+		if (dataTable.getData("General_Data", "TC_ID").contains("APAC")) {
+		Utility_Functions.xWaitForElementPresent(driver,apacIndustryEditPage, 3);
+		Utility_Functions.xClick(driver,apacIndustryEditPage, true);
+		Utility_Functions.xWaitForElementPresent(driver,apacIndustryValueEditPage, 3);
+		Utility_Functions.xClick(driver,apacIndustryValueEditPage, true);
+		Utility_Functions.xWaitForElementPresent(driver,apacSubIndustryEditPage, 3);
+		Utility_Functions.xClick(driver,apacSubIndustryEditPage, true);
+		Utility_Functions.xWaitForElementPresent(driver,apacSubIndustryValueEditPage, 3);
+		Utility_Functions.xClick(driver, apacSubIndustryValueEditPage, true);
+		}
+		Utility_Functions.xWaitForElementPresent(driver,saveEditPage, 3);
+		Utility_Functions.xClick(driver, saveEditPage, true);
+		Utility_Functions.timeWait(2);
+		driver.navigate().refresh();
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver,details, 3);
+		if(details.isDisplayed()) {
+	
+			report.updateTestLog("Verify Editing the Existing Account", "The existing account can be edited and saved successfully", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Editing the Existing Account", "The existing account cannot be edited and saved successfully", Status.FAIL);
+		}
+	}
+
 }
 

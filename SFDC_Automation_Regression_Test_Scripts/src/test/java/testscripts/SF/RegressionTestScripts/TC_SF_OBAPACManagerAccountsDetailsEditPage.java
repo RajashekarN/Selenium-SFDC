@@ -11,21 +11,21 @@ import com.cognizant.framework.selenium.SeleniumTestParameters;
 
 import com.cognizant.Craft.*;
 /**
- * Test Script for validating the SPOCs functionality
+ * Test Script for validating the Accounts Details Edit Page 
  * 
  * @author Ramya
  *
  */
 
-public class TC_SF_OBAMERManagerAccountsVerifySPOCs extends CRAFTTestCase
+public class TC_SF_OBAPACManagerAccountsDetailsEditPage extends CRAFTTestCase
 {
 	@Test(dataProvider = "RegressionTestScripts")
-	public void runTC_SF_OBAMERManagerAccountsVerifySPOCs(String testInstance, ExecutionMode executionMode, Platform platform
+	public void runTC_SF_OBAPACManagerAccountsDetailsEditPage(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
 		SeleniumTestParameters testParameters = new SeleniumTestParameters(currentScenario, currentTestcase);
-		testParameters.setCurrentTestDescription("Test for validating the Creation of new Lead");
+		testParameters.setCurrentTestDescription("Test Script for validating the Accounts Details Edit Page ");
 		testParameters.setIterationMode(IterationOptions.RUN_ONE_ITERATION_ONLY);
 		testParameters.setBrowser(Browser.CHROME);
 		testParameters.setExecutionMode(executionMode);
@@ -45,22 +45,6 @@ public class TC_SF_OBAMERManagerAccountsVerifySPOCs extends CRAFTTestCase
 	
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

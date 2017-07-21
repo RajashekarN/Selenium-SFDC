@@ -342,4 +342,14 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 	public void bc_verifyAccountsActivityTimeline() throws InterruptedException {
 		sfAccountsPage.verifyAccountsActivityTimeline();
 	}
+	
+	/**
+	 *  Validating the Account Details edit page
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyEditingExistingAccount() throws InterruptedException {
+		sfAccountsPage.verifyEditingExistingAccount();
+	}
 }

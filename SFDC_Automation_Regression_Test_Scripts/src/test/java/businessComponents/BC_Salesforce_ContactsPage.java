@@ -177,4 +177,23 @@ public class BC_Salesforce_ContactsPage extends ReusableLibrary {
 	public void bc_verifyContactsActivityTimeline()throws InterruptedException{
 		sfContactsPage.verifyContactsActivityTimeline();
 	} 
+	
+	/**
+	 * Validating the Contacts Updation of contact records
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+	public void bc_verifyUpdationOfContactRecord()throws InterruptedException{
+		sfContactsPage.verifyUpdationOfContactRecord();
+	}
+	/**
+	 * Validating the new Contact Page layout
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+	public void bc_contactsNewContactPageLayout()throws InterruptedException{
+		sfContactsPage.contactsNewContactPageLayout();
+	}
 }
