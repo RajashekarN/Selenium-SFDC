@@ -1,10 +1,8 @@
 package pageObjects;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -135,7 +133,10 @@ public class ContactsPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//span[contains(text(),'Activities')]/ancestor::article//div[text()='New Activity']")
 	WebElement newActivity;
-
+	
+	@FindBy(xpath = "//div[contains(@class,'slds-page-header')]//div[@title='New Activity'][text()='New Activity']")
+	WebElement newActivityHeader;
+	
 	@FindBy(xpath = "//input[@class='slds-input'][@type='text']")
 	WebElement subject;
 
@@ -1909,11 +1910,17 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xScrollWindowTop(driver);
 		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, newActivity, 3);
-		Utility_Functions.xClick(driver, newActivity, true);
+		try {
+			Utility_Functions.xWaitForElementPresent(driver, newActivity, 3);
+			Utility_Functions.xClick(driver, newActivity, true);
+		} catch (Exception e1) {
+			Utility_Functions.xWaitForElementPresent(driver, newActivityHeader, 3);
+			Utility_Functions.xClick(driver, newActivityHeader, true);
+		}
 		report.updateTestLog("Verify Contact Activity Timeline","The New Activity in the related page is Displayed ",  Status.PASS);
+		Utility_Functions.timeWait(1);
 		Utility_Functions.xSwitchtoFrame(driver, saveAndNewActivity);
-		Utility_Functions.timeWait(3);
+		Utility_Functions.timeWait(4);
 		Utility_Functions.xWaitForElementPresent(driver, subject, 5);
 		Utility_Functions.xSendKeys(driver, subject, "Test Automation Subject_" + Utility_Functions.xGenerateAlphaNumericString());
 		Utility_Functions.xWaitForElementPresent(driver, activityTypeFollowUpTaskValue, 3);
@@ -1938,8 +1945,13 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xScrollWindowTop(driver);
 		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, newActivity, 3);
-		Utility_Functions.xClick(driver, newActivity, true);
+		try {
+			Utility_Functions.xWaitForElementPresent(driver, newActivity, 3);
+			Utility_Functions.xClick(driver, newActivity, true);
+		} catch (Exception e1) {
+			Utility_Functions.xWaitForElementPresent(driver, newActivityHeader, 3);
+			Utility_Functions.xClick(driver, newActivityHeader, true);
+		}
 		report.updateTestLog("Verify Contact Activity Timeline","The New Activity in the related page is Displayed ",  Status.PASS);
 		Utility_Functions.xSwitchtoFrame(driver, saveAndNewActivity);
 		Utility_Functions.timeWait(3);
@@ -2023,9 +2035,13 @@ public class ContactsPage extends ReusableLibrary {
 			}
 			//System.out.println(e.getMessage());
 		}			
-		Utility_Functions.xWaitForElementPresent(driver,pastActivity, 5);
-		Utility_Functions.xClick(driver, pastActivity, true);
-		report.updateTestLog("Verify Contact Activity Timeline","The Past Activities is Clicked successfully",Status.PASS);
+		try {
+			Utility_Functions.xWaitForElementPresent(driver,pastActivity, 5);
+			Utility_Functions.xClick(driver, pastActivity, true);
+			report.updateTestLog("Verify Contact Activity Timeline","The Past Activities is Clicked successfully",Status.PASS);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		Utility_Functions.xWaitForElementPresent(driver,moreActivities, 5);
 		Utility_Functions.xClick(driver, moreActivities, true);
 		report.updateTestLog("Verify Contact Activity Timeline","The More Activities is Clicked successfully",Status.PASS);

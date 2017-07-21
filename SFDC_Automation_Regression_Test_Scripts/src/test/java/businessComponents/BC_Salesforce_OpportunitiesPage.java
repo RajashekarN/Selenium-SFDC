@@ -604,6 +604,15 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	public void bc_salesStage08_ClosedPartial_09_ClosedPaidFull() {
 		sfOpportunitiesPage.salesStage08_ClosedPartial_09_ClosedPaidFull();
 	}
+	/**
+	 * Verify Verify the required fields based on Sales Stage selected between 03-RFP/Proposal to 15-Signed Lease on Opportunity from a broker profile 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	public void bc_salesStage16_In_Escrow_19_Closed() {
+		sfOpportunitiesPage.salesStage16_In_Escrow_19_Closed();
+	}
 	
 	
 

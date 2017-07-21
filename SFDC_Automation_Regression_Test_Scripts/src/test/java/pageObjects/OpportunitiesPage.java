@@ -5255,4 +5255,45 @@ public class OpportunitiesPage extends ReusableLibrary {
 			report.updateTestLog("Verify Opportunity", "Opportunity has been saved successfully without even entering all the required fields:::", Status.FAIL);
 		}
 	}
+	/**
+	 * Verify Verify the required fields based on Sales Stage selected between 03-RFP/Proposal to 15-Signed Lease on Opportunity from a broker profile 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	
+	public void salesStage16_In_Escrow_19_Closed() {
+		String query = "SELECT Estimated_Gross_Fee_Commission__c , Id, Name FROM Opportunity where StageName > '16-In Escrow' and StageName < '19-Closed' and Estimated_Gross_Fee_Commission__c = 0.0 "
+				+ " and Created_By_User_Role__c != null limit 1 offset 9";
+		String OpportunityID = searchOpportunity.searchOpportunity(query);
+		System.out.println(OpportunityID);
+		
+		try {			
+			if(OpportunityID==null) {
+				report.updateTestLog("Verify Opportunity", "There are no Opportunities that falls under this category:::", Status.PASS);
+				salesStage08_09ClosedFunction();
+				salesStage08_08ClosedSubFunction();
+			} else {
+				String url = driver.getCurrentUrl().split("#")[0];
+				String newUrl = url + "#/sObject/" + OpportunityID;
+				newUrl = newUrl + "/view";
+				report.updateTestLog("Verify Add Opportunity Page Fields", "URL has been replaced with the new URL having the retrieved Opportunity:::" + newUrl, Status.PASS);
+				driver.get(newUrl);
+				Utility_Functions.timeWait(1);
+				try {
+					if(accessOpportunity.isDisplayed()) {
+						report.updateTestLog("Verify Opportunity Page", "Doesn't have access to edit the Opportunity:::", Status.PASS);
+						salesStage08_09ClosedFunction();
+						salesStage08_08ClosedSubFunction();
+					}
+				} catch (Exception e) {
+					salesStage08_08ClosedSubFunction();
+				} 
+			}		
+		} catch (Exception e) {
+				System.out.println(e.getMessage());
+		}		
+	
+	}
+	
  }
