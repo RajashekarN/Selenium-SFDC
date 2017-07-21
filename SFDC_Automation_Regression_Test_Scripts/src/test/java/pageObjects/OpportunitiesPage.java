@@ -310,7 +310,10 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//input[contains(@id,'closeDate')]")
 	WebElement closeDateOpp;
-
+	
+	@FindBy(xpath = "//input[contains(@id,'close') and contains(@id,'Date')]")
+	WebElement closeDateOppSpell;
+	
 	@FindBy(xpath = "//span[text()='Total Size']/parent::div//input")
 	WebElement totalSizeOpp;
 
@@ -455,9 +458,12 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//select[@id='record-type-select']/option[@selected='selected']")
 	WebElement defaultOpportutnityRecordType;
 
-	@FindBy(xpath = "//div[@class='slds-form-element']/span[text()='Opportunity Record Type']/parent::div/div/span")
+/*	@FindBy(xpath = "//div[@class='slds-form-element']/span[text()='Opportunity Record Type']/parent::div/div/span")
+	WebElement opportunityRecordTypeByDefault;*/
+	
+	@FindBy(xpath = "//span[contains(text(),'Occupier')]")
 	WebElement opportunityRecordTypeByDefault;
-
+	
 	@FindBy(xpath = "//h2[contains(@class,'slds-text-heading--medium') and contains(@class,'slds-m-bottom--small')]")
 	WebElement opportunityRecordTypeQuickCreate;
 
@@ -2167,11 +2173,15 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(4);
 		driver.navigate().refresh();
 		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, related, 4);
-		if (related.isDisplayed()) {
-			report.updateTestLog("Opportunity Created", "Opportunity created successfully:::", Status.PASS);
-		} else {
-			report.updateTestLog("Opportunity Created", "Opportunity creation failed:::", Status.FAIL);
+		try {
+			Utility_Functions.xWaitForElementPresent(driver, related, 4);
+			if (related.isDisplayed()) {
+				report.updateTestLog("Opportunity Created", "Opportunity created successfully:::", Status.PASS);
+			} else {
+				report.updateTestLog("Opportunity Created", "Opportunity creation failed:::", Status.FAIL);
+			}
+		} catch (Exception e) {
+			report.updateTestLog("Opportunity Related Tab", "System was unable to find the Related tab:::", Status.WARNING);
 		}
 		Utility_Functions.timeWait(2);
 		/*
@@ -2783,6 +2793,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			labelA: {
 			opportunityEligibility();
 			driver.navigate().refresh();
+			Utility_Functions.timeWait(4);
 			Utility_Functions.xWaitForElementPresent(driver, related, 5);
 			Utility_Functions.xClick(driver, related, true);
 			Utility_Functions.xWaitForElementPresent(driver, installmentAmountOne, 3);
@@ -4617,7 +4628,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		} catch (Exception e) {
 			e.getMessage();
 		}
-		Utility_Functions.xSwitchtoFrame(driver, closeDateOpp);
+		Utility_Functions.xSwitchtoFrame(driver, closeDateOppSpell);
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xScrollWindow(driver);
 		Utility_Functions.timeWait(2);

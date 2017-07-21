@@ -2065,6 +2065,7 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xSwitchtoFrame(driver, convertButton);
 		Utility_Functions.timeWait(5);
+		convertLeadRequiredFieldsList.clear();
 		convertLeadRequiredFields();
 		List<WebElement> convertList = driver.findElements(By.xpath("//label[@class='slds-form-element__label']"));
 		int i1 = 0, j=0, countLabelList = 0;

@@ -3437,6 +3437,10 @@ public class AccountsPage extends ReusableLibrary {
 
 	static ArrayList<String> additionalInformationFieldsList = new ArrayList<String>();
 	public void additionalInformationFields() {
+		if((dataTable.getData("General_Data", "TC_ID").contains("ABAMERCSSAccountsPopulatingAllFields")) || (dataTable.getData("General_Data", "TC_ID").contains("ABAMERBrokerAccountsPopulatingAllFields"))
+				|| (dataTable.getData("General_Data", "TC_ID").contains("OBAMERAdminAccountsPopulatingAllFields"))) {
+			additionalInformationFieldsList.add("Number of Family Members");
+		}
 		additionalInformationFieldsList.add("Investor Profile");
 		additionalInformationFieldsList.add("Lender Type");
 		additionalInformationFieldsList.add("D-U-N-S #");
@@ -4129,6 +4133,7 @@ public class AccountsPage extends ReusableLibrary {
 		System.out.println(additionalInformationSectionList.size());
 
 		try {
+			additionalInformationFieldsList.clear();
 			additionalInformationFields();
 			for (WebElement element7 : additionalInformationSectionList) {
 				System.out.println(element7.getText());

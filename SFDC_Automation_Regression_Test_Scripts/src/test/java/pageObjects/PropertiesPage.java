@@ -213,34 +213,34 @@ public class PropertiesPage extends ReusableLibrary {
 
 	@FindBy(xpath="//button[@title='Past Activity']")
 	WebElement pastActivityButton;
-	
+
 	@FindBy(xpath="//select[@class='slds-select']/option[@value='Private - Follow-Up Task']")
 	WebElement activityTypeFollowUpTaskValue;
-	   
-    @FindBy(xpath="//input[contains(@id,'dueDate')]")
+
+	@FindBy(xpath="//input[contains(@id,'dueDate')]")
 	WebElement newActivityDueDate;
-    
-    @FindBy(xpath="//button[@title='Past Activity']")
+
+	@FindBy(xpath="//button[@title='Past Activity']")
 	WebElement pastActivity;
-	
+
 	@FindBy(xpath="//button[@title='More Activities']")
 	WebElement moreActivities;
-	
+
 	@FindBy(xpath="//a[@class='tabHeader']/span[text()='Activity']")
 	WebElement activityTab;  
-	
+
 	@FindBy(xpath="//div[@id='activityPanelContainer']//a[text()='Expand All']")
 	WebElement expandAll;
-	
+
 	@FindBy(xpath="//div[@id='activityPanelContainer']//span[text()='Filter Timeline']")
 	WebElement filterTimeline;
-	
+
 	@FindBy(xpath="//div[contains(@id,'recordLayoutPlaceholder')]//div[@title='Status']")
 	WebElement statusActivityTimeline;
-	
+
 	@FindBy(xpath="//div[contains(@id,'recordLayoutPlaceholder')]//div/span")
 	WebElement openActivityTimeline;
-	
+
 	@FindBy(xpath="//div[contains(@id,'recordLayoutPlaceholder')]//div[@title='Description']")
 	WebElement descriptionActivityTimeline;
 
@@ -1713,8 +1713,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 		}
 		Utility_Functions.timeWait(2);
-		List<WebElement> accountList = driver
-				.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		List<WebElement> accountList = driver.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
 		Utility_Functions.xclickgetTextofFirstElementfromList(accountList);
 		Utility_Functions.timeWait(2);
 	}
@@ -1786,40 +1785,37 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(4);
 		Utility_Functions.xWaitForElementPresent(driver,activityTab, 5);
 		Utility_Functions.xClick(driver, activityTab, true);
-		Utility_Functions.xWaitForElementPresent(driver,expandAll, 5);
-		Utility_Functions.xClick(driver, expandAll, true);
-		report.updateTestLog("Verify Properties Activity Timeline",
-				"The expand All button is clicked",
-				Status.PASS);
-		Utility_Functions.timeWait(4);
-		
-			if (filterTimeline.isDisplayed()) {
-				System.out.println(
-						"Filter Timeline is present in acitivity related list");
-				report.updateTestLog("Verify Properties Activity Timeline","Filter Timeline is present in acitivity related list",Status.PASS);
-				
-			}
-			
-			if (statusActivityTimeline.isDisplayed()) {
-				System.out.println(
-						"Status is present in acitivity related list");
-report.updateTestLog("Verify Properties Activity Timeline","Status is present in acitivity related list",Status.PASS);
-			}
-		
-				if (openActivityTimeline.getText().contains("Open")) {
-					System.out.println("Open is present acitivity related list");
-report.updateTestLog("Verify Properties Activity Timeline","Open is present in acitivity related list:::", Status.PASS);
-					
-				}
-				if (descriptionActivityTimeline.isDisplayed()) {
-					System.out.println("Description is present acitivity related list");
-report.updateTestLog("Verify Properties Activity Timeline","Description is present in acitivity related list:::", Status.PASS);
-					
-				}
-		
+		try {
+			Utility_Functions.xWaitForElementPresent(driver,expandAll, 5);
+			Utility_Functions.xClick(driver, expandAll, true);
+			report.updateTestLog("Verify Properties Activity Timeline", "The expand All button is clicked", Status.PASS);
+		} catch (Exception e) {
+			report.updateTestLog("Verify Properties Activity Timeline", "Expand All button is not present", Status.WARNING);
+		}
+		Utility_Functions.timeWait(4);		
+		if (filterTimeline.isDisplayed()) {
+			System.out.println(
+					"Filter Timeline is present in acitivity related list");
+			report.updateTestLog("Verify Properties Activity Timeline","Filter Timeline is present in acitivity related list",Status.PASS);
+		}
 
+		if (statusActivityTimeline.isDisplayed()) {
+			System.out.println("Status is present in acitivity related list");
+			report.updateTestLog("Verify Properties Activity Timeline","Status is present in acitivity related list",Status.PASS);
+		}
+
+		if (openActivityTimeline.getText().contains("Open")) {
+			System.out.println("Open is present acitivity related list");
+			report.updateTestLog("Verify Properties Activity Timeline","Open is present in acitivity related list:::", Status.PASS);
+
+		}
+		if (descriptionActivityTimeline.isDisplayed()) {
+			System.out.println("Description is present acitivity related list");
+			report.updateTestLog("Verify Properties Activity Timeline","Description is present in acitivity related list:::", Status.PASS);
+
+		}
 	}
 }
-	
+
 
 
