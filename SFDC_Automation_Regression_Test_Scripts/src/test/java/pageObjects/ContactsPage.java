@@ -191,7 +191,7 @@ public class ContactsPage extends ReusableLibrary {
 	@FindBy(xpath = "// input [@value= 'Cancel']")
 	WebElement cancelNewActivityLayoutPage;
 
-	@FindBy(xpath="//input[contains(@id, 'contForm:Lastname')]']")
+	@FindBy(xpath="//input[contains(@id, 'contForm:Lastname')]")
 	WebElement lastNameQuickCreateContact;
 
 	@FindBy(xpath="//input[contains(@id,'Firstname')]")
