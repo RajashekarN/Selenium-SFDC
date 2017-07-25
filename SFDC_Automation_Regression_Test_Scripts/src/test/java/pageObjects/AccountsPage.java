@@ -514,8 +514,11 @@ public class AccountsPage extends ReusableLibrary {
    @FindBy(xpath="//span[text()='Migrated Account']/parent::label/span[contains(@class,'checkbox')]")
    WebElement migratedAccount;
 
-   @FindBy(xpath="//input[@id='employeeSearchBox']")
+   @FindBy(xpath="//span[@class='twitter-typeahead']//input[@id='employeeSearchBox']")
    WebElement spocEmployee;
+   
+   @FindBy(xpath="//div/span[@class='twitter-typeahead']")
+   WebElement spocEmployeeExpand;
    
    @FindBy(xpath="//select[contains(@id,'role')]")
    WebElement spocRole;
@@ -3316,6 +3319,7 @@ public class AccountsPage extends ReusableLibrary {
 		System.out.println("Account Details xPath Count::" + accountDetailsPageList.size());
 		System.out.println("Details Page Fields list Count::" + deatilsPageFieldsList.size());
 		try {
+			deatilsPageFieldsList.clear();
 			detailsPageFields();
 			while(j1<accountDetailsPageList.size()) {
 				for (WebElement element1 : accountDetailsPageList) {
@@ -3342,6 +3346,7 @@ public class AccountsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		accountDetailsPageList.clear();
 	}
 
 
@@ -4464,70 +4469,76 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver,spocsNew, true);
 		Utility_Functions.timeWait(2);
 		report.updateTestLog("Verify SPOC from Account ","The New SPOCs in the related page is Displayed ",  Status.PASS);
-		Utility_Functions.xSwitchtoFrame(driver, spocBusinessLine);
+		Utility_Functions.xSwitchtoFrame(driver, spocEmployee);
 		Utility_Functions.timeWait(2);
+		/*Utility_Functions.xWaitForElementPresent(driver, spocEmployeeExpand, 3);
+		Utility_Functions.xClick(driver, spocEmployeeExpand, true);*/
 		Utility_Functions.xWaitForElementPresent(driver, spocEmployee, 5);
 		Utility_Functions.xSendKeys(driver, spocEmployee, "Jordan");
 		spocEmployee.sendKeys(Keys.ARROW_DOWN);
 		Utility_Functions.timeWait(2);
 		spocEmployee.sendKeys(Keys.ENTER);
-		Utility_Functions.xWaitForElementPresent(driver,spocRole, 3);
-		Utility_Functions.xClick(driver,spocRole, true);
-		Utility_Functions.xWaitForElementPresent(driver,spocRoleValue, 3);
-		Utility_Functions.xClick(driver,spocRoleValue, true);
-		Utility_Functions.xWaitForElementPresent(driver,spocGeo, 3);
-		Utility_Functions.xClick(driver,spocGeo, true);
-		Utility_Functions.xWaitForElementPresent(driver,spocGeoValue, 3);
-		Utility_Functions.xClick(driver,spocGeoValue, true);
-		Utility_Functions.xWaitForElementPresent(driver,spocBusinessLine, 3);
-		Utility_Functions.xClick(driver,spocBusinessLine, true);
-		Utility_Functions.xWaitForElementPresent(driver,spocBusinessLineValue, 3);
-		Utility_Functions.xClick(driver,spocBusinessLineValue, true);
-		/*Utility_Functions.xWaitForElementPresent(driver,spocServices, 3);
-		Utility_Functions.xClick(driver,spocServices, true);*/
-		Utility_Functions.xWaitForElementPresent(driver,spocRegion, 3);
-		Utility_Functions.xClick(driver,spocRegion, true);
-		Utility_Functions.xWaitForElementPresent(driver,spocRegionValue, 3);
-		Utility_Functions.xClick(driver,spocRegionValue, true);
-		Utility_Functions.xWaitForElementPresent(driver,spocCountry, 3);
-		Utility_Functions.xClick(driver,spocCountry, true);
-		Utility_Functions.xWaitForElementPresent(driver,spocCountryValue, 3);
-		Utility_Functions.xClick(driver,spocCountryValue, true);
-		Utility_Functions.xWaitForElementPresent(driver,spocCity, 3);
-		Utility_Functions.xSendKeys(driver, spocCity, dataTable.getData("General_Data", "City"));
-		Utility_Functions.xWaitForElementPresent(driver,spocState, 3);
-		Utility_Functions.xClick(driver,spocState, true);
-		Utility_Functions.xWaitForElementPresent(driver,spocStateValue, 3);
-		Utility_Functions.xClick(driver,spocStateValue, true);
-		Utility_Functions.xWaitForElementPresent(driver,spocType, 3);
-		Utility_Functions.xClick(driver,spocType, true);
-		Utility_Functions.xWaitForElementPresent(driver,spocTypeValue, 3);
-		Utility_Functions.xClick(driver,spocTypeValue, true);
-		System.out.println(Calendar.getInstance());
-		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-		Date date = new Date();
-		Utility_Functions.xWaitForElementPresent(driver,spocOriginalDate, 3);
-		Utility_Functions.xSendKeys(driver,spocOriginalDate, dateFormat.format(date).toString());
-		Utility_Functions.xWaitForElementPresent(driver,spocRequalificationDate, 3);
-		Utility_Functions.xSendKeys(driver,spocRequalificationDate, dateFormat.format(date).toString());
-		Utility_Functions.xWaitForElementPresent(driver, saveQuickCreate, 3);
-		Utility_Functions.xClick(driver, saveQuickCreate, true);
-		Utility_Functions.timeWait(3);
-		if(related_Accounts.isDisplayed()) {
-			Utility_Functions.xClick(driver, related_Accounts, true);
-			report.updateTestLog("Verify SPOC from Account", "SPOC is saved successfully with all the fields", Status.PASS);
+		if((dataTable.getData("General_Data", "TC_ID").contains("OBAPACBroker")) || (dataTable.getData("General_Data", "TC_ID")).contains("ABAMERBroker")) {
+			report.updateTestLog("Verify SPOC from Account", "Unable to create the SPOC as the Role field is not enabled", Status.PASS);
 		} else {
-			report.updateTestLog("Verify SPOC from Account", "SPOC is not saved with all the fields", Status.FAIL);
-		}		
-		Utility_Functions.timeWait(4);
-		if(spocName.getText().equals("Jordan Botten")) {
-			System.out.println("Spoc name is same");
-			report.updateTestLog("Verify SPOC from Account", "The new SPOC is created and saved ", Status.PASS);
-		} else {			
-			System.out.println("Spoc name is not same");
-			report.updateTestLog("Verify SPOC from Account", "The new SPOC is not created and saved ", Status.FAIL);			
-		}		
-}
+			Utility_Functions.xWaitForElementPresent(driver,spocRole, 3);
+			Utility_Functions.xClick(driver,spocRole, true);
+			Utility_Functions.xWaitForElementPresent(driver,spocRoleValue, 3);
+			Utility_Functions.xClick(driver,spocRoleValue, true);
+			Utility_Functions.xWaitForElementPresent(driver,spocGeo, 3);
+			Utility_Functions.xClick(driver,spocGeo, true);
+			Utility_Functions.xWaitForElementPresent(driver,spocGeoValue, 3);
+			Utility_Functions.xClick(driver,spocGeoValue, true);
+			Utility_Functions.xWaitForElementPresent(driver,spocBusinessLine, 3);
+			Utility_Functions.xClick(driver,spocBusinessLine, true);
+			Utility_Functions.xWaitForElementPresent(driver,spocBusinessLineValue, 3);
+			Utility_Functions.xClick(driver,spocBusinessLineValue, true);
+			/*Utility_Functions.xWaitForElementPresent(driver,spocServices, 3);
+			Utility_Functions.xClick(driver,spocServices, true);*/
+			Utility_Functions.xWaitForElementPresent(driver,spocRegion, 3);
+			Utility_Functions.xClick(driver,spocRegion, true);
+			Utility_Functions.xWaitForElementPresent(driver,spocRegionValue, 3);
+			Utility_Functions.xClick(driver,spocRegionValue, true);
+			Utility_Functions.xWaitForElementPresent(driver,spocCountry, 3);
+			Utility_Functions.xClick(driver,spocCountry, true);
+			Utility_Functions.xWaitForElementPresent(driver,spocCountryValue, 3);
+			Utility_Functions.xClick(driver,spocCountryValue, true);
+			Utility_Functions.xWaitForElementPresent(driver,spocCity, 3);
+			Utility_Functions.xSendKeys(driver, spocCity, dataTable.getData("General_Data", "City"));
+			Utility_Functions.xWaitForElementPresent(driver,spocState, 3);
+			Utility_Functions.xClick(driver,spocState, true);
+			Utility_Functions.xWaitForElementPresent(driver,spocStateValue, 3);
+			Utility_Functions.xClick(driver,spocStateValue, true);
+			Utility_Functions.xWaitForElementPresent(driver,spocType, 3);
+			Utility_Functions.xClick(driver,spocType, true);
+			Utility_Functions.xWaitForElementPresent(driver,spocTypeValue, 3);
+			Utility_Functions.xClick(driver,spocTypeValue, true);
+			System.out.println(Calendar.getInstance());
+			DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+			Date date = new Date();
+			Utility_Functions.xWaitForElementPresent(driver,spocOriginalDate, 3);
+			Utility_Functions.xSendKeys(driver,spocOriginalDate, dateFormat.format(date).toString());
+			Utility_Functions.xWaitForElementPresent(driver,spocRequalificationDate, 3);
+			Utility_Functions.xSendKeys(driver,spocRequalificationDate, dateFormat.format(date).toString());
+			Utility_Functions.xWaitForElementPresent(driver, saveQuickCreate, 3);
+			Utility_Functions.xClick(driver, saveQuickCreate, true);
+			Utility_Functions.timeWait(3);
+			if(related_Accounts.isDisplayed()) {
+				Utility_Functions.xClick(driver, related_Accounts, true);
+				report.updateTestLog("Verify SPOC from Account", "SPOC is saved successfully with all the fields", Status.PASS);
+			} else {
+				report.updateTestLog("Verify SPOC from Account", "SPOC is not saved with all the fields", Status.FAIL);
+			}		
+			Utility_Functions.timeWait(4);
+			if(spocName.getText().equals("Jordan Botten")) {
+				System.out.println("Spoc name is same");
+				report.updateTestLog("Verify SPOC from Account", "The new SPOC is created and saved ", Status.PASS);
+			} else {			
+				System.out.println("Spoc name is not same");
+				report.updateTestLog("Verify SPOC from Account", "The new SPOC is not created and saved ", Status.FAIL);			
+			}	
+		}
+	}
 	/**
 	 * Validating the creation of SPOCs in the Accounts
 	 * @author Ramya
