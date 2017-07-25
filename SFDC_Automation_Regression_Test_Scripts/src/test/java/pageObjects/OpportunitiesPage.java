@@ -1868,6 +1868,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 				System.out.println(result);
 				SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
 				String query = "Select Name from Opportunity where Id = '" + result + "'";
+				Utility_Functions.timeWait(2);
 				String generatedOpportunityName = searchTextSOQL.fetchRecordFieldValue("Name", query);
 				Utility_Functions.timeWait(1);
 				if (opportunityName.equals(generatedOpportunityName)) {
@@ -2191,6 +2192,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		 */
 		String query = "Select Name from opportunity where Name like  " + "'" + sAccountName + "-" + '%' + "-" + value
 				+ "-" + "Acres" + "'";
+		Utility_Functions.timeWait(1);
 		String opportunityName = searchOpportunity.fetchRecordFieldValue("Name", query);
 		report.updateTestLog("Opportunity Created", "Opportunity Name:::" + opportunityName, Status.PASS);
 
