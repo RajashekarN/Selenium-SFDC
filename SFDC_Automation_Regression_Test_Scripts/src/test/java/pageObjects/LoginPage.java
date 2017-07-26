@@ -270,31 +270,6 @@ public class LoginPage extends ReusableLibrary {
 			} else if (environment.equals("FTE")) {
 				if (dataTable.getData("General_Data", "TC_ID").contains("Admin")) {
 					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTEAdminPassword"));
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
-					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTEGWSAMERBrokerPassword"));
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAPAC"))	&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
-					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTEGWSAPACManagerPassword"));
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSEMEA"))	&& (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
-					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTEGWSEMEABrokerPassword"));
-
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VASAMER"))	&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
-					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTEVASAMERManagerPassword"));
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VASAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
-					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FFTEVASAPACBrokerPassword"));
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VASEMEA"))
-						&& (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
-					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTEVASEMEABrokerPassword"));
-
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
-					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTEASAMERManagerPassword"));
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
-					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTEASAPACBrokerPassword"));
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ASEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
-					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTEASEMEAManagerPassword"));
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ASEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
-					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTEASEMEABrokerPassword"));
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
-					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTEASAMERBrokerPassword"));
 				} else {
 					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTEPassword"));
 				}

@@ -1935,22 +1935,22 @@ public class OpportunitiesPage extends ReusableLibrary {
 				config = new ConnectorConfig();
 				if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
 					config.setUsername(properties.getProperty("FTEGWSAPACManager"));
-					config.setPassword(properties.getProperty("FTEGWSAPACManagerPassword"));
+					config.setPassword(properties.getProperty("FTEPassword"));
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
 					config.setUsername(properties.getProperty("FTEGWSEMEABroker"));
-					config.setPassword(properties.getProperty("FTEGWSEMEABrokerPassword"));
+					config.setPassword(properties.getProperty("FTEPassword"));
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VASAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
 					config.setUsername(properties.getProperty("FTEVASAMERManager"));
-					config.setPassword(properties.getProperty("FTEVASAMERManagerPassword"));
+					config.setPassword(properties.getProperty("FTEPassword"));
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VASEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
 					config.setUsername(properties.getProperty("FTEVASEMEABroker"));
-					config.setPassword(properties.getProperty("FTEVASEMEABrokerPassword"));
+					config.setPassword(properties.getProperty("FTEPassword"));
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
 					config.setUsername(properties.getProperty("FTEASAMERManager"));
-					config.setPassword(properties.getProperty("FTEASAMERManagerPassword"));
+					config.setPassword(properties.getProperty("FTEPassword"));
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
 					config.setUsername(properties.getProperty("FTEASAPACBroker"));
-					config.setPassword(properties.getProperty("FTEASAPACBrokerPassword"));
+					config.setPassword(properties.getProperty("FTEPassword"));
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
 					config.setUsername(properties.getProperty("FTEABAMERCSS"));
 					config.setPassword(properties.getProperty("FTEPassword"));
