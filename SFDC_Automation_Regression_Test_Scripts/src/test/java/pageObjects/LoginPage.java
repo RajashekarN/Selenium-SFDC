@@ -410,9 +410,13 @@ public class LoginPage extends ReusableLibrary {
 					report.updateTestLog("Verify Login", "Login is successful", Status.PASS);
 				}
 		} catch (Exception e) {
-			if(errorMessage.isDisplayed()) {
-				report.updateTestLog("Verify Login", "UserName and Password entered are invalid please check the credentials:::", Status.FAIL);
-				driver.close();
+			try {
+				if(errorMessage.isDisplayed()) {
+					report.updateTestLog("Verify Login", "UserName and Password entered are invalid please check the credentials:::", Status.WARNING);
+					driver.close();
+				}
+			} catch (Exception e1) {
+				System.out.println("Login wasn't successful:::");
 			}
 			/*frameworkParameters.setStopExecution(true);
 			throw new FrameworkException("Verify Login", "Login failed");*/
@@ -492,8 +496,8 @@ public class LoginPage extends ReusableLibrary {
 	public void userNames() {
 		String environment = initializeEnvironment();
 		environment = environment.toLowerCase();
-		//userNamesList.add("testuser2@cbre.com.crm."+ environment);
-/*		userNamesList.add("testuser3@cbre.com.crm."+ environment);
+		/*userNamesList.add("testuser2@cbre.com.crm."+ environment);
+		userNamesList.add("testuser3@cbre.com.crm."+ environment);
 		userNamesList.add("testuser4@cbre.com.crm."+ environment);
 		userNamesList.add("testuser5@cbre.com.crm."+ environment);
 		userNamesList.add("testuser6@cbre.com.crm."+ environment);
@@ -504,8 +508,8 @@ public class LoginPage extends ReusableLibrary {
 		userNamesList.add("testuser11@cbre.com.crm."+ environment);
 		userNamesList.add("testuser12@cbre.com.crm."+ environment);
 		userNamesList.add("testuser13@cbre.com.crm."+ environment);
-		userNamesList.add("testuser14@cbre.com.crm."+ environment);*/
-		/*userNamesList.add("testuser15@cbre.com.crm."+ environment);
+		userNamesList.add("testuser14@cbre.com.crm."+ environment);
+		userNamesList.add("testuser15@cbre.com.crm."+ environment);
 		userNamesList.add("testuser16@cbre.com.crm."+ environment);
 		userNamesList.add("testuser17@cbre.com.crm."+ environment);
 		userNamesList.add("testuser18@cbre.com.crm."+ environment);
@@ -541,17 +545,16 @@ public class LoginPage extends ReusableLibrary {
 		userNamesList.add("testuser48@cbre.com.crm."+ environment);
 		userNamesList.add("testuser49@cbre.com.crm."+ environment);
 		userNamesList.add("testuser50@cbre.com.crm."+ environment);
-		userNamesList.add("testuser51@cbre.com.crm."+ environment);*/
-		//userNamesList.add("testuser52@cbre.com.crm."+ environment);
-/*		userNamesList.add("testuser53@cbre.com.crm."+ environment);
-*/		userNamesList.add("testuser54@cbre.com.crm."+ environment);
+		userNamesList.add("testuser51@cbre.com.crm."+ environment);
+		userNamesList.add("testuser52@cbre.com.crm."+ environment);
+		userNamesList.add("testuser53@cbre.com.crm."+ environment);
+		userNamesList.add("testuser54@cbre.com.crm."+ environment);
 		userNamesList.add("testuser55@cbre.com.crm."+ environment);
 		userNamesList.add("testuser56@cbre.com.crm."+ environment);
 		userNamesList.add("testuser57@cbre.com.crm."+ environment);
 		userNamesList.add("testuser58@cbre.com.crm."+ environment);
 		userNamesList.add("testuser59@cbre.com.crm."+ environment);
-		userNamesList.add("testuser60@cbre.com.crm."+ environment);
-		userNamesList.add("testuser61@cbre.com.crm."+ environment);
+		userNamesList.add("testuser60@cbre.com.crm."+ environment);*/
 		System.out.println("User Names List are::::" + userNamesList);
 	}
 }
