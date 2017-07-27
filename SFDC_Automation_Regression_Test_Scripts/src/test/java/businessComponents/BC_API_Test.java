@@ -386,4 +386,13 @@ public class BC_API_Test extends ReusableLibrary {
 	public void bc_createActivity() {
 		activityFunctions.createActivity();
 	}
+	/**
+	 * Verifying whether the User ID's are working or not
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	public void bc_validatingUserIDs() {
+		loginPage.verifyUserIDs();
+	}
 }

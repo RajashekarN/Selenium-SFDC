@@ -471,14 +471,7 @@ public class LoginPage extends ReusableLibrary {
 	public void userNames() {
 		String environment = initializeEnvironment();
 		environment = environment.toLowerCase();
-		/*userNamesList.add("testuser2@cbre.com.crm."+ environment);
-		userNamesList.add("testuser3@cbre.com.crm."+ environment);
-		userNamesList.add("testuser4@cbre.com.crm."+ environment);
-		userNamesList.add("testuser5@cbre.com.crm."+ environment);
-		userNamesList.add("testuser6@cbre.com.crm."+ environment);
-		userNamesList.add("testuser7@cbre.com.crm."+ environment);
-		userNamesList.add("testuser8@cbre.com.crm."+ environment);
-		userNamesList.add("testuser9@cbre.com.crm."+ environment);
+		userNamesList.add("testuser1@cbre.com.crm."+ environment);
 		userNamesList.add("testuser10@cbre.com.crm."+ environment);
 		userNamesList.add("testuser11@cbre.com.crm."+ environment);
 		userNamesList.add("testuser12@cbre.com.crm."+ environment);
@@ -489,6 +482,7 @@ public class LoginPage extends ReusableLibrary {
 		userNamesList.add("testuser17@cbre.com.crm."+ environment);
 		userNamesList.add("testuser18@cbre.com.crm."+ environment);
 		userNamesList.add("testuser19@cbre.com.crm."+ environment);
+		userNamesList.add("testuser2@cbre.com.crm."+ environment);
 		userNamesList.add("testuser20@cbre.com.crm."+ environment);
 		userNamesList.add("testuser21@cbre.com.crm."+ environment);
 		userNamesList.add("testuser22@cbre.com.crm."+ environment);
@@ -499,37 +493,94 @@ public class LoginPage extends ReusableLibrary {
 		userNamesList.add("testuser27@cbre.com.crm."+ environment);
 		userNamesList.add("testuser28@cbre.com.crm."+ environment);
 		userNamesList.add("testuser29@cbre.com.crm."+ environment);
+		userNamesList.add("testuser3@cbre.com.crm."+ environment);
 		userNamesList.add("testuser30@cbre.com.crm."+ environment);
 		userNamesList.add("testuser31@cbre.com.crm."+ environment);
 		userNamesList.add("testuser32@cbre.com.crm."+ environment);
-		userNamesList.add("testuser33@cbre.com.crm."+ environment);
-		userNamesList.add("testuser34@cbre.com.crm."+ environment);
-		userNamesList.add("testuser35@cbre.com.crm."+ environment);
 		userNamesList.add("testuser36@cbre.com.crm."+ environment);
 		userNamesList.add("testuser37@cbre.com.crm."+ environment);
 		userNamesList.add("testuser38@cbre.com.crm."+ environment);
 		userNamesList.add("testuser39@cbre.com.crm."+ environment);
+		userNamesList.add("testuser4@cbre.com.crm."+ environment);
 		userNamesList.add("testuser40@cbre.com.crm."+ environment);
 		userNamesList.add("testuser41@cbre.com.crm."+ environment);
-		userNamesList.add("testuser42@cbre.com.crm."+ environment);
-		userNamesList.add("testuser43@cbre.com.crm."+ environment);
-		userNamesList.add("testuser44@cbre.com.crm."+ environment);
 		userNamesList.add("testuser45@cbre.com.crm."+ environment);
 		userNamesList.add("testuser46@cbre.com.crm."+ environment);
 		userNamesList.add("testuser47@cbre.com.crm."+ environment);
 		userNamesList.add("testuser48@cbre.com.crm."+ environment);
 		userNamesList.add("testuser49@cbre.com.crm."+ environment);
+		userNamesList.add("testuser5@cbre.com.crm."+ environment);
 		userNamesList.add("testuser50@cbre.com.crm."+ environment);
 		userNamesList.add("testuser51@cbre.com.crm."+ environment);
-		userNamesList.add("testuser52@cbre.com.crm."+ environment);
-		userNamesList.add("testuser53@cbre.com.crm."+ environment);
-		userNamesList.add("testuser54@cbre.com.crm."+ environment);
-		userNamesList.add("testuser55@cbre.com.crm."+ environment);
-		userNamesList.add("testuser56@cbre.com.crm."+ environment);
-		userNamesList.add("testuser57@cbre.com.crm."+ environment);
-		userNamesList.add("testuser58@cbre.com.crm."+ environment);
-		userNamesList.add("testuser59@cbre.com.crm."+ environment);
-		userNamesList.add("testuser60@cbre.com.crm."+ environment);*/
+		userNamesList.add("testuser6@cbre.com.crm."+ environment);
+		userNamesList.add("testuser62@cbre.com.crm."+ environment);
+		userNamesList.add("testuser7@cbre.com.crm."+ environment);
+		userNamesList.add("testuser8@cbre.com.crm."+ environment);
+		userNamesList.add("testuser9@cbre.com.crm."+ environment);
+
 		System.out.println("User Names List are::::" + userNamesList);
+	}
+	
+	/**
+	 * Function for verifying the User ID's are working or not
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	static ArrayList<String> userIDsNotWorking = new ArrayList<String>();
+	static ArrayList<String> userIDsWorking = new ArrayList<String>();
+
+	public void verifyUserIDs() {
+		userNames();
+		int count=0;
+		try {
+			if ((environment.equals("UAT")) || (environment.equals("UAT2")) || (environment.equals("FTE")) || (environment.equals("FTE2"))) {				
+				for (int i=0; i < userNamesList.size(); i++) {
+					Utility_Functions.timeWait(1);
+					invokeApplication();
+					String sUserName = userNamesList.get(i);
+					Utility_Functions.xWaitForElementPresent(driver, txt_userName, 3);
+					Utility_Functions.xSendKeys(driver, txt_userName, sUserName);
+					Utility_Functions.xWaitForElementPresent(driver, txt_password, 3);
+					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty(environment+"Password"));
+					Utility_Functions.xWaitForElementPresent(driver, btn_LogIn, 3);
+					Utility_Functions.xClick(driver, btn_LogIn, true);
+					try {
+						try {
+							Utility_Functions.xWaitForElementPresent(driver, menu_Home, 3);
+							report.updateTestLog("Verify Login", "Login is successful", Status.PASS);
+						} catch (Exception e) {
+							Utility_Functions.xWaitForElementPresent(driver, userName, 3);
+							Utility_Functions.xClick(driver, userName, true);
+							Utility_Functions.timeWait(2);
+							Utility_Functions.xWaitForElementPresent(driver, switchLightningExperience, 3);
+							Utility_Functions.xClick(driver, switchLightningExperience, true);
+							report.updateTestLog("Verify Login", "Switched to Lightning Experience Page", Status.PASS);
+							Utility_Functions.xWaitForElementPresent(driver, menu_Home, 3);
+							report.updateTestLog("Verify Login", "Login is successful", Status.PASS);
+						}						
+						count++;
+					} catch (Exception e) {
+						report.updateTestLog("Verify Login", sUserName + "  :::isn't working unable to login" + "---Count is:::" + count, Status.FAIL);
+						userIDsNotWorking.add(sUserName);
+					}
+					report.updateTestLog("Verify Login", sUserName + "  :::has been logged in successfully" + "---Count is:::" + count, Status.PASS);
+					userIDsWorking.add(sUserName);
+					Utility_Functions.timeWait(4);
+					logout();
+					Utility_Functions.timeWait(3);				
+				}	
+				if(userNamesList.size()==count) {
+					report.updateTestLog("Verify Login", "All the UserID's are working successfully", Status.PASS);
+				} else {
+					report.updateTestLog("Verify Login", "Not all the UserID's are working successfully", Status.FAIL);
+				}
+			}
+			System.out.println("User ID's which aren't working are::" + userIDsNotWorking);
+			report.updateTestLog("Verify Login", "User IDs which aren't working are::::" + userIDsNotWorking, Status.WARNING);
+			report.updateTestLog("Verify Login", "User IDs which are working successfully::::" + userIDsWorking, Status.PASS);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }
