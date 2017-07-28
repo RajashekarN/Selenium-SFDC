@@ -1621,7 +1621,7 @@ public class LeadsPage extends ReusableLibrary {
 			}
 
 			System.out.println(count);
-			if (count != 9) {
+			if (count < 5) {
 
 				System.out.println(
 						"All the fields are not present in the new personal information page");
