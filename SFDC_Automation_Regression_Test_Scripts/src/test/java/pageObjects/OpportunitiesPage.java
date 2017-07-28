@@ -940,7 +940,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void requiredFieldsbetweenw03_15Stages() {
-		String query = "SELECT Id, Name FROM Opportunity where StageName > '03-RFP/Proposal' and StageName < '15-Signed Lease' and Total_Size__c !=null and CBRE_Preferred_Property_Type_c__c !=null limit 1 offset 9";
+		String query = "SELECT Id, Name FROM Opportunity where StageName > '03-RFP/Proposal' and StageName < '10-Short List' "
+				+ " and StageName > '13-LOI/Heads of Terms' and StageName < '15-Signed Lease' and Total_Size__c !=null and CBRE_Preferred_Property_Type_c__c !=null limit 1 offset 9";
 		String OpportunityID = searchOpportunity.searchOpportunity(query);
 		if(OpportunityID==null) {
 			report.updateTestLog("Verify Opportunity",
