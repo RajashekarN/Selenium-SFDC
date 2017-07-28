@@ -2272,7 +2272,7 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify Contact Record Updation", "All Contacts are Displayed ", Status.PASS);
 		List<WebElement> contactNamesList = driver.findElements(By.xpath(
-				"//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'0030')]"));
+				"//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'003')]"));
 
 		Utility_Functions.xclickRandomElement(contactNamesList);
 		Utility_Functions.timeWait(3);
