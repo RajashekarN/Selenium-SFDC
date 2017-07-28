@@ -1346,7 +1346,8 @@ public class ContactsPage extends ReusableLibrary {
 		 * System.out.println(iframeList.size()); for (WebElement element :
 		 * iframeList) { System.out.println(element.getAttribute("id")); }
 		 */
-		driver.switchTo().frame(3);
+		/*driver.switchTo().frame(3);*/
+		Utility_Functions.xSwitchtoFrame(driver, subject);
 		Utility_Functions.timeWait(3);
 
 		Utility_Functions.xWaitForElementPresent(driver, subject, 3);
