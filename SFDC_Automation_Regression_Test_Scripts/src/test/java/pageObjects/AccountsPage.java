@@ -5134,7 +5134,7 @@ public class AccountsPage extends ReusableLibrary {
 			Utility_Functions.xClick(driver, moreActivities, true);
 			report.updateTestLog("Verify Accounts Activity Timeline", "The More Activities is clicked", Status.PASS);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 		}
 	}
 	

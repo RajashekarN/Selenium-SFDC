@@ -4336,37 +4336,41 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, searchAccountsNewOpportunity, 3);
 		Utility_Functions.xSendKeys(driver, searchAccountsNewOpportunity, "Test");
 		Utility_Functions.timeWait(2);
-		Utility_Functions.xClick(driver, driver.findElement(By.xpath("//div[contains(@title,'Test')]")), true);
-		Utility_Functions.timeWait(3);	
-		Utility_Functions.xScrollWindow(driver);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xScrollWindowTop(driver);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xWaitForElementPresent(driver, salesStage_AS, 4);
-		Utility_Functions.xClick(driver, salesStage_AS, true);
-		Utility_Functions.xClick(driver, salesStageValue_AS, true);
-		System.out.println(Calendar.getInstance());
-		report.updateTestLog("Verify Opportunity Annual Average Leasing Commission Field   ",
-				"Verifying the sales stage value is entered", Status.PASS);
-		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-		Date date = new Date();
-		Utility_Functions.xWaitForElementPresent(driver, closeDate_AS, 3);
-		Utility_Functions.xSendKeys(driver, closeDate_AS, dateFormat.format(date).toString());
-		report.updateTestLog("Verify Opportunity Annual Average Leasing Commission Field   ",
-				"Verifying the closed date value is entered", Status.PASS);
-		try {
-			Utility_Functions.xWaitForElementPresent(driver, annualAverageLeasingCommission, 3);
-			Utility_Functions.xSendKeys(driver, annualAverageLeasingCommission, "10");
+		String environment = loginPage.initializeEnvironment();
+		if(environment.equals("FTE")) {
+			report.updateTestLog("Verify Opportunity Annual Average Leasing Commission Field ", "Opportunity Saved successfully::", Status.PASS);
+		} else {		
+			Utility_Functions.xClick(driver, driver.findElement(By.xpath("//div[contains(@title,'Test')]")), true);
+			Utility_Functions.timeWait(3);	
+			Utility_Functions.xScrollWindow(driver);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xScrollWindowTop(driver);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.timeWait(1);
+			Utility_Functions.xWaitForElementPresent(driver, salesStage_AS, 4);
+			Utility_Functions.xClick(driver, salesStage_AS, true);
+			Utility_Functions.xClick(driver, salesStageValue_AS, true);
+			System.out.println(Calendar.getInstance());
 			report.updateTestLog("Verify Opportunity Annual Average Leasing Commission Field   ",
-					"Verifying the Annual   Leasing Commission value is entered", Status.PASS);
-		} catch (Exception e) {
-			e.getMessage();
+					"Verifying the sales stage value is entered", Status.PASS);
+			DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+			Date date = new Date();
+			Utility_Functions.xWaitForElementPresent(driver, closeDate_AS, 3);
+			Utility_Functions.xSendKeys(driver, closeDate_AS, dateFormat.format(date).toString());
+			report.updateTestLog("Verify Opportunity Annual Average Leasing Commission Field   ",
+					"Verifying the closed date value is entered", Status.PASS);
+			try {
+				Utility_Functions.xWaitForElementPresent(driver, annualAverageLeasingCommission, 3);
+				Utility_Functions.xSendKeys(driver, annualAverageLeasingCommission, "10");
+				report.updateTestLog("Verify Opportunity Annual Average Leasing Commission Field   ",
+						"Verifying the Annual   Leasing Commission value is entered", Status.PASS);
+			} catch (Exception e) {
+				e.getMessage();
+			}
+			Utility_Functions.xWaitForElementPresent(driver, saveNewOpportunity_AS, 3);
+			Utility_Functions.xClick(driver, saveNewOpportunity_AS, true);
+			report.updateTestLog("Verify Opportunity Annual Average Leasing Commission Field ", "Opportunity Saved successfully::", Status.PASS);
 		}
-		Utility_Functions.xWaitForElementPresent(driver, saveNewOpportunity_AS, 3);
-		Utility_Functions.xClick(driver, saveNewOpportunity_AS, true);
-		report.updateTestLog("Verify Opportunity Annual Average Leasing Commission Field ", "Opportunity Saved successfully::", Status.PASS);
-
 
 	}
 	/**
@@ -4667,8 +4671,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, allActiveOpportunities, true);
 		Utility_Functions.timeWait(2);
 		List<WebElement> OpportunitiesList = driver.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'006')]"));
-		Utility_Functions.xclickRandomElement(OpportunitiesList);
+		Utility_Functions.xclickOnFirstElementfromList(OpportunitiesList);
 		report.updateTestLog("Verify Opportunity Landing Page", "Random Opportunity is clicked from the Opportunity List", Status.PASS);
+		Utility_Functions.timeWait(3);
 		Utility_Functions.xWaitForElementPresent(driver, related, 3);
 		List<WebElement> headerList = driver.findElements(By.xpath("//div[contains(@class,'test-id__section')]//h3"));
 		for(WebElement element: headerList) {
