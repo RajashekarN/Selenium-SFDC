@@ -163,6 +163,10 @@ public class SearchTextSOQL extends ReusableLibrary {
 							recordID = (String) record.getField("Opportunity_ID__c ");
 							report.updateTestLog("Verify Fetch Record",
 									"Record has been fetched successfully:::" + recordID, Status.PASS);
+						} else if (name.equals("CBRE_SPOC_Employee__c")) {
+							recordID = (String) record.getField("CBRE_SPOC_Employee__c");
+							report.updateTestLog("Verify Fetch Record",
+									"Record has been fetched successfully:::" + recordID, Status.PASS);
 						} else {
 							recordID = (String) record.getField("Id");
 							report.updateTestLog("Verify Fetch Record",

@@ -4904,80 +4904,85 @@ public class AccountsPage extends ReusableLibrary {
 		}
 		
 		Utility_Functions.xWaitForElementPresent(driver, spocEmployee, 5);
-		Utility_Functions.xSendKeys(driver, spocEmployee, "Jordan");
-		spocEmployee.sendKeys(Keys.ARROW_DOWN);
-		Utility_Functions.timeWait(2);
-		spocEmployee.sendKeys(Keys.ENTER);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver,spocRole, 3);
-		Utility_Functions.xClick(driver,spocRole, true);
-		Utility_Functions.xWaitForElementPresent(driver,spocRoleValue, 3);
-		Utility_Functions.xClick(driver,spocRoleValue, true);
-		if(!excludeSPOCCascade.isSelected()){
-			Utility_Functions.xClick(driver, excludeSPOCCascade, true);
-			System.out.println("exclude SPOC Cascade is checked");
-			report.updateTestLog("Verify SPOC Page Layout","Verifying the exclude SPOC Cascade check box is checked or else checking it",  Status.PASS);
-
-		}else{
-			System.out.println("exclude SPOC Cascade is not checked");
-			report.updateTestLog("Verify SPOC Page Layout","Verifying the exclude SPOC Cascade check box is checked or not ",  Status.FAIL);
-		}
-		Utility_Functions.xWaitForElementPresent(driver,spocGeo, 3);
-		Utility_Functions.xClick(driver,spocGeo, true);
-		Utility_Functions.xWaitForElementPresent(driver,spocGeoValue, 3);
-		Utility_Functions.xClick(driver,spocGeoValue, true);
-		Utility_Functions.xWaitForElementPresent(driver,spocBusinessLine, 3);
-		Utility_Functions.xClick(driver,spocBusinessLine, true);
-		Utility_Functions.xWaitForElementPresent(driver,spocBusinessLineValue, 3);
-		Utility_Functions.xClick(driver,spocBusinessLineValue, true);
-		/*Utility_Functions.xWaitForElementPresent(driver,spocServices, 3);
-		Utility_Functions.xClick(driver,spocServices, true);*/
-		Utility_Functions.xWaitForElementPresent(driver,spocRegion, 3);
-		Utility_Functions.xClick(driver,spocRegion, true);
-		Utility_Functions.xWaitForElementPresent(driver,spocRegionValue, 3);
-		Utility_Functions.xClick(driver,spocRegionValue, true);
-		Utility_Functions.xWaitForElementPresent(driver,spocCountry, 3);
-		Utility_Functions.xClick(driver,spocCountry, true);
-		Utility_Functions.xWaitForElementPresent(driver,spocCountryValue, 3);
-		Utility_Functions.xClick(driver,spocCountryValue, true);
-		Utility_Functions.xWaitForElementPresent(driver,spocCity, 3);
-		Utility_Functions.xSendKeys(driver, spocCity, dataTable.getData("General_Data", "City"));
-		Utility_Functions.xWaitForElementPresent(driver,spocState, 3);
-		Utility_Functions.xClick(driver,spocState, true);
-		Utility_Functions.xWaitForElementPresent(driver,spocStateValue, 3);
-		Utility_Functions.xClick(driver,spocStateValue, true);
-		Utility_Functions.xWaitForElementPresent(driver,spocType, 3);
-		Utility_Functions.xClick(driver,spocType, true);
-		Utility_Functions.xWaitForElementPresent(driver,spocTypeValue, 3);
-		Utility_Functions.xClick(driver,spocTypeValue, true);
-		System.out.println(Calendar.getInstance());
-		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-		Date date = new Date();
-		Utility_Functions.xWaitForElementPresent(driver,spocOriginalDate, 3);
-		Utility_Functions.xSendKeys(driver,spocOriginalDate, dateFormat.format(date).toString());
-		Utility_Functions.xWaitForElementPresent(driver,spocRequalificationDate, 3);
-		Utility_Functions.xSendKeys(driver,spocRequalificationDate, dateFormat.format(date).toString());
-		Utility_Functions.xWaitForElementPresent(driver,teamMember, 3);
-		String value3 = Utility_Functions.xGenerateAlphaNumericString();
-		String teamMemberValue = value3 + "Test Automation";
-		Utility_Functions.xSendKeys(driver,teamMember,teamMemberValue );
-		Utility_Functions.xWaitForElementPresent(driver,sourceBroker, 3);
-		String value = Utility_Functions.xGenerateAlphaNumericString();
-		String sourceBrokerValue = value + "Test Automation";
-		Utility_Functions.xSendKeys(driver,sourceBroker, sourceBrokerValue);
-		Utility_Functions.xWaitForElementPresent(driver,sourceSystem, 3);
-		String value1 = Utility_Functions.xGenerateAlphaNumericString();
-		String sourceSystemValue = value1 + "Test Automation";
-		Utility_Functions.xSendKeys(driver,sourceSystem, sourceSystemValue);
-		Utility_Functions.xWaitForElementPresent(driver, saveQuickCreate, 3);
-		Utility_Functions.xClick(driver, saveQuickCreate, true);
-		Utility_Functions.timeWait(3);
-		if(related_Accounts.isDisplayed()) {
-			Utility_Functions.xClick(driver, related_Accounts, true);
-			report.updateTestLog("Verify SPOC Page Layout", "SPOC is saved successfully with all the fields", Status.PASS);
+		String sSpocEmployee = searchAccount.fetchRecord("SPOC__c", "CBRE_SPOC_Employee__c");		
+		if(sSpocEmployee==null) {
+			report.updateTestLog("Verify SPOC Page Layout","There are no CBRE SPOC Employee records present:::",  Status.PASS);
 		} else {
-			report.updateTestLog("Verify SPOC Page Layout", "SPOC is not saved with all the fields", Status.FAIL);
-		}	
+			Utility_Functions.xSendKeys(driver, spocEmployee, sSpocEmployee);
+			spocEmployee.sendKeys(Keys.ARROW_DOWN);
+			Utility_Functions.timeWait(2);
+			spocEmployee.sendKeys(Keys.ENTER);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xWaitForElementPresent(driver,spocRole, 3);
+			Utility_Functions.xClick(driver,spocRole, true);
+			Utility_Functions.xWaitForElementPresent(driver,spocRoleValue, 3);
+			Utility_Functions.xClick(driver,spocRoleValue, true);
+			if(!excludeSPOCCascade.isSelected()){
+				Utility_Functions.xClick(driver, excludeSPOCCascade, true);
+				System.out.println("exclude SPOC Cascade is checked");
+				report.updateTestLog("Verify SPOC Page Layout","Verifying the exclude SPOC Cascade check box is checked or else checking it",  Status.PASS);
+	
+			}else{
+				System.out.println("exclude SPOC Cascade is not checked");
+				report.updateTestLog("Verify SPOC Page Layout","Verifying the exclude SPOC Cascade check box is checked or not ",  Status.FAIL);
+			}
+			Utility_Functions.xWaitForElementPresent(driver,spocGeo, 3);
+			Utility_Functions.xClick(driver,spocGeo, true);
+			Utility_Functions.xWaitForElementPresent(driver,spocGeoValue, 3);
+			Utility_Functions.xClick(driver,spocGeoValue, true);
+			Utility_Functions.xWaitForElementPresent(driver,spocBusinessLine, 3);
+			Utility_Functions.xClick(driver,spocBusinessLine, true);
+			Utility_Functions.xWaitForElementPresent(driver,spocBusinessLineValue, 3);
+			Utility_Functions.xClick(driver,spocBusinessLineValue, true);
+			/*Utility_Functions.xWaitForElementPresent(driver,spocServices, 3);
+			Utility_Functions.xClick(driver,spocServices, true);*/
+			Utility_Functions.xWaitForElementPresent(driver,spocRegion, 3);
+			Utility_Functions.xClick(driver,spocRegion, true);
+			Utility_Functions.xWaitForElementPresent(driver,spocRegionValue, 3);
+			Utility_Functions.xClick(driver,spocRegionValue, true);
+			Utility_Functions.xWaitForElementPresent(driver,spocCountry, 3);
+			Utility_Functions.xClick(driver,spocCountry, true);
+			Utility_Functions.xWaitForElementPresent(driver,spocCountryValue, 3);
+			Utility_Functions.xClick(driver,spocCountryValue, true);
+			Utility_Functions.xWaitForElementPresent(driver,spocCity, 3);
+			Utility_Functions.xSendKeys(driver, spocCity, dataTable.getData("General_Data", "City"));
+			Utility_Functions.xWaitForElementPresent(driver,spocState, 3);
+			Utility_Functions.xClick(driver,spocState, true);
+			Utility_Functions.xWaitForElementPresent(driver,spocStateValue, 3);
+			Utility_Functions.xClick(driver,spocStateValue, true);
+			Utility_Functions.xWaitForElementPresent(driver,spocType, 3);
+			Utility_Functions.xClick(driver,spocType, true);
+			Utility_Functions.xWaitForElementPresent(driver,spocTypeValue, 3);
+			Utility_Functions.xClick(driver,spocTypeValue, true);
+			System.out.println(Calendar.getInstance());
+			DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+			Date date = new Date();
+			Utility_Functions.xWaitForElementPresent(driver,spocOriginalDate, 3);
+			Utility_Functions.xSendKeys(driver,spocOriginalDate, dateFormat.format(date).toString());
+			Utility_Functions.xWaitForElementPresent(driver,spocRequalificationDate, 3);
+			Utility_Functions.xSendKeys(driver,spocRequalificationDate, dateFormat.format(date).toString());
+			Utility_Functions.xWaitForElementPresent(driver,teamMember, 3);
+			String value3 = Utility_Functions.xGenerateAlphaNumericString();
+			String teamMemberValue = value3 + "Test Automation";
+			Utility_Functions.xSendKeys(driver,teamMember,teamMemberValue );
+			Utility_Functions.xWaitForElementPresent(driver,sourceBroker, 3);
+			String value = Utility_Functions.xGenerateAlphaNumericString();
+			String sourceBrokerValue = value + "Test Automation";
+			Utility_Functions.xSendKeys(driver,sourceBroker, sourceBrokerValue);
+			Utility_Functions.xWaitForElementPresent(driver,sourceSystem, 3);
+			String value1 = Utility_Functions.xGenerateAlphaNumericString();
+			String sourceSystemValue = value1 + "Test Automation";
+			Utility_Functions.xSendKeys(driver,sourceSystem, sourceSystemValue);
+			Utility_Functions.xWaitForElementPresent(driver, saveQuickCreate, 3);
+			Utility_Functions.xClick(driver, saveQuickCreate, true);
+			Utility_Functions.timeWait(3);
+			if(related_Accounts.isDisplayed()) {
+				Utility_Functions.xClick(driver, related_Accounts, true);
+				report.updateTestLog("Verify SPOC Page Layout", "SPOC is saved successfully with all the fields", Status.PASS);
+			} else {
+				report.updateTestLog("Verify SPOC Page Layout", "SPOC is not saved with all the fields", Status.FAIL);
+			}
+		}
 		
 }
 	/**
