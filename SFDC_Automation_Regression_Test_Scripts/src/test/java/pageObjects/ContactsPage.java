@@ -2703,7 +2703,9 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, firstNameNewContactPage, 5);
 		Utility_Functions.xSendKeys(driver, firstNameNewContactPage, "Ema");
 		Utility_Functions.xWaitForElementPresent(driver, accountNameQuickCreateContact, 5);
-		Utility_Functions.xSendKeys(driver, accountNameQuickCreateContact, "Barclay's Test");
+		String sAccountName = searchAccountName.fetchRecord("Account", "Name");
+		Utility_Functions.xSendKeys(driver, accountNameQuickCreateContact, sAccountName);
+		//Utility_Functions.xSendKeys(driver, accountNameQuickCreateContact, "Barclay's Test");
 		accountNameQuickCreateContact.sendKeys(Keys.ARROW_DOWN);
 		Utility_Functions.timeWait(2);
 		accountNameQuickCreateContact.sendKeys(Keys.ENTER);
