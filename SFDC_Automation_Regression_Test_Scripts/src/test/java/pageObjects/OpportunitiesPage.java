@@ -534,6 +534,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//*[@id='record-type-select']/option[text()='Capital Markets – Property Sales']")
 	WebElement opportunityRecordTypeValuePropertySales;
+	
+	@FindBy(xpath = "//*[@id='record-type-select']/option[text()='Agency Brokerage']")
+	WebElement opportunityRecordTypeValueAgencyBrokerage;
 
 	@FindBy(xpath = "//*[@id='record-type-select']/option[text()='Capital Markets – Debt & Structured Finance']")
 	WebElement opportunityRecordTypeDebtStructuredFinance;
@@ -2135,11 +2138,14 @@ public class OpportunitiesPage extends ReusableLibrary {
 			Utility_Functions.xClick(driver, opportunityRecordType, true);
 			Utility_Functions.xWaitForElementPresent(driver, opportunityRecordTypeDebtStructuredFinance, 2);
 			Utility_Functions.xClick(driver, opportunityRecordTypeDebtStructuredFinance, true);
-		} else if((dataTable.getData("General_Data", "TC_ID").contains("PSOpportunity")) || (dataTable.getData("General_Data", "TC_ID").contains("CMAMERAdminOpportunitySplitFunctionalityPage")) 
-			|| (dataTable.getData("General_Data", "TC_ID").contains("ABAMERAdminOpportunitySplitFunctionalityPage"))) {
+		} else if((dataTable.getData("General_Data", "TC_ID").contains("PSOpportunity")) || (dataTable.getData("General_Data", "TC_ID").contains("CMAMERAdminOpportunitySplitFunctionalityPage"))) {
 			Utility_Functions.xClick(driver, opportunityRecordType, true);
 			Utility_Functions.xWaitForElementPresent(driver, opportunityRecordTypeValuePropertySales, 2);
 			Utility_Functions.xClick(driver, opportunityRecordTypeValuePropertySales, true);
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("ABAMERAdminOpportunitySplitFunctionalityPage")) {
+					Utility_Functions.xClick(driver, opportunityRecordType, true);
+					Utility_Functions.xWaitForElementPresent(driver, opportunityRecordTypeValueAgencyBrokerage, 2);
+					Utility_Functions.xClick(driver, opportunityRecordTypeValueAgencyBrokerage, true);
 		} 
 		Utility_Functions.xClick(driver, continueButton, true);
 		Utility_Functions.timeWait(2);

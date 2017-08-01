@@ -772,9 +772,14 @@ public class DriverScript {
 	}
 
 	private void quitWebDriver() {
-		switch (testParameters.getExecutionMode()) {
+		executionMode = ExecutionMode.valueOf(properties.getProperty("ExecutionMode"));
+		switch (executionMode) {
 		case LOCAL:
+			driver.quit();
+			break;
 		case REMOTE:
+			driver.quit();
+			break;
 		case GRID:
 		case MOBILE:
 		case PERFECTO:
