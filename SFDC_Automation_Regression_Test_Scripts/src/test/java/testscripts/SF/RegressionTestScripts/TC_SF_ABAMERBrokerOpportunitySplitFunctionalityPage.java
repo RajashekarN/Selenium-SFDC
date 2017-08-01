@@ -17,10 +17,10 @@ import com.cognizant.Craft.*;
  *
  */
 
-public class TC_SF_ABAMERAdminOpportunitySplitFunctionalityPage extends CRAFTTestCase
+public class TC_SF_ABAMERBrokerOpportunitySplitFunctionalityPage extends CRAFTTestCase
 {
 	@Test(dataProvider = "RegressionTestScripts")
-	public void runTC_SF_ABAMERAdminOpportunitySplitFunctionalityPage(String testInstance, ExecutionMode executionMode, Platform platform
+	public void runTC_SF_ABAMERBrokerOpportunitySplitFunctionalityPage(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
