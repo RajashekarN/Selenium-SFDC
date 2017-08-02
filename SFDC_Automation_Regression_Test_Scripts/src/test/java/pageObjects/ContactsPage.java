@@ -400,6 +400,12 @@ public class ContactsPage extends ReusableLibrary {
 	@FindBy(xpath = "//button[text()='Continue']")
 	WebElement continueButtonNewContact;
 
+	@FindBy(xpath="//select[contains(@id,'contForm:statusPicklist')]")
+	WebElement statusNewContactPage;
+
+	@FindBy(xpath="//select[contains(@id,'contForm:statusPicklist')]/option[@value='Inactive']")
+	WebElement statusValueNewContactPage;
+
 	SearchTextSOQL searchAccountName = new SearchTextSOQL(scriptHelper);
 
 	/**
@@ -640,7 +646,7 @@ public class ContactsPage extends ReusableLibrary {
 		if (!untitledNoteSelectedAccount.getText().isEmpty()) {
 
 			System.out
-					.println("Selected Account is present in the Note Page :" + untitledNoteSelectedAccount.getText());
+			.println("Selected Account is present in the Note Page :" + untitledNoteSelectedAccount.getText());
 		} else {
 			System.out.println("Selected Account is not present in the Note Page");
 		}
@@ -764,7 +770,7 @@ public class ContactsPage extends ReusableLibrary {
 		if (!untitledNoteSelectedAccount.getText().isEmpty()) {
 
 			System.out
-					.println("Selected Account is present in the Note Page :" + untitledNoteSelectedAccount.getText());
+			.println("Selected Account is present in the Note Page :" + untitledNoteSelectedAccount.getText());
 		} else {
 			System.out.println("Selected Account is not present in the Note Page");
 		}
@@ -1128,7 +1134,7 @@ public class ContactsPage extends ReusableLibrary {
 					"Verifying New Activity Page is having the Save, Save and New and Cancel buttons ", Status.PASS);
 		} else {
 			System.out
-					.println("Save, Save and New and Cancel buttons are not prsent in the New Activity Layout Page  ");
+			.println("Save, Save and New and Cancel buttons are not prsent in the New Activity Layout Page  ");
 			report.updateTestLog("Verify New Activity Page Layout",
 					"Verifying New Activity Page is having the Save, Save and New and Cancel buttons", Status.FAIL);
 		}
@@ -1461,51 +1467,41 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, menu_Contacts, 3);
 		Utility_Functions.xClick(driver, menu_Contacts, true);
 		Utility_Functions.timeWait(1);
-		report.updateTestLog("Verify Contact Creation With Required Fields ", "Verifying Contacts is Displayed ",
-				Status.PASS);
+		report.updateTestLog("Verify Contact Creation With Required Fields ", "Verifying Contacts is Displayed ", Status.PASS);
 		Utility_Functions.xWaitForElementPresent(driver, newContact, 3);
 		Utility_Functions.xClick(driver, newContact, true);
 		Utility_Functions.timeWait(2);
-		report.updateTestLog("Verify Contact Creation With Required Fields ",
-				"Verifying New Contacts Page is Displayed  ", Status.PASS);
-		// Utility_Functions.xSwitchtoFrame(driver,
-		// driver.findElement(By.xpath("//p[@title='Create a Contact']")));
+		report.updateTestLog("Verify Contact Creation With Required Fields ", "Verifying New Contacts Page is Displayed  ", Status.PASS);
 		Utility_Functions.xSwitchtoFrame(driver, lastNameQuickCreateContact);
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, accountNameQuickCreateContact, 5);
-		/*
-		 * Utility_Functions.xSendKeys(driver, accountNameQuickCreateContact,
-		 * "Barclay's Test");
-		 * accountNameQuickCreateContact.sendKeys(Keys.ARROW_DOWN);
-		 * Utility_Functions.timeWait(2);
-		 * accountNameQuickCreateContact.sendKeys(Keys.ENTER);
-		 */
-		int value = Utility_Functions.xRandomFunction();
-		String contactName = "Test Automation" + value;
-
-		/*
-		 * String query = "select Name from Account limit 1 offset 9"; String
-		 * accountName = searchAccountName.fetchRecordFieldValue("Name", query);
-		 */
-		Utility_Functions.xSendKeys(driver, accountNameQuickCreateContact, contactName);
-		/*
-		 * accountNameQuickCreateContact.sendKeys(Keys.ARROW_DOWN);
-		 * accountNameQuickCreateContact.sendKeys(Keys.ENTER); /*
-		 * Utility_Functions.xSendKeys(driver, accountNameQuickCreateContact,
-		 * "Test"); accountNameQuickCreateContact.sendKeys(Keys.TAB);
-		 * accountNameQuickCreateContact.sendKeys(Keys.ARROW_DOWN);
-		 * //accountNameQuickCreateContact.sendKeys(Keys.ENTER);
-		 */ report.updateTestLog("Verify Contact Creation With Required Fields ",
-				"Verifying Account name required field is populated ", Status.PASS);
+		report.updateTestLog("Verify Contact Creation With Required Fields ", "Verifying Account name required field is populated ", Status.PASS);
 		Utility_Functions.xWaitForElementPresent(driver, lastNameQuickCreateContact, 5);
-		Utility_Functions.xSendKeys(driver, lastNameQuickCreateContact, "user");
+		Utility_Functions.xSendKeys(driver, lastNameQuickCreateContact, "Test_Contact_Last_Name");
 		Utility_Functions.xWaitForElementPresent(driver, directLine, 5);
 		Utility_Functions.xSendKeys(driver, directLine, dataTable.getData("General_Data", "Direct Line"));
+		String query = "SELECT Id, Name, EMEA_Searchable__c FROM Account where EMEA_Searchable__c = false limit 1 offset 9";
+		String sAccountName = searchAccountName.fetchRecordFieldValue("Name", query);
+		Utility_Functions.xSendKeys(driver, accountNameQuickCreateContact, sAccountName);
+		accountNameQuickCreateContact.sendKeys(Keys.ARROW_DOWN);
+		Utility_Functions.timeWait(2);
+		accountNameQuickCreateContact.sendKeys(Keys.ENTER);
+		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, saveContact, 3);
 		Utility_Functions.xClick(driver, saveContact, true);
-		Utility_Functions.xWaitForElementPresent(driver, related, 3);
-		Utility_Functions.xClick(driver, related, true);
+		report.updateTestLog("Verify Contact Creation With Required Fields ", "Contact has been created successfully and have clicked on Save Button", Status.PASS);
 		Utility_Functions.timeWait(3);
+		driver.navigate().refresh();
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, details, 3);
+		if (details.isDisplayed()) {
+
+			report.updateTestLog("Verify Contact Record Updation",
+					"The existing record can be updated and saved successfully", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Contact Record Updation",
+					"The existing record cannot be updated and saved successfully", Status.FAIL);
+		}
 
 	}
 
@@ -2446,7 +2442,7 @@ public class ContactsPage extends ReusableLibrary {
 		communicationPreferencesSectionListAdmin.add("Dietary Requirements");
 
 		System.out
-				.println("Communication Preferences section fields are:: " + communicationPreferencesSectionListAdmin);
+		.println("Communication Preferences section fields are:: " + communicationPreferencesSectionListAdmin);
 	}
 
 	static ArrayList<String> excludeReasonPickListValuesList = new ArrayList<String>();
@@ -2558,7 +2554,7 @@ public class ContactsPage extends ReusableLibrary {
 		reasonForInactivatingPickListValuesList.add("Duplication");
 
 		System.out
-				.println("Reason for Inactivating pick list values  are:: " + reasonForInactivatingPickListValuesList);
+		.println("Reason for Inactivating pick list values  are:: " + reasonForInactivatingPickListValuesList);
 	}
 
 	static ArrayList<String> systemInformationSectionList = new ArrayList<String>();
@@ -3149,7 +3145,7 @@ public class ContactsPage extends ReusableLibrary {
 			Utility_Functions.xClick(driver, mailOptionsValueNewContactPage, true);
 			Calendar calendar = Calendar.getInstance();
 			calendar.add(Calendar.DAY_OF_MONTH, -20);
-			SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
+			SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 			System.out.println("Date : " + dateFormat.format(calendar.getTime()));
 			Utility_Functions.xWaitForElementPresent(driver, excludedOnNewContactpage, 3);
 			Utility_Functions.xSendKeys(driver, excludedOnNewContactpage, dateFormat.format(calendar.getTime()));
@@ -3617,6 +3613,275 @@ public class ContactsPage extends ReusableLibrary {
 			System.out.println(e.getMessage());
 		}
 		systemInformationSectionListValues.clear();
+	}
+	/**
+	 * Validating the New Contact Page by populating all the fields
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void contactsPopulatingAllFields() {
+		Utility_Functions.xWaitForElementPresent(driver, menu_Contacts, 3);
+		Utility_Functions.xClick(driver, menu_Contacts, true);
+		Utility_Functions.timeWait(1);
+		report.updateTestLog("Verify Contacts Populating all fields", "Verifying Contacts is Displayed ", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, newContact, 3);
+		Utility_Functions.xClick(driver, newContact, true);
+		Utility_Functions.timeWait(2);
+		report.updateTestLog("Verify Contacts Populating all fields", "Verifying New Contacts Page is Displayed  ",
+				Status.PASS);
+		if (dataTable.getData("General_Data", "TC_ID").contains("Admin")) {
+
+			Utility_Functions.xSwitchtoFrame(driver, continueButtonNewContact);
+			Utility_Functions.xWaitForElementPresent(driver, continueButtonNewContact, 3);
+			Utility_Functions.xClick(driver, continueButtonNewContact, true);
+			Utility_Functions.timeWait(2);
+		}
+		Utility_Functions.xSwitchtoFrame(driver, viewAllFieldsButton);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xWaitForElementPresent(driver, viewAllFieldsButton, 5);
+		Utility_Functions.xClick(driver, viewAllFieldsButton, true);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(5);
+
+		Utility_Functions.xWaitForElementPresent(driver, firstNameNewContactPage, 5);
+		Utility_Functions.xSendKeys(driver,firstNameNewContactPage, Utility_Functions.xGenerateAlphaNumericString() + "_Test_Automation_First");
+		Utility_Functions.xWaitForElementPresent(driver, accountNameQuickCreateContact, 5);
+		String query = "SELECT Id, Name FROM Account limit 1 offset 9";
+		String sAccountName = searchAccountName.fetchRecordFieldValue("Name", query);
+		Utility_Functions.xSendKeys(driver, accountNameQuickCreateContact, sAccountName);
+		accountNameQuickCreateContact.sendKeys(Keys.ARROW_DOWN);
+		Utility_Functions.timeWait(2);
+		accountNameQuickCreateContact.sendKeys(Keys.ENTER);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, lastNameQuickCreateContact, 5);
+		Utility_Functions.xSendKeys(driver,lastNameQuickCreateContact,  Utility_Functions.xGenerateAlphaNumericString() + "_Test_Automation_Last");
+		Utility_Functions.xWaitForElementPresent(driver, directLineNewContactPage, 2);
+		Utility_Functions.xSendKeys(driver, directLineNewContactPage, dataTable.getData("General_Data", "Direct Line"));
+		Utility_Functions.xWaitForElementPresent(driver, titleNewContactPage, 5);
+		Utility_Functions.xSendKeys(driver, titleNewContactPage, "Manager");
+		Utility_Functions.xWaitForElementPresent(driver, emailNewContactPage, 5);
+		Utility_Functions.xSendKeys(driver, emailNewContactPage, Utility_Functions.xGenerateAlphaNumericString() + dataTable.getData("General_Data", "Email"));
+
+		Utility_Functions.xWaitForElementPresent(driver,statusValueNewContactPage, 3);
+		Utility_Functions.xClick(driver,statusValueNewContactPage, true);
+		Utility_Functions.xWaitForElementPresent(driver, statusValueNewContactPage, 3);
+		Utility_Functions.xClick(driver,statusValueNewContactPage, true);
+
+		Utility_Functions.xWaitForElementPresent(driver, streetNewContactPage, 2);
+		Utility_Functions.xSendKeys(driver, streetNewContactPage, dataTable.getData("General_Data", "Street"));
+		Utility_Functions.xWaitForElementPresent(driver, cityNewContactPage, 2);
+		Utility_Functions.xSendKeys(driver, cityNewContactPage, dataTable.getData("General_Data", "City"));
+
+		Utility_Functions.xWaitForElementPresent(driver, countryNewContactpage, 3);
+		Utility_Functions.xClick(driver, countryNewContactpage, true);
+		Utility_Functions.xWaitForElementPresent(driver, countryValueNewContactPage, 3);
+		Utility_Functions.xClick(driver, countryValueNewContactPage, true);
+
+		Utility_Functions.xWaitForElementPresent(driver, stateNewContactPage, 3);
+		Utility_Functions.xClick(driver, stateNewContactPage, true);
+		Utility_Functions.xWaitForElementPresent(driver, stateValueNewContactPage, 3);
+		Utility_Functions.xClick(driver, stateValueNewContactPage, true);
+		Utility_Functions.xWaitForElementPresent(driver, zipcodeNewContactPage, 3);
+		Utility_Functions.xClick(driver, zipcodeNewContactPage, true);
+		Utility_Functions.xWaitForElementPresent(driver, zipcodeNewContactPage, 3);
+		Utility_Functions.xSendKeys(driver, zipcodeNewContactPage, dataTable.getData("General_Data", "Zipcode"));
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		if(!dataTable.getData("General_Data", "TC_ID").contains("CMAMERCSSContactsPopulatingAllFields")) {
+			Utility_Functions.xWaitForElementPresent(driver, middleNameNewContactPage, 5);
+			Utility_Functions.xSendKeys(driver,middleNameNewContactPage,  Utility_Functions.xGenerateAlphaNumericString() + "Test_Automation_Middle_");
+		}
+		Utility_Functions.xWaitForElementPresent(driver, mobilePhoneNewContactpage, 3);
+		Utility_Functions.xSendKeys(driver, mobilePhoneNewContactpage, dataTable.getData("General_Data", "Phone"));
+		if(!dataTable.getData("General_Data", "TC_ID").contains("CMAMERCSSContactsPopulatingAllFields")) { 
+			Utility_Functions.xWaitForElementPresent(driver, nickNameNewContactpage, 5);
+			Utility_Functions.xSendKeys(driver,nickNameNewContactpage,  Utility_Functions.xGenerateAlphaNumericString() + "Test_Automation_Nick_");
+		}
+		Utility_Functions.xWaitForElementPresent(driver, mainPhoneNewContactPage, 3);
+		Utility_Functions.xSendKeys(driver, mainPhoneNewContactPage, dataTable.getData("General_Data", "Phone"));
+		Utility_Functions.xWaitForElementPresent(driver, departmentNewContactPage, 5);
+		Utility_Functions.xSendKeys(driver,departmentNewContactPage,  Utility_Functions.xGenerateAlphaNumericString() + "Test_Automation_Department_");
+		Utility_Functions.xWaitForElementPresent(driver, inactiveContactBox, 5);
+		Utility_Functions.xSendKeys(driver, inactiveContactBox, "Test");
+		inactiveContactBox.sendKeys(Keys.ARROW_DOWN);
+		Utility_Functions.timeWait(2);
+		inactiveContactBox.sendKeys(Keys.ENTER);
+
+
+		Utility_Functions.xWaitForElementPresent(driver, influenceLevelPickList, 3);
+		Utility_Functions.xClick(driver, influenceLevelPickList, true);
+		Utility_Functions.xWaitForElementPresent(driver, influenceLevelPickListValue, 3);
+		Utility_Functions.xClick(driver, influenceLevelPickListValue, true);
+		/*Utility_Functions.xWaitForElementPresent(driver, reportsToNewContactPage, 5);
+		Utility_Functions.xSendKeys(driver, reportsToNewContactPage, "Automation Test");
+		reportsToNewContactPage.sendKeys(Keys.ARROW_DOWN);
+		Utility_Functions.timeWait(2);
+		reportsToNewContactPage.sendKeys(Keys.ENTER);*/
+
+		Utility_Functions.xWaitForElementPresent(driver, emailOptionsNewContactPage, 3);
+		Utility_Functions.xClick(driver, emailOptionsNewContactPage, true);
+		Utility_Functions.xWaitForElementPresent(driver, emailOptionsValueNewContactPage, 3);
+		Utility_Functions.xClick(driver, emailOptionsValueNewContactPage, true);
+		Utility_Functions.xWaitForElementPresent(driver, mailOptionsNewContactPage, 3);
+		Utility_Functions.xClick(driver, mailOptionsNewContactPage, true);
+		Utility_Functions.xWaitForElementPresent(driver, mailOptionsValueNewContactPage, 3);
+		Utility_Functions.xClick(driver, mailOptionsValueNewContactPage, true);
+
+		if (dataTable.getData("General_Data", "TC_ID").contains("AMER")) {
+
+			Utility_Functions.xWaitForElementPresent(driver, callOptionsNewContactPage, 3);
+			Utility_Functions.xClick(driver, callOptionsNewContactPage, true);
+			Utility_Functions.xWaitForElementPresent(driver, callOptionsValueNewContactPage, 3);
+			Utility_Functions.xClick(driver, callOptionsValueNewContactPage, true);
+
+		} else if (dataTable.getData("General_Data", "TC_ID").contains("APAC")) {
+
+			Utility_Functions.xWaitForElementPresent(driver, emailOptionsNewContactPage, 3);
+			Utility_Functions.xClick(driver, emailOptionsNewContactPage, true);
+			Utility_Functions.xWaitForElementPresent(driver, emailOptionsValueNewContactPage, 3);
+			Utility_Functions.xClick(driver, emailOptionsValueNewContactPage, true);
+			Utility_Functions.xWaitForElementPresent(driver, excludedReasonNewContactPage, 3);
+			Utility_Functions.xClick(driver, excludedReasonNewContactPage, true);
+			Utility_Functions.xWaitForElementPresent(driver, excludedReasonValueNewContactPage, 3);
+			Utility_Functions.xClick(driver, excludedReasonValueNewContactPage, true);
+			Utility_Functions.xWaitForElementPresent(driver, mailOptionsNewContactPage, 3);
+			Utility_Functions.xClick(driver, mailOptionsNewContactPage, true);
+			Utility_Functions.xWaitForElementPresent(driver, mailOptionsValueNewContactPage, 3);
+			Utility_Functions.xClick(driver, mailOptionsValueNewContactPage, true);
+			Calendar calendar = Calendar.getInstance();
+			calendar.add(Calendar.DAY_OF_MONTH, -20);
+			SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+			System.out.println("Date : " + dateFormat.format(calendar.getTime()));
+			Utility_Functions.xWaitForElementPresent(driver, excludedOnNewContactpage, 3);
+			Utility_Functions.xSendKeys(driver, excludedOnNewContactpage, dateFormat.format(calendar.getTime()));
+			Utility_Functions.xWaitForElementPresent(driver, callOptionsNewContactPage, 3);
+			Utility_Functions.xClick(driver, callOptionsNewContactPage, true);
+			Utility_Functions.xWaitForElementPresent(driver, callOptionsValueNewContactPage, 3);
+			Utility_Functions.xClick(driver, callOptionsValueNewContactPage, true);
+			Utility_Functions.xWaitForElementPresent(driver, excludedByNewContactpage, 5);
+			Utility_Functions.xSendKeys(driver, excludedByNewContactpage, "Test");
+			excludedByNewContactpage.sendKeys(Keys.ARROW_DOWN);
+			Utility_Functions.timeWait(2);
+			excludedByNewContactpage.sendKeys(Keys.ENTER);
+
+		} else if (dataTable.getData("General_Data", "TC_ID").contains("OBAMERAdmin")) {
+
+			Utility_Functions.xWaitForElementPresent(driver, preferredCommMethod, 3);
+			Utility_Functions.xClick(driver, preferredCommMethod, true);
+			Utility_Functions.xWaitForElementPresent(driver, preferredCommMethodValue, 3);
+			Utility_Functions.xClick(driver, preferredCommMethodValue, true);
+			Utility_Functions.xWaitForElementPresent(driver, emailOptionsNewContactPage, 3);
+			Utility_Functions.xClick(driver, emailOptionsNewContactPage, true);
+			Utility_Functions.xWaitForElementPresent(driver, emailOptionsValueNewContactPage, 3);
+			Utility_Functions.xClick(driver, emailOptionsValueNewContactPage, true);
+			Utility_Functions.xWaitForElementPresent(driver, excludedReasonNewContactPage, 3);
+			Utility_Functions.xClick(driver, excludedReasonNewContactPage, true);
+			Utility_Functions.xWaitForElementPresent(driver, excludedReasonValueNewContactPage, 3);
+			Utility_Functions.xClick(driver, excludedReasonValueNewContactPage, true);
+			Utility_Functions.xWaitForElementPresent(driver, mailOptionsNewContactPage, 3);
+			Utility_Functions.xClick(driver, mailOptionsNewContactPage, true);
+			Utility_Functions.xWaitForElementPresent(driver, mailOptionsValueNewContactPage, 3);
+			Utility_Functions.xClick(driver, mailOptionsValueNewContactPage, true);
+			Calendar calendar = Calendar.getInstance();
+			calendar.add(Calendar.DAY_OF_MONTH, -20);
+			SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+			System.out.println("Date : " + dateFormat.format(calendar.getTime()));
+			Utility_Functions.xWaitForElementPresent(driver, excludedOnNewContactpage, 3);
+			Utility_Functions.xSendKeys(driver, excludedOnNewContactpage, dateFormat.format(calendar.getTime()));
+			Utility_Functions.xWaitForElementPresent(driver, callOptionsNewContactPage, 3);
+			Utility_Functions.xClick(driver, callOptionsNewContactPage, true);
+			Utility_Functions.xWaitForElementPresent(driver, callOptionsValueNewContactPage, 3);
+			Utility_Functions.xClick(driver, callOptionsValueNewContactPage, true);
+			Utility_Functions.xWaitForElementPresent(driver, excludedByNewContactpage, 5);
+			Utility_Functions.xSendKeys(driver, excludedByNewContactpage, "Test");
+			excludedByNewContactpage.sendKeys(Keys.ARROW_DOWN);
+			Utility_Functions.timeWait(2);
+			excludedByNewContactpage.sendKeys(Keys.ENTER);
+
+		}
+
+		if (!(dataTable.getData("General_Data", "TC_ID").contains("Admin"))) {
+			Utility_Functions.xWaitForElementPresent(driver, faxNewContactpage, 3);
+			Utility_Functions.xSendKeys(driver, faxNewContactpage, dataTable.getData("General_Data", "Phone"));
+			if(!dataTable.getData("General_Data", "TC_ID").contains("CMAMERCSSContactsPopulatingAllFields")) {
+				Utility_Functions.xWaitForElementPresent(driver, assistantNameNewContactpage, 5);
+				Utility_Functions.xSendKeys(driver, assistantNameNewContactpage, "Emi");
+			}			
+			Utility_Functions.xWaitForElementPresent(driver, preferredCommMethod, 3);
+			Utility_Functions.xClick(driver, preferredCommMethod, true);
+			Utility_Functions.xWaitForElementPresent(driver, preferredCommMethodValue, 3);
+			Utility_Functions.xClick(driver, preferredCommMethodValue, true);
+			if(!dataTable.getData("General_Data", "TC_ID").contains("CMAMERCSSContactsPopulatingAllFields")) { 
+				Utility_Functions.xWaitForElementPresent(driver, assistantPhoneNewContactPage, 3);
+				Utility_Functions.xSendKeys(driver, assistantPhoneNewContactPage, dataTable.getData("General_Data", "Phone"));
+			}
+			Calendar calendar = Calendar.getInstance();
+			calendar.add(Calendar.DAY_OF_MONTH, -20);
+			SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+			System.out.println("Date : " + dateFormat.format(calendar.getTime()));
+			Utility_Functions.xWaitForElementPresent(driver, commEmailSentNewContactpage, 3);
+			Utility_Functions.xSendKeys(driver, commEmailSentNewContactpage, dateFormat.format(calendar.getTime()));
+			if(!dataTable.getData("General_Data", "TC_ID").contains("CMAMERCSSContactsPopulatingAllFields")) {  
+				Utility_Functions.xWaitForElementPresent(driver, assistantEmailNewContactPage, 3);
+				Utility_Functions.xSendKeys(driver, assistantEmailNewContactPage, Utility_Functions.xGenerateAlphaNumericString() + dataTable.getData("General_Data", "Email"));
+			}
+			Utility_Functions.xWaitForElementPresent(driver, reasonForInactivating, 3);
+			Utility_Functions.xClick(driver, reasonForInactivating, true);
+			Utility_Functions.xWaitForElementPresent(driver, reasonForInactivatingValue, 3);
+			Utility_Functions.xClick(driver, reasonForInactivatingValue, true);
+			Calendar calendar1 = Calendar.getInstance();
+			calendar1.add(Calendar.DAY_OF_MONTH, 10);
+			SimpleDateFormat dateFormat1 = new SimpleDateFormat("MM/dd/yyyy");
+			System.out.println("Date : " + dateFormat1.format(calendar1.getTime()));
+			Utility_Functions.xWaitForElementPresent(driver, inactivationDateNewContactPage, 3);
+			Utility_Functions.xSendKeys(driver, inactivationDateNewContactPage,
+					dateFormat1.format(calendar1.getTime()));
+
+		} else if (dataTable.getData("General_Data", "TC_ID").contains("Admin")) {
+			Utility_Functions.xWaitForElementPresent(driver, faxNewContactpage, 3);
+			Utility_Functions.xSendKeys(driver, faxNewContactpage, dataTable.getData("General_Data", "Phone"));
+			Utility_Functions.xWaitForElementPresent(driver, assistantNameNewContactpage, 5);
+			Utility_Functions.xSendKeys(driver, assistantNameNewContactpage, "Emi");
+			Utility_Functions.xWaitForElementPresent(driver, assistantPhoneNewContactPage, 3);
+			Utility_Functions.xSendKeys(driver, assistantPhoneNewContactPage,
+					dataTable.getData("General_Data", "Phone"));
+			Calendar calendar = Calendar.getInstance();
+			calendar.add(Calendar.DAY_OF_MONTH, -20);
+			SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+			System.out.println("Date : " + dateFormat.format(calendar.getTime()));
+			Utility_Functions.xWaitForElementPresent(driver, commEmailSentNewContactpage, 3);
+			Utility_Functions.xSendKeys(driver, commEmailSentNewContactpage, dateFormat.format(calendar.getTime()));
+			Utility_Functions.xWaitForElementPresent(driver, assistantEmailNewContactPage, 3);
+			Utility_Functions.xSendKeys(driver, assistantEmailNewContactPage,
+					dataTable.getData("General_Data", "Email"));
+			Calendar calendar1 = Calendar.getInstance();
+			calendar1.add(Calendar.DAY_OF_MONTH, -10);
+			SimpleDateFormat dateFormat1 = new SimpleDateFormat("MM/dd/yyyy");
+			System.out.println("Date : " + dateFormat1.format(calendar1.getTime()));
+			Utility_Functions.xWaitForElementPresent(driver, inactivationDateNewContactPage, 3);
+			Utility_Functions.xSendKeys(driver, inactivationDateNewContactPage,	dateFormat1.format(calendar1.getTime()));
+			Utility_Functions.timeWait(2);
+		}
+		Utility_Functions.xWaitForElementPresent(driver, saveContact, 3);
+		Utility_Functions.xClick(driver, saveContact, true);
+		report.updateTestLog("Verify Contacts Populating all fields", "Contact has been created successfully and have clicked on Save Button", Status.PASS);
+		Utility_Functions.timeWait(3);
+		driver.switchTo().defaultContent();
+		Utility_Functions.timeWait(2);
+		driver.navigate().refresh();
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, details, 3);
+		if (details.isDisplayed()) {
+
+			report.updateTestLog("Verify Contacts Populating all fields",
+					"The existing record can be updated and saved successfully", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Contacts Populating all fields",
+					"The existing record cannot be updated and saved successfully", Status.FAIL);
+		}
 	}
 
 }

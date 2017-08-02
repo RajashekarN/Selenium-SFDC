@@ -162,7 +162,7 @@ public class BC_Salesforce_ContactsPage extends ReusableLibrary {
 	/**
 	 * Validating the Contacts Landing page
 	 * 
-	 * @author Ramya
+	 * @author Ramyabc_contactsNewContactPageLayout
 	 *
 	 */	
 	public void bc_contactsVerifyLandingPage()throws InterruptedException{
@@ -195,5 +195,14 @@ public class BC_Salesforce_ContactsPage extends ReusableLibrary {
 	 */	
 	public void bc_contactsNewContactPageLayout()throws InterruptedException{
 		sfContactsPage.contactsNewContactPageLayout();
+	}
+	/**
+	 * Validating the Population of all the Fields in the New Contact Quick create Page
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+	public void bc_contactsPopulatingAllFields()throws InterruptedException{
+		sfContactsPage.contactsPopulatingAllFields();
 	}
 }
