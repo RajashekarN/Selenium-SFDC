@@ -1166,10 +1166,11 @@ public class Utility_Functions extends ReusableLibrary {
 	public static void xSwitchtoFrame(CraftDriver driver, WebElement webElement) {
 		List<WebElement> iframeList = driver.findElements(By.tagName("iframe"));
 		driver.switchTo().defaultContent();
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
 		for (WebElement element : iframeList) {
 			driver.switchTo().frame(element);
 			try {
-				boolean isTextValuePresent = Utility_Functions.xWaitForElementPresent(driver, webElement, 3);
+				boolean isTextValuePresent = Utility_Functions.xWaitForElementPresent(driver, webElement, 0);
 				if (isTextValuePresent) {
 					break;
 				} else {
@@ -1178,8 +1179,9 @@ public class Utility_Functions extends ReusableLibrary {
 			} catch (Exception ex) {
 				driver.switchTo().defaultContent();
 			}
-
 		}
+		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
+
 	}
 	
 	/*
