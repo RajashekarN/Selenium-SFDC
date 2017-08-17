@@ -384,7 +384,21 @@ public class Utility_Functions extends ReusableLibrary {
 		wait.until(ExpectedConditions.visibilityOf(el));
 		return true;
 	}
+	
+	// ***********************************************************
 
+	// wait for the the expected xpath count to be present
+	
+	/*public void xWaitForXpathCount(CraftDriver driver, String xpath, int timeWait) {
+		WebDriverWait wait = new WebDriverWait(driver.getWebDriver(), timeWait);
+	    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath)));
+	    List<WebElement> elementsList=driver.findElements(By.xpath(xpath));
+	    while(elementsList.size()>0){
+	    	    	}
+		      
+	}*/
+	
+	
 	// ******************************************************************
 	// wait for element present
 	public static boolean xWaitForElementPresent(CraftDriver driver, By locator, int timeWait) {
