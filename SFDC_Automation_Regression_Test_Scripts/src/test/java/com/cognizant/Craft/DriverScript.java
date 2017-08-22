@@ -142,15 +142,19 @@ public class DriverScript {
 	 * Function to execute the given test case
 	 */
 	public void driveTestExecution() {
+	try{
 		startUp();
 		initializeTestIterations();
 		initializeWebDriver();
 		initializeTestReport();
 		initializeDatatable();
 		executeCraft();
+	}finally{
 		quitWebDriver();
 		wrapUp();
 	}
+
+}
 
 	private void executeCraft() {
 		initializeTestScript();
