@@ -1847,7 +1847,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 					report.updateTestLog("Opportunity Name", "Record type is set as Global Workplace Solutions",
 							Status.PASS);
 				} else if (dataTable.getData("General_Data", "TC_ID").contains("VAS")) {
-					opportunity.setField("RecordTypeId", "012i0000000405oAAA");
+					opportunity.setField("RecordTypeId", "012e00000009O5dAAE");
 					report.updateTestLog("Opportunity Name", "Record type is set as Valuation & Advisory Services",
 							Status.PASS);
 				} else if (dataTable.getData("General_Data", "TC_ID").contains("AS")) {
@@ -1863,11 +1863,11 @@ public class OpportunitiesPage extends ReusableLibrary {
 				} else {
 					opportunity.setField("RecordTypeId", "012i0000000405n");
 				}
-
+				
 				SObject[] opportunities = new SObject[1];
 				opportunities[0] = opportunity;
 				try {
-					results = EstablishConnection.connection.create(opportunities);
+					results = connection.create(opportunities);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
