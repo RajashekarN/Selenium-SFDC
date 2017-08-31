@@ -779,19 +779,24 @@ public class DriverScript {
 		executionMode = ExecutionMode.valueOf(properties.getProperty("ExecutionMode"));
 		switch (executionMode) {
 		case LOCAL:
+			driver.close();
 			driver.quit();
 			break;
 		case REMOTE:
+			driver.close();
 			driver.quit();
 			break;
 		case GRID:
 		case MOBILE:
 		case PERFECTO:
 			downloadAddtionalReport();
+			driver.close();
 			driver.quit();
 			break;
 
 		default:
+			driver.close();
+			driver.quit();
 			throw new FrameworkException("Unhandled Execution Mode!");
 		}
 
