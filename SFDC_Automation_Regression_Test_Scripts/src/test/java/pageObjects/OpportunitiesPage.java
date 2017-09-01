@@ -2461,6 +2461,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			report.updateTestLog("Opportunities Installments", "Opportunity installment amounts recalculation failed:::"
 					+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo, Status.WARNING);
 		}
+		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, editButtonInstallment, 5);
 		Utility_Functions.xClick(driver, editButtonInstallment, true);
 		if (dataTable.getData("General_Data", "TC_ID").contains("OB")) {
