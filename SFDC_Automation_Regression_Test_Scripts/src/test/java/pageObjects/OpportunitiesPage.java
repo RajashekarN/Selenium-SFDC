@@ -4701,7 +4701,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, allActiveOpportunities, true);
 		Utility_Functions.timeWait(2);
 		List<WebElement> OpportunitiesList = driver.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'006')]"));
-		Utility_Functions.xclickOnFirstElementfromList(OpportunitiesList);
+		Utility_Functions.xclickRandomElement(OpportunitiesList);
 		report.updateTestLog("Verify Opportunity Landing Page", "Random Opportunity is clicked from the Opportunity List", Status.PASS);
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xWaitForElementPresent(driver, related, 3);
@@ -4711,7 +4711,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 				report.updateTestLog("Verify Opportunity Landing Page", "Details Page is displayed by default after clicking on Opportunity", Status.PASS);
 				break;
 			} else {
-				report.updateTestLog("Verify Opportunity Landing Page", "Details Page is not displayed by default after clicking on Opportunity", Status.FAIL);
+				report.updateTestLog("Verify Opportunity Landing Page", "Details Page is not displayed by default after clicking on Opportunity", Status.WARNING);
 			}
 		}
 	}

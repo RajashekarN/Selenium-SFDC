@@ -1309,7 +1309,8 @@ public class PropertiesPage extends ReusableLibrary {
 		newPropertySummaryFieldsList.add("# of Buildings");
 		newPropertySummaryFieldsList.add("# of Floors");
 		newPropertySummaryFieldsList.add("Building Status");
-		newPropertySummaryFieldsList.add("Month Built");
+		newPropertySummaryFieldsList.add("Local Property Name");
+		newPropertySummaryFieldsList.add("Month Built");	
 		newPropertySummaryFieldsList.add("Year Built");
 		newPropertySummaryFieldsList.add("Year Renovated");
 		newPropertySummaryFieldsList.add("Occupancy Percent");
@@ -1537,7 +1538,7 @@ public class PropertiesPage extends ReusableLibrary {
 				i5++;
 			}
 			System.out.println(count5);
-			if (count5 != 21) {
+			if (count5 != 22) {
 				report.updateTestLog("Verify Custom Property Page",
 						"All fields are not present in the Property Summary section", Status.FAIL);
 			} else {
