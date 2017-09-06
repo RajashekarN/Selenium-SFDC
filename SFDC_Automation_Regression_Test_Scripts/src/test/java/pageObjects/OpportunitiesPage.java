@@ -2323,7 +2323,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, saveButton_AB, 3);
 		Utility_Functions.xClick(driver, saveButton_AB, true);
 		Utility_Functions.timeWait(1);
-		Utility_Functions.xSwitchtoFrame(driver, related);
+		driver.switchTo().defaultContent();
+		//Utility_Functions.xSwitchtoFrame(driver, related);
 		Utility_Functions.timeWait(2);
 	}
 
@@ -2399,6 +2400,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		} else if (dataTable.getData("General_Data", "TC_ID").contains("AB")) {
 			agencyBrokerage();
 		}
+		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, related, 3);
 		Utility_Functions.xClick(driver, related, true);
 		sInstallmentAmountOne = installmentAmountOne.getText();
@@ -2491,7 +2493,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 			Utility_Functions.xWaitForElementPresent(driver, saveButton_AB, 3);
 			Utility_Functions.xClick(driver, saveButton_AB, true);
 			Utility_Functions.timeWait(1);
-			Utility_Functions.xSwitchtoFrame(driver, related);
+			driver.switchTo().defaultContent();
+			//Utility_Functions.xSwitchtoFrame(driver, related);
 			Utility_Functions.timeWait(2);
 		}
 		Utility_Functions.xWaitForElementPresent(driver, related, 3);
