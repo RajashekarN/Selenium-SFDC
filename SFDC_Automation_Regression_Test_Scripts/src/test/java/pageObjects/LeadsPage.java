@@ -379,6 +379,9 @@ public class LeadsPage extends ReusableLibrary {
 	@FindBy(xpath="//div[contains(@class,'actionMenu')]//a[@title='Sharing']")
 	WebElement sharing;
 	
+	@FindBy(xpath = "//p[text()='Lead Sharing']")
+	WebElement leadSharing;
+	
 	@FindBy(xpath="//div[@class='bFilterView']/span[@class='bFilter']/label")
 	WebElement viewElement;
 	
@@ -2757,37 +2760,81 @@ public class LeadsPage extends ReusableLibrary {
 	 * @author Ramya
 	 *
 	 */
+	@FindBy(xpath = "//input[@name='new'][contains(@value,'Add')]")
+	WebElement addButtonSharing;
+	
+	@FindBy(xpath = "//*[contains(@id,'sharing_search')]")
+	WebElement searchUsers;
+	
+	@FindBy(xpath = "//*[contains(@id,'searchValue_sharing_search')]")
+	WebElement searchUserName;
+
+	@FindBy(xpath = "//*[contains(@title,'Find')]")
+	WebElement findValue;
+
+	@FindBy(xpath = "//label[text()='Available']/parent::div/parent::td/select[@id='duel_select_0']")
+	WebElement selectUser;
+
+	@FindBy(xpath = "//img[@class='rightArrowIcon']")
+	WebElement rightArrow;
+
+	@FindBy(xpath = "//*[@id='p7']")
+	WebElement access;
+
+	@FindBy(xpath = "//*[@id='bottomButtonRow']/input[@name='save']")
+	WebElement saveButtonSharing;
+	
+	LoginPage loginPage = new LoginPage(scriptHelper);
+
 	public void leadsSharingFunctionality() {
 
 		Utility_Functions.xWaitForElementPresent(driver, menu_Leads, 3);
 		Utility_Functions.xClick(driver, menu_Leads, true);
 		Utility_Functions.timeWait(3);
-		List<WebElement> allActiveLeadsList = driver.findElements(
-				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-		Utility_Functions.xclickgetTextofFirstElementfromList(allActiveLeadsList);
+		List<WebElement> allActiveLeadsList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xclickRandomElement(allActiveLeadsList);
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xWaitForElementPresent(driver,showMoreActionsDetailsPage, 3);
 		Utility_Functions.xClick(driver,showMoreActionsDetailsPage, true);
 		Utility_Functions.xWaitForElementPresent(driver, sharing, 3);
 		Utility_Functions.xClick(driver, sharing, true);
 		Utility_Functions.timeWait(3);
-		Utility_Functions.xSwitchtoFrame(driver, addSharingPage);
-		Utility_Functions.timeWait(3);
-		System.out.println("Frame Identified");
-		/*if((!viewElement.getText().equals(""))){	
-			System.out.println("View Element is present in the Lead Sharing Page");
-			
-		}else{
-			
-			System.out.println("View Element is not present in the Lead Sharing Page");
-		}*/
-		if((!userAndGroupSharing.getText().equals(""))){	
+		Utility_Functions.xSwitchtoFrame(driver, leadSharing);
+		Utility_Functions.xWaitForElementPresent(driver, leadSharing, 4);
+		Utility_Functions.timeWait(2);
+		driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='Content']")));
+		
+		Utility_Functions.xWaitForElementPresent(driver, addButtonSharing, 5);
+		Utility_Functions.xClick(driver, addButtonSharing, true);
+		Utility_Functions.xWaitForElementPresent(driver, searchUsers, 3);
+		Utility_Functions.xSelectDropdownByName(searchUsers, "Users");
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xSendKeys(driver, searchUserName, "Vishnu");
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xClick(driver, findValue, true);
+		Utility_Functions.timeWait(1);
+		String environment = loginPage.initializeEnvironment();
+		if (environment.equals("UAT")) {
+			Utility_Functions.xSelectDropdownByName(selectUser, "User: Vishnuvardhan Bommisetty");
+		} else {
+			Utility_Functions.xSelectDropdownByName(selectUser, "User: vishnuvardhan bommisetty");
+		}
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xClick(driver, rightArrow, true);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xSelectDropdownByName(access, "Read Only");
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xClick(driver, saveButtonSharing, true);
+		report.updateTestLog("Verify Lead Sharing", "Lead Sharing functioanlity is working as expected", Status.PASS);			
+		System.out.println("Lead Sharing functioanlity is working as expected");
+		
+/*		if((!userAndGroupSharing.getText().equals(""))){	
 			System.out.println("User and Group sharing is present in the Lead Sharing Page");
 			
 		}else{
 			
 			System.out.println("User and Group sharing is not present in the Lead Sharing Page");
-		}
+		}*/
 	}
 	
 	/**
