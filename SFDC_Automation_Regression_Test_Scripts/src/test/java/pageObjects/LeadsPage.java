@@ -519,6 +519,30 @@ public class LeadsPage extends ReusableLibrary {
 	 
 	 @FindBy(xpath="//span[text()='Direct Line']/parent::label/parent::div//input[@type='tel']")
 	 WebElement leadEditDirectLine;
+	 
+	@FindBy(xpath = "//input[@name='new'][contains(@value,'Add')]")
+	WebElement addButtonSharing;
+		
+	@FindBy(xpath = "//*[contains(@id,'sharing_search')]")
+	WebElement searchUsers;
+		
+	@FindBy(xpath = "//*[contains(@id,'searchValue_sharing_search')]")
+	WebElement searchUserName;
+
+	@FindBy(xpath = "//*[contains(@title,'Find')]")
+	WebElement findValue;
+
+	@FindBy(xpath = "//label[text()='Available']/parent::div/parent::td/select[@id='duel_select_0']")
+	WebElement selectUser;
+
+	@FindBy(xpath = "//img[@class='rightArrowIcon']")
+	WebElement rightArrow;
+
+	@FindBy(xpath = "//*[@id='p7']")
+	WebElement access;
+
+	@FindBy(xpath = "//*[@id='bottomButtonRow']/input[@name='save']")
+	WebElement saveButtonSharing;
 	
 	private String leadConvertWaitSpinnerXPath = "//div[@class='slds-spinner_container']";
 	
@@ -2760,29 +2784,6 @@ public class LeadsPage extends ReusableLibrary {
 	 * @author Ramya
 	 *
 	 */
-	@FindBy(xpath = "//input[@name='new'][contains(@value,'Add')]")
-	WebElement addButtonSharing;
-	
-	@FindBy(xpath = "//*[contains(@id,'sharing_search')]")
-	WebElement searchUsers;
-	
-	@FindBy(xpath = "//*[contains(@id,'searchValue_sharing_search')]")
-	WebElement searchUserName;
-
-	@FindBy(xpath = "//*[contains(@title,'Find')]")
-	WebElement findValue;
-
-	@FindBy(xpath = "//label[text()='Available']/parent::div/parent::td/select[@id='duel_select_0']")
-	WebElement selectUser;
-
-	@FindBy(xpath = "//img[@class='rightArrowIcon']")
-	WebElement rightArrow;
-
-	@FindBy(xpath = "//*[@id='p7']")
-	WebElement access;
-
-	@FindBy(xpath = "//*[@id='bottomButtonRow']/input[@name='save']")
-	WebElement saveButtonSharing;
 	
 	LoginPage loginPage = new LoginPage(scriptHelper);
 
