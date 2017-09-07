@@ -79,6 +79,9 @@ public class LoginPage extends ReusableLibrary {
 	@FindBy(xpath = "//div[@id='error']")
 	WebElement errorMessage;
 	
+	@FindBy(xpath = "//a[@class='continue'][text()='Continue']")
+	WebElement continueButtonMaiteinance;	 
+	
 	/**
 	 * Validating the browser launch functionality
 	 * 
@@ -391,8 +394,15 @@ public class LoginPage extends ReusableLibrary {
 	public void verifyLoginSuccessful() {
 		try {
 			try {
-					Utility_Functions.xWaitForElementPresent(driver, menu_Home, 3);
-					report.updateTestLog("Verify Login", "Login is successful", Status.PASS);
+					try {
+						Utility_Functions.xWaitForElementPresent(driver, menu_Home, 3);
+						report.updateTestLog("Verify Login", "Login is successful", Status.PASS);
+					} catch (Exception e) {
+						if(continueButtonMaiteinance.isDisplayed()) {
+							Utility_Functions.xClick(driver, continueButtonMaiteinance, true);
+							report.updateTestLog("Verify Login", "Scheduled Maintenance Notification popped up", Status.PASS);
+						}
+					}
 				} catch (Exception e) {
 					Utility_Functions.xWaitForElementPresent(driver, userName, 3);
 					Utility_Functions.xClick(driver, userName, true);
