@@ -205,4 +205,20 @@ public class BC_Salesforce_ContactsPage extends ReusableLibrary {
 	public void bc_contactsPopulatingAllFields()throws InterruptedException{
 		sfContactsPage.contactsPopulatingAllFields();
 	}
+	/**
+	 * Validating the status and Reason for Inactivation fields in the Contacts edit page
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyContactEditPageFields()throws InterruptedException{
+		sfContactsPage.verifyContactEditPageFields();
+	}
+	/**
+	 * Validating the status and Reason for Inactivation fields in the Contacts edit page
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyContactEditPageNotEditableFields()throws InterruptedException{
+		sfContactsPage.verifyContactEditPageNotEditableFields();
+	}
 }

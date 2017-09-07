@@ -272,5 +272,34 @@ public class BC_Salesforce_LeadsPage extends ReusableLibrary {
 	public void bc_convertLeadWithAssociatedContact() {
 		sfLeadsPage.convertLeadWithAssociatedContact();
 	}
-	
+	/**
+	 * Validating the Lead convert with the Prefered Property
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_leadConvertWithPreferedProperty() {
+		sfLeadsPage.leadConvertWithPreferedProperty();
+	}
+	/**
+	 * Validating the Leads Pyeong value in Unit of Measure
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_verifyLeadsPyeongValueInUOMPickList() {
+		sfLeadsPage.verifyLeadsPyeongValueInUOMPickList();
+	}
+	/**
+	 * Validating the Leads Ping value in Unit of Measure
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_verifyLeadsPingValueInUOMPickList() {
+		sfLeadsPage.verifyLeadsPingValueInUOMPickList();
+	}
 }

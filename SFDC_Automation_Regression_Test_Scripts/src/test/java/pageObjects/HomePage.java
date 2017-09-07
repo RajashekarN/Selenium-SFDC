@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -62,6 +63,42 @@ public class HomePage extends ReusableLibrary {
 
 	@FindBy(xpath = "//*[text()='Salesforce Training Videos/Tools']/parent::div/parent::div/div[1]/span/img[@alt='logo']")
 	WebElement cbreImage;
+
+	@FindBy(xpath="//ul[@class='slds-list--vertical slds-has-inline-block-links']/li/a[text()='Submit Acct Update Request']")
+	WebElement submitAccountUpdateRequest;
+
+	@FindBy(xpath="//input[@placeholder='Search People']")
+	WebElement requestedFor;
+
+	@FindBy(xpath="//input[@placeholder='Search Accounts']")
+	WebElement searchAccounts;
+
+	@FindBy(xpath="//a[@title='AMER']")
+	WebElement region;
+
+	@FindBy(xpath="//span[text()='Description']/parent::label/parent::div/textarea[@class='textarea']")
+	WebElement description;
+
+	@FindBy(xpath="//button[@title='Save']")
+	WebElement saveCase;
+
+	@FindBy(xpath="//div[@class='slds-p-around--medium']/a[text()='SFDC Training']")
+	WebElement SFDCTrainingLink;
+
+	@FindBy(xpath="//h2[@id='header']/span[@title='Recent Records']")
+	WebElement recentRecords;
+
+	@FindBy(xpath = "//*[text()='More']")
+	WebElement menu_More;
+
+	@FindBy(xpath="//a[@role='menuitem']/span[contains(@class,'slds-truncate')][text()='Marketing Lists']")
+	WebElement more_marketingListings;
+
+	@FindBy(xpath="//div[@class='slds-truncate'][text()='New']")
+	WebElement newMarketingListings;
+
+	@FindBy(xpath="//label[contains(@class,'form-element__label')]/span[text()='Marketing List Name']")
+	WebElement marketingListName;
 
 	/*	@FindBy(xpath = "//button[@class='bare slds-button uiButton forceHeaderButton oneUserProfileCardTrigger']")
 	WebElement logOutButton;
@@ -358,8 +395,8 @@ public class HomePage extends ReusableLibrary {
 		} else if (countLabelList < 10) {
 			report.updateTestLog("Verify Home Page Tabs", "All the Tabs are not present in Home Page", Status.FAIL);
 		}
-		
-	/*	List<WebElement> homePageTabsList = driver
+
+		/*	List<WebElement> homePageTabsList = driver
 				.findElements(By.xpath("//div[contains(@class,'slds-context-bar')]//span[@class='slds-truncate']"));
 		String[] homePageTabs = new String[homePageTabsList.size()];
 		System.out.println(homePageTabs);
@@ -389,5 +426,99 @@ public class HomePage extends ReusableLibrary {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
 		}*/
-	}	
+	}
+	/**
+	 * Validating the tabs on the Home Page for the Account update
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void validateHomePageAccountUpdate() {
+		Utility_Functions.timeWait(4);
+		Utility_Functions.xWaitForElementPresent(driver,submitAccountUpdateRequest, 3);
+		Utility_Functions.xClick(driver,submitAccountUpdateRequest, true);
+		Utility_Functions.timeWait(4);
+		Utility_Functions.xWaitForElementPresent(driver,requestedFor, 3);
+		Utility_Functions.xSendKeys(driver,requestedFor, "test");
+		requestedFor.sendKeys(Keys.ARROW_DOWN);
+		Utility_Functions.timeWait(2);
+		requestedFor.sendKeys(Keys.ENTER);
+		List<WebElement> accountNamesList = driver.findElements(
+				By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'005')]"));
+
+		Utility_Functions.xclickOnFirstElementfromList(accountNamesList);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver,searchAccounts, 3);
+		Utility_Functions.xSendKeys(driver,searchAccounts, "test");
+		searchAccounts.sendKeys(Keys.ARROW_DOWN);
+		Utility_Functions.timeWait(2);
+		searchAccounts.sendKeys(Keys.ENTER);
+		Utility_Functions.xWaitForElementPresent(driver,region, 3);
+		Utility_Functions.xClick(driver,region, true);
+		Utility_Functions.xWaitForElementPresent(driver,description, 3);
+		Utility_Functions.xSendKeys(driver,description, "This is a case");
+		Utility_Functions.xWaitForElementPresent(driver,saveCase, 3);
+		Utility_Functions.xClick(driver, saveCase, true);
+		report.updateTestLog("Verify Home Page Account Update", "Home Page AccountUpdate is done successfully", Status.PASS);
+	}
+	/**
+	 * Validating the tabs on the Home Page for the SFDC Training link
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void validateHomePageSFDCTrainingLink() {
+		Utility_Functions.timeWait(4);
+		if(SFDCTrainingLink.isDisplayed()) {
+
+			report.updateTestLog("Verify Home Page SFDC Training Link", "The SFDC Training Link is present", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Home Page SFDC Training Link", "The SFDC Training Link is not present", Status.FAIL);
+		}
+
+	}
+	/**
+	 * Validating the tabs on the Home Page for the Recent records
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void validateHomePageRecentRecords() {
+		Utility_Functions.timeWait(4);
+		if(recentRecords.isDisplayed()) {
+			report.updateTestLog("Verify Home Page Recent Records", "The Recent Records is present", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Home Page Recent Records", "The Recent Records is not present", Status.FAIL);
+		}
+
+	}
+	/**
+	 * Validating the Marketing Lists tab on the Home Page
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void validateHomePageMarketingLists() {
+		Utility_Functions.xWaitForElementPresent(driver,menu_More, 3);
+		Utility_Functions.xClick(driver, menu_More, true);
+		report.updateTestLog("Verify Home Page Marketing Lists","Verifying Menu_more is displayed on the home page",Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver,more_marketingListings, 3);
+		Utility_Functions.xClick(driver,more_marketingListings, true);
+		report.updateTestLog("Verify Offer Auto Populated By Project Enquiries","Verifying Project Enquiries is displayed",Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver,newMarketingListings, 3);
+		Utility_Functions.xClick(driver,newMarketingListings, true);
+		report.updateTestLog("Verify Offer Auto Populated By Project Enquiries","Verifying the new Project Enquiries is displayed",Status.PASS);
+		Utility_Functions.timeWait(5);
+
+
+	}
 }

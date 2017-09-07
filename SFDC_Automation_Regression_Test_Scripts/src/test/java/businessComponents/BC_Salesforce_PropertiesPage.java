@@ -110,5 +110,124 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	public void bc_propertiesActivityLightningTimeline() throws InterruptedException {
 		sfPropertiesPage.propertiesActivityLightningTimeline();
 	}
+	/**
+	 * Validating the properties Private tag functionality 
+	 * 
+	 * @author Ramya
+	 *
+	 */	
 
+	public void bc_propertiesPrivateTagFunctionality() throws InterruptedException {
+		sfPropertiesPage.propertiesPrivateTagFunctionality();
+	}
+	/**
+	 *  Validating the Bulk Tagging
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyBulkTaggingFunctionality() throws InterruptedException {
+		sfPropertiesPage.verifyBulkTaggingFunctionality();
+	}
+	/**
+	 *  Validating the New properties page Property Type pick list field
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_newPropertiesPropertyType() throws InterruptedException {
+		sfPropertiesPage.newPropertiesPropertyType();
+	}
+	/**
+	 *  Validating the New private Tags
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyPropertiesPrivateTags() throws InterruptedException {
+		sfPropertiesPage.verifyPropertiesPrivateTags();
+	}
+
+	/**
+	 * Validating the Property Type field value
+	 * 	
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyPropertyTypeFieldValue() throws InterruptedException {
+		sfPropertiesPage.verifyPropertyTypeFieldValue();
+	}
+	/**
+	 * Validating the Property Type field value
+	 * 	
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyPropertiesPreferencesPyeongValue() throws InterruptedException {
+		sfPropertiesPage.verifyPropertiesPreferencesPyeongValue();
+	}
+	/**
+	 * Validating the Project Enquiries For the Pyeong value
+	 * 	
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyProjectEnquiriesPyeongValue() throws InterruptedException {
+		sfPropertiesPage.verifyProjectEnquiriesPyeongValue();
+	}
+	/**
+	 * Validating the Properties For the Pyeong value
+	 * 	
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyPropertiesPyeongValue() throws InterruptedException {
+		sfPropertiesPage.verifyPropertiesPyeongValue();
+	}
+	/**
+	 * Validating the Properties For the Ping value
+	 * 	
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyPropertiesPingValue() throws InterruptedException {
+		sfPropertiesPage.verifyPropertiesPingValue();
+	}
+	/**
+	 * Validating the Properties For the Ping value
+	 * 	
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyPropertiesPreferencesPingValue() throws InterruptedException {
+		sfPropertiesPage.verifyPropertiesPreferencesPingValue();
+	}
+	/**
+	 * Validating the Project Enquiries For the Ping value
+	 * 	
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyProjectEnquiriesPingValue() throws InterruptedException {
+		sfPropertiesPage.verifyProjectEnquiriesPingValue();
+	}
+	/**
+	 * Validating the Preference Type field value
+	 * 	
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyPreferenceTypevalues() throws InterruptedException {
+		sfPropertiesPage.verifyPreferenceTypevalues();
+	}
+	/**
+	 * Validating the Offer Enquiry for the Autopopulated fields from the Project Enquiries
+	 * 	
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyOfferAutoPopulatedByProjectEnquiries() throws InterruptedException {
+		sfPropertiesPage.verifyOfferAutoPopulatedByProjectEnquiries();
+	}
+	
 }

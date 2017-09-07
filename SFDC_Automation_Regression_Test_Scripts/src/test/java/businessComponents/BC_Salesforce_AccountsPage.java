@@ -352,4 +352,51 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 	public void bc_verifyEditingExistingAccount() throws InterruptedException {
 		sfAccountsPage.verifyEditingExistingAccount();
 	}
+	
+	/**
+	 *  Validating the APAC Quick create Page Industry fields
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyAPACIndustry() throws InterruptedException {
+		sfAccountsPage.verifyAPACIndustry();
+	}
+	/**
+	 *  Validating the Accounts Client Knowledge center field
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyAccountsClientKnowledgeCenterField() throws InterruptedException {
+		sfAccountsPage.verifyAccountsClientKnowledgeCenterField();
+	}
+	/**
+	 *  Validating the submit Account Update Request
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifySubmitAccUpdateRequest() throws InterruptedException {
+		sfAccountsPage.verifySubmitAccUpdateRequest();
+	}
+	/**
+	 *  Validating the Private Tag functionality
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyPrivateTagFunctionality() throws InterruptedException {
+		sfAccountsPage.verifyPrivateTagFunctionality();
+	}
+	/**
+	 *  Validating the Bulk Tagging functionality
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyBulkTagging() throws InterruptedException {
+		sfAccountsPage.verifyBulkTagging();
+	}
+	
 }

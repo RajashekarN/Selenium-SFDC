@@ -1,8 +1,10 @@
 package pageObjects;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -405,6 +407,34 @@ public class ContactsPage extends ReusableLibrary {
 
 	@FindBy(xpath="//select[contains(@id,'contForm:statusPicklist')]/option[@value='Inactive']")
 	WebElement statusValueNewContactPage;
+
+	@FindBy(xpath="//input[@type='email']")
+	WebElement emailContactEditPage;
+
+	@FindBy(xpath="//a[@title='Show more actions for this record']")
+	WebElement moreOptions;
+
+	@FindBy(xpath="//div[@class='forceActionLink'][text()='Edit']")
+	WebElement editMoreOptions;
+
+	@FindBy(xpath="//a[@aria-label='Status']")
+	WebElement statusEditPage;
+
+	@FindBy(xpath="//a[@title='Inactive']")
+	WebElement statusValue;
+
+	@FindBy(xpath="//a[@aria-label='Reason for Inactivating']")
+	WebElement reasonForInactivatingEditPage;
+
+	@FindBy(xpath="//a[@title='Deceased']")
+	WebElement reasonForInactivatingValueEditPage;
+
+	@FindBy(xpath="//div[@class='form-element']/input")
+	WebElement inactivationDateEditPage;
+
+	@FindBy(xpath="//div[contains(@class,'forceModalActionContainer--footerAction')]/button[@title='Save']")
+	WebElement saveContactEditpage;
+
 
 	SearchTextSOQL searchAccountName = new SearchTextSOQL(scriptHelper);
 
@@ -3883,5 +3913,155 @@ public class ContactsPage extends ReusableLibrary {
 					"The existing record cannot be updated and saved successfully", Status.FAIL);
 		}
 	}
+	/**
+	 * Validating the Contacts Page Fields
+	 * @author Ramya
+	 *
+	 */
+	public void verifyContactEditPageFields() {
 
+		SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
+		String queryId = "SELECT Id, Status__c FROM Contact where Status__c != 'Inactive' limit 1 offset 9";
+
+		String contactId = searchTextSOQL.fetchRecordFieldValue("Id", queryId);
+
+		String url = driver.getCurrentUrl().split("#")[0];
+		String newUrl = url + "#/sObject/" + contactId;
+		newUrl = newUrl + "/view";
+		driver.get(newUrl);
+		driver.navigate().refresh();
+		Utility_Functions.timeWait(3);
+
+		/*Utility_Functions.xWaitForElementPresent(driver, menu_Contacts, 3);
+		Utility_Functions.xClick(driver, menu_Contacts, true);
+		report.updateTestLog("Verify Contact Record Updation ","Contacts is Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
+		Utility_Functions.xClick(driver, recentlyViewed, true);
+		report.updateTestLog("Verify Contact Record Updation","Recently viewed Contacts are Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, allContacts, 3);
+		Utility_Functions.xClick(driver, allContacts, true);
+		Utility_Functions.timeWait(3);
+		report.updateTestLog("Verify Contact Record Updation","All Contacts are Displayed ",  Status.PASS);
+		List<WebElement> contactNamesList = driver.findElements(
+				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'0030')]"));
+
+		Utility_Functions.xclickRandomElement(contactNamesList);
+		Utility_Functions.timeWait(3);*/
+		try{
+			Utility_Functions.xWaitForElementPresent(driver, edit, 3);
+			Utility_Functions.xClick(driver, edit, true);
+		}catch(Exception e){
+
+			Utility_Functions.xWaitForElementPresent(driver, showMoreActionsDetailsPage, 3);
+			Utility_Functions.xClick(driver, showMoreActionsDetailsPage, true);
+			Utility_Functions.xWaitForElementPresent(driver, showMoreActionsEdit, 3);
+			Utility_Functions.xClick(driver, showMoreActionsEdit, true); 
+
+		}
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(4);
+		try{
+			Utility_Functions.xWaitForElementPresent(driver,emailContactEditPage, 3);
+			Utility_Functions.xClick(driver,emailContactEditPage, true);
+			Utility_Functions.xWaitForElementPresent(driver,statusEditPage, 3);
+			Utility_Functions.xClick(driver,statusEditPage, true);
+			Utility_Functions.xWaitForElementPresent(driver,statusValue, 3);
+			Utility_Functions.xClick(driver,statusValue, true);
+			Utility_Functions.xWaitForElementPresent(driver,reasonForInactivatingEditPage, 3);
+			Utility_Functions.xClick(driver,reasonForInactivatingEditPage, true);
+			Utility_Functions.xWaitForElementPresent(driver,reasonForInactivatingValueEditPage, 3);
+			Utility_Functions.xClick(driver,reasonForInactivatingValueEditPage, true);
+			System.out.println(Calendar.getInstance());
+			DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+			Date date = new Date();
+			Utility_Functions.xWaitForElementPresent(driver,inactivationDateEditPage, 3);
+			Utility_Functions.xSendKeys(driver,inactivationDateEditPage, dateFormat.format(date).toString());
+			Utility_Functions.xWaitForElementPresent(driver,saveContactEditpage, 3);
+			Utility_Functions.xClick(driver,saveContactEditpage, true);
+			Utility_Functions.timeWait(2);
+			driver.navigate().refresh();
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xWaitForElementPresent(driver,details, 3);
+			if(details.isDisplayed()) {
+
+				report.updateTestLog("Verify Contact Edit Page", "The existing record is edited and saved successfully", Status.PASS);
+			} else {
+				report.updateTestLog("Verify Contact Edit Page", "The existing record cannot be edited and saved ", Status.FAIL);
+			}
+		}catch (Exception e) {
+			System.out.println("The Status, Reason for Inactivating and Inactivation date fields are not present in the selected contact");
+
+		}
+
+	}
+	/**
+	 * Validating the status and Reason for Inactivation fields in the Contacts edit page
+	 * @author Ramya
+	 *
+	 */
+	public void verifyContactEditPageNotEditableFields() {
+
+		SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
+		String queryId = "SELECT Id, Status__c FROM Contact where Status__c = 'Inactive' limit 1";
+
+		String contactId = searchTextSOQL.fetchRecordFieldValue("Id", queryId);
+
+		String url = driver.getCurrentUrl().split("#")[0];
+		String newUrl = url + "#/sObject/" + contactId;
+		newUrl = newUrl + "/view";
+		driver.get(newUrl);
+		driver.navigate().refresh();
+		Utility_Functions.timeWait(3);
+
+		try{
+			Utility_Functions.xWaitForElementPresent(driver, edit, 3);
+			Utility_Functions.xClick(driver, edit, true);
+		}catch(Exception e){
+
+			Utility_Functions.xWaitForElementPresent(driver, showMoreActionsDetailsPage, 3);
+			Utility_Functions.xClick(driver, showMoreActionsDetailsPage, true);
+			Utility_Functions.xWaitForElementPresent(driver, showMoreActionsEdit, 3);
+			Utility_Functions.xClick(driver, showMoreActionsEdit, true); 
+
+		}
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(4);
+		Utility_Functions.xWaitForElementPresent(driver,emailContactEditPage, 3);
+		Utility_Functions.xClick(driver,emailContactEditPage, true);
+		try{
+			Utility_Functions.xWaitForElementPresent(driver,statusEditPage, 3);
+			Utility_Functions.xClick(driver,statusEditPage, true);
+			Utility_Functions.xWaitForElementPresent(driver,statusValue, 3);
+			Utility_Functions.xClick(driver,statusValue, true);
+			Utility_Functions.xWaitForElementPresent(driver,reasonForInactivatingEditPage, 3);
+			Utility_Functions.xClick(driver,reasonForInactivatingEditPage, true);
+			Utility_Functions.xWaitForElementPresent(driver,reasonForInactivatingValueEditPage, 3);
+			Utility_Functions.xClick(driver,reasonForInactivatingValueEditPage, true);
+			System.out.println(Calendar.getInstance());
+			DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+			Date date = new Date();
+			Utility_Functions.xWaitForElementPresent(driver,inactivationDateEditPage, 3);
+			Utility_Functions.xSendKeys(driver,inactivationDateEditPage, dateFormat.format(date).toString());
+			Utility_Functions.xWaitForElementPresent(driver,saveContactEditpage, 3);
+			Utility_Functions.xClick(driver,saveContactEditpage, true);
+			Utility_Functions.timeWait(2);
+			driver.navigate().refresh();
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xWaitForElementPresent(driver,details, 3);
+			if(details.isDisplayed()) {
+				report.updateTestLog("Verify Contact Edit Page", "The existing record is edited and saved successfully", Status.PASS);
+			} else {
+				report.updateTestLog("Verify Contact Edit Page", "The existing record cannot be edited and saved ", Status.FAIL);
+			}
+		} catch (Exception e) {
+			System.out.println("The Status, Reason for Inactivating and Inactivation date fields are not present in the selected contact");
+
+		} 
+	}
 }

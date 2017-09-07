@@ -614,6 +614,301 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 		sfOpportunitiesPage.salesStage16_In_Escrow_19_Closed();
 	}
 	
+	/**
+	 * Validating the Technology Tools Field in New Opportunity Page 
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+
+	public void bc_validateOpportunityTechnologyToolsField() {
+		sfOpportunitiesPage.validateOpportunityTechnologyToolsField();
+	}
+	/**
+	 * Validating the Targeting Initiative value in New Opportunity Page 
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+
+	public void bc_validateTargetingInitiativePickListValue() {
+		sfOpportunitiesPage.validateTargetingInitiativePickListValue();
+	}	
+	/**
+	 * Validating the Opportunities Quick create page
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_opportunityQuickCreatePage() {
+		sfOpportunitiesPage.opportunityQuickCreatePage();
+	}
+	/**
+	 * Validating the Opportunities Quick create page mandatory fields
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_opportunityQuickCreatePageMandatoryFields() {
+		sfOpportunitiesPage.opportunityQuickCreatePageMandatoryFields();
+	}
+	/**
+	 * Validating the Opportunities Quick create page Assignment Type field
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_opportunityQuickCreateAssignmentType() {
+		sfOpportunitiesPage.opportunityQuickCreateAssignmentType();
+	}
+	/**
+	 * Validating the Opportunities Team related list columns
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_opportunityTeamRelatedList() {
+		sfOpportunitiesPage.opportunityTeamRelatedList();
+	}
+	/**
+	 * Validating the Opportunities Lead Source field
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_opportunityQuickCreateLeadSource() {
+		sfOpportunitiesPage.opportunityQuickCreateLeadSource();
+	}
+	/**
+	 * Validating the Opportunities Quick create Comments field
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_opportunityQuickCreateCommentsField() {
+		sfOpportunitiesPage.opportunityQuickCreateCommentsField();
+	}
+	/**
+	 * Validating the Opportunities Quick create Comments field
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_validateOpportunityPitchAdvisor() {
+		sfOpportunitiesPage.validateOpportunityPitchAdvisor();
+	}
+	/**
+	 * Validating the Opportunities Opportunity Name field
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_validateOpportunityNameQuickCreate() {
+		sfOpportunitiesPage.validateOpportunityNameQuickCreate();
+	}
+	/**
+	 * Validating the Opportunities Average Annual Leasing Commission
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_validateOpportunityAverageAnnualLeasingCommission() {
+		sfOpportunitiesPage.validateOpportunityAverageAnnualLeasingCommission();
+	}
+	/**
+	 * Validating the Opportunities Quick create page Unit of measure pick list values
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_verifyPyeongValueInUOMPickList() {
+		sfOpportunitiesPage.verifyPyeongValueInUOMPickList();
+	}
+	
+	/**
+	 * Validating the Opportunities Quick create page mandatory fields for the Auckland Broker
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_validateOpportunityMandatoryFieldsForAucklandBroker() {
+		sfOpportunitiesPage.validateOpportunityMandatoryFieldsForAucklandBroker();
+	}
+	/**
+	 * Validating the Opportunities Quick create page Opportunity name default value
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_validateDefaultOpportunityName() {
+		sfOpportunitiesPage.validateDefaultOpportunityName();
+	}
+	/**
+	 * Validating the Opportunities for the Installment Status
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_validateOpportunityInstallmentStatus() {
+		sfOpportunitiesPage.validateOpportunityInstallmentStatus();
+	}
+	/**
+	 * Validating the Opportunities for My Active Listings
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_validateOpportunitiesMyActiveListings() {
+		sfOpportunitiesPage.validateOpportunitiesMyActiveListings();
+	}
+	/**
+	 * Validating the Opportunities for My Active Listings kanban
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_validateOpportunitiesActiveListingsKanban() {
+		sfOpportunitiesPage.validateOpportunitiesActiveListingsKanban();
+	}
+	/**
+	 * Validating the Opportunities for My Active Listings filters
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_validateOpportunitiesActiveListingsFilters() {
+		sfOpportunitiesPage.validateOpportunitiesActiveListingsFilters();
+	}
+	/**
+	 * Validating the Opportunities for My Active Listings filters
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_validateOpportunitiesPropertyMarketValue() {
+		sfOpportunitiesPage.validateOpportunitiesPropertyMarketValue();
+	}
+	
+	/**
+	 * Validating the Opportunities for Ping value in Unit of Measure Pick list
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_verifyPingValueInUOMPickList() {
+		sfOpportunitiesPage.verifyPingValueInUOMPickList();
+	}
+	/**
+	 * Validating the Opportunities for Ping value in Unit of Measure Pick list for the Opportunity Record Type
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_verifyPingValueInOpportunityRecordTypes() {
+		sfOpportunitiesPage.verifyPingValueInOpportunityRecordTypes();
+	}
+	/**
+	 * Validating the Opportunities for Ping value in Unit of Measure Pick list for the Opportunity Record Type Property Sales
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_verifyPingValueInOpportunityPropertySales() {
+		sfOpportunitiesPage.verifyPingValueInOpportunityPropertySales();
+	}
+	/**
+	 * Validating the Opportunities for Market Group and sub Market Group
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_verifyCBREMarketGroup() {
+		sfOpportunitiesPage.verifyCBREMarketGroup();
+	}
+	/**
+	 * Validating the Opportunities for the Create Offers
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_verifyNewOfferCreationPage() {
+		sfOpportunitiesPage.verifyNewOfferCreationPage();
+	}
+	
+	/**
+	 * Validating the Opportunities for the Create Offers Page fields
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyOfferCreationPageFields(){
+		sfOpportunitiesPage.verifyOfferCreationPageFields();
+		
+	}
+	/**
+	 * Validating the Opportunities for the Create Offers Page for the mandatory fields
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_namingConventionOfOfferObject(){
+		sfOpportunitiesPage.namingConventionOfOfferObject();
+		
+	}
+	/**
+	 * Validating the related list of offer object
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_relatedListOfOfferObject(){
+		sfOpportunitiesPage.relatedListOfOfferObject();
+		
+	}
+	/**
+	 * Validating the buttons on offer object
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_buttonsOnOfferObject(){
+		sfOpportunitiesPage.buttonsOnOfferObject();
+		
+	}
+	/**
+	 * Validating the Headers of offer object
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_headersOfOfferObject(){
+		sfOpportunitiesPage.headersOfOfferObject();
+		
+	}
 	
 
 }

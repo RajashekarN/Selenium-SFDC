@@ -393,7 +393,7 @@ public class AccountsPage extends ReusableLibrary {
 
 	@FindBy(xpath="//div[contains(@class,'actionMenu')]//a[@title='View Hierarchy']")
 	WebElement selectViewHierarchy;
-	
+
 	@FindBy(xpath="//input[contains(@id,'LocalAcctName')]")
 	WebElement localAccountName;
 
@@ -507,98 +507,98 @@ public class AccountsPage extends ReusableLibrary {
 
 	@FindBy(xpath="//select[contains(@id,'LegalStatus')]/option[text()='Corporation']")
 	WebElement legalStatusValue;
-	
-   @FindBy(xpath="//article[contains(@class,'forceRelatedListCardDesktop')]//span[contains(text(),'SPOCs')]/ancestor::article//div[text()='New']")
-   WebElement spocsNew;
-   
-   @FindBy(xpath="//span[text()='Migrated Account']/parent::label/span[contains(@class,'checkbox')]")
-   WebElement migratedAccount;
 
-   @FindBy(xpath="//span[@class='twitter-typeahead']//input[@id='employeeSearchBox']")
-   WebElement spocEmployee;
-   
-   @FindBy(xpath="//div/span[@class='twitter-typeahead']")
-   WebElement spocEmployeeExpand;
-   
-   @FindBy(xpath="//select[contains(@id,'role')]")
-   WebElement spocRole;
-   
-   @FindBy(xpath="//select[contains(@id,'role')]/option[text()='Leader']")
-   WebElement spocRoleValue;
-   
-   @FindBy(xpath="//select[contains(@id,'geo')]")
-   WebElement spocGeo;
-   
-   @FindBy(xpath="//select[contains(@id,'geo')]/option[text()='Local']")
-   WebElement spocGeoValue;
-   
-   @FindBy(xpath="//select[contains(@id,'region')]")
-   WebElement spocRegion;
-   
-   @FindBy(xpath="//select[contains(@id,'region')]/option[text()='Americas']")
-   WebElement spocRegionValue;
-   
-   @FindBy(xpath="//select[contains(@id,'country')]")
-   WebElement spocCountry;
-   
-   @FindBy(xpath="//select[contains(@id,'country')]/option[text()='United States']")
-   WebElement spocCountryValue;
-   
-   @FindBy(xpath="//input[contains(@id,'city')]")
-   WebElement spocCity;
-   
-   @FindBy(xpath="//select[contains(@id,'State_province')]")
-   WebElement spocState;
-   
-   @FindBy(xpath="//select[contains(@id,'State_province')]/option[text()='Texas']")
-   WebElement spocStateValue;
-   
-   @FindBy(xpath="//select[contains(@id,'Spoc_Type')]")
-   WebElement spocType;
-   
-   @FindBy(xpath="//select[contains(@id,'Spoc_Type')]/option[text()='Company / Client Request']")
-   WebElement spocTypeValue;
-   
-   @FindBy(xpath="//select[contains(@id,'Business_line')]")
-   WebElement spocBusinessLine;
-   
-   @FindBy(xpath="//select[contains(@id,'Business_line')]/option[text()='Occupier Brokerage']")
-   WebElement spocBusinessLineValue;
-   
-   @FindBy(xpath="//select[contains(@id,'services_unselected')]/option[text()='Consulting']")
-   WebElement spocServices;
-   
-   @FindBy(xpath="//input[contains(@id,'Original_date')]")
-   WebElement spocOriginalDate;
-   
-   @FindBy(xpath="//input[contains(@id,'Requalification_date')]")
-   WebElement spocRequalificationDate;
-   
-   @FindBy(xpath="//div/table/tbody/tr/td/a")
-   WebElement spocName;
-   
-   @FindBy(xpath="//input[@id='acctSearchBox']")
-   WebElement spocAccountName;
-   
-   @FindBy(xpath="//input[contains(@id,'Source_Broker')]")
-   WebElement sourceBroker;
-   
-   @FindBy(xpath="//input[contains(@id,'Source_Stystem')]")
-   WebElement sourceSystem;
-   
-   @FindBy(xpath="//textarea[contains(@id,'Team_Member')]")
-   WebElement teamMember;
-   
-   @FindBy(xpath="//label[@class='slds-checkbox']/span[@class='slds-checkbox--faux']")
-   WebElement excludeSPOCCascade;
-   
-   @FindBy(xpath="//select[@class='slds-select']/option[@value='Private - Follow-Up Task']")
-   WebElement activityTypeFollowUpTaskValue;
-   
-   @FindBy(xpath="//input[contains(@id,'dueDate')]")
-   WebElement newActivityDueDate;
-   
-   @FindBy(xpath = "//p[contains(@class,'slds-tile__title') and contains(@class,'slds-truncate')]/a/parent::p/parent::div/parent::div//div[text()='Activity Type']")
+	@FindBy(xpath="//article[contains(@class,'forceRelatedListCardDesktop')]//span[contains(text(),'SPOCs')]/ancestor::article//div[text()='New']")
+	WebElement spocsNew;
+
+	@FindBy(xpath="//span[text()='Migrated Account']/parent::label/span[contains(@class,'checkbox')]")
+	WebElement migratedAccount;
+
+	@FindBy(xpath="//span[@class='twitter-typeahead']//input[@id='employeeSearchBox']")
+	WebElement spocEmployee;
+
+	@FindBy(xpath="//div/span[@class='twitter-typeahead']")
+	WebElement spocEmployeeExpand;
+
+	@FindBy(xpath="//select[contains(@id,'role')]")
+	WebElement spocRole;
+
+	@FindBy(xpath="//select[contains(@id,'role')]/option[text()='Leader']")
+	WebElement spocRoleValue;
+
+	@FindBy(xpath="//select[contains(@id,'geo')]")
+	WebElement spocGeo;
+
+	@FindBy(xpath="//select[contains(@id,'geo')]/option[text()='Local']")
+	WebElement spocGeoValue;
+
+	@FindBy(xpath="//select[contains(@id,'region')]")
+	WebElement spocRegion;
+
+	@FindBy(xpath="//select[contains(@id,'region')]/option[text()='Americas']")
+	WebElement spocRegionValue;
+
+	@FindBy(xpath="//select[contains(@id,'country')]")
+	WebElement spocCountry;
+
+	@FindBy(xpath="//select[contains(@id,'country')]/option[text()='United States']")
+	WebElement spocCountryValue;
+
+	@FindBy(xpath="//input[contains(@id,'city')]")
+	WebElement spocCity;
+
+	@FindBy(xpath="//select[contains(@id,'State_province')]")
+	WebElement spocState;
+
+	@FindBy(xpath="//select[contains(@id,'State_province')]/option[text()='Texas']")
+	WebElement spocStateValue;
+
+	@FindBy(xpath="//select[contains(@id,'Spoc_Type')]")
+	WebElement spocType;
+
+	@FindBy(xpath="//select[contains(@id,'Spoc_Type')]/option[text()='Company / Client Request']")
+	WebElement spocTypeValue;
+
+	@FindBy(xpath="//select[contains(@id,'Business_line')]")
+	WebElement spocBusinessLine;
+
+	@FindBy(xpath="//select[contains(@id,'Business_line')]/option[text()='Occupier Brokerage']")
+	WebElement spocBusinessLineValue;
+
+	@FindBy(xpath="//select[contains(@id,'services_unselected')]/option[text()='Consulting']")
+	WebElement spocServices;
+
+	@FindBy(xpath="//input[contains(@id,'Original_date')]")
+	WebElement spocOriginalDate;
+
+	@FindBy(xpath="//input[contains(@id,'Requalification_date')]")
+	WebElement spocRequalificationDate;
+
+	@FindBy(xpath="//div/table/tbody/tr/td/a")
+	WebElement spocName;
+
+	@FindBy(xpath="//input[@id='acctSearchBox']")
+	WebElement spocAccountName;
+
+	@FindBy(xpath="//input[contains(@id,'Source_Broker')]")
+	WebElement sourceBroker;
+
+	@FindBy(xpath="//input[contains(@id,'Source_Stystem')]")
+	WebElement sourceSystem;
+
+	@FindBy(xpath="//textarea[contains(@id,'Team_Member')]")
+	WebElement teamMember;
+
+	@FindBy(xpath="//label[@class='slds-checkbox']/span[@class='slds-checkbox--faux']")
+	WebElement excludeSPOCCascade;
+
+	@FindBy(xpath="//select[@class='slds-select']/option[@value='Private - Follow-Up Task']")
+	WebElement activityTypeFollowUpTaskValue;
+
+	@FindBy(xpath="//input[contains(@id,'dueDate')]")
+	WebElement newActivityDueDate;
+
+	@FindBy(xpath = "//p[contains(@class,'slds-tile__title') and contains(@class,'slds-truncate')]/a/parent::p/parent::div/parent::div//div[text()='Activity Type']")
 	WebElement activityType;
 
 	@FindBy(xpath = "//p[contains(@class,'slds-tile__title') and contains(@class,'slds-truncate')]/a/parent::p/parent::div/parent::div//div[text()='Status']")
@@ -612,49 +612,124 @@ public class AccountsPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//span[@class='slds-checkbox--faux']")
 	WebElement statusCheckbox;
-	
+
 	@FindBy(xpath = "//*[text()='No Next Steps. Open And Upcoming Activities Show Up Here.']")
 	WebElement activityTimeline;
 
 	@FindBy(xpath = "//p[@class='slds-tile__title slds-truncate']/a")
 	WebElement activity;
-	
+
 	@FindBy(xpath="//button[@title='Past Activity']")
 	WebElement pastActivity;
-	
+
 	@FindBy(xpath="//button[@title='More Activities']")
 	WebElement moreActivities;
-	
+
 	@FindBy(xpath="//a[@class='tabHeader']/span[text()='Activity']")
 	WebElement activityTab;  
-	
-	 @FindBy(xpath="//ul[contains(@class,'forceActionsContainer')]//a[@class='forceActionLink']/div[text()='Edit']")
-	 WebElement edit;
-	 
-	 @FindBy(xpath="//a[@aria-label='APAC Industry Type']")
-	 WebElement apacIndustryEditPage;
-	 
-	 @FindBy(xpath="//div[@class='select-options']//a[@title='Accommodation']")
-	 WebElement apacIndustryValueEditPage;
-	 
-	 @FindBy(xpath="//a[@aria-label='APAC Sub Industry']")
-	 WebElement apacSubIndustryEditPage;
-	 
-	 @FindBy(xpath="//div[@class='select-options']//a[@title='Hospitality']")
-	 WebElement apacSubIndustryValueEditPage;
-	 
-	 @FindBy(xpath="//a[@aria-label='Legal Status']")
-	 WebElement legalStatusEditPage;
-	 
-	 @FindBy(xpath="//div[@class='select-options']//a[@title='Corporation']")
-	 WebElement legalStatusValueEditpage;
-	 
-	 @FindBy(xpath="//div[contains(@class,'forceModalActionContainer--footerAction')]/button[@title='Save']")
-	 WebElement saveEditPage;
-	 
-	 @FindBy(xpath="//a[@class='tabHeader']//span[text()='Details']")
-	 WebElement details;
-	 
+
+	@FindBy(xpath="//ul[contains(@class,'forceActionsContainer')]//a[@class='forceActionLink']/div[text()='Edit']")
+	WebElement edit;
+
+	@FindBy(xpath="//a[@aria-label='APAC Industry Type']")
+	WebElement apacIndustryEditPage;
+
+	@FindBy(xpath="//div[@class='select-options']//a[@title='Accommodation']")
+	WebElement apacIndustryValueEditPage;
+
+	@FindBy(xpath="//a[@aria-label='APAC Sub Industry']")
+	WebElement apacSubIndustryEditPage;
+
+	@FindBy(xpath="//div[@class='select-options']//a[@title='Hospitality']")
+	WebElement apacSubIndustryValueEditPage;
+
+	@FindBy(xpath="//a[@aria-label='Legal Status']")
+	WebElement legalStatusEditPage;
+
+	@FindBy(xpath="//div[@class='select-options']//a[@title='Corporation']")
+	WebElement legalStatusValueEditpage;
+
+	@FindBy(xpath="//div[contains(@class,'forceModalActionContainer--footerAction')]/button[@title='Save']")
+	WebElement saveEditPage;
+
+	@FindBy(xpath="//a[@class='tabHeader']//span[text()='Details']")
+	WebElement details;
+	@FindBy(xpath="//span[contains(@id,'acctForm')]/div[@class='slds-form-element']/label/abbr/parent::label")
+	WebElement industryValues;
+
+	@FindBy(xpath="//div[@class='test-id__field-label-container']/span[text()='Client Knowledge Centre']")
+	WebElement clientKnowledgeCenterField;
+
+	@FindBy(xpath="//a[text()='Submit Acct Update Request']")
+	WebElement submitAccUpdateRequest;
+
+	@FindBy(xpath="//input[@placeholder='Search People']")
+	WebElement requestedForCase;
+
+	@FindBy(xpath="//mark[@class='data-match'][text()='test58']")
+	WebElement requestedForCaseValue;
+
+	@FindBy(xpath="//a[@aria-label='Region']")
+	WebElement regionCase;
+
+	@FindBy(xpath="//a[@title='EMEA']")
+	WebElement regionValueCase;
+
+	@FindBy(xpath="//input[@placeholder='Search Accounts']")
+	WebElement searchAccountsCase;
+
+	@FindBy(xpath="//div[@title='George557']")
+	WebElement accountValueCase;
+
+	@FindBy(xpath="//textarea[@role='textbox']")
+	WebElement descriptionCase;
+
+	@FindBy(xpath="//button[@title='Save']")
+	WebElement saveCase;
+
+	@FindBy(xpath="//button[contains(@class,'oneUserProfileCardTrigger')]")
+	WebElement triggerForLogout;
+
+	@FindBy(xpath="//a[text()='Log Out']")
+	WebElement logoutButton;
+
+	@FindBy(xpath="//input[@id='username']")
+	WebElement username;
+
+	@FindBy(xpath="//input[@id='password']")
+	WebElement password;
+
+	@FindBy(xpath="//input[@id='Login']")
+	WebElement login;
+
+	@FindBy(xpath="//p[@class='detail']")
+	WebElement caseNotFound;
+
+	@FindBy(xpath="//div[@class='bBottom']//span[text()='Private Tags']")
+	WebElement menu_PrivateTags;
+
+	@FindBy(xpath="//span[contains(text(),'Properties')]/ancestor::article//div[text()='New']")
+	WebElement newPropertiesPrivateTag;
+
+	@FindBy(xpath="//input[@placeholder='Search Properties']")
+	WebElement searchPropertiesPrivateTag;
+
+	@FindBy(xpath="//div[@title='Test Automation Subject_K4AGZFTL1W']")
+	WebElement existingPropertyPrivateTag;
+
+	@FindBy(xpath="//div[contains(@class,'footer')]/button[@title='Save']")
+	WebElement savePropertyPrivateTag;
+
+	@FindBy(xpath="//one-app-launcher-header/button")
+	WebElement applauncher;
+
+	@FindBy(xpath="//a[@title='Bulk Tagging']/span/span[text()='Bulk Tagging']")
+	WebElement bulkTaggingAppLauncher;
+
+	@FindBy(xpath="//input[@placeholder='Search Account/Contact/Lead/Opportunities/Properties…']")
+	WebElement searchPropertiesAccountsContactsLeads;
+
+
 
 	HomePage hp = new HomePage(scriptHelper);
 	LoginPage loginPage = new LoginPage(scriptHelper);
@@ -2720,14 +2795,14 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xScrollWindowTop(driver);
 		Utility_Functions.timeWait(2);
 		try{
-		Utility_Functions.xWaitForElementPresent(driver, investorProfile, 3);
-		Utility_Functions.xClick(driver, investorProfile, true);
-		Utility_Functions.timeWait(1);
-		List<WebElement> reasonForLossValuesList = driver.findElements(By.xpath("//div[@class='select-options']//a[@title='Bank']/parent::li/parent::ul/li"));
-		for(WebElement element: reasonForLossValuesList) {
-			element.getText();
-			System.out.println(element.getText());
-		}
+			Utility_Functions.xWaitForElementPresent(driver, investorProfile, 3);
+			Utility_Functions.xClick(driver, investorProfile, true);
+			Utility_Functions.timeWait(1);
+			List<WebElement> reasonForLossValuesList = driver.findElements(By.xpath("//div[@class='select-options']//a[@title='Bank']/parent::li/parent::ul/li"));
+			for(WebElement element: reasonForLossValuesList) {
+				element.getText();
+				System.out.println(element.getText());
+			}
 		}catch(Exception e){
 			System.out.println("Investor profile field cannot be edited");
 			report.updateTestLog("Verify Quick Create Accounts Page Investor Profile  ",
@@ -2757,7 +2832,7 @@ public class AccountsPage extends ReusableLibrary {
 
 		Utility_Functions.xclickOnFirstElementfromList(accountNamesList);
 		report.updateTestLog("Verify Accounts Investor Services Check Box ","Verifying the selected Account is Displayed ",  Status.PASS);
-	/*	Utility_Functions.xWaitForElementPresent(driver, related_Accounts, 3);
+		/*	Utility_Functions.xWaitForElementPresent(driver, related_Accounts, 3);
 		Utility_Functions.xClick(driver, related_Accounts, true);
 		report.updateTestLog("Verify New Activity Page Layout ","Verifying the related page is Displayed ",  Status.PASS);*/
 		Utility_Functions.xScrollWindow(driver);
@@ -2770,8 +2845,8 @@ public class AccountsPage extends ReusableLibrary {
 				report.updateTestLog("Verify Accounts Investor Services Check Box  ","Verifying the Investor Services check box is present", Status.FAIL);
 			}
 		} catch (Exception e) {
-				System.out.println("Investor Services CheckBox is not present and not checked");
-				report.updateTestLog("Verify Accounts Investor Services Check Box  ","Verifying the Investor Services check box is not present",  Status.PASS);
+			System.out.println("Investor Services CheckBox is not present and not checked");
+			report.updateTestLog("Verify Accounts Investor Services Check Box  ","Verifying the Investor Services check box is not present",  Status.PASS);
 		}
 	}
 	/**
@@ -3304,7 +3379,7 @@ public class AccountsPage extends ReusableLibrary {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	/**
 	 * Validating the Accounts Details Page Layout
 	 * 
@@ -3838,7 +3913,7 @@ public class AccountsPage extends ReusableLibrary {
 			Utility_Functions.xWaitForElementPresent(driver, continueButton, 3);
 			Utility_Functions.xClick(driver, continueButton, true);
 			Utility_Functions.timeWait(2);
-			
+
 		}
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xSwitchtoFrame(driver, viewAllFieldsButton);
@@ -4246,7 +4321,7 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver,lenderType, true);
 		Utility_Functions.xWaitForElementPresent(driver,selectLenderType, 3);
 		Utility_Functions.xClick(driver,selectLenderType, true);
-/*		List<WebElement> accountSourceFieldPickList = driver.findElements(By.xpath("//select[contains(@id,'AccountSource')]/option"));
+		/*		List<WebElement> accountSourceFieldPickList = driver.findElements(By.xpath("//select[contains(@id,'AccountSource')]/option"));
 		int count10 = 0, i10 = 0;
 		String fieldsArray10[] = new String[accountSourceFieldPickList.size()];
 		System.out.println(accountSourceFieldPickList.size());
@@ -4274,7 +4349,7 @@ public class AccountsPage extends ReusableLibrary {
 			System.out.println(e.getMessage());
 		}
 		accountSourceFieldPickList.clear();*/
-		
+
 		try {
 			accountSourceTypeFields();
 			List<WebElement> accountSourceFieldPickList = driver.findElements(By.xpath("//select[contains(@id,'AccountSource')]/option"));
@@ -4304,7 +4379,7 @@ public class AccountsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
+
 		Utility_Functions.xWaitForElementPresent(driver,accountSourceField, 3);
 		Utility_Functions.xClick(driver,accountSourceField, true);
 		Utility_Functions.xClick(driver, tickerSymbol, true);
@@ -4451,7 +4526,7 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, saveQuickCreate, 3);
 		Utility_Functions.xClick(driver, saveQuickCreate, true);
 	}
-	
+
 	/**
 	 * Validating the creation of SPOCs in the Accounts
 	 * @author Ramya
@@ -4490,72 +4565,72 @@ public class AccountsPage extends ReusableLibrary {
 		/*Utility_Functions.xWaitForElementPresent(driver, spocEmployeeExpand, 3);
 		Utility_Functions.xClick(driver, spocEmployeeExpand, true);*/
 		try{
-		Utility_Functions.xWaitForElementPresent(driver, spocEmployee, 5);
-		Utility_Functions.xSendKeys(driver, spocEmployee, "Jordan");
-		spocEmployee.sendKeys(Keys.ARROW_DOWN);
-		Utility_Functions.timeWait(2);
-		spocEmployee.sendKeys(Keys.ENTER);
-		if((dataTable.getData("General_Data", "TC_ID").contains("OBAPACBroker")) || (dataTable.getData("General_Data", "TC_ID")).contains("ABAMERBroker")) {
-			report.updateTestLog("Verify SPOC from Account", "Unable to create the SPOC as the Role field is not enabled", Status.PASS);
-		} else {
-			Utility_Functions.xWaitForElementPresent(driver,spocRole, 3);
-			Utility_Functions.xClick(driver,spocRole, true);
-			Utility_Functions.xWaitForElementPresent(driver,spocRoleValue, 3);
-			Utility_Functions.xClick(driver,spocRoleValue, true);
-			Utility_Functions.xWaitForElementPresent(driver,spocGeo, 3);
-			Utility_Functions.xClick(driver,spocGeo, true);
-			Utility_Functions.xWaitForElementPresent(driver,spocGeoValue, 3);
-			Utility_Functions.xClick(driver,spocGeoValue, true);
-			Utility_Functions.xWaitForElementPresent(driver,spocBusinessLine, 3);
-			Utility_Functions.xClick(driver,spocBusinessLine, true);
-			Utility_Functions.xWaitForElementPresent(driver,spocBusinessLineValue, 3);
-			Utility_Functions.xClick(driver,spocBusinessLineValue, true);
-			/*Utility_Functions.xWaitForElementPresent(driver,spocServices, 3);
-			Utility_Functions.xClick(driver,spocServices, true);*/
-			Utility_Functions.xWaitForElementPresent(driver,spocRegion, 3);
-			Utility_Functions.xClick(driver,spocRegion, true);
-			Utility_Functions.xWaitForElementPresent(driver,spocRegionValue, 3);
-			Utility_Functions.xClick(driver,spocRegionValue, true);
-			Utility_Functions.xWaitForElementPresent(driver,spocCountry, 3);
-			Utility_Functions.xClick(driver,spocCountry, true);
-			Utility_Functions.xWaitForElementPresent(driver,spocCountryValue, 3);
-			Utility_Functions.xClick(driver,spocCountryValue, true);
-			Utility_Functions.xWaitForElementPresent(driver,spocCity, 3);
-			Utility_Functions.xSendKeys(driver, spocCity, dataTable.getData("General_Data", "City"));
-			Utility_Functions.xWaitForElementPresent(driver,spocState, 3);
-			Utility_Functions.xClick(driver,spocState, true);
-			Utility_Functions.xWaitForElementPresent(driver,spocStateValue, 3);
-			Utility_Functions.xClick(driver,spocStateValue, true);
-			Utility_Functions.xWaitForElementPresent(driver,spocType, 3);
-			Utility_Functions.xClick(driver,spocType, true);
-			Utility_Functions.xWaitForElementPresent(driver,spocTypeValue, 3);
-			Utility_Functions.xClick(driver,spocTypeValue, true);
-			System.out.println(Calendar.getInstance());
-			DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-			Date date = new Date();
-			Utility_Functions.xWaitForElementPresent(driver,spocOriginalDate, 3);
-			Utility_Functions.xSendKeys(driver,spocOriginalDate, dateFormat.format(date).toString());
-			Utility_Functions.xWaitForElementPresent(driver,spocRequalificationDate, 3);
-			Utility_Functions.xSendKeys(driver,spocRequalificationDate, dateFormat.format(date).toString());
-			Utility_Functions.xWaitForElementPresent(driver, saveQuickCreate, 3);
-			Utility_Functions.xClick(driver, saveQuickCreate, true);
-			Utility_Functions.timeWait(3);
-			if(related_Accounts.isDisplayed()) {
-				Utility_Functions.xClick(driver, related_Accounts, true);
-				report.updateTestLog("Verify SPOC from Account", "SPOC is saved successfully with all the fields", Status.PASS);
+			Utility_Functions.xWaitForElementPresent(driver, spocEmployee, 5);
+			Utility_Functions.xSendKeys(driver, spocEmployee, "Jordan");
+			spocEmployee.sendKeys(Keys.ARROW_DOWN);
+			Utility_Functions.timeWait(2);
+			spocEmployee.sendKeys(Keys.ENTER);
+			if((dataTable.getData("General_Data", "TC_ID").contains("OBAPACBroker")) || (dataTable.getData("General_Data", "TC_ID")).contains("ABAMERBroker")) {
+				report.updateTestLog("Verify SPOC from Account", "Unable to create the SPOC as the Role field is not enabled", Status.PASS);
 			} else {
-				report.updateTestLog("Verify SPOC from Account", "SPOC is not saved with all the fields", Status.FAIL);
-			}		
-			Utility_Functions.timeWait(4);
-			if(spocName.getText().equals("Jordan Botten")) {
-				System.out.println("Spoc name is same");
-				report.updateTestLog("Verify SPOC from Account", "The new SPOC is created and saved ", Status.PASS);
-			} else {			
-				System.out.println("Spoc name is not same");
-				report.updateTestLog("Verify SPOC from Account", "The new SPOC is not created and saved ", Status.FAIL);			
-			}	
-		
-		}
+				Utility_Functions.xWaitForElementPresent(driver,spocRole, 3);
+				Utility_Functions.xClick(driver,spocRole, true);
+				Utility_Functions.xWaitForElementPresent(driver,spocRoleValue, 3);
+				Utility_Functions.xClick(driver,spocRoleValue, true);
+				Utility_Functions.xWaitForElementPresent(driver,spocGeo, 3);
+				Utility_Functions.xClick(driver,spocGeo, true);
+				Utility_Functions.xWaitForElementPresent(driver,spocGeoValue, 3);
+				Utility_Functions.xClick(driver,spocGeoValue, true);
+				Utility_Functions.xWaitForElementPresent(driver,spocBusinessLine, 3);
+				Utility_Functions.xClick(driver,spocBusinessLine, true);
+				Utility_Functions.xWaitForElementPresent(driver,spocBusinessLineValue, 3);
+				Utility_Functions.xClick(driver,spocBusinessLineValue, true);
+				/*Utility_Functions.xWaitForElementPresent(driver,spocServices, 3);
+			Utility_Functions.xClick(driver,spocServices, true);*/
+				Utility_Functions.xWaitForElementPresent(driver,spocRegion, 3);
+				Utility_Functions.xClick(driver,spocRegion, true);
+				Utility_Functions.xWaitForElementPresent(driver,spocRegionValue, 3);
+				Utility_Functions.xClick(driver,spocRegionValue, true);
+				Utility_Functions.xWaitForElementPresent(driver,spocCountry, 3);
+				Utility_Functions.xClick(driver,spocCountry, true);
+				Utility_Functions.xWaitForElementPresent(driver,spocCountryValue, 3);
+				Utility_Functions.xClick(driver,spocCountryValue, true);
+				Utility_Functions.xWaitForElementPresent(driver,spocCity, 3);
+				Utility_Functions.xSendKeys(driver, spocCity, dataTable.getData("General_Data", "City"));
+				Utility_Functions.xWaitForElementPresent(driver,spocState, 3);
+				Utility_Functions.xClick(driver,spocState, true);
+				Utility_Functions.xWaitForElementPresent(driver,spocStateValue, 3);
+				Utility_Functions.xClick(driver,spocStateValue, true);
+				Utility_Functions.xWaitForElementPresent(driver,spocType, 3);
+				Utility_Functions.xClick(driver,spocType, true);
+				Utility_Functions.xWaitForElementPresent(driver,spocTypeValue, 3);
+				Utility_Functions.xClick(driver,spocTypeValue, true);
+				System.out.println(Calendar.getInstance());
+				DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+				Date date = new Date();
+				Utility_Functions.xWaitForElementPresent(driver,spocOriginalDate, 3);
+				Utility_Functions.xSendKeys(driver,spocOriginalDate, dateFormat.format(date).toString());
+				Utility_Functions.xWaitForElementPresent(driver,spocRequalificationDate, 3);
+				Utility_Functions.xSendKeys(driver,spocRequalificationDate, dateFormat.format(date).toString());
+				Utility_Functions.xWaitForElementPresent(driver, saveQuickCreate, 3);
+				Utility_Functions.xClick(driver, saveQuickCreate, true);
+				Utility_Functions.timeWait(3);
+				if(related_Accounts.isDisplayed()) {
+					Utility_Functions.xClick(driver, related_Accounts, true);
+					report.updateTestLog("Verify SPOC from Account", "SPOC is saved successfully with all the fields", Status.PASS);
+				} else {
+					report.updateTestLog("Verify SPOC from Account", "SPOC is not saved with all the fields", Status.FAIL);
+				}		
+				Utility_Functions.timeWait(4);
+				if(spocName.getText().equals("Jordan Botten")) {
+					System.out.println("Spoc name is same");
+					report.updateTestLog("Verify SPOC from Account", "The new SPOC is created and saved ", Status.PASS);
+				} else {			
+					System.out.println("Spoc name is not same");
+					report.updateTestLog("Verify SPOC from Account", "The new SPOC is not created and saved ", Status.FAIL);			
+				}	
+
+			}
 		}catch(Exception e){
 			System.out.println("Employee name does not match with the linked id");
 			report.updateTestLog("Verify SPOC from Account", "The new SPOC is created but the Employee name is not linked to the id", Status.PASS);
@@ -4596,37 +4671,37 @@ public class AccountsPage extends ReusableLibrary {
 	}
 	static ArrayList<String> rolePickList = new ArrayList<String>();
 	public void rolePickListValues() {
-		
+
 		rolePickList.add("--None--");
 		rolePickList.add("Leader");
 		rolePickList.add("Team Member");
-		
+
 		System.out.println("Role Pick List values are " +rolePickList);
 	}
 	static ArrayList<String> geoPickList = new ArrayList<String>();
 	public void geoPickListValues() {
-		
+
 		geoPickList.add("--None--");
 		geoPickList.add("Local");
 		geoPickList.add("National");
 		geoPickList.add("Regional");
 		geoPickList.add("Global");
-		
+
 		System.out.println("Geo Pick List values are " +geoPickList );
 	}
 	static ArrayList<String> regionPickList = new ArrayList<String>();
 	public void regionPickListValues() {
-		
+
 		regionPickList.add("--None--");
 		regionPickList.add("Americas");
 		regionPickList.add("APAC");
 		regionPickList.add("EMEA");
-		
+
 		System.out.println("Region Pick List values are " +regionPickList );
 	}
 	static ArrayList<String> spocPickList = new ArrayList<String>();
 	public void spocPickListValues() {
-		
+
 		spocPickList.add("--None--");
 		spocPickList.add("Company / Client Request");
 		spocPickList.add("Exclusive (Written or Verbal)");
@@ -4634,21 +4709,21 @@ public class AccountsPage extends ReusableLibrary {
 		spocPickList.add("Long-Standing Business Relationship");
 		spocPickList.add("Preferred Provider");
 		spocPickList.add("Presentation / RFP");
-		
+
 		System.out.println("Region Pick List values are " +spocPickList );
 	}
 	static ArrayList<String> statusPickList = new ArrayList<String>();
 	public void statusPickListValues() {
-		
+
 		statusPickList.add("--None--");
 		statusPickList.add("Active");
 		statusPickList.add("Inactive");
-		
+
 		System.out.println("Role Pick List values are " +statusPickList);
 	}
 	static ArrayList<String> businessLinePickList = new ArrayList<String>();
 	public void businessLinePickListValues() {
-		
+
 		businessLinePickList.add("--None--");
 		businessLinePickList.add("Agency Brokerage");
 		businessLinePickList.add("Asset Services");
@@ -4657,7 +4732,7 @@ public class AccountsPage extends ReusableLibrary {
 		businessLinePickList.add("Investor Services");
 		businessLinePickList.add("Occupier Brokerage");
 		businessLinePickList.add("Valuation & Advisory");
-		
+
 		System.out.println("Business Line Pick List values are " +businessLinePickList );
 	}
 	public void verifySPOCsPageLayout() {
@@ -4720,7 +4795,7 @@ public class AccountsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-	
+
 		List<WebElement> informationSectionList = driver.findElements(
 				By.xpath("//h2[text()='Information']/parent::div/parent::div/div//label[@class='slds-form-element__label']"));
 		int count1 = 0, i1 = 0;
@@ -4914,7 +4989,7 @@ public class AccountsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
+
 		Utility_Functions.xWaitForElementPresent(driver, spocEmployee, 5);
 		String sSpocEmployee = searchAccount.fetchRecord("SPOC__c", "CBRE_SPOC_Employee__c");		
 		if(sSpocEmployee==null) {
@@ -4933,7 +5008,7 @@ public class AccountsPage extends ReusableLibrary {
 				Utility_Functions.xClick(driver, excludeSPOCCascade, true);
 				System.out.println("exclude SPOC Cascade is checked");
 				report.updateTestLog("Verify SPOC Page Layout","Verifying the exclude SPOC Cascade check box is checked or else checking it",  Status.PASS);
-	
+
 			}else{
 				System.out.println("exclude SPOC Cascade is not checked");
 				report.updateTestLog("Verify SPOC Page Layout","Verifying the exclude SPOC Cascade check box is checked or not ",  Status.FAIL);
@@ -4995,8 +5070,8 @@ public class AccountsPage extends ReusableLibrary {
 				report.updateTestLog("Verify SPOC Page Layout", "SPOC is not saved with all the fields", Status.FAIL);
 			}
 		}
-		
-}
+
+	}
 	/**
 	 * Validating the Accounts Activity Timeline
 	 * @author Ramya
@@ -5154,13 +5229,13 @@ public class AccountsPage extends ReusableLibrary {
 			//System.out.println(e.getMessage());
 		}
 	}
-	
+
 	/**
 	 * Validating the Account Details edit page
 	 * @author Ramya
 	 *
 	 */
-	
+
 	public void verifyEditingExistingAccount() {
 		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
 		Utility_Functions.xClick(driver, menu_Accounts, true);
@@ -5173,7 +5248,7 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(3);
 		List<WebElement> accountNamesList = driver.findElements(
 				By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-		
+
 		Utility_Functions.xclickOnFirstElementfromList(accountNamesList);
 		//Utility_Functions.timeWait(3);
 		Utility_Functions.xWaitForElementPresent(driver,details, 3);
@@ -5189,14 +5264,14 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver,legalStatusValueEditpage, 3);
 		Utility_Functions.xClick(driver,legalStatusValueEditpage, true);
 		if (dataTable.getData("General_Data", "TC_ID").contains("APAC")) {
-		Utility_Functions.xWaitForElementPresent(driver,apacIndustryEditPage, 3);
-		Utility_Functions.xClick(driver,apacIndustryEditPage, true);
-		Utility_Functions.xWaitForElementPresent(driver,apacIndustryValueEditPage, 3);
-		Utility_Functions.xClick(driver,apacIndustryValueEditPage, true);
-		Utility_Functions.xWaitForElementPresent(driver,apacSubIndustryEditPage, 3);
-		Utility_Functions.xClick(driver,apacSubIndustryEditPage, true);
-		Utility_Functions.xWaitForElementPresent(driver,apacSubIndustryValueEditPage, 3);
-		Utility_Functions.xClick(driver, apacSubIndustryValueEditPage, true);
+			Utility_Functions.xWaitForElementPresent(driver,apacIndustryEditPage, 3);
+			Utility_Functions.xClick(driver,apacIndustryEditPage, true);
+			Utility_Functions.xWaitForElementPresent(driver,apacIndustryValueEditPage, 3);
+			Utility_Functions.xClick(driver,apacIndustryValueEditPage, true);
+			Utility_Functions.xWaitForElementPresent(driver,apacSubIndustryEditPage, 3);
+			Utility_Functions.xClick(driver,apacSubIndustryEditPage, true);
+			Utility_Functions.xWaitForElementPresent(driver,apacSubIndustryValueEditPage, 3);
+			Utility_Functions.xClick(driver, apacSubIndustryValueEditPage, true);
 		}
 		Utility_Functions.xWaitForElementPresent(driver,saveEditPage, 3);
 		Utility_Functions.xClick(driver, saveEditPage, true);
@@ -5205,12 +5280,204 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver,details, 3);
 		if(details.isDisplayed()) {
-	
+
 			report.updateTestLog("Verify Editing the Existing Account", "The existing account can be edited and saved successfully", Status.PASS);
 		} else {
 			report.updateTestLog("Verify Editing the Existing Account", "The existing account cannot be edited and saved successfully", Status.FAIL);
 		}
 	}
+	/**
+	 * Validating the Accounts APAC Industry fields
+	 * @author Ramya
+	 *
+	 */
+	public void verifyAPACIndustry() {
+		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
+		Utility_Functions.xClick(driver, menu_Accounts, true);
+		Utility_Functions.timeWait(1);
+		report.updateTestLog("Verify New Account Page Layout ","Verifying Accounts is Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, newAccounts, 3);
+		Utility_Functions.xClick(driver, newAccounts, true);
+		Utility_Functions.timeWait(2);
+		report.updateTestLog("Verify New Account Page Layout  ","Verifying New Accounts Page is Displayed  ",  Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xSwitchtoFrame(driver, viewAllFieldsButton);
+		Utility_Functions.xWaitForElementPresent(driver, viewAllFieldsButton, 5);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.xClick(driver, viewAllFieldsButton, true);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(5);
+		if ((!industryValues.getText().equals(""))) {
+			System.out.println("Industry value and Industry sub values are present in the APAC Account quick create page");
+			report.updateTestLog("Verify New Activity Page Layout",
+					"Industry value and Industry sub values are present in the APAC Account quick create page", Status.PASS);
+		} else {
+			System.out.println("Industry value and Industry sub values are not present in the APAC Account quick create page");
+			report.updateTestLog("Verify New Activity Page Layout",
+					"Industry value and Industry sub values are present in the APAC Account quick create page", Status.FAIL);
+		}
 
+	}
+	/**
+	 * Validating the Accounts Information Page Client Knowledge center fields
+	 * @author Ramya
+	 *
+	 */
+
+	public void verifyAccountsClientKnowledgeCenterField() {
+		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
+		Utility_Functions.xClick(driver, menu_Accounts, true);
+		report.updateTestLog("Verify Editing the Existing Account","Accounts is Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
+		Utility_Functions.xClick(driver, recentlyViewed, true);
+		report.updateTestLog("Verify Editing the Existing Account","Recently viewed Accounts are Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, allAccounts, 3);
+		Utility_Functions.xClick(driver, allAccounts, true);
+		Utility_Functions.timeWait(3);
+		List<WebElement> accountNamesList = driver.findElements(
+				By.xpath(" //a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'001')]"));
+		Utility_Functions.xclickRandomElement(accountNamesList);
+		Utility_Functions.timeWait(3);
+		try{
+			if(clientKnowledgeCenterField.isDisplayed()) {
+
+				report.updateTestLog("Verify Accounts Client Knowledge Center Field", "The Client Knowledge Center field is present", Status.PASS);
+			} else {
+				report.updateTestLog("Verify Accounts Client Knowledge Center Field", "The Client Knowledge Center field is not present", Status.FAIL);
+			}	
+		}catch (Exception e) {
+			System.out.println("Account information section is not present in which the Client knowledge center field is prsesnt");
+		}
+
+
+	}
+	/**
+	 * Validating the Submit Accounts Update Request
+	 * @author Ramya
+	 *
+	 */
+
+	public void verifySubmitAccUpdateRequest() {
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementPresent(driver,submitAccUpdateRequest, 3);
+		Utility_Functions.xClick(driver,submitAccUpdateRequest, true);
+		report.updateTestLog("Verify Submit Account Update Request","Submoit Account Update Request Page is displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver,requestedForCase, 3);
+		Utility_Functions.xSendKeys(driver,requestedForCase, "test58");
+		report.updateTestLog("Verify Submit Account Update Request","Request for case tab is opened ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver,requestedForCaseValue, 3);
+		Utility_Functions.xClick(driver,requestedForCaseValue, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver,searchAccountsCase, 3);
+		Utility_Functions.xSendKeys(driver,searchAccountsCase, "George557");
+		Utility_Functions.xWaitForElementPresent(driver,accountValueCase, 3);
+		Utility_Functions.xClick(driver,accountValueCase, true);
+		Utility_Functions.xWaitForElementPresent(driver,regionCase, 3);
+		Utility_Functions.xClick(driver,regionCase, true);
+		Utility_Functions.xWaitForElementPresent(driver,regionValueCase, 3);
+		Utility_Functions.xClick(driver,regionValueCase, true);
+		Utility_Functions.xWaitForElementPresent(driver,descriptionCase, 3);
+		Utility_Functions.xSendKeys(driver, descriptionCase, "This is case Description");
+		Utility_Functions.xWaitForElementPresent(driver,saveCase, 3);
+		Utility_Functions.xClick(driver,saveCase, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementPresent(driver,triggerForLogout, 3);
+		Utility_Functions.xClick(driver,triggerForLogout, true);
+		Utility_Functions.xWaitForElementPresent(driver,logoutButton, 3);
+		Utility_Functions.xClick(driver,logoutButton, true);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver,username, 3);
+		Utility_Functions.xSendKeys(driver,username, "emeamultibusinessA&TOccupier2@cbre.com");
+		Utility_Functions.xWaitForElementPresent(driver,password, 3);
+		Utility_Functions.xSendKeys(driver,password, "Password567");
+		Utility_Functions.xWaitForElementPresent(driver,login, 3);
+		Utility_Functions.xClick(driver,login, true);
+		Utility_Functions.timeWait(2);
+
+		driver.navigate().to("https://cbrecrm--fte2.lightning.force.com/one/one.app#/sObject/5000n000001YqEZAA0/view");
+		Utility_Functions.timeWait(3);
+
+		if(caseNotFound.isDisplayed()) {
+
+			report.updateTestLog("Verify Submit Account Update Request", "The Case is not present", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Submit Account Update Request", "The Case is present", Status.FAIL);
+		}
+
+
+	}
+	/**
+	 * Validating the Private Tag functionality
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void verifyPrivateTagFunctionality(){
+
+		try{
+			Utility_Functions.xWaitForElementPresent(driver,menu_PrivateTags, 3);
+			Utility_Functions.xClick(driver, menu_PrivateTags, true);
+		}catch(Exception e){
+
+			Utility_Functions.xWaitForElementPresent(driver,menu_More, 3);
+			Utility_Functions.xClick(driver, menu_More, true);
+
+			Utility_Functions.xWaitForElementPresent(driver, more_PrivateTags, 2);
+			Utility_Functions.xClick(driver, more_PrivateTags, true);
+		}
+		Utility_Functions.xWaitForElementPresent(driver, newAccounts, 3);
+		Utility_Functions.xClick(driver, newAccounts, true);
+		report.updateTestLog("Verify Accounts PrivateTags Functionality ","Verifying New Private Tags is Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, privateTagName, 3);
+		Utility_Functions.xSendKeys(driver, privateTagName, "Test Automation Priavate Tag_" + Utility_Functions.xGenerateAlphaNumericString());
+		report.updateTestLog("Verify Accounts PrivateTags Functionality ","Verifying the Private Tag name is entered ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, saveNewPrivateTag, 3);
+		Utility_Functions.xClick(driver, saveNewPrivateTag, true);
+		report.updateTestLog("Verify Accounts PrivateTags Functionality ","Verifying the Private Tag is saved ",  Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver,newPropertiesPrivateTag, 3);
+		Utility_Functions.xClick(driver,newPropertiesPrivateTag, true);
+		report.updateTestLog("Verify Accounts PrivateTags Functionality ","Verifying the new Properties Under Private Tag is displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver,searchPropertiesPrivateTag, 3);
+		Utility_Functions.xSendKeys(driver,searchPropertiesPrivateTag, "Test Automation Subject_K4AGZFTL1W - 2100 Ross Avenue");
+		Utility_Functions.xWaitForElementPresent(driver,existingPropertyPrivateTag, 3);
+		Utility_Functions.xClick(driver,existingPropertyPrivateTag, true);
+		Utility_Functions.xWaitForElementPresent(driver,savePropertyPrivateTag, 3);
+		report.updateTestLog("Verify Accounts PrivateTags Functionality ","Verifying the selection of the existing property",  Status.PASS);
+		Utility_Functions.xClick(driver,savePropertyPrivateTag, true);
+		Utility_Functions.timeWait(2);
+		report.updateTestLog("Verify Accounts PrivateTags Functionality ","Verifying the new Property is saved with the Existing property name ",  Status.PASS);
+
+
+	}
+	/**
+	 * Validating the Bulk Tagging functionality
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void verifyBulkTagging(){
+		Utility_Functions.xWaitForElementPresent(driver,applauncher, 3);
+		Utility_Functions.xClick(driver,applauncher, true);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver,bulkTaggingAppLauncher, 3);
+		Utility_Functions.xClick(driver,bulkTaggingAppLauncher, true);
+		Utility_Functions.xSwitchtoFrame(driver, search);
+		System.out.println("Frame Identified");
+		Utility_Functions.xWaitForElementPresent(driver,searchPropertiesAccountsContactsLeads, 3);
+		Utility_Functions.xSendKeys(driver, searchPropertiesAccountsContactsLeads, "Test");
+		Utility_Functions.xWaitForElementPresent(driver,search, 3);
+		Utility_Functions.xClick(driver,search, true);
+		Utility_Functions.timeWait(3);
+	}
 }
 

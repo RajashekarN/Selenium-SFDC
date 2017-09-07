@@ -101,5 +101,45 @@ public class BC_Salesforce_HomePage extends ReusableLibrary {
 	public void bc_verifySupportLinks() throws InterruptedException {
 		sfHomePage.validate_Support_Custom_Links();
 	}
+	/**
+	 * Validating the Home Page for the Account update
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+		
+	public void bc_validateHomePageAccountUpdate() throws InterruptedException {
+		sfHomePage.validateHomePageAccountUpdate();
+	}
+	/**
+	 * Validating the Home Page for the SFDC Training Link
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+		
+	public void bc_validateHomePageSFDCTrainingLink() throws InterruptedException {
+		sfHomePage.validateHomePageSFDCTrainingLink();
+	}
+	/**
+	 * Validating the Home Page for the recent records
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+		
+	public void bc_validateHomePageRecentRecords() throws InterruptedException {
+		sfHomePage.validateHomePageRecentRecords();
+	}
+	/**
+	 * Validating the Home Page for the Marketing Lists
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+		
+	public void bc_validateHomePageMarketingLists() throws InterruptedException {
+		sfHomePage.validateHomePageMarketingLists();
+	}
  	
 }
