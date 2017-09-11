@@ -302,4 +302,15 @@ public class BC_Salesforce_LeadsPage extends ReusableLibrary {
 	public void bc_verifyLeadsPingValueInUOMPickList() {
 		sfLeadsPage.verifyLeadsPingValueInUOMPickList();
 	}
+	
+	/**
+	 * Validating the Private Note Sharing functionality for Lead
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+
+	public void bc_privateNoteSharing() {
+		sfLeadsPage.privateNoteSharing();
+	}
 }

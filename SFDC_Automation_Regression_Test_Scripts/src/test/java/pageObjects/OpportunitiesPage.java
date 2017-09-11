@@ -343,6 +343,12 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//table[contains(@class,'forceRecordLayout')]//tr[2]//span[contains(@class,'forceOutputCurrency')]")
 	WebElement installmentAmountTwo;
+	
+	@FindBy(xpath = "//span[text()='Opportunity Installments']/parent::span[text()='View All']")
+	WebElement installmentsViewAll;
+	
+	@FindBy(xpath = "//nav[@role='navigation']/ol[contains(@class,'slds-breadcrumb')]/li[2]")
+	WebElement opportunityNameLink;
 
 	@FindBy(xpath = "//table[contains(@class,'forceRecordLayout')]//tr[3]//span[contains(@class,'forceOutputCurrency')]")
 	WebElement installmentAmountThree;
@@ -2560,6 +2566,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 * @author Vishnuvardhan
 	 *
 	 */
+	
 
 	public void multipleInstallmentsOpportunityEvenPercent() {
 		multipleInstallmentsFunction();
@@ -2582,6 +2589,12 @@ public class OpportunitiesPage extends ReusableLibrary {
 		addingInstallmentsOpportunities();
 		Utility_Functions.xWaitForElementPresent(driver, related, 4);
 		Utility_Functions.xClick(driver, related, true);
+		Utility_Functions.xWaitForElementPresent(driver, installmentsViewAll, 3);
+		Utility_Functions.xClick(driver, installmentsViewAll, true);
+		Utility_Functions.xWaitForElementPresent(driver, opportunityNameLink, 3);
+		Utility_Functions.xClick(driver, opportunityNameLink, true);
+		Utility_Functions.xWaitForElementPresent(driver, related, 3);
+		Utility_Functions.xClick(driver, related, true);		
 		Utility_Functions.xWaitForElementPresent(driver, installmentAmountOne, 3);
 		Utility_Functions.xWaitForElementPresent(driver, installmentAmountTwo, 3);
 		String sInstallmentAmountOne = installmentAmountOne.getText();
@@ -2599,6 +2612,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 			agencyBrokerage();
 		}
 		Utility_Functions.timeWait(2);
+	/*	Utility_Functions.xWaitForElementPresent(driver, related, 3);
+		Utility_Functions.xClick(driver, related, true);*/
+		driver.navigate().refresh();
 		Utility_Functions.xWaitForElementPresent(driver, related, 3);
 		Utility_Functions.xClick(driver, related, true);
 		sInstallmentAmountOne = installmentAmountOne.getText();
@@ -2646,6 +2662,12 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xSendKeys(driver, installmentDate, dateFormat.format(date).toString());
 		actions.moveToElement(saveNewOpportunityInstallment).click().perform();
 		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementPresent(driver, related, 3);
+		Utility_Functions.xClick(driver, related, true);
+		Utility_Functions.xWaitForElementPresent(driver, installmentsViewAll, 3);
+		Utility_Functions.xClick(driver, installmentsViewAll, true);
+		Utility_Functions.xWaitForElementPresent(driver, opportunityNameLink, 3);
+		Utility_Functions.xClick(driver, opportunityNameLink, true);
 		Utility_Functions.xWaitForElementPresent(driver, related, 3);
 		Utility_Functions.xClick(driver, related, true);
 		String sInstallmentAmountOne = installmentAmountOne.getText();
@@ -2898,6 +2920,12 @@ public class OpportunitiesPage extends ReusableLibrary {
 	public void recalculateRoundOffRule() {
 		multipleInstallmentsFunction();
 		addingInstallmentsOpportunities();
+		Utility_Functions.xWaitForElementPresent(driver, related, 3);
+		Utility_Functions.xClick(driver, related, true);
+		Utility_Functions.xWaitForElementPresent(driver, installmentsViewAll, 3);
+		Utility_Functions.xClick(driver, installmentsViewAll, true);
+		Utility_Functions.xWaitForElementPresent(driver, opportunityNameLink, 3);
+		Utility_Functions.xClick(driver, opportunityNameLink, true);
 		Utility_Functions.xWaitForElementPresent(driver, related, 3);
 		Utility_Functions.xClick(driver, related, true);
 		Utility_Functions.xWaitForElementPresent(driver, installmentAmountOne, 3);

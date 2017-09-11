@@ -1107,6 +1107,50 @@ public class LeadsPage extends ReusableLibrary {
 	}
 
 	/**
+	 * Validating the Private Note Sharing functionality for Lead
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	
+	public void privateNoteSharing() {
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementPresent(driver,showMoreActionsDetailsPage, 3);
+		Utility_Functions.xClick(driver,showMoreActionsDetailsPage, true);
+		Utility_Functions.xWaitForElementPresent(driver, sharing, 3);
+		Utility_Functions.xClick(driver, sharing, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xSwitchtoFrame(driver, leadSharing);
+		Utility_Functions.xWaitForElementPresent(driver, leadSharing, 4);
+		Utility_Functions.timeWait(2);
+		driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='Content']")));
+		
+		Utility_Functions.xWaitForElementPresent(driver, addButtonSharing, 5);
+		Utility_Functions.xClick(driver, addButtonSharing, true);
+		Utility_Functions.xWaitForElementPresent(driver, searchUsers, 3);
+		Utility_Functions.xSelectDropdownByName(searchUsers, "Users");
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xSendKeys(driver, searchUserName, "Vishnu");
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xClick(driver, findValue, true);
+		Utility_Functions.timeWait(1);
+		String environment = loginPage.initializeEnvironment();
+		if (environment.equals("UAT")) {
+			Utility_Functions.xSelectDropdownByName(selectUser, "User: Vishnuvardhan Bommisetty");
+		} else {
+			Utility_Functions.xSelectDropdownByName(selectUser, "User: vishnuvardhan bommisetty");
+		}
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xClick(driver, rightArrow, true);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xSelectDropdownByName(access, "Read Only");
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xClick(driver, saveButtonSharing, true);
+		report.updateTestLog("Verify Lead Sharing", "Lead Sharing functioanlity is working as expected", Status.PASS);			
+		System.out.println("Lead Sharing functionality is working as expected");
+	}
+	
+	/**
 	 * Function for validating the Convert Lead by adding the new account in the Convert Lead page
 	 * 
 	 * @author Vishnuvardhan
@@ -2795,48 +2839,7 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(3);
 		List<WebElement> allActiveLeadsList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
 		Utility_Functions.xclickRandomElement(allActiveLeadsList);
-		Utility_Functions.timeWait(3);
-		Utility_Functions.xWaitForElementPresent(driver,showMoreActionsDetailsPage, 3);
-		Utility_Functions.xClick(driver,showMoreActionsDetailsPage, true);
-		Utility_Functions.xWaitForElementPresent(driver, sharing, 3);
-		Utility_Functions.xClick(driver, sharing, true);
-		Utility_Functions.timeWait(3);
-		Utility_Functions.xSwitchtoFrame(driver, leadSharing);
-		Utility_Functions.xWaitForElementPresent(driver, leadSharing, 4);
-		Utility_Functions.timeWait(2);
-		driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='Content']")));
-
-		Utility_Functions.xWaitForElementPresent(driver, addButtonSharing, 5);
-		Utility_Functions.xClick(driver, addButtonSharing, true);
-		Utility_Functions.xWaitForElementPresent(driver, searchUsers, 3);
-		Utility_Functions.xSelectDropdownByName(searchUsers, "Users");
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xSendKeys(driver, searchUserName, "Vishnu");
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xClick(driver, findValue, true);
-		Utility_Functions.timeWait(1);
-		String environment = loginPage.initializeEnvironment();
-		if (environment.equals("UAT")) {
-			Utility_Functions.xSelectDropdownByName(selectUser, "User: Vishnuvardhan Bommisetty");
-		} else {
-			Utility_Functions.xSelectDropdownByName(selectUser, "User: vishnuvardhan bommisetty");
-		}
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xClick(driver, rightArrow, true);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xSelectDropdownByName(access, "Read Only");
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xClick(driver, saveButtonSharing, true);
-		report.updateTestLog("Verify Lead Sharing", "Lead Sharing functioanlity is working as expected", Status.PASS);			
-		System.out.println("Lead Sharing functioanlity is working as expected");
-
-		/*		if((!userAndGroupSharing.getText().equals(""))){	
-			System.out.println("User and Group sharing is present in the Lead Sharing Page");
-
-		}else{
-
-			System.out.println("User and Group sharing is not present in the Lead Sharing Page");
-		}*/
+		privateNoteSharing();
 	}
 
 	/**
