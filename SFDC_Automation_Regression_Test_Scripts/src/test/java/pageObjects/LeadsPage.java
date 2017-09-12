@@ -692,8 +692,8 @@ public class LeadsPage extends ReusableLibrary {
 
 	static ArrayList<String> relatedPageElementsList = new ArrayList<String>();
 	public void relatedPageListElements() {
-		relatedPageElementsList.add("Welcome to Salesforce!");
-		relatedPageElementsList.add("News");
+		/*relatedPageElementsList.add("Welcome to Salesforce!");
+		relatedPageElementsList.add("News");*/
 		//relatedPageElementsList.add("News");
 		relatedPageElementsList.add("Private Notes");
 		relatedPageElementsList.add("Notes");
@@ -1010,7 +1010,8 @@ public class LeadsPage extends ReusableLibrary {
 	public void relatedListsLeadLandingPage() {
 		Utility_Functions.timeWait(1);
 		createLead();
-		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xWaitForElementPresent(driver, related, 3);
 		Utility_Functions.xClick(driver, related, true);
 		Utility_Functions.timeWait(2);
 		List<WebElement> relatedLists = driver.findElements(By.xpath("//*[@id='header']/a/span[1]"));

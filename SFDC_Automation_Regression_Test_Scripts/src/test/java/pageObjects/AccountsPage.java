@@ -74,10 +74,10 @@ public class AccountsPage extends ReusableLibrary {
 	@FindBy(xpath = "//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[contains(text(), 'Title')]")
 	WebElement title;
 
-	@FindBy(xpath = "//div[@class='autocompleteWrapper']/input[@placeholder='Search Leads']")
+	@FindBy(xpath = "//input[@placeholder='Search Leads']")
 	WebElement searchLeads;
 
-	@FindBy(xpath = "//div[@class='autocompleteWrapper']/input[@placeholder='Search Contacts']")
+	@FindBy(xpath = "//input[@title='Search Contacts']")
 	WebElement searchContacts;
 
 	@FindBy(xpath = "//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[contains(text(), 'Body')]/parent::label/parent::div/textarea")
@@ -839,16 +839,6 @@ public class AccountsPage extends ReusableLibrary {
 			Utility_Functions.xScrollWindowTop(driver);
 			Utility_Functions.timeWait(2);
 			Utility_Functions.xClick(driver, new_PrivateNotes, true);
-			/*
-			 * if (dataTable.getData("General_Data",
-			 * "Username").contains("cmbroker")) {
-			 * Utility_Functions.xScrollWindow(driver);
-			 * Utility_Functions.timeWait(3); Utility_Functions.xClick(driver,
-			 * new_PrivateNotes, true); } else {
-			 * Utility_Functions.xScrollWindow(driver);
-			 * Utility_Functions.timeWait(3); Utility_Functions.xClick(driver,
-			 * new_PrivateNotes, true); }
-			 */
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());

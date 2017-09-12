@@ -1871,7 +1871,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			boolean isStatus = false;
 			String query = "SELECT Name, Id, Service__C, Total_Size__c, Unit_of_Measure__c FROM Opportunity where Name like "
 					+ "'%-%-%-%' and StageName > '03-RFP/Proposal' and StageName < '15-Signed Lease' and RecordTypeId = "
-					+ "'" + recordTypeId + "'";
+					+ "'" + recordTypeId + "'" + "limit 1 offset 9";
 			SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
 			String opportunityID = searchTextSOQL.fetchRecordFieldValue("Id", query);
 			while (!isStatus) {
