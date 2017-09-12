@@ -143,7 +143,7 @@ public class PropertiesPage extends ReusableLibrary {
 	WebElement relatedActivities;
 
 
-	@FindBy(xpath="//a[@title='//a[contains(@title,'Show') and contains(@title,'more actions')]")
+	@FindBy(xpath="//a[contains(@title,'Show') and contains(@title,'more action')]")
 	WebElement selectCreateFollowUpCustomActivity;
 
 	@FindBy(xpath="//div[contains(@title, 'Create Follow-up Custom Activity')]")
@@ -698,20 +698,8 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, newActivity, 3);
 		Utility_Functions.xClick(driver, newActivity, true);
 		report.updateTestLog("Verify Create Activity Properties ","The New Activity in the related page is Displayed ",  Status.PASS);
-		/*int size = driver.findElements(By.tagName("iframe")).size();
-		System.out.println(size);
-		Utility_Functions.timeWait(2);
-		List<WebElement> iframeList = driver.findElements(By.tagName("iframe"));
-		System.out.println(iframeList.size());
-		for (WebElement element : iframeList) {
-			System.out.println(element.getAttribute("id"));
-		}
-		driver.switchTo().frame(2);
-		Utility_Functions.timeWait(5);
-		System.out.println("Frame Identified");*/
 		Utility_Functions.xSwitchtoFrame(driver, subject);
 		Utility_Functions.xWaitForElementPresent(driver, subject, 5);
-
 		Utility_Functions.xClick(driver, subject, true);
 		Utility_Functions.xWaitForElementPresent(driver, subject, 5);
 		Utility_Functions.xSendKeys(driver, subject, "Test Activity Created by Automation");
@@ -750,13 +738,15 @@ public class PropertiesPage extends ReusableLibrary {
 		report.updateTestLog("Verify Add Opportunity Page Fields",
 				"URL has been replaced with the new URL having the retrieved Opportunity:::" + newUrl, Status.PASS);
 		driver.get(newUrl);
+		Utility_Functions.timeWait(1);
 		driver.navigate().refresh();
-		Utility_Functions.timeWait(4);
+		/*Utility_Functions.timeWait(4);
 		driver.navigate().refresh();
 		Utility_Functions.timeWait(1);
 		driver.switchTo().defaultContent();
-		driver.navigate().refresh();
-		Utility_Functions.timeWait(3);
+		driver.navigate().refresh();*/
+		Utility_Functions.timeWait(4);
+		Utility_Functions.xWaitForElementPresent(driver, selectCreateFollowUpCustomActivity, 3);
 		Utility_Functions.xClick(driver,  selectCreateFollowUpCustomActivity, true);
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify Create Activity Properties","The Follow up Activity Page is Displayed",  Status.PASS);
@@ -779,8 +769,8 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, saveActivity, true);
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify Create Activity Properties ","The Custom Activity is created ",  Status.PASS);
-		driver.navigate().refresh();
-		Utility_Functions.timeWait(1);
+/*		driver.navigate().refresh();
+		Utility_Functions.timeWait(1);*/
 		driver.switchTo().defaultContent();
 		driver.navigate().refresh();
 		Utility_Functions.timeWait(3);

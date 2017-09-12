@@ -3044,8 +3044,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 		while (!isStatus) {
 			labelA: {
 			opportunityEligibility();
-			driver.navigate().refresh();
 			Utility_Functions.timeWait(4);
+			driver.navigate().refresh();
 			Utility_Functions.xWaitForElementPresent(driver, related, 5);
 			Utility_Functions.xClick(driver, related, true);
 			Utility_Functions.xWaitForElementPresent(driver, installmentAmountOne, 3);

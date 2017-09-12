@@ -160,7 +160,7 @@ public class AccountsPage extends ReusableLibrary {
 	@FindBy(xpath = "//span[contains(@class, 'slds-text-heading--small slds-truncate') and text() = 'Activities']")
 	WebElement relatedActivities;
 
-	@FindBy(xpath = "//a[contains(@title,'Show') and contains(@title,'more actions')]")
+	@FindBy(xpath = "//a[contains(@title,'Show') and contains(@title,'more action')]")
 	WebElement selectCreateFollowUpCustomActivity;
 
 	@FindBy(xpath = "//div[contains(@title, 'Create Follow-up Custom Activity')]")

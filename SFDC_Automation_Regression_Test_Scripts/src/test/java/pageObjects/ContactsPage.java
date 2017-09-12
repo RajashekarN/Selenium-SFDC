@@ -156,7 +156,7 @@ public class ContactsPage extends ReusableLibrary {
 	@FindBy(xpath = "//span[contains(@class, 'slds-text-heading--small slds-truncate') and text() = 'Activities']")
 	WebElement relatedActivities;
 
-	@FindBy(xpath = "//a[contains(@title,'Show') and contains(@title,'more actions')]")
+	@FindBy(xpath = "//a[contains(@title,'Show') and contains(@title,'more action')]")
 	WebElement selectCreateFollowUpCustomActivity;
 
 	@FindBy(xpath = "//div[contains(@title, 'Create Follow-up Custom Activity')]")
@@ -952,15 +952,14 @@ public class ContactsPage extends ReusableLibrary {
 		report.updateTestLog("Verify Add Opportunity Page Fields",
 				"URL has been replaced with the new URL having the retrieved Opportunity:::" + newUrl, Status.PASS);
 		driver.get(newUrl);
+		Utility_Functions.timeWait(1);
 		driver.navigate().refresh();
-
-		Utility_Functions.timeWait(3);
-
+/*		Utility_Functions.timeWait(3);
 		driver.navigate().refresh();
 		Utility_Functions.timeWait(1);
 		driver.switchTo().defaultContent();
 		driver.navigate().refresh();
-		Utility_Functions.timeWait(3);
+*/		Utility_Functions.timeWait(3);
 		Utility_Functions.xWaitForElementPresent(driver, selectCreateFollowUpCustomActivity, 5);
 		Utility_Functions.xClick(driver, selectCreateFollowUpCustomActivity, true);
 

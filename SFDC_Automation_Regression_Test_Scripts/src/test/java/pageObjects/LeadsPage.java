@@ -152,8 +152,11 @@ public class LeadsPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//h1//span[@class='uiOutputText']")
 	WebElement nameText;
-
-	@FindBy(xpath = "//li[@class='slds-button slds-button--neutral slds-truncate']//div[@title='Clone']")
+/*
+	@FindBy(xpath = "//li[contains(@class,'slds-button') and contains(@class,'slds-button--neutral') and contains(@class,'slds-truncate')]//a[@title='Clone']")
+	WebElement cloneButton;*/
+	
+	@FindBy(xpath = "//div[@class='slds-truncate'][@title='Clone']")
 	WebElement cloneButton;
 
 	@FindBy(xpath = "//button[@class='slds-button slds-button--neutral uiButton forceActionButton'][@title='Save & New']")
@@ -177,7 +180,7 @@ public class LeadsPage extends ReusableLibrary {
 	@FindBy(xpath = "//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[contains(text(), 'Title')]/parent::label/parent::div/input")
 	WebElement title_PrivateNotes;
 
-	@FindBy(xpath = "//div[@class='autocompleteWrapper']/input[@placeholder='Search Contacts']")
+	@FindBy(xpath = "//input[@title='Search Contacts']")
 	WebElement searchContacts;
 
 	@FindBy(xpath = "//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[contains(text(), 'Body')]/parent::label/parent::div/textarea")
@@ -248,7 +251,7 @@ public class LeadsPage extends ReusableLibrary {
 	/****
 	 * Ramya
 	 */
-	@FindBy(xpath="//a[contains(@title,'Show') and contains(@title,'more actions')]")
+	@FindBy(xpath="//a[contains(@title,'Show') and contains(@title,'more action')]")
 	WebElement selectNewEvent;
 
 	@FindBy(xpath="//div[@class='forceActionLink'][@title='New Event']")
@@ -965,11 +968,13 @@ public class LeadsPage extends ReusableLibrary {
 		} else {
 			report.updateTestLog("Lead Details Page", "Lead First Name is not updated:::",Status.FAIL);
 		}
-		Utility_Functions.timeWait(1);
+		Utility_Functions.xWaitForElementPresent(driver, cloneButton, 3);
 		Utility_Functions.xClick(driver, cloneButton, true);
-		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, cloneSaveNewButton, 3);
 		Utility_Functions.xClick(driver, cloneSaveNewButton, true);
-		Utility_Functions.timeWait(2);
+		report.updateTestLog("Lead Details Page", "Lead clone happened successfully:::",Status.PASS);
+
+/*		Utility_Functions.xWaitForElementPresent(driver, menu_Leads, 3);
 		Utility_Functions.xClick(driver, menu_Leads, true);
 		Utility_Functions.timeWait(2);
 		List<WebElement> leadList = driver.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
@@ -993,7 +998,7 @@ public class LeadsPage extends ReusableLibrary {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		}*/
 	}
 
 	/**
