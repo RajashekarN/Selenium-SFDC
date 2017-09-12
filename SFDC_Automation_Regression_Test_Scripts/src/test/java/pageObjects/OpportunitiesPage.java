@@ -487,7 +487,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	/****
 	 * Ramya
 	 */
-	@FindBy(xpath = "//a[@title='Show more actions for this record']")
+	@FindBy(xpath = "//a[contains(@title,'Show') and contains(@title,'more actions')]")
 	WebElement selectNewEvent;
 
 	@FindBy(xpath = "//div[@class='forceActionLink'][@title='New Event']")

@@ -156,7 +156,7 @@ public class ContactsPage extends ReusableLibrary {
 	@FindBy(xpath = "//span[contains(@class, 'slds-text-heading--small slds-truncate') and text() = 'Activities']")
 	WebElement relatedActivities;
 
-	@FindBy(xpath = "//a[@title='Show more actions for this record']")
+	@FindBy(xpath = "//a[contains(@title,'Show') and contains(@title,'more actions')]")
 	WebElement selectCreateFollowUpCustomActivity;
 
 	@FindBy(xpath = "//div[contains(@title, 'Create Follow-up Custom Activity')]")

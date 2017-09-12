@@ -143,7 +143,7 @@ public class PropertiesPage extends ReusableLibrary {
 	WebElement relatedActivities;
 
 
-	@FindBy(xpath="//a[@title='Show more actions for this record']")
+	@FindBy(xpath="//a[@title='//a[contains(@title,'Show') and contains(@title,'more actions')]")
 	WebElement selectCreateFollowUpCustomActivity;
 
 	@FindBy(xpath="//div[contains(@title, 'Create Follow-up Custom Activity')]")
