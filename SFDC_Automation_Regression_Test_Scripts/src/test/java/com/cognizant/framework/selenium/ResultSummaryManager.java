@@ -22,6 +22,7 @@ import com.cognizant.framework.Settings;
 import com.cognizant.framework.TimeStamp;
 import com.cognizant.framework.Util;
 
+import supportLibraries.HostName;
 import supportLibraries.SendDataDevOps;
 
 import com.cognizant.framework.ReportThemeFactory.Theme;
@@ -251,10 +252,17 @@ public class ResultSummaryManager {
 		resultObj.StartDateTime= startTime;
 		resultObj.EndDateTime= endTime;
 		resultObj.Metadata="";*/
-
-		resultObj.sendData(properties.getProperty("ApplicationId"), properties.getProperty("AutomationProcessId"), properties.getProperty("AutomationToolId"), properties.getProperty("Description"), 
-				properties.getProperty("Version"), properties.getProperty("Cycle"), hash.get("Passed").toString(), hash.get("Failed").toString(), "0", startTime, 
-				endTime, " ");			
+		HostName hostName = new HostName();
+		String ipAddress = hostName.hostName();
+		System.out.println("IP Address of the machine is :::"+ ipAddress);
+		if(ipAddress.equals("10.71.76.71")) {			
+			resultObj.sendData(properties.getProperty("ApplicationId"), properties.getProperty("AutomationProcessId"), properties.getProperty("AutomationToolId"), properties.getProperty("Description"), 
+					properties.getProperty("Version"), properties.getProperty("Cycle"), hash.get("Passed").toString(), hash.get("Failed").toString(), "0", startTime, 
+					endTime, " ");
+			System.out.println("Results has been pushed to Dev Ops database as the IP Address matches::IP Address - 10.71.76.71:::");
+		} else {
+			System.out.println("Results won't get pushed to Dev Ops database as the IP Address didn't match:::");
+		}
 	}
 	
 	/**
