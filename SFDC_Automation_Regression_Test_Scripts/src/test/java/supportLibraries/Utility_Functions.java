@@ -1092,9 +1092,14 @@ public class Utility_Functions extends ReusableLibrary {
 	}
 
 	public static void xclickOnFirstElementfromList(List<WebElement> list) {
-		for (WebElement elememt : list) {
-			elememt.click();
+		if(list.isEmpty()) {
+			System.out.println("List is Empty:::");
 			return;
+		} else {
+			for (WebElement elememt : list) {
+				elememt.click();
+				return;
+			}
 		}
 	}
 
@@ -1109,16 +1114,21 @@ public class Utility_Functions extends ReusableLibrary {
 		String text = null;
 		boolean isStatus = false;
 		Random random = new Random();
-		while (!isStatus) {
-			for (WebElement elememt : list) {
-				int randomValue = random.nextInt(list.size());
-				text = elememt.getText();
-				list.get(randomValue).click();
-				isStatus = true;
-				break;
+		if(list.isEmpty()) {
+			System.out.println("List is Empty:::");
+			return null;
+		} else {
+			while (!isStatus) {
+				for (WebElement elememt : list) {
+					int randomValue = random.nextInt(list.size());
+					text = elememt.getText();
+					list.get(randomValue).click();
+					isStatus = true;
+					break;
+				}
 			}
-		}
-		return text;
+			return text;
+		}		
 	}
 
 	/*
@@ -1131,15 +1141,20 @@ public class Utility_Functions extends ReusableLibrary {
 	public static String xclickgetTextofFirstElementfromList(List<WebElement> list) {
 		String text = null;
 		boolean isStatus = false;
-		while (!isStatus) {
-			for (WebElement elememt : list) {
-				text = elememt.getText();
-				elememt.click();
-				isStatus = true;
-				break;
+		if(list.isEmpty()) {
+			System.out.println("List is Empty:::");
+			return null;
+		} else {
+			while (!isStatus) {
+				for (WebElement elememt : list) {
+					text = elememt.getText();
+					elememt.click();
+					isStatus = true;
+					break;
+				}
 			}
-		}
-		return text;
+			return text;
+		}		
 	}
 
 	/*

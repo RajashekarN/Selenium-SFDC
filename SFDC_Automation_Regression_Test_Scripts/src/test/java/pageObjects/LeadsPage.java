@@ -13,6 +13,8 @@ import org.openqa.selenium.support.PageFactory;
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
+
+import bsh.util.Util;
 import pagesAPI.AccountsFunctions;
 import pagesAPI.SearchTextSOQL;
 import supportLibraries.Utility_Functions;
@@ -1414,12 +1416,24 @@ public class LeadsPage extends ReusableLibrary {
 	 *
 	 */	
 	public void leadsVerifyCustomEventPage() {
-
 		Utility_Functions.xWaitForElementPresent(driver, menu_Leads, 3);
 		Utility_Functions.xClick(driver, menu_Leads, true);
 		List<WebElement> allActiveLeadsList = driver.findElements(
 				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-		Utility_Functions.xclickgetTextofFirstElementfromList(allActiveLeadsList);
+		Utility_Functions.timeWait(2);		
+		if(allActiveLeadsList.isEmpty()) {
+			Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
+			Utility_Functions.xClick(driver, recentlyViewed, true);
+			Utility_Functions.xWaitForElementPresent(driver, allLeadsMenu, 3);
+			Utility_Functions.xClick(driver, allLeadsMenu, true);
+			Utility_Functions.timeWait(2);
+			List<WebElement> allLeadsList = driver.findElements(
+					By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xclickOnFirstElementfromList(allLeadsList);
+		} else {
+			Utility_Functions.xclickOnFirstElementfromList(allActiveLeadsList);
+		}
 		Utility_Functions.timeWait(5);
 		Utility_Functions.xWaitForElementPresent(driver, selectNewEvent, 3);
 		Utility_Functions.xClick(driver, selectNewEvent, true);
