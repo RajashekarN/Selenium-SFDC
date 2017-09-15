@@ -22,6 +22,7 @@ import com.cognizant.framework.Settings;
 import com.cognizant.framework.TimeStamp;
 import com.cognizant.framework.Util;
 
+import supportLibraries.HostName;
 import supportLibraries.SendDataDevOps;
 
 import com.cognizant.framework.ReportThemeFactory.Theme;
@@ -41,14 +42,12 @@ public class ResultSummaryManager {
 	private Date overallStartTime, overallEndTime;
 
 	private Properties properties;
-	private FrameworkParameters frameworkParameters = FrameworkParameters
-			.getInstance();
+	private FrameworkParameters frameworkParameters = FrameworkParameters.getInstance();
 
 	private static final ResultSummaryManager RESULT_SUMMARY_MANAGER = new ResultSummaryManager();
 	private SeleniumTestParameters testParameters;
-	
-	public supportLibraries.SendDataDevOps resultObj;
 
+	public supportLibraries.SendDataDevOps resultObj;
 
 	private ResultSummaryManager() {
 		// To prevent external instantiation of this class
@@ -74,8 +73,7 @@ public class ResultSummaryManager {
 	 * relative path)
 	 */
 	public void setRelativePath() {
-		String relativePath = new File(System.getProperty("user.dir"))
-				.getAbsolutePath();
+		String relativePath = new File(System.getProperty("user.dir")).getAbsolutePath();
 		if (relativePath.contains("supportlibraries")) {
 			relativePath = new File(System.getProperty("user.dir")).getParent();
 		}
@@ -105,11 +103,10 @@ public class ResultSummaryManager {
 	 */
 	public void initializeSummaryReport(int nThreads) {
 		initializeReportSettings();
-		ReportTheme reportTheme = ReportThemeFactory.getReportsTheme(Theme
-				.valueOf(properties.getProperty("ReportsTheme")));
+		ReportTheme reportTheme = ReportThemeFactory
+				.getReportsTheme(Theme.valueOf(properties.getProperty("ReportsTheme")));
 
-		summaryReport = new SeleniumReport(reportSettings, reportTheme,
-				testParameters);
+		summaryReport = new SeleniumReport(reportSettings, reportTheme, testParameters);
 
 		summaryReport.initialize();
 		summaryReport.initializeResultSummary();
@@ -126,28 +123,21 @@ public class ResultSummaryManager {
 
 		reportSettings = new ReportSettings(reportPath, "");
 
-		reportSettings.setDateFormatString(properties
-				.getProperty("DateFormatString"));
+		reportSettings.setDateFormatString(properties.getProperty("DateFormatString"));
 		reportSettings.setProjectName(properties.getProperty("ProjectName"));
-		reportSettings.setGenerateExcelReports(Boolean.parseBoolean(properties
-				.getProperty("ExcelReport")));
-		reportSettings.setGenerateHtmlReports(Boolean.parseBoolean(properties
-				.getProperty("HtmlReport")));
+		reportSettings.setGenerateExcelReports(Boolean.parseBoolean(properties.getProperty("ExcelReport")));
+		reportSettings.setGenerateHtmlReports(Boolean.parseBoolean(properties.getProperty("HtmlReport")));
 		reportSettings.setLinkTestLogsToSummary(true);
 	}
 
 	private void createResultSummaryHeader(int nThreads) {
-		summaryReport.addResultSummaryHeading(reportSettings.getProjectName()
-				+ " - Automation Execution Results Summary");
-		summaryReport.addResultSummarySubHeading(
-				"Date & Time",
-				": "
-						+ Util.getFormattedTime(overallStartTime,
-								properties.getProperty("DateFormatString")),
-				"OnError", ": " + properties.getProperty("OnError"));
-		summaryReport.addResultSummarySubHeading("Run Configuration", ": "
-				+ frameworkParameters.getRunConfiguration(), "No. of threads",
-				": " + nThreads);
+		summaryReport
+				.addResultSummaryHeading(reportSettings.getProjectName() + " - Automation Execution Results Summary");
+		summaryReport.addResultSummarySubHeading("Date & Time",
+				": " + Util.getFormattedTime(overallStartTime, properties.getProperty("DateFormatString")), "OnError",
+				": " + properties.getProperty("OnError"));
+		summaryReport.addResultSummarySubHeading("Run Configuration", ": " + frameworkParameters.getRunConfiguration(),
+				"No. of threads", ": " + nThreads);
 
 		summaryReport.addResultSummaryTableHeadings();
 	}
@@ -156,14 +146,12 @@ public class ResultSummaryManager {
 	 * Function to set up the error log file within the test report
 	 */
 	public void setupErrorLog() {
-		String errorLogFile = reportPath + Util.getFileSeparator()
-				+ "ErrorLog.txt";
+		String errorLogFile = reportPath + Util.getFileSeparator() + "ErrorLog.txt";
 		try {
 			System.setErr(new PrintStream(new FileOutputStream(errorLogFile)));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			throw new FrameworkException(
-					"Error while setting up the Error log!");
+			throw new FrameworkException("Error while setting up the Error log!");
 		}
 	}
 
@@ -182,10 +170,9 @@ public class ResultSummaryManager {
 	 * @param testStatus
 	 *            The Pass/Fail status of the test instance
 	 */
-	public void updateResultSummary(SeleniumTestParameters testParameters,
-			String testReportName, String executionTime, String testStatus) {
-		summaryReport.updateResultSummary(testParameters, testReportName,
-				executionTime, testStatus);
+	public void updateResultSummary(SeleniumTestParameters testParameters, String testReportName, String executionTime,
+			String testStatus) {
+		summaryReport.updateResultSummary(testParameters, testReportName, executionTime, testStatus);
 	}
 
 	/**
@@ -198,101 +185,90 @@ public class ResultSummaryManager {
 	 */
 	public void wrapUp(Boolean testExecutedInUnitTestFramework) {
 		overallEndTime = Util.getCurrentTime();
-		String totalExecutionTime = Util.getTimeDifference(overallStartTime,
-				overallEndTime);
-		HashMap<String,Integer>hash=summaryReport.addResultSummaryFooter(totalExecutionTime);
+		String totalExecutionTime = Util.getTimeDifference(overallStartTime, overallEndTime);
+		HashMap<String, Integer> hash = summaryReport.addResultSummaryFooter(totalExecutionTime);
 		setUpData(hash);
-		if (testExecutedInUnitTestFramework
-				&& System.getProperty("ReportPath") == null) {
-			File testNgResultSrc = new File(
-					frameworkParameters.getRelativePath()
-							+ Util.getFileSeparator()
-							+ properties.getProperty("TestNgReportPath")
-							+ Util.getFileSeparator()
-							+ frameworkParameters.getRunConfiguration());
-			File testNgResultCssFile = new File(
-					frameworkParameters.getRelativePath()
-							+ Util.getFileSeparator()
-							+ properties.getProperty("TestNgReportPath")
-							+ Util.getFileSeparator() + "testng.css");
-			File testNgResultDest = summaryReport
-					.createResultsSubFolder("TestNG Results");
+		if (testExecutedInUnitTestFramework && System.getProperty("ReportPath") == null) {
+			File testNgResultSrc = new File(frameworkParameters.getRelativePath() + Util.getFileSeparator()
+					+ properties.getProperty("TestNgReportPath") + Util.getFileSeparator()
+					+ frameworkParameters.getRunConfiguration());
+			File testNgResultCssFile = new File(frameworkParameters.getRelativePath() + Util.getFileSeparator()
+					+ properties.getProperty("TestNgReportPath") + Util.getFileSeparator() + "testng.css");
+			File testNgResultDest = summaryReport.createResultsSubFolder("TestNG Results");
 
 			try {
-				FileUtils.copyDirectoryToDirectory(testNgResultSrc,
-						testNgResultDest);
-				FileUtils.copyFileToDirectory(testNgResultCssFile,
-						testNgResultDest);
+				FileUtils.copyDirectoryToDirectory(testNgResultSrc, testNgResultDest);
+				FileUtils.copyFileToDirectory(testNgResultCssFile, testNgResultDest);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
 	}
 
-	
-	public void setUpData(HashMap<String,Integer>hash){
-		System.out.println("Passed:- "+hash.get("Passed"));
-		System.out.println("Failed:- "+hash.get("Failed"));
-		//Format formatter = new SimpleDateFormat("yyyy-MM-dd-hh.mm.ss");
-		
+	public void setUpData(HashMap<String, Integer> hash) {
+		System.out.println("Passed:- " + hash.get("Passed"));
+		System.out.println("Failed:- " + hash.get("Failed"));
+		// Format formatter = new SimpleDateFormat("yyyy-MM-dd-hh.mm.ss");
+
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 		String startTime = formatter.format(overallStartTime);
 		String endTime = formatter.format(overallEndTime);
-		resultObj= new SendDataDevOps();
-		/*	resultObj.ApplicationId= Integer.parseInt(properties.getProperty("ProjectID")) ;
-		resultObj.AutomationProcessId= Integer.parseInt(properties.getProperty("AutomationProcessId"));
-		resultObj.AutomationToolId= Integer.parseInt(properties.getProperty("AutomationToolId"));
-		resultObj.Version=Integer.parseInt(properties.getProperty("Version"));
-		resultObj.Cycle=properties.getProperty("Cycle");
-		resultObj.Description=properties.getProperty("Description");
-		resultObj.Passed=hash.get("Passed");
-		resultObj.Failed=hash.get("Failed");
-		resultObj.Blocked= 0;
-		resultObj.StartDateTime= startTime;
-		resultObj.EndDateTime= endTime;
-		resultObj.Metadata="";*/
-
-		resultObj.sendData(properties.getProperty("ApplicationId"), properties.getProperty("AutomationProcessId"), properties.getProperty("AutomationToolId"), properties.getProperty("Description"), 
-				properties.getProperty("Version"), properties.getProperty("Cycle"), hash.get("Passed").toString(), hash.get("Failed").toString(), "0", startTime, 
-				endTime, " ");			
+		resultObj = new SendDataDevOps();
+		/*
+		 * resultObj.ApplicationId=
+		 * Integer.parseInt(properties.getProperty("ProjectID")) ;
+		 * resultObj.AutomationProcessId=
+		 * Integer.parseInt(properties.getProperty("AutomationProcessId"));
+		 * resultObj.AutomationToolId=
+		 * Integer.parseInt(properties.getProperty("AutomationToolId"));
+		 * resultObj.Version=Integer.parseInt(properties.getProperty("Version"))
+		 * ; resultObj.Cycle=properties.getProperty("Cycle");
+		 * resultObj.Description=properties.getProperty("Description");
+		 * resultObj.Passed=hash.get("Passed");
+		 * resultObj.Failed=hash.get("Failed"); resultObj.Blocked= 0;
+		 * resultObj.StartDateTime= startTime; resultObj.EndDateTime= endTime;
+		 * resultObj.Metadata="";
+		 */
+		HostName hostName = new HostName();
+		String ipAddress = hostName.hostName();
+		System.out.println("IP Address of the machine is :::" + ipAddress);
+		if (ipAddress.equals("10.71.76.71")) {
+			resultObj.sendData(properties.getProperty("ApplicationId"), properties.getProperty("AutomationProcessId"),
+					properties.getProperty("AutomationToolId"), properties.getProperty("Description"),
+					properties.getProperty("Version"), properties.getProperty("Cycle"), hash.get("Passed").toString(),
+					hash.get("Failed").toString(), "0", startTime, endTime, " ");
+		} else {
+			System.out.println("Results won't push to Dev Ops database as the IP Address didn't match:::" + ipAddress);
+		}
 	}
-	
+
 	/**
 	 * Function to launch the summary report at the end of the test batch
 	 * execution
-	 *//*
-	public void launchResultSummary() {
-		if (reportSettings.shouldGenerateHtmlReports()) {
-			try {
-				*//**
-				 * below logic is used for sending mails
-				 *//*
-				// sendReport(reportPath + "\\HTML Results\\Summary.Html");
-				if (checkExceptionInErrorLogTxt()) {
-					File f = new File(reportPath + "\\ErrorLog.txt");
-					java.awt.Desktop.getDesktop().edit(f);
-				} else {
-					File htmlFile = new File(reportPath
-							+ "\\HTML Results\\Summary.Html");
-					java.awt.Desktop.getDesktop().browse(htmlFile.toURI());
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		} else if (reportSettings.shouldGenerateExcelReports()) {
-			try {
-				*//**
-				 * below logic is used for sending mails
-				 *//*
-				// sendReport(reportPath + "\\Excel Results\\Summary.xls");
-				File excelFile = new File(reportPath
-						+ "\\Excel Results\\Summary.xls");
-				java.awt.Desktop.getDesktop().open(excelFile);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}*/
+	 */
+	/*
+	 * public void launchResultSummary() { if
+	 * (reportSettings.shouldGenerateHtmlReports()) { try {
+	 *//**
+		 * below logic is used for sending mails
+		 */
+
+	/*
+	 * // sendReport(reportPath + "\\HTML Results\\Summary.Html"); if
+	 * (checkExceptionInErrorLogTxt()) { File f = new File(reportPath +
+	 * "\\ErrorLog.txt"); java.awt.Desktop.getDesktop().edit(f); } else { File
+	 * htmlFile = new File(reportPath + "\\HTML Results\\Summary.Html");
+	 * java.awt.Desktop.getDesktop().browse(htmlFile.toURI()); } } catch
+	 * (IOException e) { e.printStackTrace(); } } else if
+	 * (reportSettings.shouldGenerateExcelReports()) { try {
+	 *//**
+		 * below logic is used for sending mails
+		 *//*
+		 * // sendReport(reportPath + "\\Excel Results\\Summary.xls"); File
+		 * excelFile = new File(reportPath + "\\Excel Results\\Summary.xls");
+		 * java.awt.Desktop.getDesktop().open(excelFile); } catch (IOException
+		 * e) { e.printStackTrace(); } } }
+		 */
 
 	@SuppressWarnings("resource")
 	private boolean checkExceptionInErrorLogTxt() throws IOException {
@@ -328,7 +304,7 @@ public class ResultSummaryManager {
 			try {
 				FileUtils.cleanDirectory(dest);
 			} catch (Exception e) {
-				
+
 			}
 			FileUtils.copyDirectory(source, dest);
 
