@@ -47,7 +47,7 @@ public class AccountsPage extends ReusableLibrary {
 	@FindBy(xpath = "//button/span[text()='View All Fields']")
 	WebElement viewAllFieldsButton;
 
-	@FindBy(xpath = "//a[@class='tabHeader']//span[text()='Related']")
+	@FindBy(css = "div.region-main a.tabHeader[title='Related']")
 	WebElement related_Accounts;
 
 	/*	@FindBy(xpath = "//article[contains(@class,'Private Notes')]//div[text()='New']")
@@ -86,7 +86,7 @@ public class AccountsPage extends ReusableLibrary {
 	@FindBy(xpath = "//button[@class='slds-button slds-button--neutral uiButton--default uiButton--brand uiButton forceActionButton']/span[contains(text(), 'Save')]")
 	WebElement saveButton;
 
-	@FindBy(xpath = "//span[@class='toastMessage slds-text-heading--small forceActionsText'][contains(text(), 'was created.')]")
+	@FindBy(css = "span.toastMessage")
 	WebElement wasCreated;
 
 	@FindBy(xpath = ".//div[@class='changeRecordTypeOptionRightColumn']/span[text()='Personal Information']/parent::div/parent::label/div[1]/span")
@@ -774,11 +774,9 @@ public class AccountsPage extends ReusableLibrary {
 		List<WebElement> accountList = driver
 				.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
 		Utility_Functions.xclickRandomElement(accountList);
-		Utility_Functions.timeWait(3);
 		List<WebElement> accountsPageInfoList = driver
 				.findElements(By.xpath("//span[contains(@class,'header-title')]"));
 		Utility_Functions.xScrollWindow(driver);
-		Utility_Functions.timeWait(1);
 		String[] linkTexts = new String[accountsPageInfoList.size()];
 		int i = 0, count = 0;
 		try {
@@ -812,7 +810,8 @@ public class AccountsPage extends ReusableLibrary {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e.getMessage());
+			report.updateTestLog("Exception occurred in acccount Detail Landing Page",
+					e.getMessage()+":::", Status.FAIL);
 		}
 
 	}
@@ -826,29 +825,24 @@ public class AccountsPage extends ReusableLibrary {
 
 	public void addPrivateNote() {
 		hp.validate_Menu_Accounts();
-		Utility_Functions.timeWait(4);
 		List<WebElement> accountList = driver
-				.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+				.findElements(By.cssSelector("div.listViewContent table.forceRecordLayout a.outputLookupLink"));
 		String accountSelected = Utility_Functions.xclickgetTextofFirstElementfromList(accountList);
-		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementPresent(driver, related_Accounts, 3);
 		Utility_Functions.xClick(driver, related_Accounts, true);
-		Utility_Functions.timeWait(2);
+
 		try {
 			Utility_Functions.xScrollWindow(driver);
-			Utility_Functions.timeWait(2);
 			Utility_Functions.xScrollWindowTop(driver);
-			Utility_Functions.timeWait(2);
 			Utility_Functions.xClick(driver, new_PrivateNotes, true);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
+			report.updateTestLog("Failed to Scroll", e.getMessage(), Status.FAIL);
 		}
-		Utility_Functions.timeWait(4);
 		Utility_Functions.xClick(driver, next_PrivateNotes, true);
-		Utility_Functions.timeWait(2);
 		String accountPopulated = account_PrivateNotes.getText();
 		Utility_Functions.xSendKeys(driver, title_PrivateNotes, dataTable.getData("General_Data", "Title"));
-		Utility_Functions.timeWait(1);
 		if (accountSelected.equals(accountPopulated)) {
 			report.updateTestLog("Verify Private Note", "Account populated on Private Note is same as the one "
 					+ "selected while creating the Private Note", Status.PASS);
@@ -857,21 +851,18 @@ public class AccountsPage extends ReusableLibrary {
 					"Account populated on Private Note is not the one " + "selected while creating the Private Note",
 					Status.FAIL);
 		}
-		Utility_Functions.timeWait(1);
+		Utility_Functions.xWaitForElementPresent(driver, searchContacts, 4);
 		Utility_Functions.xClick(driver, searchContacts, true);
-		List<WebElement> contactsList = driver.findElements(By.xpath(
-				"//div[@class='lookup__menu uiAbstractList uiAutocompleteList uiInput uiAutocomplete uiInput--default uiInput--lookup']//div[@class='listContent']/ul/li"));
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xclickOnFirstElementfromList(contactsList);
-		Utility_Functions.timeWait(2);
+		WebElement firstLookupElement = driver.findElement(By.cssSelector("ul>li.forceSearchInputLookupDesktopOption:nth-child(1)"));
+		Utility_Functions.xWaitForElementPresent(driver, firstLookupElement, 4);
+		Utility_Functions.xClick(driver, firstLookupElement, false);
 		Utility_Functions.xSendKeys(driver, body, dataTable.getData("General_Data", "Body"));
-		Utility_Functions.timeWait(2);
 		Utility_Functions.xClick(driver, saveButton, true);
-		Utility_Functions.timeWait(4);
-		if (wasCreated.isDisplayed()) {
+		Utility_Functions.xWaitForElementPresent(driver, wasCreated, 4);
+		if (wasCreated.getText().contains("was created")) {
 			report.updateTestLog("Verify Private Note", "Private Note is created successfully", Status.PASS);
 		} else {
-			report.updateTestLog("Verify Private Note", "Private Note is created successfully", Status.FAIL);
+			report.updateTestLog("Verify Private Note", "Private Note creation Failed", Status.FAIL);
 		}
 
 	}
