@@ -308,6 +308,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//select[contains(@id,'assignmentType')]")
 	WebElement assignmentTypeOpp;
 
+	@FindBy(xpath = "//select[contains(@id,'assignmentType')]//option[@selected='selected']")
+	WebElement assignmentTypeOppValue;
+
 	@FindBy(xpath = "//input[contains(@id,'closeDate')]")
 	WebElement closeDateOpp;
 
@@ -343,10 +346,10 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//table[contains(@class,'forceRecordLayout')]//tr[2]//span[contains(@class,'forceOutputCurrency')]")
 	WebElement installmentAmountTwo;
-	
+
 	@FindBy(xpath = "//span[text()='Opportunity Installments']/parent::span[text()='View All']")
 	WebElement installmentsViewAll;
-	
+
 	@FindBy(xpath = "//nav[@role='navigation']/ol[contains(@class,'slds-breadcrumb')]/li[2]")
 	WebElement opportunityNameLink;
 
@@ -482,7 +485,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//span[contains(@class,'toastMessage') and contains(@class,'slds-text-heading--small')]")
 	WebElement opportunityPropertyCreated;
 
-
+	@FindBy(xpath="//h2[@id='header']//span[1]")
+	WebElement headerSectionsOpp;
 
 	/****
 	 * Ramya
@@ -2566,7 +2570,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 * @author Vishnuvardhan
 	 *
 	 */
-	
+
 
 	public void multipleInstallmentsOpportunityEvenPercent() {
 		multipleInstallmentsFunction();
@@ -2612,7 +2616,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			agencyBrokerage();
 		}
 		Utility_Functions.timeWait(2);
-	/*	Utility_Functions.xWaitForElementPresent(driver, related, 3);
+		/*	Utility_Functions.xWaitForElementPresent(driver, related, 3);
 		Utility_Functions.xClick(driver, related, true);*/
 		driver.navigate().refresh();
 		Utility_Functions.xWaitForElementPresent(driver, related, 3);
@@ -3013,6 +3017,16 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		List<WebElement> opportunitiesList = driver.findElements(By.xpath(
 				"//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'006')]"));
+		if(opportunitiesList.isEmpty()) {
+			Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
+			Utility_Functions.xClick(driver, recentlyViewed, true);
+			Utility_Functions.xWaitForElementPresent(driver, allActiveOpportunities, 3);
+			Utility_Functions.xClick(driver, allActiveOpportunities, true);
+			Utility_Functions.timeWait(2);
+			List<WebElement> opportunitiesListActive = driver.findElements(By.xpath(
+					"//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'006')]"));
+			Utility_Functions.xclickRandomElement(opportunitiesListActive);
+		}
 		Utility_Functions.xclickRandomElement(opportunitiesList);
 	}
 
@@ -7273,4 +7287,99 @@ public class OpportunitiesPage extends ReusableLibrary {
 		}
 
 	}
+	/**
+	 * Validating the Clone and Edit buttons in Opportunity VF Page 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+
+	public void cloneAndEditButtonsOpportunity() {
+		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
+		opportunityEligibility();
+		Utility_Functions.xWaitForElementPresent(driver, edit, 3);
+		Utility_Functions.xClick(driver, edit, true);
+		report.updateTestLog("Verify Opportunity Edit/Clone", "Edit button is present on Opportunity",  Status.PASS);
+		if((dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) || (dataTable.getData("General_Data", "TC_ID").contains("GWSAMERBroker"))) {
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xSwitchtoFrame(driver, closeDateOpp);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xWaitForElementPresent(driver, closeDateOpp, 3);
+			try {
+				if(assignmentTypeOppValue.getText().equals("Building Agency Lease")) {
+					Utility_Functions.xSelectDropdownByIndex(assignmentTypeOpp, 2);
+				} else if(assignmentTypeOppValue.getText().equals("Building Agency Sale")) {
+					Utility_Functions.xSelectDropdownByIndex(assignmentTypeOpp, 3);
+				} else if(assignmentTypeOppValue.getText().equals("Consulting")) {
+					Utility_Functions.xSelectDropdownByIndex(assignmentTypeOpp, 2);
+				}
+			} catch (Exception e) {
+				Utility_Functions.xSelectDropdownByIndex(assignmentTypeOpp, 1);
+			}
+			report.updateTestLog("Verify Opportunity Edit/Clone", "Oportunity Assignment Type is changed to Consulting",  Status.PASS);
+			Utility_Functions.timeWait(1);
+			Random random = new Random();
+			int value = random.nextInt(999);
+			Utility_Functions.xWaitForElementPresent(driver, totalSizeOpp, 3);
+			if(totalSizeOpp.getText().equals("")) {
+				Utility_Functions.xSendKeys(driver, totalSizeOpp, Integer.toString(value));			
+			}		
+			Utility_Functions.xWaitForElementPresent(driver, saveNewOpportunity, 3);
+			Utility_Functions.xClick(driver, saveNewOpportunity, true);
+			Utility_Functions.timeWait(2);
+			report.updateTestLog("Verify Opportunity Edit/Clone","Opportunity edited and saved successfully",  Status.PASS);
+			driver.navigate().refresh();
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xSwitchtoFrame(driver, clone);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xWaitForElementPresent(driver, clone, 3);
+			Utility_Functions.xClick(driver, clone, true);
+			report.updateTestLog("Verify Opportunity Edit/Clone", "Clone button is present on Opportunity",  Status.PASS);
+			Utility_Functions.xWaitForElementPresent(driver, save, 3);
+			Utility_Functions.xClick(driver, save, true);
+			report.updateTestLog("Verify Opportunity Edit/Clone","Opportunity is cloned successfully",  Status.PASS);
+		} else if((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) || (dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) || (dataTable.getData("General_Data", "TC_ID").contains("GWSAMERManager")) || (dataTable.getData("General_Data", "TC_ID").contains("VASAMERManager"))
+				 || (dataTable.getData("General_Data", "TC_ID").contains("ASAMERManager"))) {
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xScrollWindowToElement(driver, estimatedGrossFeeField);
+			Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeField, 3);
+			Utility_Functions.xClick(driver, estimatedGrossFeeField, true);
+			if(estimatedGrossFeeField.getText().equals("10,000.00")) {
+				Utility_Functions.xSendKeys(driver, estimatedGrossFeeField, "15,000.00");
+			} else {
+				Utility_Functions.xSendKeys(driver, estimatedGrossFeeField, "10,000.00");
+			}
+			Utility_Functions.xWaitForElementPresent(driver, save, 3);
+			Utility_Functions.xClick(driver, save, true);
+			Utility_Functions.timeWait(1);
+			Utility_Functions.xWaitForElementPresent(driver, related, 3);
+			report.updateTestLog("Verify Opportunity Edit/Clone","Opportunity edited and saved successfully",  Status.PASS);
+			if(dataTable.getData("General_Data", "TC_ID").contains("GWSAMERManager")) {
+				Utility_Functions.xWaitForElementClickable(driver, clone, 3);
+				Utility_Functions.xClick(driver, clone, true);
+				report.updateTestLog("Verify Opportunity Edit/Clone", "Clone button is present on Opportunity",  Status.PASS);
+				Utility_Functions.xWaitForElementPresent(driver, save, 3);
+				Utility_Functions.xClick(driver, save, true);
+				report.updateTestLog("Verify Opportunity Edit/Clone","Opportunity is cloned successfully",  Status.PASS);
+			}		
+		}
+	}
+	
+	/**
+	 * Validating the  Related lists of an opportunity in the Opportunity Landing page 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	static ArrayList<String> opportunityRelatedHeaderSection = new ArrayList<String>();
+	public void opportunityRelatedHeaderSection() {
+
+		opportunityRelatedHeaderSection.add("Property");
+		opportunityRelatedHeaderSection.add("Contact Roles");
+		opportunityRelatedHeaderSection.add("Notes");
+		opportunityRelatedHeaderSection.add("Files");
+ 
+		System.out.println("Opportunity Related Header Section are: " +opportunityRelatedHeaderSection);
+	}
+	
 }

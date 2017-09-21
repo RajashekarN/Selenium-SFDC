@@ -909,6 +909,14 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 		sfOpportunitiesPage.headersOfOfferObject();
 		
 	}
+	/**
+	 * Validating the Clone and Edit buttons in Opportunity VF Page 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void bc_cloneAndEditButtonsOpportunity() {
+		sfOpportunitiesPage.cloneAndEditButtonsOpportunity();
+	}
 	
-
 }
