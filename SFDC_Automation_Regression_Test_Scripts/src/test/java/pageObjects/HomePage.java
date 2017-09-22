@@ -85,7 +85,7 @@ public class HomePage extends ReusableLibrary {
 	@FindBy(xpath="//div[@class='slds-p-around--medium']/a[text()='SFDC Training']")
 	WebElement SFDCTrainingLink;
 
-	@FindBy(xpath="//h2[@id='header']/span[@title='Recent Records']")
+	@FindBy(xpath="//h2[contains(@id,'homeCardHeader')]/span[text()='Recent Records']")
 	WebElement recentRecords;
 
 	@FindBy(xpath = "//*[text()='More']")
@@ -491,7 +491,7 @@ public class HomePage extends ReusableLibrary {
 	 */	
 
 	public void validateHomePageRecentRecords() {
-		Utility_Functions.timeWait(4);
+		Utility_Functions.xWaitForElementPresent(driver, recentRecords, 3);
 		if(recentRecords.isDisplayed()) {
 			report.updateTestLog("Verify Home Page Recent Records", "The Recent Records is present", Status.PASS);
 		} else {
