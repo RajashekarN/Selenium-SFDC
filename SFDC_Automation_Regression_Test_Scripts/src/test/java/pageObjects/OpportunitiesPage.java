@@ -987,7 +987,82 @@ public class OpportunitiesPage extends ReusableLibrary {
 	
 	@FindBy(xpath="//button[contains(text(), 'Add')]")
 	WebElement addButtonOpportunitySharing;
-
+	
+	@FindBy(xpath="//span[contains(text(),'Lease From')]/parent::label/parent::div//input")
+	WebElement leaseFromEditOpportunity;
+	
+	@FindBy(xpath="//span[contains(text(),'Lease To')]/parent::label/parent::div//input")
+	WebElement leaseToEditOpportunity;
+	
+	@FindBy(xpath="//span[contains(text(),'Lease Term (Months)')]/parent::label/following-sibling::input")
+	WebElement leaseTermEditOpportunity;
+	
+	@FindBy(xpath="//span[contains(text(),'Lease Rate/Rent')]/parent::label/following-sibling::input")
+	WebElement leaseRent;
+	
+	@FindBy(xpath="//span[contains(text(),'Lease Rate/Rent Basis')]/parent::span/following-sibling::div//a[contains(@class,'select')]")
+    WebElement leaseRentBasis;
+	
+	@FindBy(xpath="//a[contains(@title,'Per Month')]")
+	WebElement leaseRentBasisValue;
+	
+	@FindBy(xpath="//span[contains(text(),'CBRE Role')]/parent::span/following-sibling::div//a[contains(@class,'select')]")
+	WebElement cbreRole;
+	
+	@FindBy(xpath="//a[contains(@title,'Buyer Rep')]")
+	WebElement cbreRoleValue;
+	
+	@FindBy(xpath="//span[contains(text(),'Lease Rate/Rent Type')]/parent::span/following-sibling::div//a[contains(@class,'select')]")
+	WebElement leaseRentType;
+	
+	@FindBy(xpath="//a[contains(@title,'Full Service Gross')]")
+	WebElement leaseRentTypeValue;
+	
+	@FindBy(xpath="//select[contains(@id,'assignmentType')]//option[@value='Consulting']")
+	WebElement assignmentTypeValueNewOpp;
+	
+	@FindBy(xpath="//span[contains(text(),'Remarks')]/parent::label/following-sibling::textarea")
+	WebElement remarks;
+	
+	@FindBy(xpath="//span[contains(text(),'Other Incentives')]/parent::label/following-sibling::textarea")
+	WebElement otherIncentives;
+	
+	@FindBy(xpath="//span[contains(text(),'Rent Per Annum')]/parent::label/following-sibling::input")
+	WebElement rentPerAnnum;
+	
+	@FindBy(xpath="//span[contains(text(),'Months Rent Free')]/parent::label/following-sibling::input")
+	WebElement monthsRentFree;
+	
+	@FindBy(xpath="//span[contains(text(),'Rent Review Date')]/parent::label/parent::div//input")
+	WebElement rentReviewDate;
+	
+	@FindBy(xpath="//span[contains(text(),'Break Date')]/parent::label/parent::div//input")
+	WebElement breakDate;
+	
+	@FindBy(xpath="//span[contains(text(),'Conversion Type')]/parent::span/following-sibling::div//a[contains(@class,'select')]")
+	WebElement emeaConversionType;
+	
+	@FindBy(xpath="//a[contains(@title,'Pitch')]")
+	WebElement emeaConversionTypeValue;
+	
+	@FindBy(xpath="//span[contains(text(),'Pitch Date')]/parent::label/parent::div//input")
+	WebElement pitchDate;
+	
+	@FindBy(xpath="//span[contains(text(),'Address Line 1')]/parent::label/following-sibling::input")
+	WebElement addressLine;
+	
+	@FindBy(xpath="//span[contains(text(),'City')]/parent::label/following-sibling::input")
+	WebElement city;
+	
+	@FindBy(xpath="//span[contains(text(),'Postcode')]/parent::label/following-sibling::input")
+	WebElement postCode;
+	
+	@FindBy(xpath="//span[contains(text(),'CBRE Market Group')]/parent::span/following-sibling::div//a[contains(@class,'select')]")
+	WebElement cbreMarketGroupEMEA;
+	
+	@FindBy(xpath="//a[contains(@title,'City')]")
+	WebElement cbreMarketGroupEMEAValue;
+	
 	HomePage hp = new HomePage(scriptHelper);
 	SearchTextSOQL searchOpportunity = new SearchTextSOQL(scriptHelper);
 	OpportunitiesFunctions opportunitiesFunctions = new OpportunitiesFunctions(scriptHelper);
@@ -7602,11 +7677,11 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		accountName.sendKeys(Keys.ENTER);
 		Utility_Functions.timeWait(2);
-		if((dataTable.getData("General_Data", "TC_ID").contains("AMER"))||(dataTable.getData("General_Data", "TC_ID").contains("APAC"))){
+		if((dataTable.getData("General_Data", "TC_ID").contains("OBAMER"))||(dataTable.getData("General_Data", "TC_ID").contains("APAC"))){
 		Utility_Functions.xWaitForElementPresent(driver,assignmentTypeOpp, 4);
 		Utility_Functions.xClick(driver,assignmentTypeOpp, true);
-		Utility_Functions.xWaitForElementPresent(driver,assignmentTypeOppValue, 4);
-		Utility_Functions.xClick(driver,assignmentTypeOppValue, true);
+		Utility_Functions.xWaitForElementPresent(driver,assignmentTypeValueNewOpp, 4);
+		Utility_Functions.xClick(driver,assignmentTypeValueNewOpp, true);
 		Utility_Functions.timeWait(2);
 		}
 		Utility_Functions.xWaitForElementPresent(driver,salesStageEMEANewOpportunity, 4);
@@ -7620,7 +7695,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		}
 		String environment1 = loginPage.initializeEnvironment();
 		if (environment1.equals("FTE")) {
-			if((dataTable.getData("General_Data", "TC_ID").contains("AMER"))||(dataTable.getData("General_Data", "TC_ID").contains("APAC"))) {
+			if((dataTable.getData("General_Data", "TC_ID").contains("OBAMER"))||(dataTable.getData("General_Data", "TC_ID").contains("APAC"))) {
 			Utility_Functions.xWaitForElementPresent(driver,estimatedGrossFee, 5);
 			Utility_Functions.xSendKeys(driver,estimatedGrossFee, dataTable.getData("General_Data", "InstallmentAmount"));
 			}
@@ -7670,13 +7745,123 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xScrollWindowTop(driver);
 		Utility_Functions.timeWait(2);
+
+		if(dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) {
+		
 		Utility_Functions.xWaitForElementPresent(driver,salesStageEditOpp, 4);
 		Utility_Functions.xClick(driver,salesStageEditOpp, true);
 		Utility_Functions.xWaitForElementPresent(driver,salesStageEditOpportunityValue, 4);
 		Utility_Functions.xClick(driver,salesStageEditOpportunityValue, true);
-		if(dataTable.getData("General_Data", "TC_ID").contains("EMEA")) {
+		System.out.println(Calendar.getInstance());
+		DateFormat dateFormat1 = new SimpleDateFormat("MM/dd/yyyy");
+		Date date1 = new Date();
+		Utility_Functions.xWaitForElementPresent(driver,leaseFromEditOpportunity, 4);
+		Utility_Functions.xSendKeys(driver,leaseFromEditOpportunity, dateFormat1.format(date1).toString());
+		System.out.println(Calendar.getInstance());
+		DateFormat dateFormat2 = new SimpleDateFormat("MM/dd/yyyy");
+		Date date2 = new Date();
+		Utility_Functions.xWaitForElementPresent(driver,leaseToEditOpportunity, 4);
+		Utility_Functions.xSendKeys(driver,leaseToEditOpportunity, dateFormat2.format(date2).toString());
+		Utility_Functions.xWaitForElementPresent(driver,leaseTermEditOpportunity, 4);
+		Utility_Functions.xSendKeys(driver,leaseTermEditOpportunity, "1");
+		Utility_Functions.xWaitForElementPresent(driver,leaseRent, 4);
+		Utility_Functions.xSendKeys(driver,leaseRent, dataTable.getData("General_Data", "InstallmentAmount"));
+		Utility_Functions.xWaitForElementPresent(driver,leaseRentBasis, 4);
+		Utility_Functions.xClick(driver,leaseRentBasis, true);
+		Utility_Functions.xWaitForElementPresent(driver,leaseRentBasisValue, 4);
+		Utility_Functions.xClick(driver,leaseRentBasisValue, true);
+		Utility_Functions.xWaitForElementPresent(driver,cbreRole, 4);
+		Utility_Functions.xClick(driver,cbreRole, true);
+		Utility_Functions.xWaitForElementPresent(driver,cbreRoleValue, 4);
+		Utility_Functions.xClick(driver,cbreRoleValue, true);
+		Utility_Functions.xWaitForElementPresent(driver,leaseRentType, 4);
+		Utility_Functions.xClick(driver,leaseRentType, true);
+		Utility_Functions.xWaitForElementPresent(driver,leaseRentTypeValue, 4);
+		Utility_Functions.xClick(driver,leaseRentTypeValue, true);
+		}else if(dataTable.getData("General_Data", "TC_ID").contains("OBAPAC")) {
+	
+		Utility_Functions.xWaitForElementPresent(driver,salesStageEditOpp, 4);
+		Utility_Functions.xClick(driver,salesStageEditOpp, true);
+		Utility_Functions.xWaitForElementPresent(driver,salesStageEditOpportunityValue, 4);
+		Utility_Functions.xClick(driver,salesStageEditOpportunityValue, true);
+		System.out.println(Calendar.getInstance());
+		DateFormat dateFormat1 = new SimpleDateFormat("MM/dd/yyyy");
+		Date date1 = new Date();
+		Utility_Functions.xWaitForElementPresent(driver,leaseFromEditOpportunity, 4);
+		Utility_Functions.xSendKeys(driver,leaseFromEditOpportunity, dateFormat1.format(date1).toString());
+		System.out.println(Calendar.getInstance());
+		DateFormat dateFormat2 = new SimpleDateFormat("MM/dd/yyyy");
+		Date date2 = new Date();
+		Utility_Functions.xWaitForElementPresent(driver,leaseToEditOpportunity, 4);
+		Utility_Functions.xSendKeys(driver,leaseToEditOpportunity, dateFormat2.format(date2).toString());
+		Utility_Functions.xWaitForElementPresent(driver,leaseTermEditOpportunity, 4);
+		Utility_Functions.xSendKeys(driver,leaseTermEditOpportunity, "1");
+		Utility_Functions.xWaitForElementPresent(driver,leaseRent, 4);
+		Utility_Functions.xSendKeys(driver,leaseRent, dataTable.getData("General_Data", "InstallmentAmount"));
+		Utility_Functions.xWaitForElementPresent(driver,leaseRentBasis, 4);
+		Utility_Functions.xClick(driver,leaseRentBasis, true);
+		Utility_Functions.xWaitForElementPresent(driver,leaseRentBasisValue, 4);
+		Utility_Functions.xClick(driver,leaseRentBasisValue, true);
+		Utility_Functions.xWaitForElementPresent(driver,cbreRole, 4);
+		Utility_Functions.xClick(driver,cbreRole, true);
+		Utility_Functions.xWaitForElementPresent(driver,cbreRoleValue, 4);
+		Utility_Functions.xClick(driver,cbreRoleValue, true);
+		Utility_Functions.xWaitForElementPresent(driver,remarks, 4);
+		Utility_Functions.xSendKeys(driver,remarks, "This is Test");
+		
+		}else if(dataTable.getData("General_Data", "TC_ID").contains("OBEMEA")) {	
+		Utility_Functions.xWaitForElementPresent(driver,cbreMarketGroupEMEA, 4);
+		Utility_Functions.xClick(driver,cbreMarketGroupEMEA, true);
+		Utility_Functions.xWaitForElementPresent(driver,cbreMarketGroupEMEAValue, 4);
+		Utility_Functions.xClick(driver,cbreMarketGroupEMEAValue, true);
 		Utility_Functions.xWaitForElementPresent(driver,netFeeOpportunityEdit, 4);
 		Utility_Functions.xSendKeys(driver,netFeeOpportunityEdit, dataTable.getData("General_Data", "InstallmentAmount"));
+		Utility_Functions.xWaitForElementPresent(driver,addressLine, 2);
+		Utility_Functions.xSendKeys(driver,addressLine, dataTable.getData("General_Data", "Street"));
+		Utility_Functions.xWaitForElementPresent(driver,city, 2);
+		Utility_Functions.xSendKeys(driver,addressLine, dataTable.getData("General_Data", "City"));
+		Utility_Functions.xWaitForElementPresent(driver,postCode, 2);
+		Utility_Functions.xSendKeys(driver,postCode, dataTable.getData("General_Data", "Zipcode"));
+		Utility_Functions.xWaitForElementPresent(driver,emeaConversionType, 4);
+		Utility_Functions.xClick(driver,emeaConversionType, true);
+		Utility_Functions.xWaitForElementPresent(driver,emeaConversionTypeValue, 4);
+		System.out.println(Calendar.getInstance());
+		DateFormat dateFormat5 = new SimpleDateFormat("MM/dd/yyyy");
+		Date date5 = new Date();
+		Utility_Functions.xWaitForElementPresent(driver,pitchDate, 4);
+		Utility_Functions.xSendKeys(driver,pitchDate, dateFormat5.format(date5).toString());
+		Utility_Functions.xClick(driver,emeaConversionTypeValue, true);
+		Utility_Functions.xWaitForElementPresent(driver,salesStageEditOpp, 4);
+		Utility_Functions.xClick(driver,salesStageEditOpp, true);
+		Utility_Functions.xWaitForElementPresent(driver,salesStageEditOpportunityValue, 4);
+		Utility_Functions.xClick(driver,salesStageEditOpportunityValue, true);
+		System.out.println(Calendar.getInstance());
+		DateFormat dateFormat1 = new SimpleDateFormat("MM/dd/yyyy");
+		Date date1 = new Date();
+		Utility_Functions.xWaitForElementPresent(driver,leaseFromEditOpportunity, 4);
+		Utility_Functions.xSendKeys(driver,leaseFromEditOpportunity, dateFormat1.format(date1).toString());
+		System.out.println(Calendar.getInstance());
+		DateFormat dateFormat2 = new SimpleDateFormat("MM/dd/yyyy");
+		Date date2 = new Date();
+		Utility_Functions.xWaitForElementPresent(driver,leaseToEditOpportunity, 4);
+		Utility_Functions.xSendKeys(driver,leaseToEditOpportunity, dateFormat2.format(date2).toString());
+		Utility_Functions.xWaitForElementPresent(driver,otherIncentives, 4);
+		Utility_Functions.xSendKeys(driver,otherIncentives, "N/A");
+		Utility_Functions.xWaitForElementPresent(driver,rentPerAnnum, 4);
+		Utility_Functions.xSendKeys(driver,rentPerAnnum, dataTable.getData("General_Data", "InstallmentAmount"));
+		Utility_Functions.xWaitForElementPresent(driver,monthsRentFree, 4);
+		Utility_Functions.xSendKeys(driver,monthsRentFree, "0");
+		System.out.println(Calendar.getInstance());
+		DateFormat dateFormat3 = new SimpleDateFormat("MM/dd/yyyy");
+		Date date3 = new Date();
+		Utility_Functions.xWaitForElementPresent(driver,rentReviewDate, 4);
+		Utility_Functions.xSendKeys(driver,rentReviewDate, dateFormat3.format(date3).toString());
+		System.out.println(Calendar.getInstance());
+		DateFormat dateFormat4 = new SimpleDateFormat("MM/dd/yyyy");
+		Date date4 = new Date();
+		Utility_Functions.xWaitForElementPresent(driver,breakDate, 4);
+		Utility_Functions.xSendKeys(driver,breakDate, dateFormat4.format(date4).toString());
+		
 		}
 		Utility_Functions.xWaitForElementPresent(driver,saveEditOpp, 4);
 		Utility_Functions.xClick(driver,saveEditOpp, true);
@@ -7710,15 +7895,18 @@ public class OpportunitiesPage extends ReusableLibrary {
 		System.out.println("The labels for the New Installment Page are " + NewInstallmentPageFieldsList);
 
 	}
-	public void validateCreationOfNewInstallment() {	
+	public void validateCreationOfNewInstallment() {
+		Utility_Functions.xWaitForElementPresent(driver,menu_Opportunities, 4);
 		Utility_Functions.xClick(driver, menu_Opportunities, true);
+		Utility_Functions.xWaitForElementPresent(driver,recentlyViewed, 4);
+		Utility_Functions.xClick(driver,recentlyViewed, true);
+		Utility_Functions.xWaitForElementPresent(driver,allActiveOpportunities, 4);
+		Utility_Functions.xClick(driver,allActiveOpportunities, true);
 		Utility_Functions.timeWait(2);
 		List<WebElement> opportunitiesList = driver.findElements(By.xpath(
 				"//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'006')]"));
 		Utility_Functions.xclickRandomElement(opportunitiesList);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xWaitForElementPresent(driver, related, 4);
-		Utility_Functions.xClick(driver, related, true);
+		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver,showMoreActions, 3);
 		Utility_Functions.xClick(driver,showMoreActions, true);
 		Utility_Functions.xWaitForElementPresent(driver,newInstallment, 3);
