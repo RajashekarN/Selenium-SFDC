@@ -909,6 +909,65 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 		sfOpportunitiesPage.headersOfOfferObject();
 		
 	}
-	
+	/**
+	 * Validating the Discretionary Fee check box in the New Opportunity quick create page
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_opportunityDiscretionayFee(){
+		sfOpportunitiesPage.opportunityDiscretionayFee();
+		
+	}
+	/**
+	 * Validating the Conversion Type field in the New Opportunity quick create page
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_opportunityConversionTypeField(){
+		sfOpportunitiesPage.opportunityConversionTypeField();
+		
+	}
+	/**
+	 * Validating the New Opportunity page Total size field when the sales stage is Prospecting
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_opportunityTotalSize(){
+		sfOpportunitiesPage.opportunityTotalSize();
+		
+	}
+	/**
+	 * Validating the New Opportunity page for the Discretionary Fee check box unchecked by default
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_opportunityDiscretionayFeeUnChecked(){
+		sfOpportunitiesPage.opportunityDiscretionayFeeUnChecked();
+		
+	}
+	/**
+	 * Validating the New Opportunity page for the Net Fee field Mandatory for the Sales Stage Closed
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_opportunityNetFeeFieldMandatory(){
+		sfOpportunitiesPage.opportunityNetFeeFieldMandatory();
+		
+	}
+	/**
+	 * Validating the Opportunity New Installment Creation
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_validateCreationOfNewInstallment(){
+		sfOpportunitiesPage.validateCreationOfNewInstallment();
+		
+	}	
 
 }
