@@ -85,7 +85,7 @@ public class HomePage extends ReusableLibrary {
 	@FindBy(xpath="//div[@class='slds-p-around--medium']/a[text()='SFDC Training']")
 	WebElement SFDCTrainingLink;
 
-	@FindBy(xpath="//h2[contains(@id,'homeCardHeader')]/span[text()='Recent Records']")
+	@FindBy(xpath="//span[contains(@title,'Recent Records')]")
 	WebElement recentRecords;
 
 	@FindBy(xpath = "//*[text()='More']")
