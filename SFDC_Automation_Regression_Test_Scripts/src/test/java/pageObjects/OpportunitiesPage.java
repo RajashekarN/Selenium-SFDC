@@ -307,7 +307,16 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//select[contains(@id,'assignmentType')]")
 	WebElement assignmentTypeOpp;
-
+	
+	@FindBy(xpath = "//select[contains(@id,'salesStage')]")
+	WebElement salesStageOpp;
+	
+	@FindBy(xpath ="//label[text()='Reason for Loss']/parent::div//select")
+	WebElement reasonForLossOpp;
+	
+	@FindBy(xpath ="//label[text()='Reason Lost Comments']/parent::div//div/textarea")
+	WebElement reasonForLossOppText;
+	
 	@FindBy(xpath = "//select[contains(@id,'assignmentType')]//option[@selected='selected']")
 	WebElement assignmentTypeOppValue;
 
@@ -550,7 +559,10 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//*[@id='record-type-select']/option[text()='Capital Markets – Debt & Structured Finance']")
 	WebElement opportunityRecordTypeDebtStructuredFinance;
-
+	
+	@FindBy(xpath = "//*[@id='record-type-select']/option[text()='APAC Global Workplace Solutions']")
+	WebElement opportunityRecordTypeGlobalWorkplaceSolutions;
+	
 	@FindBy(xpath = "//div/a[@class='select'][text()='Occupier Lease']")
 	WebElement assignmentTypeEditPage;
 
@@ -8055,4 +8067,191 @@ public class OpportunitiesPage extends ReusableLibrary {
 		System.out.println("Opportunity Related Header Section are: " +opportunityRelatedHeaderSection);
 	}
 	
+	/**
+	 * Validating the Phase and Probability field when Sales stage is selected
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void phaseAndProbabilityValidation() {
+		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
+		Utility_Functions.xClick(driver, menu_Opportunities, true);
+		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
+		Utility_Functions.xClick(driver, newOpportunity, true);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xSwitchtoFrame(driver, continueButton);
+		Utility_Functions.xWaitForElementPresent(driver, continueButton, 3);
+		Utility_Functions.xClick(driver, opportunityRecordType, true);
+		Utility_Functions.xWaitForElementPresent(driver, opportunityRecordTypeGlobalWorkplaceSolutions, 2);
+		Utility_Functions.xClick(driver, opportunityRecordTypeGlobalWorkplaceSolutions, true);
+		Utility_Functions.xClick(driver, continueButton, true);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xSwitchtoFrame(driver, closeDateOpp);
+		Utility_Functions.timeWait(2);
+		String sAccountName = searchOpportunity.fetchRecord("Account", "Name");
+		Utility_Functions.xSendKeys(driver, accountName, sAccountName);
+		accountName.sendKeys(Keys.ARROW_DOWN);
+		Utility_Functions.timeWait(2);
+		accountName.sendKeys(Keys.ENTER);
+		Utility_Functions.xSelectDropdownByIndex(assignmentTypeOpp, 1);
+		System.out.println(Calendar.getInstance());
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		Date date = new Date();
+		Utility_Functions.xSelectDropdownByIndex(leadSource, 1);
+		Utility_Functions.xSendKeys(driver, closeDateOpp, dateFormat.format(date).toString());
+		Utility_Functions.xSendKeys(driver, closeDateOpp, Keys.TAB);
+		Random random = new Random();
+		int value = random.nextInt(999);
+		Utility_Functions.xSendKeys(driver, totalSizeOpp, Integer.toString(value));
+		Utility_Functions.xSelectDropdownByName(unitofMeasure, "Acres");
+		Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFee, 3);
+		Utility_Functions.xSendKeys(driver, estimatedGrossFee, dataTable.getData("General_Data", "InstallmentAmount"));
+		try {
+			Utility_Functions.xSelectDropdownByIndex(preferredPropertyTypeOpp, 1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage01")) {
+			Utility_Functions.xSelectDropdownByIndex(salesStage, 0);
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage02")) {
+			Utility_Functions.xSelectDropdownByIndex(salesStage, 1);
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage03")) {
+			Utility_Functions.xSelectDropdownByIndex(salesStage, 2);
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage04")) {
+			Utility_Functions.xSelectDropdownByIndex(salesStage, 3);
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage05")) {
+			Utility_Functions.xSelectDropdownByIndex(salesStage, 4);
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage06")) {
+			Utility_Functions.xSelectDropdownByIndex(salesStage, 5);
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage07")) {
+			Utility_Functions.xSelectDropdownByIndex(salesStage, 6);
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage08")) {
+			Utility_Functions.xSelectDropdownByIndex(salesStage, 7);
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage09")) {
+			Utility_Functions.xSelectDropdownByIndex(salesStage, 8);
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage10")) {
+			Utility_Functions.xSelectDropdownByIndex(salesStage, 9);
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage11")) {
+			Utility_Functions.xSelectDropdownByIndex(salesStage, 10);
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage12")) {
+			Utility_Functions.xSelectDropdownByIndex(salesStage, 11);
+		}
+		
+		Utility_Functions.xSelectDropdownByIndex(assignmentTypeOpp, 1);
+		Utility_Functions.timeWait(1);
+		if((dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage09")) || (dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage10"))) {
+			Utility_Functions.xWaitForElementPresent(driver, viewAllFieldsButton, 5);
+			Utility_Functions.xScrollWindow(driver);
+			Utility_Functions.xClick(driver, viewAllFieldsButton, true);
+			Utility_Functions.timeWait(1);
+			Utility_Functions.xScrollWindowTop(driver);			
+		} 
+		if(dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage10")) {
+			Utility_Functions.xWaitForElementPresent(driver, reasonForLossOpp, 3);
+			Utility_Functions.xSelectDropdownByIndex(reasonForLossOpp, 1);
+			Utility_Functions.xWaitForElementPresent(driver, reasonForLossOppText, 3);
+			Utility_Functions.xSendKeys(driver, reasonForLossOppText, "Validating the Phase and Probaility by Selecting the Sales Stage");
+			Utility_Functions.timeWait(1);
+		}
+		Utility_Functions.xClick(driver, saveNewOpportunity, true);
+		Utility_Functions.timeWait(4);
+		driver.navigate().refresh();
+		Utility_Functions.timeWait(2);
+		try {
+			Utility_Functions.xWaitForElementPresent(driver, related, 4);
+			if (related.isDisplayed()) {
+				String OpportunityQuery= "Select Name from opportunity where Name like  " + "'" + sAccountName + "-" + '%' + "-" + value
+						+ "-" + "Acres" + "'";
+				String OpportunityName = searchOpportunity.fetchRecordFieldValue("Name", OpportunityQuery);				
+				report.updateTestLog("Opportunity Created", "Opportunity created successfully:::"+ OpportunityName + ":::", Status.PASS);
+			} else {
+				report.updateTestLog("Opportunity Created", "Opportunity creation failed:::", Status.FAIL);
+			}
+		} catch (Exception e) {
+			report.updateTestLog("Opportunity Related Tab", "System was unable to find the Related tab:::", Status.WARNING);
+		}
+		
+		Utility_Functions.timeWait(2);
+		
+		String phaseQuery = "Select Phase__c from opportunity where Name like  " + "'" + sAccountName + "-" + '%' + "-" + value
+				+ "-" + "Acres" + "'";
+		String probabilityQuery = "Select Probability from opportunity where Name like  " + "'" + sAccountName + "-" + '%' + "-" + value
+				+ "-" + "Acres" + "'";
+		Utility_Functions.timeWait(1);
+		String phasePopulated = searchOpportunity.fetchRecordFieldValue("Phase__c", phaseQuery);
+		String probabilityPopulated = searchOpportunity.fetchRecordFieldValue("Probability", probabilityQuery);
+		
+		if(dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage01")) {
+			if(phasePopulated.equals("Prospecting") && (probabilityPopulated).equals("10.0")) {
+				report.updateTestLog("Opportunity Phase and Probability", "Phase and Probability populated are as expected:::", Status.PASS);
+				report.updateTestLog("Opportunity Phase and Probability", "Phase:::" + phasePopulated + ":::Probability:::" + probabilityPopulated, Status.PASS);
+			} else {
+				report.updateTestLog("Opportunity Phase and Probability", "Phase and Probability populated are not as expected:::", Status.FAIL);
+			}
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage02")) {
+			if(phasePopulated.equals("Prospecting") && (probabilityPopulated).equals("15.0")) {
+				report.updateTestLog("Opportunity Phase and Probability", "Phase and Probability populated are as expected:::", Status.PASS);
+				report.updateTestLog("Opportunity Phase and Probability", "Phase:::" + phasePopulated + ":::Probability:::" + probabilityPopulated, Status.PASS);
+			} else {
+				report.updateTestLog("Opportunity Phase and Probability", "Phase and Probability populated are not as expected:::", Status.FAIL);
+			}		
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage03")) {
+			if(phasePopulated.equals("Prospecting") && (probabilityPopulated).equals("20.0")) {
+				report.updateTestLog("Opportunity Phase and Probability", "Phase and Probability populated are as expected:::", Status.PASS);
+				report.updateTestLog("Opportunity Phase and Probability", "Phase:::" + phasePopulated + ":::Probability:::" + probabilityPopulated, Status.PASS);
+			} else {
+				report.updateTestLog("Opportunity Phase and Probability", "Phase and Probability populated are not as expected:::", Status.FAIL);
+			}
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage04")) {
+			if(phasePopulated.equals("Converting") && (probabilityPopulated).equals("30.0")) {
+				report.updateTestLog("Opportunity Phase and Probability", "Phase and Probability populated are as expected:::", Status.PASS);
+				report.updateTestLog("Opportunity Phase and Probability", "Phase:::" + phasePopulated + ":::Probability:::" + probabilityPopulated, Status.PASS);
+			} else {
+				report.updateTestLog("Opportunity Phase and Probability", "Phase and Probability populated are not as expected:::", Status.FAIL);
+			}
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage05")) {
+			if(phasePopulated.equals("Converting") && (probabilityPopulated).equals("50.0")) {
+				report.updateTestLog("Opportunity Phase and Probability", "Phase and Probability populated are as expected:::", Status.PASS);
+				report.updateTestLog("Opportunity Phase and Probability", "Phase:::" + phasePopulated + ":::Probability:::" + probabilityPopulated, Status.PASS);
+			} else {
+				report.updateTestLog("Opportunity Phase and Probability", "Phase and Probability populated are not as expected:::", Status.FAIL);
+			}
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage06")) {
+			if(phasePopulated.equals("Converting") && (probabilityPopulated).equals("50.0")) {
+				report.updateTestLog("Opportunity Phase and Probability", "Phase and Probability populated are as expected:::", Status.PASS);
+				report.updateTestLog("Opportunity Phase and Probability", "Phase:::" + phasePopulated + ":::Probability:::" + probabilityPopulated, Status.PASS);
+			} else {
+				report.updateTestLog("Opportunity Phase and Probability", "Phase and Probability populated are not as expected:::", Status.FAIL);
+			}
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage07")) {
+			if(phasePopulated.equals("Converting") && (probabilityPopulated).equals("60.0")) {
+				report.updateTestLog("Opportunity Phase and Probability", "Phase and Probability populated are as expected:::", Status.PASS);
+				report.updateTestLog("Opportunity Phase and Probability", "Phase:::" + phasePopulated + ":::Probability:::" + probabilityPopulated, Status.PASS);
+			} else {
+				report.updateTestLog("Opportunity Phase and Probability", "Phase and Probability populated are not as expected:::", Status.FAIL);
+			}
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage08")) {
+			if(phasePopulated.equals("Executing") && (probabilityPopulated).equals("90.0")) {
+				report.updateTestLog("Opportunity Phase and Probability", "Phase and Probability populated are as expected:::", Status.PASS);
+				report.updateTestLog("Opportunity Phase and Probability", "Phase:::" + phasePopulated + ":::Probability:::" + probabilityPopulated, Status.PASS);
+			} else {
+				report.updateTestLog("Opportunity Phase and Probability", "Phase and Probability populated are not as expected:::", Status.FAIL);
+			}
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage09")) {
+			if(phasePopulated.equals("Executing") && (probabilityPopulated).equals("90.0")) {
+				report.updateTestLog("Opportunity Phase and Probability", "Phase and Probability populated are as expected:::", Status.PASS);
+				report.updateTestLog("Opportunity Phase and Probability", "Phase:::" + phasePopulated + ":::Probability:::" + probabilityPopulated, Status.PASS);
+			} else {
+				report.updateTestLog("Opportunity Phase and Probability", "Phase and Probability populated are not as expected:::", Status.FAIL);
+			}
+ 		} else if((dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage10")) || (dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage11")) 
+		|| (dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage12"))) {
+ 			if(phasePopulated.equals("Lost") && (probabilityPopulated).equals("0.0")) {
+				report.updateTestLog("Opportunity Phase and Probability", "Phase and Probability populated are as expected:::", Status.PASS);
+				report.updateTestLog("Opportunity Phase and Probability", "Phase:::" + phasePopulated + ":::Probability:::" + probabilityPopulated, Status.PASS);
+			} else {
+				report.updateTestLog("Opportunity Phase and Probability", "Phase and Probability populated are not as expected:::", Status.FAIL);
+			}			
+		}   	
+	}	
 }

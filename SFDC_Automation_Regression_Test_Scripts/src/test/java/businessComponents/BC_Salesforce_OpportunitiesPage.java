@@ -979,5 +979,13 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	public void bc_cloneAndEditButtonsOpportunity() {
 		sfOpportunitiesPage.cloneAndEditButtonsOpportunity();
 	}
-	
+	/**
+	 * Validating the Phase and Probability field when Sales stage is selected
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void bc_phaseAndProbabilityValidation() {
+		sfOpportunitiesPage.phaseAndProbabilityValidation();
+	}
 }
