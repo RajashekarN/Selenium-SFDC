@@ -37,10 +37,10 @@ public class HomePage extends ReusableLibrary {
 		// Utility_Functions utility = new Utility_Functions(scriptHelper);
 	}
 
-	@FindBy(xpath = "//div[@class='bBottom']//span[text()='Accounts']")
+	@FindBy(css = "one-app-nav-bar a[title='Accounts']")
 	WebElement menu_Accounts;
 
-	@FindBy(xpath = "//div[@class='bBottom']//span[text()='Leads']")
+	@FindBy(css = "one-app-nav-bar a[title='Leads']")
 	WebElement menu_Leads;
 
 	@FindBy(xpath = "//div[@class='bBottom']//span[text()='Opportunities']")
@@ -169,7 +169,7 @@ public class HomePage extends ReusableLibrary {
 
 
 	public void validate_Menu_Accounts() {
-		Utility_Functions.timeWait(4);
+		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 4);
 		try {
 			if (menu_Accounts.isDisplayed()) {
 				report.updateTestLog("Verify Menu - Accounts", "Accounts menu is present in Home Page", Status.PASS);
@@ -177,7 +177,7 @@ public class HomePage extends ReusableLibrary {
 				report.updateTestLog("Verify Menu - Accounts", "Accounts menu is not present in Home Page", Status.FAIL);
 			}
 			menu_Accounts.click();
-			Utility_Functions.timeWait(1);
+			Utility_Functions.xWaitForElementPresent(driver, accounts_HomePage, 3);
 			if (accounts_HomePage.isDisplayed()) {
 				report.updateTestLog("Verify Accounts Home Page", "Accounts Home Page is displayed", Status.PASS);
 			} else {
@@ -186,6 +186,7 @@ public class HomePage extends ReusableLibrary {
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
+			report.updateTestLog("Exception in validate Menu Accounts", e.getMessage(), Status.FAIL);
 		}
 	}
 
