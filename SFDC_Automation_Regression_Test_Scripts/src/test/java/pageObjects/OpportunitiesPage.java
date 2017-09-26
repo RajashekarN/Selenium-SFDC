@@ -610,7 +610,10 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath="//select[@class=' select']/option[@value='Dallas/Ft. Worth']")
 	WebElement selectMarket;
 
-	@FindBy(xpath="//input[@placeholder='Search Accounts']")
+/*	@FindBy(xpath="//input[@placeholder='Search Accounts']")
+	WebElement searchAccountsNewOpportunity;*/
+	
+	@FindBy(xpath="//input[contains(@placeholder,'Search Accounts')]")
 	WebElement searchAccountsNewOpportunity;
 
 	@FindBy(xpath="//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Sales Stage']")

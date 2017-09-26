@@ -141,11 +141,11 @@ public class AccountsPage extends ReusableLibrary {
 	@FindBy(xpath = "//input[@class='searchTextField slds-input slds-lookup__search-input input'][@placeholder='Search Files...']")
 	WebElement searchFile;
 
-	/*@FindBy(xpath = "//span[contains(text(),'Activities')]/ancestor::article//div[text()='New Activity']")
-	WebElement newActivity;*/
-	
-	@FindBy(xpath = "//div[contains(@class,'slds-page-header')]//a[@title='New Activity']")
+	@FindBy(xpath = "//span[contains(text(),'Activities')]/ancestor::article//div[text()='New Activity']")
 	WebElement newActivity;
+	
+/*	@FindBy(xpath = "//div[contains(@class,'slds-page-header')]//a[@title='New Activity']")
+	WebElement newActivity;*/
 	
 	@FindBy(xpath = "//input[@class='slds-input'][@type='text']")
 	WebElement subject;
@@ -2651,6 +2651,12 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, menu_Accounts, true);
 		Utility_Functions.xWaitForElementPresent(driver, newAccount, 3);
 		Utility_Functions.xClick(driver, newAccount, true);
+		try {
+			Utility_Functions.xWaitForElementPresent(driver, newAccountEMEAnext, 3);
+			Utility_Functions.xClick(driver, newAccountEMEAnext, true);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xSwitchtoFrame(driver, continueButton);
 		Utility_Functions.timeWait(2);
@@ -2659,11 +2665,17 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, recordType_EMEAReporting, 3);
 		Utility_Functions.xClick(driver, recordType_EMEAReporting, true);
 		Utility_Functions.xWaitForElementPresent(driver, continueButton, 2);
-		Utility_Functions.xClick(driver, continueButton, true);
+		Utility_Functions.xClick(driver, continueButton, true);	
+		driver.switchTo().defaultContent();
 		Utility_Functions.xSwitchtoFrame(driver, accountNameQuickCreate);
 		Utility_Functions.timeWait(2);
 		String accountName = searchAccount.fetchRecord("Account", "Name");
+		Utility_Functions.timeWait(2);
 		Utility_Functions.xSendKeys(driver, accountNameQuickCreate, accountName);
+		accountNameQuickCreate.sendKeys(Keys.ARROW_DOWN);
+		Utility_Functions.timeWait(2);
+		accountNameQuickCreate.sendKeys(Keys.ENTER);
+		
 		Utility_Functions.xWaitForElementPresent(driver, billingStreetQuickCreate, 3);
 		Utility_Functions.xSendKeys(driver, billingStreetQuickCreate, dataTable.getData("General_Data", "Street"));
 		Utility_Functions.xWaitForElementPresent(driver, billingCityQuickCreate, 3);
