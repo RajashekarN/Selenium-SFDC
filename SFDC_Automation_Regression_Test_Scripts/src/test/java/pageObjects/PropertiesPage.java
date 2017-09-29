@@ -281,7 +281,7 @@ public class PropertiesPage extends ReusableLibrary {
 	@FindBy(xpath="//span[contains(text(),'Properties')]/ancestor::article//div[text()='New']")
 	WebElement newPropertiesDetailsPage;
 
-	@FindBy(xpath="//input[@placeholder='Search Properties']")
+	@FindBy(xpath="//input[contains(@placeholder,'Search Properties')]")
 	WebElement searchPropertyWithPrivateTag;
 
 	@FindBy(xpath="//div[contains(@class,'modal-footer') and contains(@class,'slds-modal__footer')]//button/span[text()='Save']")
@@ -769,7 +769,7 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, saveActivity, true);
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify Create Activity Properties ","The Custom Activity is created ",  Status.PASS);
-/*		driver.navigate().refresh();
+		/*		driver.navigate().refresh();
 		Utility_Functions.timeWait(1);*/
 		driver.switchTo().defaultContent();
 		driver.navigate().refresh();
@@ -2262,13 +2262,25 @@ public class PropertiesPage extends ReusableLibrary {
 	 */
 	public void verifyPropertiesPyeongValue(){
 
-		Utility_Functions.xWaitForElementPresent(driver,menu_More, 3);
-		Utility_Functions.xClick(driver, menu_More, true);
-		report.updateTestLog("Verify Properties Preferences Pyeong Value","Verifying More options is displayed",Status.PASS);
+		try{
+			Utility_Functions.xWaitForElementPresent(driver,menu_Properties, 3);
+			Utility_Functions.xClick(driver, menu_Properties, true);
+		}catch(Exception e){
+			Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
+			Utility_Functions.xClick(driver, menu_More, true);			
+			try {
+				Utility_Functions.xWaitForElementPresent(driver, properties, 2);
+				Utility_Functions.xClick(driver, properties, true);
+			} catch (Exception e1) {
+				Utility_Functions.xWaitForElementPresent(driver, propertiesEnv, 2);
+				Utility_Functions.xClick(driver, propertiesEnv, true);
+			}	
+		}	
+		/*	report.updateTestLog("Verify Properties Preferences Pyeong Value","Verifying More options is displayed",Status.PASS);
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver,menu_Properties, 3);
 		Utility_Functions.xClick(driver,menu_Properties, true);
-		report.updateTestLog("Verify Properties Preferences Pyeong Value","Verifying Property Preferences is displayed",Status.PASS);
+		report.updateTestLog("Verify Properties Preferences Pyeong Value","Verifying Property Preferences is displayed",Status.PASS);*/
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, newProperties, 2);
 		Utility_Functions.xClick(driver, newProperties, true);	
@@ -2307,14 +2319,27 @@ public class PropertiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void verifyPropertiesPingValue(){
-
-		Utility_Functions.xWaitForElementPresent(driver,menu_More, 3);
+		try {
+			Utility_Functions.xWaitForElementPresent(driver,menu_Properties, 3);
+			Utility_Functions.xClick(driver, menu_Properties, true);
+		} catch(Exception e){
+			Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
+			Utility_Functions.xClick(driver, menu_More, true);			
+			try {
+				Utility_Functions.xWaitForElementPresent(driver, properties, 2);
+				Utility_Functions.xClick(driver, properties, true);
+			} catch (Exception e1) {
+				Utility_Functions.xWaitForElementPresent(driver, propertiesEnv, 2);
+				Utility_Functions.xClick(driver, propertiesEnv, true);
+			}	
+		}
+		/*	Utility_Functions.xWaitForElementPresent(driver,menu_More, 3);
 		Utility_Functions.xClick(driver, menu_More, true);
 		report.updateTestLog("Verify Properties Preferences Ping Value","Verifying More options is displayed",Status.PASS);
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver,menu_Properties, 3);
 		Utility_Functions.xClick(driver,menu_Properties, true);
-		report.updateTestLog("Verify Properties Preferences Ping Value","Verifying Property Preferences is displayed",Status.PASS);
+		report.updateTestLog("Verify Properties Preferences Ping Value","Verifying Property Preferences is displayed",Status.PASS);*/
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, newProperties, 2);
 		Utility_Functions.xClick(driver, newProperties, true);	

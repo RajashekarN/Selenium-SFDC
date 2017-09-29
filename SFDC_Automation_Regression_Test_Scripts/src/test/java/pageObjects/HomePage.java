@@ -100,6 +100,9 @@ public class HomePage extends ReusableLibrary {
 	@FindBy(xpath="//label[contains(@class,'form-element__label')]/span[text()='Marketing List Name']")
 	WebElement marketingListName;
 
+	@FindBy(xpath="//button[text()='More']")
+	WebElement showMore;
+	
 	/*	@FindBy(xpath = "//button[@class='bare slds-button uiButton forceHeaderButton oneUserProfileCardTrigger']")
 	WebElement logOutButton;
 
@@ -372,61 +375,58 @@ public class HomePage extends ReusableLibrary {
 
 	public void validateHomePageTabsForAPACCapitalMarkets() {
 		homePageTabsList();
-		Utility_Functions.timeWait(2);		
-		List<WebElement> homePageTabsList = driver.findElements(By.xpath("//div[contains(@class,'slds-context-bar')]//span[@class='slds-truncate']"));
-		int i1 = 0, j=0, countLabelList = 0;
-		String[] labelTexts = new String[tabsList.size()];
-		while(j<tabsList.size()) {
-			for (WebElement element : homePageTabsList) {
-				labelTexts[i1] = element.getText();
-				if (labelTexts[i1].contains(tabsList.get(j))) {
-					System.out.println("Verify Add Opportunity Page Label List" + element.getText());
-					report.updateTestLog("Verify Add Opportunity Page Label List", element.getText() + "::::label list is present in Add Opportunity Page", Status.PASS);
-					countLabelList++;
+		Utility_Functions.timeWait(2);	
+		if(dataTable.getData("General_Data", "TC_ID").contains("CMAPACManagerHomeVerifyingTabsOnHomePage")) {
+			List<WebElement> homePageTabsList = driver.findElements(By.xpath("//div[contains(@class,'slds-context-bar')]//span[@class='slds-truncate']"));
+			int i1 = 0, j=0, countLabelList = 0;
+			String[] labelTexts = new String[tabsList.size()];
+			while(j<tabsList.size()) {
+				for (WebElement element : homePageTabsList) {
+					labelTexts[i1] = element.getText();
+					if (labelTexts[i1].contains(tabsList.get(j))) {
+						System.out.println("Verify Add Opportunity Page Label List" + element.getText());
+						report.updateTestLog("Verify Add Opportunity Page Label List", element.getText() + "::::label list is present in Add Opportunity Page", Status.PASS);
+						countLabelList++;
+					}
+					i1++;
 				}
-				i1++;
+				i1=0;
+				j++;
 			}
-			i1=0;
-			j++;
-		}
-		System.out.println("OpportunityInformationList:::"+ countLabelList);
-		if (countLabelList >= 9) {
-			System.out.println("All the Tabs are present in Home Page ");
-			report.updateTestLog("Verify Home Page Tabs", "All the Tabs are present in Home Page", Status.PASS);
-		} else if (countLabelList < 10) {
-			report.updateTestLog("Verify Home Page Tabs", "All the Tabs are not present in Home Page", Status.FAIL);
-		}
-
-		/*	List<WebElement> homePageTabsList = driver
-				.findElements(By.xpath("//div[contains(@class,'slds-context-bar')]//span[@class='slds-truncate']"));
-		String[] homePageTabs = new String[homePageTabsList.size()];
-		System.out.println(homePageTabs);
-		Utility_Functions.timeWait(1);
-		int i = 0, count = 0;
-		try {
-			for (WebElement element : homePageTabsList) {
-				homePageTabs[i] = element.getText();
-				if (homePageTabs[i].contains(tabsList.get(i))) {
-					count++;
-					System.out.println( homePageTabs[i] + tabsList.get(i));
-					report.updateTestLog("Verify Home Page Tabs", "Tabs " + homePageTabs[i] + " present in APAC Capital Markets Home Page Menu",
-							Status.PASS);
-				}
-				i++;
-			}
-			System.out.println(count);
-			if (count >= 10) {
+			System.out.println("OpportunityInformationList:::"+ countLabelList);
+			if (countLabelList >= 9) {
 				System.out.println("All the Tabs are present in Home Page ");
-				report.updateTestLog("Verify Home Page Tabs", "All the Tabs are present in Home Page",
-						Status.PASS);
-			} else if (count < 10) {
-				report.updateTestLog("Verify Home Page Tabs", "All the Tabs are not present in Home Page",
-						Status.FAIL);
+				report.updateTestLog("Verify Home Page Tabs", "All the Tabs are present in Home Page", Status.PASS);
+			} else if (countLabelList < 10) {
+				report.updateTestLog("Verify Home Page Tabs", "All the Tabs are not present in Home Page", Status.FAIL);
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
-		}*/
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("CMAPACBrokerHomeVerifyingTabsOnHomePage")) {
+			List<WebElement> homePageTabsList = driver.findElements(By.xpath("//div[contains(@class,'slds-context-bar')]//span[@class='slds-truncate']"));
+			Utility_Functions.timeWait(1);
+			int i = 0, count = 0, countSize=0;
+			try {
+				for (WebElement element : homePageTabsList) {
+					countSize++;
+					if (element.getText().contains(tabsList.get(i))) {
+						count++;
+						report.updateTestLog("Verify Home Page Tabs", "Tabs "+ element.getText() + " present in APAC Capital Markets Home Page Menu", Status.PASS);
+					}
+					i++;
+					if(countSize > 14) {
+						break;
+					}
+				}
+				if (count >= 9) {
+					System.out.println("All the Tabs are present in Home Page ");
+					report.updateTestLog("Verify Home Page Tabs", "All the Tabs are present in Home Page", Status.PASS);
+				} else if (count < 10) {
+					report.updateTestLog("Verify Home Page Tabs", "All the Tabs are not present in Home Page", Status.FAIL);
+				}					
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println(e.getMessage());
+			}
+		}	
 	}
 	/**
 	 * Validating the tabs on the Home Page for the Account update

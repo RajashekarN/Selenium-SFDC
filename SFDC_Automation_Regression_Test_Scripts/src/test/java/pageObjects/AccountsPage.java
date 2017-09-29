@@ -144,8 +144,8 @@ public class AccountsPage extends ReusableLibrary {
 	@FindBy(xpath = "//span[contains(text(),'Activities')]/ancestor::article//div[text()='New Activity']")
 	WebElement newActivity;
 	
-/*	@FindBy(xpath = "//div[contains(@class,'slds-page-header')]//a[@title='New Activity']")
-	WebElement newActivity;*/
+	@FindBy(xpath = "//div[contains(@class,'slds-page-header')]//a[@title='New Activity']")
+	WebElement newActivity_AS;
 	
 	@FindBy(xpath = "//input[@class='slds-input'][@type='text']")
 	WebElement subject;
@@ -2548,8 +2548,8 @@ public class AccountsPage extends ReusableLibrary {
 	public void additionalActivityTypes() {
 		accountsFunction();
 		Utility_Functions.timeWait(1);
-		Utility_Functions.xWaitForElementPresent(driver, newActivity, 4);
-		Utility_Functions.xClick(driver, newActivity, true);	
+		Utility_Functions.xWaitForElementPresent(driver, newActivity_AS, 4);
+		Utility_Functions.xClick(driver, newActivity_AS, true);	
 		Utility_Functions.xSwitchtoFrame(driver, subject);
 		Utility_Functions.timeWait(2);
 		List<WebElement> activityTypeList = driver.findElements(By.xpath("//select[contains(@id,'CustomActivityForm:activity-activityType')]/option"));
@@ -2925,9 +2925,11 @@ public class AccountsPage extends ReusableLibrary {
 		try {
 			Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
 			Utility_Functions.xClick(driver, menu_More, true);
+			Utility_Functions.timeWait(1);
 		} catch (Exception e) {
 			Utility_Functions.xWaitForElementPresent(driver, more, 3);
 			Utility_Functions.xClick(driver, more, true);
+			Utility_Functions.timeWait(1);
 		}
 		try {
 			Utility_Functions.xWaitForElementPresent(driver, more_privateTags, 3);
@@ -2960,22 +2962,18 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, newAccount, true);
 		report.updateTestLog("Verify Accounts Leads And PrivateTags ", "Verifying the New Accounts Page is displayed ",
 				Status.PASS);
+		try {
+			Utility_Functions.xWaitForElementPresent(driver, newAccountEMEAnext, 3);
+			Utility_Functions.xClick(driver, newAccountEMEAnext, true);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xSwitchtoFrame(driver, continueButton);
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xWaitForElementPresent(driver, continueButton, 5);
 		Utility_Functions.xClick(driver, continueButton, true);
 		driver.switchTo().defaultContent();
-		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
-		Utility_Functions.xClick(driver, menu_Accounts, true);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xWaitForElementPresent(driver, newAccounts, 3);
-		Utility_Functions.xClick(driver, newAccounts, true);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xSwitchtoFrame(driver, continueButton);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, continueButton, 5);
-		Utility_Functions.xClick(driver, continueButton, true);
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xSwitchtoFrame(driver, accountNameQuickCreate);
 		Utility_Functions.timeWait(2);
@@ -3019,6 +3017,12 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, newAccount, true);
 		report.updateTestLog("Verify Accounts Leads And PrivateTags ", "Verifying the new Leads page is displayed ",
 				Status.PASS);
+		try {
+			Utility_Functions.xWaitForElementPresent(driver, newAccountEMEAnext, 3);
+			Utility_Functions.xClick(driver, newAccountEMEAnext, true);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 		Utility_Functions.timeWait(2);
 		driver.navigate().refresh();
 		Utility_Functions.xSwitchtoFrame(driver, continueButton);
@@ -4008,16 +4012,18 @@ public class AccountsPage extends ReusableLibrary {
 			e1.printStackTrace();
 		}
 		if (dataTable.getData("General_Data", "TC_ID").contains("Admin")) {
+			Utility_Functions.timeWait(2);
 			Utility_Functions.xSwitchtoFrame(driver, continueButton);
 			Utility_Functions.xWaitForElementPresent(driver, continueButton, 3);
 			Utility_Functions.xClick(driver, continueButton, true);
-			Utility_Functions.timeWait(2);
-
 		}
 		Utility_Functions.timeWait(2);
+		driver.switchTo().defaultContent();
+		Utility_Functions.timeWait(2);
 		Utility_Functions.xSwitchtoFrame(driver, viewAllFieldsButton);
-		Utility_Functions.xWaitForElementPresent(driver, viewAllFieldsButton, 5);
 		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, viewAllFieldsButton, 5);
 		Utility_Functions.xClick(driver, viewAllFieldsButton, true);
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xScrollWindowTop(driver);
