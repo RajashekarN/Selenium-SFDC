@@ -9,60 +9,60 @@
 
 	<name>Craft Automation Framework Excel Based</name>
 	<url>http://maven.apache.org</url>
-
+	
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<selenium.standalone>3.0.1</selenium.standalone>
-		<java.client.appium>4.1.2</java.client.appium>
-		<org.testng>6.9.10</org.testng>
-		<source.and.target.JVM.version>1.8</source.and.target.JVM.version>
-		<org.apache.maven.plugins.maven-compiler-plugin.version>3.5</org.apache.maven.plugins.maven-compiler-plugin.version>
-		<org.codehaus.mojo.exec-maven-plugin.version>1.5.0</org.codehaus.mojo.exec-maven-plugin.version>
-		<org.apache.maven.plugins.maven-surefire-plugin.version>2.19</org.apache.maven.plugins.maven-surefire-plugin.version>
+				<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+				<selenium.standalone>3.0.1</selenium.standalone>
+				<java.client.appium>4.1.2</java.client.appium>
+				<org.testng>6.9.10</org.testng>
+				<source.and.target.JVM.version>1.8</source.and.target.JVM.version>
+				<org.apache.maven.plugins.maven-compiler-plugin.version>3.5</org.apache.maven.plugins.maven-compiler-plugin.version>
+				<org.codehaus.mojo.exec-maven-plugin.version>1.5.0</org.codehaus.mojo.exec-maven-plugin.version>
+				<org.apache.maven.plugins.maven-surefire-plugin.version>2.19</org.apache.maven.plugins.maven-surefire-plugin.version>
+				<threads>2</threads>
 	</properties>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${org.apache.maven.plugins.maven-compiler-plugin.version}</version>
-				<configuration>
-					<encoding>UTF-8</encoding>
-					<source>${source.and.target.JVM.version}</source>
-					<target>${source.and.target.JVM.version}</target>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>${org.apache.maven.plugins.maven-surefire-plugin.version}</version>
-				<configuration>
-					<skipTests>true</skipTests>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>${org.codehaus.mojo.exec-maven-plugin.version}</version>
-				<executions>
-					<execution>
-						<phase>test</phase>
-						<goals>
-							<goal>java</goal>
-						</goals>
+	
+	
+	<profiles>
+		<profile>
+			<id>runAllTests</id>
+			<properties>
+				<testNG.suiteXmlFile>src/test/resources/testng.xml</testNG.suiteXmlFile>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<version>${org.apache.maven.plugins.maven-compiler-plugin.version}</version>
+						<configuration>
+							<encoding>UTF-8</encoding>
+							<source>${source.and.target.JVM.version}</source>
+							<target>${source.and.target.JVM.version}</target>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<version>${org.apache.maven.plugins.maven-surefire-plugin.version}</version>
 						<configuration>
 							<suiteXmlFiles>
-								<suiteXmlFile>./testng.xml</suiteXmlFile>
+								<suiteXmlFile>${testNG.suiteXmlFile}</suiteXmlFile>
 							</suiteXmlFiles>
-							<mainClass>runners.Allocator</mainClass>
-							<classpathScope>test</classpathScope>
 						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+						<executions>
+							<execution>
+								<phase>integration-test</phase>
+								<goals>
+									<goal>test</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 	<dependencies>
 		<!-- Selenium Dependency -->
@@ -209,10 +209,6 @@
 			<artifactId>commons-httpclient</artifactId>
 			<version>3.1</version>
 		</dependency>
-
-
-
 	</dependencies>
-
 
 </project>
