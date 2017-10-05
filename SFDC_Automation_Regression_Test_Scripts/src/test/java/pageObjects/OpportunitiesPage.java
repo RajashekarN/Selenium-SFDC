@@ -1077,7 +1077,50 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath="//a[contains(@title,'City')]")
 	WebElement cbreMarketGroupEMEAValue;
-
+	
+	@FindBy(xpath = "//*[text()='More']")
+	WebElement menu_More;
+	
+	@FindBy(xpath = "//a[@role='menuitem']/span[contains(@class,'slds-truncate')][text()='Campaigns']")
+	WebElement campaigns;
+	
+	@FindBy(xpath = "//span[contains(@class,'virtualAutocompleteOptionText')][text()='All Active Campaigns']")
+	WebElement allActiveCampaigns;
+	
+	@FindBy(xpath = "//span[contains(text(),'Offers')]/ancestor::article//div[text()='New']")
+	WebElement offersNew;
+	
+	@FindBy(xpath = "//span[contains(text(),'Project Enquiries')]/ancestor::article//div[text()='New']")
+	WebElement projectEnquiries;
+	
+	@FindBy(xpath = "//div[contains(text(),'APAC Property Sale Offers')]/parent::div/parent::label//span[@class='slds-radio--faux']")
+	WebElement offersRadioButton;
+	
+	@FindBy(xpath = "//span[text()='Next']")
+	WebElement offersNextButton;
+	
+	@FindBy(xpath="//span[contains(@class,'slds-truncate')][text()='Properties']")
+	WebElement menu_Properties;
+	
+	@FindBy(xpath = "//div[@class='overflowList']//a[@title='Properties'][text()='Properties']")
+	WebElement propertiesEnv;	
+	
+	@FindBy(xpath = "//a[@role='menuitem']/span[contains(@class,'slds-truncate')][text()='Properties']")
+	WebElement propertiesRecord;	
+	
+	@FindBy(xpath = "//label[contains(text(),'Confidential Opportunity')]/parent::div//label[@class='slds-checkbox']/span[@class='slds-checkbox--faux']")
+	WebElement confidentialCheckboxOpp;	
+	
+	@FindBy(xpath = "//span[contains(text(),'Sales')][contains(text(),'Stage')]/parent::div//select")
+	WebElement salesStageEMEAOpp;
+	
+	@FindBy(xpath = "//h1[contains(@class,'slds-page-header__title') and contains(@class,'slds-truncate')]/span")
+	WebElement opportunityConfidentialName;
+	
+	@FindBy(xpath = "//span[text()='Estimated Gross Fee/Commission']/parent::div/div[@class='requiredInput']/input")
+	WebElement estimatedGrossFeeCommissionEMEA;
+	
+	
 	HomePage hp = new HomePage(scriptHelper);
 	SearchTextSOQL searchOpportunity = new SearchTextSOQL(scriptHelper);
 	OpportunitiesFunctions opportunitiesFunctions = new OpportunitiesFunctions(scriptHelper);
@@ -8261,4 +8304,313 @@ public class OpportunitiesPage extends ReusableLibrary {
 			}			
 		}   	
 	}	
+	
+	/**
+	 * Validating the APAC Offers Creation Page fields
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	
+	static ArrayList<String> OfferCreationPageAPAC = new ArrayList<String>();
+
+	public void OfferCreationPageAPACList() {
+		OfferCreationPageAPAC.add("Offer Enquiry");
+		OfferCreationPageAPAC.add("Offeror Contact");
+		OfferCreationPageAPAC.add("Deposit");
+		OfferCreationPageAPAC.add("Offeror Account");
+		OfferCreationPageAPAC.add("Offer Due Diligence Days");
+		OfferCreationPageAPAC.add("Offer Campaign");
+		OfferCreationPageAPAC.add("Offer Estimated Settlement Date");
+		OfferCreationPageAPAC.add("Offer Date");
+		OfferCreationPageAPAC.add("Source of Financing");
+		OfferCreationPageAPAC.add("Offer Price");
+		OfferCreationPageAPAC.add("Approvals/Condition of Sale");
+		OfferCreationPageAPAC.add("Winner Offer");
+		OfferCreationPageAPAC.add("Comments");
+		OfferCreationPageAPAC.add("Offer Name");
+		System.out.println("Offer Creation Page fields in APAC are:::" + OfferCreationPageAPAC);
+	}
+	
+	public void offerCreationPageFieldsAPAC() {
+		opportunityEligibility(); 
+		Utility_Functions.xWaitForElementPresent(driver, selectNewEvent, 3);
+		Utility_Functions.xClick(driver, selectNewEvent, true);
+		Utility_Functions.xWaitForElementPresent(driver, createOffer, 3);
+		Utility_Functions.xClick(driver, createOffer, true);
+		Utility_Functions.timeWait(2);
+		OfferCreationPageAPACList();
+		List<WebElement> createOfferPageFieldsList = driver.findElements(By.xpath("//label[contains(@class,'form-element__label')]/span[1]"));
+		int i1 = 0, j=0, countLabelList = 0;
+		String[] labelTexts = new String[createOfferPageFieldsList.size()];
+		while(j<OfferCreationPageAPAC.size()) {
+			for (WebElement element : createOfferPageFieldsList) {
+				labelTexts[i1] = element.getText();
+				if (labelTexts[i1].contains(OfferCreationPageAPAC.get(j))) {
+					System.out.println("Verify Offer Creatiom Page Fields List" + element.getText());
+					report.updateTestLog("Verify Offer Creatiom Page Fields List", element.getText() + "::::label is present in Offer Creation Page for APAC", Status.PASS);
+					countLabelList++;
+				}
+				i1++;
+			}
+			i1=0;
+			j++;
+		}
+		System.out.println("Count of labels present in Offer Creation Page are::" + countLabelList);
+		if(countLabelList>=11) {
+			report.updateTestLog("Verify Offer Creatiom Page Fields List", "All the fields are present in Offer Creation Page for APAC", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Offer Creatiom Page Fields List", "Not all the fields are present in Offer Creation Page for APAC", Status.FAIL);
+		}
+	}
+	
+	public void campaignsList() {
+		Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
+		Utility_Functions.xClick(driver, menu_More, true);
+		Utility_Functions.xWaitForElementPresent(driver, campaigns, 3);
+		Utility_Functions.xClick(driver, campaigns, true);		
+		List<WebElement> campaignsList = driver.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		if(campaignsList.isEmpty()) {
+			Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
+			Utility_Functions.xClick(driver, recentlyViewed, true);
+			Utility_Functions.xWaitForElementPresent(driver, allActiveCampaigns, 3);
+			Utility_Functions.xClick(driver, allActiveCampaigns, true);
+			Utility_Functions.timeWait(2);
+			List<WebElement> campaignsListActive = driver.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+			if(campaignsListActive.isEmpty()) {
+				report.updateTestLog("Active Campaigns List", "There are no Active Campaigns present", Status.PASS);
+			} else {
+				Utility_Functions.xclickRandomElement(campaignsListActive);
+			}
+		}
+		Utility_Functions.xclickRandomElement(campaignsList);
+	}
+	
+	
+	/**
+	 * Validating the Offers Related List from the APAC Campaign Record
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void offersReleatedListsCampaignAPAC() {
+		campaignsList();
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, related, 3);
+		Utility_Functions.xClick(driver, related, true);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xWaitForElementPresent(driver, offersNew, 3);
+		Utility_Functions.xClick(driver, offersNew, true);
+		Utility_Functions.xWaitForElementPresent(driver, offersNextButton, 3);
+		Utility_Functions.xClick(driver, offersNextButton, true);
+		OfferCreationPageAPACList();
+		Utility_Functions.timeWait(2);
+		List<WebElement> createOfferPageFieldsList = driver.findElements(By.xpath("//label[contains(@class,'form-element__label')]/span[1]"));
+		int i1 = 0, j=0, countLabelList = 0;
+		String[] labelTexts = new String[createOfferPageFieldsList.size()];
+		while(j<OfferCreationPageAPAC.size()) {
+			for (WebElement element : createOfferPageFieldsList) {
+				labelTexts[i1] = element.getText();
+				if (labelTexts[i1].contains(OfferCreationPageAPAC.get(j))) {
+					System.out.println("Verify Offer Creatiom Page Fields List" + element.getText());
+					report.updateTestLog("Verify Offer Creatiom Page Fields List", element.getText() + "::::label is present in Offer Creation Page for APAC", Status.PASS);
+					countLabelList++;
+				}
+				i1++;
+			}
+			i1=0;
+			j++;
+		}
+		System.out.println("Count of labels present in Offer Creation Page are::" + countLabelList);
+		if(countLabelList>=4) {
+			report.updateTestLog("Verify Offer Creation Page Fields List", "All the fields are present in Offer Creation Page for APAC", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Offer Creation Page Fields List", "Not all the fields are present in Offer Creation Page for APAC", Status.FAIL);
+		}
+	}
+	
+	/**
+	 * Validating the Project Enquiries Page Fiels List from the APAC Campaign Record
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	
+	static ArrayList<String> ProjectEnquiriesPageFields = new ArrayList<String>();
+
+	public void ProjectEnquiriesPageFieldsList() {
+		ProjectEnquiriesPageFields.add("Project Enquiry Name");
+		ProjectEnquiriesPageFields.add("Enquiry Account");
+		ProjectEnquiriesPageFields.add("Enquiry Contact");
+		//ProjectEnquiriesPageFields.add("Status");
+		
+		System.out.println("ProjectEnquiries Page Fields in APAC are:::" + ProjectEnquiriesPageFields);
+	}
+	
+	public void projectEnquiriesReleatedListsAPAC() {
+		campaignsList();
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, related, 3);
+		Utility_Functions.xClick(driver, related, true);		
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xWaitForElementPresent(driver, projectEnquiries, 3);
+		Utility_Functions.xClick(driver, projectEnquiries, true);
+		Utility_Functions.xWaitForElementPresent(driver, offersNextButton, 3);
+		Utility_Functions.xClick(driver, offersNextButton, true);
+		ProjectEnquiriesPageFieldsList();
+		Utility_Functions.timeWait(2);
+		List<WebElement> projectEnquiryPageFieldsList = driver.findElements(By.xpath("//label[contains(@class,'form-element__label')]/span[1]"));
+		int i1 = 0, j=0, countLabelList = 0;
+		String[] labelTexts = new String[projectEnquiryPageFieldsList.size()];
+		while(j<ProjectEnquiriesPageFields.size()) {
+			for (WebElement element : projectEnquiryPageFieldsList) {
+				labelTexts[i1] = element.getText();
+				if (labelTexts[i1].contains(ProjectEnquiriesPageFields.get(j))) {
+					System.out.println("Verify Project Creation Page Fields List" + element.getText());
+					report.updateTestLog("Verify Project Creation Page Fields List", element.getText() + "::::label is present in Project Enquiry Page for APAC", Status.PASS);
+					countLabelList++;
+				}
+				i1++;
+			}
+			i1=0;
+			j++;
+		}
+		System.out.println("Count of labels present in Offer Creation Page are::" + countLabelList);
+		if(countLabelList==3) {
+			report.updateTestLog("Verify Project Creation Page Fields List", "All the fields are present in Project Creation Page for APAC", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Project Creation Page Fields List", "Not all the fields are present in Project Creation Page for APAC", Status.FAIL);
+		}
+	}
+	
+	/**
+	 * Validating the Offers Related List from the APAC Property Record
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	
+	public void selectProperties() {
+		try {
+			Utility_Functions.xWaitForElementPresent(driver,menu_Properties, 3);
+			Utility_Functions.xClick(driver, menu_Properties, true);
+		} catch(Exception e){
+			Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
+			Utility_Functions.xClick(driver, menu_More, true);
+			try {
+				Utility_Functions.xWaitForElementPresent(driver, propertiesRecord, 3);
+				Utility_Functions.xClick(driver, propertiesRecord, true);
+			} catch (Exception e1) {
+				Utility_Functions.xWaitForElementPresent(driver, propertiesEnv, 2);
+				Utility_Functions.xClick(driver, propertiesEnv, true);
+			}	
+		}
+		List<WebElement> propertyRecordList = driver.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		if(propertyRecordList.isEmpty()) {
+				Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
+				Utility_Functions.xClick(driver, recentlyViewed, true);
+				Utility_Functions.xWaitForElementPresent(driver, allActiveCampaigns, 3);
+				Utility_Functions.xClick(driver, allActiveCampaigns, true);
+				Utility_Functions.timeWait(2);
+				List<WebElement> propertyRecordListActive = driver.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+				if(propertyRecordListActive.isEmpty()) {
+					report.updateTestLog("Active Campaigns List", "There are no Active Campaigns present", Status.PASS);
+				} else {
+					Utility_Functions.xclickRandomElement(propertyRecordListActive);
+				}
+		}
+		Utility_Functions.xclickOnFirstElementfromList(propertyRecordList);
+		
+	}
+	
+	public void projectEnquiriesPropertiesListsAPAC() {
+		selectProperties();
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, related, 3);
+		Utility_Functions.xClick(driver, related, true);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xWaitForElementPresent(driver, projectEnquiries, 3);
+		Utility_Functions.xClick(driver, projectEnquiries, true);
+		Utility_Functions.xWaitForElementPresent(driver, offersNextButton, 3);
+		Utility_Functions.xClick(driver, offersNextButton, true);
+		ProjectEnquiriesPageFieldsList();
+		Utility_Functions.timeWait(2);
+		List<WebElement> projectEnquiryPageFieldsList = driver.findElements(By.xpath("//label[contains(@class,'form-element__label')]/span[1]"));
+		int i1 = 0, j=0, countLabelList = 0;
+		String[] labelTexts = new String[projectEnquiryPageFieldsList.size()];
+		while(j<ProjectEnquiriesPageFields.size()) {
+			for (WebElement element : projectEnquiryPageFieldsList) {
+				labelTexts[i1] = element.getText();
+				if (labelTexts[i1].contains(ProjectEnquiriesPageFields.get(j))) {
+					System.out.println("Verify Project Creation Page Fields List" + element.getText());
+					report.updateTestLog("Verify Project Creation Page Fields List", element.getText() + "::::label is present in Project Enquiry Page for APAC", Status.PASS);
+					countLabelList++;
+				}
+				i1++;
+			}
+			i1=0;
+			j++;
+		}
+		System.out.println("Count of labels present in Offer Creation Page are::" + countLabelList);
+		if(countLabelList>=3) {
+			report.updateTestLog("Verify Project Creation Page Fields List", "All the fields are present in Project Creation Page for APAC", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Project Creation Page Fields List", "Not all the fields are present in Project Creation Page for APAC", Status.FAIL);
+		}
+	}
+	
+	/**
+	 * Validating Multi Business Line- Do not add Account Name to Opportunity Name when Opportunity is Marked as Confidential
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	
+	public void opportunityConfidential() {
+		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
+		Utility_Functions.xClick(driver, menu_Opportunities, true);
+		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
+		Utility_Functions.xClick(driver, newOpportunity, true);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xSwitchtoFrame(driver, accountName);
+		Utility_Functions.timeWait(2);
+		String sAccountName = searchOpportunity.fetchRecord("Account", "Name");
+		Utility_Functions.xSendKeys(driver, accountName, sAccountName);
+		accountName.sendKeys(Keys.ARROW_DOWN);
+		Utility_Functions.timeWait(2);
+		accountName.sendKeys(Keys.ENTER);
+		Utility_Functions.xWaitForElementPresent(driver, confidentialCheckboxOpp, 3);
+		Utility_Functions.xClick(driver, confidentialCheckboxOpp, true);
+		Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeCommissionEMEA, 3);
+		Utility_Functions.xSendKeys(driver, estimatedGrossFeeCommissionEMEA, dataTable.getData("General_Data", "InstallmentAmount"));
+		Utility_Functions.xSelectDropdownByIndex(salesStageEMEAOpp, 1);
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		Date date = new Date();
+		Utility_Functions.xSendKeys(driver, closeDateOpp, dateFormat.format(date).toString());
+		Utility_Functions.xSendKeys(driver, closeDateOpp, Keys.TAB);
+		Utility_Functions.xWaitForElementPresent(driver, saveNewOpportunity, 3);
+		Utility_Functions.xClick(driver, saveNewOpportunity, true);
+		driver.switchTo().defaultContent();
+		Utility_Functions.timeWait(2);		
+		Utility_Functions.xWaitForElementPresent(driver, opportunityConfidentialName, 3);
+		String opportunityName = opportunityConfidentialName.getText();
+		if ((opportunityName.contains("Confidential")) && (opportunityName.contains("Client"))) {
+			report.updateTestLog("Opportunity Created",
+					"Opportunity Name created as per the expected format -- Conidential Client:::",
+					Status.PASS);
+		} else {
+			report.updateTestLog("Opportunity Created",
+					"Opportunity Name created as per the expected format -- Conidential Client:::",
+					Status.FAIL);
+		}
+	}
 }
