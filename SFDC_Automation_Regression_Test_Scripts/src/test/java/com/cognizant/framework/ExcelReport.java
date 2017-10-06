@@ -484,7 +484,7 @@ class ExcelReport implements ReportType {
 
 	@Override
 	public void addResultSummaryFooter(String totalExecutionTime,
-			int nTestsPassed, int nTestsFailed) {
+			int nTestsPassed, int nTestsFailed, int nTestsSkipped) {
 		resultSummaryAccess.setDatasheetName(RESULT_SUMMARY);
 		int rowNum = resultSummaryAccess.addRow();
 
@@ -518,6 +518,10 @@ class ExcelReport implements ReportType {
 		resultSummaryAccess.setValue(rowNum, EXECUTION_TIME, "Tests failed",
 				cellFormatting);
 		resultSummaryAccess.setValue(rowNum, TEST_STATUS, ": " + nTestsFailed,
+				cellFormatting);
+		resultSummaryAccess.setValue(rowNum, EXECUTION_TIME, "Tests Skipped",
+				cellFormatting);
+		resultSummaryAccess.setValue(rowNum, TEST_STATUS, ": " + nTestsSkipped,
 				cellFormatting);
 
 		wrapUpResultSummary();

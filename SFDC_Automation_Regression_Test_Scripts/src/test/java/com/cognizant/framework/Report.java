@@ -15,9 +15,9 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
+import com.cognizant.Craft.CRAFTTestCase;
 import com.cognizant.framework.selenium.SeleniumTestParameters;
 //import supportlibraries.RESTclient;
-
 
 /**
  * Class to encapsulate all the reporting features of the framework
@@ -41,7 +41,7 @@ public class Report {
 
 	private String testStatus;
 	private String failureDescription;
-	
+
 	/**
 	 * Constructor to initialize the Report
 	 * 
@@ -52,10 +52,11 @@ public class Report {
 	 */
 	@SuppressWarnings("unused")
 	private final SeleniumTestParameters testParameters;
-	public Report(ReportSettings reportSettings, ReportTheme reportTheme,SeleniumTestParameters testParameters) {
+
+	public Report(ReportSettings reportSettings, ReportTheme reportTheme, SeleniumTestParameters testParameters) {
 		this.reportSettings = reportSettings;
 		this.reportTheme = reportTheme;
-		this.testParameters=testParameters;
+		this.testParameters = testParameters;
 
 		nStepsPassed = 0;
 		nStepsFailed = 0;
@@ -84,29 +85,24 @@ public class Report {
 	public void initialize() {
 
 		if (reportSettings.shouldGenerateExcelReports()) {
-			new File(reportSettings.getReportPath() + Util.getFileSeparator()
-					+ EXCEL_RESULTS).mkdir();
+			new File(reportSettings.getReportPath() + Util.getFileSeparator() + EXCEL_RESULTS).mkdir();
 
-			ExcelReport excelReport = new ExcelReport(reportSettings,
-					reportTheme);
+			ExcelReport excelReport = new ExcelReport(reportSettings, reportTheme);
 			reportTypes.add(excelReport);
 		}
 
 		if (reportSettings.shouldGenerateHtmlReports()) {
-			new File(reportSettings.getReportPath() + Util.getFileSeparator()
-					+ HTML_RESULTS).mkdir();
+			new File(reportSettings.getReportPath() + Util.getFileSeparator() + HTML_RESULTS).mkdir();
 
 			HtmlReport htmlReport = new HtmlReport(reportSettings, reportTheme);
 			reportTypes.add(htmlReport);
 		}
 
 		if (reportSettings.shouldGeneratePerfectoReports()) {
-			new File(reportSettings.getReportPath() + Util.getFileSeparator()
-					+ PERFECTO_RESULTS).mkdir();
+			new File(reportSettings.getReportPath() + Util.getFileSeparator() + PERFECTO_RESULTS).mkdir();
 		}
 
-		new File(reportSettings.getReportPath() + Util.getFileSeparator()
-				+ SCREENSHOTS).mkdir();
+		new File(reportSettings.getReportPath() + Util.getFileSeparator() + SCREENSHOTS).mkdir();
 	}
 
 	/**
@@ -117,8 +113,7 @@ public class Report {
 	 * @return The {@link File} object representing the newly created sub-folder
 	 */
 	public File createResultsSubFolder(String subFolderName) {
-		File resultsSubFolder = new File(reportSettings.getReportPath()
-				+ Util.getFileSeparator() + subFolderName);
+		File resultsSubFolder = new File(reportSettings.getReportPath() + Util.getFileSeparator() + subFolderName);
 		resultsSubFolder.mkdir();
 		return resultsSubFolder;
 	}
@@ -163,11 +158,9 @@ public class Report {
 	 * @param subHeading4
 	 *            The fourth sub-heading to be added
 	 */
-	public void addTestLogSubHeading(String subHeading1, String subHeading2,
-			String subHeading3, String subHeading4) {
+	public void addTestLogSubHeading(String subHeading1, String subHeading2, String subHeading3, String subHeading4) {
 		for (int i = 0; i < reportTypes.size(); i++) {
-			reportTypes.get(i).addTestLogSubHeading(subHeading1, subHeading2,
-					subHeading3, subHeading4);
+			reportTypes.get(i).addTestLogSubHeading(subHeading1, subHeading2, subHeading3, subHeading4);
 		}
 	}
 
@@ -220,39 +213,37 @@ public class Report {
 	 * @param stepStatus
 	 *            The status of the test step
 	 */
-	public void updateTestLog(String stepName, String stepDescription,
-			Status stepStatus) {
+	public void updateTestLog(String stepName, String stepDescription, Status stepStatus) {
 		handleStepInvolvingPassOrFail(stepDescription, stepStatus);
 
 		if (stepStatus.ordinal() <= reportSettings.getLogLevel()) {
-			String screenshotName = handleStepInvolvingScreenshot(stepName,
-					stepStatus);
+			String screenshotName = handleStepInvolvingScreenshot(stepName, stepStatus);
 
 			for (int i = 0; i < reportTypes.size(); i++) {
-				reportTypes.get(i).updateTestLog(Integer.toString(stepNumber),
-						stepName, stepDescription, stepStatus, screenshotName);
+				reportTypes.get(i).updateTestLog(Integer.toString(stepNumber), stepName, stepDescription, stepStatus,
+						screenshotName);
 				/***** To Inetgrate with JIRA *****/
-				/*if(stepStatus==Status.FAIL)
-				RESTclient.defectLog(testParameters.getCurrentTestcase(), stepDescription,
-		        		reportSettings.getReportPath()
-						+ Util.getFileSeparator() + SCREENSHOTS
-						+ Util.getFileSeparator() + screenshotName);*/
+				/*
+				 * if(stepStatus==Status.FAIL)
+				 * RESTclient.defectLog(testParameters.getCurrentTestcase(),
+				 * stepDescription, reportSettings.getReportPath() +
+				 * Util.getFileSeparator() + SCREENSHOTS +
+				 * Util.getFileSeparator() + screenshotName);
+				 */
 			}
 
 			stepNumber++;
 		}
 	}
 
-	private void handleStepInvolvingPassOrFail(String stepDescription,
-			Status stepStatus) {
+	private void handleStepInvolvingPassOrFail(String stepDescription, Status stepStatus) {
 		if (stepStatus.equals(Status.FAIL)) {
 			testStatus = "Failed";
 
 			if (failureDescription == null) {
 				failureDescription = stepDescription;
 			} else {
-				failureDescription = failureDescription + "; "
-						+ stepDescription;
+				failureDescription = failureDescription + "; " + stepDescription;
 			}
 
 			nStepsFailed++;
@@ -261,23 +252,16 @@ public class Report {
 		}
 	}
 
-	private String handleStepInvolvingScreenshot(String stepName,
-			Status stepStatus) {
-		String screenshotName = reportSettings.getReportName()
-				+ "_"
-				+ Util.getCurrentFormattedTime(
-						reportSettings.getDateFormatString()).replace(" ", "_")
-						.replace(":", "-") + "_" + stepName.replace(" ", "_")
-				+ ".png";
+	private String handleStepInvolvingScreenshot(String stepName, Status stepStatus) {
+		String screenshotName = reportSettings.getReportName() + "_"
+				+ Util.getCurrentFormattedTime(reportSettings.getDateFormatString()).replace(" ", "_").replace(":", "-")
+				+ "_" + stepName.replace(" ", "_") + ".png";
 
-		if ((stepStatus.equals(Status.FAIL) && reportSettings
-				.shouldTakeScreenshotFailedStep())
-				|| (stepStatus.equals(Status.PASS) && reportSettings
-						.shouldTakeScreenshotPassedStep())
+		if ((stepStatus.equals(Status.FAIL) && reportSettings.shouldTakeScreenshotFailedStep())
+				|| (stepStatus.equals(Status.PASS) && reportSettings.shouldTakeScreenshotPassedStep())
 				|| stepStatus.equals(Status.SCREENSHOT)) {
 
-			String screenshotPath = reportSettings.getReportPath()
-					+ Util.getFileSeparator() + SCREENSHOTS
+			String screenshotPath = reportSettings.getReportPath() + Util.getFileSeparator() + SCREENSHOTS
 					+ Util.getFileSeparator() + screenshotName;
 			if (screenshotPath.length() > 256) { // Max char limit for Windows
 													// filenames
@@ -299,16 +283,14 @@ public class Report {
 	protected void takeScreenshot(String screenshotPath) {
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
 		Dimension screenSize = toolkit.getScreenSize();
-		Rectangle rectangle = new Rectangle(0, 0, screenSize.width,
-				screenSize.height);
+		Rectangle rectangle = new Rectangle(0, 0, screenSize.width, screenSize.height);
 		Robot robot;
 
 		try {
 			robot = new Robot();
 		} catch (AWTException e) {
 			e.printStackTrace();
-			throw new FrameworkException(
-					"Error while creating Robot object (for taking screenshot)");
+			throw new FrameworkException("Error while creating Robot object (for taking screenshot)");
 		}
 
 		BufferedImage screenshotImage = robot.createScreenCapture(rectangle);
@@ -318,8 +300,7 @@ public class Report {
 			ImageIO.write(screenshotImage, "jpg", screenshotFile);
 		} catch (IOException e) {
 			e.printStackTrace();
-			throw new FrameworkException(
-					"Error while writing screenshot to .jpg file");
+			throw new FrameworkException("Error while writing screenshot to .jpg file");
 		}
 	}
 
@@ -333,8 +314,7 @@ public class Report {
 	 */
 	public void addTestLogFooter(String executionTime) {
 		for (int i = 0; i < reportTypes.size(); i++) {
-			reportTypes.get(i).addTestLogFooter(executionTime, nStepsPassed,
-					nStepsFailed);
+			reportTypes.get(i).addTestLogFooter(executionTime, nStepsPassed, nStepsFailed);
 		}
 	}
 
@@ -342,18 +322,14 @@ public class Report {
 	 * Function to consolidate all screenshots into a Word document
 	 */
 	public void consolidateScreenshotsInWordDoc() {
-		String screenshotsConsolidatedFolderPath = reportSettings
-				.getReportPath()
-				+ Util.getFileSeparator()
+		String screenshotsConsolidatedFolderPath = reportSettings.getReportPath() + Util.getFileSeparator()
 				+ "Screenshots (Consolidated)";
 		new File(screenshotsConsolidatedFolderPath).mkdir();
 
-		WordDocumentManager documentManager = new WordDocumentManager(
-				screenshotsConsolidatedFolderPath,
+		WordDocumentManager documentManager = new WordDocumentManager(screenshotsConsolidatedFolderPath,
 				reportSettings.getReportName());
 
-		String screenshotsFolderPath = reportSettings.getReportPath()
-				+ Util.getFileSeparator() + SCREENSHOTS;
+		String screenshotsFolderPath = reportSettings.getReportPath() + Util.getFileSeparator() + SCREENSHOTS;
 		File screenshotsFolder = new File(screenshotsFolderPath);
 
 		FilenameFilter filenameFilter = new FilenameFilter() {
@@ -379,18 +355,14 @@ public class Report {
 	 * @param isMobile
 	 */
 	public void consolidateScreenshotsInPDF(boolean isMobile) {
-		String screenshotsConsolidatedFolderPath = reportSettings
-				.getReportPath()
-				+ Util.getFileSeparator()
+		String screenshotsConsolidatedFolderPath = reportSettings.getReportPath() + Util.getFileSeparator()
 				+ "Screenshots (Consolidated)";
 		new File(screenshotsConsolidatedFolderPath).mkdir();
 
-		PDFDocumentManager pdfDocument = new PDFDocumentManager(
-				screenshotsConsolidatedFolderPath,
+		PDFDocumentManager pdfDocument = new PDFDocumentManager(screenshotsConsolidatedFolderPath,
 				reportSettings.getReportName());
 
-		String screenshotsFolderPath = reportSettings.getReportPath()
-				+ Util.getFileSeparator() + SCREENSHOTS;
+		String screenshotsFolderPath = reportSettings.getReportPath() + Util.getFileSeparator() + SCREENSHOTS;
 		File screenshotsFolder = new File(screenshotsFolderPath);
 
 		FilenameFilter filenameFilter = new FilenameFilter() {
@@ -443,11 +415,10 @@ public class Report {
 	 * @param subHeading4
 	 *            The fourth sub-heading to be added
 	 */
-	public void addResultSummarySubHeading(String subHeading1,
-			String subHeading2, String subHeading3, String subHeading4) {
+	public void addResultSummarySubHeading(String subHeading1, String subHeading2, String subHeading3,
+			String subHeading4) {
 		for (int i = 0; i < reportTypes.size(); i++) {
-			reportTypes.get(i).addResultSummarySubHeading(subHeading1,
-					subHeading2, subHeading3, subHeading4);
+			reportTypes.get(i).addResultSummarySubHeading(subHeading1, subHeading2, subHeading3, subHeading4);
 		}
 	}
 
@@ -501,11 +472,12 @@ public class Report {
 	 */
 	public HashMap<String, Integer> addResultSummaryFooter(String totalExecutionTime) {
 		for (int i = 0; i < reportTypes.size(); i++) {
-			reportTypes.get(i).addResultSummaryFooter(totalExecutionTime,nTestsPassed, nTestsFailed);				
+			reportTypes.get(i).addResultSummaryFooter(totalExecutionTime, CRAFTTestCase.getTestStatus_Success(),
+					CRAFTTestCase.getTestStatus_Fail(), CRAFTTestCase.getTestStatus_Skip());
 		}
 		HashMap hashMap = new HashMap();
-		hashMap.put("Passed", Integer.valueOf(this.nTestsPassed));
-		hashMap.put("Failed", Integer.valueOf(this.nTestsFailed));
+		hashMap.put("Passed", CRAFTTestCase.getTestStatus_Success());
+		hashMap.put("Failed", CRAFTTestCase.getTestStatus_Fail());
 		return hashMap;
 	}
 }

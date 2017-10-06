@@ -3,10 +3,14 @@ package com.cognizant.Craft;
 import com.cognizant.framework.FrameworkParameters;
 import com.cognizant.framework.selenium.*;
 
+import java.util.HashMap;
+
 import org.openqa.selenium.Platform;
 import org.testng.Assert;
 import org.testng.ITestContext;
+import org.testng.ITestResult;
 import org.testng.SkipException;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
@@ -18,6 +22,34 @@ import org.testng.annotations.DataProvider;
  * @author Cognizant
  */
 public abstract class CRAFTTestCase {
+	public static int testStatus_Success;
+	
+	public static int getTestStatus_Success() {
+		return testStatus_Success;
+	}
+
+	public static void setTestStatus_Success(int testStatus_Success) {
+		CRAFTTestCase.testStatus_Success = testStatus_Success;
+	}
+
+	public static int testStatus_Fail;
+	public static int getTestStatus_Fail() {
+		return testStatus_Fail;
+	}
+
+	public static void setTestStatus_Fail(int testStatus_Fail) {
+		CRAFTTestCase.testStatus_Fail = testStatus_Fail;
+	}
+
+	public static int testStatus_Skip;
+	public static int getTestStatus_Skip() {
+		return testStatus_Skip;
+	}
+
+	public static void setTestStatus_Skip(int testStatus_Skip) {
+		CRAFTTestCase.testStatus_Skip = testStatus_Skip;
+	}
+
 	/**
 	 * The current scenario
 	 */
@@ -82,6 +114,24 @@ public abstract class CRAFTTestCase {
 		}
 	}
 
+	@AfterMethod
+	public void fetchMostRecentTestResult(ITestResult result) {
+	    int status = result.getStatus();
+	    switch (status) {
+	        case ITestResult.SUCCESS:
+	        	testStatus_Success++;
+	            break;
+	        case ITestResult.FAILURE:
+	        	testStatus_Fail++;
+	            break;
+	        case ITestResult.SKIP:
+	        	testStatus_Skip++;
+	            break;
+	        default:
+	            throw new RuntimeException("Invalid Status");
+	    }
+	}
+	
 	/**
 	 * Function to do the required framework teardown activities after executing
 	 * each test case
@@ -115,6 +165,7 @@ public abstract class CRAFTTestCase {
 		resultSummaryManager.wrapUp(true);
 		// resultSummaryManager.launchResultSummary();
 	}
+ 
 
 	@DataProvider(name = "GlobalTestConfigurations", parallel = true)
 	public Object[][] dataGlobal() {

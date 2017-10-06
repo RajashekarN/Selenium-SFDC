@@ -115,5 +115,5 @@ interface ReportType {
 	 * @param nTestsFailed The number of test cases that failed
 	 */
 	public void addResultSummaryFooter(String totalExecutionTime,
-											int nTestsPassed, int nTestsFailed);
+											int nTestsPassed, int nTestsFailed, int nTestsSkipped);
 }
