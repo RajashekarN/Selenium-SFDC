@@ -3,6 +3,8 @@ package com.cognizant.Craft;
 import com.cognizant.framework.FrameworkParameters;
 import com.cognizant.framework.selenium.*;
 
+import runners.Allocator;
+
 import java.util.HashMap;
 
 import org.openqa.selenium.Platform;
@@ -23,7 +25,8 @@ import org.testng.annotations.DataProvider;
  */
 public abstract class CRAFTTestCase {
 	public static int testStatus_Success;
-	
+	private CraftDriver driver;
+
 	public static int getTestStatus_Success() {
 		return testStatus_Success;
 	}
@@ -162,7 +165,9 @@ public abstract class CRAFTTestCase {
 	 */
 	@AfterSuite
 	public void tearDownTestSuite() {
-		resultSummaryManager.wrapUp(true);
+		//resultSummaryManager.wrapUp(true);
+		Allocator allocator = new Allocator();
+		allocator.driveBatchExecution();
 		// resultSummaryManager.launchResultSummary();
 	}
  

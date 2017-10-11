@@ -1120,4 +1120,24 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	public void bc_opportunityNameConfidential() {
 		sfOpportunitiesPage.opportunityConfidential();
 	}
+	
+	/**
+	 * Validating Opportunity Type field and pick list values in Quick create Page layout for BC&P Opportunity Record Type page layout
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void bc_opportunityTypePickList() {
+		sfOpportunitiesPage.opportunityTypePickList();
+	}
+	
+	/**
+	 * Validating the update on existing fields in VAS Opportunity Record layout
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void bc_opportunityRecordLayoutVAS() {
+		sfOpportunitiesPage.opportunityRecordLayoutVAS();
+	}
 }
