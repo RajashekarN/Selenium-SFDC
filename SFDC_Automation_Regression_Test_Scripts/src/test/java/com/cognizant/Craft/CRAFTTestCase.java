@@ -25,7 +25,6 @@ import org.testng.annotations.DataProvider;
  */
 public abstract class CRAFTTestCase {
 	public static int testStatus_Success;
-	private CraftDriver driver;
 
 	public static int getTestStatus_Success() {
 		return testStatus_Success;
