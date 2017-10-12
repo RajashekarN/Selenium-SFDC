@@ -335,13 +335,13 @@ public class PropertiesPage extends ReusableLibrary {
 	@FindBy(xpath="//span[text()='Project Enquiry Name']/parent::label/parent::div/input")
 	WebElement projectEnquiryName;
 
-	@FindBy(xpath="//input[@placeholder='Search Accounts']")
+	@FindBy(xpath="//input[contains(@placeholder,'Search Accounts')]")
 	WebElement enquiryAccount;
 
 	@FindBy(xpath="//div[contains(@class,'primaryLabel')][@title='AUCAPACBroker123']")
 	WebElement enquiryAccountValue;
 
-	@FindBy(xpath="//input[@placeholder='Search Contacts']")
+	@FindBy(xpath="//input[contains(@placeholder,'Search Contacts')]")
 	WebElement enquiryContact;
 
 	@FindBy(xpath="//div[contains(@class,'secondaryLabel')][@title='AUCAPACBroker123']")
@@ -352,6 +352,39 @@ public class PropertiesPage extends ReusableLibrary {
 
 	@FindBy(xpath="//div[@class='forceChangeRecordTypeFooter']/button[contains(@class,'slds-button')]/span[text()='Next']")
 	WebElement nextNewProjectEnquiry;
+	
+	@FindBy(xpath="//span[contains(text(),'Country')]/parent::div/following-sibling::div//a[contains(text(),'New Zealand')]")
+	WebElement countryFieldNewZealand;
+	
+	@FindBy(xpath = "//one-app-launcher-header/button")
+	WebElement applauncher;
+	
+	@FindBy(xpath="//a[contains(@title,'Preferences')]/span/span[contains(text(),'Preferences')]")
+	WebElement preferences;
+	
+	@FindBy(xpath="//span[contains(@class,'virtualAutocompleteOptionText')][contains(text(),'All Investor Preferences')]")
+	WebElement allInvestorPreferences;
+	
+	@FindBy(xpath="//span[contains(text(),'Preference Type')]/parent::div/following-sibling::div//span[contains(text(),'Sale')]")
+    WebElement preferenceTypeSale;
+	
+	@FindBy(xpath="//span[contains(text(),'Property Type')]/parent::div/following-sibling::div//span[contains(text(),'Industrial')]")
+	WebElement industrialPropertyType;
+	
+	@FindBy(xpath="//span[contains(text(),'APAC Region')]/parent::div/following-sibling::div//a[contains(text(),'SA')]")
+	WebElement regionSA;
+	
+	@FindBy(xpath="//span[contains(text(),'Preference Type')]/parent::div/following-sibling::div//span[contains(text(),'Lease')]")
+	WebElement preferenceTypeLease;
+	
+	@FindBy(xpath="//span[contains(text(),'Property Type')]/parent::div/following-sibling::div//span[contains(text(),'Retail')]")
+	WebElement retailPropertyType;
+	
+	@FindBy(xpath="//span[contains(text(),'APAC Region')]/parent::div/following-sibling::div//a[contains(text(),'NSW')]")
+	WebElement regionNSW;
+	
+	@FindBy(xpath="//span[contains(text(),'APAC Region')]/parent::div/following-sibling::div//a[contains(text(),'Christchurch')]")
+	WebElement regionChristchurch;
 
 	LoginPage loginPage = new LoginPage(scriptHelper);
 
@@ -2574,6 +2607,211 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver,projectEnquirySave, true);
 
 
+	}
+	/**
+	 * Validating the Country field in the Properties
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+	public void verifyPropertiesCountryField() {
+		try{
+			Utility_Functions.xWaitForElementPresent(driver,menu_Properties, 3);
+			Utility_Functions.xClick(driver, menu_Properties, true);
+		}catch(Exception e){
+			Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
+			Utility_Functions.xClick(driver, menu_More, true);
+			Utility_Functions.xWaitForElementPresent(driver, properties, 2);
+			Utility_Functions.xClick(driver, properties, true);	
+		}
+		report.updateTestLog("Verify Properties Country Field ","Properties is Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
+		Utility_Functions.xClick(driver, recentlyViewed, true);
+		report.updateTestLog("Verify Properties Country Field  ","Recently viewed Properties are Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, allProperties, 3);
+		Utility_Functions.xClick(driver, allProperties, true);
+		Utility_Functions.timeWait(3);
+		report.updateTestLog("Verify Properties Country Field  ","All Properties are Displayed ",  Status.PASS);
+try{
+		List<WebElement> propertiesList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+
+		Utility_Functions.xclickOnFirstElementfromList(propertiesList);	
+		Utility_Functions.timeWait(3);
+		SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
+		String queryId = "SELECT 	Sharing_Country__c, Id FROM Property__c where 	Sharing_Country__c = 'New Zealand'";
+		String propertyId = searchTextSOQL.fetchRecordFieldValue("Id", queryId);
+		String url = driver.getCurrentUrl().split("#")[0];
+		String newUrl = url + "#/sObject/" + propertyId;
+		newUrl = newUrl + "/view";
+		driver.get(newUrl);
+		driver.navigate().refresh();
+		Utility_Functions.timeWait(3);
+		if(countryFieldNewZealand.isDisplayed()) {
+
+			report.updateTestLog("Verify Properties Country Field ", "The Properties country field is New Zealand ", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Properties Country Field ", "The Properties country field is not New Zealand", Status.FAIL);
+		}
+		
+}catch(Exception e){
+	System.out.println("there are no properties displayed");
+	report.updateTestLog("Verify Properties Country Field",
+			"The properties are not displayed", Status.PASS);
+	
+}
+		 
+}
+	/**
+	 * Validating the Properties Preferences property type and region
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+	public void verifyPreferencesPropertyType() {
+		Utility_Functions.xWaitForElementPresent(driver, applauncher, 3);
+		Utility_Functions.xClick(driver, applauncher, true);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver,preferences, 3);
+		Utility_Functions.xClick(driver, preferences, true);
+		report.updateTestLog("Verify Preferences Property Type ","Preferences is Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
+		Utility_Functions.xClick(driver, recentlyViewed, true);
+		report.updateTestLog("Verify Preferences Property Type ","Recently viewed Properties are Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver,allInvestorPreferences, 3);
+		Utility_Functions.xClick(driver,allInvestorPreferences, true);
+		Utility_Functions.timeWait(3);
+		report.updateTestLog("Verify Preferences Property Type","All Properties are Displayed ",  Status.PASS);
+		List<WebElement> propertiesList = driver.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xclickOnFirstElementfromList(propertiesList);	
+		Utility_Functions.timeWait(3);
+		if(dataTable.getData("General_Data", "TC_ID").contains("CMAPACBrokerAUS")) {
+		if((preferenceTypeSale.isDisplayed())&& (industrialPropertyType.isDisplayed()) && (regionSA.isDisplayed())) {
+
+			report.updateTestLog("Verify Preferences Property Type", "The Preference property type is sale, Property type is Industrial and the region is SA", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Preferences Property Type", "The Preference property type is not sale and property type is not Industrial and the region is not SA", Status.FAIL);
+		}
+		
+		
+		}else if(dataTable.getData("General_Data", "TC_ID").contains("CMAPACBrokerNSW")) {
+			
+			if((preferenceTypeLease.isDisplayed())&& (retailPropertyType.isDisplayed()) && (regionNSW.isDisplayed())) {
+			
+				report.updateTestLog("Verify Preferences Property Type", "The Preference property type is lease, Property type is Retail and the region is NSW", Status.PASS);
+			} else {
+				report.updateTestLog("Verify Preferences Property Type", "The Preference property type is not lease, Property type is not Retail and the region is not NSW", Status.FAIL);
+			}
+				
+			
+		}else if(dataTable.getData("General_Data", "TC_ID").contains("CMAPACBrokerChristChurch")) {
+			if((preferenceTypeLease.isDisplayed())&& (retailPropertyType.isDisplayed()) && (regionChristchurch.isDisplayed())) {
+				
+				report.updateTestLog("Verify Preferences Property Type", "The Preference property type is lease, Property type is Retail and the region is Christchurch", Status.PASS);
+			} else {
+				report.updateTestLog("Verify Preferences Property Type", "The Preference property type is not lease, Property type is not Retail and the region is not Christchurch", Status.FAIL);
+			}
+		}
+		}
+	/**
+	 * Validating the Project Enquiry page fields
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	static ArrayList<String> projectEnquiriesFieldsList = new ArrayList<String>();
+	public void projectEnquiriesFields() {
+
+		projectEnquiriesFieldsList.add("Project Enquiry Name");
+		projectEnquiriesFieldsList.add("Enquiry Opportunity");
+		projectEnquiriesFieldsList.add("Enquiry Account");
+		projectEnquiriesFieldsList.add("Information Memorandum Sent Date");
+		projectEnquiriesFieldsList.add("Enquiry Contact");
+		projectEnquiriesFieldsList.add("Inspection Date");
+		projectEnquiriesFieldsList.add("Enquiry Primary Campaign");
+		projectEnquiriesFieldsList.add("Confidentiality Agreement Executed Date");
+		projectEnquiriesFieldsList.add("Confidential");
+		projectEnquiriesFieldsList.add("Due Diligence Start Date");
+		projectEnquiriesFieldsList.add("Data Room Access");
+		projectEnquiriesFieldsList.add("Client Feedback");
+		projectEnquiriesFieldsList.add("Broker Feedback");
+
+		System.out.println("Project Enquiries fields are " + projectEnquiriesFieldsList);
+	}
+	public void verifyProjectEnquiriesPageFields(){
+	Utility_Functions.xWaitForElementPresent(driver,menu_More, 3);
+	Utility_Functions.xClick(driver, menu_More, true);
+	report.updateTestLog("Verify Project Enquiries Page Fields","Verifying More options is displayed",Status.PASS);
+	Utility_Functions.timeWait(2);
+	Utility_Functions.xWaitForElementPresent(driver,more_projectEnquiries, 3);
+	Utility_Functions.xClick(driver,more_projectEnquiries, true);
+	report.updateTestLog("Verify Project Enquiries Page Fields","Verifying Project Enquiries is displayed",Status.PASS);
+	Utility_Functions.timeWait(2);
+	Utility_Functions.xWaitForElementPresent(driver,newPropertiesPreferences, 3);
+	Utility_Functions.xClick(driver,newPropertiesPreferences, true);
+	report.updateTestLog("Verify Project Enquiries Page Fields","Verifying the new Project Enquiries is displayed",Status.PASS);
+	String environment = loginPage.initializeEnvironment();
+	if (environment.equals("FTE")) {
+		Utility_Functions.xWaitForElementPresent(driver,nextNewProjectEnquiry, 3);
+		Utility_Functions.xClick(driver,nextNewProjectEnquiry,true);
+	}
+	List<WebElement> projectEnquiryPageValues = driver.findElements(By.xpath("//label[contains(@class,'inputLabel')]/span[1]"));
+	int count4 = 0, i4 = 0;
+	String fieldsArray4[] = new String[projectEnquiryPageValues.size()];
+	System.out.println(projectEnquiryPageValues.size());
+	try {
+		projectEnquiriesFields();
+		for (WebElement element4 :projectEnquiryPageValues) {
+			System.out.println(element4.getText());
+			fieldsArray4[i4] = element4.getText();
+			if (fieldsArray4[i4].contains(projectEnquiriesFieldsList.get(i4))) {
+				report.updateTestLog("Verify Project Enquiries Page Fields",
+						"Project Enquiries page is having the " + fieldsArray4[i4] + " fields ",
+						Status.PASS);
+				count4++;
+			}
+			i4++;
+		}
+		System.out.println(count4);
+		if (count4!= 13) {
+			report.updateTestLog("Verify Project Enquiries Page Fields", "All fields are not present in the Project Enquiry page ", Status.FAIL);
+		} else {
+
+			report.updateTestLog("Verify Project Enquiries Page Fields", "All fields are present in the Project Enquiry page", Status.PASS);
+		}
+	} catch (Exception e) {
+		System.out.println(e.getMessage());
+	}
+	Utility_Functions.timeWait(5);
+	Utility_Functions.xScrollWindow(driver);
+	Utility_Functions.timeWait(1);
+	Utility_Functions.xScrollWindowTop(driver);
+	Utility_Functions.timeWait(2);
+	Utility_Functions.xWaitForElementPresent(driver,projectEnquiryName, 3);
+	Utility_Functions.xSendKeys(driver,projectEnquiryName, "Test Automation_" + Utility_Functions.xGenerateAlphaNumericString());
+	Utility_Functions.xWaitForElementPresent(driver,enquiryContact, 3);
+	Utility_Functions.xSendKeys(driver,enquiryContact, "AUCAPACBroker");
+	Utility_Functions.xWaitForElementPresent(driver,enquiryContactValue, 3);
+	Utility_Functions.xClick(driver,enquiryContactValue, true);
+	Utility_Functions.xWaitForElementPresent(driver,enquiryAccount, 3);
+	Utility_Functions.xSendKeys(driver,enquiryAccount, "AUCAPACBroker");
+	Utility_Functions.xWaitForElementPresent(driver,enquiryAccountValue, 3);
+	Utility_Functions.xClick(driver,enquiryAccountValue, true);
+	Utility_Functions.xWaitForElementPresent(driver,projectEnquirySave, 3);
+	Utility_Functions.xClick(driver,projectEnquirySave, true);
+}
+	/**
+	 * Validating the Project Enquiries Enhancements
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	
+	
+	public void verifyProjectEnquiriesEnhancements(){	
+		
+		verifyProjectEnquiriesPageFields();
+		//a[contains(@class,'baseCard__header-title-container')]/span[1]
+		
 	}
 }
 

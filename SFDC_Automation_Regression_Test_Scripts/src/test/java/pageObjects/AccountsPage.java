@@ -739,6 +739,34 @@ public class AccountsPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//span[text()='Next']")
 	WebElement newAccountEMEAnext;
+	
+	@FindBy(xpath="//a[@title='Budgets&#47;Targets']/span/span[text()='Budgets/Targets']")
+	WebElement budgetsTargets;
+	
+	@FindBy(xpath="//div[@class='slds-truncate'][text()='New']")
+	WebElement newBudgetsTargets;
+	
+	@FindBy(xpath="//input[contains(@title,'Search People')]")
+	WebElement cbreProfessional;
+	
+	@FindBy(xpath="//div[contains(@class,'primaryLabel')]/mark[contains(text(),'Broker4')]")
+	WebElement cbreProfessionalValue;
+	
+	@FindBy(xpath="//span[contains(text(),'Start Date')]/parent::label/following-sibling::div/input")
+	WebElement startDate;
+	
+	@FindBy(xpath="//span[contains(text(),'Budget/Target Amount')]/parent::label/following-sibling::input")
+	WebElement budgetAmount;
+	
+	@FindBy(xpath="//div[contains(@class,'forceModalActionContainer--footerAction')]//span[(text()='Save')]")
+	WebElement saveBudget;
+	
+	@FindBy(xpath="//span[contains(text(),'Owner')]/parent::div/following-sibling::div")
+	WebElement budgetOwner;
+	
+	@FindBy(xpath="//span[contains(text(),'Currency')]/parent::span/following-sibling::div//a[contains(@aria-label,'Currency')]")
+    WebElement budgetCurrency;
+
 
 	HomePage hp = new HomePage(scriptHelper);
 	LoginPage loginPage = new LoginPage(scriptHelper);
@@ -5672,5 +5700,91 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, search, 3);
 		Utility_Functions.xClick(driver, search, true);
 		Utility_Functions.timeWait(3);
+	}
+	/**
+	 * Validating the Budget/Target page and filling the mandatory fields in the page
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	
+	static ArrayList<String> budgetTargetsFieldsList = new ArrayList<String>();
+
+	public void budgetTargetsValues() {
+
+		budgetTargetsFieldsList.add("CBRE Professional");
+		budgetTargetsFieldsList.add("Budget/Target Amount");
+		budgetTargetsFieldsList.add("Start Date");
+
+		System.out.println("Budgets/Targets page fields are " + budgetTargetsFieldsList);
+	}
+	public void verifyBudgetsTargets() {
+		Utility_Functions.xWaitForElementPresent(driver, applauncher, 3);
+		Utility_Functions.xClick(driver, applauncher, true);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver,budgetsTargets, 3);
+		Utility_Functions.xClick(driver,budgetsTargets, true);
+		if(dataTable.getData("General_Data", "TC_ID").contains("OBEMEABroker")) {	
+			if (!newBudgetsTargets.isDisplayed()) {
+
+				report.updateTestLog("Verify Budgets/Targets Page Layout", "The user cannot create a Budget/Target", Status.PASS);
+			} else {
+				report.updateTestLog("Verify Budgets/Targets Page Layout", "The user can create a Budget/Target", Status.FAIL);
+			}
+			
+		}else {
+		Utility_Functions.xWaitForElementPresent(driver,newBudgetsTargets, 3);
+		Utility_Functions.xClick(driver,newBudgetsTargets, true);
+		
+		List<WebElement> budgetTargetsList = driver.findElements(By.xpath("//label[contains(@class,'inputLabel')]"));
+		int count = 0, i = 0;
+		String sectionsArray[] = new String[budgetTargetsList.size()];
+		System.out.println(budgetTargetsList.size());
+		try {
+			budgetTargetsValues();
+			for (WebElement element : budgetTargetsList) {
+				System.out.println(element.getText());
+				sectionsArray[i] = element.getText();
+				if (sectionsArray[i].contains(budgetTargetsFieldsList.get(i))) {
+					report.updateTestLog("Verify New Account Page Layout ",
+							"SPOC page  is having the " + sectionsArray[i] + " fields ", Status.PASS);
+					count++;
+				}
+				i++;
+			}
+			System.out.println(count);
+			if (count != 3) {
+				report.updateTestLog("Verify Budgets/Targets Page Layout ", "All fields are not prsent in the Budgets/Targets Page layout ",
+						Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify Budgets/Targets Page Layout  ", "All fields are prsent in the Budgets/Targets Page layout",
+						Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		Utility_Functions.xWaitForElementPresent(driver,cbreProfessional, 3);
+		Utility_Functions.xSendKeys(driver,cbreProfessional, "Test Broker4");
+		Utility_Functions.xWaitForElementPresent(driver,cbreProfessionalValue, 3);
+		Utility_Functions.xClick(driver,cbreProfessionalValue, true);
+		System.out.println(Calendar.getInstance());
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		Date date = new Date();
+		Utility_Functions.xWaitForElementPresent(driver, startDate, 3);
+		Utility_Functions.xSendKeys(driver,startDate, dateFormat.format(date).toString());
+		Utility_Functions.xWaitForElementPresent(driver,budgetAmount, 3);
+		Utility_Functions.xSendKeys(driver,budgetAmount, dataTable.getData("General_Data", "InstallmentAmount"));
+		if( (budgetOwner.isDisplayed() && (budgetCurrency.isDisplayed()))) {
+
+			report.updateTestLog("Verify Budgets/Targets Page Layout", "The owner value and currency fields are populated by default", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Budgets/Targets Page Layout", "The owner value and currency fields are not populated by default", Status.FAIL);
+		}
+		Utility_Functions.xWaitForElementPresent(driver,saveBudget, 3);
+		Utility_Functions.xClick(driver,saveBudget, true);
+		
+		}	
 	}
 }

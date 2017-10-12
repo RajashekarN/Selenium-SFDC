@@ -229,5 +229,33 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	public void bc_verifyOfferAutoPopulatedByProjectEnquiries() throws InterruptedException {
 		sfPropertiesPage.verifyOfferAutoPopulatedByProjectEnquiries();
 	}
+	/**
+	 * Validating the Properties Country field for the New Zealand Broker
+	 * 	
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyPropertiesCountryField() throws InterruptedException {
+		sfPropertiesPage.verifyPropertiesCountryField();
+	}
+	/**
+	 * Validating the Preferences Property type and region
+	 * 	
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyPreferencesPropertyType() throws InterruptedException {
+		sfPropertiesPage.verifyPreferencesPropertyType();
+	}
+	/**
+	 * Validating the Project Enquiries page fields
+	 * 	
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyProjectEnquiriesPageFields() throws InterruptedException {
+		sfPropertiesPage.verifyProjectEnquiriesPageFields();
+	}
+	
 	
 }

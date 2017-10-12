@@ -1140,4 +1140,31 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	public void bc_opportunityRecordLayoutVAS() {
 		sfOpportunitiesPage.opportunityRecordLayoutVAS();
 	}
+	/**
+	 * Validating the  Opportunities calculated Annual Leasing Commission
+	 * 
+	 * @author  Ramya
+	 *
+	 */
+	public void bc_opportunityCalculateAnnualLeasingCommission() {
+		sfOpportunitiesPage.opportunityCalculateAnnualLeasingCommission();
+	}
+	/**
+	 * Validating the  Opportunities close information section
+	 * 
+	 * @author  Ramya
+	 *
+	 */
+	public void bc_opportunityCloseInformationSection() {
+		sfOpportunitiesPage.opportunityCloseInformationSection();
+	}
+	/**
+	 * Validating the  Opportunities close information section
+	 * 
+	 * @author  Ramya
+	 *
+	 */
+	public void bc_opportunitiesClosedDateAndInstallmentDate() {
+		sfOpportunitiesPage.opportunitiesClosedDateAndInstallmentDate();
+	}
 }
