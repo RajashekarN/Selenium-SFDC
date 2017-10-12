@@ -163,11 +163,9 @@ public abstract class CRAFTTestCase {
 	 * the overall test suite
 	 */
 	@AfterSuite
-	public void tearDownTestSuite() {
-		//resultSummaryManager.wrapUp(true);
-		Allocator allocator = new Allocator();
-		allocator.driveBatchExecution();
-		// resultSummaryManager.launchResultSummary();
+	public void tearDownTestSuite() {		
+		resultSummaryManager.wrapUp(true);
+		resultSummaryManager.copyReportsFolder();
 	}
  
 
