@@ -566,7 +566,46 @@
 	<class name="testscripts.SF.Release39TestScripts.TC_SF_CMEMEACSSOppNameConfidential"/>
 	<class name="testscripts.SF.Release39TestScripts.TC_SF_ABEMEABrokerOpportunityPickList"/>
 	<class name="testscripts.SF.Release39TestScripts.TC_SF_ABEMEACSSOpportunityPickList"/>
-	<class name="testscripts.SF.Release39TestScripts.TC_SF_VASAMERManagerOppRecordLayout"/>		
+	<class name="testscripts.SF.Release39TestScripts.TC_SF_VASAMERManagerOppRecordLayout"/>	
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_OBEMEABrokerOpportunitiesQuickCreatepage"/>	
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_DAEMEADataAccountsBudgetsTargetsPage"/>	
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_OBEMEAManagerAccountsBudgetsTargetsPage"/>	
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_ABEMEAManagerAccountsBudgetsTargetsPage"/>	
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_VASEMEAManagerAccountsBudgetsTargetsPage"/>	
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_CMEMEAManagerIPAccountsBudgetsTargetsPage"/>	
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_ABEMEAManagerOpportunitiesCreateInstallment"/>	
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_VASEMEABrokerOpportunitiesQuickCreatePage"/>	
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_CMEMEABrokerIPOpportunitiesQuickCreatePage"/>	
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_CMEMEAManagerCAAccountsBudgetsTargetsPage"/>	
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_CMEMEABrokerCAOpportunitiesQuickCreatePage"/>	
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_CMEMEABrokerBCPOpportunitiesQuickCreatePage"/>	
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_CMEMEABrokerDevOpportunitiesQuickCreatePage"/>	
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_CMEMEAManagerBCPAccountsBudgetsTargetsPage"/>	
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_CMEMEAManagerDevAccountsBudgetsTargetsPage"/>	
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_CMEMEACSSDevOpportunitiesCreateInstallment"/>	
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_CMEMEABrokerBCPOpportunitiesCreateInstallment"/>	
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_CMEMEABrokerDevOpportunitiesCreateInstallment"/>	
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_VASEMEABrokerOpportunitiesCreateInstallment"/>	
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_ABEMEABrokerOpportunitiesCreateInstallment"/>	
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_VASEMEABrokerOpportunitiesDefaultOpportunityName"/>	
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_VASEMEAManagerOpportunitiesDefaultOpportunityName"/>	
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_VASEMEACSSOpportunitiesDefaultOpportunityName"/>	
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_CMEMEACSSSuperUserContactsEditPage"/>	
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_ASEMEABrokerSuperUserContactsEditPage"/>	
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_CMEMEACSSContactsNonEditableFields"/>	
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_GWSEMEABrokerSuperUserContactsEditPage"/>	
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_VASEMEABrokerSuperUserContactsEditPage"/>	
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_CMAPACBrokerNZLPropertiesCountryField"/>	
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_CMAPACBrokerMetroPropertiesCountryField"/>	
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_CMAPACBrokerAUSPropertiesPreferences"/>	
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_CMAPACBrokerNSWPropertiesPreferences"/>	
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_CMAPACBrokerChristChurchPropertiesPreferences"/>	
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_OBEMEABrokerOpportunitiesInstallmentStatus"/>	
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_OBEMEABrokerOpportunitiesCloseInformationFields"/>	
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_CMAPACBrokerPropertiesProjectEnquiriesFields"/>	
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_ABEMEABrokerOpportunitiesInstallmentDate"/>	
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_CMEMEABrokerOpportunitiesQuickCreatePage"/>	
+		
 		</classes>
 	</test>
 </suite>
