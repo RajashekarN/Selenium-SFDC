@@ -24,7 +24,7 @@ import org.testng.annotations.DataProvider;
  * @author Cognizant
  */
 public abstract class CRAFTTestCase {
-	public static int testStatus_Success;
+	/*public static int testStatus_Success;
 
 	public static int getTestStatus_Success() {
 		return testStatus_Success;
@@ -50,7 +50,7 @@ public abstract class CRAFTTestCase {
 
 	public static void setTestStatus_Skip(int testStatus_Skip) {
 		CRAFTTestCase.testStatus_Skip = testStatus_Skip;
-	}
+	}*/
 
 	/**
 	 * The current scenario
@@ -116,7 +116,7 @@ public abstract class CRAFTTestCase {
 		}
 	}
 
-	@AfterMethod
+	/*@AfterMethod
 	public void fetchMostRecentTestResult(ITestResult result) {
 	    int status = result.getStatus();
 	    switch (status) {
@@ -132,7 +132,7 @@ public abstract class CRAFTTestCase {
 	        default:
 	            throw new RuntimeException("Invalid Status");
 	    }
-	}
+	}*/
 	
 	/**
 	 * Function to do the required framework teardown activities after executing

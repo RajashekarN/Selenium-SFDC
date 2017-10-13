@@ -596,12 +596,12 @@ class HtmlReport implements ReportType {
 	}
 
 	@Override
-	public void addResultSummaryFooter(String totalExecutionTime, int nTestsPassed, int nTestsFailed,
-			int nTestsSkipped) {
+	public void addResultSummaryFooter(String totalExecutionTime, int nTestsPassed, int nTestsFailed/*,
+			int nTestsSkipped*/) {
 		try {
 			BufferedWriter bufferWriter = new BufferedWriter(new FileWriter(resultSummaryPath, true));
 
-			String resultSummaryFooter = "\t\t\t </tbody> \n" + "\t\t </table> \n\n" +
+			/*String resultSummaryFooter = "\t\t\t </tbody> \n" + "\t\t </table> \n\n" +
 
 					"\t\t <table id='footer'> \n" + "\t\t\t <colgroup> \n" + "\t\t\t\t <col style='width: 16.6%' /> \n"
 					+ "\t\t\t\t <col style='width: 16.6%' /> \n" + "\t\t\t\t <col style='width: 16.6%' /> \n"
@@ -615,8 +615,28 @@ class HtmlReport implements ReportType {
 					+ "\t\t\t\t\t <td class='fail'>&nbsp;: " + nTestsFailed + "</td> \n"
 					+ "\t\t\t\t\t <td class='skip'>&nbsp;Tests Skipped</td> \n" + "\t\t\t\t\t <td class='skip'>&nbsp;: "
 					+ nTestsSkipped + "</td> \n" + "\t\t\t\t </tr> \n" + "\t\t\t </tfoot> \n" + "\t\t </table> \n"
-					+ "\t </body> \n" + "</html>";
+					+ "\t </body> \n" + "</html>";*/
+			String resultSummaryFooter = "\t\t\t </tbody> \n"
+					+ "\t\t </table> \n\n" +
 
+					"\t\t <table id='footer'> \n" + "\t\t\t <colgroup> \n"
+					+ "\t\t\t\t <col style='width: 25%' /> \n"
+					+ "\t\t\t\t <col style='width: 25%' /> \n"
+					+ "\t\t\t\t <col style='width: 25%' /> \n"
+					+ "\t\t\t\t <col style='width: 25%' /> \n"
+					+ "\t\t\t </colgroup> \n\n" +
+
+					"\t\t\t <tfoot> \n" + "\t\t\t\t <tr class='heading'> \n"
+					+ "\t\t\t\t\t <th colspan='4'>Total Duration: "
+					+ totalExecutionTime + "</th> \n" + "\t\t\t\t </tr> \n"
+					+ "\t\t\t\t <tr class='subheading'> \n"
+					+ "\t\t\t\t\t <td class='pass'>&nbsp;Tests passed</td> \n"
+					+ "\t\t\t\t\t <td class='pass'>&nbsp;: " + nTestsPassed
+					+ "</td> \n"
+					+ "\t\t\t\t\t <td class='fail'>&nbsp;Tests failed</td> \n"
+					+ "\t\t\t\t\t <td class='fail'>&nbsp;: " + nTestsFailed
+					+ "</td> \n" + "\t\t\t\t </tr> \n" + "\t\t\t </tfoot> \n"
+					+ "\t\t </table> \n" + "\t </body> \n" + "</html>";
 			bufferWriter.write(resultSummaryFooter);
 			bufferWriter.close();
 		} catch (IOException e) {
