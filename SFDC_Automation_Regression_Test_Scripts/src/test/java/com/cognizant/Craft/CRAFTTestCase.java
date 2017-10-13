@@ -165,7 +165,7 @@ public abstract class CRAFTTestCase {
 	@AfterSuite
 	public void tearDownTestSuite() {		
 		resultSummaryManager.wrapUp(true);
-		resultSummaryManager.copyReportsFolder();
+		//resultSummaryManager.copyReportsFolder();
 	}
  
 
