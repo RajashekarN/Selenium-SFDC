@@ -7,7 +7,7 @@
 	<test name="SmokeTests">
 		<classes>	 
 	
-	<!-- <class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSEMEABrokerOpportunityNameAutoGenerate"/>
+	<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSEMEABrokerOpportunityNameAutoGenerate"/>
 	<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_CMEMACSSDSFOpportunityNameAutoGenerate"/>
 	<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBEMEAManagerAccountsPopulatingAllFields"/>
 	<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerContactsCustomActivityTimeline"/>
@@ -580,7 +580,7 @@
 	<class name="testscripts.SF.Release38TestScripts.TC_SF_CMEMEABrokerCAOpportunitiesQuickCreatePage"/>	
 	<class name="testscripts.SF.Release38TestScripts.TC_SF_CMEMEABrokerBCPOpportunitiesQuickCreatePage"/>	
 	<class name="testscripts.SF.Release38TestScripts.TC_SF_CMEMEABrokerDevOpportunitiesQuickCreatePage"/>	
-	<class name="testscripts.SF.Release38TestScripts.TC_SF_CMEMEAManagerBCPAccountsBudgetsTargetsPage"/> -->
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_CMEMEAManagerBCPAccountsBudgetsTargetsPage"/>
 	<class name="testscripts.SF.Release38TestScripts.TC_SF_CMEMEAManagerDevAccountsBudgetsTargetsPage"/>	
 	<class name="testscripts.SF.Release38TestScripts.TC_SF_CMEMEACSSDevOpportunitiesCreateInstallment"/>	
 	<class name="testscripts.SF.Release38TestScripts.TC_SF_CMEMEABrokerBCPOpportunitiesCreateInstallment"/>	
