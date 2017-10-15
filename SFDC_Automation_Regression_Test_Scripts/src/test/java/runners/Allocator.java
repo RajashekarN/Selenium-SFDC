@@ -38,7 +38,7 @@ public class Allocator {
 		allocator.driveBatchExecution();
 	}
 
-	public void driveBatchExecution() {
+	private void driveBatchExecution() {
 		resultSummaryManager.setRelativePath();
 		properties = Settings.getInstance();
 		mobileProperties = Settings.getMobilePropertiesInstance();
@@ -56,7 +56,7 @@ public class Allocator {
 
 		resultSummaryManager.setupErrorLog();
 
-		/*int testBatchStatus = executeTestBatch(nThreads);*/
+		int testBatchStatus = executeTestBatch(nThreads);
 
 		resultSummaryManager.wrapUp(false);
 		
