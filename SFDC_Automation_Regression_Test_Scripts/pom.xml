@@ -27,7 +27,8 @@
 		<profile>
 			<id>runAllTests</id>
 			<properties>
-				<testNG.suiteXmlFile>src/test/resources/testng.xml</testNG.suiteXmlFile>
+				<testNG.suite1XmlFile>src/test/resources/testngSuite1.xml</testNG.suite1XmlFile>
+				<testNG.suite2XmlFile>src/test/resources/testngSuite2.xml</testNG.suite2XmlFile>				
 			</properties>
 			<build>
 				<plugins>
@@ -47,7 +48,8 @@
 						<version>${org.apache.maven.plugins.maven-surefire-plugin.version}</version>
 						<configuration>
 							<suiteXmlFiles>
-								<suiteXmlFile>${testNG.suiteXmlFile}</suiteXmlFile>
+								<suiteXmlFile>${testNG.suite1XmlFile}</suiteXmlFile>
+								<suiteXmlFile>${testNG.suite2XmlFile}</suiteXmlFile>								
 							</suiteXmlFiles>
 						</configuration>
 						<executions>

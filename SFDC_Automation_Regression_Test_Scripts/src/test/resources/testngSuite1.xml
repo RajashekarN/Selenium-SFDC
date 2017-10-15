@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="SmokeTestScriptsSuite" parallel="methods" thread-count="3">
+<suite name="SmokeTestScriptsSuite1" parallel="methods" thread-count="3">
 	 <listeners>
 	        <listener class-name="supportLibraries.AnnotationTransformer"/> 
 	 </listeners>
-	<test name="SmokeTests">
-		<classes>	 
-	
+	<test name="SmokeTests1">
+		<classes>	 	
 	<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSEMEABrokerOpportunityNameAutoGenerate"/>
 	<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_CMEMACSSDSFOpportunityNameAutoGenerate"/>
 	<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBEMEAManagerAccountsPopulatingAllFields"/>
@@ -274,7 +273,7 @@
 	<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERManagerPropertiesVerifyCustomEventPage"/>
 	<class name="testscripts.SF.RegressionTestScripts.TC_SF_CMAMERBrokerPropertiesVerifyCustomEventPage"/>
 	<class name="testscripts.SF.RegressionTestScripts.TC_SF_CMAMERManagerPropertiesVerifyCustomEventPage"/>
-	<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABEMEABrokerAccountsVerifyNewAccountPageLayout"/>
+	<!-- <class name="testscripts.SF.RegressionTestScripts.TC_SF_ABEMEABrokerAccountsVerifyNewAccountPageLayout"/>
 	<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerPropertiesVerifyCustomEventPage"/>
 	<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerPropertiesVerifyCustomActivityTimeline"/>
 	<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerLeadsVerifyNewPersonalInformationPage"/>
@@ -604,7 +603,7 @@
 	<class name="testscripts.SF.Release38TestScripts.TC_SF_OBEMEABrokerOpportunitiesCloseInformationFields"/>	
 	<class name="testscripts.SF.Release38TestScripts.TC_SF_CMAPACBrokerPropertiesProjectEnquiriesFields"/>	
 	<class name="testscripts.SF.Release38TestScripts.TC_SF_ABEMEABrokerOpportunitiesInstallmentDate"/>	
-	<class name="testscripts.SF.Release38TestScripts.TC_SF_CMEMEABrokerOpportunitiesQuickCreatePage"/>	
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_CMEMEABrokerOpportunitiesQuickCreatePage"/>	 -->
 		
 		</classes>
 	</test>
