@@ -569,19 +569,19 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//*[@id='record-type-select']/option[text()='APAC Global Workplace Solutions']")
 	WebElement opportunityRecordTypeGlobalWorkplaceSolutions;
-	
+
 	@FindBy(xpath = "//*[@id='record-type-select']/option[text()='EMEA BC&P']")
 	WebElement opportunityRecordTypeBCP;
 
 	@FindBy(xpath = "//div/a[@class='select'][text()='Occupier Lease']")
 	WebElement assignmentTypeEditPage;
-	
+
 	@FindBy(xpath = "//span[text()='Unit of Measure']/parent::span/parent::div/parent::div//a[text()='Assets']")
 	WebElement unitOfMeasureDefaultValue;
-	
+
 	@FindBy(xpath = "//span[contains(text(),'Region')]/parent::span/parent::div//a")
 	WebElement regionMenu;
-	
+
 	/** Release 37 */
 
 	@FindBy(xpath = "//span[text()='Opportunity Currency']")
@@ -1140,67 +1140,67 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//span[text()='Estimated Gross Fee/Commission']/parent::div/div[@class='requiredInput']/input")
 	WebElement estimatedGrossFeeCommissionEMEA;
-	
+
 	@FindBy(xpath="//span[contains(text(),'Opportunity Name')]/parent::label/following-sibling::input")
 	WebElement opportunityNameAS;
-	
+
 	@FindBy(xpath="//span[text()='Total Size']/parent::label/following-sibling::input")
 	WebElement totalSizeAS;
-	
+
 	@FindBy(xpath="//div[contains(@class,'primaryLabel')][contains(@title,'Test Account APAC')]")
 	WebElement accountValue;
-	
+
 	@FindBy(xpath="//span[contains(text(),'Region')]/parent::span/following-sibling::div//a")
 	WebElement regionAS;
-	
+
 	@FindBy(xpath="//option[contains(@value,'Dallas/Ft. Worth')]")
 	WebElement marketValue;
-	
+
 	@FindBy(xpath="//a[contains(@title,'US National')]")
 	WebElement regionValueAS;
-	
+
 	@FindBy(xpath="//span[contains(text(),'Leasing')]/parent::span/following-sibling::div//a[@aria-label='Leasing']")
 	WebElement leasingAS;
-	
+
 	@FindBy(xpath="//span[contains(text(),'Consultancy')]/parent::span/following-sibling::div//a[@aria-label='Consultancy']")
 	WebElement consultancyAS;
-	
+
 	@FindBy(xpath="//a[@title='Yes']")
 	WebElement valueAS;
-	
+
 	@FindBy(xpath="//input[contains(@title,'Search Properties')]")
 	WebElement targetProperty;
-	
+
 	@FindBy(xpath="//span[contains(text(),'Account Name')]/parent::label/following-sibling::div//input[contains(@title,'Search Accounts')]")
 	WebElement accountNameNewOpportunity;
-	
+
 	@FindBy(xpath="//div[contains(@class,'primaryLabel')][@title='01R4597B21CBRE Test SFDC Automation_0401']")
 	WebElement accountNameValueNewOpp;
-	
+
 	@FindBy(xpath="//span[contains(text(),'Lead Source')]/parent::span/following-sibling::div//a[contains(@aria-label,'Lead Source')]")
 	WebElement leadSourceNewOpp;
-	
+
 	@FindBy(xpath="//a[contains(@title,'Business Relationship')]")
 	WebElement leadSourceNewOppValue;
-	
-	@FindBy(xpath="//div[contains(@class,'primaryLabel')][@title='Test Automation Subject_G7XRIZ51NS - 2100 Ross Avenue']")
+
+	@FindBy(xpath="//div[contains(@class,'primaryLabel')][contains(@title,'Test Automation Subject_G7XRIZ51NS - 2100 Ross Avenue')]")
 	WebElement targetPropertyValue;
-	
+
 	@FindBy(xpath="//label[contains(text(),'Lease Period (in months)')]")
 	WebElement leasePeriodNewOpportunity;
-	
+
 	@FindBy(xpath="//label[contains(text(),'Other Incentives')]")
 	WebElement otherIncentivesNewOpportunity;
-	
+
 	@FindBy(xpath="//label[contains(text(),'Landlord & Tenant Act 1954')]")
 	WebElement landlordTenantAct;
-	
+
 	@FindBy(xpath="//span[text()='Installment Date']/parent::div/following-sibling::div")
 	WebElement installmentDateEditOpp;
-	
+
 	@FindBy(xpath="//span[contains(text(),'Engagement Commencement')]/following-sibling::div//input")
 	WebElement engagementCommencement;
-	
+
 
 	HomePage hp = new HomePage(scriptHelper);
 	SearchTextSOQL searchOpportunity = new SearchTextSOQL(scriptHelper);
@@ -1601,7 +1601,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			report.updateTestLog("Verify Opportunity Update",
 					"You do not have the level of access necessary to perform the operation you requested. "
 							+ "Please contact the owner of the record or your administrator if access is necessary.",
-					Status.PASS);
+							Status.PASS);
 		}
 
 	}
@@ -2229,12 +2229,12 @@ public class OpportunitiesPage extends ReusableLibrary {
 						report.updateTestLog("Modified Opportunity Name",
 								"Opportunity Name modified according to the AssignmentType selected:::"
 										+ updatedAssignmentType,
-								Status.PASS);
+										Status.PASS);
 					} else {
 						report.updateTestLog("Modified Opportunity Name",
 								"Opportunity Name didn't get modified according to the AssignmentType selected:::"
 										+ updatedAssignmentType,
-								Status.FAIL);
+										Status.FAIL);
 					}
 					if (updatedTotalSize.equals("2900.0")) {
 						report.updateTestLog("Modified Opportunity Name",
@@ -2244,18 +2244,18 @@ public class OpportunitiesPage extends ReusableLibrary {
 						report.updateTestLog("Modified Opportunity Name",
 								"Opportunity Name didn't get modified according to the Total Size selected:::"
 										+ updatedTotalSize,
-								Status.FAIL);
+										Status.FAIL);
 					}
 					if (updatedUnitOfMeasure.equals("Hectares")) {
 						report.updateTestLog("Modified Opportunity Name",
 								"Opportunity Name modified according to the Unit of Measure selected:::"
 										+ updatedUnitOfMeasure,
-								Status.PASS);
+										Status.PASS);
 					} else {
 						report.updateTestLog("Modified Opportunity Name",
 								"Opportunity Name didn't get modified according to the Unit of Measure selected:::"
 										+ updatedUnitOfMeasure,
-								Status.FAIL);
+										Status.FAIL);
 					}
 					isStatus = true;
 				}
@@ -2991,7 +2991,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		report.updateTestLog("Opportunities Installments",
 				"Opportunity installment amount one and two after changing the quantity to two from one:::"
 						+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo,
-				Status.PASS);
+						Status.PASS);
 
 		Utility_Functions.xWaitForElementPresent(driver, editButtonInstallment, 5);
 		Utility_Functions.xClick(driver, editButtonInstallment, true);
@@ -3016,7 +3016,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			report.updateTestLog("Opportunities Installments",
 					"Opportunity installment amounts recalculated successfully after editing the Estimated Gross Fee:::"
 							+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo,
-					Status.PASS);
+							Status.PASS);
 		} else {
 			report.updateTestLog("Opportunities Installments", "Opportunity installment amounts recalculation failed:::"
 					+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo, Status.FAIL);
@@ -3069,7 +3069,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			report.updateTestLog("Opportunities Installments",
 					"Opportunity installment amounts recalculated successfully after editing the Estimated Gross Fee:::"
 							+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo,
-					Status.PASS);
+							Status.PASS);
 		} else {
 			report.updateTestLog("Opportunities Installments", "Opportunity installment amounts recalculation failed:::"
 					+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo, Status.WARNING);
@@ -3118,7 +3118,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			report.updateTestLog("Opportunities Installments",
 					"Opportunity installment amounts recalculated successfully after editing the Estimated Gross Fee:::"
 							+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo,
-					Status.PASS);
+							Status.PASS);
 		} else {
 			report.updateTestLog("Opportunities Installments", "Opportunity installment amounts recalculation failed:::"
 					+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo, Status.WARNING);
@@ -3328,7 +3328,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		report.updateTestLog("Opportunities Installments",
 				"Opportunity installment amount one and two after changing the quantity to two from one:::"
 						+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo + ":::" + sInstallmentAmountThree,
-				Status.PASS);
+						Status.PASS);
 		String sEstimatedGrossAmount = dataTable.getData("General_Data", "InstallmentAmount").replace(",", "");
 		String sInstallments = dataTable.getData("General_Data", "InstallmentQuantity");
 		double dInstallment = ((double) Integer.parseInt(sEstimatedGrossAmount)) / Integer.parseInt(sInstallments);
@@ -3352,7 +3352,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		if (count == 3) {
 			report.updateTestLog("Opportunities Installments",
 					"First, Second and Third Installment amounts calculated successfully:::" + bFirstInstallmentAmount
-							+ "::::" + bFirstInstallmentAmount + "::::" + sThirdInstallment,
+					+ "::::" + bFirstInstallmentAmount + "::::" + sThirdInstallment,
 					Status.PASS);
 		} else {
 			installmentList1.add(bFirstInstallmentAmount.toString());
@@ -3373,12 +3373,12 @@ public class OpportunitiesPage extends ReusableLibrary {
 						"First, Second and Third Installment amounts calculated successfully:::"
 								+ bFirstInstallmentAmount + "::::" + bFirstInstallmentAmount + "::::"
 								+ sThirdInstallment,
-						Status.PASS);
+								Status.PASS);
 			} else {
 				report.updateTestLog("Opportunities Installments",
 						"First, Second and Third Installment calculation failed:::" + bFirstInstallmentAmount + "::::"
 								+ bFirstInstallmentAmount + "::::" + sThirdInstallment,
-						Status.WARNING);
+								Status.WARNING);
 			}
 		}
 	}
@@ -3444,114 +3444,114 @@ public class OpportunitiesPage extends ReusableLibrary {
 		int iInstallmentAmountOne = 0;
 		while (!isStatus) {
 			labelA: {
-				opportunityEligibility();
-				Utility_Functions.timeWait(4);
-				driver.navigate().refresh();
-				Utility_Functions.xWaitForElementPresent(driver, related, 5);
-				Utility_Functions.xClick(driver, related, true);
-				Utility_Functions.xWaitForElementPresent(driver, installmentAmountOne, 3);
-				String sInstallmentAmountOne = installmentAmountOne.getText();
-				sInstallmentAmountOne = sInstallmentAmountOne.split(" ")[1];
-				sInstallmentAmountOne = sInstallmentAmountOne.replaceAll(",", "");
-				double dInstallmentAmountOne = Double.parseDouble(sInstallmentAmountOne);
-				iInstallmentAmountOne = Double.valueOf(dInstallmentAmountOne).intValue();
-				if (iInstallmentAmountOne > 0) {
-					report.updateTestLog("Opportunities Installments",
-							"Opportunity is eligible for editing the Installments::", Status.PASS);
-					Utility_Functions.xWaitForElementPresent(driver, arrowDown, 3);
-					Utility_Functions.xClick(driver, arrowDown, true);
-					Utility_Functions.timeWait(1);
-					List<WebElement> actionList = driver.findElements(By.xpath("//div[@class='actionMenu']//a"));
-					for (WebElement element : actionList) {
-						if (element.getText().contains("Edit")) {
-							element.click();
-							report.updateTestLog("Opportunities Installments",
-									"Clicked on edit installments button successfully::", Status.PASS);
-						} else {
-							report.updateTestLog("Opportunities Installments",
-									"Unable to click on edit installment button", Status.FAIL);
-						}
-					}
-					Utility_Functions.xWaitForElementPresent(driver, installmentOption, 3);
-					Utility_Functions.xClick(driver, installmentOption, true);
-					if (installmentOption.getText().contains("Paid")) {
+			opportunityEligibility();
+			Utility_Functions.timeWait(4);
+			driver.navigate().refresh();
+			Utility_Functions.xWaitForElementPresent(driver, related, 5);
+			Utility_Functions.xClick(driver, related, true);
+			Utility_Functions.xWaitForElementPresent(driver, installmentAmountOne, 3);
+			String sInstallmentAmountOne = installmentAmountOne.getText();
+			sInstallmentAmountOne = sInstallmentAmountOne.split(" ")[1];
+			sInstallmentAmountOne = sInstallmentAmountOne.replaceAll(",", "");
+			double dInstallmentAmountOne = Double.parseDouble(sInstallmentAmountOne);
+			iInstallmentAmountOne = Double.valueOf(dInstallmentAmountOne).intValue();
+			if (iInstallmentAmountOne > 0) {
+				report.updateTestLog("Opportunities Installments",
+						"Opportunity is eligible for editing the Installments::", Status.PASS);
+				Utility_Functions.xWaitForElementPresent(driver, arrowDown, 3);
+				Utility_Functions.xClick(driver, arrowDown, true);
+				Utility_Functions.timeWait(1);
+				List<WebElement> actionList = driver.findElements(By.xpath("//div[@class='actionMenu']//a"));
+				for (WebElement element : actionList) {
+					if (element.getText().contains("Edit")) {
+						element.click();
 						report.updateTestLog("Opportunities Installments",
-								"Opportunity not is eligible as the installment amount is already paid::",
-								Status.WARNING);
-						isStatus = false;
-						Utility_Functions.xWaitForElementPresent(driver, cancel, 3);
-						Utility_Functions.xClick(driver, cancel, true);
-						Utility_Functions.timeWait(2);
-						break labelA;
+								"Clicked on edit installments button successfully::", Status.PASS);
+					} else {
+						report.updateTestLog("Opportunities Installments",
+								"Unable to click on edit installment button", Status.FAIL);
 					}
-					DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-					Date date = new Date();
-					Utility_Functions.timeWait(1);
-					Utility_Functions.xClick(driver, installmentStatus, true);
-					Utility_Functions.xSendKeys(driver, datePaid, dateFormat.format(date).toString());
-					Utility_Functions.xWaitForElementPresent(driver, accountRoleOption, 3);
-					Utility_Functions.xClick(driver, accountRoleOption, true);
-					Utility_Functions.timeWait(1);
-					Utility_Functions.xClick(driver, accountRole, true);
-					Utility_Functions.timeWait(2);
-					Utility_Functions.xWaitForElementPresent(driver, save, 4);
-					Utility_Functions.xClick(driver, save, true);
+				}
+				Utility_Functions.xWaitForElementPresent(driver, installmentOption, 3);
+				Utility_Functions.xClick(driver, installmentOption, true);
+				if (installmentOption.getText().contains("Paid")) {
 					report.updateTestLog("Opportunities Installments",
-							"Installment Amount has been paid successfully::", Status.PASS);
-					Utility_Functions.xWaitForElementPresent(driver, related, 3);
-					driver.navigate().refresh();
-					Utility_Functions.xWaitForElementPresent(driver, related, 3);
-					Utility_Functions.xClick(driver, related, true);
-					Utility_Functions.xWaitForElementPresent(driver, arrowDown, 3);
-					Utility_Functions.xClick(driver, arrowDown, true);
-					Utility_Functions.timeWait(1);
-					List<WebElement> actionListEdit = driver.findElements(By.xpath("//div[@class='actionMenu']//a"));
-					for (WebElement element : actionListEdit) {
-						if (element.getText().contains("Edit")) {
-							Utility_Functions.xWaitForElementPresent(driver, element, 3);
-							element.click();
-							report.updateTestLog("Opportunities Installments",
-									"Clicked on edit installments button successfully::", Status.PASS);
-						} else {
-							report.updateTestLog("Opportunities Installments",
-									"Unable to click on edit installment button", Status.FAIL);
-						}
+							"Opportunity not is eligible as the installment amount is already paid::",
+							Status.WARNING);
+					isStatus = false;
+					Utility_Functions.xWaitForElementPresent(driver, cancel, 3);
+					Utility_Functions.xClick(driver, cancel, true);
+					Utility_Functions.timeWait(2);
+					break labelA;
+				}
+				DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+				Date date = new Date();
+				Utility_Functions.timeWait(1);
+				Utility_Functions.xClick(driver, installmentStatus, true);
+				Utility_Functions.xSendKeys(driver, datePaid, dateFormat.format(date).toString());
+				Utility_Functions.xWaitForElementPresent(driver, accountRoleOption, 3);
+				Utility_Functions.xClick(driver, accountRoleOption, true);
+				Utility_Functions.timeWait(1);
+				Utility_Functions.xClick(driver, accountRole, true);
+				Utility_Functions.timeWait(2);
+				Utility_Functions.xWaitForElementPresent(driver, save, 4);
+				Utility_Functions.xClick(driver, save, true);
+				report.updateTestLog("Opportunities Installments",
+						"Installment Amount has been paid successfully::", Status.PASS);
+				Utility_Functions.xWaitForElementPresent(driver, related, 3);
+				driver.navigate().refresh();
+				Utility_Functions.xWaitForElementPresent(driver, related, 3);
+				Utility_Functions.xClick(driver, related, true);
+				Utility_Functions.xWaitForElementPresent(driver, arrowDown, 3);
+				Utility_Functions.xClick(driver, arrowDown, true);
+				Utility_Functions.timeWait(1);
+				List<WebElement> actionListEdit = driver.findElements(By.xpath("//div[@class='actionMenu']//a"));
+				for (WebElement element : actionListEdit) {
+					if (element.getText().contains("Edit")) {
+						Utility_Functions.xWaitForElementPresent(driver, element, 3);
+						element.click();
+						report.updateTestLog("Opportunities Installments",
+								"Clicked on edit installments button successfully::", Status.PASS);
+					} else {
+						report.updateTestLog("Opportunities Installments",
+								"Unable to click on edit installment button", Status.FAIL);
 					}
-					try {
-						Utility_Functions.xWaitForElementPresent(driver, installmentAmountEdit, 3);
-						int iInstallmentAmount = iInstallmentAmountOne + 100;
-						Utility_Functions.xSendKeys(driver, installmentAmountEdit,
-								Integer.toString(iInstallmentAmount));
-						Utility_Functions.timeWait(2);
-						Utility_Functions.xWaitForElementPresent(driver, save, 3);
-						Utility_Functions.xClick(driver, save, true);
-						Utility_Functions.timeWait(2);
-						Utility_Functions.xWaitForElementPresent(driver, related, 3);
-						if (related.isDisplayed()) {
-							report.updateTestLog("Opportunities Installments",
-									"Editing the Paid installment amount is successfull::", Status.PASS);
-							isStatus = true;
-							break;
-						} else {
-							report.updateTestLog("Opportunities Installments",
-									"Editing the Paid installment amount is failed::", Status.FAIL);
-							isStatus = true;
-							break;
-						}
-					} catch (Exception e) {
-						report.updateTestLog("Opportunities Installments", "Unable to edit the installments:::",
-								Status.PASS);
+				}
+				try {
+					Utility_Functions.xWaitForElementPresent(driver, installmentAmountEdit, 3);
+					int iInstallmentAmount = iInstallmentAmountOne + 100;
+					Utility_Functions.xSendKeys(driver, installmentAmountEdit,
+							Integer.toString(iInstallmentAmount));
+					Utility_Functions.timeWait(2);
+					Utility_Functions.xWaitForElementPresent(driver, save, 3);
+					Utility_Functions.xClick(driver, save, true);
+					Utility_Functions.timeWait(2);
+					Utility_Functions.xWaitForElementPresent(driver, related, 3);
+					if (related.isDisplayed()) {
+						report.updateTestLog("Opportunities Installments",
+								"Editing the Paid installment amount is successfull::", Status.PASS);
+						isStatus = true;
+						break;
+					} else {
+						report.updateTestLog("Opportunities Installments",
+								"Editing the Paid installment amount is failed::", Status.FAIL);
 						isStatus = true;
 						break;
 					}
-				} else {
-					report.updateTestLog("Opportunities Installments",
-							"Opportunity not is eligible for editing the Installments::", Status.WARNING);
-					isStatus = false;
-					break labelA;
+				} catch (Exception e) {
+					report.updateTestLog("Opportunities Installments", "Unable to edit the installments:::",
+							Status.PASS);
+					isStatus = true;
+					break;
 				}
-
+			} else {
+				report.updateTestLog("Opportunities Installments",
+						"Opportunity not is eligible for editing the Installments::", Status.WARNING);
+				isStatus = false;
+				break labelA;
 			}
+
+		}
 		}
 
 	}
@@ -3681,7 +3681,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 					Status.PASS);
 		} else {
 			System.out
-					.println("Save, Save and New and Cancel buttons are not prsent in the New Activity Layout Page  ");
+			.println("Save, Save and New and Cancel buttons are not prsent in the New Activity Layout Page  ");
 			report.updateTestLog("Verify New Opportunity Custom Event Page ",
 					"Verifying New Custom Event Page is having the Save, Save and New and Cancel buttons", Status.FAIL);
 		}
@@ -5469,13 +5469,13 @@ public class OpportunitiesPage extends ReusableLibrary {
 						&& (phasePresent.getText().equals("Prospecting"))) {
 					report.updateTestLog("Verify New Opportunity Page",
 							"Sales Stage and Phase field are having the values as:::" + salesStageSelected.getText()
-									+ ":::" + phaseField.getText(),
+							+ ":::" + phaseField.getText(),
 							Status.PASS);
 				} else {
 					report.updateTestLog("Verify New Opportunity Page",
 							"Sales Stage and Phase field doesn't have the values as expected:::"
 									+ salesStageSelected.getText() + ":::" + phaseField.getText(),
-							Status.FAIL);
+									Status.FAIL);
 				}
 			} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER"))
 					&& (dataTable.getData("General_Data", "TC_ID").contains("PS"))) {
@@ -5483,13 +5483,13 @@ public class OpportunitiesPage extends ReusableLibrary {
 						&& (phasePresent.getText().equals("Prospecting"))) {
 					report.updateTestLog("Verify New Opportunity Page",
 							"Sales Stage and Phase field are having the values as:::" + salesStageSelected.getText()
-									+ ":::" + phaseField.getText(),
+							+ ":::" + phaseField.getText(),
 							Status.PASS);
 				} else {
 					report.updateTestLog("Verify New Opportunity Page",
 							"Sales Stage and Phase field doesn't have the values as expected:::"
 									+ salesStageSelected.getText() + ":::" + phaseField.getText(),
-							Status.FAIL);
+									Status.FAIL);
 				}
 			} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER"))
 					&& (dataTable.getData("General_Data", "TC_ID").contains("DSF"))) {
@@ -5497,13 +5497,13 @@ public class OpportunitiesPage extends ReusableLibrary {
 						&& (phasePresent.getText().equals("Prospecting"))) {
 					report.updateTestLog("Verify New Opportunity Page",
 							"Sales Stage and Phase field are having the values as:::" + salesStageSelected.getText()
-									+ ":::" + phaseField.getText(),
+							+ ":::" + phaseField.getText(),
 							Status.PASS);
 				} else {
 					report.updateTestLog("Verify New Opportunity Page",
 							"Sales Stage and Phase field doesn't have the values as expected:::"
 									+ salesStageSelected.getText() + ":::" + phaseField.getText(),
-							Status.FAIL);
+									Status.FAIL);
 				}
 			}
 			Utility_Functions.timeWait(2);
@@ -6292,7 +6292,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 		System.out.println("opportunity infomation fields are: " + opportunityInformationFieldsList);
 	}
-	
+
 	static ArrayList<String> opportunityInformationFieldsListABEMEABroker = new ArrayList<String>();
 
 	public void opportunityInformationFieldsABEMEABroker() {
@@ -6305,10 +6305,27 @@ public class OpportunitiesPage extends ReusableLibrary {
 		opportunityInformationFieldsListABEMEABroker.add("*Close Date");
 		opportunityInformationFieldsListABEMEABroker.add("Confidential Opportunity");
 		opportunityInformationFieldsListABEMEABroker.add("*Sales Stage");
-		
+
 		System.out.println("opportunity infomation fields are: " +opportunityInformationFieldsListABEMEABroker);
 	}
+	static ArrayList<String> opportunityInformationFieldsListVASEMEABroker = new ArrayList<String>();
 
+	public void opportunityInformationFieldsListVASEMEABroker() {
+
+		opportunityInformationFieldsListVASEMEABroker.add("*Opportunity Name");
+		opportunityInformationFieldsListVASEMEABroker.add("*Account Name");
+		opportunityInformationFieldsListVASEMEABroker.add("EMEA Accounts Only");
+		opportunityInformationFieldsListVASEMEABroker.add("EMEA Accounts Only");
+		opportunityInformationFieldsListVASEMEABroker.add("*Estimated Gross Fee/Commission");
+		opportunityInformationFieldsListVASEMEABroker.add("*Close Date");
+		opportunityInformationFieldsListVASEMEABroker.add("Confidential Opportunity");
+		opportunityInformationFieldsListVASEMEABroker.add("*Sales Stage");
+		opportunityInformationFieldsListVASEMEABroker.add("Conversion Type");
+		opportunityInformationFieldsListVASEMEABroker.add("Comments");
+		opportunityInformationFieldsListVASEMEABroker.add("Risk");
+
+		System.out.println("Opportunity infomation fields are: " +opportunityInformationFieldsListVASEMEABroker);
+	}
 
 	static ArrayList<String> additionalInformationFieldsList = new ArrayList<String>();
 
@@ -6342,7 +6359,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	static ArrayList<String> additionalInformationFieldsListCMEMEABroker = new ArrayList<String>();
 
 	public void additionalInformationFieldsCMEMEABroker() {
-	
+
 		additionalInformationFieldsListCMEMEABroker.add("Opportunity Owner");
 		additionalInformationFieldsListCMEMEABroker.add("*Opportunity Currency");
 		additionalInformationFieldsListCMEMEABroker.add("Net Fee");
@@ -6361,32 +6378,60 @@ public class OpportunitiesPage extends ReusableLibrary {
 		additionalInformationFieldsListCMEMEABroker.add("City");
 		additionalInformationFieldsListCMEMEABroker.add("Country");
 		additionalInformationFieldsListCMEMEABroker.add("RFP Submission Date");
-		
+
 		System.out.println("Additional infomation fields are: " + additionalInformationFieldsListCMEMEABroker);
 	}
 	static ArrayList<String> additionalInformationFieldsListABEMEABroker = new ArrayList<String>();
 
 	public void additionalInformationFieldsABEMEABroker() {
-	
-	additionalInformationFieldsListABEMEABroker.add("Opportunity Owner");
-	additionalInformationFieldsListABEMEABroker.add("*Opportunity Currency");
-    additionalInformationFieldsListABEMEABroker.add("Net Fee");
-	additionalInformationFieldsListABEMEABroker.add("*Probability (%)");
-	additionalInformationFieldsListABEMEABroker.add("Address Line 1");
-	additionalInformationFieldsListABEMEABroker.add("Address Line 2");
-	additionalInformationFieldsListABEMEABroker.add("Postcode");
-	additionalInformationFieldsListABEMEABroker.add("Change Opportunity Owner");
-	additionalInformationFieldsListABEMEABroker.add("Unit of Measure");
-	additionalInformationFieldsListABEMEABroker.add("Total Size");
-	additionalInformationFieldsListABEMEABroker.add("Service Line");
-	additionalInformationFieldsListABEMEABroker.add("Asset Class");
-	additionalInformationFieldsListABEMEABroker.add("Comments History");
-	additionalInformationFieldsListABEMEABroker.add("City");
-	additionalInformationFieldsListABEMEABroker.add("Country");
-	additionalInformationFieldsListABEMEABroker.add("RFP Submission Date");
-	additionalInformationFieldsListABEMEABroker.add("Critical Date");
-	
-	System.out.println("Additional infomation fields are: " + additionalInformationFieldsListABEMEABroker);
+
+		additionalInformationFieldsListABEMEABroker.add("Opportunity Owner");
+		additionalInformationFieldsListABEMEABroker.add("*Opportunity Currency");
+		additionalInformationFieldsListABEMEABroker.add("Net Fee");
+		additionalInformationFieldsListABEMEABroker.add("*Probability (%)");
+		additionalInformationFieldsListABEMEABroker.add("Address Line 1");
+		additionalInformationFieldsListABEMEABroker.add("Address Line 2");
+		additionalInformationFieldsListABEMEABroker.add("Postcode");
+		additionalInformationFieldsListABEMEABroker.add("Change Opportunity Owner");
+		additionalInformationFieldsListABEMEABroker.add("Unit of Measure");
+		additionalInformationFieldsListABEMEABroker.add("Total Size");
+		additionalInformationFieldsListABEMEABroker.add("Service Line");
+		additionalInformationFieldsListABEMEABroker.add("Asset Class");
+		additionalInformationFieldsListABEMEABroker.add("Comments History");
+		additionalInformationFieldsListABEMEABroker.add("City");
+		additionalInformationFieldsListABEMEABroker.add("Country");
+		additionalInformationFieldsListABEMEABroker.add("RFP Submission Date");
+		additionalInformationFieldsListABEMEABroker.add("Critical Date");
+
+		System.out.println("Additional infomation fields are: " + additionalInformationFieldsListABEMEABroker);
+	}
+	static ArrayList<String> additionalInformationFieldsListVASEMEABroker = new ArrayList<String>();
+
+	public void additionalInformationFieldsVASEMEABroker() {
+
+		additionalInformationFieldsListVASEMEABroker.add("Opportunity Owner");
+		additionalInformationFieldsListVASEMEABroker.add("*Opportunity Currency");
+		additionalInformationFieldsListVASEMEABroker.add("Net Fee");
+		additionalInformationFieldsListVASEMEABroker.add("*Probability (%)");
+		additionalInformationFieldsListVASEMEABroker.add("Assignment Type");
+		additionalInformationFieldsListVASEMEABroker.add("Assignment Sub-Type");
+		additionalInformationFieldsListVASEMEABroker.add("Address Line 1");
+		additionalInformationFieldsListVASEMEABroker.add("Address Line 2");
+		additionalInformationFieldsListVASEMEABroker.add("Postcode");
+		additionalInformationFieldsListVASEMEABroker.add("Change Opportunity Owner");
+		additionalInformationFieldsListVASEMEABroker.add("Unit of Measure");
+		additionalInformationFieldsListVASEMEABroker.add("Total Size");
+		additionalInformationFieldsListVASEMEABroker.add("Service Line");
+		additionalInformationFieldsListVASEMEABroker.add("Asset Class");
+		additionalInformationFieldsListVASEMEABroker.add("Sub-Asset Type");
+		additionalInformationFieldsListVASEMEABroker.add("Comments History");
+		additionalInformationFieldsListVASEMEABroker.add("Project Type Description");
+		additionalInformationFieldsListVASEMEABroker.add("City");
+		additionalInformationFieldsListVASEMEABroker.add("Country");
+		additionalInformationFieldsListVASEMEABroker.add("RFP Submission Date");
+		additionalInformationFieldsListVASEMEABroker.add("Critical Date");
+
+		System.out.println("Additional infomation fields are: " + additionalInformationFieldsListVASEMEABroker);
 	}
 
 	static ArrayList<String> lossInformationFieldsList = new ArrayList<String>();
@@ -6434,7 +6479,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
 		Utility_Functions.xClick(driver, newOpportunity, true);
 		Utility_Functions.timeWait(2);
-	   if((dataTable.getData("General_Data", "TC_ID").contains("ABEMEABroker"))){
+		if((dataTable.getData("General_Data", "TC_ID").contains("ABEMEABroker"))){
 			Utility_Functions.xSwitchtoFrame(driver, continueButton);
 			Utility_Functions.xWaitForElementPresent(driver, continueButton, 5);
 			Utility_Functions.xClick(driver, continueButton, true);
@@ -6478,39 +6523,72 @@ public class OpportunitiesPage extends ReusableLibrary {
 				System.out.println(e.getMessage());
 			}
 			opportunityInformationSectionList1.clear();
-			
-		}else{
-		List<WebElement> opportunityInformationSectionList = driver.findElements(By.xpath(
-				"//h2[text()='Opportunity Information']/parent::div/parent::div//*[@class='slds-form-element__label']"));
-		int count12 = 0, i12 = 0;
-		String fieldsArray12[] = new String[opportunityInformationSectionList.size()];
-		System.out.println(opportunityInformationSectionList.size());
-		try {
-			opportunityInformationFields();
-			for (WebElement element12 : opportunityInformationSectionList) {
-				System.out.println(element12.getText());
-				fieldsArray12[i12] = element12.getText();
-				if (fieldsArray12[i12].equals(opportunityInformationFieldsList.get(i12))) {
-					report.updateTestLog("Verify New Account Page Layout ",
-							"Opportunity Information section is having the " + fieldsArray12[i12] + " fields ",
-							Status.PASS);
-					count12++;
-				}
-				i12++;
-			}
-			System.out.println(count12);
-			if (count12 >= 7) {
-				report.updateTestLog("Verify Opportunity Quick Create Page",
-						"All fields are not present in the Opportunity Information section ", Status.FAIL);
-			} else {
 
-				report.updateTestLog("Verify Opportunity Quick Create Page",
-						"All fields are present in the Opportunity Information section", Status.PASS);
+		}else if((dataTable.getData("General_Data", "TC_ID").contains("VASEMEABroker"))){
+			List<WebElement> opportunityInformationSectionList3 = driver.findElements(By.xpath(
+					"//h2[text()='Opportunity Information']/parent::div/parent::div//*[@class='slds-form-element__label']"));
+			int count20 = 0, i20 = 0;
+			String fieldsArray20[] = new String[opportunityInformationSectionList3.size()];
+			System.out.println(opportunityInformationSectionList3.size());
+			try {
+				opportunityInformationFieldsListVASEMEABroker();
+				for (WebElement element20 : opportunityInformationSectionList3) {
+					System.out.println(element20.getText());
+					fieldsArray20[i20] = element20.getText();
+					if (fieldsArray20[i20].equals(opportunityInformationFieldsListVASEMEABroker.get(i20))) {
+						report.updateTestLog("Verify New Account Page Layout ",
+								"Opportunity Information section is having the " + fieldsArray20[i20] + " fields ",
+								Status.PASS);
+						count20++;
+					}
+					i20++;
+				}
+				System.out.println(count20);
+				if (count20 != 11) {
+					report.updateTestLog("Verify Opportunity Quick Create Page",
+							"All fields are not present in the Opportunity Information section ", Status.FAIL);
+				} else {
+
+					report.updateTestLog("Verify Opportunity Quick Create Page",
+							"All fields are present in the Opportunity Information section", Status.PASS);
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
 			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		opportunityInformationSectionList.clear();
+
+
+		}else{
+			List<WebElement> opportunityInformationSectionList = driver.findElements(By.xpath(
+					"//h2[text()='Opportunity Information']/parent::div/parent::div//*[@class='slds-form-element__label']"));
+			int count12 = 0, i12 = 0;
+			String fieldsArray12[] = new String[opportunityInformationSectionList.size()];
+			System.out.println(opportunityInformationSectionList.size());
+			try {
+				opportunityInformationFields();
+				for (WebElement element12 : opportunityInformationSectionList) {
+					System.out.println(element12.getText());
+					fieldsArray12[i12] = element12.getText();
+					if (fieldsArray12[i12].equals(opportunityInformationFieldsList.get(i12))) {
+						report.updateTestLog("Verify New Account Page Layout ",
+								"Opportunity Information section is having the " + fieldsArray12[i12] + " fields ",
+								Status.PASS);
+						count12++;
+					}
+					i12++;
+				}
+				System.out.println(count12);
+				if (count12 >= 7) {
+					report.updateTestLog("Verify Opportunity Quick Create Page",
+							"All fields are not present in the Opportunity Information section ", Status.FAIL);
+				} else {
+
+					report.updateTestLog("Verify Opportunity Quick Create Page",
+							"All fields are present in the Opportunity Information section", Status.PASS);
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			opportunityInformationSectionList.clear();
 		}
 		if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEABroker"))){
 			List<WebElement> additionalInformationSectionList1 = driver.findElements(By.xpath(
@@ -6544,7 +6622,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 				System.out.println(e.getMessage());
 			}
 			additionalInformationSectionList1.clear();
-			
+
 		}else if((dataTable.getData("General_Data", "TC_ID").contains("ABEMEABroker"))){
 			List<WebElement> additionalInformationSectionList2 = driver.findElements(By.xpath(
 					"//h2[text()='Additional Information']/parent::div/parent::div//*[@class='slds-form-element__label']"));
@@ -6577,44 +6655,73 @@ public class OpportunitiesPage extends ReusableLibrary {
 				System.out.println(e.getMessage());
 			}
 			additionalInformationSectionList2.clear();
-			
-			
-		}
-		
-		
-		else{
-		
-		List<WebElement> additionalInformationSectionList = driver.findElements(By.xpath(
-				"//h2[text()='Additional Information']/parent::div/parent::div//*[@class='slds-form-element__label']"));
-		int count13 = 0, i13 = 0;
-		String fieldsArray13[] = new String[additionalInformationSectionList.size()];
-		System.out.println(additionalInformationSectionList.size());
-		try {
-			additionalInformationFields();
-			for (WebElement element13 : additionalInformationSectionList) {
-				System.out.println(element13.getText());
-				fieldsArray13[i13] = element13.getText();
-				if (fieldsArray13[i13].contains(additionalInformationFieldsList.get(i13))) {
-					report.updateTestLog("Verify New Account Page Layout ",
-							"Additional Information section is having the " + fieldsArray13[i13] + " fields ",
-							Status.PASS);
-					count13++;
-				}
-				i13++;
-			}
-			System.out.println(count13);
-			if (count13 != 22) {
-				report.updateTestLog("Verify Opportunity Quick Create Page",
-						"All fields are not present in the Additional Information section ", Status.FAIL);
-			} else {
 
-				report.updateTestLog("Verify Opportunity Quick Create Page",
-						"All fields are present in the Additional Information section", Status.PASS);
+
+		}else if((dataTable.getData("General_Data", "TC_ID").contains("VASEMEABroker"))){
+			List<WebElement> additionalInformationSectionList3 = driver.findElements(By.xpath(
+					"//h2[text()='Additional Information']/parent::div/parent::div//*[@class='slds-form-element__label']"));
+			int count21 = 0, i21 = 0;
+			String fieldsArray21[] = new String[additionalInformationSectionList3.size()];
+			System.out.println(additionalInformationSectionList3.size());
+			try {
+				additionalInformationFieldsVASEMEABroker();
+				for (WebElement element21 : additionalInformationSectionList3) {
+					System.out.println(element21.getText());
+					fieldsArray21[i21] = element21.getText();
+					if (fieldsArray21[i21].contains(additionalInformationFieldsListVASEMEABroker.get(i21))) {
+						report.updateTestLog("Verify New Account Page Layout ",
+								"Additional Information section is having the " + fieldsArray21[i21] + " fields ",
+								Status.PASS);
+						count21++;
+					}
+					i21++;
+				}
+				System.out.println(count21);
+				if (count21 != 21) {
+					report.updateTestLog("Verify Opportunity Quick Create Page",
+							"All fields are not present in the Additional Information section ", Status.FAIL);
+				} else {
+
+					report.updateTestLog("Verify Opportunity Quick Create Page",
+							"All fields are present in the Additional Information section", Status.PASS);
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
 			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		additionalInformationSectionList.clear();
+
+		}else{
+
+			List<WebElement> additionalInformationSectionList = driver.findElements(By.xpath(
+					"//h2[text()='Additional Information']/parent::div/parent::div//*[@class='slds-form-element__label']"));
+			int count13 = 0, i13 = 0;
+			String fieldsArray13[] = new String[additionalInformationSectionList.size()];
+			System.out.println(additionalInformationSectionList.size());
+			try {
+				additionalInformationFields();
+				for (WebElement element13 : additionalInformationSectionList) {
+					System.out.println(element13.getText());
+					fieldsArray13[i13] = element13.getText();
+					if (fieldsArray13[i13].contains(additionalInformationFieldsList.get(i13))) {
+						report.updateTestLog("Verify New Account Page Layout ",
+								"Additional Information section is having the " + fieldsArray13[i13] + " fields ",
+								Status.PASS);
+						count13++;
+					}
+					i13++;
+				}
+				System.out.println(count13);
+				if (count13 != 22) {
+					report.updateTestLog("Verify Opportunity Quick Create Page",
+							"All fields are not present in the Additional Information section ", Status.FAIL);
+				} else {
+
+					report.updateTestLog("Verify Opportunity Quick Create Page",
+							"All fields are present in the Additional Information section", Status.PASS);
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			additionalInformationSectionList.clear();
 		}
 		List<WebElement> lossInformationSectionList = driver.findElements(By.xpath(
 				"//h2[text()='Loss Information']/parent::div/parent::div//*[@class='slds-form-element__label']"));
@@ -6676,37 +6783,37 @@ public class OpportunitiesPage extends ReusableLibrary {
 			System.out.println(e.getMessage());
 		}
 		dataHugSectionList.clear();
-		if ((dataTable.getData("General_Data", "TC_ID").contains("VASEMEABroker"))|| (dataTable.getData("General_Data", "TC_ID").contains("CMEMEABrokerIP")||(dataTable.getData("General_Data", "TC_ID").contains("CMEMEABrokerCA")||(dataTable.getData("General_Data", "TC_ID").contains("CMEMEABrokerBCP")||(dataTable.getData("General_Data", "TC_ID").contains("CMEMEABrokerCA")||(dataTable.getData("General_Data", "TC_ID").contains("CMEMEABrokerDev"))))))){
-		List<WebElement> systemInformationSectionList = driver.findElements(By.xpath(
-				"//h2[text()='System Information']/parent::div/parent::div//*[@class='slds-form-element__label']"));
-		int count16 = 0, i16 = 0;
-		String fieldsArray16[] = new String[systemInformationSectionList.size()];
-		System.out.println(systemInformationSectionList.size());
-		try {
-			systemInformationFields();
-			for (WebElement element16 : systemInformationSectionList) {
-				System.out.println(element16.getText());
-				fieldsArray16[i16] = element16.getText();
-				if (fieldsArray16[i16].contains(systemInformationFieldsList.get(i16))) {
-					report.updateTestLog("Verify New Account Page Layout ",
-							"System Information section is having the " + fieldsArray16[i16] + " fields ", Status.PASS);
-					count16++;
+		if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEABrokerIP")||(dataTable.getData("General_Data", "TC_ID").contains("CMEMEABrokerCA")||(dataTable.getData("General_Data", "TC_ID").contains("CMEMEABrokerBCP")||(dataTable.getData("General_Data", "TC_ID").contains("CMEMEABrokerCA")||(dataTable.getData("General_Data", "TC_ID").contains("CMEMEABrokerDev"))))))){
+			List<WebElement> systemInformationSectionList = driver.findElements(By.xpath(
+					"//h2[text()='System Information']/parent::div/parent::div//*[@class='slds-form-element__label']"));
+			int count16 = 0, i16 = 0;
+			String fieldsArray16[] = new String[systemInformationSectionList.size()];
+			System.out.println(systemInformationSectionList.size());
+			try {
+				systemInformationFields();
+				for (WebElement element16 : systemInformationSectionList) {
+					System.out.println(element16.getText());
+					fieldsArray16[i16] = element16.getText();
+					if (fieldsArray16[i16].contains(systemInformationFieldsList.get(i16))) {
+						report.updateTestLog("Verify New Account Page Layout ",
+								"System Information section is having the " + fieldsArray16[i16] + " fields ", Status.PASS);
+						count16++;
+					}
+					i16++;
 				}
-				i16++;
-			}
-			System.out.println(count16);
-			if (count16 != 2) {
-				report.updateTestLog("Verify Opportunity Quick Create Page",
-						"All fields are not present in the System Information section ", Status.FAIL);
-			} else {
+				System.out.println(count16);
+				if (count16 != 2) {
+					report.updateTestLog("Verify Opportunity Quick Create Page",
+							"All fields are not present in the System Information section ", Status.FAIL);
+				} else {
 
-				report.updateTestLog("Verify Opportunity Quick Create Page",
-						"All fields are present in the System Information section", Status.PASS);
+					report.updateTestLog("Verify Opportunity Quick Create Page",
+							"All fields are present in the System Information section", Status.PASS);
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
 			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
 		}
-	}
 		Utility_Functions.xWaitForElementPresent(driver, opportunityName, 3);
 		Utility_Functions.xSendKeys(driver, opportunityName,
 				"Test Automation Opportunity_" + Utility_Functions.xGenerateAlphaNumericString());
@@ -6730,7 +6837,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, closeDateNewOpportunity, 3);
 		Utility_Functions.xSendKeys(driver, closeDateNewOpportunity, dateFormat.format(date).toString());
 		Utility_Functions.timeWait(2);
-		
+
 		Utility_Functions.xWaitForElementPresent(driver, saveOpportunitySplitUAT, 4);
 		Utility_Functions.xClick(driver, saveOpportunitySplitUAT, true);
 		Utility_Functions.timeWait(2);
@@ -6806,7 +6913,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			Utility_Functions.xWaitForElementPresent(driver,engagementCommencement, 3);
 			Utility_Functions.xSendKeys(driver,engagementCommencement, dateFormat1.format(date1).toString());
 			Utility_Functions.timeWait(2);
-			
+
 		}
 
 		Utility_Functions.xWaitForElementPresent(driver, saveOpportunitySplitUAT, 4);
@@ -9436,11 +9543,11 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 * @author Vishnuvardhan
 	 *
 	 */
-	
+
 	static ArrayList<String> OpportunityTypePickListValues = new ArrayList<String>();
 
 	public void OpportunityTypePickListValues() {
-		
+
 		OpportunityTypePickListValues.add("-None--");
 		OpportunityTypePickListValues.add("GWS Occupier");
 		OpportunityTypePickListValues.add("Landlord");
@@ -9449,7 +9556,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 		System.out.println("Opportunity Type Pick List Values are:::" + OpportunityTypePickListValues);
 	}
-	
+
 	public void opportunityTypePickList() {
 		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
 		Utility_Functions.xClick(driver, menu_Opportunities, true);
@@ -9491,14 +9598,14 @@ public class OpportunitiesPage extends ReusableLibrary {
 					"Opportunity Type Pick List values are not present", Status.FAIL);
 		}
 	}
-	
+
 	/**
 	 * Validating the update on existing fields in VAS Opportunity Record layout
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */
-	
+
 	static ArrayList<String> competitorsListValues = new ArrayList<String>();
 
 	public void competitorsListValues() {		
@@ -9521,7 +9628,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		competitorsListValues.add("Valbridge");
 		System.out.println("Competitors List Values are:::" + competitorsListValues);
 	}
-	
+
 	static ArrayList<String> regionListValues = new ArrayList<String>();
 
 	public void regionList() {		
@@ -9530,9 +9637,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 		regionListValues.add("US Southeast");
 		regionListValues.add("US West");
 		regionListValues.add("US Northeast");
- 		System.out.println("Region Values are:::" + regionListValues);
+		System.out.println("Region Values are:::" + regionListValues);
 	}
-	
+
 	static ArrayList<String> scopeWonValues = new ArrayList<String>();
 
 	public void scopeWon() {		
@@ -9543,7 +9650,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		scopeWonValues.add("Telecom");
 		System.out.println("Scope Won List Values are:::" + scopeWonValues);
 	}
-	
+
 	static ArrayList<String> scopeLostValues = new ArrayList<String>();
 
 	public void scopeLost() {		
@@ -9554,7 +9661,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		scopeLostValues.add("Telecom");
 		System.out.println("Scope Lost List Values are:::" + scopeLostValues);
 	}
-	
+
 	public void opportunityRecordLayoutVAS() {
 		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
 		Utility_Functions.xClick(driver, menu_Opportunities, true);
@@ -9702,9 +9809,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver,valueAS, 3);
 		Utility_Functions.xClick(driver,valueAS, true);
 		Utility_Functions.timeWait(2);
-		
-		
-		
+
+
+
 	}
 	/**
 	 * Validating the Opportunity Calculated Annual Leasing Commission
@@ -9792,16 +9899,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 		} else {
 			report.updateTestLog("Verify Quick Create Opportunity Page Discretionary Fee", "The opportunity is not saved with the Discretionary Fee check box checked and the Discretionary amount", Status.FAIL);
 		}
-		//span[text()='Property Details']/parent::h3/following-sibling::div//div[contains(@class,'slds-form-element__control')]//label/span[1]
-		//span[text()='Opportunity Information']/parent::h3/following-sibling::div//div[contains(@class,'slds-form-element__control')]//label/span[1]
-		//span[text()='Financial Details/Sales Stages']/parent::h3/following-sibling::div//div[contains(@class,'slds-form-element__control')]//label/span[1]
-		//span[contains(text(),'Appointment Information')]/parent::h3/following-sibling::div//div[contains(@class,'slds-form-element__control')]//label/span[1]
-		//span[contains(text(),'Close Information')]/parent::h3/following-sibling::div//div[contains(@class,'slds-form-element__control')]//label/span[1]
-		//span[contains(text(),'Close Information')]/parent::h3/following-sibling::div//div[contains(@class,'slds-form-element__control')]//label/span[1]
-		//span[contains(text(),'Loss Information')]/parent::h3/following-sibling::div//div[contains(@class,'slds-form-element__control')]//label/span[1]
-		//span[contains(text(),'System Information')]/parent::h3/following-sibling::div//div[contains(@class,'slds-form-element__control')]//label/span[1]
-	
-	
+
+
 	}
 	/**
 	 * Validating the Opportunity create offer quick action drop down
@@ -9810,7 +9909,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 * 
 	 *
 	 */
-	public void CreateOfferOpportunityPage(){	
+	public void createOfferOpportunityPage(){	
 		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
 		Utility_Functions.xClick(driver, menu_Opportunities, true);
 		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
@@ -9824,8 +9923,6 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, targetProperty, 3);
 		Utility_Functions.xSendKeys(driver,targetProperty, "Test Automation Subject_G7XRIZ51NS - 2100 Ross Avenue");
-		Utility_Functions.xWaitForElementPresent(driver, targetPropertyValue, 3);
-		Utility_Functions.xClick(driver,targetPropertyValue, true);
 		Utility_Functions.xWaitForElementPresent(driver, targetPropertyValue, 3);
 		Utility_Functions.xClick(driver,targetPropertyValue, true);
 		Utility_Functions.xWaitForElementPresent(driver,opportunityNameAS, 3);
@@ -9847,8 +9944,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xSendKeys(driver,estiamtedGrossFeeCommissionValue, dataTable.getData("General_Data", "InstallmentAmount"));
 		Utility_Functions.xWaitForElementPresent(driver,estimatedTransactionValue, 5);
 		Utility_Functions.xSendKeys(driver,estimatedTransactionValue, dataTable.getData("General_Data", "InstallmentAmount"));
-		
-		
+		Utility_Functions.xWaitForElementPresent(driver,saveNewOpportunity_AS, 3);
+		Utility_Functions.xClick(driver,saveNewOpportunity_AS, true);
+		Utility_Functions.timeWait(5);
 	}
 	/**
 	 * Validating the Opportunities create new installment 
@@ -9856,7 +9954,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 * @author Ramya
 	 *
 	 */
-	
+
 	public void opportunitiesClosedDateAndInstallmentDate() {
 		Utility_Functions.xWaitForElementPresent(driver,menu_Opportunities, 4);
 		Utility_Functions.xClick(driver, menu_Opportunities, true);
@@ -9914,4 +10012,1005 @@ public class OpportunitiesPage extends ReusableLibrary {
 		}
 
 	}
+	/**
+	 * Validating the Opportunity Quick create page for Property sales sell side opportunity record type
+	 * 
+	 * @author Ramya
+	 * 
+	 *
+	 */
+	static ArrayList<String> propertyDetailsSectionFields = new ArrayList<String>();
+
+	public void propertyDetailsFields() {	
+
+		propertyDetailsSectionFields.add("Target Property");
+		propertyDetailsSectionFields.add("Total Size");
+		propertyDetailsSectionFields.add("Opportunity Details");
+
+		System.out.println("Property Details fields are:::" + propertyDetailsSectionFields);
+	}
+	static ArrayList<String> opportunityInformationSectionFields = new ArrayList<String>();
+
+	public void opportunityInformationSection() {	
+
+		opportunityInformationSectionFields.add("Opportunity Name");
+		opportunityInformationSectionFields.add("Account Name");
+		opportunityInformationSectionFields.add("Primary Contact");
+		opportunityInformationSectionFields.add("Close Date");
+		opportunityInformationSectionFields.add("Confidential Opportunity");
+		opportunityInformationSectionFields.add("Status Comments");
+		opportunityInformationSectionFields.add("HNI Transaction");
+		opportunityInformationSectionFields.add("Parent Opportunity");
+		opportunityInformationSectionFields.add("Core Asset Transaction");
+
+		System.out.println("Opportunity Information section fields are:::" + opportunityInformationSectionFields);
+	}
+	static ArrayList<String> financialDetailsSectionFields = new ArrayList<String>();
+
+	public void financialDetailsSection() {	
+
+		financialDetailsSectionFields.add("Estimated Gross Fee/Commission");
+		financialDetailsSectionFields.add("Sales Stage");
+		financialDetailsSectionFields.add("Estimated Transaction Value");
+		financialDetailsSectionFields.add("Probability (%)");
+		financialDetailsSectionFields.add("On Hold");
+		financialDetailsSectionFields.add("On Hold Comments");
+
+		System.out.println("Financial Details section fields are:::" + financialDetailsSectionFields);
+	}
+	static ArrayList<String> appointmentInformationSectionFields = new ArrayList<String>();
+
+	public void appointmentInformationFields() {	
+
+		appointmentInformationSectionFields.add("Agency Start Date");
+		appointmentInformationSectionFields.add("Agency Expiry Date");
+
+		System.out.println("Appointment Information fields are:::" + appointmentInformationSectionFields);
+	}
+	static ArrayList<String> closeInformationSectionFields = new ArrayList<String>();
+
+	public void closeInformationFields() {	
+
+		closeInformationSectionFields.add("Counterpart Account");
+		closeInformationSectionFields.add("Yield (%)");
+		closeInformationSectionFields.add("Counterpart Contact");
+		closeInformationSectionFields.add("Exchanged/ Agreement Signed Date");
+		closeInformationSectionFields.add("Close Comments");
+		closeInformationSectionFields.add("Settlement/Completion Date");
+		closeInformationSectionFields.add("Annual Net Operating Income");
+		closeInformationSectionFields.add("Buyer Confidentiality Agreement Signed");
+		closeInformationSectionFields.add("Stake Diluted (%)");
+
+		System.out.println("Close Information section fields are:::" +closeInformationSectionFields);
+	}
+
+	static ArrayList<String> lossInformationSectionFields = new ArrayList<String>();
+
+	public void lossInformationSectionFields() {	
+
+		lossInformationSectionFields.add("Competitor");
+		lossInformationSectionFields.add("Reason Lost Comments");
+
+		System.out.println("loss information fields are:::" +lossInformationSectionFields);
+	}
+	static ArrayList<String> systemInformationSectionFields = new ArrayList<String>();
+
+	public void systemInformationSectionFields() {	
+
+		systemInformationSectionFields.add("Last Manually Modified By");
+		systemInformationSectionFields.add("Change Opportunity Owner");
+
+		System.out.println("System information fields are:::" +systemInformationSectionFields);
+	}
+	public void validateOpportunityQuickCreatePage(){	
+		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
+		Utility_Functions.xClick(driver, menu_Opportunities, true);
+		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
+		Utility_Functions.xClick(driver, newOpportunity, true);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xSwitchtoFrame(driver, continueButton);
+		Utility_Functions.xWaitForElementPresent(driver, continueButton, 3);
+		Utility_Functions.xClick(driver,continueButton, true);
+		Utility_Functions.timeWait(2);
+		driver.switchTo().defaultContent();
+		Utility_Functions.timeWait(2);
+		List<WebElement> propertyDetailsFields = driver.findElements(By.xpath("//span[text()='Property Details']/parent::h3/following-sibling::div//div[contains(@class,'slds-form-element__control')]//label/span[1]"));
+		int count1 = 0, i1 = 0, j1 = 0;
+		String fieldsArray[] = new String[propertyDetailsFields.size()];
+		System.out.println(propertyDetailsFields.size());
+		try {
+			propertyDetailsFields();
+			while (j1 < propertyDetailsFields.size()) {
+				for (WebElement element1 : propertyDetailsFields) {
+					fieldsArray[i1] = element1.getText();
+					if (fieldsArray[i1].equalsIgnoreCase(propertyDetailsSectionFields.get(j1))) {
+						System.out.println("Verify Property Details Section " + element1.getText());
+						report.updateTestLog("Verify Property Details Section ",
+								element1.getText() + "labels  present in the Property Details Section ", Status.PASS);
+						count1++;
+					}
+					i1++;
+				}
+				i1 = 0;
+				j1++;
+			}
+			System.out.println(count1);
+			if (count1 != 3) {
+				report.updateTestLog("Verify Property Details Section",
+						"All fields are not present in the Property Details Section", Status.FAIL);
+			} else {
+				report.updateTestLog("Verify Property Details Section",
+						"All fields are present in the Property Details Section", Status.PASS);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		List<WebElement> opportunityInformationFields = driver.findElements(By.xpath("//span[text()='Opportunity Information']/parent::h3/following-sibling::div//div[contains(@class,'slds-form-element__control')]//label/span[1]"));
+		int count2 = 0, i2 = 0, j2 = 0;
+		String fieldsArray2[] = new String[opportunityInformationFields.size()];
+		System.out.println(opportunityInformationFields.size());
+		try {
+			opportunityInformationSection();
+			while (j2 < opportunityInformationFields.size()) {
+				for (WebElement element2 :opportunityInformationFields) {
+					fieldsArray2[i2] = element2.getText();
+					if (fieldsArray2[i2].equalsIgnoreCase(opportunityInformationSectionFields.get(j2))) {
+						System.out.println("Verify Opportunity Information Section " + element2.getText());
+						report.updateTestLog("Verify Opportunity Information Section",
+								element2.getText() + "labels  present in the Opportunity Information Section ", Status.PASS);
+						count2++;
+					}
+					i2++;
+				}
+				i2 = 0;
+				j2++;
+			}
+			System.out.println(count2);
+			if (count2 != 9) {
+				report.updateTestLog("Verify Opportunity Information Section",
+						"All fields are not present in the Opportunity Information Section", Status.FAIL);
+			} else {
+				report.updateTestLog("Verify Property Details Section",
+						"All fields are present in the Opportunity Information Section", Status.PASS);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		List<WebElement> financialDetailsStageFields = driver.findElements(By.xpath("//span[text()='Financial Details/Sales Stages']/parent::h3/following-sibling::div//div[contains(@class,'slds-form-element__control')]//label/span[1]"));
+		int count3 = 0, i3 = 0, j3 = 0;
+		String fieldsArray3[] = new String[financialDetailsStageFields.size()];
+		System.out.println(financialDetailsStageFields .size());
+		try {
+			financialDetailsSection();
+			while (j3 < financialDetailsStageFields.size()) {
+				for (WebElement element3 :financialDetailsStageFields ) {
+					fieldsArray3[i3] = element3.getText();
+					if (fieldsArray3[i3].equalsIgnoreCase(financialDetailsSectionFields.get(j3))) {
+						System.out.println("Verify Financial Details Section Fields " + element3.getText());
+						report.updateTestLog("Verify Financial Details Section Fields",
+								element3.getText() + "labels  present in the Financial Details Section ", Status.PASS);
+						count3++;
+					}
+					i3++;
+				}
+				i3 = 0;
+				j3++;
+			}
+			System.out.println(count3);
+			if (count3 != 6) {
+				report.updateTestLog("Verify Financial Details Section",
+						"All fields are not present in the Opportunity Information Section", Status.FAIL);
+			} else {
+				report.updateTestLog("Verify Financial Details Section",
+						"All fields are present in the Opportunity Information Section", Status.PASS);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}	
+
+		List<WebElement> appointmentInformationFields = driver.findElements(By.xpath("//span[contains(text(),'Appointment Information')]/parent::h3/following-sibling::div//div[contains(@class,'slds-form-element__control')]//label/span[1]"));
+		int count4 = 0, i4 = 0, j4 = 0;
+		String fieldsArray4[] = new String[appointmentInformationFields.size()];
+		System.out.println(appointmentInformationFields.size());
+		try {
+			appointmentInformationFields();
+			while (j4 < appointmentInformationFields.size()) {
+				for (WebElement element4 :appointmentInformationFields) {
+					fieldsArray4[i4] = element4.getText();
+					if (fieldsArray4[i4].equalsIgnoreCase(appointmentInformationSectionFields.get(j4))) {
+						System.out.println("Verify Appointment Information Section " + element4.getText());
+						report.updateTestLog("Verify Appointment Information Section",
+								element4.getText() + "labels  present in the Appointment Information Section ", Status.PASS);
+						count4++;
+					}
+					i4++;
+				}
+				i4 = 0;
+				j4++;
+			}
+			System.out.println(count4);
+			if (count4 != 2) {
+				report.updateTestLog("Verify Appointment Information Section",
+						"All fields are not present in the Appointment Information Section", Status.FAIL);
+			} else {
+				report.updateTestLog("Verify Appointment Information Section",
+						"All fields are present in the Appointment Information Section", Status.PASS);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}	
+
+		List<WebElement> closeInformationFields = driver.findElements(By.xpath("//span[contains(text(),'Close Information')]/parent::h3/following-sibling::div//div[contains(@class,'slds-form-element__control')]//label/span[1]"));
+		int count5 = 0, i5 = 0, j5 = 0;
+		String fieldsArray5[] = new String[closeInformationFields.size()];
+		System.out.println(closeInformationFields.size());
+		try {
+			closeInformationFields();
+			while (j5 <closeInformationFields.size()) {
+				for (WebElement element5 :closeInformationFields) {
+					fieldsArray5[i5] = element5.getText();
+					if (fieldsArray5[i5].equalsIgnoreCase(closeInformationSectionFields.get(j5))) {
+						System.out.println("Verify Close Information Section " + element5.getText());
+						report.updateTestLog("Verify Close Information Section",
+								element5.getText() + "labels  present in the Close Information Section ", Status.PASS);
+						count5++;
+					}
+					i5++;
+				}
+				i5 = 0;
+				j5++;
+			}
+			System.out.println(count5);
+			if (count5 != 9) {
+				report.updateTestLog("Verify Close Information Section",
+						"All fields are not present in the Close Information Section", Status.FAIL);
+			} else {
+				report.updateTestLog("Verify Close Information Section",
+						"All fields are present in the Close Information Section", Status.PASS);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}	
+
+		List<WebElement> lossInformationFields = driver.findElements(By.xpath("//span[contains(text(),'Loss Information')]/parent::h3/following-sibling::div//div[contains(@class,'slds-form-element__control')]//label/span[1]"));
+		int count6 = 0, i6 = 0, j6 = 0;
+		String fieldsArray6[] = new String[lossInformationFields.size()];
+		System.out.println(lossInformationFields.size());
+		try {
+			lossInformationSectionFields();
+			while (j6 <lossInformationFields.size()) {
+				for (WebElement element6 :lossInformationFields) {
+					fieldsArray6[i6] = element6.getText();
+					if (fieldsArray6[i6].equalsIgnoreCase(lossInformationSectionFields.get(j6))) {
+						System.out.println("Verify Opportunity Information Section " + element6.getText());
+						report.updateTestLog("Verify Opportunity Information Section",
+								element6.getText() + "labels  present in the Opportunity Information Section ", Status.PASS);
+						count6++;
+					}
+					i6++;
+				}
+				i6 = 0;
+				j6++;
+			}
+			System.out.println(count6);
+			if (count6 != 2) {
+				report.updateTestLog("Verify Opportunity Information Section",
+						"All fields are not present in the Opportunity Information Section", Status.FAIL);
+			} else {
+				report.updateTestLog("Verify Property Details Section",
+						"All fields are present in the Opportunity Information Section", Status.PASS);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		List<WebElement> systemInformationFields = driver.findElements(By.xpath("//span[contains(text(),'System Information')]/parent::h3/following-sibling::div//div[contains(@class,'slds-form-element__control')]//label/span[1]"));
+		int count7 = 0, i7 = 0, j7 = 0;
+		String fieldsArray7[] = new String[systemInformationFields.size()];
+		System.out.println(systemInformationFields.size());
+		try {
+			systemInformationSectionFields();
+			while (j7 < systemInformationFields.size()) {
+				for (WebElement element7 :systemInformationFields) {
+					fieldsArray7[i7] = element7.getText();
+					if (fieldsArray7[i7].equalsIgnoreCase(systemInformationSectionFields.get(j7))) {
+						System.out.println("Verify Opportunity Information Section " + element7.getText());
+						report.updateTestLog("Verify Opportunity Information Section",
+								element7.getText() + "labels  present in the Opportunity Information Section ", Status.PASS);
+						count7++;
+					}
+					i7++;
+				}
+				i7 = 0;
+				j7++;
+			}
+			System.out.println(count7);
+			if (count7 != 2) {
+				report.updateTestLog("Verify Opportunity Information Section",
+						"All fields are not present in the Opportunity Information Section", Status.FAIL);
+			} else {
+				report.updateTestLog("Verify Property Details Section",
+						"All fields are present in the Opportunity Information Section", Status.PASS);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		Utility_Functions.xWaitForElementPresent(driver, targetProperty, 3);
+		Utility_Functions.xSendKeys(driver,targetProperty, "Test Automation Subject_G7XRIZ51NS - 2100 Ross Avenue");
+		Utility_Functions.xWaitForElementPresent(driver, targetPropertyValue, 3);
+		Utility_Functions.xClick(driver,targetPropertyValue, true);
+		Utility_Functions.xWaitForElementPresent(driver,opportunityNameAS, 3);
+		Utility_Functions.xSendKeys(driver,opportunityNameAS, "Test Automation Opportunity_" + Utility_Functions.xGenerateAlphaNumericString());
+		Utility_Functions.xWaitForElementPresent(driver,accountNameNewOpportunity, 3);
+		Utility_Functions.xSendKeys(driver,accountNameNewOpportunity, "01R4597B21CBRE Test SFDC Automation_0401");
+		Utility_Functions.xWaitForElementPresent(driver,accountNameValueNewOpp, 3);
+		Utility_Functions.xClick(driver,accountNameValueNewOpp, true);
+		Utility_Functions.xWaitForElementPresent(driver,leadSourceNewOpp, 3);
+		Utility_Functions.xClick(driver,leadSourceNewOpp, true);
+		Utility_Functions.xWaitForElementPresent(driver,leadSourceNewOppValue, 3);
+		Utility_Functions.xClick(driver,leadSourceNewOppValue, true);
+		System.out.println(Calendar.getInstance());
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		Date date = new Date();
+		Utility_Functions.xWaitForElementPresent(driver,closeDate_AS, 3);
+		Utility_Functions.xSendKeys(driver,closeDate_AS, dateFormat.format(date).toString());
+		Utility_Functions.xWaitForElementPresent(driver,estiamtedGrossFeeCommissionValue, 5);
+		Utility_Functions.xSendKeys(driver,estiamtedGrossFeeCommissionValue, dataTable.getData("General_Data", "InstallmentAmount"));
+		Utility_Functions.xWaitForElementPresent(driver,estimatedTransactionValue, 5);
+		Utility_Functions.xSendKeys(driver,estimatedTransactionValue, dataTable.getData("General_Data", "InstallmentAmount"));
+		Utility_Functions.xWaitForElementPresent(driver,saveNewOpportunity_AS, 3);
+		Utility_Functions.xClick(driver,saveNewOpportunity_AS, true);
+		Utility_Functions.timeWait(5);
+		if(details.isDisplayed()) {
+
+			report.updateTestLog("Verify Quick Create Opportunity Page ", "The opportunity is saved with the mandatory fields ", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Quick Create Opportunity Page ", "The opportunity is not saved with the mandatory fields", Status.FAIL);
+		}
+	}
+	/**
+	 * Validating the Opportunities edit page for the Capital Advisor users
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	static ArrayList<String> opportunityInformationEditPageFields = new ArrayList<String>();
+
+	public void opportunityInformationSectionEditPage() {
+
+		opportunityInformationEditPageFields.add("Opportunity Name");
+		opportunityInformationEditPageFields.add("Confidential Opportunity");
+		opportunityInformationEditPageFields.add("Account Name");
+		opportunityInformationEditPageFields.add("Sales Stage");
+		opportunityInformationEditPageFields.add("Estimated Gross Fee/Commission");
+		opportunityInformationEditPageFields.add("Description");
+		opportunityInformationEditPageFields.add("Net Fee");
+		opportunityInformationEditPageFields.add("Comments");
+		opportunityInformationEditPageFields.add("Close Date");
+		opportunityInformationEditPageFields.add("Total Size");
+		opportunityInformationEditPageFields.add("Parent Opportunity");
+		opportunityInformationEditPageFields.add("Change Opportunity Owner");
+		opportunityInformationEditPageFields.add("Conversion Type Other");
+
+
+		System.out.println("The labels for the Opportunity Information section edit page are " + opportunityInformationEditPageFields);
+
+	}
+	static ArrayList<String> additionalInformationEditPageFields = new ArrayList<String>();
+
+	public void additionalInformationSectionEditPage() {
+
+		additionalInformationEditPageFields.add("Address Line 1");
+		additionalInformationEditPageFields.add("City");
+		additionalInformationEditPageFields.add("Address Line 2");
+		additionalInformationEditPageFields.add("Postcode");
+		additionalInformationEditPageFields.add("RFP Submission Date");
+		additionalInformationEditPageFields.add("Probability (%)");
+		additionalInformationEditPageFields.add("Pitch Date");
+		additionalInformationEditPageFields.add("Referral");
+		additionalInformationEditPageFields.add("Referral Recipient");
+		additionalInformationEditPageFields.add("Referral Email Sent");
+
+
+		System.out.println("The labels for the Additional Information section edit page are " + additionalInformationEditPageFields);
+
+	}
+	static ArrayList<String> lossInformationEditPageFields = new ArrayList<String>();
+
+	public void lossInformationSectionEditPage() {
+
+		lossInformationEditPageFields.add("Competitor");
+		lossInformationEditPageFields.add("Reason Lost Comments");
+		lossInformationEditPageFields.add("Next Step");
+		lossInformationEditPageFields.add("Invoice No");
+		lossInformationEditPageFields.add("Bill Date");
+
+		System.out.println("The labels for the loss Information section edit page are " + lossInformationEditPageFields);
+
+	}
+	static ArrayList<String> dataHugDetailsEditPageFields = new ArrayList<String>();
+
+	public void dataHugDEtailsSectionEditPage() {
+
+		dataHugDetailsEditPageFields.add("Deal Score");
+		dataHugDetailsEditPageFields.add("Last Email Sent");
+		dataHugDetailsEditPageFields.add("Deal Score Reason");
+		dataHugDetailsEditPageFields.add("Last Email Sent by");
+		dataHugDetailsEditPageFields.add("Best Connected Colleague");
+		dataHugDetailsEditPageFields.add("Last Meeting");
+		dataHugDetailsEditPageFields.add("Last Email Received");
+		dataHugDetailsEditPageFields.add("Next Meeting");
+		dataHugDetailsEditPageFields.add("Last Email Received from");
+
+		System.out.println("The labels for the Additional Information section edit page are " +dataHugDetailsEditPageFields);
+
+	}
+	static ArrayList<String> systemInformationEditPageFields = new ArrayList<String>();
+
+	public void systemInformationSectionEditPage() {
+
+		systemInformationEditPageFields.add("Created By");
+		systemInformationEditPageFields.add("External Deal ID");
+		systemInformationEditPageFields.add("Last Modified By");
+		systemInformationEditPageFields.add("Opportunity Record Type");
+		systemInformationEditPageFields.add("Opportunity Age (Days)");
+
+		System.out.println("The labels for the Additional Information section edit page are " +systemInformationEditPageFields);
+
+	}
+
+
+	public void validateOpportunitiesEditPageLayout() {
+		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 4);
+		Utility_Functions.xClick(driver, menu_Opportunities, true);
+		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 4);
+		Utility_Functions.xClick(driver, recentlyViewed, true);
+		Utility_Functions.xWaitForElementPresent(driver, allActiveOpportunities, 4);
+		Utility_Functions.xClick(driver, allActiveOpportunities, true);
+		Utility_Functions.timeWait(2);
+		List<WebElement> opportunitiesList = driver.findElements(By.xpath(
+				"//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'006')]"));
+		Utility_Functions.xclickRandomElement(opportunitiesList);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver,edit, 3);
+		Utility_Functions.xClick(driver, edit, true);
+		List<WebElement> opportunityInformationFields = driver.findElements(By.xpath("//span[text()='Opportunity Information']/parent::h3/following-sibling::div//div[contains(@class,'slds-form-element__control')]//label/span[1]"));
+		int count1 = 0, i1 = 0, j1 = 0;
+		String fieldsArray[] = new String[opportunityInformationFields.size()];
+		System.out.println(opportunityInformationFields.size());
+		try {
+			opportunityInformationSectionEditPage();
+			while (j1 <opportunityInformationFields.size()) {
+				for (WebElement element1 : opportunityInformationFields) {
+					fieldsArray[i1] = element1.getText();
+					if (fieldsArray[i1].equalsIgnoreCase(opportunityInformationEditPageFields.get(j1))) {
+						System.out.println("Verify Opportunity Information Section " + element1.getText());
+						report.updateTestLog("Verify Opportunity Information Section ",
+								element1.getText() + "labels  present in the Opportunity Information Section ", Status.PASS);
+						count1++;
+					}
+					i1++;
+				}
+				i1 = 0;
+				j1++;
+			}
+			System.out.println(count1);
+			if (count1 >= 11) {
+				report.updateTestLog("Verify Opportunity Information Section",
+						"All fields are not present in the Opportunity Information Section", Status.PASS);
+			} else {
+				report.updateTestLog("Verify Opportunity Information Section",
+						"All fields are present in the Opportunity Information Section", Status.FAIL);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		List<WebElement> additionalInformationFields = driver.findElements(By.xpath("//span[text()='Additional Information']/parent::h3/following-sibling::div//div[contains(@class,'slds-form-element__control')]//label/span[1]"));
+		int count2 = 0, i2 = 0, j2 = 0;
+		String fieldsArray2[] = new String[additionalInformationFields.size()];
+		System.out.println(additionalInformationFields.size());
+		try {
+			additionalInformationSectionEditPage();
+			while (j2 <additionalInformationFields.size()) {
+				for (WebElement element2 :additionalInformationFields) {
+					fieldsArray2[i2] = element2.getText();
+					if (fieldsArray2[i2].equalsIgnoreCase(additionalInformationEditPageFields.get(j2))) {
+						System.out.println("Verify Additional Information Section " + element2.getText());
+						report.updateTestLog("Verify Additional Information Section ",
+								element2.getText() + "labels  present in the Additional Information Section ", Status.PASS);
+						count2++;
+					}
+					i2++;
+				}
+				i2 = 0;
+				j2++;
+			}
+			System.out.println(count2);
+			if (count2 >= 10) {
+				report.updateTestLog("Verify Additional Information Section",
+						"All fields are not present in the Additional Information Section", Status.PASS);
+			} else {
+				report.updateTestLog("Verify Additional Information Section",
+						"All fields are present in the Additional Information Section", Status.FAIL);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		List<WebElement> lossInformationFields = driver.findElements(By.xpath("//span[text()='Loss Information']/parent::h3/following-sibling::div//div[contains(@class,'slds-form-element__control')]//label/span[1]"));
+		int count3 = 0, i3 = 0, j3 = 0;
+		String fieldsArray3[] = new String[lossInformationFields.size()];
+		System.out.println(lossInformationFields.size());
+		try {
+			lossInformationSectionEditPage();
+			while (j3 <additionalInformationFields.size()) {
+				for (WebElement element3 :additionalInformationFields) {
+					fieldsArray3[i3] = element3.getText();
+					if (fieldsArray3[i3].equalsIgnoreCase(lossInformationEditPageFields.get(j3))) {
+						System.out.println("Verify Loss Information Section " + element3.getText());
+						report.updateTestLog("Verify Loss Information Section ",
+								element3.getText() + "labels  present in the Loss Information Section ", Status.PASS);
+						count3++;
+					}
+					i3++;
+				}
+				i3 = 0;
+				j3++;
+			}
+			System.out.println(count3);
+			if (count3 !=3) {
+				report.updateTestLog("Verify Loss Information Section",
+						"All fields are not present in the Loss Information Section", Status.FAIL);
+			} else {
+				report.updateTestLog("Verify Loss Information Section",
+						"All fields are present in the Loss Information Section", Status.PASS);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		List<WebElement> dataHugDetailsFields = driver.findElements(By.xpath("//span[text()='Datahug Details']/parent::h3/following-sibling::div//div[contains(@class,'test-id__field-label-container')]/span[1]"));
+		int count4 = 0, i4 = 0, j4 = 0;
+		String fieldsArray4[] = new String[dataHugDetailsFields.size()];
+		System.out.println(dataHugDetailsFields.size());
+		try {
+			dataHugDEtailsSectionEditPage();
+			while (j4 <dataHugDetailsFields.size()) {
+				for (WebElement element4 :dataHugDetailsFields) {
+					fieldsArray4[i4] = element4.getText();
+					if (fieldsArray4[i4].equalsIgnoreCase(dataHugDetailsEditPageFields.get(j4))) {
+						System.out.println("Verify Data Hug Details Section " + element4.getText());
+						report.updateTestLog("Verify Data Hug Details Section ",
+								element4.getText() + "labels  present in the Data Hug Details Section ", Status.PASS);
+						count4++;
+					}
+					i4++;
+				}
+				i4 = 0;
+				j4++;
+			}
+			System.out.println(count4);
+			if (count4 >=9) {
+				report.updateTestLog("Verify Data Hug Details Section",
+						"All fields are not present in the Data Hug Details Section", Status.PASS);
+			} else {
+				report.updateTestLog("Verify Data Hug Details Section",
+						"All fields are present in the Data HUg Details Section", Status.FAIL);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		List<WebElement> systemInformationFields = driver.findElements(By.xpath("//span[text()='System Information']/parent::h3/following-sibling::div//div[contains(@class,'test-id__field-label-container')]/span[1]"));
+		int count5 = 0, i5 = 0, j5 = 0;
+		String fieldsArray5[] = new String[systemInformationFields.size()];
+		System.out.println(systemInformationFields.size());
+		try {
+			systemInformationSectionEditPage();
+			while (j5 <systemInformationFields.size()) {
+				for (WebElement element5 :systemInformationFields) {
+					fieldsArray5[i5] = element5.getText();
+					if (fieldsArray5[i5].equalsIgnoreCase(systemInformationEditPageFields.get(j5))) {
+						System.out.println("Verify System Information Section " + element5.getText());
+						report.updateTestLog("Verify System Information Section ",
+								element5.getText() + "labels  present in the System Information Section ", Status.PASS);
+						count5++;
+					}
+					i5++;
+				}
+				i5 = 0;
+				j5++;
+			}
+			System.out.println(count5);
+			if (count5 >=5) {
+				report.updateTestLog("Verify System Information Section",
+						"All fields are not present in the Property Details Section", Status.PASS);
+			} else {
+				report.updateTestLog("Verify System Information Section",
+						"All fields are present in the System Information Section", Status.FAIL);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+	}
+	/**
+	 * Validating the Opportunities edit page for the EMEA Valuation users
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	static ArrayList<String> opportunityInformationEditPageValues = new ArrayList<String>();
+
+	public void opportunityInformationEditPage() {
+
+		opportunityInformationEditPageValues.add("Opportunity Name");
+		opportunityInformationEditPageValues.add("Confidential Opportunity");
+		opportunityInformationEditPageValues.add("Account Name");
+		opportunityInformationEditPageValues.add("Close Date");
+		opportunityInformationEditPageValues.add("Project Type Description");
+		opportunityInformationEditPageValues.add("Sales Stage");
+		opportunityInformationEditPageValues.add("Comments");
+		opportunityInformationEditPageValues.add("Assignment Start Date");
+		opportunityInformationEditPageValues.add("Estimated Gross Fee/Commission");
+		opportunityInformationEditPageValues.add("Net Fee");
+		opportunityInformationEditPageValues.add("Probability (%)");
+		opportunityInformationEditPageValues.add("Risk");
+
+		System.out.println("The values for the Opportunity Information section edit page are " + opportunityInformationEditPageValues);
+
+	}
+	static ArrayList<String> additionalInformationEditPageValues = new ArrayList<String>();
+
+	public void additionalInformationEditPage() {
+
+		additionalInformationEditPageValues.add("Address Line 1");
+		additionalInformationEditPageValues.add("Sub Market");
+		additionalInformationEditPageValues.add("Address Line 2");
+		additionalInformationEditPageValues.add("City");
+		additionalInformationEditPageValues.add("Postcode");
+		additionalInformationEditPageValues.add("Property Market Value");
+		additionalInformationEditPageValues.add("Total Size");
+		additionalInformationEditPageValues.add("Referral");
+		additionalInformationEditPageValues.add("Parent Opportunity");
+		additionalInformationEditPageValues.add("Referral Recipient");
+
+
+		System.out.println("The labels for the Additional Information section edit page are " +additionalInformationEditPageValues);
+
+	}
+	static ArrayList<String> lossInformationEditPageValues = new ArrayList<String>();
+
+	public void lossInformationEditPage() {
+
+		lossInformationEditPageValues.add("Competitor");
+		lossInformationEditPageValues.add("Reason Lost Comments");
+		lossInformationEditPageValues.add("Next Step");
+
+		System.out.println("The labels for the loss Information section edit page are " +lossInformationEditPageValues);
+
+	}
+	static ArrayList<String> dataHugDetailsEditPageValues = new ArrayList<String>();
+
+	public void dataHugDetailsEditPage() {
+
+		dataHugDetailsEditPageValues.add("Deal Score");
+		dataHugDetailsEditPageValues.add("Last Email Sent");
+		dataHugDetailsEditPageValues.add("Deal Score Reason");
+		dataHugDetailsEditPageValues.add("Last Email Sent by");
+		dataHugDetailsEditPageValues.add("Best Connected Colleague");
+		dataHugDetailsEditPageValues.add("Last Meeting");
+		dataHugDetailsEditPageValues.add("Last Email Received");
+		dataHugDetailsEditPageValues.add("Next Meeting");
+		dataHugDetailsEditPageValues.add("Last Email Received from");
+
+		System.out.println("The labels for the Data Hug details section edit page are " +dataHugDetailsEditPageValues);
+
+	}
+	static ArrayList<String> systemInformationEditPageValues = new ArrayList<String>();
+
+	public void systemInformationEditPage() {
+
+		systemInformationEditPageFields.add("Created By");
+		systemInformationEditPageFields.add("Last Modified By");
+		systemInformationEditPageFields.add("External Deal ID");
+		systemInformationEditPageFields.add("Opportunity Record Type");
+		systemInformationEditPageFields.add("Opportunity Age (Days)");
+
+		System.out.println("The labels for the System Information edit page are " +systemInformationEditPageFields);
+
+	}
+	static ArrayList<String> bankValuationsInstructionsFields = new ArrayList<String>();
+
+	public void bankValuationsInstructionsEditPage() {
+
+		bankValuationsInstructionsFields.add("Margin/Interest Rate %");
+		bankValuationsInstructionsFields.add("Term (Years)");
+		bankValuationsInstructionsFields.add("LTV %");
+		bankValuationsInstructionsFields.add("Repayment Date");
+		bankValuationsInstructionsFields.add("Loan Comments");
+
+		System.out.println("The labels for the Bank Valuations Instructions edit page are " +bankValuationsInstructionsFields);
+
+	}
+	static ArrayList<String> valuationSpecificEditPageValues = new ArrayList<String>();
+
+	public void valuationSpecificEditPage() {
+
+		valuationSpecificEditPageValues.add("Number of Properties");		
+		System.out.println("The labels for the Valuation Specific section edit page are " +valuationSpecificEditPageValues);
+
+	}
+
+
+	public void validateOpportunitiesValuationsEditPage() {
+		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 4);
+		Utility_Functions.xClick(driver, menu_Opportunities, true);
+		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 4);
+		Utility_Functions.xClick(driver, recentlyViewed, true);
+		Utility_Functions.xWaitForElementPresent(driver, allActiveOpportunities, 4);
+		Utility_Functions.xClick(driver, allActiveOpportunities, true);
+		Utility_Functions.timeWait(2);
+		List<WebElement> opportunitiesList = driver.findElements(By.xpath(
+				"//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'006')]"));
+		Utility_Functions.xclickRandomElement(opportunitiesList);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver,edit, 3);
+		Utility_Functions.xClick(driver, edit, true);
+		List<WebElement> opportunityInformationFields = driver.findElements(By.xpath("//span[text()='Opportunity Information']/parent::h3/following-sibling::div//div[contains(@class,'slds-form-element__control')]//label/span[1]"));
+		int count1 = 0, i1 = 0, j1 = 0;
+		String fieldsArray[] = new String[opportunityInformationFields.size()];
+		System.out.println(opportunityInformationFields.size());
+		try {
+			opportunityInformationEditPage();
+			while (j1 <opportunityInformationFields.size()) {
+				for (WebElement element1 : opportunityInformationFields) {
+					fieldsArray[i1] = element1.getText();
+					if (fieldsArray[i1].equalsIgnoreCase(opportunityInformationEditPageValues.get(j1))) {
+						System.out.println("Verify Opportunity Information Section " + element1.getText());
+						report.updateTestLog("Verify Opportunity Information Section ",
+								element1.getText() + "labels  present in the Opportunity Information Section ", Status.PASS);
+						count1++;
+					}
+					i1++;
+				}
+				i1 = 0;
+				j1++;
+			}
+			System.out.println(count1);
+			if (count1 >= 8) {
+				report.updateTestLog("Verify Opportunity Information Section",
+						"All fields are present in the Opportunity Information Section", Status.PASS);
+			} else {
+				report.updateTestLog("Verify Opportunity Information Section",
+						"All fields are not present in the Opportunity Information Section", Status.FAIL);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		List<WebElement> additionalInformationFields = driver.findElements(By.xpath("//span[text()='Additional Information']/parent::h3/following-sibling::div//div[contains(@class,'slds-form-element__control')]//label/span[1]"));
+		int count2 = 0, i2 = 0, j2 = 0;
+		String fieldsArray2[] = new String[additionalInformationFields.size()];
+		System.out.println(additionalInformationFields.size());
+		try {
+			additionalInformationEditPage();
+			while (j2 <additionalInformationFields.size()) {
+				for (WebElement element2 :additionalInformationFields) {
+					fieldsArray2[i2] = element2.getText();
+					if (fieldsArray2[i2].equalsIgnoreCase(additionalInformationEditPageValues.get(j2))) {
+						System.out.println("Verify Additional Information Section " + element2.getText());
+						report.updateTestLog("Verify Additional Information Section ",
+								element2.getText() + "labels  present in the Additional Information Section ", Status.PASS);
+						count2++;
+					}
+					i2++;
+				}
+				i2 = 0;
+				j2++;
+			}
+			System.out.println(count2);
+			if (count2 >= 6) {
+				report.updateTestLog("Verify Additional Information Section",
+						"All fields are present in the Additional Information Section", Status.PASS);
+			} else {
+				report.updateTestLog("Verify Additional Information Section",
+						"All fields are not present in the Additional Information Section", Status.FAIL);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		int count6 = 0, i6 = 0;
+		try {
+			List<WebElement> valuationSpecificFields = null;
+			String fieldsArray6[] = null;
+			boolean isPresent = false;
+			try {
+					valuationSpecificFields = driver.findElements(By.xpath("//span[text()='Valuations Specific Information']/parent::h3/following-sibling::div//div[contains(@class,'slds-form-element__control')]//label/span[1]"));
+					fieldsArray6 = new String[valuationSpecificFields.size()];
+					System.out.println(valuationSpecificFields.size());
+					if(valuationSpecificFields.size()>1) {
+							isPresent = true;
+							valuationSpecificEditPage();
+							for (WebElement element6 :valuationSpecificFields) {
+								System.out.println(element6.getText());
+								fieldsArray6[i6] = element6.getText();
+								if (fieldsArray6[i6].contains(valuationSpecificEditPageValues.get(i1))) {
+									report.updateTestLog("Verify Valuation Specific fields",
+											"Valuation specific fields is having the " + fieldsArray6[i6] + " fields ", Status.PASS);
+									count6++;
+								}
+								i6++;
+							} 
+					} else {
+						isPresent=false;
+					}
+				} catch (Exception e) {
+				report.updateTestLog("Verify Valuation Specific fields", "Valuation specific section is not present for the selected Opportunity", Status.WARNING);	
+				isPresent = false;
+			}				
+			System.out.println(count6);
+			if(isPresent==true) {
+				if (count6 != 1) {
+					report.updateTestLog("Verify Valuation Specific fields",
+							"All fields are not present in the Valuation specific section ", Status.FAIL);
+				} else {
+
+					report.updateTestLog("Verify Valuation Specific fields",
+							"All fields are present in the Valuation specific section", Status.PASS);
+				}
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		int count7 = 0, i7 = 0, j7=0;
+		try {
+			List<WebElement> bankValuationServiceFields = null;
+			String fieldsArray7[] = null;
+			boolean isPresent = false;
+			try {
+				bankValuationServiceFields = driver.findElements(By.xpath("//span[text()='Bank Valuations Instructions']/parent::h3/following-sibling::div//div[contains(@class,'slds-form-element__control')]//label/span[1]"));
+				fieldsArray7 = new String[bankValuationServiceFields.size()];
+				System.out.println(bankValuationServiceFields.size());
+				if(bankValuationServiceFields.size()>1) { 
+					isPresent = true;				
+					bankValuationsInstructionsEditPage();
+					while (j7 <bankValuationServiceFields.size()) {
+						for (WebElement element7 :bankValuationServiceFields) {
+							fieldsArray7[i7] = element7.getText();
+							if (fieldsArray7[i7].equalsIgnoreCase(bankValuationsInstructionsFields.get(j7))) {
+								System.out.println("Verify Bank Valuations Services Section " + element7.getText());
+								report.updateTestLog("Verify Bank Valuations Services Section ",
+										element7.getText() + "labels  present in the Bank Valuations services Section ", Status.PASS);
+								count7++;
+							}
+							i7++;
+						}
+						i7 = 0;
+						j7++;
+					}
+				} else {
+					isPresent = false;
+				}
+			} catch (Exception e1) {
+				report.updateTestLog("Verify Business Service fields", "Business Service section is not present for the selected Opportunity", Status.WARNING);
+				isPresent = false;
+			}
+
+
+			System.out.println(count7);
+			if(isPresent==true) {
+				if (count7 != 5) {
+					report.updateTestLog("Verify Bank Valuation Services Section",
+							"All fields are not present in the Bank Valuation Services Section", Status.FAIL);
+				} else {
+					report.updateTestLog("Verify Bank Valuation Services Section",
+							"All fields are present in the Bank Valuation Services Section", Status.PASS);
+				}
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		List<WebElement> lossInformationFields = driver.findElements(By.xpath("//span[text()='Loss Information']/parent::h3/following-sibling::div//div[contains(@class,'slds-form-element__control')]//label/span[1]"));
+		int count3 = 0, i3 = 0, j3 = 0;
+		String fieldsArray3[] = new String[lossInformationFields.size()];
+		System.out.println(lossInformationFields.size());
+		try {
+			lossInformationEditPage();
+			while (j3 <additionalInformationFields.size()) {
+				for (WebElement element3 :additionalInformationFields) {
+					fieldsArray3[i3] = element3.getText();
+					if (fieldsArray3[i3].equalsIgnoreCase(lossInformationEditPageValues.get(j3))) {
+						System.out.println("Verify Loss Information Section " + element3.getText());
+						report.updateTestLog("Verify Loss Information Section ",
+								element3.getText() + "labels  present in the Loss Information Section ", Status.PASS);
+						count3++;
+					}
+					i3++;
+				}
+				i3 = 0;
+				j3++;
+			}
+			System.out.println(count3);
+			if (count3 !=3) {
+				report.updateTestLog("Verify Loss Information Section",
+						"All fields are not present in the Loss Information Section", Status.FAIL);
+			} else {
+				report.updateTestLog("Verify Loss Information Section",
+						"All fields are present in the Loss Information Section", Status.PASS);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		List<WebElement> dataHugDetailsFields = driver.findElements(By.xpath("//span[text()='Datahug Details']/parent::h3/following-sibling::div//div[contains(@class,'test-id__field-label-container')]/span[1]"));
+		int count4 = 0, i4 = 0, j4 = 0;
+		String fieldsArray4[] = new String[dataHugDetailsFields.size()];
+		System.out.println(dataHugDetailsFields.size());
+		try {
+			dataHugDetailsEditPage();
+			while (j4 <dataHugDetailsFields.size()) {
+				for (WebElement element4 :dataHugDetailsFields) {
+					fieldsArray4[i4] = element4.getText();
+					if (fieldsArray4[i4].equalsIgnoreCase(dataHugDetailsEditPageValues.get(j4))) {
+						System.out.println("Verify Data Hug Details Section " + element4.getText());
+						report.updateTestLog("Verify Data Hug Details Section ",
+								element4.getText() + "labels  present in the Data Hug Details Section ", Status.PASS);
+						count4++;
+					}
+					i4++;
+				}
+				i4 = 0;
+				j4++;
+			}
+			System.out.println(count4);
+			if (count4 !=9) {
+				report.updateTestLog("Verify Data Hug Details Section",
+						"All fields are not present in the Data Hug Details Section", Status.FAIL);
+			} else {
+				report.updateTestLog("Verify Data Hug Details Section",
+						"All fields are present in the Data HUg Details Section", Status.PASS);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		List<WebElement> systemInformationFields = driver.findElements(By.xpath("//span[text()='System Information']/parent::h3/following-sibling::div//div[contains(@class,'test-id__field-label-container')]/span[1]"));
+		int count5 = 0, i5 = 0, j5 = 0;
+		String fieldsArray5[] = new String[systemInformationFields.size()];
+		System.out.println(systemInformationFields.size());
+		try {
+			systemInformationEditPage();
+			while (j5 <systemInformationFields.size()) {
+				for (WebElement element5 :systemInformationFields) {
+					fieldsArray5[i5] = element5.getText();
+					if (fieldsArray5[i5].equalsIgnoreCase(systemInformationEditPageValues.get(j5))) {
+						System.out.println("Verify System Information Section " + element5.getText());
+						report.updateTestLog("Verify System Information Section ",
+								element5.getText() + "labels  present in the System Information Section ", Status.PASS);
+						count5++;
+					}
+					i5++;
+				}
+				i5 = 0;
+				j5++;
+			}
+			System.out.println(count5);
+			if (count5 !=5) {
+				report.updateTestLog("Verify System Information Section",
+						"All fields are not present in the Property Details Section", Status.FAIL);
+			} else {
+				report.updateTestLog("Verify System Information Section",
+						"All fields are present in the System Information Section", Status.PASS);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+	}
+
+
 }
+
+
+
+
+
+

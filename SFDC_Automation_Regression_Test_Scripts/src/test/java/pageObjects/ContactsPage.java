@@ -4063,4 +4063,75 @@ public class ContactsPage extends ReusableLibrary {
 
 		} 
 	}
+	static ArrayList<String> marketingSegmentationFieldsList = new ArrayList<String>();
+
+	public void marketingSegmentationFields() {
+		marketingSegmentationFieldsList.add("Client Interest - Asset Class");
+		marketingSegmentationFieldsList.add("Client Interest - Type");
+		marketingSegmentationFieldsList.add("Client Interest - Topics");
+		marketingSegmentationFieldsList.add("Events");
+		marketingSegmentationFieldsList.add("Client Interest - Industry");
+		marketingSegmentationFieldsList.add("Occupier Client Type");
+		marketingSegmentationFieldsList.add("Client Level of Influence");
+		marketingSegmentationFieldsList.add("CBRE Level of Engagement");
+		marketingSegmentationFieldsList.add("Satisfaction Survey Participation");
+		marketingSegmentationFieldsList.add("Meeting Engagement");
+		
+		System.out.println("Marketing segmentation fields are:: " + marketingSegmentationFieldsList);
+	}
+
+	public void contactsMarketingSegmentationFields() {
+		Utility_Functions.xWaitForElementPresent(driver, menu_Contacts, 3);
+		Utility_Functions.xClick(driver, menu_Contacts, true);
+		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
+		Utility_Functions.xClick(driver, recentlyViewed, true);
+		Utility_Functions.xWaitForElementPresent(driver, allContacts, 3);
+		Utility_Functions.xClick(driver, allContacts, true);
+		Utility_Functions.timeWait(3);
+		List<WebElement> contactNamesList = driver.findElements(
+				By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xclickOnFirstElementfromList(contactNamesList);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		List<WebElement> contactDetailsMarketingSegmentationList = driver
+				.findElements(By.xpath("//span[contains(text(),'Marketing Segmentation')]/parent::button/parent::h3/following-sibling::div//div[@class='test-id__field-label-container']/span[text()!='']"));
+		int count0 = 0, i0 = 0, j0 = 0;
+		;
+		String fieldsArray0[] = new String[contactDetailsMarketingSegmentationList.size()];
+		System.out.println(contactDetailsMarketingSegmentationList.size());
+		try {
+			
+			marketingSegmentationFields();
+			while (j0 < contactDetailsMarketingSegmentationList.size()) {
+				for (WebElement element0 :contactDetailsMarketingSegmentationList) {
+					fieldsArray0[i0] = element0.getText();
+					if (fieldsArray0[i0].contains(marketingSegmentationFieldsList.get(j0))) {
+						System.out.println("Contacts Details page headers are " + element0.getText());
+						report.updateTestLog("Verify Contacts Landing Page",
+								" Contact Details Page are having the " + fieldsArray0[i0] + " Headers ", Status.PASS);
+						count0++;
+					}
+					i0++;
+				}
+				i0 = 0;
+				j0++;
+			}
+			System.out.println(count0);
+			if (count0 != 10) {
+				report.updateTestLog("Verify Contacts Landing Page",
+						"All sections are not present in the Contacts Details Page", Status.FAIL);
+			} else {
+
+				report.updateTestLog("Verify Leads Landing Page",
+						"All sections are present in the Contacts Details Page", Status.PASS);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+		
 }

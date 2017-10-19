@@ -1167,4 +1167,42 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	public void bc_opportunitiesClosedDateAndInstallmentDate() {
 		sfOpportunitiesPage.opportunitiesClosedDateAndInstallmentDate();
 	}
+	/**
+	 * Validating the  Opportunities create offer page
+	 * 
+	 * @author  Ramya
+	 *
+	 */
+	public void bc_createOfferOpportunityPage() {
+		sfOpportunitiesPage.createOfferOpportunityPage();
+	}
+	
+	/**
+	 * Validating the  Opportunities quick create page for the property sales sell side
+	 * 
+	 * @author  Ramya
+	 *
+	 */
+	public void bc_validateOpportunityQuickCreatePage() {
+		sfOpportunitiesPage.validateOpportunityQuickCreatePage();
+	}
+	/**
+	 * Validating the  Opportunities edit page layout
+	 * 
+	 * @author  Ramya
+	 *
+	 */
+	public void bc_validateOpportunitiesEditPageLayout() {
+		sfOpportunitiesPage.validateOpportunitiesEditPageLayout();
+	}
+	/**
+	 * Validating the  Opportunities edit page layout
+	 * 
+	 * @author  Ramya
+	 *
+	 */
+	public void bc_validateOpportunitiesValuationsEditPage() {
+		sfOpportunitiesPage.validateOpportunitiesValuationsEditPage();
+	}
+	
 }

@@ -221,4 +221,12 @@ public class BC_Salesforce_ContactsPage extends ReusableLibrary {
 	public void bc_verifyContactEditPageNotEditableFields()throws InterruptedException{
 		sfContactsPage.verifyContactEditPageNotEditableFields();
 	}
+	/**
+	 * Validating the Contacts marketing segmentation fields for the Occupier Client care
+	 * @author Ramya
+	 *
+	 */
+	public void bc_contactsMarketingSegmentationFields()throws InterruptedException{
+		sfContactsPage.contactsMarketingSegmentationFields();
+	}
 }
