@@ -470,7 +470,7 @@ public class Report {
 	 * @param totalExecutionTime
 	 *            The total time taken to execute all the test cases
 	 */
-	public HashMap<String, Integer> addResultSummaryFooter(String totalExecutionTime) {
+	/*public HashMap<String, Integer> addResultSummaryFooter(String totalExecutionTime) {
 		for (int i = 0; i < reportTypes.size(); i++) {
 			reportTypes.get(i).addResultSummaryFooter(totalExecutionTime, CRAFTTestCase.getTestStatus_Success(),
 					CRAFTTestCase.getTestStatus_Fail(), CRAFTTestCase.getTestStatus_Skip());
@@ -478,6 +478,15 @@ public class Report {
 		HashMap hashMap = new HashMap();
 		hashMap.put("Passed", CRAFTTestCase.getTestStatus_Success());
 		hashMap.put("Failed", CRAFTTestCase.getTestStatus_Fail());
+		return hashMap;
+	}*/
+	public HashMap<String, Integer> addResultSummaryFooter(String totalExecutionTime) {
+		for (int i = 0; i < reportTypes.size(); i++) {
+			reportTypes.get(i).addResultSummaryFooter(totalExecutionTime,nTestsPassed, nTestsFailed);				
+		}
+		HashMap hashMap = new HashMap();
+		hashMap.put("Passed", Integer.valueOf(this.nTestsPassed));
+		hashMap.put("Failed", Integer.valueOf(this.nTestsFailed));
 		return hashMap;
 	}
 }

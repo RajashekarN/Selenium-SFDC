@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="SmokeTestScriptsSuite" parallel="methods" thread-count="2">
+<!-- 	 <listeners>
+	        <listener class-name="supportLibraries.AnnotationTransformer"/> 
+	 </listeners> -->
+	<test name="SmokeTests">
+		<classes>
+		
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_OBEMEABrokerAccountsBudgetsTargetsPage"/>
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_VASEMEABrokerOpportunitiesDefaultOpportunityName"/>
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_ASAMERBrokerOpportunitiesCalculatedAnnualLeasing"/>
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_VASEMEABrokerOpportunitiesCreateInstallment"/>
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_ABEMEABrokerOpportunitiesCreateInstallment"/>
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_OBEMEABrokerOpportunitiesInstallmentStatus"/>
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_OBEMEABrokerOpportunitiesCloseInformationFields"/>
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_CMAPACBrokerPropertiesProjectEnquiriesFields"/>
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_ABEMEABrokerOpportunitiesInstallmentDate"/>
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_VASEMEAManagerOpportunitiesDefaultOpportunityName"/>
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_VASEMEACSSOpportunitiesDefaultOpportunityName"/>
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_CMEMEACSSSuperUserContactsEditPage"/>
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_ASEMEABrokerSuperUserContactsEditPage"/>
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_CMEMEACSSContactsNonEditableFields"/>
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_GWSEMEABrokerSuperUserContactsEditPage"/>
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_VASEMEABrokerSuperUserContactsEditPage"/>
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_CMAPACBrokerNZLPropertiesCountryField"/>
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_CMAPACBrokerMetroPropertiesCountryField"/>
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_CMAPACBrokerAUSPropertiesPreferences"/>
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_CMAPACBrokerNSWPropertiesPreferences"/>
+	<class name="testscripts.SF.Release38TestScripts.TC_SF_CMAPACBrokerChristChurchPropertiesPreferences"/>	
+		</classes>
+	</test>
+</suite>
+

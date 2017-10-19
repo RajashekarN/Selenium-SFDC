@@ -203,6 +203,7 @@ public class ResultSummaryManager {
 				e.printStackTrace();
 			}
 		}
+		copyReportsFolder();
 	}
 
 	public void setUpData(HashMap<String, Integer> hash) {
