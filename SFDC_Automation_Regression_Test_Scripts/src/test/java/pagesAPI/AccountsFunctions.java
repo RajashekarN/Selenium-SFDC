@@ -51,7 +51,7 @@ public class AccountsFunctions extends ReusableLibrary {
 	 * @author Vishnuvardhan
 	 *
 	 */
-	public boolean createAccount() {
+	public SaveResult[] createAccount() {
 		try {
 			
 /*			ActivityFunctions activityFunctions = new ActivityFunctions(scriptHelper);
@@ -71,12 +71,13 @@ public class AccountsFunctions extends ReusableLibrary {
 			SObject account = new SObject();
 
 			account.setType("Account");
-			account.setField("Name", dataTable.getData("General_Data", "Name"));
+			String accountName = dataTable.getData("General_Data", "Name") + Utility_Functions.xRandomFunction();
+			account.setField("Name", accountName);
 			account.setField("BillingCountry", dataTable.getData("General_Data", "BillingCountry"));
 			account.setField("BillingStreet", dataTable.getData("General_Data", "BillingStreet"));
 			account.setField("BillingCity", dataTable.getData("General_Data", "BillingCity"));
 			account.setField("BillingState", dataTable.getData("General_Data", "BillingState"));
-			account.setField("BillingPostalCode ", dataTable.getData("General_Data", "BillingPostalCode"));
+			account.setField("BillingPostalCode ", dataTable.getData("General_Data", "BillingZipcode"));
 
 			SObject[] accounts = new SObject[1];
 			accounts[0] = account;
@@ -86,7 +87,7 @@ public class AccountsFunctions extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return status;
+		return results;
 	}
 
 	/**

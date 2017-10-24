@@ -484,7 +484,7 @@ class ExcelReport implements ReportType {
 
 	@Override
 	public void addResultSummaryFooter(String totalExecutionTime,
-			int nTestsPassed, int nTestsFailed/*, int nTestsSkipped*/) {
+			int nTestsPassed, int nTestsFailed) {
 		resultSummaryAccess.setDatasheetName(RESULT_SUMMARY);
 		int rowNum = resultSummaryAccess.addRow();
 

@@ -15,7 +15,6 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-import com.cognizant.Craft.CRAFTTestCase;
 import com.cognizant.framework.selenium.SeleniumTestParameters;
 //import supportlibraries.RESTclient;
 

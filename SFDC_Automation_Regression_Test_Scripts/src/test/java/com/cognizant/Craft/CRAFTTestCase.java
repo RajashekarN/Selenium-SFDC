@@ -3,16 +3,10 @@ package com.cognizant.Craft;
 import com.cognizant.framework.FrameworkParameters;
 import com.cognizant.framework.selenium.*;
 
-import runners.Allocator;
-
-import java.util.HashMap;
-
 import org.openqa.selenium.Platform;
 import org.testng.Assert;
 import org.testng.ITestContext;
-import org.testng.ITestResult;
 import org.testng.SkipException;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
