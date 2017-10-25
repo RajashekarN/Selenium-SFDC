@@ -165,6 +165,39 @@ public class EstablishConnection extends ReusableLibrary {
 	}
 
 	/**
+	 * Function for the getting the result from results array
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public String saveResultsId(SaveResult[] Results) {
+		SaveResult[] results = Results;
+		for (int j = 0; j < results.length; j++) {
+			if (results[j].isSuccess()) {
+				result = results[j].getId();
+				System.out.println("Save Results:::" + result);
+				report.updateTestLog("Verify Create/ Update Account", "Result :: " + result, Status.PASS);
+			} else {
+				for (int i = 0; i < results[j].getErrors().length; i++) {
+					com.sforce.soap.partner.Error err = results[j].getErrors()[i];
+					report.updateTestLog("Verify Create/ Update Account, Contact, Lead, Opportunities", "Errors were found on item:::" + j,
+							Status.FAIL);
+					report.updateTestLog("Verify Create/ Update Account",
+							"Errors code:::" + err.getStatusCode().toString(), Status.FAIL);
+					report.updateTestLog("Verify Create/ Update Account, Contact, Lead, Opportunities", "Errors message:::" + err.getMessage(),
+							Status.FAIL);
+					System.out.println("Errors were found on item " + j);
+					System.out.println("Error code::" + err.getStatusCode().toString());
+					System.out.println("Error message::" + err.getMessage());
+					result = err.getMessage();
+				}
+			}
+		}
+		return result;
+	}
+	
+	
+	/**
 	 * Function for saving the delete results
 	 * 
 	 * @author Vishnuvardhan

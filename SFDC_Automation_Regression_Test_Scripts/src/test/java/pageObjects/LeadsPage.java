@@ -15,9 +15,10 @@ import org.openqa.selenium.support.PageFactory;
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
+import com.sforce.soap.partner.SaveResult;
 
-import bsh.util.Util;
 import pagesAPI.AccountsFunctions;
+import pagesAPI.EstablishConnection;
 import pagesAPI.SearchTextSOQL;
 import supportLibraries.Utility_Functions;
 
@@ -51,6 +52,9 @@ public class LeadsPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//div[@title='New']")
 	WebElement newButton;	
+
+	@FindBy(xpath = "//button[@title='Dismiss notification']")
+	WebElement dismissNotification;	
 
 	@FindBy(xpath = "//*[@id='record-type-select']")
 	WebElement leadRecordTypeSelection;	
@@ -128,8 +132,6 @@ public class LeadsPage extends ReusableLibrary {
 	@FindBy(xpath = "//div[@class='slds-form-element__control slds-input-has-icon slds-input-has-icon--right']//input[@id='j_id0:CustomLeadConversionFrom:OwnerName']")
 	WebElement recordOwnerText;	
 
-
-	// //div[@class='slds-input-has-icon slds-input-has-icon--right']//input[@id='j_id0:CustomLeadConversionFrom:accname']
 	@FindBy(xpath = "//input[contains(@id,'acc_id')]")
 	WebElement accountNameConvert;	
 
@@ -156,10 +158,10 @@ public class LeadsPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//h1//span[@class='uiOutputText']")
 	WebElement nameText;
-/*
+	/*
 	@FindBy(xpath = "//li[contains(@class,'slds-button') and contains(@class,'slds-button--neutral') and contains(@class,'slds-truncate')]//a[@title='Clone']")
 	WebElement cloneButton;*/
-	
+
 	@FindBy(xpath = "//div[@class='slds-truncate'][@title='Clone']")
 	WebElement cloneButton;
 
@@ -250,11 +252,6 @@ public class LeadsPage extends ReusableLibrary {
 	@FindBy(xpath="//[contains(@id='CustomLeadConversionFrom')]//a/img")
 	WebElement accName;
 
-
-
-	/****
-	 * Ramya
-	 */
 	@FindBy(xpath="//a[contains(@title,'Show') and contains(@title,'more action')]")
 	WebElement selectNewEvent;
 
@@ -555,11 +552,16 @@ public class LeadsPage extends ReusableLibrary {
 	@FindBy(xpath = "//div[contains(@class,'slds-page-header')]//div[@title='New Activity'][text()='New Activity']")
 	WebElement newActivityHeader;
 
-	private String leadConvertWaitSpinnerXPath = "//div[@class='slds-spinner_container']";
+	@FindBy(xpath="//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']")
+	List<WebElement> leadsList;
 
+	@FindBy(xpath="//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'003')]")
+	List<WebElement> contactsList;
 
-	/*	@FindBy(xpath = "//article[contains(@class,'forceRelatedListCardDesktop')]//span[contains(text(),'Private Notes')]/ancestor::article//div[text()='New']")
-	WebElement new_PrivateNotes;*/
+	@FindBy(xpath="//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'006')]")
+	List<WebElement> opportunitiesList;
+
+	private String leadConvertWaitSpinnerXPath = "//div[@class='slds-spinner_container']"; 
 
 	/**
 	 * Validating the Convert Lead functionality
@@ -568,27 +570,26 @@ public class LeadsPage extends ReusableLibrary {
 	 *
 	 */
 
+	AccountsFunctions createAccount = new AccountsFunctions(scriptHelper);
+	SearchTextSOQL searchRecord = new SearchTextSOQL(scriptHelper);
+	EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
+
 	public void convertLead() {
-		Utility_Functions.timeWait(1);
+		Utility_Functions.xWaitForElementPresent(driver, menu_Leads, 3);
 		Utility_Functions.xClick(driver, menu_Leads, true);
-		Utility_Functions.timeWait(2);		
-		List<WebElement> leadsList = driver.findElements(
-				By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xWaitForElementPresent(driver, leadsList, 3);
 		try {
 			if(leadsList.isEmpty()) {
 				System.out.println("Recently Viewed List is empty");
 				Utility_Functions.xClick(driver, recentlyViewed, true);
-				Utility_Functions.timeWait(1);
+				Utility_Functions.xWaitForElementPresent(driver, allLeadsMenu, 3);
 				Utility_Functions.xClick(driver, allLeadsMenu, true);	
-				List<WebElement> allLeadsList = driver.findElements(
-						By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-				Utility_Functions.xclickRandomElement(allLeadsList);
+				Utility_Functions.xclickRandomElement(leadsList);
 			} else {
 				Utility_Functions.xclickRandomElement(leadsList);
 			}
 		} catch (Exception e2) {
-			e2.printStackTrace();
-			System.out.println(e2.getMessage());
+			System.out.println("Unable to click on the Lead from the Leads list:::");
 		}			
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xScrollWindowToElement(driver, addressDetails);
@@ -611,12 +612,10 @@ public class LeadsPage extends ReusableLibrary {
 						Status.PASS);		
 			}
 		} catch (Exception e1) {
-			e1.printStackTrace();
-			System.out.println(e1.getMessage());
+			System.out.println("Address Details, DirectLine and Email field are having the values:::" + e1.getMessage());
 		}
 		Utility_Functions.xClick(driver, convert, true);
 		Utility_Functions.timeWait(3);		
-		//driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@id,'CustomLeadConversionFrom')]")));
 		Utility_Functions.xSwitchtoFrame(driver, convertLeadTitle);
 		Utility_Functions.timeWait(1);
 		convertListValidation();
@@ -627,7 +626,7 @@ public class LeadsPage extends ReusableLibrary {
 			} 
 			//String usernameDataSheet = dataTable.getData("General_Data", "TC_ID").split("a")[0];
 			String recordOwnerNameText = recordOwnerText.getAttribute("value");
-			System.out.println("test1" + recordOwnerNameText);
+			System.out.println("test1" + "::::" + recordOwnerNameText);
 			if(recordOwnerNameText.contains(("test1"))) {
 				System.out.println("Record Owner field is having the record owner autopopulated");
 				report.updateTestLog("Convert Lead Page", "Convert Lead Page is not having the record owner value as null::",Status.PASS);
@@ -644,12 +643,10 @@ public class LeadsPage extends ReusableLibrary {
 					report.updateTestLog("Verify Acccount Name", "Account name doesn't contain the space between the Account First Name and Account Last Name:::", Status.WARNING);
 				}
 			} catch (Exception e) {
-				//e.printStackTrace();
-				System.out.println(e.getMessage());
+				System.out.println("Account name doesn't contain the space between the Account First Name and Account Last Name:::" + e.getMessage());
 			}			
 		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
+			System.out.println("Convert Status field is not having the option as Qualified by default:::" + e.getMessage());
 		}
 	}
 
@@ -685,8 +682,7 @@ public class LeadsPage extends ReusableLibrary {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
+			System.out.println("Convert Lead Page is having all the fields::" + e.getMessage());
 		}
 	}
 
@@ -717,9 +713,15 @@ public class LeadsPage extends ReusableLibrary {
 	 */
 
 	public void createLeadFunction() {
-		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, menu_Leads, 3);
 		Utility_Functions.xClick(driver, menu_Leads, true);
-		Utility_Functions.timeWait(2);
+		/*	try {
+				Utility_Functions.xWaitForElementPresent(driver, dismissNotification, 3);
+				Utility_Functions.xClick(driver, dismissNotification, true);
+		} catch (Exception e) {
+				System.out.println("Dismiss Notification isn't present:::");
+		}*/
+		Utility_Functions.xWaitForElementPresent(driver, newButton, 3);
 		Utility_Functions.xClick(driver, newButton, true);
 		Utility_Functions.timeWait(2);
 		try {
@@ -731,24 +733,23 @@ public class LeadsPage extends ReusableLibrary {
 				Utility_Functions.xClick(driver, capitalMarkets, true);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Unable to select the lead record type encountered an error:::" + e.getMessage());
 		}
-		//driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@src,'LeadDefaultUoM')]")));
 		Utility_Functions.xSwitchtoFrame(driver, continueButton);
 		Utility_Functions.xWaitForElementPresent(driver, continueButton, 3);
 		Utility_Functions.xClick(driver, continueButton, true);
 		Utility_Functions.timeWait(2);
 		String value = Utility_Functions.xGenerateAlphaNumericString();
-		String companyName = value  + dataTable.getData("General_Data", "Company") ;		
+		String companyName = value  + "_" + dataTable.getData("General_Data", "Company") ;		
 		Utility_Functions.xSwitchtoFrame(driver, firstName);
 		Utility_Functions.xWaitForElementPresent(driver, firstName, 5);
-		Utility_Functions.xSendKeys(driver, firstName, dataTable.getData("General_Data", "First Name"));
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xSendKeys(driver, lastName, dataTable.getData("General_Data", "Last Name"));
-		Utility_Functions.timeWait(1);
+		String sFirstName = Utility_Functions.xRandomFunction() + "_" + dataTable.getData("General_Data", "First Name");
+		String sLastName =  Utility_Functions.xRandomFunction() + "_" +  dataTable.getData("General_Data", "Last Name");
+		Utility_Functions.xSendKeys(driver, firstName, sFirstName);
+		Utility_Functions.xWaitForElementPresent(driver, lastName, 3);
+		Utility_Functions.xSendKeys(driver, lastName, sLastName);
+		Utility_Functions.xWaitForElementPresent(driver, company, 3);
 		Utility_Functions.xSendKeys(driver, company, companyName);
-		//Utility_Functions.xSendKeys(driver, company, Keys.SPACE);		
-
 		if(dataTable.getData("General_Data", "TC_ID").contains("LeadsConvertPageWithEmail")) {
 			Utility_Functions.xWaitForElementPresent(driver, selectPreferedPropertyType, 2);
 			Utility_Functions.xClick(driver, selectPreferedPropertyType, true);
@@ -780,7 +781,7 @@ public class LeadsPage extends ReusableLibrary {
 
 	public void createLead() {
 		createLeadFunction();
-		Utility_Functions.timeWait(1);
+		Utility_Functions.xWaitForElementPresent(driver, saveButton, 3);
 		Utility_Functions.xClick(driver, saveButton, true);
 		Utility_Functions.timeWait(2);
 		driver.switchTo().defaultContent();
@@ -795,7 +796,7 @@ public class LeadsPage extends ReusableLibrary {
 				report.updateTestLog("Create Lead", "Lead creation failed:::"+ headerLead.getText(),Status.FAIL);			
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Lead creation failed:::" + e.getMessage());
 		}
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xClick(driver, related, true);
@@ -818,7 +819,7 @@ public class LeadsPage extends ReusableLibrary {
 				report.updateTestLog("Verify Related Page Elements","All the elements are not present on the Related Page" ,Status.FAIL);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("All the elements are not present on the Related Page:::" + e.getMessage());
 		}
 	}
 
@@ -858,7 +859,7 @@ public class LeadsPage extends ReusableLibrary {
 				report.updateTestLog("Create Greenspace Lead", "Greenspace Lead creation failed:::"+ headerLead.getText(),Status.FAIL);			
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Greenspace Lead creation failed:::" + e.getMessage());
 		}
 	}
 
@@ -904,8 +905,7 @@ public class LeadsPage extends ReusableLibrary {
 	public void cloneAndEditButtons() {
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xClick(driver, menu_Leads, true);
-		Utility_Functions.timeWait(2);
-		List<WebElement> leadsList = driver.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xWaitForElementPresent(driver, leadsList, 3);
 		Utility_Functions.xclickgetTextofFirstElementfromList(leadsList);
 		Utility_Functions.timeWait(2);
 		buttonsListLeadDetailPage();
@@ -928,7 +928,7 @@ public class LeadsPage extends ReusableLibrary {
 				report.updateTestLog("Lead Details Page", "Not all the buttons are present on the Leads Details Page:::",Status.FAIL);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Not all the buttons are present on the Leads Details Page:::" + e.getMessage());
 		}
 		Utility_Functions.xClick(driver, showMoreActions, true);
 		Utility_Functions.timeWait(2);
@@ -952,7 +952,7 @@ public class LeadsPage extends ReusableLibrary {
 				report.updateTestLog("Lead Details Page", "Not all the menu buttons are present on the Leads Details Page:::",Status.FAIL);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Not all the menu buttons are present on the Leads Details Page:::" + e.getMessage());
 		}
 		Utility_Functions.xClick(driver, editButton, true);
 		Utility_Functions.timeWait(2);
@@ -980,32 +980,6 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, cloneSaveNewButton, 3);
 		Utility_Functions.xClick(driver, cloneSaveNewButton, true);
 		report.updateTestLog("Lead Details Page", "Lead clone happened successfully:::",Status.PASS);
-
-/*		Utility_Functions.xWaitForElementPresent(driver, menu_Leads, 3);
-		Utility_Functions.xClick(driver, menu_Leads, true);
-		Utility_Functions.timeWait(2);
-		List<WebElement> leadList = driver.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-		try {
-			int count2 =0;
-			String firstLeadName=null, secondLeadName=null;
-			for(WebElement element1: leadList) {
-				System.out.println(element1.getText());
-				if(count2 ==0) 
-					firstLeadName = element1.getText();
-				else if(count2 ==1)
-					secondLeadName = element1.getText();
-				else 
-					break;
-				count2++;
-			}
-			if(firstLeadName.equals(secondLeadName)) {
-				report.updateTestLog("Lead Details Page", "Lead clone happened successfully:::",Status.PASS);
-			} else {
-				report.updateTestLog("Lead Details Page", "Lead clone failed:::",Status.FAIL);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}*/
 	}
 
 	/**
@@ -1052,13 +1026,11 @@ public class LeadsPage extends ReusableLibrary {
 	 *
 	 */	
 	public void privateNoteLead() {
-		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementPresent(driver, menu_Leads, 3);
 		Utility_Functions.xClick(driver, menu_Leads, true);
-		Utility_Functions.timeWait(2);
-		List<WebElement> leadsList = driver.findElements(
-				By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xWaitForElementPresent(driver, leadsList, 3);
 		String leadSelected = Utility_Functions.xclickRandomElement(leadsList);
-		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementPresent(driver, related, 3);
 		/*		
 		searchTextSOQL searchRecord = new searchTextSOQL(scriptHelper);
 		String recordID = searchRecord.fetchRecord("lead");
@@ -1072,11 +1044,10 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xScrollWindowTop(driver);
 		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, new_PrivateNotes, 3);
 		Utility_Functions.xClick(driver, new_PrivateNotes, true);
-
-		Utility_Functions.timeWait(1);
+		Utility_Functions.xWaitForElementPresent(driver, next_PrivateNotes, 3);
 		Utility_Functions.xClick(driver, next_PrivateNotes, true);
-		Utility_Functions.timeWait(2);
 		String leadPopulated = lead_PrivateNotes.getText();
 		Utility_Functions.xSendKeys(driver, title_PrivateNotes, dataTable.getData("General_Data", "Title"));
 		Utility_Functions.timeWait(1);
@@ -1107,16 +1078,6 @@ public class LeadsPage extends ReusableLibrary {
 			report.updateTestLog("Verify Private Note", "Private Note is created successfully", Status.FAIL);
 		}
 		Utility_Functions.timeWait(4);
-		/*		try {
-			if (wasCreated.isDisplayed()) {
-				report.updateTestLog("Verify Private Note", "Private Note is created successfully", Status.PASS);
-			} else {
-				report.updateTestLog("Verify Private Note", "Private Note is created successfully", Status.FAIL);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}*/
-
 	}
 
 	/**
@@ -1125,7 +1086,7 @@ public class LeadsPage extends ReusableLibrary {
 	 * @author Vishnuvardhan
 	 *
 	 */	
-	
+
 	public void privateNoteSharing() {
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xWaitForElementPresent(driver,showMoreActionsDetailsPage, 3);
@@ -1137,7 +1098,7 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, leadSharing, 4);
 		Utility_Functions.timeWait(2);
 		driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='Content']")));
-		
+
 		Utility_Functions.xWaitForElementPresent(driver, addButtonSharing, 5);
 		Utility_Functions.xClick(driver, addButtonSharing, true);
 		Utility_Functions.xWaitForElementPresent(driver, searchUsers, 3);
@@ -1162,7 +1123,7 @@ public class LeadsPage extends ReusableLibrary {
 		report.updateTestLog("Verify Lead Sharing", "Lead Sharing functioanlity is working as expected", Status.PASS);			
 		System.out.println("Lead Sharing functionality is working as expected");
 	}
-	
+
 	/**
 	 * Function for validating the Convert Lead by adding the new account in the Convert Lead page
 	 * 
@@ -1209,12 +1170,6 @@ public class LeadsPage extends ReusableLibrary {
 		} else {
 			report.updateTestLog("Verify Convert Lead", "Convert Lead failed", Status.FAIL);
 		}
-		/*		Utility_Functions.timeWait(4);
-		if(menu_Home.isDisplayed()) {
-			report.updateTestLog("Verify Convert Lead", "Convert Lead done successfully", Status.PASS);
-		} else {
-			report.updateTestLog("Verify Convert Lead", "Convert Lead failed", Status.FAIL);
-		}*/
 	}
 
 	/**
@@ -1224,43 +1179,45 @@ public class LeadsPage extends ReusableLibrary {
 	 *
 	 */	
 	public void convertLeadExistingAccount() {
-		AccountsFunctions createAccount = new AccountsFunctions(scriptHelper);
-		createAccount.createAccount();
-		createLeadFunction();				
-		SearchTextSOQL searchRecord = new SearchTextSOQL(scriptHelper);
-		String accountName= searchRecord.fetchRecord("account", "Name");
+		String accountName;
+		SaveResult[] resultAccountName = createAccount.createAccount();
+		String result = establishConnection.saveResultsId(resultAccountName);
+		if(result.contains("001")) {
+			System.out.println("Account got created successfully:::" + result);
+			String accountNameQuery = "Select Name from Account where Id = " + "'" + result + "'";
+			accountName = searchRecord.fetchRecordFieldValue("Name", accountNameQuery);
+		} else {
+			accountName = searchRecord.fetchRecord("Account", "Name");
+		}
+		createLeadFunction();					
+		Utility_Functions.xWaitForElementPresent(driver, company, 3);
 		company.clear();
-		Utility_Functions.timeWait(2);
 		Utility_Functions.xSendKeys(driver, company, accountName);
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xScrollWindow(driver);
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xSendKeys(driver, directLineLead, dataTable.getData("General_Data", "Phone"));
-		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, saveButton, 3);
 		Utility_Functions.xClick(driver, saveButton, true);
-		Utility_Functions.timeWait(3);	
+		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementVisible(driver, saveConvertButton, 4);
 		Utility_Functions.xClick(driver, saveConvertButton, true);
 		Utility_Functions.timeWait(3);
-
-		//driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@src,'LeadConversionRed')]")));
 		Utility_Functions.xSwitchtoFrame(driver, convertLeadTitle);
-
-		Utility_Functions.timeWait(1);
 		convertListValidation();
+		Utility_Functions.xWaitForElementPresent(driver, convertButton, 3);
+		Utility_Functions.xClick(driver, convertButton, true);		
+		driver.switchTo().defaultContent();
+		Utility_Functions.timeWait(2);
+		driver.navigate().refresh();
 		Utility_Functions.timeWait(3);
-		if(convertButton.isDisplayed()) {
-			Utility_Functions.xClick(driver, convertButton, true);
+		Utility_Functions.xWaitForElementPresent(driver, related, 3);
+		if(related.isDisplayed()) {
 			report.updateTestLog("Verify Convert Lead", "Convert Lead done successfully", Status.PASS);
 		} else {
 			report.updateTestLog("Verify Convert Lead", "Convert Lead failed", Status.FAIL);
 		}		
 		Utility_Functions.timeWait(4);
-		/*		if(menu_Home.isDisplayed()) {
-			report.updateTestLog("Verify Convert Lead", "Convert Lead done successfully", Status.PASS);
-		} else {
-			report.updateTestLog("Verify Convert Lead", "Convert Lead failed", Status.FAIL);
-		}*/
 	}
 
 	/**
@@ -1271,16 +1228,15 @@ public class LeadsPage extends ReusableLibrary {
 	 */	
 
 	public void convertLeadNote(){
+		Utility_Functions.xWaitForElementPresent(driver, menu_Leads, 3);
 		Utility_Functions.xClick(driver, menu_Leads, true);
-		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
 		Utility_Functions.xClick(driver,recentlyViewed, true);
-		Utility_Functions.timeWait(4);
+		Utility_Functions.xWaitForElementPresent(driver, allLeadsMenu, 3);
 		Utility_Functions.xClick(driver, allLeadsMenu, true);
-		Utility_Functions.timeWait(4);
-		List<WebElement> leadsList = driver.findElements(
-				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xWaitForElementPresent(driver, leadsList, 3);
 		Utility_Functions.xclickgetTextofFirstElementfromList(leadsList);
-		Utility_Functions.timeWait(4);
+		Utility_Functions.xWaitForElementPresent(driver, related, 3);
 		Utility_Functions.xClick(driver, related, true);
 		Utility_Functions.timeWait(5);
 		Utility_Functions.xScrollWindowOnce(driver);
@@ -1288,11 +1244,11 @@ public class LeadsPage extends ReusableLibrary {
 		/*Utility_Functions.xClick(driver, recentFile, true);
 		Utility_Functions.timeWait(2);*/		
 		Utility_Functions.xClick(driver, addFile, true);
-		Utility_Functions.timeWait(5);
+		Utility_Functions.xWaitForElementPresent(driver, addFileAttachment, 3);
 		Utility_Functions.xClick(driver, addFileAttachment, true);
-		Utility_Functions.timeWait(4);
+		Utility_Functions.xWaitForElementPresent(driver, add, 3);
 		Utility_Functions.xClick(driver, add, true);
-		Utility_Functions.timeWait(4);	
+		Utility_Functions.xWaitForElementPresent(driver, convert, 3);
 		Utility_Functions.xClick(driver, convert, true);
 		Utility_Functions.timeWait(3);
 		/*		int size = driver.findElements(By.tagName("iframe")).size();
@@ -1319,8 +1275,8 @@ public class LeadsPage extends ReusableLibrary {
 			if(count!=2) 
 				report.updateTestLog("Convert Lead Page", "Convert Lead Page is not having all the fields::",Status.FAIL);							
 		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
+			System.out.println("Convert Lead Page is not having all the fields::"+e.getMessage());							
+
 		}
 		try {
 			if(convertedStatus.getText().contains("Qualified")) {
@@ -1334,8 +1290,8 @@ public class LeadsPage extends ReusableLibrary {
 				report.updateTestLog("Convert Lead Page", "Convert Lead Page is not having the fields expected::",Status.FAIL);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());		}
+			System.out.println("Convert Lead Page is not having the fields expected::" + e.getMessage());		
+		}
 		Utility_Functions.xClick(driver, accName, true);
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xSendKeys(driver, accountNameConvert, dataTable.getData("General_Data", "Account Name"));
@@ -1365,8 +1321,7 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.xScrollWindowTop(driver);
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xClick(driver, accountsContacts, true);
-		Utility_Functions.timeWait(4);
-		List<WebElement> contactsList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'] "));
+		Utility_Functions.xWaitForElementPresent(driver, contactsList, 4);
 		for(int i=0;i<contactsList.size();i++){
 			System.out.println("The accounts are :" +i+contactsList.get(i).getText());
 			report.updateTestLog("Convert Lead Note Attachment","The Accounts are:::"+ i + contactsList.get(i).getText() + "::",Status.PASS);
@@ -1383,9 +1338,8 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.xScrollWindowTop(driver);
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xClick(driver, files, true);
-		Utility_Functions.timeWait(3);
-		List<WebElement> filesContact = driver.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-		if (filesContact.isEmpty() == true) {
+		Utility_Functions.xWaitForElementPresent(driver, leadsList, 3);
+		if (leadsList.isEmpty() == true) {
 			System.out.println("File is not associated with the contact");
 			report.updateTestLog("Convert Lead Note Attachment","File is not associated with the Contact",Status.PASS);
 		}else{
@@ -1410,10 +1364,8 @@ public class LeadsPage extends ReusableLibrary {
 		labelsLeadsNewCustomEvent.add("Description");
 		labelsLeadsNewCustomEvent.add("*Assigned To");
 		labelsLeadsNewCustomEvent.add("Lead");
-
-
-
 	}
+
 	/**
 	 * Validating the manage Opportunity verify Custom Event Page
 	 * 
@@ -1423,21 +1375,17 @@ public class LeadsPage extends ReusableLibrary {
 	public void leadsVerifyCustomEventPage() {
 		Utility_Functions.xWaitForElementPresent(driver, menu_Leads, 3);
 		Utility_Functions.xClick(driver, menu_Leads, true);
-		List<WebElement> allActiveLeadsList = driver.findElements(
-				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xWaitForElementPresent(driver, leadsList, 3);
 		Utility_Functions.timeWait(2);		
-		if(allActiveLeadsList.isEmpty()) {
+		if(leadsList.isEmpty()) {
 			Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
 			Utility_Functions.xClick(driver, recentlyViewed, true);
 			Utility_Functions.xWaitForElementPresent(driver, allLeadsMenu, 3);
 			Utility_Functions.xClick(driver, allLeadsMenu, true);
-			Utility_Functions.timeWait(2);
-			List<WebElement> allLeadsList = driver.findElements(
-					By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-			Utility_Functions.timeWait(2);
-			Utility_Functions.xclickOnFirstElementfromList(allLeadsList);
+			Utility_Functions.xWaitForElementPresent(driver, leadsList, 3);
+			Utility_Functions.xclickOnFirstElementfromList(leadsList);
 		} else {
-			Utility_Functions.xclickOnFirstElementfromList(allActiveLeadsList);
+			Utility_Functions.xclickOnFirstElementfromList(leadsList);
 		}
 		Utility_Functions.timeWait(5);
 		Utility_Functions.xWaitForElementPresent(driver, selectNewEvent, 3);
@@ -1588,13 +1536,10 @@ public class LeadsPage extends ReusableLibrary {
 	 *
 	 */	
 	public void leadsVerifyPrivateNotePersonalInformation() {
-
 		Utility_Functions.xWaitForElementPresent(driver, menu_Leads, 3);
 		Utility_Functions.xClick(driver, menu_Leads, true);
-		Utility_Functions.timeWait(3);
-		List<WebElement> allActiveLeadsList = driver.findElements(
-				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-		Utility_Functions.xclickgetTextofFirstElementfromList(allActiveLeadsList);
+		Utility_Functions.xWaitForElementPresent(driver, leadsList, 3);
+		Utility_Functions.xclickgetTextofFirstElementfromList(leadsList);
 		Utility_Functions.xWaitForElementPresent(driver, related, 3);
 		Utility_Functions.xClick(driver, related, true);
 		Utility_Functions.timeWait(3);
@@ -1735,8 +1680,7 @@ public class LeadsPage extends ReusableLibrary {
 
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
+			System.out.println("Create Private Notes Personal Information Page is not having all the fields:::" + e.getMessage());
 		}
 
 		Utility_Functions.xClick(driver, savePersonalInformation, true);
@@ -1746,13 +1690,11 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.xScrollWindowTop(driver);
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xClick(driver, viewAllButton, true);
-		Utility_Functions.timeWait(3);
-		List<WebElement> relatedActivitiesList = driver.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-		for (WebElement element : relatedActivitiesList ) {
+		Utility_Functions.xWaitForElementPresent(driver, leadsList, 3);
+		for (WebElement element : leadsList) {
 			if ((!element.getText().equals(" "))){
 				report.updateTestLog("Verify Create Activity Account","The New Activity for Accounts are created ",Status.PASS);
-			}else
-			{
+			} else {
 				report.updateTestLog("Verify Create Activity Account","The New Activity for Accounts are not created ",Status.FAIL);
 			}
 		}
@@ -1768,8 +1710,6 @@ public class LeadsPage extends ReusableLibrary {
 	static ArrayList<String> customPageQuickCreateFieldsList = new ArrayList<String>();
 
 	public void customPageQuickCreateFields() {
-
-
 		customPageQuickCreateFieldsList.add("Salutation");
 		customPageQuickCreateFieldsList.add("* First Name");
 		customPageQuickCreateFieldsList.add("* Last Name");
@@ -1788,8 +1728,6 @@ public class LeadsPage extends ReusableLibrary {
 	static ArrayList<String> customPageContactInformationFieldsList = new ArrayList<String>();
 
 	public void customPageContactInformationFields() {
-
-
 		customPageContactInformationFieldsList.add("Country");
 		customPageContactInformationFieldsList.add("Street");
 		customPageContactInformationFieldsList.add("City");
@@ -1807,8 +1745,6 @@ public class LeadsPage extends ReusableLibrary {
 	static ArrayList<String> customPageLeadInformationFieldsList = new ArrayList<String>();
 
 	public void customPageLeadInformationFields() {
-
-
 		customPageLeadInformationFieldsList.add("Record Type");
 		customPageLeadInformationFieldsList.add("Nickname");
 		customPageLeadInformationFieldsList.add("Middle Name");
@@ -1828,8 +1764,6 @@ public class LeadsPage extends ReusableLibrary {
 	static ArrayList<String> customPageCommunicationPreferencesFieldsList = new ArrayList<String>();
 
 	public void customPageCommunicationPreferencesFields() {
-
-
 		customPageCommunicationPreferencesFieldsList.add("Email Options");
 		customPageCommunicationPreferencesFieldsList.add("Call Options");
 		customPageCommunicationPreferencesFieldsList.add("Mail Options");
@@ -1839,8 +1773,6 @@ public class LeadsPage extends ReusableLibrary {
 	static ArrayList<String> customPageProspectRequirementsFieldsList = new ArrayList<String>();
 
 	public void customPageProspectRequirementsFields() {
-
-
 		customPageProspectRequirementsFieldsList.add("Total # of Units");
 		customPageProspectRequirementsFieldsList.add("Unit of Comparison");
 
@@ -1850,8 +1782,6 @@ public class LeadsPage extends ReusableLibrary {
 	static ArrayList<String> customPageAdditionalInformationFieldsList = new ArrayList<String>();
 
 	public void customPageAdditionalInformationFields() {
-
-
 		customPageAdditionalInformationFieldsList.add("Assistant Name");
 		customPageAdditionalInformationFieldsList.add("Assistant Phone");
 		customPageAdditionalInformationFieldsList.add("Assistant Email");
@@ -1908,7 +1838,7 @@ public class LeadsPage extends ReusableLibrary {
 			}
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println("All fields are present in the Quick Create Section:::" +e.getMessage());
 		}
 
 		List<WebElement> customPageContactInformationSectionFieldsList = driver.findElements(
@@ -1941,7 +1871,7 @@ public class LeadsPage extends ReusableLibrary {
 			}
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println("All fields are present in the Contact Information section:::" +e.getMessage());
 		}
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xScrollWindow(driver);
@@ -1980,7 +1910,7 @@ public class LeadsPage extends ReusableLibrary {
 			}
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println("All fields are present in the Additional Leads Information Section:::" + e.getMessage());
 		}
 		List<WebElement> customPageCommunicationPreferencesSectionFieldsList = driver.findElements(
 				By.xpath("//h2[text()='Communication Preferences']/parent::div/div[2]//label[@class='slds-form-element__label']"));
@@ -2012,7 +1942,7 @@ public class LeadsPage extends ReusableLibrary {
 			}
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println("All fields are present in the Communication Preferences Section:::" + e.getMessage());
 		}
 		List<WebElement> customPageProspectRequirementsSectionFieldsList = driver.findElements(
 				By.xpath("//h2[text()='Prospect Requirements']/parent::div/div[3]//label[@class='slds-form-element__label']"));
@@ -2049,7 +1979,7 @@ public class LeadsPage extends ReusableLibrary {
 			}
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println("All fields are present in the Prospect Requirements Section:::" + e.getMessage());
 		}
 		List<WebElement> customPageAditionalInformationSectionFieldsList = driver.findElements(
 				By.xpath("//h2[text()='Additional Information']/parent::div/div[4]//label[@class='slds-form-element__label']"));
@@ -2081,24 +2011,19 @@ public class LeadsPage extends ReusableLibrary {
 			}
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println("All fields are present in the Additional Information Section:::" + e.getMessage());
 		}
 		System.out.println(leadStatus.getText());
 		System.out.println(leadSourceField.getText());
 
 		if((leadStatus.getText().contains("Status")) && (leadSourceField.getText().contains("Lead Source"))) {
-
 			System.out.println("Lead Status is followed by the requirement details and the Lead Source is followed by the Lead Status");
-
 		} else{
-
 			System.out.println("Lead Status is not followed by the requirement details and the Lead Source is not followed by the Lead Status");
-
 		}
 		Utility_Functions.timeWait(2);
 		int value = Utility_Functions.xRandomFunction();
 		String companyName = dataTable.getData("General_Data", "Company") + value;		
-		//Utility_Functions.xSwitchtoFrame(driver, firstName);
 		Utility_Functions.xScrollWindowTop(driver);
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, firstName, 5);
@@ -2110,9 +2035,7 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver,saveLead, 3);
 		Utility_Functions.xClick(driver, saveLead, true);
 		Utility_Functions.timeWait(2);
-
-		report.updateTestLog("Verify Custom Leads Page",
-				"The Lead is saved with all the required fields", Status.PASS);
+		report.updateTestLog("Verify Custom Leads Page", "The Lead is saved with all the required fields", Status.PASS);
 	}
 
 	/**
@@ -2186,39 +2109,9 @@ public class LeadsPage extends ReusableLibrary {
 		if (countLabelList != 8) {
 			report.updateTestLog("Verify Convert Lead with Direct Line and Private Note","All fields are not present in the Lead Convert Page", Status.FAIL);
 		} else {
-
 			report.updateTestLog("Verify Convert Lead with Direct Line and Private Note","All fields are present in the Lead Convert Page", Status.PASS);
 		}
 		convertList.clear();
-		/*List<WebElement> convertList = driver.findElements(By.xpath("//label[@class='slds-form-element__label']"));
-		int count1 = 0, i1 = 0;
-		String fieldsArray[] = new String[convertList.size()];
-		System.out.println(convertList.size());
-
-		try {
-			convertLeadRequiredFields();
-			for (WebElement element : convertList) {
-				System.out.println(element.getText());
-				fieldsArray[i1] = element.getText();
-				if (fieldsArray[i1].equalsIgnoreCase(convertLeadRequiredFieldsList.get(i1))) {
-					report.updateTestLog("Verify Convert Lead with Direct Line and Private Note",
-							" Lead Convert  page is having the " + fieldsArray[i1] + " fields ",
-							Status.PASS);
-					count1++;
-				}
-				i1++;
-			}
-			System.out.println(count1);
-			if (count1 != 8) {
-				report.updateTestLog("Verify Convert Lead with Direct Line and Private Note","All fields are not present in the Lead Convert Page", Status.FAIL);
-			} else {
-
-				report.updateTestLog("Verify Convert Lead with Direct Line and Private Note","All fields are present in the Lead Convert Page", Status.PASS);
-			}
-
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}*/
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xScrollWindow(driver);
 		Utility_Functions.timeWait(2);
@@ -2255,9 +2148,8 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver,accountsRelatedContacts, 3);
 		Utility_Functions.xClick(driver,accountsRelatedContacts, true);
-		List<WebElement> contactNamesList = driver.findElements(
-				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-		Utility_Functions.xclickOnFirstElementfromList(contactNamesList);
+		Utility_Functions.xWaitForElementPresent(driver, contactsList, 3);
+		Utility_Functions.xclickOnFirstElementfromList(contactsList);
 		Utility_Functions.timeWait(2);
 		driver.switchTo().defaultContent();
 		driver.navigate().refresh();
@@ -2271,13 +2163,11 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, privateNotes, 5);
 		Utility_Functions.xClick(driver, privateNotes, true);
-		Utility_Functions.timeWait(2);
-		List<WebElement> privateNotesList = driver.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'] "));
-		for (WebElement element : privateNotesList ) {
+		Utility_Functions.xWaitForElementPresent(driver, leadsList, 3);
+		for (WebElement element : leadsList ) {
 			if ((!element.getText().equals(" "))){
 				report.updateTestLog("Verify Convert Lead with Direct Line and Private Note","The Private Notes is created with the deafult contact values ",Status.PASS);
-			}else
-			{
+			} else {
 				report.updateTestLog("Verify Convert Lead with Direct Line and Private Note","The Private Notes is created with the deafult contact values ",Status.FAIL);
 			}
 		}
@@ -2344,8 +2234,7 @@ public class LeadsPage extends ReusableLibrary {
 				report.updateTestLog("Convert Lead Page", "The Converted Status, Record owner and the Account Name fields are populated with the default values" ,Status.PASS);
 			} 
 		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());		
+			System.out.println("The Converted Status, Record owner and the Account Name fields are not populated with the default values:::" + e.getMessage());		
 		}
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xScrollWindow(driver);
@@ -2384,9 +2273,8 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver,accountsRelatedContacts, 3);
 		Utility_Functions.xClick(driver,accountsRelatedContacts, true);
-		List<WebElement> contactNamesList = driver.findElements(
-				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-		Utility_Functions.xclickOnFirstElementfromList(contactNamesList);
+		Utility_Functions.xWaitForElementPresent(driver, contactsList, 3);
+		Utility_Functions.xclickOnFirstElementfromList(contactsList);
 		Utility_Functions.timeWait(2);
 		driver.switchTo().defaultContent();
 		driver.navigate().refresh();
@@ -2400,13 +2288,11 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, privateNotes, 5);
 		Utility_Functions.xClick(driver, privateNotes, true);
-		Utility_Functions.timeWait(2);
-		List<WebElement> privateNotesList = driver.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'] "));
-		for (WebElement element : privateNotesList ) {
+		Utility_Functions.xWaitForElementPresent(driver, leadsList, 3);
+		for (WebElement element : leadsList ) {
 			if ((!element.getText().equals(" "))){
 				report.updateTestLog("Verify Convert Lead with Direct Line and Private Note","The Private Notes is created with the deafult contact values ",Status.PASS);
-			}else
-			{
+			} else {
 				report.updateTestLog("Verify Convert Lead with Direct Line and Private Note","The Private Notes is created with the deafult contact values ",Status.FAIL);
 			}
 
@@ -2430,9 +2316,8 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver,accountsRelatedContacts, 3);
 		Utility_Functions.xClick(driver,accountsRelatedContacts, true);
-		List<WebElement> contactNamesList = driver.findElements(
-				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-		Utility_Functions.xclickOnFirstElementfromList(contactNamesList);
+		Utility_Functions.xWaitForElementPresent(driver, contactsList, 3);
+		Utility_Functions.xclickOnFirstElementfromList(contactsList);
 		Utility_Functions.timeWait(2);
 		driver.switchTo().defaultContent();
 		driver.navigate().refresh();
@@ -2446,9 +2331,8 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, privateNotes, 5);
 		Utility_Functions.xClick(driver, privateNotes, true);
-		Utility_Functions.timeWait(2);
-		List<WebElement> privateNotesList = driver.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'] "));
-		for (WebElement element : privateNotesList ) {
+		Utility_Functions.xWaitForElementPresent(driver, leadsList, 3);
+		for (WebElement element : leadsList ) {
 			if ((!element.getText().equals(" "))){
 				report.updateTestLog("Verify Convert Lead with Email","The Private Notes is created with the deafult contact values ",Status.PASS);
 			}else
@@ -2478,7 +2362,6 @@ public class LeadsPage extends ReusableLibrary {
 	static ArrayList<String> leadsDetailsPageFieldsList = new ArrayList<String>();
 
 	public void leadsDetailsPageFields() {
-
 		leadsDetailsPageFieldsList.add("Name");
 		leadsDetailsPageFieldsList.add("Rating");
 		leadsDetailsPageFieldsList.add("Middle Name");
@@ -2512,7 +2395,6 @@ public class LeadsPage extends ReusableLibrary {
 	static ArrayList<String> communicationPreferencesSectionFieldsList = new ArrayList<String>();
 
 	public void communicationPreferencesFields() {
-
 		communicationPreferencesSectionFieldsList.add("Email Options");
 		communicationPreferencesSectionFieldsList.add("Call Options");
 		communicationPreferencesSectionFieldsList.add("Mail Options");
@@ -2522,7 +2404,6 @@ public class LeadsPage extends ReusableLibrary {
 	static ArrayList<String> prospectRequirementsSectionFieldsList = new ArrayList<String>();
 
 	public void prospectRequirementsFields() {
-
 		prospectRequirementsSectionFieldsList.add("Preferred Property Type");
 		prospectRequirementsSectionFieldsList.add("Total Size");
 		prospectRequirementsSectionFieldsList.add("Preferred Property Sub-Type");
@@ -2539,7 +2420,6 @@ public class LeadsPage extends ReusableLibrary {
 	static ArrayList<String> customLinksSectionFieldsList = new ArrayList<String>();
 
 	public void customLinksFields() {
-
 		customLinksSectionFieldsList.add("LinkedIn");
 		customLinksSectionFieldsList.add("Google Maps");
 		customLinksSectionFieldsList.add("Google News");
@@ -2549,7 +2429,6 @@ public class LeadsPage extends ReusableLibrary {
 	static ArrayList<String> additionalInformationFieldsList = new ArrayList<String>();
 
 	public void additionalInformationFields() {
-
 		additionalInformationFieldsList.add("Assistant Name");
 		additionalInformationFieldsList.add("Unmapped Fields");
 		additionalInformationFieldsList.add("Assistant Phone");
@@ -2561,7 +2440,6 @@ public class LeadsPage extends ReusableLibrary {
 	static ArrayList<String> contactInformationFieldsList = new ArrayList<String>();
 
 	public void contactInformationFields() {
-
 		contactInformationFieldsList.add("Direct Line");
 		contactInformationFieldsList.add("Mobile");
 		contactInformationFieldsList.add("Main Phone");
@@ -2574,7 +2452,6 @@ public class LeadsPage extends ReusableLibrary {
 	static ArrayList<String> leadsDeatilsPageHeadersList = new ArrayList<String>();
 
 	public void leadsDetailsPageHeaders() {
-
 		leadsDeatilsPageHeadersList.add("Tagging");
 		leadsDeatilsPageHeadersList.add("Lead Information");
 		leadsDeatilsPageHeadersList.add("Address Information");
@@ -2589,13 +2466,10 @@ public class LeadsPage extends ReusableLibrary {
 	}
 
 	public void leadsVerifyLandingPage() {
-
 		Utility_Functions.xWaitForElementPresent(driver, menu_Leads, 3);
 		Utility_Functions.xClick(driver, menu_Leads, true);
-		Utility_Functions.timeWait(3);
-		List<WebElement> allActiveLeadsList = driver.findElements(
-				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-		Utility_Functions.xclickgetTextofFirstElementfromList(allActiveLeadsList);
+		Utility_Functions.xWaitForElementPresent(driver, leadsList, 3);
+		Utility_Functions.xclickgetTextofFirstElementfromList(leadsList);
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xScrollWindow(driver);
 		Utility_Functions.timeWait(1);
@@ -2630,7 +2504,7 @@ public class LeadsPage extends ReusableLibrary {
 			}
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println("All sections are not present in the Leads Details Page:::" + e.getMessage());
 		}
 
 		List<WebElement> leadInformationFieldsList = driver.findElements(
@@ -2663,7 +2537,7 @@ public class LeadsPage extends ReusableLibrary {
 			}
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println("All fields are not present in the Lead Information Section:::" + e.getMessage());
 		}
 		List<WebElement> addressInformationFieldsList = driver.findElements(
 				By.xpath("//h3//span[text()='Address Information']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
@@ -2695,7 +2569,7 @@ public class LeadsPage extends ReusableLibrary {
 			}
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println("All fields are not present in the Address Information Section:::" + e.getMessage());
 		}
 		List<WebElement> communicationPreferencesFieldsList = driver.findElements(
 				By.xpath("//h3//span[text()='Communication Preferences']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
@@ -2727,7 +2601,7 @@ public class LeadsPage extends ReusableLibrary {
 			}
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println("All fields are not present in the Communication Preferences Section:::" + e.getMessage());
 		}
 		List<WebElement> prospectRequirementsFieldsList = driver.findElements(
 				By.xpath("//h3//span[text()='Prospect Requirements']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
@@ -2759,7 +2633,7 @@ public class LeadsPage extends ReusableLibrary {
 			}
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println("All fields are not present in the Communication Preferences Section:::"+ e.getMessage());
 		}
 		List<WebElement> additionalInformationList = driver.findElements(By.xpath("//h3//span[text()='Additional Information']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
 		int count5 = 0, i5 = 0,j=0;
@@ -2789,7 +2663,7 @@ public class LeadsPage extends ReusableLibrary {
 						"All fields are present in the Additional Information section", Status.PASS);
 			}
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println("All fields are not present in the Additional Information section:::" + e.getMessage());
 		}
 		List<WebElement> contactInformationList = driver.findElements(By.xpath("//h3//span[text()='Contact Information']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
 		int count6 = 0, i6 = 0,j2=0;
@@ -2817,7 +2691,7 @@ public class LeadsPage extends ReusableLibrary {
 				report.updateTestLog("Verify Leads Landing Page","All fields are present in the Contact Information section", Status.PASS);
 			}
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println("All fields are not present in the Contact Information section:::"+ e.getMessage());
 		}
 		List<WebElement> customLinksList = driver.findElements(By.xpath("//h3//span[text()='Custom Links']/ancestor::h3/parent::div/div[1]//a"));
 		int count7 = 0, i7 = 0,j1=0;
@@ -2861,9 +2735,8 @@ public class LeadsPage extends ReusableLibrary {
 
 		Utility_Functions.xWaitForElementPresent(driver, menu_Leads, 3);
 		Utility_Functions.xClick(driver, menu_Leads, true);
-		Utility_Functions.timeWait(3);
-		List<WebElement> allActiveLeadsList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-		Utility_Functions.xclickRandomElement(allActiveLeadsList);
+		Utility_Functions.xWaitForElementPresent(driver, leadsList, 3);
+		Utility_Functions.xclickRandomElement(leadsList);
 		privateNoteSharing();
 	}
 
@@ -2887,13 +2760,10 @@ public class LeadsPage extends ReusableLibrary {
 		System.out.println("log A Call Page headers are " +logACallPageSectionsList);
 	}
 	public void leadCustomLogACallFunctionality() {
-
 		Utility_Functions.xWaitForElementPresent(driver, menu_Leads, 3);
 		Utility_Functions.xClick(driver, menu_Leads, true);
-		Utility_Functions.timeWait(3);
-		List<WebElement> allActiveLeadsList = driver.findElements(
-				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-		Utility_Functions.xclickgetTextofFirstElementfromList(allActiveLeadsList);
+		Utility_Functions.xWaitForElementPresent(driver, leadsList, 3);
+		Utility_Functions.xclickgetTextofFirstElementfromList(leadsList);
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xWaitForElementPresent(driver,showMoreActions, 3);
 		Utility_Functions.xClick(driver,showMoreActions, true);
@@ -2932,7 +2802,7 @@ public class LeadsPage extends ReusableLibrary {
 			}
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println("All Headers are not present in the Leads Log A Call Page:::"+e.getMessage());
 		}
 		Utility_Functions.xWaitForElementPresent(driver, subjectTop, 5);
 		Utility_Functions.xSendKeys(driver, subject, "Test Automation Subject_" + Utility_Functions.xGenerateAlphaNumericString());
@@ -2966,10 +2836,8 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, menu_Leads, 3);
 		Utility_Functions.xClick(driver, menu_Leads, true);
 		report.updateTestLog("Verify Leads Activity Timeline","Leads is Displayed ",  Status.PASS);
-		Utility_Functions.timeWait(3);
-		List<WebElement> allActiveLeadsList = driver.findElements(
-				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-		Utility_Functions.xclickgetTextofFirstElementfromList(allActiveLeadsList);
+		Utility_Functions.xWaitForElementPresent(driver, leadsList, 3);
+		Utility_Functions.xclickgetTextofFirstElementfromList(leadsList);
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify Leads Activity Timeline ","The Account is Displayed ",  Status.PASS);
 		Utility_Functions.xWaitForElementPresent(driver, related, 5);
@@ -3122,8 +2990,7 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, relatedOpportunities, 5);
 		Utility_Functions.xClick(driver, relatedOpportunities, true);
-		List<WebElement> opportunitiesList = driver.findElements(
-				By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
 		Utility_Functions.xclickgetTextofFirstElementfromList(opportunitiesList);
 		Utility_Functions.timeWait(4);
 		Utility_Functions.xScrollWindow(driver);
@@ -3144,9 +3011,8 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, related, true);
 		Utility_Functions.xWaitForElementPresent(driver,contactRoles, 5);
 		Utility_Functions.xClick(driver,contactRoles, true);
-		List<WebElement> contactRolesList = driver.findElements(
-				By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-		Utility_Functions.xclickgetTextofFirstElementfromList(contactRolesList);
+		Utility_Functions.xWaitForElementPresent(driver, contactsList, 3);
+		Utility_Functions.xclickgetTextofFirstElementfromList(contactsList);
 		Utility_Functions.timeWait(2);
 		driver.navigate().refresh();
 		Utility_Functions.timeWait(2);
@@ -3168,10 +3034,8 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, menu_Leads, 3);
 		Utility_Functions.xClick(driver, menu_Leads, true);
 		report.updateTestLog("Verify Lead Convert with New Account","Leads is Displayed ",  Status.PASS);
-		Utility_Functions.timeWait(3);
-		List<WebElement> allActiveLeadsList = driver.findElements(
-				By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-		Utility_Functions.xclickgetTextofFirstElementfromList(allActiveLeadsList);
+		Utility_Functions.xWaitForElementPresent(driver, leadsList, 3);
+		Utility_Functions.xclickgetTextofFirstElementfromList(leadsList);
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xWaitForElementPresent(driver, edit, 3);
 		Utility_Functions.xClick(driver, edit, true);
@@ -3217,26 +3081,6 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(5);
 		convertListValidation();
 		Utility_Functions.timeWait(2);
-
-		/*Utility_Functions.xWaitForElementPresent(driver,convertLeadStreet, 5);
-		Utility_Functions.xSendKeys(driver,convertLeadStreet, dataTable.getData("General_Data", "Street"));
-		report.updateTestLog("Verify Lead Convert with New Account","The New Lead page is entered with the street value", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver,convertLeadCity, 5);
-		Utility_Functions.xSendKeys(driver,convertLeadCity, dataTable.getData("General_Data", "City"));
-		report.updateTestLog("Verify Lead Convert with New Account","The New Lead page is entered with the city value", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver,convertLeadCountry, 3);
-		Utility_Functions.xClick(driver,convertLeadCountry, true);
-		Utility_Functions.xWaitForElementPresent(driver,selectConvertLeadCountry, 3);
-		Utility_Functions.xClick(driver,selectConvertLeadCountry, true);
-		report.updateTestLog("Verify Lead Convert with New Account","The New Lead page is entered with the Country value", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver,convertLeadState, 3);
-		Utility_Functions.xClick(driver,convertLeadState, true);
-		Utility_Functions.xWaitForElementPresent(driver,selectConvertLeadState, 3);
-		Utility_Functions.xClick(driver,selectConvertLeadState, true);
-		report.updateTestLog("Verify Lead Convert with New Account","The New Lead page is entered with the State value", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, zipCodeField, 5);
-		Utility_Functions.xSendKeys(driver, zipCodeField, dataTable.getData("General_Data", "Zipcode"));
-		report.updateTestLog("Verify Lead Convert with New Account","The New Lead page is entered with the Zipcode", Status.PASS);*/
 		Utility_Functions.xWaitForElementPresent(driver,convertButton, 3);
 		Utility_Functions.xClick(driver,convertButton, true);
 		report.updateTestLog("Verify Lead Convert with New Account","The Lead is converted with the required fields", Status.PASS);
@@ -3254,8 +3098,7 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, relatedOpportunities, 5);
 		Utility_Functions.xClick(driver, relatedOpportunities, true);
-		List<WebElement> opportunitiesList = driver.findElements(
-				By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
 		Utility_Functions.xclickgetTextofFirstElementfromList(opportunitiesList);
 		Utility_Functions.timeWait(4);
 		Utility_Functions.xScrollWindow(driver);
@@ -3358,8 +3201,7 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, relatedOpportunities, 5);
 		Utility_Functions.xClick(driver, relatedOpportunities, true);
-		List<WebElement> opportunitiesList = driver.findElements(
-				By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
 		Utility_Functions.xclickgetTextofFirstElementfromList(opportunitiesList);
 		Utility_Functions.timeWait(4);
 		Utility_Functions.xScrollWindow(driver);
@@ -3435,7 +3277,6 @@ public class LeadsPage extends ReusableLibrary {
 	public void verifyLeadsPyeongValueInUOMPickList(){
 		Utility_Functions.xWaitForElementPresent(driver,menu_Leads, 3);
 		Utility_Functions.xClick(driver, menu_Leads, true);
-		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, newLeads, 2);
 		Utility_Functions.xClick(driver, newLeads, true);	
 		Utility_Functions.timeWait(2);
@@ -3477,7 +3318,6 @@ public class LeadsPage extends ReusableLibrary {
 	public void verifyLeadsPingValueInUOMPickList(){
 		Utility_Functions.xWaitForElementPresent(driver,menu_Leads, 3);
 		Utility_Functions.xClick(driver, menu_Leads, true);
-		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, newLeads, 2);
 		Utility_Functions.xClick(driver, newLeads, true);	
 		Utility_Functions.timeWait(2);
@@ -3504,9 +3344,7 @@ public class LeadsPage extends ReusableLibrary {
 			System.out.println(element.getText());
 			if(element.getText().equals(sPing)) {
 				System.out.println("Ping pick list value is present in the Unit of Measure pick list values");
-				report.updateTestLog("Verify Quick Create Lead Page Unit of Measure Pick List  ",
-						"Verifying the new Lead page Unit of Measure pick list values", Status.PASS);
-
+				report.updateTestLog("Verify Quick Create Lead Page Unit of Measure Pick List ", "Verifying the new Lead page Unit of Measure pick list values", Status.PASS);
 				break;
 			}
 		}

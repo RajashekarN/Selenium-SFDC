@@ -582,8 +582,6 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//span[contains(text(),'Region')]/parent::span/parent::div//a")
 	WebElement regionMenu;
 
-	/** Release 37 */
-
 	@FindBy(xpath = "//span[text()='Opportunity Currency']")
 	WebElement opportunityCurrency;
 
@@ -1207,6 +1205,27 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath="//div[contains(@class,'primaryLabel') and @title='Test Automation 0100']/following-sibling::div[contains(@title,'2100 Ross Avenue, Dallas, United States')]")
 	WebElement offerorAccountName;
 
+	@FindBy(xpath="//h2[@class='slds-text-heading--medium slds-m-top--x-large slds-m-bottom--large']")
+	List<WebElement> headerList;
+
+	@FindBy(xpath="//*[@class='slds-form-element__label']")
+	List<WebElement> labelListOpportunitiesPage;
+
+	@FindBy(xpath="//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'006')]']")
+	List<WebElement> opportunitiesList;
+
+	@FindBy(xpath="//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'001')]']")
+	List<WebElement> accountsList;
+
+	@FindBy(xpath="//div[@class='undefined lookup__menu uiAbstractList uiAutocompleteList uiInput uiAutocomplete uiInput--default uiInput--lookup']//div[@class='listContent']/ul/li")
+	List<WebElement> propertiesList;
+
+	@FindBy(xpath="//div[@class='select-options']//a[@title='Client Action Postponed']/parent::li/parent::ul/li")
+	List<WebElement> reasonForLossValuesPickList;
+
+	@FindBy(xpath="//div[@class='select-options']//a[@title='BNP']/parent::li/parent::ul/li")
+	List<WebElement> awardedToList;
+
 	HomePage hp = new HomePage(scriptHelper);
 	SearchTextSOQL searchOpportunity = new SearchTextSOQL(scriptHelper);
 	OpportunitiesFunctions opportunitiesFunctions = new OpportunitiesFunctions(scriptHelper);
@@ -1336,8 +1355,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xScrollWindowTop(driver);
 		headerSectionOpportunityPage();
 		labelsOpportunityPage();
-		List<WebElement> headerList = driver.findElements(
-				By.xpath("//h2[@class='slds-text-heading--medium slds-m-top--x-large slds-m-bottom--large']"));
+		Utility_Functions.xWaitForElementPresent(driver, headerList, 3);
 		try {
 			int i2 = 0, count = 0;
 			String[] headerTexts = new String[headerList.size()];
@@ -1363,8 +1381,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			System.out.println(e.getMessage());
 		}
 		try {
-			List<WebElement> labelListOpportunitiesPage = driver
-					.findElements(By.xpath("//*[@class='slds-form-element__label']"));
+			Utility_Functions.xWaitForElementPresent(driver, labelListOpportunitiesPage, 3);
 			int i1 = 0, j = 0, countLabelList = 0;
 			String[] labelTexts = new String[labelListOpportunitiesPage.size()];
 			while (j < labelList.size()) {
@@ -1544,9 +1561,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		String queryOpp = "SELECT Id, Name FROM Opportunity where StageName > '16-In Escrow' and StageName < '17-Closed' and Total_Size__c !=null limit 10";
 		String Opportunity = searchOpportunity.searchOpportunity(queryOpp);
 		Utility_Functions.xClick(driver, menu_Opportunities, true);
-		Utility_Functions.timeWait(2);
-		List<WebElement> opportunitiesList = driver.findElements(By.xpath(
-				"//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'006')]"));
+		Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);		
 		Utility_Functions.xclickRandomElement(opportunitiesList);
 		Utility_Functions.timeWait(1);
 		String url = driver.getCurrentUrl().split("#")[0];
@@ -1854,11 +1869,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 		// Utility_Functions.timeWait(1);
 		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
 		Utility_Functions.xClick(driver, menu_Opportunities, true);
-		Utility_Functions.timeWait(2);
-		List<WebElement> OpportunitiesList = driver.findElements(By.xpath(
-				"//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'006')]"));
-
-		Utility_Functions.xclickOnFirstElementfromList(OpportunitiesList);
+		Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
+		Utility_Functions.xclickOnFirstElementfromList(opportunitiesList);
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xWaitForElementPresent(driver, related, 3);
 		Utility_Functions.xClick(driver, related, true);
@@ -1905,10 +1917,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			Utility_Functions.xClick(driver, associatePropertyCapitalMarkets, true);
 			Utility_Functions.xWaitForElementPresent(driver, searchProperties, 3);
 			Utility_Functions.xClick(driver, searchProperties, true);
-			Utility_Functions.timeWait(2);
-			List<WebElement> propertiesList = driver.findElements(By.xpath(
-					"//div[@class='undefined lookup__menu uiAbstractList uiAutocompleteList uiInput uiAutocomplete uiInput--default uiInput--lookup']//div[@class='listContent']/ul/li"));
-			Utility_Functions.timeWait(2);
+			Utility_Functions.xWaitForElementPresent(driver, propertiesList, 3);
 			Utility_Functions.xclickOnFirstElementfromList(propertiesList);
 			Utility_Functions.xWaitForElementPresent(driver, save, 3);
 			Utility_Functions.xClick(driver, save, true);
@@ -1929,12 +1938,10 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void opportunitySplitFunctionality() {
-
+		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
 		Utility_Functions.xClick(driver, menu_Opportunities, true);
-		Utility_Functions.timeWait(4);
-		List<WebElement> allActiveOpportunitiesList = driver.findElements(
-				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-		Utility_Functions.xclickgetTextofFirstElementfromList(allActiveOpportunitiesList);
+		Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
+		Utility_Functions.xclickgetTextofFirstElementfromList(opportunitiesList);
 		Utility_Functions.timeWait(5);
 		Utility_Functions.xClick(driver, editButton, true);
 		Utility_Functions.timeWait(4);
@@ -2271,68 +2278,6 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	}
 
-	/*
-	 * public void modifyAccountNameOpportunity() { createOpportunity(); String
-	 * accountName; String OpportunityID = retriveOpportunity();
-	 * Utility_Functions.xWaitForElementVisible(driver, edit, 5);
-	 * Utility_Functions.timeWait(3); Utility_Functions.xClick(driver,
-	 * menu_Opportunities, true); Utility_Functions.timeWait(2);
-	 * Utility_Functions.xClick(driver, recentlyViewed, true);
-	 * Utility_Functions.timeWait(1); Utility_Functions.xClick(driver,
-	 * allActiveOpportunities, true); Utility_Functions.timeWait(2);
-	 * List<WebElement> allOpportunitiesList = driver.findElements( By.
-	 * xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'006i')]"
-	 * )); Utility_Functions.xclickRandomElement(allOpportunitiesList);
-	 * //driver.navigate().refresh(); Utility_Functions.timeWait(3);
-	 * Utility_Functions.xClick(driver, edit, true);
-	 * Utility_Functions.timeWait(2); try {
-	 * 
-	 * if(title.isDisplayed()) {
-	 * Utility_Functions.xWaitForElementVisible(driver, deleteAccountName, 5);
-	 * Utility_Functions.xClick(driver, deleteAccountName, true);
-	 * Utility_Functions.xSendKeys(driver, enterNewAccountName, "Test");
-	 * Utility_Functions.timeWait(1); List<WebElement> accountList =
-	 * driver.findElements(By.
-	 * xpath("//li[@class='lookup__item force default uiAutocompleteOption forceSearchInputLookupDesktopOption']"
-	 * )); accountName = Utility_Functions.xclickRandomElement(accountList);
-	 * Utility_Functions.timeWait(1); Utility_Functions.xScrollWindow(driver);
-	 * Utility_Functions.timeWait(1);
-	 * Utility_Functions.xScrollWindowTop(driver);
-	 * Utility_Functions.timeWait(1);
-	 * 
-	 * }
-	 * 
-	 * 
-	 * } catch(Exception e) { System.out.println(e.getMessage()); }
-	 * 
-	 * 
-	 * try { if(accountList.isEmpty()) { AccountsFunctions accountsFunctions =
-	 * new AccountsFunctions(scriptHelper); accountsFunctions.createAccount();
-	 * accountName = searchOpportunity.fetchRecord("Account", "Name");
-	 * Utility_Functions.xSendKeys(driver, enterNewAccountName, accountName); }
-	 * else { accountName = Utility_Functions.xclickRandomElement(accountList);
-	 * } Utility_Functions.timeWait(1); Utility_Functions.xClick(driver, save,
-	 * true); Utility_Functions.timeWait(5); String query =
-	 * "SELECT Name FROM Opportunity where Id = " + "'" + OpportunityID + "'";
-	 * String opportunityName = searchOpportunity.fetchRecordFieldValue("Name",
-	 * query); opportunitiesFunctions.updateOpportunityField("StageName",
-	 * OpportunityID);
-	 * opportunitiesFunctions.updateOpportunityField("Service__c",
-	 * OpportunityID); if(accountName.contains(opportunityName)) {
-	 * report.updateTestLog("Opportunity Name"
-	 * ,"Opportunity name modified successfully::" , Status.PASS);
-	 * report.updateTestLog("Opportunity Name"
-	 * ,"Opportunity Assignment Type modified successfully::", Status.PASS); }
-	 * else { report.updateTestLog("Opportunity Name"
-	 * ,"Opportunity name modification failed::" , Status.FAIL); }
-	 * if(opportunityName.split("-")[1].contains("Project Management")) {
-	 * report.updateTestLog("Opportunity Name"
-	 * ,"Opportunity name saved with Opportunity Name followed by Assignment Type successfully"
-	 * , Status.PASS); } else { report.updateTestLog("Opportunity Name"
-	 * ,"Opportunity name saved with Opportunity Name followed by Assignment Type failed"
-	 * , Status.FAIL); } } catch (Exception e) {
-	 * System.out.println(e.getMessage()); } }
-	 */
 	/**
 	 * Validate Opportunity Name is not auto generated when manually added by
 	 * the user
@@ -3227,33 +3172,6 @@ public class OpportunitiesPage extends ReusableLibrary {
 			report.updateTestLog("Opportunity Name", "Installment Quantity updation failed:::" + result
 					+ ":::InstallmentQuanity:::" + siInstallmentQuantity + ":::", Status.FAIL);
 		}
-		/*
-		 * String queryCount =
-		 * "Select count() from Opportunity_Installments__c where Id = " + "'" +
-		 * result +"'"; String sOpportunityRecords =
-		 * searchOpportunity.fetchRecordFieldValue("Id", queryCount);
-		 * if(sOpportunityRecords.equals("2.0")) {
-		 * report.updateTestLog("Opportunity Name",
-		 * "Installment Records has been created successfully:::" + result
-		 * +":::InstallmentCount:::" + sOpportunityRecords + ":::",
-		 * Status.PASS); } else { report.updateTestLog("Opportunity Name",
-		 * "Installment Count updation failed:::" + result
-		 * +":::InstallmentCount:::" + sOpportunityRecords + ":::",
-		 * Status.FAIL); }
-		 */
-
-		/*
-		 * String sInstallmentCount =
-		 * searchOpportunity.fetchRecordFieldValue("Installment_Count__c",
-		 * queryCount); if(sInstallmentCount.equals("2.0")) {
-		 * report.updateTestLog("Opportunity Name",
-		 * "Installment Count has been created successfully:::" + result
-		 * +":::InstallmentCount:::" + sInstallmentCount + ":::", Status.PASS);
-		 * } else { report.updateTestLog("Opportunity Name",
-		 * "Installment Count updation failed:::" + result
-		 * +":::InstallmentCount:::" + sInstallmentCount + ":::", Status.FAIL);
-		 * }
-		 */
 	}
 
 	/**
@@ -3277,10 +3195,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 	public void deleteInstallment() {
 		try {
 			// multipleInstallmentsOpportunityEvenPercent();
+			Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
 			Utility_Functions.xClick(driver, menu_Opportunities, true);
-			Utility_Functions.timeWait(2);
-			List<WebElement> opportunitiesList = driver.findElements(By.xpath(
-					"//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'006')]"));
+			Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
 			Utility_Functions.xclickRandomElement(opportunitiesList);
 			Utility_Functions.timeWait(1);
 			Utility_Functions.xWaitForElementPresent(driver, related, 4);
@@ -3405,19 +3322,16 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void opportunityEligibility() {
+		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
 		Utility_Functions.xClick(driver, menu_Opportunities, true);
-		Utility_Functions.timeWait(2);
-		List<WebElement> opportunitiesList = driver.findElements(By.xpath(
-				"//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'006')]"));
+		Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
 		if (opportunitiesList.isEmpty()) {
 			Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
 			Utility_Functions.xClick(driver, recentlyViewed, true);
 			Utility_Functions.xWaitForElementPresent(driver, allActiveOpportunities, 3);
 			Utility_Functions.xClick(driver, allActiveOpportunities, true);
-			Utility_Functions.timeWait(2);
-			List<WebElement> opportunitiesListActive = driver.findElements(By.xpath(
-					"//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'006')]"));
-			Utility_Functions.xclickRandomElement(opportunitiesListActive);
+			Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
+			Utility_Functions.xclickRandomElement(opportunitiesList);
 		}
 		Utility_Functions.xclickRandomElement(opportunitiesList);
 	}
@@ -3600,9 +3514,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
 		Utility_Functions.xClick(driver, menu_Opportunities, true);
-		List<WebElement> allActiveOpportunitiesList = driver.findElements(
-				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-		Utility_Functions.xclickgetTextofFirstElementfromList(allActiveOpportunitiesList);
+		Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
+		Utility_Functions.xclickgetTextofFirstElementfromList(opportunitiesList);
 		Utility_Functions.timeWait(5);
 		Utility_Functions.xWaitForElementPresent(driver, selectNewEvent, 3);
 		Utility_Functions.xClick(driver, selectNewEvent, true);
@@ -4078,14 +3991,12 @@ public class OpportunitiesPage extends ReusableLibrary {
 				"Verifying the new opportunity page is displayed", Status.PASS);
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xSwitchtoFrame(driver, closeDateOpp);
-		Utility_Functions.timeWait(3);
-		List<WebElement> newOpportunityPageRequiredFields = driver
-				.findElements(By.xpath("//*[@class='slds-form-element__label']"));
+		Utility_Functions.xWaitForElementPresent(driver, labelListOpportunitiesPage, 3);
 		int i1 = 0, j = 0, countLabelList = 0;
 		quickCreateLabelsOpportunityPage();
-		String[] labelTexts = new String[newOpportunityPageRequiredFields.size()];
+		String[] labelTexts = new String[labelListOpportunitiesPage.size()];
 		while (j < quickCreateLabelsOpportunityPage.size()) {
-			for (WebElement element : newOpportunityPageRequiredFields) {
+			for (WebElement element : labelListOpportunitiesPage) {
 				labelTexts[i1] = element.getText();
 				if (labelTexts[i1].contains(quickCreateLabelsOpportunityPage.get(j))) {
 					System.out.println("Verify Add Opportunity Page Label List" + element.getText());
@@ -4110,70 +4021,6 @@ public class OpportunitiesPage extends ReusableLibrary {
 			report.updateTestLog("Verify Quick Create Section", "Labels are not present in Add Opportunity Page:::",
 					Status.FAIL);
 		}
-
-		/*
-		 * try { for (WebElement element : newOpportunityPageRequiredFields ) {
-		 * if ((element.getText().contains("Opportunity Name"))) { System.out.
-		 * println("Opportunity Name required field is present in the Quick Create Opportunity Page"
-		 * ); report.updateTestLog("Verify Quick Create Opportunity Page ",
-		 * "Quick Create Opportunity Page is having the " + element.getText() +
-		 * " Status field::", Status.PASS); countRequiredFiles++;
-		 * 
-		 * } else if ((element.getText().contains("Account Name"))) {
-		 * System.out.
-		 * println("Account Name required field is present in the Quick Create Opportunity Page"
-		 * ); report.updateTestLog("Verify Quick Create Opportunity Page ",
-		 * "Quick Create Opportunity Page is having the " + element.getText() +
-		 * " Status field::", Status.PASS); countRequiredFiles++;
-		 * 
-		 * } else if ((element.getText().contains("Success Probability"))) {
-		 * System.out.
-		 * println(" Success Probability required field is present in the Quick Create Opportunity Page"
-		 * ); report.updateTestLog("Verify Quick Create Opportunity Page ",
-		 * "Quick Create Opportunity Page is having the " + element.getText() +
-		 * " Status field::", Status.PASS); countRequiredFiles++;
-		 * 
-		 * 
-		 * } else if ((element.getText().contains("Close Date"))) { System.out.
-		 * println(" Close Date required field is present in the Quick Create Opportunity Page"
-		 * ); report.updateTestLog("Verify Quick Create Opportunity Page ",
-		 * "Quick Create Opportunity Page is having the " + element.getText() +
-		 * " Status field::", Status.PASS); countRequiredFiles++;
-		 * 
-		 * } else if ((element.getText().contains("Sales Stage"))) { System.out.
-		 * println(" Sales Stage required field is present in the Quick Create Opportunity Page"
-		 * ); report.updateTestLog("Verify Quick Create Opportunity Page ",
-		 * "Quick Create Opportunity Page is having the " + element.getText() +
-		 * " Status field::", Status.PASS); countRequiredFiles++;
-		 * 
-		 * }
-		 * 
-		 * } System.out.println(countRequiredFiles); if(countRequiredFiles!=5) {
-		 * System.out.
-		 * println("Quick Create Opportunity Page does not contain the required fields "
-		 * ); report.updateTestLog("Verify Quick Create Opportunity Page ",
-		 * "Quick Create Opportunity Page is not having all the required fields"
-		 * , Status.FAIL); }
-		 * 
-		 * 
-		 * }catch (Exception e) { e.printStackTrace();
-		 * System.out.println(e.getMessage());
-		 * 
-		 * }
-		 */
-		/*
-		 * if ((!opportunityCurrency.getText().equals(" "))) {
-		 * System.out.println(
-		 * "Opportunity Currency required field is present in the Create Opportunity Page "
-		 * ); report.updateTestLog("Verify Quick Create Opportunity Page ",
-		 * "Verifying New Custom Event Page is having the Opportunity Currency required field "
-		 * , Status.PASS); } else { System.out.
-		 * println("Opportunity Currency required field is not present in the Create Opportunity Page "
-		 * ); report.updateTestLog("Verify Quick Create Opportunity Page ",
-		 * "Verifying New Custom Event Page is not having the Opportunity Currency required field "
-		 * , Status.FAIL); }
-		 */
-
 	}
 
 	/**
@@ -4206,10 +4053,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, reasonForLoss, 3);
 		Utility_Functions.xClick(driver, reasonForLoss, true);
-		Utility_Functions.timeWait(1);
-		List<WebElement> reasonForLossValuesList = driver.findElements(By
-				.xpath("//div[@class='select-options']//a[@title='Client Action Postponed']/parent::li/parent::ul/li"));
-		for (WebElement element : reasonForLossValuesList) {
+		Utility_Functions.xWaitForElementPresent(driver, reasonForLossValuesPickList, 3);		
+		for (WebElement element : reasonForLossValuesPickList) {
 			element.getText();
 			System.out.println(element.getText());
 			report.updateTestLog("Verify Quick Create Opportunity Page Asset Services   ",
@@ -4244,10 +4089,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, reasonForLoss, 3);
 		Utility_Functions.xClick(driver, reasonForLoss, true);
-		Utility_Functions.timeWait(1);
-		List<WebElement> reasonForLossValuesList = driver.findElements(By
-				.xpath("//div[@class='select-options']//a[@title='Client Action Postponed']/parent::li/parent::ul/li"));
-		for (WebElement element : reasonForLossValuesList) {
+		Utility_Functions.xWaitForElementPresent(driver, reasonForLossValuesPickList, 3);
+		for (WebElement element : reasonForLossValuesPickList) {
 			element.getText();
 			System.out.println(element.getText());
 			report.updateTestLog("Verify Quick Create Opportunity Page Asset Services   ",
@@ -4309,10 +4152,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, accountingAwardedTo, true);
 		report.updateTestLog("Verify Quick Create Opportunity Page Awarded To Pick List   ",
 				"Verifying the new opportunity page Accounting Awarded To Pick List is displayed", Status.PASS);
-		Utility_Functions.timeWait(1);
 		int count = 0;
-		List<WebElement> awardedToList = driver
-				.findElements(By.xpath("//div[@class='select-options']//a[@title='BNP']/parent::li/parent::ul/li"));
+		Utility_Functions.xWaitForElementPresent(driver, awardedToList, 3);
 		for (WebElement element : awardedToList) {
 			element.getText();
 			if (count < 14) {
@@ -4320,8 +4161,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			}
 			System.out.println(element.getText());
 		}
-		List<WebElement> managementAwardListFields = driver
-				.findElements(By.xpath("//div[@class='select-options']//a[@title='BNP']/parent::li/parent::ul/li"));
+		List<WebElement> managementAwardListFields = driver.findElements(By.xpath("//div[@class='select-options']//a[@title='BNP']/parent::li/parent::ul/li"));
 		int count1 = 0, i1 = 0;
 		String labelArray[] = new String[awardedToList.size()];
 		try {
@@ -4385,12 +4225,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, accountingAwardedTo, true);
 		report.updateTestLog("Verify Quick Create Opportunity Page State Street Pick List  ",
 				"Verifying the new opportunity page Accounting Awarded To Pick List is displayed", Status.PASS);
-		Utility_Functions.timeWait(1);
 		String sStateStreet = "State Street";
-		List<WebElement> awardedToList = driver
-				.findElements(By.xpath("//div[@class='select-options']//a[@title='BNP']/parent::li/parent::ul/li"));
+		Utility_Functions.xWaitForElementPresent(driver, awardedToList, 3);
 		int count = 0;
-
 		for (WebElement element : awardedToList) {
 			element.getText();
 			System.out.println(element.getText());
@@ -4517,8 +4354,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, leadSourceNewOpportunity, 3);
 		Utility_Functions.xClick(driver, leadSourceNewOpportunity, true);
 		Utility_Functions.timeWait(1);
-		List<WebElement> leadSourceValuesList = driver.findElements(
-				By.xpath("//div[@class='select-options']//a[@title='Capital Markets']/parent::li/parent::ul/li"));
+		List<WebElement> leadSourceValuesList = driver.findElements(By.xpath("//div[@class='select-options']//a[@title='Capital Markets']/parent::li/parent::ul/li"));
 		for (WebElement element : leadSourceValuesList) {
 			element.getText();
 			System.out.println(element.getText());
@@ -4563,38 +4399,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			Utility_Functions.xWaitForElementPresent(driver, successProbability, 3);
 			Utility_Functions.xSendKeys(driver, successProbability, "100");
 			Utility_Functions.xWaitForElementPresent(driver, totalSizeNewOpportunity, 3);
-			Utility_Functions.xClick(driver, totalSizeNewOpportunity, true);
-
-			/*
-			 * Utility_Functions.xWaitForElementPresent(driver,
-			 * totalSizeNewOpportunity, 3); Utility_Functions.xSendKeys(driver,
-			 * totalSizeNewOpportunity, "100"); report.
-			 * updateTestLog("Verify Opportunity Leasing AnnualRevenue Field  ",
-			 * "Verifying the total size in New Opportunity Page is entered",
-			 * Status.PASS); Utility_Functions.xWaitForElementPresent(driver,
-			 * unitOfMeasureNewOpportunity, 3); Utility_Functions.xClick(driver,
-			 * unitOfMeasureNewOpportunity, true);
-			 * Utility_Functions.xWaitForElementPresent(driver,
-			 * selectUnitOfMeasureNewOpportunity, 3);
-			 * Utility_Functions.xClick(driver,
-			 * selectUnitOfMeasureNewOpportunity, true); report.
-			 * updateTestLog("Verify Opportunity Leasing AnnualRevenue Field  ",
-			 * "Verifying the unit of Measure in New Opportunity Page is selected"
-			 * , Status.PASS); Utility_Functions.xWaitForElementPresent(driver,
-			 * regionNewOpportunity, 3); Utility_Functions.xClick(driver,
-			 * regionNewOpportunity, true);
-			 * Utility_Functions.xWaitForElementPresent(driver,
-			 * selectRegionNewOpportunity, 3); Utility_Functions.xClick(driver,
-			 * selectRegionNewOpportunity, true); report.
-			 * updateTestLog("Verify Opportunity Leasing AnnualRevenue Field  ",
-			 * "Verifying the Region field in New Opportunity Page is selected",
-			 * Status.PASS); Utility_Functions.xWaitForElementPresent(driver,
-			 * selectMarket, 3); Utility_Functions.xClick(driver, selectMarket,
-			 * true); report.
-			 * updateTestLog("Verify Opportunity Leasing AnnualRevenue Field  ",
-			 * "Verifying the market field in New Opportunity Page is selected",
-			 * Status.PASS);
-			 */
+			Utility_Functions.xClick(driver, totalSizeNewOpportunity, true);		
 			Utility_Functions.xWaitForElementPresent(driver, searchAccountsNewOpportunity, 3);
 			Utility_Functions.xSendKeys(driver, searchAccountsNewOpportunity, "Test");
 			report.updateTestLog("Verify Opportunity Leasing AnnualRevenue Field  ",
@@ -4609,13 +4414,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		}
 		try {
 			Utility_Functions.xClick(driver, driver.findElement(By.xpath("//div[contains(@title,'Test')]")), true);
-			Utility_Functions.timeWait(3);
-			/*
-			 * Utility_Functions.xScrollWindow(driver);
-			 * Utility_Functions.timeWait(2);
-			 * Utility_Functions.xScrollWindowTop(driver);
-			 * Utility_Functions.timeWait(2); Utility_Functions.timeWait(1);
-			 */
+			Utility_Functions.timeWait(3); 
 			Utility_Functions.xWaitForElementPresent(driver, salesStage_AS, 4);
 			Utility_Functions.xClick(driver, salesStage_AS, true);
 			Utility_Functions.xClick(driver, salesStageValue_AS, true);
@@ -5258,12 +5057,6 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, noOption, 3);
 		Utility_Functions.xClick(driver, noOption, true);
 
-		/*
-		 * Utility_Functions.xWaitForElementPresent(driver,
-		 * selectLeasingNewOpportunity, 4); Utility_Functions.xClick(driver,
-		 * selectLeasingNewOpportunity, true);
-		 * 
-		 */
 	}
 
 	/**
@@ -5330,9 +5123,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, allAccounts, true);
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify Accounts", "All Accounts are Displayed", Status.PASS);
-		List<WebElement> accountList = driver
-				.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-		Utility_Functions.xclickRandomElement(accountList);
+		Utility_Functions.xWaitForElementPresent(driver, accountsList, 3);
+		Utility_Functions.xclickRandomElement(accountsList);
 		String opportunities = retriveAccountOpp();
 		if (opportunities == null) {
 			report.updateTestLog("Verify Active Opportunities",
@@ -5347,9 +5139,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 			Utility_Functions.xScrollWindowTop(driver);
 			Utility_Functions.timeWait(2);
 			int count = 0;
-			List<WebElement> opportunitiesList = driver.findElements(
+			List<WebElement> opportunitiesListRelated = driver.findElements(
 					By.xpath("//article[contains(@class,'forceRelatedListCardDesktop')]//a[contains(@href,'006')]"));
-			for (WebElement element : opportunitiesList) {
+			for (WebElement element : opportunitiesListRelated) {
 				report.updateTestLog("Verify Active Opportunities",
 						"Opportunities associated to this Account are :::" + element.getText(), Status.PASS);
 				count++;
@@ -5418,10 +5210,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, recentlyViewed, true);
 		Utility_Functions.xWaitForElementPresent(driver, allActiveOpportunities, 3);
 		Utility_Functions.xClick(driver, allActiveOpportunities, true);
-		Utility_Functions.timeWait(2);
-		List<WebElement> OpportunitiesList = driver.findElements(By.xpath(
-				"//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'006')]"));
-		Utility_Functions.xclickRandomElement(OpportunitiesList);
+		Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
+		Utility_Functions.xclickRandomElement(opportunitiesList);
 		report.updateTestLog("Verify Opportunity Landing Page",
 				"Random Opportunity is clicked from the Opportunity List", Status.PASS);
 		Utility_Functions.timeWait(3);
@@ -5721,8 +5511,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		servicesLabelList();
 
 		try {
-			List<WebElement> labelListOpportunitiesPage = driver
-					.findElements(By.xpath("//*[@class='slds-form-element__label']"));
+			Utility_Functions.xWaitForElementPresent(driver, labelListOpportunitiesPage, 3);
 			int i1 = 0, j = 0, countLabelList = 0;
 			String[] labelTexts = new String[labelListOpportunitiesPage.size()];
 			while (countLabelList != 13) {
@@ -7567,10 +7356,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void validateOpportunityInstallmentStatus() {
+		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
 		Utility_Functions.xClick(driver, menu_Opportunities, true);
-		Utility_Functions.timeWait(2);
-		List<WebElement> opportunitiesList = driver.findElements(By.xpath(
-				"//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'006')]"));
+		Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
 		Utility_Functions.xclickRandomElement(opportunitiesList);
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xWaitForElementPresent(driver, related, 4);
@@ -8820,9 +8608,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, recentlyViewed, true);
 		Utility_Functions.xWaitForElementPresent(driver, allActiveOpportunities, 4);
 		Utility_Functions.xClick(driver, allActiveOpportunities, true);
-		Utility_Functions.timeWait(2);
-		List<WebElement> opportunitiesList = driver.findElements(By.xpath(
-				"//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'006')]"));
+		Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);	
 		Utility_Functions.xclickRandomElement(opportunitiesList);
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, showMoreActions, 3);
@@ -10495,9 +10281,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, recentlyViewed, true);
 		Utility_Functions.xWaitForElementPresent(driver, allActiveOpportunities, 4);
 		Utility_Functions.xClick(driver, allActiveOpportunities, true);
-		Utility_Functions.timeWait(2);
-		List<WebElement> opportunitiesList = driver.findElements(By.xpath(
-				"//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'006')]"));
+		Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
 		Utility_Functions.xclickRandomElement(opportunitiesList);
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver,edit, 3);
@@ -10777,9 +10561,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, recentlyViewed, true);
 		Utility_Functions.xWaitForElementPresent(driver, allActiveOpportunities, 4);
 		Utility_Functions.xClick(driver, allActiveOpportunities, true);
-		Utility_Functions.timeWait(2);
-		List<WebElement> opportunitiesList = driver.findElements(By.xpath(
-				"//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'006')]"));
+		Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
 		Utility_Functions.xclickRandomElement(opportunitiesList);
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver,edit, 3);
@@ -10853,26 +10635,26 @@ public class OpportunitiesPage extends ReusableLibrary {
 			String fieldsArray6[] = null;
 			boolean isPresent = false;
 			try {
-					valuationSpecificFields = driver.findElements(By.xpath("//span[text()='Valuations Specific Information']/parent::h3/following-sibling::div//div[contains(@class,'slds-form-element__control')]//label/span[1]"));
-					fieldsArray6 = new String[valuationSpecificFields.size()];
-					System.out.println(valuationSpecificFields.size());
-					if(valuationSpecificFields.size()>1) {
-							isPresent = true;
-							valuationSpecificEditPage();
-							for (WebElement element6 :valuationSpecificFields) {
-								System.out.println(element6.getText());
-								fieldsArray6[i6] = element6.getText();
-								if (fieldsArray6[i6].contains(valuationSpecificEditPageValues.get(i1))) {
-									report.updateTestLog("Verify Valuation Specific fields",
-											"Valuation specific fields is having the " + fieldsArray6[i6] + " fields ", Status.PASS);
-									count6++;
-								}
-								i6++;
-							} 
-					} else {
-						isPresent=false;
-					}
-				} catch (Exception e) {
+				valuationSpecificFields = driver.findElements(By.xpath("//span[text()='Valuations Specific Information']/parent::h3/following-sibling::div//div[contains(@class,'slds-form-element__control')]//label/span[1]"));
+				fieldsArray6 = new String[valuationSpecificFields.size()];
+				System.out.println(valuationSpecificFields.size());
+				if(valuationSpecificFields.size()>1) {
+					isPresent = true;
+					valuationSpecificEditPage();
+					for (WebElement element6 :valuationSpecificFields) {
+						System.out.println(element6.getText());
+						fieldsArray6[i6] = element6.getText();
+						if (fieldsArray6[i6].contains(valuationSpecificEditPageValues.get(i1))) {
+							report.updateTestLog("Verify Valuation Specific fields",
+									"Valuation specific fields is having the " + fieldsArray6[i6] + " fields ", Status.PASS);
+							count6++;
+						}
+						i6++;
+					} 
+				} else {
+					isPresent=false;
+				}
+			} catch (Exception e) {
 				report.updateTestLog("Verify Valuation Specific fields", "Valuation specific section is not present for the selected Opportunity", Status.WARNING);	
 				isPresent = false;
 			}				
@@ -11032,9 +10814,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-
 	}
-
 
 }
 

@@ -3,6 +3,7 @@ package businessComponents;
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
+import com.sforce.soap.partner.SaveResult;
 
 import pageObjects.LoginPage;
 import pagesAPI.AccountsFunctions;
@@ -67,8 +68,9 @@ public class BC_API_Test extends ReusableLibrary {
 	 */
 
 	public void bc_createAccount() {
-		boolean status = sfAccountsFunctions.createAccount();
-		if(status==true) {
+		SaveResult[] results = sfAccountsFunctions.createAccount();
+		String result = sfEstablishConnection.saveResultsId(results);
+		if(result.contains("001")) {
 			report.updateTestLog("Verify Create Account", "Account has been created successfully", Status.PASS);
 		} else {
 			report.updateTestLog("Verify Create Account", "Account creation failed", Status.FAIL);
@@ -378,8 +380,10 @@ public class BC_API_Test extends ReusableLibrary {
 	}
 	
 	public void bc_changePassword() {
-		createUsers.setPassword(dataTable.getData("General_Data", "Password"));
-		loginPage.changePassword();
+		/*createUsers.setPassword(dataTable.getData("General_Data", "Password"));
+		loginPage.changePassword();*/
+		loginPage.changeExpiredPassword();
+		//createUsers.setPassword("FTEPasswordRelease41");
 	}
 	
 	
