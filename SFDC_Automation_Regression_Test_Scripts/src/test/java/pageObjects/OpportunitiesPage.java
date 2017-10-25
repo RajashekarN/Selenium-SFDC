@@ -1211,10 +1211,10 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath="//*[@class='slds-form-element__label']")
 	List<WebElement> labelListOpportunitiesPage;
 
-	@FindBy(xpath="//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'006')]']")
+	@FindBy(xpath="//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'006')]")
 	List<WebElement> opportunitiesList;
 
-	@FindBy(xpath="//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'001')]']")
+	@FindBy(xpath="//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'001')]")
 	List<WebElement> accountsList;
 
 	@FindBy(xpath="//div[@class='undefined lookup__menu uiAbstractList uiAutocompleteList uiInput uiAutocomplete uiInput--default uiInput--lookup']//div[@class='listContent']/ul/li")
