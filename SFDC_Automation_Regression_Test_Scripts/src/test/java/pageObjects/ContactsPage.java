@@ -437,6 +437,7 @@ public class ContactsPage extends ReusableLibrary {
 
 
 	SearchTextSOQL searchAccountName = new SearchTextSOQL(scriptHelper);
+	LoginPage loginPage = new LoginPage(scriptHelper);
 
 	/**
 	 * Selecting the Contact from a list of contacts
@@ -1565,6 +1566,7 @@ public class ContactsPage extends ReusableLibrary {
 		newContactPageSectionsList.add("System Information");
 		System.out.println("Contact Page Sections are " + newContactPageSectionsList);
 	}
+	
 
 	public void newContactPageLayoutFields() {
 		Utility_Functions.xWaitForElementPresent(driver, menu_Contacts, 3);
@@ -1576,6 +1578,16 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		report.updateTestLog("Verify New Contact Page Fields ", "Verifying New Contacts Page is Displayed  ",
 				Status.PASS);
+		String environment = loginPage.initializeEnvironment();
+		if (environment.equals("FTE")) {
+			if (dataTable.getData("General_Data", "TC_ID").contains("OBAMERAdminContactsNewContactPageLayout")) {
+				Utility_Functions.xSwitchtoFrame(driver, continueButton);
+				Utility_Functions.xWaitForElementPresent(driver, continueButton, 5);
+				Utility_Functions.timeWait(1);
+				Utility_Functions.xClick(driver, continueButton, true);
+				driver.switchTo().defaultContent();
+			}
+		}
 		driver.navigate().refresh();
 		Utility_Functions.xSwitchtoFrame(driver, lastNameQuickCreateContact);
 		Utility_Functions.timeWait(3);
@@ -1599,8 +1611,8 @@ public class ContactsPage extends ReusableLibrary {
 				System.out.println(element.getText());
 				labelArray[i1] = element.getText();
 				if (labelArray[i1].equalsIgnoreCase(contactInformationSectionList.get(i1))) {
-					report.updateTestLog("Verify Private Tags Page",
-							"Bulk Tagging Page Account Details is having the " + labelArray[i1] + " field ",
+					report.updateTestLog("Verify New Contact Page Layout",
+							"Contact Information section is having the " + labelArray[i1] + " field ",
 							Status.PASS);
 					count++;
 				}
@@ -1608,12 +1620,12 @@ public class ContactsPage extends ReusableLibrary {
 			}
 			System.out.println(count);
 			if (count != 9) {
-				report.updateTestLog("Verify Private Tags Page",
-						"All Labels are not present in the Bulk Tagging Page Account Details", Status.FAIL);
+				report.updateTestLog("Verify New Contact Page Layout",
+						"All Labels are not present in the Contact Information section", Status.FAIL);
 			} else {
 
-				report.updateTestLog("Verify Private Tags Page",
-						"All Labels are present in the Bulk Tagging Page Account Details", Status.PASS);
+				report.updateTestLog("Verify New Contact Page Layout",
+						"All Labels are present in the Contact Information section", Status.PASS);
 			}
 
 		} catch (Exception e) {
@@ -1631,8 +1643,8 @@ public class ContactsPage extends ReusableLibrary {
 				System.out.println(element1.getText());
 				labelArray1[i2] = element1.getText();
 				if (labelArray[i2].equalsIgnoreCase(newContactPageSectionsList.get(i2))) {
-					report.updateTestLog("Verify Private Tags Page",
-							"Bulk Tagging Page Account Details is having the " + labelArray[i2] + " section ",
+					report.updateTestLog("Verify New Contact Page Layout",
+							"Contacts page sections is having the " + labelArray[i2] + " section ",
 							Status.PASS);
 					count1++;
 				}
@@ -1640,29 +1652,266 @@ public class ContactsPage extends ReusableLibrary {
 			}
 			System.out.println(count1);
 			if (count1 != 4) {
-				report.updateTestLog("Verify Private Tags Page",
-						"All Labels are not present in the Bulk Tagging Page Account Details", Status.FAIL);
+				report.updateTestLog("Verify New Contact Page Layout",
+						"All Labels are not present in the Contacts Page Sections", Status.FAIL);
 			} else {
 
-				report.updateTestLog("Verify Private Tags Page",
-						"All Labels are present in the Bulk Tagging Page Account Details", Status.PASS);
+				report.updateTestLog("Verify New Contact Page Layout",
+						"All Labels are present in the Contacts Page Sections", Status.PASS);
 			}
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		String environment1 = loginPage.initializeEnvironment();
+		if (environment1.equals("FTE")) {
+			if (dataTable.getData("General_Data", "TC_ID").contains("OBAMERAdminContactsNewContactPageLayout")) {
+			Utility_Functions.xWaitForElementPresent(driver, accountNameQuickCreateContact, 5);
+			report.updateTestLog("Verify New Contact Page Layout", "Verifying Account name required field is populated ", Status.PASS);
+			Utility_Functions.xWaitForElementPresent(driver, lastNameQuickCreateContact, 5);
+			Utility_Functions.xSendKeys(driver, lastNameQuickCreateContact, "Test_Contact_Last_Name");
+			Utility_Functions.xWaitForElementPresent(driver, directLine, 5);
+			Utility_Functions.xSendKeys(driver, directLine, dataTable.getData("General_Data", "Direct Line"));
+			String query = "SELECT Id, Name, EMEA_Searchable__c FROM Account where EMEA_Searchable__c = false limit 1 offset 9";
+			String sAccountName = searchAccountName.fetchRecordFieldValue("Name", query);
+			Utility_Functions.xSendKeys(driver, accountNameQuickCreateContact, sAccountName);
+			accountNameQuickCreateContact.sendKeys(Keys.ARROW_DOWN);
+			Utility_Functions.timeWait(2);
+			accountNameQuickCreateContact.sendKeys(Keys.ENTER);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xWaitForElementPresent(driver, saveContact, 3);
+			Utility_Functions.xClick(driver, saveContact, true);
+			report.updateTestLog("Verify New Contact Page Layout", "Contact has been created successfully and have clicked on Save Button", Status.PASS);
+			Utility_Functions.timeWait(3);
+			if (details.isDisplayed()) {
 
-		Utility_Functions.xWaitForElementPresent(driver, firstNameQuickCreate, 5);
-		Utility_Functions.xSendKeys(driver, firstNameQuickCreate, "Ema");
-		Utility_Functions.xWaitForElementPresent(driver, lastNameQuickCreateContact, 5);
-		Utility_Functions.xSendKeys(driver, lastNameQuickCreateContact, "Watson");
-		/*
-		 * Utility_Functions.xWaitForElementPresent(driver,
-		 * middleNameQuickCreate, 5);
-		 * Utility_Functions.xSendKeys(driver,middleNameQuickCreate , "S");
-		 * Utility_Functions.xWaitForElementPresent(driver, nickNameContact, 5);
-		 * Utility_Functions.xSendKeys(driver,nickNameContact , "Emi");
-		 */
+				report.updateTestLog("Verify New Contact Page Layout", "Contact is saved with mandatory fields",
+						Status.PASS);
+			} else {
+				report.updateTestLog("Verify New Contact Page Layout",
+						"Contact is not saved with the mandatory fields", Status.FAIL);
+			}
+			Utility_Functions.xScrollWindow(driver);
+			Utility_Functions.timeWait(1);
+			Utility_Functions.xScrollWindowTop(driver);
+			Utility_Functions.timeWait(2);
+			List<WebElement> contactDetailsPageHeadersList = driver
+					.findElements(By.xpath("//span[contains(@class,'header-title')]"));
+			int count0 = 0, i0 = 0, j0 = 0;
+			;
+			String fieldsArray0[] = new String[contactDetailsPageHeadersList.size()];
+			System.out.println(contactDetailsPageHeadersList.size());
+			try {
+				contactsDeatilsPageHeadersList.clear();
+				contactsDetailsPageHeaders();
+				while (j0 < contactDetailsPageHeadersList.size()) {
+					for (WebElement element0 : contactDetailsPageHeadersList) {
+						fieldsArray0[i0] = element0.getText();
+						if (fieldsArray0[i0].contains(contactsDeatilsPageHeadersList.get(j0))) {
+							System.out.println("Contacts Details page headers are " + element0.getText());
+							report.updateTestLog("Verify New Contact Page Layout",
+									" Contact Details Page are having the " + fieldsArray0[i0] + " Headers ", Status.PASS);
+							count0++;
+						}
+						i0++;
+					}
+					i0 = 0;
+					j0++;
+				}
+				System.out.println(count0);
+				if (count0 != 6) {
+					report.updateTestLog("Verify New Contact Page Layout",
+							"All sections are not present in the Contacts Details Page", Status.FAIL);
+				} else {
+
+					report.updateTestLog("Verify New Contact Page Layout",
+							"All sections are present in the Contacts Details Page", Status.PASS);
+				}
+
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			contactDetailsPageHeadersList.clear();
+			List<WebElement> contactInformationFieldsLabels = driver.findElements(By.xpath(
+					"//h3//span[text()='Contact Information']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
+			int count11 = 0, i11 = 0, j11 = 0;
+			String fieldsArray11[] = new String[contactInformationFieldsLabels.size()];
+			System.out.println(contactInformationFieldsLabels.size());
+			try {
+				contactInformationSectionFieldsList.clear();
+				contactInformationDetailsPageFields();
+				while (j11 < contactInformationFieldsLabels.size()) {
+					for (WebElement element :contactInformationFieldsLabels) {
+						fieldsArray11[i11] = element.getText();
+						if (fieldsArray11[i11].contains(contactInformationSectionFieldsList.get(j11))) {
+							System.out.println("Contact Information fields are " + element.getText());
+							report.updateTestLog("Verify Contacts Landing Page",
+									" Contact Information section is having the " + fieldsArray11[i11] + " fields ",
+									Status.PASS);
+							count11++;
+						}
+						i11++;
+					}
+					i11 = 0;
+					j11++;
+				}
+				System.out.println(count11);
+				if (count11 != 10) {
+					report.updateTestLog("Verify New Contact Page Layout",
+							"All fields are not present in the Contact Information Section", Status.FAIL);
+				} else {
+
+					report.updateTestLog("Verify New Contact Page Layout",
+							"All fields are present in the Contact Information Section", Status.PASS);
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			contactInformationFieldsList.clear();
+			List<WebElement> addressInformationFieldsList = driver.findElements(By.xpath(
+					"//h3//span[text()='Address Information']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
+			int count10 = 0, i10 = 0, j10 = 0;
+			String fieldsArray10[] = new String[addressInformationFieldsList.size()];
+			System.out.println(addressInformationFieldsList.size());
+			try {
+				addressInformationSectionFieldsList.clear();
+				addressInformationFields();
+				while (j10 < addressInformationFieldsList.size()) {
+					for (WebElement element1 : addressInformationFieldsList) {
+						fieldsArray10[i10] = element1.getText();
+						if (fieldsArray10[i10].contains(addressInformationSectionFieldsList.get(j10))) {
+							System.out.println("Address Information fields are " + element1.getText());
+							report.updateTestLog("Verify New Contact Page Layout",
+									" Address Information Section is having the " + fieldsArray10[i10] + " fields ",
+									Status.PASS);
+							count10++;
+						}
+						i10++;
+					}
+					i10 = 0;
+					j10++;
+				}
+				System.out.println(count10);
+				if (count10 != 1) {
+					report.updateTestLog("Verify New Contact Page Layout",
+							"All fields are not present in the Address Information Section", Status.FAIL);
+				} else {
+
+					report.updateTestLog("Verify New Contact Page Layout",
+							"All fields are present in the Address Information Section", Status.PASS);
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			addressInformationFieldsList.clear();
+			List<WebElement> additionalInformationList = driver.findElements(By.xpath(
+					"//h3//span[text()='Additional Information']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
+			int count5 = 0, i5 = 0, j = 0;
+			String fieldsArray5[] = new String[additionalInformationList.size()];
+			System.out.println(additionalInformationList.size());
+			try {
+				additionalInformationFieldsList.clear();
+				additionalInformationFields();
+				while (j < additionalInformationList.size()) {
+					for (WebElement element5 : additionalInformationList) {
+						fieldsArray5[i5] = element5.getText();
+						if (fieldsArray5[i5].contains(additionalInformationFieldsList.get(j))) {
+							System.out.println("Additional Information fields are " + element5.getText());
+							report.updateTestLog("Verify New Contact Page Layout",
+									element5.getText() + "labels  present in the Additional Information section ",
+									Status.PASS);
+							count5++;
+						}
+						i5++;
+					}
+					i5 = 0;
+					j++;
+				}
+				System.out.println(count5);
+				if (count5 < 3) {
+					report.updateTestLog("Verify New Contact Page Layout",
+							"All fields are not present in the Additional Information section", Status.FAIL);
+				} else {
+					report.updateTestLog("Verify New Contact Page Layout",
+							"All fields are present in the Additional Information section", Status.PASS);
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			additionalInformationList.clear();
+			List<WebElement> systemInformationList = driver.findElements(By.xpath(
+					"//h3//span[text()='System Information']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
+			int count6 = 0, i6 = 0, j2 = 0;
+			String fieldsArray6[] = new String[systemInformationList.size()];
+			System.out.println(systemInformationList.size());
+			try {
+				systemInformationFieldsList.clear();
+				systemInformationFields();
+				while (j2 < systemInformationList.size()) {
+					for (WebElement element6 : systemInformationList) {
+						fieldsArray6[i6] = element6.getText();
+						if (fieldsArray6[i6].contains(systemInformationFieldsList.get(j2))) {
+							System.out.println("System Information fields are " + element6.getText());
+							report.updateTestLog("Verify New Contact Page Layout",
+									element6.getText() + "labels  present in the System Information section ", Status.PASS);
+							count6++;
+						}
+						i6++;
+					}
+					i6 = 0;
+					j2++;
+				}
+				System.out.println(count6);
+				if (count6 != 4) {
+					report.updateTestLog("Verify New Contact Page Layout",
+							"All fields are not present in the Contact Information section", Status.FAIL);
+				} else {
+					report.updateTestLog("Verify New Contact Page Layout",
+							"All fields are present in the Contact Information section", Status.PASS);
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			systemInformationList.clear();
+			List<WebElement> customLinksList = driver
+					.findElements(By.xpath("//h3//span[text()='Custom Links']/ancestor::h3/parent::div/div[1]//a"));
+			int count7 = 0, i7 = 0, j1 = 0;
+			String fieldsArray7[] = new String[customLinksList.size()];
+			System.out.println(customLinksList.size());
+			try {
+				customLinksSectionFieldsList.clear();
+				customLinksFields();
+				while (j1 < customLinksList.size()) {
+					for (WebElement element7 : customLinksList) {
+						fieldsArray7[i7] = element7.getText();
+						if (fieldsArray7[i7].contains(customLinksSectionFieldsList.get(j1))) {
+							System.out.println("Custom Link fields are " + element7.getText());
+							report.updateTestLog("Verify New Contact Page Layout",
+									element7.getText() + "labels  present in the Custom Links ", Status.PASS);
+							count7++;
+						}
+						i7++;
+					}
+					i7 = 0;
+					j1++;
+				}
+				System.out.println(count7);
+				if (count7 != 3) {
+					report.updateTestLog("Verify New Contact Page Layout",
+							"All fields are not present in the Custom Links section", Status.FAIL);
+				} else {
+					report.updateTestLog("Verify New Contact Page Layout",
+							"All fields are present in the Custom Links section", Status.PASS);
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			customLinksList.clear();
+			
+		} 
+			
+		}
+
 	}
 
 	/**

@@ -26,7 +26,7 @@ public class TC_SF_CMAPACBrokerOpportunitiesCreateOfferPage extends CRAFTTestCas
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
 		SeleniumTestParameters testParameters = new SeleniumTestParameters(currentScenario, currentTestcase);
-		testParameters.setCurrentTestDescription("Test for Validating the Opportunities for the My Active Listings filters");
+		testParameters.setCurrentTestDescription("Test for Validating the Opportunities for the create offer quick action drop down page");
 		testParameters.setIterationMode(IterationOptions.RUN_ONE_ITERATION_ONLY);
 		testParameters.setBrowser(Browser.CHROME);
 		testParameters.setExecutionMode(executionMode);

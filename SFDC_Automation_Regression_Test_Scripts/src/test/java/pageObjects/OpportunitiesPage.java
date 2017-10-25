@@ -887,19 +887,19 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//a[contains(@title,'Create Offer')]")
 	WebElement createOffer;
 
-	@FindBy(xpath = "//input[@placeholder='Search Contacts']")
+	@FindBy(xpath = "//input[contains(@placeholder,'Search Contacts')] ")
 	WebElement offerorContact;
 
 	@FindBy(xpath = "//div[contains(@class,'secondaryLabel')][@title='AUCAPACBroker123']")
 	WebElement offerorContactValue;
 
-	@FindBy(xpath = "//input[@placeholder='Search Accounts']")
+	@FindBy(xpath = "//input[contains(@placeholder,'Search Accounts')]")
 	WebElement offerorAccount;
 
 	@FindBy(xpath = "//div[@title='AUCAPACBroker123']/following-sibling::div[@title='2100 Ross Avenue, Dallas, United States']")
 	WebElement offerorAccountValue;
 
-	@FindBy(xpath = "//span[text()='Offer Price']/parent::label/parent::div/input")
+	@FindBy(xpath = "//span[contains(text(),'Offer Price')]/parent::label/parent::div/input")
 	WebElement offerPrice;
 
 	@FindBy(xpath = "//div[contains(@class,'slds-modal__footer')]//span[text()='Save']")
@@ -1219,7 +1219,12 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath="//div[@class='select-options']//a[@title='BNP']/parent::li/parent::ul/li")
 	List<WebElement> awardedToList;
-
+	
+	@FindBy(xpath="//div[contains(@class,'primaryLabel')]/mark[contains(text(),'Test')]")
+	WebElement offerorContactName;
+	
+	@FindBy(xpath="//div[contains(@class,'primaryLabel') and @title='Test Automation 0100']/following-sibling::div[contains(@title,'2100 Ross Avenue, Dallas, United States')]")
+	WebElement offerorAccountName;
 
 	HomePage hp = new HomePage(scriptHelper);
 	SearchTextSOQL searchOpportunity = new SearchTextSOQL(scriptHelper);
@@ -9733,6 +9738,30 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver,saveNewOpportunity_AS, 3);
 		Utility_Functions.xClick(driver,saveNewOpportunity_AS, true);
 		Utility_Functions.timeWait(5);
+		Utility_Functions.xWaitForElementPresent(driver,showMoreActions, 3);
+		Utility_Functions.xClick(driver,showMoreActions, true);
+		Utility_Functions.xWaitForElementPresent(driver,createOffer, 3);
+		Utility_Functions.xClick(driver,createOffer, true);
+		Utility_Functions.xWaitForElementPresent(driver,offerorAccount, 3);
+		Utility_Functions.xSendKeys(driver,offerorAccount, "Test Automation 0100");
+		Utility_Functions.xWaitForElementPresent(driver,offerorAccountName, 3);
+		Utility_Functions.xClick(driver,offerorAccountName, true);
+		Utility_Functions.xWaitForElementPresent(driver,offerorContact, 3);
+		Utility_Functions.xSendKeys(driver,offerorContact, "Test Automation 0100");
+		Utility_Functions.xWaitForElementPresent(driver,offerorContactName, 3);
+		Utility_Functions.xClick(driver,offerorContactName, true);
+		Utility_Functions.xWaitForElementPresent(driver,offerPrice, 5);
+		Utility_Functions.xSendKeys(driver,offerPrice, dataTable.getData("General_Data", "InstallmentAmount"));
+		Utility_Functions.xWaitForElementPresent(driver,createOfferSave, 5);
+		Utility_Functions.xClick(driver,createOfferSave, true);
+		Utility_Functions.timeWait(2);
+		if(details.isDisplayed()) {
+
+			report.updateTestLog("Verify Create Offer from Opportunity", "The offer is saved with the mandatory fields ", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Create Offer from Opportunity", "The offer is not saved with the mandatory fields", Status.FAIL);
+		}
+			
 	}
 	/**
 	 * Validating the Opportunities create new installment 
