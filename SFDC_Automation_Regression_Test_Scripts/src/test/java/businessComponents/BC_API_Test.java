@@ -13,6 +13,7 @@ import pagesAPI.CreateUsers;
 import pagesAPI.EstablishConnection;
 import pagesAPI.LeadFunctions;
 import pagesAPI.OpportunitiesFunctions;
+import pagesAPI.PermissionSetsUsers;
 import pagesAPI.SearchTextSOQL;
 
 /**
@@ -43,6 +44,7 @@ public class BC_API_Test extends ReusableLibrary {
 	CreateUsers createUsers = new CreateUsers(scriptHelper);
 	LoginPage loginPage = new LoginPage(scriptHelper);
 	ActivityFunctions activityFunctions = new ActivityFunctions(scriptHelper);
+	PermissionSetsUsers permissionSetsUsers = new PermissionSetsUsers(scriptHelper);
 	
 	/**
 	 * Validating the Login functionality
@@ -382,8 +384,8 @@ public class BC_API_Test extends ReusableLibrary {
 	public void bc_changePassword() {
 		/*createUsers.setPassword(dataTable.getData("General_Data", "Password"));
 		loginPage.changePassword();*/
-		loginPage.changeExpiredPassword();
-		//createUsers.setPassword("FTEPasswordRelease41");
+		//loginPage.changeExpiredPassword();
+		createUsers.setPassword("FTEPasswordRelease42");
 	}
 	
 	
@@ -398,5 +400,26 @@ public class BC_API_Test extends ReusableLibrary {
 	 */	
 	public void bc_validatingUserIDs() {
 		loginPage.verifyUserIDs();
+	}
+	
+	/**
+	 * Verifying the permission sets for the user
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	public void bc_validatePermisionSets() {
+		permissionSetsUsers.validatePermissionSets();
+	}
+	
+	/**
+	 * Verifying the permission sets for the user
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	public void bc_createUsers() {
+		loginPage.userNames();
+		permissionSetsUsers.getOrCreateUser();
 	}
 }

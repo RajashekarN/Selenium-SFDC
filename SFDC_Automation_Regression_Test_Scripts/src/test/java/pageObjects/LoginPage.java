@@ -501,6 +501,7 @@ public class LoginPage extends ReusableLibrary {
 				}
 			} catch (Exception e1) {
 				System.out.println("Login wasn't successful:::");
+				driver.close();
 			}
 			/*frameworkParameters.setStopExecution(true);
 			throw new FrameworkException("Verify Login", "Login failed");*/
@@ -619,56 +620,83 @@ public class LoginPage extends ReusableLibrary {
 	 * @author Vishnuvardhan
 	 *
 	 */
-	static ArrayList<String> userNamesList = new ArrayList<String>();
+	public static ArrayList<String> userNamesList = new ArrayList<String>();
 
 	public void userNames() {
 		String environment = initializeEnvironment();
 		environment = environment.toLowerCase();
-		/*userNamesList.add("testuser11@cbre.com.crm."+ environment);
+		
+		userNamesList.add("testuser1@cbre.com.crm."+ environment);
+		userNamesList.add("testuser10@cbre.com.crm."+ environment);
+		userNamesList.add("testuser11@cbre.com.crm."+ environment);
 		userNamesList.add("testuser12@cbre.com.crm."+ environment);
+		userNamesList.add("testuser13@cbre.com.crm."+ environment);
+		userNamesList.add("testuser15@cbre.com.crm."+ environment);
+		userNamesList.add("testuser16@cbre.com.crm."+ environment);
+		userNamesList.add("testuser17@cbre.com.crm."+ environment);
+		userNamesList.add("testuser18@cbre.com.crm."+ environment);
+		userNamesList.add("testuser19@cbre.com.crm."+ environment);
+		userNamesList.add("testuser2@cbre.com.crm."+ environment);
+		userNamesList.add("testuser20@cbre.com.crm."+ environment);
+		userNamesList.add("testuser21@cbre.com.crm."+ environment);
+		userNamesList.add("testuser22@cbre.com.crm."+ environment);
+		userNamesList.add("testuser23@cbre.com.crm."+ environment);
+		userNamesList.add("testuser24@cbre.com.crm."+ environment);
+		userNamesList.add("testuser25@cbre.com.crm."+ environment);
 		userNamesList.add("testuser26@cbre.com.crm."+ environment);
+		userNamesList.add("testuser27@cbre.com.crm."+ environment);
+		userNamesList.add("testuser28@cbre.com.crm."+ environment);
+		userNamesList.add("testuser29@cbre.com.crm."+ environment);
+		userNamesList.add("testuser3@cbre.com.crm."+ environment);
+		userNamesList.add("testuser30@cbre.com.crm."+ environment);
+		userNamesList.add("testuser31@cbre.com.crm."+ environment);
+		userNamesList.add("testuser32@cbre.com.crm."+ environment);
+		userNamesList.add("testuser36@cbre.com.crm."+ environment);
+		userNamesList.add("testuser37@cbre.com.crm."+ environment);
+		userNamesList.add("testuser38@cbre.com.crm."+ environment);
+		userNamesList.add("testuser39@cbre.com.crm."+ environment);
+		userNamesList.add("testuser4@cbre.com.crm."+ environment);
+		userNamesList.add("testuser40@cbre.com.crm."+ environment);
+		userNamesList.add("testuser41@cbre.com.crm."+ environment);
 		userNamesList.add("testuser45@cbre.com.crm."+ environment);
 		userNamesList.add("testuser46@cbre.com.crm."+ environment);
 		userNamesList.add("testuser47@cbre.com.crm."+ environment);
-		userNamesList.add("testuser86@cbre.com.crm."+ environment);
-		userNamesList.add("testuser2@cbre.com.crm."+ environment);
-		userNamesList.add("testuser3@cbre.com.crm."+ environment);
-		userNamesList.add("testuser4@cbre.com.crm."+ environment);
-		userNamesList.add("testuser28@cbre.com.crm."+ environment);
-		userNamesList.add("testuser29@cbre.com.crm."+ environment);
-		userNamesList.add("testuser87@cbre.com.crm."+ environment);
-		userNamesList.add("testuser36@cbre.com.crm."+ environment);
-		userNamesList.add("testuser37@cbre.com.crm."+ environment);
-		userNamesList.add("testuser39@cbre.com.crm."+ environment);
-		userNamesList.add("testuser40@cbre.com.crm."+ environment);
-		userNamesList.add("testuser70@cbre.com.crm."+ environment);
-		userNamesList.add("testuser90@cbre.com.crm."+ environment);
-		userNamesList.add("testuser71@cbre.com.crm."+ environment);
+		userNamesList.add("testuser48@cbre.com.crm."+ environment);
+		userNamesList.add("testuser49@cbre.com.crm."+ environment);
+		userNamesList.add("testuser5@cbre.com.crm."+ environment);
+		userNamesList.add("testuser50@cbre.com.crm."+ environment);
+		userNamesList.add("testuser51@cbre.com.crm."+ environment);
+		userNamesList.add("testuser6@cbre.com.crm."+ environment);
+		userNamesList.add("testuser62@cbre.com.crm."+ environment);
+		userNamesList.add("testuser65@cbre.com.crm."+ environment);
+		userNamesList.add("testuser66@cbre.com.crm."+ environment);
+		userNamesList.add("testuser67@cbre.com.crm."+ environment);
 		userNamesList.add("testuser68@cbre.com.crm."+ environment);
-		userNamesList.add("testuser72@cbre.com.crm."+ environment);
 		userNamesList.add("testuser69@cbre.com.crm."+ environment);
+		userNamesList.add("testuser7@cbre.com.crm."+ environment);
+		userNamesList.add("testuser70@cbre.com.crm."+ environment);
+		userNamesList.add("testuser71@cbre.com.crm."+ environment);
+		userNamesList.add("testuser72@cbre.com.crm."+ environment);
 		userNamesList.add("testuser73@cbre.com.crm."+ environment);
 		userNamesList.add("testuser74@cbre.com.crm."+ environment);
+		userNamesList.add("testuser75@cbre.com.crm."+ environment);
+		userNamesList.add("testuser76@cbre.com.crm."+ environment);
+		userNamesList.add("testuser78@cbre.com.crm."+ environment);
 		userNamesList.add("testuser79@cbre.com.crm."+ environment);
+		userNamesList.add("testuser8@cbre.com.crm."+ environment);
 		userNamesList.add("testuser80@cbre.com.crm."+ environment);
 		userNamesList.add("testuser81@cbre.com.crm."+ environment);
 		userNamesList.add("testuser82@cbre.com.crm."+ environment);
 		userNamesList.add("testuser83@cbre.com.crm."+ environment);
 		userNamesList.add("testuser84@cbre.com.crm."+ environment);
-		userNamesList.add("testuser88@cbre.com.crm."+ environment);
 		userNamesList.add("testuser85@cbre.com.crm."+ environment);
-		userNamesList.add("testuser67@cbre.com.crm."+ environment);
-		userNamesList.add("testuser66@cbre.com.crm."+ environment);
-		userNamesList.add("testuser76@cbre.com.crm."+ environment);
-		userNamesList.add("testuser65@cbre.com.crm."+ environment);
-		userNamesList.add("testuser48@cbre.com.crm."+ environment);*/
-		userNamesList.add("testuser49@cbre.com.crm."+ environment);
-		userNamesList.add("testuser78@cbre.com.crm."+ environment);
-		userNamesList.add("testuser31@cbre.com.crm."+ environment);
-		userNamesList.add("testuser32@cbre.com.crm."+ environment);
-		userNamesList.add("testuser75@cbre.com.crm."+ environment);
-		userNamesList.add("testuser91@cbre.com.crm."+ environment);
-		
+		userNamesList.add("testuser86@cbre.com.crm."+ environment);
+		userNamesList.add("testuser87@cbre.com.crm."+ environment);
+		userNamesList.add("testuser88@cbre.com.crm."+ environment);
+		userNamesList.add("testuser9@cbre.com.crm."+ environment);
+		userNamesList.add("testuser90@cbre.com.crm."+ environment);
+		userNamesList.add("testuser91@cbre.com.crm."+ environment);	
+	
 		System.out.println("User Names List are::::" + userNamesList);
 	}
 	
@@ -719,7 +747,7 @@ public class LoginPage extends ReusableLibrary {
 					userIDsWorking.add(sUserName);
 					Utility_Functions.timeWait(4);
 					logout();
-					Utility_Functions.timeWait(3);				
+					//Utility_Functions.timeWait(3);				
 				}	
 				if(userNamesList.size()==count) {
 					report.updateTestLog("Verify Login", "All the UserID's are working successfully", Status.PASS);
