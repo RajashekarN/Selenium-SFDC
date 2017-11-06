@@ -5210,6 +5210,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, recentlyViewed, true);
 		Utility_Functions.xWaitForElementPresent(driver, allActiveOpportunities, 3);
 		Utility_Functions.xClick(driver, allActiveOpportunities, true);
+		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
 		Utility_Functions.xclickRandomElement(opportunitiesList);
 		report.updateTestLog("Verify Opportunity Landing Page",
