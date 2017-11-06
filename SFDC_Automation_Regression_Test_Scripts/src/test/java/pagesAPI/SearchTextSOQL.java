@@ -207,7 +207,14 @@ public class SearchTextSOQL extends ReusableLibrary {
 		try {
 			establishConnection.establishConnection();
 			String query = Query;
-			QueryResult result = EstablishConnection.connection.query(query);
+			QueryResult result = null;
+			try {
+				result = EstablishConnection.connection.query(query);
+			} catch (Exception e) {
+				if(result==null) {
+					System.out.println("There are no records present in the table:::");
+				}
+			}
 			if (result.getSize() > 0) {
 				boolean done = false;
 				while (!done) {
@@ -300,6 +307,10 @@ public class SearchTextSOQL extends ReusableLibrary {
 							recordID = (String) record.getField("Username");
 							report.updateTestLog("Verify Fetch Record",
 									"Record has been fetched successfully:::" + recordID, Status.PASS);
+						} else if (fieldname.equals("Email")) {
+							recordID = (String) record.getField("Email");
+							report.updateTestLog("Verify Fetch Record",
+									"Record has been fetched successfully:::" + recordID, Status.PASS);
 						} else {
 							recordID = (String) record.getField("Id");
 							report.updateTestLog("Verify Fetch Record",
@@ -319,6 +330,7 @@ public class SearchTextSOQL extends ReusableLibrary {
 					}
 				}
 			}
+			
 		} catch (Exception ex) {
 			report.updateTestLog("Verify Fetch Record", "Record fetchfailed:::" + recordID, Status.FAIL);
 			System.out.println("Exception in main : " + ex);

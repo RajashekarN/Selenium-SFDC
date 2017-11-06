@@ -422,4 +422,14 @@ public class BC_API_Test extends ReusableLibrary {
 		loginPage.userNames();
 		permissionSetsUsers.getOrCreateUser();
 	}
+	
+	/**
+	 * Verifying whether the user is present or not if not creating the new user
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	public void bc_fectchOrCreateUser() {
+		permissionSetsUsers.fectchOrCreateUser();
+	}
 }
