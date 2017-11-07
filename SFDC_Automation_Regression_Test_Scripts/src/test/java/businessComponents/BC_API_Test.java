@@ -382,10 +382,7 @@ public class BC_API_Test extends ReusableLibrary {
 	}
 	
 	public void bc_changePassword() {
-		/*createUsers.setPassword(dataTable.getData("General_Data", "Password"));
-		loginPage.changePassword();*/
-		//loginPage.changeExpiredPassword();
-		createUsers.setPassword("FTEPasswordRelease42");
+		loginPage.changePassword();
 	}
 	
 	

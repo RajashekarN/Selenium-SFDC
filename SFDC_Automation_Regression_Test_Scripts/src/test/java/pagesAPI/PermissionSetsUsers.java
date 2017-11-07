@@ -104,18 +104,19 @@ public class PermissionSetsUsers extends ReusableLibrary {
 
 	public void fectchOrCreateUser() {
 		try {
+			environment = loginPage.initializeEnvironment();
 			loginPage.userNames();
-			String userName, result, userId = null;
+			String userName, userResultId, userId = null;
 			for (int i = 0; i < LoginPage.userNamesList.size(); i++) {
 				userName = LoginPage.userNamesList.get(i);
 				roleProfileTimeZoneResult = setRoleProfileTimeZone(userName);
-				String query = "Select Email from User where Email ='" + userName + "'";
-				result = searchTextSOQL.fetchRecordFieldValue("Email", query);
-				if (result == null) {
+				String query = "Select Id from User where username ='" + userName + "'";
+				userResultId = searchTextSOQL.fetchRecordFieldValue("Id", query);
+				if (userResultId == null) {
 					String role = roleProfileTimeZoneResult.split("-")[0];
 					String profile = roleProfileTimeZoneResult.split("-")[1];
 					String timeZone = roleProfileTimeZoneResult.split("-")[2];
-					userId = createUsers.createUser(dataTable.getData("General_Data", "FirstName"),
+					userResultId = createUsers.createUser(dataTable.getData("General_Data", "FirstName"),
 							dataTable.getData("General_Data", "LastName"), 
 							dataTable.getData("General_Data", "Alias"),
 							"vishnuvardhan.bommisetty" + "@cbre.com", 
@@ -135,7 +136,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				userNameCreatedList.add(userName);
 				setPermissionSets(userNameCreatedList, permissionSetsLabels);
 				userNameCreatedList.clear();
-				createUsers.setPassword(userId, properties.getProperty(environment + "AdminPassword"));
+				createUsers.setPassword(userResultId, properties.getProperty(environment + "AdminPassword"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -149,7 +150,12 @@ public class PermissionSetsUsers extends ReusableLibrary {
 
 	public void setPermissionSets(List<String> userNameList, List<String> permissionSetsLabels) throws Exception {
 		for (int i = 0; i < userNameList.size(); i++) {
-			String userName = userNameList.get(i).substring(0, userNameList.get(i).length() - 3);
+			String userName;
+			if((environment.equalsIgnoreCase("FTE2")) || (environment.equalsIgnoreCase("UAT2"))) {
+				userName = userNameList.get(i).substring(0, userNameList.get(i).length() - 4);
+			} else {
+				userName = userNameList.get(i).substring(0, userNameList.get(i).length() - 3);
+			}			
 			switch (userName) {
 			case "testuser1@cbre.com.crm.":
 				System.out.println("System Administrator User - :::" + userNameList.get(i)
