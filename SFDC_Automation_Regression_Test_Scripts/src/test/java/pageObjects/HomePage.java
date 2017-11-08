@@ -1,6 +1,10 @@
 package pageObjects;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -102,6 +106,78 @@ public class HomePage extends ReusableLibrary {
 
 	@FindBy(xpath="//button[text()='More']")
 	WebElement showMore;
+	
+	@FindBy(xpath = "//div[@class='slds-truncate'][text()='New']")
+	WebElement newOpportunity;
+	
+	@FindBy(xpath="//span[contains(text(),'Account Name')]/parent::label/following-sibling::div//input[contains(@title,'Search Accounts')]")
+	WebElement accountNameNewOpportunity;
+	
+	@FindBy(xpath="//div[contains(@class,'primaryLabel')][contains(@title,'Test Automation_0101')]")
+	WebElement accountNameNewOpp;
+	
+	@FindBy(xpath = "//span[text()='Close Date']/parent::label/parent::div//input")
+	WebElement closeDate_AS;
+	
+	@FindBy(xpath="//span[contains(text(),'Lead Source')]/parent::span/following-sibling::div//a[contains(@aria-label,'Lead Source')]")
+	WebElement leadSourceNewOpp;
+	
+	@FindBy(xpath="//a[contains(@title,'Business Relationship')]")
+	WebElement leadSourceNewOppValue;
+	
+	@FindBy(xpath = "//span[text()='Estimated Gross Fee/Commission']/parent::label/parent::div/input")
+	WebElement estiamtedGrossFeeCommissionValue;
+	
+	@FindBy(xpath = "//span[text()='Estimated Transaction Value']/parent::label/parent::div/input")
+	WebElement estimatedTransactionValue;
+	
+	@FindBy(xpath="//button[contains(@class,'forceActionButton')]/span[text()='Save']")
+	WebElement saveNewOpp;
+	
+	@FindBy(xpath="//span[contains(text(),'CBRE Office')]/parent::span/following-sibling::div//a[contains(@aria-label,'CBRE Office')]")
+	WebElement opportunityCBREOffice;
+	
+	@FindBy(xpath="//a[contains(@title,'India – Ahmedabad')]")
+	WebElement opportunityCBREOfficeValue;
+	
+	@FindBy(xpath="//span[contains(text(),'Country')]/parent::span/following-sibling::div//a[contains(@aria-label,'Country')]")
+	WebElement opportunityCountry;
+	
+	@FindBy(xpath="//a[(@title='India')]")
+	WebElement opportunityCountryValue;
+	
+	@FindBy(xpath="//span[contains(text(),'Asset Type')]/parent::span/following-sibling::div//a[contains(@aria-label,'Asset Type')]")
+	WebElement assetType;
+	
+	@FindBy(xpath="//a[@title='Office']")
+	WebElement assetTypeValue;
+	
+	@FindBy(xpath="//span[contains(text(),'City')]/parent::label/parent::div/input")
+	WebElement opportunityCity;
+	
+	@FindBy(xpath="//span[text()='Assignment Start Date']/parent::label/parent::div//input")
+	WebElement assignmentStartDate;
+	
+	@FindBy(xpath="//a[contains(@aria-label,'Opportunity Currency')]")
+	WebElement selectOpportunityCurrency;
+	
+	@FindBy(xpath="//a[contains(@title,'Indian Rupee')]")
+	WebElement opportunityCurrencyValue;
+	
+	@FindBy(xpath="//div[contains(@class,'pbBottomButtons')]//input[contains(@id,'next')]")
+	WebElement nextForJapan;
+	
+	@FindBy(xpath = "//button[text()='Continue']")
+	WebElement continueButton;
+	
+	@FindBy(xpath = "//select[@id='record-type-select']")
+	WebElement selectOpportunityRecordType;
+	
+	@FindBy(xpath="//select[@id='record-type-select']/option[contains(text(),'APAC Debt & Structured Finance')]")
+	WebElement opportunityDSFValue;
+	
+	@FindBy(xpath = "//a[@class='tabHeader']//span[text()='Details']")
+	WebElement details;
 	
 	/*	@FindBy(xpath = "//button[@class='bare slds-button uiButton forceHeaderButton oneUserProfileCardTrigger']")
 	WebElement logOutButton;
@@ -425,7 +501,10 @@ public class HomePage extends ReusableLibrary {
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println(e.getMessage());
-			}
+			}		
+				
+			
+				
 		}	
 	}
 	/**
@@ -522,4 +601,120 @@ public class HomePage extends ReusableLibrary {
 
 
 	}
+	/**
+	 * Validating the Marketing Lists tab on the Home Page
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void validateHomePageTabs() {
+		if ((dataTable.getData("General_Data", "TC_ID").contains("CMAPACBrokerJapanOpportunityCreation"))){	
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xWaitForElementPresent(driver, nextForJapan, 4);
+		Utility_Functions.xClick(driver,nextForJapan, true);
+		}
+		Utility_Functions.timeWait(5);
+		List<WebElement> homePageTabs = driver.findElements(By.xpath("//div[contains(@class,'slds-context-bar')]//span[@class='slds-truncate']"));
+		int count5 = 0, i5 = 0, j5 = 0;
+		String fieldsArray5[] = new String[homePageTabs.size()];
+		System.out.println(homePageTabs.size());
+		try {
+			homePageTabsList();
+			while (j5 <homePageTabs.size()) {
+				for (WebElement element5 :homePageTabs) {
+					fieldsArray5[i5] = element5.getText();
+					if (fieldsArray5[i5].equalsIgnoreCase(tabsList.get(j5))) {
+						System.out.println("Verify Home Page Tabs " + element5.getText());
+						report.updateTestLog("Verify Home Page Tabs",
+								element5.getText() + "labels  present in the Home Page ", Status.PASS);
+						count5++;
+					}
+					i5++;
+				}
+				i5 = 0;
+				j5++;
+			}
+			System.out.println(count5);
+			if (count5>=12) {
+				report.updateTestLog("Verify Home Page Tabs",
+						"All fields are not present in the Home Page", Status.FAIL);
+			} else {
+				report.updateTestLog("Verify Home Page Tabs",
+						"All fields are present in the Home Page", Status.PASS);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		homePageTabs.clear();
+		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 4);
+		Utility_Functions.xClick(driver, menu_Opportunities, true);
+		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
+		Utility_Functions.xClick(driver, newOpportunity, true);
+		Utility_Functions.timeWait(2);
+		if ((dataTable.getData("General_Data", "TC_ID").contains("CMAPACBrokerJapanOpportunityCreation"))){	
+		Utility_Functions.xSwitchtoFrame(driver, continueButton);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver,selectOpportunityRecordType, 3);
+		Utility_Functions.xClick(driver,selectOpportunityRecordType, true);
+		Utility_Functions.xWaitForElementPresent(driver,opportunityDSFValue, 3);
+		Utility_Functions.xClick(driver,opportunityDSFValue, true);
+		Utility_Functions.xWaitForElementPresent(driver,continueButton, 3);
+		Utility_Functions.xClick(driver,continueButton, true);
+		Utility_Functions.timeWait(2);
+		driver.switchTo().defaultContent();
+		Utility_Functions.timeWait(2);
+		}
+		Utility_Functions.xWaitForElementPresent(driver,accountNameNewOpportunity, 4);
+		Utility_Functions.xSendKeys(driver,accountNameNewOpportunity, "Test Automation_0101");
+		Utility_Functions.xWaitForElementPresent(driver,accountNameNewOpp, 3);
+		Utility_Functions.xClick(driver,accountNameNewOpp, true);
+		Utility_Functions.xWaitForElementPresent(driver,leadSourceNewOpp, 3);
+		Utility_Functions.xClick(driver,leadSourceNewOpp, true);
+		Utility_Functions.xWaitForElementPresent(driver,leadSourceNewOppValue, 3);
+		Utility_Functions.xClick(driver,leadSourceNewOppValue, true);
+		System.out.println(Calendar.getInstance());
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		Date date = new Date();
+		Utility_Functions.xWaitForElementPresent(driver, closeDate_AS, 3);
+		Utility_Functions.xSendKeys(driver, closeDate_AS, dateFormat.format(date).toString());
+		if ((dataTable.getData("General_Data", "TC_ID").contains("CMAPACBrokerJapanOpportunityCreation"))){	
+		Utility_Functions.xWaitForElementPresent(driver,estiamtedGrossFeeCommissionValue, 3);
+		Utility_Functions.xSendKeys(driver,estiamtedGrossFeeCommissionValue, dataTable.getData("General_Data", "InstallmentAmount"));
+		Utility_Functions.xWaitForElementPresent(driver,estimatedTransactionValue, 3);
+		Utility_Functions.xSendKeys(driver,estimatedTransactionValue, dataTable.getData("General_Data", "InstallmentAmount"));
+		}else if((dataTable.getData("General_Data", "TC_ID").contains("APACProjectManagerHomePageButtons"))){	
+		Calendar calendar1 = Calendar.getInstance();
+		calendar1.add(Calendar.DAY_OF_MONTH, -20);
+		SimpleDateFormat dateFormat1 = new SimpleDateFormat("MM/dd/yyyy");
+		System.out.println("Date : " + dateFormat1.format(calendar1.getTime()));
+		Utility_Functions.xWaitForElementPresent(driver,assignmentStartDate, 3);
+		Utility_Functions.xSendKeys(driver,assignmentStartDate, dateFormat1.format(calendar1.getTime()));
+		Utility_Functions.xWaitForElementPresent(driver,opportunityCBREOffice, 3);
+		Utility_Functions.xClick(driver,opportunityCBREOffice, true);
+		Utility_Functions.xWaitForElementPresent(driver,opportunityCBREOfficeValue, 3);
+		Utility_Functions.xClick(driver,opportunityCBREOfficeValue, true);
+		Utility_Functions.xWaitForElementPresent(driver,opportunityCountry, 3);
+		Utility_Functions.xClick(driver,opportunityCountry, true);
+		Utility_Functions.xWaitForElementPresent(driver,opportunityCountryValue, 3);
+		Utility_Functions.xClick(driver,opportunityCountryValue, true);
+		Utility_Functions.xWaitForElementPresent(driver,opportunityCity, 3);
+		Utility_Functions.xSendKeys(driver,opportunityCity, dataTable.getData("General_Data", "City"));
+		Utility_Functions.xWaitForElementPresent(driver,assetType, 3);
+		Utility_Functions.xClick(driver,assetType, true);
+		Utility_Functions.xWaitForElementPresent(driver,assetTypeValue, 3);
+		Utility_Functions.xClick(driver,assetTypeValue, true);
+		}
+		Utility_Functions.xWaitForElementPresent(driver,saveNewOpp, 3);
+		Utility_Functions.xClick(driver,saveNewOpp, true);
+		Utility_Functions.timeWait(3);
+		if(details.isDisplayed()) {
+
+			report.updateTestLog("Verify Home Page Tabs", "The opportunity is saved with the all the required fields", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Home Page Tabs", "The opportunity is not saved with the all the required fields", Status.FAIL);
+		}
+}
 }

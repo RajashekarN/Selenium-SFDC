@@ -1,11 +1,9 @@
-package testscripts.SF.Release38TestScripts;
-
+package testscripts.SF.UATTestScripts;
 
 import org.openqa.selenium.Platform;
-
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
+import com.cognizant.Craft.CRAFTTestCase;
 import com.cognizant.framework.IterationOptions;
 import com.cognizant.framework.selenium.Browser;
 import com.cognizant.framework.selenium.ExecutionMode;
@@ -13,20 +11,21 @@ import com.cognizant.framework.selenium.SeleniumTestParameters;
 
 import com.cognizant.Craft.*;
 /**
- * Validating the Properties private tag
+ * Test Script for validating the Leads Creation and available sections
  * 
  * @author Ramya
  *
  */
 
-public class TC_SF_CMAPACManagerPropertiesPrivateTag extends CRAFTTestCase {
+public class TC_SF_OBAMERAdminBrokerLeadsCreateNewLeads extends CRAFTTestCase
+{
 	@Test(dataProvider = "RegressionTestScripts")
-	public void runTC_SF_CMAPACManagerPropertiesPrivateTag(String testInstance, ExecutionMode executionMode, Platform platform
+	public void runTC_SF_OBAMERAdminBrokerLeadsCreateNewLeads(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
 		SeleniumTestParameters testParameters = new SeleniumTestParameters(currentScenario, currentTestcase);
-		testParameters.setCurrentTestDescription("Test for Validating the Properties private tag");
+		testParameters.setCurrentTestDescription("Test for validating the Leads Creation and available sections");
 		testParameters.setIterationMode(IterationOptions.RUN_ONE_ITERATION_ONLY);
 		testParameters.setBrowser(Browser.CHROME);
 		testParameters.setExecutionMode(executionMode);
@@ -43,8 +42,38 @@ public class TC_SF_CMAPACManagerPropertiesPrivateTag extends CRAFTTestCase {
 				"4d005cb2c4938197"*/ },
 			};
 	}
-
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

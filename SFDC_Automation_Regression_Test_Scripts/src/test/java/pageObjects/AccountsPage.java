@@ -766,6 +766,9 @@ public class AccountsPage extends ReusableLibrary {
 	
 	@FindBy(xpath="//span[contains(text(),'Currency')]/parent::span/following-sibling::div//a[contains(@aria-label,'Currency')]")
     WebElement budgetCurrency;
+	
+	/*@FindBy(xpath = "//a[@class='forceActionLink']/div[@class='slds-truncate'][text()='Edit']")
+	WebElement edit;*/
 
 
 	HomePage hp = new HomePage(scriptHelper);
@@ -5786,5 +5789,42 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver,saveBudget, true);
 		
 		}	
+	}
+	/**
+	 * Validating the Budget/Target  editing for the already created budget/targets
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void verifyBudgetsTargetsEditing(){
+		Utility_Functions.xWaitForElementPresent(driver, applauncher, 3);
+		Utility_Functions.xClick(driver, applauncher, true);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver,budgetsTargets, 3);
+		Utility_Functions.xClick(driver,budgetsTargets, true);
+		List<WebElement> budgetsNamesList = driver.findElements(By.xpath(
+				"//a[contains(@class,'slds-truncate outputLookupLink slds-truncate forceOutputLookup')][contains(@data-recordid,'a14e')]"));
+		Utility_Functions.xclickOnFirstElementfromList(budgetsNamesList);
+		Utility_Functions.xWaitForElementPresent(driver,edit, 3);
+		Utility_Functions.xClick(driver,edit, true);
+		Utility_Functions.xWaitForElementPresent(driver,budgetAmount, 3);
+		Utility_Functions.xSendKeys(driver,budgetAmount, dataTable.getData("General_Data", "InstallmentAmount"));
+		Calendar calendar1 = Calendar.getInstance();
+		calendar1.add(Calendar.DAY_OF_MONTH, 90);
+		SimpleDateFormat dateFormat1 = new SimpleDateFormat("MM/dd/yyyy");
+		System.out.println("Date : " + dateFormat1.format(calendar1.getTime()));
+		Utility_Functions.xWaitForElementPresent(driver,startDate, 3);
+		Utility_Functions.xSendKeys(driver,startDate, dateFormat1.format(calendar1.getTime()));
+		Utility_Functions.xWaitForElementPresent(driver,saveBudget, 3);
+		Utility_Functions.xClick(driver,saveBudget, true);
+		Utility_Functions.timeWait(5);
+		if( (edit.isDisplayed())) {
+
+			report.updateTestLog("Verify Budgets/Targets Edit Page", "The Budget/Target is saved after the editing is done", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Budgets/Targets Edit Page", "The Budget/Target is not edited", Status.FAIL);
+		}
+	
+		
 	}
 }

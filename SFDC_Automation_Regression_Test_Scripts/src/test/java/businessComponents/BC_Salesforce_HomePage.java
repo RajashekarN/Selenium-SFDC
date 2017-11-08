@@ -141,5 +141,15 @@ public class BC_Salesforce_HomePage extends ReusableLibrary {
 	public void bc_validateHomePageMarketingLists() throws InterruptedException {
 		sfHomePage.validateHomePageMarketingLists();
 	}
- 	
+	/**
+	 * Validating the Home Page Tabs
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+		
+	public void bc_validateHomePageTabs() throws InterruptedException {
+		sfHomePage.validateHomePageTabs();
+	}
+		
 }

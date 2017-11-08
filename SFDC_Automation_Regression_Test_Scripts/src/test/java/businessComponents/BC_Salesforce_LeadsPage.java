@@ -323,4 +323,15 @@ public class BC_Salesforce_LeadsPage extends ReusableLibrary {
 	public void bc_verifyLeadActivityCreation() {
 		sfLeadsPage.verifyLeadActivityCreation();
 	}
+	/**
+	 * Validating the Activity creation on Leads
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+
+	public void bc_verifyLeadsPrivateTags() {
+		sfLeadsPage.verifyLeadsPrivateTags();
+	}
 }
+
