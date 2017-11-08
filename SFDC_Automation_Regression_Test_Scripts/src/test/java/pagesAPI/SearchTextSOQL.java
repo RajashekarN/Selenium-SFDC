@@ -296,6 +296,14 @@ public class SearchTextSOQL extends ReusableLibrary {
 							recordID = (String) record.getField("Probability");
 							report.updateTestLog("Verify Fetch Record",
 									"Record has been fetched successfully:::" + recordID, Status.PASS);
+						} else if (fieldname.equals("Username")) {
+							recordID = (String) record.getField("Username");
+							report.updateTestLog("Verify Fetch Record",
+									"Record has been fetched successfully:::" + recordID, Status.PASS);
+						} else if (fieldname.equals("Email")) {
+							recordID = (String) record.getField("Email");
+							report.updateTestLog("Verify Fetch Record",
+									"Record has been fetched successfully:::" + recordID, Status.PASS);
 						} else {
 							recordID = (String) record.getField("Id");
 							report.updateTestLog("Verify Fetch Record",
@@ -314,7 +322,7 @@ public class SearchTextSOQL extends ReusableLibrary {
 						result = EstablishConnection.connection.queryMore(result.getQueryLocator());
 					}
 				}
-			}
+			}			
 		} catch (Exception ex) {
 			report.updateTestLog("Verify Fetch Record", "Record fetchfailed:::" + recordID, Status.FAIL);
 			System.out.println("Exception in main : " + ex);

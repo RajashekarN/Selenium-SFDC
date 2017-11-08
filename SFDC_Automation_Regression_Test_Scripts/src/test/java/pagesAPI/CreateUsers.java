@@ -54,30 +54,25 @@ public class CreateUsers extends ReusableLibrary {
 		setPassword(password);
 	}*/
 
-	public boolean createUsers() {
+	public String createUser(String firstName, String lastName, String alias, String email, String userName, String userRoleId, String profileId, String timeZoneSidKey) {
 		try {
 			SObject user = new SObject();
 			user.setType("user");
-			user.setField("Name", "OBAMER");
-			user.setField("Alias", "OBAMER");
-			user.setField("Email", "vishnuvardhan.bommisetty@cbre.com");
-			//user.setField("Nickname", "OBAMERBrokerUAT239@cbre.com");
-			user.setField("Username", "OBAMERBrokerUAT239@cbre.com");
-			user.setField("UserRole", "AMER");
-			//user.setField("UserLicense", "Salesforce");
-			user.setField("Profile", "CBRE Broker - AMER - Occupier Brokerage");
-            user.setField("TimeZoneSidKey", "America/Los_Angeles");
-            user.setField("LocaleSidKey", "En");			
-            user.setField("LanguageLocaleKey", "English");
-            user.setField("DefaultCurrencyIsoCode", "USD - U.S. Dollar");
+			user.setField("FirstName", firstName);
+			user.setField("LastName", lastName);
+			user.setField("Alias", alias);
+			user.setField("Email", email);
+			user.setField("Username", userName);
+			user.setField("UserRoleId", userRoleId);
+			user.setField("profileId", profileId);
+            user.setField("TimeZoneSidKey", timeZoneSidKey);
+            user.setField("LocaleSidKey", "en_US");			
+            user.setField("LanguageLocaleKey", "en_US");
+            user.setField("DefaultCurrencyIsoCode", "USD");
             user.setField("DefaultGroupNotificationFrequency", "P");
             user.setField("DigestFrequency", "D");
             user.setField("EmailEncodingKey", "ISO-8859-1");
-/*            user.setField("UserPermissionsCallCenterAutoLogin", "true");
-            user.setField("UserPermissionsMarketingUser", "true");
-            user.setField("UserPermissionsOfflineUser", "true"); */
-			establishConnection.establishConnection();
-
+			System.out.println(EstablishConnection.connection.getUserInfo().getUserId());
 			SObject[] users = new SObject[1];
 			users[0] = user;
 			results = EstablishConnection.connection.create(users);
@@ -86,8 +81,9 @@ public class CreateUsers extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return status;
+		return results[0].getId();
 	}
+	
 	
 	/**
 	 * Function for the creation of temporary password
@@ -135,6 +131,21 @@ public class CreateUsers extends ReusableLibrary {
 		}
 	}
 	
+	public void setPassword(String userId, String newPassword) {
+		establishConnection.establishConnection();
+		try {
+				try {
+					setPasswordResults = EstablishConnection.connection.setPassword(userId, newPassword);
+					System.out.println("The password for user ID::::" + userId + ":::changed to:::" + newPassword);
+					report.updateTestLog("New Password for the User ID:::", "The password for user ID" + userId + "changed to" + newPassword, Status.PASS);
+				} catch (Exception e) {
+					//resetPassword(userId);
+				}							
+ 		} catch (Exception e) {		
+			System.out.println(e.getMessage());
+		}
+	}
+	
 	/**
 	 * User Names for different environments 
 	 * 
@@ -147,28 +158,50 @@ public class CreateUsers extends ReusableLibrary {
 		
 		userNamesList.add("005e0000003luE7AAI");
 		userNamesList.add("005e0000003luEPAAY");
+		userNamesList.add("005e0000003luEgAAI");
+		userNamesList.add("005e0000003luE8AAI");
+		userNamesList.add("005e0000003luERAAY");
+		userNamesList.add("005e0000003luEhAAI");
+		userNamesList.add("005e0000003luE9AAI");
+		userNamesList.add("005e0000003luESAAY");
+		userNamesList.add("005e0000003luEsAAI");
+		userNamesList.add("005e0000003luEAAAY");
+		userNamesList.add("005e0000003luETAAY");
+		userNamesList.add("005e0000003luEiAAI");
+		userNamesList.add("005e0000003luEBAAY");
+		userNamesList.add("005e0000003luECAAY");
+		userNamesList.add("005e0000003luEUAAY");
 		userNamesList.add("005e0000003luEjAAI");
+		userNamesList.add("005e0000003luEDAAY");
 		userNamesList.add("005e0000003luEEAAY");
 		userNamesList.add("005e0000003luEVAAY");
 		userNamesList.add("005e0000003luE3AAI");
+		userNamesList.add("005e0000003luEkAAI");
 		userNamesList.add("005e0000003luEFAAY");
 		userNamesList.add("005e0000003luEWAAY");
 		userNamesList.add("005e0000003luEGAAY");
 		userNamesList.add("005e0000003luEZAAY");
+		userNamesList.add("005e0000003luElAAI");
 		userNamesList.add("005e0000003luEHAAY");
 		userNamesList.add("005e0000003luEMAAY");
 		userNamesList.add("005e0000003luEaAAI");
+		userNamesList.add("005e0000003luEmAAI");
 		userNamesList.add("005e0000003luEJAAY");
 		userNamesList.add("005e0000003luEcAAI");
 		userNamesList.add("005e0000003luEoAAI");
 		userNamesList.add("005e0000003luEKAAY");
 		userNamesList.add("005e0000003luEdAAI");
 		userNamesList.add("005e0000003luEeAAI");
+		userNamesList.add("005e0000003luEpAAI");
+		userNamesList.add("005e0000003luE1AAI");
+		userNamesList.add("005e0000003luE4AAI");
+		userNamesList.add("005e0000003lvDnAAI");
 		userNamesList.add("005e0000003uktRAAQ");
 		userNamesList.add("005e0000003ukuyAAA");
 		userNamesList.add("005e0000003vvxgAAA");
 		userNamesList.add("005e00000040PQfAAM");
 		userNamesList.add("005e00000040PSRAA2");
+		userNamesList.add("005e0000003luENAAY");
 		userNamesList.add("005e00000040Rq1AAE");
 		userNamesList.add("005e00000040RqGAAU");
 		userNamesList.add("005e00000040RrnAAE");
@@ -178,6 +211,7 @@ public class CreateUsers extends ReusableLibrary {
 		userNamesList.add("005e00000040ammAAA");
 		userNamesList.add("005e00000040amwAAA");
 		userNamesList.add("005e00000040ankAAA");
+		userNamesList.add("005e0000003luE5AAI");
 		userNamesList.add("005e00000040atdAAA");
 		userNamesList.add("005e00000040bE2AAI");
 		userNamesList.add("005e00000040bKtAAI");
@@ -187,8 +221,11 @@ public class CreateUsers extends ReusableLibrary {
 		userNamesList.add("005e00000040hB4AAI");
 		userNamesList.add("005e000000411ofAAA");
 		userNamesList.add("005e00000041K92AAE");
+		userNamesList.add("005e0000003luEOAAY");
 		userNamesList.add("005e00000040PEZAA2");
 		userNamesList.add("005e0000003mEtYAAU");
+		userNamesList.add("005e0000003luEfAAI");
+
 
 		System.out.println("User Names List are::::" + userNamesList);
 	}
