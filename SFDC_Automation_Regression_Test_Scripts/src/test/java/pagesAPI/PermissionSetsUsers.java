@@ -117,13 +117,8 @@ public class PermissionSetsUsers extends ReusableLibrary {
 					String profile = roleProfileTimeZoneResult.split("-")[1];
 					String timeZone = roleProfileTimeZoneResult.split("-")[2];
 					userResultId = createUsers.createUser(dataTable.getData("General_Data", "FirstName"),
-							dataTable.getData("General_Data", "LastName"), 
-							dataTable.getData("General_Data", "Alias"),
-							"vishnuvardhan.bommisetty" + "@cbre.com", 
-							userName, 
-							role, 
-							profile, 
-							timeZone);
+							dataTable.getData("General_Data", "LastName"), dataTable.getData("General_Data", "Alias"),
+							"vishnuvardhan.bommisetty" + "@cbre.com", userName, role, profile, timeZone);
 					System.out.println("User has been created");
 					report.updateTestLog("User Creation",
 							"User has been created as User Id and User Name is:::" + userId + ":::" + userName,
@@ -151,11 +146,11 @@ public class PermissionSetsUsers extends ReusableLibrary {
 	public void setPermissionSets(List<String> userNameList, List<String> permissionSetsLabels) throws Exception {
 		for (int i = 0; i < userNameList.size(); i++) {
 			String userName;
-			if((environment.equalsIgnoreCase("FTE2")) || (environment.equalsIgnoreCase("UAT2"))) {
+			if ((environment.equalsIgnoreCase("FTE2")) || (environment.equalsIgnoreCase("UAT2"))) {
 				userName = userNameList.get(i).substring(0, userNameList.get(i).length() - 4);
 			} else {
 				userName = userNameList.get(i).substring(0, userNameList.get(i).length() - 3);
-			}			
+			}
 			switch (userName) {
 			case "testuser1@cbre.com.crm.":
 				System.out.println("System Administrator User - :::" + userNameList.get(i)
@@ -676,6 +671,26 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				permissionSetsLabels.add("Preference Edit & Marketing Lists Read Permissions");
 				break;
 
+			case "testuse92@cbre.com.crm.":
+				System.out.println("CM EMEA Manager CA User - :::" + userNameList.get(i)
+						+ ":::is having the permission sets::: Lightning Experience" + "and CM - Asia and CM - India");
+				permissionSetsLabels.add("Lightning Experience");
+				permissionSetsLabels.add("CM - Asia");
+				permissionSetsLabels.add("CM - India");
+				break;
+
+			case "testuse93@cbre.com.crm.":
+				System.out.println("CM EMEA Manager CA User - :::" + userNameList.get(i)
+						+ ":::is having the permission sets::: Lightning Experience");
+				permissionSetsLabels.add("Lightning Experience");
+				break;
+
+			case "testuse94@cbre.com.crm.":
+				System.out.println("CM EMEA Manager CA User - :::" + userNameList.get(i)
+						+ ":::is having the permission sets::: Lightning Experience");
+				permissionSetsLabels.add("Lightning Experience");
+				break;
+
 			default:
 				break;
 			}
@@ -691,672 +706,697 @@ public class PermissionSetsUsers extends ReusableLibrary {
 		}
 	}
 
-/*	public HashMap<String, String> setTimeZone(String TimeZone) {
-		HashMap hashMap = new HashMap();
-		if (TimeZone.equals("AMER")) {
-			hashMap.put("TimeZone", "America/Los_Angeles");
-		} else if (TimeZone.equals("APAC")) {
-			hashMap.put("TimeZone", "Asia/Singapore");
-		} else if (TimeZone.equals("EMEA")) {
-			hashMap.put("TimeZone", "Europe/London");
-		}
-		return hashMap;
-	}*/
+	/*
+	 * public HashMap<String, String> setTimeZone(String TimeZone) { HashMap
+	 * hashMap = new HashMap(); if (TimeZone.equals("AMER")) {
+	 * hashMap.put("TimeZone", "America/Los_Angeles"); } else if
+	 * (TimeZone.equals("APAC")) { hashMap.put("TimeZone", "Asia/Singapore"); }
+	 * else if (TimeZone.equals("EMEA")) { hashMap.put("TimeZone",
+	 * "Europe/London"); } return hashMap; }
+	 */
 
 	public String setRoleProfileTimeZone(String userName) throws Exception {
 		String roleProfileTimeZone = null;
 		userName = userName.substring(0, userName.length() - 3);
-		//String userId = getUserId(userName);
-		for(int i=0; i < 1; i++) {
+		// String userId = getUserId(userName);
+		for (int i = 0; i < 1; i++) {
 			switch (userName) {
-				case "testuser1@cbre.com.crm.":
-	
-					roleIDLabels.add("EXECUTIVE");
-					profileIDLabels.add("System Administrator");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("System Administrator User - :::" + userName + environment
-							+ ":::is having the Role and Profle as:::EXECUTIVE and System Administrator");
-					break;
-	
-				case "testuser2@cbre.com.crm.":
-	
-					roleIDLabels.add("AMER");
-					profileIDLabels.add("CBRE Broker - AMER - Agency Brokerage");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("AB AMER Broker User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: AMER and CBRE Broker - AMER - Agency Brokerage");
-					break;
-	
-				case "testuser3@cbre.com.crm.":
-	
-					roleIDLabels.add("AMER");
-					profileIDLabels.add("CBRE Manager - AMER - Agency Brokerage");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("AB AMER Manager User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: AMER and CBRE Manager - AMER - Agency Brokerage");
-					break;
-	
-				case "testuser4@cbre.com.crm.":
-	
-					roleIDLabels.add("AMER");
-					profileIDLabels.add("CBRE Support Staff - AMER - Agency Brokerage");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("AB AMER CSS User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: AMER and CBRE Support Staff - AMER - Agency Brokerage");
-					break;
-	
-				case "testuser5@cbre.com.crm.":
-	
-					roleIDLabels.add("AMER");
-					profileIDLabels.add("CBRE Broker - AMER - Asset Services");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("AS AMER Broker User" + userName + environment
-							+ ":::is having the Role and Profle as::: AMER and CBRE Broker - AMER - Asset Services");
-					break;
-	
-				case "testuser6@cbre.com.crm.":
-	
-					roleIDLabels.add("AMER");
-					profileIDLabels.add("CBRE Manager - AMER - Asset Services");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("AS AMER Manager User" + userName + environment
-							+ ":::is having the Role and Profle as::: AMER and CBRE Manager - AMER - Asset Services");
-					break;
-	
-				case "testuser7@cbre.com.crm.":
-	
-					roleIDLabels.add("AMER");
-					profileIDLabels.add("CBRE Broker - AMER - Capital Markets");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("CM AMER Broker User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: AMER and CBRE Broker - AMER - Capital Markets");
-					break;
-	
-				case "testuser8@cbre.com.crm.":
-	
-					roleIDLabels.add("AMER");
-					profileIDLabels.add("CBRE Manager - AMER - Capital Markets");
-					System.out.println("CM AMER Manager User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: AMER and CBRE Manager - AMER - Capital Markets");
-					timeZone.add("America/Los_Angeles");
-					break;
-	
-				case "testuser9@cbre.com.crm.":
-	
-					roleIDLabels.add("AMER");
-					profileIDLabels.add("CBRE Support Staff - AMER - Capital Markets");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("CM AMER CSS User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: AMER and CBRE Support Staff - AMER - Capital Markets");
-					break;
-	
-				case "testuser10@cbre.com.crm.":
-	
-					roleIDLabels.add("AMER");
-					profileIDLabels.add("CBRE Broker - AMER - GWS");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("GWS AMER Broker User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: AMER and CBRE Broker - AMER - GWS");
-					break;
-	
-				case "testuser11@cbre.com.crm.":
-	
-					roleIDLabels.add("AMER");
-					profileIDLabels.add("CBRE Broker - AMER - Occupier Brokerage");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("OB AMER Broker User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: AMER and CBRE Broker - AMER - Occupier Brokerage");
-					break;
-	
-				case "testuser12@cbre.com.crm.":
-	
-					roleIDLabels.add("AMER");
-					profileIDLabels.add("CBRE Manager - AMER - Occupier Brokerage");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("OB Manager Broker User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: AMER and CBRE Manager - AMER - Occupier Brokerage");
-					break;
-	
-				case "testuser13@cbre.com.crm.":
-	
-					roleIDLabels.add("AMER");
-					profileIDLabels.add("CBRE Support Staff - AMER - Occupier Brokerage");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("OB CSS Broker User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: AMER and CBRE Support Staff - AMER - Occupier Brokerage");
-					break;
-	
-				case "testuser14@cbre.com.crm.":
-	
-					roleIDLabels.add("APAC");
-					profileIDLabels.add("CBRE Broker - APAC - Agency Brokerage");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("AB APAC Broker User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: APAC and CBRE Broker - APAC - Agency Brokerage");
-					break;
-	
-				case "testuser15@cbre.com.crm.":
-	
-					roleIDLabels.add("APAC");
-					profileIDLabels.add("CBRE Manager - APAC - Agency Brokerage");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("AB APAC Manager User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: APAC and CBRE Manager - APAC - Agency Brokerage");
-					break;
-	
-				case "testuser17@cbre.com.crm.":
-	
-					roleIDLabels.add("APAC");
-					profileIDLabels.add("CBRE Support Staff - APAC - Agency Brokerage");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("AB APAC CSS User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: APAC and CBRE Support Staff - APAC - Agency Brokerage");
-					break;
-	
-				case "testuser18@cbre.com.crm.":
-	
-					roleIDLabels.add("APAC");
-					profileIDLabels.add("CBRE Broker - APAC - Asset Services");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("AS APAC Broker User" + userName + environment
-							+ ":::is having the Role and Profle as::: APAC and CBRE Broker - APAC - Asset Services");
-					break;
-	
-				case "testuser19@cbre.com.crm.":
-	
-					roleIDLabels.add("APAC");
-					profileIDLabels.add("CBRE Manager - APAC - Asset Services");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("AS APAC Manager User" + userName + environment
-							+ ":::is having the Role and Profle as::: APAC and CBRE Manager - APAC - Asset Services");
-					break;
-	
-				case "testuser20@cbre.com.crm.":
-	
-					roleIDLabels.add("APAC");
-					profileIDLabels.add("CBRE Broker - APAC - Capital Markets");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("CM APAC Broker User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: APAC and CBRE Broker - APAC - Capital Markets");
-					break;
-	
-				case "testuser21@cbre.com.crm.":
-	
-					roleIDLabels.add("APAC");
-					profileIDLabels.add("CBRE Manager - APAC - Capital Markets");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("CM APAC Manager User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: APAC and CBRE Manager - APAC - Capital Markets");
-					break;
-	
-				case "testuser22@cbre.com.crm.":
-	
-					roleIDLabels.add("APAC");
-					profileIDLabels.add("CBRE Support Staff - APAC - Capital Markets");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("CM APAC CSS User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: APAC and CBRE Support Staff - APAC - Capital Markets");
-					break;
-	
-				case "testuser23@cbre.com.crm.":
-	
-					roleIDLabels.add("EMEA");
-					profileIDLabels.add("CBRE Broker - EMEA - GWS");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("GWS EMEA Broker User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: EMEA and CBRE Broker - EMEA - GWS");
-					break;
-	
-				case "testuser24@cbre.com.crm.":
-	
-					roleIDLabels.add("APAC");
-					profileIDLabels.add("CBRE Broker - APAC - Occupier Brokerage");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("OB APAC Broker User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: APAC and CBRE Broker - APAC - Occupier Brokerage");
-					break;
-	
-				case "testuser25@cbre.com.crm.":
-	
-					roleIDLabels.add("APAC");
-					profileIDLabels.add("CBRE Broker - APAC - Occupier Brokerage");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("OB APAC Manager User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: APAC and CBRE Broker - APAC - Occupier Brokerage");
-					break;
-	
-				case "testuser26@cbre.com.crm.":
-	
-					roleIDLabels.add("APAC");
-					profileIDLabels.add("CBRE Broker - APAC - Occupier Brokerage");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("OB APAC CSS User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: APAC and CBRE Broker - APAC - Occupier Brokerage");
-					break;
-	
-				case "testuser27@cbre.com.crm.":
-	
-					roleIDLabels.add("APAC");
-					profileIDLabels.add("CBRE Broker - APAC - Valuation & Advisory");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("VAS APAC Broker User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: APAC and CBRE Broker - APAC - Valuation & Advisory");
-					break;
-	
-				case "testuser28@cbre.com.crm.":
-	
-					roleIDLabels.add("EMEA");
-					profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("AB EMEA Broker User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: EMEA and CBRE Broker - EMEA - Multi Business Line");
-					break;
-	
-				case "testuser29@cbre.com.crm.":
-	
-					roleIDLabels.add("EMEA");
-					profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("AB EMEA Manager User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: EMEA and CBRE Broker - EMEA - Multi Business Line");
-					break;
-	
-				case "testuser30@cbre.com.crm.":
-	
-					roleIDLabels.add("EMEA");
-					profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("AB EMEA CSS User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: EMEA and CBRE Support Staff - EMEA - Multi Business Line");
-					break;
-	
-				case "testuser31@cbre.com.crm.":
-	
-					roleIDLabels.add("EMEA");
-					profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("AS EMEA Broker User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: EMEA and CBRE Support Staff - EMEA - Multi Business Line");
-					break;
-	
-				case "testuser32@cbre.com.crm.":
-	
-					roleIDLabels.add("EMEA");
-					profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("AS EMEA Manager User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: EMEA and CBRE Manager - EMEA - Multi Business Line");
-					break;
-	
-				case "testuser36@cbre.com.crm.":
-	
-					roleIDLabels.add("EMEA");
-					profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("CM EMEA Broker User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: EMEA and CBRE Broker - EMEA - Multi Business Line");
-					break;
-	
-				case "testuser37@cbre.com.crm.":
-	
-					roleIDLabels.add("EMEA");
-					profileIDLabels.add("CBRE Manager - EMEA - Multi Business Line");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("CM EMEA Manager User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: EMEA and CBRE Manager - EMEA - Multi Business Line");
-					break;
-	
-				case "testuser38@cbre.com.crm.":
-	
-					roleIDLabels.add("EMEA");
-					profileIDLabels.add("CBRE Support Staff - EMEA - Multi Business Line");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("CM EMEA CSS User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: EMEA and CBRE Support Staff - EMEA - Multi Business Line");
-					break;
-	
-				case "testuser39@cbre.com.crm.":
-	
-					roleIDLabels.add("EMEA");
-					profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("CM EMEA Broker IP User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: EMEA and CBRE Broker - EMEA - Multi Business Line");
-					break;
-	
-				case "testuser40@cbre.com.crm.":
-	
-					roleIDLabels.add("EMEA");
-					profileIDLabels.add("CBRE Manager - EMEA - Multi Business Line");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("CM EMEA Manager IP User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: EMEA and CBRE Manager - EMEA - Multi Business Line");
-					break;
-	
-				case "testuser41@cbre.com.crm.":
-	
-					roleIDLabels.add("EMEA");
-					profileIDLabels.add("CBRE Support Staff - EMEA - Multi Business Line");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("CM EMEA CSS IP User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: EMEA and CBRE Support Staff - EMEA - Multi Business Line");
-					break;
-	
-				case "testuser45@cbre.com.crm.":
-	
-					roleIDLabels.add("EMEA");
-					profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("OB EMEA Broker User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: EMEA and CBRE Broker - EMEA - Multi Business Line");
-					break;
-	
-				case "testuser46@cbre.com.crm.":
-	
-					roleIDLabels.add("EMEA");
-					profileIDLabels.add("CBRE Manager - EMEA - Multi Business Line");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("OB EMEA Manager User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: EMEA and CBRE Manager - EMEA - Multi Business Line");
-					break;
-	
-				case "testuser47@cbre.com.crm.":
-	
-					roleIDLabels.add("EMEA");
-					profileIDLabels.add("CBRE Support Staff - EMEA - Multi Business Line");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("OB EMEA CSS User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: EMEA and CBRE Support Staff - EMEA - Multi Business Line");
-					break;
-	
-				case "testuser48@cbre.com.crm.":
-	
-					roleIDLabels.add("EMEA");
-					profileIDLabels.add("CBRE Support Staff - EMEA - Multi Business Line");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("VAS EMEA Broker User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: EMEA and CBRE Broker - EMEA - Multi Business Line");
-					break;
-	
-				case "testuser49@cbre.com.crm.":
-	
-					roleIDLabels.add("EMEA");
-					profileIDLabels.add("CBRE Manager - EMEA - Multi Business Line");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("VAS EMEA Manager User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: EMEA and CBRE Manager - EMEA - Multi Business Line");
-					break;
-	
-				case "testuser50@cbre.com.crm.":
-	
-					roleIDLabels.add("EMEA");
-					profileIDLabels.add("CBRE Support Staff - EMEA - Multi Business Line");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("VAS EMEA CSS User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: EMEA and CBRE Support Staff - EMEA - Multi Business Line");
-					break;
-	
-				case "testuser51@cbre.com.crm.":
-	
-					roleIDLabels.add("EMEA");
-					profileIDLabels.add("CBRE - EMEA - Data Admin");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("DataAdmin EMEA Data User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: EMEA and CBRE - EMEA - Data Admin");
-					break;
-	
-				case "testuser62@cbre.com.crm.":
-	
-					roleIDLabels.add("APAC");
-					profileIDLabels.add("CBRE Manager - APAC - GWS");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("GWS APAC Manager User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: APAC and CBRE Manager - APAC - GWS");
-					break;
-	
-				case "testuser65@cbre.com.crm.":
-	
-					roleIDLabels.add("AMER");
-					profileIDLabels.add("CBRE Manager- AMER - Valuations &Advisory Services");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("VAS AMER Manager User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: AMER and CBRE Manager-AMER-Valuations &Advisory Services");
-					break;
-	
-				case "testuser66@cbre.com.crm.":
-	
-					roleIDLabels.add("AMER");
-					profileIDLabels.add("CBRE Manager Staff - AMER - GWS");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("GWS AMER Manager User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: AMER and CBRE Manager Staff - AMER - GWS");
-					break;
-	
-				case "testuser67@cbre.com.crm.":
-	
-					roleIDLabels.add("APAC");
-					profileIDLabels.add("CBRE Broker - APAC - GWS");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("GWS APAC Broker User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: APAC and CBRE Broker - APAC - GWS");
-					break;
-	
-				case "testuser68@cbre.com.crm.":
-	
-					roleIDLabels.add("EMEA");
-					profileIDLabels.add("CBRE Manager - EMEA - Multi Business Line");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("CM EMEA Manager BCP User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: EMEA and CBRE Manager - EMEA - Multi Business Line");
-					break;
-	
-				case "testuser69@cbre.com.crm.":
-	
-					roleIDLabels.add("EMEA");
-					profileIDLabels.add("CBRE Manager - EMEA - Multi Business Line");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("CM EMEA Manager Dev User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: EMEA and CBRE Manager - EMEA - Multi Business Line");
-					break;
-	
-				case "testuser70@cbre.com.crm.":
-	
-					roleIDLabels.add("UK Investment Advisory");
-					profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("CM EMEA Broker CA User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: UK Investment Advisory and CBRE Broker - EMEA - Multi Business Line");
-					break;
-	
-				case "testuser71@cbre.com.crm.":
-	
-					roleIDLabels.add("EMEA");
-					profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("CM EMEA Broker BCP User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: EMEA and CBRE Broker - EMEA - Multi Business Line");
-					break;
-	
-				case "testuser72@cbre.com.crm.":
-	
-					roleIDLabels.add("EMEA");
-					profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("CM EMEA Broker Dev User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: EMEA and CBRE Broker - EMEA - Multi Business Line");
-					break;
-	
-				case "testuser73@cbre.com.crm.":
-	
-					roleIDLabels.add("EMEA");
-					profileIDLabels.add("CBRE Support Staff - EMEA - Multi Business Line");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("CM EMEA CSS Dev User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: EMEA and CBRE Support Staff - EMEA - Multi Business Line");
-					break;
-	
-				case "testuser74@cbre.com.crm.":
-	
-					roleIDLabels.add("EMEA");
-					profileIDLabels.add("CBRE Support Staff - EMEA - Multi Business Line");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("CM EMEA CSS Super User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: EMEA and CBRE Support Staff - EMEA - Multi Business Line");
-					break;
-	
-				case "testuser75@cbre.com.crm.":
-	
-					roleIDLabels.add("EMEA");
-					profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("AS EMEA Broker Super User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: EMEA and CBRE Broker - EMEA - Multi Business Line");
-					break;
-	
-				case "testuser76@cbre.com.crm.":
-	
-					roleIDLabels.add("EMEA");
-					profileIDLabels.add("CBRE Broker - EMEA - GWS");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("GWS EMEA Broker Super User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: EMEA and CBRE Broker - EMEA - GWS");
-					break;
-	
-				case "testuser78@cbre.com.crm.":
-	
-					roleIDLabels.add("EMEA");
-					profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("VAS EMEA Broker Super User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: EMEA and CBRE Broker - EMEA - Multi Business Line");
-					break;
-	
-				case "testuser79@cbre.com.crm.":
-	
-					roleIDLabels.add("PAC_AB_IND_Auckland_Brokers");
-					profileIDLabels.add("CBRE Broker - APAC - Capital Markets");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("CM APAC Broker AUC User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: PAC_AB_IND_Auckland_Brokers and CBRE Broker - APAC - Capital Markets");
-					break;
-	
-				case "testuser80@cbre.com.crm.":
-	
-					roleIDLabels.add("PAC_CM_OFFICE");
-					profileIDLabels.add("CBRE Broker - APAC - Capital Markets");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("CM APAC Broker NZL User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: PAC_CM_OFFICE and CBRE Broker - APAC - Capital Markets");
-					break;
-	
-				case "testuser81@cbre.com.crm.":
-	
-					roleIDLabels.add("PAC_CM_Metro");
-					profileIDLabels.add("CBRE Broker - APAC - Capital Markets");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("CM APAC Broker Metro NZL User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: PAC CM Metro and CBRE Broker - APAC - Capital Markets");
-					break;
-	
-				case "testuser82@cbre.com.crm.":
-	
-					roleIDLabels.add("PAC_CM_Metro");
-					profileIDLabels.add("CBRE Broker - APAC - Capital Markets");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("CM APAC Brokder Metro User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: PAC_CM_Metroa nd CBRE Broker - APAC - Capital Markets");
-					permissionSetsLabels.add("Lightning Experience");
-					break;
-	
-				case "testuser83@cbre.com.crm.":
-	
-					roleIDLabels.add("PAC_AB_IND_South Australia_Brokers");
-					profileIDLabels.add("CBRE Broker - APAC - Capital Markets");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("CM APAC Broker AUS User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: PAC_AB_IND_South Australia_Brokers and CBRE Broker - APAC - Capital Markets");
-					break;
-	
-				case "testuser84@cbre.com.crm.":
-	
-					roleIDLabels.add("PAC_AB_Retail_AU_AB_Retail_New South Wales Brokers");
-					profileIDLabels.add("CBRE Broker - APAC - Capital Markets");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("CM APAC Broker NSW User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: PAC_AB_Retail_AU_AB_Retail_New South Wales Brokers and CBRE Broker - APAC - Capital Markets");
-					break;
-	
-				case "testuser85@cbre.com.crm.":
-	
-					roleIDLabels.add("PAC_AB_Retail_NZ_AB_Retail_Christchurch_Brokers");
-					profileIDLabels.add("CBRE Broker - APAC - Capital Markets");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("CM APAC Broker Christ Church User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: PAC_AB_Retail_NZ_AB_Retail_Christchurch_Brokers and "
-							+ "CBRE Broker - APAC - Capital Markets");
-					break;
-	
-				case "testuser86@cbre.com.crm.":
-	
-					roleIDLabels.add("UK");
-					profileIDLabels.add("CBRE - EMEA - Business Development");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("OB EMEA Occupier Client Care User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: UK and CBRE - EMEA - Business Development");
-					break;
-	
-				case "testuser87@cbre.com.crm.":
-	
-					roleIDLabels.add("APAC");
-					profileIDLabels.add("CBRE Broker - APAC - Capital Markets");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("CM APAC Broker Campaign User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: APAC and CBRE Broker - APAC - Capital Markets");
-					break;
-	
-				case "testuser88@cbre.com.crm.":
-	
-					roleIDLabels.add("APAC");
-					profileIDLabels.add("CBRE Broker - APAC - Capital Markets");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("CM APAC Broker MVP User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: APAC and CBRE Broker - APAC - Capital Markets");
-					break;
-	
-				case "testuser90@cbre.com.crm.":
-	
-					roleIDLabels.add("EMEA");
-					profileIDLabels.add("CBRE Manager - EMEA - Multi Business Line");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("CM EMEA Manager CA User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: EMEA and CBRE Manager - EMEA - Multi Business Line");
-					break;
-	
-				case "testuser91@cbre.com.crm.":
-	
-					roleIDLabels.add("AMER");
-					profileIDLabels.add("CBRE Support Staff - AMER - Capital Markets");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("DataAdmin EMEA Data User - :::" + userName + environment
-							+ ":::is having the Role and Profle as::: AMER and CBRE Support Staff - AMER - Capital Markets");
-					break;
-	
-				default:
-	
-					roleIDLabels.add("EXECUTIVE");
-					profileIDLabels.add("System Administrator");
-					timeZone.add("America/Los_Angeles");
-					System.out.println("System Administrator User - :::" + userName + environment
-							+ ":::is having the Role and Profle as:::EXECUTIVE and System Administrator");
-					break;
-				}
-				establishConnection.establishConnection();
-				roleProfileTimeZone = getRoleId(roleIDLabels.get(i)) + "-" + getProfileId(profileIDLabels.get(i)) + "-" + timeZone.get(i);
-				profileIDLabels.clear();
-				roleIDLabels.clear();
-				timeZone.clear();
+			case "testuser1@cbre.com.crm.":
+
+				roleIDLabels.add("EXECUTIVE");
+				profileIDLabels.add("System Administrator");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("System Administrator User - :::" + userName + environment
+						+ ":::is having the Role and Profle as:::EXECUTIVE and System Administrator");
+				break;
+
+			case "testuser2@cbre.com.crm.":
+
+				roleIDLabels.add("AMER");
+				profileIDLabels.add("CBRE Broker - AMER - Agency Brokerage");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("AB AMER Broker User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: AMER and CBRE Broker - AMER - Agency Brokerage");
+				break;
+
+			case "testuser3@cbre.com.crm.":
+
+				roleIDLabels.add("AMER");
+				profileIDLabels.add("CBRE Manager - AMER - Agency Brokerage");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("AB AMER Manager User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: AMER and CBRE Manager - AMER - Agency Brokerage");
+				break;
+
+			case "testuser4@cbre.com.crm.":
+
+				roleIDLabels.add("AMER");
+				profileIDLabels.add("CBRE Support Staff - AMER - Agency Brokerage");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("AB AMER CSS User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: AMER and CBRE Support Staff - AMER - Agency Brokerage");
+				break;
+
+			case "testuser5@cbre.com.crm.":
+
+				roleIDLabels.add("AMER");
+				profileIDLabels.add("CBRE Broker - AMER - Asset Services");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("AS AMER Broker User" + userName + environment
+						+ ":::is having the Role and Profle as::: AMER and CBRE Broker - AMER - Asset Services");
+				break;
+
+			case "testuser6@cbre.com.crm.":
+
+				roleIDLabels.add("AMER");
+				profileIDLabels.add("CBRE Manager - AMER - Asset Services");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("AS AMER Manager User" + userName + environment
+						+ ":::is having the Role and Profle as::: AMER and CBRE Manager - AMER - Asset Services");
+				break;
+
+			case "testuser7@cbre.com.crm.":
+
+				roleIDLabels.add("AMER");
+				profileIDLabels.add("CBRE Broker - AMER - Capital Markets");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("CM AMER Broker User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: AMER and CBRE Broker - AMER - Capital Markets");
+				break;
+
+			case "testuser8@cbre.com.crm.":
+
+				roleIDLabels.add("AMER");
+				profileIDLabels.add("CBRE Manager - AMER - Capital Markets");
+				System.out.println("CM AMER Manager User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: AMER and CBRE Manager - AMER - Capital Markets");
+				timeZone.add("America/Los_Angeles");
+				break;
+
+			case "testuser9@cbre.com.crm.":
+
+				roleIDLabels.add("AMER");
+				profileIDLabels.add("CBRE Support Staff - AMER - Capital Markets");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("CM AMER CSS User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: AMER and CBRE Support Staff - AMER - Capital Markets");
+				break;
+
+			case "testuser10@cbre.com.crm.":
+
+				roleIDLabels.add("AMER");
+				profileIDLabels.add("CBRE Broker - AMER - GWS");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("GWS AMER Broker User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: AMER and CBRE Broker - AMER - GWS");
+				break;
+
+			case "testuser11@cbre.com.crm.":
+
+				roleIDLabels.add("AMER");
+				profileIDLabels.add("CBRE Broker - AMER - Occupier Brokerage");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("OB AMER Broker User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: AMER and CBRE Broker - AMER - Occupier Brokerage");
+				break;
+
+			case "testuser12@cbre.com.crm.":
+
+				roleIDLabels.add("AMER");
+				profileIDLabels.add("CBRE Manager - AMER - Occupier Brokerage");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("OB Manager Broker User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: AMER and CBRE Manager - AMER - Occupier Brokerage");
+				break;
+
+			case "testuser13@cbre.com.crm.":
+
+				roleIDLabels.add("AMER");
+				profileIDLabels.add("CBRE Support Staff - AMER - Occupier Brokerage");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("OB CSS Broker User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: AMER and CBRE Support Staff - AMER - Occupier Brokerage");
+				break;
+
+			case "testuser14@cbre.com.crm.":
+
+				roleIDLabels.add("APAC");
+				profileIDLabels.add("CBRE Broker - APAC - Agency Brokerage");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("AB APAC Broker User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: APAC and CBRE Broker - APAC - Agency Brokerage");
+				break;
+
+			case "testuser15@cbre.com.crm.":
+
+				roleIDLabels.add("APAC");
+				profileIDLabels.add("CBRE Manager - APAC - Agency Brokerage");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("AB APAC Manager User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: APAC and CBRE Manager - APAC - Agency Brokerage");
+				break;
+
+			case "testuser17@cbre.com.crm.":
+
+				roleIDLabels.add("APAC");
+				profileIDLabels.add("CBRE Support Staff - APAC - Agency Brokerage");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("AB APAC CSS User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: APAC and CBRE Support Staff - APAC - Agency Brokerage");
+				break;
+
+			case "testuser18@cbre.com.crm.":
+
+				roleIDLabels.add("APAC");
+				profileIDLabels.add("CBRE Broker - APAC - Asset Services");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("AS APAC Broker User" + userName + environment
+						+ ":::is having the Role and Profle as::: APAC and CBRE Broker - APAC - Asset Services");
+				break;
+
+			case "testuser19@cbre.com.crm.":
+
+				roleIDLabels.add("APAC");
+				profileIDLabels.add("CBRE Manager - APAC - Asset Services");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("AS APAC Manager User" + userName + environment
+						+ ":::is having the Role and Profle as::: APAC and CBRE Manager - APAC - Asset Services");
+				break;
+
+			case "testuser20@cbre.com.crm.":
+
+				roleIDLabels.add("APAC");
+				profileIDLabels.add("CBRE Broker - APAC - Capital Markets");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("CM APAC Broker User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: APAC and CBRE Broker - APAC - Capital Markets");
+				break;
+
+			case "testuser21@cbre.com.crm.":
+
+				roleIDLabels.add("APAC");
+				profileIDLabels.add("CBRE Manager - APAC - Capital Markets");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("CM APAC Manager User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: APAC and CBRE Manager - APAC - Capital Markets");
+				break;
+
+			case "testuser22@cbre.com.crm.":
+
+				roleIDLabels.add("APAC");
+				profileIDLabels.add("CBRE Support Staff - APAC - Capital Markets");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("CM APAC CSS User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: APAC and CBRE Support Staff - APAC - Capital Markets");
+				break;
+
+			case "testuser23@cbre.com.crm.":
+
+				roleIDLabels.add("EMEA");
+				profileIDLabels.add("CBRE Broker - EMEA - GWS");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("GWS EMEA Broker User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: EMEA and CBRE Broker - EMEA - GWS");
+				break;
+
+			case "testuser24@cbre.com.crm.":
+
+				roleIDLabels.add("APAC");
+				profileIDLabels.add("CBRE Broker - APAC - Occupier Brokerage");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("OB APAC Broker User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: APAC and CBRE Broker - APAC - Occupier Brokerage");
+				break;
+
+			case "testuser25@cbre.com.crm.":
+
+				roleIDLabels.add("APAC");
+				profileIDLabels.add("CBRE Broker - APAC - Occupier Brokerage");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("OB APAC Manager User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: APAC and CBRE Broker - APAC - Occupier Brokerage");
+				break;
+
+			case "testuser26@cbre.com.crm.":
+
+				roleIDLabels.add("APAC");
+				profileIDLabels.add("CBRE Broker - APAC - Occupier Brokerage");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("OB APAC CSS User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: APAC and CBRE Broker - APAC - Occupier Brokerage");
+				break;
+
+			case "testuser27@cbre.com.crm.":
+
+				roleIDLabels.add("APAC");
+				profileIDLabels.add("CBRE Broker - APAC - Valuation & Advisory");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("VAS APAC Broker User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: APAC and CBRE Broker - APAC - Valuation & Advisory");
+				break;
+
+			case "testuser28@cbre.com.crm.":
+
+				roleIDLabels.add("EMEA");
+				profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("AB EMEA Broker User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: EMEA and CBRE Broker - EMEA - Multi Business Line");
+				break;
+
+			case "testuser29@cbre.com.crm.":
+
+				roleIDLabels.add("EMEA");
+				profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("AB EMEA Manager User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: EMEA and CBRE Broker - EMEA - Multi Business Line");
+				break;
+
+			case "testuser30@cbre.com.crm.":
+
+				roleIDLabels.add("EMEA");
+				profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("AB EMEA CSS User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: EMEA and CBRE Support Staff - EMEA - Multi Business Line");
+				break;
+
+			case "testuser31@cbre.com.crm.":
+
+				roleIDLabels.add("EMEA");
+				profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("AS EMEA Broker User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: EMEA and CBRE Support Staff - EMEA - Multi Business Line");
+				break;
+
+			case "testuser32@cbre.com.crm.":
+
+				roleIDLabels.add("EMEA");
+				profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("AS EMEA Manager User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: EMEA and CBRE Manager - EMEA - Multi Business Line");
+				break;
+
+			case "testuser36@cbre.com.crm.":
+
+				roleIDLabels.add("EMEA");
+				profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("CM EMEA Broker User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: EMEA and CBRE Broker - EMEA - Multi Business Line");
+				break;
+
+			case "testuser37@cbre.com.crm.":
+
+				roleIDLabels.add("EMEA");
+				profileIDLabels.add("CBRE Manager - EMEA - Multi Business Line");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("CM EMEA Manager User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: EMEA and CBRE Manager - EMEA - Multi Business Line");
+				break;
+
+			case "testuser38@cbre.com.crm.":
+
+				roleIDLabels.add("EMEA");
+				profileIDLabels.add("CBRE Support Staff - EMEA - Multi Business Line");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("CM EMEA CSS User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: EMEA and CBRE Support Staff - EMEA - Multi Business Line");
+				break;
+
+			case "testuser39@cbre.com.crm.":
+
+				roleIDLabels.add("EMEA");
+				profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("CM EMEA Broker IP User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: EMEA and CBRE Broker - EMEA - Multi Business Line");
+				break;
+
+			case "testuser40@cbre.com.crm.":
+
+				roleIDLabels.add("EMEA");
+				profileIDLabels.add("CBRE Manager - EMEA - Multi Business Line");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("CM EMEA Manager IP User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: EMEA and CBRE Manager - EMEA - Multi Business Line");
+				break;
+
+			case "testuser41@cbre.com.crm.":
+
+				roleIDLabels.add("EMEA");
+				profileIDLabels.add("CBRE Support Staff - EMEA - Multi Business Line");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("CM EMEA CSS IP User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: EMEA and CBRE Support Staff - EMEA - Multi Business Line");
+				break;
+
+			case "testuser45@cbre.com.crm.":
+
+				roleIDLabels.add("EMEA");
+				profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("OB EMEA Broker User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: EMEA and CBRE Broker - EMEA - Multi Business Line");
+				break;
+
+			case "testuser46@cbre.com.crm.":
+
+				roleIDLabels.add("EMEA");
+				profileIDLabels.add("CBRE Manager - EMEA - Multi Business Line");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("OB EMEA Manager User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: EMEA and CBRE Manager - EMEA - Multi Business Line");
+				break;
+
+			case "testuser47@cbre.com.crm.":
+
+				roleIDLabels.add("EMEA");
+				profileIDLabels.add("CBRE Support Staff - EMEA - Multi Business Line");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("OB EMEA CSS User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: EMEA and CBRE Support Staff - EMEA - Multi Business Line");
+				break;
+
+			case "testuser48@cbre.com.crm.":
+
+				roleIDLabels.add("EMEA");
+				profileIDLabels.add("CBRE Support Staff - EMEA - Multi Business Line");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("VAS EMEA Broker User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: EMEA and CBRE Broker - EMEA - Multi Business Line");
+				break;
+
+			case "testuser49@cbre.com.crm.":
+
+				roleIDLabels.add("EMEA");
+				profileIDLabels.add("CBRE Manager - EMEA - Multi Business Line");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("VAS EMEA Manager User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: EMEA and CBRE Manager - EMEA - Multi Business Line");
+				break;
+
+			case "testuser50@cbre.com.crm.":
+
+				roleIDLabels.add("EMEA");
+				profileIDLabels.add("CBRE Support Staff - EMEA - Multi Business Line");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("VAS EMEA CSS User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: EMEA and CBRE Support Staff - EMEA - Multi Business Line");
+				break;
+
+			case "testuser51@cbre.com.crm.":
+
+				roleIDLabels.add("EMEA");
+				profileIDLabels.add("CBRE - EMEA - Data Admin");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("DataAdmin EMEA Data User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: EMEA and CBRE - EMEA - Data Admin");
+				break;
+
+			case "testuser62@cbre.com.crm.":
+
+				roleIDLabels.add("APAC");
+				profileIDLabels.add("CBRE Manager - APAC - GWS");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("GWS APAC Manager User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: APAC and CBRE Manager - APAC - GWS");
+				break;
+
+			case "testuser65@cbre.com.crm.":
+
+				roleIDLabels.add("AMER");
+				profileIDLabels.add("CBRE Manager- AMER - Valuations &Advisory Services");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("VAS AMER Manager User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: AMER and CBRE Manager-AMER-Valuations &Advisory Services");
+				break;
+
+			case "testuser66@cbre.com.crm.":
+
+				roleIDLabels.add("AMER");
+				profileIDLabels.add("CBRE Manager Staff - AMER - GWS");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("GWS AMER Manager User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: AMER and CBRE Manager Staff - AMER - GWS");
+				break;
+
+			case "testuser67@cbre.com.crm.":
+
+				roleIDLabels.add("APAC");
+				profileIDLabels.add("CBRE Broker - APAC - GWS");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("GWS APAC Broker User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: APAC and CBRE Broker - APAC - GWS");
+				break;
+
+			case "testuser68@cbre.com.crm.":
+
+				roleIDLabels.add("EMEA");
+				profileIDLabels.add("CBRE Manager - EMEA - Multi Business Line");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("CM EMEA Manager BCP User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: EMEA and CBRE Manager - EMEA - Multi Business Line");
+				break;
+
+			case "testuser69@cbre.com.crm.":
+
+				roleIDLabels.add("EMEA");
+				profileIDLabels.add("CBRE Manager - EMEA - Multi Business Line");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("CM EMEA Manager Dev User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: EMEA and CBRE Manager - EMEA - Multi Business Line");
+				break;
+
+			case "testuser70@cbre.com.crm.":
+
+				roleIDLabels.add("UK Investment Advisory");
+				profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("CM EMEA Broker CA User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: UK Investment Advisory and CBRE Broker - EMEA - Multi Business Line");
+				break;
+
+			case "testuser71@cbre.com.crm.":
+
+				roleIDLabels.add("EMEA");
+				profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("CM EMEA Broker BCP User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: EMEA and CBRE Broker - EMEA - Multi Business Line");
+				break;
+
+			case "testuser72@cbre.com.crm.":
+
+				roleIDLabels.add("EMEA");
+				profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("CM EMEA Broker Dev User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: EMEA and CBRE Broker - EMEA - Multi Business Line");
+				break;
+
+			case "testuser73@cbre.com.crm.":
+
+				roleIDLabels.add("EMEA");
+				profileIDLabels.add("CBRE Support Staff - EMEA - Multi Business Line");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("CM EMEA CSS Dev User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: EMEA and CBRE Support Staff - EMEA - Multi Business Line");
+				break;
+
+			case "testuser74@cbre.com.crm.":
+
+				roleIDLabels.add("EMEA");
+				profileIDLabels.add("CBRE Support Staff - EMEA - Multi Business Line");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("CM EMEA CSS Super User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: EMEA and CBRE Support Staff - EMEA - Multi Business Line");
+				break;
+
+			case "testuser75@cbre.com.crm.":
+
+				roleIDLabels.add("EMEA");
+				profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("AS EMEA Broker Super User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: EMEA and CBRE Broker - EMEA - Multi Business Line");
+				break;
+
+			case "testuser76@cbre.com.crm.":
+
+				roleIDLabels.add("EMEA");
+				profileIDLabels.add("CBRE Broker - EMEA - GWS");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("GWS EMEA Broker Super User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: EMEA and CBRE Broker - EMEA - GWS");
+				break;
+
+			case "testuser78@cbre.com.crm.":
+
+				roleIDLabels.add("EMEA");
+				profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("VAS EMEA Broker Super User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: EMEA and CBRE Broker - EMEA - Multi Business Line");
+				break;
+
+			case "testuser79@cbre.com.crm.":
+
+				roleIDLabels.add("PAC_AB_IND_Auckland_Brokers");
+				profileIDLabels.add("CBRE Broker - APAC - Capital Markets");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("CM APAC Broker AUC User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: PAC_AB_IND_Auckland_Brokers and CBRE Broker - APAC - Capital Markets");
+				break;
+
+			case "testuser80@cbre.com.crm.":
+
+				roleIDLabels.add("PAC_CM_OFFICE");
+				profileIDLabels.add("CBRE Broker - APAC - Capital Markets");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("CM APAC Broker NZL User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: PAC_CM_OFFICE and CBRE Broker - APAC - Capital Markets");
+				break;
+
+			case "testuser81@cbre.com.crm.":
+
+				roleIDLabels.add("PAC_CM_Metro");
+				profileIDLabels.add("CBRE Broker - APAC - Capital Markets");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("CM APAC Broker Metro NZL User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: PAC CM Metro and CBRE Broker - APAC - Capital Markets");
+				break;
+
+			case "testuser82@cbre.com.crm.":
+
+				roleIDLabels.add("PAC_CM_Metro");
+				profileIDLabels.add("CBRE Broker - APAC - Capital Markets");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("CM APAC Brokder Metro User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: PAC_CM_Metroa nd CBRE Broker - APAC - Capital Markets");
+				permissionSetsLabels.add("Lightning Experience");
+				break;
+
+			case "testuser83@cbre.com.crm.":
+
+				roleIDLabels.add("PAC_AB_IND_South Australia_Brokers");
+				profileIDLabels.add("CBRE Broker - APAC - Capital Markets");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("CM APAC Broker AUS User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: PAC_AB_IND_South Australia_Brokers and CBRE Broker - APAC - Capital Markets");
+				break;
+
+			case "testuser84@cbre.com.crm.":
+
+				roleIDLabels.add("PAC_AB_Retail_AU_AB_Retail_New South Wales Brokers");
+				profileIDLabels.add("CBRE Broker - APAC - Capital Markets");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("CM APAC Broker NSW User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: PAC_AB_Retail_AU_AB_Retail_New South Wales Brokers and CBRE Broker - APAC - Capital Markets");
+				break;
+
+			case "testuser85@cbre.com.crm.":
+
+				roleIDLabels.add("PAC_AB_Retail_NZ_AB_Retail_Christchurch_Brokers");
+				profileIDLabels.add("CBRE Broker - APAC - Capital Markets");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("CM APAC Broker Christ Church User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: PAC_AB_Retail_NZ_AB_Retail_Christchurch_Brokers and "
+						+ "CBRE Broker - APAC - Capital Markets");
+				break;
+
+			case "testuser86@cbre.com.crm.":
+
+				roleIDLabels.add("UK");
+				profileIDLabels.add("CBRE - EMEA - Business Development");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("OB EMEA Occupier Client Care User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: UK and CBRE - EMEA - Business Development");
+				break;
+
+			case "testuser87@cbre.com.crm.":
+
+				roleIDLabels.add("APAC");
+				profileIDLabels.add("CBRE Broker - APAC - Capital Markets");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("CM APAC Broker Campaign User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: APAC and CBRE Broker - APAC - Capital Markets");
+				break;
+
+			case "testuser88@cbre.com.crm.":
+
+				roleIDLabels.add("APAC");
+				profileIDLabels.add("CBRE Broker - APAC - Capital Markets");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("CM APAC Broker MVP User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: APAC and CBRE Broker - APAC - Capital Markets");
+				break;
+
+			case "testuser90@cbre.com.crm.":
+
+				roleIDLabels.add("EMEA");
+				profileIDLabels.add("CBRE Manager - EMEA - Multi Business Line");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("CM EMEA Manager CA User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: EMEA and CBRE Manager - EMEA - Multi Business Line");
+				break;
+
+			case "testuser91@cbre.com.crm.":
+
+				roleIDLabels.add("AMER");
+				profileIDLabels.add("CBRE Support Staff - AMER - Capital Markets");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("DataAdmin EMEA Data User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: AMER and CBRE Support Staff - AMER - Capital Markets");
+				break;
+
+			case "testuser92@cbre.com.crm.":
+
+				roleIDLabels.add("APAC");
+				profileIDLabels.add("CBRE Broker - APAC - Multi Business Line");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("DataAdmin EMEA Data User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: APAC and CBRE Broker - APAC - Multi Business Line");
+				break;
+
+			case "testuser93@cbre.com.crm.":
+
+				roleIDLabels.add("EXECUTIVE");
+				profileIDLabels.add("CBRE Broker - JAPAN - Capital Markets");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("DataAdmin EMEA Data User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: Executive and CBRE Broker - JAPAN - Capital Markets");
+				break;
+
+			case "testuser94@cbre.com.crm.":
+
+				roleIDLabels.add("APAC");
+				profileIDLabels.add("CBRE - APAC - Project Management");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("DataAdmin EMEA Data User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: APAC and CBRE - APAC - Project Management");
+				break;
+
+			default:
+
+				roleIDLabels.add("EXECUTIVE");
+				profileIDLabels.add("System Administrator");
+				timeZone.add("America/Los_Angeles");
+				System.out.println("System Administrator User - :::" + userName + environment
+						+ ":::is having the Role and Profle as:::EXECUTIVE and System Administrator");
+				break;
 			}
-			return roleProfileTimeZone;
+			establishConnection.establishConnection();
+			roleProfileTimeZone = getRoleId(roleIDLabels.get(i)) + "-" + getProfileId(profileIDLabels.get(i)) + "-"
+					+ timeZone.get(i);
+			profileIDLabels.clear();
+			roleIDLabels.clear();
+			timeZone.clear();
+		}
+		return roleProfileTimeZone;
 	}
 
 	public String getPermSetId(String name) throws Exception {
@@ -1401,14 +1441,15 @@ public class PermissionSetsUsers extends ReusableLibrary {
 		}
 		return result;
 	}
-	
-/*	public String getProfileId(String name) throws Exception{
-		String query = "SELECT Id FROM Profile where name ='"+name+"'";
-		QueryResult result = EstablishConnection.connection.query(query);
-		System.out.println("Connection is::" +EstablishConnection.connection);
-		return result.getRecords()[0].getId();
-	}*/
-	
+
+	/*
+	 * public String getProfileId(String name) throws Exception{ String query =
+	 * "SELECT Id FROM Profile where name ='"+name+"'"; QueryResult result =
+	 * EstablishConnection.connection.query(query);
+	 * System.out.println("Connection is::" +EstablishConnection.connection);
+	 * return result.getRecords()[0].getId(); }
+	 */
+
 	public String getRoleId(String name) throws Exception {
 		String query = "SELECT Id FROM UserRole where name ='" + name + "'";
 		QueryResult result = EstablishConnection.connection.query(query);

@@ -1042,8 +1042,8 @@ public class LoginPage extends ReusableLibrary {
 		String environment = initializeEnvironment();
 		environment = environment.toLowerCase();
 
-/*		userNamesList.add("testuser1@cbre.com.crm." + environment);
-*/		userNamesList.add("testuser10@cbre.com.crm." + environment);
+		userNamesList.add("testuser1@cbre.com.crm." + environment);
+		userNamesList.add("testuser10@cbre.com.crm." + environment);
 		userNamesList.add("testuser11@cbre.com.crm." + environment);
 		userNamesList.add("testuser12@cbre.com.crm." + environment);
 		userNamesList.add("testuser13@cbre.com.crm." + environment);
@@ -1112,7 +1112,9 @@ public class LoginPage extends ReusableLibrary {
 		userNamesList.add("testuser9@cbre.com.crm." + environment);
 		userNamesList.add("testuser90@cbre.com.crm." + environment);
 		userNamesList.add("testuser91@cbre.com.crm." + environment);
-
+		userNamesList.add("testuser92@cbre.com.crm." + environment);
+		userNamesList.add("testuser93@cbre.com.crm." + environment);
+		userNamesList.add("testuser94@cbre.com.crm." + environment);
 		System.out.println("User Names List are::::" + userNamesList);
 	}
 

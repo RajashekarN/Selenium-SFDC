@@ -429,4 +429,15 @@ public class BC_API_Test extends ReusableLibrary {
 	public void bc_fectchOrCreateUser() {
 		permissionSetsUsers.fectchOrCreateUser();
 	}
+	
+	
+	/**
+	 * Reset the password
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	public void bc_setPassword() {
+		createUsers.setPassword("FTE2PasswordRelease44");
+	}
 }
