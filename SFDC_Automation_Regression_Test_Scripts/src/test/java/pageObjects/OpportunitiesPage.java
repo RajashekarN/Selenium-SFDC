@@ -7495,7 +7495,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			accountName.sendKeys(Keys.ENTER);
 			Utility_Functions.timeWait(2);
 			String environment = loginPage.initializeEnvironment();
-			if (environment.equals("FTE")) {
+			if ((environment.equals("FTE")) || (environment.equals("FTE2"))) {
 				Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeNewOpportunity, 3);
 				Utility_Functions.xSendKeys(driver, estimatedGrossFeeNewOpportunity,
 						dataTable.getData("General_Data", "InstallmentAmount"));

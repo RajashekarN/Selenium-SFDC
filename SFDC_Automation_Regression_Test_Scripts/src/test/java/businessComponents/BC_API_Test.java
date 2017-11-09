@@ -440,4 +440,14 @@ public class BC_API_Test extends ReusableLibrary {
 	public void bc_setPassword() {
 		createUsers.setPassword("FTE2PasswordRelease44");
 	}
+	/**
+	 *Updating the Role and Profile 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	
+	public void bc_updateRoleProfile() {
+		permissionSetsUsers.updateRoleProfile();
+	}
 }

@@ -48,7 +48,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 	CreateUsers createUsers = new CreateUsers(scriptHelper);
 	LoginPage loginPage = new LoginPage(scriptHelper);
 	SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
-
+	
 	/**
 	 * Validating the Permission Sets for different Roles and Profiles
 	 * 
@@ -132,6 +132,28 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				setPermissionSets(userNameCreatedList, permissionSetsLabels);
 				userNameCreatedList.clear();
 				createUsers.setPassword(userResultId, properties.getProperty(environment + "AdminPassword"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void updateRoleProfile() {
+		environment = loginPage.initializeEnvironment();
+		loginPage.userNames();
+		String userName, userResultId;
+		try {
+			for (int i = 0; i < LoginPage.userNamesList.size(); i++) {
+				userName = LoginPage.userNamesList.get(i);
+				roleProfileTimeZoneResult = setRoleProfileTimeZone(userName);				
+				String query = "Select Id from User where username ='" + userName + "'";
+				userResultId = searchTextSOQL.fetchRecordFieldValue("Id", query);
+				String role = roleProfileTimeZoneResult.split("-")[0];
+				String profile = roleProfileTimeZoneResult.split("-")[1];
+				System.out.println("User ID is :::"+ userResultId);
+				System.out.println("Role and Profile ID's are:::"+ role + "::::" + profile);
+				setRole(userResultId, role);
+				setProfile(userResultId, profile);				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -221,13 +243,13 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				break;
 
 			case "testuser12@cbre.com.crm.":
-				System.out.println("OB Manager Broker User - :::" + userNameList.get(i)
+				System.out.println("OB AMER Manager User - :::" + userNameList.get(i)
 						+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
 
 			case "testuser13@cbre.com.crm.":
-				System.out.println("OB CSS Broker User - :::" + userNameList.get(i)
+				System.out.println("OB AMER CSS User - :::" + userNameList.get(i)
 						+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
@@ -716,9 +738,12 @@ public class PermissionSetsUsers extends ReusableLibrary {
 	 */
 
 	public String setRoleProfileTimeZone(String userName) throws Exception {
-		String roleProfileTimeZone = null;
-		userName = userName.substring(0, userName.length() - 3);
-		// String userId = getUserId(userName);
+		String roleProfileTimeZone = null;				
+		if ((environment.equalsIgnoreCase("FTE2")) || (environment.equalsIgnoreCase("UAT2"))) {
+			userName = userName.substring(0, userName.length() - 4);
+		} else {
+			userName = userName.substring(0, userName.length() - 3);
+		}		
 		for (int i = 0; i < 1; i++) {
 			switch (userName) {
 			case "testuser1@cbre.com.crm.":
@@ -838,7 +863,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 						+ ":::is having the Role and Profle as::: AMER and CBRE Support Staff - AMER - Occupier Brokerage");
 				break;
 
-			case "testuser14@cbre.com.crm.":
+			case "testuser15@cbre.com.crm.":
 
 				roleIDLabels.add("APAC");
 				profileIDLabels.add("CBRE Broker - APAC - Agency Brokerage");
@@ -847,7 +872,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 						+ ":::is having the Role and Profle as::: APAC and CBRE Broker - APAC - Agency Brokerage");
 				break;
 
-			case "testuser15@cbre.com.crm.":
+			case "testuser16@cbre.com.crm.":
 
 				roleIDLabels.add("APAC");
 				profileIDLabels.add("CBRE Manager - APAC - Agency Brokerage");
@@ -1084,7 +1109,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 			case "testuser48@cbre.com.crm.":
 
 				roleIDLabels.add("EMEA");
-				profileIDLabels.add("CBRE Support Staff - EMEA - Multi Business Line");
+				profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
 				timeZone.add("America/Los_Angeles");
 				System.out.println("VAS EMEA Broker User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: EMEA and CBRE Broker - EMEA - Multi Business Line");
@@ -1129,7 +1154,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 			case "testuser65@cbre.com.crm.":
 
 				roleIDLabels.add("AMER");
-				profileIDLabels.add("CBRE Manager- AMER - Valuations &Advisory Services");
+				profileIDLabels.add("CBRE Manager - AMER - Valuations & Advisory Services");
 				timeZone.add("America/Los_Angeles");
 				System.out.println("VAS AMER Manager User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: AMER and CBRE Manager-AMER-Valuations &Advisory Services");
@@ -1138,7 +1163,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 			case "testuser66@cbre.com.crm.":
 
 				roleIDLabels.add("AMER");
-				profileIDLabels.add("CBRE Manager Staff - AMER - GWS");
+				profileIDLabels.add("CBRE Manager - AMER - GWS");
 				timeZone.add("America/Los_Angeles");
 				System.out.println("GWS AMER Manager User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: AMER and CBRE Manager Staff - AMER - GWS");
@@ -1442,35 +1467,49 @@ public class PermissionSetsUsers extends ReusableLibrary {
 		return result;
 	}
 
-	/*
-	 * public String getProfileId(String name) throws Exception{ String query =
-	 * "SELECT Id FROM Profile where name ='"+name+"'"; QueryResult result =
-	 * EstablishConnection.connection.query(query);
-	 * System.out.println("Connection is::" +EstablishConnection.connection);
-	 * return result.getRecords()[0].getId(); }
-	 */
-
 	public String getRoleId(String name) throws Exception {
 		String query = "SELECT Id FROM UserRole where name ='" + name + "'";
 		QueryResult result = EstablishConnection.connection.query(query);
 		return result.getRecords()[0].getId();
 	}
-
-	public String setRole(String userId, String roleId) {
-		String query = "SELECT Id FROM UserRole where id = '" + userId + "'";
-		QueryResult result;
+	
+	public String getRoleName(String userRoleId) throws Exception {
+		String query = "SELECT Name FROM UserRole where Id ='" + userRoleId + "'";
+		QueryResult result = EstablishConnection.connection.query(query);
+		return result.getRecords()[0].getId();
+	}
+	
+	public String getProfileName(String profileId) throws Exception {
+		String query = "SELECT Name FROM Profile where Id ='" + profileId + "'";
+		QueryResult result = EstablishConnection.connection.query(query);
+		return result.getRecords()[0].getId();
+	}
+	public String setRole(String userId, String userRoleId) throws Exception {
+		String query = "SELECT UserRoleId FROM User where id = '" + userId + "'";
+		QueryResult result; String roleName;
 		try {
 			result = EstablishConnection.connection.query(query);
+			String resultId = searchTextSOQL.fetchRecordFieldValue("UserRoleId", query);			
 			if (result.getRecords().length == 0) {
 				SObject user = new SObject();
-				user.setType("role");
-				user.setField("Id", roleId);
+				user.setType("user");
+				user.setField("Id", userId);
+				user.setField("UserRoleId", userRoleId);
 				EstablishConnection.connection.update(new SObject[] { user });
+			}  else if(!resultId.equals(userRoleId)) { 
+				SObject user = new SObject();
+				user.setType("user");
+				user.setField("Id", userId);
+				user.setField("UserRoleId", userRoleId);
+				results = EstablishConnection.connection.update(new SObject[] { user });
+				System.out.println(results[0].isSuccess());
+				roleName = getRoleName(userRoleId);
+				report.updateTestLog("Role Update", "Role updated for the user" + getUserName(userId) + ":::" + roleName, Status.PASS);
 			}
 		} catch (ConnectionException e) {
 			e.printStackTrace();
 		}
-		return roleId;
+		return userRoleId;
 	}
 
 	public QueryResult getTimeZone(String userName) {
@@ -1486,13 +1525,24 @@ public class PermissionSetsUsers extends ReusableLibrary {
 
 	public String setProfile(String userId, String profileId) {
 		try {
-			String query = "SELECT profileId FROM User where id ='" + userId + "'";
+			String query = "SELECT profileId FROM User where id ='" + userId + "'"; String profileName;
 			QueryResult result = EstablishConnection.connection.query(query);
+			String resultId = searchTextSOQL.fetchRecordFieldValue("ProfileId", query);
 			if (result.getRecords().length == 0) {
 				SObject user = new SObject();
 				user.setType("user");
+				user.setField("Id", userId);
 				user.setField("profileId", profileId);
 				EstablishConnection.connection.update(new SObject[] { user });
+			} else if(!resultId.equals(profileId)) {
+				SObject user = new SObject();
+				user.setType("user");
+				user.setField("Id", userId);
+				user.setField("profileId", profileId);
+				results = EstablishConnection.connection.update(new SObject[] { user });
+				System.out.println(results[0].isSuccess());
+				profileName = getProfileName(profileId);
+				report.updateTestLog("Profile Update", "Profile updated for the user" + getUserName(userId) + ":::" + profileName, Status.PASS);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
