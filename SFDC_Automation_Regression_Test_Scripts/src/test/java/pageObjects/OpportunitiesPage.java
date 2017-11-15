@@ -1211,8 +1211,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath="//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'001')]")
 	List<WebElement> accountsList;
 
-	@FindBy(xpath="//div[@class='undefined lookup__menu uiAbstractList uiAutocompleteList uiInput uiAutocomplete uiInput--default uiInput--lookup']//div[@class='listContent']/ul/li")
-	List<WebElement> propertiesList;
+	@FindBy(css="/ul>li.forceSearchInputLookupDesktopOption:nth-child(1)")
+	WebElement propertiesList;
 
 	@FindBy(xpath="//div[@class='select-options']//a[@title='Client Action Postponed']/parent::li/parent::ul/li")
 	List<WebElement> reasonForLossValuesPickList;
@@ -1373,6 +1373,12 @@ public class OpportunitiesPage extends ReusableLibrary {
 	
 	@FindBy(xpath="//div[contains(@class,'pbBottomButtons')]//input[contains(@id,'next')]")
 	WebElement nextForJapan;
+	
+	@FindBy(xpath="//span[text()='Project Value']/parent::div//input")
+	WebElement projectValuePhase;
+
+	@FindBy(xpath="//span[text()='Green Building Rating Systems']/parent::div//select")
+	WebElement greenBuilding;
 
 	HomePage hp = new HomePage(scriptHelper);
 	SearchTextSOQL searchOpportunity = new SearchTextSOQL(scriptHelper);
@@ -2065,8 +2071,10 @@ public class OpportunitiesPage extends ReusableLibrary {
 			Utility_Functions.xClick(driver, associatePropertyCapitalMarkets, true);
 			Utility_Functions.xWaitForElementPresent(driver, searchProperties, 3);
 			Utility_Functions.xClick(driver, searchProperties, true);
-			Utility_Functions.xWaitForElementPresent(driver, propertiesList, 3);
-			Utility_Functions.xclickOnFirstElementfromList(propertiesList);
+			Utility_Functions.timeWait(1);
+			WebElement propertyList = driver.findElement(By.cssSelector("ul>li.forceSearchInputLookupDesktopOption:nth-child(1)"));
+			Utility_Functions.xWaitForElementPresent(driver, propertyList, 3);
+			Utility_Functions.xClick(driver, propertyList, true);
 			Utility_Functions.xWaitForElementPresent(driver, save, 3);
 			Utility_Functions.xClick(driver, save, true);
 			Utility_Functions.xWaitForElementPresent(driver, opportunityPropertyCreated, 3);
@@ -3481,6 +3489,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
 			Utility_Functions.xclickRandomElement(opportunitiesList);
 		}
+		Utility_Functions.timeWait(1);
 		Utility_Functions.xclickRandomElement(opportunitiesList);
 	}
 
@@ -5358,6 +5367,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, recentlyViewed, true);
 		Utility_Functions.xWaitForElementPresent(driver, allActiveOpportunities, 3);
 		Utility_Functions.xClick(driver, allActiveOpportunities, true);
+		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
 		Utility_Functions.xclickRandomElement(opportunitiesList);
 		report.updateTestLog("Verify Opportunity Landing Page",
@@ -5659,12 +5669,13 @@ public class OpportunitiesPage extends ReusableLibrary {
 		servicesLabelList();
 
 		try {
-			Utility_Functions.xWaitForElementPresent(driver, labelListOpportunitiesPage, 3);
+			List<WebElement> labelListOpportunitiesPages = driver.findElements(By.xpath("//*[@class='slds-form-element__label']"));
+			Utility_Functions.xWaitForElementPresent(driver, labelListOpportunitiesPages, 3);
 			int i1 = 0, j = 0, countLabelList = 0;
-			String[] labelTexts = new String[labelListOpportunitiesPage.size()];
+			String[] labelTexts = new String[labelListOpportunitiesPages.size()];
 			while (countLabelList != 13) {
 				while (j < quickCreateLabelListSection.size()) {
-					for (WebElement element : labelListOpportunitiesPage) {
+					for (WebElement element : labelListOpportunitiesPages) {
 						labelTexts[i1] = element.getText();
 						if (labelTexts[i1].contains(quickCreateLabelListSection.get(j))) {
 							System.out.println("Verify Add Opportunity Page Label List" + element.getText());
@@ -8792,6 +8803,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, recentlyViewed, true);
 		Utility_Functions.xWaitForElementPresent(driver, allActiveOpportunities, 4);
 		Utility_Functions.xClick(driver, allActiveOpportunities, true);
+		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);	
 		Utility_Functions.xclickRandomElement(opportunitiesList);
 		Utility_Functions.timeWait(2);
@@ -8860,7 +8872,6 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void cloneAndEditButtonsOpportunity() {
-		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
 		opportunityEligibility();
 		Utility_Functions.xWaitForElementPresent(driver, edit, 3);
 		Utility_Functions.xClick(driver, edit, true);
@@ -8912,8 +8923,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 				|| (dataTable.getData("General_Data", "TC_ID").contains("GWSAMERManager"))
 				|| (dataTable.getData("General_Data", "TC_ID").contains("VASAMERManager"))
 				|| (dataTable.getData("General_Data", "TC_ID").contains("ASAMERManager"))) {
-			Utility_Functions.timeWait(2);
 			Utility_Functions.xScrollWindowToElement(driver, estimatedGrossFeeField);
+			Utility_Functions.timeWait(2);
 			Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeField, 3);
 			Utility_Functions.xClick(driver, estimatedGrossFeeField, true);
 			if (estimatedGrossFeeField.getText().equals("10,000.00")) {
@@ -8928,6 +8939,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			report.updateTestLog("Verify Opportunity Edit/Clone", "Opportunity edited and saved successfully",
 					Status.PASS);
 			if (dataTable.getData("General_Data", "TC_ID").contains("GWSAMERManager")) {
+				Utility_Functions.timeWait(1);
 				Utility_Functions.xWaitForElementClickable(driver, clone, 3);
 				Utility_Functions.xClick(driver, clone, true);
 				report.updateTestLog("Verify Opportunity Edit/Clone", "Clone button is present on Opportunity",
@@ -9038,6 +9050,13 @@ public class OpportunitiesPage extends ReusableLibrary {
 			Utility_Functions.xClick(driver, viewAllFieldsButton, true);
 			Utility_Functions.timeWait(1);
 			Utility_Functions.xScrollWindowTop(driver);
+		}
+		if(dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage09")) {
+			Utility_Functions.xWaitForElementPresent(driver, projectValuePhase, 3);
+			Utility_Functions.xSendKeys(driver, projectValuePhase, "50,000");
+			Utility_Functions.xWaitForElementPresent(driver, greenBuilding, 3);
+			Utility_Functions.xSelectDropdownByIndex(greenBuilding, 1);
+			Utility_Functions.timeWait(1);
 		}
 		if (dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage10")) {
 			Utility_Functions.xWaitForElementPresent(driver, reasonForLossOpp, 3);
@@ -9158,7 +9177,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 						"Phase and Probability populated are not as expected:::", Status.FAIL);
 			}
 		} else if (dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage09")) {
-			if (phasePopulated.equals("Executing") && (probabilityPopulated).equals("90.0")) {
+			if (phasePopulated.equals("Closed") && (probabilityPopulated).equals("100.0")) {
 				report.updateTestLog("Opportunity Phase and Probability",
 						"Phase and Probability populated are as expected:::", Status.PASS);
 				report.updateTestLog("Opportunity Phase and Probability",
@@ -10743,6 +10762,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, recentlyViewed, true);
 		Utility_Functions.xWaitForElementPresent(driver, allActiveOpportunities, 4);
 		Utility_Functions.xClick(driver, allActiveOpportunities, true);
+		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
 		Utility_Functions.xclickRandomElement(opportunitiesList);
 		Utility_Functions.timeWait(2);

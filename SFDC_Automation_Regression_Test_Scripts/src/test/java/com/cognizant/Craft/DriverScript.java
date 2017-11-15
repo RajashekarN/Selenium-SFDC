@@ -264,6 +264,8 @@ public class DriverScript {
 
 	}
 
+	public static String remoteURL = System.getProperty("RemoteUrl");
+
 	private void initializeWebDriver() {
 		executionMode = ExecutionMode.valueOf(properties.getProperty("ExecutionMode"));
 		switch (executionMode) {
@@ -277,8 +279,18 @@ public class DriverScript {
 			break;
 
 		case REMOTE:
-			WebDriver remoteWebDriver = WebDriverFactory.getRemoteWebDriver(testParameters.getBrowser(),
-					properties.getProperty("RemoteUrl"));
+			try {
+				if(remoteURL.equals(null)) {
+
+				} /*else {
+					System.out.println("Environment is set as per the parameters passed from Jenkins:::" + environment );
+					report.updateTestLog("Intialize Environment", "Environment is set as per the parameters passed from Jenkins:::", Status.PASS);
+				}*/			
+			} catch (Exception e) {
+				remoteURL = properties.getProperty("RemoteUrl");
+				System.out.println("Remote_URL is set as per the RemoteUrl value in Global Settings file:::" + remoteURL );
+			}
+			WebDriver remoteWebDriver = WebDriverFactory.getRemoteWebDriver(testParameters.getBrowser(), properties.getProperty("RemoteUrl"));
 			driver = new CraftDriver(remoteWebDriver);
 			driver.setTestParameters(testParameters);
 			WaitPageLoad();

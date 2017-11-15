@@ -118,7 +118,7 @@
 			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABEMEAManagerDefaultLandingPage"/>
 			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAMERManagerNewOpportunityPageLayout"/>
 			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAPACManagerNewOpportunityPageLayout"/>
-			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAMERBrokerDefaultSalesPhaseField"/>
+			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAMERBrokerDefaultSalesPhaseField"/>			
 			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABEMEABrokerDefaultSalesPhaseField"/>
 			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAMERBrokerRequiredFieldsOnSalesStage03_15"/>
 			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAMERManagerRequiredFieldsOnSalesStage03_15"/>
@@ -205,6 +205,7 @@
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBEMEACSSAccountsPopulatingAllFields"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerAccountsCustomActivityTimeline"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerLeadsConvertLeadExistingAccount"/>
+			<class name="testscripts.SF.RegressionTestScripts.TC_SF_CMAPACBrokerAccountsCustomActivityTimeline"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERManagerLeadsCustomEventPage"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerLeadsCustomEventPage"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerContactsNewActivityNotificationEmailPage"/>
@@ -304,6 +305,7 @@
 			<class name="testscripts.SF.Release37TestScripts.TC_SF_DAEMEADataAreaOfOperationsAccountCreation"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERCSSContactsPopulatingAllFields"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerLeadsConvertPageWithPrivateNote"/>
+			<class name="testscripts.SF.RegressionTestScripts.TC_SF_CMAPACBrokerAccountsPopulatingAllFields"/>
 			<class name="testscripts.SF.Release37TestScripts.TC_SF_OBAMERBrokerPreferedPropertyTypeField"/>
 			<class name="testscripts.SF.Release37TestScripts.TC_SF_ABAMERBrokerPreferedPropertyTypeField"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerLeadsCreateLead"/>
@@ -319,6 +321,7 @@
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerLeadsVerifyCreateLead"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerLeadsConvertPageWithEmail"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerAccountsVerifyDetailsPage"/>
+			<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerAccountsCustomActivityTimeline"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_CMAMERManagerAccountsVerifyDetailsPage"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_CMAMERBrokerAccountsVerifyDetailsPage"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERManagerLeadsConvertPageWithEmail"/>
@@ -334,6 +337,7 @@
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSContactsPopulatingRequiredFieldsPage"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsConvertPageWithPrivateNote"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerLeadsConvertPage"/>
+			<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerAccountsCustomActivityTimeline"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSAccountsPopulatingAllFields"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERManagerAccountsVerifyDetailsPage"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerAccountsVerifyDetailsPage"/>
@@ -345,10 +349,6 @@
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerLeadsPrivateNote"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerAccountsPopulatingAllFields"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERManagerAccountsCustomActivityTimeline"/>
-			<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerAccountsCustomActivityTimeline"/>
-			<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerAccountsCustomActivityTimeline"/>
-			<class name="testscripts.SF.RegressionTestScripts.TC_SF_CMAPACBrokerAccountsPopulatingAllFields"/>
-			<class name="testscripts.SF.RegressionTestScripts.TC_SF_CMAPACBrokerAccountsCustomActivityTimeline"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_CMAPACManagerAccountsCustomActivityTimeline"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_CMAPACManagerAccountsPopulatingAllFields"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_CMAMERBrokerContactsCustomActivityTimeline"/>
@@ -489,6 +489,7 @@
 			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAMERBrokerOpportunityCloneEdit"/>
 			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAMERManagerOpportunityCloneEdit"/>
 			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAMERCSSOpportunityCloneEdit"/>
+			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage08PhaseProbability"/>
 			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_CMAMERBrokerOpportunityCloneEdit"/>
 			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_CMAMERManagerOpportunityCloneEdit"/>
 			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_CMAMERCSSOpportunityCloneEdit"/>
@@ -500,14 +501,7 @@
 			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage01PhaseProbability"/>
 			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_CMEMEAManagerIPOpportunityCloneEdit"/>
 			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage02PhaseProbability"/>
-			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage03PhaseProbability"/>
-			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage04PhaseProbability"/>
-			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage05PhaseProbability"/>
-			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage06PhaseProbability"/>
-			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage07PhaseProbability"/>
-			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage08PhaseProbability"/>
 			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage10PhaseProbability"/>
-			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage11PhaseProbability"/>
 			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage12PhaseProbability"/>
 			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_CMEMEACSSIPOpportunityCloneEdit"/>
 			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_ASAMERManagerOpportunityCloneEdit"/>
@@ -518,6 +512,7 @@
 			<class name="testscripts.SF.Release38TestScripts.TC_SF_ABAMERCSSOpportunitiesTeamColumns"/>
 			<class name="testscripts.SF.Release38TestScripts.TC_SF_CMAMERManagerOpportunitiesTeamColumns"/>
 			<class name="testscripts.SF.Release38TestScripts.TC_SF_ABEMEABrokerOpportunitiesTeamColumns"/>
+			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage03PhaseProbability"/>
 			<class name="testscripts.SF.Release38TestScripts.TC_SF_ABEMEAManagerOpportunitiesTeamColumns"/>
 			<class name="testscripts.SF.Release38TestScripts.TC_SF_ASEMEABrokerOpportunitiesTechnologyToolsField"/>
 			<class name="testscripts.SF.Release38TestScripts.TC_SF_OBEMEABrokerOpportunitiesDiscretionaryFee"/>
@@ -535,6 +530,7 @@
 			<class name="testscripts.SF.Release38TestScripts.TC_SF_OBEMEAManagerOpportunitiesNetFeeFieldMandatory"/>
 			<class name="testscripts.SF.Release38TestScripts.TC_SF_OBEMEACSSOpportunitiesNetFeeFieldMandatory"/>
 			<class name="testscripts.SF.Release38TestScripts.TC_SF_OBEMEAManagerOpportunitiesCreateInstallment"/>
+			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage04PhaseProbability"/>
 			<class name="testscripts.SF.Release38TestScripts.TC_SF_ASEMEAManagerOpportunitiesCreateInstallment"/>
 			<class name="testscripts.SF.Release38TestScripts.TC_SF_ABEMEAManagerOpportunitiesCreateInstallment"/> 
 			<class name="testscripts.SF.Release39TestScripts.TC_SF_CMEMEABrokerOppNameConfidential"/>
@@ -551,6 +547,7 @@
 			<class name="testscripts.SF.Release38TestScripts.TC_SF_DAEMEADataAccountsBudgetsTargetsPage"/>
 			<class name="testscripts.SF.Release38TestScripts.TC_SF_OBEMEAManagerAccountsBudgetsTargetsPage"/>
 			<class name="testscripts.SF.Release38TestScripts.TC_SF_ABEMEAManagerAccountsBudgetsTargetsPage"/>
+			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage05PhaseProbability"/>
 			<class name="testscripts.SF.Release38TestScripts.TC_SF_VASEMEAManagerAccountsBudgetsTargetsPage"/>
 			<class name="testscripts.SF.Release38TestScripts.TC_SF_CMEMEAManagerIPAccountsBudgetsTargetsPage"/>
 			<class name="testscripts.SF.Release38TestScripts.TC_SF_ABEMEAManagerOpportunitiesCreateInstallment"/>
@@ -567,6 +564,7 @@
 			<class name="testscripts.SF.Release38TestScripts.TC_SF_CMEMEABrokerDevOpportunitiesCreateInstallment"/>
 			<class name="testscripts.SF.Release38TestScripts.TC_SF_VASEMEABrokerOpportunitiesCreateInstallment"/>
 			<class name="testscripts.SF.Release38TestScripts.TC_SF_ABEMEABrokerOpportunitiesCreateInstallment"/>
+			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage06PhaseProbability"/>
 			<class name="testscripts.SF.Release38TestScripts.TC_SF_VASEMEABrokerOpportunitiesDefaultOpportunityName"/>
 			<class name="testscripts.SF.Release38TestScripts.TC_SF_VASEMEAManagerOpportunitiesDefaultOpportunityName"/>
 			<class name="testscripts.SF.Release38TestScripts.TC_SF_VASEMEACSSOpportunitiesDefaultOpportunityName"/>
@@ -580,6 +578,7 @@
 			<class name="testscripts.SF.Release38TestScripts.TC_SF_CMAPACBrokerAUSPropertiesPreferences"/>
 			<class name="testscripts.SF.Release38TestScripts.TC_SF_CMAPACBrokerNSWPropertiesPreferences"/>
 			<class name="testscripts.SF.Release38TestScripts.TC_SF_CMAPACBrokerChristChurchPropertiesPreferences"/>
+			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage07PhaseProbability"/>
 			<class name="testscripts.SF.Release38TestScripts.TC_SF_OBEMEABrokerOpportunitiesInstallmentStatus"/>
 			<class name="testscripts.SF.Release38TestScripts.TC_SF_OBEMEABrokerOpportunitiesCloseInformationFields"/>
 			<class name="testscripts.SF.Release38TestScripts.TC_SF_CMAPACBrokerPropertiesProjectEnquiriesFields"/>
@@ -591,8 +590,9 @@
 			<class name="testscripts.SF.Release38TestScripts.TC_SF_OBEMEAOccupierClientCareContactsMarketingSegmentation"/>
 			<class name="testscripts.SF.Release39TestScripts.TC_SF_CMAPACBrokerMVPOpportunitiesQuickCreatePage"/>
 			<class name="testscripts.SF.Release39TestScripts.TC_SF_CMEMEABrokerCAOpportunitiesEditPageLayout"/>
-			<class name="testscripts.SF.Release39TestScripts.TC_SF_VASEMEABrokerOpportunitiesQuickCreatePageLayout"/> 
+			<class name="testscripts.SF.Release39TestScripts.TC_SF_VASEMEABrokerOpportunitiesQuickCreatePageLayout"/>
 			<class name="testscripts.SF.Release39TestScripts.TC_SF_VASEMEABrokerOpportunitiesEditPageLayout"/>
+			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage11PhaseProbability"/>
 			<class name="testscripts.SF.Release40TestScripts.TC_SF_CMAPACBrokerIndiaOpportunitiesPageLayout"/>
 			<class name="testscripts.SF.Release40TestScripts.TC_SF_CMAPACBrokerIndiaOpportunitiesRelatedObjects"/>
 			<class name="testscripts.SF.Release40TestScripts.TC_SF_CMAPACBrokerIndiaOpportunitiesDropDownButtons"/>
@@ -606,7 +606,7 @@
 			<class name="testscripts.SF.Release40TestScripts.TC_SF_APACProjectManagerRequiredFieldsSalesStage04"/>
 			<class name="testscripts.SF.Release40TestScripts.TC_SF_APACProjectManagerRequiredFieldsSalesStage06"/>
 			<class name="testscripts.SF.Release40TestScripts.TC_SF_APACProjectManagerRequiredFieldsSalesStage07"/>
-			<class name="testscripts.SF.Release40TestScripts.TC_SF_CMAPACBrokerJapanOpportunityRecordTypeDSF"/>			
+			<class name="testscripts.SF.Release40TestScripts.TC_SF_CMAPACBrokerJapanOpportunityRecordTypeDSF"/>		
 		</classes>
 	</test>
 </suite>
