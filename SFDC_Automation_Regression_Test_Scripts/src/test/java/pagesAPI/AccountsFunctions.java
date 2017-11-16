@@ -77,7 +77,7 @@ public class AccountsFunctions extends ReusableLibrary {
 			account.setField("BillingStreet", dataTable.getData("General_Data", "BillingStreet"));
 			account.setField("BillingCity", dataTable.getData("General_Data", "BillingCity"));
 			account.setField("BillingState", dataTable.getData("General_Data", "BillingState"));
-			account.setField("BillingPostalCode ", dataTable.getData("General_Data", "BillingPostalCode"));
+			account.setField("BillingPostalCode ", dataTable.getData("General_Data", "BillingZipcode"));
 
 			SObject[] accounts = new SObject[1];
 			accounts[0] = account;
