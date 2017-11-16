@@ -5,8 +5,7 @@
 	        <listener class-name="supportLibraries.AnnotationTransformer"/> 
 	 </listeners> -->
 	<test name="SmokeTests">
-		<classes>	 	
-			
+		<classes>	 				
 			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSEMEABrokerOpportunityNameAutoGenerate"/>
 			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_CMEMACSSDSFOpportunityNameAutoGenerate"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBEMEAManagerAccountsPopulatingAllFields"/>
@@ -594,6 +593,20 @@
 			<class name="testscripts.SF.Release39TestScripts.TC_SF_VASEMEABrokerOpportunitiesQuickCreatePageLayout"/>
 			<class name="testscripts.SF.Release39TestScripts.TC_SF_VASEMEABrokerOpportunitiesEditPageLayout"/>
 			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage11PhaseProbability"/>
+			<class name="testscripts.SF.Release40TestScripts.TC_SF_CMAPACBrokerIndiaOpportunitiesPageLayout"/>
+			<class name="testscripts.SF.Release40TestScripts.TC_SF_CMAPACBrokerIndiaOpportunitiesRelatedObjects"/>
+			<class name="testscripts.SF.Release40TestScripts.TC_SF_CMAPACBrokerIndiaOpportunitiesDropDownButtons"/>
+			<class name="testscripts.SF.Release40TestScripts.TC_SF_CMAPACBrokerJapanOpportunityCreation"/>
+			<class name="testscripts.SF.Release40TestScripts.TC_SF_CMAPACBrokerNZLOpportunitiesFinancialDetails"/>
+			<class name="testscripts.SF.Release40TestScripts.TC_SF_APACProjectManagerHomePageButtons"/>
+			<class name="testscripts.SF.Release40TestScripts.TC_SF_APACProjectManagerOpportunitySystemInformation"/>
+			<class name="testscripts.SF.Release40TestScripts.TC_SF_APACProjectManagerOpportunityRecordSections"/>
+			<class name="testscripts.SF.Release40TestScripts.TC_SF_APACProjectManagerRequiredFieldsSalesStage"/>
+			<class name="testscripts.SF.Release40TestScripts.TC_SF_APACProjectManagerRequiredFieldsSalesStage03"/>
+			<class name="testscripts.SF.Release40TestScripts.TC_SF_APACProjectManagerRequiredFieldsSalesStage04"/>
+			<class name="testscripts.SF.Release40TestScripts.TC_SF_APACProjectManagerRequiredFieldsSalesStage06"/>
+			<class name="testscripts.SF.Release40TestScripts.TC_SF_APACProjectManagerRequiredFieldsSalesStage07"/>
+			<class name="testscripts.SF.Release40TestScripts.TC_SF_CMAPACBrokerJapanOpportunityRecordTypeDSF"/>			
 		</classes>
 	</test>
 </suite>

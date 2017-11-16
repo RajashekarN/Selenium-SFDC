@@ -1,4 +1,4 @@
-package testscripts.SF.Release38TestScripts;
+package testscripts.SF.UATTestScripts;
 
 
 import org.openqa.selenium.Platform;
@@ -13,20 +13,20 @@ import com.cognizant.framework.selenium.SeleniumTestParameters;
 
 import com.cognizant.Craft.*;
 /**
- * Validating the Properties private tag
+ * Validating the Properties creation and the unit of measure for Japan users
  * 
  * @author Ramya
  *
  */
 
-public class TC_SF_CMAPACManagerPropertiesPrivateTag extends CRAFTTestCase {
+public class TC_SF_OBAMERAdminPropertiesCreation extends CRAFTTestCase {
 	@Test(dataProvider = "RegressionTestScripts")
-	public void runTC_SF_CMAPACManagerPropertiesPrivateTag(String testInstance, ExecutionMode executionMode, Platform platform
+	public void runTC_SF_OBAMERAdminPropertiesCreation(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
 		SeleniumTestParameters testParameters = new SeleniumTestParameters(currentScenario, currentTestcase);
-		testParameters.setCurrentTestDescription("Test for Validating the Properties private tag");
+		testParameters.setCurrentTestDescription("Test for Validating the Properties creation and the unit of measure for Japan users");
 		testParameters.setIterationMode(IterationOptions.RUN_ONE_ITERATION_ONLY);
 		testParameters.setBrowser(Browser.CHROME);
 		testParameters.setExecutionMode(executionMode);
@@ -45,6 +45,36 @@ public class TC_SF_CMAPACManagerPropertiesPrivateTag extends CRAFTTestCase {
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

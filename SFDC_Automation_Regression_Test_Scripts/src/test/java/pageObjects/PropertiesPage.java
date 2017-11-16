@@ -13,6 +13,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
@@ -329,7 +330,7 @@ public class PropertiesPage extends ReusableLibrary {
 	@FindBy(xpath="//select[contains(@id,'UnitsofMeasureAPAC')]")
 	WebElement unitOfMeasureProperties;
 
-	@FindBy(xpath="//a[@aria-label='Preference Type']")
+	@FindBy(xpath="//a[contains(@aria-label,'Preference Type')]")
 	WebElement preferenceType;
 
 	@FindBy(xpath="//span[text()='Project Enquiry Name']/parent::label/parent::div/input")
@@ -385,8 +386,61 @@ public class PropertiesPage extends ReusableLibrary {
 	
 	@FindBy(xpath="//span[contains(text(),'APAC Region')]/parent::div/following-sibling::div//a[contains(text(),'Christchurch')]")
 	WebElement regionChristchurch;
-
+	
+	@FindBy(xpath="//select[contains(@id,'countryPicklist')]/option[text()='Japan']")
+	WebElement selectCountryJapan;
+	
+	@FindBy(xpath="//select[contains(@id,'UnitsofMeasureAPAC')]/option[contains(@value,'Tsubo')]")
+	WebElement japanUnitOfMeasure;
+	
+	@FindBy(xpath="//select[contains(@id,'statePicklist')]/option[text()='Tokyo']")
+	WebElement selectStateTokyo;
+	
+	@FindBy(xpath="//input[contains(@id,'TotalSize')]")
+	WebElement totalSize;
+	
+	@FindBy(xpath="//select[contains(@id,'APACPropertyType_unselected')]")
+	WebElement propertyTypeHotel;
+	
+	@FindBy(xpath="//span[contains(@id,'propertyEditForm:prpType')]//a[contains(@title,'Add')]/img")
+	WebElement addButton;
+	
+	@FindBy(xpath="//li[contains(@id,'Serviced-Apartment')]//span[contains(text(),'Serviced Apartment')]")
+	WebElement servicedApartment;
+	
+	@FindBy(xpath = "//a[@role='menuitem']/div[@class='forceActionLink'][text()='Edit']")
+	WebElement edit;
+	
+	@FindBy(xpath = "//li[contains(@class,'oneActionsDropDown')]//a")
+	WebElement showMoreActions;
+	
+	@FindBy(xpath="//li[contains(@id,'Commercial-Building')]//span[contains(text(),'Commercial Building')]")
+	WebElement commercialBuilding;
+	
+	@FindBy(xpath="//span[contains(text(),'APAC Property Preferences')]/parent::div/preceding-sibling::div/span[contains(@class,'slds-radio--faux')]")
+	WebElement apacPropertyPreferences;
+	
+	@FindBy(xpath="//span[contains(text(),'Next')]/parent::button")
+	WebElement nextPropertyPreferences;
+	
+	@FindBy(xpath="//input[contains(@placeholder,'Search Contacts')]")
+	WebElement searchContacts;
+	
+	@FindBy(xpath="//div[contains(@class,'primaryLabel')][contains(@title,'TestAMER CMBroker')]")
+	WebElement contactsValue;
+	
+	@FindBy(xpath="//a[contains(@title,'Sale')]")
+	WebElement preferenceTypeValue;
+	
+	@FindBy(xpath="//a[contains(@aria-label,'Property Type')]")
+	WebElement propertyType;
+	
+	@FindBy(xpath="//a[contains(@title,'Hotel')]")
+	WebElement propertyTypeHotelValue;
+	
+	
 	LoginPage loginPage = new LoginPage(scriptHelper);
+	Actions actions = new Actions(driver.getWebDriver());
 
 	/**
 	 * Validating the Customer Property Page fields 
@@ -1029,28 +1083,6 @@ public class PropertiesPage extends ReusableLibrary {
 		}
 
 
-		/*if(!driver.findElements(By.xpath("// input [@value= 'Save']")).isEmpty()){
-			System.out.println("Save button is present in the New Activity Layout Page");
-			report.updateTestLog("Verify New Activity Page Layout ","The Save Button is present in the New Activity Page",  Status.PASS);
-		}else{
-			System.out.println("Save button is not present in the New Activity Layout Page");
-			report.updateTestLog("Verify New Activity Page Layout ","The Save Button is not present in the New Activity Page",  Status.FAIL);
-		}
-		if(!driver.findElements(By.xpath("// input [@value= 'Save & New']")).isEmpty()){
-			System.out.println("Save&New button is present in the New Activity Layout Page");
-			report.updateTestLog("Verify New Activity Page Layout ","The Save&New Button is present in the New Activity Page",  Status.PASS);
-		}else{
-			System.out.println("Save&New button is not present in the New Activity Layout Page");
-			report.updateTestLog("Verify New Activity Page Layout ","The Save&New Button is not present in the New Activity Page",  Status.FAIL);
-		}
-		if(!driver.findElements(By.xpath("// input [@value= 'Cancel']")).isEmpty()){
-			System.out.println("Cancel button is present in the New Activity Layout Page");
-			report.updateTestLog("Verify New Activity Page Layout","The Cancel Button is present in the New Activity Page",  Status.PASS);
-		}else{
-			System.out.println("Cancel button is not present in the New Activity Layout Page");
-			report.updateTestLog("Verify New Activity Page Layout","The Cancel Button is not present in the New Activity Page",  Status.FAIL);
-		}*/
-
 		List<WebElement> newActivityPageFields = driver
 				.findElements(By.xpath("//label[@class='slds-form-element__label']"));
 		int count = 0;
@@ -1481,14 +1513,21 @@ public class PropertiesPage extends ReusableLibrary {
 		System.out.println("Listing Management Fields are " + newpropertyListingManagementFieldsList);
 	}
 
-	/**
-	 * Validating the properties custom event page
-	 * 
-	 * @author Ramya
-	 *
-	 */
-
-
+	static ArrayList<String> unitOfMeasureValuesList = new ArrayList<String>();
+	public void unitOfMeasureFields() {
+		unitOfMeasureValuesList.add("--None--");
+		unitOfMeasureValuesList.add("Acres");
+		unitOfMeasureValuesList.add("Hectares");
+		unitOfMeasureValuesList.add("None");
+		unitOfMeasureValuesList.add("Ping");
+		unitOfMeasureValuesList.add("Pyeong");
+		unitOfMeasureValuesList.add("Square Feet");
+		unitOfMeasureValuesList.add("Square Meters");
+		unitOfMeasureValuesList.add("Square Yards");
+		unitOfMeasureValuesList.add("Tsubo");
+		System.out.println("Unit of Measure values are " + unitOfMeasureValuesList);
+	}
+	
 	public void verifyNewPropertiesPage(){
 
 		try{
@@ -1513,7 +1552,10 @@ public class PropertiesPage extends ReusableLibrary {
 
 		Utility_Functions.xSwitchtoFrame(driver, saveProperty);
 		Utility_Functions.timeWait(5);
-
+		String environment = loginPage.initializeEnvironment();
+		if (environment.equals("FTE")) {
+			if (!dataTable.getData("General_Data", "TC_ID").contains("OBAMERAdminPropertiesCreation")) {
+			
 		List<WebElement> propertiesPageSectionsList = driver.findElements(
 				By.xpath("//div[contains(@class,'slds-col--padded')]/h2"));
 		int count1 = 0, i1 = 0;
@@ -1781,6 +1823,8 @@ public class PropertiesPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+			}
+		}
 		Utility_Functions.timeWait(5);
 		Utility_Functions.xWaitForElementPresent(driver, propertyName, 3);
 		Utility_Functions.xClick(driver, propertyName, true);	
@@ -1792,27 +1836,108 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xScrollWindowTop(driver);
 		Utility_Functions.timeWait(2);
+		String environment1 = loginPage.initializeEnvironment();
+		if (environment1.equals("FTE")) {
+			if (dataTable.getData("General_Data", "TC_ID").contains("OBAMERAdminPropertiesCreation")) {
+				Utility_Functions.xWaitForElementPresent(driver, propertyCountry, 3);
+				Utility_Functions.xClick(driver, propertyCountry, true);
+				Utility_Functions.xWaitForElementPresent(driver,selectCountryJapan, 3);
+				Utility_Functions.xClick(driver,selectCountryJapan, true);
+				Utility_Functions.xWaitForElementPresent(driver,selectStateTokyo, 3);
+				Utility_Functions.xClick(driver,selectStateTokyo, true);		
+				if(japanUnitOfMeasure.isDisplayed()){
+					report.updateTestLog("Verify Custom Property Page",
+							"The unit of measure for japan is selected as Tsubo by default", Status.PASS);	
+					
+				}else{
+					report.updateTestLog("Verify Custom Property Page",
+							"The unit of measure for japan is not selected as Tsubo by default", Status.FAIL);			
+				}
+				newPropertyTypeFields();
+				int count = 0;
+				for (int i=1; i <= newPropertyTypeList.size(); i++) {
+					String option = driver.findElement(By.xpath("//select[contains(@id,'propertyEditForm:APACPropertyType')]/option["+i+"]")).getAttribute("value");
+					System.out.println(option);
+					report.updateTestLog("Verify New Property Page", "Property Type field is having the  " + option + " fields ", Status.PASS);
+					count++;
+				}		
+				System.out.println(count);
+				if (count!= 9) {
+					report.updateTestLog("Verify Custom Property Page", "All values are not present in the Property Type pick list", Status.FAIL);
+				} else {
+					report.updateTestLog("Verify Custom Property Page", "All values are not present in the Property Type pick list", Status.PASS);
+				}
+				
+				Select hotel =  new Select(propertyTypeHotel);
+				hotel.selectByVisibleText("Hotel");
+ 				Utility_Functions.xWaitForElementPresent(driver,addButton, 3);
+				Utility_Functions.xClick(driver,addButton, true);
+				Utility_Functions.xWaitForElementPresent(driver,servicedApartment, 3);
+				Utility_Functions.xClick(driver,servicedApartment, true);
+			
+				
+				List<WebElement> unitOfMeasureFieldsList = driver.findElements(
+						By.xpath("//select[contains(@id,'UnitsofMeasureAPAC')]/option"));
+				int count0 = 0, i0 = 0;
+				String fieldsArray0[] = new String[unitOfMeasureFieldsList.size()];
+				System.out.println(unitOfMeasureFieldsList.size());
+
+				try {
+					unitOfMeasureFields();
+					for (WebElement element0 :unitOfMeasureFieldsList) {
+						System.out.println(element0.getText());
+						fieldsArray0[i0] = element0.getText();
+						if (fieldsArray0[i0].equalsIgnoreCase(unitOfMeasureValuesList.get(i0))) {
+							report.updateTestLog("Verify Custom Property Page",
+									"Unit of maesure is having the  " + fieldsArray0[i0] + " Fields ",
+									Status.PASS);
+							count0++;
+						}
+						i0++;
+					}
+					System.out.println(count0);
+					if (count0 != 10) {
+						report.updateTestLog("Verify Custom Property Page",
+								"All Fields are not present in the Unit of Measure pick list", Status.FAIL);
+					} else {
+
+						report.updateTestLog("Verify Custom Property Page",
+								"All Fields are present in the Unit of Measure pick list", Status.PASS);
+					}
+
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}		
+				Utility_Functions.xSendKeys(driver,totalSize, dataTable.getData("General_Data", "Total Size"));
+				Utility_Functions.xWaitForElementPresent(driver,totalSize, 4);
+				
+			}
+			
+			}else{
+				Utility_Functions.xWaitForElementPresent(driver, propertyCountry, 3);
+				Utility_Functions.xClick(driver, propertyCountry, true);
+				Utility_Functions.xWaitForElementPresent(driver, selectPropertyCountry, 3);
+				Utility_Functions.xClick(driver, selectPropertyCountry, true);
+				Utility_Functions.xWaitForElementPresent(driver, selectPropertyState, 3);
+				Utility_Functions.xClick(driver, selectPropertyState, true);
+			}
 		Utility_Functions.xWaitForElementPresent(driver, propertyStreet, 5);
 		Utility_Functions.xSendKeys(driver, propertyStreet, dataTable.getData("General_Data", "Street"));
 		Utility_Functions.xWaitForElementPresent(driver, propertyCity, 5);
 		Utility_Functions.xSendKeys(driver, propertyCity, dataTable.getData("General_Data", "City"));
-		Utility_Functions.xWaitForElementPresent(driver, propertyCountry, 3);
-		Utility_Functions.xClick(driver, propertyCountry, true);
-		Utility_Functions.xWaitForElementPresent(driver, selectPropertyCountry, 3);
-		Utility_Functions.xClick(driver, selectPropertyCountry, true);
-		Utility_Functions.xWaitForElementPresent(driver, selectPropertyState, 3);
-		Utility_Functions.xClick(driver, selectPropertyState, true);
-		/*		Utility_Functions.timeWait(1);
-		Utility_Functions.xWaitForElementPresent(driver, selectPropertyState, 3);
-		Utility_Functions.xClick(driver, selectPropertyState, true);
-		Utility_Functions.timeWait(2);*/
 		Utility_Functions.xWaitForElementPresent(driver, saveProperty, 4);
 		Utility_Functions.xClick(driver, saveProperty, true);
-		//staleElementHandle(saveProperty);
+		Utility_Functions.timeWait(2);
 		report.updateTestLog("Verify Custom Property Page",
 				"The new property is saved with all the required fields", Status.PASS);	
-	}
+		if(details.isDisplayed()) {
 
+			report.updateTestLog("Verify Custom Property Page", "The Property is saved successfully", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Custom Property Page", "The Property is not saved successfully", Status.FAIL);
+		}
+	}
+	
 	public void staleElementHandle(WebElement element) {
 		int count = 0;
 		boolean clicked = false;
@@ -2810,9 +2935,121 @@ try{
 	public void verifyProjectEnquiriesEnhancements(){	
 		
 		verifyProjectEnquiriesPageFields();
-		//a[contains(@class,'baseCard__header-title-container')]/span[1]
+		
 		
 	}
+	/**
+	 * Validating the Properties edit page
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	
+	
+	public void verifyPropertiesEditPage(){	
+		
+		try{
+			Utility_Functions.xWaitForElementPresent(driver,menu_Properties, 3);
+			Utility_Functions.xClick(driver, menu_Properties, true);
+		}catch(Exception e){
+			Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
+			Utility_Functions.xClick(driver, menu_More, true);
+			try {
+				Utility_Functions.xWaitForElementPresent(driver, properties, 2);
+				Utility_Functions.xClick(driver, properties, true);
+			} catch (Exception e1) {
+				Utility_Functions.xWaitForElementPresent(driver, propertiesEnv, 2);
+				Utility_Functions.xClick(driver, propertiesEnv, true);
+			}      
+		}
+	
+		List<WebElement> recentlyViewedpropertiesList = driver.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xclickOnFirstElementfromList(recentlyViewedpropertiesList);
+		Utility_Functions.xWaitForElementPresent(driver,showMoreActions, 2);
+		Utility_Functions.xClick(driver,showMoreActions, true);
+		Utility_Functions.xWaitForElementPresent(driver,edit, 2);
+		actions.moveToElement(edit);
+		actions.click();
+		actions.build().perform();
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xSwitchtoFrame(driver, saveProperty);
+		Utility_Functions.timeWait(5);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Select office =  new Select(propertyTypeHotel);
+		office.selectByVisibleText("Office");
+		Utility_Functions.xWaitForElementPresent(driver,addButton, 3);
+		Utility_Functions.xClick(driver,addButton, true);
+		Utility_Functions.xWaitForElementPresent(driver,commercialBuilding, 3);
+		Utility_Functions.xClick(driver,commercialBuilding, true);
+			
+	}
+	/**
+	 * Validating the Properties Preferences creation
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void verifyPropertiesPreferencesCreation(){
+
+		Utility_Functions.xWaitForElementPresent(driver,menu_More, 3);
+		Utility_Functions.xClick(driver, menu_More, true);
+		report.updateTestLog("Verify Properties Preferences Pyeong Value","Verifying More options is displayed",Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver,more_propertyPreferences, 3);
+		Utility_Functions.xClick(driver,more_propertyPreferences, true);
+		report.updateTestLog("Verify Properties Preferences Pyeong Value","Verifying Property Preferences is displayed",Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver,newPropertiesPreferences, 3);
+		Utility_Functions.xClick(driver,newPropertiesPreferences, true);
+		report.updateTestLog("Verify Properties Preferences Pyeong Value","Verifying the new Properties Preferences is displayed",Status.PASS);
+		Utility_Functions.timeWait(5);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+				
+
+	}
+	/**
+	 * Validating the Properties Preferences creation
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+	public void verifyPreferencesPropertiesCreation() {
+		Utility_Functions.xWaitForElementPresent(driver, applauncher, 3);
+		Utility_Functions.xClick(driver, applauncher, true);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver,preferences, 3);
+		Utility_Functions.xClick(driver, preferences, true);
+		report.updateTestLog("Verify Preferences Property Type ","Preferences is Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver,newPropertiesPreferences, 3);
+		Utility_Functions.xClick(driver,newPropertiesPreferences, true);
+		report.updateTestLog("Verify Preferences Property Type ","Recently viewed Properties are Displayed ",  Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver,apacPropertyPreferences, 3);
+		Utility_Functions.xClick(driver,apacPropertyPreferences, true);
+		Utility_Functions.xWaitForElementPresent(driver,nextPropertyPreferences, 3);
+		Utility_Functions.xClick(driver,nextPropertyPreferences, true);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver,searchContacts, 3);
+		Utility_Functions.xSendKeys(driver,searchContacts, "TestAMER CMBroker");
+		Utility_Functions.xWaitForElementPresent(driver,contactsValue, 3);
+		Utility_Functions.xClick(driver,contactsValue, true);
+		Utility_Functions.xWaitForElementPresent(driver,preferenceType, 3);
+		Utility_Functions.xClick(driver,preferenceType, true);
+		Utility_Functions.xWaitForElementPresent(driver,preferenceTypeValue, 3);
+		Utility_Functions.xClick(driver,preferenceTypeValue, true);
+		Utility_Functions.xWaitForElementPresent(driver,propertyType, 3);
+		Utility_Functions.xClick(driver,propertyType, true);
+		Utility_Functions.xWaitForElementPresent(driver,propertyTypeHotelValue, 3);
+		Utility_Functions.xClick(driver,propertyTypeHotelValue, true);
+		
+		
+		
+		}
 }
 
 

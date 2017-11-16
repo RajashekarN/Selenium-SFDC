@@ -766,6 +766,9 @@ public class AccountsPage extends ReusableLibrary {
 	
 	@FindBy(xpath="//span[contains(text(),'Currency')]/parent::span/following-sibling::div//a[contains(@aria-label,'Currency')]")
     WebElement budgetCurrency;
+	
+	/*@FindBy(xpath = "//a[@class='forceActionLink']/div[@class='slds-truncate'][text()='Edit']")
+	WebElement edit;*/
 
 
 	HomePage hp = new HomePage(scriptHelper);
@@ -3418,12 +3421,12 @@ public class AccountsPage extends ReusableLibrary {
 				j++;
 			}
 			System.out.println(count3);
-			if (count3 >= 8) {
-				report.updateTestLog("Verify Accounts Details Page",
-						"All sections are present in the Accounts Related Page", Status.PASS);
-			} else {
+			if (count3 != 9) {
 				report.updateTestLog("Verify Accounts Details Page",
 						"All sections are not present in the Accounts Related Page", Status.FAIL);
+			} else {
+				report.updateTestLog("Verify Accounts Details Page",
+						"All sections are present in the Accounts Related Page", Status.PASS);
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -5281,7 +5284,7 @@ public class AccountsPage extends ReusableLibrary {
 				Status.PASS);
 		List<WebElement> accountNamesList = driver.findElements(
 				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-		Utility_Functions.xWaitForElementPresent(driver, accountNamesList, 3);
+
 		Utility_Functions.xclickRandomElement(accountNamesList);
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xWaitForElementPresent(driver, related_Accounts, 5);
@@ -5361,7 +5364,6 @@ public class AccountsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			Utility_Functions.xWaitForElementPresent(driver, moreActivities, 5);
 			Utility_Functions.xClick(driver, moreActivities, true);
-			Utility_Functions.timeWait(2);
 			Utility_Functions.xWaitForElementPresent(driver, activity, 3);
 			if (activity.isDisplayed()) {
 				System.out.println("Activity is present acitivity related list");
@@ -5372,7 +5374,6 @@ public class AccountsPage extends ReusableLibrary {
 					report.updateTestLog("Verify Activity Related List",
 							"Acitivity Type is present in acitivity related list:::", Status.PASS);
 					count++;
-					Utility_Functions.timeWait(2);
 				}
 				if (statusActivityTimeLine.getText().contains("Status")) {
 					System.out.println("Status is present acitivity related list");
@@ -5788,5 +5789,42 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver,saveBudget, true);
 		
 		}	
+	}
+	/**
+	 * Validating the Budget/Target  editing for the already created budget/targets
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void verifyBudgetsTargetsEditing(){
+		Utility_Functions.xWaitForElementPresent(driver, applauncher, 3);
+		Utility_Functions.xClick(driver, applauncher, true);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver,budgetsTargets, 3);
+		Utility_Functions.xClick(driver,budgetsTargets, true);
+		List<WebElement> budgetsNamesList = driver.findElements(By.xpath(
+				"//a[contains(@class,'slds-truncate outputLookupLink slds-truncate forceOutputLookup')][contains(@data-recordid,'a14e')]"));
+		Utility_Functions.xclickOnFirstElementfromList(budgetsNamesList);
+		Utility_Functions.xWaitForElementPresent(driver,edit, 3);
+		Utility_Functions.xClick(driver,edit, true);
+		Utility_Functions.xWaitForElementPresent(driver,budgetAmount, 3);
+		Utility_Functions.xSendKeys(driver,budgetAmount, dataTable.getData("General_Data", "InstallmentAmount"));
+		Calendar calendar1 = Calendar.getInstance();
+		calendar1.add(Calendar.DAY_OF_MONTH, 90);
+		SimpleDateFormat dateFormat1 = new SimpleDateFormat("MM/dd/yyyy");
+		System.out.println("Date : " + dateFormat1.format(calendar1.getTime()));
+		Utility_Functions.xWaitForElementPresent(driver,startDate, 3);
+		Utility_Functions.xSendKeys(driver,startDate, dateFormat1.format(calendar1.getTime()));
+		Utility_Functions.xWaitForElementPresent(driver,saveBudget, 3);
+		Utility_Functions.xClick(driver,saveBudget, true);
+		Utility_Functions.timeWait(5);
+		if( (edit.isDisplayed())) {
+
+			report.updateTestLog("Verify Budgets/Targets Edit Page", "The Budget/Target is saved after the editing is done", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Budgets/Targets Edit Page", "The Budget/Target is not edited", Status.FAIL);
+		}
+	
+		
 	}
 }

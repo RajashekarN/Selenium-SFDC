@@ -291,8 +291,7 @@ public class DriverScript {
 			WaitPageLoad();
 			break;
 
-		case REMOTE:
-			
+		case REMOTE:			
 			WebDriver remoteWebDriver = WebDriverFactory.getRemoteWebDriver(testParameters.getBrowser(), sRemoteURL);
 			driver = new CraftDriver(remoteWebDriver);
 			driver.setTestParameters(testParameters);

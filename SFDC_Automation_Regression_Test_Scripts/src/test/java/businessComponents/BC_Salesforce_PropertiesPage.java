@@ -92,7 +92,7 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 		sfPropertiesPage.validateCampaignsTab();
 	}
 	/**
-	 * Validating the Campaigns tab present in the dropdown after loggin in
+	 * Validating the New Properties page
 	 * 
 	 * @author Ramya
 	 *
@@ -256,6 +256,23 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	public void bc_verifyProjectEnquiriesPageFields() throws InterruptedException {
 		sfPropertiesPage.verifyProjectEnquiriesPageFields();
 	}
-	
+	/**
+	 * Validating the Properties edit page
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyPropertiesEditPage() throws InterruptedException {
+		sfPropertiesPage.verifyPropertiesEditPage();
+	}
+	/**
+	 * Validating the creation of properties preferences
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyPreferencesPropertiesCreation() throws InterruptedException {
+		sfPropertiesPage.verifyPreferencesPropertiesCreation();
+	}
 	
 }

@@ -406,5 +406,15 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 	 */
 	public void bc_verifyBudgetsTargets() throws InterruptedException {
 		sfAccountsPage.verifyBudgetsTargets();
-	}	
+	}
+	/**
+	 *  Validating the Budgets/Targets page 
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyBudgetsTargetsEditing() throws InterruptedException {
+		sfAccountsPage.verifyBudgetsTargetsEditing();
+	}
+	
 }

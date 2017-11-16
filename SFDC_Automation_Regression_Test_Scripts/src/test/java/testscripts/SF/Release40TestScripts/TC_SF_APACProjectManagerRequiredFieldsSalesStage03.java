@@ -1,8 +1,7 @@
-package testscripts.SF.Release38TestScripts;
+package testscripts.SF.Release40TestScripts;
 
 
 import org.openqa.selenium.Platform;
-
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -13,20 +12,20 @@ import com.cognizant.framework.selenium.SeleniumTestParameters;
 
 import com.cognizant.Craft.*;
 /**
- * Validating the Properties private tag
+ * Validating the Opportunities required fields at sales stage 03
  * 
  * @author Ramya
  *
  */
 
-public class TC_SF_CMAPACManagerPropertiesPrivateTag extends CRAFTTestCase {
+public class TC_SF_APACProjectManagerRequiredFieldsSalesStage03 extends CRAFTTestCase {
 	@Test(dataProvider = "RegressionTestScripts")
-	public void runTC_SF_CMAPACManagerPropertiesPrivateTag(String testInstance, ExecutionMode executionMode, Platform platform
+	public void runTC_SF_APACProjectManagerRequiredFieldsSalesStage03(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
 		SeleniumTestParameters testParameters = new SeleniumTestParameters(currentScenario, currentTestcase);
-		testParameters.setCurrentTestDescription("Test for Validating the Properties private tag");
+		testParameters.setCurrentTestDescription("Test for Validating the Opportunities required fields at sales stage 03");
 		testParameters.setIterationMode(IterationOptions.RUN_ONE_ITERATION_ONLY);
 		testParameters.setBrowser(Browser.CHROME);
 		testParameters.setExecutionMode(executionMode);
@@ -45,6 +44,47 @@ public class TC_SF_CMAPACManagerPropertiesPrivateTag extends CRAFTTestCase {
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -54,30 +54,25 @@ public class CreateUsers extends ReusableLibrary {
 		setPassword(password);
 	}*/
 
-	public boolean createUsers() {
+	public String createUser(String firstName, String lastName, String alias, String email, String userName, String userRoleId, String profileId, String timeZoneSidKey) {
 		try {
 			SObject user = new SObject();
 			user.setType("user");
-			user.setField("Name", "OBAMER");
-			user.setField("Alias", "OBAMER");
-			user.setField("Email", "vishnuvardhan.bommisetty@cbre.com");
-			//user.setField("Nickname", "OBAMERBrokerUAT239@cbre.com");
-			user.setField("Username", "OBAMERBrokerUAT239@cbre.com");
-			user.setField("UserRole", "AMER");
-			//user.setField("UserLicense", "Salesforce");
-			user.setField("Profile", "CBRE Broker - AMER - Occupier Brokerage");
-            user.setField("TimeZoneSidKey", "America/Los_Angeles");
-            user.setField("LocaleSidKey", "En");			
-            user.setField("LanguageLocaleKey", "English");
-            user.setField("DefaultCurrencyIsoCode", "USD - U.S. Dollar");
+			user.setField("FirstName", firstName);
+			user.setField("LastName", lastName);
+			user.setField("Alias", alias);
+			user.setField("Email", email);
+			user.setField("Username", userName);
+			user.setField("UserRoleId", userRoleId);
+			user.setField("profileId", profileId);
+            user.setField("TimeZoneSidKey", timeZoneSidKey);
+            user.setField("LocaleSidKey", "en_US");			
+            user.setField("LanguageLocaleKey", "en_US");
+            user.setField("DefaultCurrencyIsoCode", "USD");
             user.setField("DefaultGroupNotificationFrequency", "P");
             user.setField("DigestFrequency", "D");
             user.setField("EmailEncodingKey", "ISO-8859-1");
-/*            user.setField("UserPermissionsCallCenterAutoLogin", "true");
-            user.setField("UserPermissionsMarketingUser", "true");
-            user.setField("UserPermissionsOfflineUser", "true"); */
-			establishConnection.establishConnection();
-
+			System.out.println(EstablishConnection.connection.getUserInfo().getUserId());
 			SObject[] users = new SObject[1];
 			users[0] = user;
 			results = EstablishConnection.connection.create(users);
@@ -86,8 +81,9 @@ public class CreateUsers extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return status;
+		return results[0].getId();
 	}
+	
 	
 	/**
 	 * Function for the creation of temporary password
@@ -135,6 +131,21 @@ public class CreateUsers extends ReusableLibrary {
 		}
 	}
 	
+	public void setPassword(String userId, String newPassword) {
+		establishConnection.establishConnection();
+		try {
+				try {
+					setPasswordResults = EstablishConnection.connection.setPassword(userId, newPassword);
+					System.out.println("The password for user ID::::" + userId + ":::changed to:::" + newPassword);
+					report.updateTestLog("New Password for the User ID:::", "The password for user ID" + userId + "changed to" + newPassword, Status.PASS);
+				} catch (Exception e) {
+					//resetPassword(userId);
+				}							
+ 		} catch (Exception e) {		
+			System.out.println(e.getMessage());
+		}
+	}
+	
 	/**
 	 * User Names for different environments 
 	 * 
@@ -145,50 +156,77 @@ public class CreateUsers extends ReusableLibrary {
 
 	public void userNames() {
 		
-		userNamesList.add("005e0000003luE7AAI");
-		userNamesList.add("005e0000003luEPAAY");
-		userNamesList.add("005e0000003luEjAAI");
-		userNamesList.add("005e0000003luEEAAY");
-		userNamesList.add("005e0000003luEVAAY");
-		userNamesList.add("005e0000003luE3AAI");
-		userNamesList.add("005e0000003luEFAAY");
-		userNamesList.add("005e0000003luEWAAY");
-		userNamesList.add("005e0000003luEGAAY");
-		userNamesList.add("005e0000003luEZAAY");
-		userNamesList.add("005e0000003luEHAAY");
-		userNamesList.add("005e0000003luEMAAY");
-		userNamesList.add("005e0000003luEaAAI");
-		userNamesList.add("005e0000003luEJAAY");
-		userNamesList.add("005e0000003luEcAAI");
-		userNamesList.add("005e0000003luEoAAI");
-		userNamesList.add("005e0000003luEKAAY");
-		userNamesList.add("005e0000003luEdAAI");
-		userNamesList.add("005e0000003luEeAAI");
-		userNamesList.add("005e0000003uktRAAQ");
-		userNamesList.add("005e0000003ukuyAAA");
-		userNamesList.add("005e0000003vvxgAAA");
-		userNamesList.add("005e00000040PQfAAM");
-		userNamesList.add("005e00000040PSRAA2");
-		userNamesList.add("005e00000040Rq1AAE");
-		userNamesList.add("005e00000040RqGAAU");
-		userNamesList.add("005e00000040RrnAAE");
-		userNamesList.add("005e00000040RrsAAE");
-		userNamesList.add("005e00000040RzwAAE");
-		userNamesList.add("005e00000040S1OAAU");
-		userNamesList.add("005e00000040ammAAA");
-		userNamesList.add("005e00000040amwAAA");
-		userNamesList.add("005e00000040ankAAA");
-		userNamesList.add("005e00000040atdAAA");
-		userNamesList.add("005e00000040bE2AAI");
-		userNamesList.add("005e00000040bKtAAI");
-		userNamesList.add("005e00000040baDAAQ");
-		userNamesList.add("005e00000040cCgAAI");
-		userNamesList.add("005e00000040cIKAAY");
-		userNamesList.add("005e00000040hB4AAI");
-		userNamesList.add("005e000000411ofAAA");
-		userNamesList.add("005e00000041K92AAE");
-		userNamesList.add("005e00000040PEZAA2");
-		userNamesList.add("005e0000003mEtYAAU");
+		userNamesList.add("0052F000000d0UIQAY");
+		userNamesList.add("0052F000000d0UJQAY");
+		userNamesList.add("0052F000000d0UPQAY");
+		userNamesList.add("0052F000000d0UQQAY");
+		userNamesList.add("0052F000000d0UZQAY");
+		userNamesList.add("0052F000000d0UaQAI");
+		userNamesList.add("0052F000000d0UbQAI");
+		userNamesList.add("0052F000000d0UcQAI");
+		userNamesList.add("0052F000000d0UdQAI");
+		userNamesList.add("0052F000000d0UeQAI");
+		userNamesList.add("0052F000000d0UfQAI");
+		userNamesList.add("0052F000000d0UgQAI");
+		userNamesList.add("0052F000000d0UhQAI");
+		userNamesList.add("0052F000000d0UiQAI");
+		userNamesList.add("0052F000000d0UjQAI");
+		userNamesList.add("0052F000000d0UkQAI");
+		userNamesList.add("0052F000000d0UlQAI");
+		userNamesList.add("0052F000000d0UmQAI");
+		userNamesList.add("0052F000000d0UnQAI");
+		userNamesList.add("0052F000000d0URQAY");
+		userNamesList.add("0052F000000d0UoQAI");
+		userNamesList.add("0052F000000d0UpQAI");
+		userNamesList.add("0052F000000d0UqQAI");
+		userNamesList.add("0052F000000d0UzQAI");
+		userNamesList.add("0052F000000d0V0QAI");
+		userNamesList.add("0052F000000d0V1QAI");
+		userNamesList.add("0052F000000d0V2QAI");
+		userNamesList.add("0052F000000d0USQAY");
+		userNamesList.add("0052F000000d0V3QAI");
+		userNamesList.add("0052F000000d0V4QAI");
+		userNamesList.add("0052F000000d0V8QAI");
+		userNamesList.add("0052F000000d0V9QAI");
+		userNamesList.add("0052F000000d0VAQAY");
+		userNamesList.add("0052F000000d0VBQAY");
+		userNamesList.add("0052F000000d0VCQAY");
+		userNamesList.add("0052F000000d0UTQAY");
+		userNamesList.add("0052F000000d0VDQAY");
+		userNamesList.add("0052F000000d0VEQAY");
+		userNamesList.add("0052F000000d0UUQAY");
+		userNamesList.add("0052F000000eR8wQAE");
+		userNamesList.add("0052F000000eR91QAE");
+		userNamesList.add("0052F000000eR96QAE");
+		userNamesList.add("0052F000000eR9BQAU");
+		userNamesList.add("0052F000000eR9GQAU");
+		userNamesList.add("0052F000000eR9LQAU");
+		userNamesList.add("0052F000000d0UVQAY");
+		userNamesList.add("0052F000000eR9QQAU");
+		userNamesList.add("0052F000000eR9VQAU");
+		userNamesList.add("0052F000000eR9aQAE");
+		userNamesList.add("0052F000000eR9fQAE");
+		userNamesList.add("0052F000000eR9kQAE");
+		userNamesList.add("0052F000000eR9pQAE");
+		userNamesList.add("0052F000000eR9uQAE");
+		userNamesList.add("0052F000000eR9zQAE");
+		userNamesList.add("0052F000000eRA4QAM");
+		userNamesList.add("0052F000000d0UWQAY");
+		userNamesList.add("0052F000000eRA9QAM");
+		userNamesList.add("0052F000000eRAEQA2");
+		userNamesList.add("0052F000000eRATQA2");
+		userNamesList.add("0052F000000eRAiQAM");
+		userNamesList.add("0052F000000eRB2QAM");
+		userNamesList.add("0052F000000eRBCQA2");
+		userNamesList.add("0052F000000eRBWQA2");
+		userNamesList.add("0052F000000eRBvQAM");
+		userNamesList.add("0052F000000eRCFQA2");
+		userNamesList.add("0052F000000d0UXQAY");
+		userNamesList.add("0052F000000eRCZQA2");
+		userNamesList.add("0052F000000eRCeQAM");
+		userNamesList.add("0052F000000d0UYQAY");
+
+
 
 		System.out.println("User Names List are::::" + userNamesList);
 	}

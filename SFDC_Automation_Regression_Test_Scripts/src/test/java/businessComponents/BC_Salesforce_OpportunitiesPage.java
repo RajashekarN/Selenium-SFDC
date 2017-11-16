@@ -1204,5 +1204,86 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	public void bc_validateOpportunitiesValuationsEditPage() {
 		sfOpportunitiesPage.validateOpportunitiesValuationsEditPage();
 	}
-	
+	/**
+	 * Validating the  Opportunities page layout
+	 * 
+	 * @author  Ramya
+	 *
+	 */
+	public void bc_validateNewOpportunitiesPage() {
+		sfOpportunitiesPage.validateNewOpportunitiesPage();
+	}
+	/**
+	 * Validating the  Opportunities Related objects
+	 * 
+	 * @author  Ramya
+	 *
+	 */
+	public void bc_validateNewOpportunitiesRelatedObjects() {
+		sfOpportunitiesPage.validateNewOpportunitiesRelatedObjects();
+	}
+
+	/**
+	 * Validating the Opportunities creation for the opportunity record type debt and structured finance
+	 * 
+	 * @author  Ramya
+	 *
+	 */
+	public void bc_validateOpportunityCreation() {
+		sfOpportunitiesPage.validateOpportunityCreation();
+	}
+	/**
+	 * Validating the Opportunities APAC DSF for Financial Details for pacific users
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_validateOpportunitiesFinancialDetails() {
+		sfOpportunitiesPage.validateOpportunitiesFinancialDetails();
+	}
+	/**
+	 * Validating the Opportunities creation for APAC Project Manager
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_validateOpportunityCreationForProjectManager() {
+		sfOpportunitiesPage.validateOpportunityCreationForProjectManager();
+	}
+	/**
+	 * Validating the Opportunities system Information fields
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_validateOpportunitySystemInformationFields() {
+		sfOpportunitiesPage.validateOpportunitySystemInformationFields();
+	}
+	/**
+	 * Validating the Opportunities required fields at sales stage 02
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_validateRequiredFieldsAtSalesStage02() {
+		sfOpportunitiesPage.validateRequiredFieldsAtSalesStage02();
+	}
+	/**
+	 * Validating the Opportunities required fields at sales stage 03
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_validateRequiredFieldsAtSalesStage03() {
+		sfOpportunitiesPage.validateRequiredFieldsAtSalesStage03();
+	}
+	/**
+	 * Validating the Opportunities recalculate and new installment
+	 * 
+	 * @author  Ramya
+	 *
+	 */
+	public void bc_validateRecalculateAndNewInstallment() {
+		sfOpportunitiesPage.validateRecalculateAndNewInstallment();
+	}
 }
