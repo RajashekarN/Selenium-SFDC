@@ -3472,7 +3472,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 	public void opportunityEligibility() {
 		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
 		Utility_Functions.xClick(driver, menu_Opportunities, true);
-		Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
+		//Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
+		Utility_Functions.timeWait(1);
 		if (opportunitiesList.isEmpty()) {
 			Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
 			Utility_Functions.xClick(driver, recentlyViewed, true);
@@ -6807,22 +6808,10 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
 		Utility_Functions.xClick(driver, newOpportunity, true);
 		Utility_Functions.timeWait(2);
-		String environment = loginPage.initializeEnvironment();
-		if (environment.equals("FTE2")) {
-			Utility_Functions.xSwitchtoFrame(driver, continueButton);
-			Utility_Functions.xWaitForElementPresent(driver, continueButton, 5);
-			Utility_Functions.xClick(driver, continueButton, true);
-		}
-		String environment1 = loginPage.initializeEnvironment();
-		if (environment1.equals("FTE")) {
-			if (dataTable.getData("General_Data", "TC_ID").contains("Admin")) {
-				
+		if (dataTable.getData("General_Data", "TC_ID").contains("Admin")) {				
 				Utility_Functions.xSwitchtoFrame(driver, continueButton);
 				Utility_Functions.xWaitForElementPresent(driver, continueButton, 5);
 				Utility_Functions.xClick(driver, continueButton, true);
-				
-			}
-			
 		}
 		Utility_Functions.xSwitchtoFrame(driver, viewAllFieldsButton);
 		Utility_Functions.xWaitForElementPresent(driver, viewAllFieldsButton, 5);
@@ -6831,48 +6820,41 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, opportunityName, 3);
 		Utility_Functions.xSendKeys(driver, opportunityName,
 				"Test Automation Opportunity_" + Utility_Functions.xGenerateAlphaNumericString());
-		String environment3 = loginPage.initializeEnvironment();
-		if (environment3.equals("FTE")) {
-			if (dataTable.getData("General_Data", "TC_ID").contains("Admin")) {		
-				Utility_Functions.xWaitForElementPresent(driver,accountName, 4);
-				Utility_Functions.xSendKeys(driver, accountName, "-963425397_Test Automation_0131 (2100 Ross Avenue, Dallas, United States)");
-				Utility_Functions.xWaitForElementPresent(driver,accountNameValueAdmin , 4);
-				Utility_Functions.xClick(driver,accountNameValueAdmin , true);
-				Utility_Functions.xWaitForElementPresent(driver,assignmentTypeOpp, 4);
-				Utility_Functions.xClick(driver,assignmentTypeOpp, true);
-				Utility_Functions.xWaitForElementPresent(driver,assignmentTypeValue, 4);
-				Utility_Functions.xClick(driver,assignmentTypeValue, true);
+		if (dataTable.getData("General_Data", "TC_ID").contains("Admin")) {		
+			Utility_Functions.xWaitForElementPresent(driver,accountName, 4);
+			Utility_Functions.xSendKeys(driver, accountName, "-963425397_Test Automation_0131 (2100 Ross Avenue, Dallas, United States)");
+			Utility_Functions.xWaitForElementPresent(driver,accountNameValueAdmin , 4);
+			Utility_Functions.xClick(driver,accountNameValueAdmin , true);
+			Utility_Functions.xWaitForElementPresent(driver,assignmentTypeOpp, 4);
+			Utility_Functions.xClick(driver,assignmentTypeOpp, true);
+			Utility_Functions.xWaitForElementPresent(driver,assignmentTypeValue, 4);
+			Utility_Functions.xClick(driver,assignmentTypeValue, true);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xScrollWindow(driver);
+			Utility_Functions.timeWait(1);
+			Utility_Functions.xScrollWindowTop(driver);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xWaitForElementPresent(driver,preferedPropertyTypeAdmin, 4);
+			Utility_Functions.xClick(driver,preferedPropertyTypeAdmin, true);
+			Utility_Functions.xWaitForElementPresent(driver,preferedPropertyTypeValueAdmin, 4);
+			Utility_Functions.xClick(driver,preferedPropertyTypeValueAdmin, true);
+		} else {
+				String query = "SELECT Id, Name, EMEA_Searchable__c FROM Account where EMEA_Searchable__c = true limit 1 offset 9";
+				String sAccountName = searchOpportunity.fetchRecordFieldValue("Name", query);
+				Utility_Functions.xSendKeys(driver, accountName, sAccountName);
+				accountName.sendKeys(Keys.ARROW_DOWN);
 				Utility_Functions.timeWait(2);
-				Utility_Functions.xScrollWindow(driver);
-				Utility_Functions.timeWait(1);
-				Utility_Functions.xScrollWindowTop(driver);
-				Utility_Functions.timeWait(2);
-				Utility_Functions.xWaitForElementPresent(driver,preferedPropertyTypeAdmin, 4);
-				Utility_Functions.xClick(driver,preferedPropertyTypeAdmin, true);
-				Utility_Functions.xWaitForElementPresent(driver,preferedPropertyTypeValueAdmin, 4);
-				Utility_Functions.xClick(driver,preferedPropertyTypeValueAdmin, true);
-						
-			}
-			}else{
-		String query = "SELECT Id, Name, EMEA_Searchable__c FROM Account where EMEA_Searchable__c = true limit 1 offset 9";
-		String sAccountName = searchOpportunity.fetchRecordFieldValue("Name", query);
-		Utility_Functions.xSendKeys(driver, accountName, sAccountName);
-		accountName.sendKeys(Keys.ARROW_DOWN);
-		Utility_Functions.timeWait(2);
-		accountName.sendKeys(Keys.ENTER);
-		Utility_Functions.timeWait(2);	
-		Utility_Functions.xWaitForElementPresent(driver, salesStageEMEANewOpportunity, 4);
-		Utility_Functions.xClick(driver, salesStageEMEANewOpportunity, true);
-		Utility_Functions.xWaitForElementPresent(driver, salesStageEMEANewOpportunityValue, 4);
-		Utility_Functions.xClick(driver, salesStageEMEANewOpportunityValue, true);
-			}
-		String environment2 = loginPage.initializeEnvironment();
-		if (environment2.equals("FTE")) {
-			if (!dataTable.getData("General_Data", "TC_ID").contains("Admin")) {
+				accountName.sendKeys(Keys.ENTER);
+				Utility_Functions.timeWait(2);	
+				Utility_Functions.xWaitForElementPresent(driver, salesStageEMEANewOpportunity, 4);
+				Utility_Functions.xClick(driver, salesStageEMEANewOpportunity, true);
+				Utility_Functions.xWaitForElementPresent(driver, salesStageEMEANewOpportunityValue, 4);
+				Utility_Functions.xClick(driver, salesStageEMEANewOpportunityValue, true);
+		}
+		if (!dataTable.getData("General_Data", "TC_ID").contains("Admin")) {
 			Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeNewOpportunity, 5);
 			Utility_Functions.xSendKeys(driver, estimatedGrossFeeNewOpportunity,
-					dataTable.getData("General_Data", "InstallmentAmount"));
-			}
+			dataTable.getData("General_Data", "InstallmentAmount"));
 		} else {
 			Utility_Functions.xWaitForElementPresent(driver, salesStageEMEAEstimatedGrossCommission, 3);
 			Utility_Functions.xSendKeys(driver, salesStageEMEAEstimatedGrossCommission,
@@ -6891,9 +6873,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			Utility_Functions.xWaitForElementPresent(driver,engagementCommencement, 3);
 			Utility_Functions.xSendKeys(driver,engagementCommencement, dateFormat1.format(date1).toString());
 			Utility_Functions.timeWait(2);
-
 		}
-
 		Utility_Functions.xWaitForElementPresent(driver, saveOpportunitySplitUAT, 4);
 		Utility_Functions.xClick(driver, saveOpportunitySplitUAT, true);
 		Utility_Functions.timeWait(2);
@@ -8570,19 +8550,16 @@ public class OpportunitiesPage extends ReusableLibrary {
 			Utility_Functions.xWaitForElementPresent(driver, salesStageNewOpportunityValue, 4);
 			Utility_Functions.xClick(driver, salesStageNewOpportunityValue, true);
 		}
-		String environment1 = loginPage.initializeEnvironment();
-		if (environment1.equals("FTE")) {
-			if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER"))
+		if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER"))
 					|| (dataTable.getData("General_Data", "TC_ID").contains("APAC"))) {
 				Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFee, 5);
 				Utility_Functions.xSendKeys(driver, estimatedGrossFee,
 						dataTable.getData("General_Data", "InstallmentAmount"));
-			}
-			if (dataTable.getData("General_Data", "TC_ID").contains("EMEA")) {
+		}
+		if (dataTable.getData("General_Data", "TC_ID").contains("EMEA")) {
 				Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeNewOpportunity, 3);
 				Utility_Functions.xSendKeys(driver, estimatedGrossFeeNewOpportunity,
 						dataTable.getData("General_Data", "InstallmentAmount"));
-			}
 		} else {
 			Utility_Functions.xWaitForElementPresent(driver, salesStageEMEAEstimatedGrossCommission, 3);
 			Utility_Functions.xSendKeys(driver, salesStageEMEAEstimatedGrossCommission,
