@@ -272,10 +272,10 @@ public class LoginPage extends ReusableLibrary {
 				}else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker")) && (dataTable.getData("General_Data", "TC_ID").contains("Dev"))) {
 					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment+"CMEMEABrokerDev"));
 
-				}else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker")) && (dataTable.getData("General_Data", "TC_ID").contains("Dev"))) {
+				}else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager")) && (dataTable.getData("General_Data", "TC_ID").contains("Dev"))) {
 					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment+"CMEMEAManagerDev"));
 
-				}else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker")) && (dataTable.getData("General_Data", "TC_ID").contains("Dev"))) {
+				}else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS")) && (dataTable.getData("General_Data", "TC_ID").contains("Dev"))) {
 					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment+"CMEMEACSSDev"));
 
 				}else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS")) && (dataTable.getData("General_Data", "TC_ID").contains("SuperUser"))) {

@@ -555,6 +555,9 @@ public class LeadsPage extends ReusableLibrary {
 	@FindBy(xpath="//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']")
 	List<WebElement> leadsList;
 
+	@FindBy(xpath="//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@title,'N-')]")
+	List<WebElement> privateNotesList;
+	
 	@FindBy(xpath="//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'003')]")
 	List<WebElement> contactsList;
 
@@ -1702,8 +1705,8 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.xScrollWindowTop(driver);
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xClick(driver, viewAllButton, true);
-		Utility_Functions.xWaitForElementPresent(driver, leadsList, 3);
-		for (WebElement element : leadsList) {
+		Utility_Functions.xWaitForElementPresent(driver, privateNotesList, 3);
+		for (WebElement element : privateNotesList) {
 			if ((!element.getText().equals(" "))){
 				report.updateTestLog("Verify Create Activity Account","The New Activity for Accounts are created ",Status.PASS);
 			} else {
@@ -1848,11 +1851,11 @@ public class LeadsPage extends ReusableLibrary {
 				report.updateTestLog("Verify Custom Leads Page",
 						"All fields are present in the Quick Create Section", Status.PASS);
 			}
-
+			
 		} catch (Exception e) {
 			System.out.println("All fields are present in the Quick Create Section:::" +e.getMessage());
 		}
-
+		customPageQuickCreateFieldsList.clear();
 		List<WebElement> customPageContactInformationSectionFieldsList = driver.findElements(
 				By.xpath("//h2[text()='Address and Contact Information']/parent::div/div[2]//label[@class='slds-form-element__label']"));
 		int count2 = 0, i2 = 0;
@@ -1885,6 +1888,7 @@ public class LeadsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println("All fields are present in the Contact Information section:::" +e.getMessage());
 		}
+		customPageContactInformationFieldsList.clear();
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xScrollWindow(driver);
 		Utility_Functions.timeWait(2);
@@ -1924,6 +1928,7 @@ public class LeadsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println("All fields are present in the Additional Leads Information Section:::" + e.getMessage());
 		}
+		customPageLeadInformationFieldsList.clear();
 		List<WebElement> customPageCommunicationPreferencesSectionFieldsList = driver.findElements(
 				By.xpath("//h2[text()='Communication Preferences']/parent::div/div[2]//label[@class='slds-form-element__label']"));
 		int count4 = 0, i4 = 0;
@@ -1951,12 +1956,11 @@ public class LeadsPage extends ReusableLibrary {
 
 				report.updateTestLog("Verify Custom Leads Page",
 						"All fields are present in the new Leads Page Communication Preferences Section", Status.PASS);
-			}
-
-		
-	}catch (Exception e) {
+			}		
+		}catch (Exception e) {
 			System.out.println("All fields are present in the Communication Preferences Section:::" + e.getMessage());
 		}
+		customPageCommunicationPreferencesFieldsList.clear();
 		List<WebElement> customPageProspectRequirementsSectionFieldsList = driver.findElements(
 				By.xpath("//h2[text()='Prospect Requirements']/parent::div/div[3]//label[@class='slds-form-element__label']"));
 		int count5 = 0, i5 = 0;
@@ -1994,6 +1998,7 @@ public class LeadsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println("All fields are present in the Prospect Requirements Section:::" + e.getMessage());
 		}
+		customPageProspectRequirementsFieldsList.clear();
 		List<WebElement> customPageAditionalInformationSectionFieldsList = driver.findElements(
 				By.xpath("//h2[text()='Additional Information']/parent::div/div[4]//label[@class='slds-form-element__label']"));
 		int count6 = 0, i6 = 0;
@@ -2026,6 +2031,7 @@ public class LeadsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println("All fields are present in the Additional Information Section:::" + e.getMessage());
 		}
+		customPageAdditionalInformationFieldsList.clear();
 		System.out.println(leadStatus.getText());
 		System.out.println(leadSourceField.getText());
 

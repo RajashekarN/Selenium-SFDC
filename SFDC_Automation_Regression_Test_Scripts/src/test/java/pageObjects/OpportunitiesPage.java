@@ -437,7 +437,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//span[text()='Opportunity Name']/parent::label/parent::div//input")
 	WebElement opportunityName_AS;
 
-	@FindBy(xpath = "//span[text()='Total Size']/parent::label/parent::div//input")
+	@FindBy(xpath = "//span[text()='Area']/parent::label/parent::div//input")
 	WebElement totalSize_AS;
 
 	@FindBy(xpath = "//a[@aria-label='Unit of Measure']")
@@ -1305,7 +1305,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath="//span[contains(@title,'Phase History ')]")
 	WebElement phaseHistory;
 	
-	@FindBy(xpath="//a[contains(text(),'02-Opportunity Identified')]")
+	@FindBy(xpath="//a[contains(text(),'01-Intro Meeting / Relationship Building')]")
 	WebElement salesStageDefaultValue;
 	
 	@FindBy(xpath="//li[contains(text(),'Please enter Assignment Start Date for Sales Stages 02-09')]")
@@ -1350,7 +1350,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath="//span[contains(text(),'Consultancy Fee')]/parent::label/parent::div//input")
 	WebElement consultancyFee;
 	
-	@FindBy(xpath="//span[contains(text(),'Opportunity Location')]/parent::label/parent::div//input")
+	@FindBy(xpath="//span[contains(text(),'Location')]/parent::label/parent::div//input")
 	WebElement opportunityLocation;
 	
 	@FindBy(xpath="//span[contains(text(),'Opportunity Details')]/parent::label/parent::div//textarea")
@@ -3479,6 +3479,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			Utility_Functions.xClick(driver, recentlyViewed, true);
 			Utility_Functions.xWaitForElementPresent(driver, allActiveOpportunities, 3);
 			Utility_Functions.xClick(driver, allActiveOpportunities, true);
+			Utility_Functions.timeWait(2);
 			Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
 			Utility_Functions.xclickRandomElement(opportunitiesList);
 		}
@@ -5353,14 +5354,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void defaultLandingPageDetailsPage() {
-		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
-		Utility_Functions.xClick(driver, menu_Opportunities, true);
-		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
-		Utility_Functions.xClick(driver, recentlyViewed, true);
-		Utility_Functions.xWaitForElementPresent(driver, allActiveOpportunities, 3);
-		Utility_Functions.xClick(driver, allActiveOpportunities, true);
-		Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
-		Utility_Functions.xclickRandomElement(opportunitiesList);
+		opportunityEligibility();
 		report.updateTestLog("Verify Opportunity Landing Page",
 				"Random Opportunity is clicked from the Opportunity List", Status.PASS);
 		Utility_Functions.timeWait(3);
@@ -5561,7 +5555,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	public void closeInformationLabelList() {
 		closeInformationLabelList.add("Final Transaction Value");
 		closeInformationLabelList.add("Actual CBRE Gross Fee");
-		closeInformationLabelList.add("Actual Yield (%)");
+		closeInformationLabelList.add("Yield (%)");
 		closeInformationLabelList.add("Actual Yield Type");
 		closeInformationLabelList.add("Total Property Value");
 		closeInformationLabelList.add("Pitch Approved");
@@ -8763,14 +8757,15 @@ public class OpportunitiesPage extends ReusableLibrary {
 	}
 
 	public void validateCreationOfNewInstallment() {
-		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 4);
+		/*Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 4);
 		Utility_Functions.xClick(driver, menu_Opportunities, true);
 		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 4);
 		Utility_Functions.xClick(driver, recentlyViewed, true);
 		Utility_Functions.xWaitForElementPresent(driver, allActiveOpportunities, 4);
 		Utility_Functions.xClick(driver, allActiveOpportunities, true);
 		Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);	
-		Utility_Functions.xclickRandomElement(opportunitiesList);
+		Utility_Functions.xclickRandomElement(opportunitiesList);*/
+		opportunityEligibility();
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, showMoreActions, 3);
 		Utility_Functions.xClick(driver, showMoreActions, true);
@@ -11322,6 +11317,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		systemInformationSectionValues.clear();
+		
 	}
 	static ArrayList<String> relatedListValues = new ArrayList<String>();
 
@@ -11611,8 +11608,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 		opportunityDetailsPageHeaders.add("Project Specifications");
 		opportunityDetailsPageHeaders.add("Financial Information");
 		opportunityDetailsPageHeaders.add("Loss/Cancel Information");
-		opportunityDetailsPageHeaders.add("Tagging");
-		opportunityDetailsPageHeaders.add("Related Opportunities");
+		//opportunityDetailsPageHeaders.add("Tagging");
+		//opportunityDetailsPageHeaders.add("Related Opportunities");
 		opportunityDetailsPageHeaders.add("System Information");
 
 		System.out.println("The sections in the Opportunity Details page are " +opportunityDetailsPageHeaders);
@@ -11666,9 +11663,18 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver,selectOpportunityCurrency, true);
 		Utility_Functions.xWaitForElementPresent(driver,opportunityCurrencyValue, 3);
 		Utility_Functions.xClick(driver,opportunityCurrencyValue, true);
+		Utility_Functions.xWaitForElementPresent(driver, cityTier, 3);
+		Utility_Functions.xClick(driver, cityTier, true);
+		Utility_Functions.xWaitForElementPresent(driver, cityTierValue, 3);
+		Utility_Functions.xClick(driver, cityTierValue, true);
 		Utility_Functions.xWaitForElementPresent(driver,saveNewOpp, 3);
 		Utility_Functions.xClick(driver,saveNewOpp, true);
 		Utility_Functions.timeWait(5);
+		if(details.isDisplayed()) {
+			report.updateTestLog("Verify Home Page Tabs", "The opportunity is saved with the all the required fields", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Home Page Tabs", "The opportunity is not saved with the all the required fields", Status.FAIL);
+		}
 		List<WebElement> systemInformationSectionFields = driver.findElements(By.xpath("//span[contains(@class,'header-title')]"));
 		int count = 0, i = 0, j = 0;
 		String fieldsArray[] = new String[systemInformationSectionFields.size()];
@@ -11690,7 +11696,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 				j++;
 			}
 			System.out.println(count);
-			if (count!=9) {
+			if (count!=7) {
 				report.updateTestLog("Verify Opportunity Page Headers",
 						"All sections are not present in the Opportunity Details page", Status.FAIL);
 			} else {
@@ -11700,7 +11706,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
+		opportunityDetailsPageHeaders.clear();		
 }
 	/**
 	 * Validating the Opportunities for the System information fields for the APAC Project Manager
@@ -11745,6 +11751,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	} catch (Exception e) {
 		System.out.println(e.getMessage());
 	}
+	systemInformationSectionValues.clear();
 	Utility_Functions.timeWait(2);
 	Utility_Functions.xWaitForElementPresent(driver,opportunityName_AS, 3);
 	Utility_Functions.xClick(driver,opportunityName_AS, true);
@@ -11788,6 +11795,10 @@ public class OpportunitiesPage extends ReusableLibrary {
 	Utility_Functions.xClick(driver,selectOpportunityCurrency, true);
 	Utility_Functions.xWaitForElementPresent(driver,opportunityCurrencyValue, 3);
 	Utility_Functions.xClick(driver,opportunityCurrencyValue, true);
+	Utility_Functions.xWaitForElementPresent(driver, cityTier, 3);
+	Utility_Functions.xClick(driver, cityTier, true);
+	Utility_Functions.xWaitForElementPresent(driver, cityTierValue, 3);
+	Utility_Functions.xClick(driver, cityTierValue, true);
 	Utility_Functions.xWaitForElementPresent(driver,saveNewOpp, 3);
 	Utility_Functions.xClick(driver,saveNewOpp, true);
 	Utility_Functions.timeWait(5);
@@ -11869,9 +11880,18 @@ public class OpportunitiesPage extends ReusableLibrary {
 	Utility_Functions.xClick(driver,selectOpportunityCurrency, true);
 	Utility_Functions.xWaitForElementPresent(driver,opportunityCurrencyValue, 3);
 	Utility_Functions.xClick(driver,opportunityCurrencyValue, true);
+	Utility_Functions.xWaitForElementPresent(driver, cityTier, 3);
+	Utility_Functions.xClick(driver, cityTier, true);
+	Utility_Functions.xWaitForElementPresent(driver, cityTierValue, 3);
+	Utility_Functions.xClick(driver, cityTierValue, true);
 	Utility_Functions.xWaitForElementPresent(driver,saveNewOpp, 3);
 	Utility_Functions.xClick(driver,saveNewOpp, true);
-	Utility_Functions.timeWait(5);	
+	if(details.isDisplayed()) {
+		report.updateTestLog("Verify Required Fields at Sales Stage", "The opportunity is saved with the all the required fields for the sales stage", Status.PASS);
+	} else {
+		report.updateTestLog("Verify Required Fields at Sales Stage", "The opportunity is not saved with the all the required fields for the sales stage", Status.FAIL);
+	}
+/*	Utility_Functions.timeWait(5);	
 	if((assignmentStartDateMandatory.isDisplayed())){
 		report.updateTestLog("Verify Opportunity Required Fields at Sales Stage 02",
 				"Assignment start date is required field", Status.PASS);
@@ -11888,7 +11908,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	Utility_Functions.xWaitForElementPresent(driver,assignmentStartDate, 3);
 	Utility_Functions.xSendKeys(driver,assignmentStartDate, dateFormat1.format(calendar1.getTime()));
 	Utility_Functions.xWaitForElementPresent(driver,saveNewOpp, 3);
-	Utility_Functions.xClick(driver,saveNewOpp, true);
+	Utility_Functions.xClick(driver,saveNewOpp, true);*/
 }
 	/**
 	 * Validating the Opportunities required fields at sales stage 03
@@ -11972,10 +11992,10 @@ public class OpportunitiesPage extends ReusableLibrary {
 	Utility_Functions.xClick(driver,assignmentTypeOpportunity, true);
 	Utility_Functions.xWaitForElementPresent(driver,assignmentTypeValueOpportunity, 3);
 	Utility_Functions.xClick(driver,assignmentTypeValueOpportunity, true);
-	Utility_Functions.xWaitForElementPresent(driver,assignmentSubType, 3);
+/*	Utility_Functions.xWaitForElementPresent(driver,assignmentSubType, 3);
 	Utility_Functions.xClick(driver,assignmentSubType, true);
 	Utility_Functions.xWaitForElementPresent(driver,assignmentSubTypeValue, 3);
-	Utility_Functions.xClick(driver,assignmentSubTypeValue, true);
+	Utility_Functions.xClick(driver,assignmentSubTypeValue, true);*/
 	Utility_Functions.xWaitForElementPresent(driver,constructionType, 3);
 	Utility_Functions.xClick(driver,constructionType, true);
 	Utility_Functions.xWaitForElementPresent(driver,constructionTypeValue, 3);
@@ -12000,9 +12020,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 	Utility_Functions.timeWait(5);	
 	if(details.isDisplayed()) {
 
-		report.updateTestLog("Verify Required Fields at Sales Stage 03", "The opportunity is saved with the all the required fields for the sales stage 03", Status.PASS);
+		report.updateTestLog("Verify Required Fields at Sales Stage", "The opportunity is saved with the all the required fields for the sales stage", Status.PASS);
 	} else {
-		report.updateTestLog("Verify Required Fields at Sales Stage 03", "The opportunity is not saved with the all the required fields for the sales stage 03", Status.FAIL);
+		report.updateTestLog("Verify Required Fields at Sales Stage", "The opportunity is not saved with the all the required fields for the sales stage", Status.FAIL);
 	}
 	
 

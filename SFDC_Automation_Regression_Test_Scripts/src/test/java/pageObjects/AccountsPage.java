@@ -1436,7 +1436,9 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xclickOnFirstElementfromList(accountNamesList);
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify Create Activity Account ", "The Account is Displayed ", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, related_Accounts, 3);
+		Utility_Functions.timeWait(2);
+		activityPage.createNewActivityAccounts();		
+		/*Utility_Functions.xWaitForElementPresent(driver, related_Accounts, 3);
 		Utility_Functions.xClick(driver, related_Accounts, true);
 		report.updateTestLog("Verify Create Activity Account ", "The related page is Displayed ", Status.PASS);
 		Utility_Functions.xScrollWindow(driver);
@@ -1447,14 +1449,14 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, newActivity, true);
 		report.updateTestLog("Verify Create Activity Account ", "The New Activity in the related page is Displayed ",
 				Status.PASS);
-		/*
+		
 		 * int size = driver.findElements(By.tagName("iframe")).size();
 		 * System.out.println(size); Utility_Functions.timeWait(2);
 		 * List<WebElement> iframeList =
 		 * driver.findElements(By.tagName("iframe"));
 		 * System.out.println(iframeList.size()); for (WebElement element :
 		 * iframeList) { System.out.println(element.getAttribute("id")); }
-		 */
+		 
 
 		driver.switchTo().frame(5);
 
@@ -1570,7 +1572,7 @@ public class AccountsPage extends ReusableLibrary {
 			System.out.println("The New Activity Page is not displayed");
 			report.updateTestLog("Verify Create Activity Account ", "The Activity is not saved ", Status.FAIL);
 		}
-
+*/
 	}
 
 	/**
@@ -1597,7 +1599,8 @@ public class AccountsPage extends ReusableLibrary {
 				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
 
 		Utility_Functions.xclickOnFirstElementfromList(accountNamesList);
-		Utility_Functions.xWaitForElementPresent(driver, related_Accounts, 5);
+		activityPage.createNewActivityAccounts();
+	/*	Utility_Functions.xWaitForElementPresent(driver, related_Accounts, 5);
 		report.updateTestLog("Verify Create Activity Account ", "The Account is Displayed ", Status.PASS);
 		Utility_Functions.xClick(driver, related_Accounts, true);
 		Utility_Functions.timeWait(2);
@@ -1622,10 +1625,10 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify Create Activity Account ", "The Activity is saved and New Activity is displayed ",
 				Status.PASS);
-		/*
+		
 		 * Utility_Functions.xSwitchtoFrame(driver, subject);
 		 * Utility_Functions.timeWait(3);
-		 */
+		 
 		Utility_Functions.xClick(driver, subject, true);
 		Utility_Functions.timeWait(3);
 		String value = Utility_Functions.xGenerateAlphaNumericString();
@@ -1723,7 +1726,7 @@ public class AccountsPage extends ReusableLibrary {
 						Status.FAIL);
 			}
 		}
-
+*/
 	}
 
 	/**
@@ -5295,7 +5298,9 @@ public class AccountsPage extends ReusableLibrary {
 				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
 
 		Utility_Functions.xclickRandomElement(accountNamesList);
-		Utility_Functions.timeWait(3);
+		activityPage.createNewActivityAccounts();
+		activityPage.validateActivityTimeLine();
+		/*Utility_Functions.timeWait(3);
 		Utility_Functions.xWaitForElementPresent(driver, related_Accounts, 5);
 		report.updateTestLog("Verify Accounts Activity Timeline ", "The Account is Displayed ", Status.PASS);
 		Utility_Functions.xClick(driver, related_Accounts, true);
@@ -5359,8 +5364,8 @@ public class AccountsPage extends ReusableLibrary {
 		driver.navigate().refresh();
 		Utility_Functions.timeWait(4);
 		Utility_Functions.xWaitForElementPresent(driver, activityTab, 5);
-		Utility_Functions.xClick(driver, activityTab, true);
-		int count = 0;
+		Utility_Functions.xClick(driver, activityTab, true);*/
+		/*int count = 0;
 		try {
 			if (activityTimeline.isDisplayed()) {
 				System.out.println(
@@ -5434,7 +5439,7 @@ public class AccountsPage extends ReusableLibrary {
 			report.updateTestLog("Verify Accounts Activity Timeline", "The More Activities is clicked", Status.PASS);
 		} catch (Exception e) {
 			// System.out.println(e.getMessage());
-		}
+		}*/
 	}
 
 	/**

@@ -54,6 +54,9 @@ public class ActivityPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//a[@class='select'][text()='--None--']")
 	WebElement activityTypeList;
+	
+	@FindBy(xpath = "//*[text()='No Next Steps. Open And Upcoming Activities Show Up Here.']")
+	WebElement openAndUpcomingActivites;
 
 
 	DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -65,6 +68,9 @@ public class ActivityPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, addActivity, true);
 		report.updateTestLog("Verify New Activity Page Layout ", "The New Activity in the Details page is Displayed ",
 				Status.PASS);
+		if(dataTable.getData("General_Data", "TC_ID").contains("AccountsCreationOfNewActivityPage")) {
+			verifyNewAccountsActivityPageLayout();
+		}
 		Utility_Functions.xWaitForElementPresent(driver, activitySubject, 3);
 		String sActivitySubject = "Test Automation Subject_" + Utility_Functions.xGenerateAlphaNumericString();
 		Utility_Functions.xSendKeys(driver, activitySubject, sActivitySubject);
@@ -215,6 +221,13 @@ public class ActivityPage extends ReusableLibrary {
 		} else {
 			report.updateTestLog("Verify Additional Acitivty", "All the values are not present under Additional Activity List", Status.FAIL);
 		}
+	}
+	
+	public void validateActivityTimeLine() {
+			if (openAndUpcomingActivites.isDisplayed()) {
+				System.out.println("There are no activities for present, past and future dates in acitivity related list");
+				report.updateTestLog("Verify Accounts Activity Timeline", "There are no activities for present, past and future dates in acitivity related list:::", Status.PASS);
+			}			
 	}
 
 }
