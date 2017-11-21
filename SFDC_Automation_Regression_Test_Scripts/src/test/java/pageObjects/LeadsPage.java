@@ -2176,7 +2176,7 @@ public class LeadsPage extends ReusableLibrary {
 				i9++;
 			}
 			System.out.println(count9);
-			if (count9!= 9) {
+			if (count9!= 3) {
 				report.updateTestLog("Verify Leads Landing Page",
 						"All fields are not present in the Communication Preferences Section", Status.FAIL);
 			} else {
@@ -2201,30 +2201,31 @@ public class LeadsPage extends ReusableLibrary {
 				fieldsArray10[i10] = element10.getText();
 				if (fieldsArray10[i10].equalsIgnoreCase(prospectRequirementsSectionFieldsList.get(i10))) {
 					report.updateTestLog("Verify Leads Landing Page",
-							" Communication Preferences is having the " + fieldsArray10[i10] + " fields ",
+							"Prospect Requirements Section is having the " + fieldsArray10[i10] + " fields ",
 							Status.PASS);
 					count10++;
 				}
 				i10++;
 			}
 			System.out.println(count10);
-			if (count10!= 9) {
+			if (count10 >= 7) {
 				report.updateTestLog("Verify Leads Landing Page",
-						"All fields are not present in the Communication Preferences Section", Status.FAIL);
+						"All fields are present in the Prospect Requirements Section", Status.PASS);
 			} else {
 
 				report.updateTestLog("Verify Leads Landing Page",
-						"All fields are present in the Communication Preferences Section", Status.PASS);
+						"All fields are not present in the Prospect Requirements Section", Status.FAIL);
 			}
 
 		} catch (Exception e) {
-			System.out.println("All fields are not present in the Communication Preferences Section:::"+ e.getMessage());
+			System.out.println("All fields are not present in the Prospect Requirements Section:::"+ e.getMessage());
 		}
 		List<WebElement> additionalInformationList = driver.findElements(By.xpath("//h3//span[text()='Additional Information']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
 		int count11 = 0, i11 = 0,j11=0;
 		String fieldsArray11[] = new String[additionalInformationList.size()];
 		System.out.println(additionalInformationList.size());
 		try {
+			additionalInformationFieldsList.clear();
 			additionalInformationFields();
 			while(j11<additionalInformationList.size()) {
 				for (WebElement element11 : additionalInformationList) {
@@ -2250,6 +2251,7 @@ public class LeadsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println("All fields are not present in the Additional Information section:::" + e.getMessage());
 		}
+		additionalInformationFieldsList.clear();
 		List<WebElement> contactInformationList = driver.findElements(By.xpath("//h3//span[text()='Contact Information']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
 		int count12 = 0, i12 = 0,j12=0;
 		String fieldsArray12[] = new String[contactInformationList.size()];
@@ -2893,13 +2895,13 @@ public class LeadsPage extends ReusableLibrary {
 				i4++;
 			}
 			System.out.println(count4);
-			if (count4!= 9) {
+			if (count4 >= 7) {
 				report.updateTestLog("Verify Leads Landing Page",
-						"All fields are not present in the Communication Preferences Section", Status.FAIL);
+						"All fields are present in the Communication Preferences Section", Status.PASS);
 			} else {
 
 				report.updateTestLog("Verify Leads Landing Page",
-						"All fields are present in the Communication Preferences Section", Status.PASS);
+						"All fields are not present in the Communication Preferences Section", Status.FAIL);
 			}
 
 		} catch (Exception e) {
@@ -2910,6 +2912,7 @@ public class LeadsPage extends ReusableLibrary {
 		String fieldsArray5[] = new String[additionalInformationList.size()];
 		System.out.println(additionalInformationList.size());
 		try {
+			additionalInformationFieldsList.clear();
 			additionalInformationFields();
 			while(j<additionalInformationList.size()) {
 				for (WebElement element5 : additionalInformationList) {
@@ -2935,6 +2938,7 @@ public class LeadsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println("All fields are not present in the Additional Information section:::" + e.getMessage());
 		}
+		additionalInformationFieldsList.clear();
 		List<WebElement> contactInformationList = driver.findElements(By.xpath("//h3//span[text()='Contact Information']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
 		int count6 = 0, i6 = 0,j2=0;
 		String fieldsArray6[] = new String[contactInformationList.size()];

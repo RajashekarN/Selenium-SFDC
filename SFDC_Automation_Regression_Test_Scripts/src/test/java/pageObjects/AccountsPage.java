@@ -3433,12 +3433,12 @@ public class AccountsPage extends ReusableLibrary {
 				j++;
 			}
 			System.out.println(count3);
-			if (count3 != 9) {
-				report.updateTestLog("Verify Accounts Details Page",
-						"All sections are not present in the Accounts Related Page", Status.FAIL);
-			} else {
+			if (count3 >= 8) {
 				report.updateTestLog("Verify Accounts Details Page",
 						"All sections are present in the Accounts Related Page", Status.PASS);
+			} else {
+				report.updateTestLog("Verify Accounts Details Page",
+						"All sections are not present in the Accounts Related Page", Status.FAIL);
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -3541,23 +3541,12 @@ public class AccountsPage extends ReusableLibrary {
 			}
 			System.out.println(count1);
 			System.out.println("Elements which are not present in the page are :::" + deatilsPageFieldsNotPresentList);
-			String environment = loginPage.initializeEnvironment();
-			if (environment.equals("FTE")) {
-				if (count1 != 67) {
+			if (count1 != 67) {
 					report.updateTestLog("Verify Accounts Details Page",
 							"All fields are not present in the Accounts Details Page", Status.FAIL);
-				} else {
-					report.updateTestLog("Verify Accounts Details Page",
-							"All fields are present in the Accounts Details Page", Status.PASS);
-				}
 			} else {
-				if (count1 != 31) {
-					report.updateTestLog("Verify Accounts Details Page",
-							"All fields are not present in the Accounts Details Page", Status.FAIL);
-				} else {
 					report.updateTestLog("Verify Accounts Details Page",
 							"All fields are present in the Accounts Details Page", Status.PASS);
-				}
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

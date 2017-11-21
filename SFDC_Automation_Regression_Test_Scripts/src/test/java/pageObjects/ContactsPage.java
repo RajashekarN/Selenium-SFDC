@@ -438,7 +438,7 @@ public class ContactsPage extends ReusableLibrary {
 
 	SearchTextSOQL searchAccountName = new SearchTextSOQL(scriptHelper);
 	LoginPage loginPage = new LoginPage(scriptHelper);
-
+	ActivityPage activityPage = new ActivityPage(scriptHelper);
 	/**
 	 * Selecting the Contact from a list of contacts
 	 * 
@@ -1934,12 +1934,13 @@ public class ContactsPage extends ReusableLibrary {
 		report.updateTestLog("Verify Contact Activity Reminder Functionality  ", "All Contacts are Displayed ",
 				Status.PASS);
 		List<WebElement> contactNamesList = driver.findElements(
-				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+				By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'003')]"));
 		Utility_Functions.xclickRandomElement(contactNamesList);
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify Contact Activity Reminder Functionality ", "The Contact is Displayed ",
 				Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, related, 3);
+		activityPage.createNewActivityAccounts();
+		/*Utility_Functions.xWaitForElementPresent(driver, related, 3);
 		Utility_Functions.xClick(driver, related, true);
 		report.updateTestLog("Verify Contact Activity Reminder Functionality ", "The related page is Displayed ",
 				Status.PASS);
@@ -2038,7 +2039,7 @@ public class ContactsPage extends ReusableLibrary {
 		} else {
 			report.updateTestLog("Verify Contact Activity Reminder Functionality",
 					"Contacts Details page is not displayed", Status.FAIL);
-		}
+		}*/
 
 	}
 

@@ -1083,7 +1083,10 @@ public class OpportunitiesPage extends ReusableLibrary {
 	WebElement pitchDate;
 
 	@FindBy(xpath = "//span[contains(text(),'Address Line 1')]/parent::label/following-sibling::input")
-	WebElement addressLine;
+	WebElement addressLine1;
+	
+	@FindBy(xpath = "//span[contains(text(),'Address Line 2')]/parent::label/following-sibling::input")
+	WebElement addressLine2;
 
 	@FindBy(xpath = "//span[contains(text(),'City')]/parent::label/following-sibling::input")
 	WebElement city;
@@ -1211,8 +1214,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath="//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'001')]")
 	List<WebElement> accountsList;
 
-	@FindBy(xpath="//div[@class='undefined lookup__menu uiAbstractList uiAutocompleteList uiInput uiAutocomplete uiInput--default uiInput--lookup']//div[@class='listContent']/ul/li")
-	List<WebElement> propertiesList;
+/*	@FindBy(xpath="//div[@class='undefined lookup__menu uiAbstractList uiAutocompleteList uiInput uiAutocomplete uiInput--default uiInput--lookup']//div[@class='listContent']/ul/li")
+	List<WebElement> propertiesList;*/
 
 	@FindBy(xpath="//div[@class='select-options']//a[@title='Client Action Postponed']/parent::li/parent::ul/li")
 	List<WebElement> reasonForLossValuesPickList;
@@ -2014,7 +2017,6 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void associateProperty() {
-		// Utility_Functions.timeWait(1);
 		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
 		Utility_Functions.xClick(driver, menu_Opportunities, true);
 		Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
@@ -2065,7 +2067,10 @@ public class OpportunitiesPage extends ReusableLibrary {
 			Utility_Functions.xClick(driver, associatePropertyCapitalMarkets, true);
 			Utility_Functions.xWaitForElementPresent(driver, searchProperties, 3);
 			Utility_Functions.xClick(driver, searchProperties, true);
-			Utility_Functions.xWaitForElementPresent(driver, propertiesList, 3);
+			Utility_Functions.timeWait(2);
+			List<WebElement> propertiesList = driver.findElements(By.xpath(
+					"//div[@class='undefined lookup__menu uiAbstractList uiAutocompleteList uiInput uiAutocomplete uiInput--default uiInput--lookup']//div[@class='listContent']/ul/li"));
+			Utility_Functions.timeWait(2);
 			Utility_Functions.xclickOnFirstElementfromList(propertiesList);
 			Utility_Functions.xWaitForElementPresent(driver, save, 3);
 			Utility_Functions.xClick(driver, save, true);
@@ -8554,11 +8559,11 @@ public class OpportunitiesPage extends ReusableLibrary {
 				Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeNewOpportunity, 3);
 				Utility_Functions.xSendKeys(driver, estimatedGrossFeeNewOpportunity,
 						dataTable.getData("General_Data", "InstallmentAmount"));
-		} else {
+		} /*else {
 			Utility_Functions.xWaitForElementPresent(driver, salesStageEMEAEstimatedGrossCommission, 3);
 			Utility_Functions.xSendKeys(driver, salesStageEMEAEstimatedGrossCommission,
 					dataTable.getData("General_Data", "InstallmentAmount"));
-		}
+		}*/
 		System.out.println(Calendar.getInstance());
 		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 		Date date = new Date();
@@ -8673,10 +8678,10 @@ public class OpportunitiesPage extends ReusableLibrary {
 			Utility_Functions.xWaitForElementPresent(driver, netFeeOpportunityEdit, 4);
 			Utility_Functions.xSendKeys(driver, netFeeOpportunityEdit,
 					dataTable.getData("General_Data", "InstallmentAmount"));
-			Utility_Functions.xWaitForElementPresent(driver, addressLine, 2);
-			Utility_Functions.xSendKeys(driver, addressLine, dataTable.getData("General_Data", "Street"));
+			Utility_Functions.xWaitForElementPresent(driver, addressLine1, 2);
+			Utility_Functions.xSendKeys(driver, addressLine1, dataTable.getData("General_Data", "Street"));
 			Utility_Functions.xWaitForElementPresent(driver, city, 2);
-			Utility_Functions.xSendKeys(driver, addressLine, dataTable.getData("General_Data", "City"));
+			Utility_Functions.xSendKeys(driver, addressLine2, dataTable.getData("General_Data", "City"));
 			Utility_Functions.xWaitForElementPresent(driver, postCode, 2);
 			Utility_Functions.xSendKeys(driver, postCode, dataTable.getData("General_Data", "Zipcode"));
 			Utility_Functions.xWaitForElementPresent(driver, emeaConversionType, 4);
@@ -10431,14 +10436,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 
 	public void validateOpportunitiesEditPageLayout() {
-		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 4);
-		Utility_Functions.xClick(driver, menu_Opportunities, true);
-		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 4);
-		Utility_Functions.xClick(driver, recentlyViewed, true);
-		Utility_Functions.xWaitForElementPresent(driver, allActiveOpportunities, 4);
-		Utility_Functions.xClick(driver, allActiveOpportunities, true);
-		Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
-		Utility_Functions.xclickRandomElement(opportunitiesList);
+		opportunityEligibility();
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver,edit, 3);
 		Utility_Functions.xClick(driver, edit, true);

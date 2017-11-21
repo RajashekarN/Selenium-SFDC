@@ -45,6 +45,9 @@ public class ActivityPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//input[@title='Search Contacts']")
 	WebElement activitySearchContacts;
+	
+	@FindBy(xpath = "//input[@title='Search Accounts']")
+	WebElement activitySearchAccounts;
 
 	@FindBy(xpath = "//div[contains(@class,'bottomBarRight')]//span[text()='Save']")
 	WebElement activitySave;
@@ -68,7 +71,8 @@ public class ActivityPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, addActivity, true);
 		report.updateTestLog("Verify New Activity Page Layout ", "The New Activity in the Details page is Displayed ",
 				Status.PASS);
-		if(dataTable.getData("General_Data", "TC_ID").contains("AccountsCreationOfNewActivityPage")) {
+		if((dataTable.getData("General_Data", "TC_ID").contains("AccountsCreationOfNewActivityPage")) || 
+				(dataTable.getData("General_Data", "TC_ID").contains("ContactsReminderSentFunctionality"))) {
 			verifyNewAccountsActivityPageLayout();
 		}
 		Utility_Functions.xWaitForElementPresent(driver, activitySubject, 3);
@@ -82,8 +86,13 @@ public class ActivityPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, newActivityType, true);
 		Utility_Functions.xWaitForElementPresent(driver, activityInputDate, 3);
 		Utility_Functions.xSendKeys(driver, activityInputDate, dateFormat.format(date).toString());
-		Utility_Functions.xWaitForElementPresent(driver, activitySearchContacts, 3);
-		Utility_Functions.xClick(driver, activitySearchContacts, true);
+		if(dataTable.getData("General_Data", "TC_ID").contains("ContactsReminderSentFunctionality")) {
+			Utility_Functions.xWaitForElementPresent(driver, activitySearchAccounts, 3);
+			Utility_Functions.xClick(driver, activitySearchAccounts, true);
+		} else {
+			Utility_Functions.xWaitForElementPresent(driver, activitySearchContacts, 3);
+			Utility_Functions.xClick(driver, activitySearchContacts, true);
+		}		
 		WebElement firstLookupElement = driver.findElement(By.cssSelector("ul>li.forceSearchInputLookupDesktopOption:nth-child(1)"));
 		Utility_Functions.xWaitForElementPresent(driver, firstLookupElement, 4);
 		Utility_Functions.xWaitForElementPresent(driver, activitySave, 3);
@@ -156,7 +165,7 @@ public class ActivityPage extends ReusableLibrary {
 				}
 			}			
 			if (countRequiredFiles >= 9) {
-				System.out.println("New Activity Page Layout does not contain the required fields ");
+				System.out.println("New Activity Page Layout contains the required fields ");
 				report.updateTestLog("Verify New Activity Page Layout",	"New Activity Layout Page is having all the required fields", Status.PASS);
 			} else {
 				report.updateTestLog("Verify New Activity Page Layout", "New Activity Layout Page is not having all the required fields", Status.WARNING);
@@ -194,7 +203,7 @@ public class ActivityPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, addActivity, 3);
 		Utility_Functions.xClick(driver, addActivity, true);	
 		Utility_Functions.xScrollWindowTop(driver);
-		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(3);
 		Utility_Functions.xWaitForElementPresent(driver, activitySubject, 3);
 		Utility_Functions.xWaitForElementPresent(driver, activityTypeList, 3);
 		Utility_Functions.xClick(driver, activityTypeList, true);

@@ -456,6 +456,7 @@ public class HomePage extends ReusableLibrary {
 
 
 	public void validateHomePageTabsForAPACCapitalMarkets() {
+		tabsList.clear();
 		homePageTabsList();
 		Utility_Functions.timeWait(2);	
 		if(dataTable.getData("General_Data", "TC_ID").contains("CMAPACManagerHomeVerifyingTabsOnHomePage")) {

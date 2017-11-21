@@ -363,7 +363,7 @@ public class PropertiesPage extends ReusableLibrary {
 	@FindBy(xpath="//a[contains(@title,'Preferences')]/span/span[contains(text(),'Preferences')]")
 	WebElement preferences;
 	
-	@FindBy(xpath="//span[contains(@class,'virtualAutocompleteOptionText')][contains(text(),'All Investor Preferences')]")
+	@FindBy(xpath="//span[contains(@class,'virtualAutocompleteOptionText')][contains(text(),'All property preferences')]")
 	WebElement allInvestorPreferences;
 	
 	@FindBy(xpath="//span[contains(text(),'Preference Type')]/parent::div/following-sibling::div//span[contains(text(),'Sale')]")
@@ -2807,35 +2807,32 @@ try{
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify Preferences Property Type","All Properties are Displayed ",  Status.PASS);
 		List<WebElement> propertiesList = driver.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-		Utility_Functions.xclickOnFirstElementfromList(propertiesList);	
-		Utility_Functions.timeWait(3);
-		if(dataTable.getData("General_Data", "TC_ID").contains("CMAPACBrokerAUS")) {
-		if((preferenceTypeSale.isDisplayed())&& (industrialPropertyType.isDisplayed()) && (regionSA.isDisplayed())) {
-
-			report.updateTestLog("Verify Preferences Property Type", "The Preference property type is sale, Property type is Industrial and the region is SA", Status.PASS);
+		if(propertiesList.isEmpty()) {
+			report.updateTestLog("Verify Preferences Property Type", "List is Empty:::", Status.PASS);
 		} else {
-			report.updateTestLog("Verify Preferences Property Type", "The Preference property type is not sale and property type is not Industrial and the region is not SA", Status.FAIL);
-		}
-		
-		
-		}else if(dataTable.getData("General_Data", "TC_ID").contains("CMAPACBrokerNSW")) {
-			
-			if((preferenceTypeLease.isDisplayed())&& (retailPropertyType.isDisplayed()) && (regionNSW.isDisplayed())) {
-			
-				report.updateTestLog("Verify Preferences Property Type", "The Preference property type is lease, Property type is Retail and the region is NSW", Status.PASS);
-			} else {
-				report.updateTestLog("Verify Preferences Property Type", "The Preference property type is not lease, Property type is not Retail and the region is not NSW", Status.FAIL);
+			Utility_Functions.xclickOnFirstElementfromList(propertiesList);	
+			Utility_Functions.timeWait(2);
+			if(dataTable.getData("General_Data", "TC_ID").contains("CMAPACBrokerAUS")) {
+				if((preferenceTypeSale.isDisplayed())&& (industrialPropertyType.isDisplayed()) && (regionSA.isDisplayed())) {
+					report.updateTestLog("Verify Preferences Property Type", "The Preference property type is sale, Property type is Industrial and the region is SA", Status.PASS);
+				} else {
+					report.updateTestLog("Verify Preferences Property Type", "The Preference property type is not sale and property type is not Industrial and the region is not SA", Status.FAIL);
+				}
+			} else if(dataTable.getData("General_Data", "TC_ID").contains("CMAPACBrokerNSW")) {
+				if((preferenceTypeLease.isDisplayed())&& (retailPropertyType.isDisplayed()) && (regionNSW.isDisplayed())) {
+						report.updateTestLog("Verify Preferences Property Type", "The Preference property type is lease, Property type is Retail and the region is NSW", Status.PASS);
+					} else {
+						report.updateTestLog("Verify Preferences Property Type", "The Preference property type is not lease, Property type is not Retail and the region is not NSW", Status.FAIL);
+					}
+			} else if(dataTable.getData("General_Data", "TC_ID").contains("CMAPACBrokerChristChurch")) {
+					if((preferenceTypeLease.isDisplayed())&& (retailPropertyType.isDisplayed()) && (regionChristchurch.isDisplayed())) {
+						report.updateTestLog("Verify Preferences Property Type", "The Preference property type is lease, Property type is Retail and the region is Christchurch", Status.PASS);
+					} else {
+						report.updateTestLog("Verify Preferences Property Type", "The Preference property type is not lease, Property type is not Retail and the region is not Christchurch", Status.FAIL);
+					}
+				}
 			}
-				
-			
-		}else if(dataTable.getData("General_Data", "TC_ID").contains("CMAPACBrokerChristChurch")) {
-			if((preferenceTypeLease.isDisplayed())&& (retailPropertyType.isDisplayed()) && (regionChristchurch.isDisplayed())) {
-				
-				report.updateTestLog("Verify Preferences Property Type", "The Preference property type is lease, Property type is Retail and the region is Christchurch", Status.PASS);
-			} else {
-				report.updateTestLog("Verify Preferences Property Type", "The Preference property type is not lease, Property type is not Retail and the region is not Christchurch", Status.FAIL);
-			}
-		}
+		
 		}
 	/**
 	 * Validating the Project Enquiry page fields
