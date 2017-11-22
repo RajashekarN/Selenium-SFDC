@@ -438,6 +438,9 @@ public class PropertiesPage extends ReusableLibrary {
 	@FindBy(xpath="//a[contains(@title,'Hotel')]")
 	WebElement propertyTypeHotelValue;
 	
+	@FindBy(css="ul>li.forceSearchInputLookupDesktopOption:nth-child(1)")
+	WebElement firstLookUpElement;
+
 	
 	LoginPage loginPage = new LoginPage(scriptHelper);
 	Actions actions = new Actions(driver.getWebDriver());
@@ -2871,11 +2874,8 @@ try{
 	Utility_Functions.xWaitForElementPresent(driver,newPropertiesPreferences, 3);
 	Utility_Functions.xClick(driver,newPropertiesPreferences, true);
 	report.updateTestLog("Verify Project Enquiries Page Fields","Verifying the new Project Enquiries is displayed",Status.PASS);
-	String environment = loginPage.initializeEnvironment();
-	if (environment.equals("FTE")) {
-		Utility_Functions.xWaitForElementPresent(driver,nextNewProjectEnquiry, 3);
-		Utility_Functions.xClick(driver,nextNewProjectEnquiry,true);
-	}
+	Utility_Functions.xWaitForElementPresent(driver,nextNewProjectEnquiry, 3);
+	Utility_Functions.xClick(driver,nextNewProjectEnquiry,true);
 	List<WebElement> projectEnquiryPageValues = driver.findElements(By.xpath("//label[contains(@class,'inputLabel')]/span[1]"));
 	int count4 = 0, i4 = 0;
 	String fieldsArray4[] = new String[projectEnquiryPageValues.size()];
@@ -2911,13 +2911,19 @@ try{
 	Utility_Functions.xWaitForElementPresent(driver,projectEnquiryName, 3);
 	Utility_Functions.xSendKeys(driver,projectEnquiryName, "Test Automation_" + Utility_Functions.xGenerateAlphaNumericString());
 	Utility_Functions.xWaitForElementPresent(driver,enquiryContact, 3);
-	Utility_Functions.xSendKeys(driver,enquiryContact, "AUCAPACBroker");
-	Utility_Functions.xWaitForElementPresent(driver,enquiryContactValue, 3);
+	Utility_Functions.xClick(driver, enquiryContact, true);
+	//Utility_Functions.xSendKeys(driver,enquiryContact, "AUCAPACBroker");
+	Utility_Functions.xWaitForElementPresent(driver, firstLookUpElement, 3);
+	Utility_Functions.xClick(driver, firstLookUpElement, true);
+	/*Utility_Functions.xWaitForElementPresent(driver,enquiryContactValue, 3);
 	Utility_Functions.xClick(driver,enquiryContactValue, true);
-	Utility_Functions.xWaitForElementPresent(driver,enquiryAccount, 3);
-	Utility_Functions.xSendKeys(driver,enquiryAccount, "AUCAPACBroker");
-	Utility_Functions.xWaitForElementPresent(driver,enquiryAccountValue, 3);
-	Utility_Functions.xClick(driver,enquiryAccountValue, true);
+	*/Utility_Functions.xWaitForElementPresent(driver,enquiryAccount, 3);
+	Utility_Functions.xClick(driver, enquiryAccount, true);
+	//Utility_Functions.xSendKeys(driver,enquiryAccount, "AUCAPACBroker");
+	Utility_Functions.xWaitForElementPresent(driver, firstLookUpElement, 3);
+	Utility_Functions.xClick(driver, firstLookUpElement, true);
+	/*Utility_Functions.xWaitForElementPresent(driver,enquiryAccountValue, 3);
+	Utility_Functions.xClick(driver,enquiryAccountValue, true);*/
 	Utility_Functions.xWaitForElementPresent(driver,projectEnquirySave, 3);
 	Utility_Functions.xClick(driver,projectEnquirySave, true);
 }

@@ -380,6 +380,9 @@ public class LeadsPage extends ReusableLibrary {
 
 	@FindBy(xpath="//div[contains(@class,'actionMenu')]//a[@title='Sharing']")
 	WebElement sharing;
+	
+	@FindBy(xpath="//a[@class='forceActionLink'][@title='Sharing']/div[text()='Sharing']")
+	WebElement privateNoteSharing;	
 
 	@FindBy(xpath = "//p[text()='Lead Sharing']")
 	WebElement leadSharing;
@@ -1079,10 +1082,13 @@ public class LeadsPage extends ReusableLibrary {
 		}
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xClick(driver, searchContacts, true);
-		List<WebElement> contactsList = driver.findElements(By.xpath(
+	/*	List<WebElement> contactsList = driver.findElements(By.xpath(
 				"//div[@class='lookup__menu uiAbstractList uiAutocompleteList uiInput uiAutocomplete uiInput--default uiInput--lookup']//div[@class='listContent']/ul/li"));
 		Utility_Functions.timeWait(2);
-		Utility_Functions.xclickOnFirstElementfromList(contactsList);
+		Utility_Functions.xclickOnFirstElementfromList(contactsList);*/
+		WebElement firstLookupElement = driver.findElement(By.cssSelector("ul>li.forceSearchInputLookupDesktopOption:nth-child(1)"));
+		Utility_Functions.xWaitForElementPresent(driver, firstLookupElement, 4);
+		Utility_Functions.xClick(driver, firstLookupElement, false);		
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xSendKeys(driver, body, dataTable.getData("General_Data", "Body"));
 		Utility_Functions.timeWait(2);
@@ -1104,10 +1110,15 @@ public class LeadsPage extends ReusableLibrary {
 
 	public void privateNoteSharing() {
 		Utility_Functions.timeWait(3);
-		Utility_Functions.xWaitForElementPresent(driver,showMoreActionsDetailsPage, 3);
-		Utility_Functions.xClick(driver,showMoreActionsDetailsPage, true);
-		Utility_Functions.xWaitForElementPresent(driver, sharing, 3);
-		Utility_Functions.xClick(driver, sharing, true);
+		try {
+			Utility_Functions.xWaitForElementPresent(driver,showMoreActionsDetailsPage, 3);
+			Utility_Functions.xClick(driver,showMoreActionsDetailsPage, true);
+			Utility_Functions.xWaitForElementPresent(driver, sharing, 3);
+			Utility_Functions.xClick(driver, sharing, true);
+		} catch (Exception e) {
+			Utility_Functions.xWaitForElementPresent(driver, privateNoteSharing, 3);
+			Utility_Functions.xClick(driver, privateNoteSharing, true);
+		}
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xSwitchtoFrame(driver, leadSharing);
 		Utility_Functions.xWaitForElementPresent(driver, leadSharing, 4);
