@@ -869,12 +869,14 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify Create Activity Contact ", "All Contacts are Displayed ", Status.PASS);
 		List<WebElement> contactNamesList = driver.findElements(
-				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+				By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'003')]"));
 
 		Utility_Functions.xclickOnFirstElementfromList(contactNamesList);
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify Create Activity Contact ", "The Contact is Displayed ", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, related, 3);
+		activityPage.createNewActivityAccounts();	
+		
+		/*Utility_Functions.xWaitForElementPresent(driver, related, 3);
 		Utility_Functions.xClick(driver, related, true);
 		report.updateTestLog("Verify Create Activity Contact ", "The related page is Displayed ", Status.PASS);
 		Utility_Functions.xScrollWindow(driver);
@@ -885,7 +887,7 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, newActivity, true);
 		report.updateTestLog("Verify Create Activity Contact ", "The New Activity in the related page is Displayed ",
 				Status.PASS);
-		/*
+		
 		 * int size = driver.findElements(By.tagName("iframe")).size();
 		 * System.out.println(size); Utility_Functions.timeWait(2);
 		 * List<WebElement> iframeList =
@@ -895,8 +897,8 @@ public class ContactsPage extends ReusableLibrary {
 		 * 
 		 * driver.switchTo().frame(4); Utility_Functions.timeWait(5);
 		 * System.out.println("Frame Identified");
-		 */
-		/*
+		 
+		
 		 * Utility_Functions.timeWait(3); List<WebElement> iframeList =
 		 * driver.findElements(By.tagName("iframe"));
 		 * 
@@ -908,7 +910,7 @@ public class ContactsPage extends ReusableLibrary {
 		 * driver.switchTo().defaultContent(); }
 		 * 
 		 * }
-		 */
+		 
 		Utility_Functions.xSwitchtoFrame(driver, subject);
 		Utility_Functions.xWaitForElementPresent(driver, subject, 5);
 		Utility_Functions.xClick(driver, subject, true);
@@ -955,12 +957,12 @@ public class ContactsPage extends ReusableLibrary {
 		driver.get(newUrl);
 		Utility_Functions.timeWait(1);
 		driver.navigate().refresh();
-/*		Utility_Functions.timeWait(3);
+		Utility_Functions.timeWait(3);
 		driver.navigate().refresh();
 		Utility_Functions.timeWait(1);
 		driver.switchTo().defaultContent();
 		driver.navigate().refresh();
-*/		Utility_Functions.timeWait(3);
+		Utility_Functions.timeWait(3);
 		Utility_Functions.xWaitForElementPresent(driver, selectCreateFollowUpCustomActivity, 5);
 		Utility_Functions.xClick(driver, selectCreateFollowUpCustomActivity, true);
 
@@ -1019,7 +1021,7 @@ public class ContactsPage extends ReusableLibrary {
 						Status.FAIL);
 			}
 		}
-
+*/
 	}
 
 	/**
@@ -1042,11 +1044,13 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify New Activity Page Layout ", "All Contacts are Displayed ", Status.PASS);
 		List<WebElement> accountNamesList = driver.findElements(
-				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'003')]"));
 
 		Utility_Functions.xclickOnFirstElementfromList(accountNamesList);
 		Utility_Functions.timeWait(3);
-		report.updateTestLog("Verify New Activity Page Layout ", "The Contact is Displayed ", Status.PASS);
+		activityPage.createNewActivityAccounts();
+
+/*		report.updateTestLog("Verify New Activity Page Layout ", "The Contact is Displayed ", Status.PASS);
 		Utility_Functions.xClick(driver, related, true);
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify New Activity Page Layout ", "The related page is Displayed ", Status.PASS);
@@ -1334,7 +1338,7 @@ public class ContactsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
-		}
+		}*/
 
 	}
 
@@ -1355,12 +1359,13 @@ public class ContactsPage extends ReusableLibrary {
 				"Verifying the Contacts is Displayed ", Status.PASS);
 
 		List<WebElement> contactNamesList = driver.findElements(
-				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+				By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'003')]"));
 
 		Utility_Functions.xclickOnFirstElementfromList(contactNamesList);
 		report.updateTestLog("Verify New Activity Page send Notification Email ",
 				"Verifying the selected Contact is Displayed ", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, related, 3);
+		activityPage.verifyNewAccountsActivityPageLayout();
+		/*Utility_Functions.xWaitForElementPresent(driver, related, 3);
 		Utility_Functions.xClick(driver, related, true);
 		report.updateTestLog("Verify New Activity Page Layout ", "Verifying the Contact related page is Displayed ",
 				Status.PASS);
@@ -1374,15 +1379,15 @@ public class ContactsPage extends ReusableLibrary {
 		report.updateTestLog("Verify New Activity Page send Notification Email  ",
 				"Verifying the New Activity in the Contact related page is Displayed ", Status.PASS);
 		// Utility_Functions.xSwitchtoFrame(driver, subject);
-		/*
+		
 		 * int size = driver.findElements(By.tagName("iframe")).size();
 		 * System.out.println(size); Utility_Functions.timeWait(2);
 		 * List<WebElement> iframeList =
 		 * driver.findElements(By.tagName("iframe"));
 		 * System.out.println(iframeList.size()); for (WebElement element :
 		 * iframeList) { System.out.println(element.getAttribute("id")); }
-		 */
-		/*driver.switchTo().frame(3);*/
+		 
+		driver.switchTo().frame(3);
 		Utility_Functions.xSwitchtoFrame(driver, subject);
 		Utility_Functions.timeWait(3);
 
@@ -1418,7 +1423,7 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, saveActivity, true);
 		report.updateTestLog("Verify New Activity Page send Notification Email  ",
 				"Verifying the notification email issent to the Assigned To person in the New Activity page ",
-				Status.PASS);
+				Status.PASS);*/
 	}
 
 	/**

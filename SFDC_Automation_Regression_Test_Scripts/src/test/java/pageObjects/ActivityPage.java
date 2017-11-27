@@ -61,7 +61,15 @@ public class ActivityPage extends ReusableLibrary {
 	@FindBy(xpath = "//*[text()='No Next Steps. Open And Upcoming Activities Show Up Here.']")
 	WebElement openAndUpcomingActivites;
 
-
+	@FindBy(xpath = "//a[@class='tabHeader']//span[text()='Related']")
+	WebElement related;
+	
+	@FindBy(xpath = "//span[contains(@class, 'slds-text-heading--small slds-truncate') and text() = 'Activities']")
+	WebElement relatedActivities;
+	
+	@FindBy(css = "ul>li.forceSearchInputLookupDesktopOption:nth-child(1)")
+	WebElement firstLookupElement;
+		
 	DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 	Date date = new Date();
 	SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
@@ -72,7 +80,8 @@ public class ActivityPage extends ReusableLibrary {
 		report.updateTestLog("Verify New Activity Page Layout ", "The New Activity in the Details page is Displayed ",
 				Status.PASS);
 		if((dataTable.getData("General_Data", "TC_ID").contains("AccountsCreationOfNewActivityPage")) || 
-				(dataTable.getData("General_Data", "TC_ID").contains("ContactsReminderSentFunctionality"))) {
+				(dataTable.getData("General_Data", "TC_ID").contains("ContactsReminderSentFunctionality")) ||
+				(dataTable.getData("General_Data", "TC_ID").contains("ContactNewActivityPageLayout"))) {
 			verifyNewAccountsActivityPageLayout();
 		}
 		Utility_Functions.xWaitForElementPresent(driver, activitySubject, 3);
@@ -86,15 +95,17 @@ public class ActivityPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, newActivityType, true);
 		Utility_Functions.xWaitForElementPresent(driver, activityInputDate, 3);
 		Utility_Functions.xSendKeys(driver, activityInputDate, dateFormat.format(date).toString());
-		if(dataTable.getData("General_Data", "TC_ID").contains("ContactsReminderSentFunctionality")) {
+		if((dataTable.getData("General_Data", "TC_ID").contains("ContactsReminderSentFunctionality")) || 
+				(dataTable.getData("General_Data", "TC_ID").contains("ContactsCreationOfNewActivityPage")) ||
+				(dataTable.getData("General_Data", "TC_ID").contains("ContactsNewActivityLayoutPage"))) {
 			Utility_Functions.xWaitForElementPresent(driver, activitySearchAccounts, 3);
 			Utility_Functions.xClick(driver, activitySearchAccounts, true);
 		} else {
 			Utility_Functions.xWaitForElementPresent(driver, activitySearchContacts, 3);
 			Utility_Functions.xClick(driver, activitySearchContacts, true);
 		}		
-		WebElement firstLookupElement = driver.findElement(By.cssSelector("ul>li.forceSearchInputLookupDesktopOption:nth-child(1)"));
 		Utility_Functions.xWaitForElementPresent(driver, firstLookupElement, 4);
+		Utility_Functions.xClick(driver, firstLookupElement, true);
 		Utility_Functions.xWaitForElementPresent(driver, activitySave, 3);
 		Utility_Functions.xClick(driver, activitySave, true);
 		report.updateTestLog("Verify New Activity", "Verifying whether the New Activity page is saved ", Status.PASS);
@@ -105,7 +116,38 @@ public class ActivityPage extends ReusableLibrary {
 			report.updateTestLog("Verify New Activity Page", "Activity has been created successfully", Status.PASS);			
 		} else {
 			report.updateTestLog("Verify New Activity Page", "Activity didn't get created", Status.FAIL);
-		}*/
+		}*/	
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementPresent(driver, related, 5);
+		Utility_Functions.xClick(driver, related, true);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, relatedActivities, 5);
+		Utility_Functions.xClick(driver, relatedActivities, true);
+		List<WebElement> relatedActivitiesList = null;
+		if((dataTable.getData("General_Data", "TC_ID").contains("ContactsReminderSentFunctionality")) || 
+				(dataTable.getData("General_Data", "TC_ID").contains("ContactsCreationOfNewActivityPage")) ||
+				(dataTable.getData("General_Data", "TC_ID").contains("ContactsNewActivityLayoutPage")) ||  
+				(dataTable.getData("General_Data", "TC_ID").contains("Contacts"))) {
+				relatedActivitiesList = driver.findElements(
+						By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'00T')]"));
+			} else if ((dataTable.getData("General_Data", "TC_IC").contains("AccountsCreationOfNewActivityPage")) ||
+					(dataTable.getData("General_Data", "TC_IC").contains("Accounts"))) {
+				relatedActivitiesList = driver.findElements(
+						By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'00U')]"));
+			}				
+			for (WebElement element : relatedActivitiesList) {
+				if (element.getText().contains(sActivitySubject)) {
+					report.updateTestLog("Verify Create Activity Contact", "The New Activity for Accounts/ Contacts are created ",
+							Status.PASS);
+					break;
+				} else {
+					report.updateTestLog("Verify Create Activity Contact", "The New Activity for Accounts/ Contacts are not created ",
+							Status.FAIL);
+				}
+			}
 	}
 
 	public void verifyNewAccountsActivityPageLayout() {

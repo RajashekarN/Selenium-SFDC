@@ -3644,7 +3644,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		labelsOpportunitiesNewCustomEvent.add("Activity Type");
 		labelsOpportunitiesNewCustomEvent.add("Type");
 		labelsOpportunitiesNewCustomEvent.add("Location");
-		labelsOpportunitiesNewCustomEvent.add("Start ");
+		labelsOpportunitiesNewCustomEvent.add("*Start ");
 		labelsOpportunitiesNewCustomEvent.add("Start Date");
 		labelsOpportunitiesNewCustomEvent.add("Time");
 		labelsOpportunitiesNewCustomEvent.add("EndDate");
@@ -3783,7 +3783,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		}
 
 		List<WebElement> customEventpageFields = driver.findElements(By
-				.xpath("//div[contains(@class,'slds-col--padded') and contains(@class,' slds-size--1-of-1')]//label "));
+				.xpath("//div[contains(@class,'slds-col--padded') and contains(@class,' slds-size--1-of-1')]//label"));
 		int count = 0, i1 = 0;
 		String labelArray[] = new String[customEventpageFields.size()];
 		System.out.println(customEventpageFields.size());
@@ -3800,6 +3800,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 				}
 				i1++;
 			}
+			labelsOpportunitiesNewCustomEvent.clear();
+			customEventpageFields.clear();
 			System.out.println(count);
 			if (count != 15) {
 				report.updateTestLog("Verify New Opportunity Custom Event Page",

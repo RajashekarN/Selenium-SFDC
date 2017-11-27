@@ -255,7 +255,7 @@ public class LeadsPage extends ReusableLibrary {
 	@FindBy(xpath="//a[contains(@title,'Show') and contains(@title,'more action')]")
 	WebElement selectNewEvent;
 
-	@FindBy(xpath="//div[@class='forceActionLink'][@title='New Event']")
+	@FindBy(xpath="//div[@id='activityPanelContainer']//span[text()='New Event']")
 	WebElement newEvent;
 
 	@FindBy(xpath="//div[@class='slds-media__body']")
@@ -591,7 +591,7 @@ public class LeadsPage extends ReusableLibrary {
 	AccountsFunctions createAccount = new AccountsFunctions(scriptHelper);
 	SearchTextSOQL searchRecord = new SearchTextSOQL(scriptHelper);
 	EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
-
+	EventPage eventPage = new EventPage(scriptHelper);
 	public void convertLead() {
 		Utility_Functions.xWaitForElementPresent(driver, menu_Leads, 3);
 		Utility_Functions.xClick(driver, menu_Leads, true);
@@ -1413,15 +1413,19 @@ public class LeadsPage extends ReusableLibrary {
 		} else {
 			Utility_Functions.xclickOnFirstElementfromList(leadsList);
 		}
-		Utility_Functions.timeWait(5);
+/*		Utility_Functions.timeWait(5);
 		Utility_Functions.xWaitForElementPresent(driver, selectNewEvent, 3);
-		Utility_Functions.xClick(driver, selectNewEvent, true);
+		Utility_Functions.xClick(driver, selectNewEvent, true);*/
 		Utility_Functions.xWaitForElementPresent(driver, newEvent, 3);
-		Actions action  = new Actions(driver.getWebDriver());
+		Utility_Functions.xClick(driver, newEvent, true);
+		Utility_Functions.timeWait(2);
+		eventPage.verifyNewEventPageLayout();
+		
+/*		Actions action  = new Actions(driver.getWebDriver());
 		action.moveToElement(newEvent);
 		action.click();
 		action.build().perform();
-		Utility_Functions.timeWait(3);
+		Utility_Functions.timeWait(3);*/
 
 		/*int size = driver.findElements(By.tagName("iframe")).size();
 		System.out.println(size);
@@ -1432,7 +1436,7 @@ public class LeadsPage extends ReusableLibrary {
 			System.out.println(element.getAttribute("id"));
 		}*/
 
-		driver.switchTo().frame(2);
+		/*driver.switchTo().frame(2);
 		Utility_Functions.timeWait(5);
 
 		if(addAnEventPage.getText().contains("Add an Event")){	
@@ -1552,7 +1556,7 @@ public class LeadsPage extends ReusableLibrary {
 
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
-		}
+		}*/
 	}
 
 	/**
