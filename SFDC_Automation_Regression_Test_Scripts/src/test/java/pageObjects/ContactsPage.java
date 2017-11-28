@@ -435,6 +435,8 @@ public class ContactsPage extends ReusableLibrary {
 	@FindBy(xpath="//div[contains(@class,'forceModalActionContainer--footerAction')]/button[@title='Save']")
 	WebElement saveContactEditpage;
 
+	@FindBy(xpath = "//span[text()='Add']")
+	WebElement addActivity;
 
 	SearchTextSOQL searchAccountName = new SearchTextSOQL(scriptHelper);
 	LoginPage loginPage = new LoginPage(scriptHelper);
@@ -874,7 +876,7 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.xclickOnFirstElementfromList(contactNamesList);
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify Create Activity Contact ", "The Contact is Displayed ", Status.PASS);
-		activityPage.createNewActivityAccounts();	
+		activityPage.createNewActivity();	
 		
 		/*Utility_Functions.xWaitForElementPresent(driver, related, 3);
 		Utility_Functions.xClick(driver, related, true);
@@ -1048,7 +1050,7 @@ public class ContactsPage extends ReusableLibrary {
 
 		Utility_Functions.xclickOnFirstElementfromList(accountNamesList);
 		Utility_Functions.timeWait(3);
-		activityPage.createNewActivityAccounts();
+		activityPage.createNewActivity();
 
 /*		report.updateTestLog("Verify New Activity Page Layout ", "The Contact is Displayed ", Status.PASS);
 		Utility_Functions.xClick(driver, related, true);
@@ -1364,7 +1366,7 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.xclickOnFirstElementfromList(contactNamesList);
 		report.updateTestLog("Verify New Activity Page send Notification Email ",
 				"Verifying the selected Contact is Displayed ", Status.PASS);
-		activityPage.verifyNewAccountsActivityPageLayout();
+		activityPage.verifyNewActivityPageLayout();
 		/*Utility_Functions.xWaitForElementPresent(driver, related, 3);
 		Utility_Functions.xClick(driver, related, true);
 		report.updateTestLog("Verify New Activity Page Layout ", "Verifying the Contact related page is Displayed ",
@@ -1944,7 +1946,7 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify Contact Activity Reminder Functionality ", "The Contact is Displayed ",
 				Status.PASS);
-		activityPage.createNewActivityAccounts();
+		activityPage.createNewActivity();
 		/*Utility_Functions.xWaitForElementPresent(driver, related, 3);
 		Utility_Functions.xClick(driver, related, true);
 		report.updateTestLog("Verify Contact Activity Reminder Functionality ", "The related page is Displayed ",
@@ -2379,12 +2381,17 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify Contact Activity Timeline", "All Contacts are Displayed ", Status.PASS);
 		List<WebElement> contactNamesList = driver.findElements(
-				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+				By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'003')]"));
 
-		Utility_Functions.xclickOnFirstElementfromList(contactNamesList);
+		Utility_Functions.xclickRandomElement(contactNamesList);
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify Contact Activity Timeline ", "The Contact is Displayed ", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, related, 3);
+		Utility_Functions.xWaitForElementPresent(driver, addActivity, 3);
+		Utility_Functions.xClick(driver, addActivity, true);
+		activityPage.verifyNewActivityPageLayout();
+		activityPage.validateActivityTimeLine();
+		
+		/*Utility_Functions.xWaitForElementPresent(driver, related, 3);
 		Utility_Functions.xClick(driver, related, true);
 		report.updateTestLog("Verify Contact Activity Timeline ", "The related page is Displayed ", Status.PASS);
 		Utility_Functions.xScrollWindow(driver);
@@ -2531,7 +2538,7 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, moreActivities, 5);
 		Utility_Functions.xClick(driver, moreActivities, true);
 		report.updateTestLog("Verify Contact Activity Timeline", "The More Activities is Clicked successfully",
-				Status.PASS);
+				Status.PASS);*/
 	}
 
 	/**

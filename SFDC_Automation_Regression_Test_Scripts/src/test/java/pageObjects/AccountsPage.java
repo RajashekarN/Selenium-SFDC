@@ -1437,7 +1437,7 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify Create Activity Account ", "The Account is Displayed ", Status.PASS);
 		Utility_Functions.timeWait(2);
-		activityPage.createNewActivityAccounts();		
+		activityPage.createNewActivity();		
 		/*Utility_Functions.xWaitForElementPresent(driver, related_Accounts, 3);
 		Utility_Functions.xClick(driver, related_Accounts, true);
 		report.updateTestLog("Verify Create Activity Account ", "The related page is Displayed ", Status.PASS);
@@ -1599,7 +1599,7 @@ public class AccountsPage extends ReusableLibrary {
 				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
 
 		Utility_Functions.xclickOnFirstElementfromList(accountNamesList);
-		activityPage.createNewActivityAccounts();
+		activityPage.createNewActivity();
 	/*	Utility_Functions.xWaitForElementPresent(driver, related_Accounts, 5);
 		report.updateTestLog("Verify Create Activity Account ", "The Account is Displayed ", Status.PASS);
 		Utility_Functions.xClick(driver, related_Accounts, true);
@@ -1756,7 +1756,7 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, addActivity, true);
 		report.updateTestLog("Verify New Activity Page Layout ", "The New Activity in the Details page is Displayed ",
 				Status.PASS);
-		activityPage.verifyNewAccountsActivityPageLayout();
+		activityPage.verifyNewActivityPageLayout();
 		/*Utility_Functions.xWaitForElementPresent(driver, related_Accounts, 3);
 		Utility_Functions.xClick(driver, related_Accounts, true);
 		report.updateTestLog("Verify New Activity Page Layout ", "The related page is Displayed ", Status.PASS);
@@ -2173,7 +2173,7 @@ public class AccountsPage extends ReusableLibrary {
 		report.updateTestLog("Verify New Activity Page send Notification Email ", "Verifying the selected Account is Displayed ", Status.PASS);
 		report.updateTestLog("Verify New Activity Page Layout ", "The New Activity in the Details page is Displayed ",
 				Status.PASS);
-		activityPage.createNewActivityAccounts();
+		activityPage.createNewActivity();
 	/*	Utility_Functions.xWaitForElementPresent(driver, related_Accounts, 3);
 		Utility_Functions.xClick(driver, related_Accounts, true);
 		report.updateTestLog("Verify New Activity Page Layout ", "Verifying the related page is Displayed ",
@@ -2933,7 +2933,7 @@ public class AccountsPage extends ReusableLibrary {
 		report.updateTestLog("Verify New Activity Type ", "The Account is Displayed ", Status.PASS);
 		Utility_Functions.xWaitForElementPresent(driver, addActivity, 3);
 		Utility_Functions.xClick(driver, addActivity, true);
-		activityPage.createNewActivityAccounts();
+		activityPage.createNewActivity();
 	/*	Utility_Functions.xWaitForElementPresent(driver, related_Accounts, 3);
 		Utility_Functions.xClick(driver, related_Accounts, true);
 		report.updateTestLog("Verify New Activity Type ", "The related page is Displayed ", Status.PASS);
@@ -5284,10 +5284,12 @@ public class AccountsPage extends ReusableLibrary {
 		report.updateTestLog("Verify Accounts Activity Timeline", "All accounts are displayed successfully:::",
 				Status.PASS);
 		List<WebElement> accountNamesList = driver.findElements(
-				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-
+				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'001')]"));
+		
 		Utility_Functions.xclickRandomElement(accountNamesList);
-		activityPage.createNewActivityAccounts();
+		Utility_Functions.xWaitForElementPresent(driver, addActivity, 4);
+		Utility_Functions.xClick(driver, addActivity, true);
+		activityPage.verifyNewActivityPageLayout();
 		activityPage.validateActivityTimeLine();
 		/*Utility_Functions.timeWait(3);
 		Utility_Functions.xWaitForElementPresent(driver, related_Accounts, 5);

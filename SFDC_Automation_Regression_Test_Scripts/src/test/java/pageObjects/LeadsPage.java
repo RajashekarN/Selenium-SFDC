@@ -9,7 +9,6 @@ import java.util.Random;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import com.cognizant.Craft.ReusableLibrary;
@@ -890,8 +889,8 @@ public class LeadsPage extends ReusableLibrary {
 	static ArrayList<String> buttonList = new ArrayList<String>();
 	public void buttonsListLeadDetailPage() {
 		buttonList.add("Edit");
-		buttonList.add("Convert");
 		buttonList.add("Clone");
+		buttonList.add("Sharing");
 		System.out.println("Buttons list on Lead Details page::"+ buttonList);		
 	}
 
@@ -903,10 +902,10 @@ public class LeadsPage extends ReusableLibrary {
 	 */
 	static ArrayList<String> moreActionsList = new ArrayList<String>();
 	public void moreActionsListLeadDetailPage() {
-		moreActionsList.add("Sharing");
+/*		moreActionsList.add("Sharing");
 		moreActionsList.add("New Task");
 		moreActionsList.add("New Event");
-		moreActionsList.add("Log A Call");
+		moreActionsList.add("Log A Call");*/
 		moreActionsList.add("New Private Note");
 		moreActionsList.add("New Personal Information");
 		moreActionsList.add("Delete");
@@ -964,7 +963,7 @@ public class LeadsPage extends ReusableLibrary {
 				i1++;
 			}
 			System.out.println(count1);
-			if(count1==7) {
+			if(count1==3) {
 				report.updateTestLog("Lead Details Page", "All the menu buttons are present on the Leads Details Page:::",Status.PASS);
 			} else {
 				report.updateTestLog("Lead Details Page", "Not all the menu buttons are present on the Leads Details Page:::",Status.FAIL);

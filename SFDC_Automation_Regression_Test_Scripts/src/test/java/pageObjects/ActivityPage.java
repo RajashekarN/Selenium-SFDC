@@ -45,7 +45,7 @@ public class ActivityPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//input[@title='Search Contacts']")
 	WebElement activitySearchContacts;
-	
+
 	@FindBy(xpath = "//input[@title='Search Accounts']")
 	WebElement activitySearchAccounts;
 
@@ -57,24 +57,24 @@ public class ActivityPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//a[@class='select'][text()='--None--']")
 	WebElement activityTypeList;
-	
+
 	@FindBy(xpath = "//*[text()='No Next Steps. Open And Upcoming Activities Show Up Here.']")
 	WebElement openAndUpcomingActivites;
 
 	@FindBy(xpath = "//a[@class='tabHeader']//span[text()='Related']")
 	WebElement related;
-	
+
 	@FindBy(xpath = "//span[contains(@class, 'slds-text-heading--small slds-truncate') and text() = 'Activities']")
 	WebElement relatedActivities;
-	
+
 	@FindBy(css = "ul>li.forceSearchInputLookupDesktopOption:nth-child(1)")
 	WebElement firstLookupElement;
-		
+
 	DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 	Date date = new Date();
 	SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
 
-	public void createNewActivityAccounts() {
+	public void createNewActivity() {
 		Utility_Functions.xWaitForElementPresent(driver, addActivity, 3);
 		Utility_Functions.xClick(driver, addActivity, true);
 		report.updateTestLog("Verify New Activity Page Layout ", "The New Activity in the Details page is Displayed ",
@@ -82,7 +82,7 @@ public class ActivityPage extends ReusableLibrary {
 		if((dataTable.getData("General_Data", "TC_ID").contains("AccountsCreationOfNewActivityPage")) || 
 				(dataTable.getData("General_Data", "TC_ID").contains("ContactsReminderSentFunctionality")) ||
 				(dataTable.getData("General_Data", "TC_ID").contains("ContactNewActivityPageLayout"))) {
-			verifyNewAccountsActivityPageLayout();
+			verifyNewActivityPageLayout();
 		}
 		Utility_Functions.xWaitForElementPresent(driver, activitySubject, 3);
 		String sActivitySubject = "Test Automation Subject_" + Utility_Functions.xGenerateAlphaNumericString();
@@ -109,14 +109,14 @@ public class ActivityPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, activitySave, 3);
 		Utility_Functions.xClick(driver, activitySave, true);
 		report.updateTestLog("Verify New Activity", "Verifying whether the New Activity page is saved ", Status.PASS);
-/*		String query = "SELECT Subject__c FROM Activity__c where Subject__c = " + "'" + sActivitySubject + "'";
+		/*		String query = "SELECT Subject__c FROM Activity__c where Subject__c = " + "'" + sActivitySubject + "'";
 		System.out.println("Activity Subject:: "+ sActivitySubject);
 		String record = searchTextSOQL.fetchRecordFieldValue("Subject__c", query);
 		if(record.equals(sActivitySubject)) {
 			report.updateTestLog("Verify New Activity Page", "Activity has been created successfully", Status.PASS);			
 		} else {
 			report.updateTestLog("Verify New Activity Page", "Activity didn't get created", Status.FAIL);
-		}*/	
+		}*/		
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xWaitForElementPresent(driver, related, 5);
 		Utility_Functions.xClick(driver, related, true);
@@ -131,26 +131,26 @@ public class ActivityPage extends ReusableLibrary {
 				(dataTable.getData("General_Data", "TC_ID").contains("ContactsCreationOfNewActivityPage")) ||
 				(dataTable.getData("General_Data", "TC_ID").contains("ContactsNewActivityLayoutPage")) ||  
 				(dataTable.getData("General_Data", "TC_ID").contains("Contacts"))) {
-				relatedActivitiesList = driver.findElements(
-						By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'00T')]"));
-			} else if ((dataTable.getData("General_Data", "TC_IC").contains("AccountsCreationOfNewActivityPage")) ||
-					(dataTable.getData("General_Data", "TC_IC").contains("Accounts"))) {
-				relatedActivitiesList = driver.findElements(
-						By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'00U')]"));
-			}				
-			for (WebElement element : relatedActivitiesList) {
-				if (element.getText().contains(sActivitySubject)) {
-					report.updateTestLog("Verify Create Activity Contact", "The New Activity for Accounts/ Contacts are created ",
-							Status.PASS);
-					break;
-				} else {
-					report.updateTestLog("Verify Create Activity Contact", "The New Activity for Accounts/ Contacts are not created ",
-							Status.FAIL);
-				}
+			relatedActivitiesList = driver.findElements(
+					By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'00T')]"));
+		} else if ((dataTable.getData("General_Data", "TC_ID").contains("AccountsCreationOfNewActivityPage")) ||
+				(dataTable.getData("General_Data", "TC_ID").contains("Accounts"))) {
+			relatedActivitiesList = driver.findElements(
+					By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'00U')]"));
+		}				
+		for (WebElement element : relatedActivitiesList) {
+			if (element.getText().contains(sActivitySubject)) {
+				report.updateTestLog("Verify Create Activity Contact", "The New Activity for Accounts/ Contacts are created ",
+						Status.PASS);
+				break;
+			} else {
+				report.updateTestLog("Verify Create Activity Contact", "The New Activity for Accounts/ Contacts are not created ",
+						Status.FAIL);
 			}
+		}
 	}
 
-	public void verifyNewAccountsActivityPageLayout() {
+	public void verifyNewActivityPageLayout() {
 		List<WebElement> newActivityPageLayoutFields = driver.findElements(By.xpath("//div[@class='riseTransitionEnabled']//label/span"));
 		int countRequiredFiles = 0;
 		try {
@@ -212,13 +212,13 @@ public class ActivityPage extends ReusableLibrary {
 			} else {
 				report.updateTestLog("Verify New Activity Page Layout", "New Activity Layout Page is not having all the required fields", Status.WARNING);
 			}
-			
-			
+
+
 		} catch (Exception e) {
 			System.out.println("Encountered an error in validating the Account New Activity Page Layout Fields::"+e.getMessage());
 		}
 	}
-	
+
 	static ArrayList<String> activityTypeListValues = new ArrayList<String>();
 
 	public void additionalActivityTypeList() {
@@ -240,7 +240,7 @@ public class ActivityPage extends ReusableLibrary {
 		activityTypeListValues.add("Public - Client Meeting (Investor Services)");
 		System.out.println("Additional Activity Type values are added to the list successfully::::");
 	}
-	
+
 	public void validateActivityTypeValues() {
 		Utility_Functions.xWaitForElementPresent(driver, addActivity, 3);
 		Utility_Functions.xClick(driver, addActivity, true);	
@@ -273,12 +273,50 @@ public class ActivityPage extends ReusableLibrary {
 			report.updateTestLog("Verify Additional Acitivty", "All the values are not present under Additional Activity List", Status.FAIL);
 		}
 	}
-	
+
+
+	static ArrayList<String> pastActivityListValues = new ArrayList<String>();
+
+	public void pastActivityListValues() {
+		pastActivityListValues.add("Activity Type");
+		pastActivityListValues.add("Status");
+		pastActivityListValues.add("Comments");
+		System.out.println("Activity Timeline values are added to the list successfully::::");
+	}
+
 	public void validateActivityTimeLine() {
+		driver.navigate().refresh();
+		Utility_Functions.timeWait(2);
+		int i = 0, count = 0;
+		try {
+			Utility_Functions.xWaitForElementPresent(driver, openAndUpcomingActivites, 4);
 			if (openAndUpcomingActivites.isDisplayed()) {
 				System.out.println("There are no activities for present, past and future dates in acitivity related list");
 				report.updateTestLog("Verify Accounts Activity Timeline", "There are no activities for present, past and future dates in acitivity related list:::", Status.PASS);
-			}			
+			}		
+		} catch (Exception e1) {
+			List<WebElement> pastActivityList = driver.findElements(By.xpath("//div[@class='slds-media__body']//div[@class='slds-text-body--small']"));
+			pastActivityListValues();
+			String[] linkTexts = new String[pastActivityList.size()];
+			for (WebElement element : pastActivityList) {
+				linkTexts[i] = element.getText();
+				if (linkTexts[i].contains(pastActivityListValues.get(i))) {
+					count++;
+					report.updateTestLog("Verify Acitivty Timeline", "Value " +  element.getText() + "is present under Activity Timeline", Status.PASS);
+					System.out.println(element.getText());	
+					if(count==3) 
+						break;
+				}
+				i++;
+			}	
+			pastActivityListValues.clear();
+			System.out.println(count);
+			if(count==3) {
+				report.updateTestLog("Verify Acitivty Timeline", "All the values are present under Acitivty Timeline", Status.PASS);
+			} else {
+				report.updateTestLog("Verify Acitivty Timeline", "All the values are not present under Acitivty Timeline", Status.FAIL);
+			}
+		}		
 	}
 
 }

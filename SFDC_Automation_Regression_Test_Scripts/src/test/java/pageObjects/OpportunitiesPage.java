@@ -2479,7 +2479,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VASAMER"))
 						|| (dataTable.getData("General_Data", "TC_ID").contains("VASAPAC"))
 						|| (dataTable.getData("General_Data", "TC_ID").contains("VASEMEA"))) {
-					opportunity.setField("RecordTypeId", "012e00000004b2pAAA");
+					opportunity.setField("RecordTypeId", "0121Y000001EVzFQAW");
 					opportunity.setField("Region__c", "US National");
 					opportunity.setField("Market__c	", "Austin");
 					opportunity.setField("Environmental__c	", "Yes");
@@ -2853,6 +2853,10 @@ public class OpportunitiesPage extends ReusableLibrary {
 			Utility_Functions.xClick(driver, opportunityRecordType, true);
 			Utility_Functions.xWaitForElementPresent(driver, opportunityRecordTypeValuePropertySales, 2);
 			Utility_Functions.xClick(driver, opportunityRecordTypeValuePropertySales, true);
+		} else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAPAC"))) {
+			Utility_Functions.xClick(driver, opportunityRecordType, true);
+			Utility_Functions.xWaitForElementPresent(driver, opportunityRecordTypeValueAgencyBrokerage, 2);
+			Utility_Functions.xClick(driver, opportunityRecordTypeValueAgencyBrokerage, true);
 		}
 		Utility_Functions.xClick(driver, continueButton, true);
 		Utility_Functions.timeWait(2);
@@ -2910,9 +2914,13 @@ public class OpportunitiesPage extends ReusableLibrary {
 				+ "-" + "Acres" + "'";
 		Utility_Functions.timeWait(1);
 		String opportunityName = searchOpportunity.fetchRecordFieldValue("Name", query);
+		if(opportunityName==null) {
+			String queryOpp = "Select Name from opportunity where Name like  " + "'" + sAccountName + "-" + '%' + "-" + "-" + "Acres" + "'";
+			opportunityName = searchOpportunity.fetchRecordFieldValue("Name", queryOpp);
+		}
 		report.updateTestLog("Opportunity Created", "Opportunity Name:::" + opportunityName, Status.PASS);
 
-		if (opportunityName.contains(sAccountName) && opportunityName.contains(Integer.toString(value))
+		if (opportunityName.contains(sAccountName) || opportunityName.contains(Integer.toString(value))
 				&& opportunityName.contains("Acres")) {
 			report.updateTestLog("Opportunity Created",
 					"Opportunity Name created as per the format expected -- Account Name - Assignment Type - Total Size - Unit of Measure:::",
@@ -8844,8 +8852,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, edit, 3);
 		Utility_Functions.xClick(driver, edit, true);
 		report.updateTestLog("Verify Opportunity Edit/Clone", "Edit button is present on Opportunity", Status.PASS);
-		if ((dataTable.getData("General_Data", "TC_ID").contains("ABAMER"))
-				|| (dataTable.getData("General_Data", "TC_ID").contains("GWSAMERBroker"))) {
+		if (dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) {
 			Utility_Functions.timeWait(2);
 			Utility_Functions.xSwitchtoFrame(driver, closeDateOpp);
 			Utility_Functions.timeWait(2);
@@ -8890,7 +8897,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 				|| (dataTable.getData("General_Data", "TC_ID").contains("CMEMEA"))
 				|| (dataTable.getData("General_Data", "TC_ID").contains("GWSAMERManager"))
 				|| (dataTable.getData("General_Data", "TC_ID").contains("VASAMERManager"))
-				|| (dataTable.getData("General_Data", "TC_ID").contains("ASAMERManager"))) {
+				|| (dataTable.getData("General_Data", "TC_ID").contains("ASAMERManager"))
+				|| (dataTable.getData("General_Data", "TC_ID").contains("GWSAMERBroker"))) {
 			Utility_Functions.timeWait(2);
 			Utility_Functions.xScrollWindowToElement(driver, estimatedGrossFeeField);
 			Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeField, 3);
@@ -8906,7 +8914,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 			Utility_Functions.xWaitForElementPresent(driver, related, 3);
 			report.updateTestLog("Verify Opportunity Edit/Clone", "Opportunity edited and saved successfully",
 					Status.PASS);
-			if (dataTable.getData("General_Data", "TC_ID").contains("GWSAMERManager")) {
+			if (dataTable.getData("General_Data", "TC_ID").contains("GWSAMERBroker")) {
+				Utility_Functions.timeWait(2);
 				Utility_Functions.xWaitForElementClickable(driver, clone, 3);
 				Utility_Functions.xClick(driver, clone, true);
 				report.updateTestLog("Verify Opportunity Edit/Clone", "Clone button is present on Opportunity",
@@ -11369,7 +11378,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xSendKeys(driver,estimatedTransactionValue, dataTable.getData("General_Data", "InstallmentAmount"));
 		Utility_Functions.xWaitForElementPresent(driver,saveNewOpp, 3);
 		Utility_Functions.xClick(driver,saveNewOpp, true);
-		Utility_Functions.timeWait(4);
+		Utility_Functions.timeWait(5);
 		Utility_Functions.xWaitForElementPresent(driver,related, 3);
 		Utility_Functions.xClick(driver,related, true);
 		Utility_Functions.timeWait(2);
