@@ -81,7 +81,8 @@ public class ActivityPage extends ReusableLibrary {
 				Status.PASS);
 		if((dataTable.getData("General_Data", "TC_ID").contains("AccountsCreationOfNewActivityPage")) || 
 				(dataTable.getData("General_Data", "TC_ID").contains("ContactsReminderSentFunctionality")) ||
-				(dataTable.getData("General_Data", "TC_ID").contains("ContactNewActivityPageLayout"))) {
+				(dataTable.getData("General_Data", "TC_ID").contains("ContactNewActivityPageLayout")) ||
+				(dataTable.getData("General_Data", "TC_ID").contains("PropertiesNewActivityLayoutPage"))) {
 			verifyNewActivityPageLayout();
 		}
 		Utility_Functions.xWaitForElementPresent(driver, activitySubject, 3);
@@ -106,6 +107,7 @@ public class ActivityPage extends ReusableLibrary {
 		}		
 		Utility_Functions.xWaitForElementPresent(driver, firstLookupElement, 4);
 		Utility_Functions.xClick(driver, firstLookupElement, true);
+		Utility_Functions.timeWait(1);
 		Utility_Functions.xWaitForElementPresent(driver, activitySave, 3);
 		Utility_Functions.xClick(driver, activitySave, true);
 		report.updateTestLog("Verify New Activity", "Verifying whether the New Activity page is saved ", Status.PASS);

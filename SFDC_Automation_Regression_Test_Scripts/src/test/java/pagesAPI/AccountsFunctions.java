@@ -71,7 +71,7 @@ public class AccountsFunctions extends ReusableLibrary {
 			SObject account = new SObject();
 
 			account.setType("Account");
-			String accountName = dataTable.getData("General_Data", "Name") + Utility_Functions.xRandomFunction();
+			String accountName = Utility_Functions.xRandomFunction() + "-" + dataTable.getData("General_Data", "Name");
 			account.setField("Name", accountName);
 			account.setField("BillingCountry", dataTable.getData("General_Data", "BillingCountry"));
 			account.setField("BillingStreet", dataTable.getData("General_Data", "BillingStreet"));

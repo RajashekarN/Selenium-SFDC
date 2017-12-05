@@ -61,14 +61,17 @@ public class LeadsPage extends ReusableLibrary {
 	@FindBy(xpath = "//button[text()='Continue']")
 	WebElement continueButton;	
 
-	@FindBy(xpath = "//*[@id='record-type-select']/option[text()='Agency Brokerage']")
+	@FindBy(xpath = "//select[contains(@id,'record-type-select')]/option[text()='Agency Brokerage']")
 	WebElement agencyBroker;	
 
-	@FindBy(xpath = "//*[@id='record-type-select']/option[text()='Capital Markets']")
+	@FindBy(xpath = "//select[contains(@id,'record-type-select')]/option[text()='Capital Markets']")
 	WebElement capitalMarkets;	
 
-	@FindBy(xpath = "//*[@id='record-type-select']/option[text()='Occupier Brokerage']")
+	@FindBy(xpath = "//select[contains(@id,'record-type-select')]/option[text()='Occupier Brokerage']")
 	WebElement occupierBrokerage;	
+	
+	@FindBy(xpath = "//select[contains(@id,'record-type-select')]")
+	WebElement selectRecordType;
 
 	@FindBy(xpath = "//span[text()='Address']/parent::div/parent::div//span[contains(@class,'test-id__field-value')]")
 	WebElement addressDetails;	
@@ -741,18 +744,29 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, newButton, 3);
 		Utility_Functions.xClick(driver, newButton, true);
 		Utility_Functions.timeWait(2);
+		Utility_Functions.xSwitchtoFrame(driver, continueButton);
+		Utility_Functions.timeWait(3);
 		try {
-			if(dataTable.getData("General_Data", "Lead Record Type").equals("Occupier Brokerage")) {
+			if(dataTable.getData("General_Data", "TC_ID").contains("OB")) {
+				Utility_Functions.xWaitForElementPresent(driver, selectRecordType, 3);
+				Utility_Functions.xClick(driver, selectRecordType, true);
+				Utility_Functions.xWaitForElementPresent(driver, occupierBrokerage, 3);
 				Utility_Functions.xClick(driver, occupierBrokerage, true);
-			} else if(dataTable.getData("General_Data", "Lead Record Type").equals("Agency Brokerage")) {
+			} else if(dataTable.getData("General_Data", "TC_ID").equals("AB")) {
+				Utility_Functions.xWaitForElementPresent(driver, selectRecordType, 3);
+				Utility_Functions.xClick(driver, selectRecordType, true);
+				Utility_Functions.xWaitForElementPresent(driver, agencyBroker, 3);
 				Utility_Functions.xClick(driver, agencyBroker, true);
-			} else if(dataTable.getData("General_Data", "Lead Record Type").equals("Capital Markets")) {
+			} else if(dataTable.getData("General_Data", "TC_ID").equals("CM")) {
+				Utility_Functions.xWaitForElementPresent(driver, selectRecordType, 3);
+				Utility_Functions.xClick(driver, selectRecordType, true);
+				Utility_Functions.xWaitForElementPresent(driver, capitalMarkets, 3);
 				Utility_Functions.xClick(driver, capitalMarkets, true);
-			}
+			}			
 		} catch (Exception e) {
 			System.out.println("Unable to select the lead record type encountered an error:::" + e.getMessage());
 		}
-		Utility_Functions.xSwitchtoFrame(driver, continueButton);
+		/*Utility_Functions.xSwitchtoFrame(driver, continueButton);*/
 		Utility_Functions.xWaitForElementPresent(driver, continueButton, 3);
 		Utility_Functions.xClick(driver, continueButton, true);
 		Utility_Functions.timeWait(2);
@@ -889,8 +903,9 @@ public class LeadsPage extends ReusableLibrary {
 	static ArrayList<String> buttonList = new ArrayList<String>();
 	public void buttonsListLeadDetailPage() {
 		buttonList.add("Edit");
+		buttonList.add("Convert");
 		buttonList.add("Clone");
-		buttonList.add("Sharing");
+		//buttonList.add("Sharing");
 		System.out.println("Buttons list on Lead Details page::"+ buttonList);		
 	}
 
@@ -906,6 +921,7 @@ public class LeadsPage extends ReusableLibrary {
 		moreActionsList.add("New Task");
 		moreActionsList.add("New Event");
 		moreActionsList.add("Log A Call");*/
+		moreActionsList.add("Sharing");
 		moreActionsList.add("New Private Note");
 		moreActionsList.add("New Personal Information");
 		moreActionsList.add("Delete");
@@ -963,7 +979,7 @@ public class LeadsPage extends ReusableLibrary {
 				i1++;
 			}
 			System.out.println(count1);
-			if(count1==3) {
+			if(count1==4) {
 				report.updateTestLog("Lead Details Page", "All the menu buttons are present on the Leads Details Page:::",Status.PASS);
 			} else {
 				report.updateTestLog("Lead Details Page", "Not all the menu buttons are present on the Leads Details Page:::",Status.FAIL);

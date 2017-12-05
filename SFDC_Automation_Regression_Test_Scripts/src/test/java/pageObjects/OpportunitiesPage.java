@@ -1376,12 +1376,15 @@ public class OpportunitiesPage extends ReusableLibrary {
 	
 	@FindBy(xpath="//div[contains(@class,'pbBottomButtons')]//input[contains(@id,'next')]")
 	WebElement nextForJapan;
+	
+	@FindBy(xpath="//ul[@class='tabs__nav']//a[@title='New Event']")
+	WebElement newEventOpp;
 
 	HomePage hp = new HomePage(scriptHelper);
 	SearchTextSOQL searchOpportunity = new SearchTextSOQL(scriptHelper);
 	OpportunitiesFunctions opportunitiesFunctions = new OpportunitiesFunctions(scriptHelper);
 	Actions actions = new Actions(driver.getWebDriver());
-
+	EventPage eventPage = new EventPage(scriptHelper);
 	/**
 	 * Adding the Web Elements to the Label List
 	 * 
@@ -3678,8 +3681,12 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
 		Utility_Functions.xClick(driver, menu_Opportunities, true);
 		Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
-		Utility_Functions.xclickgetTextofFirstElementfromList(opportunitiesList);
-		Utility_Functions.timeWait(5);
+		Utility_Functions.xclickRandomElement(opportunitiesList);
+		Utility_Functions.xWaitForElementPresent(driver, newEventOpp, 3);
+		Utility_Functions.xClick(driver, newEventOpp, true);
+		eventPage.verifyNewEventPageLayout();
+		
+		/*Utility_Functions.timeWait(5);
 		Utility_Functions.xWaitForElementPresent(driver, selectNewEvent, 3);
 		Utility_Functions.xClick(driver, selectNewEvent, true);
 		Utility_Functions.xWaitForElementPresent(driver, newEvent, 3);
@@ -3822,7 +3829,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-		}
+		}*/
 
 	}
 
