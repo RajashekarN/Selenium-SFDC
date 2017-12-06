@@ -846,7 +846,7 @@ public class LoginPage extends ReusableLibrary {
 			// Utility_Functions.timeWait(1);
 			report.updateTestLog("Login", "Click the sign-in button", Status.PASS);
 			Utility_Functions.xClick(driver, btn_LogIn, true);
-			// Utility_Functions.timeWait(1);
+			Utility_Functions.timeWait(1);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());

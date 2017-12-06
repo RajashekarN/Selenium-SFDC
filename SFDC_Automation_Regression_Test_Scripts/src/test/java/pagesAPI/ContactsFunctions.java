@@ -140,7 +140,7 @@ public class ContactsFunctions extends ReusableLibrary {
 		try{
 			establishConnection.establishConnection();
 			DescribeLayoutResult dlr = EstablishConnection.connection.describeLayout("Contact", null, null);
-			for(int i = 0; i < dlr.getLayouts().length; i++) {
+			for(int i = 1; i < dlr.getLayouts().length; i++) {
 				DescribeLayout layout = dlr.getLayouts()[i];
 				DescribeLayoutSection[] detailLayoutSectionList = layout.getDetailLayoutSections();
 				System.out.println(" There are " + detailLayoutSectionList.length + " detail layout sections");
