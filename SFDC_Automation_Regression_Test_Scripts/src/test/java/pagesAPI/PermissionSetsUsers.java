@@ -1,7 +1,6 @@
 package pagesAPI;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.openqa.selenium.support.PageFactory;
@@ -15,7 +14,6 @@ import com.sforce.soap.partner.sobject.SObject;
 import com.sforce.ws.ConnectionException;
 
 import pageObjects.LoginPage;
-import supportLibraries.Utility_Functions;
 
 import com.sforce.soap.partner.SaveResult;
 
@@ -290,6 +288,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				System.out.println("CM APAC Broker User - :::" + userNameList.get(i)
 						+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
+				permissionSetsLabels.add("Campaigns and CampaignLogic Create/Edit Permissions");
 				break;
 
 			case "testuser21@cbre.com.crm.":

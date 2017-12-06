@@ -1098,6 +1098,7 @@ public class Utility_Functions extends ReusableLibrary {
 	}
 
 	public static void xclickOnFirstElementfromList(List<WebElement> list) {
+		Utility_Functions.timeWait(1);
 		if(list.isEmpty()) {
 			System.out.println("List is Empty:::");
 			return;
@@ -1120,6 +1121,7 @@ public class Utility_Functions extends ReusableLibrary {
 		String text = null;
 		boolean isStatus = false;
 		Random random = new Random();
+		Utility_Functions.timeWait(1);
 		if(list.isEmpty()) {
 			System.out.println("List is Empty:::");
 			return null;

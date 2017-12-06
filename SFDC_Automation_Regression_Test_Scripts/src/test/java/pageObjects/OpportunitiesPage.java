@@ -561,8 +561,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//*[@id='record-type-select']/option[text()='Capital Markets – Property Sales']")
 	WebElement opportunityRecordTypeValuePropertySales;
 
-	@FindBy(xpath = "//*[@id='record-type-select']/option[text()='Agency Brokerage']")
-	WebElement opportunityRecordTypeValueAgencyBrokerage;
+	@FindBy(xpath = "//*[@id='record-type-select']/option[text()='APAC Landlord and Sale Pursuits']")
+	WebElement opportunityRecordTypeValueAPACLandlord;
 
 	@FindBy(xpath = "//*[@id='record-type-select']/option[text()='Capital Markets – Debt & Structured Finance']")
 	WebElement opportunityRecordTypeDebtStructuredFinance;
@@ -1385,6 +1385,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	OpportunitiesFunctions opportunitiesFunctions = new OpportunitiesFunctions(scriptHelper);
 	Actions actions = new Actions(driver.getWebDriver());
 	EventPage eventPage = new EventPage(scriptHelper);
+	ActivityPage activityPage = new ActivityPage(scriptHelper);
 	/**
 	 * Adding the Web Elements to the Label List
 	 * 
@@ -2858,8 +2859,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 			Utility_Functions.xClick(driver, opportunityRecordTypeValuePropertySales, true);
 		} else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAPAC"))) {
 			Utility_Functions.xClick(driver, opportunityRecordType, true);
-			Utility_Functions.xWaitForElementPresent(driver, opportunityRecordTypeValueAgencyBrokerage, 2);
-			Utility_Functions.xClick(driver, opportunityRecordTypeValueAgencyBrokerage, true);
+			Utility_Functions.xWaitForElementPresent(driver, opportunityRecordTypeValueAPACLandlord, 2);
+			Utility_Functions.xClick(driver, opportunityRecordTypeValueAPACLandlord, true);
 		}
 		Utility_Functions.xClick(driver, continueButton, true);
 		Utility_Functions.timeWait(2);
@@ -3500,6 +3501,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			Utility_Functions.xclickRandomElement(opportunitiesList);
 		}
 		Utility_Functions.xclickRandomElement(opportunitiesList);
+		Utility_Functions.timeWait(1);
 	}
 
 	/**
@@ -9476,8 +9478,10 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xSwitchtoFrame(driver, accountName);
 		Utility_Functions.timeWait(2);
-		String sAccountName = searchOpportunity.fetchRecord("Account", "Name");
-		Utility_Functions.xSendKeys(driver, accountName, sAccountName);
+		/*String query = "SELECT EMEA_Account_Status__c, Name FROM Account where EMEA_Account_Status__c ='Active'";
+		//String sAccountName = searchOpportunity.fetchRecord("Account", "Name");
+		String sAccountName = searchOpportunity.fetchRecordFieldValue("Name", query);*/
+		Utility_Functions.xSendKeys(driver, accountName, "Test");
 		accountName.sendKeys(Keys.ARROW_DOWN);
 		Utility_Functions.timeWait(2);
 		accountName.sendKeys(Keys.ENTER);
@@ -9854,6 +9858,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver,emeaConversionType, 4);
 		Utility_Functions.xClick(driver,emeaConversionType, true);
 		Utility_Functions.xWaitForElementPresent(driver,emeaConversionTypeValue, 4);
+		Utility_Functions.timeWait(1);
 		Utility_Functions.xClick(driver,emeaConversionTypeValue, true);
 		System.out.println(Calendar.getInstance());
 		DateFormat dateFormat1 = new SimpleDateFormat("MM/dd/yyyy");
@@ -9900,10 +9905,12 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver,firstLookupElement, true);
 		Utility_Functions.xSendKeys(driver,opportunityNameAS, "Test Automation Opportunity_" + Utility_Functions.xGenerateAlphaNumericString());
 		Utility_Functions.xWaitForElementPresent(driver,accountNameNewOpportunity, 3);
-		String accountName = searchOpportunity.fetchRecord("Account", "Name");
-		Utility_Functions.xSendKeys(driver,accountNameNewOpportunity, accountName);
-		WebElement firstLookupElementAccount = driver.findElement(By.cssSelector("ul>li.forceSearchInputLookupDesktopOption:nth-child(1)"));
-		Utility_Functions.xClick(driver,firstLookupElementAccount, true);
+		Utility_Functions.xClick(driver, accountNameNewOpportunity, true);
+		/*String accountName = searchOpportunity.fetchRecord("Account", "Name");
+		Utility_Functions.xSendKeys(driver,accountNameNewOpportunity, accountName);*/
+		WebElement firstLookupAccount = driver.findElement(By.cssSelector("ul>li.forceSearchInputLookupDesktopOption:nth-child(1)"));
+		Utility_Functions.xWaitForElementPresent(driver, firstLookupAccount, 3);
+		Utility_Functions.xClick(driver,firstLookupAccount, true);
 		Utility_Functions.xWaitForElementPresent(driver,leadSourceNewOpp, 3);
 		Utility_Functions.xClick(driver,leadSourceNewOpp, true);
 		Utility_Functions.xWaitForElementPresent(driver,leadSourceNewOppValue, 3);
@@ -9957,11 +9964,15 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, menu_Opportunities, true);
 		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
 		Utility_Functions.xClick(driver, newOpportunity, true);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xSwitchtoFrame(driver, continueButton);
-		Utility_Functions.xWaitForElementPresent(driver, continueButton, 3);
-		Utility_Functions.xClick(driver,continueButton, true);
-		Utility_Functions.timeWait(2);
+		try {
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xSwitchtoFrame(driver, continueButton);
+			Utility_Functions.xWaitForElementPresent(driver, continueButton, 3);
+			Utility_Functions.xClick(driver,continueButton, true);
+			Utility_Functions.timeWait(2);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 		Utility_Functions.xSwitchtoFrame(driver, viewAllFieldsButton);
 		Utility_Functions.xWaitForElementPresent(driver, viewAllFieldsButton, 5);
 		Utility_Functions.xClick(driver,viewAllFieldsButton, true);
@@ -11342,6 +11353,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 		relatedListValues.add("Opportunity Installments");
 		relatedListValues.add("Space");
+		relatedListValues.add("Activities");
 		relatedListValues.add("Contact Roles");
 		relatedListValues.add("Notes");
 		relatedListValues.add("Files");
@@ -11350,6 +11362,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	}
 	public void validateNewOpportunitiesRelatedObjects() {
+		Utility_Functions.xWaitForElementPresent(driver, menu_home, 3);
 		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 4);
 		Utility_Functions.xClick(driver, menu_Opportunities, true);
 		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
@@ -11366,10 +11379,16 @@ public class OpportunitiesPage extends ReusableLibrary {
 		driver.switchTo().defaultContent();
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver,accountNameNewOpportunity, 4);
-		Utility_Functions.xSendKeys(driver,accountNameNewOpportunity, "Test Automation_0101");
+		/*Utility_Functions.xSendKeys(driver,accountNameNewOpportunity, "Test Automation_0101");
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xWaitForElementPresent(driver,accountNameNewOpp, 3);
 		Utility_Functions.xClick(driver,accountNameNewOpp, true);
+		*/
+		Utility_Functions.xClick(driver, accountNameNewOpportunity, true);
+		WebElement firstLookupElement = driver
+				.findElement(By.cssSelector("ul>li.forceSearchInputLookupDesktopOption:nth-child(1)"));
+		Utility_Functions.xWaitForElementPresent(driver, firstLookupElement, 4);
+		Utility_Functions.xClick(driver, firstLookupElement, false);
 		System.out.println(Calendar.getInstance());
 		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 		Date date = new Date();
@@ -11410,12 +11429,12 @@ public class OpportunitiesPage extends ReusableLibrary {
 				j5++;
 			}
 			System.out.println(count5);
-			if (count5 !=5) {
+			if (count5 >= 4) {
 				report.updateTestLog("Verify Opportunity Related List Object",
-						"All fields are not present in the Realted List Section", Status.FAIL);
+						"All fields are present in the Realted List Section", Status.PASS);
 			} else {
 				report.updateTestLog("Verify Opportunity Related List Object",
-						"All fields are present in the Related List Section", Status.PASS);
+						"All fields are not present in the Related List Section", Status.FAIL);
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -11427,7 +11446,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 		} else {
 			report.updateTestLog("Verify Opportunity Related List Object", "Activity and chatter are not displayed", Status.FAIL);
 		}
-		Utility_Functions.xWaitForElementPresent(driver,showMoreActions, 3);
+		activityPage.createNewActivity();
+		/*Utility_Functions.xWaitForElementPresent(driver,showMoreActions, 3);
 		Utility_Functions.xClick(driver,showMoreActions, true);
 		Utility_Functions.xWaitForElementPresent(driver,newTask, 3);
 		Utility_Functions.xClick(driver,newTask, true);
@@ -11443,7 +11463,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, newActivityDueDate, 3);
 		Utility_Functions.xSendKeys(driver, newActivityDueDate, dateFormat1.format(calendar1.getTime()));
 		Utility_Functions.xWaitForElementPresent(driver,saveActivity, 3);
-		Utility_Functions.xClick(driver,saveActivity, true);
+		Utility_Functions.xClick(driver,saveActivity, true);*/
 	}
 	/**
 	 * Validating the Opportunities page for Recalculate and new installment button
@@ -11469,9 +11489,14 @@ public class OpportunitiesPage extends ReusableLibrary {
 		driver.switchTo().defaultContent();	
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver,accountNameNewOpportunity, 4);
-		Utility_Functions.xSendKeys(driver,accountNameNewOpportunity, "Test Automation_0101");
+		Utility_Functions.xClick(driver, accountNameNewOpportunity, true);
+		WebElement firstLookupElement = driver
+				.findElement(By.cssSelector("ul>li.forceSearchInputLookupDesktopOption:nth-child(1)"));
+		Utility_Functions.xWaitForElementPresent(driver, firstLookupElement, 4);
+		Utility_Functions.xClick(driver, firstLookupElement, false);
+		/*Utility_Functions.xSendKeys(driver,accountNameNewOpportunity, "Test Automation_0101");
 		Utility_Functions.xWaitForElementPresent(driver,accountNameNewOpp, 3);
-		Utility_Functions.xClick(driver,accountNameNewOpp, true);
+		Utility_Functions.xClick(driver,accountNameNewOpp, true);*/
 		System.out.println(Calendar.getInstance());
 		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 		Date date = new Date();
@@ -11940,9 +11965,13 @@ public class OpportunitiesPage extends ReusableLibrary {
 	Utility_Functions.xClick(driver, newOpportunity, true);
 	Utility_Functions.timeWait(2);
 	Utility_Functions.xWaitForElementPresent(driver,accountNameNewOpportunity, 4);
-	Utility_Functions.xSendKeys(driver,accountNameNewOpportunity, "Test Automation_0101");
+	Utility_Functions.xClick(driver, accountNameNewOpportunity, true);
+	WebElement firstLookupElement = driver.findElement(By.cssSelector("ul>li.forceSearchInputLookupDesktopOption:nth-child(1)"));
+	Utility_Functions.xWaitForElementPresent(driver, firstLookupElement, 4);
+	Utility_Functions.xClick(driver, firstLookupElement, false);
+	/*Utility_Functions.xSendKeys(driver,accountNameNewOpportunity, "Test Automation_0101");
 	Utility_Functions.xWaitForElementPresent(driver,accountNameNewOpp, 3);
-	Utility_Functions.xClick(driver,accountNameNewOpp, true);
+	Utility_Functions.xClick(driver,accountNameNewOpp, true);*/
 	if ((dataTable.getData("General_Data", "TC_ID").contains("APACProjectManagerRequiredFieldsSalesStage07"))){
 		Utility_Functions.xWaitForElementPresent(driver,opportunityDetails, 3);
 		Utility_Functions.xSendKeys(driver,opportunityDetails, "This is an opportunity");	

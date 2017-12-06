@@ -626,6 +626,7 @@ public class HomePage extends ReusableLibrary {
 		int count5 = 0, i5 = 0, j5 = 0;
 		String fieldsArray5[] = new String[homePageTabs.size()];
 		System.out.println(homePageTabs.size());
+		tabsList.clear();
 		try {
 			homePageTabsList();
 			while (j5 <homePageTabs.size()) {
@@ -653,7 +654,7 @@ public class HomePage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		homePageTabs.clear();
+		tabsList.clear();
 		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 4);
 		Utility_Functions.xClick(driver, menu_Opportunities, true);
 		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
@@ -720,7 +721,6 @@ public class HomePage extends ReusableLibrary {
 		Utility_Functions.xClick(driver,saveNewOpp, true);
 		Utility_Functions.timeWait(3);
 		if(details.isDisplayed()) {
-
 			report.updateTestLog("Verify Home Page Tabs", "The opportunity is saved with the all the required fields", Status.PASS);
 		} else {
 			report.updateTestLog("Verify Home Page Tabs", "The opportunity is not saved with the all the required fields", Status.FAIL);

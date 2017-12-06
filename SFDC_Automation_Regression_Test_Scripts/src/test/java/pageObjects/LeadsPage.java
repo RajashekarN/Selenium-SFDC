@@ -121,6 +121,12 @@ public class LeadsPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//a[@class='tabHeader']//span[text()='Related']")
 	WebElement related;
+	
+	@FindBy(xpath = "//a[@title='Other Related'][text()='Other Related']")
+	WebElement otherRelated;
+	
+	@FindBy(xpath = "//a[text()='More']")
+	WebElement more;
 
 	@FindBy(xpath = "//label[text()='Lead Source']/following-sibling::div//select")
 	WebElement leadSource;
@@ -470,7 +476,7 @@ public class LeadsPage extends ReusableLibrary {
 	@FindBy(xpath="//span[text()='Account Name']/parent::div/parent::div//span[contains(@class,'test-id__field-value')]")
 	WebElement opportunityAccountName;
 
-	@FindBy(xpath="//h2[@id='header']/a/span[text()='Contact Roles']")
+	@FindBy(xpath="//h2[@id='header']/a/span[text()='Related Contacts']")
 	WebElement contactRoles;
 
 	@FindBy(xpath="//a[@class='tabHeader']//span[text()='Details']")
@@ -2456,8 +2462,10 @@ public class LeadsPage extends ReusableLibrary {
 		driver.switchTo().defaultContent();
 		driver.navigate().refresh();
 		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver,related, 3);
-		Utility_Functions.xClick(driver,related, true);
+		Utility_Functions.xWaitForElementPresent(driver, more, 3);
+		Utility_Functions.xClick(driver, more, true);
+		Utility_Functions.xWaitForElementPresent(driver, otherRelated, 3);
+		Utility_Functions.xClick(driver, otherRelated, true);
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xScrollWindow(driver);
 		Utility_Functions.timeWait(1);
@@ -2566,13 +2574,13 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver,convertButton, 3);
 		Utility_Functions.xClick(driver,convertButton, true);
 		report.updateTestLog("Verify Convert Lead with Direct Line and Private Note","The Lead is converted with the required fields", Status.PASS);
-		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(4);
 		driver.switchTo().defaultContent();
 		driver.navigate().refresh();
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver,related, 3);
 		Utility_Functions.xClick(driver,related, true);
-		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(3);
 		Utility_Functions.xWaitForElementPresent(driver,accountsRelatedContacts, 3);
 		Utility_Functions.xClick(driver,accountsRelatedContacts, true);
 		Utility_Functions.xWaitForElementPresent(driver, contactsList, 3);
@@ -2581,8 +2589,10 @@ public class LeadsPage extends ReusableLibrary {
 		driver.switchTo().defaultContent();
 		driver.navigate().refresh();
 		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver,related, 3);
-		Utility_Functions.xClick(driver,related, true);
+		Utility_Functions.xWaitForElementPresent(driver, more, 3);
+		Utility_Functions.xClick(driver, more, true);
+		Utility_Functions.xWaitForElementPresent(driver, otherRelated, 3);
+		Utility_Functions.xClick(driver, otherRelated, true);
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xScrollWindow(driver);
 		Utility_Functions.timeWait(1);
@@ -2623,9 +2633,11 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		driver.switchTo().defaultContent();
 		driver.navigate().refresh();
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver,related, 3);
-		Utility_Functions.xClick(driver,related, true);
+		Utility_Functions.timeWait(2); 
+		Utility_Functions.xWaitForElementPresent(driver, more, 3);
+		Utility_Functions.xClick(driver, more, true);
+		Utility_Functions.xWaitForElementPresent(driver, otherRelated, 3);
+		Utility_Functions.xClick(driver,otherRelated, true);
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xScrollWindow(driver);
 		Utility_Functions.timeWait(1);
@@ -3313,8 +3325,8 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, related, 5);
 		Utility_Functions.xClick(driver, related, true);
-		Utility_Functions.xWaitForElementPresent(driver,contactRoles, 5);
-		Utility_Functions.xClick(driver,contactRoles, true);
+		Utility_Functions.xWaitForElementPresent(driver, contactRoles, 5);
+		Utility_Functions.xClick(driver, contactRoles, true);
 		Utility_Functions.xWaitForElementPresent(driver, contactsList, 3);
 		Utility_Functions.xclickgetTextofFirstElementfromList(contactsList);
 		Utility_Functions.timeWait(2);

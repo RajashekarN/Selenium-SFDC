@@ -536,12 +536,12 @@
 			<class name="testscripts.SF.Release39TestScripts.TC_SF_CMEMEABrokerOppNameConfidential"/>
 			<class name="testscripts.SF.Release39TestScripts.TC_SF_CMEMEAManagerOppNameConfidential"/>
 			<class name="testscripts.SF.Release39TestScripts.TC_SF_CMEMEACSSOppNameConfidential"/>
-			<class name="testscripts.SF.Release39TestScripts.TC_SF_CMAPACBrokerOfferCreationPageFields"/>
+			<!-- <class name="testscripts.SF.Release39TestScripts.TC_SF_CMAPACBrokerOfferCreationPageFields"/> -->
 			<class name="testscripts.SF.Release39TestScripts.TC_SF_CMAPACBrokerOffersRelatedListCampaigns"/>
 			<class name="testscripts.SF.Release39TestScripts.TC_SF_CMAPACBrokerProjectEnquiryFields"/>
 			<class name="testscripts.SF.Release39TestScripts.TC_SF_CMAPACBrokerProjectEnquiryPropertyRecord"/>
-			<class name="testscripts.SF.Release39TestScripts.TC_SF_ABEMEABrokerOpportunityPickList"/>
-			<class name="testscripts.SF.Release39TestScripts.TC_SF_ABEMEACSSOpportunityPickList"/>
+			<!-- <class name="testscripts.SF.Release39TestScripts.TC_SF_ABEMEABrokerOpportunityPickList"/> -->
+			<!-- <class name="testscripts.SF.Release39TestScripts.TC_SF_ABEMEACSSOpportunityPickList"/> -->
 			<class name="testscripts.SF.Release39TestScripts.TC_SF_VASAMERManagerOppRecordLayout"/>
 			<class name="testscripts.SF.Release38TestScripts.TC_SF_OBEMEABrokerOpportunitiesQuickCreatepage"/>
 			<class name="testscripts.SF.Release38TestScripts.TC_SF_DAEMEADataAccountsBudgetsTargetsPage"/>
