@@ -85,6 +85,9 @@ public class LoginPage extends ReusableLibrary {
 	@FindBy(xpath = "//a[@class='continue'][text()='Continue']")
 	WebElement continueButtonMaiteinance;
 
+	@FindBy(xpath = "//span[contains(text(),'Sandbox')]")
+	WebElement sandbox;
+	
 	/**
 	 * Validating the browser launch functionality
 	 * 
@@ -873,6 +876,8 @@ public class LoginPage extends ReusableLibrary {
 			try {
 				try {
 					Utility_Functions.xWaitForElementPresent(driver, menu_Home, 3);
+					Utility_Functions.xWaitForElementPresent(driver, sandbox, 3);
+					Utility_Functions.xClick(driver, sandbox, true);
 					report.updateTestLog("Verify Login", "Login is successful", Status.PASS);
 				} catch (Exception e) {
 					if (continueButtonMaiteinance.isDisplayed()) {
