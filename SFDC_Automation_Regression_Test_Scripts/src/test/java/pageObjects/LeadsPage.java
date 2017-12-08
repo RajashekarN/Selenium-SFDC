@@ -1151,13 +1151,13 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, searchUsers, 3);
 		Utility_Functions.xSelectDropdownByName(searchUsers, "Users");
 		Utility_Functions.timeWait(1);
-		Utility_Functions.xSendKeys(driver, searchUserName, "Vishnu");
+		Utility_Functions.xSendKeys(driver, searchUserName, "bommisetty");
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xClick(driver, findValue, true);
 		Utility_Functions.timeWait(1);
 		String environment = loginPage.initializeEnvironment();
 		if (environment.equals("UAT")) {
-			Utility_Functions.xSelectDropdownByName(selectUser, "User: Vishnuvardhan Bommisetty");
+			Utility_Functions.xSelectDropdownByName(selectUser, "User: vishnuvardhan bommisetty");
 		} else {
 			Utility_Functions.xSelectDropdownByName(selectUser, "User: vishnuvardhan bommisetty");
 		}

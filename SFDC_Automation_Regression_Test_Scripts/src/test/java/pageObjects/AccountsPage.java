@@ -18,6 +18,7 @@ import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
 
+import pagesAPI.AccountsFunctions;
 import pagesAPI.SearchTextSOQL;
 import supportLibraries.Utility_Functions;
 
@@ -3261,7 +3262,9 @@ public class AccountsPage extends ReusableLibrary {
 	}
 
 	public void verifyAccountsPageLayout() {
-		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
+		AccountsFunctions accountsFunctions = new AccountsFunctions(scriptHelper);
+		accountsFunctions.accountPageFieldsValidation();
+		/*Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
 		Utility_Functions.xClick(driver, menu_Accounts, true);
 		Utility_Functions.timeWait(1);
 		report.updateTestLog("Verify New Account Page Layout ", "Verifying Accounts is Displayed ", Status.PASS);
@@ -3448,7 +3451,7 @@ public class AccountsPage extends ReusableLibrary {
 			System.out.println(e.getMessage());
 		}
 		accountSegmentationSectionList.clear();
-		/*
+		
 		 * List<WebElement> clientTypePickList = driver.findElements(By.
 		 * xpath("//table[@class='multiSelectPicklistTable']//select[contains(@title,'Client Type')]/option"
 		 * )); int count4 = 0, i4 = 0; String fieldsArray4[] = new
@@ -3472,7 +3475,7 @@ public class AccountsPage extends ReusableLibrary {
 		 * Status.PASS); }
 		 * 
 		 * } catch (Exception e) { System.out.println(e.getMessage()); }
-		 */
+		 
 
 		List<WebElement> addressInformationSectionList = driver.findElements(By.xpath(
 				"//h2[text()='Address Information']/parent::div/parent::div/div//label[@class='slds-form-element__label']"));
@@ -3702,7 +3705,7 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, lenderType, true);
 		Utility_Functions.xWaitForElementPresent(driver, selectLenderType, 3);
 		Utility_Functions.xClick(driver, selectLenderType, true);
-		/*
+		
 		 * List<WebElement> accountSourceFieldPickList =
 		 * driver.findElements(By.xpath(
 		 * "//select[contains(@id,'AccountSource')]/option")); int count10 = 0,
@@ -3727,7 +3730,7 @@ public class AccountsPage extends ReusableLibrary {
 		 * , Status.PASS); } } catch (Exception e) {
 		 * System.out.println(e.getMessage()); }
 		 * accountSourceFieldPickList.clear();
-		 */
+		 
 
 		try {
 			accountSourceTypeFields();
@@ -3903,7 +3906,7 @@ public class AccountsPage extends ReusableLibrary {
 		}
 		systemInformationSectionList.clear();
 		Utility_Functions.xWaitForElementPresent(driver, saveQuickCreate, 3);
-		Utility_Functions.xClick(driver, saveQuickCreate, true);
+		Utility_Functions.xClick(driver, saveQuickCreate, true);*/
 	}
 
 	/**
