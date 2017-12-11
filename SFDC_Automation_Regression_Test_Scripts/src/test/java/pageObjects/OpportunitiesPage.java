@@ -7492,16 +7492,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 			Utility_Functions.timeWait(2);
 			accountName.sendKeys(Keys.ENTER);
 			Utility_Functions.timeWait(2);
-			String environment = loginPage.initializeEnvironment();
-			if ((environment.equals("FTE")) || (environment.equals("FTE2"))) {
-				Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeNewOpportunity, 3);
-				Utility_Functions.xSendKeys(driver, estimatedGrossFeeNewOpportunity,
-						dataTable.getData("General_Data", "InstallmentAmount"));
-			} else {
-				Utility_Functions.xWaitForElementPresent(driver, salesStageEMEAEstimatedGrossCommission, 3);
-				Utility_Functions.xSendKeys(driver, salesStageEMEAEstimatedGrossCommission,
-						dataTable.getData("General_Data", "InstallmentAmount"));
-			}
+			Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeNewOpportunity, 3);
+			Utility_Functions.xSendKeys(driver, estimatedGrossFeeNewOpportunity,
+					dataTable.getData("General_Data", "InstallmentAmount"));
 			Utility_Functions.xWaitForElementPresent(driver, salesStageEMEANewOpportunity, 4);
 			Utility_Functions.xClick(driver, salesStageEMEANewOpportunity, true);
 			Utility_Functions.xWaitForElementPresent(driver, salesStageEMEANewOpportunityValue, 4);

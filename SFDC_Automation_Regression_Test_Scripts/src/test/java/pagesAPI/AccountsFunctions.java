@@ -1205,6 +1205,35 @@ static ArrayList<String> ABAMERField = new ArrayList<String>();
 		}
 	}
 	
+	public void createAccountRequiredFields() {
+		try {
+			
+			establishConnection.establishConnectionSpecificUser();
+			SObject account = new SObject();
+
+			account.setType("Account");
+			String accountName = Utility_Functions.xRandomFunction() + "_" + dataTable.getData("General_Data", "Name");
+			account.setField("Name", accountName);
+			account.setField("BillingCountry", dataTable.getData("General_Data", "Country"));
+			account.setField("BillingStreet", dataTable.getData("General_Data", "Street"));
+			account.setField("BillingCity", dataTable.getData("General_Data", "City"));
+			account.setField("BillingState", dataTable.getData("General_Data", "State"));
+			account.setField("BillingPostalCode ", dataTable.getData("General_Data", "Zipcode"));
+
+			SObject[] accounts = new SObject[1];
+			accounts[0] = account;
+			results = EstablishConnection.connection.create(accounts);
+			System.out.println("Result:::" + results);
+			status = establishConnection.saveResults(results);
+			if(status==true) {
+				report.updateTestLog("Verify Create Account", "Account has been created successfully", Status.PASS);
+			} else {
+				report.updateTestLog("Verify Create Account", "Account creation failed", Status.FAIL);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
 	
 	/*public void accountPageFieldsValidation() {
 		try {

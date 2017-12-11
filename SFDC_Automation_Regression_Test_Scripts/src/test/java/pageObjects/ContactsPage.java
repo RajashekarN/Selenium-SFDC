@@ -1469,8 +1469,11 @@ public class ContactsPage extends ReusableLibrary {
 	 *
 	 */
 	public void contactsPopulatingTheRequiredFields() {
+		
+		ContactsFunctions contactsFunctions = new ContactsFunctions(scriptHelper);
+		contactsFunctions.createContactRequiredFields();
 
-		Utility_Functions.xWaitForElementPresent(driver, menu_Contacts, 3);
+		/*Utility_Functions.xWaitForElementPresent(driver, menu_Contacts, 3);
 		Utility_Functions.xClick(driver, menu_Contacts, true);
 		Utility_Functions.timeWait(1);
 		report.updateTestLog("Verify Contact Creation With Required Fields ", "Verifying Contacts is Displayed ",
@@ -1511,7 +1514,7 @@ public class ContactsPage extends ReusableLibrary {
 		} else {
 			report.updateTestLog("Verify Contact Record Updation",
 					"The existing record cannot be updated and saved successfully", Status.FAIL);
-		}
+		}*/
 
 	}
 
@@ -2809,8 +2812,11 @@ public class ContactsPage extends ReusableLibrary {
 	}
 
 	public void contactsNewContactPageLayout() {
+		
+		ContactsFunctions contactsFunctions = new ContactsFunctions(scriptHelper);
+		contactsFunctions.contactsPageFieldsValidation();
 
-		Utility_Functions.xWaitForElementPresent(driver, menu_Contacts, 3);
+		/*Utility_Functions.xWaitForElementPresent(driver, menu_Contacts, 3);
 		Utility_Functions.xClick(driver, menu_Contacts, true);
 		Utility_Functions.timeWait(1);
 		report.updateTestLog("Verify New Contact Page Layout ", "Verifying Contacts is Displayed ", Status.PASS);
@@ -3855,7 +3861,7 @@ public class ContactsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		systemInformationSectionListValues.clear();
+		systemInformationSectionListValues.clear();*/
 	}
 
 	/**
@@ -3865,7 +3871,11 @@ public class ContactsPage extends ReusableLibrary {
 	 *
 	 */
 	public void contactsPopulatingAllFields() {
-		Utility_Functions.xWaitForElementPresent(driver, menu_Contacts, 3);
+		
+		ContactsFunctions contactsFunctions = new ContactsFunctions(scriptHelper);
+		contactsFunctions.createContactsPopulatingAllFields();
+	
+		/*Utility_Functions.xWaitForElementPresent(driver, menu_Contacts, 3);
 		Utility_Functions.xClick(driver, menu_Contacts, true);
 		Utility_Functions.timeWait(1);
 		report.updateTestLog("Verify Contacts Populating all fields", "Verifying Contacts is Displayed ", Status.PASS);
@@ -3881,14 +3891,14 @@ public class ContactsPage extends ReusableLibrary {
 			Utility_Functions.xClick(driver, continueButtonNewContact, true);
 			Utility_Functions.timeWait(2);
 		}
-		/*Utility_Functions.xSwitchtoFrame(driver, viewAllFieldsButton);
+		Utility_Functions.xSwitchtoFrame(driver, viewAllFieldsButton);
 		Utility_Functions.xScrollWindow(driver);
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xWaitForElementPresent(driver, viewAllFieldsButton, 5);
 		Utility_Functions.xClick(driver, viewAllFieldsButton, true);
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xScrollWindowTop(driver);
-		Utility_Functions.timeWait(5);*/
+		Utility_Functions.timeWait(5);
 
 		Utility_Functions.xWaitForElementPresent(driver, firstNameNewContactPage, 5);
 		Utility_Functions.xSendKeys(driver, firstNameNewContactPage, Utility_Functions.xGenerateAlphaNumericString() + "_Test_Automation_First");
@@ -3962,14 +3972,14 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, influenceLevelPickList, true);
 		Utility_Functions.xWaitForElementPresent(driver, influenceLevelPickListValue, 3);
 		Utility_Functions.xClick(driver, influenceLevelPickListValue, true);
-		/*
+		
 		 * Utility_Functions.xWaitForElementPresent(driver,
 		 * reportsToNewContactPage, 5); Utility_Functions.xSendKeys(driver,
 		 * reportsToNewContactPage, "Automation Test");
 		 * reportsToNewContactPage.sendKeys(Keys.ARROW_DOWN);
 		 * Utility_Functions.timeWait(2);
 		 * reportsToNewContactPage.sendKeys(Keys.ENTER);
-		 */
+		 
 
 		Utility_Functions.xWaitForElementPresent(driver, emailOptionsNewContactPage, 3);
 		Utility_Functions.xClick(driver, emailOptionsNewContactPage, true);
@@ -4135,7 +4145,7 @@ public class ContactsPage extends ReusableLibrary {
 		} else {
 			report.updateTestLog("Verify Contacts Populating all fields",
 					"The existing record cannot be updated and saved successfully", Status.FAIL);
-		}
+		}*/
 	}
 
 	/**

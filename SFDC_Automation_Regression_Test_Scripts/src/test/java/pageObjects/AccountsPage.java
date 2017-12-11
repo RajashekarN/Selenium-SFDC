@@ -1083,7 +1083,7 @@ public class AccountsPage extends ReusableLibrary {
 						Status.FAIL);
 			}*/
 			if (dataTable.getData("General_Data", "TC_ID").contains("Broker")) {
-				if (count == 9) {
+				if (count == 8) {
 					System.out.println("All the links are present in Home Page:::");
 					report.updateTestLog("Verify Account Landing Page Information",
 							"Account Details Page is having all the details in account landing page:::", Status.PASS);
@@ -1103,7 +1103,7 @@ public class AccountsPage extends ReusableLibrary {
 		}
 
 		try {
-			List<WebElement> labelListAccountPage = driver.findElements(By.xpath("//label[@class='slds-form-element__label']"));
+			List<WebElement> labelListAccountPage = driver.findElements(By.xpath("//label[@class='slds-fsorm-element__label']"));
 			int i1 = 0, countLabelList = 0;
 			String[] labelTexts = new String[labelListAccountPage.size()];
 			for (WebElement element : labelListAccountPage) {
@@ -2342,7 +2342,11 @@ public class AccountsPage extends ReusableLibrary {
 	 *
 	 */
 	public void verifyAccountsPopulatingRequiredFields() {
-		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
+		
+		AccountsFunctions accountsFunctions = new AccountsFunctions(scriptHelper);
+		accountsFunctions.createAccountRequiredFields();
+		
+		/*Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
 		Utility_Functions.xClick(driver, menu_Accounts, true);
 		Utility_Functions.timeWait(1);
 		report.updateTestLog("Verify Account Creation With Required Fields ", "Verifying Accounts is Displayed ",
@@ -2352,6 +2356,12 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		report.updateTestLog("Verify Account Creation With Required Fields ",
 				"Verifying New Accounts Page is Displayed  ", Status.PASS);
+		try {
+			Utility_Functions.xWaitForElementPresent(driver, newAccountEMEAnext, 3);
+			Utility_Functions.xClick(driver, newAccountEMEAnext, true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		Utility_Functions.xSwitchtoFrame(driver, accountNameQuickCreate);
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, accountNameQuickCreate, 5);
@@ -2393,7 +2403,7 @@ public class AccountsPage extends ReusableLibrary {
 			System.out.println("The new account is not saved with all the required fields");
 			report.updateTestLog("Verify Account Creation With Required Fields ",
 					"Verifying the new account is saved with all the required fields ", Status.FAIL);
-		}
+		}*/
 	}
 
 	/**
