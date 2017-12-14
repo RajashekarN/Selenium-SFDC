@@ -711,6 +711,67 @@ public class PermissionSetsUsers extends ReusableLibrary {
 						+ ":::is having the permission sets::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
+				
+			case "testuser95@cbre.com.crm.":
+				System.out.println("France Data User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: FR DIG and CBRE - France - Data Admin");
+				permissionSetsLabels.add("Lightning Experience");
+				permissionSetsLabels.add("Country Permissions - France");
+				permissionSetsLabels.add("France - Consulting & Service");
+				permissionSetsLabels.add("France - Investor Relations");
+				permissionSetsLabels.add("France - Transaction Demand Agency");
+				permissionSetsLabels.add("France - Transaction Offer Agency");
+				permissionSetsLabels.add("France Leads");
+
+				break;
+				
+			case "testuser96@cbre.com.crm.":
+
+				System.out.println("France Manager - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: FR - CODIR+ and CBRE Manager - France - Multi Business Line");
+				permissionSetsLabels.add("Country Permissions - France");
+				permissionSetsLabels.add("France - Consulting & Service");
+				permissionSetsLabels.add("France - Investor Relations");
+				permissionSetsLabels.add("France - Transaction Demand Agency");
+				permissionSetsLabels.add("France - Transaction Offer Agency");
+				permissionSetsLabels.add("France Leads");
+				permissionSetsLabels.add("Lightning Experience");
+				break;
+				
+			case "testuser97@cbre.com.crm.":
+
+				System.out.println("France Manager - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: FR DIG and CBRE Manager - France - Multi Business Line");
+
+				permissionSetsLabels.add("Country Permissions - France");
+				permissionSetsLabels.add("France - Consulting & Service");
+				permissionSetsLabels.add("France - Investor Relations");
+				permissionSetsLabels.add("France - Transaction Demand Agency");
+				permissionSetsLabels.add("France - Transaction Offer Agency");
+				permissionSetsLabels.add("France Leads");
+				permissionSetsLabels.add("Reports, Dashboards, & Data Export for Super Users");
+				permissionSetsLabels.add("Lightning Experience");
+				break;
+				
+			case "testuser98@cbre.com.crm.":
+
+				System.out.println("France Manager - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: France and CBRE Manager - France - Multi Business Line");
+				permissionSetsLabels.add("Cases Permission - Functional Analysts");
+				permissionSetsLabels.add("Cases Permission - Regional Support Specialists");
+				permissionSetsLabels.add("Cases Permission - Support Specialists");
+				permissionSetsLabels.add("Chatter Group Create Permission");
+				permissionSetsLabels.add("Composer Administrator");
+				permissionSetsLabels.add("Composer User");
+				permissionSetsLabels.add("Country Permissions - France");
+				permissionSetsLabels.add("France - Consulting & Service");
+				permissionSetsLabels.add("France - Investor Relations");
+				permissionSetsLabels.add("France - Transaction Demand Agency");
+				permissionSetsLabels.add("France - Transaction Offer Agency");
+				permissionSetsLabels.add("France Leads");
+				permissionSetsLabels.add("Language Entry Translation Permissions");
+				permissionSetsLabels.add("Lightning Experience");
+				break;
 
 			default:
 				break;
@@ -1402,6 +1463,42 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				timeZone.add("America/Los_Angeles");
 				System.out.println("DataAdmin EMEA Data User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: APAC and CBRE - APAC - Project Management");
+				break;
+				
+			case "testuser95@cbre.com.crm.":
+
+				roleIDLabels.add("FR DIG");
+				profileIDLabels.add("CBRE - France - DataAdmin");
+				timeZone.add("Europe/Paris");
+				System.out.println("France Data User - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: FR DIG and CBRE - France - Data Admin");
+				break;
+				
+			case "testuser96@cbre.com.crm.":
+
+				roleIDLabels.add("FR - CODIR+");
+				profileIDLabels.add("CBRE Manager - France - Multi Business Line");
+				timeZone.add("Europe/Paris");
+				System.out.println("France Manager - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: FR - CODIR+ and CBRE Manager - France - Multi Business Line");
+				break;
+				
+			case "testuser97@cbre.com.crm.":
+
+				roleIDLabels.add("FR DIG");
+				profileIDLabels.add("CBRE Manager - France - Multi Business Line");
+				timeZone.add("Europe/Paris");
+				System.out.println("France Manager - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: FR DIG and CBRE Manager - France - Multi Business Line");
+				break;
+				
+			case "testuser98@cbre.com.crm.":
+
+				roleIDLabels.add("FRANCE");
+				profileIDLabels.add("CBRE Manager - France - Multi Business Line");
+				timeZone.add("Europe/Paris");
+				System.out.println("France Manager - :::" + userName + environment
+						+ ":::is having the Role and Profle as::: France and CBRE Manager - France - Multi Business Line");
 				break;
 
 			default:

@@ -11,10 +11,11 @@ import pagesAPI.ActivityFunctions;
 import pagesAPI.ContactsFunctions;
 import pagesAPI.CreateUsers;
 import pagesAPI.EstablishConnection;
-import pagesAPI.LeadFunctions;
+import pagesAPI.LeadsFunctions;
 import pagesAPI.OpportunitiesFunctions;
 import pagesAPI.PermissionSetsUsers;
 import pagesAPI.SearchTextSOQL;
+import pagesAPI.TaskEventsFunctions;
 
 /**
  * Business Components Class for validating the API calls 
@@ -39,12 +40,13 @@ public class BC_API_Test extends ReusableLibrary {
 	AccountsFunctions sfAccountsFunctions = new AccountsFunctions(scriptHelper);
 	ContactsFunctions sfContactsFunctions = new ContactsFunctions(scriptHelper);
 	OpportunitiesFunctions sfOpportunitiesFunctions = new OpportunitiesFunctions(scriptHelper);
-	LeadFunctions sfLeadsFunctions = new LeadFunctions(scriptHelper);
+	LeadsFunctions sfLeadsFunctions = new LeadsFunctions(scriptHelper);
 	SearchTextSOQL sfSearchText = new SearchTextSOQL(scriptHelper);	
 	CreateUsers createUsers = new CreateUsers(scriptHelper);
 	LoginPage loginPage = new LoginPage(scriptHelper);
 	ActivityFunctions activityFunctions = new ActivityFunctions(scriptHelper);
 	PermissionSetsUsers permissionSetsUsers = new PermissionSetsUsers(scriptHelper);
+	TaskEventsFunctions taskEventsFunctions = new TaskEventsFunctions(scriptHelper);
 	
 	/**
 	 * Validating the Login functionality
@@ -449,5 +451,15 @@ public class BC_API_Test extends ReusableLibrary {
 	
 	public void bc_updateRoleProfile() {
 		permissionSetsUsers.updateRoleProfile();
+	}
+	
+	/**
+	 *Creating task on Account/ Contact/ Lead and Opportunity
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	public void bc_createTask() {
+		taskEventsFunctions.createTask();
 	}
 }

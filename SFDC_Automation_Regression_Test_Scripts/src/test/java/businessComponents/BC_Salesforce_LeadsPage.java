@@ -4,6 +4,7 @@ import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 
 import pageObjects.LeadsPage;
+import pagesAPI.LeadsFunctions;
 
 /**
  * Business Components Class for validating functionalities related to Leads Page
@@ -26,6 +27,7 @@ public class BC_Salesforce_LeadsPage extends ReusableLibrary {
 
 	BC_Salesforce_Login sfBC_Login = new BC_Salesforce_Login(scriptHelper);
 	LeadsPage sfLeadsPage = new LeadsPage(scriptHelper);
+	LeadsFunctions leadsFunctions = new LeadsFunctions(scriptHelper);
 
 	/**
 	 * Validating the Login functionality 
@@ -332,6 +334,17 @@ public class BC_Salesforce_LeadsPage extends ReusableLibrary {
 
 	public void bc_verifyLeadsPrivateTags() {
 		sfLeadsPage.verifyLeadsPrivateTags();
+	}
+	
+	/**
+	 * Lead Creation and Validation of fields
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void bc_leadCreationValidationFields() throws InterruptedException {
+		leadsFunctions.createLeadSpecificUser();
+		leadsFunctions.leadPageFieldsValidation();
 	}
 }
 

@@ -4,6 +4,7 @@ import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 
 import pageObjects.OpportunitiesPage;
+import pagesAPI.OpportunitiesFunctions;
 
 /**
  * Business Components Class for validating functionalities related to
@@ -27,7 +28,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 
 	BC_Salesforce_Login sfBC_Login = new BC_Salesforce_Login(scriptHelper);
 	OpportunitiesPage sfOpportunitiesPage = new OpportunitiesPage(scriptHelper);
-
+	OpportunitiesFunctions opportunitiesFunctions = new OpportunitiesFunctions(scriptHelper);
 	/**
 	 * Validating the Login functionality
 	 * 
@@ -1285,5 +1286,14 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 */
 	public void bc_validateRecalculateAndNewInstallment() {
 		sfOpportunitiesPage.validateRecalculateAndNewInstallment();
+	}
+	/**
+	 * Validating the Opportunities creation
+	 * 
+	 * @author  Ramya
+	 *
+	 */
+	public void bc_validateOpportunity() {
+		opportunitiesFunctions.createOpportunitySpecficUser();
 	}
 }

@@ -4,6 +4,9 @@ import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 
 import pageObjects.AccountsPage;
+import pagesAPI.AccountsFunctions;
+import pagesAPI.Tagging;
+import pagesAPI.TaskEventsFunctions;
 
 /**
  * Business Components Class for validating functionalities related to Accounts
@@ -27,7 +30,9 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 
 	BC_Salesforce_Login sfBC_Login = new BC_Salesforce_Login(scriptHelper);
 	AccountsPage sfAccountsPage = new AccountsPage(scriptHelper);
-
+	AccountsFunctions accountsFunctions = new AccountsFunctions(scriptHelper);
+	TaskEventsFunctions taskEventsFunctions = new TaskEventsFunctions(scriptHelper);
+	Tagging tagging = new Tagging(scriptHelper);
 	/**
 	 * Validating the Login functionality
 	 * 
@@ -415,6 +420,27 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 	 */
 	public void bc_verifyBudgetsTargetsEditing() throws InterruptedException {
 		sfAccountsPage.verifyBudgetsTargetsEditing();
+	}
+	
+	/**
+	 * Account Creation and Validation of fields
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void bc_accountCreationValidationFields() throws InterruptedException {
+		accountsFunctions.createAccountSpecificUser();
+		accountsFunctions.accountPageFieldsValidation();
+	}
+	
+	/**
+	 * Account Tagging with Private Tag
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void bc_accountTagging() throws InterruptedException {
+		tagging.createPrivateTag();
 	}
 	
 }

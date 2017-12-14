@@ -1,5 +1,6 @@
 package com.cognizant.framework.selenium;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
@@ -45,14 +46,17 @@ public class WebDriverFactory {
 		properties = Settings.getInstance();
 		boolean proxyRequired =
 				Boolean.parseBoolean(properties.getProperty("ProxyRequired"));
-		
+		File file = new File("src/test/resources");
+		File path = new File(file, "chromedriver.exe");
+		String chromeDriverPath = path.getAbsolutePath().toString();
 		switch(browser) {
 		case CHROME:
 			// Takes the system proxy settings automatically
 			
-			System.setProperty("webdriver.chrome.driver",
-									properties.getProperty("ChromeDriverPath"));
+			/*System.setProperty("webdriver.chrome.driver",
+									properties.getProperty("ChromeDriverPath"));*/
 			
+			System.setProperty("webdriver.chrome.driver", chromeDriverPath);
 			//ChromeDriverManager.getInstance().setup();
 			driver = new ChromeDriver();
 			break;

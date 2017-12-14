@@ -430,6 +430,7 @@ public class AccountsFunctions extends ReusableLibrary {
 	}
 	*/
 	
+	
 	static ArrayList<String> OBEMEAHeader = new ArrayList<String>();
 	
 	public void OBEMEAHeadings() {
@@ -982,7 +983,14 @@ static ArrayList<String> ABAMERField = new ArrayList<String>();
 								for (int n = 0; n < dliList.length; n++) {
 									DescribeLayoutItem li = dliList[n];
 									if ((li.getLayoutComponents() != null) && (li.getLayoutComponents().length > 0)) {
-										OBEMEAFieldLabelsAPI.add(li.getLayoutComponents()[0].getValue());
+										try {
+											String value = li.getLayoutComponents()[0].getValue();
+											if(value!=null) {
+												OBEMEAFieldLabelsAPI.add(value);
+											}
+										} catch (Exception e) {
+											e.printStackTrace();
+										}
 									}
 								}
 							}
@@ -1009,7 +1017,14 @@ static ArrayList<String> ABAMERField = new ArrayList<String>();
 								for (int n = 0; n < dliList.length; n++) {
 									DescribeLayoutItem li = dliList[n];
 									if ((li.getLayoutComponents() != null) && (li.getLayoutComponents().length > 0)) {
-										CMAPACFieldLabelsAPI.add(li.getLayoutComponents()[0].getValue());
+										try {
+											String value = li.getLayoutComponents()[0].getValue();
+											if(value!=null) {
+												CMAPACFieldLabelsAPI.add(value);
+											}
+										} catch (Exception e) {
+											e.printStackTrace();
+										}
 									}
 								}
 							}
@@ -1235,6 +1250,43 @@ static ArrayList<String> ABAMERField = new ArrayList<String>();
 		}
 	}
 	
+	
+	/**
+	 * Function for the Account Creation
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	
+	public void createAccountSpecificUser() {
+			establishConnection.establishConnectionSpecificUser();
+			SObject account = new SObject();
+
+			account.setType("Account");
+			String accountName = Utility_Functions.xRandomFunction() + "-" + dataTable.getData("General_Data", "Name");
+			account.setField("Name", accountName);
+			account.setField("BillingCountry", dataTable.getData("General_Data", "Country"));
+			account.setField("BillingStreet", dataTable.getData("General_Data", "Street"));
+			account.setField("BillingCity", dataTable.getData("General_Data", "City"));
+			account.setField("BillingState", dataTable.getData("General_Data", "State"));
+			account.setField("BillingPostalCode ", dataTable.getData("General_Data", "Zipcode"));
+			account.setField("APAC_Industry_Type__c", "Advertising, Marketing & PR");
+			account.setField("APAC_Sub_Industry__c", "Advertising and Marketing");
+			SObject[] accounts = new SObject[1];
+			accounts[0] = account;
+			try {
+				results = EstablishConnection.connection.create(accounts);
+			} catch (ConnectionException e) {
+				e.printStackTrace();
+			}
+			System.out.println("Result:::" + results);
+			status = establishConnection.saveResults(results);
+			if(status==true) {
+				report.updateTestLog("Verify Create Account", "Account has been created successfully", Status.PASS);
+			} else {
+				report.updateTestLog("Verify Create Account", "Account creation failed", Status.FAIL);
+			}
+	}
 	/*public void accountPageFieldsValidation() {
 		try {
 			establishConnection.establishConnectionSpecificUser();

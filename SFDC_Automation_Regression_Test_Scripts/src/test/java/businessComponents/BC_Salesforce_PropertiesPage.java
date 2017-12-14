@@ -4,6 +4,7 @@ import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 
 import pageObjects.PropertiesPage;
+import pagesAPI.PropertiesFunctions;
 
 /**
  * Business Components Class for validating functionalities related to Properties Page
@@ -26,6 +27,7 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 
 	BC_Salesforce_Login sfBC_Login = new BC_Salesforce_Login(scriptHelper);
 	PropertiesPage sfPropertiesPage = new PropertiesPage(scriptHelper);
+	PropertiesFunctions propertiesFunctions = new PropertiesFunctions(scriptHelper);
 
 	/**
 	 * Validating the Login functionality 
@@ -273,6 +275,26 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	 */
 	public void bc_verifyPreferencesPropertiesCreation() throws InterruptedException {
 		sfPropertiesPage.verifyPreferencesPropertiesCreation();
+	}
+	
+	/**
+	 * Validating the Property Creation
+	 * 
+	 * @author Vishnu
+	 *
+	 */
+	public void bc_validatePropertyCreation() throws InterruptedException {
+		propertiesFunctions.createPropertySpecificUser();
+	}
+	
+	/**
+	 * Validating the Property Edit
+	 * 
+	 * @author Vishnu
+	 *
+	 */
+	public void bc_validatePropertyEdit() throws InterruptedException {
+		propertiesFunctions.updatePropertySpecificUser();
 	}
 	
 }
