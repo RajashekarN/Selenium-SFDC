@@ -42,9 +42,9 @@ public class AccountsFunctions extends ReusableLibrary {
 	static DeleteResult[] deleteResults;
 	static com.sforce.soap.partner.Error[] errors;
 	static boolean status = false;
-	
+
 	EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
-	
+
 	/**
 	 * Function for the creation of an Account
 	 * 
@@ -53,8 +53,8 @@ public class AccountsFunctions extends ReusableLibrary {
 	 */
 	public SaveResult[] createAccount() {
 		try {
-			
-/*			ActivityFunctions activityFunctions = new ActivityFunctions(scriptHelper);
+
+			/*			ActivityFunctions activityFunctions = new ActivityFunctions(scriptHelper);
 			activityFunctions.createActivity();
 			CreateUsers createuser = new CreateUsers(scriptHelper);
 			createuser.setPasswordUsersList();
@@ -64,9 +64,9 @@ public class AccountsFunctions extends ReusableLibrary {
 			createuser.createUsers();
 			//createuser.resetPassword("0050m000000N8r5AAC");
 			//createuser.setPassword("0050m000000N8r5AAC", "Password8910");
-*/			
-		/*	readMultipleRowsContacts("Luis Cole%");*/
-			
+			 */			
+			/*	readMultipleRowsContacts("Luis Cole%");*/
+
 			establishConnection.establishConnection();
 			SObject account = new SObject();
 
@@ -161,9 +161,9 @@ public class AccountsFunctions extends ReusableLibrary {
 	 * @author Vishnuvardhan
 	 *
 	 */
-	
+
 	public void readMultipleRowsAccounts(String name) {
-	
+
 		try {
 			establishConnection.establishConnection();
 			String soslQuery = "FIND {" + name + "} IN Name FIELDS RETURNING Account(Id, Name)";	
@@ -192,18 +192,18 @@ public class AccountsFunctions extends ReusableLibrary {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	/**
 	 * Function for reading multiple rows from SOQL search
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */
-	
+
 	public void readMultipleRowsContacts(String name) {
-	
+
 		try {
 			establishConnection.establishConnection();
 			String soslQuery = "FIND {" + name + "} IN Name FIELDS RETURNING Contact(Id, Name)";	
@@ -232,7 +232,7 @@ public class AccountsFunctions extends ReusableLibrary {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 	public boolean updateMultipleAccounts(List<SObject> accounts) {
 		try {
@@ -261,7 +261,7 @@ public class AccountsFunctions extends ReusableLibrary {
 		}
 		return status;
 	}
-	
+
 	public boolean updateMultipleContacts(List<SObject> contacts) {
 		try {
 			establishConnection.establishConnection();
@@ -289,7 +289,7 @@ public class AccountsFunctions extends ReusableLibrary {
 		}
 		return status;
 	}
-	
+
 	/**
 	 * Function for the searching the Phone Number
 	 * 
@@ -328,7 +328,7 @@ public class AccountsFunctions extends ReusableLibrary {
 						report.updateTestLog("Verify Search Phone Number",
 								contact.getId() + " - " + contact.getField("FirstName") + " "
 										+ contact.getField("LastName") + " - " + contact.getField("Phone"),
-								Status.PASS);
+										Status.PASS);
 					}
 				}
 				// Display the leads that the search returned
@@ -339,7 +339,7 @@ public class AccountsFunctions extends ReusableLibrary {
 								+ lead.getField("LastName") + " - " + lead.getField("Phone"));
 						report.updateTestLog("Verify Search Phone Number",
 								lead.getId() + " - " + lead.getField("FirstName") + " " + lead.getField("LastName")
-										+ " - " + lead.getField("Phone"),
+								+ " - " + lead.getField("Phone"),
 								Status.PASS);
 					}
 				}
@@ -367,7 +367,7 @@ public class AccountsFunctions extends ReusableLibrary {
 	}
 
 	/*
-	*//**
+	 *//**
 	 * Function for the saving the results
 	 * 
 	 * @author Vishnuvardhan
@@ -401,12 +401,12 @@ public class AccountsFunctions extends ReusableLibrary {
 		return status;
 	}
 
-	*//**
-	 * Function for saving the delete results
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 *//*
+	  *//**
+	  * Function for saving the delete results
+	  * 
+	  * @author Vishnuvardhan
+	  *
+	  *//*
 
 	public boolean deleteResults() {
 		System.out.println("Results:::" + deleteResults);
@@ -428,11 +428,11 @@ public class AccountsFunctions extends ReusableLibrary {
 		}
 		return status;
 	}
-	*/
-	
-	
+	   */
+
+
 	static ArrayList<String> OBEMEAHeader = new ArrayList<String>();
-	
+
 	public void OBEMEAHeadings() {
 		OBEMEAHeader.add("Account Information");
 		OBEMEAHeader.add("Address Information");
@@ -441,9 +441,9 @@ public class AccountsFunctions extends ReusableLibrary {
 		OBEMEAHeader.add("System Information");
 		System.out.println("OBEMEA Headers List are::" + OBEMEAHeader);
 	}
-	
+
 	static ArrayList<String> CMAPACHeader = new ArrayList<String>();
-	
+
 	public void CMAPACHeaders() {
 		CMAPACHeader.add("Account Details");
 		CMAPACHeader.add("Address Information");
@@ -452,9 +452,9 @@ public class AccountsFunctions extends ReusableLibrary {
 		CMAPACHeader.add("System Information");
 		System.out.println("CMAPAC Headers List are::" + CMAPACHeader);
 	}
-	
+
 	static ArrayList<String> CMAMERHeader = new ArrayList<String>();
-	
+
 	public void CMAMERHeaders() {
 		CMAMERHeader.add("Account Information");
 		CMAMERHeader.add("Account Segmentation");
@@ -466,9 +466,9 @@ public class AccountsFunctions extends ReusableLibrary {
 		CMAMERHeader.add("System Information");
 		System.out.println("CMAMER Headers List are::" + CMAMERHeader);
 	}
-	
+
 	static ArrayList<String> ABEMEAHeader = new ArrayList<String>();
-	
+
 	public void ABEMEAHeaders() {
 		ABEMEAHeader.add("Account Information");
 		ABEMEAHeader.add("Address Information");
@@ -477,9 +477,9 @@ public class AccountsFunctions extends ReusableLibrary {
 		ABEMEAHeader.add("System Information");
 		System.out.println("ABEMEA Headers List are::" + ABEMEAHeader);
 	}
-	
+
 	static ArrayList<String> ABAMERHeader = new ArrayList<String>();
-	
+
 	public void ABAMERHeaders() {
 		ABAMERHeader.add("Account Information");
 		ABAMERHeader.add("Account Segmentation");
@@ -493,7 +493,7 @@ public class AccountsFunctions extends ReusableLibrary {
 	}
 
 	static ArrayList<String> AdminHeader = new ArrayList<String>();
-	
+
 	public void AdminHeaders() {
 		AdminHeader.add("Tagging");
 		AdminHeader.add("Account Information");
@@ -510,9 +510,9 @@ public class AccountsFunctions extends ReusableLibrary {
 		AdminHeader.add("System Information");
 		System.out.println("ABEMEA Headers List are::" + ABAMERHeader);
 	}
-	
+
 	static ArrayList<String> OBEMEAField = new ArrayList<String>();
-	
+
 	public void OBEMEAFields() {
 		OBEMEAField.add("Name");
 		OBEMEAField.add("Phone");
@@ -537,9 +537,9 @@ public class AccountsFunctions extends ReusableLibrary {
 		OBEMEAField.add("Last_Manually_Modified_By__c");
 		System.out.println("Occupier Brokerage EMEA Fields List are::" + OBEMEAField);		
 	}
-	
+
 	static ArrayList<String> CMAPACField = new ArrayList<String>();
-	
+
 	public void CMAPACFields() {
 		CMAPACField.add("Name");
 		CMAPACField.add("Local_Account_Name__c");
@@ -570,9 +570,9 @@ public class AccountsFunctions extends ReusableLibrary {
 		CMAPACField.add("Global_Ultimate__c");
 		System.out.println("Capital Markets APAC Fields List are::" + CMAPACField);
 	}
-	
+
 	static ArrayList<String> ABEMEAField = new ArrayList<String>();
-	
+
 	public void ABEMEAFields() {
 		ABEMEAField.add("Name");
 		ABEMEAField.add("Phone");
@@ -597,9 +597,9 @@ public class AccountsFunctions extends ReusableLibrary {
 		ABEMEAField.add("Last_Manually_Modified_By__c");
 		System.out.println("Occupier Brokerage EMEA Fields List are::" + ABEMEAField);		
 	}
-	
-static ArrayList<String> ABAMERField = new ArrayList<String>();
-	
+
+	static ArrayList<String> ABAMERField = new ArrayList<String>();
+
 	public void ABAMERFields() {
 		ABAMERField.add("Name");
 		ABAMERField.add("Original_Account_Name__c");
@@ -666,10 +666,10 @@ static ArrayList<String> ABAMERField = new ArrayList<String>();
 		ABAMERField.add("RecordTypeId");
 		ABAMERField.add("Last_Manually_Modified_Date__c");		
 		ABAMERField.add("Last_Manually_Modified_By__c");
-		
+
 		System.out.println("Agency Brokerage EMEA Fields List are::" + ABAMERField);		
 	}
-	
+
 	static ArrayList<String> AdminField = new ArrayList<String>();
 
 	public void AdminFields() {
@@ -808,9 +808,9 @@ static ArrayList<String> ABAMERField = new ArrayList<String>();
 		AdminField.add("Hierarchy_Code__c");
 		System.out.println("Admin Fields are::" + AdminField);		
 	}
-	
+
 	static ArrayList<String> CMAMERField = new ArrayList<String>();
-	
+
 	public void CMAMERFields() {
 		CMAMERField.add("Name");
 		CMAMERField.add("Original_Account_Name__c");
@@ -880,7 +880,7 @@ static ArrayList<String> ABAMERField = new ArrayList<String>();
 
 		System.out.println("Capital Markets AMER Fields are::" + CMAMERField);	
 	}
-	
+
 	/**
 	 * Function for the validating the field on the Accounts Page
 	 * 
@@ -895,397 +895,397 @@ static ArrayList<String> ABAMERField = new ArrayList<String>();
 	static ArrayList<String> CMAMERFieldLabelsAPI = new ArrayList<String>();
 
 	public void accountPageFieldsValidation() {
+		establishConnection.establishConnectionSpecificUser();
+		OBEMEAHeadings();
+		CMAPACHeaders();
+		ABEMEAHeaders();
+		ABAMERHeaders();
+		AdminHeaders();
+		CMAMERHeaders();
+		OBEMEAFields();
+		CMAPACFields();
+		ABEMEAFields();
+		ABAMERFields();
+		AdminFields();
+		CMAMERFields();
+		DescribeLayoutResult dlr = null;
 		try {
-			establishConnection.establishConnectionSpecificUser();
-			OBEMEAHeadings();
-			CMAPACHeaders();
-			ABEMEAHeaders();
-			ABAMERHeaders();
-			AdminHeaders();
-			CMAMERHeaders();
-			OBEMEAFields();
-			CMAPACFields();
-			ABEMEAFields();
-			ABAMERFields();
-			AdminFields();
-			CMAMERFields();
-			DescribeLayoutResult dlr = EstablishConnection.connection.describeLayout("Account", null, null);
-			int count=0, countLabelList = 0;
-			for (int i = 0; i < dlr.getLayouts().length; i++) {
-				DescribeLayout layout = dlr.getLayouts()[i];
-				DescribeLayoutSection[] editLayoutSectionList = layout.getEditLayoutSections();
-				// Write the headings of the edit layout sections
-				for (int x = 0; x < editLayoutSectionList.length; x++) {
-					if(dataTable.getData("General_Data", "TC_ID").contains("OBEMEA")) {
-						if(editLayoutSectionList.length==5) {
-							if(editLayoutSectionList[x].getHeading().equals(OBEMEAHeader.get(x))) {
-									System.out.println(x + ":::Occupier Brokerage EMEA has the heading layout section:::" + editLayoutSectionList[x].getHeading());
-									report.updateTestLog(x + ":::Occupier Brokerage EMEA", " has the heading layout section:::" + editLayoutSectionList[x].getHeading(), Status.PASS);
-									count++;
-								}
-						}				
-					}
-					if(dataTable.getData("General_Data", "TC_ID").contains("CMAPAC")) {
-						if(editLayoutSectionList.length==5) {
-							if(editLayoutSectionList[x].getHeading().equals(CMAPACHeader.get(x))) {
-									System.out.println(x + ":::Captial Markets APAC has the heading layout section:::" + editLayoutSectionList[x].getHeading());
-									report.updateTestLog(x + ":::Captial Markets APAC", " has the heading layout section:::" + editLayoutSectionList[x].getHeading(), Status.PASS);
-									count++;
-								}
-						}
-					}
-					if(dataTable.getData("General_Data", "TC_ID").contains("ABEMEA")) {
-						if(editLayoutSectionList.length==5) {
-							if(editLayoutSectionList[x].getHeading().equals(ABEMEAHeader.get(x))) {
-									System.out.println(x + ":::Agency Brokerage EMEA has the heading layout section:::" + editLayoutSectionList[x].getHeading());
-									report.updateTestLog(x + ":::Agency Brokerage EMEA", " has the heading layout section:::" + editLayoutSectionList[x].getHeading(), Status.PASS);
-									count++;
-								}
-						}				
-					}
-					if(dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) {
-						if(editLayoutSectionList.length==8) {
-							if(editLayoutSectionList[x].getHeading().equals(ABAMERHeader.get(x))) {
-									System.out.println(x + ":::Agency Brokerage AMER has the heading layout section:::" + editLayoutSectionList[x].getHeading());
-									report.updateTestLog(x + ":::Agency Brokerage AMER", " has the heading layout section:::" + editLayoutSectionList[x].getHeading(), Status.PASS);
-									count++;
-								}
-						}				
-					}
-					if(dataTable.getData("General_Data", "TC_ID").contains("Admin")) {
-						if(editLayoutSectionList.length==13) {
-							if(editLayoutSectionList[x].getHeading().equals(AdminHeader.get(x))) {
-									System.out.println(x + ":::Admin has the heading layout section:::" + editLayoutSectionList[x].getHeading());
-									report.updateTestLog(x + ":::Admin", " has the heading layout section:::" + editLayoutSectionList[x].getHeading(), Status.PASS);
-									count++;
-								}
-						}				
-					}
-					if(dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) {
-						if(editLayoutSectionList.length==8) {
-							if(editLayoutSectionList[x].getHeading().equals(CMAMERHeader.get(x))) {
-									System.out.println(x + ":::Capital Markets AMER has the heading layout section:::" + editLayoutSectionList[x].getHeading());
-									report.updateTestLog(x + ":::Capital Markets AMER", " has the heading layout section:::" + editLayoutSectionList[x].getHeading(), Status.PASS);
-									count++;
-								}
-						}				
-					}
-				}		
-				System.out.println(count);
+			dlr = EstablishConnection.connection.describeLayout("Account", null, null);
+		} catch (ConnectionException e1) {
+			e1.printStackTrace();
+		}
+		int count=0, countLabelList = 0;
+		for (int i = 0; i < dlr.getLayouts().length; i++) {
+			DescribeLayout layout = dlr.getLayouts()[i];
+			DescribeLayoutSection[] editLayoutSectionList = layout.getEditLayoutSections();
+			// Write the headings of the edit layout sections
+			for (int x = 0; x < editLayoutSectionList.length; x++) {
 				if(dataTable.getData("General_Data", "TC_ID").contains("OBEMEA")) {
 					if(editLayoutSectionList.length==5) {
-						for (int k = 0; k < editLayoutSectionList.length; k++) {
-							DescribeLayoutSection els = editLayoutSectionList[k];
-							DescribeLayoutRow[] dlrList = els.getLayoutRows();
-							for (int m = 0; m < dlrList.length; m++) {
-								DescribeLayoutRow lr = dlrList[m];
-								DescribeLayoutItem[] dliList = lr.getLayoutItems();
-								for (int n = 0; n < dliList.length; n++) {
-									DescribeLayoutItem li = dliList[n];
-									if ((li.getLayoutComponents() != null) && (li.getLayoutComponents().length > 0)) {
-										try {
-											String value = li.getLayoutComponents()[0].getValue();
-											if(value!=null) {
-												OBEMEAFieldLabelsAPI.add(value);
-											}
-										} catch (Exception e) {
-											e.printStackTrace();
-										}
-									}
-								}
-							}
-						}	
-						System.out.println("OBEMEA Field Label::: " + OBEMEAFieldLabelsAPI);
-						for(int i1=0; i1 < OBEMEAField.size(); i1++) {
-							if(OBEMEAFieldLabelsAPI.get(i1).equals(OBEMEAField.get(i1))) {						
-								System.out.println("Field Label:::" + OBEMEAFieldLabelsAPI.get(i1) + " -- is present in OB EMEA:::");
-								report.updateTestLog("Verify Field Labels", " has the field label:::" + OBEMEAFieldLabelsAPI.get(i1), Status.PASS);
-								countLabelList++;
-							}			 
+						if(editLayoutSectionList[x].getHeading().equals(OBEMEAHeader.get(x))) {
+							System.out.println(x + ":::Occupier Brokerage EMEA has the heading layout section:::" + editLayoutSectionList[x].getHeading());
+							report.updateTestLog(x + ":::Occupier Brokerage EMEA", " has the heading layout section:::" + editLayoutSectionList[x].getHeading(), Status.PASS);
+							count++;
 						}
-						System.out.println("Count of fields present in Occupier Brokerage EMEA::" + countLabelList);						
-					}
-				}	
+					}				
+				}
 				if(dataTable.getData("General_Data", "TC_ID").contains("CMAPAC")) {
 					if(editLayoutSectionList.length==5) {
-						for (int k = 0; k < editLayoutSectionList.length; k++) {
-							DescribeLayoutSection els = editLayoutSectionList[k];
-							DescribeLayoutRow[] dlrList = els.getLayoutRows();
-							for (int m = 0; m < dlrList.length; m++) {
-								DescribeLayoutRow lr = dlrList[m];
-								DescribeLayoutItem[] dliList = lr.getLayoutItems();
-								for (int n = 0; n < dliList.length; n++) {
-									DescribeLayoutItem li = dliList[n];
-									if ((li.getLayoutComponents() != null) && (li.getLayoutComponents().length > 0)) {
-										try {
-											String value = li.getLayoutComponents()[0].getValue();
-											if(value!=null) {
-												CMAPACFieldLabelsAPI.add(value);
-											}
-										} catch (Exception e) {
-											e.printStackTrace();
-										}
-									}
-								}
-							}
-						}	
-						System.out.println("CMAPAC Field Label::: " + CMAPACFieldLabelsAPI);
-						for(int i1=0; i1 < CMAPACField.size(); i1++) {
-							if(CMAPACFieldLabelsAPI.get(i1).equals(CMAPACField.get(i1))) {						
-								System.out.println("Field Label:::" + CMAPACFieldLabelsAPI.get(i1) + " -- is present in CM APAC:::");
-								report.updateTestLog("Verify Field Labels", " has the field label:::" + CMAPACFieldLabelsAPI.get(i1), Status.PASS);
-								countLabelList++;
-							}			 
+						if(editLayoutSectionList[x].getHeading().equals(CMAPACHeader.get(x))) {
+							System.out.println(x + ":::Captial Markets APAC has the heading layout section:::" + editLayoutSectionList[x].getHeading());
+							report.updateTestLog(x + ":::Captial Markets APAC", " has the heading layout section:::" + editLayoutSectionList[x].getHeading(), Status.PASS);
+							count++;
 						}
-						System.out.println("Count of fields present in Capital Brokerage EMEA::" + countLabelList);
 					}
-				}	
+				}
 				if(dataTable.getData("General_Data", "TC_ID").contains("ABEMEA")) {
 					if(editLayoutSectionList.length==5) {
-						for (int k = 0; k < editLayoutSectionList.length; k++) {
-							DescribeLayoutSection els = editLayoutSectionList[k];
-							DescribeLayoutRow[] dlrList = els.getLayoutRows();
-							for (int m = 0; m < dlrList.length; m++) {
-								DescribeLayoutRow lr = dlrList[m];
-								DescribeLayoutItem[] dliList = lr.getLayoutItems();
-								for (int n = 0; n < dliList.length; n++) {
-									DescribeLayoutItem li = dliList[n];
-									if ((li.getLayoutComponents() != null) && (li.getLayoutComponents().length > 0)) {
-										ABEMEAFieldLabelsAPI.add(li.getLayoutComponents()[0].getValue());
-									}
-								}
-							}
-						}	
-						System.out.println("ABEMEA Field Label::: " + ABEMEAFieldLabelsAPI);
-						for(int i1=0; i1 < ABEMEAField.size(); i1++) {
-							if(ABEMEAFieldLabelsAPI.get(i1).equals(ABEMEAField.get(i1))) {						
-								System.out.println("Field Label:::" + ABEMEAFieldLabelsAPI.get(i1) + " -- is present in CM APAC:::");
-								report.updateTestLog("Verify Field Labels", " has the field label:::" + ABEMEAFieldLabelsAPI.get(i1), Status.PASS);
-								countLabelList++;
-							}			 
+						if(editLayoutSectionList[x].getHeading().equals(ABEMEAHeader.get(x))) {
+							System.out.println(x + ":::Agency Brokerage EMEA has the heading layout section:::" + editLayoutSectionList[x].getHeading());
+							report.updateTestLog(x + ":::Agency Brokerage EMEA", " has the heading layout section:::" + editLayoutSectionList[x].getHeading(), Status.PASS);
+							count++;
 						}
-						System.out.println("Count of fields present in Agency Brokerage EMEA::" + countLabelList);
-					}
-				}	
+					}				
+				}
 				if(dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) {
 					if(editLayoutSectionList.length==8) {
-						for (int k = 0; k < editLayoutSectionList.length; k++) {
-							DescribeLayoutSection els = editLayoutSectionList[k];
-							DescribeLayoutRow[] dlrList = els.getLayoutRows();
-							for (int m = 0; m < dlrList.length; m++) {
-								DescribeLayoutRow lr = dlrList[m];
-								DescribeLayoutItem[] dliList = lr.getLayoutItems();
-								for (int n = 0; n < dliList.length; n++) {
-									DescribeLayoutItem li = dliList[n];
-									if ((li.getLayoutComponents() != null) && (li.getLayoutComponents().length > 0)) {
-										try {
-											String value = li.getLayoutComponents()[0].getValue();
-											if(value!=null) {
-												ABAMERFieldLabelsAPI.add(value);
-											}
-										} catch (Exception e) {
-											e.printStackTrace();
-										}
-									}
-								}
-							}
-						}	
-						System.out.println("ABAMER Field Label::: " + ABAMERFieldLabelsAPI);
-						for(int i1=0; i1 < ABAMERField.size(); i1++) {
-							if(ABAMERFieldLabelsAPI.get(i1).equals(ABAMERField.get(i1))) {						
-								System.out.println("Field Label:::" + ABAMERFieldLabelsAPI.get(i1) + " -- is present in AB AMER:::");
-								report.updateTestLog("Verify Field Labels", " has the field label:::" + ABAMERFieldLabelsAPI.get(i1), Status.PASS);
-								countLabelList++;
-							}			 
+						if(editLayoutSectionList[x].getHeading().equals(ABAMERHeader.get(x))) {
+							System.out.println(x + ":::Agency Brokerage AMER has the heading layout section:::" + editLayoutSectionList[x].getHeading());
+							report.updateTestLog(x + ":::Agency Brokerage AMER", " has the heading layout section:::" + editLayoutSectionList[x].getHeading(), Status.PASS);
+							count++;
 						}
-						System.out.println("Count of fields present in Agency Brokerage AMER::" + countLabelList);
-					}
-				}	
+					}				
+				}
 				if(dataTable.getData("General_Data", "TC_ID").contains("Admin")) {
 					if(editLayoutSectionList.length==13) {
-						for (int k = 0; k < editLayoutSectionList.length; k++) {
-							DescribeLayoutSection els = editLayoutSectionList[k];
-							DescribeLayoutRow[] dlrList = els.getLayoutRows();
-							for (int m = 0; m < dlrList.length; m++) {
-								DescribeLayoutRow lr = dlrList[m];
-								DescribeLayoutItem[] dliList = lr.getLayoutItems();
-								for (int n = 0; n < dliList.length; n++) {
-									DescribeLayoutItem li = dliList[n];
-									if ((li.getLayoutComponents() != null) && (li.getLayoutComponents().length > 0)) {
-										try {
-											String value = li.getLayoutComponents()[0].getValue();
-											if(value!=null) {
-												AdminFieldLabelsAPI.add(value);
-											}
-										} catch (Exception e) {
-											e.printStackTrace();
-										}
-									}
-								}
-							}
-						}	
-						System.out.println("Admin Field Label::: " + AdminFieldLabelsAPI);
-						for(int i1=0; i1 < AdminField.size(); i1++) {
-							if(AdminFieldLabelsAPI.get(i1).equals(AdminField.get(i1))) {						
-								System.out.println("Field Label:::" + AdminFieldLabelsAPI.get(i1) + " -- is present in AB AMER:::");
-								report.updateTestLog("Verify Field Labels", " has the field label:::" + AdminFieldLabelsAPI.get(i1), Status.PASS);
-								countLabelList++;
-							}			 
+						if(editLayoutSectionList[x].getHeading().equals(AdminHeader.get(x))) {
+							System.out.println(x + ":::Admin has the heading layout section:::" + editLayoutSectionList[x].getHeading());
+							report.updateTestLog(x + ":::Admin", " has the heading layout section:::" + editLayoutSectionList[x].getHeading(), Status.PASS);
+							count++;
 						}
-						System.out.println("Count of fields present in Admin::" + countLabelList);
-					}
+					}				
 				}
 				if(dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) {
 					if(editLayoutSectionList.length==8) {
-						for (int k = 0; k < editLayoutSectionList.length; k++) {
-							DescribeLayoutSection els = editLayoutSectionList[k];
-							DescribeLayoutRow[] dlrList = els.getLayoutRows();
-							for (int m = 0; m < dlrList.length; m++) {
-								DescribeLayoutRow lr = dlrList[m];
-								DescribeLayoutItem[] dliList = lr.getLayoutItems();
-								for (int n = 0; n < dliList.length; n++) {
-									DescribeLayoutItem li = dliList[n];
-									if ((li.getLayoutComponents() != null) && (li.getLayoutComponents().length > 0)) {
-										try {
-											String value = li.getLayoutComponents()[0].getValue();
-											if(value!=null) {
-												CMAMERFieldLabelsAPI.add(value);
-											}
-										} catch (Exception e) {
-											e.printStackTrace();
+						if(editLayoutSectionList[x].getHeading().equals(CMAMERHeader.get(x))) {
+							System.out.println(x + ":::Capital Markets AMER has the heading layout section:::" + editLayoutSectionList[x].getHeading());
+							report.updateTestLog(x + ":::Capital Markets AMER", " has the heading layout section:::" + editLayoutSectionList[x].getHeading(), Status.PASS);
+							count++;
+						}
+					}				
+				}
+			}		
+			System.out.println(count);
+			if(dataTable.getData("General_Data", "TC_ID").contains("OBEMEA")) {
+				if(editLayoutSectionList.length==5) {
+					for (int k = 0; k < editLayoutSectionList.length; k++) {
+						DescribeLayoutSection els = editLayoutSectionList[k];
+						DescribeLayoutRow[] dlrList = els.getLayoutRows();
+						for (int m = 0; m < dlrList.length; m++) {
+							DescribeLayoutRow lr = dlrList[m];
+							DescribeLayoutItem[] dliList = lr.getLayoutItems();
+							for (int n = 0; n < dliList.length; n++) {
+								DescribeLayoutItem li = dliList[n];
+								if ((li.getLayoutComponents() != null) && (li.getLayoutComponents().length > 0)) {
+									try {
+										String value = li.getLayoutComponents()[0].getValue();
+										if(value!=null) {
+											OBEMEAFieldLabelsAPI.add(value);
 										}
+									} catch (Exception e) {
+										e.printStackTrace();
 									}
 								}
 							}
-						}	
-						System.out.println("CMAMAER Field Label::: " + CMAMERFieldLabelsAPI);
-						for(int i1=0; i1 < CMAMERField.size(); i1++) {
-							if(CMAMERFieldLabelsAPI.get(i1).equals(CMAMERField.get(i1))) {						
-								System.out.println("Field Label:::" + CMAMERFieldLabelsAPI.get(i1) + " -- is present in CM AMER:::");
-								report.updateTestLog("Verify Field Labels", " has the field label:::" + CMAMERFieldLabelsAPI.get(i1), Status.PASS);
-								countLabelList++;
-							}			 
 						}
-						System.out.println("Count of fields present in CMAMER::" + countLabelList);
+					}	
+					System.out.println("OBEMEA Field Label::: " + OBEMEAFieldLabelsAPI);
+					for(int i1=0; i1 < OBEMEAField.size(); i1++) {
+						if(OBEMEAFieldLabelsAPI.get(i1).equals(OBEMEAField.get(i1))) {						
+							System.out.println("Field Label:::" + OBEMEAFieldLabelsAPI.get(i1) + " -- is present in OB EMEA:::");
+							report.updateTestLog("Verify Field Labels", " has the field label:::" + OBEMEAFieldLabelsAPI.get(i1), Status.PASS);
+							countLabelList++;
+						}			 
 					}
+					System.out.println("Count of fields present in Occupier Brokerage EMEA::" + countLabelList);						
 				}
 			}	
-			if((dataTable.getData("General_Data", "TC_ID").contains("OBEMEA")) || (dataTable.getData("General_Data", "TC_ID").contains("CMAPAC"))
-					|| (dataTable.getData("General_Data", "TC_ID").contains("ABEMEA")) || (dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) 
-					|| (dataTable.getData("General_Data", "TC_ID").contains("ABAMER"))) {
-				if(count==5) {
-					System.out.println("Occupier Brokerage EMEA/ Captial Markets APAC/ Agency Brokerage have all the header sections present::");
-					report.updateTestLog("Validating Header Sections", "Occupier Brokerage EMEA/ Captial Markets APAC/ Agency Brokerage - All the headers are present", Status.PASS);
-					OBEMEAHeader.clear();
-					CMAPACHeader.clear();
-					ABEMEAHeader.clear();
-				}						
-				else if(count==8) {
-					System.out.println("Capital Markets/ Agency Brokerage AMER have all the header sections present::");
-					report.updateTestLog("Validating Header Sections", "Capital Markets/ Agency Brokerage AMER - All the headers are present", Status.PASS);
-					CMAMERHeader.clear();
-					ABAMERHeader.clear();
+			if(dataTable.getData("General_Data", "TC_ID").contains("CMAPAC")) {
+				if(editLayoutSectionList.length==5) {
+					for (int k = 0; k < editLayoutSectionList.length; k++) {
+						DescribeLayoutSection els = editLayoutSectionList[k];
+						DescribeLayoutRow[] dlrList = els.getLayoutRows();
+						for (int m = 0; m < dlrList.length; m++) {
+							DescribeLayoutRow lr = dlrList[m];
+							DescribeLayoutItem[] dliList = lr.getLayoutItems();
+							for (int n = 0; n < dliList.length; n++) {
+								DescribeLayoutItem li = dliList[n];
+								if ((li.getLayoutComponents() != null) && (li.getLayoutComponents().length > 0)) {
+									try {
+										String value = li.getLayoutComponents()[0].getValue();
+										if(value!=null) {
+											CMAPACFieldLabelsAPI.add(value);
+										}
+									} catch (Exception e) {
+										e.printStackTrace();
+									}
+								}
+							}
+						}
+					}	
+					System.out.println("CMAPAC Field Label::: " + CMAPACFieldLabelsAPI);
+					for(int i1=0; i1 < CMAPACField.size(); i1++) {
+						if(CMAPACFieldLabelsAPI.get(i1).equals(CMAPACField.get(i1))) {						
+							System.out.println("Field Label:::" + CMAPACFieldLabelsAPI.get(i1) + " -- is present in CM APAC:::");
+							report.updateTestLog("Verify Field Labels", " has the field label:::" + CMAPACFieldLabelsAPI.get(i1), Status.PASS);
+							countLabelList++;
+						}			 
+					}
+					System.out.println("Count of fields present in Capital Brokerage EMEA::" + countLabelList);
 				}
-				else if(count==13) {
-					System.out.println("Admin have all the header sections present::");
-					report.updateTestLog("Validating Header Sections", "Admin have all the header sections present", Status.PASS);
-					AdminHeader.clear();
+			}	
+			if(dataTable.getData("General_Data", "TC_ID").contains("ABEMEA")) {
+				if(editLayoutSectionList.length==5) {
+					for (int k = 0; k < editLayoutSectionList.length; k++) {
+						DescribeLayoutSection els = editLayoutSectionList[k];
+						DescribeLayoutRow[] dlrList = els.getLayoutRows();
+						for (int m = 0; m < dlrList.length; m++) {
+							DescribeLayoutRow lr = dlrList[m];
+							DescribeLayoutItem[] dliList = lr.getLayoutItems();
+							for (int n = 0; n < dliList.length; n++) {
+								DescribeLayoutItem li = dliList[n];
+								if ((li.getLayoutComponents() != null) && (li.getLayoutComponents().length > 0)) {
+									ABEMEAFieldLabelsAPI.add(li.getLayoutComponents()[0].getValue());
+								}
+							}
+						}
+					}	
+					System.out.println("ABEMEA Field Label::: " + ABEMEAFieldLabelsAPI);
+					for(int i1=0; i1 < ABEMEAField.size(); i1++) {
+						if(ABEMEAFieldLabelsAPI.get(i1).equals(ABEMEAField.get(i1))) {						
+							System.out.println("Field Label:::" + ABEMEAFieldLabelsAPI.get(i1) + " -- is present in CM APAC:::");
+							report.updateTestLog("Verify Field Labels", " has the field label:::" + ABEMEAFieldLabelsAPI.get(i1), Status.PASS);
+							countLabelList++;
+						}			 
+					}
+					System.out.println("Count of fields present in Agency Brokerage EMEA::" + countLabelList);
 				}
-				else {
-					System.out.println("Occupier Brokerage EMEA/ Captial Markets APAC/ Agency Brokerage doesn't have all the header sections present::");
-					report.updateTestLog("Validating Header Sections", "Not all header sections are present", Status.FAIL);
+			}	
+			if(dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) {
+				if(editLayoutSectionList.length==8) {
+					for (int k = 0; k < editLayoutSectionList.length; k++) {
+						DescribeLayoutSection els = editLayoutSectionList[k];
+						DescribeLayoutRow[] dlrList = els.getLayoutRows();
+						for (int m = 0; m < dlrList.length; m++) {
+							DescribeLayoutRow lr = dlrList[m];
+							DescribeLayoutItem[] dliList = lr.getLayoutItems();
+							for (int n = 0; n < dliList.length; n++) {
+								DescribeLayoutItem li = dliList[n];
+								if ((li.getLayoutComponents() != null) && (li.getLayoutComponents().length > 0)) {
+									try {
+										String value = li.getLayoutComponents()[0].getValue();
+										if(value!=null) {
+											ABAMERFieldLabelsAPI.add(value);
+										}
+									} catch (Exception e) {
+										e.printStackTrace();
+									}
+								}
+							}
+						}
+					}	
+					System.out.println("ABAMER Field Label::: " + ABAMERFieldLabelsAPI);
+					for(int i1=0; i1 < ABAMERField.size(); i1++) {
+						if(ABAMERFieldLabelsAPI.get(i1).equals(ABAMERField.get(i1))) {						
+							System.out.println("Field Label:::" + ABAMERFieldLabelsAPI.get(i1) + " -- is present in AB AMER:::");
+							report.updateTestLog("Verify Field Labels", " has the field label:::" + ABAMERFieldLabelsAPI.get(i1), Status.PASS);
+							countLabelList++;
+						}			 
+					}
+					System.out.println("Count of fields present in Agency Brokerage AMER::" + countLabelList);
+				}
+			}	
+			if(dataTable.getData("General_Data", "TC_ID").contains("Admin")) {
+				if(editLayoutSectionList.length==13) {
+					for (int k = 0; k < editLayoutSectionList.length; k++) {
+						DescribeLayoutSection els = editLayoutSectionList[k];
+						DescribeLayoutRow[] dlrList = els.getLayoutRows();
+						for (int m = 0; m < dlrList.length; m++) {
+							DescribeLayoutRow lr = dlrList[m];
+							DescribeLayoutItem[] dliList = lr.getLayoutItems();
+							for (int n = 0; n < dliList.length; n++) {
+								DescribeLayoutItem li = dliList[n];
+								if ((li.getLayoutComponents() != null) && (li.getLayoutComponents().length > 0)) {
+									try {
+										String value = li.getLayoutComponents()[0].getValue();
+										if(value!=null) {
+											AdminFieldLabelsAPI.add(value);
+										}
+									} catch (Exception e) {
+										e.printStackTrace();
+									}
+								}
+							}
+						}
+					}	
+					System.out.println("Admin Field Label::: " + AdminFieldLabelsAPI);
+					for(int i1=0; i1 < AdminField.size(); i1++) {
+						if(AdminFieldLabelsAPI.get(i1).equals(AdminField.get(i1))) {						
+							System.out.println("Field Label:::" + AdminFieldLabelsAPI.get(i1) + " -- is present in AB AMER:::");
+							report.updateTestLog("Verify Field Labels", " has the field label:::" + AdminFieldLabelsAPI.get(i1), Status.PASS);
+							countLabelList++;
+						}			 
+					}
+					System.out.println("Count of fields present in Admin::" + countLabelList);
 				}
 			}
-			OBEMEAField.clear();
-			CMAPACField.clear();
-			ABEMEAField.clear();
-			ABAMERField.clear();
-			AdminField.clear();
-			CMAMERField.clear();
-			if (countLabelList == 21) {
-				report.updateTestLog("Count of fields present in Occupier Brokerage/ Agency Brokerage EMEA", "All the fields are present in Occupier Brokerage/ Agency Brokerage EMEA", Status.PASS);
-			} else if (countLabelList == 26) {
-				report.updateTestLog("Count of fields present in Capital Markets APAC", "All the fields are presentin Capital Markets", Status.PASS);
-			} else if (countLabelList == 63) {
-				report.updateTestLog("Count of fields present in Agency Brokerage AMER", "All the fields are present in Agency Brokerage", Status.PASS);
-			} else if (countLabelList == 132) {
-				report.updateTestLog("Count of fields present in Admin", "All the fields are present are present in Admin ", Status.PASS);
-			} else if (countLabelList == 65) {
-				report.updateTestLog("Count of fields present in Capital Markets AMER", "All the fields are present are present in Capital Markets", Status.PASS);
-			}  else {
-				report.updateTestLog("Count of fields present", "Not all the fields are present", Status.FAIL);
-			}		
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			if(dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) {
+				if(editLayoutSectionList.length==8) {
+					for (int k = 0; k < editLayoutSectionList.length; k++) {
+						DescribeLayoutSection els = editLayoutSectionList[k];
+						DescribeLayoutRow[] dlrList = els.getLayoutRows();
+						for (int m = 0; m < dlrList.length; m++) {
+							DescribeLayoutRow lr = dlrList[m];
+							DescribeLayoutItem[] dliList = lr.getLayoutItems();
+							for (int n = 0; n < dliList.length; n++) {
+								DescribeLayoutItem li = dliList[n];
+								if ((li.getLayoutComponents() != null) && (li.getLayoutComponents().length > 0)) {
+									try {
+										String value = li.getLayoutComponents()[0].getValue();
+										if(value!=null) {
+											CMAMERFieldLabelsAPI.add(value);
+										}
+									} catch (Exception e) {
+										e.printStackTrace();
+									}
+								}
+							}
+						}
+					}	
+					System.out.println("CMAMAER Field Label::: " + CMAMERFieldLabelsAPI);
+					for(int i1=0; i1 < CMAMERField.size(); i1++) {
+						if(CMAMERFieldLabelsAPI.get(i1).equals(CMAMERField.get(i1))) {						
+							System.out.println("Field Label:::" + CMAMERFieldLabelsAPI.get(i1) + " -- is present in CM AMER:::");
+							report.updateTestLog("Verify Field Labels", " has the field label:::" + CMAMERFieldLabelsAPI.get(i1), Status.PASS);
+							countLabelList++;
+						}			 
+					}
+					System.out.println("Count of fields present in CMAMER::" + countLabelList);
+				}
+			}
+		}	
+		if((dataTable.getData("General_Data", "TC_ID").contains("OBEMEA")) || (dataTable.getData("General_Data", "TC_ID").contains("CMAPAC"))
+				|| (dataTable.getData("General_Data", "TC_ID").contains("ABEMEA")) || (dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) 
+				|| (dataTable.getData("General_Data", "TC_ID").contains("ABAMER"))) {
+			if(count==5) {
+				System.out.println("Occupier Brokerage EMEA/ Captial Markets APAC/ Agency Brokerage have all the header sections present::");
+				report.updateTestLog("Validating Header Sections", "Occupier Brokerage EMEA/ Captial Markets APAC/ Agency Brokerage - All the headers are present", Status.PASS);
+				OBEMEAHeader.clear();
+				CMAPACHeader.clear();
+				ABEMEAHeader.clear();
+			}						
+			else if(count==8) {
+				System.out.println("Capital Markets/ Agency Brokerage AMER have all the header sections present::");
+				report.updateTestLog("Validating Header Sections", "Capital Markets/ Agency Brokerage AMER - All the headers are present", Status.PASS);
+				CMAMERHeader.clear();
+				ABAMERHeader.clear();
+			}
+			else if(count==13) {
+				System.out.println("Admin have all the header sections present::");
+				report.updateTestLog("Validating Header Sections", "Admin have all the header sections present", Status.PASS);
+				AdminHeader.clear();
+			}
+			else {
+				System.out.println("Occupier Brokerage EMEA/ Captial Markets APAC/ Agency Brokerage doesn't have all the header sections present::");
+				report.updateTestLog("Validating Header Sections", "Not all header sections are present", Status.FAIL);
+			}
 		}
+		OBEMEAField.clear();
+		CMAPACField.clear();
+		ABEMEAField.clear();
+		ABAMERField.clear();
+		AdminField.clear();
+		CMAMERField.clear();
+		if (countLabelList == 21) {
+			report.updateTestLog("Count of fields present in Occupier Brokerage/ Agency Brokerage EMEA", "All the fields are present in Occupier Brokerage/ Agency Brokerage EMEA", Status.PASS);
+		} else if (countLabelList == 26) {
+			report.updateTestLog("Count of fields present in Capital Markets APAC", "All the fields are presentin Capital Markets", Status.PASS);
+		} else if (countLabelList == 63) {
+			report.updateTestLog("Count of fields present in Agency Brokerage AMER", "All the fields are present in Agency Brokerage", Status.PASS);
+		} else if (countLabelList == 132) {
+			report.updateTestLog("Count of fields present in Admin", "All the fields are present are present in Admin ", Status.PASS);
+		} else if (countLabelList == 65) {
+			report.updateTestLog("Count of fields present in Capital Markets AMER", "All the fields are present are present in Capital Markets", Status.PASS);
+		}  else {
+			report.updateTestLog("Count of fields present", "Not all the fields are present", Status.FAIL);
+		}		
 	}
-	
+
 	public void createAccountRequiredFields() {
+		establishConnection.establishConnectionSpecificUser();
+		SObject account = new SObject();
+
+		account.setType("Account");
+		String accountName = Utility_Functions.xRandomFunction() + "_" + dataTable.getData("General_Data", "Name");
+		account.setField("Name", accountName);
+		account.setField("BillingCountry", dataTable.getData("General_Data", "Country"));
+		account.setField("BillingStreet", dataTable.getData("General_Data", "Street"));
+		account.setField("BillingCity", dataTable.getData("General_Data", "City"));
+		account.setField("BillingState", dataTable.getData("General_Data", "State"));
+		account.setField("BillingPostalCode ", dataTable.getData("General_Data", "Zipcode"));
+
+		SObject[] accounts = new SObject[1];
+		accounts[0] = account;
 		try {
-			
-			establishConnection.establishConnectionSpecificUser();
-			SObject account = new SObject();
-
-			account.setType("Account");
-			String accountName = Utility_Functions.xRandomFunction() + "_" + dataTable.getData("General_Data", "Name");
-			account.setField("Name", accountName);
-			account.setField("BillingCountry", dataTable.getData("General_Data", "Country"));
-			account.setField("BillingStreet", dataTable.getData("General_Data", "Street"));
-			account.setField("BillingCity", dataTable.getData("General_Data", "City"));
-			account.setField("BillingState", dataTable.getData("General_Data", "State"));
-			account.setField("BillingPostalCode ", dataTable.getData("General_Data", "Zipcode"));
-
-			SObject[] accounts = new SObject[1];
-			accounts[0] = account;
 			results = EstablishConnection.connection.create(accounts);
-			System.out.println("Result:::" + results);
-			status = establishConnection.saveResults(results);
-			if(status==true) {
-				report.updateTestLog("Verify Create Account", "Account has been created successfully", Status.PASS);
-			} else {
-				report.updateTestLog("Verify Create Account", "Account creation failed", Status.FAIL);
-			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
+		} catch (ConnectionException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Result:::" + results);
+		status = establishConnection.saveResults(results);
+		if(status==true) {
+			report.updateTestLog("Verify Create Account", "Account has been created successfully", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Create Account", "Account creation failed", Status.FAIL);
 		}
 	}
-	
-	
+
+
 	/**
 	 * Function for the Account Creation
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */
-	
-	public void createAccountSpecificUser() {
-			establishConnection.establishConnectionSpecificUser();
-			SObject account = new SObject();
 
-			account.setType("Account");
-			String accountName = Utility_Functions.xRandomFunction() + "-" + dataTable.getData("General_Data", "Name");
-			account.setField("Name", accountName);
-			account.setField("BillingCountry", dataTable.getData("General_Data", "Country"));
-			account.setField("BillingStreet", dataTable.getData("General_Data", "Street"));
-			account.setField("BillingCity", dataTable.getData("General_Data", "City"));
-			account.setField("BillingState", dataTable.getData("General_Data", "State"));
-			account.setField("BillingPostalCode ", dataTable.getData("General_Data", "Zipcode"));
-			account.setField("APAC_Industry_Type__c", "Advertising, Marketing & PR");
-			account.setField("APAC_Sub_Industry__c", "Advertising and Marketing");
-			SObject[] accounts = new SObject[1];
-			accounts[0] = account;
-			try {
-				results = EstablishConnection.connection.create(accounts);
-			} catch (ConnectionException e) {
-				e.printStackTrace();
-			}
-			System.out.println("Result:::" + results);
-			status = establishConnection.saveResults(results);
-			if(status==true) {
-				report.updateTestLog("Verify Create Account", "Account has been created successfully", Status.PASS);
-			} else {
-				report.updateTestLog("Verify Create Account", "Account creation failed", Status.FAIL);
-			}
+	public void createAccountSpecificUser() {
+		establishConnection.establishConnectionSpecificUser();
+		SObject account = new SObject();
+
+		account.setType("Account");
+		String accountName = Utility_Functions.xRandomFunction() + "-" + dataTable.getData("General_Data", "Name");
+		account.setField("Name", accountName);
+		account.setField("BillingCountry", dataTable.getData("General_Data", "Country"));
+		account.setField("BillingStreet", dataTable.getData("General_Data", "Street"));
+		account.setField("BillingCity", dataTable.getData("General_Data", "City"));
+		account.setField("BillingState", dataTable.getData("General_Data", "State"));
+		account.setField("BillingPostalCode ", dataTable.getData("General_Data", "Zipcode"));
+		account.setField("APAC_Industry_Type__c", "Advertising, Marketing & PR");
+		account.setField("APAC_Sub_Industry__c", "Advertising and Marketing");
+		SObject[] accounts = new SObject[1];
+		accounts[0] = account;
+		try {
+			results = EstablishConnection.connection.create(accounts);
+		} catch (ConnectionException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Result:::" + results);
+		status = establishConnection.saveResults(results);
+		if(status==true) {
+			report.updateTestLog("Verify Create Account", "Account has been created successfully", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Create Account", "Account creation failed", Status.FAIL);
+		}
 	}
 	/*public void accountPageFieldsValidation() {
 		try {

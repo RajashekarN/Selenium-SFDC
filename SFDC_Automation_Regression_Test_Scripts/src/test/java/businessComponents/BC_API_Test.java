@@ -8,6 +8,7 @@ import com.sforce.soap.partner.SaveResult;
 import pageObjects.LoginPage;
 import pagesAPI.AccountsFunctions;
 import pagesAPI.ActivityFunctions;
+import pagesAPI.AttachmentsFunctions;
 import pagesAPI.ContactsFunctions;
 import pagesAPI.CreateUsers;
 import pagesAPI.EstablishConnection;
@@ -15,6 +16,7 @@ import pagesAPI.LeadsFunctions;
 import pagesAPI.OpportunitiesFunctions;
 import pagesAPI.PermissionSetsUsers;
 import pagesAPI.SearchTextSOQL;
+import pagesAPI.Tagging;
 import pagesAPI.TaskEventsFunctions;
 
 /**
@@ -47,6 +49,8 @@ public class BC_API_Test extends ReusableLibrary {
 	ActivityFunctions activityFunctions = new ActivityFunctions(scriptHelper);
 	PermissionSetsUsers permissionSetsUsers = new PermissionSetsUsers(scriptHelper);
 	TaskEventsFunctions taskEventsFunctions = new TaskEventsFunctions(scriptHelper);
+	AttachmentsFunctions attachmentsFunctions = new AttachmentsFunctions(scriptHelper);
+	Tagging tagging= new Tagging(scriptHelper);
 	
 	/**
 	 * Validating the Login functionality
@@ -461,5 +465,51 @@ public class BC_API_Test extends ReusableLibrary {
 	 */	
 	public void bc_createTask() {
 		taskEventsFunctions.createTask();
+	}
+	
+	/**
+	 *Creating Event on Account/ Contact/ Lead and Opportunity
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	public void bc_createEvent() {
+		taskEventsFunctions.createEvent();
+	}
+	/**
+	 *Creating Attachment on Task for Account/ Contact/ Lead and Opportunity
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	public void bc_createAttachmentTask() {
+		attachmentsFunctions.createAttachment();
+	}
+	/**
+	 *Creating Attachment on Task for Account/ Contact/ Lead and Opportunity
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	public void bc_createAttachmentEvent() {
+		attachmentsFunctions.createAttachment();
+	}
+	/**
+	 *closing the tasks for Account/ Contact/ Lead and Opportunity
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	public void bc_closeTask() {
+		taskEventsFunctions.closeTask();
+	}
+	/**
+	 * Account Tagging with Private Tag
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void bc_privateTagging() throws InterruptedException {
+		tagging.CustomPrivateTag();
 	}
 }

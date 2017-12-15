@@ -9,7 +9,6 @@ import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
 import com.sforce.soap.partner.DeleteResult;
-import com.sforce.soap.partner.QueryResult;
 import com.sforce.soap.partner.SaveResult;
 import com.sforce.soap.partner.sobject.SObject;
 import com.sforce.ws.ConnectionException;
@@ -37,6 +36,7 @@ public class TaskEventsFunctions extends ReusableLibrary {
 	static boolean status = false;
 
 	EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
+	LeadsFunctions leadsFunctions = new LeadsFunctions(scriptHelper);
 	SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
 	int offsetValue = new Random().nextInt(9);
 
@@ -81,8 +81,8 @@ public class TaskEventsFunctions extends ReusableLibrary {
 			task.setField("WhatId", sAccountID);	
 			task.setField("WhoId", sContactID);
 		} else if (dataTable.getData("General_Data", "TC_ID").contains("Lead")) {
-			task.setField("WhatId", sAccountID);	
-			task.setField("WhoId",sLeadID);
+			String sNewLead = leadsFunctions.createNewLead(); 
+			task.setField("WhoId", sNewLead);
 		}
 		SObject[] tasks = new SObject[1];
 		tasks[0] = task;
@@ -98,22 +98,27 @@ public class TaskEventsFunctions extends ReusableLibrary {
 		} else {
 			report.updateTestLog("Verify Create Task", "Task creation failed", Status.FAIL);
 		}
-		/*int count=0;
-		String validateQuery = "Select whoId from Task where Id = " + "'" + status + "'";
-		String objectValue = searchTextSOQL.fetchRecordFieldValue("Id", validateQuery);
+		int count=0;
+		String leadQuery = "Select WhoId from Task where Id = " + "'" + status + "'";
+		String accountQuery = "Select Account__c from Task where Id = " + "'" + status + "'";
+		String whatIdQuery = "Select WhatId from Task where Id = " + "'" + status + "'";
+		String whatIdValue = searchTextSOQL.fetchRecordFieldValue("WhatId", whatIdQuery);
 		if(dataTable.getData("General_Data", "TC_ID").contains("Account"))  {
-			if(objectValue.startsWith("001")) {
+			String objectValue = searchTextSOQL.fetchRecordFieldValue("Account__c", accountQuery);
+			if((objectValue.startsWith("001")) && (whatIdValue !=null)) {
 				count++;
 			}
 		} else if(dataTable.getData("General_Data", "TC_ID").contains("Opportunity")) {
-			if(objectValue.startsWith("006")) {
+			if(whatIdValue.startsWith("006")) {
 				count++;
 			}
 		} else if(dataTable.getData("General_Data", "TC_ID").contains("Contact")) {
-			if(objectValue.startsWith("003")) {
+			String objectValue = searchTextSOQL.fetchRecordFieldValue("WhoId", leadQuery);
+			if((objectValue.startsWith("003")) && (whatIdValue != null)) {
 				count++;
 			}
 		} else if (dataTable.getData("General_Data", "TC_ID").contains("Lead")) {
+			String objectValue = searchTextSOQL.fetchRecordFieldValue("WhoId", leadQuery);
 			if(objectValue.startsWith("00Q")) {
 				count++;
 			}
@@ -121,7 +126,7 @@ public class TaskEventsFunctions extends ReusableLibrary {
 		if(count==1) 
 			report.updateTestLog("Verify Create Task", "Task are created under Accounts/ Contacts/ Opportunities and Leads", Status.PASS);
 		else 
-			report.updateTestLog("Verify Create Task", "Task are not created under respective objects", Status.FAIL);*/
+			report.updateTestLog("Verify Create Task", "Task are not created under respective objects", Status.FAIL);
 		return status;
 	}
 
@@ -132,7 +137,7 @@ public class TaskEventsFunctions extends ReusableLibrary {
 	 *
 	 */
 
-	public String createEvents() {
+	public String createEvent() {
 		establishConnection.establishConnectionSpecificUser();
 		SObject event = new SObject();
 		event.setType("Event");
@@ -166,8 +171,8 @@ public class TaskEventsFunctions extends ReusableLibrary {
 			event.setField("WhatId", sAccountID);	
 			event.setField("WhoId", sContactID);
 		} else if (dataTable.getData("General_Data", "TC_ID").contains("Lead")) {
-			event.setField("WhatId", sAccountID);	
-			event.setField("WhoId",sLeadID);
+			String sNewLead = leadsFunctions.createNewLead(); 
+			event.setField("WhoId", sNewLead);
 		}
 		SObject[] events = new SObject[1];
 		events[0] = event;
@@ -180,17 +185,58 @@ public class TaskEventsFunctions extends ReusableLibrary {
 		status = establishConnection.saveResults(results);
 		String status = establishConnection.saveResultsId(results);	
 		if(status.startsWith("00U")) {
-			report.updateTestLog("Verify Create Event", "Task has been closed successfully", Status.PASS);
+			report.updateTestLog("Verify Create Event", "Event has been created successfully", Status.PASS);
 		} else {
-			report.updateTestLog("Verify Create Event", "Task closure failed", Status.FAIL);
+			report.updateTestLog("Verify Create Event", "Event creation failed", Status.FAIL);
 		}	
+		int count=0;
+		String leadQuery = "Select WhoId from Event where Id = " + "'" + status + "'";
+		String accountQuery = "Select Account__c from Event where Id = " + "'" + status + "'";
+		String whatIdQuery = "Select WhatId from Event where Id = " + "'" + status + "'";
+		String whatIdValue = searchTextSOQL.fetchRecordFieldValue("WhatId", whatIdQuery);
+		if(dataTable.getData("General_Data", "TC_ID").contains("Account"))  {
+			String objectValue = searchTextSOQL.fetchRecordFieldValue("Account__c", accountQuery);
+			if((objectValue.startsWith("001")) && (whatIdValue !=null)) {
+				count++;
+			}
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("Opportunity")) {
+			if(whatIdValue.startsWith("006")) {
+				count++;
+			}
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("Contact")) {
+			String objectValue = searchTextSOQL.fetchRecordFieldValue("WhoId", leadQuery);
+			if((objectValue.startsWith("003")) && (whatIdValue != null)) {
+				count++;
+			}
+		} else if (dataTable.getData("General_Data", "TC_ID").contains("Lead")) {
+			String objectValue = searchTextSOQL.fetchRecordFieldValue("WhoId", leadQuery);
+			if(objectValue.startsWith("00Q")) {
+				count++;
+			}
+		}
+		if(count==1) 
+			report.updateTestLog("Verify Create Task", "Event are created under Accounts/ Contacts/ Opportunities and Leads", Status.PASS);
+		else 
+			report.updateTestLog("Verify Create Task", "Event are not created under respective objects", Status.FAIL);
 		return status;
 	}
 
 	public void closeTask() {
-		establishConnection.establishConnectionSpecificUser();
-		SObject[] records = new SObject[1];
-		QueryResult queryResults = null;
+		String sTaskId = createTask();
+		//establishConnection.establishConnectionSpecificUser();
+		SObject sObject = new SObject();
+		sObject.setType("Task");
+		sObject.setField("Id", sTaskId);
+		sObject.setField("Status", "Completed");
+		SObject[] sObjects = new SObject[1];
+		sObjects[0] = sObject;
+		try {
+			results = EstablishConnection.connection.update(sObjects);
+		} catch (ConnectionException e) {
+			e.printStackTrace();
+		}
+		
+		/*QueryResult queryResults = null;
 		try {
 			queryResults = EstablishConnection.connection.query("SELECT Id, Status FROM Task where Status = 'Open' ORDER BY CreatedDate DESC LIMIT 1");
 		} catch (ConnectionException e) {
@@ -212,13 +258,20 @@ public class TaskEventsFunctions extends ReusableLibrary {
 			results = EstablishConnection.connection.update(records);
 		} catch (ConnectionException e) {
 			e.printStackTrace();
-		}
+		}*/
 		System.out.println("Result:::" + results);
 		String status = establishConnection.saveResultsId(results);	
-		if(status.startsWith("00T")) {
+		/*if(status.startsWith("00T")) {
 			report.updateTestLog("Verify Close Task", "Task has been closed successfully", Status.PASS);
 		} else {
 			report.updateTestLog("Verify Close Task", "Task closure failed", Status.FAIL);
-		}	
+		}	*/
+		String queryStatus="Select Status from Task where Id = " + "'" + status + "'";
+		String sStatus = searchTextSOQL.fetchRecordFieldValue("Status", queryStatus);
+		if(sStatus.equals("Completed")) {
+			report.updateTestLog("Verify Close Task", "Task has been closed successfully", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Close Task", "Task closure failed", Status.FAIL);
+		}
 	}
 }

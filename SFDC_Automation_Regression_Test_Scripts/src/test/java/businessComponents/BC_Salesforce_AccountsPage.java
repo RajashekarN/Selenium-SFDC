@@ -432,15 +432,4 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 		accountsFunctions.createAccountSpecificUser();
 		accountsFunctions.accountPageFieldsValidation();
 	}
-	
-	/**
-	 * Account Tagging with Private Tag
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-	public void bc_accountTagging() throws InterruptedException {
-		tagging.createPrivateTag();
-	}
-	
 }

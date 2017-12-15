@@ -50,31 +50,52 @@ public class LeadsFunctions extends ReusableLibrary {
 	 */	
 
 	public boolean createLead() {
+		establishConnection.establishConnection();
+		SObject lead = new SObject();
+
+		lead.setType("Lead");		
+		lead.setField("FirstName","FirstName_AutomationAPI");
+		lead.setField("LastName","SecondName_AutomationAPI");
+		SearchTextSOQL companyName = new SearchTextSOQL(scriptHelper);
+		String company_Name = companyName.fetchRecord("Lead", "Name");
+		lead.setField("Company", company_Name);
+
+		SObject[] leads = new SObject[1];
+		leads[0] = lead;
 		try {
-			establishConnection.establishConnection();
-			SObject lead = new SObject();
-
-			lead.setType("Lead");		
-			lead.setField("FirstName","FirstName_AutomationAPI");
-			lead.setField("LastName","SecondName_AutomationAPI");
-			SearchTextSOQL companyName = new SearchTextSOQL(scriptHelper);
-			String company_Name = companyName.fetchRecord("Lead", "Name");
-			lead.setField("Company", company_Name);
-
-			SObject[] leads = new SObject[1];
-			leads[0] = lead;
 			results = EstablishConnection.connection.create(leads);
-			System.out.println("Result:::" + results);
-			status = establishConnection.saveResults(results);	
-			Utility_Functions.timeWait(1);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getStackTrace());
+		} catch (ConnectionException e) {
+			e.printStackTrace();
 		}
-
+		System.out.println("Result:::" + results);
+		status = establishConnection.saveResults(results);	
 		return status;
 	}
 
+	public String createNewLead() {
+		String resultId = null;
+		establishConnection.establishConnection();
+		SObject lead = new SObject();
+
+		lead.setType("Lead");		
+		lead.setField("FirstName","FirstName_AutomationAPI");
+		lead.setField("LastName","SecondName_AutomationAPI");
+		SearchTextSOQL companyName = new SearchTextSOQL(scriptHelper);
+		String company_Name = companyName.fetchRecord("Lead", "Name");
+		lead.setField("Company", company_Name);
+
+		SObject[] leads = new SObject[1];
+		leads[0] = lead;
+		try {
+			results = EstablishConnection.connection.create(leads);
+		} catch (ConnectionException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Result:::" + results);
+		resultId = establishConnection.saveResultsId(results);
+
+		return resultId;
+	}
 
 	/**
 	 * Function for updating the Lead

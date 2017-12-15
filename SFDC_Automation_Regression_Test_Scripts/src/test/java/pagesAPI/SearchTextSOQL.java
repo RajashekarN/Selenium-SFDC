@@ -322,6 +322,42 @@ public class SearchTextSOQL extends ReusableLibrary {
 							recordID = (String) record.getField("Sub_Type__c");
 							report.updateTestLog("Verify Fetch Record",
 									"Record has been fetched successfully:::" + recordID, Status.PASS);
+						}  else if (fieldname.equals("WhatId")) {
+							recordID = (String) record.getField("WhatId");
+							report.updateTestLog("Verify Fetch Record",
+									"Record has been fetched successfully:::" + recordID, Status.PASS);
+						} else if (fieldname.equals("WhoId")) {
+							recordID = (String) record.getField("WhoId");
+							report.updateTestLog("Verify Fetch Record",
+									"Record has been fetched successfully:::" + recordID, Status.PASS);
+						} else if (fieldname.equals("Account__c")) {
+							recordID = (String) record.getField("Account__c");
+							report.updateTestLog("Verify Fetch Record",
+									"Record has been fetched successfully:::" + recordID, Status.PASS);
+						} else if (fieldname.equals("Status")) {
+							recordID = (String) record.getField("Status");
+							report.updateTestLog("Verify Fetch Record",
+									"Record has been fetched successfully:::" + recordID, Status.PASS);
+						} else if (fieldname.equals("AccountRelatedTo__c")) {
+							recordID = (String) record.getField("AccountRelatedTo__c");
+							report.updateTestLog("Verify Fetch Record",
+									"Record has been fetched successfully:::" + recordID, Status.PASS);
+						} else if (fieldname.equals("ContactRelatedTo__c")) {
+							recordID = (String) record.getField("ContactRelatedTo__c");
+							report.updateTestLog("Verify Fetch Record",
+									"Record has been fetched successfully:::" + recordID, Status.PASS);
+						} else if (fieldname.equals("LeadRelatedTo__c")) {
+							recordID = (String) record.getField("LeadRelatedTo__c");
+							report.updateTestLog("Verify Fetch Record",
+									"Record has been fetched successfully:::" + recordID, Status.PASS);
+						} else if (fieldname.equals("OpportunityRelatedTo__c")) {
+							recordID = (String) record.getField("OpportunityRelatedTo__c");
+							report.updateTestLog("Verify Fetch Record",
+									"Record has been fetched successfully:::" + recordID, Status.PASS);
+						} else if (fieldname.equals("PropertyRelatedTo__c")) {
+							recordID = (String) record.getField("PropertyRelatedTo__c");
+							report.updateTestLog("Verify Fetch Record",
+									"Record has been fetched successfully:::" + recordID, Status.PASS);
 						} else {
 							recordID = (String) record.getField("Id");
 							report.updateTestLog("Verify Fetch Record",
