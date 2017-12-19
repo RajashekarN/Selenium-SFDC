@@ -159,6 +159,8 @@ public class EstablishConnection extends ReusableLibrary {
 					Username = properties.getProperty(environment+"FDIREMEAManager");	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("FDIGEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Data"))) 
 					Username = properties.getProperty(environment+"FDIGEMEAData");	
+				else if (dataTable.getData("General_Data", "TC_ID").contains("Admin")) 
+					Username = properties.getProperty(environment+"SystemAdminUsername");
 			}	
 			
 			if (environment.equals("UAT")) { 			
