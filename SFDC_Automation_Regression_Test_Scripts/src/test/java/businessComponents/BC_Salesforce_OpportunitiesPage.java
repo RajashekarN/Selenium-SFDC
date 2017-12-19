@@ -1294,6 +1294,6 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_validateOpportunity() {
-		opportunitiesFunctions.createOpportunitySpecficUser();
+		opportunitiesFunctions.createOpportunity();
 	}
 }

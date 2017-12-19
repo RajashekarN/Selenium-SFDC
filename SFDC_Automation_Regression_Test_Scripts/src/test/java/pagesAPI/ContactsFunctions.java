@@ -17,6 +17,7 @@ import com.sforce.soap.partner.DescribeLayoutSection;
 import com.sforce.soap.partner.QueryResult;
 import com.sforce.soap.partner.SaveResult;
 import com.sforce.soap.partner.sobject.SObject;
+import com.sforce.ws.ConnectionException;
 
 import supportLibraries.Utility_Functions;
 
@@ -322,7 +323,7 @@ public class ContactsFunctions extends ReusableLibrary {
 
 	public void contactsPageFieldsValidation() {
 		try {
-			establishConnection.establishConnectionSpecificUser();
+			establishConnection.establishConnection();
 			ABAMERHeadings();
 			ABAMERFields();
 			OBAPACHeaders();
@@ -477,34 +478,35 @@ public class ContactsFunctions extends ReusableLibrary {
 		}
 	}
 	
-	public void createContactRequiredFields() {
+	public String createContactRequiredFields() {
+		establishConnection.establishConnection();
+		SObject contact = new SObject();
+		contact.setType("Contact");
+		contact.setField("LastName", Utility_Functions.xRandomFunction() + "_" + dataTable.getData("General_data", "Last Name") );
+		contact.setField("Salutation", "Mr.");
+		SearchTextSOQL accountID = new SearchTextSOQL(scriptHelper);
+		String accountId = accountID.fetchRecord("Account", "Id");
+		contact.setField("AccountId", accountId);
+		SObject[] contacts = new SObject[1];
+		contacts[0] = contact;
 		try {
-			establishConnection.establishConnectionSpecificUser();
-			SObject contact = new SObject();
-			contact.setType("Contact");
-			contact.setField("LastName", Utility_Functions.xRandomFunction() + "_" + dataTable.getData("General_data", "Last Name") );
-			contact.setField("Salutation", "Mr.");
-			SearchTextSOQL accountID = new SearchTextSOQL(scriptHelper);
-			String accountId = accountID.fetchRecord("Account", "Id");
-			contact.setField("AccountId", accountId);
-			SObject[] contacts = new SObject[1];
-			contacts[0] = contact;
 			results = EstablishConnection.connection.create(contacts);
-			System.out.println("Result:::" + results);
-			status = establishConnection.saveResults(results);
-			if(status==true) {
+		} catch (ConnectionException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Result:::" + results);
+		String contactId = establishConnection.saveResultsId(results);
+		if(contactId.contains("003")) {
 				report.updateTestLog("Verify Create Contact", "Contact has been created successfully", Status.PASS);
 			} else {
 				report.updateTestLog("Verify Create Contact", "Contact creation failed", Status.FAIL);
 			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+		return contactId;
 	}
 	
 	public void createContactsPopulatingAllFields() {		
 		try {
-			establishConnection.establishConnectionSpecificUser();
+			establishConnection.establishConnection();
 			SObject contact = new SObject();
 			contact.setType("Contact");
 			contact.setField("LastName", Utility_Functions.xRandomFunction() + "_" + dataTable.getData("General_data", "Last Name"));

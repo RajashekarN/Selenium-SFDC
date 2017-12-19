@@ -17,8 +17,6 @@ import com.sforce.soap.partner.SaveResult;
 import com.sforce.soap.partner.sobject.SObject;
 import com.sforce.ws.ConnectionException;
 
-import supportLibraries.Utility_Functions;
-
 
 public class OpportunitiesFunctions extends ReusableLibrary {
 	/*
@@ -51,36 +49,59 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 	EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
 
 
-	public boolean createOpportunity() {
+	public String createOpportunity() {
+		establishConnection.establishConnection();
+		SObject opportunity = new SObject();
+		opportunity.setType("Opportunity");		
+		opportunity.setField("Name","Test Automation_Opportunity");
+		SearchTextSOQL accountID = new SearchTextSOQL(scriptHelper);
+		String accountId = accountID.fetchRecord("Account", "Id");
+		opportunity.setField("AccountId", accountId);
+		opportunity.setField("CloseDate",Calendar.getInstance());
+		if(dataTable.getData("General_Data", "TC_ID").contains("APAC")) /*&& (!dataTable.getData("General_Data", "TC_ID").startsWith("VAS")) && 
+		(!dataTable.getData("General_Data", "TC_ID").startsWith("GWS")) && (!dataTable.getData("General_Data", "TC_ID").startsWith("OB"))  &&
+		(!dataTable.getData("General_Data", "TC_ID").startsWith("AB")))*/ {
+			opportunity.setField("RecordTypeId", "012i0000001QOXjAAO");
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("EMEA")) /*&& (!dataTable.getData("General_Data", "TC_ID").startsWith("VAS")) && 
+				(!dataTable.getData("General_Data", "TC_ID").startsWith("GWS")) && (!dataTable.getData("General_Data", "TC_ID").startsWith("OB"))  &&
+				(!dataTable.getData("General_Data", "TC_ID").startsWith("AB")))*/ {
+			opportunity.setField("RecordTypeId", "012i0000000tvTeAAI");
+		} else if((dataTable.getData("General_Data", "TC_ID").startsWith("VAS")) && (dataTable.getData("General_Data", "TC_ID").contains("AMER"))) {
+			opportunity.setField("RecordTypeId", "0121Y000001EVzFQAW");
+		} else if((dataTable.getData("General_Data", "TC_ID").startsWith("GWS")) && (dataTable.getData("General_Data", "TC_ID").contains("AMER"))) {
+			opportunity.setField("RecordTypeId", "012i0000000405mAAA");
+		} else if((dataTable.getData("General_Data", "TC_ID").startsWith("OB")) && (dataTable.getData("General_Data", "TC_ID").contains("AMER"))) {
+			opportunity.setField("RecordTypeId", "012i0000000405nAAA");
+		} else if((dataTable.getData("General_Data", "TC_ID").startsWith("AB")) && (dataTable.getData("General_Data", "TC_ID").contains("AMER"))) {
+			opportunity.setField("RecordTypeId", "012i0000001622CAAQ");
+		} else if((dataTable.getData("General_Data", "TC_ID").startsWith("AS")) && (dataTable.getData("General_Data", "TC_ID").contains("AMER"))) {
+			opportunity.setField("RecordTypeId", "012i0000000405jAAA");
+		} else if((dataTable.getData("General_Data", "TC_ID").startsWith("CM")) && (dataTable.getData("General_Data", "TC_ID").contains("DSF")) &&
+		(dataTable.getData("General_Data", "TC_ID").contains("AMER"))) {
+			opportunity.setField("RecordTypeId", "012i0000000405lAAA");
+		}  else if((dataTable.getData("General_Data", "TC_ID").startsWith("CM")) && (dataTable.getData("General_Data", "TC_ID").contains("DSF")) &&
+		(dataTable.getData("General_Data", "TC_ID").contains("APAC"))) {
+			opportunity.setField("RecordTypeId", "0121Y000001EW60QAG");
+		} else if((dataTable.getData("General_Data", "TC_ID").startsWith("FRAN")) || (dataTable.getData("General_Data", "TC_ID").startsWith("FDIG")) 
+		|| (dataTable.getData("General_Data", "TC_ID").startsWith("FDIR"))) {
+			opportunity.setField("RecordTypeId", "0121Y000001EVzDQAW");
+		}								
+		opportunity.setField("StageName","Qualification");
+		SObject[] opportunities = new SObject[1];
+		opportunities[0] = opportunity;
 		try {
-			establishConnection.establishConnection();
-			SObject opportunity = new SObject();
-
-			opportunity.setType("Opportunity");		
-			opportunity.setField("Name","Test Automation_Opportunity");
-			SearchTextSOQL accountID = new SearchTextSOQL(scriptHelper);
-			String accountId = accountID.fetchRecord("Account", "Id");
-			opportunity.setField("AccountId", accountId);
-			opportunity.setField("CloseDate",Calendar.getInstance());
-			opportunity.setField("RecordTypeId", "012i0000000405n");
-			opportunity.setField("StageName","Qualification");
-
-			SObject[] opportunities = new SObject[1];
-			opportunities[0] = opportunity;
 			results = EstablishConnection.connection.create(opportunities);
-			System.out.println("Result:::" + results);
-			status = establishConnection.saveResults(results);	
-			Utility_Functions.timeWait(1);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getStackTrace());
+		} catch (ConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-
-		return status;
+		System.out.println("Result:::" + results);
+		String opportunityId = establishConnection.saveResultsId(results);	
+		return opportunityId;
 	}
 
-	public void createOpportunitySpecficUser() {
-		establishConnection.establishConnectionSpecificUser();
+	/*public void createOpportunitySpecficUser() {
+		establishConnection.establishConnection();
 		SObject opportunity = new SObject();
 
 		opportunity.setType("Opportunity");		
@@ -107,7 +128,7 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 			report.updateTestLog("Verify Create Opportunity", "Opportunity creation failed", Status.FAIL);
 		} 
 }
-
+*/
 
 /**
  * Function for updating the Opportunity

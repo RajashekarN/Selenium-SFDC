@@ -53,20 +53,6 @@ public class AccountsFunctions extends ReusableLibrary {
 	 */
 	public SaveResult[] createAccount() {
 		try {
-
-			/*			ActivityFunctions activityFunctions = new ActivityFunctions(scriptHelper);
-			activityFunctions.createActivity();
-			CreateUsers createuser = new CreateUsers(scriptHelper);
-			createuser.setPasswordUsersList();
-			String randomString = Utility_Functions.xGenerateString(20);
-			System.out.println(randomString);
-			CreateUsers createuser = new CreateUsers(scriptHelper);
-			createuser.createUsers();
-			//createuser.resetPassword("0050m000000N8r5AAC");
-			//createuser.setPassword("0050m000000N8r5AAC", "Password8910");
-			 */			
-			/*	readMultipleRowsContacts("Luis Cole%");*/
-
 			establishConnection.establishConnection();
 			SObject account = new SObject();
 
@@ -189,7 +175,6 @@ public class AccountsFunctions extends ReusableLibrary {
 			}
 			updateMultipleAccounts(accounts);
 		} catch (ConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -229,7 +214,6 @@ public class AccountsFunctions extends ReusableLibrary {
 			}
 			updateMultipleContacts(contacts);
 		} catch (ConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -895,7 +879,7 @@ public class AccountsFunctions extends ReusableLibrary {
 	static ArrayList<String> CMAMERFieldLabelsAPI = new ArrayList<String>();
 
 	public void accountPageFieldsValidation() {
-		establishConnection.establishConnectionSpecificUser();
+		establishConnection.establishConnection();
 		OBEMEAHeadings();
 		CMAPACHeaders();
 		ABEMEAHeaders();
@@ -1221,8 +1205,8 @@ public class AccountsFunctions extends ReusableLibrary {
 		}		
 	}
 
-	public void createAccountRequiredFields() {
-		establishConnection.establishConnectionSpecificUser();
+	public String createAccountRequiredFields() {
+		establishConnection.establishConnection();
 		SObject account = new SObject();
 
 		account.setType("Account");
@@ -1242,12 +1226,13 @@ public class AccountsFunctions extends ReusableLibrary {
 			e.printStackTrace();
 		}
 		System.out.println("Result:::" + results);
-		status = establishConnection.saveResults(results);
-		if(status==true) {
+		String accountId = establishConnection.saveResultsId(results);
+		if(accountId.startsWith("001")) {
 			report.updateTestLog("Verify Create Account", "Account has been created successfully", Status.PASS);
 		} else {
 			report.updateTestLog("Verify Create Account", "Account creation failed", Status.FAIL);
 		}
+		return accountId;
 	}
 
 
@@ -1258,8 +1243,8 @@ public class AccountsFunctions extends ReusableLibrary {
 	 *
 	 */
 
-	public void createAccountSpecificUser() {
-		establishConnection.establishConnectionSpecificUser();
+	public String createAccountSpecificUser() {
+		establishConnection.establishConnection();
 		SObject account = new SObject();
 
 		account.setType("Account");
@@ -1280,12 +1265,13 @@ public class AccountsFunctions extends ReusableLibrary {
 			e.printStackTrace();
 		}
 		System.out.println("Result:::" + results);
-		status = establishConnection.saveResults(results);
-		if(status==true) {
+		String accountId = establishConnection.saveResultsId(results);
+		if(accountId.startsWith("001")) {
 			report.updateTestLog("Verify Create Account", "Account has been created successfully", Status.PASS);
 		} else {
 			report.updateTestLog("Verify Create Account", "Account creation failed", Status.FAIL);
 		}
+		return accountId;
 	}
 	/*public void accountPageFieldsValidation() {
 		try {

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="SmokeTestScriptsSuite" parallel="methods" thread-count="2">
+<!-- 	 <listeners>
+	        <listener class-name="supportLibraries.AnnotationTransformer"/> 
+	 </listeners> -->	
+	<test name="UATTestScripts">
+		<classes>	
+			<class name="testscripts.SF.UATTestScripts.TC_SF_FDIGEMEAManagerAttachmentonContactTask"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACManagerAccountsSectionCreation"/>
+ 			<class name="testscripts.SF.UATTestScripts.TC_SF_FDIGEMEAManagerAttachmentonLeadEvent"/>
+ 			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACManagerAccountTagging"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACManagerLeadsSectionCreation"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_OBAPACBrokerPropertyCreation"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_FDIGEMEADataTaskonAccount"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_OBAPACBrokerPropertyEdit"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_OBAPACBrokerOpportunityCreation"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_FRANEMEAManagerAttachmentonContactEvent"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_FDIGEMEAManagerAttachmentonOpportunityEvent"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACManagerContactTagging"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_ASAPACManagerLeadTagging"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_ASAPACManagerOpportunityTagging"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_OBAPACBrokerPropertyTagging"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_FDIGEMEADataCloseTaskonAccount"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_FDIGEMEAManagerCloseTaskonContact"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_FRANEMEAManagerTaskonLead"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_FDIREMEAManagerAttachmentonAccountEvent"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_FDIGEMEAManagerTaskonContact"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_FDIREMEAManagerTaskonOpportunity"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_FDIGEMEAManagerEventonLead"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_FDIGEMEAManagerEventonOpportunity"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_FDIREMEAManagerAttachmentonOpportunityTask"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_FDIREMEAManagerEventonAccount"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_FRANEMEAManagerEventonContact"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_FRANEMEAManagerCloseTaskonLead"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_FDIREMEAManagerCloseTaskonOpportunity"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_FRANEMEAManagerAttachmentonLeadTask"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_FDIGEMEADataAttachmentonAccountTask"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACManagerBudgetCreation"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACManagerBudgetEdit"/>
+		</classes>
+	</test>
+</suite>
+
