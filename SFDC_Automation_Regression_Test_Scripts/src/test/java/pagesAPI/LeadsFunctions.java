@@ -11,6 +11,7 @@ import com.sforce.soap.partner.DeleteResult;
 import com.sforce.soap.partner.DescribeLayout;
 import com.sforce.soap.partner.DescribeLayoutResult;
 import com.sforce.soap.partner.DescribeLayoutSection;
+import com.sforce.soap.partner.LeadConvert;
 import com.sforce.soap.partner.QueryResult;
 import com.sforce.soap.partner.SaveResult;
 import com.sforce.soap.partner.sobject.SObject;
@@ -80,6 +81,7 @@ public class LeadsFunctions extends ReusableLibrary {
 		lead.setType("Lead");	
 		lead.setField("FirstName", Utility_Functions.xGenerateAlphaNumericString() + "_" + "First Name");
 		lead.setField("LastName", Utility_Functions.xGenerateAlphaNumericString() + "_" + "Second Name");
+		lead.setField("BizCardId__c", Utility_Functions.xGenerateAlphaNumericString());
 		lead.setField("Phone", dataTable.getData("General_Data", "Direct Line"));
 		SearchTextSOQL companyName = new SearchTextSOQL(scriptHelper);
 		String company_Name = companyName.fetchRecord("Lead", "Name");
@@ -244,7 +246,36 @@ public class LeadsFunctions extends ReusableLibrary {
 		}		
 	}
 
-
+	/**
+	 * Function for Lead Conversion
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	
+	public void leadConversion() {
+		SObject leadConvert = new SObject();
+		leadConvert.setType("Lead");		
+		String sLeadID = createNewLead();
+		
+		LeadConvert leadToConvert = new LeadConvert();
+		leadToConvert.setConvertedStatus("Closed - Converted");
+		leadToConvert.setLeadId(sLeadID);
+		SObject[] leadConverts = new SObject[1];
+		leadConverts[0] = leadConvert;
+		try {
+			results = EstablishConnection.connection.create(leadConverts);
+		} catch (ConnectionException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Result:::" + results);
+		status = establishConnection.saveResults(results);	
+		if(status==true) {
+			report.updateTestLog("Verify Create Lead", "Lead Converion is successfull", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Create Lead", "Lead Conversion failed", Status.FAIL);
+		}
+	}
 
 	/**
 	 * Function for the validating the field on the Leads Page
@@ -282,7 +313,8 @@ public class LeadsFunctions extends ReusableLibrary {
 					report.updateTestLog("Verify Accounts Page Field Validation", "Edit layout section heading: " + els.getHeading(), Status.PASS);
 					DescribeLayoutRow[] dlrList = els.getLayoutRows();
 					System.out.println("This edit layout section has " + dlrList.length + " layout rows");
-					report.updateTestLog("Verify Accounts Page Field Validation", "This edit layout section has " + dlrList.length + " layout rows", Status.PASS);
+					report.updateT
+					estLog("Verify Accounts Page Field Validation", "This edit layout section has " + dlrList.length + " layout rows", Status.PASS);
 					for(int m = 0; m < dlrList.length; m++) {
 						DescribeLayoutRow lr = dlrList[m];
 						System.out.println(" This row has " + lr.getNumItems() + " layout items");

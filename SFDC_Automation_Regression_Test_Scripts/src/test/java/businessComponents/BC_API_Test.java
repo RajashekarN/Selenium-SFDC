@@ -499,4 +499,15 @@ public class BC_API_Test extends ReusableLibrary {
 	public void bc_budgetEdit() throws InterruptedException {
 		budgetsTargetsFunctions.budgetEdit();
 	}
+	
+	/**
+	 * Account Tagging with Private Tag
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void bc_bulkTaggingValidation() throws InterruptedException {
+		tagging.bulkTaggingFieldsValidation();
+	}
+	
 }
