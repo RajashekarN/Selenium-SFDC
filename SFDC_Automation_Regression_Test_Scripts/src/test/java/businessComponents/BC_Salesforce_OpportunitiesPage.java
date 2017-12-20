@@ -41,6 +41,9 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 		sfBC_Login.bc_login();
 	}
 
+	public void bc_selectOpportunity(){
+		sfOpportunitiesPage.selectOpportunity();
+	}
 	/**
 	 * Validating the New Opportunity Page Layout fields
 	 * 

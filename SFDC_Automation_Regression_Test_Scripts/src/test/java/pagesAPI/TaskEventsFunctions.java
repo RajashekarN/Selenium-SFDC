@@ -29,7 +29,8 @@ public class TaskEventsFunctions extends ReusableLibrary {
 		// new WebDriverUtil(driver);
 		// Utility_Functions utility = new Utility_Functions(scriptHelper);
 	}
-
+	public static String leadId;
+	public static String accountId;
 	static SaveResult[] results;
 	static DeleteResult[] deleteResults;
 	static com.sforce.soap.partner.Error[] errors;
@@ -51,6 +52,8 @@ public class TaskEventsFunctions extends ReusableLibrary {
 	public String createTask() {
 		establishConnection.establishConnectionSpecificUser();
 		SObject task = new SObject();
+		SObject taskPast = new SObject();
+		SObject taskFuture = new SObject();
 		task.setType("Task");
 		String queryAccountID = "SELECT Id FROM Account ORDER BY CreatedDate DESC"  + " limit 1 offset " + offsetValue;
 		String queryContactID = "SELECT Id FROM Contact ORDER BY CreatedDate DESC"  + " limit 1 offset " + offsetValue;
@@ -67,13 +70,37 @@ public class TaskEventsFunctions extends ReusableLibrary {
 		System.out.println("Lead Id:::"+ sLeadID);
 		
 		String value = Utility_Functions.xGenerateAlphaNumericString();
-		task.setField("Subject", value + "Test Automation");
+		task.setField("Subject", value + "Test Automation "+"Present");
 		task.setField("Type", "Private - Initial Meeting");
-		task.setField("ActivityDate", Calendar.getInstance());
-		
+		//Calendar calendar = Calendar.getInstance();
+		//calendar.add(Calendar.DATE,-1);
+		task.setField("ActivityDate", calendar.getTime());
+		if(dataTable.getData("General_Data", "TC_ID").contains("Activity")){
+			
+			taskPast.setType("Task");
+			
+			taskFuture.setType("Task");
+			taskPast.setField("Subject", value + "Test Automation "+"Past");
+			taskPast.setField("Type", "Private - Initial Meeting");
+			calendar.add(Calendar.DATE,-1);
+			taskPast.setField("ActivityDate", calendar.getTime());
+			
+			taskFuture.setField("Subject", value + "Test Automation "+"Future");
+			taskFuture.setField("Type", "Private - Initial Meeting");
+			Calendar calendar1 = Calendar.getInstance();
+			calendar1.add(Calendar.DATE,1);
+			taskFuture.setField("ActivityDate", calendar1.getTime());
+		}
 		if(dataTable.getData("General_Data", "TC_ID").contains("Account"))  {
 			task.setField("WhoId", sContactID);
 			task.setField("WhatId", sAccountID);
+			accountId=sAccountID;
+			if(dataTable.getData("General_Data", "TC_ID").contains("Activity")){
+				taskPast.setField("WhoId", sContactID);
+				taskFuture.setField("WhoId", sContactID);
+				taskPast.setField("WhatId", sAccountID);
+				taskFuture.setField("WhatId", sAccountID);
+			}
 		} else if(dataTable.getData("General_Data", "TC_ID").contains("Opportunity")) {
 			task.setField("WhoId", sContactID);
 			task.setField("WhatId", sOpportunityID);
@@ -83,9 +110,18 @@ public class TaskEventsFunctions extends ReusableLibrary {
 		} else if (dataTable.getData("General_Data", "TC_ID").contains("Lead")) {
 			String sNewLead = leadsFunctions.createNewLead(); 
 			task.setField("WhoId", sNewLead);
+			if(dataTable.getData("General_Data", "TC_ID").contains("Activity")){
+				taskPast.setField("WhoId", sNewLead);
+				taskFuture.setField("WhoId", sNewLead);
+			}
+			leadId=sNewLead;
 		}
-		SObject[] tasks = new SObject[1];
+		SObject[] tasks = new SObject[3];
 		tasks[0] = task;
+		if(dataTable.getData("General_Data", "TC_ID").contains("Activity")){
+			tasks[1]=taskPast;
+			tasks[2]=taskFuture;
+		}
 		try {
 			results = EstablishConnection.connection.create(tasks);
 		} catch (ConnectionException e) {

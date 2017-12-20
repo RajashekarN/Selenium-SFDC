@@ -3,6 +3,7 @@ package pageObjects;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -31,17 +32,41 @@ public class ActivityPage extends ReusableLibrary {
 		PageFactory.initElements(driver.getWebDriver(), this);
 	}
 
+	public static String activityPast;
+	public static String activityPresent;
+	public static String activityFuture;
 	@FindBy(xpath = "//span[text()='Add']")
 	WebElement addActivity;
+	
+	
+	
+	@FindBy(xpath = "//button[@class='slds-button slds-button--neutral showMore slds-button slds-button--neutral uiButton']")
+	WebElement btnPastActivity;
 
+	@FindBy(xpath = "//button[@class='slds-button slds-button--neutral howMore slds-button slds-button--neutral uiButton']")
+	WebElement btnMoreActivity;
+	
 	@FindBy(xpath = "//label/span[text()='Subject']/parent::label/parent::div/input")
 	WebElement activitySubject;
 
 	@FindBy(xpath = "//div[@class='select-options']/ul/li/a[text()='Private - Initial Meeting']")
 	WebElement newActivityType;
+	
+	@FindBy(xpath = "//div[@class='select-options']/ul/li/a[text()='Call']")
+	WebElement newEventType;
+	
+	@FindBy(xpath = "//div[@class='select-options']/ul/li[3]/a[text()='Private - Cold Call']")
+	WebElement newActivityEventType;
 
 	@FindBy(xpath = "//input[contains(@class,'inputDate')]")
 	WebElement activityInputDate;
+	
+	@FindBy(xpath = "//span[contains(text(),'Start')]/parent::legend/following-sibling::div/div/input")
+	WebElement eventStartDate;
+	
+	@FindBy(xpath = "//span[contains(text(),'End')]/parent::legend/following-sibling::div/div/input")
+	WebElement eventEndDate;
+	
 
 	@FindBy(xpath = "//input[@title='Search Contacts']")
 	WebElement activitySearchContacts;
@@ -57,6 +82,9 @@ public class ActivityPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//a[@class='select'][text()='--None--']")
 	WebElement activityTypeList;
+	
+	@FindBy(xpath = "//span[contains(text(),'Activity Type')]/parent::span/following-sibling::div/descendant::a[@class='select'][text()='--None--']")
+	WebElement eventActivityTypeList;
 
 	@FindBy(xpath = "//*[text()='No Next Steps. Open And Upcoming Activities Show Up Here.']")
 	WebElement openAndUpcomingActivites;
@@ -67,50 +95,106 @@ public class ActivityPage extends ReusableLibrary {
 	@FindBy(xpath = "//span[contains(@class, 'slds-text-heading--small slds-truncate') and text() = 'Activities']")
 	WebElement relatedActivities;
 
-	@FindBy(css = "ul>li.forceSearchInputLookupDesktopOption:nth-child(1)")
+	@FindBy(css = "ul>li.forceSearchInputLookupDesktopOption:nth-child(3)")
 	WebElement firstLookupElement;
+	
+	@FindBy(xpath = "//span[text()='New Event']")
+	WebElement newEvent;
+	
 
-	DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+	DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 	Date date = new Date();
 	SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
 
 	public void createNewActivity() {
-		Utility_Functions.xWaitForElementPresent(driver, addActivity, 3);
-		Utility_Functions.xClick(driver, addActivity, true);
-		report.updateTestLog("Verify New Activity Page Layout ", "The New Activity in the Details page is Displayed ",
-				Status.PASS);
-		if((dataTable.getData("General_Data", "TC_ID").contains("AccountsCreationOfNewActivityPage")) || 
-				(dataTable.getData("General_Data", "TC_ID").contains("ContactsReminderSentFunctionality")) ||
-				(dataTable.getData("General_Data", "TC_ID").contains("ContactNewActivityPageLayout")) ||
-				(dataTable.getData("General_Data", "TC_ID").contains("PropertiesNewActivityLayoutPage"))) {
-			verifyNewActivityPageLayout();
+		String sActivitySubject=null;
+		int activityTimes=1;
+		if(dataTable.getData("General_Data", "TC_ID").contains("Activity") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") && !dataTable.getData("General_Data", "TC_ID").contains("Expand") ){
+			activityTimes=3;
 		}
-		Utility_Functions.xWaitForElementPresent(driver, activitySubject, 3);
-		String sActivitySubject = "Test Automation Subject_" + Utility_Functions.xGenerateAlphaNumericString();
-		Utility_Functions.xSendKeys(driver, activitySubject, sActivitySubject);
-		Utility_Functions.xScrollWindowTop(driver);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, activityTypeList, 3);
-		Utility_Functions.xClick(driver, activityTypeList, true);
-		Utility_Functions.xWaitForElementPresent(driver, newActivityType, 3);
-		Utility_Functions.xClick(driver, newActivityType, true);
-		Utility_Functions.xWaitForElementPresent(driver, activityInputDate, 3);
-		Utility_Functions.xSendKeys(driver, activityInputDate, dateFormat.format(date).toString());
-		if((dataTable.getData("General_Data", "TC_ID").contains("ContactsReminderSentFunctionality")) || 
-				(dataTable.getData("General_Data", "TC_ID").contains("ContactsCreationOfNewActivityPage")) ||
-				(dataTable.getData("General_Data", "TC_ID").contains("ContactsNewActivityLayoutPage"))) {
-			Utility_Functions.xWaitForElementPresent(driver, activitySearchAccounts, 3);
-			Utility_Functions.xClick(driver, activitySearchAccounts, true);
-		} else {
-			Utility_Functions.xWaitForElementPresent(driver, activitySearchContacts, 3);
-			Utility_Functions.xClick(driver, activitySearchContacts, true);
-		}		
-		Utility_Functions.xWaitForElementPresent(driver, firstLookupElement, 4);
-		Utility_Functions.xClick(driver, firstLookupElement, true);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xWaitForElementPresent(driver, activitySave, 3);
-		Utility_Functions.xClick(driver, activitySave, true);
-		report.updateTestLog("Verify New Activity", "Verifying whether the New Activity page is saved ", Status.PASS);
+		if(dataTable.getData("General_Data", "TC_ID").contains("Activity") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") ){
+			for(int i=1;i<=activityTimes;i++){
+				Utility_Functions.xWaitForElementPresent(driver, addActivity, 3);
+				Utility_Functions.xClick(driver, addActivity, true);
+				report.updateTestLog("Verify New Activity Page Layout ", "The New Activity in the Details page is Displayed ",
+						Status.PASS);
+				if((dataTable.getData("General_Data", "TC_ID").contains("AccountsCreationOfNewActivityPage")) || 
+						(dataTable.getData("General_Data", "TC_ID").contains("ContactsReminderSentFunctionality")) ||
+						(dataTable.getData("General_Data", "TC_ID").contains("ContactNewActivityPageLayout")) ||
+						(dataTable.getData("General_Data", "TC_ID").contains("PropertiesNewActivityLayoutPage"))) {
+					verifyNewActivityPageLayout();
+				}
+				
+				Utility_Functions.xWaitForElementPresent(driver, activitySubject, 3);
+				if(i==1)
+				{
+					sActivitySubject = "Test Automation Subject_Present" + Utility_Functions.xGenerateAlphaNumericString();
+					activityPresent=sActivitySubject;
+				}else if(i==2){
+					sActivitySubject = "Test Automation Subject_Past" + Utility_Functions.xGenerateAlphaNumericString();
+					activityPast=sActivitySubject;
+				}else{
+					sActivitySubject = "Test Automation Subject_Future" + Utility_Functions.xGenerateAlphaNumericString();
+					activityFuture=sActivitySubject;
+				}
+				Utility_Functions.xSendKeys(driver, activitySubject, sActivitySubject);
+				Utility_Functions.xScrollWindowTop(driver);
+				Utility_Functions.timeWait(2);
+				if(!dataTable.getData("General_Data", "TC_ID").contains("Lead")){
+					Utility_Functions.xWaitForElementPresent(driver, activityTypeList, 3);
+					Utility_Functions.xClick(driver, activityTypeList, true);
+					Utility_Functions.xWaitForElementPresent(driver, newActivityType, 3);
+					Utility_Functions.xClick(driver, newActivityType, true);
+				}
+				if(i==1){
+				Utility_Functions.xWaitForElementPresent(driver, activityInputDate, 3);
+				Utility_Functions.xSendKeys(driver, activityInputDate, dateFormat.format(date).toString());
+				//Utility_Functions.xSendKeys(driver, el, keyName);
+				}else if(i==2){
+					Calendar calendar = Calendar.getInstance();
+
+				    // Move calendar to yesterday
+				    calendar.add(Calendar.DATE, -1);
+
+				    // Get current date of calendar which point to the yesterday now
+				    Date newDate = calendar.getTime();
+				    Utility_Functions.xWaitForElementPresent(driver, activityInputDate, 3);
+					Utility_Functions.xSendKeys(driver, activityInputDate, dateFormat.format(newDate).toString());
+				    
+				}else{
+					Calendar calendar = Calendar.getInstance();
+
+				    // Move calendar to future
+				    calendar.add(Calendar.DATE, 1);
+
+				    // Get current date of calendar which point to the yesterday now
+				    Date newDate = calendar.getTime();
+				    Utility_Functions.xWaitForElementPresent(driver, activityInputDate, 3);
+					Utility_Functions.xSendKeys(driver, activityInputDate, dateFormat.format(newDate).toString());
+				}
+				if(!dataTable.getData("General_Data", "TC_ID").contains("Lead")){
+					if((dataTable.getData("General_Data", "TC_ID").contains("ContactsReminderSentFunctionality")) || 
+							(dataTable.getData("General_Data", "TC_ID").contains("ContactsCreationOfNewActivityPage")) ||
+							(dataTable.getData("General_Data", "TC_ID").contains("ContactsNewActivityLayoutPage")) || (dataTable.getData("General_Data", "TC_ID").contains("Contact")) ) {
+						Utility_Functions.xWaitForElementPresent(driver, activitySearchAccounts, 3);
+						Utility_Functions.xClick(driver, activitySearchAccounts, true);
+					} else {
+						Utility_Functions.xWaitForElementPresent(driver, activitySearchContacts, 3);
+						Utility_Functions.xClick(driver, activitySearchContacts, true);
+						Utility_Functions.xSendKeys(driver, activitySearchContacts, "Vishnu");
+					}		
+					Utility_Functions.timeWait(2);
+					Utility_Functions.xWaitForElementPresent(driver, firstLookupElement, 4);
+					Utility_Functions.xClick(driver, firstLookupElement, true);
+				}
+				Utility_Functions.timeWait(1);
+				Utility_Functions.xWaitForElementPresent(driver, activitySave, 3);
+				Utility_Functions.xClick(driver, activitySave, true);
+				report.updateTestLog("Verify New Activity", "Verifying whether the New Activity page is saved ", Status.PASS);
+				Utility_Functions.timeWait(3);
+			}
+		}
+		
 		/*		String query = "SELECT Subject__c FROM Activity__c where Subject__c = " + "'" + sActivitySubject + "'";
 		System.out.println("Activity Subject:: "+ sActivitySubject);
 		String record = searchTextSOQL.fetchRecordFieldValue("Subject__c", query);
@@ -150,6 +234,178 @@ public class ActivityPage extends ReusableLibrary {
 						Status.WARNING);
 			}
 		}*/
+	}
+	
+	public void createNewEvent() {
+		String sActivitySubject=null;
+		int activityTimes=1;
+		if(dataTable.getData("General_Data", "TC_ID").contains("Activity") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") ){
+			activityTimes=3;
+		}
+		if(dataTable.getData("General_Data", "TC_ID").contains("Activity") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") ){
+			for(int i=1;i<=activityTimes;i++){
+				if(i==1){
+					Utility_Functions.xWaitForElementPresent(driver, newEvent, 3);
+					Utility_Functions.xClick(driver, newEvent, true);
+				}else{
+					List<WebElement> eleList= driver.findElements(By.xpath("//span[text()='Add']"));
+				Utility_Functions.xWaitForElementPresent(driver, eleList.get(1), 3);
+				Utility_Functions.xClick(driver, eleList.get(1), true);
+				}
+				report.updateTestLog("Verify New Activity Page Layout ", "The New Activity in the Details page is Displayed ",
+						Status.PASS);
+				if((dataTable.getData("General_Data", "TC_ID").contains("AccountsCreationOfNewActivityPage")) || 
+						(dataTable.getData("General_Data", "TC_ID").contains("ContactsReminderSentFunctionality")) ||
+						(dataTable.getData("General_Data", "TC_ID").contains("ContactNewActivityPageLayout")) ||
+						(dataTable.getData("General_Data", "TC_ID").contains("PropertiesNewActivityLayoutPage"))) {
+					verifyNewActivityPageLayout();
+				}
+				
+				Utility_Functions.xWaitForElementPresent(driver, activitySubject, 3);
+				if(i==1)
+				{
+					sActivitySubject = "Event Automation Subject_Present" + Utility_Functions.xGenerateAlphaNumericString();
+					activityPresent=sActivitySubject;
+				}else if(i==2){
+					sActivitySubject = "Event Automation Subject_Past" + Utility_Functions.xGenerateAlphaNumericString();
+					activityPast=sActivitySubject;
+				}else{
+					sActivitySubject = "Event Automation Subject_Future" + Utility_Functions.xGenerateAlphaNumericString();
+					activityFuture=sActivitySubject;
+				}
+				Utility_Functions.xSendKeys(driver, activitySubject, sActivitySubject);
+				Utility_Functions.xScrollWindowTop(driver);
+				Utility_Functions.timeWait(2);
+				if((dataTable.getData("General_Data", "TC_ID").contains("Lead"))){
+					Utility_Functions.xWaitForElementPresent(driver, activityTypeList, 3);
+					Utility_Functions.xClick(driver, activityTypeList, true);
+					Utility_Functions.xWaitForElementPresent(driver, newEventType, 3);
+					Utility_Functions.xClick(driver, newEventType, true);
+				}else{
+					Utility_Functions.xWaitForElementPresent(driver, eventActivityTypeList, 3);
+					Utility_Functions.xClick(driver, eventActivityTypeList, true);
+					Utility_Functions.xWaitForElementPresent(driver, newActivityEventType, 3);
+					Utility_Functions.xClick(driver, newActivityEventType, true);
+				}
+				
+				if(i==1){
+				Utility_Functions.xWaitForElementPresent(driver, eventStartDate, 3);
+				Utility_Functions.xSendKeys(driver, eventStartDate, dateFormat.format(date).toString());
+				
+				Utility_Functions.xWaitForElementPresent(driver, eventEndDate, 3);
+				Utility_Functions.xSendKeys(driver, eventEndDate, dateFormat.format(date).toString());
+				//Utility_Functions.xSendKeys(driver, el, keyName);
+				}else if(i==2){
+					Calendar calendar = Calendar.getInstance();
+
+				    // Move calendar to yesterday
+				    calendar.add(Calendar.DATE, -1);
+
+				    // Get current date of calendar which point to the yesterday now
+				    Date newDate = calendar.getTime();
+				    Utility_Functions.xWaitForElementPresent(driver, eventStartDate, 3);
+					Utility_Functions.xSendKeys(driver, eventStartDate, dateFormat.format(newDate).toString());
+					
+					Utility_Functions.xWaitForElementPresent(driver, eventEndDate, 3);
+					Utility_Functions.xSendKeys(driver, eventEndDate, dateFormat.format(newDate).toString());
+				    
+				}else{
+					Calendar calendar = Calendar.getInstance();
+
+				    // Move calendar to future
+				    calendar.add(Calendar.DATE, 1);
+
+				    // Get current date of calendar which point to the yesterday now
+				    Date newDate = calendar.getTime();
+				    Utility_Functions.xWaitForElementPresent(driver, eventStartDate, 3);
+					Utility_Functions.xSendKeys(driver, eventStartDate, dateFormat.format(newDate).toString());
+					
+					Utility_Functions.xWaitForElementPresent(driver, eventEndDate, 3);
+					Utility_Functions.xSendKeys(driver, eventEndDate, dateFormat.format(newDate).toString());
+				}
+				if(!dataTable.getData("General_Data", "TC_ID").contains("Lead")){
+					if((dataTable.getData("General_Data", "TC_ID").contains("ContactsReminderSentFunctionality")) || 
+							(dataTable.getData("General_Data", "TC_ID").contains("ContactsCreationOfNewActivityPage")) ||
+							(dataTable.getData("General_Data", "TC_ID").contains("ContactsNewActivityLayoutPage")) || (dataTable.getData("General_Data", "TC_ID").contains("Contact")) ) {
+						Utility_Functions.xWaitForElementPresent(driver, activitySearchAccounts, 3);
+						Utility_Functions.xClick(driver, activitySearchAccounts, true);
+					} else {
+						Utility_Functions.xWaitForElementPresent(driver, activitySearchContacts, 3);
+						Utility_Functions.xClick(driver, activitySearchContacts, true);
+						Utility_Functions.xSendKeys(driver, activitySearchContacts, "Vishnu");
+					}		
+					Utility_Functions.xWaitForElementPresent(driver, firstLookupElement, 4);
+					Utility_Functions.xClick(driver, firstLookupElement, true);
+				}
+				Utility_Functions.timeWait(1);
+				Utility_Functions.xWaitForElementPresent(driver, activitySave, 3);
+				Utility_Functions.xClick(driver, activitySave, true);
+				report.updateTestLog("Verify New Activity", "Verifying whether the New Activity page is saved ", Status.PASS);
+				Utility_Functions.timeWait(3);
+			}
+		}
+	}
+	public void validateAccountActivity(){
+		Utility_Functions.xClick(driver,btnPastActivity, true);
+		Utility_Functions.timeWait(3);
+		
+		Utility_Functions.xClick(driver,btnMoreActivity, true);
+		Utility_Functions.timeWait(3);
+		System.out.println(driver.findElement(By.xpath("//div[@class='timeline-container slds-m-top--medium']/ul/li/descendant::span[text()='"+activityPast+"']/following::span[1]/p[text()='Yesterday']")).isDisplayed());
+		System.out.println(driver.findElement(By.xpath("//div[@class='timeline-container slds-m-top--medium']/ul/li/descendant::span[text()='"+activityPresent+"']/following::span[1]/p[text()='Today']")).isDisplayed());
+		System.out.println(driver.findElement(By.xpath("//div[@class='timeline-container slds-m-top--medium']/ul/li/descendant::span[text()='"+activityFuture+"']/following::span[1]/p[text()='Tomorrow']")).isDisplayed());
+		if(driver.findElement(By.xpath("//div[@class='timeline-container slds-m-top--medium']/ul/li/descendant::span[text()='"+activityPast+"']/following::span[1]/p[text()='Yesterday']")).isDisplayed() && driver.findElement(By.xpath("//div[@class='timeline-container slds-m-top--medium']/ul/li/descendant::span[text()='"+activityPresent+"']/following::span[1]/p[text()='Today']")).isDisplayed() && driver.findElement(By.xpath("//div[@class='timeline-container slds-m-top--medium']/ul/li/descendant::span[text()='"+activityFuture+"']/following::span[1]/p[text()='Tomorrow']")).isDisplayed() ){
+			report.updateTestLog("Verify created Activity", "Verifying whether the created Activity page is displaying ", Status.PASS);
+		}else{
+			report.updateTestLog("Verify created Activity", "Verifying whether the created Activity page is displaying ", Status.FAIL);
+		}
+		
+	}
+	
+	public void validateActivityExpandAll(){
+		Utility_Functions.xClick(driver,btnPastActivity, true);
+		Utility_Functions.timeWait(3);
+		
+		Utility_Functions.xClick(driver,btnMoreActivity, true);
+		Utility_Functions.timeWait(3);
+		if(!dataTable.getData("General_Data", "TC_ID").contains("Lead")){
+		System.out.println(driver.findElement(By.xpath("//div[@class='slds-media slds-tile slds-media--small']/descendant::span[text()='"+activityPresent+"']/ancestor::div[1]/following-sibling::div[1][text()='Private - Initial Meeting']")).isDisplayed());
+		System.out.println(driver.findElement(By.xpath("//div[@class='slds-media slds-tile slds-media--small']/descendant::span[text()='"+activityPresent+"']/ancestor::div[1]/following-sibling::div[2][text()='Open']")).isDisplayed());
+		
+		if(driver.findElement(By.xpath("//div[@class='slds-media slds-tile slds-media--small']/descendant::span[text()='"+activityPresent+"']/ancestor::div[1]/following-sibling::div[1][text()='Private - Initial Meeting']")).isDisplayed() && driver.findElement(By.xpath("//div[@class='slds-media slds-tile slds-media--small']/descendant::span[text()='"+activityPresent+"']/ancestor::div[1]/following-sibling::div[2][text()='Open']")).isDisplayed()){
+			report.updateTestLog("Verify created Activity", "Verifying whether the created Activity page is displaying ", Status.PASS);
+		}
+		else{
+			report.updateTestLog("Verify created Activity", "Verifying whether the created Activity page is displaying ", Status.FAIL);
+		}
+		}else{
+			System.out.println(driver.findElement(By.xpath("//div[@class='slds-media slds-tile slds-media--small']/descendant::span[text()='"+activityPresent+"']/ancestor::div[1]/following-sibling::div[1][text()='Private - Task']")).isDisplayed());
+			System.out.println(driver.findElement(By.xpath("//div[@class='slds-media slds-tile slds-media--small']/descendant::span[text()='"+activityPresent+"']/ancestor::div[1]/following-sibling::div[2][text()='Open']")).isDisplayed());
+			
+			if(driver.findElement(By.xpath("//div[@class='slds-media slds-tile slds-media--small']/descendant::span[text()='"+activityPresent+"']/ancestor::div[1]/following-sibling::div[1][text()='Private - Task']")).isDisplayed() && driver.findElement(By.xpath("//div[@class='slds-media slds-tile slds-media--small']/descendant::span[text()='"+activityPresent+"']/ancestor::div[1]/following-sibling::div[2][text()='Open']")).isDisplayed()){
+				report.updateTestLog("Verify created Activity", "Verifying whether the created Activity page is displaying ", Status.PASS);
+			}
+			else{
+				report.updateTestLog("Verify created Activity", "Verifying whether the created Activity page is displaying ", Status.FAIL);
+			}
+		}
+	}
+	
+	public void validateEventActivity(){
+		Utility_Functions.xClick(driver,btnPastActivity, true);
+		Utility_Functions.timeWait(3);
+		
+		Utility_Functions.xClick(driver,btnMoreActivity, true);
+		Utility_Functions.timeWait(3);
+		System.out.println(driver.findElement(By.xpath("//div[@class='slds-media slds-tile slds-media--small']/descendant::span[text()='"+activityPast+"']/ancestor::div[1]/following-sibling::div[text()='Yesterday']")).isDisplayed());
+		System.out.println(driver.findElement(By.xpath("//div[@class='slds-media slds-tile slds-media--small']/descendant::span[text()='"+activityPresent+"']/ancestor::div[1]/following-sibling::div[text()='Today']")).isDisplayed());
+		System.out.println(driver.findElement(By.xpath("//div[@class='slds-media slds-tile slds-media--small']/descendant::span[text()='"+activityFuture+"']/ancestor::div[1]/following-sibling::div[text()='Tomorrow']")).isDisplayed());
+		if(driver.findElement(By.xpath("//div[@class='slds-media slds-tile slds-media--small']/descendant::span[text()='"+activityPast+"']/ancestor::div[1]/following-sibling::div[text()='Yesterday']")).isDisplayed() && driver.findElement(By.xpath("//div[@class='slds-media slds-tile slds-media--small']/descendant::span[text()='"+activityPresent+"']/ancestor::div[1]/following-sibling::div[text()='Today']")).isDisplayed() && driver.findElement(By.xpath("//div[@class='slds-media slds-tile slds-media--small']/descendant::span[text()='"+activityFuture+"']/ancestor::div[1]/following-sibling::div[text()='Tomorrow']")).isDisplayed() ){
+			report.updateTestLog("Verify created Activity", "Verifying whether the created Activity page is displaying ", Status.PASS);
+		}else{
+			report.updateTestLog("Verify created Activity", "Verifying whether the created Activity page is displaying ", Status.FAIL);
+		}
+		
 	}
 
 	public void verifyNewActivityPageLayout() {

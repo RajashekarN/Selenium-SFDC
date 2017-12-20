@@ -456,9 +456,17 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xClick(driver, menu_Contacts, true);
 		Utility_Functions.timeWait(1);
-		List<WebElement> accountList = driver
+		report.updateTestLog("Verify Create Activity Contact", "Contacts are Displayed ", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
+		Utility_Functions.xClick(driver, recentlyViewed, true);
+		report.updateTestLog("Verify Create Activity Contact", "Recently viewed contacts are Displayed ", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, allContacts, 3);
+		Utility_Functions.xClick(driver, allContacts, true);
+		Utility_Functions.timeWait(7);
+		report.updateTestLog("Verify Create Activity Contact", "All contacts are displayed successfully:::", Status.PASS);
+		List<WebElement> contactList = driver
 				.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-		Utility_Functions.xclickgetTextofFirstElementfromList(accountList);
+		Utility_Functions.xclickgetTextofFirstElementfromList(contactList);
 		Utility_Functions.timeWait(2);
 	}
 

@@ -124,6 +124,7 @@ public class Tagging extends ReusableLibrary {
 		} else if(dataTable.getData("General_Data", "TC_ID").contains("Opportunity")) {
 			sOpportunityRelationId = searchTextSOQL.fetchRecordFieldValue("OpportunityRelatedTo__c", opportunityRelation);
 			if(sOpportunityRelationId.startsWith("006")) {
+				//report.updateTestLog("Verify Create Private Tag", "Private Tag for Opportunity has been created successfully", Status.PASS);
 				report.updateTestLog("Verify Create Private Tag", "Private Tag for Opportunity has been created successfully", Status.PASS);
 				count++;
 			} 

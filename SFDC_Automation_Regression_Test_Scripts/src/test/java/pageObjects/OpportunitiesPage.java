@@ -140,6 +140,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//div[@class='slds-media']//input[@value='Save']")
 	WebElement saveButton_AB;
+	
+	@FindBy(xpath = "//span[contains(@class,'virtualAutocompleteOptionText')][text()='All Active Opportunities']")
+	WebElement allOpportunities;
 
 	@FindBy(xpath = ".modal-footer [title='Save & New']")
 	WebElement saveAndNew;
@@ -1394,6 +1397,31 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	static ArrayList<String> labelList = new ArrayList<String>();
+	
+	/**
+	 * Selecting the Contact from a list of contacts
+	 * 
+	 * @author Cognizant
+	 *
+	 */
+
+	public void selectOpportunity() {
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xClick(driver, menu_Opportunities, true);
+		Utility_Functions.timeWait(1);
+		report.updateTestLog("Verify Create Activity Opportunity", "Opportunity are Displayed ", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
+		Utility_Functions.xClick(driver, recentlyViewed, true);
+		report.updateTestLog("Verify Create Activity Opportunity", "Recently viewed Opportunity are Displayed ", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, allOpportunities, 3);
+		Utility_Functions.xClick(driver, allOpportunities, true);
+		Utility_Functions.timeWait(7);
+		report.updateTestLog("Verify Create Activity Opportunity", "All Opportunity are displayed successfully:::", Status.PASS);
+		List<WebElement> contactList = driver
+				.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xclickgetTextofFirstElementfromList(contactList);
+		Utility_Functions.timeWait(2);
+	}
 
 	public void labelsOpportunityPage() {
 		labelList.add("Record Type");

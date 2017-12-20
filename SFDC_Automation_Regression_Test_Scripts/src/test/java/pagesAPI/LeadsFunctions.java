@@ -74,7 +74,7 @@ public class LeadsFunctions extends ReusableLibrary {
 
 	public String createNewLead() {
 		String resultId = null;
-		establishConnection.establishConnection();
+		establishConnection.establishConnectionSpecificUser();
 		SObject lead = new SObject();
 
 		lead.setType("Lead");		
