@@ -55,8 +55,8 @@ public class TaskEventsFunctions extends ReusableLibrary {
 	public String createTask() {
 		establishConnection.establishConnection();
 		SObject task = new SObject();
-		SObject taskPast = new SObject();
-		SObject taskFuture = new SObject();
+		/*SObject taskPast = new SObject();
+		SObject taskFuture = new SObject();*/
 		task.setType("Task");
 		String queryAccountID = "SELECT Id FROM Account ORDER BY CreatedDate DESC"  + " limit 1 offset " + offsetValue;
 		String queryContactID = "SELECT Id FROM Contact ORDER BY CreatedDate DESC"  + " limit 1 offset " + offsetValue;
@@ -75,7 +75,7 @@ public class TaskEventsFunctions extends ReusableLibrary {
 		//Calendar calendar = Calendar.getInstance();
 		//calendar.add(Calendar.DATE,-1);
 		task.setField("ActivityDate", calendar.getTime());
-		if(dataTable.getData("General_Data", "TC_ID").contains("Activity")){
+		/*if(dataTable.getData("General_Data", "TC_ID").contains("Activity")){
 			
 			taskPast.setType("Task");
 			
@@ -90,17 +90,17 @@ public class TaskEventsFunctions extends ReusableLibrary {
 			Calendar calendar1 = Calendar.getInstance();
 			calendar1.add(Calendar.DATE,1);
 			taskFuture.setField("ActivityDate", calendar1.getTime());
-		}
+		}*/
 		if(dataTable.getData("General_Data", "TC_ID").contains("Account"))  {
 			task.setField("WhoId", sContactID);
 			task.setField("WhatId", sAccountID);
 			accountId=sAccountID;
-			if(dataTable.getData("General_Data", "TC_ID").contains("Activity")){
+			/*if(dataTable.getData("General_Data", "TC_ID").contains("Activity")){
 				taskPast.setField("WhoId", sContactID);
 				taskFuture.setField("WhoId", sContactID);
 				taskPast.setField("WhatId", sAccountID);
 				taskFuture.setField("WhatId", sAccountID);
-			}
+			}*/
 		} else if(dataTable.getData("General_Data", "TC_ID").contains("Opportunity")) {
 			task.setField("WhoId", sContactID);
 			task.setField("WhatId", sOpportunityID);
@@ -111,12 +111,12 @@ public class TaskEventsFunctions extends ReusableLibrary {
 			sNewLeadID = leadsFunctions.createNewLead(); 
 			task.setField("WhoId", sNewLeadID);
 		}
-		SObject[] tasks = new SObject[3];
+		SObject[] tasks = new SObject[1];
 		tasks[0] = task;
-		if(dataTable.getData("General_Data", "TC_ID").contains("Activity")){
+/*		if(dataTable.getData("General_Data", "TC_ID").contains("Activity")){
 			tasks[1]=taskPast;
 			tasks[2]=taskFuture;
-		}
+		}*/
 		try {
 			results = EstablishConnection.connection.create(tasks);
 		} catch (ConnectionException e) {

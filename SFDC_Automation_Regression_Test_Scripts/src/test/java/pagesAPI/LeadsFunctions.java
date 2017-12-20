@@ -81,7 +81,7 @@ public class LeadsFunctions extends ReusableLibrary {
 		lead.setType("Lead");	
 		lead.setField("FirstName", Utility_Functions.xGenerateAlphaNumericString() + "_" + "First Name");
 		lead.setField("LastName", Utility_Functions.xGenerateAlphaNumericString() + "_" + "Second Name");
-		lead.setField("BizCardId__c", Utility_Functions.xGenerateAlphaNumericString());
+		//lead.setField("BizCardId__c", Utility_Functions.xGenerateAlphaNumericString());
 		lead.setField("Phone", dataTable.getData("General_Data", "Direct Line"));
 		SearchTextSOQL companyName = new SearchTextSOQL(scriptHelper);
 		String company_Name = companyName.fetchRecord("Lead", "Name");

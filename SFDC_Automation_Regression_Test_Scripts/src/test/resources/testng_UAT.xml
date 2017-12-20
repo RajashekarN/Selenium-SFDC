@@ -38,6 +38,21 @@
 			<class name="testscripts.SF.UATTestScripts.TC_SF_FDIGEMEADataAttachmentonAccountTask"/>
 			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACManagerBudgetCreation"/>
 			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACManagerBudgetEdit"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_OBAPACBrokerBulkTagging"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACAdminPropertyPreference"/>
+<!-- 			<class name="testscripts.SF.UATTestScripts.TC_SF_FRANEMEAManagerLeadActivity"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_FRANEMEAManagerAccountActivity"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_FRANEMEAManagerContactActivity"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_FRANEMEAManagerOpportunityActivity"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_FRANEMEAManagerLeadEventActivity"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_FRANEMEAManagerContactEventActivity"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_FRANEMEAManagerAccountEventActivity"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_FRANEMEAManagerOpportunityEventActivity"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_FRANEMEAManagerLeadActivityExpandAll"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_FRANEMEAManagerAccountActivityExpandAll"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_FRANEMEAManagerContactActivityExpandAll"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_FRANEMEAManagerOpportunityActivityExpandAll"/> -->
+						
 		</classes>
 	</test>
 </suite>
