@@ -34,6 +34,9 @@ public class Tagging extends ReusableLibrary {
 	static String sPrivateTagName;
 
 	EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
+	AccountsFunctions accountsFunctions = new AccountsFunctions(scriptHelper);
+	ContactsFunctions contactsFunctions = new ContactsFunctions(scriptHelper);
+	LeadsFunctions leadsFunctions = new LeadsFunctions(scriptHelper);
 	SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
 
 	/**
@@ -44,7 +47,7 @@ public class Tagging extends ReusableLibrary {
 	 */ 
 
 	public String createPrivateTag() {
-		establishConnection.establishConnectionSpecificUser();
+		establishConnection.establishConnection();
 		SObject privateTag = new SObject();
 		privateTag.setType("Private_Tag__c");
 		sPrivateTagName = "PrivateTag" +"_" + Utility_Functions.xGenerateAlphaNumericString();
@@ -84,8 +87,9 @@ public class Tagging extends ReusableLibrary {
 			privateTag.setField("ContactRelatedTo__c", contactName);
 		} else if (dataTable.getData("General_Data", "TC_ID").contains("Lead")) {
 			privateTag.setType("Private_Tag_with_Lead__c");
-			String leadName = searchTextSOQL.fetchRecord("Lead", "Id");
-			privateTag.setField("LeadRelatedTo__c", leadName);
+			//String leadName = searchTextSOQL.fetchRecord("Lead", "Id");
+			String sNewLead = leadsFunctions.createNewLead(); 
+			privateTag.setField("LeadRelatedTo__c", sNewLead);
 		} else if (dataTable.getData("General_Data", "TC_ID").contains("Property")) {
 			privateTag.setType("Private_Tag_with_Property__c");
 			String propertyName = searchTextSOQL.fetchRecord("Property__c", "Id");
@@ -103,6 +107,8 @@ public class Tagging extends ReusableLibrary {
 		String sCustomePrivateTagId = establishConnection.saveResultsId(results);
 		if(sCustomePrivateTagId.startsWith("a0")) {
 			report.updateTestLog("Verify Create Private Tag", "Private Tag for Account has been created successfully", Status.PASS);
+		} else if(sCustomePrivateTagId.startsWith("a2")) {
+			report.updateTestLog("Verify Create Private Tag", "Private Tag for Property has been created successfully", Status.PASS);
 		} else {
 			report.updateTestLog("Verify Create Private Tag", "Private Tag for Account creation failed", Status.FAIL);
 		}

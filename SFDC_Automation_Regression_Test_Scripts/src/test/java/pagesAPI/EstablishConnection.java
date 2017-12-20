@@ -43,7 +43,7 @@ public class EstablishConnection extends ReusableLibrary {
 	 *
 	 */
 	LoginPage loginPage = new LoginPage(scriptHelper);
-	public void establishConnection() {
+	/*public void establishConnection() {
 		try {
 			String environment = loginPage.initializeEnvironment();
 			System.out.println(environment);
@@ -91,9 +91,9 @@ public class EstablishConnection extends ReusableLibrary {
 		} catch (ConnectionException e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 	
-	public void establishConnectionSpecificUser() {
+	public void establishConnection() {
 		try {
 			String environment = loginPage.initializeEnvironment();
 			System.out.println(environment);
@@ -144,7 +144,13 @@ public class EstablishConnection extends ReusableLibrary {
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) 
 					Username = properties.getProperty(environment+"CMAMERManager");	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) 
-					Username = properties.getProperty(environment+"CMAMERCSS");					
+					Username = properties.getProperty(environment+"CMAMERCSS");		
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) 
+					Username = properties.getProperty(environment+"ASAPACBroker");	
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) 
+					Username = properties.getProperty(environment+"ASAPACManager");		
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) 
+					Username = properties.getProperty(environment+"ASAPACCSS");		
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) 
 					Username = properties.getProperty(environment+"FRANEMEAManager");	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("FDIGEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) 
@@ -153,6 +159,8 @@ public class EstablishConnection extends ReusableLibrary {
 					Username = properties.getProperty(environment+"FDIREMEAManager");	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("FDIGEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Data"))) 
 					Username = properties.getProperty(environment+"FDIGEMEAData");	
+				else if (dataTable.getData("General_Data", "TC_ID").contains("Admin")) 
+					Username = properties.getProperty(environment+"SystemAdminUsername");
 			}	
 			
 			if (environment.equals("UAT")) { 			
@@ -164,6 +172,7 @@ public class EstablishConnection extends ReusableLibrary {
 				System.out.println("AuthEndPoint: " + UAT_AuthEndpoint);
 				config.setAuthEndpoint(UAT_AuthEndpoint);
 				connection = new PartnerConnection(config);
+				System.out.println(connection);
 			} else if (environment.equals("UAT2")) {				
 				Password = properties.getProperty("UAT2AdminPassword");
 				String UAT2_AuthEndpoint = properties.getProperty("UAT2AuthEndpoint");

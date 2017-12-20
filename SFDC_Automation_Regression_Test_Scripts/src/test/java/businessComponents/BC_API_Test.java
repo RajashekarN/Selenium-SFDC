@@ -3,12 +3,12 @@ package businessComponents;
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
-import com.sforce.soap.partner.SaveResult;
 
 import pageObjects.LoginPage;
 import pagesAPI.AccountsFunctions;
 import pagesAPI.ActivityFunctions;
 import pagesAPI.AttachmentsFunctions;
+import pagesAPI.BudgetsTargetsFunctions;
 import pagesAPI.ContactsFunctions;
 import pagesAPI.CreateUsers;
 import pagesAPI.EstablishConnection;
@@ -51,6 +51,7 @@ public class BC_API_Test extends ReusableLibrary {
 	TaskEventsFunctions taskEventsFunctions = new TaskEventsFunctions(scriptHelper);
 	AttachmentsFunctions attachmentsFunctions = new AttachmentsFunctions(scriptHelper);
 	Tagging tagging= new Tagging(scriptHelper);
+	BudgetsTargetsFunctions budgetsTargetsFunctions = new BudgetsTargetsFunctions(scriptHelper);
 	
 	/**
 	 * Validating the Login functionality
@@ -67,23 +68,6 @@ public class BC_API_Test extends ReusableLibrary {
 			report.updateTestLog("Verify Login", "Login to the application is failed", Status.FAIL);
 		}
 	}	
-
-	/**
-	 * Validating the Create Account functionality
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-
-	public void bc_createAccount() {
-		SaveResult[] results = sfAccountsFunctions.createAccount();
-		String result = sfEstablishConnection.saveResultsId(results);
-		if(result.contains("001")) {
-			report.updateTestLog("Verify Create Account", "Account has been created successfully", Status.PASS);
-		} else {
-			report.updateTestLog("Verify Create Account", "Account creation failed", Status.FAIL);
-		}
-	}
 
 	/**
 	 * Validating the Update Accounts functionality
@@ -178,22 +162,6 @@ public class BC_API_Test extends ReusableLibrary {
 			report.updateTestLog("Verify Search Phone Number", "Phone Number has been searched successfully", Status.PASS);
 		} else {
 			report.updateTestLog("Verify Search Phone Number", "Search Phone Number failed", Status.FAIL);
-		}
-	}
-
-	/**
-	 * Validating the Create Opportunity functionality
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-
-	public void bc_createOpportunity() {
-		boolean status = sfOpportunitiesFunctions.createOpportunity();
-		if(status==true) {
-			report.updateTestLog("Verify Create Opportunity", "Opportunity has been deleted successfully", Status.PASS);
-		} else {
-			report.updateTestLog("Verify Create Opportunity", "Opportunity creation failed", Status.FAIL);
 		}
 	}
 
@@ -511,5 +479,24 @@ public class BC_API_Test extends ReusableLibrary {
 	 */
 	public void bc_privateTagging() throws InterruptedException {
 		tagging.CustomPrivateTag();
+	}
+	
+	/**
+	 * Budget Creation
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void bc_createBudget() throws InterruptedException {
+		budgetsTargetsFunctions.createBudget();
+	}
+	/**
+	 * Budget Editing
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void bc_budgetEdit() throws InterruptedException {
+		budgetsTargetsFunctions.budgetEdit();
 	}
 }
