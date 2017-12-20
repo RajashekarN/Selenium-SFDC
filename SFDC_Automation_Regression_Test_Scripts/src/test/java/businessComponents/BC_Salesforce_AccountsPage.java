@@ -4,6 +4,7 @@ import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 
 import pageObjects.AccountsPage;
+import pageObjects.ActivityPage;
 import pagesAPI.AccountsFunctions;
 import pagesAPI.Tagging;
 import pagesAPI.TaskEventsFunctions;
@@ -33,6 +34,7 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 	AccountsFunctions accountsFunctions = new AccountsFunctions(scriptHelper);
 	TaskEventsFunctions taskEventsFunctions = new TaskEventsFunctions(scriptHelper);
 	Tagging tagging = new Tagging(scriptHelper);
+	ActivityPage sfActivityPage=new ActivityPage(scriptHelper);
 	/**
 	 * Validating the Login functionality
 	 * 
@@ -44,6 +46,24 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 		sfBC_Login.bc_invokeApplication();
 		sfBC_Login.bc_login();
 	}
+	
+	public void bc_accountActivity(){
+		sfAccountsPage.verifyCreateActivityAccount();
+	}
+	
+	public void bc_selectAccount(){
+		sfAccountsPage.selectAccount();
+	}
+	 public void bc_validateCreatedActivities(){
+		 sfActivityPage.validateAccountActivity();
+	 }
+	 public void bc_validateCreatedActivitiyExpandAll(){
+		 sfActivityPage.validateActivityExpandAll();
+	 }
+	 
+	 public void bc_eventActivity(){
+		 sfActivityPage.validateEventActivity();
+	 }
 
 	/**
 	 * Validating the Account Landing Page functionality

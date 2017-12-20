@@ -39,6 +39,17 @@ public class BC_Salesforce_LeadsPage extends ReusableLibrary {
 		sfBC_Login.bc_invokeApplication();
 		sfBC_Login.bc_login();
 	}
+	
+	/**
+	 * Validating the Convert Lead functionality 
+	 * 
+	 * @author Cognizant
+	 *
+	 */	
+	public void bc_selectLead(){
+		sfLeadsPage.selectLead();
+		
+	}
 
 	/**
 	 * Validating the Convert Lead functionality 
@@ -49,6 +60,10 @@ public class BC_Salesforce_LeadsPage extends ReusableLibrary {
 
 	public void bc_convertLead() throws InterruptedException {
 		sfLeadsPage.convertLead();
+	}
+	
+	public void bc_leadsActivity(){
+		sfLeadsPage.validateLeadActivity();
 	}
 
 	/**
