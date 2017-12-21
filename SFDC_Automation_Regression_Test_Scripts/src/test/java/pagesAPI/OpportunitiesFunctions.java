@@ -1,6 +1,7 @@
 package pagesAPI;
 
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import org.openqa.selenium.support.PageFactory;
 import com.cognizant.Craft.ReusableLibrary;
@@ -16,8 +17,6 @@ import com.sforce.soap.partner.QueryResult;
 import com.sforce.soap.partner.SaveResult;
 import com.sforce.soap.partner.sobject.SObject;
 import com.sforce.ws.ConnectionException;
-
-import supportLibraries.Utility_Functions;
 
 
 public class OpportunitiesFunctions extends ReusableLibrary {
@@ -315,10 +314,127 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 	 *
 	 */	
 
-	public void opportunitiesPageFieldsValidation() {	
+	/**
+	 * Function for the validating the field on the Contacts Page
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+
+	static ArrayList<String> ASAPACHeaders = new ArrayList<String>();
+
+	public void ASAPACHeadings() {
+		ASAPACHeaders.add("Opportunity Information");
+		ASAPACHeaders.add("Services");
+		ASAPACHeaders.add("Financial Information");
+		ASAPACHeaders.add("Additional Information");
+		ASAPACHeaders.add("Status Comments");
+		ASAPACHeaders.add("Loss Information");
+		ASAPACHeaders.add("System Information");
+		System.out.println("ASAPAC Headers List are::" + ASAPACHeaders);
+	}
+
+	static ArrayList<String> ASAPACField = new ArrayList<String>();
+
+	public void ASAPACFields() {
+		ASAPACField.add("Name");
+		ASAPACField.add("AccountId");
+		ASAPACField.add("CloseDate");
+		ASAPACField.add("RecordTypeId");
+		ASAPACField.add("StageName");
+		ASAPACField.add("Service__c");
+		ASAPACField.add("Phase__c");
+		ASAPACField.add("Probability");
+		ASAPACField.add("Amount");
+		ASAPACField.add("CurrencyIsoCode");
+		ASAPACField.add("Total_Size__c");
+		ASAPACField.add("Unit_of_Measure__c");
+		ASAPACField.add("Deal_IQ_URL__c");
+		ASAPACField.add("Next_Steps__c");
+		ASAPACField.add("Reason_for_Loss__c");
+		ASAPACField.add("Other_Reason_for_Loss__c");
+		ASAPACField.add("OwnerId");
+		ASAPACField.add("Alternate_Opportunity_Owner__c");
+		ASAPACField.add("Last_Manually_Modified_By__c");
+		ASAPACField.add("Last_Manually_Modified_Date__c");
+		
+		System.out.println("Asset Services APAC Fields List are::" + ASAPACField);		
+	}
+
+	static ArrayList<String> ASAPACFieldLabelsAPI = new ArrayList<String>();
+
+	public void OpportunitiesPageFieldsValidation() {
+		try {
+			establishConnection.establishConnection();
+			ASAPACHeadings();
+			ASAPACFields();
+			DescribeLayoutResult dlr = EstablishConnection.connection.describeLayout("Opportunity", null, null);
+			int count=0, countLabelList = 0;
+			for (int i = 0; i < dlr.getLayouts().length; i++) {
+				DescribeLayout layout = dlr.getLayouts()[i];
+				DescribeLayoutSection[] editLayoutSectionList = layout.getEditLayoutSections();
+				// Write the headings of the edit layout sections
+				for (int x = 0; x < editLayoutSectionList.length; x++) {
+					if(dataTable.getData("General_Data", "TC_ID").contains("ASAPAC")) {
+						if(editLayoutSectionList.length==7) {
+							if(editLayoutSectionList[x].getHeading().equals(ASAPACHeaders.get(x))) {
+								System.out.println(x + ":::Asset Services APAC has the heading layout section:::" + editLayoutSectionList[x].getHeading());
+								report.updateTestLog(x + ":::Asset Services APAC ", " has the heading layout section:::" + editLayoutSectionList[x].getHeading(), Status.PASS);
+								count++;
+							}
+						}				
+					}						
+				}	
+				System.out.println(count);			
+				if(dataTable.getData("General_Data", "TC_ID").contains("ASAPAC")) {
+					if(editLayoutSectionList.length==7) {
+						for (int k = 0; k < editLayoutSectionList.length; k++) {
+							DescribeLayoutSection els = editLayoutSectionList[k];
+							DescribeLayoutRow[] dlrList = els.getLayoutRows();
+							for (int m = 0; m < dlrList.length; m++) {
+								DescribeLayoutRow lr = dlrList[m];
+								DescribeLayoutItem[] dliList = lr.getLayoutItems();
+								for (int n = 0; n < dliList.length; n++) {
+									DescribeLayoutItem li = dliList[n];
+									if ((li.getLayoutComponents() != null) && (li.getLayoutComponents().length > 0)) {
+											ASAPACFieldLabelsAPI.add(li.getLayoutComponents()[0].getValue());
+									}
+								}
+							}
+						}	
+						System.out.println("ABAMER Field Label::: " + ASAPACFieldLabelsAPI);
+						for(int i1=0; i1 < ASAPACField.size(); i1++) {
+							if(ASAPACFieldLabelsAPI.get(i1).equals(ASAPACField.get(i1))) {						
+								System.out.println("Field Label:::" + ASAPACFieldLabelsAPI.get(i1) + " -- is present in CM APAC:::");
+								report.updateTestLog("Verify Field Labels", " has the field label:::" + ASAPACFieldLabelsAPI.get(i1), Status.PASS);
+								countLabelList++;
+							}			 
+						}
+						System.out.println("Count of fields present in Asset Services APAC::" + countLabelList);
+					}
+				}						
+			}				
+			if(dataTable.getData("General_Data", "TC_ID").contains("ASAPAC")) {
+				if(count==7) {
+					ASAPACHeaders.clear();
+					System.out.println("Asset Services APAC have all the header sections present::");
+					report.updateTestLog("Validating Header Sections", "Admin/Agency Brokerage/Occupier Brokerage AMER - All the headers are present", Status.PASS);
+				}								
+			} 
+			ASAPACField.clear();
+			if (countLabelList == 20) {
+				System.out.println("All the fields are present::");
+				report.updateTestLog("Count of fields present", "All the fields are present in Asset Services APAC", Status.PASS);
+			} 	
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	/*public void OpportunitiesPageFieldsValidation() {	
 		try{
 			establishConnection.establishConnection();
-			DescribeLayoutResult dlr = EstablishConnection.connection.describeLayout("Contact", null, null);
+			DescribeLayoutResult dlr = EstablishConnection.connection.describeLayout("Opportunity", null, null);
 			for(int i = 0; i < dlr.getLayouts().length; i++) {
 				DescribeLayout layout = dlr.getLayouts()[i];
 				DescribeLayoutSection[] detailLayoutSectionList = layout.getDetailLayoutSections();
@@ -366,6 +482,6 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 		}catch (Exception e){
 			System.out.println(e.getMessage());
 		}
-	}
+	}*/
 
 }
