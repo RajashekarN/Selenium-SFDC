@@ -361,5 +361,15 @@ public class BC_Salesforce_LeadsPage extends ReusableLibrary {
 		leadsFunctions.createLeadSpecificUser();
 		leadsFunctions.leadPageFieldsValidation();
 	}
+	
+	/**
+	 * Lead Conversion via API
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void bc_leadConversionAPI() throws InterruptedException {
+		leadsFunctions.leadConversion();
+	}
 }
 
