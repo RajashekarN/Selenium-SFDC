@@ -37,6 +37,7 @@ public class AccountsPage extends ReusableLibrary {
 		PageFactory.initElements(driver.getWebDriver(), this);
 	}
 
+	public static String accountname;
 	@FindBy(xpath = "//div[@class='bBottom']//span[text()='Accounts']")
 	WebElement menu_Accounts;
 
@@ -1400,6 +1401,8 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xclickOnFirstElementfromList(accountNamesList);
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify Create Activity Account ", "The Account is Displayed ", Status.PASS);
+		accountname=accountNameSaved.getText();
+		System.out.println(accountNameSaved.getText());
 		//Utility_Functions.timeWait(2);
 		activityPage.createNewActivity();				
 	}

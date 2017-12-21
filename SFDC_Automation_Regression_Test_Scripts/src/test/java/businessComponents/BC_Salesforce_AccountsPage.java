@@ -54,6 +54,10 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 	public void bc_selectAccount(){
 		sfAccountsPage.selectAccount();
 	}
+	
+	public void bc_validateActivityDetails(){
+		sfActivityPage.validateActivityDetails();
+	}
 	 public void bc_validateCreatedActivities(){
 		 sfActivityPage.validateAccountActivity();
 	 }

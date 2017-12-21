@@ -19,6 +19,7 @@ import com.cognizant.framework.Status;
 import pagesAPI.SearchTextSOQL;
 import supportLibraries.Utility_Functions;
 
+
 public class ActivityPage extends ReusableLibrary {
 	/*
 	 * Constructor to initialize the business component library
@@ -35,13 +36,25 @@ public class ActivityPage extends ReusableLibrary {
 	public static String activityPast;
 	public static String activityPresent;
 	public static String activityFuture;
+	
+	//AccountsPage sfaccountsPage= new AccountsPage(scriptHelper);
 	@FindBy(xpath = "//span[text()='Add']")
 	WebElement addActivity;
 	
+	@FindBy(xpath="//button[@title='Edit Property']")
+	WebElement editButton;
 	
+	@FindBy(xpath = "//span[text()='Send Notification Email']/parent::label/following-sibling::input")
+	WebElement notificationCheckBox;
+	
+	@FindBy(xpath ="//button[@title='Edit Send Notification Email']")
+	WebElement emailNotification;
 	
 	@FindBy(xpath = "//button[@class='slds-button slds-button--neutral showMore slds-button slds-button--neutral uiButton']")
 	WebElement btnPastActivity;
+	
+	@FindBy(xpath = "//span[text()='Related To']/parent::div/following-sibling::div/span/div/a")
+	WebElement lblRelatedTo;
 
 	@FindBy(xpath = "//button[@class='slds-button slds-button--neutral howMore slds-button slds-button--neutral uiButton']")
 	WebElement btnMoreActivity;
@@ -76,6 +89,9 @@ public class ActivityPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//div[contains(@class,'bottomBarRight')]//span[text()='Save']")
 	WebElement activitySave;
+	
+	@FindBy(xpath = "//span[text()='Save']")
+	WebElement activityEditSave;
 
 	@FindBy(xpath = "//div[contains(@title,'Test Automation')]")
 	WebElement activityCreated;
@@ -360,6 +376,41 @@ public class ActivityPage extends ReusableLibrary {
 			report.updateTestLog("Verify created Activity", "Verifying whether the created Activity page is displaying ", Status.FAIL);
 		}
 		
+	}
+	
+	public void validateActivityDetails(){
+		Utility_Functions.xClick(driver,btnPastActivity, true);
+		Utility_Functions.timeWait(3);
+		
+		Utility_Functions.xClick(driver,btnMoreActivity, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementPresent(driver, driver.findElement(By.xpath("//div[@class='timeline-container slds-m-top--medium']/ul/li/descendant::span[text()='"+activityPresent+"']")), 3);
+		Utility_Functions.xClickHiddenElement(driver,driver.findElement(By.xpath("//div[@class='timeline-container slds-m-top--medium']/ul/li/descendant::span[text()='"+activityPresent+"']")));
+		Utility_Functions.timeWait(3);
+		
+		Utility_Functions.xWaitForElementPresent(driver,lblRelatedTo, 3);
+		String accountNamelbl=lblRelatedTo.getAttribute("title");
+		System.out.println(accountNamelbl);
+		System.out.println(AccountsPage.accountname);
+		if(accountNamelbl.equals(AccountsPage.accountname)){
+			report.updateTestLog("Verify account name ", "Verifying whether the created Activity page is displaying the account name", Status.PASS);
+		}else{
+			report.updateTestLog("Verify account name", "Verifying whether the created Activity page is displaying the account name", Status.FAIL);
+		}
+		Utility_Functions.timeWait(3);
+		//Utility_Functions.xWaitForElementPresent(driver,emailNotification, 3);
+		Utility_Functions.xMouseOver(driver,editButton);
+		//Utility_Functions.xHoverElementclicks(editButton,driver);
+		
+		//Utility_Functions.xSwitchtoFrame(driver, emailNotification);
+		Utility_Functions.xClickHiddenElement(driver,emailNotification);
+		
+		Utility_Functions.timeWait(3);
+		//Utility_Functions.xWaitForElementPresent(driver,notificationCheckBox, 6);
+		Utility_Functions.xClickHiddenElement(driver,notificationCheckBox);
+		//Utility_Functions.xWaitForElementPresent(driver,activityEditSave, 3);
+		Utility_Functions.xClick(driver,activityEditSave, true);
+		Utility_Functions.timeWait(3);
 	}
 	
 	public void validateActivityExpandAll(){
