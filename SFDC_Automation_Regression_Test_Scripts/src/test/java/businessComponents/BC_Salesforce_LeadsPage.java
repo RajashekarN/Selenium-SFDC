@@ -346,5 +346,30 @@ public class BC_Salesforce_LeadsPage extends ReusableLibrary {
 		leadsFunctions.createLeadSpecificUser();
 		leadsFunctions.leadPageFieldsValidation();
 	}
+	
+
+	/**
+	 * Validating the Lead Tagging
+	 * 
+	 * @author cognizant
+	 *
+	 */	
+	
+	public void bc_leadTagging () {
+		   sfLeadsPage.leadTagging();
+			
+		}
+	
+	/**
+	 * Validating the existing Lead Tagging
+	 * 
+	 * @author cognizant
+	 *
+	 */	
+	
+	public void bc_verifyLeadTagging () {
+		   sfLeadsPage.verifyLeadTagging();
+			
+		}
 }
 

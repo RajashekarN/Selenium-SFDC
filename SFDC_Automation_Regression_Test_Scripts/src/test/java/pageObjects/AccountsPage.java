@@ -757,6 +757,65 @@ public class AccountsPage extends ReusableLibrary {
 	
 	@FindBy(xpath = "//span[text()='Add']")
 	WebElement addActivity;
+	
+	@FindBy(xpath = "//a[contains(@title,'Automation')]")
+	WebElement ExistingAccount;
+	
+	@FindBy(xpath="//*[@id='tag_edit_link']")
+	WebElement addTag;
+	
+	@FindBy(xpath="//textarea[@id='ptag_edit_area']")
+	WebElement privatetag;
+	
+	@FindBy(xpath="//input[@id='tag_save_btn']")
+	WebElement savePrivateTag;
+	
+	@FindBy (xpath = "//*[contains(@class,'slds-dropdown__item has-icon--left   forceVirtualAutocompleteMenuOption')]")
+	WebElement AllBudgetTargets;
+	
+	@FindBy (xpath = " //*[@class='forceActionLink' and @title='Delete']")
+	WebElement DeleteBudgetTarget;
+	
+	@FindBy (xpath = "//*[contains(@class,'slds-button slds-button--neutral uiButton-')]")
+	WebElement DeleteBudgetTargetPopup;
+
+	@FindBy (xpath = "//*[@class='primaryLabel slds-truncate slds-lookup__result-text']")
+	WebElement SelectCbreProfessional;
+	
+	@FindBy(css = "ul>li.forceSearchInputLookupDesktopOption:nth-child(1)")
+	WebElement firstLookupElement;
+	
+	@FindBy (xpath = "//*[@class='datePicker-openIcon display']")
+	WebElement CalendarIcon;
+	
+	@FindBy (xpath = "//*[contains(@class,'today slds-s')]")
+	WebElement CalendarDate;
+	
+	@FindBy (xpath = "//*[(@title='Edit')]")
+	WebElement EditBudgetTarget;
+	
+	@FindBy (xpath = "//*[(@class='deleteIcon')]")
+	WebElement deleteCbreProfessional;
+	
+	@FindBy (xpath = "//*[contains(@title,'Clone')]")
+	WebElement CloneBudgteTarget;
+	
+	@FindBy(xpath = "//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']")
+	WebElement AccountList;
+	
+	@FindBy (xpath = "//*[contains(@title,'View records tagged')]")
+	WebElement PrivateTagged;
+	@FindBy (xpath = " //*[contains(@class,'entityNameTitle slds-breadcrumb__item slds-line-height--reset')]")
+	WebElement PrivateTagPage;
+	
+	@FindBy (xpath = "//*[(@title='Test Broker6')]")
+    WebElement SelectTestBroker;
+	
+	@FindBy (xpath = "//div[@title='Delete' and text()='Delete']/parent::a[@title='Delete']")
+	WebElement DeleteClone;
+	
+	DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+	Date date = new Date();
 
 	HomePage hp = new HomePage(scriptHelper);
 	LoginPage loginPage = new LoginPage(scriptHelper);
@@ -4937,4 +4996,220 @@ public class AccountsPage extends ReusableLibrary {
 	
 		
 	}
+	
+     public void accountTagging () {
+		
+		Utility_Functions.xClick(driver, menu_Accounts, true);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xClick(driver, recentlyViewed, true);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xClick(driver, allAccounts, true);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xClick(driver, AccountList, true);
+		Utility_Functions.timeWait(2);
+		
+		
+		
+		Utility_Functions.xSwitchtoFrame(driver, addTag);
+		Utility_Functions.xClickHiddenElement(driver, addTag);
+		//Utility_Functions.xClick(driver, addTag, true);
+		Utility_Functions.timeWait(3);	
+		Utility_Functions.xSendKeys(driver, privatetag , dataTable.getData("General_Data", "Private Tag"));
+		Utility_Functions.timeWait(3);
+		/*List<WebElement>experience = driver.findElements(By.id("tag_save_btn"));
+	       System.out.println("Number of save buttons are "+experience.size());
+	       
+	      for(int i=0;i<experience.size();i++)
+	      {
+	    	  String values = experience.get(i).getAttribute("value");
+	    	  if(values.equals("4")) {
+	    		  experience.get(i).click();
+	    		  break;	  
+	    	  }
+	    	  
+	      }*/
+		
+	
+	      Utility_Functions.xClickHiddenElement(driver, savePrivateTag);
+	
+		Utility_Functions.timeWait(5);
+
+		if(addTag.isDisplayed()){
+			report.updateTestLog("Verify Account Private Tags", "The Private Tag is saved",
+					Status.PASS);		
+		}else{
+			report.updateTestLog("Verify Account Private Tags", "The Private tag is not saved",
+					Status.FAIL);
+		}
+		
+	
 }
+     public void verifyAccountTagging () {
+	    	
+	    	
+         Utility_Functions.xClick(driver, PrivateTagged, true);
+	     Utility_Functions.timeWait(8);
+	    Utility_Functions.xSwitchToWindow(driver, 1);
+		
+	      if(PrivateTagPage.isDisplayed()){
+				report.updateTestLog("Verify Lead Private Tags", "The Tag is saved in Private Tag Page",
+						Status.PASS);		
+			}else{
+				report.updateTestLog("Verify Lead Private Tags", "The Tag is not saved in Private Tag Page",
+						Status.FAIL);
+		}
+	      System.out.println("Current URL is--" +driver.getCurrentUrl());
+}
+    	
+           public void createBudgetTarget () {
+        	   
+    		Utility_Functions.xClick(driver, applauncher, true);
+    		Utility_Functions.timeWait(2);
+    		Utility_Functions.xClick(driver, budgetsTargets, true);
+    		Utility_Functions.timeWait(2);
+    		Utility_Functions.xClick(driver, newBudgetsTargets, true);
+    		Utility_Functions.timeWait(2);
+    		
+    		if(cbreProfessional.isDisplayed()){
+    			report.updateTestLog("Verify CBRE Professional", "The CBRE Professional field is displayed",
+    					Status.PASS);		
+    		}else{
+    			report.updateTestLog("Verify CBRE Professional", "The CBRE Professional field is not displayed",
+    					Status.FAIL);
+    		}
+    		
+    		if(budgetAmount.isDisplayed()){
+    			report.updateTestLog("Verify Budget Target Amount", "The Budget Target Amount field is displayed",
+    					Status.PASS);		
+    		}else{
+    			report.updateTestLog("Verify Budget Target Amount", "The Budget Target Amount field is not displayed",
+    					Status.FAIL);
+    		}
+    		if(startDate.isDisplayed()){
+    			report.updateTestLog("Verify Start Date", "The Start Date field is displayed",
+    					Status.PASS);		
+    		}else{
+    			report.updateTestLog("Verify Start Date", "The Start Date field is not displayed",
+    					Status.FAIL);
+    		}
+    		
+    		if(budgetOwner.isDisplayed()){
+    			report.updateTestLog("Verify owner", "The owner field is displayed",
+    					Status.PASS);		
+    		}else{
+    			report.updateTestLog("Verify owner", "The owner field is not displayed",
+    					Status.FAIL);
+    		}
+    		
+    		if(budgetCurrency.isDisplayed()){
+    			report.updateTestLog("Verify Currency", "The Currency field is displayed",
+    					Status.PASS);		
+    		}else{
+    			report.updateTestLog("Verify Currency", "The Currency field is not displayed",
+    					Status.FAIL);
+    		}
+    		
+    	
+    		Utility_Functions.xSendKeys(driver, cbreProfessional, "Test Broker6");
+    		Utility_Functions.timeWait(3);
+    		
+    		Utility_Functions.xClick(driver, SelectTestBroker, true);
+    		Utility_Functions.timeWait(2);
+     	   // Utility_Functions.xClick(driver, SelectCbreProfessional, true);
+    		//Utility_Functions.timeWait(2);
+    		
+
+    		//Utility_Functions.xClick(driver, firstLookupElement, true);
+    	
+    		Utility_Functions.timeWait(3);
+    		Utility_Functions.xSendKeys(driver, budgetAmount, dataTable.getData("General_Data", "Budget Amount"));
+    		Utility_Functions.timeWait(3);
+    		Calendar calendar = Calendar.getInstance();
+
+		    // Move calendar to future
+		    calendar.add(Calendar.DATE, 1065);
+
+		    // Get current date of calendar which point to the yesterday now
+		    Date newDate = calendar.getTime();
+		    Utility_Functions.xWaitForElementPresent(driver, startDate, 3);
+			Utility_Functions.xSendKeys(driver, startDate, dateFormat.format(newDate).toString());
+    	
+    		Utility_Functions.xClick(driver, saveBudget, true);
+    		Utility_Functions.timeWait(5);
+    		
+   	    	
+}
+           
+           public void deleteBudgteTarget () {
+        	   
+        	   Utility_Functions.xSwitchtoFrame(driver, DeleteClone);
+        	   Utility_Functions.xClickHiddenElement(driver, DeleteClone);
+        	   Utility_Functions.timeWait(2);
+        	   Utility_Functions.xClick(driver, DeleteBudgetTargetPopup, true);
+        	   Utility_Functions.timeWait(7);
+        	   
+           }
+           
+            public void editBudgetTarget () {
+     
+       		Utility_Functions.xClick(driver, EditBudgetTarget, true);
+       		Utility_Functions.timeWait(2);
+       		Utility_Functions.xSendKeys(driver, budgetAmount, "50000");
+    		Utility_Functions.timeWait(3);
+       		/*Utility_Functions.xClick(driver, deleteCbreProfessional, true);
+       		Utility_Functions.timeWait(2);
+    		Utility_Functions.xSendKeys(driver, cbreProfessional, dataTable.getData("General_Data", "Edit CBRE Professional"));
+    		Utility_Functions.timeWait(3);
+    		Utility_Functions.xClick(driver, firstLookupElement, true);
+    		Utility_Functions.timeWait(3);*/
+       		/*Calendar calendar = Calendar.getInstance();
+
+		    // Move calendar to future
+		    calendar.add(Calendar.DATE, 1);
+
+		    // Get current date of calendar which point to the yesterday now
+		    Date newDate = calendar.getTime();
+		    Utility_Functions.xWaitForElementPresent(driver, startDate, 3);
+			Utility_Functions.xSendKeys(driver, startDate, dateFormat.format(newDate).toString()); */
+       		Utility_Functions.xClick(driver, saveBudget, true);
+       		Utility_Functions.timeWait(2);
+       		
+       	
+}
+            public void cloningBudgetTarget() {
+            	
+            	Utility_Functions.xClick(driver, CloneBudgteTarget, true);
+            	Utility_Functions.timeWait(2);
+            	Calendar calendar = Calendar.getInstance();
+
+    		    // Move calendar to future
+    		    calendar.add(Calendar.DATE, 1300);
+
+    		    // Get current date of calendar which point to the yesterday now
+    		    Date newDate = calendar.getTime();
+    		    Utility_Functions.xWaitForElementPresent(driver, startDate, 3);
+    			Utility_Functions.xSendKeys(driver, startDate, dateFormat.format(newDate).toString());
+    			Utility_Functions.xClick(driver, saveBudget, true);
+           		Utility_Functions.timeWait(2);
+            	
+            }
+            
+            public void opportunityToAccount () {
+            	
+            	Utility_Functions.xClick(driver, menu_Accounts, true);
+        		Utility_Functions.timeWait(2);
+        		Utility_Functions.xClick(driver, recentlyViewed, true);
+        		Utility_Functions.timeWait(2);
+        		Utility_Functions.xClick(driver, allAccounts, true);
+        		Utility_Functions.timeWait(2);
+        		Utility_Functions.xClick(driver, AccountList, true);
+        		Utility_Functions.timeWait(2);
+        		
+        		Utility_Functions.xClick(driver, related_Accounts, true);
+        		Utility_Functions.timeWait(2);
+        		
+        		
+            	
+            	
+            }
+            }

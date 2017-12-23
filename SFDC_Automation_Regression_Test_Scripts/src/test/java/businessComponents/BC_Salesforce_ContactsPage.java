@@ -229,4 +229,13 @@ public class BC_Salesforce_ContactsPage extends ReusableLibrary {
 	public void bc_contactsMarketingSegmentationFields()throws InterruptedException{
 		sfContactsPage.contactsMarketingSegmentationFields();
 	}
+	
+	/**
+	 * Validating the Contacts tagging
+	 * @author Cognizant
+	 *
+	 */
+	public void bc_contactTagging()throws InterruptedException{
+		sfContactsPage.contactTagging();
+	}
 }
