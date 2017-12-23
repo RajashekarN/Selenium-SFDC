@@ -110,10 +110,43 @@
 				name="testscripts.SF.UATTestScripts.TC_SF_FRANEMEAManagerLeadEventActivityOrder" />
 			<class
 				name="testscripts.SF.UATTestScripts.TC_SF_FRANEMEAManagerOpportunityEventActivityOrder" />
-			<!-- <class
-				name="testscripts.SF.UATTestScripts.TC_SF_CMAPACAdminOpportunityNotesFile" />
 			<class
-				name="testscripts.SF.UATTestScripts.TC_SF_CMAPACAdminOpportunityActivity" /> -->
+				name="testscripts.SF.UATTestScripts.TC_SF_CMAMERAdminInstallmentOpportunityModification" />
+			<class
+				name="testscripts.SF.UATTestScripts.TC_SF_CMAPACAdminInstallmentOpportunityModification" />
+			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACAdminLeadTagging" />
+			<class
+				name="testscripts.SF.UATTestScripts.TC_SF_CMAPACAdminAccountTagging" />
+			<class
+				name="testscripts.SF.UATTestScripts.TC_SF_CMAPACManagerOpportunityTagging" />
+			<class
+				name="testscripts.SF.UATTestScripts.TC_SF_CMAPACAdminPropertyTagging" />
+			<class
+				name="testscripts.SF.UATTestScripts.TC_SF_CMAPACManagerVerifyContactTagging" />
+			<class
+				name="testscripts.SF.UATTestScripts.TC_SF_CMAPACManagerVerifyLeadTagging" />
+			<class
+				name="testscripts.SF.UATTestScripts.TC_SF_CMAPACManagerCreateBudgetTarget" />
+			<class
+				name="testscripts.SF.UATTestScripts.TC_SF_CMAPACManagerEditBudgetTarget" />
+			<class
+				name="testscripts.SF.UATTestScripts.TC_SF_CMAPACManagerCloneBudgetTarget" />
+			<class
+				name="testscripts.SF.UATTestScripts.TC_SF_CMAPACAdminVerifyAccountTagging" />
+			<class
+				name="testscripts.SF.UATTestScripts.TC_SF_CMAPACAdminInstallmentAmountCreateEdit" />
+			<class
+				name="testscripts.SF.UATTestScripts.TC_SF_CMAPACAdminMultipleInstallmentAmountCreateEdit" />
+			<class
+				name="testscripts.SF.UATTestScripts.TC_SF_CMAPACAdminInstallmentRecalculate" />
+			<class
+				name="testscripts.SF.UATTestScripts.TC_SF_CMAPACAdminInstallmentOpportunityProbability" />
+
+			<!-- <class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACAdminOpportunityNotesFile" 
+				/> <class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACAdminOpportunityActivity" 
+				/> -->
+
+
 
 		</classes>
 	</test>
