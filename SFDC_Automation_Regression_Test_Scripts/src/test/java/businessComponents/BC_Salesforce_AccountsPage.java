@@ -55,7 +55,7 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 		sfAccountsPage.selectAccount();
 	}
 	
-	public void bc_validateActivityDetails(){
+	/*public void bc_validateActivityDetails(){
 		sfActivityPage.validateActivityDetails();
 	}
 	 public void bc_validateCreatedActivities(){
@@ -67,7 +67,7 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 	 
 	 public void bc_eventActivity(){
 		 sfActivityPage.validateEventActivity();
-	 }
+	 }*/
 
 	/**
 	 * Validating the Account Landing Page functionality

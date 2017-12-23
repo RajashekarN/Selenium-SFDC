@@ -196,6 +196,41 @@ public class Utility_Functions extends ReusableLibrary {
 		// timeWait(1);
 
 	}
+	
+	/*
+	 * *******************************************************************
+	 * Function Name: xClickVisibleListElement Author : CBRE SFDC Automation Purpose : Click the visible
+	 * element field: driver, List<WebElement>
+	 * ******************************************************************
+	 */
+	public static void xClickVisibleListElement(CraftDriver driver, List<WebElement> eleList) {
+		
+		for(WebElement element : eleList){
+			if(element.isDisplayed()){
+				xClick(driver, element, true);
+				break;
+			}
+		}
+		
+
+	}
+	/*
+	 * *******************************************************************
+	 * Function Name: xSendKeysVisibleListElement Author : CBRE SFDC Automation Purpose : SendKeys to the visible
+	 * element field: driver, List<WebElement>,string
+	 * ******************************************************************
+	 */
+	public static void xSendKeysVisibleListElement(CraftDriver driver, List<WebElement> eleList,String strVal) {
+		
+		for(WebElement element : eleList){
+			if(element.isDisplayed()){
+				xSendKeys(driver, element, strVal);
+				break;
+			}
+		}
+		
+
+	}
 
 	public static void xSendKeysNonEmpty(CraftDriver driver, WebElement el, String strVal) {
 		if (!(strVal.equals("") || strVal.isEmpty())) {
@@ -420,6 +455,8 @@ public class Utility_Functions extends ReusableLibrary {
 		wait.until(ExpectedConditions.visibilityOfAllElements(elements));
 		return true;
 	}
+	
+	
 	
 	// ******************************************************************
 	// wait for element to disappear
