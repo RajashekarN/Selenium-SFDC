@@ -129,7 +129,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				userNameCreatedList.add(userName);
 				setPermissionSets(userNameCreatedList, permissionSetsLabels);
 				userNameCreatedList.clear();
-				createUsers.setPassword(userResultId, properties.getProperty(environment + "AdminPassword"));
+				//createUsers.setPassword(userResultId, properties.getProperty(environment + "AdminPassword"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1468,7 +1468,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 			case "testuser95@cbre.com.crm.":
 
 				roleIDLabels.add("FR DIG");
-				profileIDLabels.add("CBRE - France - DataAdmin");
+				profileIDLabels.add("CBRE - France - Data Admin");
 				timeZone.add("Europe/Paris");
 				System.out.println("France Data User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: FR DIG and CBRE - France - Data Admin");

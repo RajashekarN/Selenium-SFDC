@@ -6,11 +6,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
@@ -20,6 +22,7 @@ import pagesAPI.AccountsFunctions;
 import pagesAPI.EstablishConnection;
 import pagesAPI.SearchTextSOQL;
 import supportLibraries.Utility_Functions;
+import pagesAPI.TaskEventsFunctions;
 
 
 /**
@@ -608,6 +611,31 @@ public class LeadsPage extends ReusableLibrary {
 	SearchTextSOQL searchRecord = new SearchTextSOQL(scriptHelper);
 	EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
 	EventPage eventPage = new EventPage(scriptHelper);
+	
+	/**
+	 * Selecting the Contact from a list of contacts
+	 * 
+	 * @author Cognizant
+	 *
+	 */
+
+	public void selectLead() {
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xClick(driver, menu_Leads, true);
+		Utility_Functions.timeWait(1);
+		report.updateTestLog("Verify Create Activity Lead", "Lead are Displayed ", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
+		Utility_Functions.xClick(driver, recentlyViewed, true);
+		report.updateTestLog("Verify Create Activity Lead", "Recently viewed Lead are Displayed ", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, allLeadsMenu, 3);
+		Utility_Functions.xClick(driver, allLeadsMenu, true);
+		Utility_Functions.timeWait(7);
+		report.updateTestLog("Verify Create Activity Lead", "All Lead are displayed successfully:::", Status.PASS);
+		List<WebElement> contactList = driver
+				.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xclickgetTextofFirstElementfromList(contactList);
+		Utility_Functions.timeWait(2);
+	}
 	public void convertLead() {
 		Utility_Functions.xWaitForElementPresent(driver, menu_Leads, 3);
 		Utility_Functions.xClick(driver, menu_Leads, true);
@@ -683,7 +711,38 @@ public class LeadsPage extends ReusableLibrary {
 			System.out.println("Convert Status field is not having the option as Qualified by default:::" + e.getMessage());
 		}
 	}
-
+	
+	/**
+	 * Function to validate the Convert List elements
+	 * 
+	 * @author Cognizant
+	 *
+	 */
+	public void validateLeadActivity() {
+	
+		Utility_Functions.xWaitForElementPresent(driver, menu_Leads, 3);
+		Utility_Functions.xClick(driver, menu_Leads, true);
+		Utility_Functions.xWaitForElementPresent(driver, leadsList, 3);
+		try {
+			if(leadsList.isEmpty()) {
+				System.out.println("Recently Viewed List is empty");
+				Utility_Functions.xClick(driver, recentlyViewed, true);
+				Utility_Functions.xWaitForElementPresent(driver, allLeadsMenu, 3);
+				Utility_Functions.xClick(driver, allLeadsMenu, true);	
+				Utility_Functions.xclickRandomElement(leadsList);
+			} else {
+				Utility_Functions.xclickRandomElement(leadsList);
+			}
+		} catch (Exception e2) {
+			System.out.println("Unable to click on the Lead from the Leads list:::");
+		}			
+		Utility_Functions.timeWait(2);
+		String url = driver.getCurrentUrl().split("#")[0];
+		String newUrl = url + "#/sObject/" + TaskEventsFunctions.leadId;
+		newUrl = newUrl + "/view";
+		driver.get(newUrl);
+		Utility_Functions.timeWait(1);
+	}
 	/**
 	 * Function to validate the Convert List elements
 	 * 

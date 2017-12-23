@@ -358,6 +358,14 @@ public class SearchTextSOQL extends ReusableLibrary {
 							recordID = (String) record.getField("PropertyRelatedTo__c");
 							report.updateTestLog("Verify Fetch Record",
 									"Record has been fetched successfully:::" + recordID, Status.PASS);
+						} else if (fieldname.equals("CBRE_Professional__c")) {
+							recordID = (String) record.getField("CBRE_Professional__c");
+							report.updateTestLog("Verify Fetch Record",
+									"Record has been fetched successfully:::" + recordID, Status.PASS);
+						} else if (fieldname.equals("FirstName")) {
+							recordID = (String) record.getField("FirstName");
+							report.updateTestLog("Verify Fetch Record",
+									"Record has been fetched successfully:::" + recordID, Status.PASS);
 						} else {
 							recordID = (String) record.getField("Id");
 							report.updateTestLog("Verify Fetch Record",
@@ -466,6 +474,96 @@ public class SearchTextSOQL extends ReusableLibrary {
 		file.setField("ParentID", accountID);
 
 		file.setField("Name", "SampleDocument.doc");
+
+		SObject[] files = new SObject[1];
+		files[0] = file;
+		try {
+			results = EstablishConnection.connection.create(files);
+		} catch (ConnectionException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Result:::" + results);
+		status = establishConnection.saveResults(results);
+	}
+
+	/**
+	 * Function for uploading File
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void uploadFileToOpportunity() {
+		establishConnection.establishConnection();
+		String accountID = fetchRecord("Opportunity", "Id");
+		System.out.println(accountID);
+		byte[] inbuff = null;
+		String fileName = new File("src/test/resources/Sample Test Automation.txt").getAbsolutePath();
+		InputStream inputStream;
+		try {
+			inputStream = new FileInputStream(fileName);
+			inbuff = new byte[(int) fileName.length()];
+			try {
+				inputStream.read(inbuff);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
+
+		SObject file = new SObject();
+		file.setType("Attachment");
+
+		file.setField("Body", inbuff);
+		file.setField("ParentID", accountID);
+
+		file.setField("Name", "SampleDocument.doc");
+
+		SObject[] files = new SObject[1];
+		files[0] = file;
+		try {
+			results = EstablishConnection.connection.create(files);
+		} catch (ConnectionException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Result:::" + results);
+		status = establishConnection.saveResults(results);
+	}
+
+	/**
+	 * Function for uploading File
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void AddNoteToOpportunity() {
+		establishConnection.establishConnection();
+		String accountID = fetchRecord("Opportunity", "Id");
+		System.out.println(accountID);
+	/*	byte[] inbuff = null;
+		String fileName = new File("src/test/resources/Sample Test Automation.txt").getAbsolutePath();
+		InputStream inputStream;
+		try {
+			inputStream = new FileInputStream(fileName);
+			inbuff = new byte[(int) fileName.length()];
+			try {
+				inputStream.read(inbuff);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}*/
+		
+		String txtBody="Test notes body";
+
+		SObject file = new SObject();
+		file.setType("Note");
+
+		file.setField("Body", txtBody);
+		file.setField("ParentID", accountID);
+
+		file.setField("Title", "SampleDocument.doc");
 
 		SObject[] files = new SObject[1];
 		files[0] = file;

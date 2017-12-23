@@ -6,6 +6,7 @@ import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
 import com.sforce.soap.partner.DeleteResult;
 import com.sforce.soap.partner.GetUserInfoResult;
+import com.sforce.soap.partner.LeadConvertResult;
 import com.sforce.soap.partner.PartnerConnection;
 import com.sforce.soap.partner.SaveResult;
 import com.sforce.ws.ConnectionException;
@@ -43,7 +44,7 @@ public class EstablishConnection extends ReusableLibrary {
 	 *
 	 */
 	LoginPage loginPage = new LoginPage(scriptHelper);
-	public void establishConnection() {
+	/*public void establishConnection() {
 		try {
 			String environment = loginPage.initializeEnvironment();
 			System.out.println(environment);
@@ -91,9 +92,9 @@ public class EstablishConnection extends ReusableLibrary {
 		} catch (ConnectionException e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 	
-	public void establishConnectionSpecificUser() {
+	public void establishConnection() {
 		try {
 			String environment = loginPage.initializeEnvironment();
 			System.out.println(environment);
@@ -144,7 +145,13 @@ public class EstablishConnection extends ReusableLibrary {
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) 
 					Username = properties.getProperty(environment+"CMAMERManager");	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) 
-					Username = properties.getProperty(environment+"CMAMERCSS");					
+					Username = properties.getProperty(environment+"CMAMERCSS");		
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) 
+					Username = properties.getProperty(environment+"ASAPACBroker");	
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) 
+					Username = properties.getProperty(environment+"ASAPACManager");		
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) 
+					Username = properties.getProperty(environment+"ASAPACCSS");		
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) 
 					Username = properties.getProperty(environment+"FRANEMEAManager");	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("FDIGEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) 
@@ -153,6 +160,8 @@ public class EstablishConnection extends ReusableLibrary {
 					Username = properties.getProperty(environment+"FDIREMEAManager");	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("FDIGEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Data"))) 
 					Username = properties.getProperty(environment+"FDIGEMEAData");	
+				else if (dataTable.getData("General_Data", "TC_ID").contains("Admin")) 
+					Username = properties.getProperty(environment+"SystemAdminUsername");
 			}	
 			
 			if (environment.equals("UAT")) { 			
@@ -164,6 +173,7 @@ public class EstablishConnection extends ReusableLibrary {
 				System.out.println("AuthEndPoint: " + UAT_AuthEndpoint);
 				config.setAuthEndpoint(UAT_AuthEndpoint);
 				connection = new PartnerConnection(config);
+				System.out.println(connection);
 			} else if (environment.equals("UAT2")) {				
 				Password = properties.getProperty("UAT2AdminPassword");
 				String UAT2_AuthEndpoint = properties.getProperty("UAT2AuthEndpoint");
@@ -282,6 +292,40 @@ public class EstablishConnection extends ReusableLibrary {
 		return status;
 	}
 
+	public String leadConvertResults(LeadConvertResult[] Results) {
+		LeadConvertResult[] results = Results;
+		String sAccountID =null, sContactID =null, sOpportunityID =null, sLeadID =null;
+		String sIDs = null;
+		System.out.println("Results:::" + results);
+		for (int j = 0; j < results.length; j++) {
+			if (results[j].isSuccess()) {
+				sAccountID = results[j].getAccountId();
+				sContactID = results[j].getContactId();
+				sOpportunityID = results[j].getOpportunityId();
+				sLeadID = results[j].getLeadId();
+				sIDs = sAccountID + "_" + sContactID + "_" + sOpportunityID + "_" + sLeadID;
+				System.out.println("Account ID :::" + sAccountID);
+				System.out.println("Contact ID:::" + sContactID);
+				System.out.println("Opportunity ID:::" + sOpportunityID);
+				System.out.println("Lead ID:::" + sLeadID);
+			} else {
+				for (int i = 0; i < results[j].getErrors().length; i++) {
+					com.sforce.soap.partner.Error err = results[j].getErrors()[i];
+					report.updateTestLog("Verify Create/ Update Account, Contact, Lead, Opportunities", "Errors were found on item:::" + j,
+							Status.FAIL);
+					report.updateTestLog("Verify Create/ Update Account",
+							"Errors code:::" + err.getStatusCode().toString(), Status.FAIL);
+					report.updateTestLog("Verify Create/ Update Account, Contact, Lead, Opportunities", "Errors message:::" + err.getMessage(),
+							Status.FAIL);
+					System.out.println("Errors were found on item " + j);
+					System.out.println("Error code::" + err.getStatusCode().toString());
+					System.out.println("Error message::" + err.getMessage());
+					status = false;
+				}
+			}
+		}
+		return sIDs;
+	}
 	/**
 	 * Function for the getting the result from results array
 	 * 

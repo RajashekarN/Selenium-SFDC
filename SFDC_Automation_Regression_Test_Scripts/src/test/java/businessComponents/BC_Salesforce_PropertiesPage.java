@@ -296,6 +296,15 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	public void bc_validatePropertyEdit() throws InterruptedException {
 		propertiesFunctions.updatePropertySpecificUser();
 	}
+	/**
+	 * Validating the Property Preference validation
+	 * 
+	 * @author Vishnu
+	 *
+	 */
+	public void bc_validatingPropertyPreference() throws InterruptedException {
+		propertiesFunctions.propertyPreferenceValidation();
+	}
 	
 	/**
 	 * Validating the Property tagging

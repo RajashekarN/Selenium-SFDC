@@ -46,6 +46,8 @@ public class ActivityFunctions extends ReusableLibrary {
 		try {
 			Calendar calendar = Calendar.getInstance();
 			calendar.add(Calendar.DAY_OF_MONTH, 10);
+			
+			
 			SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
 			System.out.println("Date : " + dateFormat.format(calendar.getTime()));
 			
@@ -53,8 +55,8 @@ public class ActivityFunctions extends ReusableLibrary {
 			SObject activity = new SObject();
 
 			activity.setType("Activity");
-			SearchTextSOQL accountID = new SearchTextSOQL(scriptHelper);
-			String accountId = accountID.fetchRecord("Account", "Id");
+			SearchTextSOQL AccountId = new SearchTextSOQL(scriptHelper);
+			String accountId = AccountId.fetchRecord("Account", "Id");
 			activity.setField("AccountId", accountId);
 			String value = Utility_Functions.xGenerateAlphaNumericString();
 			activity.setField("Subject", value + "Test Automation");
@@ -71,5 +73,38 @@ public class ActivityFunctions extends ReusableLibrary {
 		}
 		return status;
 	}
+	
+	public boolean createActivityForOpportunity() {
+		try {
+			Calendar calendar = Calendar.getInstance();
+			//calendar.add(Calendar.DAY_OF_MONTH, 10);
+			
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+			//SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
+			System.out.println("Date : " + dateFormat.format(calendar.getTime()));
+			
+			establishConnection.establishConnection();
+			SObject activity = new SObject();
+
+			activity.setType("Activity__c");
+			SearchTextSOQL OpportunityID = new SearchTextSOQL(scriptHelper);
+			String accountId = OpportunityID.fetchRecord("Opportunity", "Id");
+			activity.setField("Opportunity__c", accountId);
+			String value = Utility_Functions.xGenerateAlphaNumericString();
+			activity.setField("Subject__c", value + "Test Automation");
+			//activity.setField("ActivityType__c", "Private - Follow-Up Task");
+			activity.setField("DueDate__c", dateFormat.format(calendar.getTime()));
+			
+			SObject[] activities = new SObject[1];
+			activities[0] = activity;
+			results = EstablishConnection.connection.create(activities);
+			System.out.println("Result:::" + results);
+			status = establishConnection.saveResults(results);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return status;
+	}
+
 
 }

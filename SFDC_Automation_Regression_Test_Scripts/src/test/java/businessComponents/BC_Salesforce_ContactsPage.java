@@ -3,6 +3,7 @@ package businessComponents;
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 
+import pageObjects.ActivityPage;
 import pageObjects.ContactsPage;
 
 /**
@@ -26,6 +27,7 @@ public class BC_Salesforce_ContactsPage extends ReusableLibrary {
 
 	BC_Salesforce_Login sfBC_Login = new BC_Salesforce_Login(scriptHelper);
 	ContactsPage sfContactsPage = new ContactsPage(scriptHelper);
+	ActivityPage sfActivityPage = new ActivityPage(scriptHelper);
 
 	/**
 	 * Validating the Login functionality 
@@ -42,6 +44,42 @@ public class BC_Salesforce_ContactsPage extends ReusableLibrary {
 	/**
 	 * Validating the activity Lightning Time line fields 
 	 * 
+	 * @author Cognizant
+	 *
+	 */	
+
+	public void bc_createActivityUI() throws InterruptedException {
+		
+		sfActivityPage.createNewActivity();
+	}
+	
+	/**
+	 * Validating the activity Lightning Time line fields 
+	 * 
+	 * @author Cognizant
+	 *
+	 */	
+
+	public void bc_createEventUI() throws InterruptedException {
+		
+		sfActivityPage.createNewEvent();
+	}
+	
+	
+	/**
+	 * Validating the activity Lightning Time line fields 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+
+	public void bc_selectContact() throws InterruptedException {
+		sfContactsPage.selectContact();
+	}
+	
+	/**
+	 * Validating the activity Lightning Time line fields 
+	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */	
@@ -49,6 +87,7 @@ public class BC_Salesforce_ContactsPage extends ReusableLibrary {
 	public void bc_activityLightningTimeline() throws InterruptedException {
 		sfContactsPage.activityLightningTimeline();
 	}
+
 
 	/**
 	 * Validating the New Contact Page Layout fields

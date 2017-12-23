@@ -41,6 +41,9 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 		sfBC_Login.bc_login();
 	}
 
+	public void bc_selectOpportunity(){
+		sfOpportunitiesPage.selectOpportunity();
+	}
 	/**
 	 * Validating the New Opportunity Page Layout fields
 	 * 
@@ -1294,7 +1297,17 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_validateOpportunity() {
-		opportunitiesFunctions.createOpportunitySpecficUser();
+		opportunitiesFunctions.createOpportunity();
+	}
+	
+	/**
+	 * Validating the Opportunities page layout
+	 * 
+	 * @author  Ramya
+	 *
+	 */
+	public void bc_opportunityPageLayout() {
+		opportunitiesFunctions.OpportunitiesPageFieldsValidation();
 	}
 	
 	/**

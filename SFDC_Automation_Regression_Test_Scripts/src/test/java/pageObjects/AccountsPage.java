@@ -20,7 +20,9 @@ import com.cognizant.framework.Status;
 
 import pagesAPI.AccountsFunctions;
 import pagesAPI.SearchTextSOQL;
+import pagesAPI.TaskEventsFunctions;
 import supportLibraries.Utility_Functions;
+import pagesAPI.TaskEventsFunctions;
 
 public class AccountsPage extends ReusableLibrary {
 	/*
@@ -35,6 +37,7 @@ public class AccountsPage extends ReusableLibrary {
 		PageFactory.initElements(driver.getWebDriver(), this);
 	}
 
+	public static String accountname;
 	@FindBy(xpath = "//div[@class='bBottom']//span[text()='Accounts']")
 	WebElement menu_Accounts;
 
@@ -1451,14 +1454,39 @@ public class AccountsPage extends ReusableLibrary {
 		report.updateTestLog("Verify Create Activity Account", "Recently viewed Accounts are Displayed ", Status.PASS);
 		Utility_Functions.xWaitForElementPresent(driver, allAccounts, 3);
 		Utility_Functions.xClick(driver, allAccounts, true);
-		Utility_Functions.timeWait(3);
+		Utility_Functions.timeWait(5);
 		report.updateTestLog("Verify Create Activity Account", "All accounts are displayed successfully:::", Status.PASS);
 		List<WebElement> accountNamesList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'001')]"));
 		Utility_Functions.xclickOnFirstElementfromList(accountNamesList);
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify Create Activity Account ", "The Account is Displayed ", Status.PASS);
-		Utility_Functions.timeWait(2);
+		accountname=accountNameSaved.getText();
+		System.out.println(accountNameSaved.getText());
+		//Utility_Functions.timeWait(2);
 		activityPage.createNewActivity();				
+	}
+	/**
+	 * Validating the creation of New Activity Page in the Accounts
+	 * 
+	 * @author Cognizant
+	 *
+	 */
+	
+	public void selectAccount(){
+		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
+		Utility_Functions.xClick(driver, menu_Accounts, true);
+		report.updateTestLog("Verify Create Activity Account", "Accounts is Displayed ", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
+		Utility_Functions.xClick(driver, recentlyViewed, true);
+		report.updateTestLog("Verify Create Activity Account", "Recently viewed Accounts are Displayed ", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, allAccounts, 3);
+		Utility_Functions.xClick(driver, allAccounts, true);
+		Utility_Functions.timeWait(5);
+		report.updateTestLog("Verify Create Activity Account", "All accounts are displayed successfully:::", Status.PASS);
+		List<WebElement> accountNamesList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'001')]"));
+		Utility_Functions.xclickOnFirstElementfromList(accountNamesList);
+		Utility_Functions.timeWait(3);
+		report.updateTestLog("Verify Create Activity Account ", "The Account is Displayed ", Status.PASS);
 	}
 
 	/**
@@ -2224,6 +2252,45 @@ public class AccountsPage extends ReusableLibrary {
 			report.updateTestLog("Verify Accounts Investor Services Check Box  ",
 					"Verifying the Investor Services check box is not present", Status.PASS);
 		}
+	}
+	
+	/**
+	 * Validating the Accounts for the New Activity Type
+	 * 
+	 * @author Cognizant
+	 *
+	 */
+	public void verifyAccountsActivity(){
+		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 4);
+		Utility_Functions.xClick(driver, menu_Accounts, true);
+		Utility_Functions.timeWait(2);		
+		List<WebElement> accountNamesList = driver.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		try {
+			if(accountNamesList.isEmpty()) {
+				System.out.println("Recently Viewed List is empty");
+				Utility_Functions.xClick(driver, recentlyViewed, true);
+				Utility_Functions.timeWait(1);
+				Utility_Functions.xWaitForElementPresent(driver, allAccounts, 3);
+				Utility_Functions.xClick(driver, allAccounts, true);	
+				List<WebElement> allAccountNamesList = driver.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+				Utility_Functions.xclickRandomElement(allAccountNamesList);
+			} else {
+				Utility_Functions.xclickRandomElement(accountNamesList);
+			}
+			Utility_Functions.timeWait(1);
+		} catch (Exception e2) {
+			e2.printStackTrace();
+			System.out.println(e2.getMessage());
+		}	 
+		Utility_Functions.timeWait(2);
+	/*	String url = driver.getCurrentUrl().split("#")[0];
+		String newUrl = url + "#/sObject/" + TaskEventsFunctions.accountId;
+		newUrl = newUrl + "/view";
+		report.updateTestLog("Verify Create Accounts View Hierarchy",
+				"Verifying the URL has been replaced with the new URL having the retrieved Account" + newUrl,
+				Status.PASS);
+		driver.get(newUrl);
+		Utility_Functions.timeWait(3);*/
 	}
 
 	/**
