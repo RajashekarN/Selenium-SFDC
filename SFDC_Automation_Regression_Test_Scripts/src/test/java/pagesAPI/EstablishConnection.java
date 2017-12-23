@@ -6,6 +6,7 @@ import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
 import com.sforce.soap.partner.DeleteResult;
 import com.sforce.soap.partner.GetUserInfoResult;
+import com.sforce.soap.partner.LeadConvertResult;
 import com.sforce.soap.partner.PartnerConnection;
 import com.sforce.soap.partner.SaveResult;
 import com.sforce.ws.ConnectionException;
@@ -291,6 +292,40 @@ public class EstablishConnection extends ReusableLibrary {
 		return status;
 	}
 
+	public String leadConvertResults(LeadConvertResult[] Results) {
+		LeadConvertResult[] results = Results;
+		String sAccountID =null, sContactID =null, sOpportunityID =null, sLeadID =null;
+		String sIDs = null;
+		System.out.println("Results:::" + results);
+		for (int j = 0; j < results.length; j++) {
+			if (results[j].isSuccess()) {
+				sAccountID = results[j].getAccountId();
+				sContactID = results[j].getContactId();
+				sOpportunityID = results[j].getOpportunityId();
+				sLeadID = results[j].getLeadId();
+				sIDs = sAccountID + "_" + sContactID + "_" + sOpportunityID + "_" + sLeadID;
+				System.out.println("Account ID :::" + sAccountID);
+				System.out.println("Contact ID:::" + sContactID);
+				System.out.println("Opportunity ID:::" + sOpportunityID);
+				System.out.println("Lead ID:::" + sLeadID);
+			} else {
+				for (int i = 0; i < results[j].getErrors().length; i++) {
+					com.sforce.soap.partner.Error err = results[j].getErrors()[i];
+					report.updateTestLog("Verify Create/ Update Account, Contact, Lead, Opportunities", "Errors were found on item:::" + j,
+							Status.FAIL);
+					report.updateTestLog("Verify Create/ Update Account",
+							"Errors code:::" + err.getStatusCode().toString(), Status.FAIL);
+					report.updateTestLog("Verify Create/ Update Account, Contact, Lead, Opportunities", "Errors message:::" + err.getMessage(),
+							Status.FAIL);
+					System.out.println("Errors were found on item " + j);
+					System.out.println("Error code::" + err.getStatusCode().toString());
+					System.out.println("Error message::" + err.getMessage());
+					status = false;
+				}
+			}
+		}
+		return sIDs;
+	}
 	/**
 	 * Function for the getting the result from results array
 	 * 

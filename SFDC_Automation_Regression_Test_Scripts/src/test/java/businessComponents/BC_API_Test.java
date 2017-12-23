@@ -286,7 +286,7 @@ public class BC_API_Test extends ReusableLibrary {
 	 */
 
 	public void bc_opportunitiesPageFieldValidation() {
-		sfOpportunitiesFunctions.opportunitiesPageFieldsValidation();
+		sfOpportunitiesFunctions.OpportunitiesPageFieldsValidation();
 	}
 
 	/**

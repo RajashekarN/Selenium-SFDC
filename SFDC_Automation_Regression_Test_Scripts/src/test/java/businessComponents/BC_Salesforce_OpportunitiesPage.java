@@ -1299,4 +1299,14 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	public void bc_validateOpportunity() {
 		opportunitiesFunctions.createOpportunity();
 	}
+	
+	/**
+	 * Validating the Opportunities page layout
+	 * 
+	 * @author  Ramya
+	 *
+	 */
+	public void bc_opportunityPageLayout() {
+		opportunitiesFunctions.OpportunitiesPageFieldsValidation();
+	}
 }

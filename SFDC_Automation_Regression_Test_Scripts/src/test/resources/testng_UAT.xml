@@ -40,7 +40,11 @@
 			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACManagerBudgetEdit"/>
 			<class name="testscripts.SF.UATTestScripts.TC_SF_OBAPACBrokerBulkTagging"/>
 			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACAdminPropertyPreference"/>
-<!-- 			<class name="testscripts.SF.UATTestScripts.TC_SF_FRANEMEAManagerLeadActivity"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACManagerContactsSectionCreation"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_ASAPACManagerOpportunitiesSectionCreation"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_DAEMEADataLeadConversion"/>
+					
+<!-- 		<class name="testscripts.SF.UATTestScripts.TC_SF_FRANEMEAManagerLeadActivity"/>
 			<class name="testscripts.SF.UATTestScripts.TC_SF_FRANEMEAManagerAccountActivity"/>
 			<class name="testscripts.SF.UATTestScripts.TC_SF_FRANEMEAManagerContactActivity"/>
 			<class name="testscripts.SF.UATTestScripts.TC_SF_FRANEMEAManagerOpportunityActivity"/>

@@ -306,4 +306,48 @@ public class TaskEventsFunctions extends ReusableLibrary {
 			report.updateTestLog("Verify Close Task", "Task closure failed", Status.FAIL);
 		}
 	}
+	
+	public String createTaskOnLead() {
+		establishConnection.establishConnection();
+		SObject task = new SObject();
+		task.setType("Task");
+		String sNewLeadID = null;
+	
+		String value = Utility_Functions.xGenerateAlphaNumericString();
+		task.setField("Subject", value + "Test Automation "+"Present");
+		task.setField("Type", "Private - Initial Meeting");
+		task.setField("ActivityDate", calendar.getTime());
+		if (dataTable.getData("General_Data", "TC_ID").contains("Lead")) {
+			sNewLeadID = leadsFunctions.createNewLeadConversion(); 
+			task.setField("WhoId", sNewLeadID);
+		}
+		SObject[] tasks = new SObject[1];
+		tasks[0] = task;
+		try {
+			results = EstablishConnection.connection.create(tasks);
+		} catch (ConnectionException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Result:::" + results);
+		String status = establishConnection.saveResultsId(results);	
+		if(status.startsWith("00T")) {
+			report.updateTestLog("Verify Create Task", "Task has been created successfully", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Create Task", "Task creation failed", Status.FAIL);
+		}
+		int count=0;
+		String leadQuery = "Select WhoId from Task where Id = " + "'" + status + "'";
+		if (dataTable.getData("General_Data", "TC_ID").contains("Lead")) {
+			String objectValue = searchTextSOQL.fetchRecordFieldValue("WhoId", leadQuery);
+			if(objectValue.equals(sNewLeadID)) {
+				count++;
+			}
+		}
+		if(count==1) 
+			report.updateTestLog("Verify Create Task", "Task are created under Leads", Status.PASS);
+		else 
+			report.updateTestLog("Verify Create Task", "Task are not created under respective objects", Status.FAIL);
+		String IDs = sNewLeadID + "_" + status;
+		return IDs;
+	}
 }
