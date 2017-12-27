@@ -460,4 +460,65 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 		accountsFunctions.createAccountSpecificUser();
 		accountsFunctions.accountPageFieldsValidation();
 	}
+	
+	
+	/**
+	 *  Validating the account tagging
+	 * 
+	 * @author cognizant
+	 *
+	 */
+	public void bc_accountTagging() throws InterruptedException {
+		sfAccountsPage.accountTagging();
+		}
+	
+	/**
+	 *  Validating the existing account tagging 
+	 * 
+	 * @author cognizant
+	 *
+	 */
+	public void bc_verifyAccountTagging() throws InterruptedException {
+		sfAccountsPage.verifyAccountTagging();
+		}
+	
+	/**
+	 *  Validating the create Budgte Target
+	 * 
+	 * @author cognizant
+	 *
+	 */
+	public void bc_createBudgetTarget() throws InterruptedException {
+		sfAccountsPage.createBudgetTarget();
+		}
+	
+	/**
+	 *  Validating the Delete Budget Target
+	 * 
+	 * @author cognizant
+	 *
+	 */
+	public void bc_deleteBudgteTarget() throws InterruptedException {
+		sfAccountsPage.deleteBudgteTarget();
+		}
+	
+	/**
+	 *  Validating the Edit Budgets/Targets
+	 * 
+	 * @author cognizant
+	 *
+	 */
+	public void bc_editBudgetTarget() throws InterruptedException {
+		sfAccountsPage.editBudgetTarget();
+		}
+	
+	/**
+	 *  Validating the Cloning Budgets/Targets
+	 * 
+	 * @author cognizant
+	 *
+	 */
+	public void bc_cloningBudgetTarget() throws InterruptedException {
+		sfAccountsPage.cloningBudgetTarget();
+		}
 }

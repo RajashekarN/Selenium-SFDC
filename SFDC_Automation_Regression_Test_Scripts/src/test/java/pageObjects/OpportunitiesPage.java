@@ -1,6 +1,8 @@
 package pageObjects;
 
 import java.math.BigDecimal;
+import java.awt.AWTException;
+import java.awt.Robot;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -16,9 +18,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
+import com.cognizant.framework.FrameworkException;
 import com.cognizant.framework.Status;
 import com.sforce.soap.partner.PartnerConnection;
 import com.sforce.soap.partner.QueryResult;
@@ -26,6 +30,7 @@ import com.sforce.soap.partner.SaveResult;
 import com.sforce.soap.partner.sobject.SObject;
 import com.sforce.ws.ConnectionException;
 import com.sforce.ws.ConnectorConfig;
+import com.sun.glass.events.KeyEvent;
 
 import pagesAPI.EstablishConnection;
 import pagesAPI.OpportunitiesFunctions;
@@ -244,6 +249,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//tr[contains(@class,'parent')][2]//input[contains(@id,'acctSearchBox')]")
 	WebElement user2;
+	
+	@FindBy(xpath = "//tr[contains(@class,'parent')][3]//input[contains(@id,'acctSearchBox')]")
+	WebElement user3;
 
 	@FindBy(xpath = "//input[@id='acctSearchBox2'][@class='tt-search-box slds-input tt-input']")
 	WebElement userField1;
@@ -262,6 +270,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//table[@class='slds-table slds-no-row-hover']//tr[2]/td[3]//option[@value='Revenue Partner']")
 	WebElement selectTeamRole2;
+	
+	@FindBy(xpath = "//select[contains(@name,'TeamMemberForm:j_id51:2')]/option[@value='Team Support']")
+	WebElement selectTeamRole3;
 
 	@FindBy(xpath = "//table[@class='slds-table slds-no-row-hover']//tr[2]/td[4]//option[@value='Receiving Broker']")
 	WebElement selectSecondaryMemberRole2;
@@ -460,6 +471,12 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//a[@title='APAC']")
 	WebElement regionValue_AS;
+	
+	@FindBy (xpath ="//label/span[text()='Close Date']")
+	WebElement CloseDateEditOpportunity;
+	
+	@FindBy (xpath ="//*[contains(@class,'today slds-s')]")
+	WebElement DateTodayEdit;
 
 	/*
 	 * @FindBy(xpath =
@@ -967,6 +984,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//span[contains(@id,'pgMsg')]//li[contains(text(),'Please fill out Total Size')]")
 	WebElement errorMessage;
+	
+	@FindBy (xpath = "//*[@id='Page:opportunityRefractorPageLightningForm:slds-Amount']")
+	WebElement InstallmentAmountEdit;
 
 	@FindBy(xpath = "//label[contains(text(),' Total Size')]/following-sibling::input")
 	WebElement totalSizeNewOpp;
@@ -1382,6 +1402,63 @@ public class OpportunitiesPage extends ReusableLibrary {
 	
 	@FindBy(xpath="//ul[@class='tabs__nav']//a[@title='New Event']")
 	WebElement newEventOpp;
+
+	@FindBy(xpath = "//a[contains(@title,'Automation')]")
+	WebElement ExistingOpportunity;
+	
+	@FindBy(xpath="//*[@id='tag_edit_link']")
+	WebElement addTag;
+	
+	@FindBy(xpath="//textarea[@id='ptag_edit_area']")
+	WebElement privatetag;
+	
+	@FindBy(xpath="//input[@id='tag_save_btn']")
+	WebElement savePrivateTag;
+	
+	@FindBy (xpath = "//*[contains(@title,'View records tagged')]")
+	WebElement PrivateTagged;
+	
+	@FindBy (xpath = " //*[contains(@class,'entityNameTitle slds-breadcrumb__item slds-line-height--reset')]")
+	WebElement PrivateTagPage;
+	
+	@FindBy(xpath = "//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']")
+	WebElement OpportunityList;
+	
+	@FindBy (xpath = "//*[contains(@id,'58578:0')]")
+	WebElement EditGrossFee;
+	
+	@FindBy (xpath="//*[(@class='slds-icon_container slds-icon-utility-down')]")
+	WebElement InstallmentIcon;
+	
+	@FindBy (xpath="//label/span[text()='Estimated Gross Fee/Commission']/parent::label/following-sibling::input")
+	WebElement EditEstimatedGrossFee;
+	
+	@FindBy (xpath = "//*[@title='Save' and @class ='slds-button slds-button--neutral uiButton--default uiButton--brand uiButton forceActionButton']")
+	WebElement SaveEditOpportunity;
+	
+	@FindBy (xpath = "//div/button[text()='Add']")
+	WebElement AddTeamMember;
+	
+	@FindBy (xpath="//*[@id='acctSearchBox2']")
+	WebElement SearchUserTeamRole;
+	
+	@FindBy (xpath="//td/input[contains(@id,'addTeamMemberForm:j_id51:0')]")
+	WebElement TeamMemberDescription;
+	
+	@FindBy (xpath ="//span/select[contains(@id,'addTeamMemberForm:j_id51:0')]")
+	WebElement TeamRole;
+	
+	@FindBy (xpath = "//td/select[contains(@id,'addTeamMemberForm:j_id51:0')]")
+	WebElement SecondaryMemberRole;
+	
+	@FindBy (xpath="//*[@id='j_id0:addTeamMemberForm']/div[1]/input[1]")
+	WebElement SaveTeamMember;
+	
+	@FindBy (xpath = "//*[(@title='Test Broker6')]")
+    WebElement SelectTestBroker;
+	
+	
+
 
 	HomePage hp = new HomePage(scriptHelper);
 	SearchTextSOQL searchOpportunity = new SearchTextSOQL(scriptHelper);
@@ -2900,9 +2977,11 @@ public class OpportunitiesPage extends ReusableLibrary {
 	public void opportunityNameAutoGenerateFuntion() {
 		String sAccountName = searchOpportunity.fetchRecord("Account", "Name");
 		Utility_Functions.xSendKeys(driver, accountName, sAccountName);
+		Utility_Functions.timeWait(2);
 		accountName.sendKeys(Keys.ARROW_DOWN);
 		Utility_Functions.timeWait(2);
 		accountName.sendKeys(Keys.ENTER);
+		Utility_Functions.timeWait(2);
 		Utility_Functions.xSelectDropdownByIndex(assignmentTypeOpp, 1);
 		System.out.println(Calendar.getInstance());
 		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -2915,7 +2994,15 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xSendKeys(driver, totalSizeOpp, Integer.toString(value));
 		Utility_Functions.xSelectDropdownByName(unitofMeasure, "Acres");
 		Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFee, 3);
-		Utility_Functions.xSendKeys(driver, estimatedGrossFee, dataTable.getData("General_Data", "InstallmentAmount"));
+		Utility_Functions.xClick(driver, estimatedGrossFee, true);
+		Utility_Functions.xSendKeys(driver, estimatedGrossFee, "10000");
+		/*Utility_Functions.xClick(driver, estimatedGrossFee, true);
+		Utility_Functions.timeWait(4);
+		Utility_Functions.xSendKeys(driver, estimatedGrossFee, "10,000.00");
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeField, 3);
+		Utility_Functions.xSendKeys(driver, estimatedGrossFeeField, dataTable.getData("General_Data", "InstallmentAmount"));
+		*/
 		try {
 			Utility_Functions.xSelectDropdownByIndex(preferredPropertyTypeOpp, 1);
 		} catch (Exception e) {
@@ -2925,43 +3012,58 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(4);
 		driver.navigate().refresh();
 		Utility_Functions.timeWait(2);
-		try {
-			Utility_Functions.xWaitForElementPresent(driver, related, 4);
-			if (related.isDisplayed()) {
-				report.updateTestLog("Opportunity Created", "Opportunity created successfully:::", Status.PASS);
-			} else {
-				report.updateTestLog("Opportunity Created", "Opportunity creation failed:::", Status.FAIL);
-			}
-		} catch (Exception e) {
-			report.updateTestLog("Opportunity Related Tab", "System was unable to find the Related tab:::",
-					Status.WARNING);
-		}
-		Utility_Functions.timeWait(2);
-		/*
-		 * String sTotalSize = Integer.toString(value); String formatTotalSize =
-		 * sTotalSize.substring(0,1) + "," + sTotalSize.substring(1,3);
-		 * System.out.println(formatTotalSize);
-		 */
-		String query = "Select Name from opportunity where Name like  " + "'" + sAccountName + "-" + '%' + "-" + value
-				+ "-" + "Acres" + "'";
-		Utility_Functions.timeWait(1);
-		String opportunityName = searchOpportunity.fetchRecordFieldValue("Name", query);
-		if(opportunityName==null) {
-			String queryOpp = "Select Name from opportunity where Name like  " + "'" + sAccountName + "-" + '%' + "-" + "-" + "Acres" + "'";
-			opportunityName = searchOpportunity.fetchRecordFieldValue("Name", queryOpp);
-		}
-		report.updateTestLog("Opportunity Created", "Opportunity Name:::" + opportunityName, Status.PASS);
-
-		if (opportunityName.contains(sAccountName) || opportunityName.contains(Integer.toString(value))
-				&& opportunityName.contains("Acres")) {
-			report.updateTestLog("Opportunity Created",
-					"Opportunity Name created as per the format expected -- Account Name - Assignment Type - Total Size - Unit of Measure:::",
-					Status.PASS);
-		} else {
-			report.updateTestLog("Opportunity Created", "Opportunity Name is not created as per the expected format:::",
-					Status.FAIL);
-		}
+		 
+		 Utility_Functions.xClick(driver, editOpportunity, true);
+		 Utility_Functions.timeWait(3);
+		 Utility_Functions.xSwitchtoFrame(driver, EditEstimatedGrossFee);
+		 Utility_Functions.xClickHiddenElement(driver, EditEstimatedGrossFee);
+		 Utility_Functions.timeWait(2);
+		 Utility_Functions.xSendKeys(driver, EditEstimatedGrossFee, "75000");
+		
+		 Utility_Functions.timeWait(2);
+		 Utility_Functions.xClick(driver, SaveEditOpportunity, true);
+		 Utility_Functions.timeWait(2);
+		
+		
 	}
+	
+	/**
+	 * Function for edit opportunity
+	 * 
+	 * @author cognizant
+	 *
+	 */
+	    public void editCloseDate() {
+	     Utility_Functions.xClick(driver, editOpportunity, true);
+		 Utility_Functions.timeWait(3);
+		 Utility_Functions.xClick(driver, CloseDateEditOpportunity, true);
+		 Utility_Functions.timeWait(2);
+		 Utility_Functions.xClick(driver, DateTodayEdit, true);
+		 Utility_Functions.timeWait(2);
+		 
+			 Utility_Functions.xClick(driver, SaveEditOpportunity, true);
+			 Utility_Functions.timeWait(2);
+		
+	}
+	    
+	    public void addingInstallmentsAmount() {
+			Utility_Functions.timeWait(1);
+			Utility_Functions.xWaitForElementPresent(driver, showMoreActions, 4);
+			Utility_Functions.xClick(driver, showMoreActions, true);
+			Utility_Functions.timeWait(1);
+			Utility_Functions.xWaitForElementPresent(driver, recalculate, 2);
+			Utility_Functions.xClick(driver, recalculate, true);
+			Utility_Functions.xSwitchtoFrame(driver, InstallmentAmountEdit);
+			Utility_Functions.xWaitForElementPresent(driver, InstallmentAmountEdit, 3);
+			InstallmentAmountEdit.clear();
+			Utility_Functions.xSendKeys(driver, InstallmentAmountEdit,"50000");
+			Utility_Functions.xWaitForElementPresent(driver, proceed, 3);
+			Utility_Functions.xClick(driver, proceed, true);
+			Utility_Functions.xWaitForElementPresent(driver, continueButtonInstallment, 3);
+			Utility_Functions.xClick(driver, continueButtonInstallment, true);
+			driver.switchTo().defaultContent();
+			Utility_Functions.timeWait(2);
+		}
 
 	/**
 	 * Function for multiple installments
@@ -3082,8 +3184,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xSwitchtoFrame(driver, installmentQuantity);
 		Utility_Functions.xWaitForElementPresent(driver, installmentQuantity, 3);
 		installmentQuantity.clear();
-		Utility_Functions.xSendKeys(driver, installmentQuantity,
-				dataTable.getData("General_Data", "InstallmentQuantity"));
+		Utility_Functions.xSendKeys(driver, installmentQuantity,"4");
 		Utility_Functions.xWaitForElementPresent(driver, proceed, 3);
 		Utility_Functions.xClick(driver, proceed, true);
 		Utility_Functions.xWaitForElementPresent(driver, continueButtonInstallment, 3);
@@ -12136,5 +12237,183 @@ public class OpportunitiesPage extends ReusableLibrary {
 	Utility_Functions.xClick(driver,saveNewOpp, true);
 	Utility_Functions.timeWait(3);
 }
+	 public void opportunityTagging () {
+			
+			Utility_Functions.xClick(driver, menu_Opportunities, true);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xClick(driver, recentlyViewed, true);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xClick(driver, allActiveOpportunities, true);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xClick(driver, OpportunityList, true);
+			Utility_Functions.timeWait(2);
+			
+		
+			 Utility_Functions.xSwitchtoFrame(driver, addTag);
+			 	Utility_Functions.xClick(driver, addTag, true);
+			      Utility_Functions.timeWait(2);
+
+			Utility_Functions.xSendKeys(driver, privatetag, dataTable.getData("General_Data", "Private Tag"));
+			 Utility_Functions.xClickHiddenElement(driver, savePrivateTag);
+			Utility_Functions.timeWait(5);
+			
+			if(addTag.isDisplayed()){
+				report.updateTestLog("Verify Opportunity Private Tags", "The Private Tag is saved",
+						Status.PASS);		
+			}else{
+				report.updateTestLog("Verify Opportunity Private Tags", "The Private tag is not saved",
+						Status.FAIL);
+		}
+			
+			Utility_Functions.xClick(driver, PrivateTagged, true);
+		      Utility_Functions.timeWait(8);
+		    Utility_Functions.xSwitchtoFrame(driver, PrivateTagPage);
+			
+		      if(PrivateTagPage.isDisplayed()){
+					report.updateTestLog("Verify Opportunity Private Tags", "The Tag is saved in Private Tag Page",
+							Status.PASS);		
+				}else{
+					report.updateTestLog("Verify Opportunity Private Tags", "The Tag is not saved in Private Tag Page",
+							Status.FAIL);
+			}
+		      System.out.println("Current URL is--" +driver.getCurrentUrl());
+	}
+	 
+	 public void installmentsOpportunityUpdate() {
+			multipleInstallmentsFunction();
+			/*
+			 * Utility_Functions.xWaitForElementPresent(driver, showMoreActions, 2);
+			 * Utility_Functions.xClick(driver, showMoreActions, true);
+			 * Utility_Functions.timeWait(1);
+			 * Utility_Functions.xWaitForElementPresent(driver, recalculate, 2);
+			 * Utility_Functions.xClick(driver, recalculate, true);
+			 * Utility_Functions.xSwitchtoFrame(driver, installmentQuantity);
+			 * Utility_Functions.xWaitForElementPresent(driver, installmentQuantity,
+			 * 3); installmentQuantity.clear(); Utility_Functions.xSendKeys(driver,
+			 * installmentQuantity, "2");
+			 * Utility_Functions.xWaitForElementPresent(driver, proceed, 3);
+			 * Utility_Functions.xClick(driver, proceed, true);
+			 * Utility_Functions.xWaitForElementPresent(driver,
+			 * continueButtonInstallment, 3); Utility_Functions.xClick(driver,
+			 * continueButtonInstallment, true); driver.switchTo().defaultContent();
+			 */
+			addingInstallmentsOpportunities();
+			Utility_Functions.xWaitForElementPresent(driver, related, 4);
+			Utility_Functions.xClick(driver, related, true);
+			Utility_Functions.xWaitForElementPresent(driver, installmentsViewAll, 3);
+			Utility_Functions.xClick(driver, installmentsViewAll, true);
+			Utility_Functions.xWaitForElementPresent(driver, opportunityNameLink, 3);
+			Utility_Functions.xClick(driver, opportunityNameLink, true);
+			Utility_Functions.xWaitForElementPresent(driver, related, 3);
+			Utility_Functions.xClick(driver, related, true);
+	 }
+	
+		
+		 public void opportunityTeamMember() {
+			 Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
+				Utility_Functions.xClick(driver, menu_Opportunities, true);
+				Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
+				Utility_Functions.xclickgetTextofFirstElementfromList(opportunitiesList);
+				Utility_Functions.timeWait(5);
+				Utility_Functions.xClick(driver, editButton, true);
+				Utility_Functions.timeWait(4);
+				Utility_Functions.xScrollWindowToElement(driver, estimatedGrossFeeField);
+				Utility_Functions.timeWait(3);
+				Utility_Functions.xClick(driver, estimatedGrossFeeField, true);
+				Utility_Functions.timeWait(4);
+				Utility_Functions.xSendKeys(driver, estimatedGrossFeeField, "10,000.00");
+				Utility_Functions.timeWait(3);
+				Utility_Functions.xClick(driver, save, true);
+				Utility_Functions.timeWait(3);
+				Utility_Functions.xClick(driver, related, true);
+				Utility_Functions.timeWait(5);
+				Utility_Functions.xClick(driver, addButtonshareOpportunity, true);
+				Utility_Functions.timeWait(3);
+				Utility_Functions.xSwitchtoFrame(driver, SearchUserTeamRole);
+				Utility_Functions.xClickHiddenElement(driver, SearchUserTeamRole);
+				Utility_Functions.xSendKeys(driver, user1, "Inactive User");
+				Utility_Functions.timeWait(1);
+				user1.sendKeys(Keys.ARROW_DOWN);
+				user1.sendKeys(Keys.ENTER);
+				Utility_Functions.xClick(driver, selectTeamRole, true);
+				Utility_Functions.timeWait(3);
+				Utility_Functions.xClick(driver, selectSecondaryMemberRole, true);
+				Utility_Functions.timeWait(3);
+				Utility_Functions.xClick(driver, selectOpportunityAccess, true);
+				Utility_Functions.timeWait(3);
+				Utility_Functions.xClick(driver, saveButtonSplit, true);
+				Utility_Functions.timeWait(3);
+			
+			}
+		 
+		 public void opportunitySplit() {
+			 
+			 Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
+				Utility_Functions.xClick(driver, menu_Opportunities, true);
+				Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
+				Utility_Functions.xclickgetTextofFirstElementfromList(opportunitiesList);
+				Utility_Functions.timeWait(5);
+				Utility_Functions.xClick(driver, editButton, true);
+				Utility_Functions.timeWait(4);
+				Utility_Functions.xScrollWindowToElement(driver, estimatedGrossFeeField);
+				Utility_Functions.timeWait(3);
+				Utility_Functions.xClick(driver, estimatedGrossFeeField, true);
+				Utility_Functions.timeWait(4);
+				Utility_Functions.xSendKeys(driver, estimatedGrossFeeField, "10,000.00");
+				Utility_Functions.timeWait(3);
+				Utility_Functions.xClick(driver, save, true);
+				Utility_Functions.timeWait(3);
+				Utility_Functions.xClick(driver, related, true);
+				Utility_Functions.timeWait(5);
+				Utility_Functions.xClick(driver, addButtonshareOpportunity, true);
+				Utility_Functions.timeWait(3);
+				Utility_Functions.xSwitchtoFrame(driver, SearchUserTeamRole);
+				Utility_Functions.xClickHiddenElement(driver, SearchUserTeamRole);
+				Utility_Functions.xSendKeys(driver, user1, "Inactive User");
+				Utility_Functions.timeWait(1);
+				user1.sendKeys(Keys.ARROW_DOWN);
+				user1.sendKeys(Keys.ENTER);
+				Utility_Functions.xClick(driver, selectTeamRole, true);
+				Utility_Functions.timeWait(3);
+				//Utility_Functions.xClick(driver, selectSecondaryMemberRole, true);
+				Utility_Functions.timeWait(3);
+				Utility_Functions.xClick(driver, selectOpportunityAccess, true);
+				Utility_Functions.timeWait(3);
+				Utility_Functions.xSendKeys(driver, user2, "Test Broker1");
+				Utility_Functions.timeWait(2);
+				user2.sendKeys(Keys.ARROW_DOWN);
+				user2.sendKeys(Keys.ENTER);
+				Utility_Functions.xClick(driver, selectTeamRole2, true);
+				Utility_Functions.timeWait(3);
+				//Utility_Functions.xClick(driver, selectSecondaryMemberRole2, true);
+				Utility_Functions.timeWait(3);
+				Utility_Functions.xClick(driver, saveButtonSplit, true);
+				Utility_Functions.timeWait(3);
+				driver.navigate().refresh();
+				Utility_Functions.timeWait(1);
+				driver.switchTo().defaultContent();
+				driver.navigate().refresh();
+				Utility_Functions.xWaitForElementVisible(driver, manageOpportunitySplits, 3);
+				Utility_Functions.xClick(driver, manageOpportunitySplits, true);
+				Utility_Functions.timeWait(4);
+				driver.switchTo().frame(driver.findElement(By.xpath("//iframe")));
+				splitPercent.clear();
+				Utility_Functions.timeWait(3);
+				splitPercent.sendKeys("100");
+				try {
+					Utility_Functions.xClick(driver, saveOpportunitySplit, true);
+				} catch (Exception e) {
+					Utility_Functions.xClick(driver, saveOpportunitySplitUAT, true);
+				}
+				report.updateTestLog("Opportunity Saved", "Opportunity Saved successfully::", Status.PASS);
+				Utility_Functions.timeWait(3);
+			 
+			 
+		 }
+
+			
+			
+			 
+	 
 }
 

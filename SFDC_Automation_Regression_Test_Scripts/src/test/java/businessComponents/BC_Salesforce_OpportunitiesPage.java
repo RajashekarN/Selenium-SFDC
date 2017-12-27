@@ -1310,4 +1310,99 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	public void bc_opportunityPageLayout() {
 		opportunitiesFunctions.OpportunitiesPageFieldsValidation();
 	}
+	
+	/**
+	 * Validating the Opportunities Tagging
+	 * 
+	 * @author  Cognizant
+	 *
+	 */
+	public void bc_opportunityTagging() {
+		sfOpportunitiesPage.opportunityTagging();
+	}
+	
+	/**
+	 * Validating the Opportunities Auto Generate
+	 * 
+	 * @author  Cognizant
+	 *
+	 */
+	public void bc_opportunityNameAutoGenerateFuntion() {
+		sfOpportunitiesPage.opportunityNameAutoGenerateFuntion();
+	}
+	
+	/**
+	 * Validating the Opportunities multiple installments
+	 * 
+	 * @author  Cognizant
+	 *
+	 */
+	public void bc_multipleInstallmentsFunction() {
+		sfOpportunitiesPage.multipleInstallmentsFunction();
+	}
+	
+	
+	
+	/**
+	 * Validating the adding installment
+	 * 
+	 * @author  Cognizant
+	 *
+	 */
+	public void bc_addingInstallmentsOpportunities() {
+		sfOpportunitiesPage.addingInstallmentsOpportunities();
+	}
+	
+
+	/**
+	 * Validating the Opportunities installment update
+	 * 
+	 * @author  Cognizant
+	 *
+	 */
+	public void bc_installmentsOpportunityUpdate() {
+		sfOpportunitiesPage.installmentsOpportunityUpdate();
+	}
+	
+	/**
+	 * Validating the Opportunities close date
+	 * 
+	 * @author  Cognizant
+	 *
+	 */
+	public void bc_editCloseDate() {
+		sfOpportunitiesPage.editCloseDate();
+	}
+	
+	/**
+	 * Validating the Opportunities installment add
+	 * 
+	 * @author  Cognizant
+	 *
+	 */
+	public void bc_addingInstallmentsAmount() {
+		sfOpportunitiesPage.addingInstallmentsAmount();
+	}
+	
+	/**
+	 * Validating the Opportunities TeamMember
+	 * 
+	 * @author  Cognizant
+	 *
+	 */
+	public void bc_opportunityTeamMember() {
+		sfOpportunitiesPage.opportunityTeamMember();
+	}
+	
+	
+	/**
+	 * Validating the Opportunities TeamMember
+	 * 
+	 * @author  Cognizant
+	 *
+	 */
+	public void bc_opportunitySplit() {
+		sfOpportunitiesPage.opportunitySplit();
+	}
+	
 }
