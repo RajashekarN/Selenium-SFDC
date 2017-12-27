@@ -597,6 +597,33 @@ public class LeadsPage extends ReusableLibrary {
 	WebElement PrivateTagged;
 	@FindBy (xpath = " //*[contains(@class,'entityNameTitle slds-breadcrumb__item slds-line-height--reset')]")
 	WebElement PrivateTagPage;
+	
+	@FindBy (xpath = "//li/a[@title='Reports']")
+	WebElement ReportsTab;
+	
+	@FindBy (xpath = "//li/a[@title='All Folders']")
+	WebElement AllFolder;
+	
+	@FindBy (xpath = "//*[@title='AIL Campaign Mass Add Members(Template)']")
+	WebElement AllCampaignMemberbtn;
+	
+	@FindBy (xpath = "//th/a[@title='Contacts with Private Tags']")
+	WebElement ContactsPrivateTag;
+	
+	@FindBy(xpath = "//div/a[@title = 'Show 5 more actions']")
+	WebElement showMoreActionsReport;
+	
+	@FindBy(xpath = "//a[contains(@title,'Clone')]")
+	WebElement clone;
+	
+	@FindBy(xpath = "//*[@title = 'Create']")
+	WebElement create;
+	
+	
+	
+	
+	
+	
 
 	private String leadConvertWaitSpinnerXPath = "//div[@class='slds-spinner_container']"; 
 
@@ -3993,6 +4020,31 @@ public void leadTagging () {
 			}
 		      System.out.println("Current URL is--" +driver.getCurrentUrl());
 	}
+	    
+	    public void addMassMember () {
+	    	
+	    	Utility_Functions.xClick(driver, menu_Leads, true);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xClick(driver, recentlyViewed, true);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xClick(driver, allLeadsMenu, true);
+			Utility_Functions.timeWait(4);
+			Utility_Functions.xclickRandomElement(leadsList);
+			Utility_Functions.timeWait(4);
+			Utility_Functions.xClick(driver, ReportsTab, true);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xClick(driver, AllFolder, true);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xClick(driver, AllCampaignMemberbtn, true);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xClick(driver, ContactsPrivateTag, true);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xClick(driver, showMoreActionsReport, true);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xClick(driver, clone, true);
+			
+			
+	    }
 	    	
 }
 

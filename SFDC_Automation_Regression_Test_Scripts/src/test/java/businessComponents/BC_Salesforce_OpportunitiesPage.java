@@ -1394,4 +1394,14 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	}
 	
 	
+	/**
+	 * Validating the Opportunities TeamMember
+	 * 
+	 * @author  Cognizant
+	 *
+	 */
+	public void bc_opportunitySplit() {
+		sfOpportunitiesPage.opportunitySplit();
+	}
+	
 }

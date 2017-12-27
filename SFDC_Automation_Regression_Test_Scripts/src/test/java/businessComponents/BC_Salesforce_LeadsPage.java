@@ -395,6 +395,19 @@ public class BC_Salesforce_LeadsPage extends ReusableLibrary {
 	public void bc_leadConversionAPI() throws InterruptedException {
 		leadsFunctions.leadConversion();
 	}
+	
+	/**
+	 * Validating the functionality for adding the mass member
+	 * 
+	 * @author cognizant
+	 *
+	 */	
+	
+	public void bc_addMassMember () {
+		   sfLeadsPage.addMassMember();
+			
+		}
+	
 
 }
 

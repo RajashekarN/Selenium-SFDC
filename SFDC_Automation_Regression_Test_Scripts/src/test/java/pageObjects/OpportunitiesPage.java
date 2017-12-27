@@ -1,6 +1,8 @@
 package pageObjects;
 
 import java.math.BigDecimal;
+import java.awt.AWTException;
+import java.awt.Robot;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -20,6 +22,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
+import com.cognizant.framework.FrameworkException;
 import com.cognizant.framework.Status;
 import com.sforce.soap.partner.PartnerConnection;
 import com.sforce.soap.partner.QueryResult;
@@ -27,6 +30,7 @@ import com.sforce.soap.partner.SaveResult;
 import com.sforce.soap.partner.sobject.SObject;
 import com.sforce.ws.ConnectionException;
 import com.sforce.ws.ConnectorConfig;
+import com.sun.glass.events.KeyEvent;
 
 import pagesAPI.EstablishConnection;
 import pagesAPI.OpportunitiesFunctions;
@@ -245,6 +249,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//tr[contains(@class,'parent')][2]//input[contains(@id,'acctSearchBox')]")
 	WebElement user2;
+	
+	@FindBy(xpath = "//tr[contains(@class,'parent')][3]//input[contains(@id,'acctSearchBox')]")
+	WebElement user3;
 
 	@FindBy(xpath = "//input[@id='acctSearchBox2'][@class='tt-search-box slds-input tt-input']")
 	WebElement userField1;
@@ -263,6 +270,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//table[@class='slds-table slds-no-row-hover']//tr[2]/td[3]//option[@value='Revenue Partner']")
 	WebElement selectTeamRole2;
+	
+	@FindBy(xpath = "//select[contains(@name,'TeamMemberForm:j_id51:2')]/option[@value='Team Support']")
+	WebElement selectTeamRole3;
 
 	@FindBy(xpath = "//table[@class='slds-table slds-no-row-hover']//tr[2]/td[4]//option[@value='Receiving Broker']")
 	WebElement selectSecondaryMemberRole2;
@@ -3174,8 +3184,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xSwitchtoFrame(driver, installmentQuantity);
 		Utility_Functions.xWaitForElementPresent(driver, installmentQuantity, 3);
 		installmentQuantity.clear();
-		Utility_Functions.xSendKeys(driver, installmentQuantity,
-				dataTable.getData("General_Data", "InstallmentQuantity"));
+		Utility_Functions.xSendKeys(driver, installmentQuantity,"4");
 		Utility_Functions.xWaitForElementPresent(driver, proceed, 3);
 		Utility_Functions.xClick(driver, proceed, true);
 		Utility_Functions.xWaitForElementPresent(driver, continueButtonInstallment, 3);
@@ -12301,34 +12310,110 @@ public class OpportunitiesPage extends ReusableLibrary {
 	
 		
 		 public void opportunityTeamMember() {
-			Utility_Functions.xWaitForElementPresent(driver, related, 5);
-			Utility_Functions.xClick(driver, related, true);
-			Utility_Functions.xWaitForElementPresent(driver, AddTeamMember, 3);
-			Utility_Functions.xClick(driver, AddTeamMember, true);
-			Utility_Functions.timeWait(2);
-			Utility_Functions.xSwitchtoFrame(driver, SearchUserTeamRole);
-			Utility_Functions.xClickHiddenElement(driver, SearchUserTeamRole);
-			Utility_Functions.xSendKeys(driver, SearchUserTeamRole, "Test Broker");
-			Utility_Functions.timeWait(2);
-			WebElement firstLookupElement = driver.findElement(By.cssSelector("ul>li.forceSearchInputLookupDesktopOption:nth-child(1)"));
-			Utility_Functions.xWaitForElementPresent(driver, firstLookupElement, 3);
-			Utility_Functions.xClick(driver,firstLookupElement, true);
-			//Utility_Functions.xClick(driver, SelectTestBroker, true);
-			Utility_Functions.xSendKeys(driver, TeamMemberDescription, "Test QA");
-			Utility_Functions.timeWait(2);
-			Utility_Functions.xSelectDropdownByValue(TeamRole, "Analyst");
-			//Select TeamRole = new Select(driver.findElementByXPath("//select[@class='slds-select']/option[@value='Team Member']"));
-			//TeamRole.selectByValue("Analyst");
-			Utility_Functions.timeWait(2);
-			Utility_Functions.xSelectDropdownByValue(SecondaryMemberRole, "Originating Broker");
-			//Select SecondaryMemberRole = new Select(driver.findElementByXPath("//select[@class='slds-select']/option[@value='Originating Broker']"));
-			//SecondaryMemberRole.selectByValue("Originating Broker");
-			Utility_Functions.timeWait(2);
-			Utility_Functions.xClick(driver, SaveTeamMember, true);
-			Utility_Functions.timeWait(2);
+			 Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
+				Utility_Functions.xClick(driver, menu_Opportunities, true);
+				Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
+				Utility_Functions.xclickgetTextofFirstElementfromList(opportunitiesList);
+				Utility_Functions.timeWait(5);
+				Utility_Functions.xClick(driver, editButton, true);
+				Utility_Functions.timeWait(4);
+				Utility_Functions.xScrollWindowToElement(driver, estimatedGrossFeeField);
+				Utility_Functions.timeWait(3);
+				Utility_Functions.xClick(driver, estimatedGrossFeeField, true);
+				Utility_Functions.timeWait(4);
+				Utility_Functions.xSendKeys(driver, estimatedGrossFeeField, "10,000.00");
+				Utility_Functions.timeWait(3);
+				Utility_Functions.xClick(driver, save, true);
+				Utility_Functions.timeWait(3);
+				Utility_Functions.xClick(driver, related, true);
+				Utility_Functions.timeWait(5);
+				Utility_Functions.xClick(driver, addButtonshareOpportunity, true);
+				Utility_Functions.timeWait(3);
+				Utility_Functions.xSwitchtoFrame(driver, SearchUserTeamRole);
+				Utility_Functions.xClickHiddenElement(driver, SearchUserTeamRole);
+				Utility_Functions.xSendKeys(driver, user1, "Inactive User");
+				Utility_Functions.timeWait(1);
+				user1.sendKeys(Keys.ARROW_DOWN);
+				user1.sendKeys(Keys.ENTER);
+				Utility_Functions.xClick(driver, selectTeamRole, true);
+				Utility_Functions.timeWait(3);
+				Utility_Functions.xClick(driver, selectSecondaryMemberRole, true);
+				Utility_Functions.timeWait(3);
+				Utility_Functions.xClick(driver, selectOpportunityAccess, true);
+				Utility_Functions.timeWait(3);
+				Utility_Functions.xClick(driver, saveButtonSplit, true);
+				Utility_Functions.timeWait(3);
 			
+			}
+		 
+		 public void opportunitySplit() {
+			 
+			 Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
+				Utility_Functions.xClick(driver, menu_Opportunities, true);
+				Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
+				Utility_Functions.xclickgetTextofFirstElementfromList(opportunitiesList);
+				Utility_Functions.timeWait(5);
+				Utility_Functions.xClick(driver, editButton, true);
+				Utility_Functions.timeWait(4);
+				Utility_Functions.xScrollWindowToElement(driver, estimatedGrossFeeField);
+				Utility_Functions.timeWait(3);
+				Utility_Functions.xClick(driver, estimatedGrossFeeField, true);
+				Utility_Functions.timeWait(4);
+				Utility_Functions.xSendKeys(driver, estimatedGrossFeeField, "10,000.00");
+				Utility_Functions.timeWait(3);
+				Utility_Functions.xClick(driver, save, true);
+				Utility_Functions.timeWait(3);
+				Utility_Functions.xClick(driver, related, true);
+				Utility_Functions.timeWait(5);
+				Utility_Functions.xClick(driver, addButtonshareOpportunity, true);
+				Utility_Functions.timeWait(3);
+				Utility_Functions.xSwitchtoFrame(driver, SearchUserTeamRole);
+				Utility_Functions.xClickHiddenElement(driver, SearchUserTeamRole);
+				Utility_Functions.xSendKeys(driver, user1, "Inactive User");
+				Utility_Functions.timeWait(1);
+				user1.sendKeys(Keys.ARROW_DOWN);
+				user1.sendKeys(Keys.ENTER);
+				Utility_Functions.xClick(driver, selectTeamRole, true);
+				Utility_Functions.timeWait(3);
+				//Utility_Functions.xClick(driver, selectSecondaryMemberRole, true);
+				Utility_Functions.timeWait(3);
+				Utility_Functions.xClick(driver, selectOpportunityAccess, true);
+				Utility_Functions.timeWait(3);
+				Utility_Functions.xSendKeys(driver, user2, "Test Broker1");
+				Utility_Functions.timeWait(2);
+				user2.sendKeys(Keys.ARROW_DOWN);
+				user2.sendKeys(Keys.ENTER);
+				Utility_Functions.xClick(driver, selectTeamRole2, true);
+				Utility_Functions.timeWait(3);
+				//Utility_Functions.xClick(driver, selectSecondaryMemberRole2, true);
+				Utility_Functions.timeWait(3);
+				Utility_Functions.xClick(driver, saveButtonSplit, true);
+				Utility_Functions.timeWait(3);
+				driver.navigate().refresh();
+				Utility_Functions.timeWait(1);
+				driver.switchTo().defaultContent();
+				driver.navigate().refresh();
+				Utility_Functions.xWaitForElementVisible(driver, manageOpportunitySplits, 3);
+				Utility_Functions.xClick(driver, manageOpportunitySplits, true);
+				Utility_Functions.timeWait(4);
+				driver.switchTo().frame(driver.findElement(By.xpath("//iframe")));
+				splitPercent.clear();
+				Utility_Functions.timeWait(3);
+				splitPercent.sendKeys("100");
+				try {
+					Utility_Functions.xClick(driver, saveOpportunitySplit, true);
+				} catch (Exception e) {
+					Utility_Functions.xClick(driver, saveOpportunitySplitUAT, true);
+				}
+				report.updateTestLog("Opportunity Saved", "Opportunity Saved successfully::", Status.PASS);
+				Utility_Functions.timeWait(3);
+			 
 			 
 		 }
+
+			
+			
+			 
 	 
 }
 
