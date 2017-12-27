@@ -79,14 +79,11 @@
 			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACAdminOpportunityTeamMember"/>
 			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACManagerOpportunitySplit"/>
 			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACManagerCloneBudgetTarget"/>
-			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACAdminOpportunityNotesFile"/> 
 			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACAdminOpportunityActivity"/>
-<<<<<<< HEAD
 			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACAdminOpportunityActivityTaskEvent"/>
 			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACManagerAccountOpportunityHistory"/>
 			
-=======
->>>>>>> 643f9dfadaa864b94cc6020343e280fa709aabf9
+
 	
 		</classes>
 	</test>
