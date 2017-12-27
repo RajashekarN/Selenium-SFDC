@@ -1,26 +1,15 @@
 package testscripts.SF.UATTestScripts;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 import org.openqa.selenium.Platform;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
 import com.cognizant.Craft.CRAFTTestCase;
 import com.cognizant.Craft.DriverScript;
-import com.cognizant.Craft.ReusableLibrary;
-import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.IterationOptions;
 import com.cognizant.framework.selenium.Browser;
 import com.cognizant.framework.selenium.ExecutionMode;
 import com.cognizant.framework.selenium.SeleniumTestParameters;
-import com.sforce.soap.partner.DeleteResult;
-import com.sforce.soap.partner.SaveResult;
-import com.sforce.soap.partner.sobject.SObject;
-
-import supportLibraries.Utility_Functions;
 
 public class TC_SF_CMAPACAdminOpportunityActivity extends CRAFTTestCase{
 

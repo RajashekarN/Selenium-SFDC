@@ -552,6 +552,11 @@ public class LoginPage extends ReusableLibrary {
 					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "FDIREMEAManager"));
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("FDIGEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Data"))) {
 					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "FDIGEMEAData"));
+				
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("DAASIA")) && (dataTable.getData("General_Data", "TC_ID").contains("Data"))) {
+					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "DAASIAData"));
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("DAPACI")) && (dataTable.getData("General_Data", "TC_ID").contains("Data"))) {
+					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "DAPACIData"));
 				}
 			}
 			Utility_Functions.timeWait(1);
@@ -859,7 +864,9 @@ public class LoginPage extends ReusableLibrary {
 		userNamesList.add("testuser96@cbre.com.crm." + environment);
 		userNamesList.add("testuser97@cbre.com.crm." + environment);
 		userNamesList.add("testuser98@cbre.com.crm." + environment);
-
+		userNamesList.add("testuser99@cbre.com.crm." + environment);
+		userNamesList.add("testuser100@cbre.com.crm." + environment);
+		
 		System.out.println("User Names List are::::" + userNamesList);
 	}
 

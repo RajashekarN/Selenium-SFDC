@@ -496,7 +496,7 @@ public class ContactsFunctions extends ReusableLibrary {
 		}
 		System.out.println("Result:::" + results);
 		String contactId = establishConnection.saveResultsId(results);
-		if(contactId.contains("003")) {
+		if(contactId.startsWith("003")) {
 				report.updateTestLog("Verify Create Contact", "Contact has been created successfully", Status.PASS);
 			} else {
 				report.updateTestLog("Verify Create Contact", "Contact creation failed", Status.FAIL);

@@ -13,6 +13,7 @@ import pagesAPI.AccountsFunctions;
 import pagesAPI.ActivityFunctions;
 import pagesAPI.AttachmentsFunctions;
 import pagesAPI.BudgetsTargetsFunctions;
+import pagesAPI.CampaignsFunctions;
 import pagesAPI.ContactsFunctions;
 import pagesAPI.CreateUsers;
 import pagesAPI.EstablishConnection;
@@ -57,6 +58,7 @@ public class BC_API_Test extends ReusableLibrary {
 	AttachmentsFunctions attachmentsFunctions = new AttachmentsFunctions(scriptHelper);
 	Tagging tagging= new Tagging(scriptHelper);
 	BudgetsTargetsFunctions budgetsTargetsFunctions = new BudgetsTargetsFunctions(scriptHelper);
+	CampaignsFunctions campaignsFunctions = new CampaignsFunctions(scriptHelper);
 	
 	/**
 	 * Validating the Login functionality
@@ -453,7 +455,7 @@ public class BC_API_Test extends ReusableLibrary {
 	 *
 	 */	
 	public void bc_setPassword() {
-		createUsers.setPassword("FTE2PasswordRelease44");
+		createUsers.setPassword("Password567");
 	}
 	/**
 	 *Updating the Role and Profile 
@@ -551,4 +553,24 @@ public class BC_API_Test extends ReusableLibrary {
 		tagging.bulkTaggingFieldsValidation();
 	}
 	
+	/**
+	 * Campaign Creation function
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void bc_createCampaign() throws InterruptedException {
+		campaignsFunctions.createCampaign();
+	}
+	
+	/**
+	 * Contact Addition to Campaign 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void bc_associateCampaign() throws InterruptedException {
+		campaignsFunctions.associateCampagin();
+	}
+
 }

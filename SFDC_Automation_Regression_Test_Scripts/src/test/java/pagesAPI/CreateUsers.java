@@ -54,7 +54,7 @@ public class CreateUsers extends ReusableLibrary {
 		setPassword(password);
 	}*/
 
-	public String createUser(String firstName, String lastName, String alias, String email, String userName, String userRoleId, String profileId, String timeZoneSidKey) {
+	public String createUser(String firstName, String lastName, String alias, String email, String userName, String userRoleId, String profileId, String geoGraphicalId, String timeZoneSidKey) {
 		try {
 			SObject user = new SObject();
 			user.setType("user");
@@ -65,6 +65,7 @@ public class CreateUsers extends ReusableLibrary {
 			user.setField("Username", userName);
 			user.setField("UserRoleId", userRoleId);
 			user.setField("profileId", profileId);
+			user.setField("Geographical_Role__c", geoGraphicalId);
             user.setField("TimeZoneSidKey", timeZoneSidKey);
             user.setField("LocaleSidKey", "en_US");			
             user.setField("LanguageLocaleKey", "en_US");
@@ -225,8 +226,10 @@ public class CreateUsers extends ReusableLibrary {
 		userNamesList.add("0052F000000eRCZQA2");
 		userNamesList.add("0052F000000eRCeQAM");
 		userNamesList.add("0052F000000d0UYQAY");
-
-
+		userNamesList.add("0052F000000mywHQAQ");
+		userNamesList.add("0052F000000mywCQAQ");
+		userNamesList.add("0051g000000UVjcAAG");
+		userNamesList.add("0051g000000UVjhAAG");
 
 		System.out.println("User Names List are::::" + userNamesList);
 	}

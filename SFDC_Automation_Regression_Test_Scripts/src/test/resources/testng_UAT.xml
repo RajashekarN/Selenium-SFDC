@@ -82,9 +82,12 @@
 			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACAdminOpportunityActivity"/>
 			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACAdminOpportunityActivityTaskEvent"/>
 			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACManagerAccountOpportunityHistory"/>
-			
-
-	
+			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACManagerCreateCampaign"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_DAASIADataCreateCampaign"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACManagerContactAddCampaign"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACManagerLeadAddCampaign"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_DAASIADataContactAddCampaign"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_DAPACIDataLeadAddCampaign"/>
 		</classes>
 	</test>
 </suite>
