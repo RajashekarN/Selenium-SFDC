@@ -56,7 +56,7 @@ public class ActivityPage extends ReusableLibrary {
 	@FindBy(xpath ="//button[@title='Edit Send Notification Email']")
 	WebElement emailNotification;
 	
-	@FindBy(xpath = "//button[@class='slds-button slds-button--neutral showMore slds-button slds-button--neutral uiButton']")
+	@FindBy(xpath = "//button[contains(@class,'slds-button slds-button--neutral showMore slds-button slds-button--neutral uiButton')]")
 	WebElement btnPastActivity;
 	
 	@FindBy(xpath = "//span[text()='Related To']/parent::div/following-sibling::div/span/div/a")
@@ -161,12 +161,15 @@ public class ActivityPage extends ReusableLibrary {
 				{
 					sActivitySubject = "Test Automation Subject_Present" + Utility_Functions.xGenerateAlphaNumericString();
 					activityPresent=sActivitySubject;
+					System.out.println(activityPresent);
 				}else if(i==2){
 					sActivitySubject = "Test Automation Subject_Past" + Utility_Functions.xGenerateAlphaNumericString();
 					activityPast=sActivitySubject;
+					System.out.println(activityPast);
 				}else{
 					sActivitySubject = "Test Automation Subject_Future" + Utility_Functions.xGenerateAlphaNumericString();
 					activityFuture=sActivitySubject;
+					System.out.println(activityFuture);
 				}
 				Utility_Functions.xSendKeys(driver, activitySubject, sActivitySubject);
 				Utility_Functions.xScrollWindowTop(driver);
@@ -180,7 +183,7 @@ public class ActivityPage extends ReusableLibrary {
 					//Utility_Functions.xClick(driver, newActivityType, true);
 					Utility_Functions.timeWait(2);
 					Utility_Functions.xClickVisibleListElement(driver,newActivityType);
-				}else if(dataTable.getData("General_Data", "TC_ID").contains("Lead") && properties.getProperty("RunEnvironment").equalsIgnoreCase("UAT")){
+				}else if(dataTable.getData("General_Data", "TC_ID").contains("Contact") && properties.getProperty("RunEnvironment").equalsIgnoreCase("UAT")){
 					Utility_Functions.xClickVisibleListElement(driver, activityTypeList);
 					//Utility_Functions.xWaitForElementPresent(driver, newActivityType, 3);
 					//Utility_Functions.xClick(driver, newActivityType, true);
@@ -328,12 +331,15 @@ public class ActivityPage extends ReusableLibrary {
 				{
 					sActivitySubject = "Event Automation Subject_Present" + Utility_Functions.xGenerateAlphaNumericString();
 					eventPresent=sActivitySubject;
+					System.out.println(eventPresent);
 				}else if(i==2){
 					sActivitySubject = "Event Automation Subject_Past" + Utility_Functions.xGenerateAlphaNumericString();
 					eventPast=sActivitySubject;
+					System.out.println(eventPast);
 				}else{
 					sActivitySubject = "Event Automation Subject_Future" + Utility_Functions.xGenerateAlphaNumericString();
 					eventFuture=sActivitySubject;
+					System.out.println(eventFuture);
 				}
 				List<WebElement> subjectList = driver.findElements(By.xpath("//label/span[text()='Subject']/parent::label/parent::div/input"));
 				Utility_Functions.xSendKeysVisibleListElement(driver, subjectList, sActivitySubject);
@@ -430,6 +436,7 @@ public class ActivityPage extends ReusableLibrary {
 		
 		Utility_Functions.xClick(driver,btnMoreActivity, true);
 		Utility_Functions.timeWait(3);
+		
 		System.out.println(driver.findElement(By.xpath("//div[@class='timeline-container slds-m-top--medium']/ul/li/descendant::span[text()='"+activityPast+"']/following::span[1]/p[text()='Yesterday']")).isDisplayed());
 		System.out.println(driver.findElement(By.xpath("//div[@class='timeline-container slds-m-top--medium']/ul/li/descendant::span[text()='"+activityPresent+"']/following::span[1]/p[text()='Today']")).isDisplayed());
 		System.out.println(driver.findElement(By.xpath("//div[@class='timeline-container slds-m-top--medium']/ul/li/descendant::span[text()='"+activityFuture+"']/following::span[1]/p[text()='Tomorrow']")).isDisplayed());
@@ -447,6 +454,7 @@ public class ActivityPage extends ReusableLibrary {
 		
 		Utility_Functions.xClick(driver,btnMoreActivity, true);
 		Utility_Functions.timeWait(3);
+		
 		Utility_Functions.xWaitForElementPresent(driver, driver.findElement(By.xpath("//div[@class='timeline-container slds-m-top--medium']/ul/li/descendant::span[text()='"+activityPresent+"']")), 3);
 		Utility_Functions.xClickHiddenElement(driver,driver.findElement(By.xpath("//div[@class='timeline-container slds-m-top--medium']/ul/li/descendant::span[text()='"+activityPresent+"']")));
 		Utility_Functions.timeWait(3);
@@ -482,12 +490,20 @@ public class ActivityPage extends ReusableLibrary {
 	}
 	
 	public void validateActivityExpandAll(String activityPast, String activityPresent,String activityFuture){
+		try{
 		Utility_Functions.xClick(driver,btnPastActivity, true);
 		Utility_Functions.timeWait(3);
-		
+		}catch(Exception e){
+			System.out.println("More not clicked");
+		}
+		try{
 		Utility_Functions.xClick(driver,btnMoreActivity, true);
 		Utility_Functions.timeWait(3);
-		if(!dataTable.getData("General_Data", "TC_ID").contains("Lead")){
+		}catch(Exception e){
+			System.out.println("More not clicked");
+		}
+		
+		if(!dataTable.getData("General_Data", "TC_ID").contains("Lead") &&!(dataTable.getData("General_Data", "TC_ID").contains("Contact") && properties.getProperty("RunEnvironment").equalsIgnoreCase("FTE2"))){
 		System.out.println(driver.findElement(By.xpath("//div[@class='slds-media slds-tile slds-media--small']/descendant::span[text()='"+activityPresent+"']/ancestor::div[1]/following-sibling::div[1][text()='Private - Initial Meeting']")).isDisplayed());
 		System.out.println(driver.findElement(By.xpath("//div[@class='slds-media slds-tile slds-media--small']/descendant::span[text()='"+activityPresent+"']/ancestor::div[1]/following-sibling::div[2][text()='Open']")).isDisplayed());
 		
@@ -516,6 +532,7 @@ public class ActivityPage extends ReusableLibrary {
 		
 		Utility_Functions.xClick(driver,btnMoreActivity, true);
 		Utility_Functions.timeWait(3);
+	
 		System.out.println(driver.findElement(By.xpath("//div[@class='slds-media slds-tile slds-media--small']/descendant::span[text()='"+eventPast+"']/ancestor::div[1]/following-sibling::div[text()='Yesterday']")).isDisplayed());
 		System.out.println(driver.findElement(By.xpath("//div[@class='slds-media slds-tile slds-media--small']/descendant::span[text()='"+eventPresent+"']/ancestor::div[1]/following-sibling::div[text()='Today']")).isDisplayed());
 		System.out.println(driver.findElement(By.xpath("//div[@class='slds-media slds-tile slds-media--small']/descendant::span[text()='"+eventFuture+"']/ancestor::div[1]/following-sibling::div[text()='Tomorrow']")).isDisplayed());

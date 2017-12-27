@@ -1,9 +1,13 @@
 package businessComponents;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
 
+import pageObjects.AccountsPage;
 import pageObjects.LoginPage;
 import pagesAPI.AccountsFunctions;
 import pagesAPI.ActivityFunctions;
@@ -37,7 +41,8 @@ public class BC_API_Test extends ReusableLibrary {
 	public BC_API_Test(ScriptHelper scriptHelper) {
 		super(scriptHelper);
 	}
-	
+	AccountsPage sfAccountsPage = new AccountsPage(scriptHelper);
+	BC_Salesforce_Login sfBC_Login = new BC_Salesforce_Login(scriptHelper);
 	EstablishConnection sfEstablishConnection = new EstablishConnection(scriptHelper);
 	AccountsFunctions sfAccountsFunctions = new AccountsFunctions(scriptHelper);
 	ContactsFunctions sfContactsFunctions = new ContactsFunctions(scriptHelper);
@@ -91,6 +96,42 @@ public class BC_API_Test extends ReusableLibrary {
 	 * @author Vishnuvardhan
 	 *
 	 */
+
+	
+	public void bc_createOpportunityNoteAttachment(){
+		String opportunityId=sfOpportunitiesFunctions.createOpportunity();
+		boolean status = sfOpportunitiesFunctions.createNote(opportunityId);
+		
+		if(status){
+			report.updateTestLog("Verify opportunity Note","Note has been created", Status.PASS);
+		}else {
+			report.updateTestLog("Verify opportunity Note", "Note creation failed", Status.FAIL);
+		}
+		boolean status1= attachmentsFunctions.createAttachmentInOpportunity(opportunityId);
+		if(status1){
+			report.updateTestLog("Verify opportunity Attachment","Attachment has been created", Status.PASS);
+		}else {
+			report.updateTestLog("Verify opportunity Attachment", "Attachment creation failed", Status.FAIL);
+		}
+	}
+	
+	public void bc_createAccountActivityAPI() throws InterruptedException{
+		HashMap<String,String> returnmap=taskEventsFunctions.createTaskbyActivityDate("Current");
+		bc_loginApi();
+		
+		sfAccountsPage.selectAccountWithId(returnmap.get("accountId"));
+		
+	}
+	
+	public void bc_loginApi() throws InterruptedException{
+		sfBC_Login.bc_invokeApplication();
+		sfBC_Login.bc_login();
+	}
+	public void bc_createMultipleTasks(){
+		Map<String,String> taskMap = taskEventsFunctions.createMultipleTasks();
+		taskEventsFunctions.closeTaskonOpportunity(taskMap.get("Task"));
+		taskEventsFunctions.createMultipleEvents(taskMap.get("Opportunity"));
+	}
 
 	public void bc_deleteAccounts() {
 		boolean status = sfAccountsFunctions.deleteAccounts();

@@ -101,6 +101,49 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 		return opportunityId;
 	}
 
+	public boolean createNote(String parentID) {
+		int count =1;
+		boolean status=false;
+		establishConnection.establishConnection();
+		/*SObject Note = new SObject();
+		Note.setType("Note");		
+		Note.setField("ParentId",parentID);
+		Note.setField("Title", "Test Note Title");
+		Note.setField("Body","Test Note Body");*/
+		if(dataTable.getData("General_Data", "TC_ID").contains("Note") &&dataTable.getData("General_Data", "TC_ID").contains("Attachment") ) /*&& (!dataTable.getData("General_Data", "TC_ID").startsWith("VAS")) && 
+		(!dataTable.getData("General_Data", "TC_ID").startsWith("GWS")) && (!dataTable.getData("General_Data", "TC_ID").startsWith("OB"))  &&
+		(!dataTable.getData("General_Data", "TC_ID").startsWith("AB")))*/ {
+			count = 3;
+		}  
+		
+		
+		//opportunities[0] = opportunity;
+		for(int i =1;i<=count;i++){
+			SObject[] Notes = new SObject[1];
+			SObject Note = new SObject();
+			Note.setType("Note");		
+			Note.setField("ParentId",parentID);
+			Note.setField("Title", "Test Note Title "+ String.valueOf(i));
+			Note.setField("Body","Test Note Body "+ String.valueOf(i));
+			Notes[0]= Note;
+			
+			try {
+				results = EstablishConnection.connection.create(Notes);
+			} catch (ConnectionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println("Result:::" + results);
+			 status = establishConnection.saveResults(results);
+			 if (!status){
+				 break;
+			 }
+		}
+		
+			
+		return status;
+	}
+
 	/*public void createOpportunitySpecficUser() {
 		establishConnection.establishConnection();
 		SObject opportunity = new SObject();

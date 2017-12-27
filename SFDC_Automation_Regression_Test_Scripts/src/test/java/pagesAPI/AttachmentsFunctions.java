@@ -92,6 +92,45 @@ public class AttachmentsFunctions extends ReusableLibrary {
 		} 
 		return status;
 	}
+	
+	public boolean createAttachmentInOpportunity(String opportunityId) {
+		
+		//establishConnection.establishConnectionSpecificUser();
+		File file = new File("src/test/resources");
+		File path = new File(file,"Sample Test Automation.txt");		
+		byte[] body = null;
+		try {
+			InputStream inputStream = new FileInputStream(path.getAbsoluteFile());
+			 body = new byte[(int)path.length()];
+			inputStream.read(body);
+			inputStream.close();
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}	
+		/*String query = "SELECT Id FROM Task where Status = 'Open' ORDER BY CreatedDate DESC LIMIT 1";
+		String sTaskId = searchTextSOQL.fetchRecordFieldValue("Id", query);*/
+		SObject attachment = new SObject();
+		attachment.setType("Attachment");
+		attachment.setField("Name", "Sample Test Automation.txt");
+		attachment.setField("ParentId", opportunityId);
+		attachment.setField("Body", body);
+  
+		SObject[] attachments = new SObject[1];
+		attachments[0] = attachment;
+		try {
+			results = EstablishConnection.connection.create(attachments);
+		} catch (ConnectionException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Result:::" + results);
+		boolean status = establishConnection.saveResults(results);	
+		/*if(status.startsWith("00P")) {
+			report.updateTestLog("Verify Create Task", "Attachment has been created successfully", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Create Task", "Attachment creation failed", Status.FAIL);
+		} */
+		return status;
+	}
 
 	
 }

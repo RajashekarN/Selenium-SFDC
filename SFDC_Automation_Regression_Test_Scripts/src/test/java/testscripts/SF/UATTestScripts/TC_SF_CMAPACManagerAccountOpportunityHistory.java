@@ -12,20 +12,21 @@ import com.cognizant.framework.selenium.SeleniumTestParameters;
 
 import com.cognizant.Craft.*;
 /**
- * Validating the property preference fields
+ * Validating the Accounts creation and available sections 
  * 
  * @author Vishnu
  *
  */
-public class TC_SF_CMAPACAdminOpportunityNotesFile extends CRAFTTestCase {
+
+public class TC_SF_CMAPACManagerAccountOpportunityHistory extends CRAFTTestCase{
 	
 	@Test(dataProvider = "UATTestScripts")
-	public void runTC_SF_CMAPACAdminOpportunityNotesFile(String testInstance, ExecutionMode executionMode, Platform platform
+	public void runTC_SF_CMAPACManagerAccountOpportunityHistory(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
 		SeleniumTestParameters testParameters = new SeleniumTestParameters(currentScenario, currentTestcase);
-		testParameters.setCurrentTestDescription("Test for validating property preference fields");
+		testParameters.setCurrentTestDescription("Test for the validating the accounts creation and available sections");
 		testParameters.setIterationMode(IterationOptions.RUN_ONE_ITERATION_ONLY);
 		testParameters.setBrowser(Browser.CHROME);
 		testParameters.setExecutionMode(executionMode);

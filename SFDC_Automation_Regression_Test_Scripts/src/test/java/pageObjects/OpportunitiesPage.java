@@ -1419,7 +1419,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		report.updateTestLog("Verify Create Activity Opportunity", "All Opportunity are displayed successfully:::", Status.PASS);
 		List<WebElement> contactList = driver
 				.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-		Utility_Functions.xclickgetTextofFirstElementfromList(contactList);
+		Utility_Functions.xclickRandomElement(contactList);
 		Utility_Functions.timeWait(2);
 	}
 
