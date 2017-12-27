@@ -306,4 +306,14 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 		propertiesFunctions.propertyPreferenceValidation();
 	}
 	
+	/**
+	 * Validating the Property tagging
+	 * 
+	 * @author Cognizant
+	 *
+	 */
+	public void bc_propertyTagging() throws InterruptedException {
+		sfPropertiesPage.propertyTagging();
+	}
+	
 }

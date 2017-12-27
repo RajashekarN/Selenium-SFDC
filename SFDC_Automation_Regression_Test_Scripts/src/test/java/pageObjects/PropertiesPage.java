@@ -446,6 +446,18 @@ public class PropertiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//span[text()='Add']")
 	WebElement addActivity;
 	
+	@FindBy(xpath = "//a[contains(@title,'Automation')]")
+	WebElement ExistingProperty;
+	
+	@FindBy (xpath = "//*[contains(@title,'View records tagged')]")
+	WebElement PrivateTagged;
+	
+	@FindBy (xpath = " //*[contains(@class,'entityNameTitle slds-breadcrumb__item slds-line-height--reset')]")
+	WebElement PrivateTagPage;
+	
+	@FindBy(xpath = "//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']")
+	WebElement PropertyList;
+	
 	LoginPage loginPage = new LoginPage(scriptHelper);
 	Actions actions = new Actions(driver.getWebDriver());
 	ActivityPage activityPage = new ActivityPage(scriptHelper);
@@ -3062,6 +3074,52 @@ try{
 		
 		
 		}
+	
+	 public void propertyTagging () {
+			
+			Utility_Functions.xClick(driver, menu_More, true);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xClick(driver, properties, true);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xClick(driver, recentlyViewed, true);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xClick(driver, allProperties, true);
+			Utility_Functions.timeWait(4);
+			Utility_Functions.xClick(driver, PropertyList, true);
+			Utility_Functions.timeWait(2);
+			
+		
+			 Utility_Functions.xSwitchtoFrame(driver, addTag);
+			 	Utility_Functions.xClick(driver, addTag, true);
+			      Utility_Functions.timeWait(3);
+
+			Utility_Functions.xSendKeys(driver, privatetag, dataTable.getData("General_Data", "Private Tag"));
+			 Utility_Functions.timeWait(3);
+
+			 Utility_Functions.xClickHiddenElement(driver, savePrivateTag);
+			Utility_Functions.timeWait(4);
+			
+			if(addTag.isDisplayed()){
+				report.updateTestLog("Verify Opportunity Private Tags", "The Private Tag is saved",
+						Status.PASS);		
+			}else{
+				report.updateTestLog("Verify Opportunity Private Tags", "The Private tag is not saved",
+						Status.FAIL);
+		}
+			
+			Utility_Functions.xClick(driver, PrivateTagged, true);
+		      Utility_Functions.timeWait(8);
+		    Utility_Functions.xSwitchtoFrame(driver, PrivateTagPage);
+			
+		      if(PrivateTagPage.isDisplayed()){
+					report.updateTestLog("Verify Property Private Tags", "The Tag is saved in Private Tag Page",
+							Status.PASS);		
+				}else{
+					report.updateTestLog("Verify Property Private Tags", "The Tag is not saved in Private Tag Page",
+							Status.FAIL);
+			}
+		      System.out.println("Current URL is--" +driver.getCurrentUrl());
+	}
 }
 
 
