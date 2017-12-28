@@ -88,6 +88,8 @@
 			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACManagerLeadAddCampaign"/>
 			<class name="testscripts.SF.UATTestScripts.TC_SF_DAASIADataContactAddCampaign"/>
 			<class name="testscripts.SF.UATTestScripts.TC_SF_DAPACIDataLeadAddCampaign"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_DAASIADataCreateMarketingLists"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_DAASIADataCreateSubscriptions"/>			
 		</classes>
 	</test>
 </suite>

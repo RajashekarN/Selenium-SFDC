@@ -21,6 +21,7 @@ import pagesAPI.LeadsFunctions;
 import pagesAPI.OpportunitiesFunctions;
 import pagesAPI.PermissionSetsUsers;
 import pagesAPI.SearchTextSOQL;
+import pagesAPI.SubscriptionsFunctions;
 import pagesAPI.Tagging;
 import pagesAPI.TaskEventsFunctions;
 
@@ -59,6 +60,7 @@ public class BC_API_Test extends ReusableLibrary {
 	Tagging tagging= new Tagging(scriptHelper);
 	BudgetsTargetsFunctions budgetsTargetsFunctions = new BudgetsTargetsFunctions(scriptHelper);
 	CampaignsFunctions campaignsFunctions = new CampaignsFunctions(scriptHelper);
+	SubscriptionsFunctions subscriptionsFunctions = new SubscriptionsFunctions(scriptHelper);
 	
 	/**
 	 * Validating the Login functionality
@@ -571,6 +573,26 @@ public class BC_API_Test extends ReusableLibrary {
 	 */
 	public void bc_associateCampaign() throws InterruptedException {
 		campaignsFunctions.associateCampagin();
+	}
+	
+	/**
+	 * Creating subscriptions
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void bc_createSubscriptions() throws InterruptedException {
+		subscriptionsFunctions.createSubscriptions();
+	}
+	
+	/**
+	 * Creating subscriptions
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void bc_createMarketingLists() throws InterruptedException {
+		subscriptionsFunctions.createMarketing();
 	}
 
 }
