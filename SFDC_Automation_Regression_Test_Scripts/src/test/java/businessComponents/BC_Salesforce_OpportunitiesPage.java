@@ -1405,4 +1405,14 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 		sfOpportunitiesPage.opportunitySplit();
 	}
 	
+	/**
+	 * Validating the Opportunities split percentage
+	 * 
+	 * @author  Cognizant
+	 *
+	 */
+	public void bc_opportunitySplitPercentage() {
+		sfOpportunitiesPage.opportunitySplitPercentage();
+	}
+	
 }

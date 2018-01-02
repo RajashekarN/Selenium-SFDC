@@ -660,7 +660,7 @@ public class LeadsPage extends ReusableLibrary {
 		report.updateTestLog("Verify Create Activity Lead", "All Lead are displayed successfully:::", Status.PASS);
 		List<WebElement> contactList = driver
 				.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-		Utility_Functions.xclickRandomElement(contactList);
+		Utility_Functions.xclickgetTextofFirstElementfromList(contactList);
 		Utility_Functions.timeWait(2);
 	}
 	public void convertLead() {
@@ -3967,33 +3967,25 @@ public class LeadsPage extends ReusableLibrary {
 		
 	}
 	
-public void leadTagging () {
+        public void leadTagging () {
 		
 		Utility_Functions.xClick(driver, menu_Leads, true);
-		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementVisible(driver, recentlyViewed, 3);
 		Utility_Functions.xClick(driver, recentlyViewed, true);
-		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementVisible(driver, allLeadsMenu, 3);
 		Utility_Functions.xClick(driver, allLeadsMenu, true);
 		Utility_Functions.timeWait(4);
-		
-		Utility_Functions.xclickRandomElement(leadsList);
-		
-		//Utility_Functions.xClick(driver, ExistingLead, true);
+		Utility_Functions.xclickRandomElement(leadsList);	
 		Utility_Functions.timeWait(2);
-		
-	
-		 Utility_Functions.xSwitchtoFrame(driver, addTag);
-
-			Utility_Functions.xWaitForElementPresent(driver, addTag, 8);
-		
-		 	Utility_Functions.xClickHiddenElement(driver, addTag);
-		      Utility_Functions.timeWait(2);
-
+		Utility_Functions.xSwitchtoFrame(driver, addTag);
+		Utility_Functions.xWaitForElementPresent(driver, addTag, 8);
+		Utility_Functions.xClickHiddenElement(driver, addTag);
+		Utility_Functions.xWaitForElementVisible(driver, privatetag, 3);
 		Utility_Functions.xSendKeys(driver, privatetag, dataTable.getData("General_Data", "Private Tag"));
-		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementVisible(driver, savePrivateTag, 3);
 		Utility_Functions.xClickHiddenElement(driver, savePrivateTag);
-		Utility_Functions.timeWait(5);
-		
+		Utility_Functions.xWaitForElementVisible(driver, addTag, 3);
+	
 		if(addTag.isDisplayed()){
 			report.updateTestLog("Verify Lead Private Tags", "The Private Tag is saved",
 					Status.PASS);		
@@ -4005,12 +3997,9 @@ public void leadTagging () {
 }
 	
 	    public void verifyLeadTagging () {
-	    	
-	    	
 	         Utility_Functions.xClick(driver, PrivateTagged, true);
-		     Utility_Functions.timeWait(8);
 		    Utility_Functions.xSwitchToWindow(driver, 1);
-			
+		    Utility_Functions.xWaitForElementVisible(driver, PrivateTagPage, 5);	
 		      if(PrivateTagPage.isDisplayed()){
 					report.updateTestLog("Verify Lead Private Tags", "The Tag is saved in Private Tag Page",
 							Status.PASS);		
@@ -4018,29 +4007,29 @@ public void leadTagging () {
 					report.updateTestLog("Verify Lead Private Tags", "The Tag is not saved in Private Tag Page",
 							Status.FAIL);
 			}
-		      System.out.println("Current URL is--" +driver.getCurrentUrl());
+		      
 	}
 	    
 	    public void addMassMember () {
 	    	
 	    	Utility_Functions.xClick(driver, menu_Leads, true);
-			Utility_Functions.timeWait(2);
+	    	Utility_Functions.xWaitForElementVisible(driver, recentlyViewed, 5);
 			Utility_Functions.xClick(driver, recentlyViewed, true);
-			Utility_Functions.timeWait(2);
+			Utility_Functions.xWaitForElementVisible(driver, allLeadsMenu, 5);
 			Utility_Functions.xClick(driver, allLeadsMenu, true);
 			Utility_Functions.timeWait(4);
 			Utility_Functions.xclickRandomElement(leadsList);
-			Utility_Functions.timeWait(4);
+			Utility_Functions.xWaitForElementVisible(driver, ReportsTab, 5);
 			Utility_Functions.xClick(driver, ReportsTab, true);
-			Utility_Functions.timeWait(2);
+			Utility_Functions.xWaitForElementVisible(driver, AllFolder, 5);
 			Utility_Functions.xClick(driver, AllFolder, true);
-			Utility_Functions.timeWait(2);
+			Utility_Functions.xWaitForElementVisible(driver, AllCampaignMemberbtn, 5);
 			Utility_Functions.xClick(driver, AllCampaignMemberbtn, true);
-			Utility_Functions.timeWait(2);
+			Utility_Functions.xWaitForElementVisible(driver, ContactsPrivateTag, 5);
 			Utility_Functions.xClick(driver, ContactsPrivateTag, true);
-			Utility_Functions.timeWait(2);
+			Utility_Functions.xWaitForElementVisible(driver, showMoreActionsReport, 5);
 			Utility_Functions.xClick(driver, showMoreActionsReport, true);
-			Utility_Functions.timeWait(2);
+			Utility_Functions.xWaitForElementVisible(driver, clone, 5);
 			Utility_Functions.xClick(driver, clone, true);
 			
 			

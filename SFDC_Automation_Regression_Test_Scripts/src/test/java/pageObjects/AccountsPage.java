@@ -5185,40 +5185,19 @@ public class AccountsPage extends ReusableLibrary {
      public void accountTagging () {
 		
 		Utility_Functions.xClick(driver, menu_Accounts, true);
-		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver,recentlyViewed, 3);
 		Utility_Functions.xClick(driver, recentlyViewed, true);
-		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver,allAccounts, 3);
 		Utility_Functions.xClick(driver, allAccounts, true);
-		Utility_Functions.timeWait(2);
+        Utility_Functions.timeWait(2);
 		Utility_Functions.xClick(driver, AccountList, true);
-		Utility_Functions.timeWait(2);
-		
-		
-		
+		 Utility_Functions.timeWait(2);
 		Utility_Functions.xSwitchtoFrame(driver, addTag);
 		Utility_Functions.xClickHiddenElement(driver, addTag);
-		//Utility_Functions.xClick(driver, addTag, true);
-		Utility_Functions.timeWait(3);	
 		Utility_Functions.xSendKeys(driver, privatetag , dataTable.getData("General_Data", "Private Tag"));
-		Utility_Functions.timeWait(3);
-		/*List<WebElement>experience = driver.findElements(By.id("tag_save_btn"));
-	       System.out.println("Number of save buttons are "+experience.size());
-	       
-	      for(int i=0;i<experience.size();i++)
-	      {
-	    	  String values = experience.get(i).getAttribute("value");
-	    	  if(values.equals("4")) {
-	    		  experience.get(i).click();
-	    		  break;	  
-	    	  }
-	    	  
-	      }*/
-		
-	
+		Utility_Functions.xWaitForElementPresent(driver,savePrivateTag, 3);	
 	      Utility_Functions.xClickHiddenElement(driver, savePrivateTag);
-	
-		Utility_Functions.timeWait(5);
-
+	      Utility_Functions.xWaitForElementPresent(driver,addTag, 3);	
 		if(addTag.isDisplayed()){
 			report.updateTestLog("Verify Account Private Tags", "The Private Tag is saved",
 					Status.PASS);		
@@ -5232,9 +5211,9 @@ public class AccountsPage extends ReusableLibrary {
      public void verifyAccountTagging () {
 	    	
 	    	
-         Utility_Functions.xClick(driver, PrivateTagged, true);
-	     Utility_Functions.timeWait(8);
+        Utility_Functions.xClick(driver, PrivateTagged, true);
 	    Utility_Functions.xSwitchToWindow(driver, 1);
+	    Utility_Functions.xWaitForElementPresent(driver,PrivateTagPage, 3);
 		
 	      if(PrivateTagPage.isDisplayed()){
 				report.updateTestLog("Verify Lead Private Tags", "The Tag is saved in Private Tag Page",
@@ -5243,17 +5222,16 @@ public class AccountsPage extends ReusableLibrary {
 				report.updateTestLog("Verify Lead Private Tags", "The Tag is not saved in Private Tag Page",
 						Status.FAIL);
 		}
-	      System.out.println("Current URL is--" +driver.getCurrentUrl());
 }
     	
            public void createBudgetTarget () {
         	   
     		Utility_Functions.xClick(driver, applauncher, true);
-    		Utility_Functions.timeWait(2);
+    		Utility_Functions.xWaitForElementPresent(driver,budgetsTargets, 3);
     		Utility_Functions.xClick(driver, budgetsTargets, true);
-    		Utility_Functions.timeWait(2);
+    		Utility_Functions.xWaitForElementPresent(driver,newBudgetsTargets, 3);
     		Utility_Functions.xClick(driver, newBudgetsTargets, true);
-    		Utility_Functions.timeWait(2);
+    		Utility_Functions.xWaitForElementPresent(driver,cbreProfessional, 3);
     		
     		if(cbreProfessional.isDisplayed()){
     			report.updateTestLog("Verify CBRE Professional", "The CBRE Professional field is displayed",
@@ -5296,66 +5274,37 @@ public class AccountsPage extends ReusableLibrary {
     		
     	
     		Utility_Functions.xSendKeys(driver, cbreProfessional, "Test Broker6");
-    		Utility_Functions.timeWait(3);
-    		
     		Utility_Functions.xClick(driver, SelectTestBroker, true);
-    		Utility_Functions.timeWait(2);
-     	   // Utility_Functions.xClick(driver, SelectCbreProfessional, true);
-    		//Utility_Functions.timeWait(2);
-    		
-
-    		//Utility_Functions.xClick(driver, firstLookupElement, true);
-    	
-    		Utility_Functions.timeWait(3);
-    		Utility_Functions.xSendKeys(driver, budgetAmount, dataTable.getData("General_Data", "Budget Amount"));
-    		Utility_Functions.timeWait(3);
+    		Utility_Functions.xWaitForElementPresent(driver,budgetAmount, 3);
+    		Utility_Functions.xSendKeys(driver, budgetAmount, "78000");
+    		Utility_Functions.xWaitForElementPresent(driver,startDate, 3);
     		Calendar calendar = Calendar.getInstance();
-
 		    // Move calendar to future
 		    calendar.add(Calendar.DATE, 1065);
-
 		    // Get current date of calendar which point to the yesterday now
 		    Date newDate = calendar.getTime();
 		    Utility_Functions.xWaitForElementPresent(driver, startDate, 3);
 			Utility_Functions.xSendKeys(driver, startDate, dateFormat.format(newDate).toString());
-    	
     		Utility_Functions.xClick(driver, saveBudget, true);
-    		Utility_Functions.timeWait(5);
-    		
-   	    	
+    		Utility_Functions.timeWait(3);  		  	    	
 }
            
            public void deleteBudgteTarget () {
         	   
         	   Utility_Functions.xSwitchtoFrame(driver, DeleteClone);
         	   Utility_Functions.xClickHiddenElement(driver, DeleteClone);
-        	   Utility_Functions.timeWait(2);
+        	   Utility_Functions.xWaitForElementPresent(driver, DeleteBudgetTargetPopup, 3);
         	   Utility_Functions.xClick(driver, DeleteBudgetTargetPopup, true);
-        	   Utility_Functions.timeWait(7);
+        	   Utility_Functions.timeWait(3);
         	   
            }
            
             public void editBudgetTarget () {
      
        		Utility_Functions.xClick(driver, EditBudgetTarget, true);
-       		Utility_Functions.timeWait(2);
+       		Utility_Functions.xWaitForElementPresent(driver, budgetAmount, 3);
        		Utility_Functions.xSendKeys(driver, budgetAmount, "50000");
-    		Utility_Functions.timeWait(3);
-       		/*Utility_Functions.xClick(driver, deleteCbreProfessional, true);
-       		Utility_Functions.timeWait(2);
-    		Utility_Functions.xSendKeys(driver, cbreProfessional, dataTable.getData("General_Data", "Edit CBRE Professional"));
-    		Utility_Functions.timeWait(3);
-    		Utility_Functions.xClick(driver, firstLookupElement, true);
-    		Utility_Functions.timeWait(3);*/
-       		/*Calendar calendar = Calendar.getInstance();
-
-		    // Move calendar to future
-		    calendar.add(Calendar.DATE, 1);
-
-		    // Get current date of calendar which point to the yesterday now
-		    Date newDate = calendar.getTime();
-		    Utility_Functions.xWaitForElementPresent(driver, startDate, 3);
-			Utility_Functions.xSendKeys(driver, startDate, dateFormat.format(newDate).toString()); */
+       		Utility_Functions.xWaitForElementPresent(driver, saveBudget, 3);
        		Utility_Functions.xClick(driver, saveBudget, true);
        		Utility_Functions.timeWait(2);
        		
@@ -5364,7 +5313,7 @@ public class AccountsPage extends ReusableLibrary {
             public void cloningBudgetTarget() {
             	
             	Utility_Functions.xClick(driver, CloneBudgteTarget, true);
-            	Utility_Functions.timeWait(2);
+            	Utility_Functions.xWaitForElementPresent(driver, startDate, 3);
             	Calendar calendar = Calendar.getInstance();
 
     		    // Move calendar to future
@@ -5382,19 +5331,16 @@ public class AccountsPage extends ReusableLibrary {
             public void opportunityToAccount () {
             	
             	Utility_Functions.xClick(driver, menu_Accounts, true);
-        		Utility_Functions.timeWait(2);
+            	Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
         		Utility_Functions.xClick(driver, recentlyViewed, true);
-        		Utility_Functions.timeWait(2);
+        		Utility_Functions.xWaitForElementPresent(driver, allAccounts, 3);
         		Utility_Functions.xClick(driver, allAccounts, true);
-        		Utility_Functions.timeWait(2);
+        		Utility_Functions.xWaitForElementPresent(driver, AccountList, 3);
         		Utility_Functions.xClick(driver, AccountList, true);
-        		Utility_Functions.timeWait(2);
-        		
+        		Utility_Functions.xWaitForElementPresent(driver, related_Accounts, 3);	
         		Utility_Functions.xClick(driver, related_Accounts, true);
         		Utility_Functions.timeWait(2);
-        		
-        		
-            	
+        	
             	
             }
             }

@@ -89,7 +89,11 @@
 			<class name="testscripts.SF.UATTestScripts.TC_SF_DAASIADataContactAddCampaign"/>
 			<class name="testscripts.SF.UATTestScripts.TC_SF_DAPACIDataLeadAddCampaign"/>
 			<class name="testscripts.SF.UATTestScripts.TC_SF_DAASIADataCreateMarketingLists"/>
-			<class name="testscripts.SF.UATTestScripts.TC_SF_DAASIADataCreateSubscriptions"/>			
+			<class name="testscripts.SF.UATTestScripts.TC_SF_DAASIADataCreateSubscriptions"/>	
+			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACManagerOpportunitySplitPercentage"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACAdminMarketCreation"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACAdminSubscriptionCreation"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACAdminPropertyUpdateClone"/>					
 		</classes>
 	</test>
 </suite>
