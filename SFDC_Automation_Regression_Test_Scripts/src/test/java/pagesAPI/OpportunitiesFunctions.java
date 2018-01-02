@@ -18,7 +18,6 @@ import com.sforce.soap.partner.SaveResult;
 import com.sforce.soap.partner.sobject.SObject;
 import com.sforce.ws.ConnectionException;
 
-
 public class OpportunitiesFunctions extends ReusableLibrary {
 	/*
 	 * Constructor to initialize the business component library
@@ -55,14 +54,14 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 		SObject opportunity = new SObject();
 		opportunity.setType("Opportunity");		
 		opportunity.setField("Name","Test Automation_Opportunity");
-		SearchTextSOQL accountID = new SearchTextSOQL(scriptHelper);
-		String accountId = accountID.fetchRecord("Account", "Id");
+		AccountsFunctions accountsFunctions = new AccountsFunctions(scriptHelper);
+		String accountId = accountsFunctions.createAccountRequiredFields();		
 		opportunity.setField("AccountId", accountId);
 		opportunity.setField("CloseDate",Calendar.getInstance());
 		if(dataTable.getData("General_Data", "TC_ID").contains("APAC")) /*&& (!dataTable.getData("General_Data", "TC_ID").startsWith("VAS")) && 
 		(!dataTable.getData("General_Data", "TC_ID").startsWith("GWS")) && (!dataTable.getData("General_Data", "TC_ID").startsWith("OB"))  &&
 		(!dataTable.getData("General_Data", "TC_ID").startsWith("AB")))*/ {
-			opportunity.setField("RecordTypeId", "012i0000001QOXjAAO");
+			opportunity.setField("RecordTypeId", "012i0000001QOXfAAO");
 		} else if(dataTable.getData("General_Data", "TC_ID").contains("EMEA")) /*&& (!dataTable.getData("General_Data", "TC_ID").startsWith("VAS")) && 
 				(!dataTable.getData("General_Data", "TC_ID").startsWith("GWS")) && (!dataTable.getData("General_Data", "TC_ID").startsWith("OB"))  &&
 				(!dataTable.getData("General_Data", "TC_ID").startsWith("AB")))*/ {
@@ -87,7 +86,14 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 				|| (dataTable.getData("General_Data", "TC_ID").startsWith("FDIR"))) {
 			opportunity.setField("RecordTypeId", "0121Y000001EVzDQAW");
 		}								
-		opportunity.setField("StageName","Qualification");
+		opportunity.setField("Service__c", "Consulting");
+		if(dataTable.getData("General_Data", "TC_ID").startsWith("AS")) {
+			opportunity.setField("AS_Lead_Source__c", "Business Relationship");
+		} else {
+			opportunity.setField("LeadSource", "Business Relationship");	
+		}		
+		opportunity.setField("Amount", "20000");
+		opportunity.setField("StageName","02-Meeting");
 		SObject[] opportunities = new SObject[1];
 		opportunities[0] = opportunity;
 		try {

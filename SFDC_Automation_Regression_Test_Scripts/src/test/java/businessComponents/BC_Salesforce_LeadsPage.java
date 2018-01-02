@@ -403,11 +403,18 @@ public class BC_Salesforce_LeadsPage extends ReusableLibrary {
 	 *
 	 */	
 	
-	public void bc_addMassMember () {
-		   sfLeadsPage.addMassMember();
-			
-		}
+	public void bc_addMassMember() {
+		sfLeadsPage.addMassMember();
+	}
 	
-
+	/**
+	 * Lead Fields Validations
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void bc_leadFieldsValidations() {
+		leadsFunctions.leadPageFieldsValidation();
+	}
 }
 

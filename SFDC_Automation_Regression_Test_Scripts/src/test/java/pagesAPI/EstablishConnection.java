@@ -274,11 +274,11 @@ public class EstablishConnection extends ReusableLibrary {
 					query = "Select Name from Property__c where Id = " + "'" + result + "'";
 				} else if(result.startsWith("002")) {
 					query = "Select Title from Note where Id = " + "'" + result + "'";
-				}else if(result.startsWith("00P")) {
+				} else if(result.startsWith("00P")) {
 					query = "Select Title from Attachment where Id = " + "'" + result + "'";
-				}
-				
-				
+				} else if(result.startsWith("00Q")) {
+					query = "Select Id from Lead where Id = " + "'" + result + "'";
+				}				
 				SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
 				String name = searchTextSOQL.fetchRecordFieldValue("Name", query);
 				report.updateTestLog("Verify Create/ Update Account/ Contact/ Opportuntiy", "Name of the Account/ Contact/ Opportunity :: " + name, Status.PASS);

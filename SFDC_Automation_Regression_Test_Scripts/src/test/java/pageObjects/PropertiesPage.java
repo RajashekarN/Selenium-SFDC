@@ -1,10 +1,8 @@
 package pageObjects;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -19,7 +17,6 @@ import org.openqa.selenium.support.ui.Select;
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
-import com.itextpdf.text.log.SysoCounter;
 
 import pagesAPI.SearchTextSOQL;
 import supportLibraries.Utility_Functions;
