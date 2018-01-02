@@ -14,6 +14,7 @@ import pagesAPI.AccountsFunctions;
 import pagesAPI.ActivityFunctions;
 import pagesAPI.AttachmentsFunctions;
 import pagesAPI.BudgetsTargetsFunctions;
+import pagesAPI.CampaignsFunctions;
 import pagesAPI.ContactsFunctions;
 import pagesAPI.CreateUsers;
 import pagesAPI.EstablishConnection;
@@ -21,6 +22,7 @@ import pagesAPI.LeadsFunctions;
 import pagesAPI.OpportunitiesFunctions;
 import pagesAPI.PermissionSetsUsers;
 import pagesAPI.SearchTextSOQL;
+import pagesAPI.SubscriptionsFunctions;
 import pagesAPI.Tagging;
 import pagesAPI.TaskEventsFunctions;
 
@@ -62,6 +64,8 @@ public class BC_API_Test extends ReusableLibrary {
 	ContactsPage sfContactsPage=new ContactsPage(scriptHelper);
 	LeadsPage sfLeadPage=new LeadsPage(scriptHelper);
 	OpportunitiesPage sfOppPage=new OpportunitiesPage(scriptHelper);
+	CampaignsFunctions campaignsFunctions = new CampaignsFunctions(scriptHelper);
+	SubscriptionsFunctions subscriptionsFunctions = new SubscriptionsFunctions(scriptHelper);
 	
 	/**
 	 * Validating the Login functionality
@@ -138,7 +142,7 @@ public class BC_API_Test extends ReusableLibrary {
 		HashMap<String,String> returnmap=taskEventsFunctions.createEventbyActivityDate();
 		bc_loginApi();
 		
-		String accountName= sfAccountsPage.selectAccountWithId(returnmap.get("accountId"));
+		sfAccountsPage.selectAccountWithId(returnmap.get("accountId"));
 		if(dataTable.getData("General_Data", "TC_ID").contains("Event") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") && !dataTable.getData("General_Data", "TC_ID").contains("Expand") ){
 			sfActivityPage.validateEventActivity(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
 		}
@@ -149,7 +153,7 @@ public class BC_API_Test extends ReusableLibrary {
 		HashMap<String,String> returnmap=taskEventsFunctions.createEventbyActivityDate();
 		bc_loginApi();
 		
-		String accountName= sfLeadPage.selectLeadById(returnmap.get("leadId"));
+		sfLeadPage.selectLeadById(returnmap.get("leadId"));
 		if(dataTable.getData("General_Data", "TC_ID").contains("Event") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") && !dataTable.getData("General_Data", "TC_ID").contains("Expand") ){
 			sfActivityPage.validateEventActivity(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
 		}
@@ -171,7 +175,7 @@ public class BC_API_Test extends ReusableLibrary {
 		HashMap<String,String> returnmap=taskEventsFunctions.createEventbyActivityDate();
 		bc_loginApi();
 		
-		String accountName= sfContactsPage.selectContactById(returnmap.get("contactId"));
+		sfContactsPage.selectContactById(returnmap.get("contactId"));
 		if(dataTable.getData("General_Data", "TC_ID").contains("Event") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") && !dataTable.getData("General_Data", "TC_ID").contains("Expand") ){
 			sfActivityPage.validateEventActivity(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
 		}
@@ -194,7 +198,7 @@ public class BC_API_Test extends ReusableLibrary {
 	public void bc_createOpportunityEventAPI() throws InterruptedException{
 		HashMap<String,String> returnmap=taskEventsFunctions.createEventbyActivityDate();
 		bc_loginApi();
-		String accountName= sfOppPage.selectOpportunityById(returnmap.get("opportunityId"));
+		sfOppPage.selectOpportunityById(returnmap.get("opportunityId"));
 		//String accountName= sfContactsPage.selectContactById(returnmap.get("contactId"));
 		if(dataTable.getData("General_Data", "TC_ID").contains("Event") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") && !dataTable.getData("General_Data", "TC_ID").contains("Expand") ){
 			sfActivityPage.validateEventActivity(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
@@ -546,7 +550,7 @@ public class BC_API_Test extends ReusableLibrary {
 	 *
 	 */	
 	public void bc_setPassword() {
-		createUsers.setPassword("FTE2PasswordRelease44");
+		createUsers.setPassword("Password567");
 	}
 	/**
 	 *Updating the Role and Profile 
@@ -644,4 +648,44 @@ public class BC_API_Test extends ReusableLibrary {
 		tagging.bulkTaggingFieldsValidation();
 	}
 	
+	/**
+	 * Campaign Creation function
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void bc_createCampaign() throws InterruptedException {
+		campaignsFunctions.createCampaign();
+	}
+	
+	/**
+	 * Contact Addition to Campaign 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void bc_associateCampaign() throws InterruptedException {
+		campaignsFunctions.associateCampagin();
+	}
+	
+	/**
+	 * Creating subscriptions
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void bc_createSubscriptions() throws InterruptedException {
+		subscriptionsFunctions.createSubscriptions();
+	}
+	
+	/**
+	 * Creating subscriptions
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void bc_createMarketingLists() throws InterruptedException {
+		subscriptionsFunctions.createMarketing();
+	}
+
 }

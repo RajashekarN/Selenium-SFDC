@@ -440,26 +440,26 @@ public class ContactsPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//span[text()='Add']")
 	WebElement addActivity;
-	
+
 
 	@FindBy(xpath = "//a[contains(@title,'Automation')]")
 	WebElement ExistingContact;
-	
+
 	@FindBy(xpath="//*[@id='tag_edit_link']")
 	WebElement addTag;
-	
+
 	@FindBy(xpath="//textarea[@id='ptag_edit_area']")
 	WebElement privatetag;
-	
+
 	@FindBy(xpath="//input[@id='tag_save_btn']")
 	WebElement savePrivateTag;
-	
+
 	@FindBy (xpath = "//*[contains(@title,'View records tagged')]")
 	WebElement PrivateTagged;
-	
+
 	@FindBy (xpath = " //*[contains(@class,'entityNameTitle slds-breadcrumb__item slds-line-height--reset')]")
 	WebElement PrivateTagPage;
-	
+
 	@FindBy(xpath = "//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']")
 	WebElement ContactList;
 
@@ -635,7 +635,7 @@ public class ContactsPage extends ReusableLibrary {
 		if (!dataTable.getData("General_Data", "TC_ID").contains("Broker")) {
 			Utility_Functions.xClick(driver, continueButton, true);
 		}
-/*		Utility_Functions.timeWait(2);
+		/*		Utility_Functions.timeWait(2);
 		Utility_Functions.xSendKeys(driver, accountSearch, "Test");
 		Utility_Functions.xSendKeys(driver, accountSearch, Keys.SPACE);
 		Utility_Functions.timeWait(3);*/
@@ -645,7 +645,7 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, firstLookupElement, 4);
 		Utility_Functions.xClick(driver, firstLookupElement, true);
 		String accountName = accountNames.getText();
-/*		String accountFirstName = accountName.split(" ")[0]; 
+		/*		String accountFirstName = accountName.split(" ")[0]; 
 		String accountSecondName = accountName.split(" ")[1];	*/	 
 		try {
 			if (accountName.contains(" ")) {
@@ -751,7 +751,7 @@ public class ContactsPage extends ReusableLibrary {
 		if (!untitledNoteSelectedAccount.getText().isEmpty()) {
 
 			System.out
-					.println("Selected Account is present in the Note Page :" + untitledNoteSelectedAccount.getText());
+			.println("Selected Account is present in the Note Page :" + untitledNoteSelectedAccount.getText());
 		} else {
 			System.out.println("Selected Account is not present in the Note Page");
 		}
@@ -875,7 +875,7 @@ public class ContactsPage extends ReusableLibrary {
 		if (!untitledNoteSelectedAccount.getText().isEmpty()) {
 
 			System.out
-					.println("Selected Account is present in the Note Page :" + untitledNoteSelectedAccount.getText());
+			.println("Selected Account is present in the Note Page :" + untitledNoteSelectedAccount.getText());
 		} else {
 			System.out.println("Selected Account is not present in the Note Page");
 		}
@@ -1534,7 +1534,7 @@ public class ContactsPage extends ReusableLibrary {
 	 *
 	 */
 	public void contactsPopulatingTheRequiredFields() {
-		
+
 		ContactsFunctions contactsFunctions = new ContactsFunctions(scriptHelper);
 		contactsFunctions.createContactRequiredFields();
 
@@ -2752,7 +2752,7 @@ public class ContactsPage extends ReusableLibrary {
 		communicationPreferencesSectionListAdmin.add("Dietary Requirements");
 
 		System.out
-				.println("Communication Preferences section fields are:: " + communicationPreferencesSectionListAdmin);
+		.println("Communication Preferences section fields are:: " + communicationPreferencesSectionListAdmin);
 	}
 
 	static ArrayList<String> excludeReasonPickListValuesList = new ArrayList<String>();
@@ -2864,7 +2864,7 @@ public class ContactsPage extends ReusableLibrary {
 		reasonForInactivatingPickListValuesList.add("Duplication");
 
 		System.out
-				.println("Reason for Inactivating pick list values  are:: " + reasonForInactivatingPickListValuesList);
+		.println("Reason for Inactivating pick list values  are:: " + reasonForInactivatingPickListValuesList);
 	}
 
 	static ArrayList<String> systemInformationSectionList = new ArrayList<String>();
@@ -2877,7 +2877,7 @@ public class ContactsPage extends ReusableLibrary {
 	}
 
 	public void contactsNewContactPageLayout() {
-		
+
 		ContactsFunctions contactsFunctions = new ContactsFunctions(scriptHelper);
 		contactsFunctions.contactsPageFieldsValidation();
 
@@ -3936,10 +3936,10 @@ public class ContactsPage extends ReusableLibrary {
 	 *
 	 */
 	public void contactsPopulatingAllFields() {
-		
+
 		ContactsFunctions contactsFunctions = new ContactsFunctions(scriptHelper);
 		contactsFunctions.createContactsPopulatingAllFields();
-	
+
 		/*Utility_Functions.xWaitForElementPresent(driver, menu_Contacts, 3);
 		Utility_Functions.xClick(driver, menu_Contacts, true);
 		Utility_Functions.timeWait(1);
@@ -4037,14 +4037,14 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, influenceLevelPickList, true);
 		Utility_Functions.xWaitForElementPresent(driver, influenceLevelPickListValue, 3);
 		Utility_Functions.xClick(driver, influenceLevelPickListValue, true);
-		
+
 		 * Utility_Functions.xWaitForElementPresent(driver,
 		 * reportsToNewContactPage, 5); Utility_Functions.xSendKeys(driver,
 		 * reportsToNewContactPage, "Automation Test");
 		 * reportsToNewContactPage.sendKeys(Keys.ARROW_DOWN);
 		 * Utility_Functions.timeWait(2);
 		 * reportsToNewContactPage.sendKeys(Keys.ENTER);
-		 
+
 
 		Utility_Functions.xWaitForElementPresent(driver, emailOptionsNewContactPage, 3);
 		Utility_Functions.xClick(driver, emailOptionsNewContactPage, true);
@@ -4451,52 +4451,41 @@ public class ContactsPage extends ReusableLibrary {
 			System.out.println(e.getMessage());
 		}
 	}
-	
-public void contactTagging () {
-		
+
+	public void contactTagging () {
+
 		Utility_Functions.xClick(driver, menu_Contacts, true);
-		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
 		Utility_Functions.xClick(driver, recentlyViewed, true);
-		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, allContacts, 3);
 		Utility_Functions.xClick(driver, allContacts, true);
 		Utility_Functions.timeWait(2);
-		
-		
-		
 		Utility_Functions.xClick(driver, ContactList, true);
 		Utility_Functions.timeWait(2);
-		
-	
-		 Utility_Functions.xSwitchtoFrame(driver, addTag);
-		 Utility_Functions.xClickHiddenElement(driver, addTag);
-		      Utility_Functions.timeWait(2);
-
+		Utility_Functions.xSwitchtoFrame(driver, addTag);
+		Utility_Functions.xClickHiddenElement(driver, addTag);
 		Utility_Functions.xSendKeys(driver, privatetag, dataTable.getData("General_Data", "Private Tag"));
-		 Utility_Functions.xClickHiddenElement(driver, savePrivateTag);
-		Utility_Functions.timeWait(5);
-		
+		Utility_Functions.xClickHiddenElement(driver, savePrivateTag);
+		Utility_Functions.xWaitForElementPresent(driver, addTag, 3);
+
 		if(addTag.isDisplayed()){
 			report.updateTestLog("Verify Opportunity Private Tags", "The Private Tag is saved",
 					Status.PASS);		
 		}else{
 			report.updateTestLog("Verify Opportunity Private Tags", "The Private tag is not saved",
 					Status.FAIL);
-	}
-		
-		Utility_Functions.xClick(driver, PrivateTagged, true);
-	      Utility_Functions.timeWait(8);
-	    Utility_Functions.xSwitchToWindow(driver, 1);
-	    
-	  
-	      if(PrivateTagPage.isDisplayed()){
-				report.updateTestLog("Verify Contact Private Tags", "The Tag is saved in Private Tag Page",
-						Status.PASS);		
-			}else{
-				report.updateTestLog("Verify Contact Private Tags", "The Tag is not saved in Private Tag Page",
-						Status.FAIL);
 		}
-	      System.out.println("Current URL is--" +driver.getCurrentUrl());
-}
 
+		Utility_Functions.xClick(driver, PrivateTagged, true);
+		Utility_Functions.xSwitchToWindow(driver, 1);
+		Utility_Functions.xWaitForElementPresent(driver, PrivateTagPage, 3);
 
+		if(PrivateTagPage.isDisplayed()){
+			report.updateTestLog("Verify Contact Private Tags", "The Tag is saved in Private Tag Page",
+					Status.PASS);		
+		}else{
+			report.updateTestLog("Verify Contact Private Tags", "The Tag is not saved in Private Tag Page",
+					Status.FAIL);
+		}
+	}
 }

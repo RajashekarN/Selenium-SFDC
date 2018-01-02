@@ -1,8 +1,10 @@
 package pageObjects;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -17,6 +19,7 @@ import org.openqa.selenium.support.ui.Select;
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
+import com.itextpdf.text.log.SysoCounter;
 
 import pagesAPI.SearchTextSOQL;
 import supportLibraries.Utility_Functions;
@@ -352,112 +355,163 @@ public class PropertiesPage extends ReusableLibrary {
 
 	@FindBy(xpath="//div[@class='forceChangeRecordTypeFooter']/button[contains(@class,'slds-button')]/span[text()='Next']")
 	WebElement nextNewProjectEnquiry;
-	
+
 	@FindBy(xpath="//span[contains(text(),'Country')]/parent::div/following-sibling::div//a[contains(text(),'New Zealand')]")
 	WebElement countryFieldNewZealand;
-	
+
 	@FindBy(xpath = "//one-app-launcher-header/button")
 	WebElement applauncher;
-	
+
 	@FindBy(xpath="//a[contains(@title,'Preferences')]/span/span[contains(text(),'Preferences')]")
 	WebElement preferences;
-	
+
 	@FindBy(xpath="//span[contains(@class,'virtualAutocompleteOptionText')][contains(text(),'All property preferences')]")
 	WebElement allInvestorPreferences;
-	
+
 	@FindBy(xpath="//span[contains(text(),'Preference Type')]/parent::div/following-sibling::div//span[contains(text(),'Sale')]")
-    WebElement preferenceTypeSale;
-	
+	WebElement preferenceTypeSale;
+
 	@FindBy(xpath="//span[contains(text(),'Property Type')]/parent::div/following-sibling::div//span[contains(text(),'Industrial')]")
 	WebElement industrialPropertyType;
-	
+
 	@FindBy(xpath="//span[contains(text(),'APAC Region')]/parent::div/following-sibling::div//a[contains(text(),'SA')]")
 	WebElement regionSA;
-	
+
 	@FindBy(xpath="//span[contains(text(),'Preference Type')]/parent::div/following-sibling::div//span[contains(text(),'Lease')]")
 	WebElement preferenceTypeLease;
-	
+
 	@FindBy(xpath="//span[contains(text(),'Property Type')]/parent::div/following-sibling::div//span[contains(text(),'Retail')]")
 	WebElement retailPropertyType;
-	
+
 	@FindBy(xpath="//span[contains(text(),'APAC Region')]/parent::div/following-sibling::div//a[contains(text(),'NSW')]")
 	WebElement regionNSW;
-	
+
 	@FindBy(xpath="//span[contains(text(),'APAC Region')]/parent::div/following-sibling::div//a[contains(text(),'Christchurch')]")
 	WebElement regionChristchurch;
-	
+
 	@FindBy(xpath="//select[contains(@id,'countryPicklist')]/option[text()='Japan']")
 	WebElement selectCountryJapan;
-	
+
 	@FindBy(xpath="//select[contains(@id,'UnitsofMeasureAPAC')]/option[contains(@value,'Tsubo')]")
 	WebElement japanUnitOfMeasure;
-	
+
 	@FindBy(xpath="//select[contains(@id,'statePicklist')]/option[text()='Tokyo']")
 	WebElement selectStateTokyo;
-	
+
 	@FindBy(xpath="//input[contains(@id,'TotalSize')]")
 	WebElement totalSize;
-	
+
 	@FindBy(xpath="//select[contains(@id,'APACPropertyType_unselected')]")
 	WebElement propertyTypeHotel;
-	
+
 	@FindBy(xpath="//span[contains(@id,'propertyEditForm:prpType')]//a[contains(@title,'Add')]/img")
 	WebElement addButton;
-	
+
 	@FindBy(xpath="//li[contains(@id,'Serviced-Apartment')]//span[contains(text(),'Serviced Apartment')]")
 	WebElement servicedApartment;
-	
+
 	@FindBy(xpath = "//a[@role='menuitem']/div[@class='forceActionLink'][text()='Edit']")
 	WebElement edit;
-	
+
 	@FindBy(xpath = "//li[contains(@class,'oneActionsDropDown')]//a")
 	WebElement showMoreActions;
-	
+
 	@FindBy(xpath="//li[contains(@id,'Commercial-Building')]//span[contains(text(),'Commercial Building')]")
 	WebElement commercialBuilding;
-	
+
 	@FindBy(xpath="//span[contains(text(),'APAC Property Preferences')]/parent::div/preceding-sibling::div/span[contains(@class,'slds-radio--faux')]")
 	WebElement apacPropertyPreferences;
-	
+
 	@FindBy(xpath="//span[contains(text(),'Next')]/parent::button")
 	WebElement nextPropertyPreferences;
-	
+
 	@FindBy(xpath="//input[contains(@placeholder,'Search Contacts')]")
 	WebElement searchContacts;
-	
+
 	@FindBy(xpath="//div[contains(@class,'primaryLabel')][contains(@title,'TestAMER CMBroker')]")
 	WebElement contactsValue;
-	
+
 	@FindBy(xpath="//a[contains(@title,'Sale')]")
 	WebElement preferenceTypeValue;
-	
+
 	@FindBy(xpath="//a[contains(@aria-label,'Property Type')]")
 	WebElement propertyType;
-	
+
 	@FindBy(xpath="//a[contains(@title,'Hotel')]")
 	WebElement propertyTypeHotelValue;
-	
+
 	@FindBy(css="ul>li.forceSearchInputLookupDesktopOption:nth-child(1)")
 	WebElement firstLookUpElement;
-	
+
 	@FindBy(xpath="//ul[@class='tabs__nav']//a[@title='New Event']")
 	WebElement newEventOpp;
 
 	@FindBy(xpath = "//span[text()='Add']")
 	WebElement addActivity;
-	
+
 	@FindBy(xpath = "//a[contains(@title,'Automation')]")
 	WebElement ExistingProperty;
-	
+
 	@FindBy (xpath = "//*[contains(@title,'View records tagged')]")
 	WebElement PrivateTagged;
-	
+
 	@FindBy (xpath = " //*[contains(@class,'entityNameTitle slds-breadcrumb__item slds-line-height--reset')]")
 	WebElement PrivateTagPage;
-	
+
 	@FindBy(xpath = "//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']")
 	WebElement PropertyList;
 	
+	@FindBy (xpath = "//li/a[@title='Marketing Lists']")
+	WebElement marketingLists;
+	
+	@FindBy (xpath = "//*[@class=' input' and @maxlength]")
+	WebElement marketListName;
+	
+	@FindBy (xpath = "//*[@placeholder='Search Contacts...']")
+	WebElement authorContact;
+	
+	@FindBy (xpath = "//div[@class='form-element']")
+	WebElement publicationDate;
+	
+	@FindBy (xpath = "//input[@title='Search Marketing Lists']")
+	WebElement marketListSubscription;
+	
+	@FindBy (xpath = "//*[@class=' textarea']")
+	WebElement notesTxtBx;
+	
+	@FindBy (xpath = "//*[@title='Save']")
+	WebElement saveMarketList;
+	
+	@FindBy (xpath = "//*[@title='Subscriptions']")
+	WebElement subscriptions;
+	
+	@FindBy (xpath = "//button[@title='Save']")
+	WebElement saveSubscription;
+	
+	@FindBy (xpath = "//li/a[@title='Property Preferences']")
+	WebElement propertyPreferences;
+	
+	@FindBy (xpath = "//*[contains(@class,'slds-dropdown__item has-icon--left   f')]")
+	WebElement allPropertyPreferences;
+	
+	@FindBy (xpath ="//*[@class='slds-cell-edit cellContainer'][@tabindex='-1'][@scope='row']")
+	WebElement allPropertyPreferenceslist;
+	
+	@FindBy (xpath="//li/a[@title='Edit']")
+	WebElement editProperty;
+	
+	@FindBy (xpath="//span[text()='Minimum Price']/parent::label/parent::div/input")
+	WebElement minimumPriceProperty;
+
+	@FindBy (xpath="//*[@title='Save']")
+	WebElement savePropertypreference;
+	
+	@FindBy (xpath="//li/a[@title='Clone']")
+	WebElement cloneProperty;
+	
+	@FindBy (xpath ="//*[@class=' select'][@data-interactive-lib-uid='115']")
+	WebElement hotelStar;
+
 	LoginPage loginPage = new LoginPage(scriptHelper);
 	Actions actions = new Actions(driver.getWebDriver());
 	ActivityPage activityPage = new ActivityPage(scriptHelper);
@@ -796,7 +850,7 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify Create Activity Properties ","The property is Displayed ",  Status.PASS);
 		activityPage.createNewActivity();
-	/*	Utility_Functions.xWaitForElementPresent(driver, related, 3);
+		/*	Utility_Functions.xWaitForElementPresent(driver, related, 3);
 		Utility_Functions.xClick(driver, related, true);
 		report.updateTestLog("Verify Create Activity Properties ","The related page is Displayed ",  Status.PASS);
 		Utility_Functions.xScrollWindow(driver);
@@ -958,7 +1012,7 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify New Activity Page Layout ","The Contact is Displayed ",  Status.PASS);
 		activityPage.createNewActivity();
-	/*	Utility_Functions.xClick(driver, related, true);
+		/*	Utility_Functions.xClick(driver, related, true);
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify New Activity Page Layout ","The related page is Displayed ",  Status.PASS);
 		Utility_Functions.xScrollWindow(driver);
@@ -1323,12 +1377,12 @@ public class PropertiesPage extends ReusableLibrary {
 
 		List<WebElement> propertiesList = driver.findElements(
 				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-		
+
 		Utility_Functions.xclickOnFirstElementfromList(propertiesList);
 		report.updateTestLog("Verify New Activity Page send Notification Email ","Verifying the selected Account is Displayed ",  Status.PASS);
 		Utility_Functions.xWaitForElementPresent(driver, newEventOpp, 3);
 		Utility_Functions.xClick(driver, newEventOpp, true);
-		
+
 		/*Utility_Functions.xWaitForElementPresent(driver, related, 3);
 		Utility_Functions.xClick(driver, related, true);
 		report.updateTestLog("Verify New Activity Page Layout ","Verifying the related page is Displayed ",  Status.PASS);
@@ -1551,7 +1605,7 @@ public class PropertiesPage extends ReusableLibrary {
 		unitOfMeasureValuesList.add("Tsubo");
 		System.out.println("Unit of Measure values are " + unitOfMeasureValuesList);
 	}
-	
+
 	public void verifyNewPropertiesPage(){
 
 		try{
@@ -1579,274 +1633,274 @@ public class PropertiesPage extends ReusableLibrary {
 		String environment = loginPage.initializeEnvironment();
 		if (environment.equals("FTE")) {
 			if (!dataTable.getData("General_Data", "TC_ID").contains("OBAMERAdminPropertiesCreation")) {
-			
-		List<WebElement> propertiesPageSectionsList = driver.findElements(
-				By.xpath("//div[contains(@class,'slds-col--padded')]/h2"));
-		int count1 = 0, i1 = 0;
-		String sectionArray[] = new String[propertiesPageSectionsList.size()];
-		System.out.println(propertiesPageSectionsList.size());
 
-		try {
-			newPropertiesPageSections();
-			for (WebElement element1 : propertiesPageSectionsList) {
-				System.out.println(element1.getText());
-				sectionArray[i1] = element1.getText();
-				if (sectionArray[i1].equalsIgnoreCase(newPropertiesPageSectionsList.get(i1))) {
-					report.updateTestLog("Verify Custom Property Page",
-							"Properties Custom  page is having the " + sectionArray[i1] + " section ",
-							Status.PASS);
-					count1++;
+				List<WebElement> propertiesPageSectionsList = driver.findElements(
+						By.xpath("//div[contains(@class,'slds-col--padded')]/h2"));
+				int count1 = 0, i1 = 0;
+				String sectionArray[] = new String[propertiesPageSectionsList.size()];
+				System.out.println(propertiesPageSectionsList.size());
+
+				try {
+					newPropertiesPageSections();
+					for (WebElement element1 : propertiesPageSectionsList) {
+						System.out.println(element1.getText());
+						sectionArray[i1] = element1.getText();
+						if (sectionArray[i1].equalsIgnoreCase(newPropertiesPageSectionsList.get(i1))) {
+							report.updateTestLog("Verify Custom Property Page",
+									"Properties Custom  page is having the " + sectionArray[i1] + " section ",
+									Status.PASS);
+							count1++;
+						}
+						i1++;
+					}
+					System.out.println(count1);
+					if (count1 != 7) {
+						report.updateTestLog("Verify Custom Property Page",
+								"All sections are not present in the Properties page custom Layout", Status.FAIL);
+					} else {
+
+						report.updateTestLog("Verify Custom Property Page",
+								"All sections are present in the Properties page custom Layout", Status.PASS);
+					}
+
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
 				}
-				i1++;
-			}
-			System.out.println(count1);
-			if (count1 != 7) {
-				report.updateTestLog("Verify Custom Property Page",
-						"All sections are not present in the Properties page custom Layout", Status.FAIL);
-			} else {
 
-				report.updateTestLog("Verify Custom Property Page",
-						"All sections are present in the Properties page custom Layout", Status.PASS);
-			}
+				List<WebElement> propertyInformationFieldsList = driver.findElements(
+						By.xpath("//h2[text()='Property Information']/parent::div/parent::div//div[@class='slds-form-element']/label"));
+				int count2 = 0, i2 = 0;
+				String fieldsArray[] = new String[propertyInformationFieldsList.size()];
+				System.out.println(propertyInformationFieldsList.size());
 
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+				try {
+					propertyInformationFields();
+					for (WebElement element2 : propertyInformationFieldsList) {
+						System.out.println(element2.getText());
+						fieldsArray[i2] = element2.getText();
+						if (fieldsArray[i2].equalsIgnoreCase(newpropertyInformationFieldsList.get(i2))) {
+							report.updateTestLog("Verify Custom Property Page",
+									"Property Information section is having the " + fieldsArray[i2] + " section ",
+									Status.PASS);
+							count2++;
+						}
+						i2++;
+					}
+					System.out.println(count2);
+					if (count2 != 5) {
+						report.updateTestLog("Verify Custom Property Page",
+								"All fields are not present in the Property Information section ", Status.FAIL);
+					} else {
 
-		List<WebElement> propertyInformationFieldsList = driver.findElements(
-				By.xpath("//h2[text()='Property Information']/parent::div/parent::div//div[@class='slds-form-element']/label"));
-		int count2 = 0, i2 = 0;
-		String fieldsArray[] = new String[propertyInformationFieldsList.size()];
-		System.out.println(propertyInformationFieldsList.size());
+						report.updateTestLog("Verify Custom Property Page",
+								"All fields are present in the Property Information section ", Status.PASS);
+					}
 
-		try {
-			propertyInformationFields();
-			for (WebElement element2 : propertyInformationFieldsList) {
-				System.out.println(element2.getText());
-				fieldsArray[i2] = element2.getText();
-				if (fieldsArray[i2].equalsIgnoreCase(newpropertyInformationFieldsList.get(i2))) {
-					report.updateTestLog("Verify Custom Property Page",
-							"Property Information section is having the " + fieldsArray[i2] + " section ",
-							Status.PASS);
-					count2++;
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
 				}
-				i2++;
-			}
-			System.out.println(count2);
-			if (count2 != 5) {
-				report.updateTestLog("Verify Custom Property Page",
-						"All fields are not present in the Property Information section ", Status.FAIL);
-			} else {
 
-				report.updateTestLog("Verify Custom Property Page",
-						"All fields are present in the Property Information section ", Status.PASS);
-			}
+				List<WebElement> propertyAddressFieldsList = driver.findElements(
+						By.xpath("//h2[text()='Address Information']/parent::div/parent::div//div[@class='slds-form-element']/label"));
+				int count3 = 0, i3 = 0;
+				String fieldsArray1[] = new String[propertyAddressFieldsList .size()];
+				System.out.println(propertyAddressFieldsList .size());
 
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+				try {
+					newPropertiesPageAddressInformation();
+					for (WebElement element3 : propertyAddressFieldsList) {
+						System.out.println(element3.getText());
+						fieldsArray1[i3] = element3.getText();
+						if (fieldsArray1[i3].equalsIgnoreCase(newPropertyAddressInformationSectionsList.get(i3))) {
+							report.updateTestLog("Verify Custom Property Page",
+									"Address Information section is having the " + fieldsArray1[i3] + " fields ",
+									Status.PASS);
+							count3++;
+						}
+						i3++;
+					}
+					System.out.println(count3);
+					if (count3 != 10) {
+						report.updateTestLog("Verify Custom Property Page",
+								"All fields are not present in the Address Information section", Status.FAIL);
+					} else {
 
-		List<WebElement> propertyAddressFieldsList = driver.findElements(
-				By.xpath("//h2[text()='Address Information']/parent::div/parent::div//div[@class='slds-form-element']/label"));
-		int count3 = 0, i3 = 0;
-		String fieldsArray1[] = new String[propertyAddressFieldsList .size()];
-		System.out.println(propertyAddressFieldsList .size());
+						report.updateTestLog("Verify Custom Property Page",
+								"All fields are present in the Address Information section", Status.PASS);
+					}
 
-		try {
-			newPropertiesPageAddressInformation();
-			for (WebElement element3 : propertyAddressFieldsList) {
-				System.out.println(element3.getText());
-				fieldsArray1[i3] = element3.getText();
-				if (fieldsArray1[i3].equalsIgnoreCase(newPropertyAddressInformationSectionsList.get(i3))) {
-					report.updateTestLog("Verify Custom Property Page",
-							"Address Information section is having the " + fieldsArray1[i3] + " fields ",
-							Status.PASS);
-					count3++;
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
 				}
-				i3++;
-			}
-			System.out.println(count3);
-			if (count3 != 10) {
-				report.updateTestLog("Verify Custom Property Page",
-						"All fields are not present in the Address Information section", Status.FAIL);
-			} else {
 
-				report.updateTestLog("Verify Custom Property Page",
-						"All fields are present in the Address Information section", Status.PASS);
-			}
+				List<WebElement> propertiesFinancialFieldsList = driver.findElements(
+						By.xpath("//h2[text()='Property Financials']/parent::div/parent::div//div[@class='slds-form-element']/label"));
+				int count4 = 0, i4 = 0;
+				String fieldsArray3[] = new String[propertiesFinancialFieldsList.size()];
+				System.out.println(propertiesFinancialFieldsList.size());
 
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+				try {
+					propertyFinancialFields();
+					for (WebElement element4 : propertiesFinancialFieldsList) {
+						System.out.println(element4.getText());
+						fieldsArray3[i4] = element4.getText();
+						if (fieldsArray3[i4].equalsIgnoreCase(newpropertyFinancialFieldsList.get(i4))) {
+							report.updateTestLog("Verify Custom Property Page",
+									"Property Financial section is having the " + fieldsArray3[i4] + " fields ",
+									Status.PASS);
+							count4++;
+						}
+						i4++;
+					}
+					System.out.println(count4);
+					if (count4 != 3) {
+						report.updateTestLog("Verify Custom Property Page",
+								"All fields are not present in the Property financial section", Status.FAIL);
+					} else {
 
-		List<WebElement> propertiesFinancialFieldsList = driver.findElements(
-				By.xpath("//h2[text()='Property Financials']/parent::div/parent::div//div[@class='slds-form-element']/label"));
-		int count4 = 0, i4 = 0;
-		String fieldsArray3[] = new String[propertiesFinancialFieldsList.size()];
-		System.out.println(propertiesFinancialFieldsList.size());
+						report.updateTestLog("Verify Custom Property Page",
+								"All fields are present in the Property financial section", Status.PASS);
+					}
 
-		try {
-			propertyFinancialFields();
-			for (WebElement element4 : propertiesFinancialFieldsList) {
-				System.out.println(element4.getText());
-				fieldsArray3[i4] = element4.getText();
-				if (fieldsArray3[i4].equalsIgnoreCase(newpropertyFinancialFieldsList.get(i4))) {
-					report.updateTestLog("Verify Custom Property Page",
-							"Property Financial section is having the " + fieldsArray3[i4] + " fields ",
-							Status.PASS);
-					count4++;
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
 				}
-				i4++;
-			}
-			System.out.println(count4);
-			if (count4 != 3) {
-				report.updateTestLog("Verify Custom Property Page",
-						"All fields are not present in the Property financial section", Status.FAIL);
-			} else {
 
-				report.updateTestLog("Verify Custom Property Page",
-						"All fields are present in the Property financial section", Status.PASS);
-			}
+				List<WebElement> propertiesSummaryFieldsList = driver.findElements(
+						By.xpath("//h2[text()='Property Summary']/parent::div/parent::div//div[@class='slds-form-element']/label"));
+				int count5 = 0, i5 = 0;
+				String fieldsArray4[] = new String[propertiesSummaryFieldsList.size()];
+				System.out.println(propertiesSummaryFieldsList.size());
 
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+				try {
+					propertySummaryFields();
+					for (WebElement element5 : propertiesSummaryFieldsList) {
+						System.out.println(element5.getText());
 
-		List<WebElement> propertiesSummaryFieldsList = driver.findElements(
-				By.xpath("//h2[text()='Property Summary']/parent::div/parent::div//div[@class='slds-form-element']/label"));
-		int count5 = 0, i5 = 0;
-		String fieldsArray4[] = new String[propertiesSummaryFieldsList.size()];
-		System.out.println(propertiesSummaryFieldsList.size());
-
-		try {
-			propertySummaryFields();
-			for (WebElement element5 : propertiesSummaryFieldsList) {
-				System.out.println(element5.getText());
-
-				fieldsArray4[i5] = element5.getText();
-				if (fieldsArray4[i5].equalsIgnoreCase(newPropertySummaryFieldsList.get(i5))){
-					/*String propertySummaryFieldListValue = newPropertySummaryFieldsList.get(i5);
+						fieldsArray4[i5] = element5.getText();
+						if (fieldsArray4[i5].equalsIgnoreCase(newPropertySummaryFieldsList.get(i5))){
+							/*String propertySummaryFieldListValue = newPropertySummaryFieldsList.get(i5);
 				System.out.println(propertySummaryFieldListValue);
 				if (fieldsArray4[i5].contains(propertySummaryFieldListValue))*/ 
-					report.updateTestLog("Verify Custom Property Page",
-							"Property summary section is having the " + fieldsArray4[i5] + " section ",
-							Status.PASS);
-					count5++;
+							report.updateTestLog("Verify Custom Property Page",
+									"Property summary section is having the " + fieldsArray4[i5] + " section ",
+									Status.PASS);
+							count5++;
+						}
+						i5++;
+					}
+					System.out.println(count5);
+					if (count5 != 22) {
+						report.updateTestLog("Verify Custom Property Page",
+								"All fields are not present in the Property Summary section", Status.FAIL);
+					} else {
+
+						report.updateTestLog("Verify Custom Property Page",
+								"All fields are present in the Property Summary section", Status.PASS);
+					}
+
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
 				}
-				i5++;
-			}
-			System.out.println(count5);
-			if (count5 != 22) {
-				report.updateTestLog("Verify Custom Property Page",
-						"All fields are not present in the Property Summary section", Status.FAIL);
-			} else {
 
-				report.updateTestLog("Verify Custom Property Page",
-						"All fields are present in the Property Summary section", Status.PASS);
-			}
+				List<WebElement> propertiesManagementFieldsList = driver.findElements(
+						By.xpath("//h2[text()='Property Management']/parent::div/parent::div//div[@class='slds-form-element']/label"));
+				int count6 = 0, i6 = 0;
+				String fieldsArray5[] = new String[propertiesManagementFieldsList.size()];
+				System.out.println(propertiesManagementFieldsList.size());
 
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+				try {
+					propertyManagementFields();
+					for (WebElement element6 : propertiesManagementFieldsList) {
+						System.out.println(element6.getText());
+						fieldsArray5[i6] = element6.getText();
+						if (fieldsArray5[i6].equalsIgnoreCase(newpropertyManagementFieldsList.get(i6))) {
+							report.updateTestLog("Verify Custom Property Page",
+									"Property Management section is having " + fieldsArray5[i6] + " fields ",
+									Status.PASS);
+							count6++;
+						}
+						i6++;
+					}
+					System.out.println(count6);
+					if (count6 != 5) {
+						report.updateTestLog("Verify Custom Property Page",
+								"All fields are not present in the Property Management section", Status.FAIL);
+					} else {
 
-		List<WebElement> propertiesManagementFieldsList = driver.findElements(
-				By.xpath("//h2[text()='Property Management']/parent::div/parent::div//div[@class='slds-form-element']/label"));
-		int count6 = 0, i6 = 0;
-		String fieldsArray5[] = new String[propertiesManagementFieldsList.size()];
-		System.out.println(propertiesManagementFieldsList.size());
+						report.updateTestLog("Verify Custom Property Page",
+								"All fields are present in the Property Management section", Status.PASS);
+					}
 
-		try {
-			propertyManagementFields();
-			for (WebElement element6 : propertiesManagementFieldsList) {
-				System.out.println(element6.getText());
-				fieldsArray5[i6] = element6.getText();
-				if (fieldsArray5[i6].equalsIgnoreCase(newpropertyManagementFieldsList.get(i6))) {
-					report.updateTestLog("Verify Custom Property Page",
-							"Property Management section is having " + fieldsArray5[i6] + " fields ",
-							Status.PASS);
-					count6++;
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
 				}
-				i6++;
-			}
-			System.out.println(count6);
-			if (count6 != 5) {
-				report.updateTestLog("Verify Custom Property Page",
-						"All fields are not present in the Property Management section", Status.FAIL);
-			} else {
 
-				report.updateTestLog("Verify Custom Property Page",
-						"All fields are present in the Property Management section", Status.PASS);
-			}
+				List<WebElement> propertiesAssetManagementFieldsList = driver.findElements(
+						By.xpath("//h2[text()='Asset Management']/parent::div/parent::div//div[@class='slds-form-element']/label"));
+				int count7 = 0, i7 = 0;
+				String fieldsArray6[] = new String[propertiesAssetManagementFieldsList.size()];
+				System.out.println(propertiesAssetManagementFieldsList.size());
 
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+				try {
+					propertyAssetManagementFields();
+					for (WebElement element7 : propertiesAssetManagementFieldsList) {
+						System.out.println(element7.getText());
+						fieldsArray6[i7] = element7.getText();
+						if (fieldsArray6[i7].equalsIgnoreCase(newpropertyAssetManagementFieldsList.get(i7))) {
+							report.updateTestLog("Verify Custom Property Page",
+									"Asset Management section is having the " + fieldsArray6[i7] + " Fields ",
+									Status.PASS);
+							count7++;
+						}
+						i7++;
+					}
+					System.out.println(count7);
+					if (count7 != 5) {
+						report.updateTestLog("Verify Custom Property Page",
+								"All Fields are not present in the Asset Management Section", Status.FAIL);
+					} else {
 
-		List<WebElement> propertiesAssetManagementFieldsList = driver.findElements(
-				By.xpath("//h2[text()='Asset Management']/parent::div/parent::div//div[@class='slds-form-element']/label"));
-		int count7 = 0, i7 = 0;
-		String fieldsArray6[] = new String[propertiesAssetManagementFieldsList.size()];
-		System.out.println(propertiesAssetManagementFieldsList.size());
+						report.updateTestLog("Verify Custom Property Page",
+								"All Fields are present in the Asset Management Section", Status.PASS);
+					}
 
-		try {
-			propertyAssetManagementFields();
-			for (WebElement element7 : propertiesAssetManagementFieldsList) {
-				System.out.println(element7.getText());
-				fieldsArray6[i7] = element7.getText();
-				if (fieldsArray6[i7].equalsIgnoreCase(newpropertyAssetManagementFieldsList.get(i7))) {
-					report.updateTestLog("Verify Custom Property Page",
-							"Asset Management section is having the " + fieldsArray6[i7] + " Fields ",
-							Status.PASS);
-					count7++;
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
 				}
-				i7++;
-			}
-			System.out.println(count7);
-			if (count7 != 5) {
-				report.updateTestLog("Verify Custom Property Page",
-						"All Fields are not present in the Asset Management Section", Status.FAIL);
-			} else {
 
-				report.updateTestLog("Verify Custom Property Page",
-						"All Fields are present in the Asset Management Section", Status.PASS);
-			}
+				List<WebElement> propertiesListingManagementFieldsList = driver.findElements(
+						By.xpath("//h2[text()='Listing Management']/parent::div/parent::div//div[@class='slds-form-element']/label"));
+				int count8 = 0, i8 = 0;
+				String fieldsArray7[] = new String[propertiesListingManagementFieldsList.size()];
+				System.out.println(propertiesListingManagementFieldsList.size());
 
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+				try {
+					propertyListingManagementFields();
+					for (WebElement element8 : propertiesListingManagementFieldsList) {
+						System.out.println(element8.getText());
+						fieldsArray7[i8] = element8.getText();
+						if (fieldsArray7[i8].equalsIgnoreCase(newpropertyListingManagementFieldsList.get(i8))) {
+							report.updateTestLog("Verify Custom Property Page",
+									"Listing Management section is having the  " + fieldsArray7[i8] + " Fields ",
+									Status.PASS);
+							count8++;
+						}
+						i8++;
+					}
+					System.out.println(count8);
+					if (count8 != 5) {
+						report.updateTestLog("Verify Custom Property Page",
+								"All Fields are not present in the Listing Management Section", Status.FAIL);
+					} else {
 
-		List<WebElement> propertiesListingManagementFieldsList = driver.findElements(
-				By.xpath("//h2[text()='Listing Management']/parent::div/parent::div//div[@class='slds-form-element']/label"));
-		int count8 = 0, i8 = 0;
-		String fieldsArray7[] = new String[propertiesListingManagementFieldsList.size()];
-		System.out.println(propertiesListingManagementFieldsList.size());
+						report.updateTestLog("Verify Custom Property Page",
+								"All Fields are present in the Listing Management Section", Status.PASS);
+					}
 
-		try {
-			propertyListingManagementFields();
-			for (WebElement element8 : propertiesListingManagementFieldsList) {
-				System.out.println(element8.getText());
-				fieldsArray7[i8] = element8.getText();
-				if (fieldsArray7[i8].equalsIgnoreCase(newpropertyListingManagementFieldsList.get(i8))) {
-					report.updateTestLog("Verify Custom Property Page",
-							"Listing Management section is having the  " + fieldsArray7[i8] + " Fields ",
-							Status.PASS);
-					count8++;
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
 				}
-				i8++;
-			}
-			System.out.println(count8);
-			if (count8 != 5) {
-				report.updateTestLog("Verify Custom Property Page",
-						"All Fields are not present in the Listing Management Section", Status.FAIL);
-			} else {
-
-				report.updateTestLog("Verify Custom Property Page",
-						"All Fields are present in the Listing Management Section", Status.PASS);
-			}
-
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
 			}
 		}
 		Utility_Functions.timeWait(5);
@@ -1872,7 +1926,7 @@ public class PropertiesPage extends ReusableLibrary {
 				if(japanUnitOfMeasure.isDisplayed()){
 					report.updateTestLog("Verify Custom Property Page",
 							"The unit of measure for japan is selected as Tsubo by default", Status.PASS);	
-					
+
 				}else{
 					report.updateTestLog("Verify Custom Property Page",
 							"The unit of measure for japan is not selected as Tsubo by default", Status.FAIL);			
@@ -1891,15 +1945,15 @@ public class PropertiesPage extends ReusableLibrary {
 				} else {
 					report.updateTestLog("Verify Custom Property Page", "All values are not present in the Property Type pick list", Status.PASS);
 				}
-				
+
 				Select hotel =  new Select(propertyTypeHotel);
 				hotel.selectByVisibleText("Hotel");
- 				Utility_Functions.xWaitForElementPresent(driver,addButton, 3);
+				Utility_Functions.xWaitForElementPresent(driver,addButton, 3);
 				Utility_Functions.xClick(driver,addButton, true);
 				Utility_Functions.xWaitForElementPresent(driver,servicedApartment, 3);
 				Utility_Functions.xClick(driver,servicedApartment, true);
-			
-				
+
+
 				List<WebElement> unitOfMeasureFieldsList = driver.findElements(
 						By.xpath("//select[contains(@id,'UnitsofMeasureAPAC')]/option"));
 				int count0 = 0, i0 = 0;
@@ -1934,17 +1988,17 @@ public class PropertiesPage extends ReusableLibrary {
 				}		
 				Utility_Functions.xSendKeys(driver,totalSize, dataTable.getData("General_Data", "Total Size"));
 				Utility_Functions.xWaitForElementPresent(driver,totalSize, 4);
-				
+
 			}
-			
-			}else{
-				Utility_Functions.xWaitForElementPresent(driver, propertyCountry, 3);
-				Utility_Functions.xClick(driver, propertyCountry, true);
-				Utility_Functions.xWaitForElementPresent(driver, selectPropertyCountry, 3);
-				Utility_Functions.xClick(driver, selectPropertyCountry, true);
-				Utility_Functions.xWaitForElementPresent(driver, selectPropertyState, 3);
-				Utility_Functions.xClick(driver, selectPropertyState, true);
-			}
+
+		}else{
+			Utility_Functions.xWaitForElementPresent(driver, propertyCountry, 3);
+			Utility_Functions.xClick(driver, propertyCountry, true);
+			Utility_Functions.xWaitForElementPresent(driver, selectPropertyCountry, 3);
+			Utility_Functions.xClick(driver, selectPropertyCountry, true);
+			Utility_Functions.xWaitForElementPresent(driver, selectPropertyState, 3);
+			Utility_Functions.xClick(driver, selectPropertyState, true);
+		}
 		Utility_Functions.xWaitForElementPresent(driver, propertyStreet, 5);
 		Utility_Functions.xSendKeys(driver, propertyStreet, dataTable.getData("General_Data", "Street"));
 		Utility_Functions.xWaitForElementPresent(driver, propertyCity, 5);
@@ -1961,7 +2015,7 @@ public class PropertiesPage extends ReusableLibrary {
 			report.updateTestLog("Verify Custom Property Page", "The Property is not saved successfully", Status.FAIL);
 		}
 	}
-	
+
 	public void staleElementHandle(WebElement element) {
 		int count = 0;
 		boolean clicked = false;
@@ -2803,35 +2857,35 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, allProperties, true);
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify Properties Country Field  ","All Properties are Displayed ",  Status.PASS);
-try{
-		List<WebElement> propertiesList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		try{
+			List<WebElement> propertiesList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
 
-		Utility_Functions.xclickOnFirstElementfromList(propertiesList);	
-		Utility_Functions.timeWait(3);
-		SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
-		String queryId = "SELECT 	Sharing_Country__c, Id FROM Property__c where 	Sharing_Country__c = 'New Zealand'";
-		String propertyId = searchTextSOQL.fetchRecordFieldValue("Id", queryId);
-		String url = driver.getCurrentUrl().split("#")[0];
-		String newUrl = url + "#/sObject/" + propertyId;
-		newUrl = newUrl + "/view";
-		driver.get(newUrl);
-		driver.navigate().refresh();
-		Utility_Functions.timeWait(3);
-		if(countryFieldNewZealand.isDisplayed()) {
+			Utility_Functions.xclickOnFirstElementfromList(propertiesList);	
+			Utility_Functions.timeWait(3);
+			SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
+			String queryId = "SELECT 	Sharing_Country__c, Id FROM Property__c where 	Sharing_Country__c = 'New Zealand'";
+			String propertyId = searchTextSOQL.fetchRecordFieldValue("Id", queryId);
+			String url = driver.getCurrentUrl().split("#")[0];
+			String newUrl = url + "#/sObject/" + propertyId;
+			newUrl = newUrl + "/view";
+			driver.get(newUrl);
+			driver.navigate().refresh();
+			Utility_Functions.timeWait(3);
+			if(countryFieldNewZealand.isDisplayed()) {
 
-			report.updateTestLog("Verify Properties Country Field ", "The Properties country field is New Zealand ", Status.PASS);
-		} else {
-			report.updateTestLog("Verify Properties Country Field ", "The Properties country field is not New Zealand", Status.FAIL);
+				report.updateTestLog("Verify Properties Country Field ", "The Properties country field is New Zealand ", Status.PASS);
+			} else {
+				report.updateTestLog("Verify Properties Country Field ", "The Properties country field is not New Zealand", Status.FAIL);
+			}
+
+		}catch(Exception e){
+			System.out.println("there are no properties displayed");
+			report.updateTestLog("Verify Properties Country Field",
+					"The properties are not displayed", Status.PASS);
+
 		}
-		
-}catch(Exception e){
-	System.out.println("there are no properties displayed");
-	report.updateTestLog("Verify Properties Country Field",
-			"The properties are not displayed", Status.PASS);
-	
-}
-		 
-}
+
+	}
 	/**
 	 * Validating the Properties Preferences property type and region
 	 * 
@@ -2866,20 +2920,20 @@ try{
 				}
 			} else if(dataTable.getData("General_Data", "TC_ID").contains("CMAPACBrokerNSW")) {
 				if((preferenceTypeLease.isDisplayed())&& (retailPropertyType.isDisplayed()) && (regionNSW.isDisplayed())) {
-						report.updateTestLog("Verify Preferences Property Type", "The Preference property type is lease, Property type is Retail and the region is NSW", Status.PASS);
-					} else {
-						report.updateTestLog("Verify Preferences Property Type", "The Preference property type is not lease, Property type is not Retail and the region is not NSW", Status.FAIL);
-					}
+					report.updateTestLog("Verify Preferences Property Type", "The Preference property type is lease, Property type is Retail and the region is NSW", Status.PASS);
+				} else {
+					report.updateTestLog("Verify Preferences Property Type", "The Preference property type is not lease, Property type is not Retail and the region is not NSW", Status.FAIL);
+				}
 			} else if(dataTable.getData("General_Data", "TC_ID").contains("CMAPACBrokerChristChurch")) {
-					if((preferenceTypeLease.isDisplayed())&& (retailPropertyType.isDisplayed()) && (regionChristchurch.isDisplayed())) {
-						report.updateTestLog("Verify Preferences Property Type", "The Preference property type is lease, Property type is Retail and the region is Christchurch", Status.PASS);
-					} else {
-						report.updateTestLog("Verify Preferences Property Type", "The Preference property type is not lease, Property type is not Retail and the region is not Christchurch", Status.FAIL);
-					}
+				if((preferenceTypeLease.isDisplayed())&& (retailPropertyType.isDisplayed()) && (regionChristchurch.isDisplayed())) {
+					report.updateTestLog("Verify Preferences Property Type", "The Preference property type is lease, Property type is Retail and the region is Christchurch", Status.PASS);
+				} else {
+					report.updateTestLog("Verify Preferences Property Type", "The Preference property type is not lease, Property type is not Retail and the region is not Christchurch", Status.FAIL);
 				}
 			}
-		
 		}
+
+	}
 	/**
 	 * Validating the Project Enquiry page fields
 	 * 
@@ -2906,83 +2960,83 @@ try{
 		System.out.println("Project Enquiries fields are " + projectEnquiriesFieldsList);
 	}
 	public void verifyProjectEnquiriesPageFields(){
-	Utility_Functions.xWaitForElementPresent(driver,menu_More, 3);
-	Utility_Functions.xClick(driver, menu_More, true);
-	report.updateTestLog("Verify Project Enquiries Page Fields","Verifying More options is displayed",Status.PASS);
-	Utility_Functions.timeWait(2);
-	Utility_Functions.xWaitForElementPresent(driver,more_projectEnquiries, 3);
-	Utility_Functions.xClick(driver,more_projectEnquiries, true);
-	report.updateTestLog("Verify Project Enquiries Page Fields","Verifying Project Enquiries is displayed",Status.PASS);
-	Utility_Functions.timeWait(2);
-	Utility_Functions.xWaitForElementPresent(driver,newPropertiesPreferences, 3);
-	Utility_Functions.xClick(driver,newPropertiesPreferences, true);
-	report.updateTestLog("Verify Project Enquiries Page Fields","Verifying the new Project Enquiries is displayed",Status.PASS);
-	Utility_Functions.xWaitForElementPresent(driver,nextNewProjectEnquiry, 3);
-	Utility_Functions.xClick(driver,nextNewProjectEnquiry,true);
-	List<WebElement> projectEnquiryPageValues = driver.findElements(By.xpath("//label[contains(@class,'inputLabel')]/span[1]"));
-	int count4 = 0, i4 = 0;
-	String fieldsArray4[] = new String[projectEnquiryPageValues.size()];
-	System.out.println(projectEnquiryPageValues.size());
-	try {
-		projectEnquiriesFields();
-		for (WebElement element4 :projectEnquiryPageValues) {
-			System.out.println(element4.getText());
-			fieldsArray4[i4] = element4.getText();
-			if (fieldsArray4[i4].contains(projectEnquiriesFieldsList.get(i4))) {
-				report.updateTestLog("Verify Project Enquiries Page Fields",
-						"Project Enquiries page is having the " + fieldsArray4[i4] + " fields ",
-						Status.PASS);
-				count4++;
+		Utility_Functions.xWaitForElementPresent(driver,menu_More, 3);
+		Utility_Functions.xClick(driver, menu_More, true);
+		report.updateTestLog("Verify Project Enquiries Page Fields","Verifying More options is displayed",Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver,more_projectEnquiries, 3);
+		Utility_Functions.xClick(driver,more_projectEnquiries, true);
+		report.updateTestLog("Verify Project Enquiries Page Fields","Verifying Project Enquiries is displayed",Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver,newPropertiesPreferences, 3);
+		Utility_Functions.xClick(driver,newPropertiesPreferences, true);
+		report.updateTestLog("Verify Project Enquiries Page Fields","Verifying the new Project Enquiries is displayed",Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver,nextNewProjectEnquiry, 3);
+		Utility_Functions.xClick(driver,nextNewProjectEnquiry,true);
+		List<WebElement> projectEnquiryPageValues = driver.findElements(By.xpath("//label[contains(@class,'inputLabel')]/span[1]"));
+		int count4 = 0, i4 = 0;
+		String fieldsArray4[] = new String[projectEnquiryPageValues.size()];
+		System.out.println(projectEnquiryPageValues.size());
+		try {
+			projectEnquiriesFields();
+			for (WebElement element4 :projectEnquiryPageValues) {
+				System.out.println(element4.getText());
+				fieldsArray4[i4] = element4.getText();
+				if (fieldsArray4[i4].contains(projectEnquiriesFieldsList.get(i4))) {
+					report.updateTestLog("Verify Project Enquiries Page Fields",
+							"Project Enquiries page is having the " + fieldsArray4[i4] + " fields ",
+							Status.PASS);
+					count4++;
+				}
+				i4++;
 			}
-			i4++;
-		}
-		System.out.println(count4);
-		if (count4!= 13) {
-			report.updateTestLog("Verify Project Enquiries Page Fields", "All fields are not present in the Project Enquiry page ", Status.FAIL);
-		} else {
+			System.out.println(count4);
+			if (count4!= 13) {
+				report.updateTestLog("Verify Project Enquiries Page Fields", "All fields are not present in the Project Enquiry page ", Status.FAIL);
+			} else {
 
-			report.updateTestLog("Verify Project Enquiries Page Fields", "All fields are present in the Project Enquiry page", Status.PASS);
+				report.updateTestLog("Verify Project Enquiries Page Fields", "All fields are present in the Project Enquiry page", Status.PASS);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
-	} catch (Exception e) {
-		System.out.println(e.getMessage());
-	}
-	Utility_Functions.timeWait(5);
-	Utility_Functions.xScrollWindow(driver);
-	Utility_Functions.timeWait(1);
-	Utility_Functions.xScrollWindowTop(driver);
-	Utility_Functions.timeWait(2);
-	Utility_Functions.xWaitForElementPresent(driver,projectEnquiryName, 3);
-	Utility_Functions.xSendKeys(driver,projectEnquiryName, "Test Automation_" + Utility_Functions.xGenerateAlphaNumericString());
-	Utility_Functions.xWaitForElementPresent(driver,enquiryContact, 3);
-	Utility_Functions.xClick(driver, enquiryContact, true);
-	//Utility_Functions.xSendKeys(driver,enquiryContact, "AUCAPACBroker");
-	Utility_Functions.xWaitForElementPresent(driver, firstLookUpElement, 3);
-	Utility_Functions.xClick(driver, firstLookUpElement, true);
-	/*Utility_Functions.xWaitForElementPresent(driver,enquiryContactValue, 3);
+		Utility_Functions.timeWait(5);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver,projectEnquiryName, 3);
+		Utility_Functions.xSendKeys(driver,projectEnquiryName, "Test Automation_" + Utility_Functions.xGenerateAlphaNumericString());
+		Utility_Functions.xWaitForElementPresent(driver,enquiryContact, 3);
+		Utility_Functions.xClick(driver, enquiryContact, true);
+		//Utility_Functions.xSendKeys(driver,enquiryContact, "AUCAPACBroker");
+		Utility_Functions.xWaitForElementPresent(driver, firstLookUpElement, 3);
+		Utility_Functions.xClick(driver, firstLookUpElement, true);
+		/*Utility_Functions.xWaitForElementPresent(driver,enquiryContactValue, 3);
 	Utility_Functions.xClick(driver,enquiryContactValue, true);
-	*/Utility_Functions.xWaitForElementPresent(driver,enquiryAccount, 3);
-	Utility_Functions.xClick(driver, enquiryAccount, true);
-	//Utility_Functions.xSendKeys(driver,enquiryAccount, "AUCAPACBroker");
-	Utility_Functions.xWaitForElementPresent(driver, firstLookUpElement, 3);
-	Utility_Functions.xClick(driver, firstLookUpElement, true);
-	/*Utility_Functions.xWaitForElementPresent(driver,enquiryAccountValue, 3);
+		 */Utility_Functions.xWaitForElementPresent(driver,enquiryAccount, 3);
+		 Utility_Functions.xClick(driver, enquiryAccount, true);
+		 //Utility_Functions.xSendKeys(driver,enquiryAccount, "AUCAPACBroker");
+		 Utility_Functions.xWaitForElementPresent(driver, firstLookUpElement, 3);
+		 Utility_Functions.xClick(driver, firstLookUpElement, true);
+		 /*Utility_Functions.xWaitForElementPresent(driver,enquiryAccountValue, 3);
 	Utility_Functions.xClick(driver,enquiryAccountValue, true);*/
-	Utility_Functions.xWaitForElementPresent(driver,projectEnquirySave, 3);
-	Utility_Functions.xClick(driver,projectEnquirySave, true);
-}
+		 Utility_Functions.xWaitForElementPresent(driver,projectEnquirySave, 3);
+		 Utility_Functions.xClick(driver,projectEnquirySave, true);
+	}
 	/**
 	 * Validating the Project Enquiries Enhancements
 	 * 
 	 * @author Ramya
 	 *
 	 */
-	
-	
+
+
 	public void verifyProjectEnquiriesEnhancements(){	
-		
+
 		verifyProjectEnquiriesPageFields();
-		
-		
+
+
 	}
 	/**
 	 * Validating the Properties edit page
@@ -2990,10 +3044,10 @@ try{
 	 * @author Ramya
 	 *
 	 */
-	
-	
+
+
 	public void verifyPropertiesEditPage(){	
-		
+
 		try{
 			Utility_Functions.xWaitForElementPresent(driver,menu_Properties, 3);
 			Utility_Functions.xClick(driver, menu_Properties, true);
@@ -3008,7 +3062,7 @@ try{
 				Utility_Functions.xClick(driver, propertiesEnv, true);
 			}      
 		}
-	
+
 		List<WebElement> recentlyViewedpropertiesList = driver.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
 		Utility_Functions.xclickOnFirstElementfromList(recentlyViewedpropertiesList);
 		Utility_Functions.xWaitForElementPresent(driver,showMoreActions, 2);
@@ -3030,7 +3084,7 @@ try{
 		Utility_Functions.xClick(driver,addButton, true);
 		Utility_Functions.xWaitForElementPresent(driver,commercialBuilding, 3);
 		Utility_Functions.xClick(driver,commercialBuilding, true);
-			
+
 	}
 	/**
 	 * Validating the Properties Preferences creation
@@ -3056,7 +3110,7 @@ try{
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xScrollWindowTop(driver);
 		Utility_Functions.timeWait(2);
-				
+
 
 	}
 	/**
@@ -3092,55 +3146,122 @@ try{
 		Utility_Functions.xClick(driver,propertyType, true);
 		Utility_Functions.xWaitForElementPresent(driver,propertyTypeHotelValue, 3);
 		Utility_Functions.xClick(driver,propertyTypeHotelValue, true);
-		
-		
-		
+
+
+
+	}
+
+	public void propertyTagging () {
+
+		Utility_Functions.xClick(driver, menu_More, true);
+		Utility_Functions.xWaitForElementPresent(driver,properties, 3);
+		Utility_Functions.xClick(driver, properties, true);
+		Utility_Functions.xWaitForElementPresent(driver,recentlyViewed, 3);
+		Utility_Functions.xClick(driver, recentlyViewed, true);
+		Utility_Functions.xWaitForElementPresent(driver,allProperties, 3);
+		Utility_Functions.xClick(driver, allProperties, true);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xClick(driver, PropertyList, true);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xSwitchtoFrame(driver, addTag);
+		Utility_Functions.xClick(driver, addTag, true);
+		Utility_Functions.xSendKeys(driver, privatetag, dataTable.getData("General_Data", "Private Tag"));
+		Utility_Functions.xClickHiddenElement(driver, savePrivateTag);
+		Utility_Functions.xWaitForElementPresent(driver,addTag, 3);
+
+		if(addTag.isDisplayed()){
+			report.updateTestLog("Verify Opportunity Private Tags", "The Private Tag is saved",
+					Status.PASS);		
+		}else{
+			report.updateTestLog("Verify Opportunity Private Tags", "The Private tag is not saved",
+					Status.FAIL);
 		}
+
+		Utility_Functions.xClick(driver, PrivateTagged, true);
+		Utility_Functions.xSwitchtoFrame(driver, PrivateTagPage);
+		Utility_Functions.xWaitForElementPresent(driver,PrivateTagPage, 3);
+
+		if(PrivateTagPage.isDisplayed()){
+			report.updateTestLog("Verify Property Private Tags", "The Tag is saved in Private Tag Page",
+					Status.PASS);		
+		}else{
+			report.updateTestLog("Verify Property Private Tags", "The Tag is not saved in Private Tag Page",
+					Status.FAIL);
+		}
+	}
 	
-	 public void propertyTagging () {
-			
-			Utility_Functions.xClick(driver, menu_More, true);
-			Utility_Functions.timeWait(2);
-			Utility_Functions.xClick(driver, properties, true);
-			Utility_Functions.timeWait(2);
-			Utility_Functions.xClick(driver, recentlyViewed, true);
-			Utility_Functions.timeWait(2);
-			Utility_Functions.xClick(driver, allProperties, true);
-			Utility_Functions.timeWait(4);
-			Utility_Functions.xClick(driver, PropertyList, true);
-			Utility_Functions.timeWait(2);
-			
+	public void marketCreation () {
+		Utility_Functions.xWaitForElementPresent(driver, applauncher, 3);
+		Utility_Functions.xClick(driver, applauncher, true);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xClickHiddenElement(driver, marketingLists);
+		Utility_Functions.xWaitForElementPresent(driver,newProperty, 3);
+		Utility_Functions.xClick(driver, newProperty, true);
+		Utility_Functions.xWaitForElementPresent(driver,marketListName, 3);
+		Utility_Functions.xSendKeys(driver, marketListName, "Test");
+		Utility_Functions.xSendKeys(driver, authorContact, "Test Broker6");
+		Utility_Functions.timeWait(1);
+		authorContact.sendKeys(Keys.ARROW_DOWN);
+		authorContact.sendKeys(Keys.ENTER);
+		Utility_Functions.xWaitForElementPresent(driver,notesTxtBx, 3);
+		Utility_Functions.xSendKeys(driver, notesTxtBx, "Testing");
+		Utility_Functions.xClick(driver, saveMarketList, true);
+		Utility_Functions.xWaitForElementPresent(driver,newProperty, 3);
+	}
+	
+	public void subscriptionCreation() {
+		Utility_Functions.xWaitForElementPresent(driver, applauncher, 3);
+		Utility_Functions.xClick(driver, applauncher, true);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xClickHiddenElement(driver, subscriptions);
+		Utility_Functions.xWaitForElementPresent(driver,newProperty, 3);
+		Utility_Functions.xClick(driver, newProperty, true);
+		Utility_Functions.xWaitForElementPresent(driver, saveMarketList, 3);
+		Utility_Functions.xSendKeys(driver, marketListSubscription, "Test");
+		marketListSubscription.sendKeys(Keys.ARROW_DOWN);
+		marketListSubscription.sendKeys(Keys.ENTER);
+		Utility_Functions.xClick(driver, saveMarketList, true);
 		
-			 Utility_Functions.xSwitchtoFrame(driver, addTag);
-			 	Utility_Functions.xClick(driver, addTag, true);
-			      Utility_Functions.timeWait(3);
-
-			Utility_Functions.xSendKeys(driver, privatetag, dataTable.getData("General_Data", "Private Tag"));
-			 Utility_Functions.timeWait(3);
-
-			 Utility_Functions.xClickHiddenElement(driver, savePrivateTag);
-			Utility_Functions.timeWait(4);
+		if(newProperty.isDisplayed()){
 			
-			if(addTag.isDisplayed()){
-				report.updateTestLog("Verify Opportunity Private Tags", "The Private Tag is saved",
-						Status.PASS);		
-			}else{
-				report.updateTestLog("Verify Opportunity Private Tags", "The Private tag is not saved",
-						Status.FAIL);
+			System.out.println("Subscription is created");
 		}
-			
-			Utility_Functions.xClick(driver, PrivateTagged, true);
-		      Utility_Functions.timeWait(8);
-		    Utility_Functions.xSwitchtoFrame(driver, PrivateTagPage);
-			
-		      if(PrivateTagPage.isDisplayed()){
-					report.updateTestLog("Verify Property Private Tags", "The Tag is saved in Private Tag Page",
-							Status.PASS);		
-				}else{
-					report.updateTestLog("Verify Property Private Tags", "The Tag is not saved in Private Tag Page",
-							Status.FAIL);
-			}
-		      System.out.println("Current URL is--" +driver.getCurrentUrl());
+		else {
+			System.out.println("Subscription is not created");		
+		}
+		
+	}
+	
+	public void propertyPreferenceUpdateClone(){
+		Utility_Functions.xWaitForElementPresent(driver, applauncher, 3);
+		Utility_Functions.xClick(driver, applauncher, true);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xClickHiddenElement(driver, propertyPreferences);
+		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
+		Utility_Functions.xClick(driver, recentlyViewed, true);
+		Utility_Functions.xWaitForElementPresent(driver, allPropertyPreferences, 5);
+		Utility_Functions.xClick(driver, allPropertyPreferences, true);
+		Utility_Functions.timeWait(4);
+		Utility_Functions.xClick(driver, allPropertyPreferenceslist, true);
+		Utility_Functions.xWaitForElementPresent(driver, editProperty, 3);
+		Utility_Functions.xClick(driver, editProperty, true);
+		Utility_Functions.xWaitForElementPresent(driver, minimumPriceProperty, 3);
+		Utility_Functions.xSendKeys(driver, minimumPriceProperty, "2000");
+		Utility_Functions.xClick(driver, savePropertypreference, true);
+		Utility_Functions.timeWait(4);
+		Utility_Functions.xClick(driver, cloneProperty, true);
+		Utility_Functions.xWaitForElementPresent(driver, minimumPriceProperty, 3);
+		Utility_Functions.xSendKeys(driver, minimumPriceProperty, "5000");
+		//Utility_Functions.xSelectDropdownByValue(hotelStar, "5 star");
+		Utility_Functions.xClick(driver, savePropertypreference, true);
+		Utility_Functions.xWaitForElementPresent(driver, editProperty, 3);
+		if(editProperty.isDisplayed()) {
+			System.out.println("Property Preference is updated");
+		}
+		else {
+			System.out.println("Proeprty Preference is not updated");
+		}
+		
 	}
 }
 

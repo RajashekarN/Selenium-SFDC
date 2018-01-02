@@ -320,4 +320,34 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 		sfPropertiesPage.propertyTagging();
 	}
 	
+	/**
+	 * Validating the market creation
+	 * 
+	 * @author Cognizant
+	 *
+	 */
+	public void bc_marketCreation() throws InterruptedException {
+		sfPropertiesPage.marketCreation();
+	}
+	/**
+	 * Validating the subscription creation
+	 * 
+	 * @author Cognizant
+	 *
+	 */
+	public void bc_subscriptionCreation() throws InterruptedException {
+		sfPropertiesPage.subscriptionCreation();
+	}
+	
+	/**
+	 * Validating the property preference update and clone
+	 * 
+	 * @author Cognizant
+	 *
+	 */
+	public void bc_propertyPreferenceUpdateClone() throws InterruptedException {
+		sfPropertiesPage.propertyPreferenceUpdateClone();
+	}
+	
+	
 }

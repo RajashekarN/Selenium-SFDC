@@ -82,9 +82,21 @@
 			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACAdminOpportunityActivity"/>
 			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACAdminOpportunityActivityTaskEvent"/>
 			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACManagerAccountOpportunityHistory"/>
-			
-
-	
+			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACManagerCreateCampaign"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_DAASIADataCreateCampaign"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACManagerContactAddCampaign"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACManagerLeadAddCampaign"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_DAASIADataContactAddCampaign"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_DAPACIDataLeadAddCampaign"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_DAASIADataCreateMarketingLists"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_DAASIADataCreateSubscriptions"/>	
+			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACManagerOpportunitySplitPercentage"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACAdminMarketCreation"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACAdminSubscriptionCreation"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACAdminPropertyUpdateClone"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACAdminTagSharing"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACAdminBulkTag"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_DAASIADataAccountOpportunityHistory"/>						
 		</classes>
 	</test>
 </suite>

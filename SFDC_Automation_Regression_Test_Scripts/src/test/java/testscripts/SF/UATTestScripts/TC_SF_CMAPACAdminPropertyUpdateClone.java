@@ -11,16 +11,21 @@ import com.cognizant.framework.selenium.ExecutionMode;
 import com.cognizant.framework.selenium.SeleniumTestParameters;
 
 import com.cognizant.Craft.*;
+/**
+ * Validating the property preference update and clone
+ * 
+ * @author Vishnu
+ *
+ */
 
-public class TC_SF_CMAPACAdminOpportunityActivity extends CRAFTTestCase{
-
+public class TC_SF_CMAPACAdminPropertyUpdateClone extends CRAFTTestCase {
 	@Test(dataProvider = "UATTestScripts")
-	public void runTC_SF_CMAPACAdminOpportunityActivity(String testInstance, ExecutionMode executionMode, Platform platform
+	public void runTC_SF_CMAPACAdminPropertyUpdateClone(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
 		SeleniumTestParameters testParameters = new SeleniumTestParameters(currentScenario, currentTestcase);
-		testParameters.setCurrentTestDescription("Test for validating property preference fields");
+		testParameters.setCurrentTestDescription("Test for the validating the property preference update and clone");
 		testParameters.setIterationMode(IterationOptions.RUN_ONE_ITERATION_ONLY);
 		testParameters.setBrowser(Browser.CHROME);
 		testParameters.setExecutionMode(executionMode);
@@ -39,3 +44,4 @@ public class TC_SF_CMAPACAdminOpportunityActivity extends CRAFTTestCase{
 	}
 
 }
+

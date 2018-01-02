@@ -75,10 +75,11 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleProfileTimeZoneResult = setRoleProfileTimeZone(userName);
 				String role = roleProfileTimeZoneResult.split("-")[1];
 				String profile = roleProfileTimeZoneResult.split("-")[0];
-				String timeZone = roleProfileTimeZoneResult.split("-")[2];
+				String geographicalRole = roleProfileTimeZoneResult.split("-")[2];
+				String timeZone = roleProfileTimeZoneResult.split("-")[3];
 				userId = createUsers.createUser(dataTable.getData("General_Data", "FirstName"),
 						dataTable.getData("General_Data", "LastName"), dataTable.getData("General_Data", "Alias"),
-						"vishnuvardhan.bommisetty" + "@cbre.com", userName, role, profile, timeZone);
+						"vishnuvardhan.bommisetty" + "@cbre.com", userName, role, geographicalRole, profile, timeZone);
 				if (userId == null) {
 					System.out.println("User has not been created");
 					report.updateTestLog("User Creation", "User has not been created as userId is:::" + userId,
@@ -113,14 +114,17 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				if (userResultId == null) {
 					String role = roleProfileTimeZoneResult.split("-")[0];
 					String profile = roleProfileTimeZoneResult.split("-")[1];
-					String timeZone = roleProfileTimeZoneResult.split("-")[2];
+					String geographicalRole = roleProfileTimeZoneResult.split("-")[2];
+					String timeZone = roleProfileTimeZoneResult.split("-")[3];
 					userResultId = createUsers.createUser(dataTable.getData("General_Data", "FirstName"),
 							dataTable.getData("General_Data", "LastName"), dataTable.getData("General_Data", "Alias"),
-							"vishnuvardhan.bommisetty" + "@cbre.com", userName, role, profile, timeZone);
-					System.out.println("User has been created");
-					report.updateTestLog("User Creation",
-							"User has been created as User Id and User Name is:::" + userId + ":::" + userName,
-							Status.PASS);
+							"vishnuvardhan.bommisetty" + "@cbre.com", userName, role, profile, geographicalRole, timeZone);
+					if(userResultId!=null) {
+						System.out.println("User has been created");
+						report.updateTestLog("User Creation", "User has been created successfully the system::" + userId + ":::" + userName, Status.PASS);	
+					} else {
+						report.updateTestLog("User Creation", "User creation failed::" + userId + ":::" + userName, Status.FAIL);
+					}					
 				} else {
 					System.out.println("User already exists");
 					report.updateTestLog("User Creation",
@@ -161,6 +165,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 	public static List<String> roleIDLabels = new ArrayList<String>();
 	public static List<String> profileIDLabels = new ArrayList<String>();
 	public static List<String> timeZone = new ArrayList<String>();
+	public static List<String> geographicalRole = new ArrayList<String>();
 	public static List<String> permissionSetsLabels = new ArrayList<String>();
 
 	public void setPermissionSets(List<String> userNameList, List<String> permissionSetsLabels) throws Exception {
@@ -772,7 +777,41 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				permissionSetsLabels.add("Language Entry Translation Permissions");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
-
+				
+			case "testuser99@cbre.com.crm.":
+				
+				System.out.println("SouthEast Asia Data Admin- :::" + userName + environment
+						+ ":::is having the Role and Profle as::: SouthEast Asia - CBRE Data Admin");
+				
+				 permissionSetsLabels.add("APAC Capital Markets – Asia");
+				 permissionSetsLabels.add("APAC Communication Preferences Create/Edit Permissions");
+				 permissionSetsLabels.add("Asset Services Investor Services Account Field Rights");
+				 permissionSetsLabels.add("Asset Services LOB");
+				 permissionSetsLabels.add("Campaigns and CampaignLogic Create/Edit Permissions");
+				 permissionSetsLabels.add("Dashboards Create/Edit Permission");
+				 permissionSetsLabels.add("Enquiries & Space Assessment Create/Edit Permissions");
+				 permissionSetsLabels.add("Lightning Experience");
+				 permissionSetsLabels.add("Preference & Publication Edit Permissions");
+				 permissionSetsLabels.add("Preference Edit & Marketing Lists Read Permissions");
+				
+				break;
+				
+			case "testuser100@cbre.com.crm.":	
+				System.out.println("Pacific Data Admin- :::" + userName + environment
+						+ ":::is having the Role and Profle as::: Pacific - CBRE Data Admin");
+					permissionSetsLabels.add("Allow updates to Key Client and Pursuit Account LOB fields on Account");
+				 permissionSetsLabels.add("APAC Communication Preferences Create/Edit Permissions");
+				 permissionSetsLabels.add("Asset Services LOB");
+				 permissionSetsLabels.add("Campaigns and CampaignLogic Create/Edit Permissions");
+				 permissionSetsLabels.add("Country Permissions - Australia");
+				 permissionSetsLabels.add("Dashboards Create/Edit Permission");
+				 permissionSetsLabels.add("Enquiries & Space Assessment Create/Edit Permissions");
+				 permissionSetsLabels.add("Lightning Experience");
+				 permissionSetsLabels.add("Modify All Data Permission");
+				 permissionSetsLabels.add("Preference & Publication Edit Permissions");
+				 permissionSetsLabels.add("Regional Business Support");
+				 
+				 break;
 			default:
 				break;
 			}
@@ -1500,7 +1539,27 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				System.out.println("France Manager - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: France and CBRE Manager - France - Multi Business Line");
 				break;
+				
+			case "testuser99@cbre.com.crm.":
 
+				roleIDLabels.add("SOUTHEAST ASIA");
+				profileIDLabels.add("CBRE Data Admin");
+				geographicalRole.add("APAC");
+				timeZone.add("Asia/Singapore");
+				System.out.println("SouthEast Asia Data Admin- :::" + userName + environment
+						+ ":::is having the Role and Profle as::: SouthEast Asia - CBRE Data Admin");
+				break;
+				
+			case "testuser100@cbre.com.crm.":
+
+				roleIDLabels.add("PACIFIC");
+				profileIDLabels.add("CBRE Data Admin");
+				geographicalRole.add("APAC");
+				timeZone.add("Australia/Sydney");
+				System.out.println("Pacific Data Admin- :::" + userName + environment
+						+ ":::is having the Role and Profle as::: Pacific - CBRE Data Admin");
+				break;
+				
 			default:
 
 				roleIDLabels.add("EXECUTIVE");
@@ -1511,10 +1570,11 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				break;
 			}
 			establishConnection.establishConnection();
-			roleProfileTimeZone = getRoleId(roleIDLabels.get(i)) + "-" + getProfileId(profileIDLabels.get(i)) + "-"
-					+ timeZone.get(i);
+			roleProfileTimeZone = getRoleId(roleIDLabels.get(i)) + "-" + getProfileId(profileIDLabels.get(i)) + "-" + geographicalRole.get(i) 
+					+ "-" + timeZone.get(i);
 			profileIDLabels.clear();
 			roleIDLabels.clear();
+			geographicalRole.clear();
 			timeZone.clear();
 		}
 		return roleProfileTimeZone;

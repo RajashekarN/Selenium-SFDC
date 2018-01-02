@@ -11,16 +11,21 @@ import com.cognizant.framework.selenium.ExecutionMode;
 import com.cognizant.framework.selenium.SeleniumTestParameters;
 
 import com.cognizant.Craft.*;
+/**
+ * Validating the Market creation
+ * 
+ * @author Vishnu
+ *
+ */
 
-public class TC_SF_CMAPACAdminOpportunityActivity extends CRAFTTestCase{
-
+public class TC_SF_CMAPACAdminMarketCreation extends CRAFTTestCase {
 	@Test(dataProvider = "UATTestScripts")
-	public void runTC_SF_CMAPACAdminOpportunityActivity(String testInstance, ExecutionMode executionMode, Platform platform
+	public void runTC_SF_CMAPACManagerMarketCreation(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
 		SeleniumTestParameters testParameters = new SeleniumTestParameters(currentScenario, currentTestcase);
-		testParameters.setCurrentTestDescription("Test for validating property preference fields");
+		testParameters.setCurrentTestDescription("Test for the validating the Market creation");
 		testParameters.setIterationMode(IterationOptions.RUN_ONE_ITERATION_ONLY);
 		testParameters.setBrowser(Browser.CHROME);
 		testParameters.setExecutionMode(executionMode);
@@ -39,3 +44,4 @@ public class TC_SF_CMAPACAdminOpportunityActivity extends CRAFTTestCase{
 	}
 
 }
+
