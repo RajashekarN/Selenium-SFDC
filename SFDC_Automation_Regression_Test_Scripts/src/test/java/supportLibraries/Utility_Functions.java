@@ -214,6 +214,26 @@ public class Utility_Functions extends ReusableLibrary {
 		
 
 	}
+	
+	/*
+	 * *******************************************************************
+	 * Function Name: xClickVisibleListElement Author : CBRE SFDC Automation Purpose : Click the visible
+	 * element field: driver, List<WebElement>
+	 * ******************************************************************
+	 */
+	public static String xGetTextVisibleListElement(CraftDriver driver, List<WebElement> eleList) {
+		
+		for(WebElement element : eleList){
+			if(element.isDisplayed()){
+				//xClick(driver, element, true);
+				
+				return element.getText();
+			}
+		}
+		return null;
+		
+
+	}
 	/*
 	 * *******************************************************************
 	 * Function Name: xSendKeysVisibleListElement Author : CBRE SFDC Automation Purpose : SendKeys to the visible
@@ -1165,8 +1185,12 @@ public class Utility_Functions extends ReusableLibrary {
 		} else {
 			while (!isStatus) {
 				for (WebElement elememt : list) {
-					int randomValue = random.nextInt(list.size());
+					int randomValue = random.nextInt(list.size()-1);
+					if(randomValue%2>0){
+						randomValue++;
+					}
 					text = elememt.getText();
+					System.out.println(list.get(randomValue).getText()); 
 					list.get(randomValue).click();
 					isStatus = true;
 					break;

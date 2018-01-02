@@ -51,6 +51,15 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 		sfAccountsPage.verifyCreateActivityAccount();
 	}
 	
+	public void bc_navigateToTag(){
+		sfAccountsPage.navigateToTag();
+	}
+	
+	public void bc_shareTag(){
+		sfAccountsPage.shareTag();
+	}
+	
+	
 	public void bc_selectAccount(){
 		sfAccountsPage.selectAccount();
 	}

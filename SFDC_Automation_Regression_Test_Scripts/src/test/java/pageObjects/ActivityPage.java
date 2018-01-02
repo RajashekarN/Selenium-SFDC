@@ -57,13 +57,13 @@ public class ActivityPage extends ReusableLibrary {
 	WebElement emailNotification;
 	
 	@FindBy(xpath = "//button[contains(@class,'slds-button slds-button--neutral showMore slds-button slds-button--neutral uiButton')]")
-	WebElement btnPastActivity;
+	List<WebElement> btnPastActivity;
 	
 	@FindBy(xpath = "//span[text()='Related To']/parent::div/following-sibling::div/span/div/a")
 	WebElement lblRelatedTo;
 
 	@FindBy(xpath = "//button[@class='slds-button slds-button--neutral howMore slds-button slds-button--neutral uiButton']")
-	WebElement btnMoreActivity;
+	List<WebElement> btnMoreActivity;
 	
 	@FindBy(xpath = "//label/span[text()='Subject']/parent::label/parent::div/input")
 	WebElement activitySubject;
@@ -431,12 +431,13 @@ public class ActivityPage extends ReusableLibrary {
 		}
 	}
 	public void validateAccountActivity(String activityPast,String activityPresent,String activityFuture){
-		Utility_Functions.xClick(driver,btnPastActivity, true);
+		Utility_Functions.xClickVisibleListElement(driver, btnPastActivity);
 		Utility_Functions.timeWait(3);
 		
-		Utility_Functions.xClick(driver,btnMoreActivity, true);
+		if(btnMoreActivity.size()>0){
+		Utility_Functions.xClickVisibleListElement(driver, btnMoreActivity);
 		Utility_Functions.timeWait(3);
-		
+		}
 		System.out.println(driver.findElement(By.xpath("//div[@class='timeline-container slds-m-top--medium']/ul/li/descendant::span[text()='"+activityPast+"']/following::span[1]/p[text()='Yesterday']")).isDisplayed());
 		System.out.println(driver.findElement(By.xpath("//div[@class='timeline-container slds-m-top--medium']/ul/li/descendant::span[text()='"+activityPresent+"']/following::span[1]/p[text()='Today']")).isDisplayed());
 		System.out.println(driver.findElement(By.xpath("//div[@class='timeline-container slds-m-top--medium']/ul/li/descendant::span[text()='"+activityFuture+"']/following::span[1]/p[text()='Tomorrow']")).isDisplayed());
@@ -449,11 +450,13 @@ public class ActivityPage extends ReusableLibrary {
 	}
 	
 	public void validateActivityDetails(String activityPast, String activityPresent,String activityFuture,String accountName){
-		Utility_Functions.xClick(driver,btnPastActivity, true);
+		Utility_Functions.xClickVisibleListElement(driver, btnPastActivity);
 		Utility_Functions.timeWait(3);
 		
-		Utility_Functions.xClick(driver,btnMoreActivity, true);
-		Utility_Functions.timeWait(3);
+		if(btnMoreActivity.size()>0){
+			Utility_Functions.xClickVisibleListElement(driver, btnMoreActivity);
+			Utility_Functions.timeWait(3);
+			}
 		
 		Utility_Functions.xWaitForElementPresent(driver, driver.findElement(By.xpath("//div[@class='timeline-container slds-m-top--medium']/ul/li/descendant::span[text()='"+activityPresent+"']")), 3);
 		Utility_Functions.xClickHiddenElement(driver,driver.findElement(By.xpath("//div[@class='timeline-container slds-m-top--medium']/ul/li/descendant::span[text()='"+activityPresent+"']")));
@@ -490,18 +493,15 @@ public class ActivityPage extends ReusableLibrary {
 	}
 	
 	public void validateActivityExpandAll(String activityPast, String activityPresent,String activityFuture){
-		try{
-		Utility_Functions.xClick(driver,btnPastActivity, true);
+		if(btnPastActivity.size()>0){
+			Utility_Functions.xClickVisibleListElement(driver, btnPastActivity);
 		Utility_Functions.timeWait(3);
-		}catch(Exception e){
-			System.out.println("More not clicked");
-		}
-		try{
-		Utility_Functions.xClick(driver,btnMoreActivity, true);
-		Utility_Functions.timeWait(3);
-		}catch(Exception e){
-			System.out.println("More not clicked");
-		}
+	}
+		
+		if(btnMoreActivity.size()>0){
+			Utility_Functions.xClickVisibleListElement(driver, btnMoreActivity);
+			Utility_Functions.timeWait(3);
+			}
 		
 		if(!dataTable.getData("General_Data", "TC_ID").contains("Lead") &&!(dataTable.getData("General_Data", "TC_ID").contains("Contact") && properties.getProperty("RunEnvironment").equalsIgnoreCase("FTE2"))){
 		System.out.println(driver.findElement(By.xpath("//div[@class='slds-media slds-tile slds-media--small']/descendant::span[text()='"+activityPresent+"']/ancestor::div[1]/following-sibling::div[1][text()='Private - Initial Meeting']")).isDisplayed());
@@ -527,12 +527,14 @@ public class ActivityPage extends ReusableLibrary {
 	}
 	
 	public void validateEventActivity(String eventPast, String eventPresent,String eventFuture){
-		Utility_Functions.xClick(driver,btnPastActivity, true);
+		if(btnPastActivity.size()>0){
+		Utility_Functions.xClickVisibleListElement(driver, btnPastActivity);
 		Utility_Functions.timeWait(3);
-		
-		Utility_Functions.xClick(driver,btnMoreActivity, true);
-		Utility_Functions.timeWait(3);
-	
+		}
+		if(btnMoreActivity.size()>0){
+			Utility_Functions.xClickVisibleListElement(driver, btnMoreActivity);
+			Utility_Functions.timeWait(3);
+			}
 		System.out.println(driver.findElement(By.xpath("//div[@class='slds-media slds-tile slds-media--small']/descendant::span[text()='"+eventPast+"']/ancestor::div[1]/following-sibling::div[text()='Yesterday']")).isDisplayed());
 		System.out.println(driver.findElement(By.xpath("//div[@class='slds-media slds-tile slds-media--small']/descendant::span[text()='"+eventPresent+"']/ancestor::div[1]/following-sibling::div[text()='Today']")).isDisplayed());
 		System.out.println(driver.findElement(By.xpath("//div[@class='slds-media slds-tile slds-media--small']/descendant::span[text()='"+eventFuture+"']/ancestor::div[1]/following-sibling::div[text()='Tomorrow']")).isDisplayed());

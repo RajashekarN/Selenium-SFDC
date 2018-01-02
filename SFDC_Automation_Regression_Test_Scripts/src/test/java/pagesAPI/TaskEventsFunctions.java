@@ -650,31 +650,48 @@ public class TaskEventsFunctions extends ReusableLibrary {
 		return IDs;
 	}
 	
-	public HashMap<String,String> createTaskbyActivityDate(String dateValue) {
+	public HashMap<String,String> createTaskbyActivityDate() {
+		String taskName=null;
+		String status = null;
+		String presentTask = null;
+		String pastTask = null;
+		String futureTask = null;
+		int activityTimes=1;
 		establishConnection.establishConnection();
 		SObject task = new SObject();
  		task.setType("Task");
 		String queryAccountID = "SELECT Id FROM Account ORDER BY CreatedDate DESC"  + " limit 1 offset " + offsetValue;
 		String queryContactID = "SELECT Id FROM Contact ORDER BY CreatedDate DESC"  + " limit 1 offset " + offsetValue;
 		String queryOpportunityID = "SELECT Id FROM Opportunity ORDER BY CreatedDate DESC"  + " limit 1 offset " + offsetValue;
-
+		
 		String sAccountID = searchTextSOQL.fetchRecordFieldValue("Id", queryAccountID);
 		String sContactID = searchTextSOQL.fetchRecordFieldValue("Id", queryContactID);
 		String sOpportunityID = searchTextSOQL.fetchRecordFieldValue("Id", queryOpportunityID);
 		//String sLeadID = searchTextSOQL.fetchRecordFieldValue("Id", queryLeadID);	
 		String sNewLeadID = null;
-		
+		if(dataTable.getData("General_Data", "TC_ID").contains("Activity") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") && !dataTable.getData("General_Data", "TC_ID").contains("Expand") ){
+			activityTimes=3;
+		}
+		for(int i=0;i<activityTimes;i++){
 		String value = Utility_Functions.xGenerateAlphaNumericString();
-		task.setField("Subject", value + "Test Automation "+"Present");
+		//task.setField("Subject", value + "Test Automation "+"Present");
 		task.setField("Type", "Private - Initial Meeting");
-		if(dateValue.equals("Current")) {
+		if(i==0) {
 			task.setField("ActivityDate", calendar.getTime());
-		} else if (dateValue.equals("Past")) {
+			taskName=value + "Test Automation "+"Present";
+			task.setField("Subject", taskName);
+		} else if (i==1) {
 			calendar.add(Calendar.DATE,-1);
 			task.setField("ActivityDate", calendar.getTime());
-		} else if (dateValue.equals("Future")) {
-			calendar.add(Calendar.DATE,1);
+			taskName=value + "Test Automation "+"Past";
+			task.setField("Subject", taskName);
+			//task.setField("Subject", value + "Test Automation "+"Past");
+		} else {
+			calendar.add(Calendar.DATE,2);
 			task.setField("ActivityDate", calendar.getTime());
+			taskName=value + "Test Automation "+"Future";
+			task.setField("Subject", taskName);
+			//task.setField("Subject", value + "Test Automation "+"Future");
 		}
 	
 		if(dataTable.getData("General_Data", "TC_ID").contains("Account"))  {
@@ -687,7 +704,9 @@ public class TaskEventsFunctions extends ReusableLibrary {
 			task.setField("WhatId", sAccountID);	
 			task.setField("WhoId", sContactID);
 		} else if (dataTable.getData("General_Data", "TC_ID").contains("Lead")) {
-			sNewLeadID = leadsFunctions.createNewLead(); 
+			if(i==0){
+				sNewLeadID = leadsFunctions.createNewLead(); 
+			}
 			task.setField("WhoId", sNewLeadID);
 		}
 		SObject[] tasks = new SObject[1];
@@ -698,7 +717,7 @@ public class TaskEventsFunctions extends ReusableLibrary {
 			e.printStackTrace();
 		}
 		System.out.println("Result:::" + results);
-		String status = establishConnection.saveResultsId(results);	
+		 status = establishConnection.saveResultsId(results);	
 		if(status.startsWith("00T")) {
 			report.updateTestLog("Verify Create Task", "Task has been created successfully", Status.PASS);
 		} else {
@@ -714,6 +733,7 @@ public class TaskEventsFunctions extends ReusableLibrary {
 			if((objectValue.equals(sAccountID)) && (whatIdValue !=null)) {
 				count++;
 			}
+			
 		} else if(dataTable.getData("General_Data", "TC_ID").contains("Opportunity")) {
 			if(whatIdValue.equals(sOpportunityID)) {
 				count++;
@@ -729,58 +749,73 @@ public class TaskEventsFunctions extends ReusableLibrary {
 				count++;
 			}
 		}
-		if(count==1) 
+		if(count!=0) 
 			report.updateTestLog("Verify Create Task", "Task are created under Accounts/ Contacts/ Opportunities and Leads", Status.PASS);
 		else 
 			report.updateTestLog("Verify Create Task", "Task are not created under respective objects", Status.FAIL);
+		
+		String taskQuery = "Select Name from Task where Id = " + "'" + status + "'";
+		if(i==0){
+			 presentTask = taskName;
+			 System.out.println(presentTask);
+		}else if(i==1){
+			 pastTask = taskName;
+			 System.out.println(pastTask);
+		}else{
+			 futureTask = taskName;
+			 System.out.println(futureTask);
+		}
+		}
+		HashMap<String,String> returnMap = new HashMap<String,String>();
 		if(dataTable.getData("General_Data", "TC_ID").contains("Account")){
-			HashMap<String,String> returnMap = new HashMap<String,String>();
-			returnMap.put("accountId", sAccountID);
-			returnMap.put("activityId", status);
 			
-			return returnMap;
-		}else if(dataTable.getData("General_Data", "TC_ID").contains("Account")){
-			HashMap<String,String> returnMap = new HashMap<String,String>();
+			returnMap.put("accountId", sAccountID);
+			returnMap.put("present", presentTask);
+			returnMap.put("past", pastTask);
+			returnMap.put("future", futureTask);
+			
+			System.out.println("Account Id : "+sAccountID);
+			
+		}else if(dataTable.getData("General_Data", "TC_ID").contains("Contact")){
+			//HashMap<String,String> returnMap = new HashMap<String,String>();
 			returnMap.put("contactId", sContactID);
-			returnMap.put("activityId", status);
-			return returnMap;
+			returnMap.put("present", presentTask);
+			returnMap.put("past", pastTask);
+			returnMap.put("future", futureTask);
+			//return returnMap;
 			
 		}else if(dataTable.getData("General_Data", "TC_ID").contains("Opportunity")){
-			HashMap<String,String> returnMap = new HashMap<String,String>();
+			//HashMap<String,String> returnMap = new HashMap<String,String>();
 			returnMap.put("opportunityId", sOpportunityID);
-			returnMap.put("activityId", status);
-			return returnMap;
+			returnMap.put("present", presentTask);
+			returnMap.put("past", pastTask);
+			returnMap.put("future", futureTask);
+			//return returnMap;
 			
 		}else{
-			HashMap<String,String> returnMap = new HashMap<String,String>();
+			//HashMap<String,String> returnMap = new HashMap<String,String>();
 			returnMap.put("leadId", sNewLeadID);
-			returnMap.put("activityId", status);
-			return returnMap;
+			returnMap.put("present", presentTask);
+			returnMap.put("past", pastTask);
+			returnMap.put("future", futureTask);
+			//return returnMap;
 		}
-		//return status;
+		return returnMap;
 	}
 	
-	public String createEventbyActivityDate(String dateValue) {
+	public HashMap<String,String> createEventbyActivityDate() {
+		String taskName=null;
+		String status = null;
+		String presentTask = null;
+		String pastTask = null;
+		String futureTask = null;
+		int activityTimes=1;
 		establishConnection.establishConnection();
 		SObject event = new SObject();
 		event.setType("Event");
-		String value = Utility_Functions.xGenerateAlphaNumericString();
-		event.setField("Subject", value + "Test Automation");
-		event.setField("Type", "Private - Initial Meeting");
 		
-		if(dateValue.equals("Current")) {
-			event.setField("ActivityDate", Calendar.getInstance());
-			event.setField("ActivityDateTime", Calendar.getInstance());
-		} else if (dateValue.equals("Past")) {
-			calendar.add(Calendar.DATE,-1);
-			event.setField("ActivityDate", Calendar.getInstance());
-			event.setField("ActivityDateTime", Calendar.getInstance());
-		} else if (dateValue.equals("Future")) {
-			calendar.add(Calendar.DATE,1);
-			event.setField("ActivityDate", Calendar.getInstance());
-			event.setField("ActivityDateTime", Calendar.getInstance());
-		}	
-		event.setField("DurationInMinutes", 10);
+		
+		
 		String queryAccountID = "SELECT Id FROM Account ORDER BY CreatedDate DESC"  + " limit 1 offset " + offsetValue;
 		String queryContactID = "SELECT Id FROM Contact ORDER BY CreatedDate DESC"  + " limit 1 offset " + offsetValue;
 		String queryOpportunityID = "SELECT Id FROM Opportunity ORDER BY CreatedDate DESC"  + " limit 1 offset " + offsetValue;
@@ -791,11 +826,40 @@ public class TaskEventsFunctions extends ReusableLibrary {
 		String sOpportunityID = searchTextSOQL.fetchRecordFieldValue("Id", queryOpportunityID);
 		String sLeadID = searchTextSOQL.fetchRecordFieldValue("Id", queryLeadID);
 		String sNewLead = null;
+		if(dataTable.getData("General_Data", "TC_ID").contains("Event") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") ){
+			activityTimes=3;
+		}
 		System.out.println("Account Id:::"+ sAccountID);
 		System.out.println("Contact Id:::"+ sContactID);
 		System.out.println("Opportunity Id:::"+ sOpportunityID);
 		System.out.println("Lead Id:::"+ sLeadID);
-		
+		for(int i=0;i<activityTimes;i++){
+			String value = Utility_Functions.xGenerateAlphaNumericString();
+			event.setField("Type", "Private - Initial Meeting");
+			event.setField("DurationInMinutes", 10);
+			if(i==0) {
+				System.out.println("Date : "+Calendar.getInstance());
+				event.setField("ActivityDate", Calendar.getInstance());
+				event.setField("ActivityDateTime", Calendar.getInstance());
+				taskName=value + "Event Automation "+"Present";
+				event.setField("Subject", taskName);
+			} else if (i==1) {
+				calendar.add(Calendar.DATE,-1);
+				System.out.println("Date : "+calendar.getTime());
+				event.setField("ActivityDate", calendar.getTime());
+				event.setField("ActivityDateTime", calendar.getTime());
+				taskName=value + "Event Automation "+"Past";
+				event.setField("Subject", taskName);
+				//task.setField("Subject", value + "Test Automation "+"Past");
+			} else {
+				calendar.add(Calendar.DATE,2);
+				System.out.println("Date : "+calendar.getTime());
+				event.setField("ActivityDate", calendar.getTime());
+				event.setField("ActivityDateTime", calendar.getTime());
+				taskName=value + "Event Automation "+"Future";
+				event.setField("Subject", taskName);
+				//event.setField("Subject", value + "Test Automation "+"Future");
+			}
 		if(dataTable.getData("General_Data", "TC_ID").contains("Account"))  {
 			event.setField("WhoId", sContactID);
 			event.setField("WhatId", sAccountID);
@@ -817,8 +881,8 @@ public class TaskEventsFunctions extends ReusableLibrary {
 			e.printStackTrace();
 		}
 		System.out.println("Result:::" + results);
-		status = establishConnection.saveResults(results);
-		String status = establishConnection.saveResultsId(results);	
+		//status = establishConnection.saveResults(results);
+		 status = establishConnection.saveResultsId(results);	
 		if(status.startsWith("00U")) {
 			report.updateTestLog("Verify Create Event", "Event has been created successfully", Status.PASS);
 		} else {
@@ -853,7 +917,55 @@ public class TaskEventsFunctions extends ReusableLibrary {
 			report.updateTestLog("Verify Create Task", "Event are created under Accounts/ Contacts/ Opportunities and Leads", Status.PASS);
 		else 
 			report.updateTestLog("Verify Create Task", "Event are not created under respective objects", Status.FAIL);
-		return status;
+		
+		if(i==0){
+			 presentTask = taskName;
+			 System.out.println(presentTask);
+		}else if(i==1){
+			 pastTask = taskName;
+			 System.out.println(pastTask);
+		}else{
+			 futureTask = taskName;
+			 System.out.println(futureTask);
+		}
+		}
+		
+		
+		HashMap<String,String> returnMap = new HashMap<String,String>();
+		if(dataTable.getData("General_Data", "TC_ID").contains("Account")){
+			System.out.println("Account Id : "+sAccountID);
+			returnMap.put("accountId", sAccountID);
+			returnMap.put("present", presentTask);
+			returnMap.put("past", pastTask);
+			returnMap.put("future", futureTask);
+			
+			System.out.println("Account Id : "+sAccountID);
+			
+		}else if(dataTable.getData("General_Data", "TC_ID").contains("Contact")){
+			//HashMap<String,String> returnMap = new HashMap<String,String>();
+			returnMap.put("contactId", sContactID);
+			returnMap.put("present", presentTask);
+			returnMap.put("past", pastTask);
+			returnMap.put("future", futureTask);
+			//return returnMap;
+			
+		}else if(dataTable.getData("General_Data", "TC_ID").contains("Opportunity")){
+			//HashMap<String,String> returnMap = new HashMap<String,String>();
+			returnMap.put("opportunityId", sOpportunityID);
+			returnMap.put("present", presentTask);
+			returnMap.put("past", pastTask);
+			returnMap.put("future", futureTask);
+			//return returnMap;
+			
+		}else{
+			//HashMap<String,String> returnMap = new HashMap<String,String>();
+			returnMap.put("leadId", sNewLead);
+			returnMap.put("present", presentTask);
+			returnMap.put("past", pastTask);
+			returnMap.put("future", futureTask);
+			//return returnMap;
+		}
+		return returnMap;
 	}
 }
 

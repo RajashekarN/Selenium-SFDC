@@ -2178,6 +2178,28 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);		
 
 	}
+	
+	public void bulkTaggingFunctionality(){
+
+		Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
+		Utility_Functions.xClick(driver, menu_More, true);
+		Utility_Functions.xWaitForElementPresent(driver, bulkTagging, 3);
+		Utility_Functions.xClick(driver, bulkTagging, true);
+		Utility_Functions.timeWait(5);
+		Utility_Functions.xSwitchtoFrame(driver, accountSearch);
+		Utility_Functions.timeWait(5);
+		Utility_Functions.xWaitForElementPresent(driver, accountSearch, 3);
+		Utility_Functions.xClick(driver, accountSearch, true);
+		Utility_Functions.xSendKeys(driver, accountSearch, "Test");
+		Utility_Functions.xWaitForElementPresent(driver,searchProperty, 3);
+		Utility_Functions.xClick(driver,searchProperty, true);
+		Utility_Functions.timeWait(3);		
+		for(int i=1;i<=3;i++){
+			WebElement element= driver.findElement(By.xpath("//h2[contains(text(),'Property Detail')]/parent::div/following-sibling::div/span/table/tbody/tr["+i+"]/td/label/input[@type='checkbox']"));
+			Utility_Functions.xClick(driver,element, true);
+		}
+
+	}
 	/**
 	 * Validating the New Property Page Property Type field
 	 * 

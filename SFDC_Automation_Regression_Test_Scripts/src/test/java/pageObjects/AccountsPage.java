@@ -14,6 +14,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
@@ -42,11 +43,35 @@ public class AccountsPage extends ReusableLibrary {
 	@FindBy(xpath = "//div[@class='bBottom']//span[text()='Accounts']")
 	WebElement menu_Accounts;
 	
+	@FindBy(xpath = "//p[contains(text(),'Private Tag Sharing')]")
+	WebElement tagSharing;
+	
 	@FindBy(xpath = "//span[text()='Lead Source']/parent::span/following-sibling::div/descendant::a[@class='select'][text()='--None--']")
 	WebElement leadSourceList;
 	
+	@FindBy(xpath="//*[@id='j_id0:oppForm:assignmentType']")
+	WebElement oppAssignmentType;
+	
+	//@FindBy(xpath="//select[contains(@name,'assignmentType')]")
+	//WebElement oppAssignmentType;
+	
+	@FindBy(xpath="//button[contains(text(),'More')]")
+	WebElement moreMenu;
+	
+	@FindBy(xpath="//a[contains(@role,'menuitem')]/span[contains(text(),'Private Tags')]")
+	WebElement moreTag;
+	
+	@FindBy(xpath = "//div[contains(text(),'Sharing')]")
+	WebElement btnShare;
+	
+	@FindBy(xpath = "//input[contains(@title,'Add')]")
+	WebElement btnAddUser;
+	
 	@FindBy(xpath = "//div[@class='select-options']/ul/li/a[text()='Business Relationship']")
 	WebElement leadSourceValue;
+	
+	@FindBy(xpath = "//select[contains(@name,'assignmentType')]/option[contains(text(),'Consulting')]")
+	WebElement assignTypeValue;
 	
 	@FindBy(xpath = "//span[text()='Estimated Gross Fee/Commission']/parent::label/following-sibling::input")
 	WebElement grossfee;
@@ -56,10 +81,14 @@ public class AccountsPage extends ReusableLibrary {
 	@FindAll(value = {@FindBy(xpath = "//span[text()='Save']")})
 	List<WebElement> saveButtonList;
 	
+	@FindBy(xpath = "//input[@value='Save']")
+	WebElement oppSave;
+	
 	@FindBy(xpath="//span[text()='Close Date']/parent::label/following-sibling::div/input")
 	WebElement closeDate;
 	
-	
+	@FindBy(xpath = "//span/input[contains(@name,'closeDate')]")
+	WebElement oppCloseDate;
 	//@FindBy(css = "ul>li.forceSearchInputLookupDesktopOption:nth-child(1)")
 	//WebElement firstLookupElement;
 	
@@ -71,6 +100,9 @@ public class AccountsPage extends ReusableLibrary {
 	
 	@FindBy(xpath = "//ul[@class='slds-button-group slds-m-left--xx-small oneActionsRibbon forceActionsContainer']//li/a/div[text()='New']")
 	WebElement newAccount;
+	
+	//@FindAll(value = {@FindBy(xpath = "//a[@class='slds-card__header-link baseCard__header-title-container']/span[text()='Opportunities']/ancestor::header[@class='slds-media slds-media--center slds-has-flexi-truncate']/following-sibling::div/descendant::a/div")})
+	//List<WebElement> newOpportunity;
 	
 	@FindBy(xpath = "//a[@class='slds-card__header-link baseCard__header-title-container']/span[text()='Opportunities']/ancestor::header[@class='slds-media slds-media--center slds-has-flexi-truncate']/following-sibling::div/descendant::a/div")
 	WebElement newOpportunity;
@@ -369,6 +401,9 @@ public class AccountsPage extends ReusableLibrary {
 	@FindBy(xpath = "//div[contains(@class,'listRelatedObject')]//td[@class='pbButton']//input[@type='button'][@name='new']")
 	WebElement addButtonSharing;
 
+	@FindBy(xpath = "//input[@name='new'][contains(@value,'Add')]")
+	WebElement addButtonUser;
+	
 	@FindBy(xpath = "//*[contains(@id,'sharing_search')]")
 	WebElement searchUsers;
 
@@ -384,7 +419,7 @@ public class AccountsPage extends ReusableLibrary {
 	@FindBy(xpath = "//img[@class='rightArrowIcon']")
 	WebElement rightArrow;
 
-	@FindBy(xpath = "//*[@id='p2']")
+	@FindBy(xpath = "//*[@id='p9']")
 	WebElement access;
 
 	@FindBy(xpath = "//*[@id='bottomButtonRow']/input[@name='save']")
@@ -392,6 +427,9 @@ public class AccountsPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//h1[text()='Sharing Detail']")
 	WebElement sharingDetail;
+	
+	@FindBy(xpath = "//input[@title='Save']")
+	WebElement tagSaveBtn;
 
 	@FindBy(xpath = "//a[@role='menuitem'][text()='Private Tags']")
 	WebElement more_privateTags;
@@ -412,7 +450,7 @@ public class AccountsPage extends ReusableLibrary {
 	WebElement more_PrivateTags;
 
 	@FindBy(xpath = "//h1[contains(@class,'slds-page-header__title')]/span")
-	WebElement accountNameSaved;
+	List<WebElement> accountNameSaved;
 
 	@FindBy(xpath = "//span[text()='D-U-N-S #']/parent::div/parent::div//span[@class='uiOutputText']")
 	WebElement accountDetailsDUNS;
@@ -857,6 +895,72 @@ public class AccountsPage extends ReusableLibrary {
 	ActivityPage activityPage = new ActivityPage(scriptHelper);
 	static ArrayList<String> accountsPageDetailsList = new ArrayList<String>();
 
+	
+	/**
+	 * Account Landing Page functionality Header information
+	 * 
+	 * @author Cognizant
+	 *
+	 */
+	public void navigateToTag() {
+		Utility_Functions.xWaitForElementPresent(driver,moreMenu,3);
+		Utility_Functions.xClick(driver, moreMenu, true);
+		Utility_Functions.xWaitForElementPresent(driver,moreTag,3);
+		Utility_Functions.xClick(driver, moreTag, true);
+		
+		report.updateTestLog("Verify Sharing private tag", "All tags are displayed successfully:::", Status.PASS);
+		List<WebElement> tagNameList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xclickRandomElement(tagNameList);
+		
+		
+	}
+	
+	/**
+	 * Account Landing Page functionality Header information
+	 * 
+	 * @author Cognizant
+	 *
+	 */
+	public void shareTag() {
+		Utility_Functions.xWaitForElementPresent(driver,btnShare,3);
+		Utility_Functions.xClick(driver, btnShare, true);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xSwitchtoFrame(driver, tagSharing);
+		Utility_Functions.xWaitForElementPresent(driver, tagSharing, 4);
+		
+		Utility_Functions.timeWait(2);
+		driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='Content']")));
+		
+			Utility_Functions.xWaitForElementPresent(driver, addButtonUser, 5);
+			Utility_Functions.xClick(driver, addButtonUser, true);
+			
+			//Select userSelect=new Select(driver.findElement(By.xpath("//select[@id='sharing_search']")));
+			
+			Utility_Functions.xWaitForElementPresent(driver, searchUsers, 3);
+			Utility_Functions.xSelectDropdownByName(searchUsers, "Users");
+			Utility_Functions.timeWait(1);
+			Utility_Functions.xSendKeys(driver, searchUserName, "bommisetty");
+			Utility_Functions.timeWait(1);
+			Utility_Functions.xClick(driver, findValue, true);
+			Utility_Functions.timeWait(1);
+			String environment = loginPage.initializeEnvironment();
+			if (environment.equals("UAT")) {
+				Utility_Functions.xSelectDropdownByName(selectUser, "User: vishnuvardhan bommisetty");
+			} else {
+				Utility_Functions.xSelectDropdownByName(selectUser, "User: vishnuvardhan bommisetty");
+			}
+			Utility_Functions.timeWait(1);
+			Utility_Functions.xClick(driver, rightArrow, true);
+			Utility_Functions.timeWait(1);
+			Utility_Functions.xSelectDropdownByName(access, "Read/Write");
+			Utility_Functions.xClick(driver, tagSaveBtn, true);
+			Utility_Functions.timeWait(3);
+		
+		
+		driver.switchTo().defaultContent();
+		
+	}
+	
 	/**
 	 * Account Landing Page functionality Header information
 	 * 
@@ -1491,8 +1595,9 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xclickRandomElement(accountNamesList);
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify Create Activity Account ", "The Account is Displayed ", Status.PASS);
-		accountname=accountNameSaved.getText();
-		System.out.println(accountNameSaved.getText());
+		//accountname=accountNameSaved.getText();
+		accountname=Utility_Functions.xGetTextVisibleListElement(driver, accountNameSaved);
+		System.out.println(accountname);
 		//Utility_Functions.timeWait(2);
 		activityPage.createNewActivity();				
 	}
@@ -1520,7 +1625,7 @@ public class AccountsPage extends ReusableLibrary {
 		report.updateTestLog("Verify Create Activity Account ", "The Account is Displayed ", Status.PASS);
 	}
 	
-	public void selectAccountWithId(String accountId){
+	public String selectAccountWithId(String accountId){
 		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
 		Utility_Functions.xClick(driver, menu_Accounts, true);
 		report.updateTestLog("Verify Create Activity Account", "Accounts is Displayed ", Status.PASS);
@@ -1543,7 +1648,10 @@ public class AccountsPage extends ReusableLibrary {
 				Status.PASS);
 		driver.get(newUrl);
 		Utility_Functions.timeWait(3);
-		
+		//String accountName=accountNameSaved.getText();
+		String accountName=Utility_Functions.xGetTextVisibleListElement(driver, accountNameSaved);
+		System.out.println(accountName);
+		return accountName;
 		
 	}
 
@@ -4735,8 +4843,10 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, related_Accounts, true);
 		//Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
 		Utility_Functions.timeWait(3);
-		Utility_Functions.xSwitchtoFrame(driver, newOpportunity);
-		Utility_Functions.xClick(driver, newOpportunity, true);
+		Utility_Functions.xScrollWindowOnce(driver);
+		Utility_Functions.xScrollWindowToElement(driver, newOpportunity);
+		//Utility_Functions.xSwitchtoFrame(driver, newOpportunity);
+		Utility_Functions.xClickHiddenElement(driver, newOpportunity);
 		driver.switchTo().defaultContent();
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xSwitchtoFrame(driver, continueButton);
@@ -4752,34 +4862,65 @@ public class AccountsPage extends ReusableLibrary {
 	
 	
 	public void createnewOpportunity(){
-		Utility_Functions.xWaitForElementPresent(driver, firstLookupElement, 4);
-		Utility_Functions.xClick(driver, firstLookupElement, true);
-		Utility_Functions.xWaitForElementPresent(driver, leadSourceList, 4);
-		Utility_Functions.xClick(driver, leadSourceList, true);
-		Utility_Functions.xWaitForElementPresent(driver, leadSourceValue, 4);
-		Utility_Functions.xClick(driver, leadSourceValue, true);
-		Utility_Functions.xWaitForElementPresent(driver, grossfee, 4);
-		Utility_Functions.xSendKeys(driver, grossfee, "10000");
-		Utility_Functions.xWaitForElementPresent(driver, tansValue, 4);
-		Utility_Functions.xSendKeys(driver, tansValue, "2000");
-		
-		Utility_Functions.xWaitForElementPresent(driver, closeDate, 4);
-		Calendar calendar = Calendar.getInstance();
+		if ((dataTable.getData("General_Data", "TC_ID").contains("DAASIA")) && (dataTable.getData("General_Data", "TC_ID").contains("Data"))) {
+			Utility_Functions.timeWait(6);
+			//Utility_Functions.xWaitForElementPresent(driver, oppAssignmentType, 4);
+			Select selectAssign = new Select(oppAssignmentType);
+			//Utility_Functions.xClickHiddenElement(driver, oppAssignmentType);
+			//Utility_Functions.xClick(driver, oppAssignmentType, true);
+			//Utility_Functions.xWaitForElementPresent(driver, assignTypeValue, 4);
+			//Utility_Functions.xClick(driver, assignTypeValue, true);
+			selectAssign.selectByVisibleText("Consulting");
+			Utility_Functions.xWaitForElementPresent(driver, oppCloseDate, 4);
+			Calendar calendar = Calendar.getInstance();
 
-	    // Move calendar to future
-	    calendar.add(Calendar.DATE, 1);
+			// Move calendar to future
+			calendar.add(Calendar.DATE, 1);
 
-	    // Get current date of calendar which point to the yesterday now
-	    Date newDate = calendar.getTime();
-	    DateFormat dateFormat;
-	    if(properties.getProperty("RunEnvironment").equalsIgnoreCase("UAT")){
-			dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			// Get current date of calendar which point to the yesterday now
+			Date newDate = calendar.getTime();
+			DateFormat dateFormat;
+			if(properties.getProperty("RunEnvironment").equalsIgnoreCase("UAT")){
+				dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			}else{
+				dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+			}
+			Utility_Functions.xSendKeys(driver, oppCloseDate, dateFormat.format(newDate).toString());
+			Utility_Functions.xClick(driver, oppSave,true);
+			Utility_Functions.timeWait(6);
+			
+			
 		}else{
-			dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+			Utility_Functions.xWaitForElementPresent(driver, firstLookupElement, 4);
+			Utility_Functions.xClick(driver, firstLookupElement, true);
+			Utility_Functions.xWaitForElementPresent(driver, leadSourceList, 4);
+			Utility_Functions.xClick(driver, leadSourceList, true);
+			Utility_Functions.xWaitForElementPresent(driver, leadSourceValue, 4);
+			Utility_Functions.xClick(driver, leadSourceValue, true);
+			Utility_Functions.xWaitForElementPresent(driver, grossfee, 4);
+			Utility_Functions.xSendKeys(driver, grossfee, "10000");
+			Utility_Functions.xWaitForElementPresent(driver, tansValue, 4);
+			Utility_Functions.xSendKeys(driver, tansValue, "2000");
+		
+			Utility_Functions.xWaitForElementPresent(driver, closeDate, 4);
+			Calendar calendar = Calendar.getInstance();
+
+			// Move calendar to future
+			calendar.add(Calendar.DATE, 1);
+
+			// Get current date of calendar which point to the yesterday now
+			Date newDate = calendar.getTime();
+			DateFormat dateFormat;
+			if(properties.getProperty("RunEnvironment").equalsIgnoreCase("UAT")){
+				dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			}else{
+				dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+			}
+			Utility_Functions.xSendKeys(driver, closeDate, dateFormat.format(newDate).toString());
+		
+			Utility_Functions.xClickVisibleListElement(driver, saveButtonList);
+			Utility_Functions.timeWait(6);
 		}
-	    Utility_Functions.xSendKeys(driver, closeDate, dateFormat.format(newDate).toString());
-		Utility_Functions.xClickVisibleListElement(driver, saveButtonList);
-		Utility_Functions.timeWait(6);
 		
 		
 	}

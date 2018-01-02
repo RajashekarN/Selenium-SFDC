@@ -7,8 +7,9 @@ import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
 
-import pageObjects.AccountsPage;
+import pageObjects.*;
 import pageObjects.LoginPage;
+import pageObjects.ActivityPage;
 import pagesAPI.AccountsFunctions;
 import pagesAPI.ActivityFunctions;
 import pagesAPI.AttachmentsFunctions;
@@ -57,6 +58,10 @@ public class BC_API_Test extends ReusableLibrary {
 	AttachmentsFunctions attachmentsFunctions = new AttachmentsFunctions(scriptHelper);
 	Tagging tagging= new Tagging(scriptHelper);
 	BudgetsTargetsFunctions budgetsTargetsFunctions = new BudgetsTargetsFunctions(scriptHelper);
+	ActivityPage sfActivityPage = new ActivityPage(scriptHelper);
+	ContactsPage sfContactsPage=new ContactsPage(scriptHelper);
+	LeadsPage sfLeadPage=new LeadsPage(scriptHelper);
+	OpportunitiesPage sfOppPage=new OpportunitiesPage(scriptHelper);
 	
 	/**
 	 * Validating the Login functionality
@@ -116,12 +121,100 @@ public class BC_API_Test extends ReusableLibrary {
 	}
 	
 	public void bc_createAccountActivityAPI() throws InterruptedException{
-		HashMap<String,String> returnmap=taskEventsFunctions.createTaskbyActivityDate("Current");
+		HashMap<String,String> returnmap=taskEventsFunctions.createTaskbyActivityDate();
 		bc_loginApi();
 		
-		sfAccountsPage.selectAccountWithId(returnmap.get("accountId"));
+		String accountName= sfAccountsPage.selectAccountWithId(returnmap.get("accountId"));
+		if(dataTable.getData("General_Data", "TC_ID").contains("Activity") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") && dataTable.getData("General_Data", "TC_ID").contains("Expand") ){
+			sfActivityPage.validateActivityExpandAll(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
+		}else if(dataTable.getData("General_Data", "TC_ID").contains("Activity") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") && dataTable.getData("General_Data", "TC_ID").contains("CreationDates") ){
+			sfActivityPage.validateActivityDetails(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"),accountName);
+		}else if(dataTable.getData("General_Data", "TC_ID").contains("Activity") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") ){
+			sfActivityPage.validateAccountActivity(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
+		}
 		
 	}
+	public void bc_createAccountEventAPI() throws InterruptedException{
+		HashMap<String,String> returnmap=taskEventsFunctions.createEventbyActivityDate();
+		bc_loginApi();
+		
+		String accountName= sfAccountsPage.selectAccountWithId(returnmap.get("accountId"));
+		if(dataTable.getData("General_Data", "TC_ID").contains("Event") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") && !dataTable.getData("General_Data", "TC_ID").contains("Expand") ){
+			sfActivityPage.validateEventActivity(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
+		}
+		
+	}
+	
+	public void bc_createLeadEventAPI() throws InterruptedException{
+		HashMap<String,String> returnmap=taskEventsFunctions.createEventbyActivityDate();
+		bc_loginApi();
+		
+		String accountName= sfLeadPage.selectLeadById(returnmap.get("leadId"));
+		if(dataTable.getData("General_Data", "TC_ID").contains("Event") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") && !dataTable.getData("General_Data", "TC_ID").contains("Expand") ){
+			sfActivityPage.validateEventActivity(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
+		}
+		
+	}
+	public void bc_createContactActivityAPI() throws InterruptedException{
+		HashMap<String,String> returnmap=taskEventsFunctions.createTaskbyActivityDate();
+		bc_loginApi();
+		String accountName= sfContactsPage.selectContactById(returnmap.get("contactId"));
+		if(dataTable.getData("General_Data", "TC_ID").contains("Activity") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") && dataTable.getData("General_Data", "TC_ID").contains("Expand") ){
+			sfActivityPage.validateActivityExpandAll(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
+		}else if(dataTable.getData("General_Data", "TC_ID").contains("Activity") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") && dataTable.getData("General_Data", "TC_ID").contains("CreationDates") ){
+			sfActivityPage.validateActivityDetails(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"),accountName);
+		}else if(dataTable.getData("General_Data", "TC_ID").contains("Activity") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") ){
+			sfActivityPage.validateAccountActivity(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
+		}
+	}
+	public void bc_createContactEventAPI() throws InterruptedException{
+		HashMap<String,String> returnmap=taskEventsFunctions.createEventbyActivityDate();
+		bc_loginApi();
+		
+		String accountName= sfContactsPage.selectContactById(returnmap.get("contactId"));
+		if(dataTable.getData("General_Data", "TC_ID").contains("Event") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") && !dataTable.getData("General_Data", "TC_ID").contains("Expand") ){
+			sfActivityPage.validateEventActivity(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
+		}
+		
+	}
+	
+	public void bc_createOpportunityActivityAPI() throws InterruptedException{
+		HashMap<String,String> returnmap=taskEventsFunctions.createTaskbyActivityDate();
+		bc_loginApi();
+		String accountName= sfOppPage.selectOpportunityById(returnmap.get("opportunityId"));
+		if(dataTable.getData("General_Data", "TC_ID").contains("Activity") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") && dataTable.getData("General_Data", "TC_ID").contains("Expand") ){
+			sfActivityPage.validateActivityExpandAll(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
+		}else if(dataTable.getData("General_Data", "TC_ID").contains("Activity") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") && dataTable.getData("General_Data", "TC_ID").contains("CreationDates") ){
+			sfActivityPage.validateActivityDetails(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"),accountName);
+		}else if(dataTable.getData("General_Data", "TC_ID").contains("Activity") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") ){
+			sfActivityPage.validateAccountActivity(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
+		}
+	}
+	
+	public void bc_createOpportunityEventAPI() throws InterruptedException{
+		HashMap<String,String> returnmap=taskEventsFunctions.createEventbyActivityDate();
+		bc_loginApi();
+		String accountName= sfOppPage.selectOpportunityById(returnmap.get("opportunityId"));
+		//String accountName= sfContactsPage.selectContactById(returnmap.get("contactId"));
+		if(dataTable.getData("General_Data", "TC_ID").contains("Event") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") && !dataTable.getData("General_Data", "TC_ID").contains("Expand") ){
+			sfActivityPage.validateEventActivity(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
+		}
+		
+	}
+	
+	public void bc_createLeadActivityAPI() throws InterruptedException{
+		HashMap<String,String> returnmap=taskEventsFunctions.createTaskbyActivityDate();
+		bc_loginApi();
+		String accountName= sfLeadPage.selectLeadById(returnmap.get("leadId"));
+		if(dataTable.getData("General_Data", "TC_ID").contains("Activity") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") && dataTable.getData("General_Data", "TC_ID").contains("Expand") ){
+			sfActivityPage.validateActivityExpandAll(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
+		}else if(dataTable.getData("General_Data", "TC_ID").contains("Activity") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") && dataTable.getData("General_Data", "TC_ID").contains("CreationDates") ){
+			sfActivityPage.validateActivityDetails(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"),accountName);
+		}else if(dataTable.getData("General_Data", "TC_ID").contains("Activity") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") ){
+			sfActivityPage.validateAccountActivity(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
+		}
+	}
+	
 	
 	public void bc_loginApi() throws InterruptedException{
 		sfBC_Login.bc_invokeApplication();

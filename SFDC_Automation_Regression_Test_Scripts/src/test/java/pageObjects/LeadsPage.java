@@ -619,7 +619,8 @@ public class LeadsPage extends ReusableLibrary {
 	@FindBy(xpath = "//*[@title = 'Create']")
 	WebElement create;
 	
-	
+	@FindBy(xpath = "//h1[contains(@class,'slds-page-header__title')]/span")
+	List<WebElement> accountNameSaved;
 	
 	
 	
@@ -663,6 +664,38 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.xclickRandomElement(contactList);
 		Utility_Functions.timeWait(2);
 	}
+	
+	public String selectLeadById(String Id) {
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xClick(driver, menu_Leads, true);
+		Utility_Functions.timeWait(1);
+		report.updateTestLog("Verify Create Activity Lead", "Lead are Displayed ", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
+		Utility_Functions.xClick(driver, recentlyViewed, true);
+		report.updateTestLog("Verify Create Activity Lead", "Recently viewed Lead are Displayed ", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, allLeadsMenu, 3);
+		Utility_Functions.xClick(driver, allLeadsMenu, true);
+		Utility_Functions.timeWait(7);
+		report.updateTestLog("Verify Create Activity Lead", "All Lead are displayed successfully:::", Status.PASS);
+		List<WebElement> contactList = driver
+				.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xclickRandomElement(contactList);
+		Utility_Functions.timeWait(2);
+		report.updateTestLog("Verify Create Activity Account ", "The Account is Displayed ", Status.PASS);
+		String url = driver.getCurrentUrl().split("#")[0];
+		String newUrl = url + "#/sObject/" + Id;
+		newUrl = newUrl + "/view";
+		report.updateTestLog("Verify Create Accounts View Hierarchy",
+				"Verifying the URL has been replaced with the new URL having the retrieved Account" + newUrl,
+				Status.PASS);
+		driver.get(newUrl);
+		Utility_Functions.timeWait(3);
+		//String accountName=accountNameSaved.getText();
+		String accountName=Utility_Functions.xGetTextVisibleListElement(driver, accountNameSaved);
+		System.out.println(accountName);
+		return accountName;
+	}
+	
 	public void convertLead() {
 		Utility_Functions.xWaitForElementPresent(driver, menu_Leads, 3);
 		Utility_Functions.xClick(driver, menu_Leads, true);

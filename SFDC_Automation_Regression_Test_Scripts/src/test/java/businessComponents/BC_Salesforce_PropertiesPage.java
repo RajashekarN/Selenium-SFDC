@@ -59,6 +59,10 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	 *
 	 */	
 
+	public void bc_bulkTagging(){
+		sfPropertiesPage.bulkTaggingFunctionality();
+		
+	}
 	public void bc_verifyCreationOfActivity(){
 		sfPropertiesPage.verifyCreationOfActivity();
 	}

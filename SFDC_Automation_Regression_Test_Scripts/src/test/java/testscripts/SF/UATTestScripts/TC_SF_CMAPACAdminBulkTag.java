@@ -22,10 +22,11 @@ import com.sforce.soap.partner.sobject.SObject;
 
 import supportLibraries.Utility_Functions;
 
-public class TC_SF_CMAPACAdminLeadTagging extends CRAFTTestCase{
+
+public class TC_SF_CMAPACAdminBulkTag extends CRAFTTestCase{
 
 	@Test(dataProvider = "UATTestScripts")
-	public void runTC_SF_CMAPACAdminLeadTagging(String testInstance, ExecutionMode executionMode, Platform platform
+	public void runTC_SF_CMAPACAdminBulkTag(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{

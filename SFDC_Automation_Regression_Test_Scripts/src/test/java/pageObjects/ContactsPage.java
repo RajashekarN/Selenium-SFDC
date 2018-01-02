@@ -463,6 +463,8 @@ public class ContactsPage extends ReusableLibrary {
 	@FindBy(xpath = "//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']")
 	WebElement ContactList;
 
+	@FindBy(xpath = "//h1[contains(@class,'slds-page-header__title')]/span")
+	List<WebElement> accountNameSaved;
 
 	SearchTextSOQL searchAccountName = new SearchTextSOQL(scriptHelper);
 	LoginPage loginPage = new LoginPage(scriptHelper);
@@ -491,6 +493,38 @@ public class ContactsPage extends ReusableLibrary {
 				.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
 		Utility_Functions.xclickRandomElement(contactList);
 		Utility_Functions.timeWait(2);
+	}
+	
+	public String selectContactById(String Id){
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xClick(driver, menu_Contacts, true);
+		Utility_Functions.timeWait(1);
+		report.updateTestLog("Verify Create Activity Contact", "Contacts are Displayed ", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
+		Utility_Functions.xClick(driver, recentlyViewed, true);
+		report.updateTestLog("Verify Create Activity Contact", "Recently viewed contacts are Displayed ", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, allContacts, 3);
+		Utility_Functions.xClick(driver, allContacts, true);
+		Utility_Functions.timeWait(5);
+		report.updateTestLog("Verify Create Activity Contact", "All contacts are displayed successfully:::", Status.PASS);
+		List<WebElement> contactList = driver
+				.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+		Utility_Functions.xclickRandomElement(contactList);
+		Utility_Functions.timeWait(2);
+		report.updateTestLog("Verify Create Activity Account ", "The Account is Displayed ", Status.PASS);
+		String url = driver.getCurrentUrl().split("#")[0];
+		String newUrl = url + "#/sObject/" + Id;
+		newUrl = newUrl + "/view";
+		report.updateTestLog("Verify Create Accounts View Hierarchy",
+				"Verifying the URL has been replaced with the new URL having the retrieved Account" + newUrl,
+				Status.PASS);
+		driver.get(newUrl);
+		Utility_Functions.timeWait(3);
+		//String accountName=accountNameSaved.getText();
+		String accountName=Utility_Functions.xGetTextVisibleListElement(driver, accountNameSaved);
+		System.out.println(accountName);
+		return accountName;
+		
 	}
 
 	/**
