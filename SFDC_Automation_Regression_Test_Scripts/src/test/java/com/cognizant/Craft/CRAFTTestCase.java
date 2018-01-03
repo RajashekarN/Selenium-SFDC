@@ -2,6 +2,8 @@ package com.cognizant.Craft;
 
 import com.cognizant.framework.FrameworkParameters;
 import com.cognizant.framework.selenium.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.openqa.selenium.Platform;
 import org.testng.Assert;
@@ -18,33 +20,26 @@ import org.testng.annotations.DataProvider;
  * @author Cognizant
  */
 public abstract class CRAFTTestCase {
-	/*public static int testStatus_Success;
-
-	public static int getTestStatus_Success() {
-		return testStatus_Success;
-	}
-
-	public static void setTestStatus_Success(int testStatus_Success) {
-		CRAFTTestCase.testStatus_Success = testStatus_Success;
-	}
-
-	public static int testStatus_Fail;
-	public static int getTestStatus_Fail() {
-		return testStatus_Fail;
-	}
-
-	public static void setTestStatus_Fail(int testStatus_Fail) {
-		CRAFTTestCase.testStatus_Fail = testStatus_Fail;
-	}
-
-	public static int testStatus_Skip;
-	public static int getTestStatus_Skip() {
-		return testStatus_Skip;
-	}
-
-	public static void setTestStatus_Skip(int testStatus_Skip) {
-		CRAFTTestCase.testStatus_Skip = testStatus_Skip;
-	}*/
+	/*
+	 * public static int testStatus_Success;
+	 * 
+	 * public static int getTestStatus_Success() { return testStatus_Success; }
+	 * 
+	 * public static void setTestStatus_Success(int testStatus_Success) {
+	 * CRAFTTestCase.testStatus_Success = testStatus_Success; }
+	 * 
+	 * public static int testStatus_Fail; public static int getTestStatus_Fail()
+	 * { return testStatus_Fail; }
+	 * 
+	 * public static void setTestStatus_Fail(int testStatus_Fail) {
+	 * CRAFTTestCase.testStatus_Fail = testStatus_Fail; }
+	 * 
+	 * public static int testStatus_Skip; public static int getTestStatus_Skip()
+	 * { return testStatus_Skip; }
+	 * 
+	 * public static void setTestStatus_Skip(int testStatus_Skip) {
+	 * CRAFTTestCase.testStatus_Skip = testStatus_Skip; }
+	 */
 
 	/**
 	 * The current scenario
@@ -55,8 +50,7 @@ public abstract class CRAFTTestCase {
 	 */
 	protected String currentTestcase;
 
-	private ResultSummaryManager resultSummaryManager = ResultSummaryManager
-			.getInstance();
+	private ResultSummaryManager resultSummaryManager = ResultSummaryManager.getInstance();
 
 	/**
 	 * Function to do the required framework setup activities before executing
@@ -68,8 +62,7 @@ public abstract class CRAFTTestCase {
 	@BeforeSuite
 	public void setUpTestSuite(ITestContext testContext) {
 		resultSummaryManager.setRelativePath();
-		resultSummaryManager.initializeTestBatch(testContext.getSuite()
-				.getName());
+		resultSummaryManager.initializeTestBatch(testContext.getSuite().getName());
 
 		int nThreads;
 		if ("false".equalsIgnoreCase(testContext.getSuite().getParallel())) {
@@ -94,40 +87,28 @@ public abstract class CRAFTTestCase {
 	 */
 	@BeforeMethod
 	public void setUpTestRunner() {
-		FrameworkParameters frameworkParameters = FrameworkParameters
-				.getInstance();
+		FrameworkParameters frameworkParameters = FrameworkParameters.getInstance();
 		if (frameworkParameters.getStopExecution()) {
 			tearDownTestSuite();
 
 			// Throwing TestNG SkipException within a configuration method
 			// causes all subsequent test methods to be skipped/aborted
-			throw new SkipException(
-					"Test execution terminated by user! All subsequent tests aborted...");
+			throw new SkipException("Test execution terminated by user! All subsequent tests aborted...");
 		} else {
-			currentScenario = this.getClass().getPackage().getName()
-					.substring(12);
+			currentScenario = this.getClass().getPackage().getName().substring(12);
 			currentTestcase = this.getClass().getSimpleName();
 		}
 	}
 
-	/*@AfterMethod
-	public void fetchMostRecentTestResult(ITestResult result) {
-	    int status = result.getStatus();
-	    switch (status) {
-	        case ITestResult.SUCCESS:
-	        	testStatus_Success++;
-	            break;
-	        case ITestResult.FAILURE:
-	        	testStatus_Fail++;
-	            break;
-	        case ITestResult.SKIP:
-	        	testStatus_Skip++;
-	            break;
-	        default:
-	            throw new RuntimeException("Invalid Status");
-	    }
-	}*/
-	
+	/*
+	 * @AfterMethod public void fetchMostRecentTestResult(ITestResult result) {
+	 * int status = result.getStatus(); switch (status) { case
+	 * ITestResult.SUCCESS: testStatus_Success++; break; case
+	 * ITestResult.FAILURE: testStatus_Fail++; break; case ITestResult.SKIP:
+	 * testStatus_Skip++; break; default: throw new
+	 * RuntimeException("Invalid Status"); } }
+	 */
+
 	/**
 	 * Function to do the required framework teardown activities after executing
 	 * each test case
@@ -138,16 +119,20 @@ public abstract class CRAFTTestCase {
 	 * @param driverScript
 	 *            The {@link DriverScript} object passed from the test case
 	 */
-	protected synchronized void tearDownTestRunner(
-			SeleniumTestParameters testParameters, DriverScript driverScript) {
+
+	public static List<String> failedTestCase = new ArrayList<String>();
+	public static String currentPacakage;
+
+	protected synchronized void tearDownTestRunner(SeleniumTestParameters testParameters, DriverScript driverScript) {
 		String testReportName = driverScript.getReportName();
 		String executionTime = driverScript.getExecutionTime();
 		String testStatus = driverScript.getTestStatus();
 
-		resultSummaryManager.updateResultSummary(testParameters,
-				testReportName, executionTime, testStatus);
+		resultSummaryManager.updateResultSummary(testParameters, testReportName, executionTime, testStatus);
 
 		if ("Failed".equalsIgnoreCase(testStatus)) {
+			currentPacakage = testParameters.getCurrentScenario();
+			failedTestCase.add("testscripts." + testParameters.getCurrentScenario() + "." + testParameters.getCurrentTestcase());
 			Assert.fail(driverScript.getFailureDescription());
 		}
 	}
@@ -157,16 +142,14 @@ public abstract class CRAFTTestCase {
 	 * the overall test suite
 	 */
 	@AfterSuite
-	public void tearDownTestSuite() {		
+	public void tearDownTestSuite() {
 		resultSummaryManager.wrapUp(true);
-		//resultSummaryManager.copyReportsFolder();
+		// resultSummaryManager.copyReportsFolder();
 	}
- 
 
 	@DataProvider(name = "GlobalTestConfigurations", parallel = true)
 	public Object[][] dataGlobal() {
-		return new Object[][] { { "Instance4", ExecutionMode.LOCAL,
-				MobileToolName.APPIUM, MobileExecutionPlatform.ANDROID, "4.4",
-				"N/A", Browser.FIREFOX, Platform.WINDOWS } };
+		return new Object[][] { { "Instance4", ExecutionMode.LOCAL, MobileToolName.APPIUM,
+				MobileExecutionPlatform.ANDROID, "4.4", "N/A", Browser.FIREFOX, Platform.WINDOWS } };
 	}
 }
