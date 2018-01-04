@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="SmokeTestScriptsSuite" parallel="methods" thread-count="2">
+<!-- 	 <listeners>
+	        <listener class-name="supportLibraries.AnnotationTransformer"/> 
+	 </listeners> -->
+	<test name="SmokeTests">
+		<classes>			
+				<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAMERBrokerNewAccountPageLayout"/>
+				<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAMERBrokerHomePageLinks"/>
+				<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAMERAdminRequiredFieldsOnSalesStage03_05"/>
+				<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAMERBrokerAssociateProperty"/>
+				<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAMERBrokerNewContactPageLayout"/>
+				<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAMERBrokerCloneEditLeadDetailPage"/>
+				<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAMERCSSHomePageLinks"/>
+				<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAMERManagerCreateGreenspaceLead"/>
+				<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAMERManagerHomePageLinks"/>
+				<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAMERBrokerRequiredFieldsOnSalesStage16_19"/>
+				<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAMERBrokerConvertLeadExistingAccount"/>
+				<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAMERBrokerAddNewPersonalInformation"/>
+				<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAMERBrokerCreateLead"/>
+				<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAMERCSSLogin"/>
+				<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAMERBrokerConvertLeadNewAccount"/>
+				<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAMERAdminValidateCustomerPropertyPage"/>
+				<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAMERBrokerRelatedListsLeadLandingPage"/>
+				<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAMERManagerLogin"/>
+				<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAMERAdminOpportunitySharing"/>
+				<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAMERAdminHomePageLinks"/>
+				<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAMERBrokerAccountsLandingPage"/>
+				<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAMERBrokerActivityLightningTimeline"/>
+				<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAMERBrokerAddPrivateNoteLead"/>
+				<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAMERAdminLogin"/>
+				<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAMERBrokerNewOpportunityPageLayout"/>
+				<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAMERAdminConvertLead"/>
+				<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAMERBrokerLogin"/>
+				<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAMERBrokerConvertLead"/>
+				<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAMERBrokerAccountLookUpNewContactPage"/>
+				<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAMERBrokerAddPrivateNote"/>							
+		</classes>
+	</test>	
+</suite>
+

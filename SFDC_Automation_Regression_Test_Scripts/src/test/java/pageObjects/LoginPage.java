@@ -49,7 +49,7 @@ public class LoginPage extends ReusableLibrary {
 	@FindBy(xpath = "//div[contains(@class,'profile')]//a[contains(text(),'Log') and contains(text(),'Out')]")
 	WebElement logOut;
 
-	@FindBy(xpath = "//a[@class='continue][text()='Continue']")
+	@FindBy(xpath = "//a[@class='continue'][text()='Continue']")
 	WebElement continueLink;
 
 	@FindBy(xpath = "//*[@id='userNavLabel']")
@@ -123,7 +123,7 @@ public class LoginPage extends ReusableLibrary {
 		report.updateTestLog("Invoke Application",
 				"Invoke the application under test @ " + properties.getProperty("Application" + environment + "Url"),
 				Status.PASS);
-		if (environment.equals("UAT")) {
+/*		if (environment.equals("UAT")) {
 			driver.get(properties.getProperty("ApplicationUATUrl"));
 		} else if (environment.equals("UAT2")) {
 			driver.get(properties.getProperty("ApplicationUAT2Url"));
@@ -131,7 +131,8 @@ public class LoginPage extends ReusableLibrary {
 			driver.get(properties.getProperty("ApplicationFTEUrl"));
 		} else if (environment.equals("FTE2")) {
 			driver.get(properties.getProperty("ApplicationFTE2Url"));
-		}
+		}*/
+		driver.get(properties.getProperty("ApplicationUrl"));
 		Utility_Functions.xWaitForElementPresent(driver, txt_userName, 10);
 	}
 
@@ -696,7 +697,14 @@ public class LoginPage extends ReusableLibrary {
 				Utility_Functions.xSendKeys(driver, txt_password, sCurrentPassword);
 				Utility_Functions.xWaitForElementPresent(driver, btn_LogIn, 3);
 				Utility_Functions.xClick(driver, btn_LogIn, true);
-				Utility_Functions.xWaitForElementPresent(driver, changePasswordHeader, 3);
+				try {
+					if (continueLink.isDisplayed()) {
+						Utility_Functions.xClick(driver, continueLink, true);
+						report.updateTestLog("Scheduled Maintenance Window", "Clicking on continue link from the scheduled maintenance window", Status.PASS);
+					}
+				} catch (Exception e) {
+					Utility_Functions.xWaitForElementPresent(driver, changePasswordHeader, 3);
+				}
 				Utility_Functions.xWaitForElementPresent(driver, currentPassword, 3);
 				Utility_Functions.xSendKeys(driver, currentPassword, sCurrentPassword);
 				Utility_Functions.xWaitForElementPresent(driver, newPassword, 3);

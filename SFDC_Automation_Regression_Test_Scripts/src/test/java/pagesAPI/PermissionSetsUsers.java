@@ -75,11 +75,11 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleProfileTimeZoneResult = setRoleProfileTimeZone(userName);
 				String role = roleProfileTimeZoneResult.split("-")[1];
 				String profile = roleProfileTimeZoneResult.split("-")[0];
-				String geographicalRole = roleProfileTimeZoneResult.split("-")[2];
-				String timeZone = roleProfileTimeZoneResult.split("-")[3];
+				//String geographicalRole = roleProfileTimeZoneResult.split("-")[2];
+				String timeZone = roleProfileTimeZoneResult.split("-")[2];
 				userId = createUsers.createUser(dataTable.getData("General_Data", "FirstName"),
 						dataTable.getData("General_Data", "LastName"), dataTable.getData("General_Data", "Alias"),
-						"vishnuvardhan.bommisetty" + "@cbre.com", userName, role, geographicalRole, profile, timeZone);
+						"vishnuvardhan.bommisetty" + "@cbre.com", userName, role, /*geographicalRole, */profile, timeZone);
 				if (userId == null) {
 					System.out.println("User has not been created");
 					report.updateTestLog("User Creation", "User has not been created as userId is:::" + userId,
@@ -114,11 +114,11 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				if (userResultId == null) {
 					String role = roleProfileTimeZoneResult.split("-")[0];
 					String profile = roleProfileTimeZoneResult.split("-")[1];
-					String geographicalRole = roleProfileTimeZoneResult.split("-")[2];
-					String timeZone = roleProfileTimeZoneResult.split("-")[3];
+					//String geographicalRole = roleProfileTimeZoneResult.split("-")[2];
+					String timeZone = roleProfileTimeZoneResult.split("-")[2];
 					userResultId = createUsers.createUser(dataTable.getData("General_Data", "FirstName"),
 							dataTable.getData("General_Data", "LastName"), dataTable.getData("General_Data", "Alias"),
-							"vishnuvardhan.bommisetty" + "@cbre.com", userName, role, profile, geographicalRole, timeZone);
+							"vishnuvardhan.bommisetty" + "@cbre.com", userName, role, profile, /*geographicalRole,*/ timeZone);
 					if(userResultId!=null) {
 						System.out.println("User has been created");
 						report.updateTestLog("User Creation", "User has been created successfully the system::" + userId + ":::" + userName, Status.PASS);	
@@ -690,14 +690,14 @@ public class PermissionSetsUsers extends ReusableLibrary {
 						+ ":::is having the permission set::: Lightning Experience,"
 						+ "APAC Communication Preferences Create/Edit Permissions, Enquiries & Space Assessment Create/Edit Permissions,"
 						+ "Preference & Publication Edit Permissions and Preference Edit & Marketing Lists Read Permissions");
+				permissionSetsLabels.add("Lightning Experience");
 				permissionSetsLabels.add("APAC Communication Preferences Create/Edit Permissions");
 				permissionSetsLabels.add("Enquiries & Space Assessment Create/Edit Permissions");
-				permissionSetsLabels.add("Lightning Experience");
 				permissionSetsLabels.add("Preference & Publication Edit Permissions");
 				permissionSetsLabels.add("Preference Edit & Marketing Lists Read Permissions");
 				break;
 
-			case "testuse92@cbre.com.crm.":
+			case "testuser92@cbre.com.crm.":
 				System.out.println("CM EMEA Manager CA User - :::" + userNameList.get(i)
 						+ ":::is having the permission sets::: Lightning Experience" + "and CM - Asia and CM - India");
 				permissionSetsLabels.add("Lightning Experience");
@@ -705,13 +705,13 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				permissionSetsLabels.add("CM - India");
 				break;
 
-			case "testuse93@cbre.com.crm.":
+			case "testuser93@cbre.com.crm.":
 				System.out.println("CM EMEA Manager CA User - :::" + userNameList.get(i)
 						+ ":::is having the permission sets::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
 
-			case "testuse94@cbre.com.crm.":
+			case "testuser94@cbre.com.crm.":
 				System.out.println("CM EMEA Manager CA User - :::" + userNameList.get(i)
 						+ ":::is having the permission sets::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
@@ -1570,7 +1570,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				break;
 			}
 			establishConnection.establishConnection();
-			roleProfileTimeZone = getRoleId(roleIDLabels.get(i)) + "-" + getProfileId(profileIDLabels.get(i)) + "-" + geographicalRole.get(i) 
+			roleProfileTimeZone = getRoleId(roleIDLabels.get(i)) + "-" + getProfileId(profileIDLabels.get(i)) /*+ "-" + geographicalRole.get(i)*/ 
 					+ "-" + timeZone.get(i);
 			profileIDLabels.clear();
 			roleIDLabels.clear();
