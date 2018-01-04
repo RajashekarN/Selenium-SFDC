@@ -1498,9 +1498,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, allOpportunities, true);
 		Utility_Functions.timeWait(7);
 		report.updateTestLog("Verify Create Activity Opportunity", "All Opportunity are displayed successfully:::", Status.PASS);
-		List<WebElement> contactList = driver
-				.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-		Utility_Functions.xclickRandomElement(contactList);
+		List<WebElement> oppList = driver
+				.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'006')]"));
+		Utility_Functions.xclickRandomElement(oppList);
 		Utility_Functions.timeWait(2);
 	}
 

@@ -124,6 +124,9 @@ public class BC_API_Test extends ReusableLibrary {
 		}
 	}
 	
+	public void bc_createOppActivity(){
+		taskEventsFunctions.createTaskbyActivityDate();
+	}
 	public void bc_createAccountActivityAPI() throws InterruptedException{
 		HashMap<String,String> returnmap=taskEventsFunctions.createTaskbyActivityDate();
 		bc_loginApi();

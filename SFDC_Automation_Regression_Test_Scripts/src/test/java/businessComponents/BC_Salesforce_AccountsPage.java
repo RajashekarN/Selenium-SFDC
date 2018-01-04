@@ -68,6 +68,10 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 		sfAccountsPage.accountToOpportunity();
 	}
 	
+	public void bc_createOpportunity(){
+		sfAccountsPage.createnewOpportunity();
+	}
+	
 	/*public void bc_validateActivityDetails(){
 		sfActivityPage.validateActivityDetails();
 	}

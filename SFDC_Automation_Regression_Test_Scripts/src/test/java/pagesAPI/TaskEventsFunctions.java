@@ -677,18 +677,21 @@ public class TaskEventsFunctions extends ReusableLibrary {
 		//task.setField("Subject", value + "Test Automation "+"Present");
 		task.setField("Type", "Private - Initial Meeting");
 		if(i==0) {
-			task.setField("ActivityDate", calendar.getTime());
+			Calendar calendar1 = Calendar.getInstance();
+			task.setField("ActivityDate", calendar1.getTime());
 			taskName=value + "Test Automation "+"Present";
 			task.setField("Subject", taskName);
 		} else if (i==1) {
-			calendar.add(Calendar.DATE,-1);
-			task.setField("ActivityDate", calendar.getTime());
+			Calendar calendar2 = Calendar.getInstance();
+			calendar2.add(Calendar.DATE,-1);
+			task.setField("ActivityDate", calendar2.getTime());
 			taskName=value + "Test Automation "+"Past";
 			task.setField("Subject", taskName);
 			//task.setField("Subject", value + "Test Automation "+"Past");
 		} else {
-			calendar.add(Calendar.DATE,2);
-			task.setField("ActivityDate", calendar.getTime());
+			Calendar calendar3 = Calendar.getInstance();
+			calendar3.add(Calendar.DATE,1);
+			task.setField("ActivityDate", calendar3.getTime());
 			taskName=value + "Test Automation "+"Future";
 			task.setField("Subject", taskName);
 			//task.setField("Subject", value + "Test Automation "+"Future");
@@ -838,24 +841,27 @@ public class TaskEventsFunctions extends ReusableLibrary {
 			event.setField("Type", "Private - Initial Meeting");
 			event.setField("DurationInMinutes", 10);
 			if(i==0) {
-				System.out.println("Date : "+Calendar.getInstance());
-				event.setField("ActivityDate", Calendar.getInstance());
-				event.setField("ActivityDateTime", Calendar.getInstance());
+				Calendar calendar1 = Calendar.getInstance();
+				System.out.println("Date : "+calendar1.getInstance());
+				event.setField("ActivityDate", calendar1.getInstance());
+				event.setField("ActivityDateTime", calendar1.getInstance());
 				taskName=value + "Event Automation "+"Present";
 				event.setField("Subject", taskName);
 			} else if (i==1) {
-				calendar.add(Calendar.DATE,-1);
-				System.out.println("Date : "+calendar.getTime());
-				event.setField("ActivityDate", calendar.getTime());
-				event.setField("ActivityDateTime", calendar.getTime());
+				Calendar calendar2 = Calendar.getInstance();
+				calendar2.add(Calendar.DATE,-1);
+				System.out.println("Date : "+calendar2.getTime());
+				event.setField("ActivityDate", calendar2.getTime());
+				event.setField("ActivityDateTime", calendar2.getTime());
 				taskName=value + "Event Automation "+"Past";
 				event.setField("Subject", taskName);
 				//task.setField("Subject", value + "Test Automation "+"Past");
 			} else {
-				calendar.add(Calendar.DATE,2);
-				System.out.println("Date : "+calendar.getTime());
-				event.setField("ActivityDate", calendar.getTime());
-				event.setField("ActivityDateTime", calendar.getTime());
+				Calendar calendar3 = Calendar.getInstance();
+				calendar3.add(Calendar.DATE,1);
+				System.out.println("Date : "+calendar3.getTime());
+				event.setField("ActivityDate", calendar3.getTime());
+				event.setField("ActivityDateTime", calendar3.getTime());
 				taskName=value + "Event Automation "+"Future";
 				event.setField("Subject", taskName);
 				//event.setField("Subject", value + "Test Automation "+"Future");

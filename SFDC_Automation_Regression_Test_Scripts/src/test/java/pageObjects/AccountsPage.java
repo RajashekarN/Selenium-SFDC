@@ -114,8 +114,13 @@ public class AccountsPage extends ReusableLibrary {
 	WebElement viewAllFieldsButton;
 
 	@FindBy(css = "div.region-main a.tabHeader[title='Related']")
-	WebElement related_Accounts;
+	WebElement accounts_Related;
+	
+	@FindBy(css = "div.region-main a.tabHeader[title='Related']")
+	List<WebElement> related_Accounts;
 
+	@FindBy(xpath = "//span[contains(text(),'Opportunities & Comps')]")
+	WebElement account_Opp;
 	@FindBy(xpath = "//span[contains(text(),'Private Notes')]/ancestor::article//div[text()='New']")
 	WebElement new_PrivateNotes;
 
@@ -1053,7 +1058,7 @@ public class AccountsPage extends ReusableLibrary {
 				.findElements(By.cssSelector("div.listViewContent table.forceRecordLayout a.outputLookupLink"));
 		String accountSelected = Utility_Functions.xclickgetTextofFirstElementfromList(accountList);
 		Utility_Functions.xWaitForElementPresent(driver, related_Accounts, 3);
-		Utility_Functions.xClick(driver, related_Accounts, true);
+		Utility_Functions.xClickVisibleListElement(driver, related_Accounts);
 
 		try {
 			Utility_Functions.xScrollWindow(driver);
@@ -1340,7 +1345,7 @@ public class AccountsPage extends ReusableLibrary {
 		List<WebElement> accountNamesList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'001')]"));
 		Utility_Functions.xclickRandomElement(accountNamesList);
 		Utility_Functions.timeWait(3);
-		Utility_Functions.xClick(driver, related_Accounts, true);
+		Utility_Functions.xClickVisibleListElement(driver, related_Accounts);
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xScrollWindow(driver);
 		Utility_Functions.timeWait(1);
@@ -1486,7 +1491,7 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xclickOnFirstElementfromList(accountNamesList);
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xWaitForElementPresent(driver, related_Accounts, 3);
-		Utility_Functions.xClick(driver, related_Accounts, true);
+		Utility_Functions.xClickVisibleListElement(driver, related_Accounts);
 		List<WebElement> relatedPageList = driver.findElements(By.xpath("//*[@id='header']/a/span[1]"));
 		try {
 			for (WebElement element : relatedPageList) {
@@ -1721,7 +1726,7 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xclickOnFirstElementfromList(accountNamesList);
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify New Activity Page Layout ", "The Account is Displayed ", Status.PASS);
-		Utility_Functions.xClick(driver, related_Accounts, true);
+		Utility_Functions.xClickVisibleListElement(driver, related_Accounts);
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify New Activity Page Layout ", "The related page is Displayed ", Status.PASS);
 		Utility_Functions.xScrollWindow(driver);
@@ -2252,8 +2257,8 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		driver.switchTo().defaultContent();
 		driver.navigate().refresh();
-		Utility_Functions.xWaitForElementPresent(driver, related_Accounts, 3);
-		if (related_Accounts.isDisplayed()) {
+		Utility_Functions.xWaitForElementPresent(driver, accounts_Related, 3);
+		if (accounts_Related.isDisplayed()) {
 			report.updateTestLog("Verify Area of Operations", "Account creation is successful:::", Status.PASS);
 		} else {
 			report.updateTestLog("Verify Area of Operations", "Account creation failed::", Status.FAIL);
@@ -2944,7 +2949,7 @@ public class AccountsPage extends ReusableLibrary {
 			System.out.println(e.getMessage());
 		}
 
-		Utility_Functions.xClick(driver, related_Accounts, true);
+		Utility_Functions.xClickVisibleListElement(driver, related_Accounts);
 		Utility_Functions.timeWait(5);
 		List<WebElement> accountRelatedPageHeadersList = driver.findElements(By.xpath("//h2[@id='header']/a/span[1]"));
 		int count3 = 0, i3 = 0, j = 0;
@@ -2997,7 +3002,7 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xclickRandomElement(accountNamesList);
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify Account Details Page ", "The Account is Displayed ", Status.PASS);
-		Utility_Functions.xClick(driver, related_Accounts, true);
+		Utility_Functions.xClickVisibleListElement(driver, related_Accounts);
 		Utility_Functions.timeWait(5);
 		List<WebElement> accountRelatedPageHeadersList = driver.findElements(By.xpath("//h2[@id='header']/a/span[1]"));
 		int count3 = 0, i3 = 0, j = 0;
@@ -4235,7 +4240,7 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify SPOC from Account ", "The Account is Displayed ", Status.PASS);
 		Utility_Functions.xWaitForElementPresent(driver, related_Accounts, 3);
-		Utility_Functions.xClick(driver, related_Accounts, true);
+		Utility_Functions.xClickVisibleListElement(driver, related_Accounts);
 		report.updateTestLog("Verify SPOC from Account", "The related page is Displayed ", Status.PASS);
 		Utility_Functions.xScrollWindow(driver);
 		Utility_Functions.timeWait(1);
@@ -4307,8 +4312,8 @@ public class AccountsPage extends ReusableLibrary {
 				Utility_Functions.xWaitForElementPresent(driver, saveQuickCreate, 3);
 				Utility_Functions.xClick(driver, saveQuickCreate, true);
 				Utility_Functions.timeWait(3);
-				if (related_Accounts.isDisplayed()) {
-					Utility_Functions.xClick(driver, related_Accounts, true);
+				if (accounts_Related.isDisplayed()) {
+					Utility_Functions.xClick(driver, accounts_Related, true);
 					report.updateTestLog("Verify SPOC from Account", "SPOC is saved successfully with all the fields",
 							Status.PASS);
 				} else {
@@ -4467,7 +4472,7 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify SPOC Page Layout ", "The Account is Displayed ", Status.PASS);
 		Utility_Functions.xWaitForElementPresent(driver, related_Accounts, 3);
-		Utility_Functions.xClick(driver, related_Accounts, true);
+		Utility_Functions.xClickVisibleListElement(driver, related_Accounts);
 		report.updateTestLog("Verify SPOC Page Layout", "The related page is Displayed ", Status.PASS);
 		Utility_Functions.xScrollWindow(driver);
 		Utility_Functions.timeWait(1);
@@ -4791,8 +4796,8 @@ public class AccountsPage extends ReusableLibrary {
 			Utility_Functions.xWaitForElementPresent(driver, saveQuickCreate, 3);
 			Utility_Functions.xClick(driver, saveQuickCreate, true);
 			Utility_Functions.timeWait(3);
-			if (related_Accounts.isDisplayed()) {
-				Utility_Functions.xClick(driver, related_Accounts, true);
+			if (accounts_Related.isDisplayed()) {
+				Utility_Functions.xClick(driver, accounts_Related, true);
 				report.updateTestLog("Verify SPOC Page Layout", "SPOC is saved successfully with all the fields",
 						Status.PASS);
 			} else {
@@ -4840,7 +4845,11 @@ public class AccountsPage extends ReusableLibrary {
 	 */
 
 	public void accountToOpportunity(){
-		Utility_Functions.xClick(driver, related_Accounts, true);
+		if(related_Accounts.size()>0){
+		Utility_Functions.xClickVisibleListElement(driver, related_Accounts);
+		}else{
+		Utility_Functions.xClick(driver, account_Opp, true);
+		}
 		//Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xScrollWindowOnce(driver);
@@ -4863,14 +4872,32 @@ public class AccountsPage extends ReusableLibrary {
 	
 	public void createnewOpportunity(){
 		if ((dataTable.getData("General_Data", "TC_ID").contains("DAASIA")) && (dataTable.getData("General_Data", "TC_ID").contains("Data"))) {
-			Utility_Functions.timeWait(6);
+			if(related_Accounts.size()>0){
+				Utility_Functions.xClickVisibleListElement(driver, related_Accounts);
+				}else{
+				Utility_Functions.xClick(driver, account_Opp, true);
+				}
+				//Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
+				Utility_Functions.timeWait(3);
+				Utility_Functions.xScrollWindowOnce(driver);
+				Utility_Functions.xScrollWindowToElement(driver, newOpportunity);
+				//Utility_Functions.xSwitchtoFrame(driver, newOpportunity);
+				Utility_Functions.xClickHiddenElement(driver, newOpportunity);
+				driver.switchTo().defaultContent();
+				Utility_Functions.timeWait(3);
+				Utility_Functions.xSwitchtoFrame(driver, continueButton);
+				Utility_Functions.xClick(driver, continueButton, true);
+				driver.switchTo().defaultContent();
+				Utility_Functions.timeWait(3);
+				Utility_Functions.xSwitchtoFrame(driver, searchProp);
+				Utility_Functions.timeWait(2);
 			//Utility_Functions.xWaitForElementPresent(driver, oppAssignmentType, 4);
-			Select selectAssign = new Select(oppAssignmentType);
+			//Select selectAssign = new Select(oppAssignmentType);
 			//Utility_Functions.xClickHiddenElement(driver, oppAssignmentType);
 			//Utility_Functions.xClick(driver, oppAssignmentType, true);
 			//Utility_Functions.xWaitForElementPresent(driver, assignTypeValue, 4);
 			//Utility_Functions.xClick(driver, assignTypeValue, true);
-			selectAssign.selectByVisibleText("Consulting");
+			//selectAssign.selectByVisibleText("Consulting");
 			Utility_Functions.xWaitForElementPresent(driver, oppCloseDate, 4);
 			Calendar calendar = Calendar.getInstance();
 
@@ -4887,7 +4914,7 @@ public class AccountsPage extends ReusableLibrary {
 			}
 			Utility_Functions.xSendKeys(driver, oppCloseDate, dateFormat.format(newDate).toString());
 			Utility_Functions.xClick(driver, oppSave,true);
-			Utility_Functions.timeWait(6);
+			//Utility_Functions.timeWait(6);
 			
 			
 		}else{
@@ -5479,7 +5506,7 @@ public class AccountsPage extends ReusableLibrary {
         		Utility_Functions.xWaitForElementPresent(driver, AccountList, 3);
         		Utility_Functions.xClick(driver, AccountList, true);
         		Utility_Functions.xWaitForElementPresent(driver, related_Accounts, 3);	
-        		Utility_Functions.xClick(driver, related_Accounts, true);
+        		Utility_Functions.xClickVisibleListElement(driver, related_Accounts);
         		Utility_Functions.timeWait(2);
         	
             	

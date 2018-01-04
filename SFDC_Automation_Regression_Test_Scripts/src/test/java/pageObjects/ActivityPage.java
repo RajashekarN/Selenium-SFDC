@@ -438,9 +438,10 @@ public class ActivityPage extends ReusableLibrary {
 		Utility_Functions.xClickVisibleListElement(driver, btnMoreActivity);
 		Utility_Functions.timeWait(3);
 		}
-		System.out.println(driver.findElement(By.xpath("//div[@class='timeline-container slds-m-top--medium']/ul/li/descendant::span[text()='"+activityPast+"']/following::span[1]/p[text()='Yesterday']")).isDisplayed());
+		
 		System.out.println(driver.findElement(By.xpath("//div[@class='timeline-container slds-m-top--medium']/ul/li/descendant::span[text()='"+activityPresent+"']/following::span[1]/p[text()='Today']")).isDisplayed());
 		System.out.println(driver.findElement(By.xpath("//div[@class='timeline-container slds-m-top--medium']/ul/li/descendant::span[text()='"+activityFuture+"']/following::span[1]/p[text()='Tomorrow']")).isDisplayed());
+		System.out.println(driver.findElement(By.xpath("//div[@class='timeline-container slds-m-top--medium']/ul/li/descendant::span[text()='"+activityPast+"']/following::span[1]/p[text()='Yesterday']")).isDisplayed());
 		if(driver.findElement(By.xpath("//div[@class='timeline-container slds-m-top--medium']/ul/li/descendant::span[text()='"+activityPast+"']/following::span[1]/p[text()='Yesterday']")).isDisplayed() && driver.findElement(By.xpath("//div[@class='timeline-container slds-m-top--medium']/ul/li/descendant::span[text()='"+activityPresent+"']/following::span[1]/p[text()='Today']")).isDisplayed() && driver.findElement(By.xpath("//div[@class='timeline-container slds-m-top--medium']/ul/li/descendant::span[text()='"+activityFuture+"']/following::span[1]/p[text()='Tomorrow']")).isDisplayed() ){
 			report.updateTestLog("Verify created Activity", "Verifying whether the created Activity page is displaying ", Status.PASS);
 		}else{
@@ -535,9 +536,10 @@ public class ActivityPage extends ReusableLibrary {
 			Utility_Functions.xClickVisibleListElement(driver, btnMoreActivity);
 			Utility_Functions.timeWait(3);
 			}
-		System.out.println(driver.findElement(By.xpath("//div[@class='slds-media slds-tile slds-media--small']/descendant::span[text()='"+eventPast+"']/ancestor::div[1]/following-sibling::div[text()='Yesterday']")).isDisplayed());
+		
 		System.out.println(driver.findElement(By.xpath("//div[@class='slds-media slds-tile slds-media--small']/descendant::span[text()='"+eventPresent+"']/ancestor::div[1]/following-sibling::div[text()='Today']")).isDisplayed());
 		System.out.println(driver.findElement(By.xpath("//div[@class='slds-media slds-tile slds-media--small']/descendant::span[text()='"+eventFuture+"']/ancestor::div[1]/following-sibling::div[text()='Tomorrow']")).isDisplayed());
+		System.out.println(driver.findElement(By.xpath("//div[@class='slds-media slds-tile slds-media--small']/descendant::span[text()='"+eventPast+"']/ancestor::div[1]/following-sibling::div[text()='Yesterday']")).isDisplayed());
 		if(driver.findElement(By.xpath("//div[@class='slds-media slds-tile slds-media--small']/descendant::span[text()='"+eventPast+"']/ancestor::div[1]/following-sibling::div[text()='Yesterday']")).isDisplayed() && driver.findElement(By.xpath("//div[@class='slds-media slds-tile slds-media--small']/descendant::span[text()='"+eventPresent+"']/ancestor::div[1]/following-sibling::div[text()='Today']")).isDisplayed() && driver.findElement(By.xpath("//div[@class='slds-media slds-tile slds-media--small']/descendant::span[text()='"+eventFuture+"']/ancestor::div[1]/following-sibling::div[text()='Tomorrow']")).isDisplayed() ){
 			report.updateTestLog("Verify created Activity", "Verifying whether the created Activity page is displaying ", Status.PASS);
 		}else{
