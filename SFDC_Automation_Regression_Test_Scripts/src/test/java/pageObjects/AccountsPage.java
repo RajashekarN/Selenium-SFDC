@@ -22,9 +22,7 @@ import com.cognizant.framework.Status;
 
 import pagesAPI.AccountsFunctions;
 import pagesAPI.SearchTextSOQL;
-import pagesAPI.TaskEventsFunctions;
 import supportLibraries.Utility_Functions;
-import pagesAPI.TaskEventsFunctions;
 
 public class AccountsPage extends ReusableLibrary {
 	/*
