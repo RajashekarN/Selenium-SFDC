@@ -8,7 +8,9 @@ import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
 import com.sforce.soap.partner.DeleteResult;
 import com.sforce.soap.partner.DescribeLayout;
+import com.sforce.soap.partner.DescribeLayoutItem;
 import com.sforce.soap.partner.DescribeLayoutResult;
+import com.sforce.soap.partner.DescribeLayoutRow;
 import com.sforce.soap.partner.DescribeLayoutSection;
 import com.sforce.soap.partner.LeadConvert;
 import com.sforce.soap.partner.LeadConvertResult;
@@ -218,7 +220,43 @@ public class LeadsFunctions extends ReusableLibrary {
 		CMAPACHeader.add("System Information");
 		System.out.println("CMAPAC Headers List are::" + CMAPACHeader);
 	}
+	
+	static ArrayList<String> CMAPACField = new ArrayList<String>();
 
+	public void CMAPACFields() {
+		CMAPACField.add("Name");
+		CMAPACField.add("LeadSource");
+		CMAPACField.add("Company");
+		CMAPACField.add("Status");
+		CMAPACField.add("Email");
+		CMAPACField.add("Rating");
+		CMAPACField.add("Phone");
+		CMAPACField.add("Influence_Level__c");
+		CMAPACField.add("MobilePhone");
+		CMAPACField.add("Requirement_Details__c");
+		CMAPACField.add("Title");
+		CMAPACField.add("Status_Comments__c");
+		CMAPACField.add("Address");
+		CMAPACField.add("Department__c");
+		CMAPACField.add("Reports_To__c");
+		CMAPACField.add("Nickname__c");
+		CMAPACField.add("Assistant__c");
+		CMAPACField.add("Website");
+		CMAPACField.add("Assistant_Phone__c");
+		CMAPACField.add("Assistant_Email__c");
+		CMAPACField.add("APAC_Preferred_Comm_Method__c");
+		CMAPACField.add("APAC_Exclude_Reason__c");
+		CMAPACField.add("Email_Options__c");
+		CMAPACField.add("APAC_Excluded_On__c");
+		CMAPACField.add("Mail_Options__c");
+		CMAPACField.add("APAC_Excluded_By__c");
+		CMAPACField.add("Call_Options__c");
+		CMAPACField.add("RecordTypeId");
+		CMAPACField.add("OwnerId");
+		CMAPACField.add("Lead_Owner_User_Market__c");
+
+	}
+	
 	public void createLeadSpecificUser() {
 		establishConnection.establishConnection();
 		SObject lead = new SObject();
@@ -247,17 +285,19 @@ public class LeadsFunctions extends ReusableLibrary {
 			report.updateTestLog("Verify Create Lead", "Lead creation failed", Status.FAIL);
 		}
 	}
+	static ArrayList<String> CMAPACFieldLabelsAPI = new ArrayList<String>();
 
 	public void leadPageFieldsValidation() {
 		establishConnection.establishConnection();
 		CMAPACHeadings();
+		CMAPACFields();
 		DescribeLayoutResult dlr = null;
 		try {
 			dlr = EstablishConnection.connection.describeLayout("Lead", null, null);
 		} catch (ConnectionException e) {
 			e.printStackTrace();
 		}
-		int count = 0;
+		int count=0, countLabelList = 0;
 		for (int i = 0; i < dlr.getLayouts().length; i++) {
 			DescribeLayout layout = dlr.getLayouts()[i];
 			DescribeLayoutSection[] editLayoutSectionList = layout.getEditLayoutSections();
@@ -278,6 +318,40 @@ public class LeadsFunctions extends ReusableLibrary {
 				}
 			}
 			System.out.println(count);
+			if(dataTable.getData("General_Data", "TC_ID").contains("CMAPAC")) {
+				if(editLayoutSectionList.length==5) {
+					for (int k = 0; k < editLayoutSectionList.length; k++) {
+						DescribeLayoutSection els = editLayoutSectionList[k];
+						DescribeLayoutRow[] dlrList = els.getLayoutRows();
+						for (int m = 0; m < dlrList.length; m++) {
+							DescribeLayoutRow lr = dlrList[m];
+							DescribeLayoutItem[] dliList = lr.getLayoutItems();
+							for (int n = 0; n < dliList.length; n++) {
+								DescribeLayoutItem li = dliList[n];
+								if ((li.getLayoutComponents() != null) && (li.getLayoutComponents().length > 0)) {
+									try {
+										String value = li.getLayoutComponents()[0].getValue();
+										if(value!=null) {
+											CMAPACFieldLabelsAPI.add(value);
+										}
+									} catch (Exception e) {
+										e.printStackTrace();
+									}
+								}
+							}
+						}
+					}	
+					System.out.println("CMAPAC Field Label::: " + CMAPACFieldLabelsAPI);
+					for(int i1=0; i1 < CMAPACField.size(); i1++) {
+						if(CMAPACFieldLabelsAPI.get(i1).equals(CMAPACField.get(i1))) {						
+							System.out.println("Field Label:::" + CMAPACFieldLabelsAPI.get(i1) + " -- is present in CM APAC:::");
+							report.updateTestLog("Verify Field Labels", " has the field label:::" + CMAPACFieldLabelsAPI.get(i1), Status.PASS);
+							countLabelList++;
+						}			 
+					}
+					System.out.println("Count of fields present in Capital Brokerage EMEA::" + countLabelList);
+				}
+			}	
 		}
 		if (dataTable.getData("General_Data", "TC_ID").contains("CMAPAC")) {
 			if (count == 5) {
@@ -286,7 +360,13 @@ public class LeadsFunctions extends ReusableLibrary {
 				report.updateTestLog("Validating Header Sections", "Capital Markets APAC - All the headers are present",
 						Status.PASS);
 			}
-		}
+		} 
+		CMAPACField.clear();
+		CMAPACFieldLabelsAPI.clear();
+		if (countLabelList == 30) {
+			report.updateTestLog("Count of fields present in Capital Markets APAC Manager", "All the fields are present in Capital Markets APAC Manager", Status.PASS);
+		} 
+		
 	}
 
 	/**
@@ -323,5 +403,73 @@ public class LeadsFunctions extends ReusableLibrary {
 			report.updateTestLog("Verify Create Lead", "Lead Conversion failed", Status.FAIL);
 		}
 	}
+	
+	public void leadsFieldsValidations() {
+	try {
+		establishConnection.establishConnection();
+		DescribeLayoutResult dlr = EstablishConnection.connection.describeLayout("Lead", null, null);
+		for (int i = 0; i < dlr.getLayouts().length; i++) {
+			DescribeLayout layout = dlr.getLayouts()[i];
+			DescribeLayoutSection[] detailLayoutSectionList = layout.getDetailLayoutSections();
+			System.out.println(" There are " + detailLayoutSectionList.length + " detail layout sections");
+			report.updateTestLog("Verify Accounts Page Field Validation",
+					"There are " + detailLayoutSectionList.length + " detail layout sections", Status.PASS);
+			DescribeLayoutSection[] editLayoutSectionList = layout.getEditLayoutSections();
+			System.out.println(" There are " + editLayoutSectionList.length + " edit layout sections");
+			report.updateTestLog("Verify Accounts Page Field Validation",
+					" There are " + editLayoutSectionList.length + " edit layout sections", Status.PASS);
+			for (int j = 0; j < detailLayoutSectionList.length; j++) {
+				System.out.println(j + " This detail layout section has a heading of "
+						+ detailLayoutSectionList[j].getHeading());
+				report.updateTestLog("Verify Accounts Page Field Validation", j
+						+ " This detail layout section has a heading of " + detailLayoutSectionList[j].getHeading(),
+						Status.PASS);
+			}
+			// Write the headings of the edit layout sections
+			for (int x = 0; x < editLayoutSectionList.length; x++) {
+				System.out.println(
+						x + " This edit layout section has a heading of " + editLayoutSectionList[x].getHeading());
+				report.updateTestLog("Verify Accounts Page Field Validation",
+						x + " This edit layout section has a heading of " + editLayoutSectionList[x].getHeading(),
+						Status.PASS);
+			}
+			// For each edit layout section, get its details.
+			for (int k = 0; k < editLayoutSectionList.length; k++) {
+				DescribeLayoutSection els = editLayoutSectionList[k];
+				System.out.println("Edit layout section heading: " + els.getHeading());
+				report.updateTestLog("Verify Accounts Page Field Validation",
+						"Edit layout section heading: " + els.getHeading(), Status.PASS);
+				DescribeLayoutRow[] dlrList = els.getLayoutRows();
+				System.out.println("This edit layout section has " + dlrList.length + " layout rows");
+				report.updateTestLog("Verify Accounts Page Field Validation",
+						"This edit layout section has " + dlrList.length + " layout rows", Status.PASS);
+				for (int m = 0; m < dlrList.length; m++) {
+					DescribeLayoutRow lr = dlrList[m];
+					System.out.println(" This row has " + lr.getNumItems() + " layout items");
+					report.updateTestLog("Verify Accounts Page Field Validation",
+							" This row has " + lr.getNumItems() + " layout items", Status.PASS);
+					DescribeLayoutItem[] dliList = lr.getLayoutItems();
+					for (int n = 0; n < dliList.length; n++) {
+						DescribeLayoutItem li = dliList[n];
+						if ((li.getLayoutComponents() != null) && (li.getLayoutComponents().length > 0)) {
+							System.out.println("\tLayout item " + n + ", layout component: "
+									+ li.getLayoutComponents()[0].getValue());
+							report.updateTestLog(
+									"Verify Accounts Page Field Validation", "\tLayout item " + n
+											+ ", layout component: " + li.getLayoutComponents()[0].getValue(),
+									Status.PASS);
+						} else {
+							System.out.println("\tLayout item " + n + ", no layout component");
+							report.updateTestLog("Verify Accounts Page Field Validation",
+									"\tLayout item " + n + ", no layout component", Status.PASS);
+						}
+					}
+				}
+			}
+		}
+	} catch (Exception e) {
+		System.out.println(e.getMessage());
+	}
+}
 
 }

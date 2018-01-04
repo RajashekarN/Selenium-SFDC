@@ -82,7 +82,9 @@ public class Tagging extends ReusableLibrary {
 		
 		if(dataTable.getData("General_Data", "TC_ID").contains("Account"))  {
 			privateTag.setType("Private_Tag_with_Account__c");
-			accountName = searchTextSOQL.fetchRecord("Account", "Id");
+			AccountsFunctions accountsFunctions = new AccountsFunctions(scriptHelper);
+			accountName = accountsFunctions.createAccountRequiredFields();
+			//accountName = searchTextSOQL.fetchRecord("Account", "Id");
 			privateTag.setField("AccountRelatedTo__c", accountName);
 		} else if(dataTable.getData("General_Data", "TC_ID").contains("Opportunity")) {
 			opportunityName = searchTextSOQL.fetchRecord("Opportunity", "Id");
@@ -90,7 +92,9 @@ public class Tagging extends ReusableLibrary {
 			privateTag.setField("OpportunityRelatedTo__c", opportunityName);
 		} else if(dataTable.getData("General_Data", "TC_ID").contains("Contact")) {
 			privateTag.setType("Private_Tag_with_Contact__c");
-			contactName = searchTextSOQL.fetchRecord("Contact", "Id");
+			ContactsFunctions contactsFunctions = new ContactsFunctions(scriptHelper);
+			contactName = contactsFunctions.createContactRequiredFields();
+			//contactName = searchTextSOQL.fetchRecord("Contact", "Id");
 			privateTag.setField("ContactRelatedTo__c", contactName);
 		} else if (dataTable.getData("General_Data", "TC_ID").contains("Lead")) {
 			privateTag.setType("Private_Tag_with_Lead__c");
