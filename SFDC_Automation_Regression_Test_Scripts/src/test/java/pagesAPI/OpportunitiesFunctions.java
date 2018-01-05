@@ -58,32 +58,48 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 		String accountId = accountsFunctions.createAccountRequiredFields();		
 		opportunity.setField("AccountId", accountId);
 		opportunity.setField("CloseDate",Calendar.getInstance());
+		String sTestCaseID = dataTable.getData("General_Data", "TC_ID");
+		System.out.println(sTestCaseID);
 		if(dataTable.getData("General_Data", "TC_ID").contains("APAC")) /*&& (!dataTable.getData("General_Data", "TC_ID").startsWith("VAS")) && 
 		(!dataTable.getData("General_Data", "TC_ID").startsWith("GWS")) && (!dataTable.getData("General_Data", "TC_ID").startsWith("OB"))  &&
 		(!dataTable.getData("General_Data", "TC_ID").startsWith("AB")))*/ {
 			opportunity.setField("RecordTypeId", "012i0000001QOXfAAO");
-		} else if(dataTable.getData("General_Data", "TC_ID").contains("EMEA")) /*&& (!dataTable.getData("General_Data", "TC_ID").startsWith("VAS")) && 
+		} else if((!dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_FRAN")) 
+				&& (!dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_FDIG")) && (!dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_FDIR"))
+				&& (dataTable.getData("General_Data", "TC_ID").contains("EMEA"))) /*&& (!dataTable.getData("General_Data", "TC_ID").startsWith("VAS")) && 
 				(!dataTable.getData("General_Data", "TC_ID").startsWith("GWS")) && (!dataTable.getData("General_Data", "TC_ID").startsWith("OB"))  &&
 				(!dataTable.getData("General_Data", "TC_ID").startsWith("AB")))*/ {
 			opportunity.setField("RecordTypeId", "012i0000000tvTeAAI");
-		} else if((dataTable.getData("General_Data", "TC_ID").startsWith("VAS")) && (dataTable.getData("General_Data", "TC_ID").contains("AMER"))) {
+		} else if((dataTable.getData("General_Data", "TC_ID").startsWith("VAS")) && (dataTable.getData("General_Data", "TC_ID").contains("AMER"))
+				&& (!dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_FRAN")) && (!dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_FDIG")) 
+				&& (!dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_FDIR"))) {
 			opportunity.setField("RecordTypeId", "0121Y000001EVzFQAW");
-		} else if((dataTable.getData("General_Data", "TC_ID").startsWith("GWS")) && (dataTable.getData("General_Data", "TC_ID").contains("AMER"))) {
+		} else if((dataTable.getData("General_Data", "TC_ID").startsWith("GWS")) && (dataTable.getData("General_Data", "TC_ID").contains("AMER"))
+				&& (!dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_FRAN")) 
+				&& (!dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_FDIR")) && (!dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_FDIG"))) {
 			opportunity.setField("RecordTypeId", "012i0000000405mAAA");
-		} else if((dataTable.getData("General_Data", "TC_ID").startsWith("OB")) && (dataTable.getData("General_Data", "TC_ID").contains("AMER"))) {
+		} else if((dataTable.getData("General_Data", "TC_ID").startsWith("OB")) && (dataTable.getData("General_Data", "TC_ID").contains("AMER")) 
+				&& (!dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_FRAN")) 
+				&& (!dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_FDIR")) && (!dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_FDIG"))) {
 			opportunity.setField("RecordTypeId", "012i0000000405nAAA");
-		} else if((dataTable.getData("General_Data", "TC_ID").startsWith("AB")) && (dataTable.getData("General_Data", "TC_ID").contains("AMER"))) {
+		} else if((dataTable.getData("General_Data", "TC_ID").startsWith("AB")) && (dataTable.getData("General_Data", "TC_ID").contains("AMER")) 
+				&& (!dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_FRAN")) 
+				&& (!dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_FDIR")) && (!dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_DIG"))) {
 			opportunity.setField("RecordTypeId", "012i0000001622CAAQ");
-		} else if((dataTable.getData("General_Data", "TC_ID").startsWith("AS")) && (dataTable.getData("General_Data", "TC_ID").contains("AMER"))) {
+		} else if((dataTable.getData("General_Data", "TC_ID").startsWith("AS")) && (dataTable.getData("General_Data", "TC_ID").contains("AMER")
+				&& (!dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_FRAN")) 
+				&& (!dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_FDIG")) && (!dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_FDIR")))) {
 			opportunity.setField("RecordTypeId", "012i0000000405jAAA");
 		} else if((dataTable.getData("General_Data", "TC_ID").startsWith("CM")) && (dataTable.getData("General_Data", "TC_ID").contains("DSF")) &&
-				(dataTable.getData("General_Data", "TC_ID").contains("AMER"))) {
+				(dataTable.getData("General_Data", "TC_ID").contains("AMER")) && (!dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_FRAN")) 
+				&& (!dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_FDIR")) && (!dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_FDIG"))) {
 			opportunity.setField("RecordTypeId", "012i0000000405lAAA");
 		}  else if((dataTable.getData("General_Data", "TC_ID").startsWith("CM")) && (dataTable.getData("General_Data", "TC_ID").contains("DSF")) &&
-				(dataTable.getData("General_Data", "TC_ID").contains("APAC"))) {
+				(dataTable.getData("General_Data", "TC_ID").contains("APAC")) && (!dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_FRAN")) 
+				&& (!dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_FDIR")) && (!dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_FDIG"))) {
 			opportunity.setField("RecordTypeId", "0121Y000001EW60QAG");
-		} else if((dataTable.getData("General_Data", "TC_ID").startsWith("FRAN")) || (dataTable.getData("General_Data", "TC_ID").startsWith("FDIG")) 
-				|| (dataTable.getData("General_Data", "TC_ID").startsWith("FDIR"))) {
+		} else if((dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_FRAN")) || (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_FDIG")) 
+				|| (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_FDIR"))) {
 			opportunity.setField("RecordTypeId", "0121Y000001EVzDQAW");
 		}								
 		opportunity.setField("Service__c", "Consulting");

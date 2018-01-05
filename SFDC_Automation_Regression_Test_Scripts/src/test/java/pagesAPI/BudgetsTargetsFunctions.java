@@ -1,6 +1,7 @@
 package pagesAPI;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Random;
 
 import org.openqa.selenium.support.PageFactory;
@@ -61,7 +62,7 @@ public class BudgetsTargetsFunctions extends ReusableLibrary {
 		String sCBREProfessional = searchTextSOQL.fetchRecordFieldValue("CBRE_Professional__c", query);
 		budget.setField("CBRE_Professional__c", sCBREProfessional);
 		budget.setField("Budget_Target_Amount__c", 20000);
-		budget.setField("Start_Date__c", Utility_Functions.xAddDays(10));		
+		budget.setField("Start_Date__c", Calendar.getInstance());		
 		SObject[] budgets = new SObject[1];
 		budgets[0] = budget;
 		try {
@@ -84,7 +85,7 @@ public class BudgetsTargetsFunctions extends ReusableLibrary {
 		QueryResult queryResults = null;
 		int value = 0;
 		try {
-			queryResults = EstablishConnection.connection.query("SELECT Id FROM Budget_Target__c where Start_Date__c >= 2017-01-01 and Start_Date__c  <= 2017-12-31 ORDER BY CreatedDate DESC LIMIT 1");
+			queryResults = EstablishConnection.connection.query("SELECT Id FROM Budget_Target__c where Start_Date__c >= 2018-01-01 and Start_Date__c  <= 2018-12-31 and createdById != '005W0000002rBtgIAE' ORDER BY CreatedDate DESC LIMIT 1");
 		} catch (ConnectionException e1) {
 			e1.printStackTrace();
 		}

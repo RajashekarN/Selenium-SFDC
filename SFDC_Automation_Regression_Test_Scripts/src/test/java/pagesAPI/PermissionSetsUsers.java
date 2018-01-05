@@ -75,11 +75,11 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleProfileTimeZoneResult = setRoleProfileTimeZone(userName);
 				String role = roleProfileTimeZoneResult.split("-")[1];
 				String profile = roleProfileTimeZoneResult.split("-")[0];
-				//String geographicalRole = roleProfileTimeZoneResult.split("-")[2];
-				String timeZone = roleProfileTimeZoneResult.split("-")[2];
+				String geographicalRole = roleProfileTimeZoneResult.split("-")[2];
+				String timeZone = roleProfileTimeZoneResult.split("-")[3];
 				userId = createUsers.createUser(dataTable.getData("General_Data", "FirstName"),
 						dataTable.getData("General_Data", "LastName"), dataTable.getData("General_Data", "Alias"),
-						"vishnuvardhan.bommisetty" + "@cbre.com", userName, role, /*geographicalRole, */profile, timeZone);
+						"vishnuvardhan.bommisetty" + "@cbre.com", userName, role, geographicalRole, profile, timeZone);
 				if (userId == null) {
 					System.out.println("User has not been created");
 					report.updateTestLog("User Creation", "User has not been created as userId is:::" + userId,
@@ -105,7 +105,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 		try {
 			environment = loginPage.initializeEnvironment();
 			loginPage.userNames();
-			String userName, userResultId, userId = null;
+			String userName, userResultId;
 			for (int i = 0; i < LoginPage.userNamesList.size(); i++) {
 				userName = LoginPage.userNamesList.get(i);
 				roleProfileTimeZoneResult = setRoleProfileTimeZone(userName);
@@ -114,21 +114,21 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				if (userResultId == null) {
 					String role = roleProfileTimeZoneResult.split("-")[0];
 					String profile = roleProfileTimeZoneResult.split("-")[1];
-					//String geographicalRole = roleProfileTimeZoneResult.split("-")[2];
-					String timeZone = roleProfileTimeZoneResult.split("-")[2];
+					String geographicalRole = roleProfileTimeZoneResult.split("-")[2];
+					String timeZone = roleProfileTimeZoneResult.split("-")[3];
 					userResultId = createUsers.createUser(dataTable.getData("General_Data", "FirstName"),
 							dataTable.getData("General_Data", "LastName"), dataTable.getData("General_Data", "Alias"),
-							"vishnuvardhan.bommisetty" + "@cbre.com", userName, role, profile, /*geographicalRole,*/ timeZone);
+							"vishnuvardhan.bommisetty" + "@cbre.com", userName, role, profile, geographicalRole, timeZone);
 					if(userResultId!=null) {
 						System.out.println("User has been created");
-						report.updateTestLog("User Creation", "User has been created successfully the system::" + userId + ":::" + userName, Status.PASS);	
+						report.updateTestLog("User Creation", "User has been created successfully the system::" + userResultId + ":::" + userName, Status.PASS);	
 					} else {
-						report.updateTestLog("User Creation", "User creation failed::" + userId + ":::" + userName, Status.FAIL);
+						report.updateTestLog("User Creation", "User creation failed::" + userResultId + ":::" + userName, Status.FAIL);
 					}					
 				} else {
 					System.out.println("User already exists");
 					report.updateTestLog("User Creation",
-							"User already exists in the system::" + userId + ":::" + userName, Status.PASS);
+							"User already exists in the system::" + userResultId + ":::" + userName, Status.PASS);
 				}
 				userNameCreatedList.add(userName);
 				setPermissionSets(userNameCreatedList, permissionSetsLabels);
@@ -300,6 +300,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				System.out.println("CM APAC Manager User - :::" + userNameList.get(i)
 						+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
+				permissionSetsLabels.add("Campaigns and CampaignLogic Create/Edit Permissions");
 				break;
 
 			case "testuser22@cbre.com.crm.":
@@ -850,6 +851,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("EXECUTIVE");
 				profileIDLabels.add("System Administrator");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("AMER");
 				System.out.println("System Administrator User - :::" + userName + environment
 						+ ":::is having the Role and Profle as:::EXECUTIVE and System Administrator");
 				break;
@@ -859,6 +861,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("AMER");
 				profileIDLabels.add("CBRE Broker - AMER - Agency Brokerage");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("AMER");
 				System.out.println("AB AMER Broker User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: AMER and CBRE Broker - AMER - Agency Brokerage");
 				break;
@@ -868,6 +871,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("AMER");
 				profileIDLabels.add("CBRE Manager - AMER - Agency Brokerage");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("AMER");
 				System.out.println("AB AMER Manager User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: AMER and CBRE Manager - AMER - Agency Brokerage");
 				break;
@@ -877,6 +881,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("AMER");
 				profileIDLabels.add("CBRE Support Staff - AMER - Agency Brokerage");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("AMER");
 				System.out.println("AB AMER CSS User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: AMER and CBRE Support Staff - AMER - Agency Brokerage");
 				break;
@@ -886,6 +891,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("AMER");
 				profileIDLabels.add("CBRE Broker - AMER - Asset Services");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("AMER");
 				System.out.println("AS AMER Broker User" + userName + environment
 						+ ":::is having the Role and Profle as::: AMER and CBRE Broker - AMER - Asset Services");
 				break;
@@ -895,6 +901,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("AMER");
 				profileIDLabels.add("CBRE Manager - AMER - Asset Services");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("AMER");
 				System.out.println("AS AMER Manager User" + userName + environment
 						+ ":::is having the Role and Profle as::: AMER and CBRE Manager - AMER - Asset Services");
 				break;
@@ -904,6 +911,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("AMER");
 				profileIDLabels.add("CBRE Broker - AMER - Capital Markets");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("AMER");
 				System.out.println("CM AMER Broker User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: AMER and CBRE Broker - AMER - Capital Markets");
 				break;
@@ -912,6 +920,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 
 				roleIDLabels.add("AMER");
 				profileIDLabels.add("CBRE Manager - AMER - Capital Markets");
+				geographicalRole.add("AMER");
 				System.out.println("CM AMER Manager User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: AMER and CBRE Manager - AMER - Capital Markets");
 				timeZone.add("America/Los_Angeles");
@@ -922,6 +931,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("AMER");
 				profileIDLabels.add("CBRE Support Staff - AMER - Capital Markets");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("AMER");
 				System.out.println("CM AMER CSS User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: AMER and CBRE Support Staff - AMER - Capital Markets");
 				break;
@@ -931,6 +941,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("AMER");
 				profileIDLabels.add("CBRE Broker - AMER - GWS");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("AMER");
 				System.out.println("GWS AMER Broker User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: AMER and CBRE Broker - AMER - GWS");
 				break;
@@ -940,6 +951,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("AMER");
 				profileIDLabels.add("CBRE Broker - AMER - Occupier Brokerage");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("AMER");
 				System.out.println("OB AMER Broker User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: AMER and CBRE Broker - AMER - Occupier Brokerage");
 				break;
@@ -949,6 +961,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("AMER");
 				profileIDLabels.add("CBRE Manager - AMER - Occupier Brokerage");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("AMER");
 				System.out.println("OB Manager Broker User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: AMER and CBRE Manager - AMER - Occupier Brokerage");
 				break;
@@ -958,6 +971,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("AMER");
 				profileIDLabels.add("CBRE Support Staff - AMER - Occupier Brokerage");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("AMER");
 				System.out.println("OB CSS Broker User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: AMER and CBRE Support Staff - AMER - Occupier Brokerage");
 				break;
@@ -967,6 +981,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("APAC");
 				profileIDLabels.add("CBRE Broker - APAC - Agency Brokerage");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("APAC");
 				System.out.println("AB APAC Broker User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: APAC and CBRE Broker - APAC - Agency Brokerage");
 				break;
@@ -976,6 +991,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("APAC");
 				profileIDLabels.add("CBRE Manager - APAC - Agency Brokerage");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("APAC");
 				System.out.println("AB APAC Manager User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: APAC and CBRE Manager - APAC - Agency Brokerage");
 				break;
@@ -985,6 +1001,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("APAC");
 				profileIDLabels.add("CBRE Support Staff - APAC - Agency Brokerage");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("APAC");
 				System.out.println("AB APAC CSS User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: APAC and CBRE Support Staff - APAC - Agency Brokerage");
 				break;
@@ -994,6 +1011,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("APAC");
 				profileIDLabels.add("CBRE Broker - APAC - Asset Services");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("APAC");
 				System.out.println("AS APAC Broker User" + userName + environment
 						+ ":::is having the Role and Profle as::: APAC and CBRE Broker - APAC - Asset Services");
 				break;
@@ -1003,6 +1021,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("APAC");
 				profileIDLabels.add("CBRE Manager - APAC - Asset Services");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("APAC");
 				System.out.println("AS APAC Manager User" + userName + environment
 						+ ":::is having the Role and Profle as::: APAC and CBRE Manager - APAC - Asset Services");
 				break;
@@ -1012,6 +1031,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("APAC");
 				profileIDLabels.add("CBRE Broker - APAC - Capital Markets");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("APAC");
 				System.out.println("CM APAC Broker User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: APAC and CBRE Broker - APAC - Capital Markets");
 				break;
@@ -1021,6 +1041,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("APAC");
 				profileIDLabels.add("CBRE Manager - APAC - Capital Markets");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("APAC");
 				System.out.println("CM APAC Manager User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: APAC and CBRE Manager - APAC - Capital Markets");
 				break;
@@ -1030,6 +1051,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("APAC");
 				profileIDLabels.add("CBRE Support Staff - APAC - Capital Markets");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("APAC");
 				System.out.println("CM APAC CSS User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: APAC and CBRE Support Staff - APAC - Capital Markets");
 				break;
@@ -1039,6 +1061,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("EMEA");
 				profileIDLabels.add("CBRE Broker - EMEA - GWS");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("EMEA");
 				System.out.println("GWS EMEA Broker User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: EMEA and CBRE Broker - EMEA - GWS");
 				break;
@@ -1048,6 +1071,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("APAC");
 				profileIDLabels.add("CBRE Broker - APAC - Occupier Brokerage");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("APAC");
 				System.out.println("OB APAC Broker User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: APAC and CBRE Broker - APAC - Occupier Brokerage");
 				break;
@@ -1057,6 +1081,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("APAC");
 				profileIDLabels.add("CBRE Broker - APAC - Occupier Brokerage");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("APAC");
 				System.out.println("OB APAC Manager User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: APAC and CBRE Broker - APAC - Occupier Brokerage");
 				break;
@@ -1066,6 +1091,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("APAC");
 				profileIDLabels.add("CBRE Broker - APAC - Occupier Brokerage");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("APAC");
 				System.out.println("OB APAC CSS User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: APAC and CBRE Broker - APAC - Occupier Brokerage");
 				break;
@@ -1075,6 +1101,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("APAC");
 				profileIDLabels.add("CBRE Broker - APAC - Valuation & Advisory");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("APAC");
 				System.out.println("VAS APAC Broker User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: APAC and CBRE Broker - APAC - Valuation & Advisory");
 				break;
@@ -1084,6 +1111,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("EMEA");
 				profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("EMEA");
 				System.out.println("AB EMEA Broker User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: EMEA and CBRE Broker - EMEA - Multi Business Line");
 				break;
@@ -1093,6 +1121,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("EMEA");
 				profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("EMEA");
 				System.out.println("AB EMEA Manager User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: EMEA and CBRE Broker - EMEA - Multi Business Line");
 				break;
@@ -1102,6 +1131,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("EMEA");
 				profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("EMEA");
 				System.out.println("AB EMEA CSS User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: EMEA and CBRE Support Staff - EMEA - Multi Business Line");
 				break;
@@ -1111,6 +1141,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("EMEA");
 				profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("EMEA");
 				System.out.println("AS EMEA Broker User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: EMEA and CBRE Support Staff - EMEA - Multi Business Line");
 				break;
@@ -1120,6 +1151,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("EMEA");
 				profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("EMEA");
 				System.out.println("AS EMEA Manager User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: EMEA and CBRE Manager - EMEA - Multi Business Line");
 				break;
@@ -1129,6 +1161,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("EMEA");
 				profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("EMEA");
 				System.out.println("CM EMEA Broker User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: EMEA and CBRE Broker - EMEA - Multi Business Line");
 				break;
@@ -1138,6 +1171,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("EMEA");
 				profileIDLabels.add("CBRE Manager - EMEA - Multi Business Line");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("EMEA");
 				System.out.println("CM EMEA Manager User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: EMEA and CBRE Manager - EMEA - Multi Business Line");
 				break;
@@ -1147,6 +1181,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("EMEA");
 				profileIDLabels.add("CBRE Support Staff - EMEA - Multi Business Line");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("EMEA");
 				System.out.println("CM EMEA CSS User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: EMEA and CBRE Support Staff - EMEA - Multi Business Line");
 				break;
@@ -1156,6 +1191,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("EMEA");
 				profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("EMEA");
 				System.out.println("CM EMEA Broker IP User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: EMEA and CBRE Broker - EMEA - Multi Business Line");
 				break;
@@ -1165,6 +1201,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("EMEA");
 				profileIDLabels.add("CBRE Manager - EMEA - Multi Business Line");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("EMEA");
 				System.out.println("CM EMEA Manager IP User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: EMEA and CBRE Manager - EMEA - Multi Business Line");
 				break;
@@ -1174,6 +1211,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("EMEA");
 				profileIDLabels.add("CBRE Support Staff - EMEA - Multi Business Line");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("EMEA");
 				System.out.println("CM EMEA CSS IP User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: EMEA and CBRE Support Staff - EMEA - Multi Business Line");
 				break;
@@ -1183,6 +1221,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("EMEA");
 				profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("EMEA");
 				System.out.println("OB EMEA Broker User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: EMEA and CBRE Broker - EMEA - Multi Business Line");
 				break;
@@ -1192,6 +1231,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("EMEA");
 				profileIDLabels.add("CBRE Manager - EMEA - Multi Business Line");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("EMEA");
 				System.out.println("OB EMEA Manager User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: EMEA and CBRE Manager - EMEA - Multi Business Line");
 				break;
@@ -1201,6 +1241,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("EMEA");
 				profileIDLabels.add("CBRE Support Staff - EMEA - Multi Business Line");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("EMEA");
 				System.out.println("OB EMEA CSS User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: EMEA and CBRE Support Staff - EMEA - Multi Business Line");
 				break;
@@ -1210,6 +1251,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("EMEA");
 				profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("EMEA");
 				System.out.println("VAS EMEA Broker User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: EMEA and CBRE Broker - EMEA - Multi Business Line");
 				break;
@@ -1219,6 +1261,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("EMEA");
 				profileIDLabels.add("CBRE Manager - EMEA - Multi Business Line");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("EMEA");
 				System.out.println("VAS EMEA Manager User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: EMEA and CBRE Manager - EMEA - Multi Business Line");
 				break;
@@ -1228,6 +1271,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("EMEA");
 				profileIDLabels.add("CBRE Support Staff - EMEA - Multi Business Line");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("EMEA");
 				System.out.println("VAS EMEA CSS User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: EMEA and CBRE Support Staff - EMEA - Multi Business Line");
 				break;
@@ -1237,6 +1281,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("EMEA");
 				profileIDLabels.add("CBRE - EMEA - Data Admin");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("EMEA");
 				System.out.println("DataAdmin EMEA Data User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: EMEA and CBRE - EMEA - Data Admin");
 				break;
@@ -1246,6 +1291,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("APAC");
 				profileIDLabels.add("CBRE Manager - APAC - GWS");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("APAC");
 				System.out.println("GWS APAC Manager User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: APAC and CBRE Manager - APAC - GWS");
 				break;
@@ -1255,6 +1301,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("AMER");
 				profileIDLabels.add("CBRE Manager - AMER - Valuations & Advisory Services");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("AMER");
 				System.out.println("VAS AMER Manager User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: AMER and CBRE Manager-AMER-Valuations &Advisory Services");
 				break;
@@ -1264,6 +1311,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("AMER");
 				profileIDLabels.add("CBRE Manager - AMER - GWS");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("AMER");
 				System.out.println("GWS AMER Manager User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: AMER and CBRE Manager Staff - AMER - GWS");
 				break;
@@ -1273,6 +1321,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("APAC");
 				profileIDLabels.add("CBRE Broker - APAC - GWS");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("APAC");
 				System.out.println("GWS APAC Broker User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: APAC and CBRE Broker - APAC - GWS");
 				break;
@@ -1282,6 +1331,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("EMEA");
 				profileIDLabels.add("CBRE Manager - EMEA - Multi Business Line");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("EMEA");
 				System.out.println("CM EMEA Manager BCP User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: EMEA and CBRE Manager - EMEA - Multi Business Line");
 				break;
@@ -1291,6 +1341,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("EMEA");
 				profileIDLabels.add("CBRE Manager - EMEA - Multi Business Line");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("EMEA");
 				System.out.println("CM EMEA Manager Dev User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: EMEA and CBRE Manager - EMEA - Multi Business Line");
 				break;
@@ -1300,6 +1351,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("UK Investment Advisory");
 				profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("EMEA");
 				System.out.println("CM EMEA Broker CA User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: UK Investment Advisory and CBRE Broker - EMEA - Multi Business Line");
 				break;
@@ -1309,6 +1361,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("EMEA");
 				profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("EMEA");
 				System.out.println("CM EMEA Broker BCP User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: EMEA and CBRE Broker - EMEA - Multi Business Line");
 				break;
@@ -1318,6 +1371,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("EMEA");
 				profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("EMEA");
 				System.out.println("CM EMEA Broker Dev User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: EMEA and CBRE Broker - EMEA - Multi Business Line");
 				break;
@@ -1327,6 +1381,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("EMEA");
 				profileIDLabels.add("CBRE Support Staff - EMEA - Multi Business Line");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("EMEA");
 				System.out.println("CM EMEA CSS Dev User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: EMEA and CBRE Support Staff - EMEA - Multi Business Line");
 				break;
@@ -1336,6 +1391,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("EMEA");
 				profileIDLabels.add("CBRE Support Staff - EMEA - Multi Business Line");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("EMEA");
 				System.out.println("CM EMEA CSS Super User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: EMEA and CBRE Support Staff - EMEA - Multi Business Line");
 				break;
@@ -1345,6 +1401,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("EMEA");
 				profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("EMEA");
 				System.out.println("AS EMEA Broker Super User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: EMEA and CBRE Broker - EMEA - Multi Business Line");
 				break;
@@ -1354,6 +1411,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("EMEA");
 				profileIDLabels.add("CBRE Broker - EMEA - GWS");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("EMEA");
 				System.out.println("GWS EMEA Broker Super User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: EMEA and CBRE Broker - EMEA - GWS");
 				break;
@@ -1363,6 +1421,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("EMEA");
 				profileIDLabels.add("CBRE Broker - EMEA - Multi Business Line");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("EMEA");
 				System.out.println("VAS EMEA Broker Super User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: EMEA and CBRE Broker - EMEA - Multi Business Line");
 				break;
@@ -1372,6 +1431,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("PAC_AB_IND_Auckland_Brokers");
 				profileIDLabels.add("CBRE Broker - APAC - Capital Markets");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("APAC");
 				System.out.println("CM APAC Broker AUC User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: PAC_AB_IND_Auckland_Brokers and CBRE Broker - APAC - Capital Markets");
 				break;
@@ -1381,6 +1441,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("PAC_CM_OFFICE");
 				profileIDLabels.add("CBRE Broker - APAC - Capital Markets");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("APAC");
 				System.out.println("CM APAC Broker NZL User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: PAC_CM_OFFICE and CBRE Broker - APAC - Capital Markets");
 				break;
@@ -1390,6 +1451,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("PAC_CM_Metro");
 				profileIDLabels.add("CBRE Broker - APAC - Capital Markets");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("APAC");
 				System.out.println("CM APAC Broker Metro NZL User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: PAC CM Metro and CBRE Broker - APAC - Capital Markets");
 				break;
@@ -1399,6 +1461,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("PAC_CM_Metro");
 				profileIDLabels.add("CBRE Broker - APAC - Capital Markets");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("APAC");
 				System.out.println("CM APAC Brokder Metro User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: PAC_CM_Metroa nd CBRE Broker - APAC - Capital Markets");
 				permissionSetsLabels.add("Lightning Experience");
@@ -1409,6 +1472,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("PAC_AB_IND_South Australia_Brokers");
 				profileIDLabels.add("CBRE Broker - APAC - Capital Markets");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("APAC");
 				System.out.println("CM APAC Broker AUS User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: PAC_AB_IND_South Australia_Brokers and CBRE Broker - APAC - Capital Markets");
 				break;
@@ -1418,6 +1482,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("PAC_AB_Retail_AU_AB_Retail_New South Wales Brokers");
 				profileIDLabels.add("CBRE Broker - APAC - Capital Markets");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("APAC");
 				System.out.println("CM APAC Broker NSW User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: PAC_AB_Retail_AU_AB_Retail_New South Wales Brokers and CBRE Broker - APAC - Capital Markets");
 				break;
@@ -1427,6 +1492,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("PAC_AB_Retail_NZ_AB_Retail_Christchurch_Brokers");
 				profileIDLabels.add("CBRE Broker - APAC - Capital Markets");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("APAC");
 				System.out.println("CM APAC Broker Christ Church User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: PAC_AB_Retail_NZ_AB_Retail_Christchurch_Brokers and "
 						+ "CBRE Broker - APAC - Capital Markets");
@@ -1437,6 +1503,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("UK");
 				profileIDLabels.add("CBRE - EMEA - Business Development");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("EMEA");
 				System.out.println("OB EMEA Occupier Client Care User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: UK and CBRE - EMEA - Business Development");
 				break;
@@ -1446,6 +1513,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("APAC");
 				profileIDLabels.add("CBRE Broker - APAC - Capital Markets");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("APAC");
 				System.out.println("CM APAC Broker Campaign User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: APAC and CBRE Broker - APAC - Capital Markets");
 				break;
@@ -1455,6 +1523,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("APAC");
 				profileIDLabels.add("CBRE Broker - APAC - Capital Markets");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("APAC");
 				System.out.println("CM APAC Broker MVP User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: APAC and CBRE Broker - APAC - Capital Markets");
 				break;
@@ -1464,6 +1533,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("EMEA");
 				profileIDLabels.add("CBRE Manager - EMEA - Multi Business Line");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("EMEA");
 				System.out.println("CM EMEA Manager CA User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: EMEA and CBRE Manager - EMEA - Multi Business Line");
 				break;
@@ -1473,6 +1543,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("AMER");
 				profileIDLabels.add("CBRE Support Staff - AMER - Capital Markets");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("AMER");
 				System.out.println("DataAdmin EMEA Data User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: AMER and CBRE Support Staff - AMER - Capital Markets");
 				break;
@@ -1482,6 +1553,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("APAC");
 				profileIDLabels.add("CBRE Broker - APAC - Multi Business Line");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("APAC");
 				System.out.println("DataAdmin EMEA Data User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: APAC and CBRE Broker - APAC - Multi Business Line");
 				break;
@@ -1491,6 +1563,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("EXECUTIVE");
 				profileIDLabels.add("CBRE Broker - JAPAN - Capital Markets");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("APAC");
 				System.out.println("DataAdmin EMEA Data User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: Executive and CBRE Broker - JAPAN - Capital Markets");
 				break;
@@ -1500,6 +1573,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("APAC");
 				profileIDLabels.add("CBRE - APAC - Project Management");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("APAC");
 				System.out.println("DataAdmin EMEA Data User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: APAC and CBRE - APAC - Project Management");
 				break;
@@ -1509,6 +1583,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("FR DIG");
 				profileIDLabels.add("CBRE - France - Data Admin");
 				timeZone.add("Europe/Paris");
+				geographicalRole.add("EMEA");
 				System.out.println("France Data User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: FR DIG and CBRE - France - Data Admin");
 				break;
@@ -1518,6 +1593,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("FR - CODIR+");
 				profileIDLabels.add("CBRE Manager - France - Multi Business Line");
 				timeZone.add("Europe/Paris");
+				geographicalRole.add("EMEA");
 				System.out.println("France Manager - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: FR - CODIR+ and CBRE Manager - France - Multi Business Line");
 				break;
@@ -1527,6 +1603,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("FR DIG");
 				profileIDLabels.add("CBRE Manager - France - Multi Business Line");
 				timeZone.add("Europe/Paris");
+				geographicalRole.add("EMEA");
 				System.out.println("France Manager - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: FR DIG and CBRE Manager - France - Multi Business Line");
 				break;
@@ -1536,6 +1613,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("FRANCE");
 				profileIDLabels.add("CBRE Manager - France - Multi Business Line");
 				timeZone.add("Europe/Paris");
+				geographicalRole.add("EMEA");
 				System.out.println("France Manager - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: France and CBRE Manager - France - Multi Business Line");
 				break;
@@ -1544,8 +1622,8 @@ public class PermissionSetsUsers extends ReusableLibrary {
 
 				roleIDLabels.add("SOUTHEAST ASIA");
 				profileIDLabels.add("CBRE Data Admin");
-				geographicalRole.add("APAC");
 				timeZone.add("Asia/Singapore");
+				geographicalRole.add("APAC");
 				System.out.println("SouthEast Asia Data Admin- :::" + userName + environment
 						+ ":::is having the Role and Profle as::: SouthEast Asia - CBRE Data Admin");
 				break;
@@ -1565,12 +1643,13 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				roleIDLabels.add("EXECUTIVE");
 				profileIDLabels.add("System Administrator");
 				timeZone.add("America/Los_Angeles");
+				geographicalRole.add("AMER");
 				System.out.println("System Administrator User - :::" + userName + environment
 						+ ":::is having the Role and Profle as:::EXECUTIVE and System Administrator");
 				break;
 			}
 			establishConnection.establishConnection();
-			roleProfileTimeZone = getRoleId(roleIDLabels.get(i)) + "-" + getProfileId(profileIDLabels.get(i)) /*+ "-" + geographicalRole.get(i)*/ 
+			roleProfileTimeZone = getRoleId(roleIDLabels.get(i)) + "-" + getProfileId(profileIDLabels.get(i)) + "-" + geographicalRole.get(i) 
 					+ "-" + timeZone.get(i);
 			profileIDLabels.clear();
 			roleIDLabels.clear();

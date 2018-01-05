@@ -70,7 +70,7 @@ public class CampaignsFunctions extends ReusableLibrary {
 		}
 		System.out.println("Result:::" + results);
 		String sCampaignId = establishConnection.saveResultsId(results);
-		if(sCampaignId.startsWith("7012")) {
+		if(sCampaignId.startsWith("701")) {
 			report.updateTestLog("Verify Create Campaign", "Campaign has been created successfully", Status.PASS);
 		} else {
 			report.updateTestLog("Verify Create Campaign", "Campaign creation failed", Status.FAIL);

@@ -17,6 +17,8 @@ import com.sforce.soap.partner.SaveResult;
 import com.sforce.soap.partner.sobject.SObject;
 import com.sforce.ws.ConnectionException;
 
+import supportLibraries.Utility_Functions;
+
 public class PropertiesFunctions extends ReusableLibrary {
 	/*
 	 * Constructor to initialize the business component library
@@ -47,7 +49,7 @@ public class PropertiesFunctions extends ReusableLibrary {
 	 *
 	 */
 
-	public void createPropertySpecificUser() {
+	public String createPropertySpecificUser() {
 		establishConnection.establishConnection();
 		SObject property = new SObject();
 
@@ -61,7 +63,11 @@ public class PropertiesFunctions extends ReusableLibrary {
 		String stateId = searchTextSOQL.fetchRecordFieldValue("Id", query_State);
 		String recordTypeId = searchTextSOQL.fetchRecordFieldValue("Id", query_RecordType);
 		String propertyType = searchTextSOQL.fetchRecordFieldValue("Property_Type__c", query_PropertyType);
-		property.setField("Building_Property_Name__c", propertyName);
+		if(propertyName==null) {
+			property.setField("Building_Property_Name__c", Utility_Functions.xRandomFunction() + "_" + "Test Automation Project");
+		} else {
+			property.setField("Building_Property_Name__c", propertyName);	
+		}		
 		property.setField("Property_Type__c", propertyType);
 		property.setField("RecordTypeId", recordTypeId);
 		property.setField("Country__c", countryId);
@@ -78,12 +84,14 @@ public class PropertiesFunctions extends ReusableLibrary {
 			e.printStackTrace();
 		}
 		System.out.println("Result:::" + results);
+		String result = establishConnection.saveResultsId(results);
 		status = establishConnection.saveResults(results);
 		if (status == true) {
 			report.updateTestLog("Verify Create Property", "Property has been created successfully", Status.PASS);
 		} else {
 			report.updateTestLog("Verify Create Property", "Property creation failed", Status.FAIL);
 		}
+		return result; 
 	}
 
 	/**
@@ -182,7 +190,7 @@ public class PropertiesFunctions extends ReusableLibrary {
 		propertyPreference.setField("Contact__c", sContactName);
 		propertyPreference.setField("APAC_Status__c", "Opt In");
 		propertyPreference.setField("APAC_Preference_Type__c", "Sale");
-		propertyPreference.setField("APAC_Country__c", "a0Gi00000035bnhEAA");		
+		//propertyPreference.setField("APAC_Country__c", "a0Gi00000035bnhEAA");		
 		propertyPreference.setField("APAC_Region__c", "a0Ni000002WNYtYEAX");
 
 		SObject[] propertyPreferences = new SObject[1];
