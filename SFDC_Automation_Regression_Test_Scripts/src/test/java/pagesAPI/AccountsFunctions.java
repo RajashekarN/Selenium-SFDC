@@ -1217,7 +1217,14 @@ public class AccountsFunctions extends ReusableLibrary {
 		account.setField("BillingCity", dataTable.getData("General_Data", "City"));
 		account.setField("BillingState", dataTable.getData("General_Data", "State"));
 		account.setField("BillingPostalCode ", dataTable.getData("General_Data", "Zipcode"));
-
+		if((dataTable.getData("General_Data", "TC_ID").contains("FRAN")) || (dataTable.getData("General_Data", "TC_ID").contains("FDIG")) ||
+				(dataTable.getData("General_Data", "TC_ID").contains("FDIR"))) {
+			account.setField("ShippingCountry", dataTable.getData("General_Data", "Country"));
+			account.setField("ShippingStreet", dataTable.getData("General_Data", "Street"));
+			account.setField("ShippingCity", dataTable.getData("General_Data", "City"));
+			account.setField("ShippingState", dataTable.getData("General_Data", "State"));
+			account.setField("ShippingPostalCode ", dataTable.getData("General_Data", "Zipcode"));
+		}
 		SObject[] accounts = new SObject[1];
 		accounts[0] = account;
 		try {

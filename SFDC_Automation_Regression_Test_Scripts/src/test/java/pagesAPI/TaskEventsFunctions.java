@@ -55,6 +55,7 @@ public class TaskEventsFunctions extends ReusableLibrary {
 	Calendar calendar = Calendar.getInstance();
 
 	public String createTask() {
+		String sNewOpportunity = null;
 		establishConnection.establishConnection();
 		SObject task = new SObject();
 		/*SObject taskPast = new SObject();
@@ -68,6 +69,10 @@ public class TaskEventsFunctions extends ReusableLibrary {
 		String sAccountID = searchTextSOQL.fetchRecordFieldValue("Id", queryAccountID);
 		String sContactID = searchTextSOQL.fetchRecordFieldValue("Id", queryContactID);
 		String sOpportunityID = searchTextSOQL.fetchRecordFieldValue("Id", queryOpportunityID);
+		if(sOpportunityID==null) {
+			OpportunitiesFunctions opportunitiesFunctions = new OpportunitiesFunctions(scriptHelper);
+			sNewOpportunity = opportunitiesFunctions.createOpportunity();
+		}
 		//String sLeadID = searchTextSOQL.fetchRecordFieldValue("Id", queryLeadID);	
 		String sNewLeadID = null;
 		
@@ -105,7 +110,12 @@ public class TaskEventsFunctions extends ReusableLibrary {
 			}*/
 		} else if(dataTable.getData("General_Data", "TC_ID").contains("Opportunity")) {
 			task.setField("WhoId", sContactID);
-			task.setField("WhatId", sOpportunityID);
+			if(sOpportunityID==null) {
+				task.setField("WhatId", sNewOpportunity);
+			} else {
+				
+				task.setField("WhatId", sOpportunityID);	
+			}			
 		} else if(dataTable.getData("General_Data", "TC_ID").contains("Contact")) {
 			task.setField("WhatId", sAccountID);	
 			task.setField("WhoId", sContactID);
@@ -142,9 +152,15 @@ public class TaskEventsFunctions extends ReusableLibrary {
 				count++;
 			}
 		} else if(dataTable.getData("General_Data", "TC_ID").contains("Opportunity")) {
-			if(whatIdValue.equals(sOpportunityID)) {
-				count++;
-			}
+			if(sOpportunityID==null) {
+				if(whatIdValue.equals(sNewOpportunity)) {
+					count++;
+				}
+			} else {
+				if(whatIdValue.equals(sOpportunityID)) {
+					count++;
+				}
+			}	
 		} else if(dataTable.getData("General_Data", "TC_ID").contains("Contact")) {
 			String objectValue = searchTextSOQL.fetchRecordFieldValue("WhoId", leadQuery);
 			if((objectValue.equals(sContactID)) && (whatIdValue != null)) {
@@ -321,12 +337,12 @@ public class TaskEventsFunctions extends ReusableLibrary {
 		String sAccountID = searchTextSOQL.fetchRecordFieldValue("Id", queryAccountID);
 		String sContactID = searchTextSOQL.fetchRecordFieldValue("Id", queryContactID);
 		String sOpportunityID = searchTextSOQL.fetchRecordFieldValue("Id", queryOpportunityID);
-		String sLeadID = searchTextSOQL.fetchRecordFieldValue("Id", queryLeadID);
+		//String sLeadID = searchTextSOQL.fetchRecordFieldValue("Id", queryLeadID);
 		String sNewLead = null;
 		System.out.println("Account Id:::"+ sAccountID);
 		System.out.println("Contact Id:::"+ sContactID);
 		System.out.println("Opportunity Id:::"+ sOpportunityID);
-		System.out.println("Lead Id:::"+ sLeadID);
+		//System.out.println("Lead Id:::"+ sLeadID);
 		
 		if(dataTable.getData("General_Data", "TC_ID").contains("Account"))  {
 			event.setField("WhoId", sContactID);

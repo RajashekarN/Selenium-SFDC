@@ -77,16 +77,24 @@ public class LeadsFunctions extends ReusableLibrary {
 	}
 
 	public String createNewLead() {
-		String resultId = null;
+		String resultId = null, sAccountID, sCompany_Name;
 		establishConnection.establishConnection();
 		SObject lead = new SObject();
 		lead.setType("Lead");
 		lead.setField("FirstName", Utility_Functions.xGenerateAlphaNumericString() + "_" + "First Name");
 		lead.setField("LastName", Utility_Functions.xGenerateAlphaNumericString() + "_" + "Second Name");
 		lead.setField("Phone", dataTable.getData("General_Data", "Direct Line"));
-		SearchTextSOQL companyName = new SearchTextSOQL(scriptHelper);
-		String company_Name = companyName.fetchRecord("Lead", "Name");
-		lead.setField("Company", company_Name);
+		SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
+		String company_Name = searchTextSOQL.fetchRecord("Lead", "Name");
+		if(company_Name==null) {
+			AccountsFunctions accountsFunctions = new AccountsFunctions(scriptHelper);
+			sAccountID = accountsFunctions.createAccountRequiredFields();
+			String query = "Select Name from Account where Id = " + "'" + sAccountID + "'";
+			sCompany_Name = searchTextSOQL.fetchRecordFieldValue("Name", query);
+			lead.setField("Company", sCompany_Name);
+		} else {
+			lead.setField("Company", company_Name);
+		}
 		SObject[] leads = new SObject[1];
 		leads[0] = lead;
 		System.out.println(EstablishConnection.connection);

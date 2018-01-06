@@ -132,7 +132,8 @@ public class LoginPage extends ReusableLibrary {
 		} else if (environment.equals("FTE2")) {
 			driver.get(properties.getProperty("ApplicationFTE2Url"));
 		}*/
-		driver.get(properties.getProperty("ApplicationUrl"));
+		String sApplicationUrl = properties.getProperty("ApplicationUrl");
+		driver.get(sApplicationUrl);
 		Utility_Functions.xWaitForElementPresent(driver, txt_userName, 10);
 	}
 
@@ -698,12 +699,12 @@ public class LoginPage extends ReusableLibrary {
 				Utility_Functions.xWaitForElementPresent(driver, btn_LogIn, 3);
 				Utility_Functions.xClick(driver, btn_LogIn, true);
 				try {
+					Utility_Functions.xWaitForElementPresent(driver, changePasswordHeader, 3);
+				} catch (Exception e) {
 					if (continueLink.isDisplayed()) {
 						Utility_Functions.xClick(driver, continueLink, true);
 						report.updateTestLog("Scheduled Maintenance Window", "Clicking on continue link from the scheduled maintenance window", Status.PASS);
 					}
-				} catch (Exception e) {
-					Utility_Functions.xWaitForElementPresent(driver, changePasswordHeader, 3);
 				}
 				Utility_Functions.xWaitForElementPresent(driver, currentPassword, 3);
 				Utility_Functions.xSendKeys(driver, currentPassword, sCurrentPassword);
@@ -728,6 +729,7 @@ public class LoginPage extends ReusableLibrary {
 						Status.PASS);
 				Utility_Functions.timeWait(4);
 				logout();
+				System.out.println("Password has been changed successfully:::" + userName);
 				Utility_Functions.timeWait(3);
 				// driver.quit();
 			}
