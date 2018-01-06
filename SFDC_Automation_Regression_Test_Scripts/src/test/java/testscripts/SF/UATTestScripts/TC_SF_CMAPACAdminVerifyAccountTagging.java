@@ -20,7 +20,7 @@ import com.cognizant.Craft.*;
  */
 
 public class TC_SF_CMAPACAdminVerifyAccountTagging extends CRAFTTestCase {
-	@Test(dataProvider = "UATTestScripts")
+	@Test(groups= {"UAT","UI","Admin","Account","Tagging"},dataProvider = "UATTestScripts")
 	public void runTC_SF_CMAPACAdminVerifyAccountTagging(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)

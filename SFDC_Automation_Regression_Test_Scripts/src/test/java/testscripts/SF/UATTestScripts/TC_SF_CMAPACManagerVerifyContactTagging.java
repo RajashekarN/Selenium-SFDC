@@ -20,7 +20,7 @@ import com.cognizant.Craft.*;
  */
 
 public class TC_SF_CMAPACManagerVerifyContactTagging extends CRAFTTestCase {
-	@Test(dataProvider = "UATTestScripts")
+	@Test(groups= {"UAT","UI","Manager","Contact","Tagging"},dataProvider = "UATTestScripts")
 	public void runTC_SF_CMAPACManagerVerifyContactTagging(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)

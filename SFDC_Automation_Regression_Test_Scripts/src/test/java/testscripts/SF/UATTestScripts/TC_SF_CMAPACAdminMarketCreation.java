@@ -19,7 +19,7 @@ import com.cognizant.Craft.*;
  */
 
 public class TC_SF_CMAPACAdminMarketCreation extends CRAFTTestCase {
-	@Test(dataProvider = "UATTestScripts")
+	@Test(groups= {"UAT","API","Admin","Market"},dataProvider = "UATTestScripts")
 	public void runTC_SF_CMAPACManagerMarketCreation(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)

@@ -20,7 +20,7 @@ import com.cognizant.Craft.*;
 
 public class TC_SF_CMAPACAdminOpportunityActivityTaskEvent extends CRAFTTestCase {
 	
-	@Test(dataProvider = "UATTestScripts")
+	@Test(groups= {"UAT","API","Admin","Opportunity","Event"},dataProvider = "UATTestScripts")
 	public void runTC_SF_CMAPACAdminOpportunityActivityTaskEvent(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)

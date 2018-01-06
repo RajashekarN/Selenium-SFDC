@@ -20,7 +20,7 @@ import com.cognizant.Craft.*;
  */
 
 public class TC_SF_DAASIADataCreateSubscriptions extends CRAFTTestCase {
-	@Test(dataProvider = "UATTestScripts")
+	@Test(groups= {"UAT","API","DataAdmin","Subscription"},dataProvider = "UATTestScripts")
 	public void runTC_SF_DAASIADataCreateSubscriptions(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)

@@ -20,7 +20,7 @@ import com.cognizant.Craft.*;
  */
 
 public class TC_SF_CMAPACManagerContactsSectionCreation extends CRAFTTestCase {
-	@Test(dataProvider = "UATTestScripts")
+	@Test(groups= {"UAT","API","Manager","Contacts","Section"},dataProvider = "UATTestScripts")
 	public void runTC_SF_CMAPACManagerContactsSectionCreation(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)

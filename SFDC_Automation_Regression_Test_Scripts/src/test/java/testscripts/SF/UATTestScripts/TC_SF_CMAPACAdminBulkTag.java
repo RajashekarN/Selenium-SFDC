@@ -13,7 +13,7 @@ import com.cognizant.framework.selenium.SeleniumTestParameters;
 
 public class TC_SF_CMAPACAdminBulkTag extends CRAFTTestCase{
 
-	@Test(dataProvider = "UATTestScripts")
+	@Test(groups= {"UAT","API","Admin","BulkTag"},dataProvider = "UATTestScripts")
 	public void runTC_SF_CMAPACAdminBulkTag(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)

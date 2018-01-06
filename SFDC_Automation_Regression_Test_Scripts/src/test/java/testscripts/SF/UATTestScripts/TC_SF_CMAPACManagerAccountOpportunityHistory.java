@@ -20,7 +20,7 @@ import com.cognizant.Craft.*;
 
 public class TC_SF_CMAPACManagerAccountOpportunityHistory extends CRAFTTestCase{
 	
-	@Test(dataProvider = "UATTestScripts")
+	@Test(groups= {"UAT","UI","Manager","Account","Opportunity"},dataProvider = "UATTestScripts")
 	public void runTC_SF_CMAPACManagerAccountOpportunityHistory(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)

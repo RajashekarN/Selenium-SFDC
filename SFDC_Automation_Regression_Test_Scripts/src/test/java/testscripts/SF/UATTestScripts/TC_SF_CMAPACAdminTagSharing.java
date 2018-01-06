@@ -13,7 +13,7 @@ import com.cognizant.framework.selenium.SeleniumTestParameters;
 
 public class TC_SF_CMAPACAdminTagSharing extends CRAFTTestCase{
 
-	@Test(dataProvider = "UATTestScripts")
+	@Test(groups= {"UAT","UI","Admin","Tag"},dataProvider = "UATTestScripts")
 	public void runTC_SF_CMAPACAdminTagSharing(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)

@@ -20,7 +20,7 @@ import com.cognizant.Craft.*;
  */
 
 public class TC_SF_CMAMERAdminInstallmentOpportunityModification extends CRAFTTestCase {
-	@Test(dataProvider = "UATTestScripts")
+	@Test(groups= {"UAT","API","Admin","Opportunity","Installment"},dataProvider = "UATTestScripts")
 	public void runTC_SF_CMAMERAdminInstallmentOpportunityModification(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
