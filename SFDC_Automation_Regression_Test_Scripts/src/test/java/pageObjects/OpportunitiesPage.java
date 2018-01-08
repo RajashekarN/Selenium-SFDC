@@ -1511,7 +1511,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(7);
 		report.updateTestLog("Verify Create Activity Opportunity", "All Opportunity are displayed successfully:::", Status.PASS);
 		List<WebElement> contactList = driver
-				.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+				.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'006')]"));
 		Utility_Functions.xclickRandomElement(contactList);
 		Utility_Functions.timeWait(2);
 		report.updateTestLog("Verify Create Activity Account ", "The Account is Displayed ", Status.PASS);
@@ -3013,6 +3013,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		accountName.sendKeys(Keys.ENTER);
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xSelectDropdownByIndex(assignmentTypeOpp, 1);
+		
 		System.out.println(Calendar.getInstance());
 		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 		Date date = new Date();
@@ -12274,9 +12275,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, recentlyViewed, true);
 		Utility_Functions.xWaitForElementPresent(driver,allActiveOpportunities, 3);
 		Utility_Functions.xClick(driver, allActiveOpportunities, true);
-		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(6);
 		Utility_Functions.xClick(driver, OpportunityList, true);
-		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(4);
 		Utility_Functions.xSwitchtoFrame(driver, addTag);
 		Utility_Functions.xClick(driver, addTag, true);
 		Utility_Functions.xSendKeys(driver, privatetag, dataTable.getData("General_Data", "Private Tag"));
@@ -12292,16 +12293,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 		}
 
 		Utility_Functions.xClick(driver, PrivateTagged, true);
-		Utility_Functions.xSwitchtoFrame(driver, PrivateTagPage);
-		Utility_Functions.xWaitForElementPresent(driver,PrivateTagPage, 3);
-
-		if(PrivateTagPage.isDisplayed()){
-			report.updateTestLog("Verify Opportunity Private Tags", "The Tag is saved in Private Tag Page",
-					Status.PASS);		
-		}else{
-			report.updateTestLog("Verify Opportunity Private Tags", "The Tag is not saved in Private Tag Page",
-					Status.FAIL);
-		}
+		report.updateTestLog("Verify Opportunity Private Tags", "The Private tag is saved in Private Tag Page",
+				Status.FAIL);
+		
 	}
 
 	public void opportunitySplit() {
@@ -12317,10 +12311,11 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, estimatedGrossFeeField, true);
 		Utility_Functions.xSendKeys(driver, estimatedGrossFeeField, "10,000.00");
 		Utility_Functions.xClick(driver, save, true);
-		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(5);
 		Utility_Functions.xClick(driver, related, true);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xClick(driver, addButtonshareOpportunity, true);
+		Utility_Functions.timeWait(4);
+		Utility_Functions.xClickHiddenElement(driver, addButtonshareOpportunity);
+		//Utility_Functions.xClick(driver, addButtonshareOpportunity, true);
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xSwitchtoFrame(driver, SearchUserTeamRole);
 		Utility_Functions.xClickHiddenElement(driver, SearchUserTeamRole);
@@ -12352,7 +12347,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		driver.switchTo().frame(driver.findElement(By.xpath("//iframe")));
 		splitPercent.clear();
 		Utility_Functions.timeWait(3);
-		splitPercent.sendKeys("100");
+		splitPercent.sendKeys("0");
 		SplitSecond.clear();
 		SplitSecond.sendKeys("0");
 		
@@ -12404,17 +12399,18 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
 		Utility_Functions.xclickgetTextofFirstElementfromList(opportunitiesList);
 		Utility_Functions.xWaitForElementPresent(driver, editButton, 3);
-		Utility_Functions.xClick(driver, editButton, true);
+		/*Utility_Functions.xClick(driver, editButton, true);
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xScrollWindowToElement(driver, estimatedGrossFeeField);
 		Utility_Functions.xClick(driver, estimatedGrossFeeField, true);
 		Utility_Functions.xSendKeys(driver, estimatedGrossFeeField, "10,000.00");
 		Utility_Functions.xClick(driver, save, true);
-		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(2);*/
 		Utility_Functions.xClick(driver, related, true);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xClick(driver, addButtonshareOpportunity, true);
-		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(4);
+		Utility_Functions.xClickHiddenElement(driver, addButtonshareOpportunity);
+		//Utility_Functions.xClick(driver, addButtonshareOpportunity, true);
+		Utility_Functions.timeWait(3);
 		Utility_Functions.xSwitchtoFrame(driver, SearchUserTeamRole);
 		Utility_Functions.xClickHiddenElement(driver, SearchUserTeamRole);
 		Utility_Functions.xSendKeys(driver, user1, "Inactive User");
@@ -12444,10 +12440,11 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, estimatedGrossFeeField, true);
 		Utility_Functions.xSendKeys(driver, estimatedGrossFeeField, "10,000.00");
 		Utility_Functions.xClick(driver, save, true);
-		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(6);
 		Utility_Functions.xClick(driver, related, true);
 		Utility_Functions.timeWait(2);
-		Utility_Functions.xClick(driver, addButtonshareOpportunity, true);
+		Utility_Functions.xClickHiddenElement(driver, addButtonshareOpportunity);
+		//Utility_Functions.xClick(driver, addButtonshareOpportunity, true);
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xSwitchtoFrame(driver, SearchUserTeamRole);
 		Utility_Functions.xClickHiddenElement(driver, SearchUserTeamRole);
@@ -12479,10 +12476,10 @@ public class OpportunitiesPage extends ReusableLibrary {
 		driver.switchTo().frame(driver.findElement(By.xpath("//iframe")));
 		splitPercent.clear();
 		Utility_Functions.timeWait(3);
-		splitPercent.sendKeys("60");
+		splitPercent.sendKeys("0");
 		SplitSecond.clear();
 		Utility_Functions.timeWait(3);
-		SplitSecond.sendKeys("40");
+		SplitSecond.sendKeys("0");
 		try {
 			Utility_Functions.xClick(driver, saveOpportunitySplit, true);
 		} catch (Exception e) {

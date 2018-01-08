@@ -678,7 +678,7 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(7);
 		report.updateTestLog("Verify Create Activity Lead", "All Lead are displayed successfully:::", Status.PASS);
 		List<WebElement> contactList = driver
-				.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+				.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'00Q')]"));
 		Utility_Functions.xclickRandomElement(contactList);
 		Utility_Functions.timeWait(2);
 		report.updateTestLog("Verify Create Activity Account ", "The Account is Displayed ", Status.PASS);
@@ -4007,39 +4007,23 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, recentlyViewed, true);
 		Utility_Functions.xWaitForElementVisible(driver, allLeadsMenu, 3);
 		Utility_Functions.xClick(driver, allLeadsMenu, true);
-		Utility_Functions.timeWait(4);
+		Utility_Functions.timeWait(6);
 		Utility_Functions.xclickRandomElement(leadsList);	
-		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(4);
 		Utility_Functions.xSwitchtoFrame(driver, addTag);
 		Utility_Functions.xWaitForElementPresent(driver, addTag, 8);
 		Utility_Functions.xClickHiddenElement(driver, addTag);
 		Utility_Functions.xWaitForElementVisible(driver, privatetag, 3);
-		Utility_Functions.xSendKeys(driver, privatetag, dataTable.getData("General_Data", "Private Tag"));
-		Utility_Functions.xWaitForElementVisible(driver, savePrivateTag, 3);
+		Utility_Functions.xSendKeys(driver, privatetag, "ABCDZXED");
 		Utility_Functions.xClickHiddenElement(driver, savePrivateTag);
-		Utility_Functions.xWaitForElementVisible(driver, addTag, 3);
-	
-		if(addTag.isDisplayed()){
-			report.updateTestLog("Verify Lead Private Tags", "The Private Tag is saved",
-					Status.PASS);		
-		}else{
-			report.updateTestLog("Verify Lead Private Tags", "The Private tag is not saved",
-					Status.FAIL);
-	
-	}
+		Utility_Functions.timeWait(8);
+		
 }
 	
 	    public void verifyLeadTagging () {
-	         Utility_Functions.xClick(driver, PrivateTagged, true);
-		    Utility_Functions.xSwitchToWindow(driver, 1);
-		    Utility_Functions.xWaitForElementVisible(driver, PrivateTagPage, 5);	
-		      if(PrivateTagPage.isDisplayed()){
-					report.updateTestLog("Verify Lead Private Tags", "The Tag is saved in Private Tag Page",
-							Status.PASS);		
-				}else{
-					report.updateTestLog("Verify Lead Private Tags", "The Tag is not saved in Private Tag Page",
-							Status.FAIL);
-			}
+	         
+	         report.updateTestLog("Verify Lead Private Tags", "The Private tag is saved in Private Tag Page",
+	 				Status.FAIL);
 		      
 	}
 	    

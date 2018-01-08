@@ -127,6 +127,19 @@ public class BC_API_Test extends ReusableLibrary {
 	public void bc_createOppActivity(){
 		taskEventsFunctions.createTaskbyActivityDate();
 	}
+	
+	public void bc_createAccountActivityOrder() throws InterruptedException{
+		HashMap<String,String> returnmap=taskEventsFunctions.createTaskbyActivityDate();
+		HashMap<String,String> returnmapEvent=taskEventsFunctions.createEventbyActivityDate(returnmap.get("accountId"));
+		bc_loginApi();
+		
+		String accountName= sfAccountsPage.selectAccountWithId(returnmap.get("accountId"));
+		
+			sfActivityPage.validateAccountActivity(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
+			sfActivityPage.validateEventActivity(returnmapEvent.get("past"),returnmapEvent.get("present"),returnmapEvent.get("future"));
+		
+		
+	}
 	public void bc_createAccountActivityAPI() throws InterruptedException{
 		HashMap<String,String> returnmap=taskEventsFunctions.createTaskbyActivityDate();
 		bc_loginApi();
@@ -140,9 +153,10 @@ public class BC_API_Test extends ReusableLibrary {
 			sfActivityPage.validateAccountActivity(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
 		}
 		
+		
 	}
 	public void bc_createAccountEventAPI() throws InterruptedException{
-		HashMap<String,String> returnmap=taskEventsFunctions.createEventbyActivityDate();
+		HashMap<String,String> returnmap=taskEventsFunctions.createEventbyActivityDate(null);
 		bc_loginApi();
 		
 		sfAccountsPage.selectAccountWithId(returnmap.get("accountId"));
@@ -153,13 +167,26 @@ public class BC_API_Test extends ReusableLibrary {
 	}
 	
 	public void bc_createLeadEventAPI() throws InterruptedException{
-		HashMap<String,String> returnmap=taskEventsFunctions.createEventbyActivityDate();
+		HashMap<String,String> returnmap=taskEventsFunctions.createEventbyActivityDate(null);
 		bc_loginApi();
 		
 		sfLeadPage.selectLeadById(returnmap.get("leadId"));
 		if(dataTable.getData("General_Data", "TC_ID").contains("Event") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") && !dataTable.getData("General_Data", "TC_ID").contains("Expand") ){
 			sfActivityPage.validateEventActivity(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
 		}
+		
+	}
+	
+	public void bc_createContactActivityOrder() throws InterruptedException{
+		HashMap<String,String> returnmap=taskEventsFunctions.createTaskbyActivityDate();
+		HashMap<String,String> returnmapEvent=taskEventsFunctions.createEventbyActivityDate(returnmap.get("contactId"));
+		bc_loginApi();
+		
+		String accountName= sfAccountsPage.selectAccountWithId(returnmap.get("contactId"));
+		
+			sfActivityPage.validateAccountActivity(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
+			sfActivityPage.validateEventActivity(returnmapEvent.get("past"),returnmapEvent.get("present"),returnmapEvent.get("future"));
+		
 		
 	}
 	public void bc_createContactActivityAPI() throws InterruptedException{
@@ -175,7 +202,7 @@ public class BC_API_Test extends ReusableLibrary {
 		}
 	}
 	public void bc_createContactEventAPI() throws InterruptedException{
-		HashMap<String,String> returnmap=taskEventsFunctions.createEventbyActivityDate();
+		HashMap<String,String> returnmap=taskEventsFunctions.createEventbyActivityDate(null);
 		bc_loginApi();
 		
 		sfContactsPage.selectContactById(returnmap.get("contactId"));
@@ -184,7 +211,18 @@ public class BC_API_Test extends ReusableLibrary {
 		}
 		
 	}
-	
+	public void bc_createOpportunityActivityOrder() throws InterruptedException{
+		HashMap<String,String> returnmap=taskEventsFunctions.createTaskbyActivityDate();
+		HashMap<String,String> returnmapEvent=taskEventsFunctions.createEventbyActivityDate(returnmap.get("opportunityId"));
+		bc_loginApi();
+		
+		String accountName= sfAccountsPage.selectAccountWithId(returnmap.get("opportunityId"));
+		
+			sfActivityPage.validateAccountActivity(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
+			sfActivityPage.validateEventActivity(returnmapEvent.get("past"),returnmapEvent.get("present"),returnmapEvent.get("future"));
+		
+		
+	}
 	public void bc_createOpportunityActivityAPI() throws InterruptedException{
 		HashMap<String,String> returnmap=taskEventsFunctions.createTaskbyActivityDate();
 		bc_loginApi();
@@ -199,7 +237,7 @@ public class BC_API_Test extends ReusableLibrary {
 	}
 	
 	public void bc_createOpportunityEventAPI() throws InterruptedException{
-		HashMap<String,String> returnmap=taskEventsFunctions.createEventbyActivityDate();
+		HashMap<String,String> returnmap=taskEventsFunctions.createEventbyActivityDate(null);
 		bc_loginApi();
 		sfOppPage.selectOpportunityById(returnmap.get("opportunityId"));
 		//String accountName= sfContactsPage.selectContactById(returnmap.get("contactId"));
@@ -208,7 +246,18 @@ public class BC_API_Test extends ReusableLibrary {
 		}
 		
 	}
-	
+	public void bc_createLeadActivityOrder() throws InterruptedException{
+		HashMap<String,String> returnmap=taskEventsFunctions.createTaskbyActivityDate();
+		HashMap<String,String> returnmapEvent=taskEventsFunctions.createEventbyActivityDate(returnmap.get("leadId"));
+		bc_loginApi();
+		
+		String accountName= sfAccountsPage.selectAccountWithId(returnmap.get("leadId"));
+		
+			sfActivityPage.validateAccountActivity(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
+			sfActivityPage.validateEventActivity(returnmapEvent.get("past"),returnmapEvent.get("present"),returnmapEvent.get("future"));
+		
+		
+	}
 	public void bc_createLeadActivityAPI() throws InterruptedException{
 		HashMap<String,String> returnmap=taskEventsFunctions.createTaskbyActivityDate();
 		bc_loginApi();

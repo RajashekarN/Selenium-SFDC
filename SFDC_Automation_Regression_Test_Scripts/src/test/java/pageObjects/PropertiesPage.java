@@ -3157,9 +3157,9 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, recentlyViewed, true);
 		Utility_Functions.xWaitForElementPresent(driver,allProperties, 3);
 		Utility_Functions.xClick(driver, allProperties, true);
-		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(8);
 		Utility_Functions.xClick(driver, PropertyList, true);
-		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(4);
 		Utility_Functions.xSwitchtoFrame(driver, addTag);
 		Utility_Functions.xClick(driver, addTag, true);
 		Utility_Functions.xSendKeys(driver, privatetag, dataTable.getData("General_Data", "Private Tag"));
@@ -3167,24 +3167,16 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver,addTag, 3);
 
 		if(addTag.isDisplayed()){
-			report.updateTestLog("Verify Opportunity Private Tags", "The Private Tag is saved",
+			report.updateTestLog("Verify Property Private Tags", "The Private Tag is saved",
 					Status.PASS);		
 		}else{
-			report.updateTestLog("Verify Opportunity Private Tags", "The Private tag is not saved",
+			report.updateTestLog("Verify Property Private Tags", "The Private tag is not saved",
 					Status.FAIL);
 		}
 
 		Utility_Functions.xClick(driver, PrivateTagged, true);
-		Utility_Functions.xSwitchtoFrame(driver, PrivateTagPage);
-		Utility_Functions.xWaitForElementPresent(driver,PrivateTagPage, 3);
-
-		if(PrivateTagPage.isDisplayed()){
-			report.updateTestLog("Verify Property Private Tags", "The Tag is saved in Private Tag Page",
-					Status.PASS);		
-		}else{
-			report.updateTestLog("Verify Property Private Tags", "The Tag is not saved in Private Tag Page",
-					Status.FAIL);
-		}
+		 report.updateTestLog("Verify Property Private Tags", "The Private tag is saved in Private Tag Page",
+	 				Status.FAIL);
 	}
 	
 	public void marketCreation () {

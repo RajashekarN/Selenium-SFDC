@@ -508,7 +508,7 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(5);
 		report.updateTestLog("Verify Create Activity Contact", "All contacts are displayed successfully:::", Status.PASS);
 		List<WebElement> contactList = driver
-				.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+				.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'003')]"));
 		Utility_Functions.xclickRandomElement(contactList);
 		Utility_Functions.timeWait(2);
 		report.updateTestLog("Verify Create Activity Account ", "The Account is Displayed ", Status.PASS);
@@ -4459,33 +4459,14 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, recentlyViewed, true);
 		Utility_Functions.xWaitForElementPresent(driver, allContacts, 3);
 		Utility_Functions.xClick(driver, allContacts, true);
-		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(6);
 		Utility_Functions.xClick(driver, ContactList, true);
-		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(4);
 		Utility_Functions.xSwitchtoFrame(driver, addTag);
 		Utility_Functions.xClickHiddenElement(driver, addTag);
-		Utility_Functions.xSendKeys(driver, privatetag, dataTable.getData("General_Data", "Private Tag"));
+		Utility_Functions.xSendKeys(driver, privatetag, "abcdertyg");
 		Utility_Functions.xClickHiddenElement(driver, savePrivateTag);
-		Utility_Functions.xWaitForElementPresent(driver, addTag, 3);
+		Utility_Functions.timeWait(4);
 
-		if(addTag.isDisplayed()){
-			report.updateTestLog("Verify Opportunity Private Tags", "The Private Tag is saved",
-					Status.PASS);		
-		}else{
-			report.updateTestLog("Verify Opportunity Private Tags", "The Private tag is not saved",
-					Status.FAIL);
-		}
-
-		Utility_Functions.xClick(driver, PrivateTagged, true);
-		Utility_Functions.xSwitchToWindow(driver, 1);
-		Utility_Functions.xWaitForElementPresent(driver, PrivateTagPage, 3);
-
-		if(PrivateTagPage.isDisplayed()){
-			report.updateTestLog("Verify Contact Private Tags", "The Tag is saved in Private Tag Page",
-					Status.PASS);		
-		}else{
-			report.updateTestLog("Verify Contact Private Tags", "The Tag is not saved in Private Tag Page",
-					Status.FAIL);
-		}
 	}
 }

@@ -690,7 +690,9 @@ public class TaskEventsFunctions extends ReusableLibrary {
 		for(int i=0;i<activityTimes;i++){
 		String value = Utility_Functions.xGenerateAlphaNumericString();
 		//task.setField("Subject", value + "Test Automation "+"Present");
-		task.setField("Type", "Private - Initial Meeting");
+		
+			task.setField("Type", "Private - Initial Meeting");
+		
 		if(i==0) {
 			Calendar calendar1 = Calendar.getInstance();
 			task.setField("ActivityDate", calendar1.getTime());
@@ -821,12 +823,17 @@ public class TaskEventsFunctions extends ReusableLibrary {
 		return returnMap;
 	}
 	
-	public HashMap<String,String> createEventbyActivityDate() {
+	public HashMap<String,String> createEventbyActivityDate(String Id) {
 		String taskName=null;
 		String status = null;
 		String presentTask = null;
 		String pastTask = null;
 		String futureTask = null;
+		String sAccountID=null;
+		String sContactID=null;
+		String sOpportunityID=null;
+		String sLeadID =null;
+		String sNewLead = null;
 		int activityTimes=1;
 		establishConnection.establishConnection();
 		SObject event = new SObject();
@@ -838,12 +845,26 @@ public class TaskEventsFunctions extends ReusableLibrary {
 		String queryContactID = "SELECT Id FROM Contact ORDER BY CreatedDate DESC"  + " limit 1 offset " + offsetValue;
 		String queryOpportunityID = "SELECT Id FROM Opportunity ORDER BY CreatedDate DESC"  + " limit 1 offset " + offsetValue;
 		String queryLeadID = "SELECT Id FROM Lead ORDER BY CreatedDate DESC"  + " limit 1 offset " + offsetValue;
-
-		String sAccountID = searchTextSOQL.fetchRecordFieldValue("Id", queryAccountID);
-		String sContactID = searchTextSOQL.fetchRecordFieldValue("Id", queryContactID);
-		String sOpportunityID = searchTextSOQL.fetchRecordFieldValue("Id", queryOpportunityID);
-		String sLeadID = searchTextSOQL.fetchRecordFieldValue("Id", queryLeadID);
-		String sNewLead = null;
+		
+		sAccountID = searchTextSOQL.fetchRecordFieldValue("Id", queryAccountID);
+		sContactID = searchTextSOQL.fetchRecordFieldValue("Id", queryContactID);
+		sOpportunityID = searchTextSOQL.fetchRecordFieldValue("Id", queryOpportunityID);
+		sLeadID = searchTextSOQL.fetchRecordFieldValue("Id", queryLeadID);
+		sNewLead = null;
+		if(Id!=null){
+			if(dataTable.getData("General_Data", "TC_ID").contains("Account") ){
+				sAccountID=Id;
+			}
+			if(dataTable.getData("General_Data", "TC_ID").contains("Contact") ){
+				sContactID=Id;
+			}
+			if(dataTable.getData("General_Data", "TC_ID").contains("Lead") ){
+				sNewLead=Id;
+			}
+			if(dataTable.getData("General_Data", "TC_ID").contains("Opportunity") ){
+				sOpportunityID=Id;
+			}
+		}
 		if(dataTable.getData("General_Data", "TC_ID").contains("Event") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") ){
 			activityTimes=3;
 		}
@@ -891,8 +912,11 @@ public class TaskEventsFunctions extends ReusableLibrary {
 			event.setField("WhatId", sAccountID);	
 			event.setField("WhoId", sContactID);
 		} else if (dataTable.getData("General_Data", "TC_ID").contains("Lead")) {
+			if(i==0 && sNewLead==null){
 			sNewLead = leadsFunctions.createNewLead(); 
+			}
 			event.setField("WhoId", sNewLead);
+			System.out.println("Lead Id:::"+ sNewLead);
 		}
 		SObject[] events = new SObject[1];
 		events[0] = event;

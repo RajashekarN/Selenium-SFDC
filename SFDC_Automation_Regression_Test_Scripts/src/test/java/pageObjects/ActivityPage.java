@@ -145,8 +145,9 @@ public class ActivityPage extends ReusableLibrary {
 		}
 		if(dataTable.getData("General_Data", "TC_ID").contains("Activity") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") ){
 			for(int i=1;i<=activityTimes;i++){
+				Utility_Functions.xScrollWindowTop(driver);
 				Utility_Functions.xWaitForElementPresent(driver, addActivity, 3);
-				Utility_Functions.xClick(driver, addActivity, true);
+				Utility_Functions.xClickHiddenElement(driver, addActivity);
 				report.updateTestLog("Verify New Activity Page Layout ", "The New Activity in the Details page is Displayed ",
 						Status.PASS);
 				if((dataTable.getData("General_Data", "TC_ID").contains("AccountsCreationOfNewActivityPage")) || 
@@ -215,7 +216,9 @@ public class ActivityPage extends ReusableLibrary {
 				    Date newDate = calendar.getTime();
 				    Utility_Functions.xWaitForElementPresent(driver, activityInputDate, 3);
 					Utility_Functions.xSendKeys(driver, activityInputDate, dateFormat.format(newDate).toString());
+					
 				}
+				Utility_Functions.xScrollWindowOnce(driver);
 				if(!dataTable.getData("General_Data", "TC_ID").contains("Lead")){
 					if((dataTable.getData("General_Data", "TC_ID").contains("ContactsReminderSentFunctionality")) || 
 							(dataTable.getData("General_Data", "TC_ID").contains("ContactsCreationOfNewActivityPage")) ||
@@ -310,7 +313,7 @@ public class ActivityPage extends ReusableLibrary {
 			for(int i=1;i<=activityTimes;i++){
 				if(i==1){
 					Utility_Functions.xScrollWindowTop(driver);
-					Utility_Functions.xWaitForElementPresent(driver, newEvent, 3);
+					Utility_Functions.xClickHiddenElement(driver, newEvent);
 					Utility_Functions.xClick(driver, newEvent, true);
 				}else{
 					List<WebElement> eleList= driver.findElements(By.xpath("//span[text()='Add']"));
@@ -504,7 +507,7 @@ public class ActivityPage extends ReusableLibrary {
 			Utility_Functions.timeWait(3);
 			}
 		
-		if(!dataTable.getData("General_Data", "TC_ID").contains("Lead") &&!(dataTable.getData("General_Data", "TC_ID").contains("Contact") && properties.getProperty("RunEnvironment").equalsIgnoreCase("FTE2"))){
+		if(!dataTable.getData("General_Data", "TC_ID").contains("Lead") &&!(dataTable.getData("General_Data", "TC_ID").contains("Contact") && properties.getProperty("RunEnvironment").equalsIgnoreCase("FTE2"))&&!(dataTable.getData("General_Data", "TC_ID").contains("Contact") && properties.getProperty("RunEnvironment").equalsIgnoreCase("UAT2"))){
 		System.out.println(driver.findElement(By.xpath("//div[@class='slds-media slds-tile slds-media--small']/descendant::span[text()='"+activityPresent+"']/ancestor::div[1]/following-sibling::div[1][text()='Private - Initial Meeting']")).isDisplayed());
 		System.out.println(driver.findElement(By.xpath("//div[@class='slds-media slds-tile slds-media--small']/descendant::span[text()='"+activityPresent+"']/ancestor::div[1]/following-sibling::div[2][text()='Open']")).isDisplayed());
 		

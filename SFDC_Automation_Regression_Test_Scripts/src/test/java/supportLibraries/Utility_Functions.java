@@ -207,7 +207,7 @@ public class Utility_Functions extends ReusableLibrary {
 		
 		for(WebElement element : eleList){
 			if(element.isDisplayed()){
-				xClick(driver, element, true);
+				xClickHiddenElement(driver, element);
 				break;
 			}
 		}
