@@ -1,11 +1,7 @@
 package pagesAPI;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Random;
-
-import org.openqa.selenium.support.PageFactory;
-
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
@@ -32,9 +28,6 @@ public class BudgetsTargetsFunctions extends ReusableLibrary {
 
 	public BudgetsTargetsFunctions(ScriptHelper scriptHelper) {
 		super(scriptHelper);
-		PageFactory.initElements(driver.getWebDriver(), this);
-		// new WebDriverUtil(driver);
-		// Utility_Functions utility = new Utility_Functions(scriptHelper);
 	}
 
 	static SaveResult[] results;
@@ -79,6 +72,12 @@ public class BudgetsTargetsFunctions extends ReusableLibrary {
 		}*/
 	}
 
+	/**
+	 * Function for the creation of Budgets Edit
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
 	public void budgetEdit() {
 		establishConnection.establishConnection();
 		SObject[] records = new SObject[1];
@@ -114,114 +113,129 @@ public class BudgetsTargetsFunctions extends ReusableLibrary {
 		} else {
 			report.updateTestLog("Verify Create Budget/Target", "Budget/Target Edit failed", Status.FAIL);
 		}
-}
-
-public boolean deleteBudgetTarget() {
-	establishConnection.establishConnection();
-	String[] records = new String[1];
-	QueryResult queryResults = null;
-	try {
-		queryResults = EstablishConnection.connection.query("SELECT Id, Start_Date__c FROM Budget_Target__c where Start_Date__c >= 2017-01-01 and Start_Date__c  <= 2017-12-31");
-	} catch (ConnectionException e) {
-		e.printStackTrace();
 	}
-	if (queryResults.getSize() > 0) {
-		for (int i = 0; i < queryResults.getRecords().length; i++) {
-			SObject so = (SObject) queryResults.getRecords()[i];
-			records[i] = so.getId();		            
-			System.out.println("Deleting Id: " + so.getId() + " - Name: "+so.getField("Name"));
-			report.updateTestLog("Verify Delete Buget", "Budget has been deleted successfully:::" + "Deleting Id: " + so.getId() + " - Name: "+so.getField("Name"), Status.PASS);
-		}
-	}
-	try {
-		deleteResults = EstablishConnection.connection.delete(records);
-	} catch (ConnectionException e) {
-		e.printStackTrace();
-	}
-	System.out.println("Result:::" + deleteResults);
-	status = establishConnection.deleteResults(deleteResults);		
-	return status;
-}
-static ArrayList<String> BudgetTargetFields = new ArrayList<String>();
 
-public void BudgetTarget() {
-	BudgetTargetFields.add("CBRE_Professional__c");
-	BudgetTargetFields.add("OwnerId");
-	BudgetTargetFields.add("Budget_Target_Amount__c");
-	BudgetTargetFields.add("CurrencyIsoCode");
-	BudgetTargetFields.add("Start_Date__c");
-	System.out.println("Budget/Target Fields List are::" + BudgetTargetFields);
-}
-
-static ArrayList<String> BudgetTargetFieldsAPI = new ArrayList<String>();
-
-public void budgetsTargetsFieldsValidation() {
-	try {
+	/**
+	 * Function for the deletion of Budgets
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	
+	public boolean deleteBudgetTarget() {
 		establishConnection.establishConnection();
-		BudgetTarget();
-		DescribeLayoutResult dlr = EstablishConnection.connection.describeLayout("Budget_Target__c", null, null);
-		int count=0, countLabelList = 0;
-		for (int i = 0; i < dlr.getLayouts().length; i++) {
-			DescribeLayout layout = dlr.getLayouts()[i];
-			DescribeLayoutSection[] editLayoutSectionList = layout.getEditLayoutSections();
-			// Write the headings of the edit layout sections
-			for (int x = 0; x < editLayoutSectionList.length; x++) {
+		String[] records = new String[1];
+		QueryResult queryResults = null;
+		try {
+			queryResults = EstablishConnection.connection.query("SELECT Id, Start_Date__c FROM Budget_Target__c where Start_Date__c >= 2017-01-01 and Start_Date__c  <= 2017-12-31");
+		} catch (ConnectionException e) {
+			e.printStackTrace();
+		}
+		if (queryResults.getSize() > 0) {
+			for (int i = 0; i < queryResults.getRecords().length; i++) {
+				SObject so = (SObject) queryResults.getRecords()[i];
+				records[i] = so.getId();		            
+				System.out.println("Deleting Id: " + so.getId() + " - Name: "+so.getField("Name"));
+				report.updateTestLog("Verify Delete Buget", "Budget has been deleted successfully:::" + "Deleting Id: " + so.getId() + " - Name: "+so.getField("Name"), Status.PASS);
+			}
+		}
+		try {
+			deleteResults = EstablishConnection.connection.delete(records);
+		} catch (ConnectionException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Result:::" + deleteResults);
+		status = establishConnection.deleteResults(deleteResults);		
+		return status;
+	}
+	
+	/**
+	 * Function for the validating the fields for Budgets
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	
+	static ArrayList<String> BudgetTargetFields = new ArrayList<String>();
+
+	public void BudgetTarget() {
+		BudgetTargetFields.add("CBRE_Professional__c");
+		BudgetTargetFields.add("OwnerId");
+		BudgetTargetFields.add("Budget_Target_Amount__c");
+		BudgetTargetFields.add("CurrencyIsoCode");
+		BudgetTargetFields.add("Start_Date__c");
+		System.out.println("Budget/Target Fields List are::" + BudgetTargetFields);
+	}
+
+	static ArrayList<String> BudgetTargetFieldsAPI = new ArrayList<String>();
+
+	public void budgetsTargetsFieldsValidation() {
+		try {
+			establishConnection.establishConnection();
+			BudgetTarget();
+			DescribeLayoutResult dlr = EstablishConnection.connection.describeLayout("Budget_Target__c", null, null);
+			int count=0, countLabelList = 0;
+			for (int i = 0; i < dlr.getLayouts().length; i++) {
+				DescribeLayout layout = dlr.getLayouts()[i];
+				DescribeLayoutSection[] editLayoutSectionList = layout.getEditLayoutSections();
+				// Write the headings of the edit layout sections
+				for (int x = 0; x < editLayoutSectionList.length; x++) {
+					if(dataTable.getData("General_Data", "TC_ID").contains("CMAPAC")) {
+						if(editLayoutSectionList.length==0) {
+							if(editLayoutSectionList[x].getHeading().equals("Information")) {
+								System.out.println(x + ":::Capital Markets APAC Budget/Target section heading layout section:::" + editLayoutSectionList[x].getHeading());
+								report.updateTestLog(x + ":::Capital Markets APAC Budget/Target section", " has the heading layout section:::" + editLayoutSectionList[x].getHeading(), Status.PASS);
+								count++;
+							}
+						}				
+					}							
+				}	
+				System.out.println(count);			
 				if(dataTable.getData("General_Data", "TC_ID").contains("CMAPAC")) {
-					if(editLayoutSectionList.length==0) {
-						if(editLayoutSectionList[x].getHeading().equals("Information")) {
-							System.out.println(x + ":::Capital Markets APAC Budget/Target section heading layout section:::" + editLayoutSectionList[x].getHeading());
-							report.updateTestLog(x + ":::Capital Markets APAC Budget/Target section", " has the heading layout section:::" + editLayoutSectionList[x].getHeading(), Status.PASS);
-							count++;
-						}
-					}				
-				}							
-			}	
-			System.out.println(count);			
-			if(dataTable.getData("General_Data", "TC_ID").contains("CMAPAC")) {
-				if(editLayoutSectionList.length==1) {
-					for (int k = 0; k < editLayoutSectionList.length; k++) {
-						DescribeLayoutSection els = editLayoutSectionList[k];
-						DescribeLayoutRow[] dlrList = els.getLayoutRows();
-						for (int m = 0; m < dlrList.length; m++) {
-							DescribeLayoutRow lr = dlrList[m];
-							DescribeLayoutItem[] dliList = lr.getLayoutItems();
-							for (int n = 0; n < dliList.length; n++) {
-								DescribeLayoutItem li = dliList[n];
-								if ((li.getLayoutComponents() != null) && (li.getLayoutComponents().length > 0)) {
-									BudgetTargetFieldsAPI.add(li.getLayoutComponents()[0].getValue());
+					if(editLayoutSectionList.length==1) {
+						for (int k = 0; k < editLayoutSectionList.length; k++) {
+							DescribeLayoutSection els = editLayoutSectionList[k];
+							DescribeLayoutRow[] dlrList = els.getLayoutRows();
+							for (int m = 0; m < dlrList.length; m++) {
+								DescribeLayoutRow lr = dlrList[m];
+								DescribeLayoutItem[] dliList = lr.getLayoutItems();
+								for (int n = 0; n < dliList.length; n++) {
+									DescribeLayoutItem li = dliList[n];
+									if ((li.getLayoutComponents() != null) && (li.getLayoutComponents().length > 0)) {
+										BudgetTargetFieldsAPI.add(li.getLayoutComponents()[0].getValue());
+									}
 								}
 							}
+						}	
+						System.out.println("Budget/Target API Label::: " + BudgetTargetFieldsAPI);
+						for(int i1=0; i1 < BudgetTargetFields.size(); i1++) {
+							if(BudgetTargetFieldsAPI.get(i1).equals(BudgetTargetFields.get(i1))) {						
+								System.out.println("Field Label:::" + BudgetTargetFields.get(i1) + " -- is present in CM APAC:::");
+								report.updateTestLog("Verify Field Labels", " has the field label:::" + BudgetTargetFieldsAPI.get(i1), Status.PASS);
+								countLabelList++;
+							}			 
 						}
-					}	
-					System.out.println("Budget/Target API Label::: " + BudgetTargetFieldsAPI);
-					for(int i1=0; i1 < BudgetTargetFields.size(); i1++) {
-						if(BudgetTargetFieldsAPI.get(i1).equals(BudgetTargetFields.get(i1))) {						
-							System.out.println("Field Label:::" + BudgetTargetFields.get(i1) + " -- is present in CM APAC:::");
-							report.updateTestLog("Verify Field Labels", " has the field label:::" + BudgetTargetFieldsAPI.get(i1), Status.PASS);
-							countLabelList++;
-						}			 
+						System.out.println("Count of fields present in Capital Markets Budget/ Target::" + countLabelList);
 					}
-					System.out.println("Count of fields present in Capital Markets Budget/ Target::" + countLabelList);
-				}
-			}					
-		}				
-		if(dataTable.getData("General_Data", "TC_ID").contains("CMAPAC")) {
-			if(count==0) {
-				System.out.println("Capital Markets APAC Budget/Target section has the section present::");
-				report.updateTestLog("Validating Header Sections", "Capital Markets APAC Budget/Target section has the headers present", Status.PASS);
-			}								
-		} 
-		BudgetTargetFields.clear();
-		if (countLabelList == 5) {
-			System.out.println("All the fields are present::");
-			report.updateTestLog("Count of fields present", "All the fields are present Capital Markets APAC Budget/Target section", Status.PASS);
-		} else {
-			System.out.println("All the fields are not present::");
-			report.updateTestLog("Count of fields present", "All the fields are not present Capital Markets APAC Budget/Target section", Status.FAIL);
-		} 		
-	} catch (Exception e) {
-		System.out.println(e.getMessage());
+				}					
+			}				
+			if(dataTable.getData("General_Data", "TC_ID").contains("CMAPAC")) {
+				if(count==0) {
+					System.out.println("Capital Markets APAC Budget/Target section has the section present::");
+					report.updateTestLog("Validating Header Sections", "Capital Markets APAC Budget/Target section has the headers present", Status.PASS);
+				}								
+			} 
+			BudgetTargetFields.clear();
+			if (countLabelList == 5) {
+				System.out.println("All the fields are present::");
+				report.updateTestLog("Count of fields present", "All the fields are present Capital Markets APAC Budget/Target section", Status.PASS);
+			} else {
+				System.out.println("All the fields are not present::");
+				report.updateTestLog("Count of fields present", "All the fields are not present Capital Markets APAC Budget/Target section", Status.FAIL);
+			} 		
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
-}
 
 }

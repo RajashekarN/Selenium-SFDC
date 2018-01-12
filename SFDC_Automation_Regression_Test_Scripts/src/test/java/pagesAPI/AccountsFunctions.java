@@ -2,9 +2,6 @@ package pagesAPI;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.openqa.selenium.support.PageFactory;
-
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
@@ -33,9 +30,6 @@ public class AccountsFunctions extends ReusableLibrary {
 
 	public AccountsFunctions(ScriptHelper scriptHelper) {
 		super(scriptHelper);
-		PageFactory.initElements(driver.getWebDriver(), this);
-		// new WebDriverUtil(driver);
-		// Utility_Functions utility = new Utility_Functions(scriptHelper);
 	}
 
 	static SaveResult[] results;
@@ -142,7 +136,7 @@ public class AccountsFunctions extends ReusableLibrary {
 	}
 
 	/**
-	 * Function for reading multiple rows from SOQL search
+	 * Function for reading multiple rows from SOQL search for Accounts
 	 * 
 	 * @author Vishnuvardhan
 	 *
@@ -181,7 +175,7 @@ public class AccountsFunctions extends ReusableLibrary {
 	}
 
 	/**
-	 * Function for reading multiple rows from SOQL search
+	 * Function for reading multiple rows from SOQL search for Contacts 
 	 * 
 	 * @author Vishnuvardhan
 	 *
@@ -216,8 +210,15 @@ public class AccountsFunctions extends ReusableLibrary {
 		} catch (ConnectionException e) {
 			e.printStackTrace();
 		}
-
 	}
+	
+	/**
+	 * Function for updating multiple accounts
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+
 	public boolean updateMultipleAccounts(List<SObject> accounts) {
 		try {
 			establishConnection.establishConnection();
@@ -245,6 +246,13 @@ public class AccountsFunctions extends ReusableLibrary {
 		}
 		return status;
 	}
+
+	/**
+	 * Function for updating multiple Contacts
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
 
 	public boolean updateMultipleContacts(List<SObject> contacts) {
 		try {
@@ -349,71 +357,14 @@ public class AccountsFunctions extends ReusableLibrary {
 		}
 		return status;
 	}
+	
 
-	/*
-	 *//**
-	 * Function for the saving the results
+	/**
+	 * Function for the validating the fields on the Accounts Page
 	 * 
 	 * @author Vishnuvardhan
 	 *
-	 *//*
-
-	public boolean saveResults() {
-		System.out.println("Results:::" + results);
-		for (int j = 0; j < results.length; j++) {
-			if (results[j].isSuccess()) {
-				result = results[j].getId();
-				System.out.println("Save Results:::" + result);
-				report.updateTestLog("Verify Create/ Update Account", "Result :: " + result, Status.PASS);
-				status = true;
-			} else {
-				for (int i = 0; i < results[j].getErrors().length; i++) {
-					com.sforce.soap.partner.Error err = results[j].getErrors()[i];
-					report.updateTestLog("Verify Create/ Update Account", "Errors were found on item:::" + j,
-							Status.FAIL);
-					report.updateTestLog("Verify Create/ Update Account",
-							"Errors code:::" + err.getStatusCode().toString(), Status.FAIL);
-					report.updateTestLog("Verify Create/ Update Account", "Errors message:::" + err.getMessage(),
-							Status.FAIL);
-					System.out.println("Errors were found on item " + j);
-					System.out.println("Error code::" + err.getStatusCode().toString());
-					System.out.println("Error message::" + err.getMessage());
-					status = false;
-				}
-			}
-		}
-		return status;
-	}
-
-	  *//**
-	  * Function for saving the delete results
-	  * 
-	  * @author Vishnuvardhan
-	  *
-	  *//*
-
-	public boolean deleteResults() {
-		System.out.println("Results:::" + deleteResults);
-		for (int j = 0; j < deleteResults.length; j++) {
-			if (deleteResults[j].isSuccess()) {
-				deleteResults[j].getId();
-				System.out.println("Delete Results:::" + deleteResults[j].getId());
-				report.updateTestLog("Verify Delete Account", "Result :: " + deleteResults[j].getId(), Status.PASS);
-				status = true;
-			} else {
-				errors = deleteResults[j].getErrors();
-				for (int i = 0; i < errors.length; i++) {
-					report.updateTestLog("Verify Delete Account", "Errors message:::" + errors[i].getMessage(),
-							Status.FAIL);
-					System.out.println("Error message::" + errors[i].getMessage());
-					status = false;
-				}
-			}
-		}
-		return status;
-	}
-	   */
-
+	 */
 
 	static ArrayList<String> OBEMEAHeader = new ArrayList<String>();
 
@@ -866,7 +817,7 @@ public class AccountsFunctions extends ReusableLibrary {
 	}
 
 	/**
-	 * Function for the validating the field on the Accounts Page
+	 * Function for the validating the fields on the Accounts Page
 	 * 
 	 * @author Vishnuvardhan
 	 *
@@ -1204,6 +1155,14 @@ public class AccountsFunctions extends ReusableLibrary {
 			report.updateTestLog("Count of fields present", "Not all the fields are present", Status.FAIL);
 		}		
 	}
+	
+
+	/**
+	 * Function for the creating the account with required fields
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
 
 	public String createAccountRequiredFields() {
 		establishConnection.establishConnection();
@@ -1244,7 +1203,7 @@ public class AccountsFunctions extends ReusableLibrary {
 
 
 	/**
-	 * Function for the Account Creation
+	 * Function for the Account creation with specific user
 	 * 
 	 * @author Vishnuvardhan
 	 *
@@ -1280,6 +1239,15 @@ public class AccountsFunctions extends ReusableLibrary {
 		}
 		return accountId;
 	}
+	
+
+	/**
+	 * Function for the describe layout example for Accounts
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	
 	/*public void accountPageFieldsValidation() {
 		try {
 			establishConnection.establishConnectionSpecificUser();

@@ -5,9 +5,6 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Calendar;
 import java.util.Random;
-
-import org.openqa.selenium.support.PageFactory;
-
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
@@ -27,9 +24,6 @@ public class AttachmentsFunctions extends ReusableLibrary {
 
 	public AttachmentsFunctions(ScriptHelper scriptHelper) {
 		super(scriptHelper);
-		PageFactory.initElements(driver.getWebDriver(), this);
-		// new WebDriverUtil(driver);
-		// Utility_Functions utility = new Utility_Functions(scriptHelper);
 	}
 
 	static SaveResult[] results;
@@ -43,7 +37,7 @@ public class AttachmentsFunctions extends ReusableLibrary {
 	int offsetValue = new Random().nextInt(9);
 
 	/**
-	 * Function for the creation of an Task
+	 * Function for the creation of an Attachment
 	 * 
 	 * @author Vishnuvardhan
 	 *
@@ -93,6 +87,12 @@ public class AttachmentsFunctions extends ReusableLibrary {
 		return status;
 	}
 	
+	/**
+	 * Function for the creation of an Attachment for an Opportunity
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
 	public boolean createAttachmentInOpportunity(String opportunityId) {
 		
 		//establishConnection.establishConnectionSpecificUser();
@@ -131,6 +131,5 @@ public class AttachmentsFunctions extends ReusableLibrary {
 		} */
 		return status;
 	}
-
 	
 }

@@ -1291,25 +1291,9 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	public void bc_validateRecalculateAndNewInstallment() {
 		sfOpportunitiesPage.validateRecalculateAndNewInstallment();
 	}
-	/**
-	 * Validating the Opportunities creation
-	 * 
-	 * @author  Ramya
-	 *
-	 */
-	public void bc_validateOpportunity() {
-		opportunitiesFunctions.createOpportunity();
-	}
+
 	
-	/**
-	 * Validating the Opportunities page layout
-	 * 
-	 * @author  Ramya
-	 *
-	 */
-	public void bc_opportunityPageLayout() {
-		opportunitiesFunctions.OpportunitiesPageFieldsValidation();
-	}
+
 	
 	/**
 	 * Validating the Opportunities Tagging

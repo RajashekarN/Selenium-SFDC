@@ -1,9 +1,6 @@
 package pagesAPI;
 
 import java.util.Random;
-
-import org.openqa.selenium.support.PageFactory;
-
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
@@ -24,9 +21,6 @@ public class CampaignsFunctions extends ReusableLibrary {
 
 	public CampaignsFunctions(ScriptHelper scriptHelper) {
 		super(scriptHelper);
-		PageFactory.initElements(driver.getWebDriver(), this);
-		// new WebDriverUtil(driver);
-		// Utility_Functions utility = new Utility_Functions(scriptHelper);
 	}
 
 	static SaveResult[] results;
@@ -79,7 +73,7 @@ public class CampaignsFunctions extends ReusableLibrary {
 	}		
 	
 	/**
-	 * Function for the contact add to Campaign 
+	 * Function for the associating a Campaign 
 	 * 
 	 * @author Vishnuvardhan
 	 *

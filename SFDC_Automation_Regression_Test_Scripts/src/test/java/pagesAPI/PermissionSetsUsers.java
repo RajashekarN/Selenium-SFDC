@@ -2,10 +2,7 @@ package pagesAPI;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
@@ -33,9 +30,6 @@ public class PermissionSetsUsers extends ReusableLibrary {
 
 	public PermissionSetsUsers(ScriptHelper scriptHelper) {
 		super(scriptHelper);
-		PageFactory.initElements(driver.getWebDriver(), this);
-		// new WebDriverUtil(driver);
-		// Utility_Functions utility = new Utility_Functions(scriptHelper);
 	}
 
 	static SaveResult[] results;
@@ -46,15 +40,13 @@ public class PermissionSetsUsers extends ReusableLibrary {
 	CreateUsers createUsers = new CreateUsers(scriptHelper);
 	LoginPage loginPage = new LoginPage(scriptHelper);
 	SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
-	
+
 	/**
 	 * Validating the Permission Sets for different Roles and Profiles
 	 * 
 	 * @author Vishnuvardhan
-	 * @throws Exception
 	 *
 	 */
-
 	public void validatePermissionSets() {
 		establishConnection.establishConnection();
 		loginPage.userNames();
@@ -65,40 +57,12 @@ public class PermissionSetsUsers extends ReusableLibrary {
 		}
 	}
 
-	public void getOrCreateUser() {
-		try {
-			establishConnection.establishConnection();
-			environment = loginPage.initializeEnvironment();
-			String userId, userName;
-			for (int i = 1; i <= 91; i++) {
-				userName = "testuser" + i + "@cbre.com.crm." + environment;
-				roleProfileTimeZoneResult = setRoleProfileTimeZone(userName);
-				String role = roleProfileTimeZoneResult.split("-")[1];
-				String profile = roleProfileTimeZoneResult.split("-")[0];
-				String geographicalRole = roleProfileTimeZoneResult.split("-")[2];
-				String timeZone = roleProfileTimeZoneResult.split("-")[3];
-				userId = createUsers.createUser(dataTable.getData("General_Data", "FirstName"),
-						dataTable.getData("General_Data", "LastName"), dataTable.getData("General_Data", "Alias"),
-						"vishnuvardhan.bommisetty" + "@cbre.com", userName, role, geographicalRole, profile, timeZone);
-				if (userId == null) {
-					System.out.println("User has not been created");
-					report.updateTestLog("User Creation", "User has not been created as userId is:::" + userId,
-							Status.PASS);
-				} else {
-					report.updateTestLog("User Creation", "User has been created successfully and the userId is:::"
-							+ "testuser" + i + "@cbre.com.crm." + environment, Status.PASS);
-					System.out.println("User has been created successfully. And the username is:::" + "testuser" + i
-							+ "@cbre.com.crm." + environment);
-					System.out.println(
-							"User has been created successfully. And the username is:::" + getUserName(userId));
-					createUsers.setPassword(userId, dataTable.getData("General_Data", "NewPassword"));
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
+	/**
+	 * Function for creation of users 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
 	static List<String> userNameCreatedList = new ArrayList<String>();
 
 	public void fectchOrCreateUser() {
@@ -139,7 +103,12 @@ public class PermissionSetsUsers extends ReusableLibrary {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Function for updating Role Profile for the users
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
 	public void updateRoleProfile() {
 		environment = loginPage.initializeEnvironment();
 		loginPage.userNames();
@@ -162,6 +131,13 @@ public class PermissionSetsUsers extends ReusableLibrary {
 		}
 	}
 
+	/**
+	 * Function to set up the permission sets
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+
 	public static List<String> roleIDLabels = new ArrayList<String>();
 	public static List<String> profileIDLabels = new ArrayList<String>();
 	public static List<String> timeZone = new ArrayList<String>();
@@ -179,171 +155,171 @@ public class PermissionSetsUsers extends ReusableLibrary {
 			switch (userName) {
 			case "testuser1@cbre.com.crm.":
 				System.out.println("System Administrator User - :::" + userNameList.get(i)
-						+ ":::is having the permission set::: Lightning Experience");
+				+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
 
 			case "testuser2@cbre.com.crm.":
 				System.out.println("AB AMER Broker User - :::" + userNameList.get(i)
-						+ ":::is having the permission set::: Lightning Experience");
+				+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
 
 			case "testuser3@cbre.com.crm.":
 				System.out.println("AB AMER Manager User - :::" + userNameList.get(i)
-						+ ":::is having the permission set::: Lightning Experience");
+				+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
 
 			case "testuser4@cbre.com.crm.":
 				System.out.println("AB AMER CSS User - :::" + userNameList.get(i)
-						+ ":::is having the permission set::: Lightning Experience");
+				+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
 
 			case "testuser5@cbre.com.crm.":
 				System.out.println("AS AMER Broker User" + userNameList.get(i)
-						+ ":::is having the permission sets::: Lightning Experience" + "and Asset Services LOB");
+				+ ":::is having the permission sets::: Lightning Experience" + "and Asset Services LOB");
 				permissionSetsLabels.add("Lightning Experience");
 				permissionSetsLabels.add("Asset Services LOB");
 				break;
 
 			case "testuser6@cbre.com.crm.":
 				System.out.println("AS AMER Manager User" + userNameList.get(i)
-						+ ":::is having the permission sets::: Lightning Experience" + "and Asset Services LOB");
+				+ ":::is having the permission sets::: Lightning Experience" + "and Asset Services LOB");
 				permissionSetsLabels.add("Lightning Experience");
 				permissionSetsLabels.add("Asset Services LOB");
 				break;
 
 			case "testuser7@cbre.com.crm.":
 				System.out.println("CM AMER Broker User - :::" + userNameList.get(i)
-						+ ":::is having the permission set::: Lightning Experience");
+				+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
 
 			case "testuser8@cbre.com.crm.":
 				System.out.println("CM AMER Manager User - :::" + userNameList.get(i)
-						+ ":::is having the permission set::: Lightning Experience");
+				+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
 
 			case "testuser9@cbre.com.crm.":
 				System.out.println("CM AMER CSS User - :::" + userNameList.get(i)
-						+ ":::is having the permission set::: Lightning Experience");
+				+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
 
 			case "testuser10@cbre.com.crm.":
 				System.out.println("GWS AMER Broker User - :::" + userNameList.get(i)
-						+ ":::is having the permission set::: Lightning Experience");
+				+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
 
 			case "testuser11@cbre.com.crm.":
 				System.out.println("OB AMER Broker User - :::" + userNameList.get(i)
-						+ ":::is having the permission set::: Lightning Experience");
+				+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
 
 			case "testuser12@cbre.com.crm.":
 				System.out.println("OB AMER Manager User - :::" + userNameList.get(i)
-						+ ":::is having the permission set::: Lightning Experience");
+				+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
 
 			case "testuser13@cbre.com.crm.":
 				System.out.println("OB AMER CSS User - :::" + userNameList.get(i)
-						+ ":::is having the permission set::: Lightning Experience");
+				+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
 
 			case "testuser15@cbre.com.crm.":
 				System.out.println("AB APAC Broker User - :::" + userNameList.get(i)
-						+ ":::is having the permission set::: Lightning Experience");
+				+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
 
 			case "testuser16@cbre.com.crm.":
 				System.out.println("AB APAC Manager User - :::" + userNameList.get(i)
-						+ ":::is having the permission set::: Lightning Experience");
+				+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
 
 			case "testuser17@cbre.com.crm.":
 				System.out.println("AB APAC CSS User - :::" + userNameList.get(i)
-						+ ":::is having the permission set::: Lightning Experience");
+				+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
 
 			case "testuser18@cbre.com.crm.":
 				System.out.println("AS APAC Broker User" + userNameList.get(i)
-						+ ":::is having the permission sets::: Lightning Experience" + "and Asset Services LOB");
+				+ ":::is having the permission sets::: Lightning Experience" + "and Asset Services LOB");
 				permissionSetsLabels.add("Lightning Experience");
 				permissionSetsLabels.add("Asset Services LOB");
 				break;
 
 			case "testuser19@cbre.com.crm.":
 				System.out.println("AS APAC Manager User" + userNameList.get(i)
-						+ ":::is having the permission sets::: Lightning Experience" + "and Asset Services LOB");
+				+ ":::is having the permission sets::: Lightning Experience" + "and Asset Services LOB");
 				permissionSetsLabels.add("Lightning Experience");
 				permissionSetsLabels.add("Asset Services LOB");
 				break;
 
 			case "testuser20@cbre.com.crm.":
 				System.out.println("CM APAC Broker User - :::" + userNameList.get(i)
-						+ ":::is having the permission set::: Lightning Experience");
+				+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				permissionSetsLabels.add("Campaigns and CampaignLogic Create/Edit Permissions");
 				break;
 
 			case "testuser21@cbre.com.crm.":
 				System.out.println("CM APAC Manager User - :::" + userNameList.get(i)
-						+ ":::is having the permission set::: Lightning Experience");
+				+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				permissionSetsLabels.add("Campaigns and CampaignLogic Create/Edit Permissions");
 				break;
 
 			case "testuser22@cbre.com.crm.":
 				System.out.println("CM APAC CSS User - :::" + userNameList.get(i)
-						+ ":::is having the permission set::: Lightning Experience");
+				+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
 
 			case "testuser23@cbre.com.crm.":
 				System.out.println("GWS EMEA Broker User - :::" + userNameList.get(i)
-						+ ":::is having the permission set::: Lightning Experience");
+				+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
 
 			case "testuser24@cbre.com.crm.":
 				System.out.println("OB APAC Broker User - :::" + userNameList.get(i)
-						+ ":::is having the permission set::: Lightning Experience");
+				+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
 
 			case "testuser25@cbre.com.crm.":
 				System.out.println("OB APAC Manager User - :::" + userNameList.get(i)
-						+ ":::is having the permission set::: Lightning Experience");
+				+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
 
 			case "testuser26@cbre.com.crm.":
 				System.out.println("OB APAC CSS User - :::" + userNameList.get(i)
-						+ ":::is having the permission set::: Lightning Experience");
+				+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
 
 			case "testuser27@cbre.com.crm.":
 				System.out.println("VAS APAC Broker User - :::" + userNameList.get(i)
-						+ ":::is having the permission set::: Lightning Experience");
+				+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
 
 			case "testuser28@cbre.com.crm.":
 				System.out.println("AB EMEA Broker User - :::" + userNameList.get(i)
-						+ ":::is having the permission sets::: Lightning Experience"
-						+ ", EMEA A&T Occupier, EMEA A&T Investor, EMEA BC&P, EMEA Capital Markets Capital Advisors, EMEA Property Permissions"
-						+ " and EMEA Valuations");
+				+ ":::is having the permission sets::: Lightning Experience"
+				+ ", EMEA A&T Occupier, EMEA A&T Investor, EMEA BC&P, EMEA Capital Markets Capital Advisors, EMEA Property Permissions"
+				+ " and EMEA Valuations");
 				permissionSetsLabels.add("Lightning Experience");
 				permissionSetsLabels.add("EMEA A&T Occupier");
 				permissionSetsLabels.add("EMEA A&T Investor");
@@ -355,248 +331,204 @@ public class PermissionSetsUsers extends ReusableLibrary {
 
 			case "testuser29@cbre.com.crm.":
 				System.out.println("AB EMEA Manager User - :::" + userNameList.get(i)
-						+ ":::is having the permission sets::: Lightning Experience" + "and EMEA A&T Investor");
+				+ ":::is having the permission sets::: Lightning Experience" + "and EMEA A&T Investor");
 				permissionSetsLabels.add("EMEA A&T Investor");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
-			/*
-			 * case "testuser30@cbre.com.crm.":
-			 * System.out.println("AB EMEA CSS User - :::" + userNameList.get(i)
-			 * + ":::is having the permission sets::: " +
-			 * "Edit Permission for Property, EMEA A&T Investor, EMEA Asset Services, EMEA Asset Services Service Line Champion,"
-			 * +
-			 * "EMEA BC&P, EMEA Capital Markets Capital Advisors Service Line Champion, EMEA Capital Markets Capital Advisors,"
-			 * +
-			 * "EMEA Capital Markets Investment Properties, EMEA Central London, EMEA Central London Service Line Champion,"
-			 * +
-			 * "EMEA Corporate Marketing, EMEA Corporate Marketing Service Line Champion, EMEA Development, EMEA Edit Permission for Pitch Advisor,"
-			 * +
-			 * "EMEA Ireland Marketing, EMEA Ireland Marketing Service Line Champion, EMEA Occupier Client Care, EMEA Property Permissions,"
-			 * +
-			 * "EMEA Super User, EMEA Valuations, EMEA Valuations Service Line Champion, Lightning Experience,"
-			 * ); permissionSetsLabels.add("Edit Permission for Property");
-			 * permissionSetsLabels.add("EMEA A&T Investor");
-			 * permissionSetsLabels.add("EMEA Asset Services");
-			 * permissionSetsLabels.
-			 * add("EMEA Asset Services Service Line Champion");
-			 * permissionSetsLabels.add("EMEA BC&P"); permissionSetsLabels.
-			 * add("EMEA Capital Markets Capital Advisors Service Line Champion"
-			 * );
-			 * permissionSetsLabels.add("EMEA Capital Markets Capital Advisors"
-			 * ); permissionSetsLabels.
-			 * add("EMEA Capital Markets Investment Properties");
-			 * permissionSetsLabels.add("EMEA Central London");
-			 * permissionSetsLabels.
-			 * add("EMEA Central London Service Line Champion");
-			 * permissionSetsLabels.add("EMEA Corporate Marketing");
-			 * permissionSetsLabels.
-			 * add("EMEA Corporate Marketing Service Line Champion");
-			 * permissionSetsLabels.add("EMEA Development");
-			 * permissionSetsLabels.add("EMEA Edit Permission for Pitch Advisor"
-			 * ); permissionSetsLabels.add("EMEA Ireland Marketing");
-			 * permissionSetsLabels.
-			 * add("EMEA Ireland Marketing Service Line Champion");
-			 * permissionSetsLabels.add("EMEA Occupier Client Care");
-			 * permissionSetsLabels.add("EMEA Property Permissions");
-			 * permissionSetsLabels.add("EMEA Super User");
-			 * permissionSetsLabels.add("EMEA Valuations");
-			 * permissionSetsLabels.add("EMEA Valuations Service Line Champion"
-			 * ); permissionSetsLabels.add("Lightning Experience"); break;
-			 */
 
 			case "testuser31@cbre.com.crm.":
 				System.out.println("AS EMEA Broker User - :::" + userNameList.get(i)
-						+ ":::is having the permission sets::: Lightning Experience and EMEA Asset Services");
+				+ ":::is having the permission sets::: Lightning Experience and EMEA Asset Services");
 				permissionSetsLabels.add("Lightning Experience");
 				permissionSetsLabels.add("EMEA Asset Services");
 				break;
 
 			case "testuser32@cbre.com.crm.":
 				System.out.println("AS EMEA Manager User - :::" + userNameList.get(i)
-						+ ":::is having the permission sets::: Lightning Experience and EMEA Asset Services");
+				+ ":::is having the permission sets::: Lightning Experience and EMEA Asset Services");
 				permissionSetsLabels.add("Lightning Experience");
 				permissionSetsLabels.add("EMEA Asset Services");
 				break;
 
 			case "testuser36@cbre.com.crm.":
 				System.out.println("CM EMEA Broker User - :::" + userNameList.get(i)
-						+ ":::is having the permission sets::: Lightning Experience and EMEA Capital Markets Capital Advisors");
+				+ ":::is having the permission sets::: Lightning Experience and EMEA Capital Markets Capital Advisors");
 				permissionSetsLabels.add("Lightning Experience");
 				permissionSetsLabels.add("EMEA Capital Markets Capital Advisors");
 				break;
 
 			case "testuser37@cbre.com.crm.":
 				System.out.println("CM EMEA Manager User - :::" + userNameList.get(i)
-						+ ":::is having the permission sets::: Lightning Experience and EMEA Capital Markets Capital Advisors");
+				+ ":::is having the permission sets::: Lightning Experience and EMEA Capital Markets Capital Advisors");
 				permissionSetsLabels.add("Lightning Experience");
 				permissionSetsLabels.add("EMEA Capital Markets Capital Advisors");
 				break;
 
 			case "testuser38@cbre.com.crm.":
 				System.out.println("CM EMEA CSS User - :::" + userNameList.get(i)
-						+ ":::is having the permission sets::: Lightning Experience and EMEA Capital Markets Capital Advisors");
+				+ ":::is having the permission sets::: Lightning Experience and EMEA Capital Markets Capital Advisors");
 				permissionSetsLabels.add("Lightning Experience");
 				permissionSetsLabels.add("EMEA Capital Markets Capital Advisors");
 				break;
 
 			case "testuser39@cbre.com.crm.":
 				System.out.println("CM EMEA Broker IP User - :::" + userNameList.get(i)
-						+ ":::is having the permission sets::: Lightning Experience and EMEA Capital Markets Investment Properties");
+				+ ":::is having the permission sets::: Lightning Experience and EMEA Capital Markets Investment Properties");
 				permissionSetsLabels.add("Lightning Experience");
 				permissionSetsLabels.add("EMEA Capital Markets Investment Properties");
 				break;
 
 			case "testuser40@cbre.com.crm.":
 				System.out.println("CM EMEA Manager IP User - :::" + userNameList.get(i)
-						+ ":::is having the permission sets::: Lightning Experience and EMEA Capital Markets Investment Properties");
+				+ ":::is having the permission sets::: Lightning Experience and EMEA Capital Markets Investment Properties");
 				permissionSetsLabels.add("Lightning Experience");
 				permissionSetsLabels.add("EMEA Capital Markets Investment Properties");
 				break;
 
 			case "testuser41@cbre.com.crm.":
 				System.out.println("CM EMEA CSS IP User - :::" + userNameList.get(i)
-						+ ":::is having the permission sets::: Lightning Experience and EMEA Capital Markets Investment Properties");
+				+ ":::is having the permission sets::: Lightning Experience and EMEA Capital Markets Investment Properties");
 				permissionSetsLabels.add("Lightning Experience");
 				permissionSetsLabels.add("EMEA Capital Markets Investment Properties");
 				break;
 
 			case "testuser45@cbre.com.crm.":
 				System.out.println("OB EMEA Broker User - :::" + userNameList.get(i)
-						+ ":::is having the permission sets::: Lightning Experience and EMEA A&T Occupier");
+				+ ":::is having the permission sets::: Lightning Experience and EMEA A&T Occupier");
 				permissionSetsLabels.add("Lightning Experience");
 				permissionSetsLabels.add("EMEA A&T Occupier");
 				break;
 
 			case "testuser46@cbre.com.crm.":
 				System.out.println("OB EMEA Manager User - :::" + userNameList.get(i)
-						+ ":::is having the permission sets::: Lightning Experience and EMEA A&T Occupier");
+				+ ":::is having the permission sets::: Lightning Experience and EMEA A&T Occupier");
 				permissionSetsLabels.add("Lightning Experience");
 				permissionSetsLabels.add("EMEA A&T Occupier");
 				break;
 
 			case "testuser47@cbre.com.crm.":
 				System.out.println("OB EMEA CSS User - :::" + userNameList.get(i)
-						+ ":::is having the permission sets::: Lightning Experience and EMEA A&T Occupier");
+				+ ":::is having the permission sets::: Lightning Experience and EMEA A&T Occupier");
 				permissionSetsLabels.add("Lightning Experience");
 				permissionSetsLabels.add("EMEA A&T Occupier");
 				break;
 
 			case "testuser48@cbre.com.crm.":
 				System.out.println("VAS EMEA Broker User - :::" + userNameList.get(i)
-						+ ":::is having the permission sets::: Lightning Experience and EMEA Valuations");
+				+ ":::is having the permission sets::: Lightning Experience and EMEA Valuations");
 				permissionSetsLabels.add("Lightning Experience");
 				permissionSetsLabels.add("EMEA Valuations");
 				break;
 
 			case "testuser49@cbre.com.crm.":
 				System.out.println("VAS EMEA Manager User - :::" + userNameList.get(i)
-						+ ":::is having the permission sets::: Lightning Experience and EMEA Valuations");
+				+ ":::is having the permission sets::: Lightning Experience and EMEA Valuations");
 				permissionSetsLabels.add("Lightning Experience");
 				permissionSetsLabels.add("EMEA Valuations");
 				break;
 			case "testuser50@cbre.com.crm.":
 				System.out.println("VAS EMEA CSS User - :::" + userNameList.get(i)
-						+ ":::is having the permission sets::: Lightning Experience and EMEA Valuations");
+				+ ":::is having the permission sets::: Lightning Experience and EMEA Valuations");
 				permissionSetsLabels.add("Lightning Experience");
 				permissionSetsLabels.add("EMEA Valuations");
 				break;
 
 			case "testuser51@cbre.com.crm.":
 				System.out.println("DataAdmin EMEA Data User - :::" + userNameList.get(i)
-						+ ":::is having the permission set::: Lightning Experience");
+				+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
 			case "testuser62@cbre.com.crm.":
 				System.out.println("GWS APAC Manager User - :::" + userNameList.get(i)
-						+ ":::is having the permission set::: Lightning Experience");
+				+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
 
 			case "testuser65@cbre.com.crm.":
 				System.out.println("VAS AMER Manager User - :::" + userNameList.get(i)
-						+ ":::is having the permission set::: Lightning Experience");
+				+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
 
 			case "testuser66@cbre.com.crm.":
 				System.out.println("GWS AMER Manager User - :::" + userNameList.get(i)
-						+ ":::is having the permission set::: Lightning Experience");
+				+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
 
 			case "testuser67@cbre.com.crm.":
 				System.out.println("GWS APAC Broker User - :::" + userNameList.get(i)
-						+ ":::is having the permission set::: Lightning Experience");
+				+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
 
 			case "testuser68@cbre.com.crm.":
 				System.out.println("CM EMEA Manager BCP User - :::" + userNameList.get(i)
-						+ ":::is having the permission sets::: Lightning Experience and EMEA BC&P");
+				+ ":::is having the permission sets::: Lightning Experience and EMEA BC&P");
 				permissionSetsLabels.add("Lightning Experience");
 				permissionSetsLabels.add("EMEA BC&P");
 				break;
 
 			case "testuser69@cbre.com.crm.":
 				System.out.println("CM EMEA Manager Dev User - :::" + userNameList.get(i)
-						+ ":::is having the permission sets::: Lightning Experience and EMEA Development");
+				+ ":::is having the permission sets::: Lightning Experience and EMEA Development");
 				permissionSetsLabels.add("Lightning Experience");
 				permissionSetsLabels.add("EMEA Development");
 				break;
 
 			case "testuser70@cbre.com.crm.":
 				System.out.println("CM EMEA Broker CA User - :::" + userNameList.get(i)
-						+ ":::is having the permission sets::: Lightning Experience and EMEA Capital Markets Capital Advisors");
+				+ ":::is having the permission sets::: Lightning Experience and EMEA Capital Markets Capital Advisors");
 				permissionSetsLabels.add("Lightning Experience");
 				permissionSetsLabels.add("EMEA Capital Markets Capital Advisors");
 				break;
 
 			case "testuser71@cbre.com.crm.":
 				System.out.println("CM EMEA Broker BCP User - :::" + userNameList.get(i)
-						+ ":::is having the permission sets::: Lightning Experience and EMEA BC&P");
+				+ ":::is having the permission sets::: Lightning Experience and EMEA BC&P");
 				permissionSetsLabels.add("Lightning Experience");
 				permissionSetsLabels.add("EMEA BC&P");
 				break;
 
 			case "testuser72@cbre.com.crm.":
 				System.out.println("CM EMEA Broker Dev User - :::" + userNameList.get(i)
-						+ ":::is having the permission sets::: Lightning Experience and EMEA Development");
+				+ ":::is having the permission sets::: Lightning Experience and EMEA Development");
 				permissionSetsLabels.add("Lightning Experience");
 				permissionSetsLabels.add("EMEA Development");
 				break;
 
 			case "testuser73@cbre.com.crm.":
 				System.out.println("CM EMEA CSS Dev User - :::" + userNameList.get(i)
-						+ ":::is having the permission sets::: Lightning Experience and EMEA Development");
+				+ ":::is having the permission sets::: Lightning Experience and EMEA Development");
 				permissionSetsLabels.add("Lightning Experience");
 				permissionSetsLabels.add("EMEA Development");
 				break;
 
 			case "testuser74@cbre.com.crm.":
 				System.out.println("CM EMEA CSS Super User - :::" + userNameList.get(i)
-						+ ":::is having the permission sets::: Lightning Experience and EMEA Super User");
+				+ ":::is having the permission sets::: Lightning Experience and EMEA Super User");
 				permissionSetsLabels.add("Lightning Experience");
 				permissionSetsLabels.add("EMEA Super User");
 				break;
 
 			case "testuser75@cbre.com.crm.":
 				System.out.println("AS EMEA Broker Super User - :::" + userNameList.get(i)
-						+ ":::is having the permission sets::: Lightning Experience and EMEA Super User");
+				+ ":::is having the permission sets::: Lightning Experience and EMEA Super User");
 				permissionSetsLabels.add("Lightning Experience");
 				permissionSetsLabels.add("EMEA Super User");
 				break;
 
 			case "testuser76@cbre.com.crm.":
 				System.out.println("GWS EMEA Broker Super User - :::" + userNameList.get(i)
-						+ ":::is having the permission sets::: Lightning Experience and EMEA Super User");
+				+ ":::is having the permission sets::: Lightning Experience and EMEA Super User");
 				permissionSetsLabels.add("Lightning Experience");
 				permissionSetsLabels.add("EMEA Super User");
 				break;
 
 			case "testuser78@cbre.com.crm.":
 				System.out.println("VAS EMEA Broker Super User - :::" + userNameList.get(i)
-						+ ":::is having the permission sets::: Lightning Experience, EMEA Super User and "
-						+ "EMEA Valuations");
+				+ ":::is having the permission sets::: Lightning Experience, EMEA Super User and "
+				+ "EMEA Valuations");
 				permissionSetsLabels.add("Lightning Experience");
 				permissionSetsLabels.add("EMEA Super User");
 				permissionSetsLabels.add("EMEA Valuations");
@@ -604,21 +536,21 @@ public class PermissionSetsUsers extends ReusableLibrary {
 
 			case "testuser79@cbre.com.crm.":
 				System.out.println("CM APAC Broker AUC User - :::" + userNameList.get(i)
-						+ ":::is having the permission set::: Lightning Experience");
+				+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
 
 			case "testuser80@cbre.com.crm.":
 				System.out.println("CM APAC Broker NZL User - :::" + userNameList.get(i)
-						+ ":::is having the permission set::: Lightning Experience");
+				+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
 
 			case "testuser81@cbre.com.crm.":
 				System.out.println("CM APAC Broker Metro NZL User - :::" + userNameList.get(i)
-						+ ":::is having the permission sets::: Lightning Experience,"
-						+ "Campaigns and CampaignLogic Create/Edit Permissions, Enquiries & Space Assessment Create/Edit Permissions,"
-						+ "Preference & Publication Edit Permissions and Preference Edit & Marketing Lists Read Permissions");
+				+ ":::is having the permission sets::: Lightning Experience,"
+				+ "Campaigns and CampaignLogic Create/Edit Permissions, Enquiries & Space Assessment Create/Edit Permissions,"
+				+ "Preference & Publication Edit Permissions and Preference Edit & Marketing Lists Read Permissions");
 				permissionSetsLabels.add("Campaigns and CampaignLogic Create/Edit Permissions");
 				permissionSetsLabels.add("Enquiries & Space Assessment Create/Edit Permissions");
 				permissionSetsLabels.add("Preference & Publication Edit Permissions");
@@ -628,32 +560,32 @@ public class PermissionSetsUsers extends ReusableLibrary {
 
 			case "testuser82@cbre.com.crm.":
 				System.out.println("CM APAC Brokder Metro User - :::" + userNameList.get(i)
-						+ ":::is having the permission set::: Lightning Experience");
+				+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
 
 			case "testuser83@cbre.com.crm.":
 				System.out.println("CM APAC Broker AUS User - :::" + userNameList.get(i)
-						+ ":::is having the permission set::: Lightning Experience");
+				+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
 
 			case "testuser84@cbre.com.crm.":
 				System.out.println("CM APAC Broker NSW User - :::" + userNameList.get(i)
-						+ ":::is having the permission set::: Lightning Experience");
+				+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
 
 			case "testuser85@cbre.com.crm.":
 				System.out.println("CM APAC Broker Christ Church User - :::" + userNameList.get(i)
-						+ ":::is having the permission set::: Lightning Experience");
+				+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
 
 			case "testuser86@cbre.com.crm.":
 				System.out.println("OB EMEA Occupier Client Care User - :::" + userNameList.get(i)
-						+ ":::is having the permission sets::: Lightning Experience,"
-						+ "EMEA A&T Occupier, EMEA Occupier Client Care, EMEA Super User and Tableau Dashboard Permission");
+				+ ":::is having the permission sets::: Lightning Experience,"
+				+ "EMEA A&T Occupier, EMEA Occupier Client Care, EMEA Super User and Tableau Dashboard Permission");
 				permissionSetsLabels.add("EMEA A&T Occupier");
 				permissionSetsLabels.add("EMEA Occupier Client Care");
 				permissionSetsLabels.add("EMEA Super User");
@@ -663,8 +595,8 @@ public class PermissionSetsUsers extends ReusableLibrary {
 
 			case "testuser87@cbre.com.crm.":
 				System.out.println("CM APAC Broker Campaign User - :::" + userNameList.get(i)
-						+ ":::is having the permission sets::: Lightning Experience,"
-						+ "Campaigns and CampaignLogic Create/Edit Permissions and Enquiries & Space Assessment Create/Edit Permissions");
+				+ ":::is having the permission sets::: Lightning Experience,"
+				+ "Campaigns and CampaignLogic Create/Edit Permissions and Enquiries & Space Assessment Create/Edit Permissions");
 				permissionSetsLabels.add("Campaigns and CampaignLogic Create/Edit Permissions");
 				permissionSetsLabels.add("Enquiries & Space Assessment Create/Edit Permissions");
 				permissionSetsLabels.add("Lightning Experience");
@@ -672,7 +604,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 
 			case "testuser88@cbre.com.crm.":
 				System.out.println("CM APAC Broker MVP User - :::" + userNameList.get(i)
-						+ ":::is having the permission sets::: Lightning Experience," + "CM - Asia and CM - India");
+				+ ":::is having the permission sets::: Lightning Experience," + "CM - Asia and CM - India");
 				permissionSetsLabels.add("Lightning Experience");
 				permissionSetsLabels.add("CM - Asia");
 				permissionSetsLabels.add("CM - India");
@@ -680,17 +612,17 @@ public class PermissionSetsUsers extends ReusableLibrary {
 
 			case "testuse90@cbre.com.crm.":
 				System.out.println("CM EMEA Manager CA User - :::" + userNameList.get(i)
-						+ ":::is having the permission sets::: Lightning Experience"
-						+ "and EMEA Capital Markets Capital Advisors");
+				+ ":::is having the permission sets::: Lightning Experience"
+				+ "and EMEA Capital Markets Capital Advisors");
 				permissionSetsLabels.add("Lightning Experience");
 				permissionSetsLabels.add("EMEA Capital Markets Capital Advisors");
 				break;
 
 			case "testuser91@cbre.com.crm.":
 				System.out.println("DataAdmin EMEA Data User - :::" + userNameList.get(i)
-						+ ":::is having the permission set::: Lightning Experience,"
-						+ "APAC Communication Preferences Create/Edit Permissions, Enquiries & Space Assessment Create/Edit Permissions,"
-						+ "Preference & Publication Edit Permissions and Preference Edit & Marketing Lists Read Permissions");
+				+ ":::is having the permission set::: Lightning Experience,"
+				+ "APAC Communication Preferences Create/Edit Permissions, Enquiries & Space Assessment Create/Edit Permissions,"
+				+ "Preference & Publication Edit Permissions and Preference Edit & Marketing Lists Read Permissions");
 				permissionSetsLabels.add("Lightning Experience");
 				permissionSetsLabels.add("APAC Communication Preferences Create/Edit Permissions");
 				permissionSetsLabels.add("Enquiries & Space Assessment Create/Edit Permissions");
@@ -700,7 +632,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 
 			case "testuser92@cbre.com.crm.":
 				System.out.println("CM EMEA Manager CA User - :::" + userNameList.get(i)
-						+ ":::is having the permission sets::: Lightning Experience" + "and CM - Asia and CM - India");
+				+ ":::is having the permission sets::: Lightning Experience" + "and CM - Asia and CM - India");
 				permissionSetsLabels.add("Lightning Experience");
 				permissionSetsLabels.add("CM - Asia");
 				permissionSetsLabels.add("CM - India");
@@ -708,16 +640,16 @@ public class PermissionSetsUsers extends ReusableLibrary {
 
 			case "testuser93@cbre.com.crm.":
 				System.out.println("CM EMEA Manager CA User - :::" + userNameList.get(i)
-						+ ":::is having the permission sets::: Lightning Experience");
+				+ ":::is having the permission sets::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
 
 			case "testuser94@cbre.com.crm.":
 				System.out.println("CM EMEA Manager CA User - :::" + userNameList.get(i)
-						+ ":::is having the permission sets::: Lightning Experience");
+				+ ":::is having the permission sets::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
-				
+
 			case "testuser95@cbre.com.crm.":
 				System.out.println("France Data User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: FR DIG and CBRE - France - Data Admin");
@@ -730,7 +662,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				permissionSetsLabels.add("France Leads");
 
 				break;
-				
+
 			case "testuser96@cbre.com.crm.":
 
 				System.out.println("France Manager - :::" + userName + environment
@@ -743,7 +675,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				permissionSetsLabels.add("France Leads");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
-				
+
 			case "testuser97@cbre.com.crm.":
 
 				System.out.println("France Manager - :::" + userName + environment
@@ -758,7 +690,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				permissionSetsLabels.add("Reports, Dashboards, & Data Export for Super Users");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
-				
+
 			case "testuser98@cbre.com.crm.":
 
 				System.out.println("France Manager - :::" + userName + environment
@@ -778,41 +710,41 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				permissionSetsLabels.add("Language Entry Translation Permissions");
 				permissionSetsLabels.add("Lightning Experience");
 				break;
-				
+
 			case "testuser99@cbre.com.crm.":
-				
+
 				System.out.println("SouthEast Asia Data Admin- :::" + userName + environment
 						+ ":::is having the Role and Profle as::: SouthEast Asia - CBRE Data Admin");
-				
-				 permissionSetsLabels.add("APAC Capital Markets – Asia");
-				 permissionSetsLabels.add("APAC Communication Preferences Create/Edit Permissions");
-				 permissionSetsLabels.add("Asset Services Investor Services Account Field Rights");
-				 permissionSetsLabels.add("Asset Services LOB");
-				 permissionSetsLabels.add("Campaigns and CampaignLogic Create/Edit Permissions");
-				 permissionSetsLabels.add("Dashboards Create/Edit Permission");
-				 permissionSetsLabels.add("Enquiries & Space Assessment Create/Edit Permissions");
-				 permissionSetsLabels.add("Lightning Experience");
-				 permissionSetsLabels.add("Preference & Publication Edit Permissions");
-				 permissionSetsLabels.add("Preference Edit & Marketing Lists Read Permissions");
-				
+
+				permissionSetsLabels.add("APAC Capital Markets – Asia");
+				permissionSetsLabels.add("APAC Communication Preferences Create/Edit Permissions");
+				permissionSetsLabels.add("Asset Services Investor Services Account Field Rights");
+				permissionSetsLabels.add("Asset Services LOB");
+				permissionSetsLabels.add("Campaigns and CampaignLogic Create/Edit Permissions");
+				permissionSetsLabels.add("Dashboards Create/Edit Permission");
+				permissionSetsLabels.add("Enquiries & Space Assessment Create/Edit Permissions");
+				permissionSetsLabels.add("Lightning Experience");
+				permissionSetsLabels.add("Preference & Publication Edit Permissions");
+				permissionSetsLabels.add("Preference Edit & Marketing Lists Read Permissions");
+
 				break;
-				
+
 			case "testuser100@cbre.com.crm.":	
 				System.out.println("Pacific Data Admin- :::" + userName + environment
 						+ ":::is having the Role and Profle as::: Pacific - CBRE Data Admin");
-					permissionSetsLabels.add("Allow updates to Key Client and Pursuit Account LOB fields on Account");
-				 permissionSetsLabels.add("APAC Communication Preferences Create/Edit Permissions");
-				 permissionSetsLabels.add("Asset Services LOB");
-				 permissionSetsLabels.add("Campaigns and CampaignLogic Create/Edit Permissions");
-				 permissionSetsLabels.add("Country Permissions - Australia");
-				 permissionSetsLabels.add("Dashboards Create/Edit Permission");
-				 permissionSetsLabels.add("Enquiries & Space Assessment Create/Edit Permissions");
-				 permissionSetsLabels.add("Lightning Experience");
-				 permissionSetsLabels.add("Modify All Data Permission");
-				 permissionSetsLabels.add("Preference & Publication Edit Permissions");
-				 permissionSetsLabels.add("Regional Business Support");
-				 
-				 break;
+				permissionSetsLabels.add("Allow updates to Key Client and Pursuit Account LOB fields on Account");
+				permissionSetsLabels.add("APAC Communication Preferences Create/Edit Permissions");
+				permissionSetsLabels.add("Asset Services LOB");
+				permissionSetsLabels.add("Campaigns and CampaignLogic Create/Edit Permissions");
+				permissionSetsLabels.add("Country Permissions - Australia");
+				permissionSetsLabels.add("Dashboards Create/Edit Permission");
+				permissionSetsLabels.add("Enquiries & Space Assessment Create/Edit Permissions");
+				permissionSetsLabels.add("Lightning Experience");
+				permissionSetsLabels.add("Modify All Data Permission");
+				permissionSetsLabels.add("Preference & Publication Edit Permissions");
+				permissionSetsLabels.add("Regional Business Support");
+
+				break;
 			default:
 				break;
 			}
@@ -820,7 +752,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 			for (String permSet : permissionSetsLabels) {
 				setPermSetAssigned(userId, getPermSetId(permSet));
 				System.out
-						.println("Permission Set for the user:::" + userNameList.get(i) + "::::is having:::" + permSet);
+				.println("Permission Set for the user:::" + userNameList.get(i) + "::::is having:::" + permSet);
 				report.updateTestLog("Permission Sets",
 						userNameList.get(i) + "::::is having the permission sets:::" + permSet, Status.PASS);
 			}
@@ -828,15 +760,12 @@ public class PermissionSetsUsers extends ReusableLibrary {
 		}
 	}
 
-	/*
-	 * public HashMap<String, String> setTimeZone(String TimeZone) { HashMap
-	 * hashMap = new HashMap(); if (TimeZone.equals("AMER")) {
-	 * hashMap.put("TimeZone", "America/Los_Angeles"); } else if
-	 * (TimeZone.equals("APAC")) { hashMap.put("TimeZone", "Asia/Singapore"); }
-	 * else if (TimeZone.equals("EMEA")) { hashMap.put("TimeZone",
-	 * "Europe/London"); } return hashMap; }
+	/**
+	 * Function to set up the role, profile, time zone and geographical role
+	 * 
+	 * @author Vishnuvardhan
+	 *
 	 */
-
 	public String setRoleProfileTimeZone(String userName) throws Exception {
 		String roleProfileTimeZone = null;				
 		if ((environment.equalsIgnoreCase("FTE2")) || (environment.equalsIgnoreCase("UAT2"))) {
@@ -1577,7 +1506,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				System.out.println("DataAdmin EMEA Data User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: APAC and CBRE - APAC - Project Management");
 				break;
-				
+
 			case "testuser95@cbre.com.crm.":
 
 				roleIDLabels.add("FR DIG");
@@ -1587,7 +1516,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				System.out.println("France Data User - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: FR DIG and CBRE - France - Data Admin");
 				break;
-				
+
 			case "testuser96@cbre.com.crm.":
 
 				roleIDLabels.add("FR - CODIR+");
@@ -1597,7 +1526,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				System.out.println("France Manager - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: FR - CODIR+ and CBRE Manager - France - Multi Business Line");
 				break;
-				
+
 			case "testuser97@cbre.com.crm.":
 
 				roleIDLabels.add("FR DIG");
@@ -1607,7 +1536,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				System.out.println("France Manager - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: FR DIG and CBRE Manager - France - Multi Business Line");
 				break;
-				
+
 			case "testuser98@cbre.com.crm.":
 
 				roleIDLabels.add("FRANCE");
@@ -1617,7 +1546,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				System.out.println("France Manager - :::" + userName + environment
 						+ ":::is having the Role and Profle as::: France and CBRE Manager - France - Multi Business Line");
 				break;
-				
+
 			case "testuser99@cbre.com.crm.":
 
 				roleIDLabels.add("SOUTHEAST ASIA");
@@ -1627,7 +1556,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				System.out.println("SouthEast Asia Data Admin- :::" + userName + environment
 						+ ":::is having the Role and Profle as::: SouthEast Asia - CBRE Data Admin");
 				break;
-				
+
 			case "testuser100@cbre.com.crm.":
 
 				roleIDLabels.add("PACIFIC");
@@ -1637,7 +1566,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				System.out.println("Pacific Data Admin- :::" + userName + environment
 						+ ":::is having the Role and Profle as::: Pacific - CBRE Data Admin");
 				break;
-				
+
 			default:
 
 				roleIDLabels.add("EXECUTIVE");
@@ -1650,7 +1579,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 			}
 			establishConnection.establishConnection();
 			roleProfileTimeZone = getRoleId(roleIDLabels.get(i)) + "-" + getProfileId(profileIDLabels.get(i)) + "-" + geographicalRole.get(i) 
-					+ "-" + timeZone.get(i);
+			+ "-" + timeZone.get(i);
 			profileIDLabels.clear();
 			roleIDLabels.clear();
 			geographicalRole.clear();
@@ -1659,11 +1588,25 @@ public class PermissionSetsUsers extends ReusableLibrary {
 		return roleProfileTimeZone;
 	}
 
+	/**
+	 * Function to get the permission set Id
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+
 	public String getPermSetId(String name) throws Exception {
 		String query = "SELECT Id FROM PermissionSet where label ='" + name + "'";
 		QueryResult result = EstablishConnection.connection.query(query);
 		return result.getRecords()[0].getId();
 	}
+
+	/**
+	 * Function to assign permission set Id
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
 
 	public void setPermSetAssigned(String userId, String permSetId) {
 		try {
@@ -1707,13 +1650,13 @@ public class PermissionSetsUsers extends ReusableLibrary {
 		QueryResult result = EstablishConnection.connection.query(query);
 		return result.getRecords()[0].getId();
 	}
-	
+
 	public String getRoleName(String userRoleId) throws Exception {
 		String query = "SELECT Name FROM UserRole where Id ='" + userRoleId + "'";
 		QueryResult result = EstablishConnection.connection.query(query);
 		return result.getRecords()[0].getId();
 	}
-	
+
 	public String getProfileName(String profileId) throws Exception {
 		String query = "SELECT Name FROM Profile where Id ='" + profileId + "'";
 		QueryResult result = EstablishConnection.connection.query(query);
@@ -1820,5 +1763,4 @@ public class PermissionSetsUsers extends ReusableLibrary {
 		}
 		return sResult;
 	}
-
 }

@@ -13,20 +13,20 @@ import com.cognizant.framework.selenium.SeleniumTestParameters;
 
 import com.cognizant.Craft.*;
 /**
- * Validating the Lead tagging with private tag
+ * Validating the Account tagging with private tag
  * 
  * @author Vishnu
  *
  */
 
 public class TC_SF_CMAPACAdminAccountTagging extends CRAFTTestCase {
-	@Test(groups= {"UAT","API","Admin","Account","Tagging"},dataProvider = "UATTestScripts")
+	@Test(groups= {"UAT","UI","Admin","Account","Tagging"},dataProvider = "UATTestScripts")
 	public void runTC_SF_CMAPACAdminAccountTagging(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
 		SeleniumTestParameters testParameters = new SeleniumTestParameters(currentScenario, currentTestcase);
-		testParameters.setCurrentTestDescription("Test for the validating the Lead tagging with private tag");
+		testParameters.setCurrentTestDescription("Test for validating the Account tagging with private tag CMAPAC");
 		testParameters.setIterationMode(IterationOptions.RUN_ONE_ITERATION_ONLY);
 		testParameters.setBrowser(Browser.CHROME);
 		testParameters.setExecutionMode(executionMode);
@@ -45,38 +45,3 @@ public class TC_SF_CMAPACAdminAccountTagging extends CRAFTTestCase {
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

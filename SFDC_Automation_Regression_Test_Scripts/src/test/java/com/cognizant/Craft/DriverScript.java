@@ -68,13 +68,21 @@ public class DriverScript {
 
 	private Properties properties;
 	private Properties mobileProperties;
-	private final FrameworkParameters frameworkParameters = FrameworkParameters
-			.getInstance();
+	private final FrameworkParameters frameworkParameters = FrameworkParameters.getInstance();
 
 	private Boolean linkScreenshotsToTestLog = true;
 
 	private final SeleniumTestParameters testParameters;
 	private String reportPath;
+	private boolean isAPITest;
+
+	public boolean getIsAPITest() {
+		return isAPITest;
+	}
+
+	public void setIsAPITest(boolean b) {
+		this.isAPITest = b;
+	}
 
 	private ExecutionMode executionMode = ExecutionMode.LOCAL;
 
@@ -137,24 +145,27 @@ public class DriverScript {
 		return executionTime;
 	}
 
-
 	/**
 	 * Function to execute the given test case
 	 */
 	public void driveTestExecution() {
-	try{
-		startUp();
-		initializeTestIterations();
-		initializeWebDriver();
-		initializeTestReport();
-		initializeDatatable();
-		executeCraft();
-	}finally{
-		quitWebDriver();
-		wrapUp();
-	}
+		try {
+			startUp();
+			initializeTestIterations();
+			if (!isAPITest) {
+				initializeWebDriver();
+			}
+			initializeTestReport();
+			initializeDatatable();
+			executeCraft();
+		} finally {
+			if (!isAPITest) {
+				quitWebDriver();
+			}			
+			wrapUp();
+		}
 
-}
+	}
 
 	private void executeCraft() {
 		initializeTestScript();
@@ -172,40 +183,33 @@ public class DriverScript {
 
 	private void setDefaultTestParameters() {
 		if (testParameters.getIterationMode() == null) {
-			testParameters
-			.setIterationMode(IterationOptions.RUN_ALL_ITERATIONS);
+			testParameters.setIterationMode(IterationOptions.RUN_ALL_ITERATIONS);
 		}
 
 		if (testParameters.getExecutionMode() == null) {
-			testParameters.setExecutionMode(ExecutionMode.valueOf(properties
-					.getProperty("DefaultExecutionMode")));
+			testParameters.setExecutionMode(ExecutionMode.valueOf(properties.getProperty("DefaultExecutionMode")));
 		}
 
 		if (testParameters.getMobileExecutionPlatform() == null) {
-			testParameters.setMobileExecutionPlatform(MobileExecutionPlatform
-					.valueOf(mobileProperties
-							.getProperty("DefaultMobileExecutionPlatform")));
+			testParameters.setMobileExecutionPlatform(
+					MobileExecutionPlatform.valueOf(mobileProperties.getProperty("DefaultMobileExecutionPlatform")));
 		}
 
 		if (testParameters.getMobileToolName() == null) {
-			testParameters.setMobileToolName(MobileToolName
-					.valueOf(mobileProperties
-							.getProperty("DefaultMobileToolName")));
+			testParameters
+					.setMobileToolName(MobileToolName.valueOf(mobileProperties.getProperty("DefaultMobileToolName")));
 		}
 
 		if (testParameters.getDeviceName() == null) {
-			testParameters.setDeviceName(mobileProperties
-					.getProperty("DefaultDevice"));
+			testParameters.setDeviceName(mobileProperties.getProperty("DefaultDevice"));
 		}
 
 		if (testParameters.getBrowser() == null) {
-			testParameters.setBrowser(Browser.valueOf(properties
-					.getProperty("DefaultBrowser")));
+			testParameters.setBrowser(Browser.valueOf(properties.getProperty("DefaultBrowser")));
 		}
 
-		testParameters.setInstallApplication(Boolean
-				.parseBoolean(mobileProperties
-						.getProperty("InstallApplicationInDevice")));
+		testParameters.setInstallApplication(
+				Boolean.parseBoolean(mobileProperties.getProperty("InstallApplicationInDevice")));
 
 	}
 
@@ -223,10 +227,8 @@ public class DriverScript {
 			break;
 
 		case RUN_RANGE_OF_ITERATIONS:
-			if (testParameters.getStartIteration() > testParameters
-					.getEndIteration()) {
-				throw new FrameworkException("Error",
-						"StartIteration cannot be greater than EndIteration!");
+			if (testParameters.getStartIteration() > testParameters.getEndIteration()) {
+				throw new FrameworkException("Error", "StartIteration cannot be greater than EndIteration!");
 			}
 			currentIteration = testParameters.getStartIteration();
 			break;
@@ -237,19 +239,14 @@ public class DriverScript {
 	}
 
 	private int getNumberOfIterations() {
-		String datatablePath = frameworkParameters.getRelativePath()
-				+ Util.getFileSeparator() + "src" + Util.getFileSeparator()
-				+ "test" + Util.getFileSeparator() + "resources"
-				+ Util.getFileSeparator() + "Datatables";
-		ExcelDataAccess testDataAccess = new ExcelDataAccess(datatablePath,
-				testParameters.getCurrentScenario());
-		testDataAccess.setDatasheetName(properties
-				.getProperty("DefaultDataSheet"));
+		String datatablePath = frameworkParameters.getRelativePath() + Util.getFileSeparator() + "src"
+				+ Util.getFileSeparator() + "test" + Util.getFileSeparator() + "resources" + Util.getFileSeparator()
+				+ "Datatables";
+		ExcelDataAccess testDataAccess = new ExcelDataAccess(datatablePath, testParameters.getCurrentScenario());
+		testDataAccess.setDatasheetName(properties.getProperty("DefaultDataSheet"));
 
-		int startRowNum = testDataAccess.getRowNum(
-				testParameters.getCurrentTestcase(), 0);
-		int nTestcaseRows = testDataAccess.getRowCount(
-				testParameters.getCurrentTestcase(), 0, startRowNum);
+		int startRowNum = testDataAccess.getRowNum(testParameters.getCurrentTestcase(), 0);
+		int nTestcaseRows = testDataAccess.getRowCount(testParameters.getCurrentTestcase(), 0, startRowNum);
 		int nSubIterations = testDataAccess.getRowCount("1", 1, startRowNum); // Assumption:
 		// Every
 		// test
@@ -265,15 +262,15 @@ public class DriverScript {
 	}
 
 	public static String remoteURL = System.getProperty("RemoteUrl");
-	
+
 	public String findRemoteURL() {
 		try {
-			if(remoteURL.equals(null)) {
+			if (remoteURL.equals(null)) {
 
-			} 		
+			}
 		} catch (Exception e) {
 			remoteURL = properties.getProperty("RemoteUrl");
-			System.out.println("Remote_URL is set as per the RemoteUrl value in Global Settings file:::" + remoteURL );
+			System.out.println("Remote_URL is set as per the RemoteUrl value in Global Settings file:::" + remoteURL);
 		}
 		return remoteURL;
 	}
@@ -284,14 +281,13 @@ public class DriverScript {
 		switch (executionMode) {
 
 		case LOCAL:
-			WebDriver webDriver = WebDriverFactory.getWebDriver(testParameters
-					.getBrowser());
+			WebDriver webDriver = WebDriverFactory.getWebDriver(testParameters.getBrowser());
 			driver = new CraftDriver(webDriver);
 			driver.setTestParameters(testParameters);
 			WaitPageLoad();
 			break;
 
-		case REMOTE:			
+		case REMOTE:
 			WebDriver remoteWebDriver = WebDriverFactory.getRemoteWebDriver(testParameters.getBrowser(), sRemoteURL);
 			driver = new CraftDriver(remoteWebDriver);
 			driver.setTestParameters(testParameters);
@@ -308,25 +304,18 @@ public class DriverScript {
 			break;
 
 		case MOBILE:
-			if ((testParameters.getMobileToolName()
-					.equals(MobileToolName.APPIUM))) {
+			if ((testParameters.getMobileToolName().equals(MobileToolName.APPIUM))) {
 				WebDriver appiumDriver = AppiumDriverFactory.getAppiumDriver(
-						testParameters.getMobileExecutionPlatform(),
-						testParameters.getDeviceName(),
-						testParameters.getMobileOSVersion(),
-						testParameters.shouldInstallApplication(),
+						testParameters.getMobileExecutionPlatform(), testParameters.getDeviceName(),
+						testParameters.getMobileOSVersion(), testParameters.shouldInstallApplication(),
 						mobileProperties.getProperty("AppiumURL"));
 				driver = new CraftDriver(appiumDriver);
 				driver.setTestParameters(testParameters);
-			} else if (testParameters.getMobileToolName().equals(
-					MobileToolName.REMOTE_WEBDRIVER)) {
-				WebDriver remoteAppiumDriver = AppiumDriverFactory
-						.getAppiumRemoteWebDriver(
-								testParameters.getMobileExecutionPlatform(),
-								testParameters.getDeviceName(),
-								testParameters.getMobileOSVersion(),
-								testParameters.shouldInstallApplication(),
-								mobileProperties.getProperty("AppiumURL"));
+			} else if (testParameters.getMobileToolName().equals(MobileToolName.REMOTE_WEBDRIVER)) {
+				WebDriver remoteAppiumDriver = AppiumDriverFactory.getAppiumRemoteWebDriver(
+						testParameters.getMobileExecutionPlatform(), testParameters.getDeviceName(),
+						testParameters.getMobileOSVersion(), testParameters.shouldInstallApplication(),
+						mobileProperties.getProperty("AppiumURL"));
 				driver = new CraftDriver(remoteAppiumDriver);
 				driver.setTestParameters(testParameters);
 			}
@@ -335,24 +324,17 @@ public class DriverScript {
 
 		case PERFECTO:
 
-			if (testParameters.getMobileToolName()
-					.equals(MobileToolName.APPIUM)) {
-				WebDriver appiumPerfectoDriver = PerfectoDriverFactory
-						.getPerfectoAppiumDriver(
-								testParameters.getMobileExecutionPlatform(),
-								testParameters.getDeviceName(),
-								mobileProperties.getProperty("PerfectoHost"),testParameters);
+			if (testParameters.getMobileToolName().equals(MobileToolName.APPIUM)) {
+				WebDriver appiumPerfectoDriver = PerfectoDriverFactory.getPerfectoAppiumDriver(
+						testParameters.getMobileExecutionPlatform(), testParameters.getDeviceName(),
+						mobileProperties.getProperty("PerfectoHost"), testParameters);
 				driver = new CraftDriver(appiumPerfectoDriver);
 				driver.setTestParameters(testParameters);
 
-			} else if (testParameters.getMobileToolName().equals(
-					MobileToolName.REMOTE_WEBDRIVER)) {
-				WebDriver remotePerfectoDriver = PerfectoDriverFactory
-						.getPerfectoRemoteWebDriver(
-								testParameters.getMobileExecutionPlatform(),
-								testParameters.getDeviceName(),
-								mobileProperties.getProperty("PerfectoHost"),
-								testParameters.getBrowser());
+			} else if (testParameters.getMobileToolName().equals(MobileToolName.REMOTE_WEBDRIVER)) {
+				WebDriver remotePerfectoDriver = PerfectoDriverFactory.getPerfectoRemoteWebDriver(
+						testParameters.getMobileExecutionPlatform(), testParameters.getDeviceName(),
+						mobileProperties.getProperty("PerfectoHost"), testParameters.getBrowser());
 				driver = new CraftDriver(remotePerfectoDriver);
 				driver.setTestParameters(testParameters);
 			}
@@ -367,30 +349,31 @@ public class DriverScript {
 	}
 
 	private void implicitWaitForDriver() {
-		long objectSyncTimeout = Long.parseLong(properties.get(
-				"ObjectSyncTimeout").toString());
-		driver.manage().timeouts()
-		.implicitlyWait(objectSyncTimeout, TimeUnit.SECONDS);
+		long objectSyncTimeout = Long.parseLong(properties.get("ObjectSyncTimeout").toString());
+		driver.manage().timeouts().implicitlyWait(objectSyncTimeout, TimeUnit.SECONDS);
 	}
 
 	private void WaitPageLoad() {
-		long pageLoadTimeout = Long.parseLong(properties.get("PageLoadTimeout")
-				.toString());
-		driver.manage().timeouts()
-		.pageLoadTimeout(pageLoadTimeout, TimeUnit.SECONDS);
+		long pageLoadTimeout = Long.parseLong(properties.get("PageLoadTimeout").toString());
+		driver.manage().timeouts().pageLoadTimeout(pageLoadTimeout, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 
 	}
 
 	private void initializeTestReport() {
 		initializeReportSettings();
-		ReportTheme reportTheme = ReportThemeFactory.getReportsTheme(Theme
-				.valueOf(properties.getProperty("ReportsTheme")));
+		ReportTheme reportTheme = ReportThemeFactory
+				.getReportsTheme(Theme.valueOf(properties.getProperty("ReportsTheme")));
 
 		report = new SeleniumReport(reportSettings, reportTheme, testParameters);
 
 		report.initialize();
-		report.setDriver(driver);
+		if (!isAPITest) {
+			reportSettings.takeScreenshotFailedStep = true;
+			report.setDriver(driver);
+		} else {
+			reportSettings.takeScreenshotFailedStep = false;
+		}		
 		report.initializeTestLog();
 		createTestLogHeader();
 	}
@@ -402,95 +385,67 @@ public class DriverScript {
 			reportPath = TimeStamp.getInstance();
 		}
 
-		reportSettings = new ReportSettings(reportPath,
-				testParameters.getCurrentScenario() + "_"
-						+ testParameters.getCurrentTestcase() + "_"
-						+ testParameters.getCurrentTestInstance());
+		reportSettings = new ReportSettings(reportPath, testParameters.getCurrentScenario() + "_"
+				+ testParameters.getCurrentTestcase() + "_" + testParameters.getCurrentTestInstance());
 
-		reportSettings.setDateFormatString(properties
-				.getProperty("DateFormatString"));
-		reportSettings.setLogLevel(Integer.parseInt(properties
-				.getProperty("LogLevel")));
+		reportSettings.setDateFormatString(properties.getProperty("DateFormatString"));
+		reportSettings.setLogLevel(Integer.parseInt(properties.getProperty("LogLevel")));
 		reportSettings.setProjectName(properties.getProperty("ProjectName"));
-		reportSettings.setGenerateExcelReports(Boolean.parseBoolean(properties
-				.getProperty("ExcelReport")));
-		reportSettings.setGenerateHtmlReports(Boolean.parseBoolean(properties
-				.getProperty("HtmlReport")));
-		reportSettings.setGenerateSeeTestReports(Boolean
-				.parseBoolean(mobileProperties
-						.getProperty("SeeTestReportGeneration")));
-		reportSettings.setGeneratePerfectoReports(Boolean
-				.parseBoolean(mobileProperties
-						.getProperty("PerfectoReportGeneration")));
-		reportSettings.setTakeScreenshotFailedStep(Boolean
-				.parseBoolean(properties
-						.getProperty("TakeScreenshotFailedStep")));
-		reportSettings.setTakeScreenshotPassedStep(Boolean
-				.parseBoolean(properties
-						.getProperty("TakeScreenshotPassedStep")));
-		reportSettings.setConsolidateScreenshotsInWordDoc(Boolean
-				.parseBoolean(properties
-						.getProperty("ConsolidateScreenshotsInWordDoc")));
-		reportSettings.setConsolidateScreenshotsInPDF(Boolean
-				.parseBoolean(properties
-						.getProperty("ConsolidateScreenshotsInPDF")));
+		reportSettings.setGenerateExcelReports(Boolean.parseBoolean(properties.getProperty("ExcelReport")));
+		reportSettings.setGenerateHtmlReports(Boolean.parseBoolean(properties.getProperty("HtmlReport")));
+		reportSettings.setGenerateSeeTestReports(
+				Boolean.parseBoolean(mobileProperties.getProperty("SeeTestReportGeneration")));
+		reportSettings.setGeneratePerfectoReports(
+				Boolean.parseBoolean(mobileProperties.getProperty("PerfectoReportGeneration")));
+		reportSettings
+				.setTakeScreenshotFailedStep(Boolean.parseBoolean(properties.getProperty("TakeScreenshotFailedStep")));
+		reportSettings
+				.setTakeScreenshotPassedStep(Boolean.parseBoolean(properties.getProperty("TakeScreenshotPassedStep")));
+		reportSettings.setConsolidateScreenshotsInWordDoc(
+				Boolean.parseBoolean(properties.getProperty("ConsolidateScreenshotsInWordDoc")));
+		reportSettings.setConsolidateScreenshotsInPDF(
+				Boolean.parseBoolean(properties.getProperty("ConsolidateScreenshotsInPDF")));
 		reportSettings.setisMobileExecution(isMobileAutomation());
 
-		reportSettings
-		.setLinkScreenshotsToTestLog(this.linkScreenshotsToTestLog);
+		reportSettings.setLinkScreenshotsToTestLog(this.linkScreenshotsToTestLog);
 
 	}
 
 	private void createTestLogHeader() {
-		report.addTestLogHeading(reportSettings.getProjectName() + " - "
-				+ reportSettings.getReportName()
+		report.addTestLogHeading(reportSettings.getProjectName() + " - " + reportSettings.getReportName()
 				+ " Automation Execution Results");
-		report.addTestLogSubHeading(
-				"Date & Time",
-				": "
-						+ Util.getFormattedTime(startTime,
-								properties.getProperty("DateFormatString")),
-						"Iteration Mode", ": " + testParameters.getIterationMode());
-		report.addTestLogSubHeading("Start Iteration",
-				": " + testParameters.getStartIteration(), "End Iteration",
+		report.addTestLogSubHeading("Date & Time",
+				": " + Util.getFormattedTime(startTime, properties.getProperty("DateFormatString")), "Iteration Mode",
+				": " + testParameters.getIterationMode());
+		report.addTestLogSubHeading("Start Iteration", ": " + testParameters.getStartIteration(), "End Iteration",
 				": " + testParameters.getEndIteration());
 
 		switch (testParameters.getExecutionMode()) {
 		case LOCAL:
-			report.addTestLogSubHeading("Browser/Platform", ": "
-					+ testParameters.getBrowserAndPlatform(), "Execution on",
-					": " + "Local Machine");
+			report.addTestLogSubHeading("Browser/Platform", ": " + testParameters.getBrowserAndPlatform(),
+					"Execution on", ": " + "Local Machine");
 			break;
-			
+
 		case REMOTE:
 			report.addTestLogSubHeading("Browser", ": " + testParameters.getBrowser(), "Executed on",
 					": " + properties.getProperty("RemoteUrl"));
 			break;
 
 		case MOBILE:
-			report.addTestLogSubHeading("Execution Mode",
-					": " + testParameters.getExecutionMode(),
-					"Execution Platform",
-					": " + testParameters.getMobileExecutionPlatform());
-			report.addTestLogSubHeading("Tool Used",
-					": " + testParameters.getMobileToolName(),
-					"Device Name/ID", ": " + testParameters.getDeviceName());
+			report.addTestLogSubHeading("Execution Mode", ": " + testParameters.getExecutionMode(),
+					"Execution Platform", ": " + testParameters.getMobileExecutionPlatform());
+			report.addTestLogSubHeading("Tool Used", ": " + testParameters.getMobileToolName(), "Device Name/ID",
+					": " + testParameters.getDeviceName());
 			break;
 
 		case PERFECTO:
-			report.addTestLogSubHeading("Execution Mode",
-					": " + testParameters.getExecutionMode(),
-					"Execution Platform",
-					": " + testParameters.getMobileExecutionPlatform());
-			report.addTestLogSubHeading("Tool Used",
-					": " + testParameters.getMobileToolName(),
-					"Device Name/ID", ": " + testParameters.getDeviceName());
-			report.addTestLogSubHeading(
-					"Executed on",
-					": " + "Perfecto MobileCloud @ "
-							+ mobileProperties.getProperty("PerfectoHost"),
-							"Perfecto User",
-							": " + mobileProperties.getProperty("PerfectoUser"));
+			report.addTestLogSubHeading("Execution Mode", ": " + testParameters.getExecutionMode(),
+					"Execution Platform", ": " + testParameters.getMobileExecutionPlatform());
+			report.addTestLogSubHeading("Tool Used", ": " + testParameters.getMobileToolName(), "Device Name/ID",
+					": " + testParameters.getDeviceName());
+			report.addTestLogSubHeading("Executed on",
+					": " + "Perfecto MobileCloud @ " + mobileProperties.getProperty("PerfectoHost"), "Perfecto User",
+					": " + mobileProperties.getProperty("PerfectoUser"));
 			break;
 
 		default:
@@ -501,25 +456,20 @@ public class DriverScript {
 	}
 
 	private synchronized void initializeDatatable() {
-		String datatablePath = frameworkParameters.getRelativePath()
-				+ Util.getFileSeparator() + "src" + Util.getFileSeparator()
-				+ "test" + Util.getFileSeparator() + "resources"
-				+ Util.getFileSeparator() + "Datatables";
+		String datatablePath = frameworkParameters.getRelativePath() + Util.getFileSeparator() + "src"
+				+ Util.getFileSeparator() + "test" + Util.getFileSeparator() + "resources" + Util.getFileSeparator()
+				+ "Datatables";
 
 		String runTimeDatatablePath;
-		Boolean includeTestDataInReport = Boolean.parseBoolean(properties
-				.getProperty("IncludeTestDataInReport"));
+		Boolean includeTestDataInReport = Boolean.parseBoolean(properties.getProperty("IncludeTestDataInReport"));
 		if (includeTestDataInReport) {
-			runTimeDatatablePath = reportPath + Util.getFileSeparator()
-			+ "Datatables";
+			runTimeDatatablePath = reportPath + Util.getFileSeparator() + "Datatables";
 
-			File runTimeDatatable = new File(runTimeDatatablePath
-					+ Util.getFileSeparator()
-					+ testParameters.getCurrentScenario() + ".xls");
+			File runTimeDatatable = new File(
+					runTimeDatatablePath + Util.getFileSeparator() + testParameters.getCurrentScenario() + ".xls");
 			if (!runTimeDatatable.exists()) {
-				File datatable = new File(datatablePath
-						+ Util.getFileSeparator()
-						+ testParameters.getCurrentScenario() + ".xls");
+				File datatable = new File(
+						datatablePath + Util.getFileSeparator() + testParameters.getCurrentScenario() + ".xls");
 
 				try {
 					FileUtils.copyFile(datatable, runTimeDatatable);
@@ -530,11 +480,10 @@ public class DriverScript {
 				}
 			}
 
-			File runTimeCommonDatatable = new File(runTimeDatatablePath
-					+ Util.getFileSeparator() + "Common Testdata.xls");
+			File runTimeCommonDatatable = new File(
+					runTimeDatatablePath + Util.getFileSeparator() + "Common Testdata.xls");
 			if (!runTimeCommonDatatable.exists()) {
-				File commonDatatable = new File(datatablePath
-						+ Util.getFileSeparator() + "Common Testdata.xls");
+				File commonDatatable = new File(datatablePath + Util.getFileSeparator() + "Common Testdata.xls");
 
 				try {
 					FileUtils.copyFile(commonDatatable, runTimeCommonDatatable);
@@ -548,34 +497,32 @@ public class DriverScript {
 			runTimeDatatablePath = datatablePath;
 		}
 
-		dataTable = new CraftDataTable(runTimeDatatablePath,
-				testParameters.getCurrentScenario());
-		dataTable.setDataReferenceIdentifier(properties
-				.getProperty("DataReferenceIdentifier"));
+		dataTable = new CraftDataTable(runTimeDatatablePath, testParameters.getCurrentScenario());
+		dataTable.setDataReferenceIdentifier(properties.getProperty("DataReferenceIdentifier"));
 
 	}
 
 	private void initializeTestScript() {
-		driverUtil = new WebDriverUtil(driver);
-		scriptHelper = new ScriptHelper(dataTable, report, driver, driverUtil);
-		driver.setRport(report);
+		if (!isAPITest) {
+			driverUtil = new WebDriverUtil(driver);
+			scriptHelper = new ScriptHelper(dataTable, report, driver, driverUtil);
+			driver.setRport(report);
+		} else {
+			scriptHelper = new ScriptHelper(dataTable, report);
+		}
 		initializeBusinessFlow();
 	}
-
+	
 	private void initializeBusinessFlow() {
 		ExcelDataAccess businessFlowAccess = new ExcelDataAccess(
-				frameworkParameters.getRelativePath() + Util.getFileSeparator()
-				+ "src" + Util.getFileSeparator() + "test"
-				+ Util.getFileSeparator() + "resources"
-				+ Util.getFileSeparator() + "Datatables",
+				frameworkParameters.getRelativePath() + Util.getFileSeparator() + "src" + Util.getFileSeparator()
+						+ "test" + Util.getFileSeparator() + "resources" + Util.getFileSeparator() + "Datatables",
 				testParameters.getCurrentScenario());
 		businessFlowAccess.setDatasheetName("Business_Flow");
 
-		int rowNum = businessFlowAccess.getRowNum(
-				testParameters.getCurrentTestcase(), 0);
+		int rowNum = businessFlowAccess.getRowNum(testParameters.getCurrentTestcase(), 0);
 		if (rowNum == -1) {
-			throw new FrameworkException("The test case \""
-					+ testParameters.getCurrentTestcase()
+			throw new FrameworkException("The test case \"" + testParameters.getCurrentTestcase()
 					+ "\" is not found in the Business Flow sheet!");
 		}
 
@@ -593,15 +540,13 @@ public class DriverScript {
 
 		if (businessFlowData.isEmpty()) {
 			throw new FrameworkException(
-					"No business flow found against the test case \""
-							+ testParameters.getCurrentTestcase() + "\"");
+					"No business flow found against the test case \"" + testParameters.getCurrentTestcase() + "\"");
 		}
 	}
 
 	private void executeCRAFTTestIterations() {
 		while (currentIteration <= testParameters.getEndIteration()) {
-			report.addTestLogSection("Iteration: "
-					+ Integer.toString(currentIteration));
+			report.addTestLogSection("Iteration: " + Integer.toString(currentIteration));
 
 			// Evaluate each test iteration for any errors
 			try {
@@ -619,14 +564,11 @@ public class DriverScript {
 	}
 
 	private void executeTestcase(List<String> businessFlowData)
-			throws IllegalAccessException, InvocationTargetException,
-			ClassNotFoundException, InstantiationException {
+			throws IllegalAccessException, InvocationTargetException, ClassNotFoundException, InstantiationException {
 		Map<String, Integer> keywordDirectory = new HashMap<String, Integer>();
 
-		for (int currentKeywordNum = 0; currentKeywordNum < businessFlowData
-				.size(); currentKeywordNum++) {
-			String[] currentFlowData = businessFlowData.get(currentKeywordNum)
-					.split(",");
+		for (int currentKeywordNum = 0; currentKeywordNum < businessFlowData.size(); currentKeywordNum++) {
+			String[] currentFlowData = businessFlowData.get(currentKeywordNum).split(",");
 			String currentKeyword = currentFlowData[0];
 
 			int nKeywordIterations;
@@ -638,19 +580,16 @@ public class DriverScript {
 
 			for (int currentKeywordIteration = 0; currentKeywordIteration < nKeywordIterations; currentKeywordIteration++) {
 				if (keywordDirectory.containsKey(currentKeyword)) {
-					keywordDirectory.put(currentKeyword,
-							keywordDirectory.get(currentKeyword) + 1);
+					keywordDirectory.put(currentKeyword, keywordDirectory.get(currentKeyword) + 1);
 				} else {
 					keywordDirectory.put(currentKeyword, 1);
 				}
 				currentSubIteration = keywordDirectory.get(currentKeyword);
 
-				dataTable.setCurrentRow(testParameters.getCurrentTestcase(),
-						currentIteration, currentSubIteration);
+				dataTable.setCurrentRow(testParameters.getCurrentTestcase(), currentIteration, currentSubIteration);
 
 				if (currentSubIteration > 1) {
-					report.addTestLogSubSection(currentKeyword
-							+ " (Sub-Iteration: " + currentSubIteration + ")");
+					report.addTestLogSubSection(currentKeyword + " (Sub-Iteration: " + currentSubIteration + ")");
 				} else {
 					report.addTestLogSubSection(currentKeyword);
 				}
@@ -661,19 +600,17 @@ public class DriverScript {
 	}
 
 	private void invokeBusinessComponent(String currentKeyword)
-			throws IllegalAccessException, InvocationTargetException,
-			ClassNotFoundException, InstantiationException {
+			throws IllegalAccessException, InvocationTargetException, ClassNotFoundException, InstantiationException {
 		Boolean isMethodFound = false;
 		final String CLASS_FILE_EXTENSION = ".class";
-		File[] packageDirectories = {
-				new File(frameworkParameters.getRelativePath()
-						+ Util.getFileSeparator() + "target"
-						+ Util.getFileSeparator() + "test-classes"
-						+ Util.getFileSeparator() + "businessComponents"),
-				/*new File(frameworkParameters.getRelativePath()
-						+ Util.getFileSeparator() + "target"
-						+ Util.getFileSeparator() + "test-classes"
-						+ Util.getFileSeparator() + "componentGroups")*/ };
+		File[] packageDirectories = { new File(frameworkParameters.getRelativePath() + Util.getFileSeparator()
+				+ "target" + Util.getFileSeparator() + "test-classes" + Util.getFileSeparator() + "businessComponents"),
+				/*
+				 * new File(frameworkParameters.getRelativePath() +
+				 * Util.getFileSeparator() + "target" + Util.getFileSeparator()
+				 * + "test-classes" + Util.getFileSeparator() +
+				 * "componentGroups")
+				 */ };
 
 		for (File packageDirectory : packageDirectories) {
 			File[] packageFiles = packageDirectory.listFiles();
@@ -686,20 +623,16 @@ public class DriverScript {
 				// We only want the .class files
 				if (fileName.endsWith(CLASS_FILE_EXTENSION)) {
 					// Remove the .class extension to get the class name
-					String className = fileName.substring(0, fileName.length()
-							- CLASS_FILE_EXTENSION.length());
+					String className = fileName.substring(0, fileName.length() - CLASS_FILE_EXTENSION.length());
 
-					Class<?> reusableComponents = Class.forName(packageName
-							+ "." + className);
+					Class<?> reusableComponents = Class.forName(packageName + "." + className);
 					Method executeComponent;
 
 					try {
 						// Convert the first letter of the method to lowercase
 						// (in line with java naming conventions)
-						currentKeyword = currentKeyword.substring(0, 1)
-								.toLowerCase() + currentKeyword.substring(1);
-						executeComponent = reusableComponents.getMethod(
-								currentKeyword, (Class<?>[]) null);
+						currentKeyword = currentKeyword.substring(0, 1).toLowerCase() + currentKeyword.substring(1);
+						executeComponent = reusableComponents.getMethod(currentKeyword, (Class<?>[]) null);
 					} catch (NoSuchMethodException ex) {
 						// If the method is not found in this class, search the
 						// next class
@@ -708,8 +641,7 @@ public class DriverScript {
 
 					isMethodFound = true;
 
-					Constructor<?> ctor = reusableComponents
-							.getDeclaredConstructors()[0];
+					Constructor<?> ctor = reusableComponents.getDeclaredConstructors()[0];
 					Object businessComponent = ctor.newInstance(scriptHelper);
 
 					executeComponent.invoke(businessComponent, (Object[]) null);
@@ -720,8 +652,7 @@ public class DriverScript {
 		}
 
 		if (!isMethodFound) {
-			throw new FrameworkException("Keyword " + currentKeyword
-					+ " not found within any class "
+			throw new FrameworkException("Keyword " + currentKeyword + " not found within any class "
 					+ "inside the businesscomponents package");
 		}
 	}
@@ -734,11 +665,10 @@ public class DriverScript {
 		}
 
 		if (ex.getCause() != null) {
-			report.updateTestLog(exceptionName, exceptionDescription
-					+ " <b>Caused by: </b>" + ex.getCause(), Status.FAIL);
-		} else {
-			report.updateTestLog(exceptionName, exceptionDescription,
+			report.updateTestLog(exceptionName, exceptionDescription + " <b>Caused by: </b>" + ex.getCause(),
 					Status.FAIL);
+		} else {
+			report.updateTestLog(exceptionName, exceptionDescription, Status.FAIL);
 		}
 
 		// Print stack trace for detailed debug information
@@ -749,36 +679,28 @@ public class DriverScript {
 
 		// Error response
 		if (frameworkParameters.getStopExecution()) {
-			report.updateTestLog(
-					"CRAFT Info",
-					"Test execution terminated by user! All subsequent tests aborted...",
+			report.updateTestLog("CRAFT Info", "Test execution terminated by user! All subsequent tests aborted...",
 					Status.DONE);
 			currentIteration = testParameters.getEndIteration();
 		} else {
-			OnError onError = OnError
-					.valueOf(properties.getProperty("OnError"));
+			OnError onError = OnError.valueOf(properties.getProperty("OnError"));
 			switch (onError) {
 			// Stop option is not relevant when run from QC
 			case NEXT_ITERATION:
-				report.updateTestLog(
-						"CRAFT Info",
+				report.updateTestLog("CRAFT Info",
 						"Test case iteration terminated by user! Proceeding to next iteration (if applicable)...",
 						Status.DONE);
 				break;
 
 			case NEXT_TESTCASE:
-				report.updateTestLog(
-						"CRAFT Info",
-						"Test case terminated by user! Proceeding to next test case (if applicable)...",
-						Status.DONE);
+				report.updateTestLog("CRAFT Info",
+						"Test case terminated by user! Proceeding to next test case (if applicable)...", Status.DONE);
 				currentIteration = testParameters.getEndIteration();
 				break;
 
 			case STOP:
 				frameworkParameters.setStopExecution(true);
-				report.updateTestLog(
-						"CRAFT Info",
-						"Test execution terminated by user! All subsequent tests aborted...",
+				report.updateTestLog("CRAFT Info", "Test execution terminated by user! All subsequent tests aborted...",
 						Status.DONE);
 				currentIteration = testParameters.getEndIteration();
 				break;
@@ -840,14 +762,10 @@ public class DriverScript {
 				&& reportSettings.shouldGeneratePerfectoReports()) {
 			try {
 				driver.close();
-				RemoteWebDriverUtils.downloadReport(
-						(RemoteWebDriver) driver.getWebDriver(), "pdf",
-						reportPath + Util.getFileSeparator()
-						+ "Perfecto Results" + Util.getFileSeparator()
-						+ testParameters.getCurrentScenario() + "_"
-						+ testParameters.getCurrentTestcase() + "_"
-						+ testParameters.getCurrentTestInstance()
-						+ ".pdf");
+				RemoteWebDriverUtils.downloadReport((RemoteWebDriver) driver.getWebDriver(), "pdf",
+						reportPath + Util.getFileSeparator() + "Perfecto Results" + Util.getFileSeparator()
+								+ testParameters.getCurrentScenario() + "_" + testParameters.getCurrentTestcase() + "_"
+								+ testParameters.getCurrentTestInstance() + ".pdf");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -859,8 +777,7 @@ public class DriverScript {
 	private boolean isMobileAutomation() {
 		boolean isMobileAutomation = false;
 		if (testParameters.getExecutionMode().equals(ExecutionMode.MOBILE)
-				|| testParameters.getExecutionMode().equals(
-						ExecutionMode.PERFECTO)) {
+				|| testParameters.getExecutionMode().equals(ExecutionMode.PERFECTO)) {
 			isMobileAutomation = true;
 		}
 		return isMobileAutomation;

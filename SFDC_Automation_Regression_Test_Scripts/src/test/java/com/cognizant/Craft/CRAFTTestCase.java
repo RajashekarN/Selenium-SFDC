@@ -2,6 +2,9 @@ package com.cognizant.Craft;
 
 import com.cognizant.framework.FrameworkParameters;
 import com.cognizant.framework.selenium.*;
+
+import supportLibraries.XmlGenerator;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +54,8 @@ public abstract class CRAFTTestCase {
 	protected String currentTestcase;
 
 	private ResultSummaryManager resultSummaryManager = ResultSummaryManager.getInstance();
-
+	public static int countReRunFailedTestCase = 1;
+	
 	/**
 	 * Function to do the required framework setup activities before executing
 	 * the overall test suite
@@ -128,13 +132,29 @@ public abstract class CRAFTTestCase {
 		String executionTime = driverScript.getExecutionTime();
 		String testStatus = driverScript.getTestStatus();
 
-		resultSummaryManager.updateResultSummary(testParameters, testReportName, executionTime, testStatus);
+		resultSummaryManager.updateResultSummary(testParameters, testReportName, executionTime, testStatus);	
 
+		/*String value = properties.getProperty("ReRunFailedTestCase");
+		countReRunFailedTestCase = Integer.parseInt(value);
+		if(testStatus.equals("Passed")) {
+				resultSummaryManager.updateResultSummary(testParameters, testReportName, executionTime, testStatus);
+		} else if(testStatus.equals("Failed")) {
+			if(countReRunFailedTestCase==2) {
+				resultSummaryManager.updateResultSummary(testParameters, testReportName, executionTime, testStatus);	
+			}			
+		}*/
 		if ("Failed".equalsIgnoreCase(testStatus)) {
 			currentPacakage = testParameters.getCurrentScenario();
 			failedTestCase.add("testscripts." + testParameters.getCurrentScenario() + "." + testParameters.getCurrentTestcase());
 			Assert.fail(driverScript.getFailureDescription());
 		}
+		
+/*		String value = System.getProperty("ReRunFailedTestCase");
+		countReRunFailedTestCase = Integer.parseInt(value);
+		if(countReRunFailedTestCase==1) {
+			XmlGenerator.reRunFailedTestCases();
+			countReRunFailedTestCase++;
+		}*/
 	}
 
 	/**
@@ -143,6 +163,10 @@ public abstract class CRAFTTestCase {
 	 */
 	@AfterSuite
 	public void tearDownTestSuite() {
+/*		if((!failedTestCase.isEmpty()) && (countReRunFailedTestCase<2)) {
+			XmlGenerator.reRunFailedTestCases();
+			countReRunFailedTestCase++;
+		}*/
 		resultSummaryManager.wrapUp(true);
 		// resultSummaryManager.copyReportsFolder();
 	}

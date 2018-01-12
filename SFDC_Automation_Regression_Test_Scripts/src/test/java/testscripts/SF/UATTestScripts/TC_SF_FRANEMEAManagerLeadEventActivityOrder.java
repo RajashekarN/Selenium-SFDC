@@ -4,27 +4,25 @@ package testscripts.SF.UATTestScripts;
 import org.openqa.selenium.Platform;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
 import com.cognizant.framework.IterationOptions;
 import com.cognizant.framework.selenium.Browser;
 import com.cognizant.framework.selenium.ExecutionMode;
 import com.cognizant.framework.selenium.SeleniumTestParameters;
 import com.cognizant.Craft.*;
 /**
- * Validating the creation of Task on Lead
+ * Validating the activity page for Lead with respect to Event order
  * 
  * @author Cognizant
  *
  */
 public class TC_SF_FRANEMEAManagerLeadEventActivityOrder extends CRAFTTestCase{
-
-	@Test(dataProvider = "UATTestScripts")
+	@Test(groups= {"UAT","UI","France","Manager","Lead","Event"},dataProvider = "UATTestScripts")
 	public void runTC_SF_FRANEMEAManagerLeadEventActivityOrder(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
 		SeleniumTestParameters testParameters = new SeleniumTestParameters(currentScenario, currentTestcase);
-		testParameters.setCurrentTestDescription("Test for validating the creation of Task on Account");
+		testParameters.setCurrentTestDescription("Test for validating the activity page for Lead with respect to Event order for FRANEMEA");
 		testParameters.setIterationMode(IterationOptions.RUN_ONE_ITERATION_ONLY);
 		testParameters.setBrowser(Browser.CHROME);
 		testParameters.setExecutionMode(executionMode);

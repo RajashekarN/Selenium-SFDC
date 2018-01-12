@@ -3,7 +3,6 @@ package pagesAPI;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import org.openqa.selenium.support.PageFactory;
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
@@ -28,9 +27,6 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 
 	public OpportunitiesFunctions(ScriptHelper scriptHelper) {
 		super(scriptHelper);
-		PageFactory.initElements(driver.getWebDriver(), this);
-		// new WebDriverUtil(driver);
-		// Utility_Functions utility = new Utility_Functions(scriptHelper);
 	}
 
 	static SaveResult[] results;
@@ -38,6 +34,7 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 	static com.sforce.soap.partner.Error[] errors;
 	static boolean status = false;
 
+	EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
 
 	/**
 	 * Function for the creation of the Opportunity
@@ -45,9 +42,6 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 	 * @author Vishnuvardhan
 	 *
 	 */	
-
-	EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
-
 
 	public String createOpportunity() {
 		establishConnection.establishConnection();
@@ -123,6 +117,13 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 		return opportunityId;
 	}
 
+	/**
+	 * Function for the creation Note
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+
 	public boolean createNote(String parentID) {
 		int count =1;
 		boolean status=false;
@@ -137,8 +138,6 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 		(!dataTable.getData("General_Data", "TC_ID").startsWith("AB")))*/ {
 			count = 3;
 		}  
-		
-		
 		//opportunities[0] = opportunity;
 		for(int i =1;i<=count;i++){
 			SObject[] Notes = new SObject[1];
@@ -148,7 +147,6 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 			Note.setField("Title", "Test Note Title "+ String.valueOf(i));
 			Note.setField("Body","Test Note Body "+ String.valueOf(i));
 			Notes[0]= Note;
-			
 			try {
 				results = EstablishConnection.connection.create(Notes);
 			} catch (ConnectionException e) {
@@ -156,45 +154,13 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 				e.printStackTrace();
 			}
 			System.out.println("Result:::" + results);
-			 status = establishConnection.saveResults(results);
-			 if (!status){
-				 break;
-			 }
+			status = establishConnection.saveResults(results);
+			if (!status){
+				break;
+			}
 		}
-		
-			
 		return status;
 	}
-
-	/*public void createOpportunitySpecficUser() {
-		establishConnection.establishConnection();
-		SObject opportunity = new SObject();
-
-		opportunity.setType("Opportunity");		
-		opportunity.setField("Name", Utility_Functions.xGenerateAlphaNumericString() + "Test Automation_Opportunity");
-		SearchTextSOQL accountID = new SearchTextSOQL(scriptHelper);
-		String accountId = accountID.fetchRecord("Account", "Id");
-		opportunity.setField("AccountId", accountId);
-		opportunity.setField("CloseDate",Calendar.getInstance());
-		opportunity.setField("RecordTypeId", "012i0000000405n");
-		opportunity.setField("StageName","06-Assignment");
-
-		SObject[] opportunities = new SObject[1];
-		opportunities[0] = opportunity;
-		try {
-			results = EstablishConnection.connection.create(opportunities);
-		} catch (ConnectionException e) {
-			e.printStackTrace();
-		}
-		System.out.println("Result:::" + results);
-		status = establishConnection.saveResults(results);	
-		if(status==true) {
-			report.updateTestLog("Verify Create Opportunity", "Opportunity has been created successfully", Status.PASS);
-		} else {
-			report.updateTestLog("Verify Create Opportunity", "Opportunity creation failed", Status.FAIL);
-		} 
-}
-	 */
 
 	/**
 	 * Function for updating the Opportunity
@@ -349,38 +315,8 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 		return status;
 	}
 
-
 	/**
-	 * Function for the validating the Opportunity Contact Role
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */	
-/*	public void opportunityContactRole() {
-		establishConnection.establishConnection();
-		SObject opportunityContactRole = new SObject();
-		opportunityContactRole.setType("Opportunity");
-		String sOpportunityName = createOpportunity();
-		opportunityContactRole.setField("", value)
-		opportunityContactRole.setField("", value) 
-		opportunityContactRole.setField("", value)
-		
-		SObject[] opportunityContactRoles = new SObject[1];
-		opportunityContactRoles[0] = opportunityContactRole;
-		results = EstablishConnection.connection.create(opportunityContactRoles);
-		System.out.println("Result:::" + results);
-		status = establishConnection.saveResults(results);
-	}*/
-	
-	/**
-	 * Function for the validating the field on the Opportunities Page
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */	
-
-	/**
-	 * Function for the validating the field on the Contacts Page
+	 * Function for the validating the fields on the Opportunities Page
 	 * 
 	 * @author Vishnuvardhan
 	 *
@@ -422,7 +358,7 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 		ASAPACField.add("Alternate_Opportunity_Owner__c");
 		ASAPACField.add("Last_Manually_Modified_By__c");
 		ASAPACField.add("Last_Manually_Modified_Date__c");
-		
+
 		System.out.println("Asset Services APAC Fields List are::" + ASAPACField);		
 	}
 
@@ -462,7 +398,7 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 								for (int n = 0; n < dliList.length; n++) {
 									DescribeLayoutItem li = dliList[n];
 									if ((li.getLayoutComponents() != null) && (li.getLayoutComponents().length > 0)) {
-											ASAPACFieldLabelsAPI.add(li.getLayoutComponents()[0].getValue());
+										ASAPACFieldLabelsAPI.add(li.getLayoutComponents()[0].getValue());
 									}
 								}
 							}
@@ -496,6 +432,13 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 		}
 	}
 	
+	/**
+	 * Function for the validating the fields on the Opportunities Page
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+
 	/*public void OpportunitiesPageFieldsValidation() {	
 		try{
 			establishConnection.establishConnection();

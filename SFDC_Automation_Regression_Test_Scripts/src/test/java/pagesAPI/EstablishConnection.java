@@ -1,6 +1,5 @@
 package pagesAPI;
 
-import org.openqa.selenium.support.PageFactory;
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
@@ -12,7 +11,6 @@ import com.sforce.soap.partner.SaveResult;
 import com.sforce.ws.ConnectionException;
 import com.sforce.ws.ConnectorConfig;
 
-import pageObjects.LoginPage;
 
 public class EstablishConnection extends ReusableLibrary {
 	/*
@@ -24,9 +22,6 @@ public class EstablishConnection extends ReusableLibrary {
 
 	public EstablishConnection(ScriptHelper scriptHelper) {
 		super(scriptHelper);
-		PageFactory.initElements(driver.getWebDriver(), this);
-		// new WebDriverUtil(driver);
-		// Utility_Functions utility = new Utility_Functions(scriptHelper);
 	}
 
 	public static PartnerConnection connection = null;
@@ -34,69 +29,39 @@ public class EstablishConnection extends ReusableLibrary {
 	static com.sforce.soap.partner.Error[] errors;
 	static boolean status = false;
 	static String result;
-	//public String environment = properties.getProperty("RunEnvironment");
-	//public String environment = System.getProperty("RunEnvironment");
 	
+	/**
+	 * Function for retrieving the environment
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public static String environment = System.getProperty("RunEnvironment");
+
+	public String initializeEnvironment() {
+		try {
+			if (environment.equals(null)) {
+
+			}
+		} catch (Exception e) {
+			environment = properties.getProperty("RunEnvironment");
+			System.out.println(
+					"Environment is set as per the RunEnvironment value in Global Settings file:::" + environment);
+		}
+		return environment;
+	}
+	
+
 	/**
 	 * Function for establishing the connection
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */
-	LoginPage loginPage = new LoginPage(scriptHelper);
-	/*public void establishConnection() {
-		try {
-			String environment = loginPage.initializeEnvironment();
-			System.out.println(environment);
-			if (environment.equals("UAT")) {
-				String UAT_Username = properties.getProperty("UATSystemAdminUsername");
-				String UAT_Password = properties.getProperty("UATAdminPassword");
-				String UAT_AuthEndpoint = properties.getProperty("UATAuthEndpoint");
-				config = new ConnectorConfig();
-				config.setUsername(UAT_Username);
-				config.setPassword(UAT_Password);
-				System.out.println("AuthEndPoint: " + UAT_AuthEndpoint);
-				config.setAuthEndpoint(UAT_AuthEndpoint);
-				connection = new PartnerConnection(config);
-			} else if (environment.equals("UAT2")) {
-				String UAT2_Username = properties.getProperty("UAT2SystemAdminUsername");
-				String UAT2_Password = properties.getProperty("UAT2AdminPassword");
-				String UAT2_AuthEndpoint = properties.getProperty("UAT2AuthEndpoint");
-				config = new ConnectorConfig();
-				config.setUsername(UAT2_Username);
-				config.setPassword(UAT2_Password);
-				System.out.println("AuthEndPoint: " + UAT2_AuthEndpoint);
-				config.setAuthEndpoint(UAT2_AuthEndpoint);
-				connection = new PartnerConnection(config);
-			} else if (environment.equals("FTE")) {
-				String FTE_Username = properties.getProperty("FTESystemAdminUsername");
-				String FTE_Password = properties.getProperty("FTEAdminPassword");
-				String FTE_AuthEndpoint = properties.getProperty("FTEAuthEndpoint");
-				config = new ConnectorConfig();
-				config.setUsername(FTE_Username);
-				config.setPassword(FTE_Password);
-				System.out.println("AuthEndPoint: " + FTE_AuthEndpoint);
-				config.setAuthEndpoint(FTE_AuthEndpoint);
-				connection = new PartnerConnection(config);
-			} else if (environment.equals("FTE2")) {
-				String FTE2_Username = properties.getProperty("FTE2SystemAdminUsername");
-				String FTE2_Password = properties.getProperty("FTE2AdminPassword");
-				String FTE2_AuthEndpoint = properties.getProperty("FTE2AuthEndpoint");
-				config = new ConnectorConfig();
-				config.setUsername(FTE2_Username);
-				config.setPassword(FTE2_Password);
-				System.out.println("AuthEndPoint: " + FTE2_AuthEndpoint);
-				config.setAuthEndpoint(FTE2_AuthEndpoint);
-				connection = new PartnerConnection(config);
-			}
-		} catch (ConnectionException e) {
-			e.printStackTrace();
-		}
-	}*/
 	
 	public void establishConnection() {
 		try {
-			String environment = loginPage.initializeEnvironment();
+			String environment = initializeEnvironment();
 			System.out.println(environment);
 			String Username = null, Password;
 			if ((environment.equals("UAT")) || (environment.equals("UAT2")) || (environment.equals("FTE")) || (environment.equals("FTE2"))) {
@@ -305,6 +270,14 @@ public class EstablishConnection extends ReusableLibrary {
 		}
 		return status;
 	}
+	
+
+	/**
+	 * Function for saving the lead conversion results
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
 
 	public String leadConvertResults(LeadConvertResult[] Results) {
 		LeadConvertResult[] results = Results;
@@ -341,7 +314,7 @@ public class EstablishConnection extends ReusableLibrary {
 		return sIDs;
 	}
 	/**
-	 * Function for the getting the result from results array
+	 * Function for the getting the Id from results array
 	 * 
 	 * @author Vishnuvardhan
 	 *
@@ -374,7 +347,7 @@ public class EstablishConnection extends ReusableLibrary {
 	
 	
 	/**
-	 * Function for saving the delete results
+	 * Function for deleting the results
 	 * 
 	 * @author Vishnuvardhan
 	 *

@@ -351,16 +351,7 @@ public class BC_Salesforce_LeadsPage extends ReusableLibrary {
 		sfLeadsPage.verifyLeadsPrivateTags();
 	}
 	
-	/**
-	 * Lead Creation and Validation of fields
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-	public void bc_leadCreationValidationFields() throws InterruptedException {
-		leadsFunctions.createLeadSpecificUser();
-		leadsFunctions.leadPageFieldsValidation();
-	}
+
 
 	/**
 	 * Validating the Lead Tagging
@@ -385,16 +376,6 @@ public class BC_Salesforce_LeadsPage extends ReusableLibrary {
 		   sfLeadsPage.verifyLeadTagging();
 			
 		}
-	
-	/**
-	 * Lead Conversion via API
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-	public void bc_leadConversionAPI() throws InterruptedException {
-		leadsFunctions.leadConversion();
-	}
 	
 	/**
 	 * Validating the functionality for adding the mass member

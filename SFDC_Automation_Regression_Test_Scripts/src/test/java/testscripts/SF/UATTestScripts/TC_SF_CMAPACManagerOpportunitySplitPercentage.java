@@ -1,31 +1,28 @@
 package testscripts.SF.UATTestScripts;
 
 import org.openqa.selenium.Platform;
-
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
 import com.cognizant.framework.IterationOptions;
 import com.cognizant.framework.selenium.Browser;
 import com.cognizant.framework.selenium.ExecutionMode;
 import com.cognizant.framework.selenium.SeleniumTestParameters;
-
 import com.cognizant.Craft.*;
 /**
- * Validating the functionality split opportunity
+ * Validating the functionality for Opportunity split percentage
  * 
  * @author Cognizant
  *
  */
 
 public class TC_SF_CMAPACManagerOpportunitySplitPercentage extends CRAFTTestCase {
-	@Test(groups= {"UAT","API","Manager","Opportunity"},dataProvider = "UATTestScripts")
+	@Test(groups= {"UAT","UI","Manager","Opportunity"},dataProvider = "UATTestScripts")
 	public void runTC_SF_CMAPACManagerOpportunitySplitPercentage(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
 		SeleniumTestParameters testParameters = new SeleniumTestParameters(currentScenario, currentTestcase);
-		testParameters.setCurrentTestDescription("Test for the functionality split opportunity");
+		testParameters.setCurrentTestDescription("Test for the functionality for Opportunity split percentage for CMAPAC");
 		testParameters.setIterationMode(IterationOptions.RUN_ONE_ITERATION_ONLY);
 		testParameters.setBrowser(Browser.CHROME);
 		testParameters.setExecutionMode(executionMode);

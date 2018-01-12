@@ -41,6 +41,12 @@ public class ScriptHelper {
 		this.craftDriver = craftDriver;
 		this.driverUtil = driverUtil;
 	}
+	
+	public ScriptHelper(CraftDataTable dataTable, SeleniumReport report) {
+		this.dataTable = dataTable;
+		this.report = report;
+		//this.driverUtil = driverUtil;
+	}
 
 	/**
 	 * Function to get the {@link CraftDataTable} object

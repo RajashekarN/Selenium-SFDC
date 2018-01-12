@@ -4,9 +4,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
-
-import org.openqa.selenium.support.PageFactory;
-
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
@@ -27,10 +24,8 @@ public class TaskEventsFunctions extends ReusableLibrary {
 
 	public TaskEventsFunctions(ScriptHelper scriptHelper) {
 		super(scriptHelper);
-		PageFactory.initElements(driver.getWebDriver(), this);
-		// new WebDriverUtil(driver);
-		// Utility_Functions utility = new Utility_Functions(scriptHelper);
 	}
+
 	public static String leadId;
 	public static String accountId;
 	static SaveResult[] results;
@@ -75,7 +70,7 @@ public class TaskEventsFunctions extends ReusableLibrary {
 		}
 		//String sLeadID = searchTextSOQL.fetchRecordFieldValue("Id", queryLeadID);	
 		String sNewLeadID = null;
-		
+
 		String value = Utility_Functions.xGenerateAlphaNumericString();
 		task.setField("Subject", value + "Test Automation "+"Present");
 		task.setField("Type", "Private - Initial Meeting");
@@ -83,15 +78,15 @@ public class TaskEventsFunctions extends ReusableLibrary {
 		//calendar.add(Calendar.DATE,-1);
 		task.setField("ActivityDate", calendar.getTime());
 		/*if(dataTable.getData("General_Data", "TC_ID").contains("Activity")){
-			
+
 			taskPast.setType("Task");
-			
+
 			taskFuture.setType("Task");
 			taskPast.setField("Subject", value + "Test Automation "+"Past");
 			taskPast.setField("Type", "Private - Initial Meeting");
 			calendar.add(Calendar.DATE,-1);
 			taskPast.setField("ActivityDate", calendar.getTime());
-			
+
 			taskFuture.setField("Subject", value + "Test Automation "+"Future");
 			taskFuture.setField("Type", "Private - Initial Meeting");
 			Calendar calendar1 = Calendar.getInstance();
@@ -113,7 +108,7 @@ public class TaskEventsFunctions extends ReusableLibrary {
 			if(sOpportunityID==null) {
 				task.setField("WhatId", sNewOpportunity);
 			} else {
-				
+
 				task.setField("WhatId", sOpportunityID);	
 			}			
 		} else if(dataTable.getData("General_Data", "TC_ID").contains("Contact")) {
@@ -125,7 +120,7 @@ public class TaskEventsFunctions extends ReusableLibrary {
 		}
 		SObject[] tasks = new SObject[1];
 		tasks[0] = task;
-/*		if(dataTable.getData("General_Data", "TC_ID").contains("Activity")){
+		/*		if(dataTable.getData("General_Data", "TC_ID").contains("Activity")){
 			tasks[1]=taskPast;
 			tasks[2]=taskFuture;
 		}*/
@@ -178,7 +173,13 @@ public class TaskEventsFunctions extends ReusableLibrary {
 			report.updateTestLog("Verify Create Task", "Task are not created under respective objects", Status.FAIL);
 		return status;
 	}
-	
+
+	/**
+	 * Function for the creation of multiple Tasks
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
 	public Map<String,String> createMultipleTasks() {
 		establishConnection.establishConnection();
 		SObject task = new SObject();
@@ -224,14 +225,14 @@ public class TaskEventsFunctions extends ReusableLibrary {
 			}
 			SObject[] tasks = new SObject[1];
 			tasks[0] = task;
-			
+
 			try {
 				results = EstablishConnection.connection.create(tasks);
 			} catch (ConnectionException e) {
 				e.printStackTrace();
 			}
 			System.out.println("Result:::" + results);
-			 taskId = establishConnection.saveResultsId(results);	
+			taskId = establishConnection.saveResultsId(results);	
 			if(taskId.startsWith("00T")) {
 				status=true;
 				//report.updateTestLog("Verify Create Task", "Task has been created successfully", Status.PASS);
@@ -240,7 +241,7 @@ public class TaskEventsFunctions extends ReusableLibrary {
 				break;
 				//report.updateTestLog("Verify Create Task", "Task creation failed", Status.FAIL);
 			}
-			int count=0;
+			/*int count=0;
 			String leadQuery = "Select WhoId from Task where Id = " + "'" + taskId + "'";
 			String accountQuery = "Select Account__c from Task where Id = " + "'" + taskId + "'";
 			String whatIdQuery = "Select WhatId from Task where Id = " + "'" + taskId + "'";
@@ -264,52 +265,22 @@ public class TaskEventsFunctions extends ReusableLibrary {
 				if(objectValue.equals(sNewLeadID)) {
 					count++;
 				}
-			}
-			
-				
+			}*/
+
+
 		}
 		if(status){
 			report.updateTestLog("Verify Create Task", "Tasks are created under Accounts/ Contacts/ Opportunities and Leads", Status.PASS);
 		}
-			else 
-				report.updateTestLog("Verify Create Task", "Tasks are not created under respective objects", Status.FAIL);
-		
+		else 
+			report.updateTestLog("Verify Create Task", "Tasks are not created under respective objects", Status.FAIL);
+
 		Map<String,String> returnMap=new HashMap<String,String>();
 		returnMap.put("Task", taskId);
 		returnMap.put("Opportunity", sOpportunityID);
-	return	returnMap;
-	
+		return	returnMap;
+
 	}
-	
-	
-		
-		//Calendar calendar = Calendar.getInstance();
-		//calendar.add(Calendar.DATE,-1);
-		
-		/*if(dataTable.getData("General_Data", "TC_ID").contains("Activity")){
-			
-			taskPast.setType("Task");
-			
-			taskFuture.setType("Task");
-			taskPast.setField("Subject", value + "Test Automation "+"Past");
-			taskPast.setField("Type", "Private - Initial Meeting");
-			calendar.add(Calendar.DATE,-1);
-			taskPast.setField("ActivityDate", calendar.getTime());
-			
-			taskFuture.setField("Subject", value + "Test Automation "+"Future");
-			taskFuture.setField("Type", "Private - Initial Meeting");
-			Calendar calendar1 = Calendar.getInstance();
-			calendar1.add(Calendar.DATE,1);
-			taskFuture.setField("ActivityDate", calendar1.getTime());
-		}*/
-		
-/*		if(dataTable.getData("General_Data", "TC_ID").contains("Activity")){
-			tasks[1]=taskPast;
-			tasks[2]=taskFuture;
-		}*/
-		
-		
-	
 
 
 	/**
@@ -332,7 +303,7 @@ public class TaskEventsFunctions extends ReusableLibrary {
 		String queryAccountID = "SELECT Id FROM Account ORDER BY CreatedDate DESC"  + " limit 1 offset " + offsetValue;
 		String queryContactID = "SELECT Id FROM Contact ORDER BY CreatedDate DESC"  + " limit 1 offset " + offsetValue;
 		String queryOpportunityID = "SELECT Id FROM Opportunity ORDER BY CreatedDate DESC"  + " limit 1 offset " + offsetValue;
-		String queryLeadID = "SELECT Id FROM Lead ORDER BY CreatedDate DESC"  + " limit 1 offset " + offsetValue;
+		//String queryLeadID = "SELECT Id FROM Lead ORDER BY CreatedDate DESC"  + " limit 1 offset " + offsetValue;
 
 		String sAccountID = searchTextSOQL.fetchRecordFieldValue("Id", queryAccountID);
 		String sContactID = searchTextSOQL.fetchRecordFieldValue("Id", queryContactID);
@@ -343,7 +314,7 @@ public class TaskEventsFunctions extends ReusableLibrary {
 		System.out.println("Contact Id:::"+ sContactID);
 		System.out.println("Opportunity Id:::"+ sOpportunityID);
 		//System.out.println("Lead Id:::"+ sLeadID);
-		
+
 		if(dataTable.getData("General_Data", "TC_ID").contains("Account"))  {
 			event.setField("WhoId", sContactID);
 			event.setField("WhatId", sAccountID);
@@ -403,7 +374,14 @@ public class TaskEventsFunctions extends ReusableLibrary {
 			report.updateTestLog("Verify Create Task", "Event are not created under respective objects", Status.FAIL);
 		return status;
 	}
-	
+
+	/**
+	 * Function for the creation of an Events
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+
 	public void createMultipleEvents(String Id) {
 		establishConnection.establishConnection();
 		/*String queryAccountID = "SELECT Id FROM Account ORDER BY CreatedDate DESC"  + " limit 1 offset " + offsetValue;
@@ -412,7 +390,7 @@ public class TaskEventsFunctions extends ReusableLibrary {
 		String queryLeadID = "SELECT Id FROM Lead ORDER BY CreatedDate DESC"  + " limit 1 offset " + offsetValue;
 
 		String sAccountID = searchTextSOQL.fetchRecordFieldValue("Id", queryAccountID);
-		
+
 		String sOpportunityID = searchTextSOQL.fetchRecordFieldValue("Id", queryOpportunityID);
 		String sLeadID = searchTextSOQL.fetchRecordFieldValue("Id", queryLeadID);*/
 		String queryContactID = "SELECT Id FROM Contact ORDER BY CreatedDate DESC"  + " limit 1 offset " + offsetValue;
@@ -422,94 +400,94 @@ public class TaskEventsFunctions extends ReusableLibrary {
 		System.out.println("Contact Id:::"+ sContactID);
 		System.out.println("Opportunity Id:::"+ sOpportunityID);
 		System.out.println("Lead Id:::"+ sLeadID);*/
-		
+
 		for(int i=0;i<3;i++){
-		SObject event = new SObject();
-		event.setType("Event");
-		//String value = Utility_Functions.xGenerateAlphaNumericString();
-		event.setField("Subject", "Refactor Event"+String.valueOf(i+1));
-		event.setField("Type", "Private - Initial Meeting");
-		if(i==0){
-		calendar.add(Calendar.DATE, -1);
-		event.setField("ActivityDate", calendar);
-		event.setField("ActivityDateTime", calendar);
-		}else if(i==1){
-			Calendar calendar = Calendar.getInstance();
-			event.setField("ActivityDate", calendar);
-			event.setField("ActivityDateTime", calendar);
-		}else{
-			Calendar calendar = Calendar.getInstance();
-			calendar.add(Calendar.DATE, 1);
-			event.setField("ActivityDate", calendar);
-			event.setField("ActivityDateTime", calendar);
-		}
-	    // Get current date of calendar which point to the yesterday now
-	   // Date newDate = calendar.getTime();
-		
-		
-		event.setField("DurationInMinutes", 10);
-		
-		
-		if(dataTable.getData("General_Data", "TC_ID").contains("Account"))  {
-			event.setField("WhoId", sContactID);
-			event.setField("WhatId", Id);
-		} else if(dataTable.getData("General_Data", "TC_ID").contains("Opportunity")) {
-			event.setField("WhoId", sContactID);
-			event.setField("WhatId", Id);
-		} else if(dataTable.getData("General_Data", "TC_ID").contains("Contact")) {
-			event.setField("WhatId", Id);	
-			event.setField("WhoId", sContactID);
-		} else if (dataTable.getData("General_Data", "TC_ID").contains("Lead")) {
-			sNewLead = leadsFunctions.createNewLead(); 
-			event.setField("WhoId", sNewLead);
-		}
-		SObject[] events = new SObject[1];
-		events[0] = event;
-		try {
-			results = EstablishConnection.connection.create(events);
-		} catch (ConnectionException e) {
-			e.printStackTrace();
-		}
-		System.out.println("Result:::" + results);
-		status = establishConnection.saveResults(results);
-		String status = establishConnection.saveResultsId(results);	
-		if(status.startsWith("00U")) {
-			report.updateTestLog("Verify Create Event", "Event has been created successfully", Status.PASS);
-		} else {
-			report.updateTestLog("Verify Create Event", "Event creation failed", Status.FAIL);
-		}	
-		int count=0;
-		String leadQuery = "Select WhoId from Event where Id = " + "'" + status + "'";
-		String accountQuery = "Select Account__c from Event where Id = " + "'" + status + "'";
-		String whatIdQuery = "Select WhatId from Event where Id = " + "'" + status + "'";
-		String whatIdValue = searchTextSOQL.fetchRecordFieldValue("WhatId", whatIdQuery);
-		if(dataTable.getData("General_Data", "TC_ID").contains("Account"))  {
-			String objectValue = searchTextSOQL.fetchRecordFieldValue("Account__c", accountQuery);
-			if((objectValue.contains(Id)) && (whatIdValue !=null)) {
-				count++;
+			SObject event = new SObject();
+			event.setType("Event");
+			//String value = Utility_Functions.xGenerateAlphaNumericString();
+			event.setField("Subject", "Refactor Event"+String.valueOf(i+1));
+			event.setField("Type", "Private - Initial Meeting");
+			if(i==0){
+				calendar.add(Calendar.DATE, -1);
+				event.setField("ActivityDate", calendar);
+				event.setField("ActivityDateTime", calendar);
+			}else if(i==1){
+				Calendar calendar = Calendar.getInstance();
+				event.setField("ActivityDate", calendar);
+				event.setField("ActivityDateTime", calendar);
+			}else{
+				Calendar calendar = Calendar.getInstance();
+				calendar.add(Calendar.DATE, 1);
+				event.setField("ActivityDate", calendar);
+				event.setField("ActivityDateTime", calendar);
 			}
-		} else if(dataTable.getData("General_Data", "TC_ID").contains("Opportunity")) {
-			if(whatIdValue.contains(Id)) {
-				count++;
+			// Get current date of calendar which point to the yesterday now
+			// Date newDate = calendar.getTime();
+
+
+			event.setField("DurationInMinutes", 10);
+
+
+			if(dataTable.getData("General_Data", "TC_ID").contains("Account"))  {
+				event.setField("WhoId", sContactID);
+				event.setField("WhatId", Id);
+			} else if(dataTable.getData("General_Data", "TC_ID").contains("Opportunity")) {
+				event.setField("WhoId", sContactID);
+				event.setField("WhatId", Id);
+			} else if(dataTable.getData("General_Data", "TC_ID").contains("Contact")) {
+				event.setField("WhatId", Id);	
+				event.setField("WhoId", sContactID);
+			} else if (dataTable.getData("General_Data", "TC_ID").contains("Lead")) {
+				sNewLead = leadsFunctions.createNewLead(); 
+				event.setField("WhoId", sNewLead);
 			}
-		} else if(dataTable.getData("General_Data", "TC_ID").contains("Contact")) {
-			String objectValue = searchTextSOQL.fetchRecordFieldValue("WhoId", leadQuery);
-			if((objectValue.contains(sContactID)) && (whatIdValue != null)) {
-				count++;
+			SObject[] events = new SObject[1];
+			events[0] = event;
+			try {
+				results = EstablishConnection.connection.create(events);
+			} catch (ConnectionException e) {
+				e.printStackTrace();
 			}
-		} else if (dataTable.getData("General_Data", "TC_ID").contains("Lead")) {
-			String objectValue = searchTextSOQL.fetchRecordFieldValue("WhoId", leadQuery);
-			if(objectValue.contains(sNewLead)) {
-				count++;
+			System.out.println("Result:::" + results);
+			status = establishConnection.saveResults(results);
+			String status = establishConnection.saveResultsId(results);	
+			if(status.startsWith("00U")) {
+				report.updateTestLog("Verify Create Event", "Event has been created successfully", Status.PASS);
+			} else {
+				report.updateTestLog("Verify Create Event", "Event creation failed", Status.FAIL);
+			}	
+			int count=0;
+			String leadQuery = "Select WhoId from Event where Id = " + "'" + status + "'";
+			String accountQuery = "Select Account__c from Event where Id = " + "'" + status + "'";
+			String whatIdQuery = "Select WhatId from Event where Id = " + "'" + status + "'";
+			String whatIdValue = searchTextSOQL.fetchRecordFieldValue("WhatId", whatIdQuery);
+			if(dataTable.getData("General_Data", "TC_ID").contains("Account"))  {
+				String objectValue = searchTextSOQL.fetchRecordFieldValue("Account__c", accountQuery);
+				if((objectValue.contains(Id)) && (whatIdValue !=null)) {
+					count++;
+				}
+			} else if(dataTable.getData("General_Data", "TC_ID").contains("Opportunity")) {
+				if(whatIdValue.contains(Id)) {
+					count++;
+				}
+			} else if(dataTable.getData("General_Data", "TC_ID").contains("Contact")) {
+				String objectValue = searchTextSOQL.fetchRecordFieldValue("WhoId", leadQuery);
+				if((objectValue.contains(sContactID)) && (whatIdValue != null)) {
+					count++;
+				}
+			} else if (dataTable.getData("General_Data", "TC_ID").contains("Lead")) {
+				String objectValue = searchTextSOQL.fetchRecordFieldValue("WhoId", leadQuery);
+				if(objectValue.contains(sNewLead)) {
+					count++;
+				}
 			}
+			if(count==1) 
+				report.updateTestLog("Verify Create Task", "Event are created under Accounts/ Contacts/ Opportunities and Leads", Status.PASS);
+			else 
+				report.updateTestLog("Verify Create Task", "Event are not created under respective objects", Status.FAIL);
+			//return status;
 		}
-		if(count==1) 
-			report.updateTestLog("Verify Create Task", "Event are created under Accounts/ Contacts/ Opportunities and Leads", Status.PASS);
-		else 
-			report.updateTestLog("Verify Create Task", "Event are not created under respective objects", Status.FAIL);
-		//return status;
-		}
-	//	return sNewLead;
+		//	return sNewLead;
 	}
 
 	public void closeTask() {
@@ -526,7 +504,7 @@ public class TaskEventsFunctions extends ReusableLibrary {
 		} catch (ConnectionException e) {
 			e.printStackTrace();
 		}
-		
+
 		/*QueryResult queryResults = null;
 		try {
 			queryResults = EstablishConnection.connection.query("SELECT Id, Status FROM Task where Status = 'Open' ORDER BY CreatedDate DESC LIMIT 1");
@@ -565,7 +543,7 @@ public class TaskEventsFunctions extends ReusableLibrary {
 			report.updateTestLog("Verify Close Task", "Task closure failed", Status.FAIL);
 		}
 	}
-	
+
 	public void closeTaskonOpportunity(String sTaskId) {
 		//String sTaskId = createTask();
 		//establishConnection.establishConnectionSpecificUser();
@@ -580,7 +558,7 @@ public class TaskEventsFunctions extends ReusableLibrary {
 		} catch (ConnectionException e) {
 			e.printStackTrace();
 		}
-		
+
 		/*QueryResult queryResults = null;
 		try {
 			queryResults = EstablishConnection.connection.query("SELECT Id, Status FROM Task where Status = 'Open' ORDER BY CreatedDate DESC LIMIT 1");
@@ -619,14 +597,14 @@ public class TaskEventsFunctions extends ReusableLibrary {
 			report.updateTestLog("Verify Close Task", "Task closure failed", Status.FAIL);
 		}
 	}
-	
-	
+
+
 	public String createTaskOnLead() {
 		establishConnection.establishConnection();
 		SObject task = new SObject();
 		task.setType("Task");
 		String sNewLeadID = null;
-	
+
 		String value = Utility_Functions.xGenerateAlphaNumericString();
 		task.setField("Subject", value + "Test Automation "+"Present");
 		task.setField("Type", "Private - Initial Meeting");
@@ -664,7 +642,7 @@ public class TaskEventsFunctions extends ReusableLibrary {
 		String IDs = sNewLeadID + "_" + status;
 		return IDs;
 	}
-	
+
 	public HashMap<String,String> createTaskbyActivityDate() {
 		String taskName=null;
 		String status = null;
@@ -674,11 +652,11 @@ public class TaskEventsFunctions extends ReusableLibrary {
 		int activityTimes=1;
 		establishConnection.establishConnection();
 		SObject task = new SObject();
- 		task.setType("Task");
+		task.setType("Task");
 		String queryAccountID = "SELECT Id FROM Account ORDER BY CreatedDate DESC"  + " limit 1 offset " + offsetValue;
 		String queryContactID = "SELECT Id FROM Contact ORDER BY CreatedDate DESC"  + " limit 1 offset " + offsetValue;
 		String queryOpportunityID = "SELECT Id FROM Opportunity ORDER BY CreatedDate DESC"  + " limit 1 offset " + offsetValue;
-		
+
 		String sAccountID = searchTextSOQL.fetchRecordFieldValue("Id", queryAccountID);
 		String sContactID = searchTextSOQL.fetchRecordFieldValue("Id", queryContactID);
 		String sOpportunityID = searchTextSOQL.fetchRecordFieldValue("Id", queryOpportunityID);
@@ -688,114 +666,114 @@ public class TaskEventsFunctions extends ReusableLibrary {
 			activityTimes=3;
 		}
 		for(int i=0;i<activityTimes;i++){
-		String value = Utility_Functions.xGenerateAlphaNumericString();
-		//task.setField("Subject", value + "Test Automation "+"Present");
-		
+			String value = Utility_Functions.xGenerateAlphaNumericString();
+			//task.setField("Subject", value + "Test Automation "+"Present");
+
 			task.setField("Type", "Private - Initial Meeting");
-		
-		if(i==0) {
-			Calendar calendar1 = Calendar.getInstance();
-			task.setField("ActivityDate", calendar1.getTime());
-			taskName=value + "Test Automation "+"Present";
-			task.setField("Subject", taskName);
-		} else if (i==1) {
-			Calendar calendar2 = Calendar.getInstance();
-			calendar2.add(Calendar.DATE,-1);
-			task.setField("ActivityDate", calendar2.getTime());
-			taskName=value + "Test Automation "+"Past";
-			task.setField("Subject", taskName);
-			//task.setField("Subject", value + "Test Automation "+"Past");
-		} else {
-			Calendar calendar3 = Calendar.getInstance();
-			calendar3.add(Calendar.DATE,1);
-			task.setField("ActivityDate", calendar3.getTime());
-			taskName=value + "Test Automation "+"Future";
-			task.setField("Subject", taskName);
-			//task.setField("Subject", value + "Test Automation "+"Future");
-		}
-	
-		if(dataTable.getData("General_Data", "TC_ID").contains("Account"))  {
-			task.setField("WhoId", sContactID);
-			task.setField("WhatId", sAccountID);
-		} else if(dataTable.getData("General_Data", "TC_ID").contains("Opportunity")) {
-			task.setField("WhoId", sContactID);
-			task.setField("WhatId", sOpportunityID);
-		} else if(dataTable.getData("General_Data", "TC_ID").contains("Contact")) {
-			task.setField("WhatId", sAccountID);	
-			task.setField("WhoId", sContactID);
-		} else if (dataTable.getData("General_Data", "TC_ID").contains("Lead")) {
+
+			if(i==0) {
+				Calendar calendar1 = Calendar.getInstance();
+				task.setField("ActivityDate", calendar1.getTime());
+				taskName=value + "Test Automation "+"Present";
+				task.setField("Subject", taskName);
+			} else if (i==1) {
+				Calendar calendar2 = Calendar.getInstance();
+				calendar2.add(Calendar.DATE,-1);
+				task.setField("ActivityDate", calendar2.getTime());
+				taskName=value + "Test Automation "+"Past";
+				task.setField("Subject", taskName);
+				//task.setField("Subject", value + "Test Automation "+"Past");
+			} else {
+				Calendar calendar3 = Calendar.getInstance();
+				calendar3.add(Calendar.DATE,1);
+				task.setField("ActivityDate", calendar3.getTime());
+				taskName=value + "Test Automation "+"Future";
+				task.setField("Subject", taskName);
+				//task.setField("Subject", value + "Test Automation "+"Future");
+			}
+
+			if(dataTable.getData("General_Data", "TC_ID").contains("Account"))  {
+				task.setField("WhoId", sContactID);
+				task.setField("WhatId", sAccountID);
+			} else if(dataTable.getData("General_Data", "TC_ID").contains("Opportunity")) {
+				task.setField("WhoId", sContactID);
+				task.setField("WhatId", sOpportunityID);
+			} else if(dataTable.getData("General_Data", "TC_ID").contains("Contact")) {
+				task.setField("WhatId", sAccountID);	
+				task.setField("WhoId", sContactID);
+			} else if (dataTable.getData("General_Data", "TC_ID").contains("Lead")) {
+				if(i==0){
+					sNewLeadID = leadsFunctions.createNewLead(); 
+				}
+				task.setField("WhoId", sNewLeadID);
+			}
+			SObject[] tasks = new SObject[1];
+			tasks[0] = task;
+			try {
+				results = EstablishConnection.connection.create(tasks);
+			} catch (ConnectionException e) {
+				e.printStackTrace();
+			}
+			System.out.println("Result:::" + results);
+			status = establishConnection.saveResultsId(results);	
+			if(status.startsWith("00T")) {
+				report.updateTestLog("Verify Create Task", "Task has been created successfully", Status.PASS);
+			} else {
+				report.updateTestLog("Verify Create Task", "Task creation failed", Status.FAIL);
+			}
+			int count=0;
+			String leadQuery = "Select WhoId from Task where Id = " + "'" + status + "'";
+			String accountQuery = "Select Account__c from Task where Id = " + "'" + status + "'";
+			String whatIdQuery = "Select WhatId from Task where Id = " + "'" + status + "'";
+			String whatIdValue = searchTextSOQL.fetchRecordFieldValue("WhatId", whatIdQuery);
+			if(dataTable.getData("General_Data", "TC_ID").contains("Account"))  {
+				String objectValue = searchTextSOQL.fetchRecordFieldValue("Account__c", accountQuery);
+				if((objectValue.equals(sAccountID)) && (whatIdValue !=null)) {
+					count++;
+				}
+
+			} else if(dataTable.getData("General_Data", "TC_ID").contains("Opportunity")) {
+				if(whatIdValue.equals(sOpportunityID)) {
+					count++;
+				}
+			} else if(dataTable.getData("General_Data", "TC_ID").contains("Contact")) {
+				String objectValue = searchTextSOQL.fetchRecordFieldValue("WhoId", leadQuery);
+				if((objectValue.equals(sContactID)) && (whatIdValue != null)) {
+					count++;
+				}
+			} else if (dataTable.getData("General_Data", "TC_ID").contains("Lead")) {
+				String objectValue = searchTextSOQL.fetchRecordFieldValue("WhoId", leadQuery);
+				if(objectValue.equals(sNewLeadID)) {
+					count++;
+				}
+			}
+			if(count!=0) 
+				report.updateTestLog("Verify Create Task", "Task are created under Accounts/ Contacts/ Opportunities and Leads", Status.PASS);
+			else 
+				report.updateTestLog("Verify Create Task", "Task are not created under respective objects", Status.FAIL);
+
+			//String taskQuery = "Select Name from Task where Id = " + "'" + status + "'";
 			if(i==0){
-				sNewLeadID = leadsFunctions.createNewLead(); 
+				presentTask = taskName;
+				System.out.println(presentTask);
+			}else if(i==1){
+				pastTask = taskName;
+				System.out.println(pastTask);
+			}else{
+				futureTask = taskName;
+				System.out.println(futureTask);
 			}
-			task.setField("WhoId", sNewLeadID);
-		}
-		SObject[] tasks = new SObject[1];
-		tasks[0] = task;
-		try {
-			results = EstablishConnection.connection.create(tasks);
-		} catch (ConnectionException e) {
-			e.printStackTrace();
-		}
-		System.out.println("Result:::" + results);
-		 status = establishConnection.saveResultsId(results);	
-		if(status.startsWith("00T")) {
-			report.updateTestLog("Verify Create Task", "Task has been created successfully", Status.PASS);
-		} else {
-			report.updateTestLog("Verify Create Task", "Task creation failed", Status.FAIL);
-		}
-		int count=0;
-		String leadQuery = "Select WhoId from Task where Id = " + "'" + status + "'";
-		String accountQuery = "Select Account__c from Task where Id = " + "'" + status + "'";
-		String whatIdQuery = "Select WhatId from Task where Id = " + "'" + status + "'";
-		String whatIdValue = searchTextSOQL.fetchRecordFieldValue("WhatId", whatIdQuery);
-		if(dataTable.getData("General_Data", "TC_ID").contains("Account"))  {
-			String objectValue = searchTextSOQL.fetchRecordFieldValue("Account__c", accountQuery);
-			if((objectValue.equals(sAccountID)) && (whatIdValue !=null)) {
-				count++;
-			}
-			
-		} else if(dataTable.getData("General_Data", "TC_ID").contains("Opportunity")) {
-			if(whatIdValue.equals(sOpportunityID)) {
-				count++;
-			}
-		} else if(dataTable.getData("General_Data", "TC_ID").contains("Contact")) {
-			String objectValue = searchTextSOQL.fetchRecordFieldValue("WhoId", leadQuery);
-			if((objectValue.equals(sContactID)) && (whatIdValue != null)) {
-				count++;
-			}
-		} else if (dataTable.getData("General_Data", "TC_ID").contains("Lead")) {
-			String objectValue = searchTextSOQL.fetchRecordFieldValue("WhoId", leadQuery);
-			if(objectValue.equals(sNewLeadID)) {
-				count++;
-			}
-		}
-		if(count!=0) 
-			report.updateTestLog("Verify Create Task", "Task are created under Accounts/ Contacts/ Opportunities and Leads", Status.PASS);
-		else 
-			report.updateTestLog("Verify Create Task", "Task are not created under respective objects", Status.FAIL);
-		
-		String taskQuery = "Select Name from Task where Id = " + "'" + status + "'";
-		if(i==0){
-			 presentTask = taskName;
-			 System.out.println(presentTask);
-		}else if(i==1){
-			 pastTask = taskName;
-			 System.out.println(pastTask);
-		}else{
-			 futureTask = taskName;
-			 System.out.println(futureTask);
-		}
 		}
 		HashMap<String,String> returnMap = new HashMap<String,String>();
 		if(dataTable.getData("General_Data", "TC_ID").contains("Account")){
-			
+
 			returnMap.put("accountId", sAccountID);
 			returnMap.put("present", presentTask);
 			returnMap.put("past", pastTask);
 			returnMap.put("future", futureTask);
-			
+
 			System.out.println("Account Id : "+sAccountID);
-			
+
 		}else if(dataTable.getData("General_Data", "TC_ID").contains("Contact")){
 			//HashMap<String,String> returnMap = new HashMap<String,String>();
 			returnMap.put("contactId", sContactID);
@@ -803,7 +781,7 @@ public class TaskEventsFunctions extends ReusableLibrary {
 			returnMap.put("past", pastTask);
 			returnMap.put("future", futureTask);
 			//return returnMap;
-			
+
 		}else if(dataTable.getData("General_Data", "TC_ID").contains("Opportunity")){
 			//HashMap<String,String> returnMap = new HashMap<String,String>();
 			returnMap.put("opportunityId", sOpportunityID);
@@ -811,7 +789,7 @@ public class TaskEventsFunctions extends ReusableLibrary {
 			returnMap.put("past", pastTask);
 			returnMap.put("future", futureTask);
 			//return returnMap;
-			
+
 		}else{
 			//HashMap<String,String> returnMap = new HashMap<String,String>();
 			returnMap.put("leadId", sNewLeadID);
@@ -822,7 +800,7 @@ public class TaskEventsFunctions extends ReusableLibrary {
 		}
 		return returnMap;
 	}
-	
+
 	public HashMap<String,String> createEventbyActivityDate(String Id) {
 		String taskName=null;
 		String status = null;
@@ -838,14 +816,14 @@ public class TaskEventsFunctions extends ReusableLibrary {
 		establishConnection.establishConnection();
 		SObject event = new SObject();
 		event.setType("Event");
-		
-		
-		
+
+
+
 		String queryAccountID = "SELECT Id FROM Account ORDER BY CreatedDate DESC"  + " limit 1 offset " + offsetValue;
 		String queryContactID = "SELECT Id FROM Contact ORDER BY CreatedDate DESC"  + " limit 1 offset " + offsetValue;
 		String queryOpportunityID = "SELECT Id FROM Opportunity ORDER BY CreatedDate DESC"  + " limit 1 offset " + offsetValue;
 		String queryLeadID = "SELECT Id FROM Lead ORDER BY CreatedDate DESC"  + " limit 1 offset " + offsetValue;
-		
+
 		sAccountID = searchTextSOQL.fetchRecordFieldValue("Id", queryAccountID);
 		sContactID = searchTextSOQL.fetchRecordFieldValue("Id", queryContactID);
 		sOpportunityID = searchTextSOQL.fetchRecordFieldValue("Id", queryOpportunityID);
@@ -877,10 +855,10 @@ public class TaskEventsFunctions extends ReusableLibrary {
 			event.setField("Type", "Private - Initial Meeting");
 			event.setField("DurationInMinutes", 10);
 			if(i==0) {
-				Calendar calendar1 = Calendar.getInstance();
-				System.out.println("Date : "+calendar1.getInstance());
-				event.setField("ActivityDate", calendar1.getInstance());
-				event.setField("ActivityDateTime", calendar1.getInstance());
+			/*	Calendar calendar1 = Calendar.getInstance();
+				System.out.println("Date : "+calendar1.getInstance());*/
+				event.setField("ActivityDate", Calendar.getInstance());
+				event.setField("ActivityDateTime", Calendar.getInstance());
 				taskName=value + "Event Automation "+"Present";
 				event.setField("Subject", taskName);
 			} else if (i==1) {
@@ -902,80 +880,80 @@ public class TaskEventsFunctions extends ReusableLibrary {
 				event.setField("Subject", taskName);
 				//event.setField("Subject", value + "Test Automation "+"Future");
 			}
-		if(dataTable.getData("General_Data", "TC_ID").contains("Account"))  {
-			event.setField("WhoId", sContactID);
-			event.setField("WhatId", sAccountID);
-		} else if(dataTable.getData("General_Data", "TC_ID").contains("Opportunity")) {
-			event.setField("WhoId", sContactID);
-			event.setField("WhatId", sOpportunityID);
-		} else if(dataTable.getData("General_Data", "TC_ID").contains("Contact")) {
-			event.setField("WhatId", sAccountID);	
-			event.setField("WhoId", sContactID);
-		} else if (dataTable.getData("General_Data", "TC_ID").contains("Lead")) {
-			if(i==0 && sNewLead==null){
-			sNewLead = leadsFunctions.createNewLead(); 
+			if(dataTable.getData("General_Data", "TC_ID").contains("Account"))  {
+				event.setField("WhoId", sContactID);
+				event.setField("WhatId", sAccountID);
+			} else if(dataTable.getData("General_Data", "TC_ID").contains("Opportunity")) {
+				event.setField("WhoId", sContactID);
+				event.setField("WhatId", sOpportunityID);
+			} else if(dataTable.getData("General_Data", "TC_ID").contains("Contact")) {
+				event.setField("WhatId", sAccountID);	
+				event.setField("WhoId", sContactID);
+			} else if (dataTable.getData("General_Data", "TC_ID").contains("Lead")) {
+				if(i==0 && sNewLead==null){
+					sNewLead = leadsFunctions.createNewLead(); 
+				}
+				event.setField("WhoId", sNewLead);
+				System.out.println("Lead Id:::"+ sNewLead);
 			}
-			event.setField("WhoId", sNewLead);
-			System.out.println("Lead Id:::"+ sNewLead);
-		}
-		SObject[] events = new SObject[1];
-		events[0] = event;
-		try {
-			results = EstablishConnection.connection.create(events);
-		} catch (ConnectionException e) {
-			e.printStackTrace();
-		}
-		System.out.println("Result:::" + results);
-		//status = establishConnection.saveResults(results);
-		 status = establishConnection.saveResultsId(results);	
-		if(status.startsWith("00U")) {
-			report.updateTestLog("Verify Create Event", "Event has been created successfully", Status.PASS);
-		} else {
-			report.updateTestLog("Verify Create Event", "Event creation failed", Status.FAIL);
-		}	
-		int count=0;
-		String leadQuery = "Select WhoId from Event where Id = " + "'" + status + "'";
-		String accountQuery = "Select Account__c from Event where Id = " + "'" + status + "'";
-		String whatIdQuery = "Select WhatId from Event where Id = " + "'" + status + "'";
-		String whatIdValue = searchTextSOQL.fetchRecordFieldValue("WhatId", whatIdQuery);
-		if(dataTable.getData("General_Data", "TC_ID").contains("Account"))  {
-			String objectValue = searchTextSOQL.fetchRecordFieldValue("Account__c", accountQuery);
-			if((objectValue.contains(sAccountID)) && (whatIdValue !=null)) {
-				count++;
+			SObject[] events = new SObject[1];
+			events[0] = event;
+			try {
+				results = EstablishConnection.connection.create(events);
+			} catch (ConnectionException e) {
+				e.printStackTrace();
 			}
-		} else if(dataTable.getData("General_Data", "TC_ID").contains("Opportunity")) {
-			if(whatIdValue.contains(sOpportunityID)) {
-				count++;
+			System.out.println("Result:::" + results);
+			//status = establishConnection.saveResults(results);
+			status = establishConnection.saveResultsId(results);	
+			if(status.startsWith("00U")) {
+				report.updateTestLog("Verify Create Event", "Event has been created successfully", Status.PASS);
+			} else {
+				report.updateTestLog("Verify Create Event", "Event creation failed", Status.FAIL);
+			}	
+			int count=0;
+			String leadQuery = "Select WhoId from Event where Id = " + "'" + status + "'";
+			String accountQuery = "Select Account__c from Event where Id = " + "'" + status + "'";
+			String whatIdQuery = "Select WhatId from Event where Id = " + "'" + status + "'";
+			String whatIdValue = searchTextSOQL.fetchRecordFieldValue("WhatId", whatIdQuery);
+			if(dataTable.getData("General_Data", "TC_ID").contains("Account"))  {
+				String objectValue = searchTextSOQL.fetchRecordFieldValue("Account__c", accountQuery);
+				if((objectValue.contains(sAccountID)) && (whatIdValue !=null)) {
+					count++;
+				}
+			} else if(dataTable.getData("General_Data", "TC_ID").contains("Opportunity")) {
+				if(whatIdValue.contains(sOpportunityID)) {
+					count++;
+				}
+			} else if(dataTable.getData("General_Data", "TC_ID").contains("Contact")) {
+				String objectValue = searchTextSOQL.fetchRecordFieldValue("WhoId", leadQuery);
+				if((objectValue.contains(sContactID)) && (whatIdValue != null)) {
+					count++;
+				}
+			} else if (dataTable.getData("General_Data", "TC_ID").contains("Lead")) {
+				String objectValue = searchTextSOQL.fetchRecordFieldValue("WhoId", leadQuery);
+				if(objectValue.contains(sNewLead)) {
+					count++;
+				}
 			}
-		} else if(dataTable.getData("General_Data", "TC_ID").contains("Contact")) {
-			String objectValue = searchTextSOQL.fetchRecordFieldValue("WhoId", leadQuery);
-			if((objectValue.contains(sContactID)) && (whatIdValue != null)) {
-				count++;
-			}
-		} else if (dataTable.getData("General_Data", "TC_ID").contains("Lead")) {
-			String objectValue = searchTextSOQL.fetchRecordFieldValue("WhoId", leadQuery);
-			if(objectValue.contains(sNewLead)) {
-				count++;
+			if(count==1) 
+				report.updateTestLog("Verify Create Task", "Event are created under Accounts/ Contacts/ Opportunities and Leads", Status.PASS);
+			else 
+				report.updateTestLog("Verify Create Task", "Event are not created under respective objects", Status.FAIL);
+
+			if(i==0){
+				presentTask = taskName;
+				System.out.println(presentTask);
+			}else if(i==1){
+				pastTask = taskName;
+				System.out.println(pastTask);
+			}else{
+				futureTask = taskName;
+				System.out.println(futureTask);
 			}
 		}
-		if(count==1) 
-			report.updateTestLog("Verify Create Task", "Event are created under Accounts/ Contacts/ Opportunities and Leads", Status.PASS);
-		else 
-			report.updateTestLog("Verify Create Task", "Event are not created under respective objects", Status.FAIL);
-		
-		if(i==0){
-			 presentTask = taskName;
-			 System.out.println(presentTask);
-		}else if(i==1){
-			 pastTask = taskName;
-			 System.out.println(pastTask);
-		}else{
-			 futureTask = taskName;
-			 System.out.println(futureTask);
-		}
-		}
-		
-		
+
+
 		HashMap<String,String> returnMap = new HashMap<String,String>();
 		if(dataTable.getData("General_Data", "TC_ID").contains("Account")){
 			System.out.println("Account Id : "+sAccountID);
@@ -983,9 +961,9 @@ public class TaskEventsFunctions extends ReusableLibrary {
 			returnMap.put("present", presentTask);
 			returnMap.put("past", pastTask);
 			returnMap.put("future", futureTask);
-			
+
 			System.out.println("Account Id : "+sAccountID);
-			
+
 		}else if(dataTable.getData("General_Data", "TC_ID").contains("Contact")){
 			//HashMap<String,String> returnMap = new HashMap<String,String>();
 			returnMap.put("contactId", sContactID);
@@ -993,7 +971,7 @@ public class TaskEventsFunctions extends ReusableLibrary {
 			returnMap.put("past", pastTask);
 			returnMap.put("future", futureTask);
 			//return returnMap;
-			
+
 		}else if(dataTable.getData("General_Data", "TC_ID").contains("Opportunity")){
 			//HashMap<String,String> returnMap = new HashMap<String,String>();
 			returnMap.put("opportunityId", sOpportunityID);
@@ -1001,7 +979,7 @@ public class TaskEventsFunctions extends ReusableLibrary {
 			returnMap.put("past", pastTask);
 			returnMap.put("future", futureTask);
 			//return returnMap;
-			
+
 		}else{
 			//HashMap<String,String> returnMap = new HashMap<String,String>();
 			returnMap.put("leadId", sNewLead);
@@ -1014,4 +992,4 @@ public class TaskEventsFunctions extends ReusableLibrary {
 	}
 }
 
-	
+

@@ -1,29 +1,21 @@
 package businessComponents;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
 
-import pageObjects.*;
-import pageObjects.LoginPage;
-import pageObjects.ActivityPage;
 import pagesAPI.AccountsFunctions;
-import pagesAPI.ActivityFunctions;
 import pagesAPI.AttachmentsFunctions;
 import pagesAPI.BudgetsTargetsFunctions;
 import pagesAPI.CampaignsFunctions;
 import pagesAPI.ContactsFunctions;
-import pagesAPI.CreateUsers;
-import pagesAPI.EstablishConnection;
 import pagesAPI.LeadsFunctions;
 import pagesAPI.OpportunitiesFunctions;
-import pagesAPI.PermissionSetsUsers;
-import pagesAPI.SearchTextSOQL;
+import pagesAPI.PropertiesFunctions;
 import pagesAPI.SubscriptionsFunctions;
-import pagesAPI.Tagging;
+import pagesAPI.TaggingFunctions;
 import pagesAPI.TaskEventsFunctions;
 
 /**
@@ -44,575 +36,79 @@ public class BC_API_Test extends ReusableLibrary {
 	public BC_API_Test(ScriptHelper scriptHelper) {
 		super(scriptHelper);
 	}
-	AccountsPage sfAccountsPage = new AccountsPage(scriptHelper);
-	BC_Salesforce_Login sfBC_Login = new BC_Salesforce_Login(scriptHelper);
-	EstablishConnection sfEstablishConnection = new EstablishConnection(scriptHelper);
-	AccountsFunctions sfAccountsFunctions = new AccountsFunctions(scriptHelper);
-	ContactsFunctions sfContactsFunctions = new ContactsFunctions(scriptHelper);
-	OpportunitiesFunctions sfOpportunitiesFunctions = new OpportunitiesFunctions(scriptHelper);
-	LeadsFunctions sfLeadsFunctions = new LeadsFunctions(scriptHelper);
-	SearchTextSOQL sfSearchText = new SearchTextSOQL(scriptHelper);	
-	CreateUsers createUsers = new CreateUsers(scriptHelper);
-	LoginPage loginPage = new LoginPage(scriptHelper);
-	ActivityFunctions activityFunctions = new ActivityFunctions(scriptHelper);
-	PermissionSetsUsers permissionSetsUsers = new PermissionSetsUsers(scriptHelper);
+	
+	AccountsFunctions accountsFunctions = new AccountsFunctions(scriptHelper);
+	ContactsFunctions contactsFunctions = new ContactsFunctions(scriptHelper);
+	OpportunitiesFunctions opportunitiesFunctions = new OpportunitiesFunctions(scriptHelper);
+	LeadsFunctions leadsFunctions = new LeadsFunctions(scriptHelper);
+	TaggingFunctions taggingFunctions = new TaggingFunctions(scriptHelper);
+	PropertiesFunctions propertiesFunctions = new PropertiesFunctions(scriptHelper);
 	TaskEventsFunctions taskEventsFunctions = new TaskEventsFunctions(scriptHelper);
 	AttachmentsFunctions attachmentsFunctions = new AttachmentsFunctions(scriptHelper);
-	Tagging tagging= new Tagging(scriptHelper);
 	BudgetsTargetsFunctions budgetsTargetsFunctions = new BudgetsTargetsFunctions(scriptHelper);
-	ActivityPage sfActivityPage = new ActivityPage(scriptHelper);
-	ContactsPage sfContactsPage=new ContactsPage(scriptHelper);
-	LeadsPage sfLeadPage=new LeadsPage(scriptHelper);
-	OpportunitiesPage sfOppPage=new OpportunitiesPage(scriptHelper);
 	CampaignsFunctions campaignsFunctions = new CampaignsFunctions(scriptHelper);
 	SubscriptionsFunctions subscriptionsFunctions = new SubscriptionsFunctions(scriptHelper);
 	
 	/**
-	 * Validating the Login functionality
+	 * Account Creation and Validation of fields
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */
-
-	public void bc_valdiateLogin() {
-		boolean status = sfEstablishConnection.retrieveUserConfiguration();
-		if(status==true) {
-			report.updateTestLog("Verify Login", "Login to the application is successful", Status.PASS);
-		} else {
-			report.updateTestLog("Verify Login", "Login to the application is failed", Status.FAIL);
-		}
-	}	
-
+	public void bc_accountCreationValidationFields() throws InterruptedException {
+		accountsFunctions.createAccountSpecificUser();
+		accountsFunctions.accountPageFieldsValidation();
+	}
+	
 	/**
-	 * Validating the Update Accounts functionality
+	 * Account Tagging with Private Tag
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */
-
-	public void bc_updateAccounts() {
-		boolean status = sfAccountsFunctions.updateAccounts();
-		if(status==true) {
-			report.updateTestLog("Verify Update Accounts", "Account has been updated successfully", Status.PASS);
-		} else {
-			report.updateTestLog("Verify Update Accounts", "Account updation failed", Status.FAIL);
-		}
+	public void bc_privateTagging() throws InterruptedException {
+		taggingFunctions.CustomPrivateTag();
 	}
-
+	
 	/**
-	 * Validating the Delete Accounts functionality
+	 * Lead Creation and Validation of fields
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */
-
-	
-	public void bc_createOpportunityNoteAttachment(){
-		String opportunityId=sfOpportunitiesFunctions.createOpportunity();
-		boolean status = sfOpportunitiesFunctions.createNote(opportunityId);
-		
-		if(status){
-			report.updateTestLog("Verify opportunity Note","Note has been created", Status.PASS);
-		}else {
-			report.updateTestLog("Verify opportunity Note", "Note creation failed", Status.FAIL);
-		}
-		boolean status1= attachmentsFunctions.createAttachmentInOpportunity(opportunityId);
-		if(status1){
-			report.updateTestLog("Verify opportunity Attachment","Attachment has been created", Status.PASS);
-		}else {
-			report.updateTestLog("Verify opportunity Attachment", "Attachment creation failed", Status.FAIL);
-		}
+	public void bc_leadCreationValidationFields() throws InterruptedException {
+		leadsFunctions.createLeadSpecificUser();
+		leadsFunctions.leadPageFieldsValidation();
 	}
 	
-	public void bc_createOppActivity(){
-		taskEventsFunctions.createTaskbyActivityDate();
-	}
-	
-	public void bc_createAccountActivityOrder() throws InterruptedException{
-		HashMap<String,String> returnmap=taskEventsFunctions.createTaskbyActivityDate();
-		HashMap<String,String> returnmapEvent=taskEventsFunctions.createEventbyActivityDate(returnmap.get("accountId"));
-		bc_loginApi();
-		
-		String accountName= sfAccountsPage.selectAccountWithId(returnmap.get("accountId"));
-		
-			sfActivityPage.validateAccountActivity(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
-			sfActivityPage.validateEventActivity(returnmapEvent.get("past"),returnmapEvent.get("present"),returnmapEvent.get("future"));
-		
-		
-	}
-	public void bc_createAccountActivityAPI() throws InterruptedException{
-		HashMap<String,String> returnmap=taskEventsFunctions.createTaskbyActivityDate();
-		bc_loginApi();
-		
-		String accountName= sfAccountsPage.selectAccountWithId(returnmap.get("accountId"));
-		if(dataTable.getData("General_Data", "TC_ID").contains("Activity") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") && dataTable.getData("General_Data", "TC_ID").contains("Expand") ){
-			sfActivityPage.validateActivityExpandAll(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
-		}else if(dataTable.getData("General_Data", "TC_ID").contains("Activity") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") && dataTable.getData("General_Data", "TC_ID").contains("CreationDates") ){
-			sfActivityPage.validateActivityDetails(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"),accountName);
-		}else if(dataTable.getData("General_Data", "TC_ID").contains("Activity") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") ){
-			sfActivityPage.validateAccountActivity(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
-		}
-		
-		
-	}
-	public void bc_createAccountEventAPI() throws InterruptedException{
-		HashMap<String,String> returnmap=taskEventsFunctions.createEventbyActivityDate(null);
-		bc_loginApi();
-		
-		sfAccountsPage.selectAccountWithId(returnmap.get("accountId"));
-		if(dataTable.getData("General_Data", "TC_ID").contains("Event") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") && !dataTable.getData("General_Data", "TC_ID").contains("Expand") ){
-			sfActivityPage.validateEventActivity(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
-		}
-		
-	}
-	
-	public void bc_createLeadEventAPI() throws InterruptedException{
-		HashMap<String,String> returnmap=taskEventsFunctions.createEventbyActivityDate(null);
-		bc_loginApi();
-		
-		sfLeadPage.selectLeadById(returnmap.get("leadId"));
-		if(dataTable.getData("General_Data", "TC_ID").contains("Event") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") && !dataTable.getData("General_Data", "TC_ID").contains("Expand") ){
-			sfActivityPage.validateEventActivity(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
-		}
-		
-	}
-	
-	public void bc_createContactActivityOrder() throws InterruptedException{
-		HashMap<String,String> returnmap=taskEventsFunctions.createTaskbyActivityDate();
-		HashMap<String,String> returnmapEvent=taskEventsFunctions.createEventbyActivityDate(returnmap.get("contactId"));
-		bc_loginApi();
-		
-		String accountName= sfAccountsPage.selectAccountWithId(returnmap.get("contactId"));
-		
-			sfActivityPage.validateAccountActivity(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
-			sfActivityPage.validateEventActivity(returnmapEvent.get("past"),returnmapEvent.get("present"),returnmapEvent.get("future"));
-		
-		
-	}
-	public void bc_createContactActivityAPI() throws InterruptedException{
-		HashMap<String,String> returnmap=taskEventsFunctions.createTaskbyActivityDate();
-		bc_loginApi();
-		String accountName= sfContactsPage.selectContactById(returnmap.get("contactId"));
-		if(dataTable.getData("General_Data", "TC_ID").contains("Activity") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") && dataTable.getData("General_Data", "TC_ID").contains("Expand") ){
-			sfActivityPage.validateActivityExpandAll(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
-		}else if(dataTable.getData("General_Data", "TC_ID").contains("Activity") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") && dataTable.getData("General_Data", "TC_ID").contains("CreationDates") ){
-			sfActivityPage.validateActivityDetails(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"),accountName);
-		}else if(dataTable.getData("General_Data", "TC_ID").contains("Activity") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") ){
-			sfActivityPage.validateAccountActivity(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
-		}
-	}
-	public void bc_createContactEventAPI() throws InterruptedException{
-		HashMap<String,String> returnmap=taskEventsFunctions.createEventbyActivityDate(null);
-		bc_loginApi();
-		
-		sfContactsPage.selectContactById(returnmap.get("contactId"));
-		if(dataTable.getData("General_Data", "TC_ID").contains("Event") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") && !dataTable.getData("General_Data", "TC_ID").contains("Expand") ){
-			sfActivityPage.validateEventActivity(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
-		}
-		
-	}
-	public void bc_createOpportunityActivityOrder() throws InterruptedException{
-		HashMap<String,String> returnmap=taskEventsFunctions.createTaskbyActivityDate();
-		HashMap<String,String> returnmapEvent=taskEventsFunctions.createEventbyActivityDate(returnmap.get("opportunityId"));
-		bc_loginApi();
-		
-		String accountName= sfAccountsPage.selectAccountWithId(returnmap.get("opportunityId"));
-		
-			sfActivityPage.validateAccountActivity(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
-			sfActivityPage.validateEventActivity(returnmapEvent.get("past"),returnmapEvent.get("present"),returnmapEvent.get("future"));
-		
-		
-	}
-	public void bc_createOpportunityActivityAPI() throws InterruptedException{
-		HashMap<String,String> returnmap=taskEventsFunctions.createTaskbyActivityDate();
-		bc_loginApi();
-		String accountName= sfOppPage.selectOpportunityById(returnmap.get("opportunityId"));
-		if(dataTable.getData("General_Data", "TC_ID").contains("Activity") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") && dataTable.getData("General_Data", "TC_ID").contains("Expand") ){
-			sfActivityPage.validateActivityExpandAll(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
-		}else if(dataTable.getData("General_Data", "TC_ID").contains("Activity") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") && dataTable.getData("General_Data", "TC_ID").contains("CreationDates") ){
-			sfActivityPage.validateActivityDetails(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"),accountName);
-		}else if(dataTable.getData("General_Data", "TC_ID").contains("Activity") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") ){
-			sfActivityPage.validateAccountActivity(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
-		}
-	}
-	
-	public void bc_createOpportunityEventAPI() throws InterruptedException{
-		HashMap<String,String> returnmap=taskEventsFunctions.createEventbyActivityDate(null);
-		bc_loginApi();
-		sfOppPage.selectOpportunityById(returnmap.get("opportunityId"));
-		//String accountName= sfContactsPage.selectContactById(returnmap.get("contactId"));
-		if(dataTable.getData("General_Data", "TC_ID").contains("Event") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") && !dataTable.getData("General_Data", "TC_ID").contains("Expand") ){
-			sfActivityPage.validateEventActivity(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
-		}
-		
-	}
-	public void bc_createLeadActivityOrder() throws InterruptedException{
-		HashMap<String,String> returnmap=taskEventsFunctions.createTaskbyActivityDate();
-		HashMap<String,String> returnmapEvent=taskEventsFunctions.createEventbyActivityDate(returnmap.get("leadId"));
-		bc_loginApi();
-		
-		String accountName= sfAccountsPage.selectAccountWithId(returnmap.get("leadId"));
-		
-			sfActivityPage.validateAccountActivity(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
-			sfActivityPage.validateEventActivity(returnmapEvent.get("past"),returnmapEvent.get("present"),returnmapEvent.get("future"));
-		
-		
-	}
-	public void bc_createLeadActivityAPI() throws InterruptedException{
-		HashMap<String,String> returnmap=taskEventsFunctions.createTaskbyActivityDate();
-		bc_loginApi();
-		String accountName= sfLeadPage.selectLeadById(returnmap.get("leadId"));
-		if(dataTable.getData("General_Data", "TC_ID").contains("Activity") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") && dataTable.getData("General_Data", "TC_ID").contains("Expand") ){
-			sfActivityPage.validateActivityExpandAll(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
-		}else if(dataTable.getData("General_Data", "TC_ID").contains("Activity") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") && dataTable.getData("General_Data", "TC_ID").contains("CreationDates") ){
-			sfActivityPage.validateActivityDetails(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"),accountName);
-		}else if(dataTable.getData("General_Data", "TC_ID").contains("Activity") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") ){
-			sfActivityPage.validateAccountActivity(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
-		}
-	}
-	
-	
-	public void bc_loginApi() throws InterruptedException{
-		sfBC_Login.bc_invokeApplication();
-		sfBC_Login.bc_login();
-	}
-	public void bc_createMultipleTasks(){
-		Map<String,String> taskMap = taskEventsFunctions.createMultipleTasks();
-		taskEventsFunctions.closeTaskonOpportunity(taskMap.get("Task"));
-		taskEventsFunctions.createMultipleEvents(taskMap.get("Opportunity"));
-	}
-
-	public void bc_deleteAccounts() {
-		boolean status = sfAccountsFunctions.deleteAccounts();
-		if(status==true) {
-			report.updateTestLog("Verify Delete Account", "Account has been deleted successfully", Status.PASS);
-		} else {
-			report.updateTestLog("Verify Delete Account", "Account deletion failed", Status.FAIL);
-		}
-	}
-
 	/**
-	 * Class for validating the Create Contact functionality
+	 * Validating the Property Creation
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */
-
-	public void bc_createContact() {
-		boolean status = sfContactsFunctions.createContacts();
-		if(status==true) {
-			report.updateTestLog("Verify Create Contact", "Contact has been created successfully", Status.PASS);
-		} else {
-			report.updateTestLog("Verify Create Contact", "Contact creation failed", Status.FAIL);
-		}
+	public void bc_validatePropertyCreation() throws InterruptedException {
+		propertiesFunctions.createPropertySpecificUser();
 	}
-
+	
 	/**
-	 * Validating the Update Contacts functionality
+	 * Validating the Property Edit
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */
-
-	public void bc_updateContacts() {
-		boolean status = sfContactsFunctions.updateContacts();
-		if(status==true) {
-			report.updateTestLog("Verify Update Contact", "Contact has been created successfully", Status.PASS);
-		} else {
-			report.updateTestLog("Verify Update Contact", "Contact creation failed", Status.FAIL);
-		}
+	public void bc_validatePropertyEdit() throws InterruptedException {
+		propertiesFunctions.updatePropertySpecificUser();
 	}
-
+	
 	/**
-	 * Validating the Delete Contacts functionality
+	 * Validating the Opportunities creation
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */
-
-	public void bc_deleteContacts() {
-		boolean status = sfContactsFunctions.deleteContacts();
-		if(status==true) {
-			report.updateTestLog("Verify Delete Contact", "Contact has been deleted successfully", Status.PASS);
-		} else {
-			report.updateTestLog("Verify Delete Contact", "Contact deletion failed", Status.FAIL);
-		}
-	}
-
-	/**
-	 * Validating the Search Phone Number functionality
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-
-	public void bc_searchPhoneNumber() {
-		boolean status = sfAccountsFunctions.searchPhonenumber(dataTable.getData("General_Data", "SearchPhoneNumber"));
-		if(status==true) {
-			report.updateTestLog("Verify Search Phone Number", "Phone Number has been searched successfully", Status.PASS);
-		} else {
-			report.updateTestLog("Verify Search Phone Number", "Search Phone Number failed", Status.FAIL);
-		}
-	}
-
-	/**
-	 * Validating the Update Opportunity functionality
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-
-	public void bc_updateOpportunity() {
-		boolean status = sfOpportunitiesFunctions.updateOpportunities();
-		if(status==true) {
-			report.updateTestLog("Verify Update Opportunity", "Opportunity has been updated successfully", Status.PASS);
-		} else {
-			report.updateTestLog("Verify Update Opportunity", "Opportunity updation failed", Status.FAIL);
-		}
-	}
-
-	/**
-	 * Validating the Delete Opportunity
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-
-	public void bc_deleteOpportunity() {
-		boolean status = sfOpportunitiesFunctions.deleteOpportunities();
-		if(status==true) {
-			report.updateTestLog("Verify Delete Opportunity", "Opportunity has been deleted successfully", Status.PASS);
-		} else {
-			report.updateTestLog("Verify Delete Opportunity", "Opportunity deletion failed", Status.FAIL);
-		}
-	}
-
-	
-	/**
-	 * Validating the Create Lead functionality
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-
-	public void bc_createLead() {
-		boolean status = sfLeadsFunctions.createLead();
-		if(status==true) {
-			report.updateTestLog("Verify Create Lead", "Lead has been deleted successfully", Status.PASS);
-		} else {
-			report.updateTestLog("Verify Create Lead", "Lead creation failed", Status.FAIL);
-		}
-	}
-	/**
-	 * Validating the Update Lead functionality
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-
-	public void bc_updateLead() {
-		boolean status = sfLeadsFunctions.updateLead();
-		if(status==true) {
-			report.updateTestLog("Verify Update Lead", "Lead has been updated successfully", Status.PASS);
-		} else {
-			report.updateTestLog("Verify Update Lead", "Lead updation failed", Status.FAIL);
-		}
-	}
-	/**
-	 * Validating the Delete Lead
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-
-	public void bc_deleteLead() {
-		boolean status = sfOpportunitiesFunctions.deleteOpportunities();
-		if(status==true) {
-			report.updateTestLog("Verify Delete Lead", "Lead has been deleted successfully", Status.PASS);
-		} else {
-			report.updateTestLog("Verify Delete Lead", "Lead deletion failed", Status.FAIL);
-		}
-	}
-
-	
-	/**
-	 * Validating the Account Page Fields 
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-
-	public void bc_accountsPageFieldValidation() {
-		sfAccountsFunctions.accountPageFieldsValidation();
-	}
-
-	/**
-	 * Validating the Contacts Page Fields 
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */	
-
-	public void bc_contactsPageFieldValidation() {
-		sfContactsFunctions.contactsPageFieldsValidation();
-	}
-	
-	/**
-	 * Validating the Lead Page Fields 
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */	
-
-	public void bc_leadPageFieldValidation() {
-		sfLeadsFunctions.leadPageFieldsValidation();
-	}
-
-	/**
-	 * Validating the Opportunities Page Fields 
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-
-	public void bc_opportunitiesPageFieldValidation() {
-		sfOpportunitiesFunctions.OpportunitiesPageFieldsValidation();
-	}
-
-	/**
-	 * Validating the Search Lead Name functionality
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */	
-
-	public void bc_searchLeadName() {
-		sfSearchText.searchLead();
-	}
-	
-	/**
-	 * Validating the Search Opportunity Name functionality
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */	
-
-	public void bc_searchLeadName(String query) {
-		sfSearchText.searchOpportunity(query);
-	}
-	
-	/**
-	 * Function for fetching the record from SOQL by passing the table 
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */	
-
-	public void bc_fetchRecordID() {
-		String accountID, contactID, leadID, opportunityID;
-		if(dataTable.getData("General_Data", "Record").equals("Account")) {
-			accountID = sfSearchText.fetchRecord("account", "Name");
-			System.out.println("Account ID retrieved" + accountID);
-		} else if(dataTable.getData("General_Data", "Record").equals("Contact")) {
-			contactID = sfSearchText.fetchRecord("contact", "Name");
-			System.out.println("Contact ID retrieved" + contactID);
-		} else if(dataTable.getData("General_Data", "Record").equals("Leads")) {
-			leadID = sfSearchText.fetchRecord("lead", "Name");
-			System.out.println("Lead ID retrieved" + leadID);
-		} else if(dataTable.getData("General_Data", "Record").equals("Opportunities")) {
-			opportunityID = sfSearchText.fetchRecord("opportunity", "Name");
-			System.out.println("Opportunity ID retrieved" + opportunityID);
-		
-		}
-	} 
-	/**
-	 * Function for uploading an attachment
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */	
-	public void bc_uploadAttachment() {
-		sfSearchText.uploadAttachment();
-	}
-	/**
-	 * Function for uploading an attachment
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */	
-	public void bc_uploadFile() {
-		sfSearchText.contentDocumentLink();
-		//sfSearchText.uploadFile();		
-	}
-	
-	public void bc_changePassword() {
-		loginPage.changePassword();
-	}
-	
-	
-	public void bc_createActivity() {
-		activityFunctions.createActivity();
-	}
-	/**
-	 * Verifying whether the User ID's are working or not
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */	
-	public void bc_validatingUserIDs() {
-		loginPage.verifyUserIDs();
-	}
-	
-	/**
-	 * Verifying the permission sets for the user
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */	
-	public void bc_validatePermisionSets() {
-		permissionSetsUsers.validatePermissionSets();
-	}
-	
-	/**
-	 * Verifying the permission sets for the user
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */	
-	public void bc_createUsers() {
-		loginPage.userNames();
-		permissionSetsUsers.getOrCreateUser();
-	}
-	
-	/**
-	 * Verifying whether the user is present or not if not creating the new user
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */	
-	public void bc_fectchOrCreateUser() {
-		permissionSetsUsers.fectchOrCreateUser();
-	}
-	
-	
-	/**
-	 * Reset the password
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */	
-	public void bc_setPassword() {
-		createUsers.setPassword("Password567");
-	}
-	/**
-	 *Updating the Role and Profile 
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */	
-	
-	public void bc_updateRoleProfile() {
-		permissionSetsUsers.updateRoleProfile();
+	public void bc_validateOpportunity() {
+		opportunitiesFunctions.createOpportunity();
 	}
 	
 	/**
@@ -624,7 +120,7 @@ public class BC_API_Test extends ReusableLibrary {
 	public void bc_createTask() {
 		taskEventsFunctions.createTask();
 	}
-	
+		
 	/**
 	 *Creating Event on Account/ Contact/ Lead and Opportunity
 	 * 
@@ -634,6 +130,7 @@ public class BC_API_Test extends ReusableLibrary {
 	public void bc_createEvent() {
 		taskEventsFunctions.createEvent();
 	}
+	
 	/**
 	 *Creating Attachment on Task for Account/ Contact/ Lead and Opportunity
 	 * 
@@ -643,15 +140,7 @@ public class BC_API_Test extends ReusableLibrary {
 	public void bc_createAttachmentTask() {
 		attachmentsFunctions.createAttachment();
 	}
-	/**
-	 *Creating Attachment on Task for Account/ Contact/ Lead and Opportunity
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */	
-	public void bc_createAttachmentEvent() {
-		attachmentsFunctions.createAttachment();
-	}
+	
 	/**
 	 *closing the tasks for Account/ Contact/ Lead and Opportunity
 	 * 
@@ -660,15 +149,6 @@ public class BC_API_Test extends ReusableLibrary {
 	 */	
 	public void bc_closeTask() {
 		taskEventsFunctions.closeTask();
-	}
-	/**
-	 * Account Tagging with Private Tag
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-	public void bc_privateTagging() throws InterruptedException {
-		tagging.CustomPrivateTag();
 	}
 	
 	/**
@@ -680,6 +160,8 @@ public class BC_API_Test extends ReusableLibrary {
 	public void bc_createBudget() throws InterruptedException {
 		budgetsTargetsFunctions.createBudget();
 	}
+	
+
 	/**
 	 * Budget Editing
 	 * 
@@ -691,13 +173,99 @@ public class BC_API_Test extends ReusableLibrary {
 	}
 	
 	/**
+	 * Lead Conversion via API
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void bc_leadConversionAPI() throws InterruptedException {
+		leadsFunctions.leadConversion();
+	}
+	
+	/**
 	 * Account Tagging with Private Tag
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */
 	public void bc_bulkTaggingValidation() throws InterruptedException {
-		tagging.bulkTaggingFieldsValidation();
+		taggingFunctions.bulkTaggingFieldsValidation();
+	}
+	
+	/**
+	 * Validating the Property Preference validation
+	 * 
+	 * @author Vishnu
+	 *
+	 */
+	public void bc_validatingPropertyPreference() throws InterruptedException {
+		propertiesFunctions.propertyPreferenceValidation();
+	}
+	
+	/**
+	 * Validating the New Contact Page Layout fields
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+
+	public void bc_newContactPageLayout() {	
+		contactsFunctions.contactsPageFieldsValidation();
+	}
+	
+	/**
+	 * Validating the Opportunities page layout
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void bc_opportunityPageLayout() {
+		opportunitiesFunctions.OpportunitiesPageFieldsValidation();
+	}	
+
+	/**
+	 * Validating the Opportunity Note Attachements
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	
+	public void bc_createOpportunityNoteAttachment(){
+		String opportunityId = opportunitiesFunctions.createOpportunity();
+		boolean oppStatus = opportunitiesFunctions.createNote(opportunityId);
+		if(oppStatus) {
+			report.updateTestLog("Verify opportunity Note","Note has been created", Status.PASS);
+		} else {
+			report.updateTestLog("Verify opportunity Note", "Note creation failed", Status.FAIL);
+		}
+		boolean attachmentStatus = attachmentsFunctions.createAttachmentInOpportunity(opportunityId);
+		if(attachmentStatus){
+			report.updateTestLog("Verify opportunity Attachment","Attachment has been created", Status.PASS);
+		} else {
+			report.updateTestLog("Verify opportunity Attachment", "Attachment creation failed", Status.FAIL);
+		}
+	}
+
+	/**
+	 * Validating the Create Activity functionality
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void bc_createActivity() {
+		taskEventsFunctions.createTask();
+	}
+	
+	/**
+	 * Validating the creation of Multiple tasks
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void bc_createMultipleTasks(){
+		Map<String,String> taskMap = taskEventsFunctions.createMultipleTasks();
+		taskEventsFunctions.closeTaskonOpportunity(taskMap.get("Task"));
+		taskEventsFunctions.createMultipleEvents(taskMap.get("Opportunity"));
 	}
 	
 	/**
@@ -709,6 +277,7 @@ public class BC_API_Test extends ReusableLibrary {
 	public void bc_createCampaign() throws InterruptedException {
 		campaignsFunctions.createCampaign();
 	}
+	
 	
 	/**
 	 * Contact Addition to Campaign 
@@ -738,6 +307,17 @@ public class BC_API_Test extends ReusableLibrary {
 	 */
 	public void bc_createMarketingLists() throws InterruptedException {
 		subscriptionsFunctions.createMarketing();
+	}
+	
+
+	/**
+	 *Creating Attachment on Task for Account/ Contact/ Lead and Opportunity
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */	
+	public void bc_createAttachmentEvent() {
+		attachmentsFunctions.createAttachment();
 	}
 
 }

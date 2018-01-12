@@ -1,8 +1,6 @@
 package pagesAPI;
 
 import java.util.ArrayList;
-
-import org.openqa.selenium.support.PageFactory;
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
@@ -29,9 +27,6 @@ public class PropertiesFunctions extends ReusableLibrary {
 
 	public PropertiesFunctions(ScriptHelper scriptHelper) {
 		super(scriptHelper);
-		PageFactory.initElements(driver.getWebDriver(), this);
-		// new WebDriverUtil(driver);
-		// Utility_Functions utility = new Utility_Functions(scriptHelper);
 	}
 
 	static SaveResult[] results;
@@ -95,7 +90,7 @@ public class PropertiesFunctions extends ReusableLibrary {
 	}
 
 	/**
-	 * Function for updating the Lead
+	 * Function for updating the Property
 	 * 
 	 * @author Vishnuvardhan
 	 *
@@ -211,7 +206,7 @@ public class PropertiesFunctions extends ReusableLibrary {
 	
 
 	/**
-	 * Function for validating the Property Preferences
+	 * Function for validating the Property Preferences page layout
 	 * 
 	 * @author Vishnuvardhan
 	 *

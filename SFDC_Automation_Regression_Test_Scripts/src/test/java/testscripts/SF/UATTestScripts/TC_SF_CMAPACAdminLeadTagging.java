@@ -1,16 +1,20 @@
 package testscripts.SF.UATTestScripts;
 
 import org.openqa.selenium.Platform;
-
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
 import com.cognizant.framework.IterationOptions;
 import com.cognizant.framework.selenium.Browser;
 import com.cognizant.framework.selenium.ExecutionMode;
 import com.cognizant.framework.selenium.SeleniumTestParameters;
-
 import com.cognizant.Craft.*;
+
+/**
+ * Validating the Lead Tagging fuctionaltiy
+ * 
+ * @author Vishnu
+ *
+ */
 
 public class TC_SF_CMAPACAdminLeadTagging extends CRAFTTestCase{
 
@@ -20,7 +24,7 @@ public class TC_SF_CMAPACAdminLeadTagging extends CRAFTTestCase{
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
 		SeleniumTestParameters testParameters = new SeleniumTestParameters(currentScenario, currentTestcase);
-		testParameters.setCurrentTestDescription("Test for validating property preference fields");
+		testParameters.setCurrentTestDescription("Test for validating the Lead Tagging fuctionaltiy for CMAPAC");
 		testParameters.setIterationMode(IterationOptions.RUN_ONE_ITERATION_ONLY);
 		testParameters.setBrowser(Browser.CHROME);
 		testParameters.setExecutionMode(executionMode);

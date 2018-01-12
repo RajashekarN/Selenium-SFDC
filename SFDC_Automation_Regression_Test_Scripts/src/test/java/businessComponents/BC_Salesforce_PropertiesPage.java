@@ -281,25 +281,8 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 		sfPropertiesPage.verifyPreferencesPropertiesCreation();
 	}
 	
-	/**
-	 * Validating the Property Creation
-	 * 
-	 * @author Vishnu
-	 *
-	 */
-	public void bc_validatePropertyCreation() throws InterruptedException {
-		propertiesFunctions.createPropertySpecificUser();
-	}
 	
-	/**
-	 * Validating the Property Edit
-	 * 
-	 * @author Vishnu
-	 *
-	 */
-	public void bc_validatePropertyEdit() throws InterruptedException {
-		propertiesFunctions.updatePropertySpecificUser();
-	}
+
 	/**
 	 * Validating the Property Preference validation
 	 * 

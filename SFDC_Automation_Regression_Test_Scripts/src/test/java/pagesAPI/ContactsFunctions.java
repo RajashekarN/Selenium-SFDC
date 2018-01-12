@@ -2,9 +2,6 @@ package pagesAPI;
 
 
 import java.util.ArrayList;
-
-import org.openqa.selenium.support.PageFactory;
-
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
@@ -32,9 +29,6 @@ public class ContactsFunctions extends ReusableLibrary {
 
 	public ContactsFunctions(ScriptHelper scriptHelper) {
 		super(scriptHelper);
-		PageFactory.initElements(driver.getWebDriver(), this);
-		// new WebDriverUtil(driver);
-		// Utility_Functions utility = new Utility_Functions(scriptHelper);
 	}
 
 	static SaveResult[] results;
@@ -136,7 +130,7 @@ public class ContactsFunctions extends ReusableLibrary {
 	}
 
 	/**
-	 * Function for the validating the field on the Contacts Page
+	 * Function for the validating the fields on the Contacts Page
 	 * 
 	 * @author Vishnuvardhan
 	 *
@@ -478,6 +472,13 @@ public class ContactsFunctions extends ReusableLibrary {
 		}
 	}
 	
+	/**
+	 * Function for the creation of Contacts providing required fields
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	
 	public String createContactRequiredFields() {
 		establishConnection.establishConnection();
 		SObject contact = new SObject();
@@ -503,6 +504,13 @@ public class ContactsFunctions extends ReusableLibrary {
 			}
 		return contactId;
 	}
+	
+	/**
+	 * Function for the creation of Contacts populating all fields
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
 	
 	public void createContactsPopulatingAllFields() {		
 		try {
@@ -541,6 +549,14 @@ public class ContactsFunctions extends ReusableLibrary {
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	
+	/**
+	 * Function for validating the fields in Contacts page
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
 
 	/*public void contactsPageFieldsValidation() {	
 		try{

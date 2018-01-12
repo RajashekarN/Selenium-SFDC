@@ -2,7 +2,6 @@ package pagesAPI;
 
 
 import java.util.ArrayList;
-import org.openqa.selenium.support.PageFactory;
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
@@ -14,9 +13,6 @@ import com.sforce.soap.partner.SetPasswordResult;
 import com.sforce.soap.partner.sobject.SObject;
 import com.sforce.ws.ConnectionException;
 
-import pageObjects.LoginPage;
-
-
 public class CreateUsers extends ReusableLibrary {
 	/*
 	 * Constructor to initialize the business component library
@@ -27,9 +23,6 @@ public class CreateUsers extends ReusableLibrary {
 
 	public CreateUsers(ScriptHelper scriptHelper) {
 		super(scriptHelper);
-		PageFactory.initElements(driver.getWebDriver(), this);
-		// new WebDriverUtil(driver);
-		// Utility_Functions utility = new Utility_Functions(scriptHelper);
 	}
 	
 	public static PartnerConnection connection = null;
@@ -38,10 +31,9 @@ public class CreateUsers extends ReusableLibrary {
 	static com.sforce.soap.partner.Error[] errors;
 	static boolean status = false;
 	static SetPasswordResult setPasswordResults;
-	public static String password = "Release_38_UATPassword";
+	//public static String password = "Release_38_UATPassword";
 	
 	EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
-	LoginPage loginPage = new LoginPage(scriptHelper);
 	
 	/**
 	 * Function for the creation of users
@@ -49,10 +41,6 @@ public class CreateUsers extends ReusableLibrary {
 	 * @author Vishnuvardhan
 	 *
 	 */
-	
-/*	public void setPasswordUsersList() {
-		setPassword(password);
-	}*/
 
 	public String createUser(String firstName, String lastName, String alias, String email, String userName, String userRoleId, String profileId, String geoGraphicalId, String timeZoneSidKey) {
 		try {
@@ -107,7 +95,7 @@ public class CreateUsers extends ReusableLibrary {
 		return result;
 	}
 	/**
-	 * Function for the set password
+	 * Function to set the password after creating the users list
 	 * 
 	 * @author Vishnuvardhan
 	 *
@@ -135,6 +123,12 @@ public class CreateUsers extends ReusableLibrary {
 		}
 	}
 	
+	/**
+	 * Function to set the password after creation of the user
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
 	public void setPassword(String userId, String newPassword) {
 		establishConnection.establishConnection();
 		try {
@@ -238,8 +232,6 @@ public class CreateUsers extends ReusableLibrary {
 		userNamesList.add("0050R000000GSvdQAG");
 		userNamesList.add("0050R000000GSviQAG");
 		userNamesList.add("0050R000000GSuuQAG");
-
-
 		System.out.println("User Names List are::::" + userNamesList);
 	}
 	

@@ -6,7 +6,7 @@ import com.cognizant.Craft.ScriptHelper;
 import pageObjects.AccountsPage;
 import pageObjects.ActivityPage;
 import pagesAPI.AccountsFunctions;
-import pagesAPI.Tagging;
+import pagesAPI.TaggingFunctions;
 import pagesAPI.TaskEventsFunctions;
 
 /**
@@ -33,7 +33,7 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 	AccountsPage sfAccountsPage = new AccountsPage(scriptHelper);
 	AccountsFunctions accountsFunctions = new AccountsFunctions(scriptHelper);
 	TaskEventsFunctions taskEventsFunctions = new TaskEventsFunctions(scriptHelper);
-	Tagging tagging = new Tagging(scriptHelper);
+	TaggingFunctions tagging = new TaggingFunctions(scriptHelper);
 	ActivityPage sfActivityPage=new ActivityPage(scriptHelper);
 	/**
 	 * Validating the Login functionality
@@ -461,17 +461,6 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 	 */
 	public void bc_verifyBudgetsTargetsEditing() throws InterruptedException {
 		sfAccountsPage.verifyBudgetsTargetsEditing();
-	}
-	
-	/**
-	 * Account Creation and Validation of fields
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-	public void bc_accountCreationValidationFields() throws InterruptedException {
-		accountsFunctions.createAccountSpecificUser();
-		accountsFunctions.accountPageFieldsValidation();
 	}
 	
 	

@@ -6,8 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Random;
-
-import org.openqa.selenium.support.PageFactory;
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
@@ -33,9 +31,6 @@ public class SearchTextSOQL extends ReusableLibrary {
 
 	public SearchTextSOQL(ScriptHelper scriptHelper) {
 		super(scriptHelper);
-		PageFactory.initElements(driver.getWebDriver(), this);
-		// new WebDriverUtil(driver);
-		// Utility_Functions utility = new Utility_Functions(scriptHelper);
 	}
 
 	static SaveResult[] results;
@@ -49,7 +44,7 @@ public class SearchTextSOQL extends ReusableLibrary {
 	EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
 
 	/**
-	 * Validating the Search Lead functionality
+	 * Function for validating the search for Lead functionality
 	 * 
 	 * @author Vishnuvardhan
 	 *
@@ -89,10 +84,9 @@ public class SearchTextSOQL extends ReusableLibrary {
 	}
 
 	/**
-	 * Searching for the Opportunity
+	 * Function for validating the search for Opportunity functionality
 	 * 
 	 * @author Vishnuvardhan
-	 * @return
 	 *
 	 */
 
@@ -132,8 +126,7 @@ public class SearchTextSOQL extends ReusableLibrary {
 	}
 
 	/**
-	 * Function to fetch the Account, Contact, Lead, Opportunities from SOQL
-	 * using the query
+	 * Function to fetch the Account, Contact, Lead, Opportunities from SOQL using the query
 	 * 
 	 * @author Vishnuvardhan
 	 *
@@ -194,8 +187,7 @@ public class SearchTextSOQL extends ReusableLibrary {
 	}
 
 	/**
-	 * Function to fetch the Account, Contact, Lead, Opportunities from SOQL
-	 * using the query
+	 * Function to fetch the Account, Contact, Lead, Opportunities from SOQL using the query
 	 * 
 	 * @author Vishnuvardhan
 	 *

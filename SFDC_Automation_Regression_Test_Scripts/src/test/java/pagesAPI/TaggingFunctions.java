@@ -1,7 +1,5 @@
 package pagesAPI;
 
-import org.openqa.selenium.support.PageFactory;
-
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
@@ -17,7 +15,7 @@ import com.sforce.ws.ConnectionException;
 
 import supportLibraries.Utility_Functions;
 
-public class Tagging extends ReusableLibrary {
+public class TaggingFunctions extends ReusableLibrary {
 	/*
 	 * Constructor to initialize the business component library
 	 * 
@@ -25,11 +23,8 @@ public class Tagging extends ReusableLibrary {
 	 * {@link DriverScript}
 	 */
 
-	public Tagging(ScriptHelper scriptHelper) {
+	public TaggingFunctions(ScriptHelper scriptHelper) {
 		super(scriptHelper);
-		PageFactory.initElements(driver.getWebDriver(), this);
-		// new WebDriverUtil(driver);
-		// Utility_Functions utility = new Utility_Functions(scriptHelper);
 	}
 
 	static SaveResult[] results;
@@ -45,7 +40,7 @@ public class Tagging extends ReusableLibrary {
 	SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
 
 	/**
-	 * Function for the creation of private tag to an account
+	 * Function for the creation of Private Tag
 	 * 
 	 * @author Vishnuvardhan
 	 *
@@ -73,13 +68,20 @@ public class Tagging extends ReusableLibrary {
 		}
 		return sPrivateTagId;
 	}
-	
+
+	/**
+	 * Function for the association of private tag to an Account/ Contact/ Lead and Opportunity
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */ 
+
 	public void CustomPrivateTag() {
 		String sPrivateTagId = createPrivateTag();
 		SObject privateTag = new SObject();
-		
+
 		String accountName = null, opportunityName = null, contactName = null, sNewLead = null, propertyName = null, spropertyName = null;
-		
+
 		if(dataTable.getData("General_Data", "TC_ID").contains("Account"))  {
 			privateTag.setType("Private_Tag_with_Account__c");
 			AccountsFunctions accountsFunctions = new AccountsFunctions(scriptHelper);
@@ -136,7 +138,7 @@ public class Tagging extends ReusableLibrary {
 		String propertyRelation = "Select PropertyRelatedTo__c from Private_Tag_with_Property__c where Id = " + "'" + sCustomePrivateTagId + "'";
 
 		String sAccountRelationId = null, sContactRelationId = null, sLeadRelationId= null, sOpportunityRelationId =null, sPropertyRelationId =null;;
-		
+
 		if(dataTable.getData("General_Data", "TC_ID").contains("Account"))  {
 			sAccountRelationId = searchTextSOQL.fetchRecordFieldValue("AccountRelatedTo__c", accountRelation);
 			if(sAccountRelationId.equals(accountName)) {
@@ -177,64 +179,70 @@ public class Tagging extends ReusableLibrary {
 
 		}				
 		if(count==1) {
-				report.updateTestLog("Verify Create Private Tag", "Private Tag for Account/Contact/ Lead/ Opportunity/ Property creation failed", Status.PASS);
+			report.updateTestLog("Verify Create Private Tag", "Private Tag for Account/Contact/ Lead/ Opportunity/ Property creation failed", Status.PASS);
 		} else {
 			report.updateTestLog("Verify Create Private Tag", "Private Tag for Account/Contact/ Lead/ Opportunity/ Property creation failed", Status.FAIL);
 		}
 	}
-	
+
+	/**
+	 * Function for validating the fields in Bulk Tagging
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */ 
 	public void bulkTaggingFieldsValidation() {	
-	try{
-		establishConnection.establishConnection();
-		DescribeLayoutResult dlr = EstablishConnection.connection.describeLayout("OpportunityTag", null, null);
-		for(int i = 0; i < dlr.getLayouts().length; i++) {
-			DescribeLayout layout = dlr.getLayouts()[i];
-			DescribeLayoutSection[] detailLayoutSectionList = layout.getDetailLayoutSections();
-			System.out.println(" There are " + detailLayoutSectionList.length + " detail layout sections");
-			report.updateTestLog("Verify Accounts Page Field Validation", "There are " + detailLayoutSectionList.length + " detail layout sections", Status.PASS);
-			DescribeLayoutSection[] editLayoutSectionList = layout.getEditLayoutSections();
-			System.out.println(" There are " + editLayoutSectionList.length + " edit layout sections");
-			report.updateTestLog("Verify Accounts Page Field Validation", " There are " + editLayoutSectionList.length + " edit layout sections", Status.PASS);
-			for(int j = 0; j < detailLayoutSectionList.length; j++) {
-				System.out.println(j +  " This detail layout section has a heading of " +detailLayoutSectionList[j].getHeading());  
-				report.updateTestLog("Verify Accounts Page Field Validation", j +  " This detail layout section has a heading of " +detailLayoutSectionList[j].getHeading(), Status.PASS);
-			}
-			// Write the headings of the edit layout sections
-			for(int x = 0; x < editLayoutSectionList.length; x++) { 
-				System.out.println(x + " This edit layout section has a heading of " + editLayoutSectionList[x].getHeading());
-				report.updateTestLog("Verify Accounts Page Field Validation", x + " This edit layout section has a heading of " + editLayoutSectionList[x].getHeading(), Status.PASS);
-			}
-			// For each edit layout section, get its details.
-			for(int k = 0; k < editLayoutSectionList.length; k++) {
-				DescribeLayoutSection els = editLayoutSectionList[k];   
-				System.out.println("Edit layout section heading: " + els.getHeading());
-				report.updateTestLog("Verify Accounts Page Field Validation", "Edit layout section heading: " + els.getHeading(), Status.PASS);
-				DescribeLayoutRow[] dlrList = els.getLayoutRows();
-				System.out.println("This edit layout section has " + dlrList.length + " layout rows");
-				report.updateTestLog("Verify Accounts Page Field Validation", "This edit layout section has " + dlrList.length + " layout rows", Status.PASS);
-				for(int m = 0; m < dlrList.length; m++) {
-					DescribeLayoutRow lr = dlrList[m];
-					System.out.println(" This row has " + lr.getNumItems() + " layout items");
-					report.updateTestLog("Verify Accounts Page Field Validation", " This row has " + lr.getNumItems() + " layout items", Status.PASS);
-					DescribeLayoutItem[] dliList = lr.getLayoutItems();
-					for(int n = 0; n < dliList.length; n++) {
-						DescribeLayoutItem li = dliList[n];
-						if ((li.getLayoutComponents() != null) && (li.getLayoutComponents().length > 0)) {
-							System.out.println("\tLayout item " + n +", layout component: " +li.getLayoutComponents()[0].getValue());
-							report.updateTestLog("Verify Accounts Page Field Validation", "\tLayout item " + n +", layout component: " +li.getLayoutComponents()[0].getValue(), Status.PASS);
+		try{
+			establishConnection.establishConnection();
+			DescribeLayoutResult dlr = EstablishConnection.connection.describeLayout("OpportunityTag", null, null);
+			for(int i = 0; i < dlr.getLayouts().length; i++) {
+				DescribeLayout layout = dlr.getLayouts()[i];
+				DescribeLayoutSection[] detailLayoutSectionList = layout.getDetailLayoutSections();
+				System.out.println(" There are " + detailLayoutSectionList.length + " detail layout sections");
+				report.updateTestLog("Verify Accounts Page Field Validation", "There are " + detailLayoutSectionList.length + " detail layout sections", Status.PASS);
+				DescribeLayoutSection[] editLayoutSectionList = layout.getEditLayoutSections();
+				System.out.println(" There are " + editLayoutSectionList.length + " edit layout sections");
+				report.updateTestLog("Verify Accounts Page Field Validation", " There are " + editLayoutSectionList.length + " edit layout sections", Status.PASS);
+				for(int j = 0; j < detailLayoutSectionList.length; j++) {
+					System.out.println(j +  " This detail layout section has a heading of " +detailLayoutSectionList[j].getHeading());  
+					report.updateTestLog("Verify Accounts Page Field Validation", j +  " This detail layout section has a heading of " +detailLayoutSectionList[j].getHeading(), Status.PASS);
+				}
+				// Write the headings of the edit layout sections
+				for(int x = 0; x < editLayoutSectionList.length; x++) { 
+					System.out.println(x + " This edit layout section has a heading of " + editLayoutSectionList[x].getHeading());
+					report.updateTestLog("Verify Accounts Page Field Validation", x + " This edit layout section has a heading of " + editLayoutSectionList[x].getHeading(), Status.PASS);
+				}
+				// For each edit layout section, get its details.
+				for(int k = 0; k < editLayoutSectionList.length; k++) {
+					DescribeLayoutSection els = editLayoutSectionList[k];   
+					System.out.println("Edit layout section heading: " + els.getHeading());
+					report.updateTestLog("Verify Accounts Page Field Validation", "Edit layout section heading: " + els.getHeading(), Status.PASS);
+					DescribeLayoutRow[] dlrList = els.getLayoutRows();
+					System.out.println("This edit layout section has " + dlrList.length + " layout rows");
+					report.updateTestLog("Verify Accounts Page Field Validation", "This edit layout section has " + dlrList.length + " layout rows", Status.PASS);
+					for(int m = 0; m < dlrList.length; m++) {
+						DescribeLayoutRow lr = dlrList[m];
+						System.out.println(" This row has " + lr.getNumItems() + " layout items");
+						report.updateTestLog("Verify Accounts Page Field Validation", " This row has " + lr.getNumItems() + " layout items", Status.PASS);
+						DescribeLayoutItem[] dliList = lr.getLayoutItems();
+						for(int n = 0; n < dliList.length; n++) {
+							DescribeLayoutItem li = dliList[n];
+							if ((li.getLayoutComponents() != null) && (li.getLayoutComponents().length > 0)) {
+								System.out.println("\tLayout item " + n +", layout component: " +li.getLayoutComponents()[0].getValue());
+								report.updateTestLog("Verify Accounts Page Field Validation", "\tLayout item " + n +", layout component: " +li.getLayoutComponents()[0].getValue(), Status.PASS);
+							}
+							else {
+								System.out.println("\tLayout item " + n +", no layout component");                 
+								report.updateTestLog("Verify Accounts Page Field Validation", "\tLayout item " + n +", no layout component", Status.PASS);
+							}     
 						}
-						else {
-							System.out.println("\tLayout item " + n +", no layout component");                 
-							report.updateTestLog("Verify Accounts Page Field Validation", "\tLayout item " + n +", no layout component", Status.PASS);
-						}     
 					}
 				}
-			}
-		} 
-	}catch (Exception e){
-		System.out.println(e.getMessage());
+			} 
+		}catch (Exception e){
+			System.out.println(e.getMessage());
+		}
 	}
-}
-	
-	
+
+
 }

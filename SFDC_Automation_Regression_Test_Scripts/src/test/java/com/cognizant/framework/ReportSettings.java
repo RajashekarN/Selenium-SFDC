@@ -19,7 +19,7 @@ public class ReportSettings {
 	private boolean generateExcelReports;
 	private boolean generateHtmlReports;
 
-	private boolean takeScreenshotFailedStep;
+	public boolean takeScreenshotFailedStep;
 	private boolean takeScreenshotPassedStep;
 
 	private boolean linkScreenshotsToTestLog;

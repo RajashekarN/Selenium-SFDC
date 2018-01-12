@@ -1,15 +1,12 @@
 package testscripts.SF.UATTestScripts;
 
 import org.openqa.selenium.Platform;
-
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
 import com.cognizant.framework.IterationOptions;
 import com.cognizant.framework.selenium.Browser;
 import com.cognizant.framework.selenium.ExecutionMode;
 import com.cognizant.framework.selenium.SeleniumTestParameters;
-
 import com.cognizant.Craft.*;
 /**
  * Validating the Accounts creation and available sections 
@@ -19,7 +16,6 @@ import com.cognizant.Craft.*;
  */
 
 public class TC_SF_DAASIADataAccountOpportunityHistory extends CRAFTTestCase{
-
 	@Test(groups= {"UAT","UI","DataAdmin","Account","Opportunity"},dataProvider = "UATTestScripts")
 	public void runTC_SF_DAASIADataAccountOpportunityHistory(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,

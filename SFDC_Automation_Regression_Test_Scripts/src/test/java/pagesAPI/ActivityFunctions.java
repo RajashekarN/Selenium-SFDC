@@ -2,10 +2,6 @@ package pagesAPI;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
-
-import org.openqa.selenium.support.PageFactory;
-
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.sforce.soap.partner.DeleteResult;
@@ -24,9 +20,6 @@ public class ActivityFunctions extends ReusableLibrary {
 
 	public ActivityFunctions(ScriptHelper scriptHelper) {
 		super(scriptHelper);
-		PageFactory.initElements(driver.getWebDriver(), this);
-		// new WebDriverUtil(driver);
-		// Utility_Functions utility = new Utility_Functions(scriptHelper);
 	}
 
 	static SaveResult[] results;
@@ -74,6 +67,13 @@ public class ActivityFunctions extends ReusableLibrary {
 		return status;
 	}
 	
+	/**
+	 * Function for the creation of an Activity for Opportunity
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	
 	public boolean createActivityForOpportunity() {
 		try {
 			Calendar calendar = Calendar.getInstance();
@@ -105,6 +105,5 @@ public class ActivityFunctions extends ReusableLibrary {
 		}
 		return status;
 	}
-
 
 }

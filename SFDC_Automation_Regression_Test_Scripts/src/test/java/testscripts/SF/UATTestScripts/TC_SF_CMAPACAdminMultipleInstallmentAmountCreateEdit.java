@@ -2,31 +2,28 @@ package testscripts.SF.UATTestScripts;
 
 
 import org.openqa.selenium.Platform;
-
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
 import com.cognizant.framework.IterationOptions;
 import com.cognizant.framework.selenium.Browser;
 import com.cognizant.framework.selenium.ExecutionMode;
 import com.cognizant.framework.selenium.SeleniumTestParameters;
-
 import com.cognizant.Craft.*;
 /**
- * Validating the Lead tagging with private tag
+ * Validating the Opportunity Installment Amount edit functionality
  * 
  * @author Vishnu
  *
  */
 
 public class TC_SF_CMAPACAdminMultipleInstallmentAmountCreateEdit extends CRAFTTestCase {
-	@Test(groups= {"UAT","UI","Admin","Installment"},dataProvider = "UATTestScripts")
+	@Test(groups= {"UAT","UI","Admin","Opportunity","Installment"},dataProvider = "UATTestScripts")
 	public void runTC_SF_CMAPACAdminMultipleInstallmentAmountCreateEdit(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
 		SeleniumTestParameters testParameters = new SeleniumTestParameters(currentScenario, currentTestcase);
-		testParameters.setCurrentTestDescription("Test for the validating the Lead tagging with private tag");
+		testParameters.setCurrentTestDescription("Test for the Opportunity Installment Amount edit functionality for CMAPAC");
 		testParameters.setIterationMode(IterationOptions.RUN_ONE_ITERATION_ONLY);
 		testParameters.setBrowser(Browser.CHROME);
 		testParameters.setExecutionMode(executionMode);
@@ -45,38 +42,3 @@ public class TC_SF_CMAPACAdminMultipleInstallmentAmountCreateEdit extends CRAFTT
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
