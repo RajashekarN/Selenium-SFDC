@@ -18,7 +18,7 @@ import com.cognizant.Craft.*;
  */
 public class TC_SF_OBAMERAdminCreateGreenspaceLead extends CRAFTTestCase
 {
-	@Test(dataProvider = "SmokeTestScripts")
+	@Test(groups= {"SMOKE","UI","Admin","Greenspace","Create"},dataProvider = "SmokeTestScripts")
 	public void runTC_SF_OBAMERAdminCreateGreenspaceLead(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)

@@ -19,13 +19,13 @@ import com.cognizant.Craft.*;
 
 public class TC_SF_ABAMERAdminAccountsVerifyNewAccountPage extends CRAFTTestCase
 {
-	@Test(dataProvider = "RegressionTestScripts")
+	@Test(groups= {"REGRESSION","UI","Admin","Account","Page"},dataProvider = "RegressionTestScripts")
 	public void runTC_SF_ABAMERAdminAccountsVerifyNewAccountPage(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
 		SeleniumTestParameters testParameters = new SeleniumTestParameters(currentScenario, currentTestcase);
-		testParameters.setCurrentTestDescription("Test Script for validating the New Account Layout Page from Admin Profile");
+		testParameters.setCurrentTestDescription("Test Script for Verify New Account Page");
 		testParameters.setIterationMode(IterationOptions.RUN_ONE_ITERATION_ONLY);
 		testParameters.setBrowser(Browser.CHROME);
 		testParameters.setExecutionMode(executionMode);

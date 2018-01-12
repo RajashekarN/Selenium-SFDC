@@ -19,13 +19,13 @@ import com.cognizant.Craft.*;
 
 public class TC_SF_ABAMERManagerAccountsVerifySPOCs extends CRAFTTestCase
 {
-	@Test(dataProvider = "RegressionTestScripts")
+	@Test(groups= {"REGRESSION","UI","Manager","Account","SPOC"},dataProvider = "RegressionTestScripts")
 	public void runTC_SF_ABAMERManagerAccountsVerifySPOCs(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
 		SeleniumTestParameters testParameters = new SeleniumTestParameters(currentScenario, currentTestcase);
-		testParameters.setCurrentTestDescription("Test for validating the Creation of new Lead");
+		testParameters.setCurrentTestDescription("Test for validating the SPOCs");
 		testParameters.setIterationMode(IterationOptions.RUN_ONE_ITERATION_ONLY);
 		testParameters.setBrowser(Browser.CHROME);
 		testParameters.setExecutionMode(executionMode);

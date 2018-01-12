@@ -4466,7 +4466,8 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.xClickHiddenElement(driver, addTag);
 		Utility_Functions.xSendKeys(driver, privatetag, "abcdertyg");
 		Utility_Functions.xClickHiddenElement(driver, savePrivateTag);
-		Utility_Functions.timeWait(4);
+		report.updateTestLog("Verify Contact Private Tags", "The Private tag is saved in Private Tag Page",
+ 				Status.PASS);
 
 	}
 }

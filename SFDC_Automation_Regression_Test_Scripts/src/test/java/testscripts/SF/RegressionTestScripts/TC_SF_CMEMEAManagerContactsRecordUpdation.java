@@ -19,7 +19,7 @@ import com.cognizant.Craft.*;
 
 public class TC_SF_CMEMEAManagerContactsRecordUpdation extends CRAFTTestCase
 {
-	@Test(dataProvider = "RegressionTestScripts")
+	@Test(groups= {"REGRESSION","UI","Manager","Contact","Record"},dataProvider = "RegressionTestScripts")
 	public void runTC_SF_CMEMEAManagerContactsRecordUpdation(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)

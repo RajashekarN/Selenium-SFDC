@@ -18,13 +18,13 @@ import com.cognizant.Craft.*;
  */
 public class TC_SF_OBAMERBrokerSupporCustomtLinks extends CRAFTTestCase
 {
-	@Test(dataProvider = "RegressionTestScripts")
+	@Test(groups= {"REGRESSION","UI","Broker","Suppor","Customt"},dataProvider = "RegressionTestScripts")
 	public void runTC_SF_OBAMERBrokerSupporCustomtLinks(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
 		SeleniumTestParameters testParameters = new SeleniumTestParameters(currentScenario, currentTestcase);
-		testParameters.setCurrentTestDescription("Test for logging into Salesforce Portal as Admin User");
+		testParameters.setCurrentTestDescription("Test for Custom Support Links");
 		testParameters.setIterationMode(IterationOptions.RUN_ONE_ITERATION_ONLY);
 		testParameters.setBrowser(Browser.CHROME);
 		testParameters.setExecutionMode(executionMode);

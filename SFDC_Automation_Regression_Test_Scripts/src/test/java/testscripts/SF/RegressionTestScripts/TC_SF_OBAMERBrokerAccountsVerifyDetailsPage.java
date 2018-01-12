@@ -19,13 +19,13 @@ import com.cognizant.Craft.*;
 
 public class TC_SF_OBAMERBrokerAccountsVerifyDetailsPage extends CRAFTTestCase
 {
-	@Test(dataProvider = "RegressionTestScripts")
+	@Test(groups= {"REGRESSION","UI","Broker","Account","Detail"},dataProvider = "RegressionTestScripts")
 	public void runTC_SF_OBAMERBrokerAccountsVerifyDetailsPage(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
 		SeleniumTestParameters testParameters = new SeleniumTestParameters(currentScenario, currentTestcase);
-		testParameters.setCurrentTestDescription("Test Script for validating the Accounts page from a Broker Profile");
+		testParameters.setCurrentTestDescription("Test Script for validating the Accounts Detail page");
 		testParameters.setIterationMode(IterationOptions.RUN_ONE_ITERATION_ONLY);
 		testParameters.setBrowser(Browser.CHROME);
 		testParameters.setExecutionMode(executionMode);

@@ -19,13 +19,13 @@ import com.cognizant.Craft.*;
 
 public class TC_SF_CMEMEAManagerContactsCustomActivityTimeline extends CRAFTTestCase
 {
-	@Test(dataProvider = "RegressionTestScripts")
+	@Test(groups= {"REGRESSION","UI","Manager","Contact","Activity"},dataProvider = "RegressionTestScripts")
 	public void runTC_SF_CMEMEAManagerContactsCustomActivityTimeline(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
 		SeleniumTestParameters testParameters = new SeleniumTestParameters(currentScenario, currentTestcase);
-		testParameters.setCurrentTestDescription("Test Script for validating the Contacts Custom Activity time line for the Agency Broker");
+		testParameters.setCurrentTestDescription("Test Script for validating the Contacts Custom Activity time line");
 		testParameters.setIterationMode(IterationOptions.RUN_ONE_ITERATION_ONLY);
 		testParameters.setBrowser(Browser.CHROME);
 		testParameters.setExecutionMode(executionMode);
