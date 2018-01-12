@@ -19,7 +19,7 @@ import com.cognizant.Craft.*;
 
 public class TC_SF_OBAMERBrokerNewOpportunityPageLayout extends CRAFTTestCase
 {
-	@Test(dataProvider = "SmokeTestScripts")
+	@Test(groups= {"SMOKE","UI","Broker","Opportunity","Layout"},dataProvider = "SmokeTestScripts")
 	public void runTC_SF_OBAMERBrokerNewOpportunityPageLayout(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)

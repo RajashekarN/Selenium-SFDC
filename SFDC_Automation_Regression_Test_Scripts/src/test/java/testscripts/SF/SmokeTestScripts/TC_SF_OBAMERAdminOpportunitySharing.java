@@ -19,13 +19,13 @@ import com.cognizant.Craft.*;
 
 public class TC_SF_OBAMERAdminOpportunitySharing extends CRAFTTestCase
 {
-	@Test(dataProvider = "SmokeTestScripts")
+	@Test(groups= {"SMOKE","UI","Admin","Opportunity","Sharing"},dataProvider = "SmokeTestScripts")
 	public void runTC_SF_OBAMERAdminOpportunitySharing(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
 		SeleniumTestParameters testParameters = new SeleniumTestParameters(currentScenario, currentTestcase);
-		testParameters.setCurrentTestDescription("Test for validating the required fiels on Sales Stage as an OB");
+		testParameters.setCurrentTestDescription("Test for validating the Sharing functionality");
 		testParameters.setIterationMode(IterationOptions.RUN_ONE_ITERATION_ONLY);
 		testParameters.setBrowser(Browser.CHROME);
 		testParameters.setExecutionMode(executionMode);

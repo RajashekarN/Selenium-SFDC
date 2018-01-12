@@ -19,7 +19,7 @@ import com.cognizant.Craft.*;
 
 public class TC_SF_ABAMERCSSLeadsCreateLead extends CRAFTTestCase
 {
-	@Test(dataProvider = "RegressionTestScripts")
+	@Test(groups= {"REGRESSION","UI","CSS","Lead","Create"},dataProvider = "RegressionTestScripts")
 	public void runTC_SF_ABAMERCSSLeadsCreateLead(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)

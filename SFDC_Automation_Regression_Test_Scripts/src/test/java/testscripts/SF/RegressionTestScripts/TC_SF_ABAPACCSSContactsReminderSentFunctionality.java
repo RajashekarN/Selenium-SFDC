@@ -19,7 +19,7 @@ import com.cognizant.Craft.*;
 
 public class TC_SF_ABAPACCSSContactsReminderSentFunctionality extends CRAFTTestCase
 {
-	@Test(dataProvider = "RegressionTestScripts")
+	@Test(groups= {"REGRESSION","UI","CSS","Contact","Reminder"},dataProvider = "RegressionTestScripts")
 	public void runTC_SF_ABAPACCSSContactsReminderSentFunctionality(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)

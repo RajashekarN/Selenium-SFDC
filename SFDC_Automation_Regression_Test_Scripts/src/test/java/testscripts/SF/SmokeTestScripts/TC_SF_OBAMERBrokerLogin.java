@@ -18,7 +18,7 @@ import com.cognizant.Craft.*;
  */
 public class TC_SF_OBAMERBrokerLogin extends CRAFTTestCase
 {
-	@Test(dataProvider = "SmokeTestScripts")
+	@Test(groups= {"SMOKE","UI","Broker","Login"},dataProvider = "SmokeTestScripts")
 	public void runTC_SF_OBAMERBrokerLogin(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
@@ -42,9 +42,3 @@ public class TC_SF_OBAMERBrokerLogin extends CRAFTTestCase
 			};
 	}
 }
-
-
-
-
-
-	

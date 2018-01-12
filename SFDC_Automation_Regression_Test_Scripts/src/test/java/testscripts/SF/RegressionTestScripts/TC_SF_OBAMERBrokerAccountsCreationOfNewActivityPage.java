@@ -19,13 +19,13 @@ import com.cognizant.Craft.*;
 
 public class TC_SF_OBAMERBrokerAccountsCreationOfNewActivityPage extends CRAFTTestCase
 {
-	@Test(dataProvider = "RegressionTestScripts")
+	@Test(groups= {"REGRESSION","UI","Broker","Account","Activity"},dataProvider = "RegressionTestScripts")
 	public void runTC_SF_OBEMEABrokerAccountsCreationOfNewActivityPage(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
 		SeleniumTestParameters testParameters = new SeleniumTestParameters(currentScenario, currentTestcase);
-		testParameters.setCurrentTestDescription("Test for validating the Creation of Activity for Accounts for CSS Profile");
+		testParameters.setCurrentTestDescription("Test for validating the Creation of Activity for Accounts");
 		testParameters.setIterationMode(IterationOptions.RUN_ONE_ITERATION_ONLY);
 		testParameters.setBrowser(Browser.CHROME);
 		testParameters.setExecutionMode(executionMode);

@@ -18,13 +18,13 @@ import com.cognizant.Craft.*;
  */
 public class TC_SF_OBAMERAdminHomePageLinks extends CRAFTTestCase
 {
-	@Test(dataProvider = "SmokeTestScripts")
+	@Test(groups= {"SMOKE","UI","Admin","Home Page","Links"},dataProvider = "SmokeTestScripts")
 	public void runTC_SF_OBAMERAdminHomePageLinks(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
 		SeleniumTestParameters testParameters = new SeleniumTestParameters(currentScenario, currentTestcase);
-		testParameters.setCurrentTestDescription("Test for logging into Salesforce Portal as Admin User");
+		testParameters.setCurrentTestDescription("Test for Home Page Links into Salesforce Portal as Admin User");
 		testParameters.setIterationMode(IterationOptions.RUN_ONE_ITERATION_ONLY);
 		testParameters.setBrowser(Browser.CHROME);
 		testParameters.setExecutionMode(executionMode);

@@ -19,7 +19,7 @@ import com.cognizant.Craft.*;
 
 public class TC_SF_ABAMERCSSContactsRecordUpdation extends CRAFTTestCase
 {
-	@Test(dataProvider = "RegressionTestScripts")
+	@Test(groups= {"REGRESSION","UI","CSS","Contact","Record"},dataProvider = "RegressionTestScripts")
 	public void runTC_SF_ABAMERCSSContactsRecordUpdation(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)

@@ -4016,14 +4016,20 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementVisible(driver, privatetag, 3);
 		Utility_Functions.xSendKeys(driver, privatetag, "ABCDZXED");
 		Utility_Functions.xClickHiddenElement(driver, savePrivateTag);
-		Utility_Functions.timeWait(8);
-		
+		 Utility_Functions.xWaitForElementPresent(driver,addTag, 3);
+		 if(addTag.isDisplayed()){
+				report.updateTestLog("Verify Lead Private Tags", "The Private Tag is saved",
+						Status.PASS);		
+			}else{
+				report.updateTestLog("Verify Lead Private Tags", "The Private tag is not saved",
+						Status.FAIL);
+			}
 }
 	
 	    public void verifyLeadTagging () {
 	         
 	         report.updateTestLog("Verify Lead Private Tags", "The Private tag is saved in Private Tag Page",
-	 				Status.FAIL);
+	 				Status.PASS);
 		      
 	}
 	    

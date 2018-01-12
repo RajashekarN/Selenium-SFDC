@@ -18,7 +18,7 @@ import com.cognizant.Craft.*;
  */
 public class TC_SF_OBAMERCSSLogin extends CRAFTTestCase
 {
-	@Test(dataProvider = "SmokeTestScripts")
+	@Test(groups= {"SMOKE","CSS","Broker","Login"},dataProvider = "SmokeTestScripts")
 	public void runTC_SF_OBAMERCSSLogin(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)

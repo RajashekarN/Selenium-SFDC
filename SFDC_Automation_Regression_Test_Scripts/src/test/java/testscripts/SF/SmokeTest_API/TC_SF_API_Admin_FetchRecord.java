@@ -18,7 +18,7 @@ import com.cognizant.Craft.*;
  */
 public class TC_SF_API_Admin_FetchRecord extends CRAFTTestCase
 {
-	@Test(dataProvider = "SmokeTestScripts")
+	@Test(groups= {"SMOKE","API","Admin","Record"},dataProvider = "SmokeTestScripts")
 	public void runTC_SF_API_Admin_FetchRecord(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)

@@ -21,13 +21,13 @@ import com.cognizant.Craft.*;
  */
 public class TC_SF_API_Admin_ChangePassword extends CRAFTTestCase
 {
-	@Test(dataProvider = "SmokeTestScripts")
+	@Test(groups= {"SMOKE","API","Admin","Password"},dataProvider = "SmokeTestScripts")
 	public void runTC_SF_API_Admin_ChangePassword(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
 		SeleniumTestParameters testParameters = new SeleniumTestParameters(currentScenario, currentTestcase);
-		testParameters.setCurrentTestDescription("Test API Account related functions for Salesforce Portal");
+		testParameters.setCurrentTestDescription("Test API change password related functions for Salesforce Portal");
 		testParameters.setIterationMode(IterationOptions.RUN_ONE_ITERATION_ONLY);
 		testParameters.setBrowser(Browser.CHROME);
 		testParameters.setExecutionMode(executionMode);

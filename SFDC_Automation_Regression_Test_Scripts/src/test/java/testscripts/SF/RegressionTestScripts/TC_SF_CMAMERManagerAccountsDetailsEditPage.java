@@ -19,7 +19,7 @@ import com.cognizant.Craft.*;
 
 public class TC_SF_CMAMERManagerAccountsDetailsEditPage extends CRAFTTestCase
 {
-	@Test(dataProvider = "RegressionTestScripts")
+	@Test(groups= {"REGRESSION","UI","Manager","Account","Edit"},dataProvider = "RegressionTestScripts")
 	public void runTC_SF_CMAMERManagerAccountsDetailsEditPage(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)

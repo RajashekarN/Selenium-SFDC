@@ -19,7 +19,7 @@ import com.cognizant.Craft.*;
 
 public class TC_SF_OBAMERBrokerAddNewPersonalInformation extends CRAFTTestCase
 {
-	@Test(dataProvider = "SmokeTestScripts")
+	@Test(groups= {"SMOKE","UI","Broker","Account","Information"},dataProvider = "SmokeTestScripts")
 	public void runTC_SF_OBAMERBrokerAddNewPersonalInformation(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)

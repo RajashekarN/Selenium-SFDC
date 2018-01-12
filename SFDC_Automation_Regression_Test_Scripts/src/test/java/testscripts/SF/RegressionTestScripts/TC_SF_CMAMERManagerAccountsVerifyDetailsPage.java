@@ -19,7 +19,7 @@ import com.cognizant.Craft.*;
 
 public class TC_SF_CMAMERManagerAccountsVerifyDetailsPage extends CRAFTTestCase
 {
-	@Test(dataProvider = "RegressionTestScripts")
+	@Test(groups= {"REGRESSION","UI","Manager","Account","Detail"},dataProvider = "RegressionTestScripts")
 	public void runTC_SF_CMAMERManagerAccountsVerifyDetailsPage(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)

@@ -19,7 +19,7 @@ import com.cognizant.Craft.*;
 
 public class TC_SF_ABAMERManagerLeadsSharingFunctionalityPage extends CRAFTTestCase
 {
-	@Test(dataProvider = "RegressionTestScripts")
+	@Test(groups= {"REGRESSION","UI","Manager","Lead","Sharing"},dataProvider = "RegressionTestScripts")
 	public void runTC_SF_ABAMERManagerLeadsSharingFunctionalityPage(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)

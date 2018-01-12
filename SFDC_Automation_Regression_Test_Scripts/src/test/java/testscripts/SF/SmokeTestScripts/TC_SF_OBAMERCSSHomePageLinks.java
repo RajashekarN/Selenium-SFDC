@@ -18,7 +18,7 @@ import com.cognizant.Craft.*;
  */
 public class TC_SF_OBAMERCSSHomePageLinks extends CRAFTTestCase
 {
-	@Test(dataProvider = "SmokeTestScripts")
+	@Test(groups= {"SMOKE","UI","CSS","Home Page","Links"},dataProvider = "SmokeTestScripts")
 	public void runTC_SF_OBAMERCSSHomePageLinks(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)

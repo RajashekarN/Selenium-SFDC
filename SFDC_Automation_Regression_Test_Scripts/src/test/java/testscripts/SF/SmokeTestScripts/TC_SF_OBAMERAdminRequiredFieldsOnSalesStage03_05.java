@@ -19,7 +19,7 @@ import com.cognizant.Craft.*;
 
 public class TC_SF_OBAMERAdminRequiredFieldsOnSalesStage03_05 extends CRAFTTestCase
 {
-	@Test(dataProvider = "SmokeTestScripts")
+	@Test(groups= {"SMOKE","UI","Admin","Opportunity","SalesStage"},dataProvider = "SmokeTestScripts")
 	public void runTC_SF_OBAMERAdminRequiredFieldsOnSalesStage03_05(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)

@@ -18,13 +18,13 @@ import com.cognizant.Craft.*;
  */
 public class TC_SF_OBAMERBrokerActivityLightningTimeline extends CRAFTTestCase
 {
-	@Test(dataProvider = "SmokeTestScripts")
+	@Test(groups= {"SMOKE","UI","Broker","Activity","Timeline"},dataProvider = "SmokeTestScripts")
 	public void runTC_SF_OBAMERBrokerActivityLightningTimeline(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
 		SeleniumTestParameters testParameters = new SeleniumTestParameters(currentScenario, currentTestcase);
-		testParameters.setCurrentTestDescription("Test for converting Lead by logging in as Admin User");
+		testParameters.setCurrentTestDescription("Test for Activity Lightening timeline");
 		testParameters.setIterationMode(IterationOptions.RUN_ONE_ITERATION_ONLY);
 		testParameters.setBrowser(Browser.CHROME);
 		testParameters.setExecutionMode(executionMode);

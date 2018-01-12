@@ -19,7 +19,7 @@ import com.cognizant.Craft.*;
 
 public class TC_SF_OBAMERBrokerContactsNewActivityLayoutPage extends CRAFTTestCase
 {
-	@Test(dataProvider = "RegressionTestScripts")
+	@Test(groups= {"REGRESSION","UI","Broker","Contact","Activity"},dataProvider = "RegressionTestScripts")
 	public void runTC_SF_OBAMERBrokerContactsNewActivityLayoutPage(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)

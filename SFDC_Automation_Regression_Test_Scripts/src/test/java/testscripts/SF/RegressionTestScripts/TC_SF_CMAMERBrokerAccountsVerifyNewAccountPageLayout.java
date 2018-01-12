@@ -19,7 +19,7 @@ import com.cognizant.Craft.*;
 
 public class TC_SF_CMAMERBrokerAccountsVerifyNewAccountPageLayout extends CRAFTTestCase
 {
-	@Test(dataProvider = "RegressionTestScripts")
+	@Test(groups= {"REGRESSION","UI","Broker","Account","Page"},dataProvider = "RegressionTestScripts")
 	public void runTC_SF_CMAMERBrokerAccountsVerifyNewAccountPageLayout(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)

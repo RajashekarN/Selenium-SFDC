@@ -19,7 +19,7 @@ import com.cognizant.Craft.*;
 
 public class TC_SF_OBAMERManagerContactsReminderSentFunctionality extends CRAFTTestCase
 {
-	@Test(dataProvider = "RegressionTestScripts")
+	@Test(groups= {"REGRESSION","UI","Manager","Contact","Reminder"},dataProvider = "RegressionTestScripts")
 	public void runTC_SF_OBAMERManagerContactsReminderSentFunctionality(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)

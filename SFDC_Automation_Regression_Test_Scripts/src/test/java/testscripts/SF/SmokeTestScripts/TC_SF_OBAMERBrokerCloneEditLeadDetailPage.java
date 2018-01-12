@@ -19,7 +19,7 @@ import com.cognizant.Craft.*;
 
 public class TC_SF_OBAMERBrokerCloneEditLeadDetailPage extends CRAFTTestCase
 {
-	@Test(dataProvider = "SmokeTestScripts")
+	@Test(groups= {"SMOKE","UI","Broker","Lead","Edit"},dataProvider = "SmokeTestScripts")
 	public void runTC_SF_OBAMERBrokerCloneEditLeadDetailPage(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)

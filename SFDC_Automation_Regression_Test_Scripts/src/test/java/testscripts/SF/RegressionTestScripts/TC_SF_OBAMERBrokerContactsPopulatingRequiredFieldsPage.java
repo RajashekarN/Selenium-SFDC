@@ -19,7 +19,7 @@ import com.cognizant.Craft.*;
 
 public class TC_SF_OBAMERBrokerContactsPopulatingRequiredFieldsPage extends CRAFTTestCase
 {
-	@Test(dataProvider = "RegressionTestScripts")
+	@Test(groups= {"REGRESSION","UI","Broker","Contact","Field"},dataProvider = "RegressionTestScripts")
 	public void runTC_SF_OBAMERBrokerContactsPopulatingRequiredFieldsPage(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)

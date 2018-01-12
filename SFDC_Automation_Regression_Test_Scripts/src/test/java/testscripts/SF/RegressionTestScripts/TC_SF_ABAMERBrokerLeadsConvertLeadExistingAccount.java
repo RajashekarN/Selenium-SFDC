@@ -19,13 +19,13 @@ import com.cognizant.Craft.*;
 
 public class TC_SF_ABAMERBrokerLeadsConvertLeadExistingAccount extends CRAFTTestCase
 {
-	@Test(dataProvider = "RegressionTestScripts")
+	@Test(groups= {"REGRESSION","UI","Broker","Lead","Convert"},dataProvider = "RegressionTestScripts")
 	public void runTC_SF_ABAMERBrokerLeadsConvertLeadExistingAccount(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
 		SeleniumTestParameters testParameters = new SeleniumTestParameters(currentScenario, currentTestcase);
-		testParameters.setCurrentTestDescription("Test Script for validating the Accounts Custom Activity time line for the Agency Broker");
+		testParameters.setCurrentTestDescription("Test Script for validating the Convert Lead Existing Account");
 		testParameters.setIterationMode(IterationOptions.RUN_ONE_ITERATION_ONLY);
 		testParameters.setBrowser(Browser.CHROME);
 		testParameters.setExecutionMode(executionMode);

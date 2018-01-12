@@ -26,7 +26,7 @@ public class TC_SF_CMAPACManagerVerifyContactTagging extends CRAFTTestCase {
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
 		SeleniumTestParameters testParameters = new SeleniumTestParameters(currentScenario, currentTestcase);
-		testParameters.setCurrentTestDescription("Test for the validating the Lead tagging with private tag");
+		testParameters.setCurrentTestDescription("Test for the validating the Contact tagging with private tag");
 		testParameters.setIterationMode(IterationOptions.RUN_ONE_ITERATION_ONLY);
 		testParameters.setBrowser(Browser.CHROME);
 		testParameters.setExecutionMode(executionMode);

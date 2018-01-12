@@ -19,13 +19,13 @@ import com.cognizant.Craft.*;
 
 public class TC_SF_OBAMERBrokerAccountsAddPrivateNote extends CRAFTTestCase
 {
-	@Test(dataProvider = "RegressionTestScripts")
+	@Test(groups= {"REGRESSION","UI","Broker","Account","Private"},dataProvider = "RegressionTestScripts")
 	public void runTC_SF_OBAMERBrokerAccountsAddPrivateNote(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
 		SeleniumTestParameters testParameters = new SeleniumTestParameters(currentScenario, currentTestcase);
-		testParameters.setCurrentTestDescription("Test for validating the Leads Sharing functionality");
+		testParameters.setCurrentTestDescription("Test for validating the Private Note");
 		testParameters.setIterationMode(IterationOptions.RUN_ONE_ITERATION_ONLY);
 		testParameters.setBrowser(Browser.CHROME);
 		testParameters.setExecutionMode(executionMode);

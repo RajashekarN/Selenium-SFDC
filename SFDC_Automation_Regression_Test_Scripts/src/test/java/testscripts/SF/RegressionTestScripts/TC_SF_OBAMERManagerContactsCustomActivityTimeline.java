@@ -19,7 +19,7 @@ import com.cognizant.Craft.*;
 
 public class TC_SF_OBAMERManagerContactsCustomActivityTimeline extends CRAFTTestCase
 {
-	@Test(dataProvider = "RegressionTestScripts")
+	@Test(groups= {"REGRESSION","UI","Manager","Contact","Activity"},dataProvider = "RegressionTestScripts")
 	public void runTC_SF_OBAMERManagerContactsCustomActivityTimeline(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)

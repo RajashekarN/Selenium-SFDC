@@ -18,7 +18,7 @@ import com.cognizant.Craft.*;
  */
 public class TC_SF_OBAMERBrokerConvertLeadNoteAttachment extends CRAFTTestCase
 {
-	@Test(dataProvider = "SmokeTestScripts")
+	@Test(groups= {"SMOKE","UI","Broker","Lead","Convert"},dataProvider = "SmokeTestScripts")
 	public void runTC_SF_OBAMERBrokerConvertLeadNoteAttachment(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)

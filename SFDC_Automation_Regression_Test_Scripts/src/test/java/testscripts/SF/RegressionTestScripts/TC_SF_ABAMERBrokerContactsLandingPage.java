@@ -19,7 +19,7 @@ import com.cognizant.Craft.*;
 
 public class TC_SF_ABAMERBrokerContactsLandingPage extends CRAFTTestCase
 {
-	@Test(dataProvider = "RegressionTestScripts")
+	@Test(groups= {"REGRESSION","UI","Broker","Contact","Landing"},dataProvider = "RegressionTestScripts")
 	public void runTC_SF_ABAMERBrokerContactsLandingPage(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)

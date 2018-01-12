@@ -485,15 +485,7 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 		sfAccountsPage.accountTagging();
 		}
 	
-	/**
-	 *  Validating the existing account tagging 
-	 * 
-	 * @author cognizant
-	 *
-	 */
-	public void bc_verifyAccountTagging() throws InterruptedException {
-		sfAccountsPage.verifyAccountTagging();
-		}
+
 	
 	/**
 	 *  Validating the create Budgte Target
