@@ -11,14 +11,14 @@ import com.cognizant.framework.selenium.SeleniumTestParameters;
 
 import com.cognizant.Craft.*;
 /**
- * Test Script for validating the Opportunity Account Name modification
+ * Test Script for validating the Opportunity sharing functionality
  * 
  * @author Vishnuvardhan
  *
  */
 public class TC_SF_ABAPACManagerOpportunitySharing extends CRAFTTestCase
 {
-	@Test(dataProvider = "RegressionTestScripts")
+	@Test(groups= {"Regression","UI","Manager","Opportunity","Sharing"},dataProvider = "RegressionTestScripts")
 	public void runTC_SF_ABAPACManagerOpportunitySharing(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)

@@ -19,7 +19,7 @@ import com.cognizant.Craft.*;
 
 public class TC_SF_ABAMERCSSRequiredFieldsOnSalesStage16_19 extends CRAFTTestCase
 {
-	@Test(dataProvider = "RegressionTestScripts")
+	@Test(groups= {"Regression","UI","CSS","Opportunity","Sales"},dataProvider = "RegressionTestScripts")
 	public void runTC_SF_ABAMERCSSRequiredFieldsOnSalesStage16_19(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)

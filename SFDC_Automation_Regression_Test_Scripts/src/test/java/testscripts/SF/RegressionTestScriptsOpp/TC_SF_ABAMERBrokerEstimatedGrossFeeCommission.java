@@ -11,20 +11,20 @@ import com.cognizant.framework.selenium.SeleniumTestParameters;
 
 import com.cognizant.Craft.*;
 /**
- * Test Script for validating the Opportunity Account Name modification
+ * Test Script for validating the Estimated Gross Fee Commission
  * 
  * @author Vishnuvardhan
  *
  */
 public class TC_SF_ABAMERBrokerEstimatedGrossFeeCommission extends CRAFTTestCase
 {
-	@Test(dataProvider = "RegressionTestScripts")
+	@Test(groups= {"Regression","UI","Broker","Opportunity","Fee"},dataProvider = "RegressionTestScripts")
 	public void runTC_SF_ABAMERBrokerEstimatedGrossFeeCommission(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
 		SeleniumTestParameters testParameters = new SeleniumTestParameters(currentScenario, currentTestcase);
-		testParameters.setCurrentTestDescription("Test validating the Opportunity Account Name modification");
+		testParameters.setCurrentTestDescription("Test validating the Estimated Gross Fee Commission");
 		testParameters.setIterationMode(IterationOptions.RUN_ONE_ITERATION_ONLY);
 		testParameters.setBrowser(Browser.CHROME);
 		testParameters.setExecutionMode(executionMode);
