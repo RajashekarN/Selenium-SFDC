@@ -18,7 +18,7 @@ import com.cognizant.Craft.*;
  */
 public class TC_SF_OBAMERManagerFieldsOnSalesStage03_15 extends CRAFTTestCase
 {
-	@Test(dataProvider = "RegressionTestScripts")
+	@Test(groups= {"Regression","API","Manager","Opportunity","Saless"},dataProvider = "RegressionTestScripts")
 	public void runTC_SF_OBAMERManagerFieldsOnSalesStage03_15(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)

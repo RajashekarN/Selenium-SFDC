@@ -18,7 +18,7 @@ import com.cognizant.Craft.*;
  */
 public class TC_SF_CMAMERCSSSalesStage03_07 extends CRAFTTestCase
 {
-	@Test(dataProvider = "RegressionTestScripts")
+	@Test(groups= {"Regression","API","CSS","Opportunity","Sales"},dataProvider = "RegressionTestScripts")
 	public void runTC_SF_CMAMERCSSSalesStage03_07(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)

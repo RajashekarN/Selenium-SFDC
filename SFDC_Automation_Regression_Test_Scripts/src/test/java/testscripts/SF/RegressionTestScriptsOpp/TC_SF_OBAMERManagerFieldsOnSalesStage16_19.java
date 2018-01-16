@@ -11,20 +11,20 @@ import com.cognizant.framework.selenium.SeleniumTestParameters;
 
 import com.cognizant.Craft.*;
 /**
- * Test Script for validating the Opportunity Account Name modification
+ * Test Script for validating the Opportunity sales stage
  * 
  * @author Vishnuvardhan
  *
  */
 public class TC_SF_OBAMERManagerFieldsOnSalesStage16_19 extends CRAFTTestCase
 {
-	@Test(dataProvider = "RegressionTestScripts")
+	@Test(groups= {"Regression","UI","Manager","Opportunity","Sales"},dataProvider = "RegressionTestScripts")
 	public void runTC_SF_OBAMERManagerFieldsOnSalesStage16_19(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
 		SeleniumTestParameters testParameters = new SeleniumTestParameters(currentScenario, currentTestcase);
-		testParameters.setCurrentTestDescription("Test validating the Opportunity Account Name modification");
+		testParameters.setCurrentTestDescription("Test validating the Opportunity sales stage");
 		testParameters.setIterationMode(IterationOptions.RUN_ONE_ITERATION_ONLY);
 		testParameters.setBrowser(Browser.CHROME);
 		testParameters.setExecutionMode(executionMode);
