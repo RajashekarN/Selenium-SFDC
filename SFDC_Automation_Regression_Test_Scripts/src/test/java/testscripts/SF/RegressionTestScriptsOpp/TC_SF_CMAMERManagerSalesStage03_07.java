@@ -1,9 +1,9 @@
-package testscripts.SF.RegressionTestScriptsOpp;
+	package testscripts.SF.RegressionTestScriptsOpp;
 
 import org.openqa.selenium.Platform;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import com.cognizant.Craft.CRAFTTestCase;
+
 import com.cognizant.framework.IterationOptions;
 import com.cognizant.framework.selenium.ExecutionMode;
 import com.cognizant.framework.selenium.SeleniumTestParameters;
@@ -47,4 +47,3 @@ public class TC_SF_CMAMERManagerSalesStage03_07 extends CRAFTTestCase
 	}
 
 }
-

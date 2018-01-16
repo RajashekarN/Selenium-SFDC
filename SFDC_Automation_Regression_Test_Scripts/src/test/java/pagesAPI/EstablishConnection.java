@@ -76,7 +76,13 @@ public class EstablishConnection extends ReusableLibrary {
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) 
 					Username = properties.getProperty(environment+"CMAPACManager");		
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) 
-					Username = properties.getProperty(environment+"CMAPACSS");	
+					Username = properties.getProperty(environment+"CMAPACCSS");	
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) 
+					Username = properties.getProperty(environment+"CMEMEABroker");		
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) 
+					Username = properties.getProperty(environment+"CMEMEAManager");		
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) 
+					Username = properties.getProperty(environment+"CMEMEACSS");	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("ABEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) 
 					Username = properties.getProperty(environment+"ABEMEABroker");	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("ABEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) 
@@ -111,12 +117,42 @@ public class EstablishConnection extends ReusableLibrary {
 					Username = properties.getProperty(environment+"CMAMERManager");	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) 
 					Username = properties.getProperty(environment+"CMAMERCSS");		
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) 
+					Username = properties.getProperty(environment+"CMEMEABroker");	
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) 
+					Username = properties.getProperty(environment+"CMEMEAManager");	
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) 
+					Username = properties.getProperty(environment+"CMEMEACSS");		
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) 
 					Username = properties.getProperty(environment+"ASAPACBroker");	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) 
 					Username = properties.getProperty(environment+"ASAPACManager");		
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) 
 					Username = properties.getProperty(environment+"ASAPACCSS");		
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) 
+					Username = properties.getProperty(environment+"GWSAPACBroker");	
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) 
+					Username = properties.getProperty(environment+"GWSAPACManager");		
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) 
+					Username = properties.getProperty(environment+"GWSAPACCSS");	
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) 
+					Username = properties.getProperty(environment+"GWSEMEABroker");	
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) 
+					Username = properties.getProperty(environment+"GWSEMEAManager");		
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) 
+					Username = properties.getProperty(environment+"GWSEMEACSS");
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("VASAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) 
+					Username = properties.getProperty(environment+"VASAMERBroker");	
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("VASAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) 
+					Username = properties.getProperty(environment+"VASAMERManager");		
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("VASAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) 
+					Username = properties.getProperty(environment+"VASAMERCSS");
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("VASEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) 
+					Username = properties.getProperty(environment+"VASEMEABroker");	
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("VASEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) 
+					Username = properties.getProperty(environment+"VASEMEAManager");		
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("VASEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) 
+					Username = properties.getProperty(environment+"VASEMEACSS");
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) 
 					Username = properties.getProperty(environment+"FRANEMEAManager");	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("FDIGEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) 
