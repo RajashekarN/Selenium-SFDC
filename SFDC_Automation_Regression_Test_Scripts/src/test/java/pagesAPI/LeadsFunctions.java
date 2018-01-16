@@ -409,9 +409,15 @@ public class LeadsFunctions extends ReusableLibrary {
 	 */
 
 	public void leadConversion() {
+		String sLeadID = null;
 		SObject leadConvert = new SObject();
 		leadConvert.setType("Lead");
-		String sLeadID = createNewLeadConversion();
+		if(dataTable.getData("General_Data", "TC_ID").contains("ConvertLeadExisitingAccount")) {
+			String leadSearch = "SELECT Id, ConvertedAccountId FROM Lead where ConvertedAccountId = null ORDER BY CreatedDate DESC LIMIT 1";
+			sLeadID = searchTextSOQL.fetchRecordFieldValue("Id", leadSearch);
+		} else {
+			sLeadID = createNewLeadConversion();
+		}
 		LeadConvert leadToConvert = new LeadConvert();
 		leadToConvert.setConvertedStatus("Qualified");
 		leadToConvert.setLeadId(sLeadID);

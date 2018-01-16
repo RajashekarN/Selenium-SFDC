@@ -61,6 +61,16 @@ public class BC_API_Test extends ReusableLibrary {
 	}
 	
 	/**
+	 * Accounts Page fields validation
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void bc_accountValidationFields() throws InterruptedException {
+		accountsFunctions.accountPageFieldsValidation();
+	}
+	
+	/**
 	 * Account Tagging with Private Tag
 	 * 
 	 * @author Vishnuvardhan
@@ -170,6 +180,16 @@ public class BC_API_Test extends ReusableLibrary {
 	 */
 	public void bc_budgetEdit() throws InterruptedException {
 		budgetsTargetsFunctions.budgetEdit();
+	}
+	
+	/**
+	 * Lead Creation via API
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void bc_createLeadAPI() throws InterruptedException {
+		leadsFunctions.createNewLeadConversion();
 	}
 	
 	/**
@@ -319,5 +339,55 @@ public class BC_API_Test extends ReusableLibrary {
 	public void bc_createAttachmentEvent() {
 		attachmentsFunctions.createAttachment();
 	}
+	
 
+	/**
+	 * Validating the New Account populating the required fields
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyAccountsPopulatingRequiredFields() throws InterruptedException {
+		accountsFunctions.createAccountRequiredFields();
+	}
+
+	/**
+	 * Validating the New Accounts Page Layout
+	 * 
+	 * @author Ramya
+	 *
+	 */
+	public void bc_verifyAccountsPageLayout() throws InterruptedException {
+		accountsFunctions.accountPageFieldsValidation();
+	}
+	
+	/**
+	 * Validating the new Contact Page layout
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+	public void bc_contactsNewContactPageLayout()throws InterruptedException{
+		contactsFunctions.contactsPageFieldsValidation();
+	}
+	
+	/**
+	 * Validating the Population of all the required Fields in the New Contact Quick create Page
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+	public void bc_contactsPopulatingTheRequiredFields()throws InterruptedException{
+		contactsFunctions.createContactRequiredFields();
+	}
+	
+	/**
+	 * Validating the Population of all the Fields in the New Contact Quick create Page
+	 * 
+	 * @author Ramya
+	 *
+	 */	
+	public void bc_contactsPopulatingAllFields()throws InterruptedException{
+		contactsFunctions.createContactsPopulatingAllFields();
+	}
 }

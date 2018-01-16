@@ -545,7 +545,8 @@ public class ContactsPage extends ReusableLibrary {
 		 * Utility_Functions.timeWait(2);
 		 */
 		selectContact();
-		Utility_Functions.xClick(driver, related, true);
+		activityPage.validateActivityTimeLine();
+		/*Utility_Functions.xClick(driver, related, true);
 		Utility_Functions.timeWait(4);
 		int count = 0;
 		try {
@@ -610,7 +611,7 @@ public class ContactsPage extends ReusableLibrary {
 			}
 			e.printStackTrace();
 			System.out.println(e.getMessage());
-		}
+		}*/
 
 	}
 

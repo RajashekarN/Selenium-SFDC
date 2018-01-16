@@ -882,11 +882,11 @@ public class AccountsFunctions extends ReusableLibrary {
 						}
 					}				
 				}
-				if(dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) {
+				if((dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) || (dataTable.getData("General_Data", "TC_ID").contains("OBAMER"))) {
 					if(editLayoutSectionList.length==8) {
 						if(editLayoutSectionList[x].getHeading().equals(ABAMERHeader.get(x))) {
-							System.out.println(x + ":::Agency Brokerage AMER has the heading layout section:::" + editLayoutSectionList[x].getHeading());
-							report.updateTestLog(x + ":::Agency Brokerage AMER", " has the heading layout section:::" + editLayoutSectionList[x].getHeading(), Status.PASS);
+							System.out.println(x + ":::Agency/Occupancy Brokerage AMER has the heading layout section:::" + editLayoutSectionList[x].getHeading());
+							report.updateTestLog(x + ":::Agency/Occupancy Brokerage AMER", " has the heading layout section:::" + editLayoutSectionList[x].getHeading(), Status.PASS);
 							count++;
 						}
 					}				
@@ -1006,7 +1006,7 @@ public class AccountsFunctions extends ReusableLibrary {
 					System.out.println("Count of fields present in Agency Brokerage EMEA::" + countLabelList);
 				}
 			}	
-			if(dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) {
+			if((dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) || (dataTable.getData("General_Data", "TC_ID").contains("OBAMER"))) {
 				if(editLayoutSectionList.length==8) {
 					for (int k = 0; k < editLayoutSectionList.length; k++) {
 						DescribeLayoutSection els = editLayoutSectionList[k];
@@ -1146,7 +1146,7 @@ public class AccountsFunctions extends ReusableLibrary {
 		} else if (countLabelList == 26) {
 			report.updateTestLog("Count of fields present in Capital Markets APAC", "All the fields are presentin Capital Markets", Status.PASS);
 		} else if (countLabelList == 63) {
-			report.updateTestLog("Count of fields present in Agency Brokerage AMER", "All the fields are present in Agency Brokerage", Status.PASS);
+			report.updateTestLog("Count of fields present in Agency/Occupancy Brokerage AMER", "All the fields are present in Agency/Occupancy Brokerage", Status.PASS);
 		} else if (countLabelList == 132) {
 			report.updateTestLog("Count of fields present in Admin", "All the fields are present are present in Admin ", Status.PASS);
 		} else if (countLabelList == 65) {
@@ -1248,9 +1248,9 @@ public class AccountsFunctions extends ReusableLibrary {
 	 *
 	 */
 	
-	/*public void accountPageFieldsValidation() {
+	public void accountPageFieldsValidationTest() {
 		try {
-			establishConnection.establishConnectionSpecificUser();
+			establishConnection.establishConnection();
 			DescribeLayoutResult dlr = EstablishConnection.connection.describeLayout("Account", null, null);
 			for (int i = 0; i < dlr.getLayouts().length; i++) {
 				DescribeLayout layout = dlr.getLayouts()[i];
@@ -1314,6 +1314,6 @@ public class AccountsFunctions extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-	}*/
+	}
 
 }

@@ -3,8 +3,6 @@ package com.cognizant.Craft;
 import com.cognizant.framework.FrameworkParameters;
 import com.cognizant.framework.selenium.*;
 
-import supportLibraries.XmlGenerator;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,7 +52,6 @@ public abstract class CRAFTTestCase {
 	protected String currentTestcase;
 
 	private ResultSummaryManager resultSummaryManager = ResultSummaryManager.getInstance();
-	public static int countReRunFailedTestCase = 1;
 	
 	/**
 	 * Function to do the required framework setup activities before executing
