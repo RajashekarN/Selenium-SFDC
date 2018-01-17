@@ -13,6 +13,7 @@ import java.util.Scanner;
 
 import org.apache.commons.io.FileUtils;
 
+import com.cognizant.Craft.CRAFTTestCase;
 import com.cognizant.framework.FrameworkException;
 import com.cognizant.framework.FrameworkParameters;
 import com.cognizant.framework.ReportSettings;
@@ -131,8 +132,14 @@ public class ResultSummaryManager {
 	}
 
 	private void createResultSummaryHeader(int nThreads) {
+		if(CRAFTTestCase.rerun){
+			summaryReport
+			.addResultSummaryHeading(reportSettings.getProjectName() + " - Rerun scripts Results Summary");
+		}else{
 		summaryReport
 				.addResultSummaryHeading(reportSettings.getProjectName() + " - Automation Execution Results Summary");
+		}
+		
 		summaryReport.addResultSummarySubHeading("Date & Time",
 				": " + Util.getFormattedTime(overallStartTime, properties.getProperty("DateFormatString")), "OnError",
 				": " + properties.getProperty("OnError"));

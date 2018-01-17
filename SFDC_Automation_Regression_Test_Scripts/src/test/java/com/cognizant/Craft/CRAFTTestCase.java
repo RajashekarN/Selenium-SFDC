@@ -55,7 +55,13 @@ public abstract class CRAFTTestCase {
 
 	private ResultSummaryManager resultSummaryManager = ResultSummaryManager.getInstance();
 	public static int countReRunFailedTestCase = 1;
-	
+	public static boolean rerun = true;
+	public static boolean getRerun(){
+		return rerun;
+	}
+	public static void toggleRerun(){
+		rerun=!rerun;
+	}
 	/**
 	 * Function to do the required framework setup activities before executing
 	 * the overall test suite
@@ -169,6 +175,12 @@ public abstract class CRAFTTestCase {
 		}*/
 		resultSummaryManager.wrapUp(true);
 		// resultSummaryManager.copyReportsFolder();
+		
+		if(rerun){
+			toggleRerun();
+			
+			XmlGenerator.reRunFailedTestCases();
+		}
 	}
 
 	@DataProvider(name = "GlobalTestConfigurations", parallel = true)

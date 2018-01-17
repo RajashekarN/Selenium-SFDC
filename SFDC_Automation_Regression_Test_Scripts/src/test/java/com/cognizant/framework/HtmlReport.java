@@ -8,6 +8,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintStream;
 
+import com.cognizant.Craft.CRAFTTestCase;
+
 /**
  * Class to encapsulate the HTML report generation functions of the framework
  * 
@@ -42,8 +44,13 @@ class HtmlReport implements ReportType {
 		testLogPath = reportSettings.getReportPath() + Util.getFileSeparator() + "HTML Results"
 				+ Util.getFileSeparator() + reportSettings.getReportName() + ".html";
 
+		if(!CRAFTTestCase.rerun){
+			resultSummaryPath = reportSettings.getReportPath() + Util.getFileSeparator() + "HTML Results"
+					+ Util.getFileSeparator() + "Rerun summary" + ".html";
+		}else{
 		resultSummaryPath = reportSettings.getReportPath() + Util.getFileSeparator() + "HTML Results"
 				+ Util.getFileSeparator() + "Summary" + ".html";
+		}
 	}
 
 	private String getThemeCss() {
