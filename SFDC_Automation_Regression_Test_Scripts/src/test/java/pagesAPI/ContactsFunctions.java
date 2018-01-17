@@ -521,7 +521,7 @@ public class ContactsFunctions extends ReusableLibrary {
 			contact.setField("Middle_Name__c", dataTable.getData("General_data", "Middle Name"));
 			contact.setField("Nickname__c", dataTable.getData("General_data", "Nick Name"));
 			contact.setField("Title", "Sir");
-			contact.setField("Direct_Line__c", dataTable.getData("General_data", "Direct Line"));
+			//contact.setField("Direct_Line__c", dataTable.getData("General_data", "Direct Line"));
 			contact.setField("Email", Utility_Functions.xRandomFunction() + "_" + "@gmail.com");
 			//contact.setField("Contact_Mailing_Address__c", "2100 Ross Avenue, Dallas, TX, 75201, United States");
 			contact.setField("Main_Phone__c", dataTable.getData("General_data", "Direct Line"));
@@ -529,7 +529,9 @@ public class ContactsFunctions extends ReusableLibrary {
 			contact.setField("Influence_Level__c", "Medium");
 			contact.setField("Email_Options__c", "Email Opt In");
 			contact.setField("Mail_Options__c", "Mail Opt Out");
-			contact.setField("APAC_Exclude_Reason__c", "Archieved");
+			if(dataTable.getData("General_Data", "TC_ID").contains("APAC")) {
+				contact.setField("APAC_Exclude_Reason__c", "Archieved");
+			} 			
 			contact.setField("Salutation", "Mr.");
 			SearchTextSOQL accountID = new SearchTextSOQL(scriptHelper);
 			String accountId = accountID.fetchRecord("Account", "Id");

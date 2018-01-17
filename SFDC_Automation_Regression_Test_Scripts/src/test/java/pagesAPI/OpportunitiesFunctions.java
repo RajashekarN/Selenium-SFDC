@@ -524,6 +524,7 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 				try {
 					results = EstablishConnection.connection.create(opportunities);
 				} catch (Exception e) {
+					System.out.println(e.getMessage());
 					e.printStackTrace();
 				}
 				System.out.println("Result:::" + results);

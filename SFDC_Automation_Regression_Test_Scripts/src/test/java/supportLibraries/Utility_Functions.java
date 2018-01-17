@@ -1185,12 +1185,8 @@ public class Utility_Functions extends ReusableLibrary {
 		} else {
 			while (!isStatus) {
 				for (WebElement elememt : list) {
-					int randomValue = random.nextInt(list.size()-1);
-					if(randomValue%2>0){
-						randomValue++;
-					}
+					int randomValue = random.nextInt(list.size());
 					text = elememt.getText();
-					System.out.println(list.get(randomValue).getText()); 
 					list.get(randomValue).click();
 					isStatus = true;
 					break;
