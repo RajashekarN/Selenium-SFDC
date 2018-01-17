@@ -3,6 +3,8 @@ package pagesAPI;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Random;
+
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
@@ -16,6 +18,8 @@ import com.sforce.soap.partner.QueryResult;
 import com.sforce.soap.partner.SaveResult;
 import com.sforce.soap.partner.sobject.SObject;
 import com.sforce.ws.ConnectionException;
+
+import supportLibraries.Utility_Functions;
 
 public class OpportunitiesFunctions extends ReusableLibrary {
 	/*
@@ -432,6 +436,454 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 		}
 	}
 	
+
+	/**
+	 * Validate Opportunity Name is not auto generated when manually added by
+	 * the user
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+
+	static String result;
+
+	public String manualOpportunityCreation() {
+		try {
+
+			boolean isStatus = false;
+			while (!isStatus) {
+				establishConnection.establishConnection();
+				SObject opportunity = new SObject();
+				Random random = new Random();
+				int value = random.nextInt();
+				String opportunityName = "Test Automation_Opportunity" + value;
+				opportunity.setType("Opportunity");
+				opportunity.setField("Name", opportunityName);
+				SearchTextSOQL accountID = new SearchTextSOQL(scriptHelper);
+				String accountId = accountID.fetchRecord("Account", "Id");
+				opportunity.setField("AccountId", accountId);
+				opportunity.setField("CloseDate", Calendar.getInstance());
+				opportunity.setField("StageName", "Qualification");
+
+				if ((dataTable.getData("General_Data", "TC_ID").contains("CM")) && (dataTable.getData("General_Data", "TC_ID").contains("DSF"))) {
+					opportunity.setField("RecordTypeId", "012i0000000405lAAA");
+					// opportunity.setField("Estimated_Gross_Fee_Commission__c", 10000);
+					report.updateTestLog("Opportunity Name", "Record type is set as Capital Markets - Debt & Structured Finance:::", Status.PASS);
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CM")) && (dataTable.getData("General_Data", "TC_ID").contains("PS"))) {
+					opportunity.setField("RecordTypeId", "012i0000000405kAAA");
+					report.updateTestLog("Opportunity Name", "Record type is set as Property Sales", Status.PASS);
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAMER"))
+						|| (dataTable.getData("General_Data", "TC_ID").contains("GWSAPAC"))
+						|| (dataTable.getData("General_Data", "TC_ID").contains("GWSEMEA"))) {
+					opportunity.setField("RecordTypeId", "012i0000000405mAAA");
+					opportunity.setField("Service__c", "Service Contract Exclusive");
+					report.updateTestLog("Opportunity Name", "Record type is set as Global Workplace Solutions",
+							Status.PASS);
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VASAMER"))
+						|| (dataTable.getData("General_Data", "TC_ID").contains("VASAPAC"))
+						|| (dataTable.getData("General_Data", "TC_ID").contains("VASEMEA"))) {
+					opportunity.setField("RecordTypeId", "0121Y000001EVzFQAW");
+					opportunity.setField("Region__c", "US National");
+					opportunity.setField("Market__c	", "Austin");
+					opportunity.setField("Environmental__c	", "Yes");
+					opportunity.setField("Property_Condition__c", "Yes");
+					opportunity.setField("Facility_Assessment__c", "Yes");
+					opportunity.setField("Appraisal__c", "Yes");
+
+					report.updateTestLog("Opportunity Name", "Record type is set as Valuation & Advisory Services",
+							Status.PASS);
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAMER"))
+						|| (dataTable.getData("General_Data", "TC_ID").contains("ASAPAC"))
+						|| (dataTable.getData("General_Data", "TC_ID").contains("ASEMEA"))) {
+					opportunityNameAutoGenerate_API();
+					isStatus = false;
+					break;
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAMER"))
+						|| (dataTable.getData("General_Data", "TC_ID").contains("ABAPAC"))
+						|| (dataTable.getData("General_Data", "TC_ID").contains("ABEMEA"))) {
+					opportunity.setField("RecordTypeId", "012i0000001622CAAQ");
+					opportunity.setField("Service__c", "Consulting");
+					opportunity.setField("Total_Size__c", 999);
+					opportunity.setField("CBRE_Preferred_Property_Type_c__c", "Hotel");
+					report.updateTestLog("Opportunity Name", "Record type is set as Agency Brokerage", Status.PASS);
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER"))
+						|| (dataTable.getData("General_Data", "TC_ID").contains("OBAPAC"))
+						|| (dataTable.getData("General_Data", "TC_ID").contains("OBEMEA"))) {
+					opportunity.setField("RecordTypeId", "012i0000000405nAAA");
+					opportunity.setField("Service__c", "Consulting");
+					opportunity.setField("Total_Size__c", 999);
+					opportunity.setField("CBRE_Preferred_Property_Type_c__c", "Hotel");
+					report.updateTestLog("Opportunity Name", "Record type is set as Occupier Brokerage", Status.PASS);
+				} else {
+					opportunity.setField("RecordTypeId", "012i0000000405n");
+				}
+				opportunity.setField("Amount", "20000");
+				opportunity.setField("StageName","02-Meeting");
+				SObject[] opportunities = new SObject[1];
+				opportunities[0] = opportunity;
+				try {
+					results = EstablishConnection.connection.create(opportunities);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				System.out.println("Result:::" + results);
+				for (int j = 0; j < results.length; j++) {
+					if (results[j].isSuccess()) {
+						result = results[j].getId();
+					}
+				}
+				System.out.println(result);
+				SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
+				String query = "Select Name from Opportunity where Id = '" + result + "'";
+				String generatedOpportunityName = searchTextSOQL.fetchRecordFieldValue("Name", query);
+				if (opportunityName.equals(generatedOpportunityName)) {
+					report.updateTestLog("Opportunity Name",
+							"Opportunity Name is not auto generated when Opportunity is manually added by the User::",
+							Status.PASS);
+				} else {
+					report.updateTestLog("Opportunity Name", "Failure in the Opportunity Name generation:::",
+							Status.FAIL);
+				}
+				if (dataTable.getData("General_Data", "TC_ID").contains("DSF")) {
+					String queryRecordType = "Select RecordTypeId from Opportunity where Id = '" + result + "'";
+					String recordType = searchTextSOQL.fetchRecordFieldValue("RecordTypeId", queryRecordType);
+					if (recordType.equals("012i0000000405lAAA")) {
+						report.updateTestLog("Opportunity Name",
+								"Opportunity is created by selecting the Record Type as Capital Markets - Debt & Structured Finance:::",
+								Status.PASS);
+					} else if (recordType.equals("012i0000000405kAAA")) {
+						report.updateTestLog("Opportunity Name",
+								"Opportunity is created by selecting the Record Type  as Property Sales:::",
+								Status.PASS);
+					} else if (recordType.equals("012i0000000405mAAA")) {
+						report.updateTestLog("Opportunity Name",
+								"Opportunity is created by selecting the Record Type  as Global Workplace Solutions:::",
+								Status.PASS);
+					} else if (recordType.equals("012i0000000405oAAA")) {
+						report.updateTestLog("Opportunity Name",
+								"Opportunity is created by selecting the Record Type  as Valuation & Advisory Services:::",
+								Status.PASS);
+					} else if (recordType.equals("012i0000001622CAAQ")) {
+						report.updateTestLog("Opportunity Name",
+								"Opportunity is created by selecting the Record Type  as Agency Brokerage:::",
+								Status.PASS);
+					} else if (recordType.equals("012i0000000405nAAA")) {
+						report.updateTestLog("Opportunity Name",
+								"Opportunity is created by selecting the Record Type  as Occupier Brokerage:::",
+								Status.PASS);
+					} else {
+						report.updateTestLog("Opportunity Name",
+								"Opportunity is not as created as per the selection:::", Status.FAIL);
+					}
+				}
+				isStatus = true;
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println(e.getStackTrace());
+		}
+		return result;
+	}
+	
+	/**
+	 * Function for creating an Opportunity
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+
+	public String opportunityNameAutoGenerate_API() {
+		String accountName = null;
+		try {
+			establishConnection.establishConnection();
+			SObject opportunity = new SObject();
+			opportunity.setType("Opportunity");
+			/*
+			 * SearchTextSOQL accountID = new SearchTextSOQL(scriptHelper);
+			 * String accountId = accountID.fetchRecord("Account", "Id");
+			 */
+			int value = Utility_Functions.xRandomFunction();
+			opportunity.setField("Name", "Test Automation_" + value);
+			opportunity.setField("AccountId", "0010S000004SaIHQA0");
+			opportunity.setField("CloseDate", Calendar.getInstance());
+			if ((dataTable.getData("General_Data", "TC_ID").contains("ASAMER"))
+					|| (dataTable.getData("General_Data", "TC_ID").contains("ASAPAC"))
+					|| (dataTable.getData("General_Data", "TC_ID").contains("ASEMEA"))) {
+				opportunity.setField("RecordTypeId", "012i0000000405jAAA");
+			} else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAMER"))
+					|| (dataTable.getData("General_Data", "TC_ID").contains("GWSAPAC"))
+					|| (dataTable.getData("General_Data", "TC_ID").contains("GWSEMEA"))) {
+				opportunity.setField("RecordTypeId", "012i0000000405mAAA");
+			} else if (dataTable.getData("General_Data", "TC_ID").contains("CM")
+					&& (dataTable.getData("General_Data", "TC_ID").contains("DSF"))) {
+				opportunity.setField("RecordTypeId", "012i0000000405lAAA");
+			} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER"))
+					|| (dataTable.getData("General_Data", "TC_ID").contains("OBAPAC"))
+					|| (dataTable.getData("General_Data", "TC_ID").contains("OBEMEA"))) {
+				opportunity.setField("RecordTypeId", "012i0000000405nAAA");
+			}
+
+			opportunity.setField("StageName", "1-Target");
+			// opportunity.setField("Service__c", "Business Valuation");
+			opportunity.setField("Total_Size__c", 5000);
+			opportunity.setField("Unit_of_Measure__c", "Acres");
+			opportunity.setField("Type_of_Client__c", "New Business");
+
+			opportunity.setField("Leasing__c", "Yes");
+			opportunity.setField("Management__c", "Yes");
+			opportunity.setField("Capital_Markets__c", "Yes");
+			opportunity.setField("Accounting__c", "Yes");
+			opportunity.setField("Tech_Services__c", "Yes");
+			opportunity.setField("Project_Management__c	", "Yes");
+			opportunity.setField("Sustainability__c", "Yes");
+			opportunity.setField("Consultancy__c", "Yes");
+			opportunity.setField("FM_Lite__c", "Yes");
+
+			if (dataTable.getData("General_Data", "TC_ID").contains("AMER")) {
+				opportunity.setField("Region__c	", "US National");
+				opportunity.setField("Market__c	", "Boston");
+			} else if (dataTable.getData("General_Data", "TC_ID").contains("EMEA")) {
+				opportunity.setField("Region__c	", "EMEA");
+				opportunity.setField("Market__c	", "Africa");
+			} else if (dataTable.getData("General_Data", "TC_ID").contains("APAC")) {
+				opportunity.setField("Region__c	", "APAC");
+				opportunity.setField("Market__c	", "Australia");
+			}
+			SObject[] opportunities = new SObject[1];
+			opportunities[0] = opportunity;
+			results = EstablishConnection.connection.create(opportunities);
+			report.updateTestLog("Opportunity Name",
+					"Opportunity for the record type Asset Services is created successfully:::", Status.PASS);
+			System.out.println("Result:::" + results);
+			for (int j = 0; j < results.length; j++) {
+				if (results[j].isSuccess()) {
+					result = results[j].getId();
+					System.out.println("Save Results:::" + result);
+					report.updateTestLog("Opportunity Name", "Opportunity Id:::" + result + " successfully:::",
+							Status.PASS);
+				}
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println(e.getStackTrace());
+		}
+		return result + ":" + accountName;
+	}
+	
+	/**
+	 * Validating the Auto Generated Opportunity Account Name modification
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+
+	public void modifyAutoGeneratedOpportunityName() {
+		try {
+			String recordTypeId;
+			if (dataTable.getData("General_Data", "TC_ID").contains("DSF")) {
+				recordTypeId = "012i0000000405lAAA";
+				report.updateTestLog("Opportunity Name",
+						"Record type is set as Capital Markets - Debt & Structured Finance:::", Status.PASS);
+			} else if (dataTable.getData("General_Data", "TC_ID").contains("PS")) {
+				recordTypeId = "012i0000000405kAAA";
+				report.updateTestLog("Opportunity Name", "Record type is set as Property Sales", Status.PASS);
+			} else if (dataTable.getData("General_Data", "TC_ID").contains("GWS")) {
+				recordTypeId = "012i0000000405mAAA";
+				report.updateTestLog("Opportunity Name", "Record type is set as Global Workplace Solutions",
+						Status.PASS);
+			} else if (dataTable.getData("General_Data", "TC_ID").contains("VAS")) {
+				recordTypeId = "012i0000000405oAAA";
+				report.updateTestLog("Opportunity Name", "Record type is set as Valuation & Advisory Services",
+						Status.PASS);
+			} else if (dataTable.getData("General_Data", "TC_ID").contains("AS")) {
+				recordTypeId = "012i0000000405jAAA";
+				report.updateTestLog("Opportunity Name", "Record type is set as Asset Services", Status.PASS);
+			} else if (dataTable.getData("General_Data", "TC_ID").contains("AB")) {
+				recordTypeId = "012i0000001622CAAQ";
+				report.updateTestLog("Opportunity Name", "Record type is set as Agency Brokerage", Status.PASS);
+			} else if (dataTable.getData("General_Data", "TC_ID").contains("OB")) {
+				recordTypeId = "012i0000000405nAAA";
+				report.updateTestLog("Opportunity Name", "Record type is set as Occupier Brokerage", Status.PASS);
+			} else {
+				recordTypeId = "012i0000000405n";
+			}
+			boolean isStatus = false;
+			String query = "SELECT Name, Id, Service__C, Total_Size__c, Unit_of_Measure__c FROM Opportunity where Name like "
+					+ "'%-%-%-%' and StageName > '03-RFP/Proposal' and StageName < '15-Signed Lease' and RecordTypeId = "
+					+ "'" + recordTypeId + "'" + "limit 1 offset 9";
+			SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
+			String opportunityID = searchTextSOQL.fetchRecordFieldValue("Id", query);
+			while (!isStatus) {
+				if (opportunityID == null) {
+					report.updateTestLog("Opportunity", "No Opportunities present for the Record Type selected:::",
+							Status.PASS);
+					isStatus = false;
+					break;
+				} else {
+					String opportunityName = searchTextSOQL.fetchRecordFieldValue("Name", query);
+					String assignmentType = searchTextSOQL.fetchRecordFieldValue("Service__c", query);
+					String totalSize = searchTextSOQL.fetchRecordFieldValue("Total_Size__c", query);
+					String unitOfMeasure = searchTextSOQL.fetchRecordFieldValue("Unit_of_Measure__c", query);
+					report.updateTestLog("Fetched Opportunity Name", "Opportunity Name:::" + opportunityName,
+							Status.PASS);
+					report.updateTestLog("Fetched Opportunity Name", "Opportunity Assignment Type:::" + assignmentType,
+							Status.PASS);
+					report.updateTestLog("Fetched Opportunity Name", "Opportunity Total Size:::" + totalSize,
+							Status.PASS);
+					report.updateTestLog("Fetched Opportunity Name", "Opportunity Unit of Measure:::" + unitOfMeasure,
+							Status.PASS);
+					updateOpportunityField("Service__c", opportunityID);
+					updateOpportunityField("Total_Size__c", opportunityID);
+					updateOpportunityField("Unit_of_Measure__c", opportunityID);
+
+					String updatedAssignmentType = searchTextSOQL.fetchRecordFieldValue("Service__c", query);
+					String updatedTotalSize = searchTextSOQL.fetchRecordFieldValue("Total_Size__c", query);
+					String updatedUnitOfMeasure = searchTextSOQL.fetchRecordFieldValue("Unit_of_Measure__c", query);
+					if (updatedAssignmentType.equals("Project Management")) {
+						report.updateTestLog("Modified Opportunity Name",
+								"Opportunity Name modified according to the AssignmentType selected:::"
+										+ updatedAssignmentType,
+								Status.PASS);
+					} else {
+						report.updateTestLog("Modified Opportunity Name",
+								"Opportunity Name didn't get modified according to the AssignmentType selected:::"
+										+ updatedAssignmentType,
+								Status.FAIL);
+					}
+					if (updatedTotalSize.equals("2900.0")) {
+						report.updateTestLog("Modified Opportunity Name",
+								"Opportunity Name modified according to the Total Size selected:::" + updatedTotalSize,
+								Status.PASS);
+					} else {
+						report.updateTestLog("Modified Opportunity Name",
+								"Opportunity Name didn't get modified according to the Total Size selected:::"
+										+ updatedTotalSize,
+								Status.FAIL);
+					}
+					if (updatedUnitOfMeasure.equals("Hectares")) {
+						report.updateTestLog("Modified Opportunity Name",
+								"Opportunity Name modified according to the Unit of Measure selected:::"
+										+ updatedUnitOfMeasure,
+								Status.PASS);
+					} else {
+						report.updateTestLog("Modified Opportunity Name",
+								"Opportunity Name didn't get modified according to the Unit of Measure selected:::"
+										+ updatedUnitOfMeasure,
+								Status.FAIL);
+					}
+					isStatus = true;
+				}
+			}
+		} catch (Exception e) {
+			e.getMessage();
+		}
+
+	}
+	
+	/**
+	 * Verify the required fields based on Sales Stage selected between
+	 * 03-RFP/Proposal to 07-Under Contract on Opportunity from a broker profile
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	
+	SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
+	
+	public void salesStage03_RFPProposal_07UnderContract() {
+		String query = "SELECT Estimated_Gross_Fee_Commission__c , Id, Name FROM Opportunity where StageName > '03-RFP/Proposal' and StageName < '07-Under Contract' and Estimated_Gross_Fee_Commission__c = 0.0 limit 10";
+		String OpportunityID = searchTextSOQL.searchOpportunity(query);
+		System.out.println(OpportunityID);
+		if (OpportunityID == null) {
+			report.updateTestLog("Verify Opportunity", "There are no Opportunities that falls under this category:::",
+					Status.PASS);
+		} else {
+			report.updateTestLog("Verify Opportunity Required Fields",
+					"Opportunity retrived from database is:::" + OpportunityID, Status.PASS);
+			String estimatedGrossFeeCommmission = "SELECT Estimated_Gross_Fee_Commission__c FROM Opportunity where Id = "
+					+ "'" + OpportunityID + "'";
+			String estimatedGrossFeeCommission_Value = searchTextSOQL
+					.fetchRecordFieldValue("Estimated_Gross_Fee_Commission__c", estimatedGrossFeeCommmission);
+			report.updateTestLog("Verify Opportunity Required Fields",
+					"Estimated Gross Fee Commission Value is :::" + estimatedGrossFeeCommission_Value, Status.PASS);
+
+			String stagName = "SELECT stageName FROM Opportunity where Id = " + "'" + OpportunityID + "'";
+			String stageName_Value = searchTextSOQL.fetchRecordFieldValue("StageName", stagName);
+			report.updateTestLog("Verify Opportunity Required Fields", "Stage Name is :::" + stageName_Value,
+					Status.PASS);
+			updateOpportunityField("StageName", OpportunityID);
+			String stageName_UpdatedValue = searchTextSOQL.fetchRecordFieldValue("StageName", stagName);
+			if (stageName_UpdatedValue.equals("07-Under Contract")) {
+				report.updateTestLog("Verify Opportunity Required Fields",
+						"Opportunity Sales Stage is updated successfully :::" + stageName_UpdatedValue, Status.PASS);
+			} else {
+				report.updateTestLog("Verify Opportunity Required Fields",
+						"Opportunity Sales Stage updation failed:::" + stageName_UpdatedValue, Status.FAIL);
+			}
+		}
+	}
+	
+	/**
+	 * Validating the required fields based on Sales Stage selected between
+	 * 03-RFP/Proposal to 15-Signed Lease on Opportunity from a broker profile
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+
+	public void requiredFieldsbetweenw03_15Stages() {
+		String query = "SELECT Id, Name FROM Opportunity where StageName > '03-RFP/Proposal' and StageName < '10-Short List' "
+				+ " and StageName > '13-LOI/Heads of Terms' and StageName < '15-Signed Lease' and Total_Size__c !=null and CBRE_Preferred_Property_Type_c__c !=null limit 1 offset 9";
+		String OpportunityID = searchTextSOQL.searchOpportunity(query);
+		if (OpportunityID == null) {
+			report.updateTestLog("Verify Opportunity", "There are no Opportunities that falls under this category:::",
+					Status.PASS);
+		} else {
+			report.updateTestLog("Verify Opportunity Required Fields",
+					"Opportunity retrived from database is:::" + OpportunityID, Status.PASS);
+			String url = driver.getCurrentUrl().split("#")[0];
+			String newUrl = url + "#/sObject/" + OpportunityID;
+			newUrl = newUrl + "/view";
+			report.updateTestLog("Verify Add Opportunity Page Fields",
+					"URL has been replaced with the new URL having the retrieved Opportunity:::" + newUrl, Status.PASS);
+			driver.get(newUrl);
+
+			SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
+			String query_TotalSize = "Select Total_Size__c from Opportunity where Id = " + "'" + OpportunityID + "'";
+			String totalSize = searchTextSOQL.fetchRecordFieldValue("Total_Size__c", query_TotalSize);
+			String query_PreferredPropertyType = "Select CBRE_Preferred_Property_Type_c__c  from Opportunity where Id = "
+					+ "'" + OpportunityID + "'";
+			String preferredPropertyType = searchTextSOQL.fetchRecordFieldValue("CBRE_Preferred_Property_Type_c__c",
+					query_PreferredPropertyType);
+
+			try {
+				if (!(totalSize.equals("")) && !(preferredPropertyType.equals(" "))) {
+					report.updateTestLog("Verify Add Opportunity Page Fields",
+							"Total Size Value and Preferred Property Type fields has values present", Status.PASS);
+				} else {
+					report.updateTestLog("Verify Add Opportunity Page Fields",
+							"Total Size Value and Preferred Property Type fields has values present", Status.FAIL);
+				}
+			} catch (Exception e) {
+				e.getMessage();
+			}
+			OpportunitiesFunctions update = new OpportunitiesFunctions(scriptHelper);
+			update.updateOpportunityField("StageName", OpportunityID);
+			update.updateOpportunityField("EMEA_Success_Probability__c", OpportunityID);
+			String updateQuery = "SELECT Id, Name, StageName FROM Opportunity where Id = " + "'" + OpportunityID + "'";
+			searchTextSOQL.searchOpportunity(updateQuery);
+			String resultQuery = "SELECT Id, Name, StageName FROM Opportunity where Id = " + "'" + OpportunityID + "'";
+			String opportunityStage = searchTextSOQL.fetchRecordFieldValue("StageName", resultQuery);
+			System.out.println(opportunityStage);
+			if (opportunityStage.contains("Closed")) {
+				report.updateTestLog("Verify Opportunity Update", "Sales Stage has been updated successfully",
+						Status.PASS);
+			} else {
+				report.updateTestLog("Verify Opportunity Update", "Sales Stage updation has been failed", Status.FAIL);
+			}
+		}
+	}
 	/**
 	 * Function for the validating the fields on the Opportunities Page
 	 * 

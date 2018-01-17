@@ -170,16 +170,6 @@ public class BC_Salesforce_ContactsPage extends ReusableLibrary {
 	}
 
 	/**
-	 * Validating the Population of all the required Fields in the New Contact Quick create Page
-	 * 
-	 * @author Ramya
-	 *
-	 */	
-	public void bc_contactsPopulatingTheRequiredFields()throws InterruptedException{
-		sfContactsPage.contactsPopulatingTheRequiredFields();
-	}
-
-	/**
 	 * Validating the all the fields in the new contact page
 	 * 
 	 * @author Ramya
@@ -201,7 +191,7 @@ public class BC_Salesforce_ContactsPage extends ReusableLibrary {
 	/**
 	 * Validating the Contacts Landing page
 	 * 
-	 * @author Ramyabc_contactsNewContactPageLayout
+	 * @author Ramya
 	 *
 	 */	
 	public void bc_contactsVerifyLandingPage()throws InterruptedException{
@@ -226,24 +216,7 @@ public class BC_Salesforce_ContactsPage extends ReusableLibrary {
 	public void bc_verifyUpdationOfContactRecord()throws InterruptedException{
 		sfContactsPage.verifyUpdationOfContactRecord();
 	}
-	/**
-	 * Validating the new Contact Page layout
-	 * 
-	 * @author Ramya
-	 *
-	 */	
-	public void bc_contactsNewContactPageLayout()throws InterruptedException{
-		sfContactsPage.contactsNewContactPageLayout();
-	}
-	/**
-	 * Validating the Population of all the Fields in the New Contact Quick create Page
-	 * 
-	 * @author Ramya
-	 *
-	 */	
-	public void bc_contactsPopulatingAllFields()throws InterruptedException{
-		sfContactsPage.contactsPopulatingAllFields();
-	}
+
 	/**
 	 * Validating the status and Reason for Inactivation fields in the Contacts edit page
 	 * @author Ramya

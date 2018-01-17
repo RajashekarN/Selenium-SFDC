@@ -302,16 +302,6 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 	}
 
 	/**
-	 * Validating the New Account populating the required fields
-	 * 
-	 * @author Ramya
-	 *
-	 */
-	public void bc_verifyAccountsPopulatingRequiredFields() throws InterruptedException {
-		sfAccountsPage.verifyAccountsPopulatingRequiredFields();
-	}
-
-	/**
 	 * Validating the view Hierarchy for the existing Accounts
 	 * 
 	 * @author Ramya
@@ -349,16 +339,6 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 	 */
 	public void bc_verifyAccountsLandingPageDetailsLayoutBroker() throws InterruptedException {
 		sfAccountsPage.verifyAccountsLandingPageDetailsLayoutBroker();
-	}
-	
-	/**
-	 * Validating the New Accounts Page Layout
-	 * 
-	 * @author Ramya
-	 *
-	 */
-	public void bc_verifyAccountsPageLayout() throws InterruptedException {
-		sfAccountsPage.verifyAccountsPageLayout();
 	}
 	
 	/**

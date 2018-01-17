@@ -18,7 +18,7 @@ import com.cognizant.Craft.*;
  */
 public class TC_SF_GWSAPACBrokerStage01PhaseProbability extends CRAFTTestCase
 {
-	@Test(dataProvider = "RegressionTestScripts")
+	@Test(groups= {"Regression","UI","Broker","Opportunity","Sales"},dataProvider = "RegressionTestScripts")
 	public void runTC_SF_GWSAPACBrokerStage01PhaseProbability(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)

@@ -18,7 +18,7 @@ import com.cognizant.Craft.*;
  */
 public class TC_SF_CMAMERBrokerOpportunityCloneEdit extends CRAFTTestCase
 {
-	@Test(dataProvider = "RegressionTestScripts")
+	@Test(groups= {"Regression","UI","Broker","Opportunity","Clone"},dataProvider = "RegressionTestScripts")
 	public void runTC_SF_CMAMERBrokerOpportunityCloneEdit(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
