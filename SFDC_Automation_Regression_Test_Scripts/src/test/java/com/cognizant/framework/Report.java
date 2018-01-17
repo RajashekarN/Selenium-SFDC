@@ -486,6 +486,9 @@ public class Report {
 		HashMap hashMap = new HashMap();
 		hashMap.put("Passed", Integer.valueOf(this.nTestsPassed));
 		hashMap.put("Failed", Integer.valueOf(this.nTestsFailed));
+		
+		nTestsPassed=0;
+		nTestsFailed=0;
 		return hashMap;
 	}
 }

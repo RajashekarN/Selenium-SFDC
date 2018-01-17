@@ -3,6 +3,8 @@ package com.cognizant.Craft;
 import com.cognizant.framework.FrameworkParameters;
 import com.cognizant.framework.selenium.*;
 
+import supportLibraries.XmlGenerator;
+
 import java.util.ArrayList;
 import java.util.List;
 
