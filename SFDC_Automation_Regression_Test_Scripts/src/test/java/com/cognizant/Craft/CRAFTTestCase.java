@@ -69,7 +69,7 @@ public abstract class CRAFTTestCase {
 	 * @param testContext
 	 *            The TestNG {@link ITestContext} of the current test suite
 	 */
-	@BeforeSuite
+	@BeforeSuite(alwaysRun = true)
 	public void setUpTestSuite(ITestContext testContext) {
 		resultSummaryManager.setRelativePath();
 		resultSummaryManager.initializeTestBatch(testContext.getSuite().getName());
@@ -95,7 +95,7 @@ public abstract class CRAFTTestCase {
 	 * Function to do the required framework setup activities before executing
 	 * each test case
 	 */
-	@BeforeMethod
+	@BeforeMethod(alwaysRun = true)
 	public void setUpTestRunner() {
 		FrameworkParameters frameworkParameters = FrameworkParameters.getInstance();
 		if (frameworkParameters.getStopExecution()) {
@@ -167,7 +167,7 @@ public abstract class CRAFTTestCase {
 	 * Function to do the required framework teardown activities after executing
 	 * the overall test suite
 	 */
-	@AfterSuite
+	@AfterSuite(alwaysRun = true)
 	public void tearDownTestSuite() {
 /*		if((!failedTestCase.isEmpty()) && (countReRunFailedTestCase<2)) {
 			XmlGenerator.reRunFailedTestCases();
