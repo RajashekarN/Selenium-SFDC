@@ -144,6 +144,7 @@ public class LoginPage extends ReusableLibrary {
 	 *
 	 */
 	public void login() {
+		invokeApplication();
 		try {
 			if ((environment.equals("UAT")) || (environment.equals("UAT2")) || (environment.equals("FTE"))
 					|| (environment.equals("FTE2"))) {
