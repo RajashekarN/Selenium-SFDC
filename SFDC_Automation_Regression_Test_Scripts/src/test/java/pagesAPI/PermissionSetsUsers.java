@@ -147,6 +147,8 @@ public class PermissionSetsUsers extends ReusableLibrary {
 	public void setPermissionSets(List<String> userNameList, List<String> permissionSetsLabels) throws Exception {
 		for (int i = 0; i < userNameList.size(); i++) {
 			String userName;
+			LoginPage loginPage = new LoginPage(scriptHelper);
+			String environment = loginPage.initializeEnvironment();
 			if ((environment.equalsIgnoreCase("FTE2")) || (environment.equalsIgnoreCase("UAT2"))) {
 				userName = userNameList.get(i).substring(0, userNameList.get(i).length() - 4);
 			} else {
@@ -610,7 +612,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				permissionSetsLabels.add("CM - India");
 				break;
 
-			case "testuse90@cbre.com.crm.":
+			case "testuser90@cbre.com.crm.":
 				System.out.println("CM EMEA Manager CA User - :::" + userNameList.get(i)
 				+ ":::is having the permission sets::: Lightning Experience"
 				+ "and EMEA Capital Markets Capital Advisors");

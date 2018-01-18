@@ -721,9 +721,12 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//select[contains(@id,'oppForm:salesStage')]/option[@selected='selected']")
 	WebElement salesStageSelected;
 
-	@FindBy(xpath = "//select[contains(@id,'oppForm:salesStage') or contains(@id,'oppForm:stage')]/option[@value='']")
-	WebElement salesStageSelectedEMEA;
+/*	@FindBy(xpath = "//select[contains(@id,'oppForm:salesStage') or contains(@id,'oppForm:stage')]/option[@value='']")
+	WebElement salesStageSelectedEMEA;*/
 
+	@FindBy(xpath = "//span[text()='Sales Stage']/parent::label/parent::div//a[@class='select']")
+	WebElement salesStageSelectedEMEA;
+		
 	/*
 	 * @FindBy(xpath=
 	 * "//select[contains(@id,'oppForm:salesStage')]/option[@selected='selected']")
@@ -1465,6 +1468,10 @@ public class OpportunitiesPage extends ReusableLibrary {
 	Actions actions = new Actions(driver.getWebDriver());
 	EventPage eventPage = new EventPage(scriptHelper);
 	ActivityPage activityPage = new ActivityPage(scriptHelper);
+	
+	int offsetValue = new Random().nextInt(9);
+
+	
 	/**
 	 * Adding the Web Elements to the Label List
 	 * 
@@ -2662,7 +2669,46 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 
 	}
+	
+	public void opportunityCreation() {
+		String sAccountName = searchOpportunity.fetchRecord("Account", "Name");
+		Utility_Functions.xSendKeys(driver, accountName, sAccountName);
+		Utility_Functions.timeWait(2);
+		accountName.sendKeys(Keys.ARROW_DOWN);
+		Utility_Functions.timeWait(2);
+		accountName.sendKeys(Keys.ENTER);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xSelectDropdownByIndex(assignmentTypeOpp, 1);
 
+		System.out.println(Calendar.getInstance());
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		Date date = new Date();
+		Utility_Functions.xSelectDropdownByIndex(leadSource, 1);
+		Utility_Functions.xSendKeys(driver, closeDateOpp, dateFormat.format(date).toString());
+		Utility_Functions.xSendKeys(driver, closeDateOpp, Keys.TAB);
+		Random random = new Random();
+		int value = random.nextInt(999);
+		Utility_Functions.xSendKeys(driver, totalSizeOpp, Integer.toString(value));
+		Utility_Functions.xSelectDropdownByName(unitofMeasure, "Acres");
+		Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFee, 3);
+		Utility_Functions.xClick(driver, estimatedGrossFee, true);
+		Utility_Functions.xSendKeys(driver, estimatedGrossFee, "10000");
+		/*
+		 * Utility_Functions.xClick(driver, estimatedGrossFee, true);
+		 * Utility_Functions.timeWait(4); Utility_Functions.xSendKeys(driver,
+		 * estimatedGrossFee, "10,000.00"); Utility_Functions.timeWait(3);
+		 * Utility_Functions.xWaitForElementPresent(driver,
+		 * estimatedGrossFeeField, 3); Utility_Functions.xSendKeys(driver,
+		 * estimatedGrossFeeField, dataTable.getData("General_Data",
+		 * "InstallmentAmount"));
+		 */
+		try {
+			Utility_Functions.xSelectDropdownByIndex(preferredPropertyTypeOpp, 1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Utility_Functions.xClick(driver, saveNewOpportunity, true);
+	}
 	/**
 	 * Function for edit opportunity
 	 * 
@@ -2717,7 +2763,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
 		Utility_Functions.xClick(driver, menu_Opportunities, true);
 		Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
-		Utility_Functions.xclickgetTextofFirstElementfromList(opportunitiesList);
+		//Utility_Functions.xclickgetTextofFirstElementfromList(opportunitiesList);
+		Utility_Functions.xclickRandomElement(opportunitiesList);
 		Utility_Functions.xWaitForElementPresent(driver, editButton, 3);
 		// Utility_Functions.xWaitForElementPresent(driver, showMoreActions, 3);
 		// driver.navigate().refresh();
@@ -2835,8 +2882,14 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xSendKeys(driver, InstallmentAmountEdit, "50000");
 		Utility_Functions.xWaitForElementPresent(driver, proceed, 3);
 		Utility_Functions.xClick(driver, proceed, true);
-		Utility_Functions.xWaitForElementPresent(driver, continueButtonInstallment, 3);
-		Utility_Functions.xClick(driver, continueButtonInstallment, true);
+		try {
+			Utility_Functions.xSelectDropdownByIndex(preferredPropertyTypeOpp, 1);
+			Utility_Functions.xWaitForElementPresent(driver, continueButtonInstallment, 3);
+			Utility_Functions.xClick(driver, continueButtonInstallment, true);
+		} catch (Exception e) {
+			Utility_Functions.xWaitForElementPresent(driver, continueButtonInstallment, 3);
+			Utility_Functions.xClick(driver, continueButtonInstallment, true);
+		}		
 		driver.switchTo().defaultContent();
 		Utility_Functions.timeWait(2);
 	}
@@ -2904,7 +2957,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		sInstallmentAmountTwo = installmentAmountTwo.getText();
 		System.out.println(sInstallmentAmountOne);
 		System.out.println(sInstallmentAmountTwo);
-		if (sInstallmentAmountOne.equals("USD 10,000.00") && sInstallmentAmountTwo.equals("USD 10,000.00")) {
+		if (sInstallmentAmountOne.equals("USD 5,000.00") && sInstallmentAmountTwo.equals("USD 5,000.00")) {
 			report.updateTestLog("Opportunities Installments",
 					"Opportunity installment amounts recalculated successfully after editing the Estimated Gross Fee:::"
 							+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo,
@@ -5052,6 +5105,19 @@ public class OpportunitiesPage extends ReusableLibrary {
 		return sAccountID;
 	}
 
+	public String retriveOpportunityforInstallments() {
+		String query = "SELECT Id, Installment_Quantity__c FROM Opportunity where Installment_Quantity__c = 1 ORDER BY CreatedDate DESC"  + " limit 1 offset " + offsetValue;
+		String sOpportunityId = searchOpportunity.fetchRecordFieldValue("Id", query);
+		report.updateTestLog("Verify Active Opportunities", "Opportunity ID retrived from database is:::" + sOpportunityId,
+				Status.PASS);
+		String url = driver.getCurrentUrl().split("#")[0];
+		String newUrl = url + "#/sObject/" + sOpportunityId;
+		newUrl = newUrl + "/view";
+		driver.get(newUrl);
+		Utility_Functions.timeWait(1);
+		return sOpportunityId;
+	}
+	
 	public void validateActiveOpportunities() {
 		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
 		Utility_Functions.xClick(driver, menu_Accounts, true);
@@ -5173,8 +5239,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, menu_Opportunities, true);
 		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
 		Utility_Functions.xClick(driver, newOpportunity, true);
-		if ((dataTable.getData("General_Data", "TC_ID").contains("ABAMER"))
-				|| (dataTable.getData("General_Data", "TC_ID").contains("CMAMER"))) {
+		if ((dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) || (dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) || (dataTable.getData("General_Data", "TC_ID").contains("OBAMER"))) {
 			Utility_Functions.timeWait(3);
 			Utility_Functions.xSwitchtoFrame(driver, continueButton);
 			Utility_Functions.xWaitForElementPresent(driver, continueButton, 3);
@@ -5191,7 +5256,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			Utility_Functions.timeWait(2);
 			Utility_Functions.xSwitchtoFrame(driver, salesStageSelected);
 			Utility_Functions.xWaitForElementPresent(driver, salesStageSelected, 3);
-			if (dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) {
+			if ((dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) || (dataTable.getData("General_Data", "TC_ID").contains("OBAMER"))) {
 				if ((salesStageSelected.getText().equals("02-Meeting"))
 						&& (phasePresent.getText().equals("Prospecting"))) {
 					report.updateTestLog("Verify New Opportunity Page",
@@ -5204,8 +5269,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 									+ salesStageSelected.getText() + ":::" + phaseField.getText(),
 							Status.FAIL);
 				}
-			} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER"))
-					&& (dataTable.getData("General_Data", "TC_ID").contains("PS"))) {
+			} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("PS"))) {
 				if ((salesStageSelected.getText().equals("01-Preliminary"))
 						&& (phasePresent.getText().equals("Prospecting"))) {
 					report.updateTestLog("Verify New Opportunity Page",
@@ -5218,8 +5282,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 									+ salesStageSelected.getText() + ":::" + phaseField.getText(),
 							Status.FAIL);
 				}
-			} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER"))
-					&& (dataTable.getData("General_Data", "TC_ID").contains("DSF"))) {
+			} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("DSF"))) {
 				if ((salesStageSelected.getText().equals("01-Screening"))
 						&& (phasePresent.getText().equals("Prospecting"))) {
 					report.updateTestLog("Verify New Opportunity Page",
@@ -5234,7 +5297,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 				}
 			}
 			Utility_Functions.timeWait(2);
-			opportunityNameAutoGenerateFuntion();
+			opportunityCreation();
 		} else if (dataTable.getData("General_Data", "TC_ID").contains("ABEMEA")) {
 			try {
 				Utility_Functions.xSwitchtoFrame(driver, salesStageSelectedEMEA);
