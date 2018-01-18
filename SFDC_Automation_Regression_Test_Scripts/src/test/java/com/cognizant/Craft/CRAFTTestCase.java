@@ -1,12 +1,14 @@
 package com.cognizant.Craft;
 
 import com.cognizant.framework.FrameworkParameters;
+import com.cognizant.framework.Settings;
 import com.cognizant.framework.selenium.*;
 
 import supportLibraries.XmlGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import org.openqa.selenium.Platform;
 import org.testng.Assert;
@@ -52,15 +54,25 @@ public abstract class CRAFTTestCase {
 	 * The current test case
 	 */
 	protected String currentTestcase;
-
+	private Properties properties;
 	private ResultSummaryManager resultSummaryManager = ResultSummaryManager.getInstance();
 	public static int countReRunFailedTestCase = 1;
-	public static boolean rerun = true;
+	public static boolean rerun = false;
+	public static int rerunCounter=0;
+	public static int getCounter(){
+		return rerunCounter;
+	}
+	public static void updateCounter(){
+		rerunCounter++;
+	}
 	public static boolean getRerun(){
 		return rerun;
 	}
 	public static void toggleRerun(){
 		rerun=!rerun;
+	}
+	public static void updateReRun(){
+		rerun=true;
 	}
 	/**
 	 * Function to do the required framework setup activities before executing
@@ -175,9 +187,10 @@ public abstract class CRAFTTestCase {
 		}*/
 		resultSummaryManager.wrapUp(true);
 		// resultSummaryManager.copyReportsFolder();
-		
-		if(rerun){
-			toggleRerun();
+		properties = Settings.getInstance();
+		if(getCounter()<Integer.parseInt(properties.getProperty("ReRunTimes"))){
+			updateReRun();
+			updateCounter();
 			
 			XmlGenerator.reRunFailedTestCases();
 		}

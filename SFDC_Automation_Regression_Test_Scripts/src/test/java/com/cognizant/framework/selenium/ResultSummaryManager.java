@@ -132,9 +132,9 @@ public class ResultSummaryManager {
 	}
 
 	private void createResultSummaryHeader(int nThreads) {
-		if(CRAFTTestCase.rerun){
+		if(CRAFTTestCase.getRerun()){
 			summaryReport
-			.addResultSummaryHeading(reportSettings.getProjectName() + " - Rerun scripts Results Summary");
+			.addResultSummaryHeading(reportSettings.getProjectName() + " - Rerun"+Integer.toString(CRAFTTestCase.getCounter())+ "scripts Results Summary");
 		}else{
 		summaryReport
 				.addResultSummaryHeading(reportSettings.getProjectName() + " - Automation Execution Results Summary");

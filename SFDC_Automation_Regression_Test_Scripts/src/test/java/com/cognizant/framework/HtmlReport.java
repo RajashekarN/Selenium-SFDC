@@ -44,9 +44,9 @@ class HtmlReport implements ReportType {
 		testLogPath = reportSettings.getReportPath() + Util.getFileSeparator() + "HTML Results"
 				+ Util.getFileSeparator() + reportSettings.getReportName() + ".html";
 
-		if(!CRAFTTestCase.rerun){
+		if(CRAFTTestCase.rerun){
 			resultSummaryPath = reportSettings.getReportPath() + Util.getFileSeparator() + "HTML Results"
-					+ Util.getFileSeparator() + "Rerun summary" + ".html";
+					+ Util.getFileSeparator() + "Rerun"+Integer.toString(CRAFTTestCase.getCounter())+ "summary" + ".html";
 		}else{
 		resultSummaryPath = reportSettings.getReportPath() + Util.getFileSeparator() + "HTML Results"
 				+ Util.getFileSeparator() + "Summary" + ".html";
