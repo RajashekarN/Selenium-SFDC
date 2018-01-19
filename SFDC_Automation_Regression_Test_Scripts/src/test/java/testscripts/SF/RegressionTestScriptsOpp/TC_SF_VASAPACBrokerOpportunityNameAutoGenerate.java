@@ -3,8 +3,9 @@ package testscripts.SF.RegressionTestScriptsOpp;
 import org.openqa.selenium.Platform;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import com.cognizant.Craft.CRAFTTestCase;
+
 import com.cognizant.framework.IterationOptions;
+import com.cognizant.framework.selenium.Browser;
 import com.cognizant.framework.selenium.ExecutionMode;
 import com.cognizant.framework.selenium.SeleniumTestParameters;
 
@@ -17,7 +18,7 @@ import com.cognizant.Craft.*;
  */
 public class TC_SF_VASAPACBrokerOpportunityNameAutoGenerate extends CRAFTTestCase
 {
-	@Test(groups= {"Regression","API","Broker","Opportunity","Generate"},dataProvider = "RegressionTestScripts")
+	@Test(groups= {"Regression","UI","Broker","Opportunity","Generate"},dataProvider = "RegressionTestScripts")
 	public void runTC_SF_VASAPACBrokerOpportunityNameAutoGenerate(String testInstance, ExecutionMode executionMode, Platform platform
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
@@ -25,15 +26,10 @@ public class TC_SF_VASAPACBrokerOpportunityNameAutoGenerate extends CRAFTTestCas
 		SeleniumTestParameters testParameters = new SeleniumTestParameters(currentScenario, currentTestcase);
 		testParameters.setCurrentTestDescription("Test validating the Opportunity Auto generate");
 		testParameters.setIterationMode(IterationOptions.RUN_ONE_ITERATION_ONLY);
+		testParameters.setBrowser(Browser.CHROME);
 		testParameters.setExecutionMode(executionMode);
 		testParameters.setPlatform(platform);
-		DriverScript driverScript = new DriverScript(testParameters);		
-		driverScript = new DriverScript(testParameters);
-		runDriverScript(driverScript, testParameters);
-	}
-
-	private void runDriverScript(DriverScript driverScript, SeleniumTestParameters testParameters){
-		driverScript.setIsAPITest(true);
+		DriverScript driverScript = new DriverScript(testParameters);
 		driverScript.driveTestExecution();
 		tearDownTestRunner(testParameters, driverScript);
 	}
@@ -43,9 +39,8 @@ public class TC_SF_VASAPACBrokerOpportunityNameAutoGenerate extends CRAFTTestCas
 		return new Object[][] { { "Instance1", ExecutionMode.LOCAL, Platform.WINDOWS /*ExecutionMode.LOCAL,
 				MobileToolName.APPIUM, MobileExecutionPlatform.IOS,
 				"4d005cb2c4938197"*/ },
-		};
+			};
 	}
-
 }
 
 
