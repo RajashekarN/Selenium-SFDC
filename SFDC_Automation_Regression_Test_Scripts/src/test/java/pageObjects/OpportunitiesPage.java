@@ -1802,9 +1802,10 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 		String queryOpp = "SELECT Id, Name FROM Opportunity where StageName > '16-In Escrow' and StageName < '17-Closed' and Total_Size__c !=null limit 10";
 		String Opportunity = searchOpportunity.searchOpportunity(queryOpp);
-		Utility_Functions.xClick(driver, menu_Opportunities, true);
+		/*Utility_Functions.xClick(driver, menu_Opportunities, true);
 		Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
-		Utility_Functions.xclickRandomElement(opportunitiesList);
+		Utility_Functions.xclickRandomElement(opportunitiesList);*/
+		selectOpportunity();
 		Utility_Functions.timeWait(1);
 		String url = driver.getCurrentUrl().split("#")[0];
 		String newUrl = url + "#/sObject/" + Opportunity;
@@ -2656,18 +2657,37 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(4);
 		driver.navigate().refresh();
 		Utility_Functions.timeWait(2);
-
-		Utility_Functions.xClick(driver, editOpportunity, true);
-		Utility_Functions.timeWait(3);
-		Utility_Functions.xSwitchtoFrame(driver, EditEstimatedGrossFee);
-		Utility_Functions.xClickHiddenElement(driver, EditEstimatedGrossFee);
+		try {
+			Utility_Functions.xWaitForElementPresent(driver, related, 4);
+			if (related.isDisplayed()) {
+				report.updateTestLog("Opportunity Created", "Opportunity created successfully:::", Status.PASS);
+			} else {
+				report.updateTestLog("Opportunity Created", "Opportunity creation failed:::", Status.FAIL);
+			}
+		} catch (Exception e) {
+			report.updateTestLog("Opportunity Related Tab", "System was unable to find the Related tab:::", Status.WARNING);
+		}
 		Utility_Functions.timeWait(2);
-		Utility_Functions.xSendKeys(driver, EditEstimatedGrossFee, "75000");
+		/*
+		 * String sTotalSize = Integer.toString(value); String formatTotalSize =
+		 * sTotalSize.substring(0,1) + "," + sTotalSize.substring(1,3);
+		 * System.out.println(formatTotalSize);
+		 */
+		String query = "Select Name from opportunity where Name like  " + "'" + sAccountName + "-" + '%' + "-" + value
+				+ "-" + "Acres" + "'";
+		Utility_Functions.timeWait(1);
+		String opportunityName = searchOpportunity.fetchRecordFieldValue("Name", query);
+		report.updateTestLog("Opportunity Created", "Opportunity Name:::" + opportunityName, Status.PASS);
 
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xClick(driver, SaveEditOpportunity, true);
-		Utility_Functions.timeWait(2);
-
+		if (opportunityName.contains(sAccountName) && opportunityName.contains(Integer.toString(value))
+				&& opportunityName.contains("Acres")) {
+			report.updateTestLog("Opportunity Created",
+					"Opportunity Name created as per the format expected -- Account Name - Assignment Type - Total Size - Unit of Measure:::",
+					Status.PASS);
+		} else {
+			report.updateTestLog("Opportunity Created", "Opportunity Name is not created as per the expected format:::",
+					Status.FAIL);
+		}
 	}
 	
 	public void opportunityCreation() {
@@ -2763,9 +2783,14 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
 		Utility_Functions.xClick(driver, menu_Opportunities, true);
 		Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
-		//Utility_Functions.xclickgetTextofFirstElementfromList(opportunitiesList);
-		Utility_Functions.xclickRandomElement(opportunitiesList);
-		Utility_Functions.xWaitForElementPresent(driver, editButton, 3);
+		Utility_Functions.xclickRandomElement(opportunitiesList);		
+		String oppportunityID = retriveOpportunityforInstallments();
+		if (oppportunityID == null) {
+			report.updateTestLog("Opportunity Installments", "There are no Opportunities present with the provided criteria:::", Status.PASS);
+		} else {
+			driver.navigate().refresh();
+			Utility_Functions.timeWait(1);
+			Utility_Functions.xWaitForElementPresent(driver, editButton, 3);
 		// Utility_Functions.xWaitForElementPresent(driver, showMoreActions, 3);
 		// driver.navigate().refresh();
 		Utility_Functions.xWaitForElementPresent(driver, related, 5);
@@ -2775,7 +2800,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		sInstallmentAmount = sInstallmentAmount.split(" ")[1];
 		// String formatInstallmentAmount = sInstallmentAmount.replace(",", "");
 		if (sInstallmentAmount.equals((dataTable.getData("General_Data", "InstallmentAmount") + ".00"))) {
-			report.updateTestLog("Opportunities Installments",
+				report.updateTestLog("Opportunities Installments",
 					"Opportunity installment amount record is present in the opportunity installment related list:::",
 					Status.PASS);
 		} else {
@@ -2784,6 +2809,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 					Status.PASS);
 		}
 		Utility_Functions.timeWait(2);
+		}
 	}
 
 	/**
@@ -2951,6 +2977,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		 * Utility_Functions.xClick(driver, related, true);
 		 */
 		driver.navigate().refresh();
+		Utility_Functions.timeWait(1);
 		Utility_Functions.xWaitForElementPresent(driver, related, 3);
 		Utility_Functions.xClick(driver, related, true);
 		sInstallmentAmountOne = installmentAmountOne.getText();
@@ -5106,15 +5133,20 @@ public class OpportunitiesPage extends ReusableLibrary {
 	}
 
 	public String retriveOpportunityforInstallments() {
-		String query = "SELECT Id, Installment_Quantity__c FROM Opportunity where Installment_Quantity__c = 1 ORDER BY CreatedDate DESC"  + " limit 1 offset " + offsetValue;
+		String query = "SELECT Id, Installment_Quantity__c, CBRE_Preferred_Property_Type_c__c, Total_Size__c, Service__c  FROM"
+				+ " Opportunity where Installment_Quantity__c = 1 and  CBRE_Preferred_Property_Type_c__c !=null and"
+				+ " Total_Size__c != null and Service__c  != null ORDER BY CreatedDate DESC"  + " limit 1 offset " + offsetValue;
 		String sOpportunityId = searchOpportunity.fetchRecordFieldValue("Id", query);
-		report.updateTestLog("Verify Active Opportunities", "Opportunity ID retrived from database is:::" + sOpportunityId,
-				Status.PASS);
-		String url = driver.getCurrentUrl().split("#")[0];
-		String newUrl = url + "#/sObject/" + sOpportunityId;
-		newUrl = newUrl + "/view";
-		driver.get(newUrl);
-		Utility_Functions.timeWait(1);
+		if(sOpportunityId==null) {
+			report.updateTestLog("Verify Active Opportunities", "No Opportunities are present:::", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Active Opportunities", "Opportunity ID retrived from database is:::" + sOpportunityId, Status.PASS);
+			String url = driver.getCurrentUrl().split("#")[0];
+			String newUrl = url + "#/sObject/" + sOpportunityId;
+			newUrl = newUrl + "/view";
+			driver.get(newUrl);
+			Utility_Functions.timeWait(1);
+		}
 		return sOpportunityId;
 	}
 	

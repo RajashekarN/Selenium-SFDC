@@ -518,8 +518,8 @@ public class ContactsFunctions extends ReusableLibrary {
 			SObject contact = new SObject();
 			contact.setType("Contact");
 			contact.setField("LastName", Utility_Functions.xRandomFunction() + "_" + dataTable.getData("General_data", "Last Name"));
-			contact.setField("Middle_Name__c", dataTable.getData("General_data", "Middle Name"));
-			contact.setField("Nickname__c", dataTable.getData("General_data", "Nick Name"));
+			//contact.setField("Middle_Name__c", dataTable.getData("General_data", "Middle Name"));
+			//contact.setField("Nickname__c", dataTable.getData("General_data", "Nick Name"));
 			contact.setField("Title", "Sir");
 			//contact.setField("Direct_Line__c", dataTable.getData("General_data", "Direct Line"));
 			contact.setField("Email", Utility_Functions.xRandomFunction() + "_" + "@gmail.com");

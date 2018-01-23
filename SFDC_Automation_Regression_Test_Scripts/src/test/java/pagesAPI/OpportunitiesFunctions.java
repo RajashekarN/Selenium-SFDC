@@ -215,7 +215,7 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 			SObject[] records = new SObject[1];
 			QueryResult queryResults = EstablishConnection.connection.query("SELECT Id FROM Opportunity Where ID = " +  "'" + opportunityID + "'");
 			System.out.println(queryResults);
-			if(dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) {
+			if(dataTable.getData("General_Data", "TC_ID").contains("SalesStage")) {
 				if (queryResults.getSize() > 0) {
 					for (int i = 0; i < queryResults.getRecords().length; i++) {
 						SObject so = (SObject) queryResults.getRecords()[i];
@@ -686,7 +686,7 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 				recordTypeId = "012i0000000405lAAA";
 				report.updateTestLog("Opportunity Name",
 						"Record type is set as Capital Markets - Debt & Structured Finance:::", Status.PASS);
-			} else if (dataTable.getData("General_Data", "TC_ID").contains("PS")) {
+			} else if ((dataTable.getData("General_Data", "TC_ID").contains("PS")) || (dataTable.getData("General_Data", "TC_ID").contains("PS"))) {
 				recordTypeId = "012i0000000405kAAA";
 				report.updateTestLog("Opportunity Name", "Record type is set as Property Sales", Status.PASS);
 			} else if (dataTable.getData("General_Data", "TC_ID").contains("GWS")) {
@@ -711,7 +711,7 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 			}
 			boolean isStatus = false;
 			String query = "SELECT Name, Id, Service__C, Total_Size__c, Unit_of_Measure__c FROM Opportunity where Name like "
-					+ "'%-%-%-%' and StageName > '03-RFP/Proposal' and StageName < '15-Signed Lease' and RecordTypeId = "
+					+ "'%-%-%-%' and StageName > '03-RFP/Proposal' and StageName < '15-Signed Lease' and CBRE_Preferred_Property_Type_c__c !=null and RecordTypeId = "
 					+ "'" + recordTypeId + "'" + "limit 1 offset 9";
 			SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
 			String opportunityID = searchTextSOQL.fetchRecordFieldValue("Id", query);
@@ -793,7 +793,8 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 	SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
 	
 	public void salesStage03_RFPProposal_07UnderContract() {
-		String query = "SELECT Estimated_Gross_Fee_Commission__c , Id, Name FROM Opportunity where StageName > '03-RFP/Proposal' and StageName < '07-Under Contract' and Estimated_Gross_Fee_Commission__c = 0.0 limit 10";
+		String query = "SELECT Estimated_Gross_Fee_Commission__c , Id, Name FROM Opportunity where StageName > '03-RFP/Proposal' and "
+				+ "StageName < '07-Under Contract' and Estimated_Gross_Fee_Commission__c = 0.0 and CBRE_Preferred_Property_Type_c__c !=null limit 10";
 		String OpportunityID = searchTextSOQL.searchOpportunity(query);
 		System.out.println(OpportunityID);
 		if (OpportunityID == null) {
