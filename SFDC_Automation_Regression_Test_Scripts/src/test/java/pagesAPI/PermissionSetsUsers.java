@@ -297,6 +297,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				System.out.println("OB APAC Broker User - :::" + userNameList.get(i)
 				+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
+				permissionSetsLabels.add("Campaigns and CampaignLogic Create/Edit Permissions");
 				break;
 
 			case "testuser25@cbre.com.crm.":

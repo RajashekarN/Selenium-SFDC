@@ -395,6 +395,47 @@ public class SearchTextSOQL extends ReusableLibrary {
 		}
 		return recordID;
 	}
+	
+	public String fetchRecordFieldValueAdminLogin(String FieldName, String Query) {
+		String recordID = null;
+		String fieldname = FieldName;
+		try {
+			establishConnection.establishConnectionAdminLogin();
+			String query = Query;
+			QueryResult result = EstablishConnection.connection.query(query);
+			if (result.getSize() > 0) {
+				boolean done = false;
+				while (!done) {
+					for (SObject record : result.getRecords()) {
+						if (fieldname.equals("Name")) {
+							recordID = (String) record.getField("Name");
+							report.updateTestLog("Verify Fetch Record",
+									"Record has been fetched successfully:::" + recordID, Status.PASS);
+						} else if (fieldname.equals("Id")) {
+							recordID = (String) record.getField("Id");
+							report.updateTestLog("Verify Fetch Record",
+									"Record has been fetched successfully:::" + recordID, Status.PASS);
+						} 
+						System.out.println("###### record.Id: " + (String) record.getField("Id"));
+						System.out.println("###### record.Name: " + (String) record.getField("Name"));
+						if (recordID != null) {
+							done = true;
+							break;
+						}
+					}
+					if (result.isDone()) {
+						done = true;
+					} else {
+						result = EstablishConnection.connection.queryMore(result.getQueryLocator());
+					}
+				}
+			}			
+		} catch (Exception ex) {
+			report.updateTestLog("Verify Fetch Record", "Record fetchfailed:::" + recordID, Status.FAIL);
+			System.out.println("Exception in main : " + ex);
+		}
+		return recordID;
+	}
 
 	/**
 	 * Function for uploading an Attachment

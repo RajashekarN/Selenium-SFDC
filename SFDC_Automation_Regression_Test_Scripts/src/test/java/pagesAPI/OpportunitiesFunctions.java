@@ -470,28 +470,42 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 					// opportunity.setField("Estimated_Gross_Fee_Commission__c", 10000);
 					report.updateTestLog("Opportunity Name", "Record type is set as Capital Markets - Debt & Structured Finance:::", Status.PASS);
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CM")) && (dataTable.getData("General_Data", "TC_ID").contains("PS"))) {
-					opportunity.setField("RecordTypeId", "012i0000000405kAAA");
-					report.updateTestLog("Opportunity Name", "Record type is set as Property Sales", Status.PASS);
+					if(dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_CMEMEA")) {
+						opportunity.setField("RecordTypeId", "012i0000000tvThAAI");
+						report.updateTestLog("Opportunity Name", "Record type is set as Capital Markets Capital Advisors", Status.PASS);
+					} else {
+						opportunity.setField("RecordTypeId", "012i0000000405kAAA");
+						report.updateTestLog("Opportunity Name", "Record type is set as Property Sales", Status.PASS);
+					}					
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAMER"))
 						|| (dataTable.getData("General_Data", "TC_ID").contains("GWSAPAC"))
 						|| (dataTable.getData("General_Data", "TC_ID").contains("GWSEMEA"))) {
-					opportunity.setField("RecordTypeId", "012i0000000405mAAA");
-					opportunity.setField("Service__c", "Service Contract Exclusive");
-					report.updateTestLog("Opportunity Name", "Record type is set as Global Workplace Solutions",
-							Status.PASS);
+					if(dataTable.getData("General_Data", "TC_ID").contains("GWSEMEA")) {
+						opportunity.setField("RecordTypeId", "012i0000000405n");
+					} else {
+						opportunity.setField("RecordTypeId", "012i0000000405mAAA");
+						opportunity.setField("Service__c", "Service Contract Exclusive");
+						report.updateTestLog("Opportunity Name", "Record type is set as Global Workplace Solutions",
+								Status.PASS);
+					}				
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VASAMER"))
 						|| (dataTable.getData("General_Data", "TC_ID").contains("VASAPAC"))
 						|| (dataTable.getData("General_Data", "TC_ID").contains("VASEMEA"))) {
-					opportunity.setField("RecordTypeId", "0121Y000001EVzFQAW");
-					opportunity.setField("Region__c", "US National");
-					opportunity.setField("Market__c	", "Austin");
-					opportunity.setField("Environmental__c	", "Yes");
-					opportunity.setField("Property_Condition__c", "Yes");
-					opportunity.setField("Facility_Assessment__c", "Yes");
-					opportunity.setField("Appraisal__c", "Yes");
-
-					report.updateTestLog("Opportunity Name", "Record type is set as Valuation & Advisory Services",
-							Status.PASS);
+					
+					if(dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_VASEMEA")) {
+						opportunity.setField("RecordTypeId", "012i0000000tvTkAAI");
+					} else if (dataTable.getData("General_Data", "TC_ID").contains("TC_SF_VASAPAC")) {
+						opportunity.setField("RecordTypeId", "012i0000001QOXkAAO");
+					} else {
+						opportunity.setField("RecordTypeId", "0121Y000001EVzFQAW");
+						opportunity.setField("Region__c", "US National");
+						opportunity.setField("Market__c	", "Austin");
+						opportunity.setField("Environmental__c	", "Yes");
+						opportunity.setField("Property_Condition__c", "Yes");
+						opportunity.setField("Facility_Assessment__c", "Yes");
+						opportunity.setField("Appraisal__c", "Yes");
+					} 
+					report.updateTestLog("Opportunity Name", "Record type is set as Valuation & Advisory Services", 	Status.PASS);
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAMER"))
 						|| (dataTable.getData("General_Data", "TC_ID").contains("ASAPAC"))
 						|| (dataTable.getData("General_Data", "TC_ID").contains("ASEMEA"))) {
@@ -686,18 +700,18 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 				recordTypeId = "012i0000000405lAAA";
 				report.updateTestLog("Opportunity Name",
 						"Record type is set as Capital Markets - Debt & Structured Finance:::", Status.PASS);
-			} else if ((dataTable.getData("General_Data", "TC_ID").contains("PS")) || (dataTable.getData("General_Data", "TC_ID").contains("PS"))) {
+			} else if (dataTable.getData("General_Data", "TC_ID").contains("PS")) {
 				recordTypeId = "012i0000000405kAAA";
 				report.updateTestLog("Opportunity Name", "Record type is set as Property Sales", Status.PASS);
 			} else if (dataTable.getData("General_Data", "TC_ID").contains("GWS")) {
 				recordTypeId = "012i0000000405mAAA";
 				report.updateTestLog("Opportunity Name", "Record type is set as Global Workplace Solutions",
 						Status.PASS);
-			} else if (dataTable.getData("General_Data", "TC_ID").contains("VAS")) {
+			} else if (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_VAS")) {
 				recordTypeId = "012i0000000405oAAA";
 				report.updateTestLog("Opportunity Name", "Record type is set as Valuation & Advisory Services",
 						Status.PASS);
-			} else if (dataTable.getData("General_Data", "TC_ID").contains("AS")) {
+			} else if (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_AS")) {
 				recordTypeId = "012i0000000405jAAA";
 				report.updateTestLog("Opportunity Name", "Record type is set as Asset Services", Status.PASS);
 			} else if (dataTable.getData("General_Data", "TC_ID").contains("AB")) {
@@ -714,7 +728,7 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 					+ "'%-%-%-%' and StageName > '03-RFP/Proposal' and StageName < '15-Signed Lease' and CBRE_Preferred_Property_Type_c__c !=null and RecordTypeId = "
 					+ "'" + recordTypeId + "'" + "limit 1 offset 9";
 			SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
-			String opportunityID = searchTextSOQL.fetchRecordFieldValue("Id", query);
+			String opportunityID = searchTextSOQL.fetchRecordFieldValueAdminLogin("Id", query);
 			while (!isStatus) {
 				if (opportunityID == null) {
 					report.updateTestLog("Opportunity", "No Opportunities present for the Record Type selected:::",

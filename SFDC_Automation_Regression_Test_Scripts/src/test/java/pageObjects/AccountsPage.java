@@ -579,6 +579,12 @@ public class AccountsPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//article[contains(@class,'forceRelatedListCardDesktop')]//span[contains(text(),'SPOCs')]/ancestor::article//div[text()='New']")
 	WebElement spocsNew;
+	
+	@FindBy(xpath = "//ul[@class='tabs__nav']//a[text()='More']")
+	WebElement moreTabButton;
+	
+	@FindBy(xpath = "//a[text()='Other Related']")
+	WebElement otherRelatedButton;
 
 	@FindBy(xpath = "//span[text()='Migrated Account']/parent::label/span[contains(@class,'checkbox')]")
 	WebElement migratedAccount;
@@ -1878,9 +1884,12 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(5);
 		Utility_Functions.xWaitForElementPresent(driver, accountSearch, 3);
 		Utility_Functions.xClick(driver, accountSearch, true);
-		Utility_Functions.xSendKeys(driver, accountSearch, "Test");
+		SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
+		String accountName = searchTextSOQL.fetchRecord("Account", "Name");
+		Utility_Functions.xSendKeys(driver, accountSearch, accountName);
 		Utility_Functions.xWaitForElementPresent(driver, search, 3);
 		Utility_Functions.xClick(driver, search, true);
+		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, selectAccount1, 3);
 		Utility_Functions.xClick(driver, selectAccount1, true);
 		Utility_Functions.xWaitForElementPresent(driver, selectAccount2, 3);
@@ -2964,14 +2973,14 @@ public class AccountsPage extends ReusableLibrary {
 						count3++;
 					}
 					i3++;
-					if (count3 == 9)
+					if (count3 == 6)
 						break;
 				}
 				i3 = 0;
 				j++;
 			}
 			System.out.println(count3);
-			if (count3 >= 8) {
+			if (count3 >= 6) {
 				report.updateTestLog("Verify Accounts Details Page",
 						"All sections are present in the Accounts Related Page", Status.PASS);
 			} else {
@@ -4231,13 +4240,17 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify SPOC from Account", "All accounts are displayed successfully:::", Status.PASS);
 		List<WebElement> accountNamesList = driver.findElements(
-				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
+				By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'001')]"));
 
 		Utility_Functions.xclickOnFirstElementfromList(accountNamesList);
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify SPOC from Account ", "The Account is Displayed ", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, related_Accounts, 3);
-		Utility_Functions.xClickVisibleListElement(driver, related_Accounts);
+		Utility_Functions.xWaitForElementPresent(driver, moreTabButton, 3);
+		Utility_Functions.xClick(driver, moreTabButton, true);
+		Utility_Functions.xWaitForElementPresent(driver, otherRelatedButton, 3);
+		Utility_Functions.xClick(driver, otherRelatedButton, true);
+		/*Utility_Functions.xWaitForElementPresent(driver, related_Accounts, 3);
+		Utility_Functions.xClickVisibleListElement(driver, related_Accounts);*/
 		report.updateTestLog("Verify SPOC from Account", "The related page is Displayed ", Status.PASS);
 		Utility_Functions.xScrollWindow(driver);
 		Utility_Functions.timeWait(1);

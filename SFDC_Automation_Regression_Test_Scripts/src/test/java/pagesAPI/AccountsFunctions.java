@@ -456,6 +456,7 @@ public class AccountsFunctions extends ReusableLibrary {
 		OBEMEAField.add("EMEA_Reporting_Account__c");
 		OBEMEAField.add("EMEA_Key_Account__c");
 		OBEMEAField.add("EMEA_Client_Knowledge_Centre__c");
+		OBEMEAField.add("EMEA_Searchable__c");
 		OBEMEAField.add("BillingAddress");
 		OBEMEAField.add("ShippingAddress");
 		OBEMEAField.add("datahugapps__HugRank__c");
@@ -516,6 +517,7 @@ public class AccountsFunctions extends ReusableLibrary {
 		ABEMEAField.add("EMEA_Reporting_Account__c");
 		ABEMEAField.add("EMEA_Key_Account__c");
 		ABEMEAField.add("EMEA_Client_Knowledge_Centre__c");
+		ABEMEAField.add("EMEA_Searchable__c");
 		ABEMEAField.add("BillingAddress");
 		ABEMEAField.add("ShippingAddress");
 		ABEMEAField.add("datahugapps__HugRank__c");
@@ -1141,7 +1143,7 @@ public class AccountsFunctions extends ReusableLibrary {
 		ABAMERField.clear();
 		AdminField.clear();
 		CMAMERField.clear();
-		if (countLabelList == 21) {
+		if (countLabelList == 22) {
 			report.updateTestLog("Count of fields present in Occupier Brokerage/ Agency Brokerage EMEA", "All the fields are present in Occupier Brokerage/ Agency Brokerage EMEA", Status.PASS);
 		} else if (countLabelList == 26) {
 			report.updateTestLog("Count of fields present in Capital Markets APAC", "All the fields are presentin Capital Markets", Status.PASS);

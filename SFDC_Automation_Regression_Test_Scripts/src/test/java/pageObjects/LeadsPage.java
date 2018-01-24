@@ -20,6 +20,7 @@ import com.sforce.soap.partner.SaveResult;
 
 import pagesAPI.AccountsFunctions;
 import pagesAPI.EstablishConnection;
+import pagesAPI.LeadsFunctions;
 import pagesAPI.SearchTextSOQL;
 import supportLibraries.Utility_Functions;
 import pagesAPI.TaskEventsFunctions;
@@ -118,6 +119,9 @@ public class LeadsPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//input[@class='btn slds-button slds-button--neutral slds-m-left--small'][@value='Save']")
 	WebElement saveButton;
+	
+	@FindBy(xpath = "//p[text()='Lead']/parent::div/h1/span")
+	WebElement leadNameTitle;
 
 	@FindBy(xpath = "//h1[@class='slds-page-header__title slds-m-right--small slds-truncate slds-align-middle']")
 	WebElement headerLead;
@@ -903,8 +907,11 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, continueButton, 3);
 		Utility_Functions.xClick(driver, continueButton, true);
 		Utility_Functions.timeWait(2);
-		String value = Utility_Functions.xGenerateAlphaNumericString();
-		String companyName = value  + "_" + dataTable.getData("General_Data", "Company") ;		
+		//String value = Utility_Functions.xGenerateAlphaNumericString();
+		SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
+		String queryAccount = "Select Name from Account where BillingStreet != null";
+		String sCompanyName = searchTextSOQL.fetchRecordFieldValueAdminLogin("Name", queryAccount);
+		//String companyName = value  + "_" + dataTable.getData("General_Data", "Company") ;		
 		Utility_Functions.xSwitchtoFrame(driver, firstName);
 		Utility_Functions.xWaitForElementPresent(driver, firstName, 5);
 		String sFirstName = Utility_Functions.xRandomFunction() + "_" + dataTable.getData("General_Data", "First Name");
@@ -913,7 +920,7 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, lastName, 3);
 		Utility_Functions.xSendKeys(driver, lastName, sLastName);
 		Utility_Functions.xWaitForElementPresent(driver, company, 3);
-		Utility_Functions.xSendKeys(driver, company, companyName);
+		Utility_Functions.xSendKeys(driver, company, sCompanyName);
 		if(dataTable.getData("General_Data", "TC_ID").contains("LeadsConvertPageWithEmail")) {
 			Utility_Functions.xWaitForElementPresent(driver, selectPreferedPropertyType, 2);
 			Utility_Functions.xClick(driver, selectPreferedPropertyType, true);
@@ -2968,7 +2975,7 @@ public class LeadsPage extends ReusableLibrary {
 				i++;
 			}
 			System.out.println(count);
-			if (count!= 16) {
+			if (count >= 11) {
 				report.updateTestLog("Verify Leads Landing Page",
 						"All fields are not present in the Lead Information Section", Status.FAIL);
 			} else {
@@ -3387,7 +3394,14 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, saveButton, true);
 		report.updateTestLog("Verify Convert Lead with Existing Account","The New Lead page is entered with direct Line and Prefered Property type value", Status.PASS);
 		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, convert, 2);
+		Utility_Functions.xWaitForElementPresent(driver, leadNameTitle, 3);
+		String leadName = leadNameTitle.getText();
+		SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
+		String queryLead = "Select Id from Lead where Name = " +"'" + leadName + "'";
+		String sLeadID = searchTextSOQL.fetchRecordFieldValue("Id", queryLead);
+		LeadsFunctions leadsFunctions = new LeadsFunctions(scriptHelper);
+		leadsFunctions.leadConversion(sLeadID);
+		/*Utility_Functions.xWaitForElementPresent(driver, convert, 2);
 		Utility_Functions.xClick(driver,convert, true);
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xSwitchtoFrame(driver, convertButton);
@@ -3464,7 +3478,7 @@ public class LeadsPage extends ReusableLibrary {
 			report.updateTestLog("Verify Convert Lead with Existing Account", "Contacts Details page is displayed", Status.PASS);
 		} else {
 			report.updateTestLog("Verify Convert Lead with Existing Account", "Contacts Details page is not displayed", Status.FAIL);
-		}
+		}*/
 
 	}
 	/**

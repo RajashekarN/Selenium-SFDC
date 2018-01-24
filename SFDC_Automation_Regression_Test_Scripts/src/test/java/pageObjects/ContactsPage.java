@@ -1474,7 +1474,7 @@ public class ContactsPage extends ReusableLibrary {
 		String query = "SELECT Id FROM Account where Number_of_Contacts__c > 1.0 limit 1 offset 9";
 		// String query = "SELECT Id, Total_Number_Of_Contact_Parent_Formula__c,
 		// createddate from Account order by createddate desc";
-		String sAccountID = searchAccountName.fetchRecordFieldValue("Id", query);
+		String sAccountID = searchAccountName.fetchRecordFieldValueAdminLogin("Id", query);
 		report.updateTestLog("Verify Contact hyperlink", "Account ID retrived from database is:::" + sAccountID,
 				Status.PASS);
 		String url = driver.getCurrentUrl().split("#")[0];
@@ -1519,7 +1519,7 @@ public class ContactsPage extends ReusableLibrary {
 							"Contacts hyperlinks are present in Related section for Account", Status.PASS);
 				} else {
 					report.updateTestLog("Verify Contact hyperlink",
-							"Contacts hyperlinks are not present in Related section for Account", Status.WARNING);
+							"Contacts hyperlinks are not present in Related section for Account", Status.FAIL);
 				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

@@ -237,7 +237,10 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = ".//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[contains(text(),'Estimated Gross Fee/Commission')]/parent::label/parent::div/input")
 	WebElement estimatedGrossFeeField;
-
+	
+	@FindBy(xpath = "//span[text()='Management Annual Revenue']/parent::label/parent::div//input")
+	WebElement managementAnnualRevenue;
+	
 	@FindBy(xpath = "//tr[contains(@class,'parent')][1]//input[contains(@id,'acctSearchBox')]")
 	WebElement user1;
 
@@ -5121,7 +5124,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	public String retriveAccountOpp() {
 		String query = "SELECT Id, Total_Number_Of_Opps__c FROM Account where Total_Number_Of_Opps__c > 1 limit 1 offset 9";
-		String sAccountID = searchOpportunity.fetchRecordFieldValue("Id", query);
+		String sAccountID = searchOpportunity.fetchRecordFieldValueAdminLogin("Id", query);
 		report.updateTestLog("Verify Active Opportunities", "Account ID retrived from database is:::" + sAccountID,
 				Status.PASS);
 		String url = driver.getCurrentUrl().split("#")[0];
@@ -8735,8 +8738,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 		} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER"))
 				|| (dataTable.getData("General_Data", "TC_ID").contains("CMEMEA"))
 				|| (dataTable.getData("General_Data", "TC_ID").contains("GWSAMERManager"))
-				|| (dataTable.getData("General_Data", "TC_ID").contains("VASAMERManager"))
-				|| (dataTable.getData("General_Data", "TC_ID").contains("ASAMERManager"))
+				|| (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_ASAMERManager"))
+				|| (!dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_VASAMERManager"))
 				|| (dataTable.getData("General_Data", "TC_ID").contains("GWSAMERBroker"))) {
 			Utility_Functions.timeWait(2);
 			Utility_Functions.xScrollWindowToElement(driver, estimatedGrossFeeField);
@@ -8759,11 +8762,25 @@ public class OpportunitiesPage extends ReusableLibrary {
 				Utility_Functions.xClick(driver, clone, true);
 				report.updateTestLog("Verify Opportunity Edit/Clone", "Clone button is present on Opportunity",
 						Status.PASS);
-				Utility_Functions.xWaitForElementPresent(driver, save, 3);
+				Utility_Functions.xWaitForElementPresent(driver, offersNextButton, 3);
+				Utility_Functions.xClick(driver, offersNextButton, true);
+				Utility_Functions.xWaitForElementPresent(driver, offersNextButton, 3);
 				Utility_Functions.xClick(driver, save, true);
 				report.updateTestLog("Verify Opportunity Edit/Clone", "Opportunity is cloned successfully",
 						Status.PASS);
 			}
+		} else if (dataTable.getData("General_Data", "TC_ID").contains("VASAMERManager")) {
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xScrollWindowToElement(driver, managementAnnualRevenue);
+			Utility_Functions.xWaitForElementPresent(driver, managementAnnualRevenue, 3);
+			Utility_Functions.xClick(driver, managementAnnualRevenue, true);
+			Utility_Functions.xSendKeys(driver, managementAnnualRevenue, "2,00,000.00");
+			Utility_Functions.xWaitForElementPresent(driver, save, 3);
+			Utility_Functions.xClick(driver, save, true);
+			Utility_Functions.timeWait(1);
+			Utility_Functions.xWaitForElementPresent(driver, related, 3);
+			report.updateTestLog("Verify Opportunity Edit/Clone", "Opportunity edited and saved successfully",
+					Status.PASS);
 		}
 	}
 

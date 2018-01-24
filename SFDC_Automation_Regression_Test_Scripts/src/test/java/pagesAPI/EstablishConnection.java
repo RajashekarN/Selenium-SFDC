@@ -211,6 +211,57 @@ public class EstablishConnection extends ReusableLibrary {
 			e.printStackTrace();
 		}
 	}
+	
+	public void establishConnectionAdminLogin() {
+		try {
+			String environment = initializeEnvironment();
+			System.out.println(environment);
+			String Username = null, Password;
+			if ((environment.equals("UAT")) || (environment.equals("UAT2")) || (environment.equals("FTE")) || (environment.equals("FTE2"))) {
+				Username = properties.getProperty(environment+"SystemAdminUsername");
+			}				
+			if (environment.equals("UAT")) { 			
+				Password = properties.getProperty("UATAdminPassword");
+				String UAT_AuthEndpoint = properties.getProperty("UATAuthEndpoint");
+				config = new ConnectorConfig();
+				config.setUsername(Username);
+				config.setPassword(Password);
+				System.out.println("AuthEndPoint: " + UAT_AuthEndpoint);
+				config.setAuthEndpoint(UAT_AuthEndpoint);
+				connection = new PartnerConnection(config);
+				System.out.println(connection);
+			} else if (environment.equals("UAT2")) {				
+				Password = properties.getProperty("UAT2AdminPassword");
+				String UAT2_AuthEndpoint = properties.getProperty("UAT2AuthEndpoint");
+				config = new ConnectorConfig();
+				config.setUsername(Username);
+				config.setPassword(Password);
+				System.out.println("AuthEndPoint: " + UAT2_AuthEndpoint);
+				config.setAuthEndpoint(UAT2_AuthEndpoint);
+				connection = new PartnerConnection(config);
+			} else if (environment.equals("FTE")) {				
+				Password = properties.getProperty("FTEAdminPassword");
+				String FTE_AuthEndpoint = properties.getProperty("FTEAuthEndpoint");
+				config = new ConnectorConfig();
+				config.setUsername(Username);
+				config.setPassword(Password);
+				System.out.println("AuthEndPoint: " + FTE_AuthEndpoint);
+				config.setAuthEndpoint(FTE_AuthEndpoint);
+				connection = new PartnerConnection(config);
+			} else if (environment.equals("FTE2")) {				
+				Password = properties.getProperty("FTE2AdminPassword");
+				String FTE2_AuthEndpoint = properties.getProperty("FTE2AuthEndpoint");
+				config = new ConnectorConfig();
+				config.setUsername(Username);
+				config.setPassword(Password);
+				System.out.println("AuthEndPoint: " + FTE2_AuthEndpoint);
+				config.setAuthEndpoint(FTE2_AuthEndpoint);
+				connection = new PartnerConnection(config);
+			}
+		} catch (ConnectionException e) {
+			e.printStackTrace();
+		}
+	}
 
 
 	/**

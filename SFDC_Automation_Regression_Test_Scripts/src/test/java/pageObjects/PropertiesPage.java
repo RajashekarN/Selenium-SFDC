@@ -1,8 +1,6 @@
 package pageObjects;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -2061,7 +2059,9 @@ public class PropertiesPage extends ReusableLibrary {
 	public void propertiesActivityLightningTimeline() {
 
 		selectProperty();
-		Utility_Functions.xClick(driver, related, true);
+		ActivityPage activityPage = new ActivityPage(scriptHelper);
+		activityPage.validateActivityTimeLine();
+		/*Utility_Functions.xClick(driver, related, true);
 		Utility_Functions.timeWait(4);
 		Utility_Functions.xScrollWindow(driver);
 		Utility_Functions.timeWait(1);
@@ -2146,7 +2146,7 @@ public class PropertiesPage extends ReusableLibrary {
 			System.out.println("Description is present acitivity related list");
 			report.updateTestLog("Verify Properties Activity Timeline","Description is present in acitivity related list:::", Status.PASS);
 
-		}
+		}*/
 	}
 	/**
 	 * Validating the Properties Private Tag functionality

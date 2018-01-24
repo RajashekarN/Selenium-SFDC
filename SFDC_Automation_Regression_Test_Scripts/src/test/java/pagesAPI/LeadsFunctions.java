@@ -441,6 +441,35 @@ public class LeadsFunctions extends ReusableLibrary {
 			report.updateTestLog("Verify Create Lead", "Lead Conversion failed", Status.FAIL);
 		}
 	}
+	
+	public void leadConversion(String LeadId) {
+		String sLeadID = null;
+		SObject leadConvert = new SObject();
+		leadConvert.setType("Lead");
+		sLeadID = LeadId;
+		LeadConvert leadToConvert = new LeadConvert();
+		leadToConvert.setConvertedStatus("Qualified");
+		leadToConvert.setLeadId(sLeadID);
+		LeadConvert[] leadConverts = new LeadConvert[1];
+		leadConverts[0] = leadToConvert;
+		try {
+			leadConvertResults = EstablishConnection.connection.convertLead(leadConverts);
+		} catch (ConnectionException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Result:::" + leadConvertResults);
+		String sResultID = establishConnection.leadConvertResults(leadConvertResults);
+		System.out.println(sResultID);
+		String sAccountID = sResultID.split("_")[0];
+		String sContactID = sResultID.split("_")[1];
+		String sOpportunityID = sResultID.split("_")[2];
+		if ((sAccountID.startsWith("001")) && (sContactID.startsWith("003")) && (sOpportunityID.startsWith("006"))
+				&& (sResultID.split("_")[3].equals(sLeadID))) {
+			report.updateTestLog("Verify Create Lead", "Lead Converion is successfull", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Create Lead", "Lead Conversion failed", Status.FAIL);
+		}
+	}
 
 	/**
 	 * Function for validating the fields in Leads page layout
