@@ -2620,77 +2620,81 @@ public class OpportunitiesPage extends ReusableLibrary {
 	}
 
 	public void opportunityNameAutoGenerateFuntion() {
-		String sAccountName = searchOpportunity.fetchRecord("Account", "Name");
-		Utility_Functions.xSendKeys(driver, accountName, sAccountName);
-		Utility_Functions.timeWait(2);
-		accountName.sendKeys(Keys.ARROW_DOWN);
-		Utility_Functions.timeWait(2);
-		accountName.sendKeys(Keys.ENTER);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xSelectDropdownByIndex(assignmentTypeOpp, 1);
-
-		System.out.println(Calendar.getInstance());
-		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-		Date date = new Date();
-		Utility_Functions.xSelectDropdownByIndex(leadSource, 1);
-		Utility_Functions.xSendKeys(driver, closeDateOpp, dateFormat.format(date).toString());
-		Utility_Functions.xSendKeys(driver, closeDateOpp, Keys.TAB);
-		Random random = new Random();
-		int value = random.nextInt(999);
-		Utility_Functions.xSendKeys(driver, totalSizeOpp, Integer.toString(value));
-		Utility_Functions.xSelectDropdownByName(unitofMeasure, "Acres");
-		Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFee, 3);
-		Utility_Functions.xClick(driver, estimatedGrossFee, true);
-		Utility_Functions.xSendKeys(driver, estimatedGrossFee, "10000");
-		/*
-		 * Utility_Functions.xClick(driver, estimatedGrossFee, true);
-		 * Utility_Functions.timeWait(4); Utility_Functions.xSendKeys(driver,
-		 * estimatedGrossFee, "10,000.00"); Utility_Functions.timeWait(3);
-		 * Utility_Functions.xWaitForElementPresent(driver,
-		 * estimatedGrossFeeField, 3); Utility_Functions.xSendKeys(driver,
-		 * estimatedGrossFeeField, dataTable.getData("General_Data",
-		 * "InstallmentAmount"));
-		 */
-		try {
-			Utility_Functions.xSelectDropdownByIndex(preferredPropertyTypeOpp, 1);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		Utility_Functions.xClick(driver, saveNewOpportunity, true);
-		Utility_Functions.timeWait(4);
-		driver.navigate().refresh();
-		Utility_Functions.timeWait(2);
-		try {
-			Utility_Functions.xWaitForElementPresent(driver, related, 4);
-			if (related.isDisplayed()) {
-				report.updateTestLog("Opportunity Created", "Opportunity created successfully:::", Status.PASS);
-			} else {
-				report.updateTestLog("Opportunity Created", "Opportunity creation failed:::", Status.FAIL);
-			}
-		} catch (Exception e) {
-			report.updateTestLog("Opportunity Related Tab", "System was unable to find the Related tab:::", Status.WARNING);
-		}
-		Utility_Functions.timeWait(2);
-		/*
-		 * String sTotalSize = Integer.toString(value); String formatTotalSize =
-		 * sTotalSize.substring(0,1) + "," + sTotalSize.substring(1,3);
-		 * System.out.println(formatTotalSize);
-		 */
-		String query = "Select Name from opportunity where Name like  " + "'" + sAccountName + "-" + '%' + "-" + value
-				+ "-" + "Acres" + "'";
-		Utility_Functions.timeWait(1);
-		String opportunityName = searchOpportunity.fetchRecordFieldValue("Name", query);
-		report.updateTestLog("Opportunity Created", "Opportunity Name:::" + opportunityName, Status.PASS);
-
-		if (opportunityName.contains(sAccountName) && opportunityName.contains(Integer.toString(value))
-				&& opportunityName.contains("Acres")) {
-			report.updateTestLog("Opportunity Created",
-					"Opportunity Name created as per the format expected -- Account Name - Assignment Type - Total Size - Unit of Measure:::",
-					Status.PASS);
+		String sAccountName = searchOpportunity.fetchRecord("Account", "Name");	
+		if(sAccountName==null) {
+			report.updateTestLog("Opportunity Created", "There are no Opportunity records present for this record type:::", Status.PASS);
 		} else {
-			report.updateTestLog("Opportunity Created", "Opportunity Name is not created as per the expected format:::",
-					Status.FAIL);
-		}
+			Utility_Functions.xSendKeys(driver, accountName, sAccountName);
+			Utility_Functions.timeWait(2);
+			accountName.sendKeys(Keys.ARROW_DOWN);
+			Utility_Functions.timeWait(2);
+			accountName.sendKeys(Keys.ENTER);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xSelectDropdownByIndex(assignmentTypeOpp, 1);
+
+			System.out.println(Calendar.getInstance());
+			DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+			Date date = new Date();
+			Utility_Functions.xSelectDropdownByIndex(leadSource, 1);
+			Utility_Functions.xSendKeys(driver, closeDateOpp, dateFormat.format(date).toString());
+			Utility_Functions.xSendKeys(driver, closeDateOpp, Keys.TAB);
+			Random random = new Random();
+			int value = random.nextInt(999);
+			Utility_Functions.xSendKeys(driver, totalSizeOpp, Integer.toString(value));
+			Utility_Functions.xSelectDropdownByName(unitofMeasure, "Acres");
+			Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFee, 3);
+			Utility_Functions.xClick(driver, estimatedGrossFee, true);
+			Utility_Functions.xSendKeys(driver, estimatedGrossFee, "10000");
+			/*
+			 * Utility_Functions.xClick(driver, estimatedGrossFee, true);
+			 * Utility_Functions.timeWait(4); Utility_Functions.xSendKeys(driver,
+			 * estimatedGrossFee, "10,000.00"); Utility_Functions.timeWait(3);
+			 * Utility_Functions.xWaitForElementPresent(driver,
+			 * estimatedGrossFeeField, 3); Utility_Functions.xSendKeys(driver,
+			 * estimatedGrossFeeField, dataTable.getData("General_Data",
+			 * "InstallmentAmount"));
+			 */
+			try {
+				Utility_Functions.xSelectDropdownByIndex(preferredPropertyTypeOpp, 1);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			Utility_Functions.xClick(driver, saveNewOpportunity, true);
+			Utility_Functions.timeWait(4);
+			driver.navigate().refresh();
+			Utility_Functions.timeWait(2);
+			try {
+				Utility_Functions.xWaitForElementPresent(driver, related, 4);
+				if (related.isDisplayed()) {
+					report.updateTestLog("Opportunity Created", "Opportunity created successfully:::", Status.PASS);
+				} else {
+					report.updateTestLog("Opportunity Created", "Opportunity creation failed:::", Status.FAIL);
+				}
+			} catch (Exception e) {
+				report.updateTestLog("Opportunity Related Tab", "System was unable to find the Related tab:::", Status.WARNING);
+			}
+			Utility_Functions.timeWait(2);
+			/*
+			 * String sTotalSize = Integer.toString(value); String formatTotalSize =
+			 * sTotalSize.substring(0,1) + "," + sTotalSize.substring(1,3);
+			 * System.out.println(formatTotalSize);
+			 */
+			String query = "Select Name from opportunity where Name like  " + "'" + sAccountName + "-" + '%' + "-" + value
+					+ "-" + "Acres" + "'";
+			Utility_Functions.timeWait(1);
+			String opportunityName = searchOpportunity.fetchRecordFieldValue("Name", query);
+			report.updateTestLog("Opportunity Created", "Opportunity Name:::" + opportunityName, Status.PASS);
+
+			if (opportunityName.contains(sAccountName) && opportunityName.contains(Integer.toString(value))
+					&& opportunityName.contains("Acres")) {
+				report.updateTestLog("Opportunity Created",
+						"Opportunity Name created as per the format expected -- Account Name - Assignment Type - Total Size - Unit of Measure:::",
+						Status.PASS);
+			} else {
+				report.updateTestLog("Opportunity Created", "Opportunity Name is not created as per the expected format:::",
+						Status.FAIL);
+			}
+		}		
 	}
 	
 	public void opportunityCreation() {
@@ -8691,14 +8695,28 @@ public class OpportunitiesPage extends ReusableLibrary {
 	public void cloneAndEditButtonsOpportunity() {
 		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
 		opportunityEligibility();
+		SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
+		String query = "SELECT Id FROM Opportunity where CBRE_Preferred_Property_Type_c__c	!= null limit 1 offset 9";
+		String OpportunityID = searchTextSOQL.fetchRecordFieldValue("Id", query);
+		report.updateTestLog("Verify Opportunity Required Fields", "Opportunity retrived from database is:::" + OpportunityID, Status.PASS);
+		String url = driver.getCurrentUrl().split("#")[0];
+		String newUrl = url + "#/sObject/" + OpportunityID;
+		newUrl = newUrl + "/view";
+		driver.get(newUrl);
+		driver.navigate().refresh();
+		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, edit, 3);
 		Utility_Functions.xClick(driver, edit, true);
 		report.updateTestLog("Verify Opportunity Edit/Clone", "Edit button is present on Opportunity", Status.PASS);
 		if (dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) {
 			Utility_Functions.timeWait(2);
-			Utility_Functions.xSwitchtoFrame(driver, closeDateOpp);
-			Utility_Functions.timeWait(2);
-			Utility_Functions.xWaitForElementPresent(driver, closeDateOpp, 3);
+			try {
+				Utility_Functions.xSwitchtoFrame(driver, closeDateOpp);
+				Utility_Functions.timeWait(2);
+				Utility_Functions.xWaitForElementPresent(driver, closeDateOpp, 3);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
 			try {
 				if (assignmentTypeOppValueClone.getText().equals("Building Agency Lease")) {
 					Utility_Functions.xSelectDropdownByIndex(assignmentTypeOpp, 2);
@@ -8706,7 +8724,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 					Utility_Functions.xSelectDropdownByIndex(assignmentTypeOpp, 3);
 				} else if (assignmentTypeOppValueClone.getText().equals("Consulting")) {
 					Utility_Functions.xSelectDropdownByIndex(assignmentTypeOpp, 2);
-				}
+				} else if (preferredPropertyTypeOpp.getText().equals("--None--")){
+					Utility_Functions.xSelectDropdownByIndex(preferredPropertyTypeOpp, 1);
+				} 			
 			} catch (Exception e) {
 				Utility_Functions.xSelectDropdownByIndex(assignmentTypeOpp, 1);
 			}

@@ -179,6 +179,7 @@ public abstract class CRAFTTestCase {
 	 * Function to do the required framework teardown activities after executing
 	 * the overall test suite
 	 */
+
 	@AfterSuite(alwaysRun = true)
 	public void tearDownTestSuite() {
 /*		if((!failedTestCase.isEmpty()) && (countReRunFailedTestCase<2)) {
@@ -187,12 +188,20 @@ public abstract class CRAFTTestCase {
 		}*/
 		resultSummaryManager.wrapUp(true);
 		// resultSummaryManager.copyReportsFolder();
-		properties = Settings.getInstance();
-		if(getCounter()<Integer.parseInt(properties.getProperty("ReRunTimes"))){
-			updateReRun();
-			updateCounter();
-			
-			XmlGenerator.reRunFailedTestCases();
+		try {
+			if(getCounter()<Integer.parseInt(System.getProperty("ReRunTimes"))) {
+				System.out.println("ReRunCount is set as per the value passed from Jenkin:::");
+				updateReRun();
+				updateCounter();
+				XmlGenerator.reRunFailedTestCases();
+			}
+		} catch(Exception e) {
+			properties = Settings.getInstance();
+			if(getCounter()<Integer.parseInt(properties.getProperty("ReRunTimes"))){
+				updateReRun();
+				updateCounter();
+				XmlGenerator.reRunFailedTestCases();
+			}		
 		}
 	}
 
