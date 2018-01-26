@@ -122,15 +122,6 @@ public abstract class CRAFTTestCase {
 		}
 	}
 
-	/*
-	 * @AfterMethod public void fetchMostRecentTestResult(ITestResult result) {
-	 * int status = result.getStatus(); switch (status) { case
-	 * ITestResult.SUCCESS: testStatus_Success++; break; case
-	 * ITestResult.FAILURE: testStatus_Fail++; break; case ITestResult.SKIP:
-	 * testStatus_Skip++; break; default: throw new
-	 * RuntimeException("Invalid Status"); } }
-	 */
-
 	/**
 	 * Function to do the required framework teardown activities after executing
 	 * each test case
@@ -152,27 +143,11 @@ public abstract class CRAFTTestCase {
 
 		resultSummaryManager.updateResultSummary(testParameters, testReportName, executionTime, testStatus);	
 
-		/*String value = properties.getProperty("ReRunFailedTestCase");
-		countReRunFailedTestCase = Integer.parseInt(value);
-		if(testStatus.equals("Passed")) {
-				resultSummaryManager.updateResultSummary(testParameters, testReportName, executionTime, testStatus);
-		} else if(testStatus.equals("Failed")) {
-			if(countReRunFailedTestCase==2) {
-				resultSummaryManager.updateResultSummary(testParameters, testReportName, executionTime, testStatus);	
-			}			
-		}*/
 		if ("Failed".equalsIgnoreCase(testStatus)) {
 			currentPacakage = testParameters.getCurrentScenario();
 			failedTestCase.add("testscripts." + testParameters.getCurrentScenario() + "." + testParameters.getCurrentTestcase());
 			Assert.fail(driverScript.getFailureDescription());
 		}
-		
-/*		String value = System.getProperty("ReRunFailedTestCase");
-		countReRunFailedTestCase = Integer.parseInt(value);
-		if(countReRunFailedTestCase==1) {
-			XmlGenerator.reRunFailedTestCases();
-			countReRunFailedTestCase++;
-		}*/
 	}
 
 	/**
@@ -182,12 +157,7 @@ public abstract class CRAFTTestCase {
 
 	@AfterSuite(alwaysRun = true)
 	public void tearDownTestSuite() {
-/*		if((!failedTestCase.isEmpty()) && (countReRunFailedTestCase<2)) {
-			XmlGenerator.reRunFailedTestCases();
-			countReRunFailedTestCase++;
-		}*/
 		resultSummaryManager.wrapUp(true);
-		// resultSummaryManager.copyReportsFolder();
 		try {
 			if(getCounter()<Integer.parseInt(System.getProperty("ReRunTimes"))) {
 				System.out.println("ReRunCount is set as per the value passed from Jenkin:::");

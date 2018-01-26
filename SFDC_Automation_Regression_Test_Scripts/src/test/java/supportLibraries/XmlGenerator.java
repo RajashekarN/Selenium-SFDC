@@ -63,6 +63,7 @@ public class XmlGenerator {
 		List<XmlSuite> suites = new ArrayList<XmlSuite>();
 		suites.add(xmlSuite);
 		testng.setXmlSuites(suites);
+		CRAFTTestCase.failedTestCase.clear();
 		testng.run(); 
 	}	
 }
