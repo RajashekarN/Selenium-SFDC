@@ -40,6 +40,9 @@ public class AccountsPage extends ReusableLibrary {
 	@FindBy(xpath = "//div[@class='bBottom']//span[text()='Accounts']")
 	WebElement menu_Accounts;
 	
+	@FindBy(xpath = "//div[@class='bBottom']//span[text()='Private Tags']")
+	WebElement menu_PrivateTagsObject;
+	
 	@FindBy(xpath = "//p[contains(text(),'Private Tag Sharing')]")
 	WebElement tagSharing;
 	
@@ -2505,21 +2508,21 @@ public class AccountsPage extends ReusableLibrary {
 	 */
 	public void verifyAccountsLeadsAndPrivateTags() {
 		try {
-			Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
-			Utility_Functions.xClick(driver, menu_More, true);
-			Utility_Functions.timeWait(1);
+				Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
+				Utility_Functions.xClick(driver, menu_More, true);
+				Utility_Functions.timeWait(1);
 		} catch (Exception e) {
-			Utility_Functions.xWaitForElementPresent(driver, more, 3);
-			Utility_Functions.xClick(driver, more, true);
-			Utility_Functions.timeWait(1);
+				Utility_Functions.xWaitForElementPresent(driver, more, 3);
+				Utility_Functions.xClick(driver, more, true);
+				Utility_Functions.timeWait(1);
 		}
 		try {
-			Utility_Functions.xWaitForElementPresent(driver, more_privateTags, 3);
-			Utility_Functions.xClick(driver, more_privateTags, true);
+				Utility_Functions.xWaitForElementPresent(driver, more_privateTags, 3);
+				Utility_Functions.xClick(driver, more_privateTags, true);
 		} catch (Exception e) {
-			Utility_Functions.xWaitForElementPresent(driver, more_PrivateTags, 2);
-			Utility_Functions.xClick(driver, more_PrivateTags, true);
-		}
+				Utility_Functions.xWaitForElementPresent(driver, more_PrivateTags, 2);
+				Utility_Functions.xClick(driver, more_PrivateTags, true);
+		}			
 		Utility_Functions.xWaitForElementPresent(driver, newAccounts, 3);
 		Utility_Functions.xClick(driver, newAccounts, true);
 		report.updateTestLog("Verify Accounts Leads And PrivateTags ", "Verifying New Private Tags is Displayed ",
@@ -2533,7 +2536,7 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, saveNewPrivateTag, true);
 		report.updateTestLog("Verify Accounts Leads And PrivateTags ", "Verifying the Private Tag is saved ",
 				Status.PASS);
-		Utility_Functions.timeWait(2);
+		/*Utility_Functions.timeWait(2);
 		driver.navigate().refresh();
 		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
 		Utility_Functions.xClick(driver, menu_Accounts, true);
@@ -2635,7 +2638,7 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, saveButtonLeads, 3);
 		Utility_Functions.xClick(driver, saveButtonLeads, true);
 		report.updateTestLog("Verify Accounts Leads And PrivateTags ",
-				"Verifying the created Lead is saved successfully ", Status.PASS);
+				"Verifying the created Lead is saved successfully ", Status.PASS);*/
 	}
 
 	/**
@@ -4245,12 +4248,15 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xclickOnFirstElementfromList(accountNamesList);
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify SPOC from Account ", "The Account is Displayed ", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, moreTabButton, 3);
-		Utility_Functions.xClick(driver, moreTabButton, true);
-		Utility_Functions.xWaitForElementPresent(driver, otherRelatedButton, 3);
-		Utility_Functions.xClick(driver, otherRelatedButton, true);
-		/*Utility_Functions.xWaitForElementPresent(driver, related_Accounts, 3);
-		Utility_Functions.xClickVisibleListElement(driver, related_Accounts);*/
+		try {
+			Utility_Functions.xWaitForElementPresent(driver, moreTabButton, 3);
+			Utility_Functions.xClick(driver, moreTabButton, true);
+			Utility_Functions.xWaitForElementPresent(driver, otherRelatedButton, 3);
+			Utility_Functions.xClick(driver, otherRelatedButton, true);
+		} catch (Exception e1) {
+			Utility_Functions.xWaitForElementPresent(driver, related_Accounts, 3);
+			Utility_Functions.xClickVisibleListElement(driver, related_Accounts);
+		}
 		report.updateTestLog("Verify SPOC from Account", "The related page is Displayed ", Status.PASS);
 		Utility_Functions.xScrollWindow(driver);
 		Utility_Functions.timeWait(1);

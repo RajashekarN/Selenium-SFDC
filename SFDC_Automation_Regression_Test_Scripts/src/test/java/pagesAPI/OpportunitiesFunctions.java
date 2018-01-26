@@ -465,11 +465,13 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 				opportunity.setField("CloseDate", Calendar.getInstance());
 				opportunity.setField("StageName", "Qualification");
 
-				if ((dataTable.getData("General_Data", "TC_ID").contains("CM")) && (dataTable.getData("General_Data", "TC_ID").contains("DSF"))) {
+				if ((dataTable.getData("General_Data", "TC_ID").contains("CM")) && (dataTable.getData("General_Data", "TC_ID").contains("DSF")) && 
+						(!dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_CMEMEA"))) {
 					opportunity.setField("RecordTypeId", "012i0000000405lAAA");
 					// opportunity.setField("Estimated_Gross_Fee_Commission__c", 10000);
 					report.updateTestLog("Opportunity Name", "Record type is set as Capital Markets - Debt & Structured Finance:::", Status.PASS);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CM")) && (dataTable.getData("General_Data", "TC_ID").contains("PS"))) {
+				} else if ((dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_CM")) && (dataTable.getData("General_Data", "TC_ID").contains("PS"))
+						|| (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_CMEMEA"))) {
 					if(dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_CMEMEA")) {
 						opportunity.setField("RecordTypeId", "012i0000000tvThAAI");
 						report.updateTestLog("Opportunity Name", "Record type is set as Capital Markets Capital Advisors", Status.PASS);
@@ -477,10 +479,10 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 						opportunity.setField("RecordTypeId", "012i0000000405kAAA");
 						report.updateTestLog("Opportunity Name", "Record type is set as Property Sales", Status.PASS);
 					}					
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAMER"))
-						|| (dataTable.getData("General_Data", "TC_ID").contains("GWSAPAC"))
-						|| (dataTable.getData("General_Data", "TC_ID").contains("GWSEMEA"))) {
-					if(dataTable.getData("General_Data", "TC_ID").contains("GWSEMEA")) {
+				} else if ((dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_GWSAMER"))
+						|| (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_GWSAPAC"))
+						|| (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_GWSEMEA"))) {
+					if(dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_GWSEMEA")) {
 						opportunity.setField("RecordTypeId", "012i0000000405n");
 					} else {
 						opportunity.setField("RecordTypeId", "012i0000000405mAAA");
@@ -488,13 +490,13 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 						report.updateTestLog("Opportunity Name", "Record type is set as Global Workplace Solutions",
 								Status.PASS);
 					}				
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VASAMER"))
-						|| (dataTable.getData("General_Data", "TC_ID").contains("VASAPAC"))
-						|| (dataTable.getData("General_Data", "TC_ID").contains("VASEMEA"))) {
+				} else if ((dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_VASAMER"))
+						|| (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_VASAPAC"))
+						|| (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_VASEMEA"))) {
 					
 					if(dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_VASEMEA")) {
 						opportunity.setField("RecordTypeId", "012i0000000tvTkAAI");
-					} else if (dataTable.getData("General_Data", "TC_ID").contains("TC_SF_VASAPAC")) {
+					} else if (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_VASAPAC")) {
 						opportunity.setField("RecordTypeId", "012i0000001QOXkAAO");
 					} else {
 						opportunity.setField("RecordTypeId", "0121Y000001EVzFQAW");
@@ -506,23 +508,23 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 						opportunity.setField("Appraisal__c", "Yes");
 					} 
 					report.updateTestLog("Opportunity Name", "Record type is set as Valuation & Advisory Services", 	Status.PASS);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAMER"))
-						|| (dataTable.getData("General_Data", "TC_ID").contains("ASAPAC"))
-						|| (dataTable.getData("General_Data", "TC_ID").contains("ASEMEA"))) {
+				} else if ((dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_ASAMER"))
+						|| (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_ASAPAC"))
+						|| (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_ASEMEA"))) {
 					opportunityNameAutoGenerate_API();
 					isStatus = false;
 					break;
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAMER"))
-						|| (dataTable.getData("General_Data", "TC_ID").contains("ABAPAC"))
-						|| (dataTable.getData("General_Data", "TC_ID").contains("ABEMEA"))) {
+				} else if ((dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_ABAMER"))
+						|| (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_ABAPAC"))
+						|| (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_ABEMEA"))) {
 					opportunity.setField("RecordTypeId", "012i0000001622CAAQ");
 					opportunity.setField("Service__c", "Consulting");
 					opportunity.setField("Total_Size__c", 999);
 					opportunity.setField("CBRE_Preferred_Property_Type_c__c", "Hotel");
 					report.updateTestLog("Opportunity Name", "Record type is set as Agency Brokerage", Status.PASS);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER"))
-						|| (dataTable.getData("General_Data", "TC_ID").contains("OBAPAC"))
-						|| (dataTable.getData("General_Data", "TC_ID").contains("OBEMEA"))) {
+				} else if ((dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_OBAMER"))
+						|| (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_OBAPAC"))
+						|| (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_OBEMEA"))) {
 					opportunity.setField("RecordTypeId", "012i0000000405nAAA");
 					opportunity.setField("Service__c", "Consulting");
 					opportunity.setField("Total_Size__c", 999);
@@ -588,7 +590,7 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 								Status.PASS);
 					} else {
 						report.updateTestLog("Opportunity Name",
-								"Opportunity is not as created as per the selection:::", Status.FAIL);
+								"Opportunity is not as created as per the selection:::", Status.WARNING);
 					}
 				}
 				isStatus = true;

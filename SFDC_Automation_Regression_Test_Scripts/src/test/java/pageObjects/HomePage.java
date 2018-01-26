@@ -62,7 +62,7 @@ public class HomePage extends ReusableLibrary {
 	@FindBy(xpath = "//ul/li[@class='slds-list__item slds-p-bottom--xxx-small']")
 	WebElement homePage_Links;
 
-	@FindBy(xpath = "//*[@id='header']/a/span")
+	@FindBy(xpath = "//a/span[@title='Welcome to Salesforce!']")
 	WebElement welcomeToSalesforce;
 
 	@FindBy(xpath = "//*[text()='Salesforce Training Videos/Tools']/parent::div/parent::div/div[1]/span/img[@alt='logo']")

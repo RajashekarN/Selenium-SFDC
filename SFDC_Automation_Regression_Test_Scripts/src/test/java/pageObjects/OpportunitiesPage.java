@@ -8695,15 +8695,15 @@ public class OpportunitiesPage extends ReusableLibrary {
 	public void cloneAndEditButtonsOpportunity() {
 		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
 		opportunityEligibility();
-		SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
-		String query = "SELECT Id FROM Opportunity where CBRE_Preferred_Property_Type_c__c	!= null limit 1 offset 9";
+		/*SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
+		String query = "SELECT Id FROM Opportunity limit 1 offset 9";
 		String OpportunityID = searchTextSOQL.fetchRecordFieldValue("Id", query);
 		report.updateTestLog("Verify Opportunity Required Fields", "Opportunity retrived from database is:::" + OpportunityID, Status.PASS);
 		String url = driver.getCurrentUrl().split("#")[0];
 		String newUrl = url + "#/sObject/" + OpportunityID;
 		newUrl = newUrl + "/view";
 		driver.get(newUrl);
-		driver.navigate().refresh();
+		driver.navigate().refresh();*/
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, edit, 3);
 		Utility_Functions.xClick(driver, edit, true);

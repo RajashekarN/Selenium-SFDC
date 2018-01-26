@@ -412,7 +412,8 @@ public class LeadsFunctions extends ReusableLibrary {
 		String sLeadID = null;
 		SObject leadConvert = new SObject();
 		leadConvert.setType("Lead");
-		if(dataTable.getData("General_Data", "TC_ID").contains("ConvertLeadExisitingAccount")) {
+		if(dataTable.getData("General_Data", "TC_ID").contains("ConvertLeadExisitingAccount") || (
+				dataTable.getData("General_Data", "TC_ID").contains("ConvertWithExisitingAccount"))) {
 			String leadSearch = "SELECT Id, ConvertedAccountId FROM Lead where ConvertedAccountId = null ORDER BY CreatedDate DESC LIMIT 1";
 			sLeadID = searchTextSOQL.fetchRecordFieldValue("Id", leadSearch);
 		} else {

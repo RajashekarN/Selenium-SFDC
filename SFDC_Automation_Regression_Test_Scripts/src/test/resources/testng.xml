@@ -177,7 +177,6 @@
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERManagerPropertiesVerifyCustomEventPage"/>
 			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERManagerDefaultSalesPhaseField"/>
 			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERCSSDefaultSalesPhaseField"/>
-			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_VASAMERManagerOpportunityCloneEdit"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_CMAMERBrokerContactsNewActivityLayoutPage"/>
 			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAMERCSSEditPaidInstallment"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerOpportunityRecordTypeFieldPage"/>
@@ -374,7 +373,6 @@
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_CMAMERBrokerAccountsVerifyDetailsPage"/>
 			<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAMERAdminLogin"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERCSSOpportunityRecordTypeFieldPage"/>
-			<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerLeadsVerifyLogACallPage"/>
 			<class name="testscripts.SF.Release37TestScripts.TC_SF_ASAPACBrokerCommissionField"/>
 			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_CMAMERBrokerDSFOpportunityNameAutoGenerate"/>
 			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAMERBrokerRecalculateRoundOffRule"/>
@@ -422,7 +420,6 @@
 			<class name="testscripts.SF.Release37TestScripts.TC_SF_OBAMERBrokerActiveOpportunities"/>
 			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAMERBrokerMultipleInstallmentsEvenPercent"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerAccountsVerifyDetailsPage"/>
-			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSEMEABrokerOpportunityNameAutoGenerate"/>
 			<class name="testscripts.SF.Release37TestScripts.TC_SF_ABEMEAManagerContactsHyperlink"/>
 			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAMERManagerNewOpportunityPageLayout"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_CMAMERCSSContactsPopulatingRequiredFieldsPage"/>

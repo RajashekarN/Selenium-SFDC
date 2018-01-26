@@ -2950,7 +2950,7 @@ public class LeadsPage extends ReusableLibrary {
 				report.updateTestLog("Verify Leads Landing Page",
 						"All sections are present in the Leads Details Page", Status.PASS);
 			}
-
+			leadsDeatilsPageHeadersList.clear();
 		} catch (Exception e) {
 			System.out.println("All sections are not present in the Leads Details Page:::" + e.getMessage());
 		}
@@ -2983,7 +2983,7 @@ public class LeadsPage extends ReusableLibrary {
 				report.updateTestLog("Verify Leads Landing Page",
 						"All fields are present in the Lead Information Section", Status.PASS);
 			}
-
+			leadsDetailsPageFieldsList.clear();
 		} catch (Exception e) {
 			System.out.println("All fields are not present in the Lead Information Section:::" + e.getMessage());
 		}
@@ -3015,7 +3015,7 @@ public class LeadsPage extends ReusableLibrary {
 				report.updateTestLog("Verify Leads Landing Page",
 						"All fields are present in the Address Information Section", Status.PASS);
 			}
-
+			addressInformationSectionFieldsList.clear();
 		} catch (Exception e) {
 			System.out.println("All fields are not present in the Address Information Section:::" + e.getMessage());
 		}
@@ -3047,7 +3047,7 @@ public class LeadsPage extends ReusableLibrary {
 				report.updateTestLog("Verify Leads Landing Page",
 						"All fields are present in the Communication Preferences Section", Status.PASS);
 			}
-
+			communicationPreferencesSectionFieldsList.clear();
 		} catch (Exception e) {
 			System.out.println("All fields are not present in the Communication Preferences Section:::" + e.getMessage());
 		}
@@ -3079,7 +3079,7 @@ public class LeadsPage extends ReusableLibrary {
 				report.updateTestLog("Verify Leads Landing Page",
 						"All fields are not present in the Communication Preferences Section", Status.FAIL);
 			}
-
+			prospectRequirementsSectionFieldsList.clear();
 		} catch (Exception e) {
 			System.out.println("All fields are not present in the Communication Preferences Section:::"+ e.getMessage());
 		}
@@ -3111,6 +3111,7 @@ public class LeadsPage extends ReusableLibrary {
 				report.updateTestLog("Verify Leads Landing Page",
 						"All fields are present in the Additional Information section", Status.PASS);
 			}
+			
 		} catch (Exception e) {
 			System.out.println("All fields are not present in the Additional Information section:::" + e.getMessage());
 		}
@@ -3143,6 +3144,7 @@ public class LeadsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println("All fields are not present in the Contact Information section:::"+ e.getMessage());
 		}
+		contactInformationFieldsList.clear();
 		List<WebElement> customLinksList = driver.findElements(By.xpath("//h3//span[text()='Custom Links']/ancestor::h3/parent::div/div[1]//a"));
 		int count7 = 0, i7 = 0,j1=0;
 		String fieldsArray7[] = new String[customLinksList.size()];
@@ -3168,6 +3170,7 @@ public class LeadsPage extends ReusableLibrary {
 			} else {
 				report.updateTestLog("Verify Leads Landing Page","All fields are present in the Custom Links section", Status.PASS);
 			}
+			customLinksSectionFieldsList.clear();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -3374,7 +3377,7 @@ public class LeadsPage extends ReusableLibrary {
 	 *
 	 */
 	public void leadConvertWithExistingAccount() {
-		createLeadFunction();
+		/*createLeadFunction();
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, selectPreferedPropertyType, 2);
 		Utility_Functions.xClick(driver, selectPreferedPropertyType, true);
@@ -3398,9 +3401,10 @@ public class LeadsPage extends ReusableLibrary {
 		String leadName = leadNameTitle.getText();
 		SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
 		String queryLead = "Select Id from Lead where Name = " +"'" + leadName + "'";
-		String sLeadID = searchTextSOQL.fetchRecordFieldValue("Id", queryLead);
+		String sLeadID = searchTextSOQL.fetchRecordFieldValue("Id", queryLead);*/
 		LeadsFunctions leadsFunctions = new LeadsFunctions(scriptHelper);
-		leadsFunctions.leadConversion(sLeadID);
+		leadsFunctions.leadConversion();
+		//leadsFunctions.leadConversion(sLeadID);
 		/*Utility_Functions.xWaitForElementPresent(driver, convert, 2);
 		Utility_Functions.xClick(driver,convert, true);
 		Utility_Functions.timeWait(2);
@@ -3610,7 +3614,7 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver,newNoteSave, 2);
 		Utility_Functions.xClick(driver,newNoteSave, true);
 		report.updateTestLog("Verify Lead with Associated Contact","The New Lead page is entered with direct Line and Prefered Property type value", Status.PASS);
-		Utility_Functions.timeWait(2);
+		/*Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, convert, 2);
 		Utility_Functions.xClick(driver,convert, true);
 		Utility_Functions.timeWait(2);
@@ -3671,7 +3675,7 @@ public class LeadsPage extends ReusableLibrary {
 		} else {
 			System.out.println("Opportunity Account Name is not populated with the default value");
 			report.updateTestLog("Verify Lead with Associated Contact","Verifying the Account name is not populated with the default value in the Opportunity Information Page ",  Status.FAIL);
-		}
+		}*/
 
 	}
 	/**
