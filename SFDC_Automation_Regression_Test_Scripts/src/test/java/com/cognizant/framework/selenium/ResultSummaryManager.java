@@ -1,8 +1,10 @@
 package com.cognizant.framework.selenium;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.text.SimpleDateFormat;
@@ -24,6 +26,7 @@ import com.cognizant.framework.TimeStamp;
 import com.cognizant.framework.Util;
 
 import supportLibraries.HostName;
+import supportLibraries.MailResult;
 import supportLibraries.SendDataDevOps;
 
 import com.cognizant.framework.ReportThemeFactory.Theme;
@@ -248,6 +251,18 @@ public class ResultSummaryManager {
 		} else {
 			System.out.println("Results won't push to Dev Ops database as the IP Address didn't match:::" + ipAddress);
 		}
+		StringBuilder contentBuilder = new StringBuilder();
+        try {
+            BufferedReader in = new BufferedReader(new FileReader(reportPath + "\\HTML Results\\Summary.html"));
+            String str;
+            while ((str = in.readLine()) != null) {
+                contentBuilder.append(str);
+            }
+            in.close();
+        } catch(IOException e) {
+        	System.out.println(e.getMessage());
+        } 
+        MailResult.emailSend(contentBuilder.toString());
 	}
 
 	/**
