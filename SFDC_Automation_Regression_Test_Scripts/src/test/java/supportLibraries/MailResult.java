@@ -15,6 +15,19 @@ public class MailResult {
 	static Session session;
 	private static Properties properties;
 
+	public static String environment = System.getProperty("RunEnvironment");
+	public static String initializeEnvironment() {
+		try {
+			if (environment.equals(null)) {
+
+			}
+		} catch (Exception e) {
+			environment = properties.getProperty("RunEnvironment");
+			System.out.println(
+					"Environment is set as per the RunEnvironment value in Global Settings file:::" + environment);
+		}
+		return environment;
+	}
 	public static void emailSend(String msg) {
 		properties = Settings.getInstance();
 		String to = properties.getProperty("ToMail");
@@ -36,6 +49,9 @@ public class MailResult {
 		Date date = new Date();
 		System.out.println(dateFormat.format(date)); //2016/11/16 12:08:43
 		String sEnvironment = LoginPage.environment;
+		if(sEnvironment==null) {
+			sEnvironment = environment;
+		}
 		try {
 			MimeMessage message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(from));

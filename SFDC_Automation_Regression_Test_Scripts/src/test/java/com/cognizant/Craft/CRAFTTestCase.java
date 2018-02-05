@@ -4,6 +4,8 @@ import com.cognizant.framework.FrameworkParameters;
 import com.cognizant.framework.Settings;
 import com.cognizant.framework.selenium.*;
 
+import supportLibraries.CreateDefectTFS;
+import supportLibraries.DefectFiling;
 import supportLibraries.XmlGenerator;
 
 import java.util.ArrayList;
@@ -25,26 +27,6 @@ import org.testng.annotations.DataProvider;
  * @author Cognizant
  */
 public abstract class CRAFTTestCase {
-	/*
-	 * public static int testStatus_Success;
-	 * 
-	 * public static int getTestStatus_Success() { return testStatus_Success; }
-	 * 
-	 * public static void setTestStatus_Success(int testStatus_Success) {
-	 * CRAFTTestCase.testStatus_Success = testStatus_Success; }
-	 * 
-	 * public static int testStatus_Fail; public static int getTestStatus_Fail()
-	 * { return testStatus_Fail; }
-	 * 
-	 * public static void setTestStatus_Fail(int testStatus_Fail) {
-	 * CRAFTTestCase.testStatus_Fail = testStatus_Fail; }
-	 * 
-	 * public static int testStatus_Skip; public static int getTestStatus_Skip()
-	 * { return testStatus_Skip; }
-	 * 
-	 * public static void setTestStatus_Skip(int testStatus_Skip) {
-	 * CRAFTTestCase.testStatus_Skip = testStatus_Skip; }
-	 */
 
 	/**
 	 * The current scenario
@@ -59,6 +41,8 @@ public abstract class CRAFTTestCase {
 	public static int countReRunFailedTestCase = 1;
 	public static boolean rerun = false;
 	public static int rerunCounter=0;
+	public static boolean sResponseMessage;
+
 	public static int getCounter(){
 		return rerunCounter;
 	}
@@ -92,13 +76,6 @@ public abstract class CRAFTTestCase {
 		} else {
 			nThreads = testContext.getCurrentXmlTest().getThreadCount();
 		}
-
-		// Note: Separate threads may be spawned through usage of DataProvider
-		// testContext.getSuite().getXmlSuite().getDataProviderThreadCount();
-		// This will be at test case level (multiple instances on same test case
-		// in parallel)
-		// This level of threading will not be reflected in the summary report
-
 		resultSummaryManager.initializeSummaryReport(nThreads);
 		resultSummaryManager.setupErrorLog();
 	}
@@ -146,7 +123,31 @@ public abstract class CRAFTTestCase {
 		if ("Failed".equalsIgnoreCase(testStatus)) {
 			currentPacakage = testParameters.getCurrentScenario();
 			failedTestCase.add("testscripts." + testParameters.getCurrentScenario() + "." + testParameters.getCurrentTestcase());
-			Assert.fail(driverScript.getFailureDescription());
+			properties = Settings.getInstance();
+			if(getCounter()<Integer.parseInt(properties.getProperty("ReRunTimes"))) {
+				Assert.fail(driverScript.getFailureDescription());				
+			} else if((getCounter()==Integer.parseInt(properties.getProperty("ReRunTimes")))) {
+				if(properties.get("DefectLogging").equals("True")) {
+					//sResponseMessage = DefectFiling.searchDefect(testParameters.getCurrentTestDescription());		
+					sResponseMessage = CreateDefectTFS.searchBugInTFS(testParameters.getCurrentTestDescription());					
+					if(sResponseMessage==false) {
+						System.out.println("Defect doesn't exists:::");						
+						/*sResponseMessage = DefectFiling.createDefect(currentPacakage + "_" + testParameters.getCurrentTestcase() + "-" +testParameters.getCurrentTestDescription(), 
+								testParameters.getCurrentTestDescription() + "_" + driverScript.getFailureDescription());*/
+						sResponseMessage = CreateDefectTFS.createBugInTFS(currentPacakage + "_" + testParameters.getCurrentTestcase() + "-" +testParameters.getCurrentTestDescription(), 
+								testParameters.getCurrentTestDescription() + "_" + driverScript.getFailureDescription());
+								if(sResponseMessage==false) 
+									System.out.println("Defect filing failed to log the defect for the issue:::" + driverScript.getFailureDescription());
+								else if (sResponseMessage==true)
+							System.out.println("Defect filed successfully for the issue:::" + testParameters.getCurrentTestcase() + "-" + driverScript.getFailureDescription());
+					} else if(sResponseMessage==true) {
+						System.out.println("Defect already exists, no need to log a new defect:::");						
+					}
+				} else {
+					System.out.println("Defect logging feature disabled:::");						
+				}
+				Assert.fail(driverScript.getFailureDescription());
+			}						
 		}
 	}
 
@@ -178,6 +179,6 @@ public abstract class CRAFTTestCase {
 	@DataProvider(name = "GlobalTestConfigurations", parallel = true)
 	public Object[][] dataGlobal() {
 		return new Object[][] { { "Instance4", ExecutionMode.LOCAL, MobileToolName.APPIUM,
-				MobileExecutionPlatform.ANDROID, "4.4", "N/A", Browser.FIREFOX, Platform.WINDOWS } };
+			MobileExecutionPlatform.ANDROID, "4.4", "N/A", Browser.FIREFOX, Platform.WINDOWS } };
 	}
 }

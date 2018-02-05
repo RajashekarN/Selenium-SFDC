@@ -251,18 +251,20 @@ public class ResultSummaryManager {
 		} else {
 			System.out.println("Results won't push to Dev Ops database as the IP Address didn't match:::" + ipAddress);
 		}
-		StringBuilder contentBuilder = new StringBuilder();
-        try {
-            BufferedReader in = new BufferedReader(new FileReader(reportPath + "\\HTML Results\\Summary.html"));
-            String str;
-            while ((str = in.readLine()) != null) {
-                contentBuilder.append(str);
-            }
-            in.close();
-        } catch(IOException e) {
-        	System.out.println(e.getMessage());
-        } 
-        MailResult.emailSend(contentBuilder.toString());
+		if (ipAddress.equals("10.71.76.71")) {
+			StringBuilder contentBuilder = new StringBuilder();
+	        try {
+	            BufferedReader in = new BufferedReader(new FileReader(reportPath + "\\HTML Results\\Summary.html"));
+	            String str;
+	            while ((str = in.readLine()) != null) {
+	                contentBuilder.append(str);
+	            }
+	            in.close();
+	        } catch(IOException e) {
+	        	System.out.println(e.getMessage());
+	        } 
+	        MailResult.emailSend(contentBuilder.toString());
+		}		
 	}
 
 	/**
