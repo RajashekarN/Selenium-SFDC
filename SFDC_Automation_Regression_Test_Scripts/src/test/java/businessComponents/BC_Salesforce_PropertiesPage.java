@@ -332,5 +332,154 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 		sfPropertiesPage.propertyPreferenceUpdateClone();
 	}
 	
+	/**
+	 * Validating the add property Functionality
+	 * 
+	 * @author Cognizant
+	 *
+	 */
+	public void bc_addProperty() throws InterruptedException {
+		sfPropertiesPage.addProperty();
+	}
+	
+	/**
+	 * Validating the add Task Functionality
+	 * 
+	 * @author Cognizant
+	 *
+	 */
+	public void bc_addTask() throws InterruptedException {
+		sfPropertiesPage.addTask();
+	}
+	
+	/**
+	 * Validating the add Campaigns Functionality
+	 * 
+	 * @author Cognizant
+	 *
+	 */
+	public void bc_addCampaign() throws InterruptedException {
+		sfPropertiesPage.addCampaign();
+	}
+	
+	/**
+	 * Validating the add Comps Functionality
+	 * 
+	 * @author Cognizant
+	 *
+	 */
+	public void bc_addComp() throws InterruptedException {
+		sfPropertiesPage.addComp();
+	}
+	
+	/**
+	 * Validating the Activity Timeline Task Functionality
+	 * 
+	 * @author Cognizant
+	 *
+	 */
+	public void bc_activityTask() throws InterruptedException {
+		sfPropertiesPage.activityTask();
+	}
+	
+	/**
+	 * Validating the Activity Timeline Event Functionality
+	 * 
+	 * @author Cognizant
+	 *
+	 */
+	public void bc_activityEvent() throws InterruptedException {
+		sfPropertiesPage.activityEvent();
+	}
+	
+	/**
+	 * Validating the add Event Functionality
+	 * 
+	 * @author Cognizant
+	 *
+	 */
+	public void bc_addEvent() throws InterruptedException {
+		sfPropertiesPage.	addEvent();
+	}
+
+	/**
+	 * Validating the edit task Functionality
+	 * 
+	 * @author Cognizant
+	 *
+	 */
+	public void bc_editTask() throws InterruptedException {
+		sfPropertiesPage.editTask();
+	}
+
+	/**
+	 * Validating the attachment Functionality
+	 * 
+	 * @author Cognizant
+	 *
+	 */
+	public void bc_addAttachment() throws InterruptedException {
+		sfPropertiesPage.addAttachment();
+	}
+	
+	/**
+	 * Validating the delete task Functionality
+	 * 
+	 * @author Cognizant
+	 *
+	 */
+	public void bc_deleteTask() throws InterruptedException {
+		sfPropertiesPage.deleteTask();
+	}
+	
+	/**
+	 * Validating the edit close task Functionality
+	 * 
+	 * @author Cognizant
+	 *
+	 */
+	public void bc_editCloseTask() throws InterruptedException {
+		sfPropertiesPage.editStatusTask();
+	}
+	
+	/**
+	 * Validating the edit Event Functionality
+	 * 
+	 * @author Cognizant
+	 *
+	 */
+	public void bc_editEvent() throws InterruptedException {
+		sfPropertiesPage.editEvent();
+	}
+	
+	/**
+	 * Task Validating Functionality
+	 * 
+	 * @author Cognizant
+	 *
+	 */
+	public void bc_validationTask() throws InterruptedException {
+		sfPropertiesPage.validationTask();
+	}
+	
+	/**
+	 * Event Validating Functionality
+	 * 
+	 * @author Cognizant
+	 *
+	 */
+	public void bc_validationEvent() throws InterruptedException {
+		sfPropertiesPage.validationEvent();
+	}
+	
+	/**
+	 * Create space Validating Functionality
+	 * 
+	 * @author Cognizant
+	 *
+	 */
+	public void bc_createSpace() throws InterruptedException {
+		sfPropertiesPage.createSpace();
+	}
 	
 }
