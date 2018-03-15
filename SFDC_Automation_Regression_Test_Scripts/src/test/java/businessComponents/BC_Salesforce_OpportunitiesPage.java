@@ -1341,4 +1341,10 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 		sfOpportunitiesPage.opportunitySplitPercentage();
 	}
 	
+	
+	public void bc_verifyAutoCreationOfOpportunityInstallments() throws Exception {
+		sfOpportunitiesPage.verifyAutoCreationOfOpportunityInstallments();
+	}
+	
+	
 }

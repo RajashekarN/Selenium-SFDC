@@ -9,13 +9,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
@@ -26,9 +26,12 @@ import com.sforce.soap.partner.SaveResult;
 import com.sforce.soap.partner.sobject.SObject;
 import com.sforce.ws.ConnectionException;
 import com.sforce.ws.ConnectorConfig;
+
+import pagesAPI.AccountsFunctions;
 import pagesAPI.EstablishConnection;
 import pagesAPI.OpportunitiesFunctions;
 import pagesAPI.SearchTextSOQL;
+import supportLibraries.SFUtility_Functions;
 import supportLibraries.Utility_Functions;
 
 /**
@@ -294,7 +297,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//input[@placeholder='Search Accounts']")
 	WebElement enterNewAccountName;
-
+	
 	@FindBy(xpath = "//div[@class='dotSpinner']")
 	WebElement dotSpinner;
 
@@ -397,7 +400,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//div[contains(@class,'actionsContainer')]//div[text()='Edit']")
 	WebElement editButtonInstallment;
 
-	@FindBy(xpath = "//div[@class='slds-form-element__control']//span[text()='Estimated Gross Fee/Commission']/parent::label/parent::div/input")
+	@FindBy(xpath = "//span[text()='Estimated Gross Fee/Commission']/parent::label/following-sibling::input")
 	WebElement estimatedGrossFeeEdit;
 
 	@FindBy(xpath = "//span[@class='slds-form-element__label'][text()='Estimated Gross Fee/Commission']/parent::span//input")
@@ -415,9 +418,12 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//div[contains(@class,'modal-footer')]//span[text()='Save']")
 	WebElement saveNewOpportunityInstallment;
 
-	@FindBy(xpath = "//span[@class='uiOutputNumber'][text()='1']/ancestor::tr//div[contains(@class,'forceVirtualActionMarker')]//a")
+	@FindBy(xpath = "//span[@class='uiOutputNumber'][text()='1']/ancestor::tr//div[contains(@class,'forceVirtualActionMarker')]//a//span[@class='lightningPrimitiveIcon']")
 	WebElement arrowDown;
 
+	@FindBy(xpath = "//div[contains(@class,'actionMenu')]//a[@title='Edit']")
+	WebElement editBtn;
+	
 	@FindBy(xpath = "//div[@class='actionMenu']//a[@title='Delete']")
 	WebElement deleteInstallment;
 
@@ -608,16 +614,16 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//div[@class='select-options']//a[@title='Client Action Postponed']/parent::li/parent::ul/li")
 	WebElement reasonForLossValuesList;
 
-	@FindBy(xpath = "//a[@aria-label='Accounting Awarded To:']")
+	@FindBy(xpath = "//span[text()='Accounting Awarded To:']/parent::span/following-sibling::div//a")
 	WebElement accountingAwardedTo;
 
-	@FindBy(xpath = "//a[@aria-label='Mgmt Awarded To:']")
+	@FindBy(xpath = "//span[text()= 'Mgmt Awarded To:']/parent::span/following-sibling::div//a']")
 	WebElement mgmtAwardedTo;
 
 	@FindBy(xpath = "//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Term of Contract']/parent::label/parent::div/input")
 	WebElement termOfContract;
 
-	@FindBy(xpath = "//a[@aria-label='Lead Source']")
+	@FindBy(xpath = "//span[text() = 'Lead Source']/parent::span/following-sibling::div//a")
 	WebElement leadSourceNewOpportunity;
 
 	@FindBy(xpath = "//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Opportunity Name']/parent::label/parent::div/input")
@@ -626,13 +632,13 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Total Size']/parent::label/parent::div/input")
 	WebElement totalSizeNewOpportunity;
 
-	@FindBy(xpath = "//a[@aria-label='Unit of Measure']")
+	@FindBy(xpath = "//span[text()='Unit of Measure']/parent::span/following-sibling::div//a")
 	WebElement unitOfMeasureNewOpportunity;
 
 	@FindBy(xpath = "//a[@title='Square Feet']")
 	WebElement selectUnitOfMeasureNewOpportunity;
 
-	@FindBy(xpath = "//a[@aria-label='Region']")
+	@FindBy(xpath = "//span[text()='Region']/parent::span/following-sibling::div//a")
 	WebElement regionNewOpportunity;
 
 	@FindBy(xpath = "//a[@title='US National']")
@@ -670,7 +676,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//a[@title='2-Client Engaged']")
 	WebElement salesStageValue_AS;
 
-	@FindBy(xpath = "//span[text()='Close Date']/parent::label/parent::div//input")
+	@FindBy(xpath = "//span[text()='Close Date']/parent::label/parent::div//input")  
 	WebElement closeDate_AS;
 
 	@FindBy(xpath = "//input[@placeholder='Search Accounts']")
@@ -1225,7 +1231,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//span[contains(text(),'Engagement Commencement')]/following-sibling::div//input")
 	WebElement engagementCommencement;
 
-	@FindBy(xpath = "//h2[@class='slds-text-heading--medium slds-m-top--x-large slds-m-bottom--large']")
+	@FindBy(xpath = "//h2[contains(@class,'slds-text-heading--medium slds-m-top--x-large slds-m-bottom--large')]")
 	List<WebElement> headerList;
 
 	@FindBy(xpath = "//*[@class='slds-form-element__label']")
@@ -1465,6 +1471,14 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//*[contains(@id,'1:j_id56')]")
 	WebElement SplitSecond;
 
+	@FindBy(xpath = "//label[text() = 'Account Name']")
+	WebElement OpportunityPageLabel;
+	
+	
+	
+	
+		
+	
 	HomePage hp = new HomePage(scriptHelper);
 	SearchTextSOQL searchOpportunity = new SearchTextSOQL(scriptHelper);
 	OpportunitiesFunctions opportunitiesFunctions = new OpportunitiesFunctions(scriptHelper);
@@ -1660,6 +1674,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		headerSectionOpportunityPage();
 		labelsOpportunityPage();
 		Utility_Functions.xWaitForElementPresent(driver, headerList, 3);
+		System.out.println("Number of headers found  :: "+headerList.size());
 		try {
 			int i2 = 0, count = 0;
 			String[] headerTexts = new String[headerList.size()];
@@ -1667,7 +1682,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 				headerTexts[i2] = element.getText();
 				if (headerTexts[i2].contains(headerSectionList.get(i2))) {
 					count++;
-					System.out.println("Verify Add Opportunity Header List" + element.getText());
+					System.out.println("Verify Add Opportunity Header List  :: " + element.getText());
 					report.updateTestLog("Verify Add Opportunity Header List",
 							element.getText() + " header is present in Add Opportunity Page", Status.PASS);
 				}
@@ -1685,7 +1700,10 @@ public class OpportunitiesPage extends ReusableLibrary {
 			System.out.println(e.getMessage());
 		}
 		try {
-			Utility_Functions.xWaitForElementPresent(driver, labelListOpportunitiesPage, 3);
+			Utility_Functions.xSwitchtoFrame(driver, OpportunityPageLabel);
+			System.out.println("Switched to frame");
+			Utility_Functions.xWaitForElementPresent(driver, labelListOpportunitiesPage, 6);
+			System.out.println("Number of Labels found in Opportunity page :: "+ labelListOpportunitiesPage.size());
 			int i1 = 0, j = 0, countLabelList = 0;
 			String[] labelTexts = new String[labelListOpportunitiesPage.size()];
 			while (j < labelList.size()) {
@@ -3042,8 +3060,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, related, true);
 		String sInstallmentAmountOne = installmentAmountOne.getText();
 		String sInstallmentAmountTwo = installmentAmountTwo.getText();
-		System.out.println(sInstallmentAmountOne);
-		System.out.println(sInstallmentAmountTwo);
+		System.out.println("installmentAmountOne"+sInstallmentAmountOne);
+		System.out.println("installmentAmountTwo"+sInstallmentAmountTwo);
 		if (sInstallmentAmountOne.equals("USD 6,000.00") && sInstallmentAmountTwo.equals("USD 4,000.00")) {
 			report.updateTestLog("Opportunities Installments",
 					"Opportunity installment amounts recalculated successfully after editing the Estimated Gross Fee:::"
@@ -3060,7 +3078,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			Utility_Functions.xScrollWindow(driver);
 			Utility_Functions.timeWait(1);
 			Utility_Functions.xScrollWindowTop(driver);
-			Utility_Functions.timeWait(2);
+			Utility_Functions.timeWait(3);
 			Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeEdit, 3);
 			estimatedGrossFeeEdit.clear();
 			Utility_Functions.xSendKeys(driver, estimatedGrossFeeEdit, "20,000");
@@ -3414,18 +3432,29 @@ public class OpportunitiesPage extends ReusableLibrary {
 							"Opportunity is eligible for editing the Installments::", Status.PASS);
 					Utility_Functions.xWaitForElementPresent(driver, arrowDown, 3);
 					Utility_Functions.xClick(driver, arrowDown, true);
+					Utility_Functions.timeWait(2);
+				
+					/*
+					List<WebElement> actionList = driver.findElements(By.xpath("//div[contains(@class,'actionMenu')]//a/div"));
 					Utility_Functions.timeWait(1);
-					List<WebElement> actionList = driver.findElements(By.xpath("//div[@class='actionMenu']//a"));
 					for (WebElement element : actionList) {
+						System.out.println("e:"+element.getText()+"-");
 						if (element.getText().contains("Edit")) {
 							element.click();
+							System.out.println("clicked on Edit");
 							report.updateTestLog("Opportunities Installments",
 									"Clicked on edit installments button successfully::", Status.PASS);
 						} else {
 							report.updateTestLog("Opportunities Installments",
 									"Unable to click on edit installment button", Status.FAIL);
 						}
-					}
+					}*/
+					
+					//WebElement 
+					Utility_Functions.xWaitForElementPresent(driver, editBtn, 3);
+					Utility_Functions.xClick(driver, editBtn, true);
+					Utility_Functions.timeWait(1);
+						
 					Utility_Functions.xWaitForElementPresent(driver, installmentOption, 3);
 					Utility_Functions.xClick(driver, installmentOption, true);
 					if (installmentOption.getText().contains("Paid")) {
@@ -12395,4 +12424,376 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	}
 
+	
+
+	/*
+	
+	 * @author Swapna
+
+	 */
+	
+	@FindBy(xpath ="//input[contains(@placeholder,'Search Accounts')]")
+	WebElement enterAccountName;
+	
+	@FindBy(xpath ="//input[contains(@placeholder,'Search Accounts')]/following-sibling::div//div[contains(@title,'SB test APAC account')]")
+	WebElement existingAccountValue;
+	
+	@FindBy(xpath ="//input[contains(@placeholder,'Search Accounts')]/parent::div//span[contains(@title,'New Account')]")
+	WebElement clickNewAccount;
+	
+	@FindBy(xpath ="//span[text()='Account Name']//parent::label/following-sibling::div//input")
+	WebElement EnterNewAccountName;	
+	
+	@FindBy(xpath ="//span[text()='Opportunity Name']/parent::label/parent::div//input")
+	WebElement enterNewOpportunityName;
+	
+	@FindBy(xpath ="//span[contains(text(),'Lead Source')]/parent::span/parent::div//a")
+	WebElement selectLeadSource;
+	
+	@FindBy(xpath ="//li/a[@title='CBRE Referral']")
+	WebElement LeadSourceValue;
+	
+	@FindBy(xpath ="//span[text()='Close Date']/parent::label/parent::div//input")
+	WebElement enterCloseDate;
+	
+	@FindBy(xpath ="//span[text()='Sales Stage']/parent::label/parent::div//a[@class='select']")
+	WebElement selectSalesStage;
+	
+	@FindBy(xpath = "//li/a[contains(@title,'02-Opportunity Identified')]")
+	WebElement selectSalesStageValue;
+	
+	@FindBy(xpath ="//span[text()='CBRE Office']/parent::span/parent::div//a[@class='select']")
+	WebElement selectCBREOffice;
+	
+	@FindBy(xpath ="//li/a[@title='India – Hyderabad']")
+	WebElement selectCBREOfficeValue;
+
+	//city is already there
+	
+	@FindBy(xpath ="//span[contains(text(),'City Tier')]/parent::span/following-sibling::div//a")
+	WebElement selectCityTier;
+	
+	@FindBy(xpath ="//li/a[contains(@title,'Tier 1')]")
+	WebElement selectCityTierValue;
+		
+	@FindBy(xpath ="//span[contains(text(),'Asset Type')]/parent::span/following-sibling::div//a")
+	WebElement selectAssetType;
+	
+	@FindBy(xpath ="//li/a[contains(@title,'Education')]")
+	WebElement selectAssetTypeValue;
+	
+	@FindBy(xpath ="//span[text()='Country']/parent::span/parent::div//a[@class='select']")
+	WebElement selectCountry;
+	
+	@FindBy(xpath ="//li/a[contains(@title,'America')]")
+	WebElement selectCountryValue;
+	
+	@FindBy(xpath ="//span[text()='Opportunity Currency']/parent::span/following-sibling::div//a")
+	WebElement SelectOpportunityCurrency;
+	
+	@FindBy(xpath ="//*[@id='1488:819;a']/div/ul/li[57]/a")
+	WebElement SelectOpportunityCurrencyValue;
+	
+	//OpportunityCurrency is already there
+	
+	@FindBy(xpath ="//div/span[text()='Consultancy Fee']")
+	WebElement ConsultancyFee;
+	
+	@FindBy(xpath ="//div/span[text()='Principal Fee']")
+	WebElement PrincipalFee;
+	
+	@FindBy(xpath ="//div/span[text()='Principal Fee %']")
+	WebElement PrincipalFeePercent;
+	
+	@FindBy(xpath ="//div/span[text()='Principal Passthrough']")
+	WebElement PrincipalPassthrough;
+	
+	@FindBy(xpath ="//div/span[text()='Total Billing']")
+	WebElement TotalBilling;
+	
+	@FindBy(xpath ="//div/span[text()='Total Fee']")
+	WebElement TotalFee;
+		
+	@FindBy(xpath ="//a/span[text()='Related']")
+	WebElement relatedTab;
+	
+	@FindBy(xpath ="//*[@id='rlql-showAllShowLess']/a")
+	WebElement showAllshowLess;
+
+	@FindBy(xpath ="//a/span[contains(text(),'Opportunity Installments')]")
+	WebElement opportunityInstallmentLink;
+	
+	@FindBy(xpath = "//th[@title='Opportunity Installments ID']/parent::tr/parent::thead/following-sibling::tbody//a")
+	WebElement opportunityInstallmentIdLink;
+	
+	
+	/**
+	 * Verify Auto Creation of 'Opportunity Installments' record on creation of an Opportunity
+	 * 
+	 * @author Swapna
+	 * @throws Exception 
+	 *
+	 */
+     // In New page
+	
+	static ArrayList<String> APACProjManagerfinancialInfoLabelList = new ArrayList<String>();
+
+	public void APACProjManagerfinancialInfoLabelList() {
+		
+		APACProjManagerfinancialInfoLabelList.add("Project Value");
+		APACProjManagerfinancialInfoLabelList.add("Consultancy Fee");
+		APACProjManagerfinancialInfoLabelList.add("Principal Fee");
+		APACProjManagerfinancialInfoLabelList.add("Principal Passthrough");
+
+		System.out.println("Opportunity financialInformationLabelList are:::" + APACProjManagerfinancialInfoLabelList);
+		//h3/span[text()='Financial Information']/parent::h3/parent::div//label[contains(@class,'label inputLabel')]/span
+	}
+	
+	
+    /*  this list is for Financial info labels in Details 
+     * */
+	static ArrayList<String> APACPjManagerDetailsfinancialInfoLabelList = new ArrayList<String>();
+
+	public void APACProjManagerfinancialInfoLabelListInDetails() {
+		APACPjManagerDetailsfinancialInfoLabelList.add("Opportunity Currency");
+		APACPjManagerDetailsfinancialInfoLabelList.add("Total Billing");
+		APACPjManagerDetailsfinancialInfoLabelList.add("Consultancy Fee");
+		APACPjManagerDetailsfinancialInfoLabelList.add("Total Fee");
+		APACPjManagerDetailsfinancialInfoLabelList.add("Principal Fee");
+		APACPjManagerDetailsfinancialInfoLabelList.add("Project Value");
+		APACPjManagerDetailsfinancialInfoLabelList.add("Principal Fee %");
+		APACPjManagerDetailsfinancialInfoLabelList.add("Principal Passthrough");
+
+		System.out.println("Opportunity financialInformationLabelList in Details are:::" + APACPjManagerDetailsfinancialInfoLabelList);
+		//span[text() = 'Financial Information']/parent::button/parent::h3/following-sibling::div//span[@class='test-id__field-label slds-form-element__label']
+	}
+	
+	
+	
+	 /*  this list is for Opportunity Installment labels in Popup 
+     * */
+	static ArrayList<String> OpportunityInstallmentlabelsInPopup  = new ArrayList<String>();
+
+	public void OpportunityInstallmentlabelsInPopup() {
+		OpportunityInstallmentlabelsInPopup.add("Opportunity Installments ID");
+		OpportunityInstallmentlabelsInPopup.add("Installment Date");
+		OpportunityInstallmentlabelsInPopup.add("Installment Probability");
+		OpportunityInstallmentlabelsInPopup.add("Installment Amount");
+		OpportunityInstallmentlabelsInPopup.add("Principal Passthrough");
+		OpportunityInstallmentlabelsInPopup.add("Installment Status");
+		
+
+		System.out.println("Opportunity Installment labels In Quick link Popup are:::" + OpportunityInstallmentlabelsInPopup);
+		//a[text()='Opportunity Installments']/parent::h2/parent::div/parent::div/parent::div/parent::div/parent::div/following-sibling::div//a/span[2]
+	}
+	
+	
+	/*  this list is for labels in Opportunity Installment Page 
+     * */
+	static ArrayList<String> OpportunityInstallmentlabelsInPage  = new ArrayList<String>();
+
+	public void OpportunityInstallmentlabelsInPage() {
+		OpportunityInstallmentlabelsInPage.add("Opportunity ID");
+		OpportunityInstallmentlabelsInPage.add("Installment Date");
+		OpportunityInstallmentlabelsInPage.add("Installment Status");
+		OpportunityInstallmentlabelsInPage.add("Installment Probability (%)");
+		OpportunityInstallmentlabelsInPage.add("Date Paid");
+		OpportunityInstallmentlabelsInPage.add("Paying Account");
+		OpportunityInstallmentlabelsInPage.add("Consultancy Fee");
+		OpportunityInstallmentlabelsInPage.add("Account Role");
+		OpportunityInstallmentlabelsInPage.add("Principal Fee");
+		OpportunityInstallmentlabelsInPage.add("Invoice Number");
+		OpportunityInstallmentlabelsInPage.add("Installment Amount");
+		OpportunityInstallmentlabelsInPage.add("Comments");
+		OpportunityInstallmentlabelsInPage.add("Principal Pass-through");
+		OpportunityInstallmentlabelsInPage.add("Installment Probability Manual Ride");
+		OpportunityInstallmentlabelsInPage.add("Created By");
+		OpportunityInstallmentlabelsInPage.add("Installment Number");
+		OpportunityInstallmentlabelsInPage.add("Last Modified By");
+		OpportunityInstallmentlabelsInPage.add("Record Type");
+		OpportunityInstallmentlabelsInPage.add("Opportunity Installments ID");
+		
+
+		System.out.println("The labels Opportunity Installment Page are:::" + OpportunityInstallmentlabelsInPage);
+		//a[@title='Details']/parent::li/parent::ul/parent::div/following-sibling::section//div[@class='test-id__field-label-container']/span
+	}
+
+
+	public void verifyAutoCreationOfOpportunityInstallments() throws Exception {
+		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
+		Utility_Functions.xClick(driver, menu_Opportunities, true);
+		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
+		Utility_Functions.xClick(driver, newOpportunity, true);
+		Utility_Functions.timeWait(2);
+		System.out.println("My first case");
+		if ((dataTable.getData("General_Data", "TC_ID").contains("APAC"))
+				&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
+			
+			/* Verify that below fields are present in Opportunity Creation page.
+				- Opportunity Currency (defaults to the Users currency)
+				- Consultancy Fee
+				- Principal Fee
+				- Principal Pass-through
+				- Project Value 
+			 */
+			//verify Financial Info label ist 
+			APACProjManagerfinancialInfoLabelList();
+			String commonXpath = "//h3/span[text()='Financial Information']/parent::h3/parent::div//label[contains(@class,'label inputLabel')]/span";
+			
+			Status result = SFUtility_Functions.verifyElementsPresent(driver,APACProjManagerfinancialInfoLabelList,commonXpath);
+			 
+			 if(result == Status.PASS ){
+				 report.updateTestLog("Verify Financial Information Section",
+							"Labels are present in  Financial Information Section:::",  result);
+			  }else{
+				  report.updateTestLog("Verify Financial Information Section",
+							"Labels are not present in  Financial Information Section:::",result);
+			  }
+			 
+			 if (opportunityCurrency.getText().equalsIgnoreCase("Opportunity Currency")) {
+					System.out.println("Verify "+opportunityCurrency.getText()+ " label is present on the page"); 
+					report.updateTestLog("Verify "+
+							opportunityCurrency.getText(), " label is present on the page",Status.PASS);
+				}
+			 
+			 /*
+			  * Complete all mandatory information and Save the Opportunity  :
+			  */
+			 Utility_Functions.xWaitForElementPresent(driver, enterAccountName, 4);
+			 Utility_Functions.xClick(driver, enterAccountName, true);
+			 Utility_Functions.xSendKeys(driver, enterAccountName, "test");	
+			 Utility_Functions.xClick(driver, enterAccountName, true);
+			 Utility_Functions.xWaitForElementPresent(driver, existingAccountValue, 4);
+			 Utility_Functions.xClick(driver, existingAccountValue, true);
+			 
+			 /* Tried to create a new account
+			  * Utility_Functions.xWaitForElementPresent(driver, clickNewAccount, 4);
+			 Utility_Functions.xClick(driver, clickNewAccount, true);
+			 Utility_Functions.xWaitForElementPresent(driver, EnterNewAccountName, 4);				
+			 AccountsPage acc_Functions = new AccountsPage(scriptHelper);
+				 acc_Functions.createAccount();
+				
+			     Utility_Functions.xWaitForElementPresent(driver, selectLeadSource, 3);
+				 Utility_Functions.xClick(driver, selectLeadSource, true);
+				 Utility_Functions.xWaitForElementPresent(driver, selectLeadSource, 3);
+				 Utility_Functions.xClick(driver, selectLeadSource, true);
+				 Utility_Functions.xWaitForElementPresent(driver, LeadSourceValue, 3);
+				 Utility_Functions.xClick(driver, LeadSourceValue, true);
+				*/
+			     Utility_Functions.xWaitForElementPresent(driver, enterNewOpportunityName, 3);
+				 enterNewOpportunityName.clear();
+			     enterNewOpportunityName.sendKeys("APACProjManagerOpportunity");
+			     Utility_Functions.xWaitForElementPresent(driver, selectLeadSource, 3);
+			     selectLeadSource.click();
+			     Utility_Functions.xWaitForElementPresent(driver, LeadSourceValue, 3);
+			     LeadSourceValue.click();		     
+			     
+				 DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+				 Date date = new Date();
+				 Utility_Functions.xSendKeys(driver, enterCloseDate, dateFormat.format(date).toString());
+			     Utility_Functions.xSendKeys(driver, enterCloseDate, Keys.TAB);
+			     Utility_Functions.xWaitForElementPresent(driver, selectSalesStage, 4);
+			     Utility_Functions.xClick(driver, selectSalesStage, true);
+				 Utility_Functions.xWaitForElementPresent(driver, selectSalesStageValue, 4);
+			     Utility_Functions.xClick(driver, selectSalesStageValue, true);
+				 Utility_Functions.xWaitForElementPresent(driver, selectCBREOffice, 4);
+				 Utility_Functions.xClick(driver, selectCBREOffice, true);
+				 Utility_Functions.xWaitForElementPresent(driver, selectCBREOfficeValue, 4);
+				 Utility_Functions.xClick(driver, selectCBREOfficeValue, true);
+			     	Utility_Functions.xWaitForElementPresent(driver, selectCountry, 4);
+			     	Utility_Functions.xClick(driver, selectCountry, true);
+					 Utility_Functions.xWaitForElementPresent(driver, selectCountryValue, 4);
+					 Utility_Functions.xClick(driver, selectCountryValue, true);
+					 Utility_Functions.xWaitForElementPresent(driver, city,4);
+					Utility_Functions.xSendKeys(driver, city, dataTable.getData("General_Data", "City"));
+					
+					Utility_Functions.xWaitForElementPresent(driver, selectAssetType, 4);
+					 Utility_Functions.xClick(driver, selectAssetType, true);
+					 Utility_Functions.xWaitForElementPresent(driver, selectAssetTypeValue, 4);
+					 Utility_Functions.xClick(driver, selectAssetTypeValue, true);
+					 /*Utility_Functions.xWaitForElementPresent(driver, SelectOpportunityCurrency, 4);
+					 Utility_Functions.xClick(driver, SelectOpportunityCurrency, true);
+					Utility_Functions.xWaitForElementPresent(driver, SelectOpportunityCurrencyValue, 4);
+				    Utility_Functions.xClick(driver, SelectOpportunityCurrencyValue, true);
+				    */
+				Utility_Functions.xWaitForElementPresent(driver, selectCityTier, 4);
+					 Utility_Functions.xClick(driver, selectCityTier, true);
+					 Utility_Functions.xWaitForElementPresent(driver, selectCityTierValue, 4);
+					 Utility_Functions.xClick(driver, selectCityTierValue, true);
+				     Utility_Functions.xWaitForElementPresent(driver, saveNewOpp, 4);
+					Utility_Functions.xClick(driver, saveNewOpp, true);
+					Utility_Functions.timeWait(5);
+					if (details.isDisplayed()) {
+						report.updateTestLog("Verify Home Page Tabs", "The opportunity is saved with the all the required fields",
+								Status.PASS);
+					} else {
+						report.updateTestLog("Verify Home Page Tabs",
+								"The opportunity is not saved with the all the required fields", Status.FAIL);
+					}
+						
+					Utility_Functions.timeWait(8);
+					
+				   //verifying financial info section in Details
+					APACProjManagerfinancialInfoLabelListInDetails();
+				   commonXpath = "//span[text() = 'Financial Information']/parent::button/parent::h3/following-sibling::div//span[@class='test-id__field-label slds-form-element__label']";
+					
+					 result = SFUtility_Functions.verifyElementsPresent(driver,APACPjManagerDetailsfinancialInfoLabelList,commonXpath);
+					 
+					 if(result == Status.PASS ){
+						 report.updateTestLog("Verify Financial Information Section in Details page",
+									"Labels are present in  Financial Information Section:::",  result);
+					  }else{
+						  report.updateTestLog("Verify Financial Information Section in Details page",
+									"Labels are not present in  Financial Information Section:::",result);
+					  }
+					 
+				
+			     //Navigate to Related tab and verify 'Opportunity Installment' record has been auto-created 
+					
+					 Utility_Functions.xWaitForElementPresent(driver, opportunityInstallmentLink, 4);
+					 String OppInstallmentText  =  opportunityInstallmentLink.getText();
+					 if(OppInstallmentText.equalsIgnoreCase("Opportunity Installments (1)")){
+						 System.out.println("Opportunity installment is created");
+					 }else{
+						 System.out.println("Opportunity installment is not created");
+					 }
+					 Utility_Functions.xHoverElementclicks(opportunityInstallmentLink, driver);
+					 //Utility_Functions.timeWait(2);
+					 Utility_Functions.xWaitForElementPresent(driver, opportunityInstallmentIdLink, 4);
+					 Utility_Functions.xHoverElementclicks(opportunityInstallmentIdLink, driver);
+					 
+					 //verifying labels in Opportunity Installment Popup
+					 commonXpath = "//a[text()='Opportunity Installments']/parent::h2/parent::div/parent::div/parent::div/parent::div/parent::div/following-sibling::div//a/span[2]";
+					 OpportunityInstallmentlabelsInPopup();
+				     result = SFUtility_Functions.verifyElementsPresent(driver,OpportunityInstallmentlabelsInPopup,commonXpath);
+				     if(result == Status.PASS ){
+						 report.updateTestLog("Verify labels in Opportunity Installment Popup",
+									"Labels are present in Opportunity Installment Popup:::",  result);
+					  }else{
+						  report.updateTestLog("Verify labels in Opportunity Installment Popup",
+									"Labels are not present in Opportunity Installment Popup:::",result);
+					  }
+				     
+				     Utility_Functions.xClick(driver, opportunityInstallmentIdLink, true);
+				   			     
+				   //verifying labels in Opportunity Installment Page
+				     OpportunityInstallmentlabelsInPage();
+					 commonXpath = "//a[@title='Details']/parent::li/parent::ul/parent::div/following-sibling::section//div[@class='test-id__field-label-container']/span";
+						
+				     result = SFUtility_Functions.verifyElementsPresent(driver,OpportunityInstallmentlabelsInPage,commonXpath);
+				     if(result == Status.PASS ){
+						 report.updateTestLog("Verify labels in Opportunity Installment Page",
+									"Labels are present in Opportunity Installment Page:::",  result);
+					  }else{
+						  report.updateTestLog("Verify labels in Opportunity Installment Page",
+									"Labels are not present in Opportunity Installment Page:::",result);
+					  }					 
+				}
+	
+	}	
+	
+	
+	
+	
+	
 }

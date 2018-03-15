@@ -37,7 +37,7 @@ public class PropertiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//*[text()='More']")
 	WebElement menu_More;
 
-	@FindBy(xpath = "//a[@role='menuitem']/span[contains(@class,'slds-truncate')][text()='Properties']")
+	@FindBy(xpath = "//a[@role='menuitem']//span[text()='Properties']")
 	WebElement properties;	
 
 	@FindBy(xpath = "//div[@class='overflowList']//a[@title='Properties'][text()='Properties']")
@@ -97,7 +97,7 @@ public class PropertiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//a[@role='menuitem']/span[contains(@class,'slds-truncate')][text()='Campaigns']")
 	WebElement campaigns;	
 
-	@FindBy(xpath = "//div[@class='overflowList']//a[@title='Campaigns'][text()='Campaigns']")
+	@FindBy(xpath = "//div[@role='menu']//a/span/span[text()='Campaigns']")
 	WebElement campaignsEnv;	
 
 	/**
@@ -162,7 +162,7 @@ public class PropertiesPage extends ReusableLibrary {
 	@FindBy(xpath = "// input [@value= 'Cancel']")
 	WebElement cancelNewActivityLayoutPage;
 
-	@FindBy(xpath = "//ul[@class='slds-button-group slds-m-left--xx-small oneActionsRibbon forceActionsContainer']//li/a/div[text()='New']")
+	@FindBy(xpath = "//a[@title='New']/div[text()='New']")
 	WebElement newProperties;
 
 	@FindBy(xpath="//label[text()='Building/Property Name']/parent::div/parent::div//div[contains(@class,'requiredInput')]//input[contains(@id,'propertyEditForm')]")

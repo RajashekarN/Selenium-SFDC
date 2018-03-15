@@ -63,7 +63,7 @@ public class ContactsPage extends ReusableLibrary {
 	@FindBy(xpath = "//span[@class='slds-checkbox--faux']")
 	WebElement statusCheckbox;
 
-	@FindBy(xpath = "//ul[@class='slds-button-group slds-m-left--xx-small oneActionsRibbon forceActionsContainer']//li/a/div[text()='New']")
+	@FindBy(xpath = "//a[@title='New']/div[text()='New']")
 	WebElement newContact;
 
 	@FindBy(xpath = "//p[@title='Create a Contact']")
@@ -463,7 +463,7 @@ public class ContactsPage extends ReusableLibrary {
 	@FindBy(xpath = "//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']")
 	WebElement ContactList;
 
-	@FindBy(xpath = "//h1[contains(@class,'slds-page-header__title')]/span")
+	@FindBy(xpath = "//span[text()='Account Name']/parent::div/following-sibling::div//a")
 	List<WebElement> accountNameSaved;
 
 	SearchTextSOQL searchAccountName = new SearchTextSOQL(scriptHelper);

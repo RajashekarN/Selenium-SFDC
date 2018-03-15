@@ -44,8 +44,11 @@ public class ActivityPage extends ReusableLibrary {
 	@FindBy(xpath = "//span[text()='Add']")
 	WebElement addActivity;
 	
-	@FindBy(xpath = "//h1[contains(@class,'slds-page-header__title')]/span")
+	@FindBy(xpath = "//span[text()='Account Name']/parent::div/following-sibling::div//a")  
 	WebElement accountNameSaved;
+	
+	@FindBy(xpath = "//span[text()='Account Name']/parent::div/following-sibling::div/span/span")  
+	WebElement accountNameSavedEnv;
 	
 	@FindBy(xpath="//button[@title='Edit Property']")
 	WebElement editButton;
@@ -127,6 +130,9 @@ public class ActivityPage extends ReusableLibrary {
 	//DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 	Date date = new Date();
 	SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
+	
+	
+	
 
 	public void createNewActivity() {
 		if(properties.getProperty("RunEnvironment").equalsIgnoreCase("UAT")){
@@ -138,7 +144,13 @@ public class ActivityPage extends ReusableLibrary {
 		String activityPresent=null;
 		String activityPast = null;
 		String activityFuture=null;
-		String accountName=accountNameSaved.getText();
+		String accountName = null;
+		
+		try{
+			 accountName=accountNameSaved.getText();
+		}catch(Exception e){
+			accountName=accountNameSavedEnv.getText();
+		}
 		int activityTimes=1;
 		if(dataTable.getData("General_Data", "TC_ID").contains("Activity") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") && !dataTable.getData("General_Data", "TC_ID").contains("Expand") ){
 			activityTimes=3;
@@ -638,7 +650,7 @@ public class ActivityPage extends ReusableLibrary {
 	static ArrayList<String> activityTypeListValues = new ArrayList<String>();
 
 	public void additionalActivityTypeList() {
-		activityTypeListValues.add("--None--");
+		activityTypeListValues.add("");
 		activityTypeListValues.add("Private - Client Intelligence");
 		activityTypeListValues.add("Private - Cold Call");
 		activityTypeListValues.add("Private - Follow-Up Meeting");
@@ -672,10 +684,11 @@ public class ActivityPage extends ReusableLibrary {
 		try {
 			for (WebElement element : activityTypeValues) {
 				linkTexts[i] = element.getText();
+				System.out.println("activityTypeValue found : "+element.getText()+"   Text needs to be verified : "+activityTypeListValues.get(i));	
 				if (linkTexts[i].equals(activityTypeListValues.get(i))) {
 					count++;
 					report.updateTestLog("Verify Additional Acitivty", "Value " +  element.getText() + "is present under Additional Activity List", Status.PASS);
-					System.out.println(element.getText());	
+					
 				}
 				i++;
 			}

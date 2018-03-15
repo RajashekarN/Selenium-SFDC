@@ -195,6 +195,7 @@ public class LoginPage extends ReusableLibrary {
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
 					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment+"CMAMERManager"));
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
+					System.out.println(properties.get(environment+"CMAMERBroker"));
 					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment+"CMAMERBroker"));
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS")) && (!dataTable.getData("General_Data", "TC_ID").contains("BCP")) 
 						&& (!dataTable.getData("General_Data", "TC_ID").contains("Dev")) && (!dataTable.getData("General_Data", "TC_ID").contains("IP") && (!dataTable.getData("General_Data", "TC_ID").contains("CA")
