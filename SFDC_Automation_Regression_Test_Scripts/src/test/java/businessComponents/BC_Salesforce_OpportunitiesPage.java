@@ -1342,9 +1342,5 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	}
 	
 	
-	public void bc_verifyAutoCreationOfOpportunityInstallments() throws Exception {
-		sfOpportunitiesPage.verifyAutoCreationOfOpportunityInstallments();
-	}
-	
 	
 }

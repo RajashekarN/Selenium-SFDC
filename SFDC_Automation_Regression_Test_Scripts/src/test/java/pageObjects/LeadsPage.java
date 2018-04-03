@@ -16,6 +16,7 @@ import org.openqa.selenium.support.PageFactory;
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
+import com.itextpdf.text.Utilities;
 import com.sforce.soap.partner.SaveResult;
 
 import pagesAPI.AccountsFunctions;
@@ -543,10 +544,10 @@ public class LeadsPage extends ReusableLibrary {
 	@FindBy(xpath = "//input[@name='new'][contains(@value,'Add')]")
 	WebElement addButtonSharing;
 
-	@FindBy(xpath = "//*[contains(@id,'sharing_search')]")
+	@FindBy(xpath = "//select[contains(@id,'sharing_search')]")
 	WebElement searchUsers;
 
-	@FindBy(xpath = "//*[contains(@id,'searchValue_sharing_search')]")
+	@FindBy(xpath = "//input[contains(@id,'searchValue_sharing_search')]")
 	WebElement searchUserName;
 
 	@FindBy(xpath = "//*[contains(@title,'Find')]")
@@ -1284,7 +1285,8 @@ public class LeadsPage extends ReusableLibrary {
 
 		Utility_Functions.xWaitForElementPresent(driver, addButtonSharing, 5);
 		Utility_Functions.xClick(driver, addButtonSharing, true);
-		Utility_Functions.xWaitForElementPresent(driver, searchUsers, 3);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, searchUsers, 5);
 		Utility_Functions.xSelectDropdownByName(searchUsers, "Users");
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xSendKeys(driver, searchUserName, "bommisetty");

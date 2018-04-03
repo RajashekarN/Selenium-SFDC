@@ -31,7 +31,6 @@ import pagesAPI.AccountsFunctions;
 import pagesAPI.EstablishConnection;
 import pagesAPI.OpportunitiesFunctions;
 import pagesAPI.SearchTextSOQL;
-import supportLibraries.SFUtility_Functions;
 import supportLibraries.Utility_Functions;
 
 /**
@@ -608,7 +607,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//span[text()='Opportunity Currency']")
 	WebElement opportunityCurrency;
 
-	@FindBy(xpath = "//a[@aria-label='Reason for Loss']")
+	@FindBy(xpath = "//span[text()='Reason for Loss']/parent::span/following-sibling::div//a")
 	WebElement reasonForLoss;
 
 	@FindBy(xpath = "//div[@class='select-options']//a[@title='Client Action Postponed']/parent::li/parent::ul/li")
@@ -617,7 +616,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//span[text()='Accounting Awarded To:']/parent::span/following-sibling::div//a")
 	WebElement accountingAwardedTo;
 
-	@FindBy(xpath = "//span[text()= 'Mgmt Awarded To:']/parent::span/following-sibling::div//a']")
+	@FindBy(xpath = "//span[text()= 'Mgmt Awarded To:']/parent::span/following-sibling::div//a")
 	WebElement mgmtAwardedTo;
 
 	@FindBy(xpath = "//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Term of Contract']/parent::label/parent::div/input")
@@ -1647,7 +1646,20 @@ public class OpportunitiesPage extends ReusableLibrary {
 		headerSectionList.add("System Information");
 		System.out.println("Header Section Details present in the new account page are:: " + headerSectionList);
 	}
-
+	
+/*	public List<WebElement> findLabelElements(String commonXpath,ArrayList<String> labels){
+		
+		List<WebElement> labelElements = null;
+		String[] elementsXpaths = null;
+		for(int i=0;i<labels.size();i++){
+			String eleXpath = 
+					elementsXpaths[i] = commonXpath.replace("@TEMP", labels.get(i));
+			labelElements.add(driver.findElement(By.xpath(elementsXpaths[i])));
+		}
+		
+		return labelElements;
+	}
+*/
 	/**
 	 * Validating the New Opportunities Page Layout fields
 	 * 
@@ -1660,33 +1672,36 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, menu_Opportunities, true);
 		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
 		Utility_Functions.xClick(driver, newOpportunity, true);
-		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(5);
 		Utility_Functions.xSwitchtoFrame(driver, continueButton);
 		Utility_Functions.xWaitForElementPresent(driver, continueButton, 5);
 		Utility_Functions.xClick(driver, continueButton, true);
-		driver.switchTo().defaultContent();
+		Utility_Functions.timeWait(2);
+		//driver.switchTo().defaultContent();
+		Utility_Functions.xScrollWindow(driver);
 		Utility_Functions.xSwitchtoFrame(driver, viewAllFieldsButton);
 		Utility_Functions.xWaitForElementPresent(driver, viewAllFieldsButton, 5);
-		Utility_Functions.xScrollWindow(driver);
 		Utility_Functions.xClick(driver, viewAllFieldsButton, true);
 		Utility_Functions.timeWait(1);
-		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.xScrollWindow(driver);
 		headerSectionOpportunityPage();
 		labelsOpportunityPage();
-		Utility_Functions.xWaitForElementPresent(driver, headerList, 3);
+		Utility_Functions.xWaitForElementPresent(driver, headerList, 5);
 		System.out.println("Number of headers found  :: "+headerList.size());
 		try {
 			int i2 = 0, count = 0;
 			String[] headerTexts = new String[headerList.size()];
 			for (WebElement element : headerList) {
 				headerTexts[i2] = element.getText();
+				System.out.println("Element found :"+headerTexts[i2]+"  ---  label should be :"+headerSectionList.get(i2));
 				if (headerTexts[i2].contains(headerSectionList.get(i2))) {
 					count++;
 					System.out.println("Verify Add Opportunity Header List  :: " + element.getText());
 					report.updateTestLog("Verify Add Opportunity Header List",
 							element.getText() + " header is present in Add Opportunity Page", Status.PASS);
 				}
-				i2++;
+				i2++;				
+				
 			}
 			System.out.println(count);
 			if (count == 5) {
@@ -1700,26 +1715,28 @@ public class OpportunitiesPage extends ReusableLibrary {
 			System.out.println(e.getMessage());
 		}
 		try {
-			Utility_Functions.xSwitchtoFrame(driver, OpportunityPageLabel);
-			System.out.println("Switched to frame");
-			Utility_Functions.xWaitForElementPresent(driver, labelListOpportunitiesPage, 6);
-			System.out.println("Number of Labels found in Opportunity page :: "+ labelListOpportunitiesPage.size());
+			//Utility_Functions.xSwitchtoFrame(driver, OpportunityPageLabel);
+			//System.out.println("Switched to frame");
+			Utility_Functions.xScrollWindowTop(driver);
+			//Utility_Functions.xWaitForElementPresent(driver, labelListOpportunitiesPage, 6);
+			List<WebElement> OpportunitiesPageLabels = driver.findElements(By.xpath("//*[@class='slds-form-element__label']"));
+			System.out.println("Number of Labels found in Opportunity page :: "+ OpportunitiesPageLabels.size());
+			System.out.println("Number of label text verified "+labelList.size());
 			int i1 = 0, j = 0, countLabelList = 0;
-			String[] labelTexts = new String[labelListOpportunitiesPage.size()];
-			while (j < labelList.size()) {
-				for (WebElement element : labelListOpportunitiesPage) {
+			String[] labelTexts = new String[OpportunitiesPageLabels.size()];
+			for (WebElement element : OpportunitiesPageLabels) {
 					labelTexts[i1] = element.getText();
+					j=0;
+					while (j < labelList.size()) {
 					if (labelTexts[i1].contains(labelList.get(j))) {
-						System.out.println("Verify Add Opportunity Page Label List" + element.getText());
+						System.out.println("Verify Add Opportunity Page Label List  : " + element.getText());
 						report.updateTestLog("Verify Add Opportunity Page Label List",
 								element.getText() + "::::label list is present in Add Opportunity Page", Status.PASS);
 						countLabelList++;
+					 }
+					j++;
 					}
-					i1++;
-				}
-				i1 = 0;
-				j++;
-			}
+			  }
 			System.out.println("Count of Label List::" + countLabelList);
 			if (dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) {
 				countLabelList = 104;
@@ -8738,7 +8755,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, edit, true);
 		report.updateTestLog("Verify Opportunity Edit/Clone", "Edit button is present on Opportunity", Status.PASS);
 		if (dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) {
-			Utility_Functions.timeWait(2);
+			Utility_Functions.timeWait(4);
 			try {
 				Utility_Functions.xSwitchtoFrame(driver, closeDateOpp);
 				Utility_Functions.timeWait(2);
@@ -8746,6 +8763,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
+			   Utility_Functions.xWaitForElementPresent(driver, assignmentTypeOpp, 3);
 			try {
 				if (assignmentTypeOppValueClone.getText().equals("Building Agency Lease")) {
 					Utility_Functions.xSelectDropdownByIndex(assignmentTypeOpp, 2);
@@ -8753,9 +8771,11 @@ public class OpportunitiesPage extends ReusableLibrary {
 					Utility_Functions.xSelectDropdownByIndex(assignmentTypeOpp, 3);
 				} else if (assignmentTypeOppValueClone.getText().equals("Consulting")) {
 					Utility_Functions.xSelectDropdownByIndex(assignmentTypeOpp, 2);
-				} else if (preferredPropertyTypeOpp.getText().equals("--None--")){
+				} 
+				//if (preferredPropertyTypeOpp.getText().equals("--None--")){
+				    Utility_Functions.xWaitForElementPresent(driver, preferredPropertyTypeOpp, 3);
 					Utility_Functions.xSelectDropdownByIndex(preferredPropertyTypeOpp, 1);
-				} 			
+				//} 			
 			} catch (Exception e) {
 				Utility_Functions.xSelectDropdownByIndex(assignmentTypeOpp, 1);
 			}
@@ -8768,14 +8788,20 @@ public class OpportunitiesPage extends ReusableLibrary {
 			if (totalSizeOpp.getText().equals("")) {
 				Utility_Functions.xSendKeys(driver, totalSizeOpp, Integer.toString(value));
 			}
-			Utility_Functions.xWaitForElementPresent(driver, saveNewOpportunity, 3);
+			
+		    Utility_Functions.xWaitForElementPresent(driver, preferredPropertyTypeOpp, 3);
+			if (preferredPropertyTypeOpp.getText().equals("--None--")){
+				Utility_Functions.xSelectDropdownByIndex(preferredPropertyTypeOpp, 1);
+			} 
+			
+			Utility_Functions.xWaitForElementPresent(driver, saveNewOpportunity, 4);
 			Utility_Functions.xClick(driver, saveNewOpportunity, true);
 			Utility_Functions.timeWait(2);
 			report.updateTestLog("Verify Opportunity Edit/Clone", "Opportunity edited and saved successfully",
 					Status.PASS);
-			driver.navigate().refresh();
 			Utility_Functions.timeWait(2);
-			Utility_Functions.xSwitchtoFrame(driver, clone);
+				Utility_Functions.xWaitForElementPresent(driver, clone, 3);
+				Utility_Functions.xSwitchtoFrame(driver, clone);
 			Utility_Functions.timeWait(2);
 			Utility_Functions.xWaitForElementPresent(driver, clone, 3);
 			Utility_Functions.xClick(driver, clone, true);
@@ -8863,7 +8889,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, menu_Opportunities, true);
 		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
 		Utility_Functions.xClick(driver, newOpportunity, true);
-		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(3);
 		Utility_Functions.xSwitchtoFrame(driver, continueButton);
 		Utility_Functions.xWaitForElementPresent(driver, continueButton, 3);
 		Utility_Functions.xClick(driver, opportunityRecordType, true);
@@ -8942,8 +8968,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		}
 		Utility_Functions.xClick(driver, saveNewOpportunity, true);
 		Utility_Functions.timeWait(4);
-		driver.navigate().refresh();
-		Utility_Functions.timeWait(2);
+
 		try {
 			Utility_Functions.xWaitForElementPresent(driver, related, 4);
 			if (related.isDisplayed()) {
@@ -12619,178 +12644,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 	}
 
 
-	public void verifyAutoCreationOfOpportunityInstallments() throws Exception {
-		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
-		Utility_Functions.xClick(driver, menu_Opportunities, true);
-		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
-		Utility_Functions.xClick(driver, newOpportunity, true);
-		Utility_Functions.timeWait(2);
-		System.out.println("My first case");
-		if ((dataTable.getData("General_Data", "TC_ID").contains("APAC"))
-				&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
-			
-			/* Verify that below fields are present in Opportunity Creation page.
-				- Opportunity Currency (defaults to the Users currency)
-				- Consultancy Fee
-				- Principal Fee
-				- Principal Pass-through
-				- Project Value 
-			 */
-			//verify Financial Info label ist 
-			APACProjManagerfinancialInfoLabelList();
-			String commonXpath = "//h3/span[text()='Financial Information']/parent::h3/parent::div//label[contains(@class,'label inputLabel')]/span";
-			
-			Status result = SFUtility_Functions.verifyElementsPresent(driver,APACProjManagerfinancialInfoLabelList,commonXpath);
-			 
-			 if(result == Status.PASS ){
-				 report.updateTestLog("Verify Financial Information Section",
-							"Labels are present in  Financial Information Section:::",  result);
-			  }else{
-				  report.updateTestLog("Verify Financial Information Section",
-							"Labels are not present in  Financial Information Section:::",result);
-			  }
-			 
-			 if (opportunityCurrency.getText().equalsIgnoreCase("Opportunity Currency")) {
-					System.out.println("Verify "+opportunityCurrency.getText()+ " label is present on the page"); 
-					report.updateTestLog("Verify "+
-							opportunityCurrency.getText(), " label is present on the page",Status.PASS);
-				}
-			 
-			 /*
-			  * Complete all mandatory information and Save the Opportunity  :
-			  */
-			 Utility_Functions.xWaitForElementPresent(driver, enterAccountName, 4);
-			 Utility_Functions.xClick(driver, enterAccountName, true);
-			 Utility_Functions.xSendKeys(driver, enterAccountName, "test");	
-			 Utility_Functions.xClick(driver, enterAccountName, true);
-			 Utility_Functions.xWaitForElementPresent(driver, existingAccountValue, 4);
-			 Utility_Functions.xClick(driver, existingAccountValue, true);
-			 
-			 /* Tried to create a new account
-			  * Utility_Functions.xWaitForElementPresent(driver, clickNewAccount, 4);
-			 Utility_Functions.xClick(driver, clickNewAccount, true);
-			 Utility_Functions.xWaitForElementPresent(driver, EnterNewAccountName, 4);				
-			 AccountsPage acc_Functions = new AccountsPage(scriptHelper);
-				 acc_Functions.createAccount();
-				
-			     Utility_Functions.xWaitForElementPresent(driver, selectLeadSource, 3);
-				 Utility_Functions.xClick(driver, selectLeadSource, true);
-				 Utility_Functions.xWaitForElementPresent(driver, selectLeadSource, 3);
-				 Utility_Functions.xClick(driver, selectLeadSource, true);
-				 Utility_Functions.xWaitForElementPresent(driver, LeadSourceValue, 3);
-				 Utility_Functions.xClick(driver, LeadSourceValue, true);
-				*/
-			     Utility_Functions.xWaitForElementPresent(driver, enterNewOpportunityName, 3);
-				 enterNewOpportunityName.clear();
-			     enterNewOpportunityName.sendKeys("APACProjManagerOpportunity");
-			     Utility_Functions.xWaitForElementPresent(driver, selectLeadSource, 3);
-			     selectLeadSource.click();
-			     Utility_Functions.xWaitForElementPresent(driver, LeadSourceValue, 3);
-			     LeadSourceValue.click();		     
-			     
-				 DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-				 Date date = new Date();
-				 Utility_Functions.xSendKeys(driver, enterCloseDate, dateFormat.format(date).toString());
-			     Utility_Functions.xSendKeys(driver, enterCloseDate, Keys.TAB);
-			     Utility_Functions.xWaitForElementPresent(driver, selectSalesStage, 4);
-			     Utility_Functions.xClick(driver, selectSalesStage, true);
-				 Utility_Functions.xWaitForElementPresent(driver, selectSalesStageValue, 4);
-			     Utility_Functions.xClick(driver, selectSalesStageValue, true);
-				 Utility_Functions.xWaitForElementPresent(driver, selectCBREOffice, 4);
-				 Utility_Functions.xClick(driver, selectCBREOffice, true);
-				 Utility_Functions.xWaitForElementPresent(driver, selectCBREOfficeValue, 4);
-				 Utility_Functions.xClick(driver, selectCBREOfficeValue, true);
-			     	Utility_Functions.xWaitForElementPresent(driver, selectCountry, 4);
-			     	Utility_Functions.xClick(driver, selectCountry, true);
-					 Utility_Functions.xWaitForElementPresent(driver, selectCountryValue, 4);
-					 Utility_Functions.xClick(driver, selectCountryValue, true);
-					 Utility_Functions.xWaitForElementPresent(driver, city,4);
-					Utility_Functions.xSendKeys(driver, city, dataTable.getData("General_Data", "City"));
-					
-					Utility_Functions.xWaitForElementPresent(driver, selectAssetType, 4);
-					 Utility_Functions.xClick(driver, selectAssetType, true);
-					 Utility_Functions.xWaitForElementPresent(driver, selectAssetTypeValue, 4);
-					 Utility_Functions.xClick(driver, selectAssetTypeValue, true);
-					 /*Utility_Functions.xWaitForElementPresent(driver, SelectOpportunityCurrency, 4);
-					 Utility_Functions.xClick(driver, SelectOpportunityCurrency, true);
-					Utility_Functions.xWaitForElementPresent(driver, SelectOpportunityCurrencyValue, 4);
-				    Utility_Functions.xClick(driver, SelectOpportunityCurrencyValue, true);
-				    */
-				Utility_Functions.xWaitForElementPresent(driver, selectCityTier, 4);
-					 Utility_Functions.xClick(driver, selectCityTier, true);
-					 Utility_Functions.xWaitForElementPresent(driver, selectCityTierValue, 4);
-					 Utility_Functions.xClick(driver, selectCityTierValue, true);
-				     Utility_Functions.xWaitForElementPresent(driver, saveNewOpp, 4);
-					Utility_Functions.xClick(driver, saveNewOpp, true);
-					Utility_Functions.timeWait(5);
-					if (details.isDisplayed()) {
-						report.updateTestLog("Verify Home Page Tabs", "The opportunity is saved with the all the required fields",
-								Status.PASS);
-					} else {
-						report.updateTestLog("Verify Home Page Tabs",
-								"The opportunity is not saved with the all the required fields", Status.FAIL);
-					}
-						
-					Utility_Functions.timeWait(8);
-					
-				   //verifying financial info section in Details
-					APACProjManagerfinancialInfoLabelListInDetails();
-				   commonXpath = "//span[text() = 'Financial Information']/parent::button/parent::h3/following-sibling::div//span[@class='test-id__field-label slds-form-element__label']";
-					
-					 result = SFUtility_Functions.verifyElementsPresent(driver,APACPjManagerDetailsfinancialInfoLabelList,commonXpath);
-					 
-					 if(result == Status.PASS ){
-						 report.updateTestLog("Verify Financial Information Section in Details page",
-									"Labels are present in  Financial Information Section:::",  result);
-					  }else{
-						  report.updateTestLog("Verify Financial Information Section in Details page",
-									"Labels are not present in  Financial Information Section:::",result);
-					  }
-					 
-				
-			     //Navigate to Related tab and verify 'Opportunity Installment' record has been auto-created 
-					
-					 Utility_Functions.xWaitForElementPresent(driver, opportunityInstallmentLink, 4);
-					 String OppInstallmentText  =  opportunityInstallmentLink.getText();
-					 if(OppInstallmentText.equalsIgnoreCase("Opportunity Installments (1)")){
-						 System.out.println("Opportunity installment is created");
-					 }else{
-						 System.out.println("Opportunity installment is not created");
-					 }
-					 Utility_Functions.xHoverElementclicks(opportunityInstallmentLink, driver);
-					 //Utility_Functions.timeWait(2);
-					 Utility_Functions.xWaitForElementPresent(driver, opportunityInstallmentIdLink, 4);
-					 Utility_Functions.xHoverElementclicks(opportunityInstallmentIdLink, driver);
-					 
-					 //verifying labels in Opportunity Installment Popup
-					 commonXpath = "//a[text()='Opportunity Installments']/parent::h2/parent::div/parent::div/parent::div/parent::div/parent::div/following-sibling::div//a/span[2]";
-					 OpportunityInstallmentlabelsInPopup();
-				     result = SFUtility_Functions.verifyElementsPresent(driver,OpportunityInstallmentlabelsInPopup,commonXpath);
-				     if(result == Status.PASS ){
-						 report.updateTestLog("Verify labels in Opportunity Installment Popup",
-									"Labels are present in Opportunity Installment Popup:::",  result);
-					  }else{
-						  report.updateTestLog("Verify labels in Opportunity Installment Popup",
-									"Labels are not present in Opportunity Installment Popup:::",result);
-					  }
-				     
-				     Utility_Functions.xClick(driver, opportunityInstallmentIdLink, true);
-				   			     
-				   //verifying labels in Opportunity Installment Page
-				     OpportunityInstallmentlabelsInPage();
-					 commonXpath = "//a[@title='Details']/parent::li/parent::ul/parent::div/following-sibling::section//div[@class='test-id__field-label-container']/span";
-						
-				     result = SFUtility_Functions.verifyElementsPresent(driver,OpportunityInstallmentlabelsInPage,commonXpath);
-				     if(result == Status.PASS ){
-						 report.updateTestLog("Verify labels in Opportunity Installment Page",
-									"Labels are present in Opportunity Installment Page:::",  result);
-					  }else{
-						  report.updateTestLog("Verify labels in Opportunity Installment Page",
-									"Labels are not present in Opportunity Installment Page:::",result);
-					  }					 
-				}
 	
-	}	
+	
+		
 	
 	
 	

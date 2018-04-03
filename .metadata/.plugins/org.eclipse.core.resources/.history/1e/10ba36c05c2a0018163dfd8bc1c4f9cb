@@ -1,0 +1,685 @@
+# Framework settings file
+
+# General Settings
+ProjectName=GLOBAL SALESFORCE ENTERPRISE
+DefaultDataSheet=General_Data
+DataReferenceIdentifier=#
+DateFormatString=dd-MMM-yyyy hh:mm:ss a
+ReRunTimes=0
+#Framework
+Approach=KeywordDriven
+#KeywordDriven
+#ModularDriven
+
+# Browser Settings
+# PhantomJSPath=C:\\Javalibs\\Selenium\\Browser Drivers\\phantomjs-2.0.0-windows\\bin\\phantomjs.exe
+# InternetExplorerDriverPath=C:\\Drivers\\IEDriverServer_Win32_2.53.0\\IEDriverServer.exe
+# ChromeDriverPath=E:\\New Project\\chromedriver.exe
+# GeckoDriverPath=C:\\Drivers\\geckodriver-v0.14.0-win64\\geckodriver.exe
+DefaultBrowser=FIREFOX
+
+# Proxy settings (Relevant only for Opera and HtmlUnit)
+ProxyRequired=False
+ProxyHost=proxy.cognizant.com
+ProxyPort=6050
+
+# NTLM Authentication settings (Supported only for HtmlUnit running on local machine)
+ProxyAuthenticationRequired=False
+Domain=cts
+
+Username=141950
+Password=abcde
+
+# General Execution Settings 
+OnError=NEXT_ITERATION
+ObjectSyncTimeout=20
+PageLoadTimeout=60
+ExecutionMode=LOCAL
+DefaultBrowser=FIREFOX
+
+# Allocator Execution Settings (Applicable only during a batch execution using the Allocator)
+RunConfiguration=Regression
+NumberOfThreads=3
+
+# Allocator Execution Settings (Applicable only during a batch execution using the Allocator)
+# RunConfiguration=Regression
+# NumberOfThreads=2
+
+# Remote Execution & Grid Settings (Applicable only if the ExecutionMode is "REMOTE" or "GRID")
+# RemoteUrl=http://10.71.161.62:4444/wd/hub
+# RemoteUrl=http://10.34.186.81:4444/wd/hub
+RemoteUrl=http://10.71.2.37:4444/wd/hub
+# RemoteUrl=http://192.241.145.58:4444/wd/hub
+# RemoteUrl=http://10.45.71.205:4444/wd/hub
+DefaultPlatform=WINDOWS
+
+# Report Settings
+# LogLevel ranges between 0 to 5, with 0 being minimal reporting and 5 being highly detailed reporting
+LogLevel=4
+TestNgReportPath=test-output
+HtmlReport=True
+ExcelReport=False
+IncludeTestDataInReport=False
+TakeScreenshotFailedStep=True
+TakeScreenshotPassedStep=False
+ConsolidateScreenshotsInWordDoc=True
+ConsolidateScreenshotsInPDF=True
+ReportsTheme=CUSTOM
+# AUTUMN, CUSTOM ,CLASSIC, MYSTIC, OLIVE 
+
+# User-defined Settings
+# ApplicationUATUrl=https://cbrecrm--uat.cs96.my.salesforce.com
+# ApplicationFTEUrl=https://cbrecrm--FTE.cs15.my.salesforce.com
+#ApplicationFTE2Url=https://cbrecrm--FTE2.cs91.my.salesforce.com
+ApplicationUrl=https://test.salesforce.com
+RunEnvironment=UAT2
+
+# Mail and SMTP Details
+ToMail=vishnuvardhan.bommisetty@cbre.com	
+SMTPServer=smtp.office365.com
+SMTPPort=587
+
+
+#JIRA Integration Config Details
+Jira_Url=https://cognizantmobilecoe.atlassian.net
+Jira_UserName=admin
+Jira_Password=password
+Jira_Project_ID=10000
+Jira_Issue_Reporter=tester1
+Jira_Issue_Type=Bug
+
+################################################################################
+
+# FTE Environment Credentials
+
+# Username
+# Occupier Brokerage 
+FTEOBAMERBroker=testuser11@cbre.com.crm.fte
+FTEOBAMERManager=testuser12@cbre.com.crm.fte
+FTEOBAMERCSS=testuser13@cbre.com.crm.fte
+
+FTEOBAPACBroker=testuser24@cbre.com.crm.fte
+FTEOBAPACManager=testuser25@cbre.com.crm.fte
+FTEOBAPACCSS=testuser26@cbre.com.crm.fte
+
+FTEOBEMEABroker=testuser45@cbre.com.crm.fte
+FTEOBEMEAManager=testuser46@cbre.com.crm.fte
+FTEOBEMEACSS=testuser47@cbre.com.crm.fte
+
+FTEOBEMEAOccupierClientCare=testuser86@cbre.com.crm.fte
+
+# Agency Brokerage
+FTEABAMERBroker=testuser2@cbre.com.crm.fte
+FTEABAMERManager=testuser3@cbre.com.crm.fte
+FTEABAMERCSS=testuser4@cbre.com.crm.fte
+
+FTEABAPACBroker=testuser15@cbre.com.crm.fte
+FTEABAPACManager=testuser16@cbre.com.crm.fte
+FTEABAPACCSS=testuser17@cbre.com.crm.fte
+
+FTEABEMEABroker=testuser28@cbre.com.crm.fte
+FTEABEMEAManager=testuser29@cbre.com.crm.fte
+FTEABEMEACSS=testuser30@cbre.com.crm.fte
+
+
+# Capital Markets
+FTECMAMERBroker=testuser7@cbre.com.crm.fte
+FTECMAMERManager=testuser8@cbre.com.crm.fte
+FTECMAMERCSS=testuser9@cbre.com.crm.fte
+
+FTECMAPACBroker=testuser20@cbre.com.crm.fte
+FTECMAPACManager=testuser21@cbre.com.crm.fte
+FTECMAPACCSS=testuser22@cbre.com.crm.fte
+FTECMAPACBrokerCampaign=testuser87@cbre.com.crm.fte
+
+FTECMEMEABroker=testuser36@cbre.com.crm.fte
+FTECMEMEAManager=testuser37@cbre.com.crm.fte
+FTECMEMEACSS=testuser38@cbre.com.crm.fte
+
+FTECMEMEABrokerIP=testuser39@cbre.com.crm.fte
+FTECMEMEAManagerIP=testuser40@cbre.com.crm.fte
+FTECMEMEACSSIP=testuser41@cbre.com.crm.fte
+
+FTECMEMEABrokerCA=testuser70@cbre.com.crm.fte
+FTECMEMEAManagerCA=testuser90@cbre.com.crm.fte
+
+FTECMEMEABrokerBCP=testuser71@cbre.com.crm.fte
+FTECMEMEAManagerBCP=testuser68@cbre.com.crm.fte
+
+FTECMEMEABrokerDev=testuser72@cbre.com.crm.fte
+FTECMEMEAManagerDev=testuser69@cbre.com.crm.fte
+FTECMEMEACSSDev=testuser73@cbre.com.crm.fte
+
+FTECMEMEACSSSuperUser=testuser74@cbre.com.crm.fte
+
+FTECMAPACBrokerAUC=testuser79@cbre.com.crm.fte
+FTECMAPACBrokerNZL=testuser80@cbre.com.crm.fte
+FTECMAPACBrokerMetroNZL=testuser81@cbre.com.crm.fte
+FTECMAPACBrokerMetro=testuser82@cbre.com.crm.fte
+FTECMAPACBrokerAUS=testuser83@cbre.com.crm.fte
+FTECMAPACBrokerNSW=testuser84@cbre.com.crm.fte
+FTECMAPACBrokerMVP=testuser88@cbre.com.crm.fte
+FTECMAPACBrokerChristChurch=testuser85@cbre.com.crm.fte
+
+# Global Workspace Solutions
+FTEGWSAPACBroker=testuser67@cbre.com.crm.fte
+FTEGWSAMERManager=testuser66@cbre.com.crm.fte
+FTEGWSAMERBroker=testuser10@cbre.com.crm.fte
+FTEGWSAPACManager=testuser62@cbre.com.crm.fte
+FTEGWSEMEABroker=testuser23@cbre.com.crm.fte
+
+FTEGWSEMEABrokerSuperUser=testuser76@cbre.com.crm.fte
+
+# Valuation & Advisory Services - VAS
+FTEVASAMERManager=testuser65@cbre.com.crm.fte
+
+FTEVASAPACBroker=testuser27@cbre.com.crm.fte
+
+FTEVASEMEABroker=testuser48@cbre.com.crm.fte
+FTEVASEMEAManager=testuser49@cbre.com.crm.fte
+FTEVASEMEACSS=testuser50@cbre.com.crm.fte
+
+FTEVASEMEABrokerSuperUser=testuser78@cbre.com.crm.fte
+ 
+# Asset Services - AS
+
+FTEASAMERBroker=testuser5@cbre.com.crm.fte
+FTEASAMERManager=testuser6@cbre.com.crm.fte
+
+FTEASAPACBroker=testuser18@cbre.com.crm.fte
+FTEASAPACManager=testuser19@cbre.com.crm.fte
+
+FTEASEMEABroker=testuser31@cbre.com.crm.fte
+FTEASEMEAManager=testuser32@cbre.com.crm.fte
+
+FTEASEMEABrokerSuperUser=testuser75@cbre.com.crm.fte
+
+# Data Admin - DA
+
+FTEDAEMEAData = testuser51@cbre.com.crm.fte
+
+# Auckland Broker
+
+FTEAUCAPACBroker=testuser91@cbre.com.crm.fte
+
+# Admin 
+FTESystemAdminUsername=testuser1@cbre.com.crm.fte
+
+FTEAPACProjectManager=testuser94@cbre.com.crm.fte
+FTECMAPACBrokerIndia=testuser92@cbre.com.crm.fte
+FTECMAPACBrokerJapan=testuser93@cbre.com.crm.fte
+
+# Password
+FTEPassword= FTEPasswordRelease42
+FTEAdminPassword=FTEPasswordRelease42
+FTEAUCAPACBrokerPassword=FTEPasswordRelease42
+FTEAuthEndpoint = https://cbrecrm--fte.cs15.my.salesforce.com/services/Soap/u/38.0/
+################################################################################
+# FTE2 Environment Credentials
+
+# FTE2 Environment Credentials
+
+# Username
+# Occupier Brokerage 
+FTE2OBAMERBroker=testuser11@cbre.com.crm.fte2
+FTE2OBAMERManager=testuser12@cbre.com.crm.fte2
+FTE2OBAMERCSS=testuser13@cbre.com.crm.fte2
+
+FTE2OBAPACBroker=testuser24@cbre.com.crm.fte2
+FTE2OBAPACManager=testuser25@cbre.com.crm.fte2
+FTE2OBAPACCSS=testuser26@cbre.com.crm.fte2
+
+FTE2OBEMEABroker=testuser45@cbre.com.crm.fte2
+FTE2OBEMEAManager=testuser46@cbre.com.crm.fte2
+FTE2OBEMEACSS=testuser47@cbre.com.crm.fte2
+
+FTE2OBEMEAOccupierClientCare=testuser86@cbre.com.crm.fte2
+
+# Agency Brokerage
+FTE2ABAMERBroker=testuser2@cbre.com.crm.fte2
+FTE2ABAMERManager=testuser3@cbre.com.crm.fte2
+FTE2ABAMERCSS=testuser4@cbre.com.crm.fte2
+
+FTE2ABAPACBroker=testuser15@cbre.com.crm.fte2
+FTE2ABAPACManager=testuser16@cbre.com.crm.fte2
+FTE2ABAPACCSS=testuser17@cbre.com.crm.fte2
+
+FTE2ABEMEABroker=testuser28@cbre.com.crm.fte2
+FTE2ABEMEAManager=testuser29@cbre.com.crm.fte2
+FTE2ABEMEACSS=testuser30@cbre.com.crm.fte2
+
+# Capital Markets
+FTE2CMAMERBroker=testuser7@cbre.com.crm.fte2
+FTE2CMAMERManager=testuser8@cbre.com.crm.fte2
+FTE2CMAMERCSS=testuser9@cbre.com.crm.fte2
+
+FTE2CMAPACBroker=testuser20@cbre.com.crm.fte2
+FTE2CMAPACManager=testuser21@cbre.com.crm.fte2
+FTE2CMAPACCSS=testuser22@cbre.com.crm.fte2
+FTE2CMAPACBrokerCampaign=testuser87@cbre.com.crm.fte2
+
+FTE2CMEMEABroker=testuser36@cbre.com.crm.fte2
+FTE2CMEMEAManager=testuser37@cbre.com.crm.fte2
+FTE2CMEMEACSS=testuser38@cbre.com.crm.fte2
+
+FTE2CMEMEABrokerIP=testuser39@cbre.com.crm.fte2
+FTE2CMEMEAManagerIP=testuser40@cbre.com.crm.fte2
+FTE2CMEMEACSSIP=testuser41@cbre.com.crm.fte2
+
+FTE2CMEMEABrokerCA=testuser70@cbre.com.crm.fte2
+FTE2CMEMEAManagerCA=testuser90@cbre.com.crm.fte2
+
+FTE2CMEMEABrokerBCP=testuser71@cbre.com.crm.fte2
+FTE2CMEMEAManagerBCP=testuser68@cbre.com.crm.fte2
+
+FTE2CMEMEABrokerDev=testuser72@cbre.com.crm.fte2
+FTE2CMEMEAManagerDev=testuser69@cbre.com.crm.fte2
+FTE2CMEMEACSSDev=testuser73@cbre.com.crm.fte2
+
+FTE2CMEMEACSSSuperUser=testuser74@cbre.com.crm.fte2
+
+FTE2CMAPACBrokerAUC=testuser79@cbre.com.crm.fte2
+FTE2CMAPACBrokerNZL=testuser80@cbre.com.crm.fte2
+FTE2CMAPACBrokerMetroNZL=testuser81@cbre.com.crm.fte2
+FTE2CMAPACBrokerMetro=testuser82@cbre.com.crm.fte2
+FTE2CMAPACBrokerAUS=testuser83@cbre.com.crm.fte2
+FTE2CMAPACBrokerNSW=testuser84@cbre.com.crm.fte2
+FTE2CMAPACBrokerMVP=testuser88@cbre.com.crm.fte2
+FTE2CMAPACBrokerChristChurch=testuser85@cbre.com.crm.fte2
+
+# Global Workspace Solutions
+FTE2GWSAPACBroker=testuser67@cbre.com.crm.fte2
+FTE2GWSAMERManager=testuser66@cbre.com.crm.fte2
+FTE2GWSAMERBroker=testuser10@cbre.com.crm.fte2
+FTE2GWSAPACManager=testuser62@cbre.com.crm.fte2
+FTE2GWSEMEABroker=testuser23@cbre.com.crm.fte2
+
+FTE2GWSEMEABrokerSuperUser=testuser76@cbre.com.crm.fte2
+
+# Valuation & Advisory Services - VAS
+FTE2VASAMERManager=testuser65@cbre.com.crm.fte2
+
+FTE2VASAPACBroker=testuser27@cbre.com.crm.fte2
+
+FTE2VASEMEABroker=testuser48@cbre.com.crm.fte2
+FTE2VASEMEAManager=testuser49@cbre.com.crm.fte2
+FTE2VASEMEACSS=testuser50@cbre.com.crm.fte2
+
+FTE2VASEMEABrokerSuperUser=testuser78@cbre.com.crm.fte2
+ 
+# Asset Services - AS
+
+FTE2ASAMERBroker=testuser5@cbre.com.crm.fte2
+FTE2ASAMERManager=testuser6@cbre.com.crm.fte2
+
+FTE2ASAPACBroker=testuser18@cbre.com.crm.fte2
+FTE2ASAPACManager=testuser19@cbre.com.crm.fte2
+
+FTE2ASEMEABroker=testuser31@cbre.com.crm.fte2
+FTE2ASEMEAManager=testuser32@cbre.com.crm.fte2
+
+FTE2ASAPACBroker=testuser18@cbre.com.crm.fte2
+FTE2ASAPACManager=testuser19@cbre.com.crm.fte2
+
+FTE2ASEMEABroker=testuser31@cbre.com.crm.fte2
+FTE2ASEMEAManager=testuser32@cbre.com.crm.fte2
+
+FTE2ASEMEABrokerSuperUser=testuser75@cbre.com.crm.fte2
+
+# Data Admin - DA
+
+FTE2DAEMEAData = testuser51@cbre.com.crm.fte2
+FTE2DAASIAData = testuser99@cbre.com.crm.fte2
+FTE2DAPACIData = testuser100@cbre.com.crm.fte2
+
+# Auckland Broker
+
+FTE2AUCAPACBroker=testuser91@cbre.com.crm.fte2
+
+# Admin 
+FTE2SystemAdminUsername=testuser1@cbre.com.crm.fte2
+
+FTE2APACProjectManager=testuser94@cbre.com.crm.fte2
+FTE2CMAPACBrokerIndia=testuser92@cbre.com.crm.fte2
+FTE2CMAPACBrokerJapan=testuser93@cbre.com.crm.fte2
+
+
+#France Users
+FTE2FRANEMEAManager=testuser98@cbre.com.crm.fte2
+FTE2FDIGEMEAManager=testuser97@cbre.com.crm.fte2
+FTE2FDIREMEAManager=testuser96@cbre.com.crm.fte2
+FTE2FDIGEMEAData=testuser95@cbre.com.crm.fte2
+
+# Password
+FTE2Password=FTE2PasswordRelease43
+FTE2AdminPassword=FTE2PasswordRelease43
+FTE2AuthEndpoint = https://cbrecrm--fte2.cs13.my.salesforce.com/services/Soap/u/38.0/
+################################################################################
+
+# UAT 2 Environment Credentials
+
+# UAT2 Environment Credentials
+
+# Username
+# Occupier Brokerage 
+UAT2OBAMERBroker=testuser11@cbre.com.crm.uat2
+UAT2OBAMERManager=testuser12@cbre.com.crm.uat2
+UAT2OBAMERCSS=testuser13@cbre.com.crm.uat2
+
+UAT2OBAPACBroker=testuser24@cbre.com.crm.uat2
+UAT2OBAPACManager=testuser25@cbre.com.crm.uat2
+UAT2OBAPACCSS=testuser26@cbre.com.crm.uat2
+
+UAT2OBEMEABroker=testuser45@cbre.com.crm.uat2
+UAT2OBEMEAManager=testuser46@cbre.com.crm.uat2
+UAT2OBEMEACSS=testuser47@cbre.com.crm.uat2
+
+UAT2OBEMEAOccupierClientCare=testuser86@cbre.com.crm.uat2
+
+# Agency Brokerage
+UAT2ABAMERBroker=testuser2@cbre.com.crm.uat2
+UAT2ABAMERManager=testuser3@cbre.com.crm.uat2
+UAT2ABAMERCSS=testuser4@cbre.com.crm.uat2
+
+UAT2ABAPACBroker=testuser15@cbre.com.crm.uat2
+UAT2ABAPACManager=testuser16@cbre.com.crm.uat2
+UAT2ABAPACCSS=testuser17@cbre.com.crm.uat2
+
+UAT2ABAPACBroker=testuser15@cbre.com.crm.uat2
+UAT2ABAPACManager=testuser16@cbre.com.crm.uat2
+UAT2ABAPACCSS=testuser17@cbre.com.crm.uat2
+
+UAT2ABEMEABroker=testuser28@cbre.com.crm.uat2
+UAT2ABEMEAManager=testuser29@cbre.com.crm.uat2
+UAT2ABEMEACSS=testuser30@cbre.com.crm.uat2
+
+
+# Capital Markets
+UAT2CMAMERBroker=testuser7@cbre.com.crm.uat2
+UAT2CMAMERManager=testuser8@cbre.com.crm.uat2
+UAT2CMAMERCSS=testuser9@cbre.com.crm.uat2
+
+UAT2CMAPACBroker=testuser20@cbre.com.crm.uat2
+UAT2CMAPACManager=testuser21@cbre.com.crm.uat2
+UAT2CMAPACCSS=testuser22@cbre.com.crm.uat2
+UAT2CMAPACBrokerCampaign=testuser87@cbre.com.crm.uat2
+
+UAT2CMEMEABroker=testuser36@cbre.com.crm.uat2
+UAT2CMEMEAManager=testuser37@cbre.com.crm.uat2
+UAT2CMEMEACSS=testuser38@cbre.com.crm.uat2
+
+UAT2CMEMEABrokerIP=testuser39@cbre.com.crm.uat2
+UAT2CMEMEAManagerIP=testuser40@cbre.com.crm.uat2
+UAT2CMEMEACSSIP=testuser41@cbre.com.crm.uat2
+
+UAT2CMEMEABrokerCA=testuser70@cbre.com.crm.uat2
+UAT2CMEMEAManagerCA=testuser90@cbre.com.crm.uat2
+
+UAT2CMEMEABrokerBCP=testuser71@cbre.com.crm.uat2
+UAT2CMEMEAManagerBCP=testuser68@cbre.com.crm.uat2
+
+UAT2CMEMEABrokerIP=testuser39@cbre.com.crm.uat2
+UAT2CMEMEAManagerIP=testuser40@cbre.com.crm.uat2
+UAT2CMEMEACSSIP=testuser41@cbre.com.crm.uat2
+
+UAT2CMEMEABrokerCA=testuser70@cbre.com.crm.uat2
+UAT2CMEMEAManagerCA=testuser90@cbre.com.crm.uat2
+
+UAT2CMEMEABrokerBCP=testuser71@cbre.com.crm.uat2
+UAT2CMEMEAManagerBCP=testuser68@cbre.com.crm.uat2
+
+UAT2CMEMEABrokerDev=testuser72@cbre.com.crm.uat2
+UAT2CMEMEAManagerDev=testuser69@cbre.com.crm.uat2
+UAT2CMEMEACSSDev=testuser73@cbre.com.crm.uat2
+
+UAT2CMEMEACSSSuperUser=testuser74@cbre.com.crm.uat2
+
+UAT2CMAPACBrokerAUC=testuser79@cbre.com.crm.uat2
+UAT2CMAPACBrokerNZL=testuser80@cbre.com.crm.uat2
+UAT2CMAPACBrokerMetroNZL=testuser81@cbre.com.crm.uat2
+UAT2CMAPACBrokerMetro=testuser82@cbre.com.crm.uat2
+UAT2CMAPACBrokerAUS=testuser83@cbre.com.crm.uat2
+UAT2CMAPACBrokerNSW=testuser84@cbre.com.crm.uat2
+UAT2CMAPACBrokerMVP=testuser88@cbre.com.crm.uat2
+UAT2CMAPACBrokerChristChurch=testuser85@cbre.com.crm.uat2
+
+# Global Workspace Solutions
+UAT2GWSAPACBroker=testuser67@cbre.com.crm.uat2
+UAT2GWSAMERManager=testuser66@cbre.com.crm.uat2
+UAT2GWSAMERBroker=testuser10@cbre.com.crm.uat2
+UAT2GWSAPACManager=testuser62@cbre.com.crm.uat2
+UAT2GWSEMEABroker=testuser23@cbre.com.crm.uat2
+
+UAT2GWSEMEABrokerSuperUser=testuser76@cbre.com.crm.uat2
+
+# Valuat2ion & Advisory Services - VAS
+UAT2VASAMERManager=testuser65@cbre.com.crm.uat2
+
+UAT2VASAPACBroker=testuser27@cbre.com.crm.uat2
+
+UAT2VASEMEABroker=testuser48@cbre.com.crm.uat2
+UAT2VASEMEAManager=testuser49@cbre.com.crm.uat2
+UAT2VASEMEACSS=testuser50@cbre.com.crm.uat2
+
+UAT2VASAPACBroker=testuser27@cbre.com.crm.uat2
+
+UAT2VASEMEABroker=testuser48@cbre.com.crm.uat2
+UAT2VASEMEAManager=testuser49@cbre.com.crm.uat2
+UAT2VASEMEACSS=testuser50@cbre.com.crm.uat2
+
+UAT2VASEMEABrokerSuperUser=testuser78@cbre.com.crm.uat2
+ 
+# Asset Services - AS
+
+UAT2ASAMERBroker=testuser5@cbre.com.crm.uat2
+UAT2ASAMERManager=testuser6@cbre.com.crm.uat2
+
+UAT2ASAPACBroker=testuser18@cbre.com.crm.uat2
+UAT2ASAPACManager=testuser19@cbre.com.crm.uat2
+
+UAT2ASEMEABroker=testuser31@cbre.com.crm.uat2
+UAT2ASEMEAManager=testuser32@cbre.com.crm.uat2
+
+UAT2ASAPACBroker=testuser18@cbre.com.crm.uat2
+UAT2ASAPACManager=testuser19@cbre.com.crm.uat2
+
+UAT2ASEMEABroker=testuser31@cbre.com.crm.uat2
+UAT2ASEMEAManager=testuser32@cbre.com.crm.uat2
+
+UAT2ASEMEABrokerSuperUser=testuser75@cbre.com.crm.uat2
+
+# Data Admin - DA
+
+UAT2DAEMEAData = testuser51@cbre.com.crm.uat2
+UAT2DaASIAData = testuser99@cbre.com.crm.uat2
+UAT2DAPACIData = testuser100@cbre.com.crm.uat2
+
+# Auckland Broker
+
+UAT2AUCAPACBroker=testuser91@cbre.com.crm.uat2
+
+# Admin 
+UAT2SystemAdminUsername=testuser1@cbre.com.crm.uat2
+
+UAT2APACProjectManager=testuser94@cbre.com.crm.uat2
+UAT2CMAPACBrokerIndia=testuser92@cbre.com.crm.uat2
+UAT2CMAPACBrokerJapan=testuser93@cbre.com.crm.uat2
+
+#France Users
+UAT2FRANEMEAManager=testuser98@cbre.com.crm.uat2
+UAT2FDIGEMEAManager=testuser97@cbre.com.crm.uat2
+UAT2FDIREMEAManager=testuser96@cbre.com.crm.uat2
+UAT2FDIGEMEAData=testuser95@cbre.com.crm.uat2
+
+# Password
+UAT2Password=UAT2PasswordRelease43
+UAT2AdminPassword=UAT2PasswordRelease43
+UAT2AuthEndpoint=https://cbrecrm--uat2.cs94.my.salesforce.com/services/Soap/u/38.0/
+################################################################################
+
+
+# UAT Environment Credentials
+
+# Username
+# Occupier Brokerage 
+UATOBAMERBroker=testuser11@cbre.com.crm.uat
+UATOBAMERManager=testuser12@cbre.com.crm.uat
+UATOBAMERCSS=testuser13@cbre.com.crm.uat
+
+UATOBAPACBroker=testuser24@cbre.com.crm.uat
+UATOBAPACManager=testuser25@cbre.com.crm.uat
+UATOBAPACCSS=testuser26@cbre.com.crm.uat
+
+UATOBEMEABroker=testuser45@cbre.com.crm.uat
+UATOBEMEAManager=testuser46@cbre.com.crm.uat
+UATOBEMEACSS=testuser47@cbre.com.crm.uat
+
+UATOBEMEAOccupierClientCare=testuser86@cbre.com.crm.uat
+
+# Agency Brokerage
+UATABAMERBroker=testuser2@cbre.com.crm.uat
+UATABAMERManager=testuser3@cbre.com.crm.uat
+UATABAMERCSS=testuser4@cbre.com.crm.uat
+
+UATABAPACBroker=testuser15@cbre.com.crm.uat
+UATABAPACManager=testuser16@cbre.com.crm.uat
+UATABAPACCSS=testuser17@cbre.com.crm.uat
+
+UATABAPACBroker=testuser15@cbre.com.crm.uat
+UATABAPACManager=testuser16@cbre.com.crm.uat
+UATABAPACCSS=testuser17@cbre.com.crm.uat
+
+UATABEMEABroker=testuser28@cbre.com.crm.uat
+UATABEMEAManager=testuser29@cbre.com.crm.uat
+UATABEMEACSS=testuser30@cbre.com.crm.uat
+
+
+# Capital Markets
+UATCMAMERBroker=testuser7@cbre.com.crm.uat
+UATCMAMERManager=testuser8@cbre.com.crm.uat
+UATCMAMERCSS=testuser9@cbre.com.crm.uat
+
+UATCMAPACBroker=testuser20@cbre.com.crm.uat
+UATCMAPACManager=testuser21@cbre.com.crm.uat
+UATCMAPACCSS=testuser22@cbre.com.crm.uat
+UATCMAPACBrokerCampaign=testuser87@cbre.com.crm.uat
+
+UATCMEMEABroker=testuser36@cbre.com.crm.uat
+UATCMEMEAManager=testuser37@cbre.com.crm.uat
+UATCMEMEACSS=testuser38@cbre.com.crm.uat
+
+UATCMEMEABrokerIP=testuser39@cbre.com.crm.uat
+UATCMEMEAManagerIP=testuser40@cbre.com.crm.uat
+UATCMEMEACSSIP=testuser41@cbre.com.crm.uat
+
+UATCMEMEABrokerCA=testuser70@cbre.com.crm.uat
+UATCMEMEAManagerCA=testuser90@cbre.com.crm.uat
+
+UATCMEMEABrokerBCP=testuser71@cbre.com.crm.uat
+UATCMEMEAManagerBCP=testuser68@cbre.com.crm.uat
+
+UATCMEMEABrokerIP=testuser39@cbre.com.crm.uat
+UATCMEMEAManagerIP=testuser40@cbre.com.crm.uat
+UATCMEMEACSSIP=testuser41@cbre.com.crm.uat
+
+UATCMEMEABrokerCA=testuser70@cbre.com.crm.uat
+UATCMEMEAManagerCA=testuser90@cbre.com.crm.uat
+
+UATCMEMEABrokerBCP=testuser71@cbre.com.crm.uat
+UATCMEMEAManagerBCP=testuser68@cbre.com.crm.uat
+
+UATCMEMEABrokerDev=testuser72@cbre.com.crm.uat
+UATCMEMEAManagerDev=testuser69@cbre.com.crm.uat
+UATCMEMEACSSDev=testuser73@cbre.com.crm.uat
+
+UATCMEMEACSSSuperUser=testuser74@cbre.com.crm.uat
+
+UATCMAPACBrokerAUC=testuser79@cbre.com.crm.uat
+UATCMAPACBrokerNZL=testuser80@cbre.com.crm.uat
+UATCMAPACBrokerMetroNZL=testuser81@cbre.com.crm.uat
+UATCMAPACBrokerMetro=testuser82@cbre.com.crm.uat
+UATCMAPACBrokerAUS=testuser83@cbre.com.crm.uat
+UATCMAPACBrokerNSW=testuser84@cbre.com.crm.uat
+UATCMAPACBrokerMVP=testuser88@cbre.com.crm.uat
+UATCMAPACBrokerChristChurch=testuser85@cbre.com.crm.uat
+
+# Global Workspace Solutions
+UATGWSAPACBroker=testuser67@cbre.com.crm.uat
+UATGWSAMERManager=testuser66@cbre.com.crm.uat
+UATGWSAMERBroker=testuser10@cbre.com.crm.uat
+UATGWSAPACManager=testuser62@cbre.com.crm.uat
+UATGWSEMEABroker=testuser23@cbre.com.crm.uat
+
+UATGWSEMEABrokerSuperUser=testuser76@cbre.com.crm.uat
+
+# Valuation & Advisory Services - VAS
+UATVASAMERManager=testuser65@cbre.com.crm.uat
+
+UATVASAPACBroker=testuser27@cbre.com.crm.uat
+
+UATVASEMEABroker=testuser48@cbre.com.crm.uat
+UATVASEMEAManager=testuser49@cbre.com.crm.uat
+UATVASEMEACSS=testuser50@cbre.com.crm.uat
+
+UATVASAPACBroker=testuser27@cbre.com.crm.uat
+
+UATVASEMEABroker=testuser48@cbre.com.crm.uat
+UATVASEMEAManager=testuser49@cbre.com.crm.uat
+UATVASEMEACSS=testuser50@cbre.com.crm.uat
+
+UATVASEMEABrokerSuperUser=testuser78@cbre.com.crm.uat
+ 
+# Asset Services - AS
+
+UATASAMERBroker=testuser5@cbre.com.crm.uat
+UATASAMERManager=testuser6@cbre.com.crm.uat
+
+UATASAPACBroker=testuser18@cbre.com.crm.uat
+UATASAPACManager=testuser19@cbre.com.crm.uat
+
+UATASEMEABroker=testuser31@cbre.com.crm.uat
+UATASEMEAManager=testuser32@cbre.com.crm.uat
+
+UATASAPACBroker=testuser18@cbre.com.crm.uat
+UATASAPACManager=testuser19@cbre.com.crm.uat
+
+UATASEMEABroker=testuser31@cbre.com.crm.uat
+UATASEMEAManager=testuser32@cbre.com.crm.uat
+
+UATASEMEABrokerSuperUser=testuser75@cbre.com.crm.uat
+
+# Data Admin - DA
+
+UATDAEMEAData = testuser51@cbre.com.crm.uat
+UATDaASIAData = testuser99@cbre.com.crm.uat
+UATDAPACIData = testuser100@cbre.com.crm.uat
+
+# Auckland Broker
+
+UATAUCAPACBroker=testuser91@cbre.com.crm.uat
+
+# Admin 
+UATSystemAdminUsername=testuser1@cbre.com.crm.uat
+
+UATAPACProjectManager=testuser94@cbre.com.crm.uat
+UATCMAPACBrokerIndia=testuser92@cbre.com.crm.uat
+UATCMAPACBrokerJapan=testuser93@cbre.com.crm.uat
+
+#France Users
+UATFRANEMEAManager=testuser98@cbre.com.crm.uat
+UATFDIGEMEAManager=testuser97@cbre.com.crm.uat
+UATFDIREMEAManager=testuser96@cbre.com.crm.uat
+UATFDIGEMEAData=testuser95@cbre.com.crm.uat
+
+# Password
+UATPassword=UATPasswordRelease43
+UATAdminPassword=UATPasswordRelease43
+UATAuthEndpoint=https://cbrecrm--uat.cs97.my.salesforce.com/services/Soap/u/38.0/
+################################################################################
+
+ApplicationId=6
+AutomationProcessId=14
+AutomationToolId=19
+Version=4.0
+Cycle=SDFC_Build
+Description=SFDC_Environment
