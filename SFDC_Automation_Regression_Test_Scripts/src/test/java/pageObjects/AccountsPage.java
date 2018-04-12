@@ -18,6 +18,7 @@ import org.openqa.selenium.support.PageFactory;
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
+import com.sforce.soap.partner.SaveResult;
 
 import pagesAPI.AccountsFunctions;
 import pagesAPI.SearchTextSOQL;
@@ -451,7 +452,7 @@ public class AccountsPage extends ReusableLibrary {
 	@FindBy(xpath = "//button[contains(@class,'context-bar__label-action')][text()='More']")
 	WebElement more;
 
-	@FindBy(xpath = "//a[@role='menuitem']/span[contains(@class,'slds-truncate')][text()='Private Tags']")
+	@FindBy(xpath = "//a[@role='menuitem']/span/span[text()='Private Tags']")
 	WebElement more_PrivateTags;
 
 	@FindBy(xpath = "//h1[contains(@class,'slds-page-header__title')]/span")
@@ -708,20 +709,20 @@ public class AccountsPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//ul[contains(@class,'forceActionsContainer')]//a[@class='forceActionLink']/div[text()='Edit']")
 	WebElement edit;
-
-	@FindBy(xpath = "//a[@aria-label='APAC Industry Type']")
+	
+	@FindBy(xpath = "//span[text()='APAC Industry Type']/parent::span/following-sibling::div//a")
 	WebElement apacIndustryEditPage;
 
 	@FindBy(xpath = "//div[@class='select-options']//a[@title='Accommodation']")
 	WebElement apacIndustryValueEditPage;
 
-	@FindBy(xpath = "//a[@aria-label='APAC Sub Industry']")
+	@FindBy(xpath = "//span[text()='APAC Sub Industry']/parent::span/following-sibling::div//a")
 	WebElement apacSubIndustryEditPage;
 
 	@FindBy(xpath = "//div[@class='select-options']//a[@title='Hospitality']")
 	WebElement apacSubIndustryValueEditPage;
 
-	@FindBy(xpath = "//a[@aria-label='Legal Status']")
+	@FindBy(xpath = "//span[text()='Legal Status']/parent::span/following-sibling::div//a")
 	WebElement legalStatusEditPage;
 
 	@FindBy(xpath = "//div[@class='select-options']//a[@title='Corporation']")
@@ -896,6 +897,7 @@ public class AccountsPage extends ReusableLibrary {
 	
 	@FindBy (xpath = "//div[@title='Delete' and text()='Delete']/parent::a[@title='Delete']")
 	WebElement DeleteClone;
+	
 	
 	DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 	Date date = new Date();
@@ -2483,6 +2485,7 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
 		Utility_Functions.xClick(driver, menu_Accounts, true);
 		report.updateTestLog("Verify New Activity Type ", "Accounts is Displayed ", Status.PASS);
+		Utility_Functions.timeWait(1);
 		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
 		Utility_Functions.xClick(driver, recentlyViewed, true);
 		report.updateTestLog("Verify New Activity Type ", "Recently viewed Accounts are Displayed ", Status.PASS);
@@ -5507,4 +5510,70 @@ public class AccountsPage extends ReusableLibrary {
         	
             	
             }
-            }
+            
+
+/** 
+	 * @Description : Method to create account with required field
+	 * @TestStep1:Pre-requisite:Login as APAC/JP Profile 
+	 * @TestStep2:
+	 * @Release  R43 - User Story Test Case # LR4306
+	 * @author Swapna
+	 * @Team: CBRE Global
+	 * @param None 
+	 * @CreationDate 02/07/2018 - R43 -Workout
+      */
+          
+      @FindBy(xpath ="//span[text()='Account Name']/parent::label/parent::div//input")
+      WebElement newAccountName;  	      
+            
+      @FindBy(xpath = "//span[text()='Billing Country']/parent::span/following-sibling::div//a")
+      WebElement country;
+      
+      @FindBy(xpath = "//span[text()='Billing Street']/parent::label/following-sibling::textarea")
+      WebElement street;
+      
+      @FindBy(xpath = "//span[text()='Billing City']/parent::label/following-sibling::input")
+      WebElement city;
+      
+      @FindBy(xpath = "//span[contains(text(),'Billing State')]/parent::span/following-sibling::div//a")
+      WebElement state;
+      
+      @FindBy(xpath = "//span[contains(text(),'Billing Zip')]/parent::label/following-sibling::input")
+      WebElement zipcode;
+     
+      //saveButton is already there;
+    
+      
+      public void createAccount() {
+  		try { 
+  			
+  			String countryStr = "//li/a[@title = '"+dataTable.getData("General_Data", "Country")+"']";
+  			String stateStr = "//li/a[@title = '"+dataTable.getData("General_Data", "State")+"']";
+  			
+  			String accountName = Utility_Functions.xRandomFunction() + "-" + dataTable.getData("General_Data", "Name");
+//???		                  Utility_Functions.xWaitForElementPresent(driver, newAccountName, 4);
+//unable to locate  			Utility_Functions.xClick(driver, newAccountName, true);  			
+  			Utility_Functions.xSendKeys(driver, newAccountName, accountName);
+  			Utility_Functions.xWaitForElementPresent(driver, country, 4);
+  			Utility_Functions.xClick(driver, country, true);
+  			Utility_Functions.xWaitForElementPresent(driver, By.xpath(countryStr), 4);
+  			driver.findElement(By.xpath(countryStr)).click();
+  			Utility_Functions.xWaitForElementPresent(driver, street, 4);
+  			Utility_Functions.xSendKeys(driver, street,dataTable.getData("General_Data", "Street"));
+  			Utility_Functions.xWaitForElementPresent(driver, city, 4);
+  			Utility_Functions.xSendKeys(driver, city,dataTable.getData("General_Data", "City"));
+  			Utility_Functions.xWaitForElementPresent(driver, state, 4);
+  			Utility_Functions.xClick(driver, state, true);
+  			Utility_Functions.xWaitForElementPresent(driver, By.xpath(stateStr), 4);
+  			driver.findElement(By.xpath(stateStr)).click();
+  			Utility_Functions.xWaitForElementPresent(driver, zipcode, 4);
+  			Utility_Functions.xSendKeys(driver, zipcode,dataTable.getData("General_Data", "Zipcode"));
+  			Utility_Functions.xWaitForElementPresent(driver, saveButton, 4);
+  			Utility_Functions.xClick(driver, saveButton, true);
+  			
+  		}catch(Exception e){
+  			System.out.println(e.getMessage());
+  		}
+      }
+  		    
+}

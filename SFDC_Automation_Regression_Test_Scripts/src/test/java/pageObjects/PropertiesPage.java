@@ -28,7 +28,7 @@ import supportLibraries.Utility_Functions;
 public class PropertiesPage extends ReusableLibrary {
 	/*
 	 * Constructor to initialize the business component library
-	 * 
+	 *
 	 * @param scriptHelper The {@link ScriptHelper} object passed from the
 	 * {@link DriverScript}
 	 */
@@ -43,9 +43,9 @@ public class PropertiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//*[text()='More']")
 	WebElement menu_More;
 
-	@FindBy(xpath = "//a[contains(@href,'Property__c/home') and @role='menuitem']")
+	@FindBy(xpath = "//a[@role='menuitem']//span[text()='Properties']")
 	WebElement properties;
-////a[@role='menuitem']/span[contains(@class,'slds-truncate')][text()='Properties']
+
 	@FindBy(xpath = "//div[@class='overflowList']//a[@title='Properties'][text()='Properties']")
 	WebElement propertiesEnv;
 
@@ -63,7 +63,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//div[@class='slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2']/div/label[@for='property-name']/parent::div//div/input")
 	List<WebElement> buildingPropertyName1;
-	
+
 	@FindBy(xpath = "//div[@class='slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2']/div/label[@for='property-name']/parent::div//div/input")
 	WebElement buildingPropertyName;
 
@@ -109,12 +109,12 @@ public class PropertiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//a[@role='menuitem']/span[contains(@class,'slds-truncate')][text()='Campaigns']")
 	WebElement campaigns;
 
-	@FindBy(xpath = "//div[@class='overflowList']//a[@title='Campaigns'][text()='Campaigns']")
+	@FindBy(xpath = "//div[@role='menu']//a/span/span[text()='Campaigns']")
 	WebElement campaignsEnv;
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 * @author Ramya
 	 *
 	 */
@@ -173,7 +173,7 @@ public class PropertiesPage extends ReusableLibrary {
 	@FindBy(xpath = "// input [@value= 'Cancel']")
 	WebElement cancelNewActivityLayoutPage;
 
-	@FindBy(xpath = "//ul[@class='slds-button-group slds-m-left--xx-small oneActionsRibbon forceActionsContainer']//li/a/div[text()='New']")
+	@FindBy(xpath = "//a[@title='New']/div[text()='New']")
 	WebElement newProperties;
 
 	@FindBy(xpath = "//label[text()='Building/Property Name']/parent::div/parent::div//div[contains(@class,'requiredInput')]//input[contains(@id,'propertyEditForm')]")
@@ -457,7 +457,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//span[text()='Add']")
 	WebElement addActivity;
-	
+
 	@FindBy(xpath = "//button[@title='Add']")
 	List<WebElement> addEventActivity;
 
@@ -526,7 +526,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//button[@title='Add']")
 	WebElement addBtnTask;
-	
+
 	@FindBy(xpath = "//button[@title='Add']")
 	List<WebElement> addBtnTask1;
 
@@ -544,146 +544,146 @@ public class PropertiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//a[text()='Private - Initial Meeting']")
 	WebElement activityType1;
-	
+
 	@FindBy(xpath = "//*[contains(@class ,'label') and text()='Campaigns']")
 	WebElement campaign;
-	
+
 	@FindBy(xpath = "//*[contains(@class ,'label') and text()='Comps']")
 	WebElement comps;
-	
+
 	@FindBy(xpath = "//div[@class='slds-truncate'][@title='New']")
 	WebElement newComps;
-	
+
 	@FindBy(xpath = "//button[contains(@class,'neutral uiButton--default uiButton--br')]")
 	WebElement nextBtnComps;
-	
+
 	@FindBy(xpath = "//input[@class=' input' and @maxlength = '80']")
 	List<WebElement> compsName;
-	
+
 	@FindBy(xpath = "//button[contains(@class, 'Button-') and @title='Save']")
 	WebElement saveComps;
-	
+
 	@FindBy(xpath = "//*[contains(@class ,'label') and text()='Space Assessments']")
 	WebElement spaces;
-	
+
 	@FindBy(xpath = "//div[@class='slds-truncate'][@title='New']")
 	WebElement newSpaces;
-	
-	
+
+
 	@FindBy(xpath = "//div[@class='slds-truncate'][@title='New']")
 	WebElement newCampaigns;
-	
+
 	@FindBy(xpath = "//input[@class=' input' and @maxlength = '80']")
 	List<WebElement> campaignsName;
-	
+
 	@FindBy(xpath = "//button[contains(@class, 'Button-') and @title='Save']")
 	WebElement saveCampaigns;
 
 	@FindBy(xpath = "//span[text()='New Event']")
 	List<WebElement> newEvent;
-	
+
 	@FindBy(xpath = "//label/span[text()='Subject']/parent::label/parent::div/input")
 	List<WebElement> eventSubject;
-	
+
 	@FindAll(value = {@FindBy(xpath = "//span[contains(text(),'Activity Type')]/parent::span/following-sibling::div/descendant::a[@class='select'][text()='--None--']")})
 	List<WebElement> eventActivityTypeList;
-	
+
 	@FindBy(xpath = "//*[contains(@id,'g') and text()='Task']")
 	WebElement taskName;
-	
+
 	@FindBy(xpath = "//*[@title='Edit']")
 	List<WebElement> editTask;
-	
+
 	@FindBy(xpath = "//*[@class='slds-truncate' and @title='Edit']")
 	List<WebElement> editEvent;
-	
-	
+
+
 	@FindBy(xpath = "//*[@class=' input']")
 	List<WebElement> editTaskName;
-	
+
 	@FindBy(xpath = "//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Subject']//parent::label/following-sibling::input")
 	List<WebElement> editEventName;
-	
+
 	@FindBy(xpath = "//input[contains(@class,'inputDate')]")
 	List<WebElement> activityInputDate;
-	
+
 	@FindBy(xpath = "//button[contains(@class, 'Button-') and @title='Save']")
 	WebElement saveBtnTask;
-	
+
 	@FindBy(xpath = "//button[contains(@class, 'Button-') and @title='Save']")
 	WebElement saveBtnEvent;
-	
+
 	@FindBy(xpath = "//a[@title='Add Attachment']")
 	WebElement addAttachment;
-	
+
 	@FindBy(xpath = "//input[@class= 'slds-input']")
 	WebElement attachFile;
-	
+
 	@FindBy(xpath = "//*[contains(@class,'slds-truncate') and @title ='Delete']")
 	List<WebElement> deleteTask;
-	
+
 	@FindBy(xpath = "//*[contains(@class,'slds-button') and @title ='Delete']")
 	WebElement deleteTaskPopup;
-	
+
 	@FindBy(xpath = "//*[@class='slds-checkbox--faux']")
 	List<WebElement> checkBoxTask;
-	
+
 	@FindBy(xpath = "//*[contains(@id,'g') and text()='Event']")
 	WebElement eventName;
-	
+
 	@FindBy(xpath = "//div[text()='Activity Type']")
 	WebElement activityTypeTask;
-	
+
 	@FindBy(xpath = "//div[text()='Status']")
 	WebElement statusTask;
-	
+
 	@FindBy(xpath = "//div[text()='Comments']")
 	WebElement commentTask;
-	
+
 	@FindBy(xpath = "//div[contains(text(),'Start Time')]")
 	WebElement startTimeEvent;
-	
+
 	@FindBy(xpath = "//div[contains(text(),'End Time')]")
 	WebElement endTimeEvent;
-	
+
 	@FindBy(xpath = "//div[contains(text(),'Comments')]")
 	WebElement commmentsEvent;
-	
+
 	@FindBy(xpath = "//a[@class='tabHeader']//span[text()='Related']")
 	List<WebElement> relatedlnk;
-	
+
 	@FindBy(xpath = "//span[@title='Spaces']")
 	WebElement space;
-	
+
 	@FindBy(xpath = "//div[@class='slds-truncate'][@title='New']")
 	List<WebElement> newSpace;
-	
+
 	@FindBy(xpath = "//input[@class=' input' and @maxlength='80']")
 	WebElement spaceName;
-	
+
 	@FindBy(xpath = "//button[contains(@class, 'Button-') and @title='Save']")
 	WebElement saveSpace;
-	
+
 	@FindBy(xpath = "//a[@title='test']")
 	WebElement spaceNameSelect;
-	
+
 	@FindBy(xpath = "//span[contains(text(),'Start')]/parent::legend/following-sibling::div/div/input")
 	WebElement eventStartDate;
-	
+
 	@FindBy(xpath = "//span[contains(text(),'End')]/parent::legend/following-sibling::div/div/input")
 	WebElement eventEndDate;
-	
+
 	DateFormat dateFormat;
 	//DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 	Date date = new Date();
-	
+
 	LoginPage loginPage = new LoginPage(scriptHelper);
 	Actions actions = new Actions(driver.getWebDriver());
 	ActivityPage activityPage = new ActivityPage(scriptHelper);
 
 	/**
 	 * Validating the Customer Property Page fields
-	 * 
+	 *
 	 * @author Vishnuvardhan
 	 *
 	 */
@@ -776,7 +776,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 	/**
 	 * Validating the Customer Property Page fields
-	 * 
+	 *
 	 * @author Vishnuvardhan
 	 *
 	 */
@@ -962,7 +962,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 	/**
 	 * Validating the Customer Property Page fields sub sections
-	 * 
+	 *
 	 * @author Vishnuvardhan
 	 *
 	 */
@@ -1008,7 +1008,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 	/**
 	 * Function for Creating a property
-	 * 
+	 *
 	 * @author Vishnuvardhan
 	 *
 	 */
@@ -1050,7 +1050,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 	/**
 	 * Validating the Creation of Activity in the Properties
-	 * 
+	 *
 	 * @author Ramya
 	 *
 	 */
@@ -1114,14 +1114,14 @@ public class PropertiesPage extends ReusableLibrary {
 		 * ,"The Activity is saved and New Activity is displayed ",
 		 * Status.PASS); Utility_Functions.xClick(driver, subject, true); Random
 		 * random = new Random(); int value = random.nextInt();
-		 * 
+		 *
 		 * Utility_Functions.xSendKeys(driver, subject,
 		 * "Test Activity Created by Automation" + value);
 		 * Utility_Functions.xWaitForElementPresent(driver, activityType2, 5);
 		 * Utility_Functions.xClick(driver, activityType2, true);
 		 * Utility_Functions.xWaitForElementPresent(driver, saveActivity, 5);
 		 * Utility_Functions.xClick(driver, saveActivity, true);
-		 * 
+		 *
 		 * SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
 		 * String query = "select Name from Activity__C where Subject__C = " +
 		 * "'" + "Test Activity Created by Automation" + value + "'"; String
@@ -1136,7 +1136,7 @@ public class PropertiesPage extends ReusableLibrary {
 		 * String queryId = "select Id from Activity__C where Name = " + "'" +
 		 * nameActivity + "'"; String activityId =
 		 * searchTextSOQL.fetchRecordFieldValue("Id", queryId);
-		 * 
+		 *
 		 * String url = driver.getCurrentUrl().split("#")[0]; String newUrl =
 		 * url + "#/sObject/" + activityId; newUrl = newUrl + "/view";
 		 * report.updateTestLog("Verify Add Opportunity Page Fields",
@@ -1154,11 +1154,11 @@ public class PropertiesPage extends ReusableLibrary {
 		 * ,"The Follow up Activity Page is Displayed", Status.PASS);
 		 * Utility_Functions.xWaitForElementPresent(driver,
 		 * createCustomActivity, 5);
-		 * 
+		 *
 		 * Actions action = new Actions(driver.getWebDriver());
 		 * action.moveToElement(createCustomActivity); action.click();
 		 * action.build().perform(); Utility_Functions.timeWait(3);
-		 * 
+		 *
 		 * Utility_Functions.xSwitchtoFrame(driver, subject );
 		 * Utility_Functions.timeWait(3); Utility_Functions.xClick(driver,
 		 * subject, true); Utility_Functions.xWaitForElementPresent(driver,
@@ -1186,7 +1186,7 @@ public class PropertiesPage extends ReusableLibrary {
 		 * recentlyViewedpropertiesList = driver.findElements(By.
 		 * xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"
 		 * ));
-		 * 
+		 *
 		 * Utility_Functions.xclickOnFirstElementfromList(
 		 * recentlyViewedpropertiesList); Utility_Functions.timeWait(3);
 		 * Utility_Functions.xWaitForElementVisible(driver, related, 5);
@@ -1195,10 +1195,10 @@ public class PropertiesPage extends ReusableLibrary {
 		 * Utility_Functions.timeWait(1);
 		 * Utility_Functions.xScrollWindowTop(driver);
 		 * Utility_Functions.timeWait(2);
-		 * 
+		 *
 		 * Utility_Functions.xWaitForElementPresent(driver, relatedActivities,
 		 * 5); Utility_Functions.xClick(driver, relatedActivities, true);
-		 * 
+		 *
 		 * List<WebElement> relatedActivitiesList = driver.findElements(By.
 		 * xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'] "
 		 * )); for (WebElement element : relatedActivitiesList ) { if
@@ -1212,7 +1212,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 	/**
 	 * Validating the New Activity Page Layout in the Properties
-	 * 
+	 *
 	 * @author Ramya
 	 *
 	 */
@@ -1278,30 +1278,30 @@ public class PropertiesPage extends ReusableLibrary {
 		 * ); report.updateTestLog("Verify New Activity Page Layout",
 		 * "New Activity Layout Page is having the " + element.getText() +
 		 * " Status field::", Status.PASS); countHeader++;
-		 * 
-		 * 
+		 *
+		 *
 		 * } else if ((element.getText().contains("System Information"))) {
 		 * System.out.
 		 * println("System Information section is present in the New Activity Layout Page"
 		 * ); report.updateTestLog("Verify New Activity Page Layout",
 		 * "New Activity Layout Page is having the " + element.getText() +
 		 * " Status field::", Status.PASS); countHeader++;
-		 * 
-		 * 
+		 *
+		 *
 		 * } else if ((element.getText().contains("Related To"))) { System.out.
 		 * println(" Related To section is present in the New Activity Layout Page"
 		 * ); report.updateTestLog("Verify New Activity Page Layout",
 		 * "New Activity Layout Page is having the " + element.getText() +
 		 * " Status field::", Status.PASS); countHeader++;
-		 * 
+		 *
 		 * } } System.out.println(countHeader); if(countHeader!=3) { System.out.
 		 * println("New Activity Page Layout does not contain the Quick Create, System Information and Related To sections"
 		 * ); report.updateTestLog("Verify New Activity Page Layout",
 		 * "New Activity Layout Page is having all the fields", Status.FAIL); }
 		 * }catch (Exception e) { e.printStackTrace();
 		 * System.out.println(e.getMessage()); }
-		 * 
-		 * 
+		 *
+		 *
 		 * List<WebElement> newActivityPageLayoutRequiredFields =
 		 * driver.findElements(By.xpath(
 		 * "//label[@class='slds-form-element__label']")); int
@@ -1312,46 +1312,46 @@ public class PropertiesPage extends ReusableLibrary {
 		 * ); report.updateTestLog("Verify New Activity Page Layout",
 		 * "New Activity Layout Page is having the " + element.getText() +
 		 * " Status field::", Status.PASS); countRequiredFiles++;
-		 * 
+		 *
 		 * } else if ((element.getText().equals("*Activity Type"))) {
 		 * System.out.
 		 * println("Activity Type required field is present in the New Activity Layout Page"
 		 * ); report.updateTestLog("Verify New Activity Page Layout",
 		 * "New Activity Layout Page is having the " + element.getText() +
 		 * " Status field::", Status.PASS); countRequiredFiles++;
-		 * 
+		 *
 		 * } else if ((element.getText().equals("*Assigned To"))) { System.out.
 		 * println(" Assigned To required field is present in the New Activity Layout Page"
 		 * ); report.updateTestLog("Verify New Activity Page Layout",
 		 * "New Activity Layout Page is having the " + element.getText() +
 		 * " Status field::", Status.PASS); countRequiredFiles++;
-		 * 
-		 * 
+		 *
+		 *
 		 * } else if ((element.getText().equals("*Status"))) { System.out.
 		 * println(" Status required field is present in the New Activity Layout Page"
 		 * ); report.updateTestLog("Verify New Activity Page Layout",
 		 * "New Activity Layout Page is having the " + element.getText() +
 		 * " Status field::", Status.PASS); countRequiredFiles++;
-		 * 
+		 *
 		 * } else if ((element.getText().equals("*Priority"))) { System.out.
 		 * println(" Priority required field is present in the New Activity Layout Page"
 		 * ); report.updateTestLog("Verify New Activity Page Layout",
 		 * "New Activity Layout Page is having the " + element.getText() +
 		 * " Status field::", Status.PASS); //countRequiredFiles++;
-		 * 
+		 *
 		 * }
-		 * 
+		 *
 		 * } System.out.println(countRequiredFiles); if(countRequiredFiles!=4) {
 		 * System.out.
 		 * println("New Activity Page Layout does not contain the required fields "
 		 * ); report.updateTestLog("Verify New Activity Page Layout",
 		 * "New Activity Layout Page is having all the required fields",
 		 * Status.FAIL); }
-		 * 
-		 * 
+		 *
+		 *
 		 * }catch (Exception e) { e.printStackTrace();
 		 * System.out.println(e.getMessage());
-		 * 
+		 *
 		 * } if ((!saveNewActivityLayoutPage.getText().equals(" ")) ||
 		 * (!saveAndNewActivityLayoutPage.getText().equals(" ")) ||
 		 * (!cancelNewActivityLayoutPage.getText().equals(" "))) {
@@ -1364,8 +1364,8 @@ public class PropertiesPage extends ReusableLibrary {
 		 * ); report.updateTestLog("Verify New Activity Page Layout",
 		 * "Verifying New Activity Page is having the Save, Save and New and Cancel buttons"
 		 * , Status.FAIL); }
-		 * 
-		 * 
+		 *
+		 *
 		 * List<WebElement> newActivityPageFields = driver
 		 * .findElements(By.xpath("//label[@class='slds-form-element__label']"))
 		 * ; int count = 0; try { for (WebElement element :
@@ -1390,7 +1390,7 @@ public class PropertiesPage extends ReusableLibrary {
 		 * ); report.updateTestLog("Verify New Activity Page Layout",
 		 * "New Activity Layout Page is having the " + element.getText() +
 		 * " Status field::", Status.PASS); count++;
-		 * 
+		 *
 		 * } else if ((count == 4) && (element.getText().contains("Comments")))
 		 * { System.out
 		 * .println("Comments field is present in the New Activity Layout Page"
@@ -1427,7 +1427,7 @@ public class PropertiesPage extends ReusableLibrary {
 		 * report.updateTestLog("Verify New Activity Page Layout",
 		 * "New Activity Layout Page is having the " + element.getText() +
 		 * " Status field::", Status.PASS); count++;
-		 * 
+		 *
 		 * }else if ((count == 11) &&
 		 * (element.getText().contains("Opportunity"))) { System.out.
 		 * println("Opportunity field is present in the New Activity Layout Page"
@@ -1449,49 +1449,49 @@ public class PropertiesPage extends ReusableLibrary {
 		 * report.updateTestLog("Verify New Activity Page Layout",
 		 * "New Activity Layout Page is having the " + element.getText() +
 		 * " Status field::", Status.PASS);
-		 * 
+		 *
 		 * }
-		 * 
+		 *
 		 * } System.out.println(count); if(count!=14) { System.out.
 		 * println("New Activity Page Layout does not contain all the fields ");
 		 * report.updateTestLog("Verify New Activity Page Layout",
 		 * "New Activity Layout Page is not having all the fields",
 		 * Status.FAIL);
-		 * 
+		 *
 		 * } }catch (Exception e) { e.printStackTrace();
 		 * System.out.println(e.getMessage()); }
-		 * 
-		 * 
+		 *
+		 *
 		 * List<WebElement> newActivityPageCheckFields = driver
 		 * .findElements(By.xpath("//span[@class='slds-form-element__label']"));
-		 * 
+		 *
 		 * try { for (WebElement element : newActivityPageCheckFields ) { if
 		 * ((element.getText().contains("Set Reminder"))) { System.out.
 		 * println("Set Reminder field is present in the Create Private Notes Personal Information Page"
 		 * ); report.updateTestLog("Verify New Activity Page Layout",
 		 * "New Activity Layout Page is having the " + element.getText() +
 		 * " Status field::", Status.PASS);
-		 * 
+		 *
 		 * } else if ((element.getText().contains("Notification Email"))) {
 		 * System.out.
 		 * println("Notification Email field is present in the New Activity Layout Page"
 		 * ); report.updateTestLog("Verify New Activity Page Layout",
 		 * "New Activity Layout Page is having the " + element.getText() +
 		 * " Status field::", Status.PASS);
-		 * 
+		 *
 		 * }else if ((element.getText().contains("Has Attachment"))) {
 		 * System.out.
 		 * println("Has Attachment  field is present in the New Activity Layout Page"
 		 * ); report.updateTestLog("Verify New Activity Page Layout",
 		 * "New Activity Layout Page is having the " + element.getText() +
 		 * " Status field::", Status.PASS);
-		 * 
+		 *
 		 * }else { System.out.
 		 * println("New Activity Page Layout does not contain the the Set Reminder and Notification Email and Has Attachment Fields"
 		 * ); report.updateTestLog("Verify New Activity Page Layout",
 		 * "New Activity Layout Page is having the " + element.getText() +
 		 * " Status field::", Status.FAIL);
-		 * 
+		 *
 		 * } } }catch (Exception e) { e.printStackTrace();
 		 * System.out.println(e.getMessage()); } try { if
 		 * ((!assignedTo.getText().equals("")) ||
@@ -1514,7 +1514,7 @@ public class PropertiesPage extends ReusableLibrary {
 	/**
 	 * Validating the New Activity Page send Notification Email to the Assigned
 	 * Person
-	 * 
+	 *
 	 * @author Ramya
 	 *
 	 */
@@ -1568,7 +1568,7 @@ public class PropertiesPage extends ReusableLibrary {
 		 * System.out.println(iframeList.size()); for (WebElement element :
 		 * iframeList) { System.out.println(element.getAttribute("id")); }
 		 * driver.switchTo().frame(2); Utility_Functions.timeWait(3);
-		 * 
+		 *
 		 * Utility_Functions.xWaitForElementPresent(driver, subject, 3);
 		 * Utility_Functions.xClick(driver, subject, true);
 		 * Utility_Functions.xWaitForElementPresent(driver, subject, 3);
@@ -1612,13 +1612,13 @@ public class PropertiesPage extends ReusableLibrary {
 
 	/**
 	 * Validating the Campaigns tab present in the dropdown after loggin in
-	 * 
+	 *
 	 * @author Vishnuvardhan
 	 *
 	 */
 	/**
 	 * Validating the Campaigns tab present in the dropdown after loggin in
-	 * 
+	 *
 	 * @author Vishnuvardhan
 	 *
 	 */
@@ -1669,7 +1669,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 	/**
 	 * Validating the properties custom event page
-	 * 
+	 *
 	 * @author Ramya
 	 *
 	 */
@@ -2235,7 +2235,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 	/**
 	 * Validating the activity Lightning Time line fields
-	 * 
+	 *
 	 * @author Ramya
 	 *
 	 */
@@ -2260,7 +2260,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 	/**
 	 * Validating the activity Lightning Time line fields
-	 * 
+	 *
 	 * @author Ramya
 	 *
 	 */
@@ -2350,29 +2350,29 @@ public class PropertiesPage extends ReusableLibrary {
 		 * report.updateTestLog("Verify Properties Activity Timeline"
 		 * ,"Filter Timeline is present in acitivity related list",Status.PASS);
 		 * }
-		 * 
+		 *
 		 * if (statusActivityTimeline.isDisplayed()) {
 		 * System.out.println("Status is present in acitivity related list");
 		 * report.updateTestLog("Verify Properties Activity Timeline"
 		 * ,"Status is present in acitivity related list",Status.PASS); }
-		 * 
+		 *
 		 * if (openActivityTimeline.getText().contains("Open")) {
 		 * System.out.println("Open is present acitivity related list");
 		 * report.updateTestLog("Verify Properties Activity Timeline"
 		 * ,"Open is present in acitivity related list:::", Status.PASS);
-		 * 
+		 *
 		 * } if (descriptionActivityTimeline.isDisplayed()) {
 		 * System.out.println("Description is present acitivity related list");
 		 * report.updateTestLog("Verify Properties Activity Timeline"
 		 * ,"Description is present in acitivity related list:::", Status.PASS);
-		 * 
+		 *
 		 * }
 		 */
 	}
 
 	/**
 	 * Validating the Properties Private Tag functionality
-	 * 
+	 *
 	 * @author Ramya
 	 *
 	 */
@@ -2433,7 +2433,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 	/**
 	 * Validating the Bulk Tagging
-	 * 
+	 *
 	 * @author Ramya
 	 *
 	 */
@@ -2481,7 +2481,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 	/**
 	 * Validating the New Property Page Property Type field
-	 * 
+	 *
 	 * @author Ramya
 	 *
 	 */
@@ -2544,7 +2544,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 	/**
 	 * Validating the Property Type field value
-	 * 
+	 *
 	 * @author Ramya
 	 *
 	 */
@@ -2615,7 +2615,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 	/**
 	 * Validating the Properties Private Tags
-	 * 
+	 *
 	 * @author Ramya
 	 *
 	 */
@@ -2672,7 +2672,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 	/**
 	 * Validating the Properties Preferences Pyeong Value
-	 * 
+	 *
 	 * @author Ramya
 	 *
 	 */
@@ -2722,7 +2722,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 	/**
 	 * Validating the Project Enquiries for the Pyeong Value
-	 * 
+	 *
 	 * @author Ramya
 	 *
 	 */
@@ -2772,7 +2772,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 	/**
 	 * Validating the Properties Pyeong Value
-	 * 
+	 *
 	 * @author Ramya
 	 *
 	 */
@@ -2836,7 +2836,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 	/**
 	 * Validating the Properties Ping Value
-	 * 
+	 *
 	 * @author Ramya
 	 *
 	 */
@@ -2901,7 +2901,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 	/**
 	 * Validating the Properties Preferences Ping Value
-	 * 
+	 *
 	 * @author Ramya
 	 *
 	 */
@@ -2951,7 +2951,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 	/**
 	 * Validating the Project Enquiries for the Ping Value
-	 * 
+	 *
 	 * @author Ramya
 	 *
 	 */
@@ -3000,7 +3000,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 	/**
 	 * Validating the Properties Preferences for the Preference Type values
-	 * 
+	 *
 	 * @author Ramya
 	 *
 	 */
@@ -3073,7 +3073,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 	/**
 	 * Validating the offer enquiry auto populated from the project enquiries
-	 * 
+	 *
 	 * @author Ramya
 	 *
 	 */
@@ -3125,7 +3125,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 	/**
 	 * Validating the Country field in the Properties
-	 * 
+	 *
 	 * @author Ramya
 	 *
 	 */
@@ -3182,7 +3182,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 	/**
 	 * Validating the Properties Preferences property type and region
-	 * 
+	 *
 	 * @author Ramya
 	 *
 	 */
@@ -3248,7 +3248,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 	/**
 	 * Validating the Project Enquiry page fields
-	 * 
+	 *
 	 * @author Ramya
 	 *
 	 */
@@ -3350,7 +3350,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 	/**
 	 * Validating the Project Enquiries Enhancements
-	 * 
+	 *
 	 * @author Ramya
 	 *
 	 */
@@ -3363,7 +3363,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 	/**
 	 * Validating the Properties edit page
-	 * 
+	 *
 	 * @author Ramya
 	 *
 	 */
@@ -3412,7 +3412,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 	/**
 	 * Validating the Properties Preferences creation
-	 * 
+	 *
 	 * @author Ramya
 	 *
 	 */
@@ -3442,7 +3442,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 	/**
 	 * Validating the Properties Preferences creation
-	 * 
+	 *
 	 * @author Ramya
 	 *
 	 */
@@ -3611,7 +3611,7 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.xSwitchtoFrame(driver, addBtnTask);
 
 		report.updateTestLog("Verify Property", "The Private is created successfully", Status.PASS);
-		
+
 
 	}
 
@@ -3622,7 +3622,7 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.xClickVisibleListElement(driver, addBtnTask1);
 		Utility_Functions.xWaitForElementPresent(driver, taskSubject, 2);
 		Utility_Functions.xSendKeys(driver, taskSubject, "Task");
-		
+
 		List<WebElement> newActivityPageLayoutFields = driver.findElements(By.xpath("//div[@class='riseTransitionEnabled']//label/span"));
 		int countRequiredFiles = 0;
 		try {
@@ -3677,7 +3677,7 @@ public class PropertiesPage extends ReusableLibrary {
 							Status.PASS);
 					countRequiredFiles++;
 				}
-			}			
+			}
 			if (countRequiredFiles >= 9) {
 				System.out.println("New Activity Page Layout contains the required fields ");
 				report.updateTestLog("Verify New Activity Page Layout",	"New Activity Layout Page is having all the required fields", Status.PASS);
@@ -3689,7 +3689,7 @@ public class PropertiesPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println("Encountered an error in validating the Account New Activity Page Layout Fields::"+e.getMessage());
 		}
-		
+
 		activityTypeListValues.add("--None--");
 		activityTypeListValues.add("Private - Client Intelligence");
 		activityTypeListValues.add("Private - Cold Call");
@@ -3708,14 +3708,14 @@ public class PropertiesPage extends ReusableLibrary {
 		activityTypeListValues.add("Public - Client Meeting (Investor Services)");
 		System.out.println("Additional Activity Type values are added to the list successfully::::");
 
-			
-		
+
+
 		Utility_Functions.xClickVisibleListElement(driver, activityTypeList);
 		Utility_Functions.xClick(driver, activityType1, true);
 		Utility_Functions.xWaitForElementPresent(driver, activitySave, 2);
         Utility_Functions.xClickVisibleListElement(driver, activitySave);
 		report.updateTestLog("Verify Task", "The Task is created successfully", Status.PASS);
-			
+
 	}
 
 	public void addCampaign() {
@@ -3733,24 +3733,24 @@ public class PropertiesPage extends ReusableLibrary {
 		report.updateTestLog("Verify Campaigns", "The Campaigns is created successfully", Status.PASS);
 
 	}
-	
-	
+
+
 	public void activityTask () {
-		
+
 		for(int i=1;i<=3;i++){
-			
+
 			if(i==1)
-			{	
+			{
 				//Utility_Functions.xWaitForElementPresent(driver, addBtnTask1, 3);
 				Utility_Functions.timeWait(5);
 				Utility_Functions.xClickVisibleListElement(driver, addBtnTask1);
 				Utility_Functions.xWaitForElementPresent(driver, taskSubject, 2);
 				Utility_Functions.xSendKeys(driver, taskSubject, "Present Automation Task");
-				
+
 				//Utility_Functions.xSendKeysVisibleListElement(driver, activityInputDate, dateFormat.format(date).toString());
 				//Utility_Functions.xSendKeys(driver, activityInputDate, dateFormat.format(date).toString());
-				
-				
+
+
 			}else if(i==2){
 				//Utility_Functions.xWaitForElementPresent(driver, addBtnTask1, 6);
 				Utility_Functions.timeWait(3);
@@ -3797,9 +3797,9 @@ public class PropertiesPage extends ReusableLibrary {
 		  report.updateTestLog("Verify Task", "The Task is created successfully", Status.PASS);
 		}
 	}
-	
+
 	public void addComp() {
-		
+
 		Utility_Functions.xWaitForElementPresent(driver, applauncher, 3);
 		Utility_Functions.xClick(driver, applauncher, true);
 		Utility_Functions.xWaitForElementPresent(driver, comps, 3);
@@ -3813,30 +3813,30 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, saveComps, 3);
 		Utility_Functions.xClick(driver, saveComps, true);
 		report.updateTestLog("Verify Comps", "The Comps is created successfully", Status.PASS);
-		
+
 	}
-	
+
 	public void activityEvent() {
 		for(int i=1;i<=3;i++){
 			if(i==1)
 			{
-		
+
 		//Utility_Functions.xWaitForElementPresent(driver, newEvent, 3);
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xClickVisibleListElement(driver, newEvent);
 		Utility_Functions.xSendKeysVisibleListElement(driver, eventSubject, "Past Event");
-		
+
 		/*Utility_Functions.xWaitForElementPresent(driver, eventStartDate, 3);
 		Utility_Functions.xSendKeys(driver, eventStartDate, dateFormat.format(date).toString());
-		
+
 		Utility_Functions.xWaitForElementPresent(driver, eventEndDate, 3);
 		Utility_Functions.xSendKeys(driver, eventEndDate, dateFormat.format(date).toString());*/
-		
+
 			}
 			else if(i==2){
 		Utility_Functions.xClickVisibleListElement(driver, addEventActivity);
 		Utility_Functions.xSendKeysVisibleListElement(driver, eventSubject, "Present Event");
-		
+
 		/*Calendar calendar = Calendar.getInstance();
 
 	    // Move calendar to yesterday
@@ -3846,15 +3846,15 @@ public class PropertiesPage extends ReusableLibrary {
 	    Date newDate = calendar.getTime();
 	    Utility_Functions.xWaitForElementPresent(driver, eventStartDate, 3);
 		Utility_Functions.xSendKeys(driver, eventStartDate, dateFormat.format(newDate).toString());
-		
+
 		Utility_Functions.xWaitForElementPresent(driver, eventEndDate, 3);
 		Utility_Functions.xSendKeys(driver, eventEndDate, dateFormat.format(newDate).toString());*/
-		
+
 			}
 			else{
 		Utility_Functions.xClickVisibleListElement(driver, addEventActivity);
 		Utility_Functions.xSendKeysVisibleListElement(driver, eventSubject, "Future Event");
-		
+
 		/*Calendar calendar = Calendar.getInstance();
 
 	    // Move calendar to future
@@ -3864,10 +3864,10 @@ public class PropertiesPage extends ReusableLibrary {
 	    Date newDate = calendar.getTime();
 	    Utility_Functions.xWaitForElementPresent(driver, eventStartDate, 3);
 		Utility_Functions.xSendKeys(driver, eventStartDate, dateFormat.format(newDate).toString());
-		
+
 		Utility_Functions.xWaitForElementPresent(driver, eventEndDate, 3);
 		Utility_Functions.xSendKeys(driver, eventEndDate, dateFormat.format(newDate).toString());*/
-		
+
 			}
 			Utility_Functions.xClickVisibleListElement(driver, eventActivityTypeList);
 			Utility_Functions.xWaitForElementPresent(driver, newActivityType, 3);
@@ -3878,7 +3878,7 @@ public class PropertiesPage extends ReusableLibrary {
 			Utility_Functions.timeWait(3);
 		}
 	}
-	
+
 	public void addEvent () {
 		Utility_Functions.timeWait(5);
 		Utility_Functions.xClickVisibleListElement(driver, newEvent);
@@ -3889,10 +3889,10 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, activitySave, 3);
 		Utility_Functions.xClickVisibleListElement(driver, activitySave);
 		report.updateTestLog("Verify Event", "The Event is created successfully", Status.PASS);
-		
+
 	}
-	
-	
+
+
 	public void editTask() {
 		Utility_Functions.xWaitForElementPresent(driver, taskName, 5);
 		Utility_Functions.xClick(driver, taskName, true);
@@ -3904,11 +3904,11 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, saveBtnTask, 3);
 		Utility_Functions.xClick(driver, saveBtnTask, true);
 		report.updateTestLog("Verify Edit Task", "The Task is edited successfully", Status.PASS);
-		
+
 	}
-	
+
 	public void addAttachment() {
-		
+
         Utility_Functions.timeWait(5);
 		Utility_Functions.xClick(driver, addAttachment, true);
 		Utility_Functions.timeWait(5);
@@ -3925,7 +3925,7 @@ public class PropertiesPage extends ReusableLibrary {
 				System.out.println("selection" +sel);
 		try {
 			Robot robot = new Robot();
-			
+
 			robot.keyPress(KeyEvent.VK_CONTROL);
 			robot.keyPress(KeyEvent.VK_V);
 			robot.keyRelease(KeyEvent.VK_CONTROL);
@@ -3935,19 +3935,19 @@ public class PropertiesPage extends ReusableLibrary {
 
 		} catch (Exception e) {
 			System.out.println("The file is not uploaded"+e.getMessage());
-			
+
 		}
-		
-		
+
+
 	}
-	
+
 	public void deleteTask() {
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xClickVisibleListElement(driver, deleteTask);
 		Utility_Functions.xClick(driver, deleteTaskPopup, true);
-			
+
 	}
-	
+
 	public void editStatusTask() {
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xClickVisibleListElement(driver, checkBoxTask);
@@ -3956,23 +3956,23 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify Edit Task status", "The Task status is changed successfully", Status.PASS);
 	}
-	
+
     public void validationEvent() {
-		
+
 		if(startTimeEvent.isDisplayed()) {
     		report.updateTestLog("Event", "Start Time", Status.PASS);
     	}
     	else {
     			report.updateTestLog("Event", "Start Time", Status.FAIL);
     		}
-		
+
 		if(endTimeEvent.isDisplayed()) {
     		report.updateTestLog("Event", "End Time", Status.PASS);
     	}
     	else {
     			report.updateTestLog("Event", "End Time", Status.FAIL);
     		}
-		
+
 		if(commmentsEvent.isDisplayed()) {
     		report.updateTestLog("Event", "Comments", Status.PASS);
     	}
@@ -3991,25 +3991,25 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, saveBtnEvent, 3);
 		Utility_Functions.xClick(driver, saveBtnEvent, true);
 		report.updateTestLog("Verify Edit Event", "The Event is edited successfully", Status.PASS);
-		
+
 	}
-	
+
 	public void validationTask() {
-		
+
 		if(activityTypeTask.isDisplayed()) {
     		report.updateTestLog("Task", "Activity Type", Status.PASS);
     	}
     	else {
     			report.updateTestLog("Task", "Activity Type", Status.FAIL);
     		}
-		
+
 		if(statusTask.isDisplayed()) {
     		report.updateTestLog("Task", "Status", Status.PASS);
     	}
     	else {
     			report.updateTestLog("Task", "Status", Status.FAIL);
     		}
-		
+
 		if(commentTask.isDisplayed()) {
     		report.updateTestLog("Task", "Comment", Status.PASS);
     	}
@@ -4018,7 +4018,7 @@ public class PropertiesPage extends ReusableLibrary {
     		}
 	}
 
-	
+
 	static ArrayList<String> activityTypeListValues = new ArrayList<String>();
 
 	    public void additionalActivityTypeList() {
@@ -4040,9 +4040,9 @@ public class PropertiesPage extends ReusableLibrary {
 		activityTypeListValues.add("Public - Client Meeting (Investor Services)");
 		System.out.println("Additional Activity Type values are added to the list successfully::::");
 	}
-	   
+
 	    public void createSpace() {
-	    	
+
 	    	Utility_Functions.timeWait(5);
 	    	Utility_Functions.xClickVisibleListElement(driver, relatedlnk);
 	    	Utility_Functions.xWaitForElementPresent(driver, space, 5);
@@ -4054,7 +4054,7 @@ public class PropertiesPage extends ReusableLibrary {
 	    	Utility_Functions.xClick(driver, saveSpace, true);
 	    	Utility_Functions.timeWait(5);
 	    	Utility_Functions.xClick(driver, spaceNameSelect, true);
-	    	 	
-	    	
+
+
 	    }
 }

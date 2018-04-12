@@ -16,6 +16,7 @@ import org.openqa.selenium.support.PageFactory;
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
+import com.itextpdf.text.Utilities;
 import com.sforce.soap.partner.SaveResult;
 
 import pagesAPI.AccountsFunctions;
@@ -333,7 +334,7 @@ public class LeadsPage extends ReusableLibrary {
 	@FindBy(xpath=" //button[@class='slds-button slds-button--neutral uiButton--default uiButton--brand uiButton forceActionButton']/span[contains(text(), 'Save')]")
 	WebElement savePersonalInformation;
 
-	@FindBy(xpath="//ul[@class='slds-button-group slds-m-left--xx-small oneActionsRibbon forceActionsContainer']//li/a/div[text()='New']")
+	@FindBy(xpath="//a[@title='New']/div[text()='New']")
 	WebElement newLeads;
 
 	@FindBy(xpath="//input[@value='Save']")
@@ -543,10 +544,10 @@ public class LeadsPage extends ReusableLibrary {
 	@FindBy(xpath = "//input[@name='new'][contains(@value,'Add')]")
 	WebElement addButtonSharing;
 
-	@FindBy(xpath = "//*[contains(@id,'sharing_search')]")
+	@FindBy(xpath = "//select[contains(@id,'sharing_search')]")
 	WebElement searchUsers;
 
-	@FindBy(xpath = "//*[contains(@id,'searchValue_sharing_search')]")
+	@FindBy(xpath = "//input[contains(@id,'searchValue_sharing_search')]")
 	WebElement searchUserName;
 
 	@FindBy(xpath = "//*[contains(@title,'Find')]")
@@ -1082,8 +1083,9 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.xclickgetTextofFirstElementfromList(leadsList);
 		Utility_Functions.timeWait(2);
 		buttonsListLeadDetailPage();
-		List<WebElement> buttonsList = driver.findElements(By.xpath("//div[@class='slds-col slds-no-flex slds-grid slds-align-middle actionsContainer']//ul[@class='slds-button-group slds-m-left--xx-small oneActionsRibbon forceActionsContainer']/li/a/div"));
+		List<WebElement> buttonsList = driver.findElements(By.xpath("//div[contains(@class,'flexipagePage')]//a[contains(@class,'forceActionLink')]/div"));
 		int i =0, count =0;
+		System.out.println("Number of buttons found  ::  "+buttonsList.size());
 		try {
 			for(WebElement element: buttonsList) {
 				System.out.println(element.getText() + buttonList.get(i));
@@ -1106,7 +1108,8 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, showMoreActions, true);
 		Utility_Functions.timeWait(2);
 		moreActionsListLeadDetailPage();
-		List<WebElement> showMoreActionsList = driver.findElements(By.xpath(" //div[@class='actionMenu']/ul[@class='scrollable']/li/a"));
+		List<WebElement> showMoreActionsList = driver.findElements(By.xpath(" //div[contains(@class,'actionMenu')]//li/a/div"));
+		System.out.println("Number of More Action buttons found :: "+ showMoreActionsList.size());
 		int i1 =0, count1=0;
 		try {
 			for(WebElement element: showMoreActionsList) {
@@ -1282,7 +1285,8 @@ public class LeadsPage extends ReusableLibrary {
 
 		Utility_Functions.xWaitForElementPresent(driver, addButtonSharing, 5);
 		Utility_Functions.xClick(driver, addButtonSharing, true);
-		Utility_Functions.xWaitForElementPresent(driver, searchUsers, 3);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, searchUsers, 5);
 		Utility_Functions.xSelectDropdownByName(searchUsers, "Users");
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xSendKeys(driver, searchUserName, "bommisetty");
@@ -2281,6 +2285,7 @@ public class LeadsPage extends ReusableLibrary {
 				}
 				i7++;
 			}
+			leadsDetailsPageFieldsList.clear();
 			System.out.println(count7);
 			if (count7!= 16) {
 				report.updateTestLog("Verify Leads Landing Page",
@@ -2290,7 +2295,6 @@ public class LeadsPage extends ReusableLibrary {
 				report.updateTestLog("Verify Leads Landing Page",
 						"All fields are present in the Lead Information Section", Status.PASS);
 			}
-
 		} catch (Exception e) {
 			System.out.println("All fields are not present in the Lead Information Section:::" + e.getMessage());
 		}
@@ -2974,6 +2978,7 @@ public class LeadsPage extends ReusableLibrary {
 				}
 				i++;
 			}
+			leadsDetailsPageFieldsList.clear();
 			System.out.println(count);
 			if (count >= 11) {
 				report.updateTestLog("Verify Leads Landing Page",
@@ -2983,7 +2988,7 @@ public class LeadsPage extends ReusableLibrary {
 				report.updateTestLog("Verify Leads Landing Page",
 						"All fields are present in the Lead Information Section", Status.PASS);
 			}
-			leadsDetailsPageFieldsList.clear();
+			
 		} catch (Exception e) {
 			System.out.println("All fields are not present in the Lead Information Section:::" + e.getMessage());
 		}

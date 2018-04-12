@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="SmokeRegTestScriptsSuite" parallel="methods" thread-count="1">
+<!-- 	 <listeners>
+	        <listener class-name="supportLibraries.AnnotationTransformer"/> 
+	 </listeners> -->
+	<test name="SmokeRegTests">
+		<classes>	
+
+
+
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage08PhaseProbability"/>	
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage12PhaseProbability"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage06PhaseProbability"/>
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+<!-- 
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerContactsPopulatingRequiredFieldsPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerAccountsDetailsEditPage"/>
+<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAMERBrokerAccountLookUpNewContactPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_CMAMERBrokerAccountsCreationOfNewActivityPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSAccountsDetailsEditPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerAccountsDetailsEditPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_CMAMERBrokerAccountsDetailsEditPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_CMAMERManagerAccountsDetailsEditPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_CMAPACCSSAccountsDetailsEditPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAPACBrokerAccountsDetailsEditPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAPACCSSAccountsDetailsEditPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAPACManagerAccountsDetailsEditPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerAccountsVerifySPOCs"/>
+<class name="testscripts.SF.Release37TestScripts.TC_SF_ASAPACBrokerAdditionalActivityTypes"/>
+<class name="testscripts.SF.Release37TestScripts.TC_SF_OBAMERAdminAccountsPrivateTags"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERAdminAccountsVerifySPOCs"/>
+<class name="testscripts.SF.Release37TestScripts.TC_SF_ASAPACBrokerAwardedPickListValues"/>
+<class name="testscripts.SF.Release37TestScripts.TC_SF_OBAPACBrokerCampaignsTab"/>
+<class name="testscripts.SF.SmokeTestScripts.TC_SF_OBAMERBrokerCloneEditLeadDetailPage"/>
+<class name="testscripts.SF.Release37TestScripts.TC_SF_ASAMERManagerCommissionField"/>
+<class name="testscripts.SF.Release37TestScripts.TC_SF_ASAPACBrokerCommissionField"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerContactsCreationOfNewActivityPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSContactsCreationOfNewActivityPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerContactsCreationOfNewActivityPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_CMAMERBrokerContactsCreationOfNewActivityPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_CMAMERCSSContactsCreationOfNewActivityPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_CMAMERManagerContactsCreationOfNewActivityPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerContactsCreationOfNewActivityPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERCSSContactsCreationOfNewActivityPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERManagerContactsCreationOfNewActivityPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerContactsNewActivityLayoutPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerContactsNewActivityLayoutPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_CMAMERBrokerContactsNewActivityLayoutPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_CMAMERManagerContactsNewActivityLayoutPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerContactsNewActivityLayoutPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERManagerContactsNewActivityLayoutPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerContactsPopulatingAllFields"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerContactsPopulatingRequiredFieldsPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAPACBrokerContactsReminderSentFunctionality"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAPACCSSContactsReminderSentFunctionality"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAPACManagerContactsReminderSentFunctionality"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerContactsReminderSentFunctionality"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERCSSContactsReminderSentFunctionality"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERManagerContactsReminderSentFunctionality"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAMERBrokerEditPaidInstallment"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAMERCSSEditPaidInstallment"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAMERManagerEditPaidInstallment"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERBrokerEditPaidInstallment"/>
+<class name="testscripts.SF.Release37TestScripts.TC_SF_CMAPACBrokerHomeVerifyingTabsOnHomePage"/>
+<class name="testscripts.SF.Release37TestScripts.TC_SF_CMAPACManagerHomeVerifyingTabsOnHomePage"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERBrokerInLineEditUnEvenPercentOpportunity"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERManagerLeadsDetailsPage"/>
+<class name="testscripts.SF.Release37TestScripts.TC_SF_ASEMEAManagerLeadSourceField"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerLeadsSharingFunctionalityPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsSharingFunctionalityPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerLeadsSharingFunctionalityPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerLeadsSharingFunctionalityPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERManagerLeadsSharingFunctionalityPage"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERCSSEditPaidInstallment"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERManagerEditPaidInstallment"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerLeadsVerifyNewCustomPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsVerifyNewCustomPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerLeadsVerifyNewCustomPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerLeadsVerifyNewCustomPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERCSSLeadsVerifyNewCustomPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERManagerLeadsVerifyNewCustomPage"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERBrokerMultipleInstallmentsEvenPercent"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERBrokerMultipleInstallmentsUnEvenPercent"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAPACManagerNewOpportunityPageLayout"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAMERManagerOpportunityCloneEdit"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAMERManagerOpportunityCloneEdit"/>
+<class name="testscripts.SF.Release37TestScripts.TC_SF_ASAMERManagerPickListValues"/>
+<class name="testscripts.SF.Release37TestScripts.TC_SF_ASAPACBrokerPickListValues"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerPrivateNoteSharing"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerPrivateNoteSharing"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerPropertiesNewActivityNotificationEmailPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerPropertiesVerifyCustomEventPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerPropertiesVerifyCustomEventPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_CMAMERBrokerPropertiesVerifyCustomEventPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_CMAMERManagerPropertiesVerifyCustomEventPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerPropertiesVerifyCustomEventPage"/>
+<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERManagerPropertiesVerifyCustomEventPage"/>
+<class name="testscripts.SF.Release37TestScripts.TC_SF_ASEMEABrokerRFPAndPitchDueDateFields"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage01PhaseProbability"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage02PhaseProbability"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage03PhaseProbability"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage04PhaseProbability"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage05PhaseProbability"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage06PhaseProbability"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage07PhaseProbability"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage08PhaseProbability"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage10PhaseProbability"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage11PhaseProbability"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage12PhaseProbability"/>
+<class name="testscripts.SF.Release37TestScripts.TC_SF_ASAPACBrokerStateStreetPickListValue"/>
+<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_VASAPACBrokerOpportunityNameAutoGenerate"/>
+	
+ -->
+	
+	</classes>
+	</test>	
+</suite>

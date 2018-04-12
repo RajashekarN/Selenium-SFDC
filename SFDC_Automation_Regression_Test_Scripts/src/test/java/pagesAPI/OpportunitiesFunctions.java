@@ -120,7 +120,7 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 		String opportunityId = establishConnection.saveResultsId(results);	
 		return opportunityId;
 	}
-
+	
 	/**
 	 * Function for the creation Note
 	 * 
@@ -961,5 +961,10 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 			System.out.println(e.getMessage());
 		}
 	}*/
+	
+	
+	
+
+	
 
 }

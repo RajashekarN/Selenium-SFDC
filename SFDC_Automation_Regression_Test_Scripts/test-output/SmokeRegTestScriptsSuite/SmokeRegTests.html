@@ -1,0 +1,1065 @@
+<html>
+<head>
+<title>TestNG:  SmokeRegTests</title>
+<link href="../testng.css" rel="stylesheet" type="text/css" />
+<link href="../my-testng.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+.log { display: none;} 
+.stack-trace { display: none;} 
+</style>
+<script type="text/javascript">
+<!--
+function flip(e) {
+  current = e.style.display;
+  if (current == 'block') {
+    e.style.display = 'none';
+    return 0;
+  }
+  else {
+    e.style.display = 'block';
+    return 1;
+  }
+}
+
+function toggleBox(szDivId, elem, msg1, msg2)
+{
+  var res = -1;  if (document.getElementById) {
+    res = flip(document.getElementById(szDivId));
+  }
+  else if (document.all) {
+    // this is the way old msie versions work
+    res = flip(document.all[szDivId]);
+  }
+  if(elem) {
+    if(res == 0) elem.innerHTML = msg1; else elem.innerHTML = msg2;
+  }
+
+}
+
+function toggleAllBoxes() {
+  if (document.getElementsByTagName) {
+    d = document.getElementsByTagName('div');
+    for (i = 0; i < d.length; i++) {
+      if (d[i].className == 'log') {
+        flip(d[i]);
+      }
+    }
+  }
+}
+
+// -->
+</script>
+
+</head>
+<body>
+<h2 align='center'>SmokeRegTests</h2><table border='1' align="center">
+<tr>
+<td>Tests passed/Failed/Skipped:</td><td>83/13/0</td>
+</tr><tr>
+<td>Started on:</td><td>Mon Mar 19 08:30:49 CDT 2018</td>
+</tr>
+<tr><td>Total time:</td><td>5659 seconds (5659252 ms)</td>
+</tr><tr>
+<td>Included groups:</td><td></td>
+</tr><tr>
+<td>Excluded groups:</td><td></td>
+</tr>
+</table><p/>
+<small><i>(Hover the method name to see the test class name)</i></small><p/>
+<table width='100%' border='1' class='invocation-failed'>
+<tr><td colspan='4' align='center'><b>FAILED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerPropertiesVerifyCustomEventPage.runTC_SF_ABAMERBrokerPropertiesVerifyCustomEventPage()'><b>runTC_SF_ABAMERBrokerPropertiesVerifyCustomEventPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerPropertiesVerifyCustomEventPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td><div><pre>java.lang.AssertionError: Expected condition failed: waiting for visibility of Proxy element for: DefaultElementLocator &apos;By.xpath: //label[text()=&apos;Building/Property Name&apos;]/parent::div/parent::div//div[contains(@class,&apos;requiredInput&apos;)]//input[contains(@id,&apos;propertyEditForm&apos;)]&apos; (tried for 3 second(s) with 500 MILLISECONDS interval)
+Build info: version: &apos;3.0.1&apos;, revision: &apos;1969d75&apos;, time: &apos;2016-10-18 09:49:13 -0700&apos;
+System info: host: &apos;TX604-7235QTD&apos;, ip: &apos;192.168.1.109&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_162&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73), userDataDir=C:\Users\SBitra\AppData\Local\Temp\scoped_dir18772_23264}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=65.0.3325.162, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=false, acceptInsecureCerts=false, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: fcb77448a83b2ce8b4e7950e0805f28f &lt;b&gt;Caused by: &lt;/b&gt;org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//label[text()=&apos;Building/Property Name&apos;]/parent::div/parent::div//div[contains(@class,&apos;requiredInput&apos;)]//input[contains(@id,&apos;propertyEditForm&apos;)]&quot;}
+  (Session info: chrome=65.0.3325.162)
+  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 10.0.14393 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 3.03 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: &apos;3.0.1&apos;, revision: &apos;1969d75&apos;, time: &apos;2016-10-18 09:49:13 -0700&apos;
+System info: host: &apos;TX604-7235QTD&apos;, ip: &apos;192.168.1.109&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_162&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73), userDataDir=C:\Users\SBitra\AppData\Local\Temp\scoped_dir18772_23264}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=65.0.3325.162, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=false, acceptInsecureCerts=false, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: fcb77448a83b2ce8b4e7950e0805f28f
+*** Element info: {Using=xpath, value=//label[text()=&apos;Building/Property Name&apos;]/parent::div/parent::div//div[contains(@class,&apos;requiredInput&apos;)]//input[contains(@id,&apos;propertyEditForm&apos;)]}
+	at com.cognizant.Craft.CRAFTTestCase.tearDownTestRunner(CRAFTTestCase.java:149)
+	at testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerPropertiesVerifyCustomEventPage.runTC_SF_ABAMERBrokerPropertiesVerifyCustomEventPage(TC_SF_ABAMERBrokerPropertiesVerifyCustomEventPage.java:35)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+... Removed 11 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace423880970", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace423880970'><pre>java.lang.AssertionError: Expected condition failed: waiting for visibility of Proxy element for: DefaultElementLocator &apos;By.xpath: //label[text()=&apos;Building/Property Name&apos;]/parent::div/parent::div//div[contains(@class,&apos;requiredInput&apos;)]//input[contains(@id,&apos;propertyEditForm&apos;)]&apos; (tried for 3 second(s) with 500 MILLISECONDS interval)
+Build info: version: &apos;3.0.1&apos;, revision: &apos;1969d75&apos;, time: &apos;2016-10-18 09:49:13 -0700&apos;
+System info: host: &apos;TX604-7235QTD&apos;, ip: &apos;192.168.1.109&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_162&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73), userDataDir=C:\Users\SBitra\AppData\Local\Temp\scoped_dir18772_23264}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=65.0.3325.162, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=false, acceptInsecureCerts=false, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: fcb77448a83b2ce8b4e7950e0805f28f &lt;b&gt;Caused by: &lt;/b&gt;org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//label[text()=&apos;Building/Property Name&apos;]/parent::div/parent::div//div[contains(@class,&apos;requiredInput&apos;)]//input[contains(@id,&apos;propertyEditForm&apos;)]&quot;}
+  (Session info: chrome=65.0.3325.162)
+  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 10.0.14393 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 3.03 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: &apos;3.0.1&apos;, revision: &apos;1969d75&apos;, time: &apos;2016-10-18 09:49:13 -0700&apos;
+System info: host: &apos;TX604-7235QTD&apos;, ip: &apos;192.168.1.109&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_162&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73), userDataDir=C:\Users\SBitra\AppData\Local\Temp\scoped_dir18772_23264}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=65.0.3325.162, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=false, acceptInsecureCerts=false, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: fcb77448a83b2ce8b4e7950e0805f28f
+*** Element info: {Using=xpath, value=//label[text()=&apos;Building/Property Name&apos;]/parent::div/parent::div//div[contains(@class,&apos;requiredInput&apos;)]//input[contains(@id,&apos;propertyEditForm&apos;)]}
+	at org.testng.Assert.fail(Assert.java:94)
+	at com.cognizant.Craft.CRAFTTestCase.tearDownTestRunner(CRAFTTestCase.java:149)
+	at testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerPropertiesVerifyCustomEventPage.runTC_SF_ABAMERBrokerPropertiesVerifyCustomEventPage(TC_SF_ABAMERBrokerPropertiesVerifyCustomEventPage.java:35)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:86)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:643)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:820)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1128)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>43</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerPropertiesVerifyCustomEventPage@1b68ddbd</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAMERManagerOpportunityCloneEdit.runTC_SF_ABAMERManagerOpportunityCloneEdit()'><b>runTC_SF_ABAMERManagerOpportunityCloneEdit</b><br>Test class: testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAMERManagerOpportunityCloneEdit<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td><div><pre>java.lang.AssertionError: Expected condition failed: waiting for visibility of Proxy element for: DefaultElementLocator &apos;By.xpath: //a[@class=&apos;forceActionLink&apos;]/div[@class=&apos;slds-truncate&apos;][text()=&apos;Clone&apos;]&apos; (tried for 3 second(s) with 500 MILLISECONDS interval)
+Build info: version: &apos;3.0.1&apos;, revision: &apos;1969d75&apos;, time: &apos;2016-10-18 09:49:13 -0700&apos;
+System info: host: &apos;TX604-7235QTD&apos;, ip: &apos;192.168.1.109&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_162&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73), userDataDir=C:\Users\SBitra\AppData\Local\Temp\scoped_dir15588_17239}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=65.0.3325.162, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=false, acceptInsecureCerts=false, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: e4c294e57a644686e08a0dfb79c3ba55 &lt;b&gt;Caused by: &lt;/b&gt;org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//a[@class=&apos;forceActionLink&apos;]/div[@class=&apos;slds-truncate&apos;][text()=&apos;Clone&apos;]&quot;}
+  (Session info: chrome=65.0.3325.162)
+  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 10.0.14393 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 3.05 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: &apos;3.0.1&apos;, revision: &apos;1969d75&apos;, time: &apos;2016-10-18 09:49:13 -0700&apos;
+System info: host: &apos;TX604-7235QTD&apos;, ip: &apos;192.168.1.109&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_162&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73), userDataDir=C:\Users\SBitra\AppData\Local\Temp\scoped_dir15588_17239}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=65.0.3325.162, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=false, acceptInsecureCerts=false, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: e4c294e57a644686e08a0dfb79c3ba55
+*** Element info: {Using=xpath, value=//a[@class=&apos;forceActionLink&apos;]/div[@class=&apos;slds-truncate&apos;][text()=&apos;Clone&apos;]}
+	at com.cognizant.Craft.CRAFTTestCase.tearDownTestRunner(CRAFTTestCase.java:149)
+	at testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAMERManagerOpportunityCloneEdit.runTC_SF_ABAMERManagerOpportunityCloneEdit(TC_SF_ABAMERManagerOpportunityCloneEdit.java:34)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+... Removed 11 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1201709965", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1201709965'><pre>java.lang.AssertionError: Expected condition failed: waiting for visibility of Proxy element for: DefaultElementLocator &apos;By.xpath: //a[@class=&apos;forceActionLink&apos;]/div[@class=&apos;slds-truncate&apos;][text()=&apos;Clone&apos;]&apos; (tried for 3 second(s) with 500 MILLISECONDS interval)
+Build info: version: &apos;3.0.1&apos;, revision: &apos;1969d75&apos;, time: &apos;2016-10-18 09:49:13 -0700&apos;
+System info: host: &apos;TX604-7235QTD&apos;, ip: &apos;192.168.1.109&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_162&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73), userDataDir=C:\Users\SBitra\AppData\Local\Temp\scoped_dir15588_17239}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=65.0.3325.162, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=false, acceptInsecureCerts=false, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: e4c294e57a644686e08a0dfb79c3ba55 &lt;b&gt;Caused by: &lt;/b&gt;org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//a[@class=&apos;forceActionLink&apos;]/div[@class=&apos;slds-truncate&apos;][text()=&apos;Clone&apos;]&quot;}
+  (Session info: chrome=65.0.3325.162)
+  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 10.0.14393 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 3.05 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: &apos;3.0.1&apos;, revision: &apos;1969d75&apos;, time: &apos;2016-10-18 09:49:13 -0700&apos;
+System info: host: &apos;TX604-7235QTD&apos;, ip: &apos;192.168.1.109&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_162&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73), userDataDir=C:\Users\SBitra\AppData\Local\Temp\scoped_dir15588_17239}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=65.0.3325.162, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=false, acceptInsecureCerts=false, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: e4c294e57a644686e08a0dfb79c3ba55
+*** Element info: {Using=xpath, value=//a[@class=&apos;forceActionLink&apos;]/div[@class=&apos;slds-truncate&apos;][text()=&apos;Clone&apos;]}
+	at org.testng.Assert.fail(Assert.java:94)
+	at com.cognizant.Craft.CRAFTTestCase.tearDownTestRunner(CRAFTTestCase.java:149)
+	at testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAMERManagerOpportunityCloneEdit.runTC_SF_ABAMERManagerOpportunityCloneEdit(TC_SF_ABAMERManagerOpportunityCloneEdit.java:34)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:86)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:643)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:820)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1128)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>44</td>
+<td>testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAMERManagerOpportunityCloneEdit@17579e0f</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerPropertiesVerifyCustomEventPage.runTC_SF_ABAMERManagerPropertiesVerifyCustomEventPage()'><b>runTC_SF_ABAMERManagerPropertiesVerifyCustomEventPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerPropertiesVerifyCustomEventPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td><div><pre>java.lang.AssertionError: unknown error: unhandled inspector error: {&quot;code&quot;:-32000,&quot;message&quot;:&quot;Cannot find context with specified id&quot;}
+  (Session info: chrome=65.0.3325.162)
+  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 10.0.14393 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 1.12 seconds
+Build info: version: &apos;3.0.1&apos;, revision: &apos;1969d75&apos;, time: &apos;2016-10-18 09:49:13 -0700&apos;
+System info: host: &apos;TX604-7235QTD&apos;, ip: &apos;192.168.1.109&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_162&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73), userDataDir=C:\Users\SBitra\AppData\Local\Temp\scoped_dir18864_27429}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=65.0.3325.162, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=false, acceptInsecureCerts=false, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: e4c9cb767e94db8a1ceff529eac7952e
+*** Element info: {Using=xpath, value=//a[@class=&apos;tabHeader&apos;]//span[text()=&apos;Details&apos;]}
+	at com.cognizant.Craft.CRAFTTestCase.tearDownTestRunner(CRAFTTestCase.java:149)
+	at testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerPropertiesVerifyCustomEventPage.runTC_SF_ABAMERManagerPropertiesVerifyCustomEventPage(TC_SF_ABAMERManagerPropertiesVerifyCustomEventPage.java:35)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+... Removed 11 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace341308716", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace341308716'><pre>java.lang.AssertionError: unknown error: unhandled inspector error: {&quot;code&quot;:-32000,&quot;message&quot;:&quot;Cannot find context with specified id&quot;}
+  (Session info: chrome=65.0.3325.162)
+  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 10.0.14393 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 1.12 seconds
+Build info: version: &apos;3.0.1&apos;, revision: &apos;1969d75&apos;, time: &apos;2016-10-18 09:49:13 -0700&apos;
+System info: host: &apos;TX604-7235QTD&apos;, ip: &apos;192.168.1.109&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_162&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73), userDataDir=C:\Users\SBitra\AppData\Local\Temp\scoped_dir18864_27429}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=65.0.3325.162, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=false, acceptInsecureCerts=false, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: e4c9cb767e94db8a1ceff529eac7952e
+*** Element info: {Using=xpath, value=//a[@class=&apos;tabHeader&apos;]//span[text()=&apos;Details&apos;]}
+	at org.testng.Assert.fail(Assert.java:94)
+	at com.cognizant.Craft.CRAFTTestCase.tearDownTestRunner(CRAFTTestCase.java:149)
+	at testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerPropertiesVerifyCustomEventPage.runTC_SF_ABAMERManagerPropertiesVerifyCustomEventPage(TC_SF_ABAMERManagerPropertiesVerifyCustomEventPage.java:35)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:86)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:643)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:820)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1128)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>60</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerPropertiesVerifyCustomEventPage@646d64ab</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerContactsCreationOfNewActivityPage.runTC_SF_ABEMEAManagerContactsCreationOfNewActivityPage()'><b>runTC_SF_ABEMEAManagerContactsCreationOfNewActivityPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerContactsCreationOfNewActivityPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td><div><pre>java.lang.AssertionError: Expected condition failed: waiting for visibility of [[ChromeDriver: chrome on XP (bb4b66b3066d4ee8371d7911b06f8459)] -&gt; id: username] (tried for 10 second(s) with 500 MILLISECONDS interval)
+Build info: version: &apos;3.0.1&apos;, revision: &apos;1969d75&apos;, time: &apos;2016-10-18 09:49:13 -0700&apos;
+System info: host: &apos;TX604-7235QTD&apos;, ip: &apos;192.168.1.109&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_162&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73), userDataDir=C:\Users\SBitra\AppData\Local\Temp\scoped_dir2448_5219}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=65.0.3325.162, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=false, acceptInsecureCerts=false, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: bb4b66b3066d4ee8371d7911b06f8459 &lt;b&gt;Caused by: &lt;/b&gt;org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;id&quot;,&quot;selector&quot;:&quot;username&quot;}
+  (Session info: chrome=65.0.3325.162)
+  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 10.0.14393 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 543.49 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: &apos;3.0.1&apos;, revision: &apos;1969d75&apos;, time: &apos;2016-10-18 09:49:13 -0700&apos;
+System info: host: &apos;TX604-7235QTD&apos;, ip: &apos;192.168.1.109&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_162&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73), userDataDir=C:\Users\SBitra\AppData\Local\Temp\scoped_dir2448_5219}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=65.0.3325.162, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=false, acceptInsecureCerts=false, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: bb4b66b3066d4ee8371d7911b06f8459
+*** Element info: {Using=id, value=username}
+	at com.cognizant.Craft.CRAFTTestCase.tearDownTestRunner(CRAFTTestCase.java:149)
+	at testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerContactsCreationOfNewActivityPage.runTC_SF_ABEMEAManagerContactsCreationOfNewActivityPage(TC_SF_ABAMERManagerContactsCreationOfNewActivityPage.java:35)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+... Removed 11 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace743616770", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace743616770'><pre>java.lang.AssertionError: Expected condition failed: waiting for visibility of [[ChromeDriver: chrome on XP (bb4b66b3066d4ee8371d7911b06f8459)] -&gt; id: username] (tried for 10 second(s) with 500 MILLISECONDS interval)
+Build info: version: &apos;3.0.1&apos;, revision: &apos;1969d75&apos;, time: &apos;2016-10-18 09:49:13 -0700&apos;
+System info: host: &apos;TX604-7235QTD&apos;, ip: &apos;192.168.1.109&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_162&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73), userDataDir=C:\Users\SBitra\AppData\Local\Temp\scoped_dir2448_5219}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=65.0.3325.162, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=false, acceptInsecureCerts=false, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: bb4b66b3066d4ee8371d7911b06f8459 &lt;b&gt;Caused by: &lt;/b&gt;org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;id&quot;,&quot;selector&quot;:&quot;username&quot;}
+  (Session info: chrome=65.0.3325.162)
+  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 10.0.14393 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 543.49 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: &apos;3.0.1&apos;, revision: &apos;1969d75&apos;, time: &apos;2016-10-18 09:49:13 -0700&apos;
+System info: host: &apos;TX604-7235QTD&apos;, ip: &apos;192.168.1.109&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_162&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73), userDataDir=C:\Users\SBitra\AppData\Local\Temp\scoped_dir2448_5219}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=65.0.3325.162, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=false, acceptInsecureCerts=false, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: bb4b66b3066d4ee8371d7911b06f8459
+*** Element info: {Using=id, value=username}
+	at org.testng.Assert.fail(Assert.java:94)
+	at com.cognizant.Craft.CRAFTTestCase.tearDownTestRunner(CRAFTTestCase.java:149)
+	at testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerContactsCreationOfNewActivityPage.runTC_SF_ABEMEAManagerContactsCreationOfNewActivityPage(TC_SF_ABAMERManagerContactsCreationOfNewActivityPage.java:35)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:86)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:643)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:820)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1128)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>560</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerContactsCreationOfNewActivityPage@5e853265</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage01PhaseProbability.runTC_SF_GWSAPACBrokerStage01PhaseProbability()'><b>runTC_SF_GWSAPACBrokerStage01PhaseProbability</b><br>Test class: testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage01PhaseProbability<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td><div><pre>java.lang.AssertionError: unknown error: Element &lt;div class=&quot;slds-truncate&quot; title=&quot;...&quot; data-aura-rendered-by=&quot;1666:0&quot; style=&quot;border: 2px solid yellow;&quot;&gt;New&lt;/div&gt; is not clickable at point (1286, 180). Other element would receive the click: &lt;a href=&quot;javascript:void(0);&quot; title=&quot;New&quot; data-aura-rendered-by=&quot;1665:0&quot; class=&quot;forceActionLink&quot; data-aura-class=&quot;forceActionLink&quot;&gt;...&lt;/a&gt;
+  (Session info: chrome=65.0.3325.162)
+  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 10.0.14393 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 426 milliseconds
+Build info: version: &apos;3.0.1&apos;, revision: &apos;1969d75&apos;, time: &apos;2016-10-18 09:49:13 -0700&apos;
+System info: host: &apos;TX604-7235QTD&apos;, ip: &apos;192.168.1.109&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_162&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73), userDataDir=C:\Users\SBitra\AppData\Local\Temp\scoped_dir13664_30735}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=65.0.3325.162, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=false, acceptInsecureCerts=false, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: 56e3d5ce2729053b17ec0dbce7138de3
+	at com.cognizant.Craft.CRAFTTestCase.tearDownTestRunner(CRAFTTestCase.java:149)
+	at testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage01PhaseProbability.runTC_SF_GWSAPACBrokerStage01PhaseProbability(TC_SF_GWSAPACBrokerStage01PhaseProbability.java:34)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+... Removed 11 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace281467240", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace281467240'><pre>java.lang.AssertionError: unknown error: Element &lt;div class=&quot;slds-truncate&quot; title=&quot;...&quot; data-aura-rendered-by=&quot;1666:0&quot; style=&quot;border: 2px solid yellow;&quot;&gt;New&lt;/div&gt; is not clickable at point (1286, 180). Other element would receive the click: &lt;a href=&quot;javascript:void(0);&quot; title=&quot;New&quot; data-aura-rendered-by=&quot;1665:0&quot; class=&quot;forceActionLink&quot; data-aura-class=&quot;forceActionLink&quot;&gt;...&lt;/a&gt;
+  (Session info: chrome=65.0.3325.162)
+  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 10.0.14393 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 426 milliseconds
+Build info: version: &apos;3.0.1&apos;, revision: &apos;1969d75&apos;, time: &apos;2016-10-18 09:49:13 -0700&apos;
+System info: host: &apos;TX604-7235QTD&apos;, ip: &apos;192.168.1.109&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_162&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73), userDataDir=C:\Users\SBitra\AppData\Local\Temp\scoped_dir13664_30735}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=65.0.3325.162, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=false, acceptInsecureCerts=false, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: 56e3d5ce2729053b17ec0dbce7138de3
+	at org.testng.Assert.fail(Assert.java:94)
+	at com.cognizant.Craft.CRAFTTestCase.tearDownTestRunner(CRAFTTestCase.java:149)
+	at testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage01PhaseProbability.runTC_SF_GWSAPACBrokerStage01PhaseProbability(TC_SF_GWSAPACBrokerStage01PhaseProbability.java:34)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:86)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:643)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:820)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1128)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>21</td>
+<td>testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage01PhaseProbability@704a52ec</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage02PhaseProbability.runTC_SF_GWSAPACBrokerStage01PhaseProbability()'><b>runTC_SF_GWSAPACBrokerStage01PhaseProbability</b><br>Test class: testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage02PhaseProbability<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td><div><pre>java.lang.AssertionError: Phase and Probability populated are not as expected:::
+	at com.cognizant.Craft.CRAFTTestCase.tearDownTestRunner(CRAFTTestCase.java:149)
+	at testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage02PhaseProbability.runTC_SF_GWSAPACBrokerStage01PhaseProbability(TC_SF_GWSAPACBrokerStage02PhaseProbability.java:34)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+... Removed 11 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1673662839", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1673662839'><pre>java.lang.AssertionError: Phase and Probability populated are not as expected:::
+	at org.testng.Assert.fail(Assert.java:94)
+	at com.cognizant.Craft.CRAFTTestCase.tearDownTestRunner(CRAFTTestCase.java:149)
+	at testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage02PhaseProbability.runTC_SF_GWSAPACBrokerStage01PhaseProbability(TC_SF_GWSAPACBrokerStage02PhaseProbability.java:34)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:86)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:643)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:820)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1128)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>45</td>
+<td>testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage02PhaseProbability@6ee52dcd</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage03PhaseProbability.runTC_SF_GWSAPACBrokerStage03PhaseProbability()'><b>runTC_SF_GWSAPACBrokerStage03PhaseProbability</b><br>Test class: testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage03PhaseProbability<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td><div><pre>java.lang.AssertionError: java.lang.NullPointerException
+	at com.cognizant.Craft.CRAFTTestCase.tearDownTestRunner(CRAFTTestCase.java:149)
+	at testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage03PhaseProbability.runTC_SF_GWSAPACBrokerStage03PhaseProbability(TC_SF_GWSAPACBrokerStage03PhaseProbability.java:34)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+... Removed 11 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1989796900", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1989796900'><pre>java.lang.AssertionError: java.lang.NullPointerException
+	at org.testng.Assert.fail(Assert.java:94)
+	at com.cognizant.Craft.CRAFTTestCase.tearDownTestRunner(CRAFTTestCase.java:149)
+	at testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage03PhaseProbability.runTC_SF_GWSAPACBrokerStage03PhaseProbability(TC_SF_GWSAPACBrokerStage03PhaseProbability.java:34)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:86)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:643)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:820)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1128)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>45</td>
+<td>testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage03PhaseProbability@4493d195</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage04PhaseProbability.runTC_SF_GWSAPACBrokerStage04PhaseProbability()'><b>runTC_SF_GWSAPACBrokerStage04PhaseProbability</b><br>Test class: testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage04PhaseProbability<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td><div><pre>java.lang.AssertionError: java.lang.NullPointerException
+	at com.cognizant.Craft.CRAFTTestCase.tearDownTestRunner(CRAFTTestCase.java:149)
+	at testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage04PhaseProbability.runTC_SF_GWSAPACBrokerStage04PhaseProbability(TC_SF_GWSAPACBrokerStage04PhaseProbability.java:34)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+... Removed 11 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace331265957", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace331265957'><pre>java.lang.AssertionError: java.lang.NullPointerException
+	at org.testng.Assert.fail(Assert.java:94)
+	at com.cognizant.Craft.CRAFTTestCase.tearDownTestRunner(CRAFTTestCase.java:149)
+	at testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage04PhaseProbability.runTC_SF_GWSAPACBrokerStage04PhaseProbability(TC_SF_GWSAPACBrokerStage04PhaseProbability.java:34)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:86)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:643)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:820)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1128)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>46</td>
+<td>testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage04PhaseProbability@2781e022</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage07PhaseProbability.runTC_SF_GWSAPACBrokerStage07PhaseProbability()'><b>runTC_SF_GWSAPACBrokerStage07PhaseProbability</b><br>Test class: testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage07PhaseProbability<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td><div><pre>java.lang.AssertionError: Expected condition failed: waiting for visibility of Proxy element for: DefaultElementLocator &apos;By.xpath: //button[text()=&apos;Continue&apos;]&apos; (tried for 3 second(s) with 500 MILLISECONDS interval)
+Build info: version: &apos;3.0.1&apos;, revision: &apos;1969d75&apos;, time: &apos;2016-10-18 09:49:13 -0700&apos;
+System info: host: &apos;TX604-7235QTD&apos;, ip: &apos;192.168.1.109&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_162&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73), userDataDir=C:\Users\SBitra\AppData\Local\Temp\scoped_dir20028_1288}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=65.0.3325.162, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=false, acceptInsecureCerts=false, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: a61472ae90432ec3ee4c3b375fbf48b6 &lt;b&gt;Caused by: &lt;/b&gt;org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//button[text()=&apos;Continue&apos;]&quot;}
+  (Session info: chrome=65.0.3325.162)
+  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 10.0.14393 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 3.01 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: &apos;3.0.1&apos;, revision: &apos;1969d75&apos;, time: &apos;2016-10-18 09:49:13 -0700&apos;
+System info: host: &apos;TX604-7235QTD&apos;, ip: &apos;192.168.1.109&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_162&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73), userDataDir=C:\Users\SBitra\AppData\Local\Temp\scoped_dir20028_1288}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=65.0.3325.162, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=false, acceptInsecureCerts=false, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: a61472ae90432ec3ee4c3b375fbf48b6
+*** Element info: {Using=xpath, value=//button[text()=&apos;Continue&apos;]}
+	at com.cognizant.Craft.CRAFTTestCase.tearDownTestRunner(CRAFTTestCase.java:149)
+	at testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage07PhaseProbability.runTC_SF_GWSAPACBrokerStage07PhaseProbability(TC_SF_GWSAPACBrokerStage07PhaseProbability.java:34)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+... Removed 11 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace984029470", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace984029470'><pre>java.lang.AssertionError: Expected condition failed: waiting for visibility of Proxy element for: DefaultElementLocator &apos;By.xpath: //button[text()=&apos;Continue&apos;]&apos; (tried for 3 second(s) with 500 MILLISECONDS interval)
+Build info: version: &apos;3.0.1&apos;, revision: &apos;1969d75&apos;, time: &apos;2016-10-18 09:49:13 -0700&apos;
+System info: host: &apos;TX604-7235QTD&apos;, ip: &apos;192.168.1.109&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_162&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73), userDataDir=C:\Users\SBitra\AppData\Local\Temp\scoped_dir20028_1288}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=65.0.3325.162, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=false, acceptInsecureCerts=false, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: a61472ae90432ec3ee4c3b375fbf48b6 &lt;b&gt;Caused by: &lt;/b&gt;org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//button[text()=&apos;Continue&apos;]&quot;}
+  (Session info: chrome=65.0.3325.162)
+  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 10.0.14393 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 3.01 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: &apos;3.0.1&apos;, revision: &apos;1969d75&apos;, time: &apos;2016-10-18 09:49:13 -0700&apos;
+System info: host: &apos;TX604-7235QTD&apos;, ip: &apos;192.168.1.109&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_162&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73), userDataDir=C:\Users\SBitra\AppData\Local\Temp\scoped_dir20028_1288}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=65.0.3325.162, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=false, acceptInsecureCerts=false, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: a61472ae90432ec3ee4c3b375fbf48b6
+*** Element info: {Using=xpath, value=//button[text()=&apos;Continue&apos;]}
+	at org.testng.Assert.fail(Assert.java:94)
+	at com.cognizant.Craft.CRAFTTestCase.tearDownTestRunner(CRAFTTestCase.java:149)
+	at testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage07PhaseProbability.runTC_SF_GWSAPACBrokerStage07PhaseProbability(TC_SF_GWSAPACBrokerStage07PhaseProbability.java:34)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:86)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:643)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:820)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1128)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>40</td>
+<td>testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage07PhaseProbability@1877ab81</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage12PhaseProbability.runTC_SF_GWSAPACBrokerStage12PhaseProbability()'><b>runTC_SF_GWSAPACBrokerStage12PhaseProbability</b><br>Test class: testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage12PhaseProbability<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td><div><pre>java.lang.AssertionError: java.lang.NullPointerException
+	at com.cognizant.Craft.CRAFTTestCase.tearDownTestRunner(CRAFTTestCase.java:149)
+	at testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage12PhaseProbability.runTC_SF_GWSAPACBrokerStage12PhaseProbability(TC_SF_GWSAPACBrokerStage12PhaseProbability.java:34)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+... Removed 11 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1176612093", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1176612093'><pre>java.lang.AssertionError: java.lang.NullPointerException
+	at org.testng.Assert.fail(Assert.java:94)
+	at com.cognizant.Craft.CRAFTTestCase.tearDownTestRunner(CRAFTTestCase.java:149)
+	at testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage12PhaseProbability.runTC_SF_GWSAPACBrokerStage12PhaseProbability(TC_SF_GWSAPACBrokerStage12PhaseProbability.java:34)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:86)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:643)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:820)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1128)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>45</td>
+<td>testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage12PhaseProbability@34cd072c</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_OBAMERAdminAccountsVerifySPOCs.runTC_SF_OBAMERAdminAccountsVerifySPOCs()'><b>runTC_SF_OBAMERAdminAccountsVerifySPOCs</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_OBAMERAdminAccountsVerifySPOCs<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td><div><pre>java.lang.AssertionError: unknown error: Element &lt;a class=&quot;slds-truncate outputLookupLink slds-truncate forceOutputLookup&quot; data-ownerid=&quot;2079:0&quot; data-refid=&quot;recordId&quot; data-recordid=&quot;0010R000009gDrlQAE&quot; data-special-link=&quot;true&quot; href=&quot;/one/one.app#/sObject/0010R000009gDrlQAE/view&quot; target=&quot;_blank&quot; rel=&quot;noreferrer&quot; title=&quot;Albert Heijn - CBRE Account&quot; data-aura-rendered-by=&quot;2088:0&quot; data-aura-class=&quot;forceOutputLookup&quot;&gt;...&lt;/a&gt; is not clickable at point (163, 295). Other element would receive the click: &lt;div class=&quot;slds-spinner_container slds-grid&quot; data-aura-rendered-by=&quot;1453:0&quot;&gt;...&lt;/div&gt;
+  (Session info: chrome=65.0.3325.162)
+  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 10.0.14393 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 138 milliseconds
+Build info: version: &apos;3.0.1&apos;, revision: &apos;1969d75&apos;, time: &apos;2016-10-18 09:49:13 -0700&apos;
+System info: host: &apos;TX604-7235QTD&apos;, ip: &apos;192.168.1.109&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_162&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73), userDataDir=C:\Users\SBitra\AppData\Local\Temp\scoped_dir10104_22870}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=65.0.3325.162, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=false, acceptInsecureCerts=false, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: 02591b41fbdca13b838f202b813d33a2
+	at com.cognizant.Craft.CRAFTTestCase.tearDownTestRunner(CRAFTTestCase.java:149)
+	at testscripts.SF.RegressionTestScripts.TC_SF_OBAMERAdminAccountsVerifySPOCs.runTC_SF_OBAMERAdminAccountsVerifySPOCs(TC_SF_OBAMERAdminAccountsVerifySPOCs.java:35)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+... Removed 11 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace57611831", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace57611831'><pre>java.lang.AssertionError: unknown error: Element &lt;a class=&quot;slds-truncate outputLookupLink slds-truncate forceOutputLookup&quot; data-ownerid=&quot;2079:0&quot; data-refid=&quot;recordId&quot; data-recordid=&quot;0010R000009gDrlQAE&quot; data-special-link=&quot;true&quot; href=&quot;/one/one.app#/sObject/0010R000009gDrlQAE/view&quot; target=&quot;_blank&quot; rel=&quot;noreferrer&quot; title=&quot;Albert Heijn - CBRE Account&quot; data-aura-rendered-by=&quot;2088:0&quot; data-aura-class=&quot;forceOutputLookup&quot;&gt;...&lt;/a&gt; is not clickable at point (163, 295). Other element would receive the click: &lt;div class=&quot;slds-spinner_container slds-grid&quot; data-aura-rendered-by=&quot;1453:0&quot;&gt;...&lt;/div&gt;
+  (Session info: chrome=65.0.3325.162)
+  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 10.0.14393 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 138 milliseconds
+Build info: version: &apos;3.0.1&apos;, revision: &apos;1969d75&apos;, time: &apos;2016-10-18 09:49:13 -0700&apos;
+System info: host: &apos;TX604-7235QTD&apos;, ip: &apos;192.168.1.109&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_162&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73), userDataDir=C:\Users\SBitra\AppData\Local\Temp\scoped_dir10104_22870}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=65.0.3325.162, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=false, acceptInsecureCerts=false, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: 02591b41fbdca13b838f202b813d33a2
+	at org.testng.Assert.fail(Assert.java:94)
+	at com.cognizant.Craft.CRAFTTestCase.tearDownTestRunner(CRAFTTestCase.java:149)
+	at testscripts.SF.RegressionTestScripts.TC_SF_OBAMERAdminAccountsVerifySPOCs.runTC_SF_OBAMERAdminAccountsVerifySPOCs(TC_SF_OBAMERAdminAccountsVerifySPOCs.java:35)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:86)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:643)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:820)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1128)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>31</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_OBAMERAdminAccountsVerifySPOCs@68bbe345</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERBrokerMultipleInstallmentsUnEvenPercent.runTC_SF_OBAMERBrokerMultipleInstallmentsUnEvenPercent()'><b>runTC_SF_OBAMERBrokerMultipleInstallmentsUnEvenPercent</b><br>Test class: testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERBrokerMultipleInstallmentsUnEvenPercent<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td><div><pre>java.lang.AssertionError: unknown error: Element &lt;span class=&quot;title&quot; data-aura-rendered-by=&quot;2480:0&quot; style=&quot;border: 2px solid yellow;&quot;&gt;...&lt;/span&gt; is not clickable at point (195, 562). Other element would receive the click: &lt;div class=&quot;modal-glass&quot; data-aura-rendered-by=&quot;560:0&quot;&gt;...&lt;/div&gt;
+  (Session info: chrome=65.0.3325.162)
+  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 10.0.14393 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 83 milliseconds
+Build info: version: &apos;3.0.1&apos;, revision: &apos;1969d75&apos;, time: &apos;2016-10-18 09:49:13 -0700&apos;
+System info: host: &apos;TX604-7235QTD&apos;, ip: &apos;192.168.1.109&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_162&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73), userDataDir=C:\Users\SBitra\AppData\Local\Temp\scoped_dir19784_18115}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=65.0.3325.162, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=false, acceptInsecureCerts=false, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: 1108fdc9e16bec84dadf96248b7c1453
+	at com.cognizant.Craft.CRAFTTestCase.tearDownTestRunner(CRAFTTestCase.java:149)
+	at testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERBrokerMultipleInstallmentsUnEvenPercent.runTC_SF_OBAMERBrokerMultipleInstallmentsUnEvenPercent(TC_SF_OBAMERBrokerMultipleInstallmentsUnEvenPercent.java:34)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+... Removed 11 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace374730089", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace374730089'><pre>java.lang.AssertionError: unknown error: Element &lt;span class=&quot;title&quot; data-aura-rendered-by=&quot;2480:0&quot; style=&quot;border: 2px solid yellow;&quot;&gt;...&lt;/span&gt; is not clickable at point (195, 562). Other element would receive the click: &lt;div class=&quot;modal-glass&quot; data-aura-rendered-by=&quot;560:0&quot;&gt;...&lt;/div&gt;
+  (Session info: chrome=65.0.3325.162)
+  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 10.0.14393 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 83 milliseconds
+Build info: version: &apos;3.0.1&apos;, revision: &apos;1969d75&apos;, time: &apos;2016-10-18 09:49:13 -0700&apos;
+System info: host: &apos;TX604-7235QTD&apos;, ip: &apos;192.168.1.109&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_162&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73), userDataDir=C:\Users\SBitra\AppData\Local\Temp\scoped_dir19784_18115}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=65.0.3325.162, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=false, acceptInsecureCerts=false, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: 1108fdc9e16bec84dadf96248b7c1453
+	at org.testng.Assert.fail(Assert.java:94)
+	at com.cognizant.Craft.CRAFTTestCase.tearDownTestRunner(CRAFTTestCase.java:149)
+	at testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERBrokerMultipleInstallmentsUnEvenPercent.runTC_SF_OBAMERBrokerMultipleInstallmentsUnEvenPercent(TC_SF_OBAMERBrokerMultipleInstallmentsUnEvenPercent.java:34)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:86)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:643)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:820)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1128)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>83</td>
+<td>testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERBrokerMultipleInstallmentsUnEvenPercent@6acdbdf5</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_OBAMERCSSLeadsVerifyNewCustomPage.runTC_SF_OBAMERCSSLeadsVerifyNewCustomPage()'><b>runTC_SF_OBAMERCSSLeadsVerifyNewCustomPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_OBAMERCSSLeadsVerifyNewCustomPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td><div><pre>java.lang.AssertionError: All fields are not present in the Lead Information Section
+	at com.cognizant.Craft.CRAFTTestCase.tearDownTestRunner(CRAFTTestCase.java:149)
+	at testscripts.SF.RegressionTestScripts.TC_SF_OBAMERCSSLeadsVerifyNewCustomPage.runTC_SF_OBAMERCSSLeadsVerifyNewCustomPage(TC_SF_OBAMERCSSLeadsVerifyNewCustomPage.java:35)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+... Removed 11 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace547580017", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace547580017'><pre>java.lang.AssertionError: All fields are not present in the Lead Information Section
+	at org.testng.Assert.fail(Assert.java:94)
+	at com.cognizant.Craft.CRAFTTestCase.tearDownTestRunner(CRAFTTestCase.java:149)
+	at testscripts.SF.RegressionTestScripts.TC_SF_OBAMERCSSLeadsVerifyNewCustomPage.runTC_SF_OBAMERCSSLeadsVerifyNewCustomPage(TC_SF_OBAMERCSSLeadsVerifyNewCustomPage.java:35)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:86)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:643)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:820)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1128)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>87</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_OBAMERCSSLeadsVerifyNewCustomPage@1786dec2</td></tr>
+</table><p>
+<table width='100%' border='1' class='invocation-passed'>
+<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='testscripts.SF.Release37TestScripts.TC_SF_ASEMEAManagerLeadSourceField.RUNTC_SF_ASEMEAManagerLeadSourceField()'><b>RUNTC_SF_ASEMEAManagerLeadSourceField</b><br>Test class: testscripts.SF.Release37TestScripts.TC_SF_ASEMEAManagerLeadSourceField<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>62</td>
+<td>testscripts.SF.Release37TestScripts.TC_SF_ASEMEAManagerLeadSourceField@1f7030a6</td></tr>
+<tr>
+<td title='testscripts.SF.Release37TestScripts.TC_SF_OBAMERAdminAccountsPrivateTags.RUNTC_SF_OBAMERAdminAccountsPrivateTags()'><b>RUNTC_SF_OBAMERAdminAccountsPrivateTags</b><br>Test class: testscripts.SF.Release37TestScripts.TC_SF_OBAMERAdminAccountsPrivateTags<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>64</td>
+<td>testscripts.SF.Release37TestScripts.TC_SF_OBAMERAdminAccountsPrivateTags@a7e666</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerAccountsDetailsEditPage.runTC_SF_ABAMERBrokerAccountsDetailsEditPage()'><b>runTC_SF_ABAMERBrokerAccountsDetailsEditPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerAccountsDetailsEditPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>75</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerAccountsDetailsEditPage@cd2dae5</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerContactsCreationOfNewActivityPage.runTC_SF_ABAMERBrokerContactsCreationOfNewActivityPage()'><b>runTC_SF_ABAMERBrokerContactsCreationOfNewActivityPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerContactsCreationOfNewActivityPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>42</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerContactsCreationOfNewActivityPage@5a8806ef</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerContactsNewActivityLayoutPage.runTC_SF_ABAMERBrokerContactsNewActivityLayoutPage()'><b>runTC_SF_ABAMERBrokerContactsNewActivityLayoutPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerContactsNewActivityLayoutPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>30</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerContactsNewActivityLayoutPage@76707e36</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerContactsPopulatingRequiredFieldsPage.runTC_SF_ABAMERBrokerContactsPopulatingRequiredFieldsPage()'><b>runTC_SF_ABAMERBrokerContactsPopulatingRequiredFieldsPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerContactsPopulatingRequiredFieldsPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>7</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerContactsPopulatingRequiredFieldsPage@32709393</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAMERBrokerEditPaidInstallment.runTC_SF_ABAMERBrokerEditPaidInstallment()'><b>runTC_SF_ABAMERBrokerEditPaidInstallment</b><br>Test class: testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAMERBrokerEditPaidInstallment<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>115</td>
+<td>testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAMERBrokerEditPaidInstallment@2d6eabae</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerLeadsSharingFunctionalityPage.runTC_SF_ABAMERBrokerLeadsSharingFunctionalityPage()'><b>runTC_SF_ABAMERBrokerLeadsSharingFunctionalityPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerLeadsSharingFunctionalityPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>42</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerLeadsSharingFunctionalityPage@5a1c0542</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerLeadsVerifyNewCustomPage.runTC_SF_ABAMERBrokerLeadsVerifyCustomPage()'><b>runTC_SF_ABAMERBrokerLeadsVerifyCustomPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerLeadsVerifyNewCustomPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>87</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerLeadsVerifyNewCustomPage@1e965684</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerPrivateNoteSharing.runTC_SF_ABAMERBrokerPrivateNoteSharing()'><b>runTC_SF_ABAMERBrokerPrivateNoteSharing</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerPrivateNoteSharing<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>75</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerPrivateNoteSharing@33f88ab</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerPropertiesNewActivityNotificationEmailPage.runTC_SF_ABAMERBrokerPropertiesNewActivityNotificationEmailPage()'><b>runTC_SF_ABAMERBrokerPropertiesNewActivityNotificationEmailPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerPropertiesNewActivityNotificationEmailPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>26</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerPropertiesNewActivityNotificationEmailPage@2d8f65a4</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSAccountsDetailsEditPage.runTC_SF_ABAMERCSSAccountsDetailsEditPage()'><b>runTC_SF_ABAMERCSSAccountsDetailsEditPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSAccountsDetailsEditPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>56</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSAccountsDetailsEditPage@6321e813</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAMERCSSEditPaidInstallment.runTC_SF_ABAMERCSSEditPaidInstallment()'><b>runTC_SF_ABAMERCSSEditPaidInstallment</b><br>Test class: testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAMERCSSEditPaidInstallment<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>104</td>
+<td>testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAMERCSSEditPaidInstallment@4e7dc304</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsSharingFunctionalityPage.runTC_SF_ABAMERCSSLeadsSharingFunctionalityPage()'><b>runTC_SF_ABAMERCSSLeadsSharingFunctionalityPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsSharingFunctionalityPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>41</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsSharingFunctionalityPage@396f6598</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsVerifyNewCustomPage.runTC_SF_ABAMERCSSLeadsVerifyCustomPage()'><b>runTC_SF_ABAMERCSSLeadsVerifyCustomPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsVerifyNewCustomPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>86</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsVerifyNewCustomPage@4d95d2a2</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerAccountsDetailsEditPage.runTC_SF_ABAMERManagerAccountsDetailsEditPage()'><b>runTC_SF_ABAMERManagerAccountsDetailsEditPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerAccountsDetailsEditPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>56</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerAccountsDetailsEditPage@79be0360</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerAccountsVerifySPOCs.runTC_SF_ABAMERManagerAccountsVerifySPOCs()'><b>runTC_SF_ABAMERManagerAccountsVerifySPOCs</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerAccountsVerifySPOCs<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>67</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerAccountsVerifySPOCs@6737fd8f</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerContactsNewActivityLayoutPage.runTC_SF_ABAMERManagerContactsNewActivityLayoutPage()'><b>runTC_SF_ABAMERManagerContactsNewActivityLayoutPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerContactsNewActivityLayoutPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>28</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerContactsNewActivityLayoutPage@614ddd49</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerContactsPopulatingRequiredFieldsPage.runTC_SF_ABAMERManagerContactsPopulatingRequiredFieldsPage()'><b>runTC_SF_ABAMERManagerContactsPopulatingRequiredFieldsPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerContactsPopulatingRequiredFieldsPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>2</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerContactsPopulatingRequiredFieldsPage@3fd7a715</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAMERManagerEditPaidInstallment.runTC_SF_ABAMERManagerEditPaidInstallment()'><b>runTC_SF_ABAMERManagerEditPaidInstallment</b><br>Test class: testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAMERManagerEditPaidInstallment<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>183</td>
+<td>testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAMERManagerEditPaidInstallment@64729b1e</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerLeadsSharingFunctionalityPage.runTC_SF_ABAMERManagerLeadsSharingFunctionalityPage()'><b>runTC_SF_ABAMERManagerLeadsSharingFunctionalityPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerLeadsSharingFunctionalityPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>41</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerLeadsSharingFunctionalityPage@394e1a0f</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerLeadsVerifyNewCustomPage.runTC_SF_ABAMERManagerLeadsVerifyCustomPage()'><b>runTC_SF_ABAMERManagerLeadsVerifyCustomPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerLeadsVerifyNewCustomPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>87</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerLeadsVerifyNewCustomPage@53f65459</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_ABAPACBrokerContactsReminderSentFunctionality.runTC_SF_ABAPACBrokerContactsReminderSentFunctionality()'><b>runTC_SF_ABAPACBrokerContactsReminderSentFunctionality</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_ABAPACBrokerContactsReminderSentFunctionality<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>27</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_ABAPACBrokerContactsReminderSentFunctionality@711f39f9</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSContactsCreationOfNewActivityPage.runTC_SF_ABAPACCSSContactsCreationOfNewActivityPage()'><b>runTC_SF_ABAPACCSSContactsCreationOfNewActivityPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSContactsCreationOfNewActivityPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>30</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSContactsCreationOfNewActivityPage@6c49835d</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_ABAPACCSSContactsReminderSentFunctionality.runTC_SF_ABAPACCSSContactsReminderSentFunctionality()'><b>runTC_SF_ABAPACCSSContactsReminderSentFunctionality</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_ABAPACCSSContactsReminderSentFunctionality<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>28</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_ABAPACCSSContactsReminderSentFunctionality@71bbf57e</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_ABAPACManagerContactsReminderSentFunctionality.runTC_SF_ABAPACManagerContactsReminderSentFunctionality()'><b>runTC_SF_ABAPACManagerContactsReminderSentFunctionality</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_ABAPACManagerContactsReminderSentFunctionality<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>28</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_ABAPACManagerContactsReminderSentFunctionality@7f13d6e</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAPACManagerNewOpportunityPageLayout.runTC_SF_ABAPACManagerNewOpportunityPageLayout()'><b>runTC_SF_ABAPACManagerNewOpportunityPageLayout</b><br>Test class: testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAPACManagerNewOpportunityPageLayout<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>66</td>
+<td>testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAPACManagerNewOpportunityPageLayout@4b1c1ea0</td></tr>
+<tr>
+<td title='testscripts.SF.Release37TestScripts.TC_SF_ASAMERManagerCommissionField.runTC_SF_ASAMERManagerCommissionField()'><b>runTC_SF_ASAMERManagerCommissionField</b><br>Test class: testscripts.SF.Release37TestScripts.TC_SF_ASAMERManagerCommissionField<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>110</td>
+<td>testscripts.SF.Release37TestScripts.TC_SF_ASAMERManagerCommissionField@7c29daf3</td></tr>
+<tr>
+<td title='testscripts.SF.Release37TestScripts.TC_SF_ASAMERManagerPickListValues.runTC_SF_ASAMERManagerPickListValues()'><b>runTC_SF_ASAMERManagerPickListValues</b><br>Test class: testscripts.SF.Release37TestScripts.TC_SF_ASAMERManagerPickListValues<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>44</td>
+<td>testscripts.SF.Release37TestScripts.TC_SF_ASAMERManagerPickListValues@3712b94</td></tr>
+<tr>
+<td title='testscripts.SF.Release37TestScripts.TC_SF_ASAPACBrokerAdditionalActivityTypes.runTC_SF_ASAPACBrokerAdditionalActivityTypes()'><b>runTC_SF_ASAPACBrokerAdditionalActivityTypes</b><br>Test class: testscripts.SF.Release37TestScripts.TC_SF_ASAPACBrokerAdditionalActivityTypes<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>32</td>
+<td>testscripts.SF.Release37TestScripts.TC_SF_ASAPACBrokerAdditionalActivityTypes@72b6cbcc</td></tr>
+<tr>
+<td title='testscripts.SF.Release37TestScripts.TC_SF_ASAPACBrokerAwardedPickListValues.runTC_SF_ASAPACBrokerAwardedPickListValues()'><b>runTC_SF_ASAPACBrokerAwardedPickListValues</b><br>Test class: testscripts.SF.Release37TestScripts.TC_SF_ASAPACBrokerAwardedPickListValues<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>51</td>
+<td>testscripts.SF.Release37TestScripts.TC_SF_ASAPACBrokerAwardedPickListValues@30b8a058</td></tr>
+<tr>
+<td title='testscripts.SF.Release37TestScripts.TC_SF_ASAPACBrokerCommissionField.runTC_SF_ASAPACBrokerCommissionField()'><b>runTC_SF_ASAPACBrokerCommissionField</b><br>Test class: testscripts.SF.Release37TestScripts.TC_SF_ASAPACBrokerCommissionField<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>53</td>
+<td>testscripts.SF.Release37TestScripts.TC_SF_ASAPACBrokerCommissionField@9660f4e</td></tr>
+<tr>
+<td title='testscripts.SF.Release37TestScripts.TC_SF_ASAPACBrokerPickListValues.runTC_SF_ASAPACBrokerPickListValues()'><b>runTC_SF_ASAPACBrokerPickListValues</b><br>Test class: testscripts.SF.Release37TestScripts.TC_SF_ASAPACBrokerPickListValues<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>47</td>
+<td>testscripts.SF.Release37TestScripts.TC_SF_ASAPACBrokerPickListValues@2833cc44</td></tr>
+<tr>
+<td title='testscripts.SF.Release37TestScripts.TC_SF_ASAPACBrokerStateStreetPickListValue.runTC_SF_ASAPACBrokerStateStreetPickListValue()'><b>runTC_SF_ASAPACBrokerStateStreetPickListValue</b><br>Test class: testscripts.SF.Release37TestScripts.TC_SF_ASAPACBrokerStateStreetPickListValue<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>52</td>
+<td>testscripts.SF.Release37TestScripts.TC_SF_ASAPACBrokerStateStreetPickListValue@7a1ebcd8</td></tr>
+<tr>
+<td title='testscripts.SF.Release37TestScripts.TC_SF_ASEMEABrokerRFPAndPitchDueDateFields.runTC_SF_ASEMEABrokerRFPAndPitchDueDateFields()'><b>runTC_SF_ASEMEABrokerRFPAndPitchDueDateFields</b><br>Test class: testscripts.SF.Release37TestScripts.TC_SF_ASEMEABrokerRFPAndPitchDueDateFields<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>81</td>
+<td>testscripts.SF.Release37TestScripts.TC_SF_ASEMEABrokerRFPAndPitchDueDateFields@76f2b07d</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_CMAMERBrokerAccountsDetailsEditPage.runTC_SF_CMAMERBrokerAccountsDetailsEditPage()'><b>runTC_SF_CMAMERBrokerAccountsDetailsEditPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_CMAMERBrokerAccountsDetailsEditPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>56</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_CMAMERBrokerAccountsDetailsEditPage@22a67b4</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_CMAMERBrokerContactsNewActivityLayoutPage.runTC_SF_CMAMERBrokerContactsNewActivityLayoutPage()'><b>runTC_SF_CMAMERBrokerContactsNewActivityLayoutPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_CMAMERBrokerContactsNewActivityLayoutPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>29</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_CMAMERBrokerContactsNewActivityLayoutPage@1f554b06</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_CMAMERBrokerPropertiesVerifyCustomEventPage.runTC_SF_CMAMERBrokerPropertiesVerifyCustomEventPage()'><b>runTC_SF_CMAMERBrokerPropertiesVerifyCustomEventPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_CMAMERBrokerPropertiesVerifyCustomEventPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>59</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_CMAMERBrokerPropertiesVerifyCustomEventPage@59e5ddf</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_CMAMERCSSContactsCreationOfNewActivityPage.runTC_SF_CMAMERCSSContactsCreationOfNewActivityPage()'><b>runTC_SF_CMAMERCSSContactsCreationOfNewActivityPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_CMAMERCSSContactsCreationOfNewActivityPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>28</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_CMAMERCSSContactsCreationOfNewActivityPage@7d0587f1</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_CMAMERManagerAccountsDetailsEditPage.runTC_SF_CMAMERManagerAccountsDetailsEditPage()'><b>runTC_SF_CMAMERManagerAccountsDetailsEditPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_CMAMERManagerAccountsDetailsEditPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>57</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_CMAMERManagerAccountsDetailsEditPage@57855c9a</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_CMAMERManagerContactsCreationOfNewActivityPage.runTC_SF_CMAMERManagerContactsCreationOfNewActivityPage()'><b>runTC_SF_CMAMERManagerContactsCreationOfNewActivityPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_CMAMERManagerContactsCreationOfNewActivityPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>29</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_CMAMERManagerContactsCreationOfNewActivityPage@5d76b067</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_CMAMERManagerContactsNewActivityLayoutPage.runTC_SF_CMAMERManagerContactsNewActivityLayoutPage()'><b>runTC_SF_CMAMERManagerContactsNewActivityLayoutPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_CMAMERManagerContactsNewActivityLayoutPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>29</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_CMAMERManagerContactsNewActivityLayoutPage@694e1548</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_CMAMERManagerPropertiesVerifyCustomEventPage.runTC_SF_CMAMERManagerPropertiesVerifyCustomEventPage()'><b>runTC_SF_CMAMERManagerPropertiesVerifyCustomEventPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_CMAMERManagerPropertiesVerifyCustomEventPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>58</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_CMAMERManagerPropertiesVerifyCustomEventPage@536aaa8d</td></tr>
+<tr>
+<td title='testscripts.SF.Release37TestScripts.TC_SF_CMAPACBrokerHomeVerifyingTabsOnHomePage.runTC_SF_CMAPACBrokerHomeVerifyingTabsOnHomePage()'><b>runTC_SF_CMAPACBrokerHomeVerifyingTabsOnHomePage</b><br>Test class: testscripts.SF.Release37TestScripts.TC_SF_CMAPACBrokerHomeVerifyingTabsOnHomePage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>21</td>
+<td>testscripts.SF.Release37TestScripts.TC_SF_CMAPACBrokerHomeVerifyingTabsOnHomePage@48503868</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_CMAPACCSSAccountsDetailsEditPage.runTC_SF_CMAPACCSSAccountsDetailsEditPage()'><b>runTC_SF_CMAPACCSSAccountsDetailsEditPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_CMAPACCSSAccountsDetailsEditPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>56</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_CMAPACCSSAccountsDetailsEditPage@3b084709</td></tr>
+<tr>
+<td title='testscripts.SF.Release37TestScripts.TC_SF_CMAPACManagerHomeVerifyingTabsOnHomePage.runTC_SF_CMAPACManagerHomeVerifyingTabsOnHomePage()'><b>runTC_SF_CMAPACManagerHomeVerifyingTabsOnHomePage</b><br>Test class: testscripts.SF.Release37TestScripts.TC_SF_CMAPACManagerHomeVerifyingTabsOnHomePage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>21</td>
+<td>testscripts.SF.Release37TestScripts.TC_SF_CMAPACManagerHomeVerifyingTabsOnHomePage@6895a785</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_CMAMERBrokerAccountsCreationOfNewActivityPage.runTC_SF_CMEMEABrokerAccountsCreationOfNewActivityPage()'><b>runTC_SF_CMEMEABrokerAccountsCreationOfNewActivityPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_CMAMERBrokerAccountsCreationOfNewActivityPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>46</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_CMAMERBrokerAccountsCreationOfNewActivityPage@4973813a</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_CMAMERBrokerContactsCreationOfNewActivityPage.runTC_SF_CMEMEABrokerContactsCreationOfNewActivityPage()'><b>runTC_SF_CMEMEABrokerContactsCreationOfNewActivityPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_CMAMERBrokerContactsCreationOfNewActivityPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>28</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_CMAMERBrokerContactsCreationOfNewActivityPage@67205a84</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAMERManagerOpportunityCloneEdit.runTC_SF_GWSAMERManagerOpportunityCloneEdit()'><b>runTC_SF_GWSAMERManagerOpportunityCloneEdit</b><br>Test class: testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAMERManagerOpportunityCloneEdit<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>31</td>
+<td>testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAMERManagerOpportunityCloneEdit@4d41cee</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage05PhaseProbability.runTC_SF_GWSAPACBrokerStage05PhaseProbability()'><b>runTC_SF_GWSAPACBrokerStage05PhaseProbability</b><br>Test class: testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage05PhaseProbability<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>44</td>
+<td>testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage05PhaseProbability@57e1b0c</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage06PhaseProbability.runTC_SF_GWSAPACBrokerStage06PhaseProbability()'><b>runTC_SF_GWSAPACBrokerStage06PhaseProbability</b><br>Test class: testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage06PhaseProbability<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>47</td>
+<td>testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage06PhaseProbability@4232c52b</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage08PhaseProbability.runTC_SF_GWSAPACBrokerStage08PhaseProbability()'><b>runTC_SF_GWSAPACBrokerStage08PhaseProbability</b><br>Test class: testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage08PhaseProbability<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>44</td>
+<td>testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage08PhaseProbability@305fd85d</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage10PhaseProbability.runTC_SF_GWSAPACBrokerStage10PhaseProbability()'><b>runTC_SF_GWSAPACBrokerStage10PhaseProbability</b><br>Test class: testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage10PhaseProbability<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>65</td>
+<td>testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage10PhaseProbability@458c1321</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage11PhaseProbability.runTC_SF_GWSAPACBrokerStage11PhaseProbability()'><b>runTC_SF_GWSAPACBrokerStage11PhaseProbability</b><br>Test class: testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage11PhaseProbability<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>45</td>
+<td>testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAPACBrokerStage11PhaseProbability@11438d26</td></tr>
+<tr>
+<td title='testscripts.SF.SmokeTestScripts.TC_SF_OBAMERBrokerAccountLookUpNewContactPage.runTC_SF_OBAMERBrokerAccountLookUpNewContactPage()'><b>runTC_SF_OBAMERBrokerAccountLookUpNewContactPage</b><br>Test class: testscripts.SF.SmokeTestScripts.TC_SF_OBAMERBrokerAccountLookUpNewContactPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>28</td>
+<td>testscripts.SF.SmokeTestScripts.TC_SF_OBAMERBrokerAccountLookUpNewContactPage@3a883ce7</td></tr>
+<tr>
+<td title='testscripts.SF.SmokeTestScripts.TC_SF_OBAMERBrokerCloneEditLeadDetailPage.runTC_SF_OBAMERBrokerCloneEditLeadDetailPage()'><b>runTC_SF_OBAMERBrokerCloneEditLeadDetailPage</b><br>Test class: testscripts.SF.SmokeTestScripts.TC_SF_OBAMERBrokerCloneEditLeadDetailPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>38</td>
+<td>testscripts.SF.SmokeTestScripts.TC_SF_OBAMERBrokerCloneEditLeadDetailPage@4bbfb90a</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerContactsCreationOfNewActivityPage.runTC_SF_OBAMERBrokerContactsCreationOfNewActivityPage()'><b>runTC_SF_OBAMERBrokerContactsCreationOfNewActivityPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerContactsCreationOfNewActivityPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>28</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerContactsCreationOfNewActivityPage@2a17b7b6</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerContactsNewActivityLayoutPage.runTC_SF_OBAMERBrokerContactsNewActivityLayoutPage()'><b>runTC_SF_OBAMERBrokerContactsNewActivityLayoutPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerContactsNewActivityLayoutPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>28</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerContactsNewActivityLayoutPage@1c3a4799</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerContactsPopulatingAllFields.runTC_SF_OBAMERBrokerContactsPopulatingAllFields()'><b>runTC_SF_OBAMERBrokerContactsPopulatingAllFields</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerContactsPopulatingAllFields<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>4</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerContactsPopulatingAllFields@26aa12dd</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerContactsReminderSentFunctionality.runTC_SF_OBAMERBrokerContactsReminderSentFunctionality()'><b>runTC_SF_OBAMERBrokerContactsReminderSentFunctionality</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerContactsReminderSentFunctionality<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>28</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerContactsReminderSentFunctionality@51cdd8a</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERBrokerEditPaidInstallment.runTC_SF_OBAMERBrokerEditPaidInstallment()'><b>runTC_SF_OBAMERBrokerEditPaidInstallment</b><br>Test class: testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERBrokerEditPaidInstallment<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>104</td>
+<td>testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERBrokerEditPaidInstallment@10bbd20a</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERBrokerInLineEditUnEvenPercentOpportunity.runTC_SF_OBAMERBrokerInLineEditUnEvenPercentOpportunity()'><b>runTC_SF_OBAMERBrokerInLineEditUnEvenPercentOpportunity</b><br>Test class: testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERBrokerInLineEditUnEvenPercentOpportunity<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>122</td>
+<td>testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERBrokerInLineEditUnEvenPercentOpportunity@184f6be2</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerLeadsSharingFunctionalityPage.runTC_SF_OBAMERBrokerLeadsSharingFunctionalityPage()'><b>runTC_SF_OBAMERBrokerLeadsSharingFunctionalityPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerLeadsSharingFunctionalityPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>40</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerLeadsSharingFunctionalityPage@27a5f880</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerLeadsVerifyNewCustomPage.runTC_SF_OBAMERBrokerLeadsVerifyNewCustomPage()'><b>runTC_SF_OBAMERBrokerLeadsVerifyNewCustomPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerLeadsVerifyNewCustomPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>87</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerLeadsVerifyNewCustomPage@3b088d51</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERBrokerMultipleInstallmentsEvenPercent.runTC_SF_OBAMERBrokerMultipleInstallmentsEvenPercent()'><b>runTC_SF_OBAMERBrokerMultipleInstallmentsEvenPercent</b><br>Test class: testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERBrokerMultipleInstallmentsEvenPercent<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>84</td>
+<td>testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERBrokerMultipleInstallmentsEvenPercent@15d0c81b</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerPrivateNoteSharing.runTC_SF_OBAMERBrokerPrivateNoteSharing()'><b>runTC_SF_OBAMERBrokerPrivateNoteSharing</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerPrivateNoteSharing<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>74</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerPrivateNoteSharing@27a8c74e</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerPropertiesVerifyCustomEventPage.runTC_SF_OBAMERBrokerPropertiesVerifyCustomEventPage()'><b>runTC_SF_OBAMERBrokerPropertiesVerifyCustomEventPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerPropertiesVerifyCustomEventPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>58</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerPropertiesVerifyCustomEventPage@e320068</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_OBAMERCSSContactsReminderSentFunctionality.runTC_SF_OBAMERCSSContactsReminderSentFunctionality()'><b>runTC_SF_OBAMERCSSContactsReminderSentFunctionality</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_OBAMERCSSContactsReminderSentFunctionality<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>28</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_OBAMERCSSContactsReminderSentFunctionality@d44fc21</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERCSSEditPaidInstallment.runTC_SF_OBAMERCSSEditPaidInstallment()'><b>runTC_SF_OBAMERCSSEditPaidInstallment</b><br>Test class: testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERCSSEditPaidInstallment<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>103</td>
+<td>testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERCSSEditPaidInstallment@5f282abb</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_OBAMERManagerContactsNewActivityLayoutPage.runTC_SF_OBAMERManagerContactsNewActivityLayoutPage()'><b>runTC_SF_OBAMERManagerContactsNewActivityLayoutPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_OBAMERManagerContactsNewActivityLayoutPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>29</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_OBAMERManagerContactsNewActivityLayoutPage@131276c2</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_OBAMERManagerContactsReminderSentFunctionality.runTC_SF_OBAMERManagerContactsReminderSentFunctionality()'><b>runTC_SF_OBAMERManagerContactsReminderSentFunctionality</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_OBAMERManagerContactsReminderSentFunctionality<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>28</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_OBAMERManagerContactsReminderSentFunctionality@23faf8f2</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERManagerEditPaidInstallment.runTC_SF_OBAMERManagerEditPaidInstallment()'><b>runTC_SF_OBAMERManagerEditPaidInstallment</b><br>Test class: testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERManagerEditPaidInstallment<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>138</td>
+<td>testscripts.SF.RegressionTestScriptsOpp.TC_SF_OBAMERManagerEditPaidInstallment@167fdd33</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_OBAMERManagerLeadsDetailsPage.runTC_SF_OBAMERManagerLeadsDetailsPage()'><b>runTC_SF_OBAMERManagerLeadsDetailsPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_OBAMERManagerLeadsDetailsPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>44</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_OBAMERManagerLeadsDetailsPage@56aac163</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_OBAMERManagerLeadsSharingFunctionalityPage.runTC_SF_OBAMERManagerLeadsSharingFunctionalityPage()'><b>runTC_SF_OBAMERManagerLeadsSharingFunctionalityPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_OBAMERManagerLeadsSharingFunctionalityPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>40</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_OBAMERManagerLeadsSharingFunctionalityPage@1d29cf23</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_OBAMERManagerLeadsVerifyNewCustomPage.runTC_SF_OBAMERManagerLeadsVerifyNewCustomPage()'><b>runTC_SF_OBAMERManagerLeadsVerifyNewCustomPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_OBAMERManagerLeadsVerifyNewCustomPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>87</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_OBAMERManagerLeadsVerifyNewCustomPage@74650e52</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_OBAMERManagerPropertiesVerifyCustomEventPage.runTC_SF_OBAMERManagerPropertiesVerifyCustomEventPage()'><b>runTC_SF_OBAMERManagerPropertiesVerifyCustomEventPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_OBAMERManagerPropertiesVerifyCustomEventPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>58</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_OBAMERManagerPropertiesVerifyCustomEventPage@1f57539</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_OBAPACBrokerAccountsDetailsEditPage.runTC_SF_OBAPACBrokerAccountsDetailsEditPage()'><b>runTC_SF_OBAPACBrokerAccountsDetailsEditPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_OBAPACBrokerAccountsDetailsEditPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>58</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_OBAPACBrokerAccountsDetailsEditPage@3224f60b</td></tr>
+<tr>
+<td title='testscripts.SF.Release37TestScripts.TC_SF_OBAPACBrokerCampaignsTab.runTC_SF_OBAPACBrokerCampaignsTab()'><b>runTC_SF_OBAPACBrokerCampaignsTab</b><br>Test class: testscripts.SF.Release37TestScripts.TC_SF_OBAPACBrokerCampaignsTab<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>80</td>
+<td>testscripts.SF.Release37TestScripts.TC_SF_OBAPACBrokerCampaignsTab@7494e528</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_OBAPACCSSAccountsDetailsEditPage.runTC_SF_OBAPACCSSAccountsDetailsEditPage()'><b>runTC_SF_OBAPACCSSAccountsDetailsEditPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_OBAPACCSSAccountsDetailsEditPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>56</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_OBAPACCSSAccountsDetailsEditPage@63e2203c</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_OBAMERCSSContactsCreationOfNewActivityPage.runTC_SF_OBAPACCSSContactsCreationOfNewActivityPage()'><b>runTC_SF_OBAPACCSSContactsCreationOfNewActivityPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_OBAMERCSSContactsCreationOfNewActivityPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>29</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_OBAMERCSSContactsCreationOfNewActivityPage@4f063c0a</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_OBAPACManagerAccountsDetailsEditPage.runTC_SF_OBAPACManagerAccountsDetailsEditPage()'><b>runTC_SF_OBAPACManagerAccountsDetailsEditPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_OBAPACManagerAccountsDetailsEditPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>55</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_OBAPACManagerAccountsDetailsEditPage@1efed156</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScripts.TC_SF_OBAMERManagerContactsCreationOfNewActivityPage.runTC_SF_OBEMEAManagerContactsCreationOfNewActivityPage()'><b>runTC_SF_OBEMEAManagerContactsCreationOfNewActivityPage</b><br>Test class: testscripts.SF.RegressionTestScripts.TC_SF_OBAMERManagerContactsCreationOfNewActivityPage<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>29</td>
+<td>testscripts.SF.RegressionTestScripts.TC_SF_OBAMERManagerContactsCreationOfNewActivityPage@1e6d1014</td></tr>
+<tr>
+<td title='testscripts.SF.RegressionTestScriptsOpp.TC_SF_VASAPACBrokerOpportunityNameAutoGenerate.runTC_SF_VASAPACBrokerOpportunityNameAutoGenerate()'><b>runTC_SF_VASAPACBrokerOpportunityNameAutoGenerate</b><br>Test class: testscripts.SF.RegressionTestScriptsOpp.TC_SF_VASAPACBrokerOpportunityNameAutoGenerate<br>Parameters: Instance1, LOCAL, WINDOWS</td>
+<td></td>
+<td>57</td>
+<td>testscripts.SF.RegressionTestScriptsOpp.TC_SF_VASAPACBrokerOpportunityNameAutoGenerate@5faeada1</td></tr>
+</table><p>
+</body>
+</html>

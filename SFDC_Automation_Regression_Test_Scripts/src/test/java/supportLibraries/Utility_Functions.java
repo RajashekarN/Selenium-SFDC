@@ -338,7 +338,7 @@ public class Utility_Functions extends ReusableLibrary {
 		Actions builder = new Actions(driver.getWebDriver());
 		builder.moveToElement(el).build().perform();
 		timeWait(2);
-		builder.click().perform();
+		//builder.click().perform();
 		return true;
 	}
 

@@ -446,7 +446,7 @@ public class HomePage extends ReusableLibrary {
 		tabsList.add("Opportunities");
 		tabsList.add("Reports");
 		tabsList.add("Dashboards");
-		tabsList.add("Private Notes");
+		
 		/*
 		 * tabsList.add("Properties"); tabsList.add("Private Tags");
 		 * tabsList.add("Bulk Tagging"); tabsList.add("Cases");
@@ -457,6 +457,7 @@ public class HomePage extends ReusableLibrary {
 	static ArrayList<String> moreTabsList = new ArrayList<String>();
 
 	public void homePageMoreTabsList() {
+		moreTabsList.add("Private Notes");
 		moreTabsList.add("Properties");
 		moreTabsList.add("Private Tags");
 		moreTabsList.add("Bulk Tagging");
@@ -465,7 +466,8 @@ public class HomePage extends ReusableLibrary {
 		moreTabsList.add("Offers");
 		System.out.println("The Home Page more Tabs for the APAC Capital Markets are:::" + moreTabsList);
 	}
-
+	
+	
 	/**
 	 * Validating the tabs on the Home Page for the APAC broker Capital Markets
 	 * 
@@ -483,55 +485,59 @@ public class HomePage extends ReusableLibrary {
 					.findElements(By.xpath("//div[contains(@class,'slds-context-bar')]//span[@class='slds-truncate']"));
 			int i1 = 0, j = 0, countLabelList = 0;
 			String[] labelTexts = new String[tabsList.size()];
+			System.out.println("Number of Tabs found :"+homePageTabsList.size()+" , "+"  Number of TabNames in List :"+tabsList.size() );
 			for (WebElement element : homePageTabsList) {
 				labelTexts[i1] = element.getText();
 				if (labelTexts[i1].contains(tabsList.get(j))) {
-					System.out.println("Verify Add Opportunity Page Label List" + element.getText());
-					report.updateTestLog("Verify Add Opportunity Page Label List",
-							element.getText() + "::::label list is present in Add Opportunity Page", Status.PASS);
+					System.out.println("Verify Home Page TabNames For APACCapitalMarkets" + element.getText());
+					report.updateTestLog("Verify Home Page TabNames For APACCapitalMarkets",
+							element.getText() + "::::label list is present in Home Page TabNames For APACCapitalMarkets", Status.PASS);
 					countLabelList++;
 				}
-				if (countLabelList == 12)
+				if (countLabelList == 11)
 					break;
 				i1++;
 				j++;
 			}
 			System.out.println("Home Page Tabs List Count:::" + countLabelList);
-			if (countLabelList >= 12) {
+			if (countLabelList >= 11) {
 				System.out.println("All the Tabs are present in Home Page ");
 				report.updateTestLog("Verify Home Page Tabs", "All the Tabs are present in Home Page", Status.PASS);
-			} else if (countLabelList < 12) {
+			} else if (countLabelList < 11) {
 				report.updateTestLog("Verify Home Page Tabs", "All the Tabs are not present in Home Page", Status.FAIL);
 			}
 			Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
 			Utility_Functions.xClick(driver, menu_More, true);
-			List<WebElement> homePageMoreTabsList = driver.findElements(By.xpath("//one-tmp-menu-item[@class='slds-dropdown__item']//span"));
+			List<WebElement> homePageMoreTabsList = driver.findElements(By.xpath("//one-tmp-menu-item[@class='slds-dropdown__item']//span/span"));
+			moreTabsList.clear();
 			homePageMoreTabsList();
+			System.out.println("Number of More Tabs found ::::" + homePageMoreTabsList.size()+" , "+ "  Number of More TabNames in List :"+moreTabsList.size());
 			int i2 = 0, j1 = 0, countLabelListMore = 0;
 			String[] labelTextsMore = new String[moreTabsList.size()];
 			for (WebElement element : homePageMoreTabsList) {
 				labelTextsMore[i2] = element.getText();
 				if (labelTextsMore[i2].contains(moreTabsList.get(j1))) {
-					System.out.println("Verify Add Opportunity Page Label List" + element.getText());
-					report.updateTestLog("Verify Add Opportunity Page Label List",
-							element.getText() + "::::label list is present in Add Opportunity Page", Status.PASS);
+					System.out.println("Verify Home Page TabNames For APACCapitalMarkets" + element.getText());
+					report.updateTestLog("Verify Home Page TabNames For APACCapitalMarkets",
+							element.getText() + "::::label list is present in Home Page TabNames For APACCapitalMarkets", Status.PASS);
 					countLabelListMore++;
 				}
-				if (countLabelListMore == 6)
+				if (countLabelListMore == 7)
 					break;
 				i2++;
 				j1++;
 			}
-			System.out.println("Home Page Tabs List Count:::" + countLabelList);
-			if (countLabelListMore >= 6) {
+			System.out.println("Home Page Tabs List Count:::" + countLabelListMore);
+			if (countLabelListMore >= 7) {
 				System.out.println("All the Tabs are present in Home Page ");
 				report.updateTestLog("Verify Home Page Tabs", "All the Tabs are present in Home Page", Status.PASS);
-			} else if (countLabelListMore < 6) {
+			} else if (countLabelListMore < 7) {
 				report.updateTestLog("Verify Home Page Tabs", "All the Tabs are not present in Home Page", Status.FAIL);
 			}
 
 		} 
 		tabsList.clear();
+		moreTabsList.clear();
 	}
 
 	/**
