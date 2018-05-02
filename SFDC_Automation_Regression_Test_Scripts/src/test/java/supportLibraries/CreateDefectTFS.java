@@ -37,6 +37,7 @@ public class CreateDefectTFS  {
 			String sTestRetroSteps = testRetroSteps;
 			JSONObject json = new JSONObject();
 			json.put("action", "create");
+			json.put("application_id", properties.getProperty("ApplicationId"));
 			json.put("title", sTestTitle ); 
 			json.put("repro_steps", sTestRetroSteps);
 			json.put("project_name_in_TFS", properties.getProperty("ProjectNameinTFS"));
@@ -88,6 +89,7 @@ public class CreateDefectTFS  {
 			Properties properties = Settings.getInstance();
 			JSONObject json = new JSONObject();
 			json.put("action", "search");
+			json.put("application_id", properties.getProperty("ApplicationId"));
 			json.put("defect_title_to_search", title); 
 			json.put("project_name_in_TFS", properties.getProperty("ProjectNameinTFS"));
 			URL url = new URL(properties.getProperty("URL"));
