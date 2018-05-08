@@ -749,7 +749,7 @@ public class LoginPage extends ReusableLibrary {
 
 	public void changeExpiredPassword() {
 		userNames();
-		String sCurrentPassword = dataTable.getData("General_Data", "Password");
+		String sCurrentPassword = environment+dataTable.getData("General_Data", "Password");
 		if ((environment.equals("UAT")) || (environment.equals("UAT2")) || (environment.equals("FTE"))
 				|| (environment.equals("FTE2"))) {
 			for (int i = 0; i < userNamesList.size(); i++) {
@@ -761,20 +761,21 @@ public class LoginPage extends ReusableLibrary {
 				Utility_Functions.xSendKeys(driver, txt_userName, userName);
 				Utility_Functions.xWaitForElementPresent(driver, txt_password, 3);
 				Utility_Functions.xSendKeys(driver, txt_password, sCurrentPassword);
+				Utility_Functions.timeWait(2);
 				Utility_Functions.xWaitForElementPresent(driver, btn_LogIn, 3);
 				Utility_Functions.xClick(driver, btn_LogIn, true);
 				try {
 					Utility_Functions.xWaitForElementPresent(driver, changeExpiredPasswordHeader, 3);
 					Utility_Functions.xWaitForElementPresent(driver, newPassword, 3);
-					Utility_Functions.xSendKeys(driver, newPassword, dataTable.getData("General_Data", "NewPassword"));
+					Utility_Functions.xSendKeys(driver, newPassword, environment+dataTable.getData("General_Data", "NewPassword"));
 					Utility_Functions.xWaitForElementPresent(driver, confirmNewPassword, 3);
 					Utility_Functions.xSendKeys(driver, confirmNewPassword,
-							dataTable.getData("General_Data", "NewPassword"));
+							environment+dataTable.getData("General_Data", "NewPassword"));
 					Utility_Functions.xWaitForElementPresent(driver, changePassword, 3);
 					Utility_Functions.xClick(driver, changePassword, true);
 					report.updateTestLog(
 							"Verify Change Password", "Expired Password has been changed successfully:::"
-									+ userNamesList.get(i) + dataTable.getData("General_Data", "NewPassword"),
+									+ userNamesList.get(i) + (environment+dataTable.getData("General_Data", "NewPassword")),
 							Status.PASS);
 					Utility_Functions.timeWait(4);
 					logout();
@@ -803,7 +804,7 @@ public class LoginPage extends ReusableLibrary {
 		environment = environment.toLowerCase();
 
 		//userNamesList.add("testuser1@cbre.com.crm." + environment);
-		userNamesList.add("testuser10@cbre.com.crm." + environment);
+		//userNamesList.add("testuser10@cbre.com.crm." + environment);
 		userNamesList.add("testuser11@cbre.com.crm." + environment);
 		userNamesList.add("testuser12@cbre.com.crm." + environment);
 		userNamesList.add("testuser13@cbre.com.crm." + environment);
@@ -896,6 +897,7 @@ public class LoginPage extends ReusableLibrary {
 
 	public void verifyUserIDs() {
 		userNames();
+		String sPassword = properties.getProperty(environment + "Password");
 		int count = 0;
 		try {
 			if ((environment.equals("UAT")) || (environment.equals("UAT2")) || (environment.equals("FTE"))
@@ -907,7 +909,8 @@ public class LoginPage extends ReusableLibrary {
 					Utility_Functions.xWaitForElementPresent(driver, txt_userName, 3);
 					Utility_Functions.xSendKeys(driver, txt_userName, sUserName);
 					Utility_Functions.xWaitForElementPresent(driver, txt_password, 3);
-					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty(environment + "Password"));
+					Utility_Functions.xSendKeys(driver, txt_password, sPassword);
+					Utility_Functions.timeWait(3);
 					Utility_Functions.xWaitForElementPresent(driver, btn_LogIn, 3);
 					Utility_Functions.xClick(driver, btn_LogIn, true);
 					try {
@@ -936,6 +939,7 @@ public class LoginPage extends ReusableLibrary {
 					userIDsWorking.add(sUserName);
 					Utility_Functions.timeWait(4);
 					logout();
+					Utility_Functions.timeWait(8);
 					// Utility_Functions.timeWait(3);
 				}
 				if (userNamesList.size() == count) {
