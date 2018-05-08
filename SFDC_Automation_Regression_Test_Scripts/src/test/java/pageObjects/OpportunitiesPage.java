@@ -1206,7 +1206,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//div[contains(@class,'primaryLabel')][@title='01R4597B21CBRE Test SFDC Automation_0401']")
 	WebElement accountNameValueNewOpp;
 
-	@FindBy(xpath = "//span[contains(text(),'Lead Source')]/parent::span/following-sibling::div//a[contains(@aria-label,'Lead Source')]")
+	@FindBy(xpath = "//span[contains(text(),'Lead Source')]/parent::span/following-sibling::div//a")
 	WebElement leadSourceNewOpp;
 
 	@FindBy(xpath = "//a[contains(@title,'Business Relationship')]")
@@ -2629,9 +2629,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 	public void opportunityNameAutoGenerate() {
 		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
 		Utility_Functions.xClick(driver, menu_Opportunities, true);
-		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
+		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 5);
 		Utility_Functions.xClick(driver, newOpportunity, true);
-		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(7);
 		Utility_Functions.xSwitchtoFrame(driver, continueButton);
 		Utility_Functions.xWaitForElementPresent(driver, continueButton, 3);
 		if (dataTable.getData("General_Data", "TC_ID").contains("DSFOpportunity")) {
@@ -11540,19 +11540,20 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, menu_Opportunities, true);
 		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
 		Utility_Functions.xClick(driver, newOpportunity, true);
-		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(7);
 		Utility_Functions.xSwitchtoFrame(driver, continueButton);
 		Utility_Functions.xWaitForElementPresent(driver, selectOpportunityRecordType, 3);
 		Utility_Functions.xClick(driver, selectOpportunityRecordType, true);
-		Utility_Functions.xWaitForElementPresent(driver, opportunityDSFValue, 3);
+		Utility_Functions.xWaitForElementPresent(driver, opportunityDSFValue, 5);
 		Utility_Functions.xClick(driver, opportunityDSFValue, true);
 		Utility_Functions.xWaitForElementPresent(driver, continueButton, 3);
 		Utility_Functions.xClick(driver, continueButton, true);
-		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(4);
 		driver.switchTo().defaultContent();
-		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(6);
 		Utility_Functions.xWaitForElementPresent(driver, accountNameNewOpportunity, 4);
 		Utility_Functions.xClick(driver, accountNameNewOpportunity, true);
+		Utility_Functions.xSendKeys(driver, accountNameNewOpportunity, "test");
 		WebElement firstLookupElement = driver
 				.findElement(By.cssSelector("ul>li.forceSearchInputLookupDesktopOption:nth-child(1)"));
 		Utility_Functions.xWaitForElementPresent(driver, firstLookupElement, 4);
@@ -11580,9 +11581,10 @@ public class OpportunitiesPage extends ReusableLibrary {
 				dataTable.getData("General_Data", "InstallmentAmount"));
 		Utility_Functions.xWaitForElementPresent(driver, saveNewOpp, 3);
 		Utility_Functions.xClick(driver, saveNewOpp, true);
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xWaitForElementPresent(driver, showMoreActions, 3);
+		Utility_Functions.timeWait(10);
+		Utility_Functions.xWaitForElementPresent(driver, showMoreActions, 6);
 		Utility_Functions.xClick(driver, showMoreActions, true);
+		Utility_Functions.xWaitForElementPresent(driver, recalculate, 5);
 		if ((recalculate.isDisplayed()) && (newInstallment.isDisplayed())) {
 
 			report.updateTestLog("Verify Recalculate and New Installment",

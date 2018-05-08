@@ -102,10 +102,25 @@ public class CreateUsers extends ReusableLibrary {
 	 */
 	public void setPassword(String newPassword) {
 		establishConnection.establishConnection();
-		userNames();
+		String environment = properties.getProperty("RunEnvironment");
+		ArrayList<String> userNamesList = null;
+		if(environment.equalsIgnoreCase("UAT")){ 
+			
+			userNamesList.clear();
+			userNamesUAT();
+			userNamesList = UATuserNamesList;
+		}else if(environment.equalsIgnoreCase("UAT")){
+			
+			userNamesList.clear();
+			userNamesFTE2();
+			userNamesList = FTE2userNamesList;
+		}	
 		try {
-			for(int i=0; i < userNamesList.size(); i++) {
-				String userId = userNamesList.get(i);
+		
+			//UATuserNamesList.clear();
+			//userNamesUAT();
+			for(int i=0; i < UATuserNamesList.size(); i++) {
+				String userId = UATuserNamesList.get(i);
 				try {
 					setPasswordResults = EstablishConnection.connection.setPassword(userId, newPassword);
 					SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
@@ -150,89 +165,182 @@ public class CreateUsers extends ReusableLibrary {
 	 * @author Vishnuvardhan
 	 *
 	 */
-	static ArrayList<String> userNamesList = new ArrayList<String>();
+	static ArrayList<String> FTE2userNamesList = new ArrayList<String>();
 
-	public void userNames() {
+	public void userNamesFTE2() {
 		
-		userNamesList.add("0050R000000GSvnQAG");
-		userNamesList.add("0050R000000GSpzQAG");
-		userNamesList.add("0050R000000GSq4QAG");
-		userNamesList.add("0050R000000GSq9QAG");
-		userNamesList.add("0050R000000GSqEQAW");
-		userNamesList.add("0050R000000GSqJQAW");
-		userNamesList.add("0050R000000GSqOQAW");
-		userNamesList.add("0050R000000GSqTQAW");
-		userNamesList.add("0050R000000GSqAQAW");
-		userNamesList.add("0050R000000GSqFQAW");
-		userNamesList.add("0050R000000GSpkQAG");
-		userNamesList.add("0050R000000GSqdQAG");
-		userNamesList.add("0050R000000GSqiQAG");
-		userNamesList.add("0050R000000GSqnQAG");
-		userNamesList.add("0050R000000GSqsQAG");
-		userNamesList.add("0050R000000GSqxQAG");
-		userNamesList.add("0050R000000GSr2QAG");
-		userNamesList.add("0050R000000GSr7QAG");
-		userNamesList.add("0050R000000GSrCQAW");
-		userNamesList.add("0050R000000GSrHQAW");
-		userNamesList.add("0050R000000GSrMQAW");
-		userNamesList.add("0050R000000GSqYQAW");
-		userNamesList.add("0050R000000GSrWQAW");
-		userNamesList.add("0050R000000GSrbQAG");
-		userNamesList.add("0050R000000GSrgQAG");
-		userNamesList.add("0050R000000GSrlQAG");
-		userNamesList.add("0050R000000GSrqQAG");
-		userNamesList.add("0050R000000GSrvQAG");
-		userNamesList.add("0050R000000GSs0QAG");
-		userNamesList.add("0050R000000GSrRQAW");
-		userNamesList.add("0050R000000GSsAQAW");
-		userNamesList.add("0050R000000GSsBQAW");
-		userNamesList.add("0050R000000GSsFQAW");
-		userNamesList.add("0050R000000GSsKQAW");
-		userNamesList.add("0050R000000GSsPQAW");
-		userNamesList.add("0050R000000GSsUQAW");
-		userNamesList.add("0050R000000GSsZQAW");
-		userNamesList.add("0050R000000GSs5QAG");
-		userNamesList.add("0050R000000GSsjQAG");
-		userNamesList.add("0050R000000GSsoQAG");
-		userNamesList.add("0050R000000GSseQAG");
-		userNamesList.add("0050R000000GSsyQAG");
-		userNamesList.add("0050R000000GSt3QAG");
-		userNamesList.add("0050R000000GSt8QAG");
-		userNamesList.add("0050R000000GStDQAW");
-		userNamesList.add("0050R000000GStIQAW");
-		userNamesList.add("0050R000000GStNQAW");
-		userNamesList.add("0050R000000GSstQAG");
-		userNamesList.add("0050R000000GStJQAW");
-		userNamesList.add("0050R000000GStXQAW");
-		userNamesList.add("0050R000000GStcQAG");
-		userNamesList.add("0050R000000GSthQAG");
-		userNamesList.add("0050R000000GStmQAG");
-		userNamesList.add("0050R000000GStrQAG");
-		userNamesList.add("0050R000000GStwQAG");
-		userNamesList.add("0050R000000GSu1QAG");
-		userNamesList.add("0050R000000GStSQAW");
-		userNamesList.add("0050R000000GSuBQAW");
-		userNamesList.add("0050R000000GSuGQAW");
-		userNamesList.add("0050R000000GSuLQAW");
-		userNamesList.add("0050R000000GSuQQAW");
-		userNamesList.add("0050R000000GSuVQAW");
-		userNamesList.add("0050R000000GSuaQAG");
-		userNamesList.add("0050R000000GSufQAG");
-		userNamesList.add("0050R000000GSukQAG");
-		userNamesList.add("0050R000000GSupQAG");
-		userNamesList.add("0050R000000GSu6QAG");
-		userNamesList.add("0050R000000GSuzQAG");
-		userNamesList.add("0050R000000GSv4QAG");
-		userNamesList.add("0050R000000GSv9QAG");
-		userNamesList.add("0050R000000GSvEQAW");
-		userNamesList.add("0050R000000GSvJQAW");
-		userNamesList.add("0050R000000GSvOQAW");
-		userNamesList.add("0050R000000GSvTQAW");
-		userNamesList.add("0050R000000GSvYQAW");
-		userNamesList.add("0050R000000GSvdQAG");
-		userNamesList.add("0050R000000GSviQAG");
-		userNamesList.add("0050R000000GSuuQAG");
-		System.out.println("User Names List are::::" + userNamesList);
+		FTE2userNamesList.add("005m00000034p7JAAQ");
+		FTE2userNamesList.add("005m00000034o36AAA");
+		FTE2userNamesList.add("005m00000034o4xAAA");
+		FTE2userNamesList.add("005m00000034o65AAA");
+		FTE2userNamesList.add("005m00000034o6AAAQ");
+		FTE2userNamesList.add("0051Y000009gz6LQAQ");
+		FTE2userNamesList.add("0051Y000009gz6fQAA");
+		FTE2userNamesList.add("0051Y000009gz6uQAA");
+		FTE2userNamesList.add("0051Y000009gz6zQAA");
+		FTE2userNamesList.add("0051Y000009gz79QAA");
+		FTE2userNamesList.add("005m00000034ni8AAA");
+		FTE2userNamesList.add("0051Y000009gz7OQAQ");
+		FTE2userNamesList.add("0051Y000009gz7dQAA");
+		FTE2userNamesList.add("0051Y000009gz82QAA");
+		FTE2userNamesList.add("0051Y000009gz8CQAQ");
+		FTE2userNamesList.add("0051Y000009gz8MQAQ");
+		FTE2userNamesList.add("0051Y000009gz8bQAA");
+		FTE2userNamesList.add("0051Y000009gz8qQAA");
+		FTE2userNamesList.add("0051Y000009gz8RQAQ");
+		FTE2userNamesList.add("005m00000034o6tAAA");
+		FTE2userNamesList.add("005m00000034o73AAA");
+		FTE2userNamesList.add("005m00000034o6UAAQ");
+		FTE2userNamesList.add("005m00000034o7IAAQ");
+		FTE2userNamesList.add("005m00000034o7NAAQ");
+		FTE2userNamesList.add("005m00000034o7cAAA");
+		FTE2userNamesList.add("005m00000034o7mAAA");
+		FTE2userNamesList.add("005m00000034o81AAA");
+		FTE2userNamesList.add("005m00000034o8BAAQ");
+		FTE2userNamesList.add("005m00000034o8LAAQ");
+		FTE2userNamesList.add("005m00000034o78AAA");
+		FTE2userNamesList.add("005m00000034o8aAAA");
+		FTE2userNamesList.add("005m00000034o8pAAA");
+		FTE2userNamesList.add("005m00000034o8zAAA");
+		FTE2userNamesList.add("005m00000034o99AAA");
+		FTE2userNamesList.add("005m00000034o9EAAQ");
+		FTE2userNamesList.add("005m00000034o9TAAQ");
+		FTE2userNamesList.add("005m00000034o9dAAA");
+		FTE2userNamesList.add("005m00000034o8QAAQ");
+		FTE2userNamesList.add("005m00000034o82AAA");
+		FTE2userNamesList.add("005m00000034oA2AAI");
+		FTE2userNamesList.add("0051Y000009gz8vQAA");
+		FTE2userNamesList.add("005m00000034o9sAAA");
+		FTE2userNamesList.add("005m00000034oAMAAY");
+		FTE2userNamesList.add("005m00000034oAWAAY");
+		FTE2userNamesList.add("005m00000034oAbAAI");
+		FTE2userNamesList.add("005m00000034oAlAAI");
+		FTE2userNamesList.add("005m00000034oAqAAI");
+		FTE2userNamesList.add("005m00000034oB0AAI");
+		FTE2userNamesList.add("005m00000034oACAAY");
+		FTE2userNamesList.add("005m00000034oBPAAY");
+		FTE2userNamesList.add("005m00000034oBeAAI");
+		FTE2userNamesList.add("005m00000034oBoAAI");
+		FTE2userNamesList.add("005m00000034oBtAAI");
+		FTE2userNamesList.add("005m00000034oC3AAI");
+		FTE2userNamesList.add("005m00000034oCNAAY");
+		FTE2userNamesList.add("005m00000034oCXAAY");
+		FTE2userNamesList.add("005m00000034oCcAAI");
+		FTE2userNamesList.add("005m00000034oCmAAI");
+		FTE2userNamesList.add("005m00000034oBFAAY");
+		FTE2userNamesList.add("005m00000034oD6AAI");
+		FTE2userNamesList.add("005m00000034oDBAAY");
+		FTE2userNamesList.add("005m00000034oDLAAY");
+		FTE2userNamesList.add("005m00000034oDQAAY");
+		FTE2userNamesList.add("005m00000034oDVAAY");
+		FTE2userNamesList.add("005m00000034oDfAAI");
+		FTE2userNamesList.add("005m00000034oDkAAI");
+		FTE2userNamesList.add("005m00000034oDuAAI");
+		FTE2userNamesList.add("005m00000034oE4AAI");
+		FTE2userNamesList.add("005m00000034oCrAAI");
+		FTE2userNamesList.add("005m00000034oddAAA");
+		FTE2userNamesList.add("005m00000034odiAAA");
+		FTE2userNamesList.add("005m00000034odsAAA");
+		FTE2userNamesList.add("005m00000034p5cAAA");
+		FTE2userNamesList.add("005m00000034p5hAAA");
+		FTE2userNamesList.add("005m00000034p5rAAA");
+		FTE2userNamesList.add("005m00000034p5wAAA");
+		FTE2userNamesList.add("005m00000034p66AAA");
+		FTE2userNamesList.add("005m00000034p6kAAA");
+		FTE2userNamesList.add("005m00000034p6zAAA");
+		FTE2userNamesList.add("005m00000034oZgAAI");
+
+		System.out.println("User Names List are::::" + FTE2userNamesList);
+	}
+	
+	
+	static ArrayList<String> UATuserNamesList = new ArrayList<String>();
+
+	public void userNamesUAT() {
+		
+		UATuserNamesList.add("0050x0000018PG6AAM");
+		UATuserNamesList.add("0050x0000018OnXAAU");
+		UATuserNamesList.add("0050x0000018OnhAAE");
+		UATuserNamesList.add("0050x0000018Oo1AAE");
+		UATuserNamesList.add("0050x0000018OoGAAU");
+		UATuserNamesList.add("0051Y000009gz6LQAQ");
+		UATuserNamesList.add("0051Y000009gz6fQAA");
+		UATuserNamesList.add("0051Y000009gz6uQAA");
+		UATuserNamesList.add("0051Y000009gz6zQAA");
+		UATuserNamesList.add("0051Y000009gz79QAA");
+		UATuserNamesList.add("0050x0000018OXeAAM");
+		UATuserNamesList.add("0051Y000009gz7OQAQ");
+		UATuserNamesList.add("0051Y000009gz7dQAA");
+		UATuserNamesList.add("0051Y000009gz82QAA");
+		UATuserNamesList.add("0051Y000009gz8CQAQ");
+		UATuserNamesList.add("0051Y000009gz8MQAQ");
+		UATuserNamesList.add("0051Y000009gz8bQAA");
+		UATuserNamesList.add("0051Y000009gz8qQAA");
+		UATuserNamesList.add("0051Y000009gz8RQAQ");
+		UATuserNamesList.add("0050x0000018OpEAAU");
+		UATuserNamesList.add("0050x0000018Oo7AAE");
+		UATuserNamesList.add("0050x0000018OokAAE");
+		UATuserNamesList.add("0050x0000018Oq2AAE");
+		UATuserNamesList.add("0050x0000018OqMAAU");
+		UATuserNamesList.add("0050x0000018OqgAAE");
+		UATuserNamesList.add("0050x0000018OqvAAE");
+		UATuserNamesList.add("0050x0000018OrFAAU");
+		UATuserNamesList.add("0050x0000018OrUAAU");
+		UATuserNamesList.add("0050x0000018OreAAE");
+		UATuserNamesList.add("0050x0000018OpnAAE");
+		UATuserNamesList.add("0050x0000018OsIAAU");
+		UATuserNamesList.add("0050x0000018OsXAAU");
+		UATuserNamesList.add("0050x0000018OsrAAE");
+		UATuserNamesList.add("0050x0000018Ot6AAE");
+		UATuserNamesList.add("0050x0000018OpaAAE");
+		UATuserNamesList.add("0050x0000018OtkAAE");
+		UATuserNamesList.add("0050x0000018Ou9AAE");
+		UATuserNamesList.add("0050x0000018OryAAE");
+		UATuserNamesList.add("0050x0000018OuiAAE");
+		UATuserNamesList.add("0050x0000018OuxAAE");
+		UATuserNamesList.add("0051Y000009gz8vQAA");
+		UATuserNamesList.add("0050x0000018OuTAAU");
+		UATuserNamesList.add("0050x0000018OvDAAU");
+		UATuserNamesList.add("0050x0000018OvWAAU");
+		UATuserNamesList.add("0050x0000018OvlAAE");
+		UATuserNamesList.add("0050x0000018OvvAAE");
+		UATuserNamesList.add("0050x0000018Ow0AAE");
+		UATuserNamesList.add("0050x0000018OwPAAU");
+		UATuserNamesList.add("0050x0000018OvCAAU");
+		UATuserNamesList.add("0050x0000018OwoAAE");
+		UATuserNamesList.add("0050x0000018OwyAAE");
+		UATuserNamesList.add("0050x0000018OxIAAU");
+		UATuserNamesList.add("0050x0000018OxXAAU");
+		UATuserNamesList.add("0050x0000018Ox4AAE");
+		UATuserNamesList.add("0050x0000018OxrAAE");
+		UATuserNamesList.add("0050x0000018Oy1AAE");
+		UATuserNamesList.add("0050x0000018OyVAAU");
+		UATuserNamesList.add("0050x0000018OyaAAE");
+		UATuserNamesList.add("0050x0000018OwZAAU");
+		UATuserNamesList.add("0050x0000018Oz4AAE");
+		UATuserNamesList.add("0050x0000018OzJAAU");
+		UATuserNamesList.add("0050x0000018OzYAAU");
+		UATuserNamesList.add("0050x0000018OzdAAE");
+		UATuserNamesList.add("0050x0000018OznAAE");
+		UATuserNamesList.add("0050x0000018P02AAE");
+		UATuserNamesList.add("0050x0000018P0CAAU");
+		UATuserNamesList.add("0050x0000018P0RAAU");
+		UATuserNamesList.add("0050x0000018OylAAE");
+		UATuserNamesList.add("0050x0000018OyuAAE");
+		UATuserNamesList.add("0050x0000018P4JAAU");
+		UATuserNamesList.add("0050x0000018P4TAAU");
+		UATuserNamesList.add("0050x0000018P4nAAE");
+		UATuserNamesList.add("0050x0000018P9TAAU");
+		UATuserNamesList.add("0050x0000018PETAA2");
+		UATuserNamesList.add("0050x0000018PEdAAM");
+		UATuserNamesList.add("0050x0000018PF2AAM");
+		UATuserNamesList.add("0050x0000018PFHAA2");
+		UATuserNamesList.add("0050x0000018PGPAA2");
+		UATuserNamesList.add("0050x0000018PGyAAM");
+		UATuserNamesList.add("0050x0000018P44AAE");
+
+
+		System.out.println("User Names List are::::" + UATuserNamesList);
 	}
 	
 }

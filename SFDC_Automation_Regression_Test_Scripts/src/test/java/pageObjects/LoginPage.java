@@ -134,6 +134,7 @@ public class LoginPage extends ReusableLibrary {
 		}*/
 		String sApplicationUrl = properties.getProperty("ApplicationUrl");
 		driver.get(sApplicationUrl);
+		Utility_Functions.timeWait(3);
 		Utility_Functions.xWaitForElementPresent(driver, txt_userName, 10);
 	}
 
@@ -593,7 +594,7 @@ public class LoginPage extends ReusableLibrary {
 			// Utility_Functions.timeWait(1);
 			report.updateTestLog("Login", "Click the sign-in button", Status.PASS);
 			Utility_Functions.xClick(driver, btn_LogIn, true);
-			Utility_Functions.timeWait(1);
+			Utility_Functions.timeWait(5);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
@@ -688,7 +689,9 @@ public class LoginPage extends ReusableLibrary {
 
 	public void changePassword() {
 		userNames();
-		String sCurrentPassword = dataTable.getData("General_Data", "Password");
+		String environment = properties.getProperty("RunEnvironment");
+		String sCurrentPassword = environment+dataTable.getData("General_Data", "Password");
+		String sNewPassword = environment+dataTable.getData("General_Data", "NewPassword");
 		if ((environment.equals("UAT")) || (environment.equals("UAT2")) || (environment.equals("FTE"))
 				|| (environment.equals("FTE2"))) {
 			for (int i = 0; i < userNamesList.size(); i++) {
@@ -701,7 +704,7 @@ public class LoginPage extends ReusableLibrary {
 				Utility_Functions.xWaitForElementPresent(driver, btn_LogIn, 3);
 				Utility_Functions.xClick(driver, btn_LogIn, true);
 				try {
-					Utility_Functions.xWaitForElementPresent(driver, changePasswordHeader, 3);
+					Utility_Functions.xWaitForElementPresent(driver, changePasswordHeader, 6);
 				} catch (Exception e) {
 					if (continueLink.isDisplayed()) {
 						Utility_Functions.xClick(driver, continueLink, true);
@@ -711,10 +714,9 @@ public class LoginPage extends ReusableLibrary {
 				Utility_Functions.xWaitForElementPresent(driver, currentPassword, 3);
 				Utility_Functions.xSendKeys(driver, currentPassword, sCurrentPassword);
 				Utility_Functions.xWaitForElementPresent(driver, newPassword, 3);
-				Utility_Functions.xSendKeys(driver, newPassword, dataTable.getData("General_Data", "NewPassword"));
+				Utility_Functions.xSendKeys(driver, newPassword,sNewPassword);
 				Utility_Functions.xWaitForElementPresent(driver, confirmNewPassword, 3);
-				Utility_Functions.xSendKeys(driver, confirmNewPassword,
-						dataTable.getData("General_Data", "NewPassword"));
+				Utility_Functions.xSendKeys(driver, confirmNewPassword,sNewPassword);
 				/*
 				 * Utility_Functions.xScrollWindowOnce(driver);
 				 * Utility_Functions.timeWait(1);
@@ -727,12 +729,12 @@ public class LoginPage extends ReusableLibrary {
 				Utility_Functions.xWaitForElementPresent(driver, changePassword, 3);
 				Utility_Functions.xClick(driver, changePassword, true);
 				report.updateTestLog("Verify Change Password",
-						"Password has been changed successfully:::" + dataTable.getData("General_Data", "NewPassword"),
+						"Password has been changed successfully to:::" + sNewPassword,
 						Status.PASS);
-				Utility_Functions.timeWait(4);
+				Utility_Functions.timeWait(8);
 				logout();
 				System.out.println("Password has been changed successfully:::" + userName);
-				Utility_Functions.timeWait(3);
+				Utility_Functions.timeWait(5);
 				// driver.quit();
 			}
 		}
@@ -800,7 +802,7 @@ public class LoginPage extends ReusableLibrary {
 		String environment = initializeEnvironment();
 		environment = environment.toLowerCase();
 
-		userNamesList.add("testuser1@cbre.com.crm." + environment);
+		//userNamesList.add("testuser1@cbre.com.crm." + environment);
 		userNamesList.add("testuser10@cbre.com.crm." + environment);
 		userNamesList.add("testuser11@cbre.com.crm." + environment);
 		userNamesList.add("testuser12@cbre.com.crm." + environment);
@@ -870,12 +872,12 @@ public class LoginPage extends ReusableLibrary {
 		userNamesList.add("testuser9@cbre.com.crm." + environment);
 		userNamesList.add("testuser90@cbre.com.crm." + environment);
 		userNamesList.add("testuser91@cbre.com.crm." + environment);
-		userNamesList.add("testuser92@cbre.com.crm." + environment);
+		userNamesList.add("testuser92@cbre.com.crm." + environment);   
 		userNamesList.add("testuser93@cbre.com.crm." + environment);
 		userNamesList.add("testuser94@cbre.com.crm." + environment);
 		userNamesList.add("testuser95@cbre.com.crm." + environment);
 		userNamesList.add("testuser96@cbre.com.crm." + environment);
-		userNamesList.add("testuser97@cbre.com.crm." + environment);
+		userNamesList.add("testuser97@cbre.com.crm." + environment);   
 		userNamesList.add("testuser98@cbre.com.crm." + environment);
 		userNamesList.add("testuser99@cbre.com.crm." + environment);
 		userNamesList.add("testuser100@cbre.com.crm." + environment);

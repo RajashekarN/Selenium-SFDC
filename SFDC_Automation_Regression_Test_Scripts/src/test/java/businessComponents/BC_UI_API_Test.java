@@ -540,7 +540,8 @@ public class BC_UI_API_Test extends ReusableLibrary {
 	 *
 	 */	
 	public void bc_setPassword() {
-		createUsers.setPassword("Password567");
+		String environment = properties.getProperty("RunEnvironment");
+		createUsers.setPassword(properties.getProperty(environment+"Password"));
 	}
 	/**
 	 *Updating the Role and Profile 
