@@ -915,7 +915,7 @@ public class LoginPage extends ReusableLibrary {
 					Utility_Functions.xClick(driver, btn_LogIn, true);
 					try {
 						try {
-							Utility_Functions.xWaitForElementPresent(driver, menu_Home, 3);
+							Utility_Functions.xWaitForElementPresent(driver, menu_Home, 9);
 							report.updateTestLog("Verify Login", "Login is successful", Status.PASS);
 						} catch (Exception e) {
 							Utility_Functions.xWaitForElementPresent(driver, userName, 3);
