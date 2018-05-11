@@ -1262,6 +1262,7 @@ public class Utility_Functions extends ReusableLibrary {
 		driver.switchTo().defaultContent();
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
 		for (WebElement element : iframeList) {
+			
 			driver.switchTo().frame(element);
 			try {
 				boolean isTextValuePresent = Utility_Functions.xWaitForElementPresent(driver, webElement, 0);

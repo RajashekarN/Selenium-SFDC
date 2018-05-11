@@ -2,23 +2,38 @@
 <testng-results skipped="0" failed="1" total="1" passed="0">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="76731" started-at="2018-04-02T20:26:54Z" finished-at="2018-04-02T20:28:11Z">
+  <suite name="Default suite" duration-ms="49894" started-at="2018-05-10T19:52:56Z" finished-at="2018-05-10T19:53:46Z">
     <groups>
+      <group name="REGRESSION">
+        <method signature="TC_SF_ABAMERCSSLeadsCreateLead.runTC_SF_ABAMERCSSLeadsCreateLead(java.lang.String, com.cognizant.framework.selenium.ExecutionMode, org.openqa.selenium.Platform)[pri:0, instance:testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsCreateLead@31ef45e3]" name="runTC_SF_ABAMERCSSLeadsCreateLead" class="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsCreateLead"/>
+      </group> <!-- REGRESSION -->
+      <group name="CSS">
+        <method signature="TC_SF_ABAMERCSSLeadsCreateLead.runTC_SF_ABAMERCSSLeadsCreateLead(java.lang.String, com.cognizant.framework.selenium.ExecutionMode, org.openqa.selenium.Platform)[pri:0, instance:testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsCreateLead@31ef45e3]" name="runTC_SF_ABAMERCSSLeadsCreateLead" class="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsCreateLead"/>
+      </group> <!-- CSS -->
+      <group name="UI">
+        <method signature="TC_SF_ABAMERCSSLeadsCreateLead.runTC_SF_ABAMERCSSLeadsCreateLead(java.lang.String, com.cognizant.framework.selenium.ExecutionMode, org.openqa.selenium.Platform)[pri:0, instance:testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsCreateLead@31ef45e3]" name="runTC_SF_ABAMERCSSLeadsCreateLead" class="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsCreateLead"/>
+      </group> <!-- UI -->
+      <group name="Create">
+        <method signature="TC_SF_ABAMERCSSLeadsCreateLead.runTC_SF_ABAMERCSSLeadsCreateLead(java.lang.String, com.cognizant.framework.selenium.ExecutionMode, org.openqa.selenium.Platform)[pri:0, instance:testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsCreateLead@31ef45e3]" name="runTC_SF_ABAMERCSSLeadsCreateLead" class="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsCreateLead"/>
+      </group> <!-- Create -->
+      <group name="Lead">
+        <method signature="TC_SF_ABAMERCSSLeadsCreateLead.runTC_SF_ABAMERCSSLeadsCreateLead(java.lang.String, com.cognizant.framework.selenium.ExecutionMode, org.openqa.selenium.Platform)[pri:0, instance:testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsCreateLead@31ef45e3]" name="runTC_SF_ABAMERCSSLeadsCreateLead" class="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsCreateLead"/>
+      </group> <!-- Lead -->
     </groups>
-    <test name="Default test" duration-ms="76731" started-at="2018-04-02T20:26:54Z" finished-at="2018-04-02T20:28:11Z">
-      <class name="testscripts.SF.Release40TestScripts.TC_SF_APACProjectManagerHomePageButtons">
-        <test-method status="PASS" signature="setUpTestSuite(org.testng.ITestContext)[pri:0, instance:testscripts.SF.Release40TestScripts.TC_SF_APACProjectManagerHomePageButtons@f6c48ac]" name="setUpTestSuite" is-config="true" duration-ms="94" started-at="2018-04-02T15:26:54Z" finished-at="2018-04-02T15:26:54Z">
+    <test name="Default test" duration-ms="49894" started-at="2018-05-10T19:52:56Z" finished-at="2018-05-10T19:53:46Z">
+      <class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsCreateLead">
+        <test-method status="PASS" signature="setUpTestSuite(org.testng.ITestContext)[pri:0, instance:testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsCreateLead@31ef45e3]" name="setUpTestSuite" is-config="true" duration-ms="45" started-at="2018-05-10T14:52:56Z" finished-at="2018-05-10T14:52:56Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@7927bd9f]]>
+                <![CDATA[org.testng.TestRunner@4bf324f9]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpTestSuite -->
-        <test-method status="FAIL" signature="runTC_SF_APACProjectManagerHomePageButtons(java.lang.String, com.cognizant.framework.selenium.ExecutionMode, org.openqa.selenium.Platform)[pri:0, instance:testscripts.SF.Release40TestScripts.TC_SF_APACProjectManagerHomePageButtons@f6c48ac]" name="runTC_SF_APACProjectManagerHomePageButtons" duration-ms="76676" started-at="2018-04-02T15:26:54Z" data-provider="RegressionTestScripts" finished-at="2018-04-02T15:28:11Z">
+        <test-method status="FAIL" signature="runTC_SF_ABAMERCSSLeadsCreateLead(java.lang.String, com.cognizant.framework.selenium.ExecutionMode, org.openqa.selenium.Platform)[pri:0, instance:testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsCreateLead@31ef45e3]" name="runTC_SF_ABAMERCSSLeadsCreateLead" duration-ms="49873" started-at="2018-05-10T14:52:56Z" data-provider="RegressionTestScripts" finished-at="2018-05-10T14:53:46Z">
           <params>
             <param index="0">
               <value>
@@ -38,33 +53,13 @@
           </params>
           <exception class="java.lang.AssertionError">
             <message>
-              <![CDATA[Expected condition failed: waiting for visibility of Proxy element for: DefaultElementLocator 'By.xpath: //span[contains(text(),'Lead Source')]/parent::span/following-sibling::div//a[contains(@aria-label,'Lead Source')]' (tried for 3 second(s) with 500 MILLISECONDS interval) <b>Caused by: </b>org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//span[contains(text(),'Lead Source')]/parent::span/following-sibling::div//a[contains(@aria-label,'Lead Source')]"}
-  (Session info: chrome=65.0.3325.181)
-  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 10.0.14393 x86_64) (WARNING: The server did not provide any stacktrace information)
-Command duration or timeout: 0 milliseconds
-For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
-Build info: version: '3.6.0', revision: '6fbf3ec767', time: '2017-09-27T15:28:36.4Z'
-System info: host: 'TX604-7235QTD', ip: '10.34.187.88', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_162'
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities [{mobileEmulationEnabled=false, hasTouchScreen=false, platform=XP, acceptSslCerts=false, acceptInsecureCerts=false, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, platformName=XP, setWindowRect=true, unexpectedAlertBehaviour=, applicationCacheEnabled=false, rotatable=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73), userDataDir=C:\Users\SBitra\AppData\Local\Temp\scoped_dir14744_18361}, takesHeapSnapshot=true, pageLoadStrategy=normal, unhandledPromptBehavior=, databaseEnabled=false, handlesAlerts=true, version=65.0.3325.181, browserConnectionEnabled=false, nativeEvents=true, locationContextEnabled=true, cssSelectorsEnabled=true}]
-Session ID: 2cc8edd94934a5e1f9dfd17e8c5756a9
-*** Element info: {Using=xpath, value=//span[contains(text(),'Lead Source')]/parent::span/following-sibling::div//a[contains(@aria-label,'Lead Source')]}]]>
+              <![CDATA[All the elements are not present on the Related Page]]>
             </message>
             <full-stacktrace>
-              <![CDATA[java.lang.AssertionError: Expected condition failed: waiting for visibility of Proxy element for: DefaultElementLocator 'By.xpath: //span[contains(text(),'Lead Source')]/parent::span/following-sibling::div//a[contains(@aria-label,'Lead Source')]' (tried for 3 second(s) with 500 MILLISECONDS interval) <b>Caused by: </b>org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//span[contains(text(),'Lead Source')]/parent::span/following-sibling::div//a[contains(@aria-label,'Lead Source')]"}
-  (Session info: chrome=65.0.3325.181)
-  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 10.0.14393 x86_64) (WARNING: The server did not provide any stacktrace information)
-Command duration or timeout: 0 milliseconds
-For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
-Build info: version: '3.6.0', revision: '6fbf3ec767', time: '2017-09-27T15:28:36.4Z'
-System info: host: 'TX604-7235QTD', ip: '10.34.187.88', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_162'
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities [{mobileEmulationEnabled=false, hasTouchScreen=false, platform=XP, acceptSslCerts=false, acceptInsecureCerts=false, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, platformName=XP, setWindowRect=true, unexpectedAlertBehaviour=, applicationCacheEnabled=false, rotatable=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73), userDataDir=C:\Users\SBitra\AppData\Local\Temp\scoped_dir14744_18361}, takesHeapSnapshot=true, pageLoadStrategy=normal, unhandledPromptBehavior=, databaseEnabled=false, handlesAlerts=true, version=65.0.3325.181, browserConnectionEnabled=false, nativeEvents=true, locationContextEnabled=true, cssSelectorsEnabled=true}]
-Session ID: 2cc8edd94934a5e1f9dfd17e8c5756a9
-*** Element info: {Using=xpath, value=//span[contains(text(),'Lead Source')]/parent::span/following-sibling::div//a[contains(@aria-label,'Lead Source')]}
+              <![CDATA[java.lang.AssertionError: All the elements are not present on the Related Page
 	at org.testng.Assert.fail(Assert.java:94)
 	at com.cognizant.Craft.CRAFTTestCase.tearDownTestRunner(CRAFTTestCase.java:149)
-	at testscripts.SF.Release40TestScripts.TC_SF_APACProjectManagerHomePageButtons.runTC_SF_APACProjectManagerHomePageButtons(TC_SF_APACProjectManagerHomePageButtons.java:35)
+	at testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsCreateLead.runTC_SF_ABAMERCSSLeadsCreateLead(TC_SF_ABAMERCSSLeadsCreateLead.java:35)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
@@ -94,16 +89,16 @@ Session ID: 2cc8edd94934a5e1f9dfd17e8c5756a9
           </exception> <!-- java.lang.AssertionError -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- runTC_SF_APACProjectManagerHomePageButtons -->
-        <test-method status="PASS" signature="setUpTestRunner()[pri:0, instance:testscripts.SF.Release40TestScripts.TC_SF_APACProjectManagerHomePageButtons@f6c48ac]" name="setUpTestRunner" is-config="true" duration-ms="0" started-at="2018-04-02T15:26:54Z" finished-at="2018-04-02T15:26:54Z">
+        </test-method> <!-- runTC_SF_ABAMERCSSLeadsCreateLead -->
+        <test-method status="PASS" signature="setUpTestRunner()[pri:0, instance:testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsCreateLead@31ef45e3]" name="setUpTestRunner" is-config="true" duration-ms="0" started-at="2018-05-10T14:52:56Z" finished-at="2018-05-10T14:52:56Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpTestRunner -->
-        <test-method status="PASS" signature="tearDownTestSuite()[pri:0, instance:testscripts.SF.Release40TestScripts.TC_SF_APACProjectManagerHomePageButtons@f6c48ac]" name="tearDownTestSuite" is-config="true" duration-ms="439" started-at="2018-04-02T15:28:11Z" finished-at="2018-04-02T15:28:11Z">
+        <test-method status="PASS" signature="tearDownTestSuite()[pri:0, instance:testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsCreateLead@31ef45e3]" name="tearDownTestSuite" is-config="true" duration-ms="47" started-at="2018-05-10T14:53:46Z" finished-at="2018-05-10T14:53:46Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDownTestSuite -->
-      </class> <!-- testscripts.SF.Release40TestScripts.TC_SF_APACProjectManagerHomePageButtons -->
+      </class> <!-- testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsCreateLead -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

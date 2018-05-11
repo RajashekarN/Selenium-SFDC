@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -110,11 +111,11 @@ public class LeadsPage extends ReusableLibrary {
 	WebElement recordOwner;	
 
 	@FindBy(xpath = "//div[@class='slds-form-element__row']//label[@for='first-name']/parent::div//input")
-	WebElement firstName;	
-
+	WebElement firstName;
+	
 	@FindBy(xpath = "//div[@class='slds-form-element__row']//label[@for='last-name']/parent::div//input")
 	WebElement lastName;
-
+	
 	@FindBy(xpath = "//label[@for='company']/following-sibling::div//input")
 	WebElement company;	
 
@@ -891,6 +892,7 @@ public class LeadsPage extends ReusableLibrary {
 				Utility_Functions.xWaitForElementPresent(driver, occupierBrokerage, 3);
 				Utility_Functions.xClick(driver, occupierBrokerage, true);
 			} else if(dataTable.getData("General_Data", "TC_ID").equals("AB")) {
+										
 				Utility_Functions.xWaitForElementPresent(driver, selectRecordType, 3);
 				Utility_Functions.xClick(driver, selectRecordType, true);
 				Utility_Functions.xWaitForElementPresent(driver, agencyBroker, 3);
@@ -912,8 +914,10 @@ public class LeadsPage extends ReusableLibrary {
 		SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
 		String queryAccount = "Select Name from Account where BillingStreet != null";
 		String sCompanyName = searchTextSOQL.fetchRecordFieldValueAdminLogin("Name", queryAccount);
-		//String companyName = value  + "_" + dataTable.getData("General_Data", "Company") ;		
+		//String companyName = value  + "_" + dataTable.getData("General_Data", "Company") ;	
+		driver.switchTo().defaultContent();
 		Utility_Functions.xSwitchtoFrame(driver, firstName);
+		Utility_Functions.timeWait(3);
 		Utility_Functions.xWaitForElementPresent(driver, firstName, 5);
 		String sFirstName = Utility_Functions.xRandomFunction() + "_" + dataTable.getData("General_Data", "First Name");
 		String sLastName =  Utility_Functions.xRandomFunction() + "_" +  dataTable.getData("General_Data", "Last Name");
@@ -1277,10 +1281,10 @@ public class LeadsPage extends ReusableLibrary {
 			Utility_Functions.xWaitForElementPresent(driver, privateNoteSharing, 3);
 			Utility_Functions.xClick(driver, privateNoteSharing, true);
 		}
-		Utility_Functions.timeWait(3);
+		Utility_Functions.timeWait(5);
 		Utility_Functions.xSwitchtoFrame(driver, leadSharing);
 		Utility_Functions.xWaitForElementPresent(driver, leadSharing, 4);
-		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(5);
 		driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='Content']")));
 
 		Utility_Functions.xWaitForElementPresent(driver, addButtonSharing, 5);
@@ -1292,7 +1296,7 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.xSendKeys(driver, searchUserName, "bommisetty");
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xClick(driver, findValue, true);
-		Utility_Functions.timeWait(1);
+		Utility_Functions.timeWait(3);
 		String environment = loginPage.initializeEnvironment();
 		if (environment.equals("UAT")) {
 			Utility_Functions.xSelectDropdownByName(selectUser, "User: vishnuvardhan bommisetty");
@@ -1984,16 +1988,19 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, newLeads, 2);
 		Utility_Functions.xClick(driver, newLeads, true);	
-		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(4);
 		Utility_Functions.xSwitchtoFrame(driver, continueButton);
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xClick(driver, continueButton, true);
 		Utility_Functions.timeWait(2);
+		driver.switchTo().defaultContent();
+		Utility_Functions.timeWait(2);
 		Utility_Functions.xSwitchtoFrame(driver, saveLead);
 		Utility_Functions.timeWait(5);
-
+				
 		List<WebElement> customPageQuickCreateSectionFieldsList = driver.findElements(
 				By.xpath("//h2[text()='Quick Create']/parent::span/parent::div/div[1]//label[@class='slds-form-element__label']"));
+		
 		int count1 = 0, i1 = 0;
 		String fieldsArray[] = new String[customPageQuickCreateSectionFieldsList.size()];
 		System.out.println(customPageQuickCreateSectionFieldsList.size());
@@ -2227,7 +2234,7 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.xSendKeys(driver, company, companyName);
 		Utility_Functions.xWaitForElementPresent(driver,saveLead, 3);
 		Utility_Functions.xClick(driver, saveLead, true);
-		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(5);
 		report.updateTestLog("Verify Custom Leads Page", "The Lead is saved with all the required fields", Status.PASS);
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xScrollWindow(driver);
