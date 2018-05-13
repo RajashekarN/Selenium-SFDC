@@ -146,11 +146,11 @@ public class ActivityPage extends ReusableLibrary {
 		String activityFuture=null;
 		String accountName = null;
 		
-		try{
+/*		try{
 			 accountName=accountNameSaved.getText();
 		}catch(Exception e){
 			accountName=accountNameSavedEnv.getText();
-		}
+		}  */
 		int activityTimes=1;
 		if(dataTable.getData("General_Data", "TC_ID").contains("Activity") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") && !dataTable.getData("General_Data", "TC_ID").contains("Expand") ){
 			activityTimes=3;

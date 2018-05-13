@@ -627,6 +627,9 @@ public class LeadsPage extends ReusableLibrary {
 	@FindBy(xpath = "//h1[contains(@class,'slds-page-header__title')]/span")
 	List<WebElement> accountNameSaved;
 	
+	@FindBy(xpath ="//span[text()='All Leads']")
+	WebElement allLeads;
+	
 	
 	
 	
@@ -1560,24 +1563,25 @@ public class LeadsPage extends ReusableLibrary {
 	public void leadsVerifyCustomEventPage() {
 		Utility_Functions.xWaitForElementPresent(driver, menu_Leads, 3);
 		Utility_Functions.xClick(driver, menu_Leads, true);
-		Utility_Functions.xWaitForElementPresent(driver, leadsList, 3);
+		/*Utility_Functions.xWaitForElementPresent(driver, leadsList, 3);
 		Utility_Functions.timeWait(2);		
 		if(leadsList.isEmpty()) {
-			Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
+		*/
+		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
 			Utility_Functions.xClick(driver, recentlyViewed, true);
 			Utility_Functions.xWaitForElementPresent(driver, allLeadsMenu, 3);
 			Utility_Functions.xClick(driver, allLeadsMenu, true);
 			Utility_Functions.xWaitForElementPresent(driver, leadsList, 3);
 			Utility_Functions.xclickOnFirstElementfromList(leadsList);
-		} else {
+		/*} else {
 			Utility_Functions.xclickOnFirstElementfromList(leadsList);
-		}
+		}*/
 /*		Utility_Functions.timeWait(5);
 		Utility_Functions.xWaitForElementPresent(driver, selectNewEvent, 3);
 		Utility_Functions.xClick(driver, selectNewEvent, true);*/
 		Utility_Functions.xWaitForElementPresent(driver, newEvent, 3);
 		Utility_Functions.xClick(driver, newEvent, true);
-		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(5);
 		eventPage.verifyNewEventPageLayout();
 		
 /*		Actions action  = new Actions(driver.getWebDriver());
@@ -2825,6 +2829,7 @@ public class LeadsPage extends ReusableLibrary {
 		leadsDetailsPageFieldsList.add("Department");
 		leadsDetailsPageFieldsList.add("Lead Owner");
 		leadsDetailsPageFieldsList.add("Influence Level");
+		leadsDetailsPageFieldsList.add("Lead Owner User Market");
 		leadsDetailsPageFieldsList.add("Company");
 		leadsDetailsPageFieldsList.add("Represented By (Firm)");
 		leadsDetailsPageFieldsList.add("Industry");
@@ -2884,8 +2889,8 @@ public class LeadsPage extends ReusableLibrary {
 		additionalInformationFieldsList.add("Assistant Name");
 		additionalInformationFieldsList.add("Unmapped Fields");
 		additionalInformationFieldsList.add("Assistant Phone");
-		additionalInformationFieldsList.add("Assistant Email");
-
+		additionalInformationFieldsList.add("Next Steps");
+		additionalInformationFieldsList.add("Assistant Email");		
 		System.out.println("Additional Information fields are " +additionalInformationFieldsList);
 	}
 
@@ -2920,13 +2925,22 @@ public class LeadsPage extends ReusableLibrary {
 	public void leadsVerifyLandingPage() {
 		Utility_Functions.xWaitForElementPresent(driver, menu_Leads, 3);
 		Utility_Functions.xClick(driver, menu_Leads, true);
+		
+		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
+		Utility_Functions.xClick(driver, recentlyViewed, true);
+		Utility_Functions.xWaitForElementPresent(driver, allLeads, 3);
+		Utility_Functions.xClick(driver, allLeads, true);
+		Utility_Functions.timeWait(3);
+		List<WebElement> leadsList = driver.findElements(By.xpath(
+				"//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
 		Utility_Functions.xWaitForElementPresent(driver, leadsList, 3);
-		Utility_Functions.xclickgetTextofFirstElementfromList(leadsList);
+		Utility_Functions.xclickRandomElement(leadsList);
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xScrollWindow(driver);
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xScrollWindowTop(driver);
 		Utility_Functions.timeWait(2);
+		
 		List<WebElement> contactDetailsPageHeadersList = driver.findElements(By.xpath("//span[contains(@class,'header-title')]"));
 		int count0 = 0, i0 = 0;
 		String fieldsArray0[] = new String[contactDetailsPageHeadersList.size()];
@@ -2939,7 +2953,7 @@ public class LeadsPage extends ReusableLibrary {
 				fieldsArray0[i0] = element0.getText();
 				if (fieldsArray0[i0].contains(leadsDeatilsPageHeadersList.get(i0))) {
 					report.updateTestLog("Verify Leads Landing Page",
-							"Accounts Details  page is having the " + fieldsArray0[i0] + " Headers ",
+							"Leads Details  page is having the " + fieldsArray0[i0] + " Headers ",
 							Status.PASS);
 					count0++;
 				}
@@ -2950,7 +2964,7 @@ public class LeadsPage extends ReusableLibrary {
 				report.updateTestLog("Verify Leads Landing Page",
 						"All sections are not present in the Leads Details Page", Status.FAIL);
 			} else {
-
+				System.out.println("All sections are present::"+leadsDeatilsPageHeadersList);
 				report.updateTestLog("Verify Leads Landing Page",
 						"All sections are present in the Leads Details Page", Status.PASS);
 			}
@@ -2980,7 +2994,7 @@ public class LeadsPage extends ReusableLibrary {
 			}
 			leadsDetailsPageFieldsList.clear();
 			System.out.println(count);
-			if (count >= 11) {
+			if (count != 17) {
 				report.updateTestLog("Verify Leads Landing Page",
 						"All fields are not present in the Lead Information Section", Status.FAIL);
 			} else {
@@ -3024,6 +3038,10 @@ public class LeadsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println("All fields are not present in the Address Information Section:::" + e.getMessage());
 		}
+		
+		Utility_Functions.xScrollWindowOnce(driver);
+		Utility_Functions.timeWait(2);
+		
 		List<WebElement> communicationPreferencesFieldsList = driver.findElements(
 				By.xpath("//h3//span[text()='Communication Preferences']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
 		int count3 = 0, i3 = 0;
@@ -3056,6 +3074,10 @@ public class LeadsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println("All fields are not present in the Communication Preferences Section:::" + e.getMessage());
 		}
+		
+		Utility_Functions.xScrollWindowOnce(driver);
+		Utility_Functions.timeWait(2);
+		
 		List<WebElement> prospectRequirementsFieldsList = driver.findElements(
 				By.xpath("//h3//span[text()='Prospect Requirements']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
 		int count4 = 0, i4 = 0;
@@ -3109,7 +3131,7 @@ public class LeadsPage extends ReusableLibrary {
 				j++;
 			}
 			System.out.println(count5);
-			if (count5!= 4) {
+			if (count5!= 5) {
 				report.updateTestLog("Verify Leads Landing Page",
 						"All fields are not present in the Additional Information section", Status.FAIL);
 			} else {
@@ -3121,6 +3143,9 @@ public class LeadsPage extends ReusableLibrary {
 			System.out.println("All fields are not present in the Additional Information section:::" + e.getMessage());
 		}
 		additionalInformationFieldsList.clear();
+		Utility_Functions.xScrollWindowOnce(driver);
+		Utility_Functions.timeWait(2);
+		
 		List<WebElement> contactInformationList = driver.findElements(By.xpath("//h3//span[text()='Contact Information']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
 		int count6 = 0, i6 = 0,j2=0;
 		String fieldsArray6[] = new String[contactInformationList.size()];

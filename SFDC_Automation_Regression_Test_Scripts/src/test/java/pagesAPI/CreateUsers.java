@@ -254,6 +254,12 @@ public class CreateUsers extends ReusableLibrary {
 	}
 	
 	
+	
+	/**
+	 * 
+	 *  List contains ids of all test users, UATSystemAdmin user : '0050x0000018OXeAAM' / inlcuded in below list
+	 */
+	
 	static ArrayList<String> UATuserNamesList = new ArrayList<String>();
 
 	public void userNamesUAT() {
@@ -344,3 +350,4 @@ public class CreateUsers extends ReusableLibrary {
 	}
 	
 }
+

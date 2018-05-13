@@ -43,7 +43,9 @@ public class PropertiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//*[text()='More']")
 	WebElement menu_More;
 
-	@FindBy(xpath = "//a[@role='menuitem']//span[text()='Properties']")
+	@FindBy(xpath = "//one-app-nav-bar-menu-item[@class='overflowNavItem slds-dropdown__item']//span[text()='Properties'] ")  
+	//@FindBy(xpath = "//span[text()='Properties']")
+	//@FindBy(xpath = "//span[contains(text(),'Properties')]")
 	WebElement properties;
 
 	@FindBy(xpath = "//div[@class='overflowList']//a[@title='Properties'][text()='Properties']")
@@ -60,6 +62,10 @@ public class PropertiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = /* "//div[@class='slds-media'] */ "//*[@value='Save Property']")
 	WebElement saveProperty;
+	
+	
+	@FindBy(xpath = "//label[text()='Building/Property Name']/following-sibling::div//input")
+	WebElement buildingPropertyNameEnv;
 
 	@FindBy(xpath = "//div[@class='slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2']/div/label[@for='property-name']/parent::div//div/input")
 	List<WebElement> buildingPropertyName1;
@@ -1055,16 +1061,23 @@ public class PropertiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void verifyCreationOfActivity() {
+		Utility_Functions.timeWait(6);
 		try {
 			Utility_Functions.xWaitForElementPresent(driver, menu_Properties, 3);
 			Utility_Functions.xClick(driver, menu_Properties, true);
 		} catch (Exception e) {
 			Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
 			Utility_Functions.xClick(driver, menu_More, true);
+			Utility_Functions.timeWait(1);
 			try {
-				Utility_Functions.xWaitForElementPresent(driver, properties, 2);
+			//By prop_Xpath = By.xpath("//span[text()='Properties']");
+				Utility_Functions.xWaitForElementPresent(driver, properties, 5);
 				Utility_Functions.xClick(driver, properties, true);
+				
+				//Utility_Functions.xWaitForElementPresent(driver, prop_Xpath, 3);
+			//	driver.findElement(prop_Xpath).click();
 			} catch (Exception e1) {
+
 				Utility_Functions.xWaitForElementPresent(driver, propertiesEnv, 2);
 				Utility_Functions.xClick(driver, propertiesEnv, true);
 			}
@@ -2101,12 +2114,18 @@ public class PropertiesPage extends ReusableLibrary {
 				}
 			}
 		}
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xWaitForElementPresent(driver, propertyName, 3);
-		Utility_Functions.xClick(driver, propertyName, true);
-		Utility_Functions.xWaitForElementPresent(driver, propertyName, 5);
-		int value = Utility_Functions.xRandomFunction();
-		Utility_Functions.xSendKeys(driver, propertyName, "Test Automation User_" + value);
+		Utility_Functions.timeWait(8);
+		Utility_Functions.xScrollWindow(driver);
+		String property_value = "Test Automation User_" +Utility_Functions.xRandomFunction();
+		try{
+			Utility_Functions.xWaitForElementPresent(driver, buildingPropertyNameEnv, 3);
+			Utility_Functions.xClick(driver, buildingPropertyNameEnv, true);
+			Utility_Functions.xSendKeys(driver, buildingPropertyNameEnv,property_value);
+		}catch(Exception e){
+			Utility_Functions.xWaitForElementPresent(driver, propertyName, 3);
+			Utility_Functions.xClick(driver, propertyName, true);
+			Utility_Functions.xSendKeys(driver, propertyName,property_value);
+		}		
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xScrollWindow(driver);
 		Utility_Functions.timeWait(1);
@@ -2207,11 +2226,15 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.xSendKeys(driver, propertyCity, dataTable.getData("General_Data", "City"));
 		Utility_Functions.xWaitForElementPresent(driver, saveProperty, 4);
 		Utility_Functions.xClick(driver, saveProperty, true);
-		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(7);
 		report.updateTestLog("Verify Custom Property Page", "The new property is saved with all the required fields",
 				Status.PASS);
-		if (details.isDisplayed()) {
-
+		
+		driver.navigate().refresh();
+		Utility_Functions.timeWait(6);
+		
+		if(driver.findElement(By.xpath("//span[text()='"+property_value+"']/parent::h1")).getText().equalsIgnoreCase(property_value))
+		{
 			report.updateTestLog("Verify Custom Property Page", "The Property is saved successfully", Status.PASS);
 		} else {
 			report.updateTestLog("Verify Custom Property Page", "The Property is not saved successfully", Status.FAIL);

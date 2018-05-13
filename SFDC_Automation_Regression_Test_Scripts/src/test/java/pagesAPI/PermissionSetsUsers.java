@@ -1580,6 +1580,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 						+ ":::is having the Role and Profle as:::EXECUTIVE and System Administrator");
 				break;
 			}
+			String abc =null;
 			establishConnection.establishConnection();
 			roleProfileTimeZone = getRoleId(roleIDLabels.get(i)) + "-" + getProfileId(profileIDLabels.get(i)) + "-" + geographicalRole.get(i) 
 			+ "-" + timeZone.get(i);

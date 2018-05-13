@@ -3838,7 +3838,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	public void opportunitySplitRegression() {
 		opportunityNameAutoGenerate();
-
+          
 		Utility_Functions.xClick(driver, related, true);
 		Utility_Functions.timeWait(5);
 		/*

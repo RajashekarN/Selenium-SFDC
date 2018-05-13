@@ -8,8 +8,11 @@ import com.sforce.soap.partner.GetUserInfoResult;
 import com.sforce.soap.partner.LeadConvertResult;
 import com.sforce.soap.partner.PartnerConnection;
 import com.sforce.soap.partner.SaveResult;
+import com.sforce.soap.partner.SetPasswordResult;
 import com.sforce.ws.ConnectionException;
 import com.sforce.ws.ConnectorConfig;
+
+import supportLibraries.Utility_Functions;
 
 
 public class EstablishConnection extends ReusableLibrary {
@@ -25,6 +28,7 @@ public class EstablishConnection extends ReusableLibrary {
 	}
 
 	public static PartnerConnection connection = null;
+	static SetPasswordResult setPasswordResults =null;
 	static ConnectorConfig config;
 	static com.sforce.soap.partner.Error[] errors;
 	static boolean status = false;
@@ -461,4 +465,163 @@ public class EstablishConnection extends ReusableLibrary {
 		}
 		return status;
 	}
+	
+	
+	
+	
+	
+	/**
+	 * Function for establishing the connection as Admin
+	 * 
+	 * @author Global QA Team
+	 *
+	 */
+	
+	
+	public void establishApiConnection() {
+		try {
+			String environment = initializeEnvironment();
+			System.out.println(environment);
+			String Username = null, Password;
+			
+			
+		/*	if ((environment.equals("UAT")) || (environment.equals("UAT2")) || (environment.equals("FTE")) || (environment.equals("FTE2"))) {
+				Username = properties.getProperty(environment+"SystemAdminUsername");
+			}*/		
+			
+			if((environment.equals("UAT"))){
+				 /*Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment+"SystemAdminUsername"));
+				 Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("UATAdminPassword"));*/
+				Username = properties.getProperty("UATSystemAdminUsername");
+				
+				Username = properties.getProperty(environment+"SystemAdminUsername");
+			}else if((environment.equals("FTE"))) {
+				Username = properties.getProperty("FTESystemAdminUsername");
+			}else if((environment.equals("FTE2"))) {
+				Username = properties.getProperty("FTE2SystemAdminUsername");
+			}else if((environment.equals("UAT2"))) {
+				Username = properties.getProperty("UAT2SystemAdminUsername");
+			}
+			
+			if (environment.equals("UAT")) { 			
+				Password = properties.getProperty("UATAdminPassword");
+				String UAT_AuthEndpoint = properties.getProperty("UATAuthEndpoint");
+				config = new ConnectorConfig();
+				config.setUsername(Username);
+				config.setPassword(Password);
+				System.out.println("AuthEndPoint: " + UAT_AuthEndpoint);
+				config.setAuthEndpoint(UAT_AuthEndpoint);
+				connection = new PartnerConnection(config);
+				System.out.println(connection);
+			} else if (environment.equals("UAT2")) {				
+				Password = properties.getProperty("UAT2AdminPassword");
+				String UAT2_AuthEndpoint = properties.getProperty("UAT2AuthEndpoint");
+				config = new ConnectorConfig();
+				config.setUsername(Username);
+				config.setPassword(Password);
+				System.out.println("AuthEndPoint: " + UAT2_AuthEndpoint);
+				config.setAuthEndpoint(UAT2_AuthEndpoint);
+				connection = new PartnerConnection(config);
+			} else if (environment.equals("FTE")) {				
+				Password = properties.getProperty("FTEAdminPassword");
+				String FTE_AuthEndpoint = properties.getProperty("FTEAuthEndpoint");
+				config = new ConnectorConfig();
+				config.setUsername(Username);
+				config.setPassword(Password);
+				System.out.println("AuthEndPoint: " + FTE_AuthEndpoint);
+				config.setAuthEndpoint(FTE_AuthEndpoint);
+				connection = new PartnerConnection(config);
+			} else if (environment.equals("FTE2")) {				
+				Password = properties.getProperty("FTE2AdminPassword");
+				String FTE2_AuthEndpoint = properties.getProperty("FTE2AuthEndpoint");
+				config = new ConnectorConfig();
+				config.setUsername(Username);
+				config.setPassword(Password);
+				System.out.println("AuthEndPoint: " + FTE2_AuthEndpoint);
+				config.setAuthEndpoint(FTE2_AuthEndpoint);
+				connection = new PartnerConnection(config);
+			}
+		} catch (ConnectionException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	
+	/**
+	 * Function for establishing the connection as Specific User
+	 * 
+	 * @author Global QA Team
+	 * @throws Exception 
+	 *
+	 */
+	
+	public void establishConnectionAsSpecificUser(String userId) throws Exception {
+		
+		//Getting Logged in User Name using ID
+		User user = new User(userId);
+		String Username = user.getUserName();
+		//String Password = CBRE_Utility_Functions.xRandomFunction()+"Testuserpassword123!@#";
+		//String pwd = setPasswordResults.toString();
+	//	String Password = "Sales345#$%";
+		String Password = Utility_Functions.xRandomFunction()+"Testuserpassword123!@#";
+		System.out.println(setPasswordResults);
+		/*EstablishApiConnection establishConnection = new EstablishApiConnection(scriptHelper);
+		establishConnection.establishConnection();*/
+		//EstablishApiConnection.connection.resetPassword(userId);
+		setPasswordResults = EstablishConnection.connection.setPassword(userId, Password);
+		System.out.println(setPasswordResults);
+	
+		
+	
+		try {
+			String environment = initializeEnvironment();
+			System.out.println(environment);
+			
+			if (environment.equals("UAT")) { 			
+				//Password = properties.getProperty("UATAdminPassword");
+				String UAT_AuthEndpoint = properties.getProperty("UATAuthEndpoint");
+				config = new ConnectorConfig();
+				config.setUsername(Username);
+				config.setPassword(Password);
+				System.out.println("AuthEndPoint: " + UAT_AuthEndpoint);
+				config.setAuthEndpoint(UAT_AuthEndpoint);
+				connection = new PartnerConnection(config);
+				System.out.println(connection);
+			} else if (environment.equals("UAT2")) {				
+				Password = properties.getProperty("UAT2AdminPassword");
+				String UAT2_AuthEndpoint = properties.getProperty("UAT2AuthEndpoint");
+				config = new ConnectorConfig();
+				config.setUsername(Username);
+				config.setPassword(Password);
+				System.out.println("AuthEndPoint: " + UAT2_AuthEndpoint);
+				config.setAuthEndpoint(UAT2_AuthEndpoint);
+				connection = new PartnerConnection(config);
+			} else if (environment.equals("FTE")) {				
+				Password = properties.getProperty("FTEAdminPassword");
+				String FTE_AuthEndpoint = properties.getProperty("FTEAuthEndpoint");
+				config = new ConnectorConfig();
+				config.setUsername(Username);
+				config.setPassword(Password);
+				System.out.println("AuthEndPoint: " + FTE_AuthEndpoint);
+				config.setAuthEndpoint(FTE_AuthEndpoint);
+				connection = new PartnerConnection(config);
+			} else if (environment.equals("FTE2")) {				
+				//Password = properties.getProperty("FTE2AdminPassword");
+				String FTE2_AuthEndpoint = properties.getProperty("FTE2AuthEndpoint");
+				config = new ConnectorConfig();
+				config.setUsername(Username);
+				config.setPassword(Password);
+				System.out.println("AuthEndPoint: " + FTE2_AuthEndpoint);
+				config.setAuthEndpoint(FTE2_AuthEndpoint);
+				connection = new PartnerConnection(config);
+			}
+		} catch (ConnectionException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
 }

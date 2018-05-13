@@ -138,7 +138,8 @@ public class SearchTextSOQL extends ReusableLibrary {
 		try {
 			establishConnection.establishConnection();
 			String tableName = table;
-			String query = "select Id, Name from " + tableName + " limit 1 offset " + offsetValue;
+			//String query = "select Id, Name from " + tableName + " limit 1 offset " + offsetValue;
+			String query = "select Id, Name from " + tableName + " limit 1 offset 1";
 			QueryResult result = EstablishConnection.connection.query(query);
 			if (result.getSize() > 0) {
 				boolean done = false;
@@ -181,6 +182,8 @@ public class SearchTextSOQL extends ReusableLibrary {
 			}
 		} catch (Exception ex) {
 			report.updateTestLog("Verify Fetch Record", "Record fetch failed:::" + recordID, Status.WARNING);
+			System.out.println(ex.getMessage()); 
+			ex.printStackTrace();
 		}
 		return recordID;
 	}
