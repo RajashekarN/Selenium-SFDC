@@ -420,7 +420,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//span[@class='uiOutputNumber'][text()='1']/ancestor::tr//div[contains(@class,'forceVirtualActionMarker')]//a//span[@class='lightningPrimitiveIcon']")
 	WebElement arrowDown;
 
-	@FindBy(xpath = "//div[contains(@class,'actionMenu')]//a[@title='Edit']")
+	@FindBy(xpath = "//a[@title='Edit']")
 	WebElement editBtn;
 	
 	@FindBy(xpath = "//div[@class='actionMenu']//a[@title='Delete']")
@@ -3447,7 +3447,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 				if (iInstallmentAmountOne > 0) {
 					report.updateTestLog("Opportunities Installments",
 							"Opportunity is eligible for editing the Installments::", Status.PASS);
-					Utility_Functions.xWaitForElementPresent(driver, arrowDown, 3);
+					
+					
+					Utility_Functions.xWaitForElementPresent(driver, arrowDown, 3); 
 					Utility_Functions.xClick(driver, arrowDown, true);
 					Utility_Functions.timeWait(2);
 				

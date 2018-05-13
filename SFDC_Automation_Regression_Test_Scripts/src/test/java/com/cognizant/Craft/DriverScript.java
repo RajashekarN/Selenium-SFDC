@@ -558,7 +558,6 @@ public class DriverScript {
 			} catch (Exception ex) {
 				exceptionHandler(ex, "Error");
 			}
-
 			currentIteration++;
 		}
 	}
