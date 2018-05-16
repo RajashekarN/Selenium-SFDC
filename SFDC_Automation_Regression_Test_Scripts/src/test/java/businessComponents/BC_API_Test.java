@@ -12,6 +12,7 @@ import pagesAPI.BudgetsTargetsFunctions;
 import pagesAPI.CampaignsFunctions;
 import pagesAPI.ContactsFunctions;
 import pagesAPI.LeadsFunctions;
+import pagesAPI.MarketingListsAPI;
 import pagesAPI.OpportunitiesFunctions;
 import pagesAPI.PropertiesFunctions;
 import pagesAPI.SubscriptionsFunctions;
@@ -48,6 +49,7 @@ public class BC_API_Test extends ReusableLibrary {
 	BudgetsTargetsFunctions budgetsTargetsFunctions = new BudgetsTargetsFunctions(scriptHelper);
 	CampaignsFunctions campaignsFunctions = new CampaignsFunctions(scriptHelper);
 	SubscriptionsFunctions subscriptionsFunctions = new SubscriptionsFunctions(scriptHelper);
+	MarketingListsAPI marketingList = new MarketingListsAPI(scriptHelper);
 	
 	/**
 	 * Account Creation and Validation of fields
@@ -448,4 +450,7 @@ public class BC_API_Test extends ReusableLibrary {
 	public void bc_requiredFields03_15Stages() throws InterruptedException {
 		opportunitiesFunctions.requiredFieldsbetweenw03_15Stages();
 	}
+	
+	
+	
 }

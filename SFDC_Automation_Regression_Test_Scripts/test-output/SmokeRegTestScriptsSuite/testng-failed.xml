@@ -3,49 +3,7 @@
 <suite thread-count="1" guice-stage="DEVELOPMENT" name="Failed suite [SmokeRegTestScriptsSuite]" parallel="methods">
   <test name="SmokeRegTests">
     <classes>
-      <class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerAccountsPopulatingAllFields"/>
-      <class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerAccountsVerifyDetailsPage"/>
-      <class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerContactsPopulatingAllFields"/>
-      <class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerHomePageLinks"/>
-      <class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerLeadsCustomEventPage"/>
-      <class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerLeadsSharingFunctionalityPage"/>
+      <class name="testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingList"/>
     </classes>
   </test> <!-- SmokeRegTests -->
-  <test name="SmokeRegTests(failed)" parallel="methods">
-    <classes>
-      <class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerContactsPopulatingAllFields">
-        <methods>
-          <include name="setUpTestRunner"/>
-        </methods>
-      </class> <!-- testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerContactsPopulatingAllFields -->
-      <class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerAccountsVerifyDetailsPage">
-        <methods>
-          <include name="setUpTestRunner"/>
-        </methods>
-      </class> <!-- testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerAccountsVerifyDetailsPage -->
-      <class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerLeadsSharingFunctionalityPage">
-        <methods>
-          <include name="setUpTestRunner"/>
-          <include name="runTC_SF_ABAMERBrokerLeadsSharingFunctionalityPage" invocation-numbers="0"/>
-        </methods>
-      </class> <!-- testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerLeadsSharingFunctionalityPage -->
-      <class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerAccountsPopulatingAllFields">
-        <methods>
-          <include name="setUpTestRunner"/>
-          <include name="tearDownTestSuite"/>
-          <include name="setUpTestSuite"/>
-        </methods>
-      </class> <!-- testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerAccountsPopulatingAllFields -->
-      <class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerHomePageLinks">
-        <methods>
-          <include name="setUpTestRunner"/>
-        </methods>
-      </class> <!-- testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerHomePageLinks -->
-      <class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerLeadsCustomEventPage">
-        <methods>
-          <include name="setUpTestRunner"/>
-        </methods>
-      </class> <!-- testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerLeadsCustomEventPage -->
-    </classes>
-  </test> <!-- SmokeRegTests(failed) -->
 </suite> <!-- Failed suite [SmokeRegTestScriptsSuite] -->

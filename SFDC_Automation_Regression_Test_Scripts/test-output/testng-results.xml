@@ -2,38 +2,27 @@
 <testng-results skipped="0" failed="1" total="1" passed="0">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="49894" started-at="2018-05-10T19:52:56Z" finished-at="2018-05-10T19:53:46Z">
+  <suite name="Default suite" duration-ms="3652" started-at="2018-05-14T20:43:21Z" finished-at="2018-05-14T20:43:25Z">
     <groups>
-      <group name="REGRESSION">
-        <method signature="TC_SF_ABAMERCSSLeadsCreateLead.runTC_SF_ABAMERCSSLeadsCreateLead(java.lang.String, com.cognizant.framework.selenium.ExecutionMode, org.openqa.selenium.Platform)[pri:0, instance:testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsCreateLead@31ef45e3]" name="runTC_SF_ABAMERCSSLeadsCreateLead" class="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsCreateLead"/>
-      </group> <!-- REGRESSION -->
-      <group name="CSS">
-        <method signature="TC_SF_ABAMERCSSLeadsCreateLead.runTC_SF_ABAMERCSSLeadsCreateLead(java.lang.String, com.cognizant.framework.selenium.ExecutionMode, org.openqa.selenium.Platform)[pri:0, instance:testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsCreateLead@31ef45e3]" name="runTC_SF_ABAMERCSSLeadsCreateLead" class="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsCreateLead"/>
-      </group> <!-- CSS -->
-      <group name="UI">
-        <method signature="TC_SF_ABAMERCSSLeadsCreateLead.runTC_SF_ABAMERCSSLeadsCreateLead(java.lang.String, com.cognizant.framework.selenium.ExecutionMode, org.openqa.selenium.Platform)[pri:0, instance:testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsCreateLead@31ef45e3]" name="runTC_SF_ABAMERCSSLeadsCreateLead" class="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsCreateLead"/>
-      </group> <!-- UI -->
-      <group name="Create">
-        <method signature="TC_SF_ABAMERCSSLeadsCreateLead.runTC_SF_ABAMERCSSLeadsCreateLead(java.lang.String, com.cognizant.framework.selenium.ExecutionMode, org.openqa.selenium.Platform)[pri:0, instance:testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsCreateLead@31ef45e3]" name="runTC_SF_ABAMERCSSLeadsCreateLead" class="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsCreateLead"/>
-      </group> <!-- Create -->
-      <group name="Lead">
-        <method signature="TC_SF_ABAMERCSSLeadsCreateLead.runTC_SF_ABAMERCSSLeadsCreateLead(java.lang.String, com.cognizant.framework.selenium.ExecutionMode, org.openqa.selenium.Platform)[pri:0, instance:testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsCreateLead@31ef45e3]" name="runTC_SF_ABAMERCSSLeadsCreateLead" class="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsCreateLead"/>
-      </group> <!-- Lead -->
     </groups>
-    <test name="Default test" duration-ms="49894" started-at="2018-05-10T19:52:56Z" finished-at="2018-05-10T19:53:46Z">
-      <class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsCreateLead">
-        <test-method status="PASS" signature="setUpTestSuite(org.testng.ITestContext)[pri:0, instance:testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsCreateLead@31ef45e3]" name="setUpTestSuite" is-config="true" duration-ms="45" started-at="2018-05-10T14:52:56Z" finished-at="2018-05-10T14:52:56Z">
+    <test name="Default test" duration-ms="3652" started-at="2018-05-14T20:43:21Z" finished-at="2018-05-14T20:43:25Z">
+      <class name="testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingList">
+        <test-method status="PASS" signature="setUpTestSuite(org.testng.ITestContext)[pri:0, instance:testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingList@31ef45e3]" name="setUpTestSuite" is-config="true" duration-ms="65" started-at="2018-05-14T15:43:21Z" finished-at="2018-05-14T15:43:21Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@4bf324f9]]>
+                <![CDATA[org.testng.TestRunner@928763c]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpTestSuite -->
-        <test-method status="FAIL" signature="runTC_SF_ABAMERCSSLeadsCreateLead(java.lang.String, com.cognizant.framework.selenium.ExecutionMode, org.openqa.selenium.Platform)[pri:0, instance:testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsCreateLead@31ef45e3]" name="runTC_SF_ABAMERCSSLeadsCreateLead" duration-ms="49873" started-at="2018-05-10T14:52:56Z" data-provider="RegressionTestScripts" finished-at="2018-05-10T14:53:46Z">
+        <test-method status="PASS" signature="setUpTestRunner()[pri:0, instance:testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingList@31ef45e3]" name="setUpTestRunner" is-config="true" duration-ms="1" started-at="2018-05-14T15:43:21Z" finished-at="2018-05-14T15:43:21Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpTestRunner -->
+        <test-method status="FAIL" signature="runTC_SF_APACCreateNewMarketingList(java.lang.String, com.cognizant.framework.selenium.ExecutionMode, org.openqa.selenium.Platform)[pri:0, instance:testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingList@31ef45e3]" name="runTC_SF_APACCreateNewMarketingList" duration-ms="3621" started-at="2018-05-14T15:43:21Z" data-provider="RegressionTestScripts" finished-at="2018-05-14T15:43:25Z">
           <params>
             <param index="0">
               <value>
@@ -53,13 +42,14 @@
           </params>
           <exception class="java.lang.AssertionError">
             <message>
-              <![CDATA[All the elements are not present on the Related Page]]>
+              <![CDATA[java.lang.NullPointerException]]>
             </message>
             <full-stacktrace>
-              <![CDATA[java.lang.AssertionError: All the elements are not present on the Related Page
+              <![CDATA[java.lang.AssertionError: java.lang.NullPointerException
 	at org.testng.Assert.fail(Assert.java:94)
 	at com.cognizant.Craft.CRAFTTestCase.tearDownTestRunner(CRAFTTestCase.java:149)
-	at testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsCreateLead.runTC_SF_ABAMERCSSLeadsCreateLead(TC_SF_ABAMERCSSLeadsCreateLead.java:35)
+	at testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingList.runDriverScript(TC_SF_ABAPACBrokerCreateNewMarketingList.java:34)
+	at testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingList.runTC_SF_APACCreateNewMarketingList(TC_SF_ABAPACBrokerCreateNewMarketingList.java:28)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
@@ -89,16 +79,12 @@
           </exception> <!-- java.lang.AssertionError -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- runTC_SF_ABAMERCSSLeadsCreateLead -->
-        <test-method status="PASS" signature="setUpTestRunner()[pri:0, instance:testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsCreateLead@31ef45e3]" name="setUpTestRunner" is-config="true" duration-ms="0" started-at="2018-05-10T14:52:56Z" finished-at="2018-05-10T14:52:56Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUpTestRunner -->
-        <test-method status="PASS" signature="tearDownTestSuite()[pri:0, instance:testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsCreateLead@31ef45e3]" name="tearDownTestSuite" is-config="true" duration-ms="47" started-at="2018-05-10T14:53:46Z" finished-at="2018-05-10T14:53:46Z">
+        </test-method> <!-- runTC_SF_APACCreateNewMarketingList -->
+        <test-method status="PASS" signature="tearDownTestSuite()[pri:0, instance:testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingList@31ef45e3]" name="tearDownTestSuite" is-config="true" duration-ms="78" started-at="2018-05-14T15:43:25Z" finished-at="2018-05-14T15:43:25Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDownTestSuite -->
-      </class> <!-- testscripts.SF.RegressionTestScripts.TC_SF_ABAMERCSSLeadsCreateLead -->
+      </class> <!-- testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingList -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
