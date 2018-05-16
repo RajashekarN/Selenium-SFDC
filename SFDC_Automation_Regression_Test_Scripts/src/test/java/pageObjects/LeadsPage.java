@@ -882,7 +882,7 @@ public class LeadsPage extends ReusableLibrary {
 		}*/
 		Utility_Functions.xWaitForElementPresent(driver, newButton, 3);
 		Utility_Functions.xClick(driver, newButton, true);
-		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(4);
 		Utility_Functions.xSwitchtoFrame(driver, continueButton);
 		Utility_Functions.timeWait(3);
 		try {
@@ -959,9 +959,9 @@ public class LeadsPage extends ReusableLibrary {
 		createLeadFunction();
 		Utility_Functions.xWaitForElementPresent(driver, saveButton, 3);
 		Utility_Functions.xClick(driver, saveButton, true);
-		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(3);
 		driver.switchTo().defaultContent();
-		Utility_Functions.timeWait(1);
+		Utility_Functions.timeWait(3);
 		try {
 			//String companyText = dataTable.getData("General_Data", "Company");
 			if(headerLead.isDisplayed()) {
@@ -974,11 +974,13 @@ public class LeadsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println("Lead creation failed:::" + e.getMessage());
 		}
-		Utility_Functions.timeWait(1);
+		Utility_Functions.timeWait(4);
 		Utility_Functions.xClick(driver, related, true);
-		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(4);
 		relatedPageListElements();
-		List<WebElement> relatedPageList = driver.findElements(By.xpath("//*[@id='header']/a/span[1]"));
+ 		// List<WebElement> relatedPageList = driver.findElements(By.xpath("//*[@id='header']/a/span[1]")); --> xpath is not working 
+		List<WebElement> relatedPageList = driver.findElements(By.xpath("//*[starts-with(@id, \"header\")]/a/span[1]"));
+		//*[starts-with(@id, "header")]/a/span[1]
 		try {
 			int i=0, count=0;
 			for(WebElement element: relatedPageList) {
@@ -1314,7 +1316,7 @@ public class LeadsPage extends ReusableLibrary {
 	}
 
 	/**
-	 * Function for validating the Convert Lead by adding the new account in the Convert Lead page
+	 * Function for validating the Convert Lead by ing the new account in the Convert Lead page
 	 * 
 	 * @author Vishnuvardhan
 	 *
