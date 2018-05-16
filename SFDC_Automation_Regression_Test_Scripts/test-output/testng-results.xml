@@ -2,27 +2,39 @@
 <testng-results skipped="0" failed="1" total="1" passed="0">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="3652" started-at="2018-05-14T20:43:21Z" finished-at="2018-05-14T20:43:25Z">
+  <suite name="Default suite" duration-ms="31499" started-at="2018-05-16T21:13:35Z" finished-at="2018-05-16T21:14:07Z">
     <groups>
+      <group name="REGRESSION">
+        <method signature="TC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly.runTC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly(java.lang.String, com.cognizant.framework.selenium.ExecutionMode, org.openqa.selenium.Platform)[pri:0, instance:testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly@31ef45e3]" name="runTC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly" class="testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly"/>
+      </group> <!-- REGRESSION -->
+      <group name="Broker">
+        <method signature="TC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly.runTC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly(java.lang.String, com.cognizant.framework.selenium.ExecutionMode, org.openqa.selenium.Platform)[pri:0, instance:testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly@31ef45e3]" name="runTC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly" class="testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly"/>
+      </group> <!-- Broker -->
+      <group name="UI">
+        <method signature="TC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly.runTC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly(java.lang.String, com.cognizant.framework.selenium.ExecutionMode, org.openqa.selenium.Platform)[pri:0, instance:testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly@31ef45e3]" name="runTC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly" class="testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly"/>
+      </group> <!-- UI -->
+      <group name="MarketingList">
+        <method signature="TC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly.runTC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly(java.lang.String, com.cognizant.framework.selenium.ExecutionMode, org.openqa.selenium.Platform)[pri:0, instance:testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly@31ef45e3]" name="runTC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly" class="testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly"/>
+      </group> <!-- MarketingList -->
     </groups>
-    <test name="Default test" duration-ms="3652" started-at="2018-05-14T20:43:21Z" finished-at="2018-05-14T20:43:25Z">
-      <class name="testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingList">
-        <test-method status="PASS" signature="setUpTestSuite(org.testng.ITestContext)[pri:0, instance:testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingList@31ef45e3]" name="setUpTestSuite" is-config="true" duration-ms="65" started-at="2018-05-14T15:43:21Z" finished-at="2018-05-14T15:43:21Z">
+    <test name="Default test" duration-ms="31499" started-at="2018-05-16T21:13:35Z" finished-at="2018-05-16T21:14:07Z">
+      <class name="testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly">
+        <test-method status="PASS" signature="setUpTestSuite(org.testng.ITestContext)[pri:0, instance:testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly@31ef45e3]" name="setUpTestSuite" is-config="true" duration-ms="33" started-at="2018-05-16T16:13:35Z" finished-at="2018-05-16T16:13:35Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@928763c]]>
+                <![CDATA[org.testng.TestRunner@3d3f761a]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpTestSuite -->
-        <test-method status="PASS" signature="setUpTestRunner()[pri:0, instance:testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingList@31ef45e3]" name="setUpTestRunner" is-config="true" duration-ms="1" started-at="2018-05-14T15:43:21Z" finished-at="2018-05-14T15:43:21Z">
+        <test-method status="PASS" signature="setUpTestRunner()[pri:0, instance:testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly@31ef45e3]" name="setUpTestRunner" is-config="true" duration-ms="1" started-at="2018-05-16T16:13:35Z" finished-at="2018-05-16T16:13:35Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpTestRunner -->
-        <test-method status="FAIL" signature="runTC_SF_APACCreateNewMarketingList(java.lang.String, com.cognizant.framework.selenium.ExecutionMode, org.openqa.selenium.Platform)[pri:0, instance:testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingList@31ef45e3]" name="runTC_SF_APACCreateNewMarketingList" duration-ms="3621" started-at="2018-05-14T15:43:21Z" data-provider="RegressionTestScripts" finished-at="2018-05-14T15:43:25Z">
+        <test-method status="FAIL" signature="runTC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly(java.lang.String, com.cognizant.framework.selenium.ExecutionMode, org.openqa.selenium.Platform)[pri:0, instance:testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly@31ef45e3]" name="runTC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly" duration-ms="31460" started-at="2018-05-16T16:13:35Z" data-provider="RegressionTestScripts" finished-at="2018-05-16T16:14:07Z">
           <params>
             <param index="0">
               <value>
@@ -42,14 +54,35 @@
           </params>
           <exception class="java.lang.AssertionError">
             <message>
-              <![CDATA[java.lang.NullPointerException]]>
+              <![CDATA[Expected condition failed: waiting for element to be clickable: Proxy element for: DefaultElementLocator 'By.xpath: //div[@title, 'New']' (tried for 3 second(s) with 500 MILLISECONDS interval) <b>Caused by: </b>org.openqa.selenium.InvalidSelectorException: invalid selector: Unable to locate an element with the xpath expression //div[@title, 'New'] because of the following error:
+SyntaxError: Failed to execute 'evaluate' on 'Document': The string '//div[@title, 'New']' is not a valid XPath expression.
+  (Session info: chrome=66.0.3359.139)
+  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 10.0.14393 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 0 milliseconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/invalid_selector_exception.html
+Build info: version: '3.6.0', revision: '6fbf3ec767', time: '2017-09-27T15:28:36.4Z'
+System info: host: 'TX590-5R10QN2', ip: '10.22.20.80', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_171'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{mobileEmulationEnabled=false, hasTouchScreen=false, platform=XP, acceptSslCerts=false, acceptInsecureCerts=false, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, platformName=XP, setWindowRect=true, unexpectedAlertBehaviour=, applicationCacheEnabled=false, rotatable=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73), userDataDir=C:\Users\RNALLA~1\AppData\Local\Temp\scoped_dir11736_24637}, takesHeapSnapshot=true, pageLoadStrategy=normal, unhandledPromptBehavior=, databaseEnabled=false, handlesAlerts=true, version=66.0.3359.139, browserConnectionEnabled=false, nativeEvents=true, locationContextEnabled=true, cssSelectorsEnabled=true}]
+Session ID: f72d0d574b25476d169d1eb17c327bdf
+*** Element info: {Using=xpath, value=//div[@title, 'New']}]]>
             </message>
             <full-stacktrace>
-              <![CDATA[java.lang.AssertionError: java.lang.NullPointerException
+              <![CDATA[java.lang.AssertionError: Expected condition failed: waiting for element to be clickable: Proxy element for: DefaultElementLocator 'By.xpath: //div[@title, 'New']' (tried for 3 second(s) with 500 MILLISECONDS interval) <b>Caused by: </b>org.openqa.selenium.InvalidSelectorException: invalid selector: Unable to locate an element with the xpath expression //div[@title, 'New'] because of the following error:
+SyntaxError: Failed to execute 'evaluate' on 'Document': The string '//div[@title, 'New']' is not a valid XPath expression.
+  (Session info: chrome=66.0.3359.139)
+  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 10.0.14393 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 0 milliseconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/invalid_selector_exception.html
+Build info: version: '3.6.0', revision: '6fbf3ec767', time: '2017-09-27T15:28:36.4Z'
+System info: host: 'TX590-5R10QN2', ip: '10.22.20.80', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_171'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{mobileEmulationEnabled=false, hasTouchScreen=false, platform=XP, acceptSslCerts=false, acceptInsecureCerts=false, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, platformName=XP, setWindowRect=true, unexpectedAlertBehaviour=, applicationCacheEnabled=false, rotatable=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73), userDataDir=C:\Users\RNALLA~1\AppData\Local\Temp\scoped_dir11736_24637}, takesHeapSnapshot=true, pageLoadStrategy=normal, unhandledPromptBehavior=, databaseEnabled=false, handlesAlerts=true, version=66.0.3359.139, browserConnectionEnabled=false, nativeEvents=true, locationContextEnabled=true, cssSelectorsEnabled=true}]
+Session ID: f72d0d574b25476d169d1eb17c327bdf
+*** Element info: {Using=xpath, value=//div[@title, 'New']}
 	at org.testng.Assert.fail(Assert.java:94)
 	at com.cognizant.Craft.CRAFTTestCase.tearDownTestRunner(CRAFTTestCase.java:149)
-	at testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingList.runDriverScript(TC_SF_ABAPACBrokerCreateNewMarketingList.java:34)
-	at testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingList.runTC_SF_APACCreateNewMarketingList(TC_SF_ABAPACBrokerCreateNewMarketingList.java:28)
+	at testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly.runTC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly(TC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly.java:29)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
@@ -79,12 +112,12 @@
           </exception> <!-- java.lang.AssertionError -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- runTC_SF_APACCreateNewMarketingList -->
-        <test-method status="PASS" signature="tearDownTestSuite()[pri:0, instance:testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingList@31ef45e3]" name="tearDownTestSuite" is-config="true" duration-ms="78" started-at="2018-05-14T15:43:25Z" finished-at="2018-05-14T15:43:25Z">
+        </test-method> <!-- runTC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly -->
+        <test-method status="PASS" signature="tearDownTestSuite()[pri:0, instance:testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly@31ef45e3]" name="tearDownTestSuite" is-config="true" duration-ms="46" started-at="2018-05-16T16:14:07Z" finished-at="2018-05-16T16:14:07Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDownTestSuite -->
-      </class> <!-- testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingList -->
+      </class> <!-- testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

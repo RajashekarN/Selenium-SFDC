@@ -3,19 +3,19 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test verbose="2" name="Default test">
     <classes>
-      <class name="testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingList"/>
+      <class name="testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly"/>
     </classes>
   </test> <!-- Default test -->
   <test name="Default test(failed)">
     <classes>
-      <class name="testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingList">
+      <class name="testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly">
         <methods>
           <include name="setUpTestRunner"/>
+          <include name="runTC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly" invocation-numbers="0"/>
           <include name="tearDownTestSuite"/>
-          <include name="runTC_SF_APACCreateNewMarketingList" invocation-numbers="0"/>
           <include name="setUpTestSuite"/>
         </methods>
-      </class> <!-- testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingList -->
+      </class> <!-- testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

@@ -49,7 +49,7 @@
               <ul>
                 <li>
                   <a href="#" class="navigator-link " panel-name="test-xml-Default_suite">
-                    <span>C:\Users\rnallapat\AppData\Local\Temp\testng-eclipse-925625943\testng-customsuite.xml</span>
+                    <span>C:\Users\rnallapat\AppData\Local\Temp\testng-eclipse-703828879\testng-customsuite.xml</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -59,7 +59,7 @@
                 </li>
                 <li>
                   <a href="#" class="navigator-link " panel-name="group-Default_suite">
-                    <span>0 groups</span>
+                    <span>4 groups</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -102,7 +102,7 @@
                     <div class="method-list-content failed suite-Default_suite">
                       <span>
                         <img width="3%" src="failed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingList" hash-for-method="runTC_SF_APACCreateNewMarketingList(Instance1, LOCAL, WINDOWS)">runTC_SF_APACCreateNewMarketingList(Instance1, LOCAL, WINDOWS)</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly" hash-for-method="runTC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly(Instance1, LOCAL, WINDOWS)">runTC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly(Instance1, LOCAL, WINDOWS)</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content failed suite-Default_suite -->
@@ -120,20 +120,30 @@
           <div class="suite-Default_suite-class-failed">
             <div class="main-panel-header rounded-window-top">
               <img src="failed.png"/>
-              <span class="class-name">testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingList</span>
+              <span class="class-name">testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="runTC_SF_APACCreateNewMarketingList(Instance1, LOCAL, WINDOWS)">
-                  </a> <!-- runTC_SF_APACCreateNewMarketingList(Instance1, LOCAL, WINDOWS) -->
-                  <span class="method-name">runTC_SF_APACCreateNewMarketingList</span>
+                  <a name="runTC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly(Instance1, LOCAL, WINDOWS)">
+                  </a> <!-- runTC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly(Instance1, LOCAL, WINDOWS) -->
+                  <span class="method-name">runTC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly</span>
                   <span class="parameters">(Instance1, LOCAL, WINDOWS)</span>
-                  <div class="stack-trace">java.lang.AssertionError: java.lang.NullPointerException
+                  <div class="stack-trace">java.lang.AssertionError: Expected condition failed: waiting for element to be clickable: Proxy element for: DefaultElementLocator &apos;By.xpath: //div[@title, &apos;New&apos;]&apos; (tried for 3 second(s) with 500 MILLISECONDS interval) &lt;b&gt;Caused by: &lt;/b&gt;org.openqa.selenium.InvalidSelectorException: invalid selector: Unable to locate an element with the xpath expression //div[@title, &apos;New&apos;] because of the following error:
+SyntaxError: Failed to execute &apos;evaluate&apos; on &apos;Document&apos;: The string &apos;//div[@title, &apos;New&apos;]&apos; is not a valid XPath expression.
+  (Session info: chrome=66.0.3359.139)
+  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 10.0.14393 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 0 milliseconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/invalid_selector_exception.html
+Build info: version: &apos;3.6.0&apos;, revision: &apos;6fbf3ec767&apos;, time: &apos;2017-09-27T15:28:36.4Z&apos;
+System info: host: &apos;TX590-5R10QN2&apos;, ip: &apos;10.22.20.80&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_171&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{mobileEmulationEnabled=false, hasTouchScreen=false, platform=XP, acceptSslCerts=false, acceptInsecureCerts=false, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, platformName=XP, setWindowRect=true, unexpectedAlertBehaviour=, applicationCacheEnabled=false, rotatable=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73), userDataDir=C:\Users\RNALLA~1\AppData\Local\Temp\scoped_dir11736_24637}, takesHeapSnapshot=true, pageLoadStrategy=normal, unhandledPromptBehavior=, databaseEnabled=false, handlesAlerts=true, version=66.0.3359.139, browserConnectionEnabled=false, nativeEvents=true, locationContextEnabled=true, cssSelectorsEnabled=true}]
+Session ID: f72d0d574b25476d169d1eb17c327bdf
+*** Element info: {Using=xpath, value=//div[@title, &apos;New&apos;]}
 	at org.testng.Assert.fail(Assert.java:94)
 	at com.cognizant.Craft.CRAFTTestCase.tearDownTestRunner(CRAFTTestCase.java:149)
-	at testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingList.runDriverScript(TC_SF_ABAPACBrokerCreateNewMarketingList.java:34)
-	at testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingList.runTC_SF_APACCreateNewMarketingList(TC_SF_ABAPACBrokerCreateNewMarketingList.java:28)
+	at testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly.runTC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly(TC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly.java:29)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
@@ -167,7 +177,7 @@
         </div> <!-- panel Default_suite -->
         <div panel-name="test-xml-Default_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">C:\Users\rnallapat\AppData\Local\Temp\testng-eclipse-925625943\testng-customsuite.xml</span>
+            <span class="header-content">C:\Users\rnallapat\AppData\Local\Temp\testng-eclipse-703828879\testng-customsuite.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
@@ -176,7 +186,7 @@
 &lt;suite guice-stage=&quot;DEVELOPMENT&quot; name=&quot;Default suite&quot;&gt;
   &lt;test verbose=&quot;2&quot; name=&quot;Default test&quot;&gt;
     &lt;classes&gt;
-      &lt;class name=&quot;testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingList&quot;/&gt;
+      &lt;class name=&quot;testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly&quot;/&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- Default test --&gt;
 &lt;/suite&gt; &lt;!-- Default suite --&gt;
@@ -200,6 +210,38 @@
             <span class="header-content">Groups for Default suite</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
+            <div class="test-group">
+              <span class="test-group-name">Broker</span>
+              <br/>
+              <div class="method-in-group">
+                <span class="method-in-group-name">runTC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly</span>
+                <br/>
+              </div> <!-- method-in-group -->
+            </div> <!-- test-group -->
+            <div class="test-group">
+              <span class="test-group-name">MarketingList</span>
+              <br/>
+              <div class="method-in-group">
+                <span class="method-in-group-name">runTC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly</span>
+                <br/>
+              </div> <!-- method-in-group -->
+            </div> <!-- test-group -->
+            <div class="test-group">
+              <span class="test-group-name">REGRESSION</span>
+              <br/>
+              <div class="method-in-group">
+                <span class="method-in-group-name">runTC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly</span>
+                <br/>
+              </div> <!-- method-in-group -->
+            </div> <!-- test-group -->
+            <div class="test-group">
+              <span class="test-group-name">UI</span>
+              <br/>
+              <div class="method-in-group">
+                <span class="method-in-group-name">runTC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly</span>
+                <br/>
+              </div> <!-- method-in-group -->
+            </div> <!-- test-group -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
         <div panel-name="times-Default_suite" class="panel">
@@ -218,14 +260,14 @@ data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
 data.addRows(1);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'runTC_SF_APACCreateNewMarketingList')
-data.setCell(0, 2, 'testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingList')
-data.setCell(0, 3, 3621);
+data.setCell(0, 1, 'runTC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly')
+data.setCell(0, 2, 'testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly')
+data.setCell(0, 3, 31460);
 window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-Default_suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 3 seconds</span>
+              <span class="suite-total-time">Total running time: 31 seconds</span>
               <div id="times-div-Default_suite">
               </div> <!-- times-div-Default_suite -->
             </div> <!-- times-div -->
@@ -251,24 +293,24 @@ return data;
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="chronological-class">
-              <div class="chronological-class-name">testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingList</div> <!-- chronological-class-name -->
+              <div class="chronological-class-name">testscripts.SF.SprintR48.TC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly</div> <!-- chronological-class-name -->
               <div class="configuration-suite before">
-                <span class="method-name">setUpTestSuite(org.testng.TestRunner@928763c)</span>
+                <span class="method-name">setUpTestSuite(org.testng.TestRunner@3d3f761a)</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-suite before -->
               <div class="configuration-method before">
                 <span class="method-name">setUpTestRunner</span>
-                <span class="method-start">84 ms</span>
+                <span class="method-start">69 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <img src="failed.png">
                 </img>
-                <span class="method-name">runTC_SF_APACCreateNewMarketingList(Instance1, LOCAL, WINDOWS)</span>
-                <span class="method-start">85 ms</span>
+                <span class="method-name">runTC_SF_ABAPACBrokerCreateNewMarketingListAndSharepublicationReadOnly(Instance1, LOCAL, WINDOWS)</span>
+                <span class="method-start">70 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-suite after">
                 <span class="method-name">tearDownTestSuite</span>
-                <span class="method-start">3743 ms</span>
+                <span class="method-start">31550 ms</span>
               </div> <!-- configuration-suite after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
