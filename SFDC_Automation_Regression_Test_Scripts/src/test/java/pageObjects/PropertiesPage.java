@@ -320,7 +320,7 @@ public class PropertiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//select[contains(@id,'propertyEditForm:Class')]/option[@value='A']")
 	WebElement buildingClassValue;
 
-	@FindBy(xpath = "//a[@title='Details']//span[text()='Details']")
+	@FindBy(xpath = "//a[@class='tabHeader']//span[text()='Details']")
 	WebElement details;
 
 	@FindBy(xpath = "//a[@role='menuitem']/span[contains(@class,'slds-truncate')][text()='Property Preferences']")
@@ -2207,8 +2207,8 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.xSendKeys(driver, propertyCity, dataTable.getData("General_Data", "City"));
 		Utility_Functions.xWaitForElementPresent(driver, saveProperty, 4);
 		Utility_Functions.xClick(driver, saveProperty, true);
-		Utility_Functions.timeWait(5);
-		driver.switchTo().defaultContent();
+		Utility_Functions.timeWait(2);
+		
 		report.updateTestLog("Verify Custom Property Page", "The new property is saved with all the required fields",
 				Status.PASS);
 		if (details.isDisplayed()) {
