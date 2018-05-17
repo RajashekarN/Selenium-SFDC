@@ -2,6 +2,8 @@ package pagesAPI;
 
 
 import java.util.ArrayList;
+import java.util.List;
+
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
@@ -103,24 +105,14 @@ public class CreateUsers extends ReusableLibrary {
 	public void setPassword(String newPassword) {
 		establishConnection.establishConnection();
 		String environment = properties.getProperty("RunEnvironment");
-		ArrayList<String> userNamesList = null;
-		if(environment.equalsIgnoreCase("UAT")){ 
-			
-			userNamesList.clear();
-			userNamesUAT();
-			userNamesList = UATuserNamesList;
-		}else if(environment.equalsIgnoreCase("UAT")){
-			
-			userNamesList.clear();
+		List<String> UserNameList = new ArrayList<String>();
+		if(environment.equals("FTE2")) {
 			userNamesFTE2();
-			userNamesList = FTE2userNamesList;
-		}	
-		try {
-		
-			//UATuserNamesList.clear();
-			//userNamesUAT();
-			for(int i=0; i < UATuserNamesList.size(); i++) {
-				String userId = UATuserNamesList.get(i);
+			UserNameList = FTE2userNamesList;
+		}
+		try {			
+			for(int i=0; i < UserNameList.size(); i++) {
+				String userId = UserNameList.get(i);
 				try {
 					setPasswordResults = EstablishConnection.connection.setPassword(userId, newPassword);
 					SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
@@ -264,7 +256,7 @@ public class CreateUsers extends ReusableLibrary {
 
 	public void userNamesUAT() {
 		
-		UATuserNamesList.add("0050x0000018PG6AAM");
+		/*UATuserNamesList.add("0050x0000018PG6AAM");
 		UATuserNamesList.add("0050x0000018OnXAAU");
 		UATuserNamesList.add("0050x0000018OnhAAE");
 		UATuserNamesList.add("0050x0000018Oo1AAE");
@@ -343,7 +335,9 @@ public class CreateUsers extends ReusableLibrary {
 		UATuserNamesList.add("0050x0000018PFHAA2");
 		UATuserNamesList.add("0050x0000018PGPAA2");
 		UATuserNamesList.add("0050x0000018PGyAAM");
-		UATuserNamesList.add("0050x0000018P44AAE");
+		UATuserNamesList.add("0050x0000018P44AAE");*/
+		
+		
 
 
 		System.out.println("User Names List are::::" + UATuserNamesList);

@@ -690,8 +690,8 @@ public class LoginPage extends ReusableLibrary {
 	public void changePassword() {
 		userNames();
 		String environment = properties.getProperty("RunEnvironment");
-		String sCurrentPassword = environment+dataTable.getData("General_Data", "Password");
-		String sNewPassword = environment+dataTable.getData("General_Data", "NewPassword");
+		String sCurrentPassword = dataTable.getData("General_Data", "Password");
+		String sNewPassword = dataTable.getData("General_Data", "NewPassword");
 		if ((environment.equals("UAT")) || (environment.equals("UAT2")) || (environment.equals("FTE"))
 				|| (environment.equals("FTE2"))) {
 			for (int i = 0; i < userNamesList.size(); i++) {
@@ -804,7 +804,7 @@ public class LoginPage extends ReusableLibrary {
 		environment = environment.toLowerCase();
 
 		//userNamesList.add("testuser1@cbre.com.crm." + environment);
-		//userNamesList.add("testuser10@cbre.com.crm." + environment);
+		userNamesList.add("testuser10@cbre.com.crm." + environment);
 		userNamesList.add("testuser11@cbre.com.crm." + environment);
 		userNamesList.add("testuser12@cbre.com.crm." + environment);
 		userNamesList.add("testuser13@cbre.com.crm." + environment);
