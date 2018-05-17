@@ -2659,6 +2659,10 @@ public class OpportunitiesPage extends ReusableLibrary {
 		if(sAccountName==null) {
 			report.updateTestLog("Opportunity Created", "There are no Opportunity records present for this record type:::", Status.PASS);
 		} else {
+			driver.switchTo().defaultContent();
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xSwitchtoFrame(driver, saveButton);
+			Utility_Functions.xWaitForElementPresent(driver, saveButton, 3);
 			Utility_Functions.xSendKeys(driver, accountName, sAccountName);
 			Utility_Functions.timeWait(2);
 			accountName.sendKeys(Keys.ARROW_DOWN);
