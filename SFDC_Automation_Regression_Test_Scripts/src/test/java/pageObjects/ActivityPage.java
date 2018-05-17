@@ -68,7 +68,8 @@ public class ActivityPage extends ReusableLibrary {
 	@FindBy(xpath = "//button[@class='slds-button slds-button--neutral howMore slds-button slds-button--neutral uiButton']")
 	List<WebElement> btnMoreActivity;
 	
-	@FindBy(xpath = "//label/span[text()='Subject']/parent::label/parent::div/input")
+	//@FindBy(xpath = "//label/span[text()='Subject']/parent::label/parent::div/input")
+	@FindBy(xpath = "//label/span[text()='Subject']/parent::label/parent::div/descendant::input")
 	WebElement activitySubject;
 
 	@FindAll(value={@FindBy(xpath = "//div[@class='select-options']/ul/li/a[text()='Private - Initial Meeting']")})
@@ -701,7 +702,7 @@ public class ActivityPage extends ReusableLibrary {
 		} else {
 			report.updateTestLog("Verify Additional Acitivty", "All the values are not present under Additional Activity List", Status.FAIL);
 		}
-	}
+																						}
 
 
 	static ArrayList<String> pastActivityListValues = new ArrayList<String>();
