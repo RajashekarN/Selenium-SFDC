@@ -2208,7 +2208,6 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, saveProperty, 4);
 		Utility_Functions.xClick(driver, saveProperty, true);
 		Utility_Functions.timeWait(2);
-		
 		report.updateTestLog("Verify Custom Property Page", "The new property is saved with all the required fields",
 				Status.PASS);
 		if (details.isDisplayed()) {
