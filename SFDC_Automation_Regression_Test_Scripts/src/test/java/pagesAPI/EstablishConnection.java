@@ -12,9 +12,6 @@ import com.sforce.soap.partner.SetPasswordResult;
 import com.sforce.ws.ConnectionException;
 import com.sforce.ws.ConnectorConfig;
 
-import supportLibraries.Utility_Functions;
-
-
 public class EstablishConnection extends ReusableLibrary {
 	/*
 	 * Constructor to initialize the business component library
@@ -33,7 +30,7 @@ public class EstablishConnection extends ReusableLibrary {
 	static com.sforce.soap.partner.Error[] errors;
 	static boolean status = false;
 	static String result;
-	
+
 	/**
 	 * Function for retrieving the environment
 	 * 
@@ -54,7 +51,7 @@ public class EstablishConnection extends ReusableLibrary {
 		}
 		return environment;
 	}
-	
+
 
 	/**
 	 * Function for establishing the connection
@@ -62,7 +59,7 @@ public class EstablishConnection extends ReusableLibrary {
 	 * @author Vishnuvardhan
 	 *
 	 */
-	
+
 	public void establishConnection() {
 		try {
 			String environment = initializeEnvironment();
@@ -70,111 +67,111 @@ public class EstablishConnection extends ReusableLibrary {
 			String Username = null, Password;
 			if ((environment.equals("UAT")) || (environment.equals("UAT2")) || (environment.equals("FTE")) || (environment.equals("FTE2"))) {
 				if ((dataTable.getData("General_Data", "TC_ID").contains("OBEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) 
-					Username = properties.getProperty(environment+"OBEMEABroker");
+					Username = properties.getProperty("OBEMEABroker")+ "." + environment;
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("OBEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) 
-					Username = properties.getProperty(environment+"OBEMEAManager");
+					Username = properties.getProperty("OBEMEAManager")+ "." + environment;
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("OBEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) 
-					Username = properties.getProperty(environment+"OBEMEACSS");		
+					Username = properties.getProperty("OBEMEACSS")+ "." + environment;	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) 
-					Username = properties.getProperty(environment+"CMAPACBroker");		
+					Username = properties.getProperty("CMAPACBroker")+ "." + environment;		
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) 
-					Username = properties.getProperty(environment+"CMAPACManager");		
+					Username = properties.getProperty("CMAPACManager")+ "." + environment;		
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) 
-					Username = properties.getProperty(environment+"CMAPACCSS");	
+					Username = properties.getProperty("CMAPACCSS")+ "." + environment;	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) 
-					Username = properties.getProperty(environment+"CMEMEABroker");		
+					Username = properties.getProperty("CMEMEABroker")+ "." + environment;		
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) 
-					Username = properties.getProperty(environment+"CMEMEAManager");		
+					Username = properties.getProperty("CMEMEAManager")+ "." + environment;		
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) 
-					Username = properties.getProperty(environment+"CMEMEACSS");	
+					Username = properties.getProperty("CMEMEACSS")+ "." + environment;	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("ABEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) 
-					Username = properties.getProperty(environment+"ABEMEABroker");	
+					Username = properties.getProperty("ABEMEABroker")+ "." + environment;	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("ABEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) 
-					Username = properties.getProperty(environment+"ABEMEAManager");	
+					Username = properties.getProperty("ABEMEAManager")+ "." + environment;	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("ABEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) 
-					Username = properties.getProperty(environment+"ABEMEACSS");	
+					Username = properties.getProperty("ABEMEACSS")+ "." + environment;	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty(environment+"SystemAdminUsername");	
+					Username = properties.getProperty("SystemAdminUsername")+ "." + environment;	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) 
-					Username = properties.getProperty(environment+"ABAMERBroker");	
+					Username = properties.getProperty("ABAMERBroker")+ "." + environment;	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) 
-					Username = properties.getProperty(environment+"ABAMERManager");	
+					Username = properties.getProperty("ABAMERManager")+ "." + environment;	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) 
-					Username = properties.getProperty(environment+"ABAMERCSS");	
+					Username = properties.getProperty("ABAMERCSS")+ "." + environment;	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) 
-					Username = properties.getProperty(environment+"OBAMERBroker");	
+					Username = properties.getProperty("OBAMERBroker")+ "." + environment;	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) 
-					Username = properties.getProperty(environment+"OBAMERManager");	
+					Username = properties.getProperty("OBAMERManager")+ "." + environment;	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) 
-					Username = properties.getProperty(environment+"OBAMERCSS");	
+					Username = properties.getProperty("OBAMERCSS")+ "." + environment;	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty(environment+"SystemAdminUsername");	
+					Username = properties.getProperty("SystemAdminUsername")+ "." + environment;	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) 
-					Username = properties.getProperty(environment+"OBAPACBroker");
+					Username = properties.getProperty("OBAPACBroker")+ "." + environment;
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) 
-					Username = properties.getProperty(environment+"OBAPACManager");
+					Username = properties.getProperty("OBAPACManager")+ "." + environment;
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) 
-					Username = properties.getProperty(environment+"OBAPACCSS");
+					Username = properties.getProperty("OBAPACCSS")+ "." + environment;
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) 
-					Username = properties.getProperty(environment+"CMAMERBroker");	
+					Username = properties.getProperty("CMAMERBroker")+ "." + environment;	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) 
-					Username = properties.getProperty(environment+"CMAMERManager");	
+					Username = properties.getProperty("CMAMERManager")+ "." + environment;	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) 
-					Username = properties.getProperty(environment+"CMAMERCSS");		
+					Username = properties.getProperty("CMAMERCSS")+ "." + environment;		
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) 
-					Username = properties.getProperty(environment+"CMEMEABroker");	
+					Username = properties.getProperty("CMEMEABroker")+ "." + environment;	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) 
-					Username = properties.getProperty(environment+"CMEMEAManager");	
+					Username = properties.getProperty("CMEMEAManager")+ "." + environment;	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) 
-					Username = properties.getProperty(environment+"CMEMEACSS");		
+					Username = properties.getProperty("CMEMEACSS")+ "." + environment;		
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) 
-					Username = properties.getProperty(environment+"ASAPACBroker");	
+					Username = properties.getProperty("ASAPACBroker")+ "." + environment;	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) 
-					Username = properties.getProperty(environment+"ASAPACManager");		
+					Username = properties.getProperty("ASAPACManager")+ "." + environment;		
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) 
-					Username = properties.getProperty(environment+"ASAPACCSS");		
+					Username = properties.getProperty("ASAPACCSS")+ "." + environment;		
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) 
-					Username = properties.getProperty(environment+"GWSAPACBroker");	
+					Username = properties.getProperty("GWSAPACBroker")+ "." + environment;	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) 
-					Username = properties.getProperty(environment+"GWSAPACManager");		
+					Username = properties.getProperty("GWSAPACManager")+ "." + environment;		
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) 
-					Username = properties.getProperty(environment+"GWSAPACCSS");	
+					Username = properties.getProperty("GWSAPACCSS")+ "." + environment;	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) 
-					Username = properties.getProperty(environment+"GWSEMEABroker");	
+					Username = properties.getProperty("GWSEMEABroker")+ "." + environment;	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) 
-					Username = properties.getProperty(environment+"GWSEMEAManager");		
+					Username = properties.getProperty("GWSEMEAManager")+ "." + environment;		
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) 
-					Username = properties.getProperty(environment+"GWSEMEACSS");
+					Username = properties.getProperty("GWSEMEACSS")+ "." + environment;
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("VASAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) 
-					Username = properties.getProperty(environment+"VASAMERBroker");	
+					Username = properties.getProperty("VASAMERBroker")+ "." + environment;	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("VASAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) 
-					Username = properties.getProperty(environment+"VASAMERManager");		
+					Username = properties.getProperty("VASAMERManager")+ "." + environment;		
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("VASAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) 
-					Username = properties.getProperty(environment+"VASAMERCSS");
+					Username = properties.getProperty("VASAMERCSS")+ "." + environment;
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("VASEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) 
-					Username = properties.getProperty(environment+"VASEMEABroker");	
+					Username = properties.getProperty("VASEMEABroker")+ "." + environment;	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("VASEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) 
-					Username = properties.getProperty(environment+"VASEMEAManager");		
+					Username = properties.getProperty("VASEMEAManager")+ "." + environment;		
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("VASEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) 
-					Username = properties.getProperty(environment+"VASEMEACSS");
+					Username = properties.getProperty("VASEMEACSS")+ "." + environment;
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) 
-					Username = properties.getProperty(environment+"FRANEMEAManager");	
+					Username = properties.getProperty("FRANEMEAManager")+ "." + environment;	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("FDIGEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) 
-					Username = properties.getProperty(environment+"FDIGEMEAManager");	
+					Username = properties.getProperty("FDIGEMEAManager")+ "." + environment;	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("FDIREMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) 
-					Username = properties.getProperty(environment+"FDIREMEAManager");	
+					Username = properties.getProperty("FDIREMEAManager")+ "." + environment;	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("FDIGEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Data"))) 
-					Username = properties.getProperty(environment+"FDIGEMEAData");
+					Username = properties.getProperty("FDIGEMEAData")+ "." + environment;
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("DAASIA")) && (dataTable.getData("General_Data", "TC_ID").contains("Data"))) 
-					Username = properties.getProperty(environment+"DAASIAData");	
+					Username = properties.getProperty("DAASIAData")+ "." + environment;	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("DAPACI")) && (dataTable.getData("General_Data", "TC_ID").contains("Data"))) 
-					Username = properties.getProperty(environment+"DAPACIData");	
+					Username = properties.getProperty("DAPACIData")+ "." + environment;	
 				else if (dataTable.getData("General_Data", "TC_ID").contains("Admin")) 
-					Username = properties.getProperty(environment+"SystemAdminUsername");
+					Username = properties.getProperty("SystemAdminUsername")+ "." + environment;
 			}	
-			
+
 			if (environment.equals("UAT")) { 			
-				Password = properties.getProperty("UATAdminPassword");
+				Password = properties.getProperty("UATPassword");
 				String UAT_AuthEndpoint = properties.getProperty("UATAuthEndpoint");
 				config = new ConnectorConfig();
 				config.setUsername(Username);
@@ -184,7 +181,7 @@ public class EstablishConnection extends ReusableLibrary {
 				connection = new PartnerConnection(config);
 				System.out.println(connection);
 			} else if (environment.equals("UAT2")) {				
-				Password = properties.getProperty("UAT2AdminPassword");
+				Password = properties.getProperty("UAT2Password");
 				String UAT2_AuthEndpoint = properties.getProperty("UAT2AuthEndpoint");
 				config = new ConnectorConfig();
 				config.setUsername(Username);
@@ -193,7 +190,7 @@ public class EstablishConnection extends ReusableLibrary {
 				config.setAuthEndpoint(UAT2_AuthEndpoint);
 				connection = new PartnerConnection(config);
 			} else if (environment.equals("FTE")) {				
-				Password = properties.getProperty("FTEAdminPassword");
+				Password = properties.getProperty("FTEPassword");
 				String FTE_AuthEndpoint = properties.getProperty("FTEAuthEndpoint");
 				config = new ConnectorConfig();
 				config.setUsername(Username);
@@ -202,7 +199,7 @@ public class EstablishConnection extends ReusableLibrary {
 				config.setAuthEndpoint(FTE_AuthEndpoint);
 				connection = new PartnerConnection(config);
 			} else if (environment.equals("FTE2")) {				
-				Password = properties.getProperty("FTE2AdminPassword");
+				Password = properties.getProperty("FTE2Password");
 				String FTE2_AuthEndpoint = properties.getProperty("FTE2AuthEndpoint");
 				config = new ConnectorConfig();
 				config.setUsername(Username);
@@ -215,14 +212,14 @@ public class EstablishConnection extends ReusableLibrary {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void establishConnectionAdminLogin() {
 		try {
 			String environment = initializeEnvironment();
 			System.out.println(environment);
 			String Username = null, Password;
 			if ((environment.equals("UAT")) || (environment.equals("UAT2")) || (environment.equals("FTE")) || (environment.equals("FTE2"))) {
-				Username = properties.getProperty(environment+"SystemAdminUsername");
+				Username = properties.getProperty("SystemAdminUsername")+ "." + environment;
 			}				
 			if (environment.equals("UAT")) { 			
 				Password = properties.getProperty("UATAdminPassword");
@@ -361,7 +358,7 @@ public class EstablishConnection extends ReusableLibrary {
 		}
 		return status;
 	}
-	
+
 
 	/**
 	 * Function for saving the lead conversion results
@@ -435,8 +432,8 @@ public class EstablishConnection extends ReusableLibrary {
 		}
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * Function for deleting the results
 	 * 
@@ -464,164 +461,7 @@ public class EstablishConnection extends ReusableLibrary {
 			}
 		}
 		return status;
-	}
-	
-	
-	
-	
-	
-	/**
-	 * Function for establishing the connection as Admin
-	 * 
-	 * @author Global QA Team
-	 *
-	 */
-	
-	
-	public void establishApiConnection() {
-		try {
-			String environment = initializeEnvironment();
-			System.out.println(environment);
-			String Username = null, Password;
-			
-			
-		/*	if ((environment.equals("UAT")) || (environment.equals("UAT2")) || (environment.equals("FTE")) || (environment.equals("FTE2"))) {
-				Username = properties.getProperty(environment+"SystemAdminUsername");
-			}*/		
-			
-			if((environment.equals("UAT"))){
-				 /*Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment+"SystemAdminUsername"));
-				 Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("UATAdminPassword"));*/
-				Username = properties.getProperty("UATSystemAdminUsername");
-				
-				Username = properties.getProperty(environment+"SystemAdminUsername");
-			}else if((environment.equals("FTE"))) {
-				Username = properties.getProperty("FTESystemAdminUsername");
-			}else if((environment.equals("FTE2"))) {
-				Username = properties.getProperty("FTE2SystemAdminUsername");
-			}else if((environment.equals("UAT2"))) {
-				Username = properties.getProperty("UAT2SystemAdminUsername");
-			}
-			
-			if (environment.equals("UAT")) { 			
-				Password = properties.getProperty("UATAdminPassword");
-				String UAT_AuthEndpoint = properties.getProperty("UATAuthEndpoint");
-				config = new ConnectorConfig();
-				config.setUsername(Username);
-				config.setPassword(Password);
-				System.out.println("AuthEndPoint: " + UAT_AuthEndpoint);
-				config.setAuthEndpoint(UAT_AuthEndpoint);
-				connection = new PartnerConnection(config);
-				System.out.println(connection);
-			} else if (environment.equals("UAT2")) {				
-				Password = properties.getProperty("UAT2AdminPassword");
-				String UAT2_AuthEndpoint = properties.getProperty("UAT2AuthEndpoint");
-				config = new ConnectorConfig();
-				config.setUsername(Username);
-				config.setPassword(Password);
-				System.out.println("AuthEndPoint: " + UAT2_AuthEndpoint);
-				config.setAuthEndpoint(UAT2_AuthEndpoint);
-				connection = new PartnerConnection(config);
-			} else if (environment.equals("FTE")) {				
-				Password = properties.getProperty("FTEAdminPassword");
-				String FTE_AuthEndpoint = properties.getProperty("FTEAuthEndpoint");
-				config = new ConnectorConfig();
-				config.setUsername(Username);
-				config.setPassword(Password);
-				System.out.println("AuthEndPoint: " + FTE_AuthEndpoint);
-				config.setAuthEndpoint(FTE_AuthEndpoint);
-				connection = new PartnerConnection(config);
-			} else if (environment.equals("FTE2")) {				
-				Password = properties.getProperty("FTE2AdminPassword");
-				String FTE2_AuthEndpoint = properties.getProperty("FTE2AuthEndpoint");
-				config = new ConnectorConfig();
-				config.setUsername(Username);
-				config.setPassword(Password);
-				System.out.println("AuthEndPoint: " + FTE2_AuthEndpoint);
-				config.setAuthEndpoint(FTE2_AuthEndpoint);
-				connection = new PartnerConnection(config);
-			}
-		} catch (ConnectionException e) {
-			e.printStackTrace();
-		}
-		
-	}
-	
-	
-	
-	/**
-	 * Function for establishing the connection as Specific User
-	 * 
-	 * @author Global QA Team
-	 * @throws Exception 
-	 *
-	 */
-	
-	public void establishConnectionAsSpecificUser(String userId) throws Exception {
-		
-		//Getting Logged in User Name using ID
-		User user = new User(userId);
-		String Username = user.getUserName();
-		//String Password = CBRE_Utility_Functions.xRandomFunction()+"Testuserpassword123!@#";
-		//String pwd = setPasswordResults.toString();
-	//	String Password = "Sales345#$%";
-		String Password = Utility_Functions.xRandomFunction()+"Testuserpassword123!@#";
-		System.out.println(setPasswordResults);
-		/*EstablishApiConnection establishConnection = new EstablishApiConnection(scriptHelper);
-		establishConnection.establishConnection();*/
-		//EstablishApiConnection.connection.resetPassword(userId);
-		setPasswordResults = EstablishConnection.connection.setPassword(userId, Password);
-		System.out.println(setPasswordResults);
-	
-		
-	
-		try {
-			String environment = initializeEnvironment();
-			System.out.println(environment);
-			
-			if (environment.equals("UAT")) { 			
-				//Password = properties.getProperty("UATAdminPassword");
-				String UAT_AuthEndpoint = properties.getProperty("UATAuthEndpoint");
-				config = new ConnectorConfig();
-				config.setUsername(Username);
-				config.setPassword(Password);
-				System.out.println("AuthEndPoint: " + UAT_AuthEndpoint);
-				config.setAuthEndpoint(UAT_AuthEndpoint);
-				connection = new PartnerConnection(config);
-				System.out.println(connection);
-			} else if (environment.equals("UAT2")) {				
-				Password = properties.getProperty("UAT2AdminPassword");
-				String UAT2_AuthEndpoint = properties.getProperty("UAT2AuthEndpoint");
-				config = new ConnectorConfig();
-				config.setUsername(Username);
-				config.setPassword(Password);
-				System.out.println("AuthEndPoint: " + UAT2_AuthEndpoint);
-				config.setAuthEndpoint(UAT2_AuthEndpoint);
-				connection = new PartnerConnection(config);
-			} else if (environment.equals("FTE")) {				
-				Password = properties.getProperty("FTEAdminPassword");
-				String FTE_AuthEndpoint = properties.getProperty("FTEAuthEndpoint");
-				config = new ConnectorConfig();
-				config.setUsername(Username);
-				config.setPassword(Password);
-				System.out.println("AuthEndPoint: " + FTE_AuthEndpoint);
-				config.setAuthEndpoint(FTE_AuthEndpoint);
-				connection = new PartnerConnection(config);
-			} else if (environment.equals("FTE2")) {				
-				//Password = properties.getProperty("FTE2AdminPassword");
-				String FTE2_AuthEndpoint = properties.getProperty("FTE2AuthEndpoint");
-				config = new ConnectorConfig();
-				config.setUsername(Username);
-				config.setPassword(Password);
-				System.out.println("AuthEndPoint: " + FTE2_AuthEndpoint);
-				config.setAuthEndpoint(FTE2_AuthEndpoint);
-				connection = new PartnerConnection(config);
-			}
-		} catch (ConnectionException e) {
-			e.printStackTrace();
-		}
-		
-	}
-	
-	
+	}	
+
+
 }
