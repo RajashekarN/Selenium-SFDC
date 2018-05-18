@@ -166,6 +166,12 @@ public class EstablishConnection extends ReusableLibrary {
 					Username = properties.getProperty("DAASIAData")+ "." + environment;	
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("DAPACI")) && (dataTable.getData("General_Data", "TC_ID").contains("Data"))) 
 					Username = properties.getProperty("DAPACIData")+ "." + environment;	
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) 
+					Username = properties.getProperty("ABAPACBroker")+ "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) 
+					Username = properties.getProperty("ABAPACManager")+ "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) 
+					Username = properties.getProperty("ABAPACCSS")+ "." + environment;
 				else if (dataTable.getData("General_Data", "TC_ID").contains("Admin")) 
 					Username = properties.getProperty("SystemAdminUsername")+ "." + environment;
 			}	

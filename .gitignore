@@ -2,3 +2,8 @@ SFDC_Automation_Regression_Test_Scripts/Results/*
 **/*.class
 SFDC_Automation_Regression_Test_Scripts/LastBuildResults/*
 SFDC_Automation_Regression_Test_Scripts/target/*
+*.log
+*.fdx
+*.fdt
+*.cfs
+*.lock
