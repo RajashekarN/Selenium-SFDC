@@ -196,7 +196,6 @@ public class LoginPage extends ReusableLibrary {
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
 					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("CMAMERManager") + "." + environment);
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
-					System.out.println(properties.get(environment+"CMAMERBroker") + "." + environment);
 					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("CMAMERBroker"));
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS")) && (!dataTable.getData("General_Data", "TC_ID").contains("BCP")) 
 						&& (!dataTable.getData("General_Data", "TC_ID").contains("Dev")) && (!dataTable.getData("General_Data", "TC_ID").contains("IP") && (!dataTable.getData("General_Data", "TC_ID").contains("CA")
@@ -238,11 +237,6 @@ public class LoginPage extends ReusableLibrary {
 				}else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker")&& (dataTable.getData("General_Data", "TC_ID").contains("MVP")))) {
 					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("CMAPACBrokerMVP") + "." + environment);
 
-				
-				}else if ((dataTable.getData("General_Data", "TC_ID").contains("APAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Project")&& (dataTable.getData("General_Data", "TC_ID").contains("Manager")))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("APACProjectManager")+ "." + environment);
-
-				
 				}else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS")) && (dataTable.getData("General_Data", "TC_ID").contains("IP"))) {
 					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("CMEMEACSSIP")+ "." + environment);
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager")) && (dataTable.getData("General_Data", "TC_ID").contains("IP"))) {
@@ -265,6 +259,22 @@ public class LoginPage extends ReusableLibrary {
 					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("CMEMEACSSDev")+ "." + environment);
 				}else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS")) && (dataTable.getData("General_Data", "TC_ID").contains("SuperUser"))) {
 					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("CMEMEACSSSuperUser")+ "." + environment);
+		
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker")) && (dataTable.getData("General_Data", "TC_ID").contains("BCP"))) {
+					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("CMEMEABrokerBCP")+ "." + environment); 
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager")) && (dataTable.getData("General_Data", "TC_ID").contains("BCP"))) {
+					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("CMEMEAManagerBCP")+ "." + environment); 
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS")) && (dataTable.getData("General_Data", "TC_ID").contains("BCP"))) {
+					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("CMEMEACSSBCP")+ "." + environment); 
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker")) && (dataTable.getData("General_Data", "TC_ID").contains("Dev"))) {
+					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("CMEMEABrokerDev")+ "." + environment); 
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager")) && (dataTable.getData("General_Data", "TC_ID").contains("Dev"))) {
+					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("CMEMEAManagerDev")+ "." + environment); 
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS")) && (dataTable.getData("General_Data", "TC_ID").contains("Dev"))) {
+					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("CMEMEACSSDev")+ "." + environment); 
+										
+				}else if ((dataTable.getData("General_Data", "TC_ID").contains("APAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Project")&& (dataTable.getData("General_Data", "TC_ID").contains("Manager")))) {
+					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("APACProjectManager")+ "." + environment);
 					
 				}else if ((dataTable.getData("General_Data", "TC_ID").contains("VASAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
 					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("VASAMERManager")+ "." + environment);
@@ -338,230 +348,20 @@ public class LoginPage extends ReusableLibrary {
 					
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("AUCAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
 					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("AUCAPACBroker")+ "." + environment);
-					
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker")) && (dataTable.getData("General_Data", "TC_ID").contains("BCP"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("CMEMEABrokerBCP")+ "." + environment); 
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager")) && (dataTable.getData("General_Data", "TC_ID").contains("BCP"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("CMEMEAManagerBCP")+ "." + environment); 
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS")) && (dataTable.getData("General_Data", "TC_ID").contains("BCP"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("CMEMEACSSBCP")+ "." + environment); 
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker")) && (dataTable.getData("General_Data", "TC_ID").contains("Dev"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("CMEMEABrokerDev")+ "." + environment); 
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager")) && (dataTable.getData("General_Data", "TC_ID").contains("Dev"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("CMEMEAManagerDev")+ "." + environment); 
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS")) && (dataTable.getData("General_Data", "TC_ID").contains("Dev"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("CMEMEACSSDev")+ "." + environment); 
-					
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName,properties.getProperty(environment + "OBAMERCSS")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "OBAMERManager")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "OBAMERBroker")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "OBEMEACSS")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "OBEMEAManager")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("OccupierClientCare")) 
-						&& (!dataTable.getData("General_Data", "TC_ID").contains("OBEMEABroker")) && (!dataTable.getData("General_Data", "TC_ID").contains("OBEMEAManager"))
-						&& (!dataTable.getData("General_Data", "TC_ID").contains("OBEMEACSS"))) { 
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "OBEMEAOccupierClientCare")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "OBEMEABroker")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "OBAPACCSS")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "OBAPACManager")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "OBAPACBroker")+ "." + environment);
-					
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "ABAMERCSS")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "ABAMERManager")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "ABAMERBroker")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ABEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "ABEMEACSS")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ABEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "ABEMEAManager")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ABEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "ABEMEABroker")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "ABAPACCSS")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "ABAPACManager")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "ABAPACBroker")+ "." + environment);
-
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "CMAMERCSS")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "CMAMERManager")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "CMAMERBroker")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))
-						&& (!dataTable.getData("General_Data", "TC_ID").contains("BCP")) && (!dataTable.getData("General_Data", "TC_ID").contains("Dev"))
-						&& (!dataTable.getData("General_Data", "TC_ID").contains("IP") && (!dataTable.getData("General_Data", "TC_ID").contains("CA") && (!dataTable.getData("General_Data", "TC_ID").contains("SuperUser"))))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "CMEMEACSS")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))
-						&& (!dataTable.getData("General_Data", "TC_ID").contains("BCP")) && (!dataTable.getData("General_Data", "TC_ID").contains("Dev"))
-						&& (!dataTable.getData("General_Data", "TC_ID").contains("IP") && (!dataTable.getData("General_Data", "TC_ID").contains("CA")))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "CMEMEAManager")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))
-						&& (!dataTable.getData("General_Data", "TC_ID").contains("BCP")) && (!dataTable.getData("General_Data", "TC_ID").contains("Dev"))
-						&& (!dataTable.getData("General_Data", "TC_ID").contains("IP") && (!dataTable.getData("General_Data", "TC_ID").contains("CA")))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "CMEMEABroker")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "CMAPACCSS")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAPAC"))
-						&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "CMAPACManager"));
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker") && (!dataTable.getData("General_Data", "TC_ID").contains("NZL") 
-						&& (!dataTable.getData("General_Data", "TC_ID").contains("MetroNZL")&& (!dataTable.getData("General_Data", "TC_ID").contains("Metro") && (!dataTable.getData("General_Data", "TC_ID").contains("AUC")
-						&& (!dataTable.getData("General_Data", "TC_ID").contains("AUS") && (!dataTable	.getData("General_Data", "TC_ID").contains("NSW") && (!dataTable.getData("General_Data", "TC_ID").contains("ChristChurch")
-						&& (!dataTable.getData("General_Data", "TC_ID").contains("MVP"))))))))))) {
-					Utility_Functions.xSendKeys(driver, txt_userName,properties.getProperty(environment + "CMAPACBroker")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker") && (dataTable.getData("General_Data", "TC_ID").contains("AUC")))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "CMAPACBrokerAUC")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker") && (dataTable.getData("General_Data", "TC_ID").contains("AUS")))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "CMAPACBrokerAUS")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker") && (dataTable.getData("General_Data", "TC_ID").contains("ChristChurch")))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "CMAPACBrokerChristChurch")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker") && (dataTable.getData("General_Data", "TC_ID").contains("NSW")))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "CMAPACBrokerNSW")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker") && (dataTable.getData("General_Data", "TC_ID").contains("NZL")))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "CMAPACBrokerNZL")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker") && (dataTable.getData("General_Data", "TC_ID").contains("MetroNZL")))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "CMAPACBrokerMetroNZL"));
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker") && (dataTable.getData("General_Data", "TC_ID").contains("Metro")))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "CMAPACBrokerMetro")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker") && (dataTable.getData("General_Data", "TC_ID").contains("MVP")))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "CMAPACBrokerMVP")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS")) && (dataTable.getData("General_Data", "TC_ID").contains("IP"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "CMEMEACSSIP")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager")) && (dataTable.getData("General_Data", "TC_ID").contains("IP"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "CMEMEAManagerIP")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker")) && (dataTable.getData("General_Data", "TC_ID").contains("IP"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "CMEMEABrokerIP")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker")) && (dataTable.getData("General_Data", "TC_ID").contains("BCP"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "CMEMEABrokerBCP")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker")) && (dataTable.getData("General_Data", "TC_ID").contains("BCP"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "CMEMEAManagerBCP")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker")) && (dataTable.getData("General_Data", "TC_ID").contains("CA"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "CMEMEABrokerCA")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager")) && (dataTable.getData("General_Data", "TC_ID").contains("CA"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "CMEMEAManagerCA")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker")) && (dataTable.getData("General_Data", "TC_ID").contains("Dev"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "CMEMEABrokerDev")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker")) && (dataTable.getData("General_Data", "TC_ID").contains("Dev"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "CMEMEAManagerDev")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker")) && (dataTable.getData("General_Data", "TC_ID").contains("Dev"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "CMEMEACSSDev")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS")) && (dataTable.getData("General_Data", "TC_ID").contains("SuperUser"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "CMEMEACSSSuperUser")+ "." + environment);
-					
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VASAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "VASAMERManager")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VASAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "VASAMERBroker")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VASAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "VASAMERCSS")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VASEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "VASEMEAManager")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VASEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker") && (!dataTable.getData("General_Data", "TC_ID").contains("SuperUser")))) {	
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "VASEMEABroker")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VASEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker") && (dataTable.getData("General_Data", "TC_ID").contains("SuperUser")))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "VASEMEABrokerSuperUser")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VASEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "VASEMEACSS")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VASAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "VASAPACManager")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VASAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "VASAPACBroker")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VASAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "VASAPACCSS")+ "." + environment);
-
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "ASAMERManager")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "ASAMERBroker")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "ASAMERCSS")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ASEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "ASEMEAManager")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ASEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker")
-								&& (!dataTable.getData("General_Data", "TC_ID").contains("SuperUser")))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "ASEMEABroker")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ASEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker") && (dataTable.getData("General_Data", "TC_ID").contains("SuperUser")))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "ASEMEABrokerSuperUser")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ASEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "ASEMEACSS")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "ASAPACManager")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "ASAPACBroker")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "ASAPACCSS")+ "." + environment);
-
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "GWSAMERManager")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "GWSAMERBroker")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAMER"))	&& (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "GWSAMERCSS")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "GWSEMEAManager")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker") && (!dataTable.getData("General_Data", "TC_ID").contains("SuperUser")))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "GWSEMEABroker")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSEMEA"))	&& (dataTable.getData("General_Data", "TC_ID").contains("Broker") && (dataTable.getData("General_Data", "TC_ID").contains("SuperUser")))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "GWSEMEABrokerSuperUser")+ "." + environment);
-
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "GWSEMEACSS")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "GWSAPACManager")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "GWSAPACBroker")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAPAC"))	&& (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "GWSAPACCSS")+ "." + environment);
-
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("DAAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Data"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "DAAMERData")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("DAEMEA"))  && (dataTable.getData("General_Data", "TC_ID").contains("Data"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "DAEMEAData")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("DAAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Data"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "DAAPACData")+ "." + environment);
-
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("AUCAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "AUCAPACBroker")+ "." + environment);
-
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker")) && (dataTable.getData("General_Data", "TC_ID").contains("BCP"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "CMEMEABrokerBCP")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager")) && (dataTable.getData("General_Data", "TC_ID").contains("BCP"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "CMEMEAManagerBCP")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS")) && (dataTable.getData("General_Data", "TC_ID").contains("BCP"))) {					
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "CMEMEACSSBCP")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker")) && (dataTable.getData("General_Data", "TC_ID").contains("Dev"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "CMEMEABrokerDev")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager")) && (dataTable.getData("General_Data", "TC_ID").contains("Dev"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "CMEMEAManagerDev")+ "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS")) && (dataTable.getData("General_Data", "TC_ID").contains("Dev"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "CMEMEACSSDev")+ "." + environment);
-				
+						
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "FRANEMEAManager")+ "." + environment);
+					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("FRANEMEAManager")+ "." + environment);
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("FDIGEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "FDIGEMEAManager")+ "." + environment);
+					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("FDIGEMEAManager")+ "." + environment);
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("FDIREMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "FDIREMEAManager")+ "." + environment);
+					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("FDIREMEAManager")+ "." + environment);
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("FDIGEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Data"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "FDIGEMEAData")+ "." + environment);
+					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("FDIGEMEAData")+ "." + environment);
 				
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("DAASIA")) && (dataTable.getData("General_Data", "TC_ID").contains("Data"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "DAASIAData")+ "." + environment);
+					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("DAASIAData")+ "." + environment);
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("DAPACI")) && (dataTable.getData("General_Data", "TC_ID").contains("Data"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty(environment + "DAPACIData")+ "." + environment);
+					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("DAPACIData")+ "." + environment);
 				}
 			}
 			Utility_Functions.timeWait(1);
