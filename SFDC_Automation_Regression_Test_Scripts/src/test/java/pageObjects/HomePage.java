@@ -17,6 +17,7 @@ import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
 
+import supportLibraries.SF_UtilityFunctions;
 import supportLibraries.Utility_Functions;
 
 /**
@@ -41,56 +42,132 @@ public class HomePage extends ReusableLibrary {
 		// Utility_Functions utility = new Utility_Functions(scriptHelper);
 	}
 
-	@FindBy(css = "one-app-nav-bar a[title='Accounts']")
-	WebElement menu_Accounts;
+	/**
+	 * Page Object Class for verify_Home_Page
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
 
-	@FindBy(css = "one-app-nav-bar a[title='Leads']")
-	WebElement menu_Leads;
-
-	@FindBy(xpath = "//div[@class='bBottom']//span[text()='Opportunities']")
-	WebElement menu_Opportunities;
-
-	@FindBy(xpath = "//span[@class='uiOutputText'][text()='Accounts']")
-	WebElement accounts_HomePage;
-
-	@FindBy(xpath = "//span[@class='uiOutputText'][text()='Opportunities']")
-	WebElement opportunities_HomePage;
-
-	@FindBy(xpath = "//span[@class='uiOutputText'][text()='Leads']")
-	WebElement leads_HomePage;
-
-	@FindBy(xpath = "//ul/li[@class='slds-list__item slds-p-bottom--xxx-small']")
-	WebElement homePage_Links;
-
-	@FindBy(xpath = "//a/span[@title='Welcome to Salesforce!']")
+	@FindBy(xpath = "//span[@title='Welcome to Salesforce!']")
 	WebElement welcomeToSalesforce;
 
 	@FindBy(xpath = "//*[text()='Salesforce Training Videos/Tools']/parent::div/parent::div/div[1]/span/img[@alt='logo']")
 	WebElement cbreImage;
 
+
+	/**
+	 * Page Object Class for validate_Menu_Accounts
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+
+	@FindBy(xpath = "//span[@class='uiOutputText'][text()='Accounts']")
+	WebElement accounts_HomePage;
+
+	@FindBy(css = "one-app-nav-bar a[title='Accounts']")
+	WebElement menu_Accounts;
+
+
+	/**
+	 * Page Object Class for validate_Menu_Opportunities
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+
+
+	@FindBy(xpath = "//div[@class='bBottom']//span[text()='Opportunities']")
+	WebElement menu_Opportunities;
+
+	@FindBy(xpath = "//span[@class='uiOutputText'][text()='Opportunities']")
+	WebElement opportunities_HomePage;
+
+
+	/**
+	 * Page Object Class for validate_Menu_Leads
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+
+	@FindBy(css = "one-app-nav-bar a[title='Leads']")
+	WebElement menu_Leads;
+
+	@FindBy(xpath = "//span[@class='uiOutputText'][text()='Leads']")
+	WebElement leads_HomePage;
+
+
+	/**
+	 * Page Object Class for validateHomePageSFDCTrainingLink
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+
+	@FindBy(xpath = "//div[@class='slds-p-around--medium']/a[text()='SFDC Training']")
+	WebElement SFDCTrainingLink;
+
+
+	/**
+	 * Page Object Class for validateHomePageAccountUpdate
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+
 	@FindBy(xpath = "//ul[@class='slds-list--vertical slds-has-inline-block-links']/li/a[text()='Submit Acct Update Request']")
 	WebElement submitAccountUpdateRequest;
 
-	@FindBy(xpath = "//input[@placeholder='Search People']")
+	@FindBy(xpath = "//input[@title='Search People']")
 	WebElement requestedFor;
 
-	@FindBy(xpath = "//input[@placeholder='Search Accounts']")
+	@FindBy(xpath = "//input[@title='Search Accounts']")
 	WebElement searchAccounts;
+
+	@FindBy(xpath = "//span[text()='Region']/parent::span/parent::div//a")
+	WebElement regionField;
 
 	@FindBy(xpath = "//a[@title='AMER']")
 	WebElement region;
 
-	@FindBy(xpath = "//span[text()='Description']/parent::label/parent::div/textarea[@class='textarea']")
+	@FindBy(xpath = "//span[text()='Description']/parent::label/parent::div/textarea")
 	WebElement description;
 
 	@FindBy(xpath = "//button[@title='Save']")
 	WebElement saveCase;
 
-	@FindBy(xpath = "//div[@class='slds-p-around--medium']/a[text()='SFDC Training']")
-	WebElement SFDCTrainingLink;
+
+	/**
+	 * Page Object Class for validateHomePageRecentRecords
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+
 
 	@FindBy(xpath = "//span[contains(@title,'Recent Records')]")
 	WebElement recentRecords;
+
+
+	/**
+	 * Page Object Class for validateHomePageRecentRecords
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+
+	@FindBy(xpath = "//ul/li[@class='slds-list__item slds-p-bottom--xxx-small']")
+	WebElement homePage_Links;
+
+
+	/**
+	 * Page Object Class for validateHomePageMarketingLists
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
 
 	@FindBy(xpath = "//*[text()='More']")
 	WebElement menu_More;
@@ -103,6 +180,14 @@ public class HomePage extends ReusableLibrary {
 
 	@FindBy(xpath = "//label[contains(@class,'form-element__label')]/span[text()='Marketing List Name']")
 	WebElement marketingListName;
+
+
+	/**
+	 * Page Object Class for validateHomePageTabs
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
 
 	@FindBy(xpath = "//button[text()='More']")
 	WebElement showMore;
@@ -185,15 +270,7 @@ public class HomePage extends ReusableLibrary {
 	@FindBy(xpath = "//a[@class='tabHeader']//span[text()='Details']")
 	WebElement details;
 
-	/*
-	 * @FindBy(xpath =
-	 * "//button[@class='bare slds-button uiButton forceHeaderButton oneUserProfileCardTrigger']"
-	 * ) WebElement logOutButton;
-	 * 
-	 * @FindBy(xpath =
-	 * "//div[@class='profile-card-indent']//a[text()='Log Out']") WebElement
-	 * logOut;
-	 */
+	SF_UtilityFunctions sf_UtilityFunctions = new SF_UtilityFunctions(scriptHelper);
 
 	/**
 	 * Validating the Home Page login functionality
@@ -203,26 +280,18 @@ public class HomePage extends ReusableLibrary {
 	 */
 
 	public void verify_Home_Page() {
-		try {
-			if (welcomeToSalesforce.isDisplayed()) {
-				report.updateTestLog("Verify Home Page Links", "Welcome to Salesforce link is present in Home Page",
-						Status.PASS);
-			} else {
-				report.updateTestLog("Verify Home Page Links", "Welcome to Salesforce link is not present in Home Page",
-						Status.FAIL);
-			}
-			Utility_Functions.timeWait(4);
-			if (cbreImage.isDisplayed()) {
-				report.updateTestLog("Verify Home Page Links", "CBRE image is present in Home Page", Status.PASS);
-			} else {
-				report.updateTestLog("Verify Home Page Links", "CBRE image is not present in Home Page", Status.FAIL);
-			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
+		if (welcomeToSalesforce.isDisplayed()) {
+			report.updateTestLog("Verify Home Page Links", "Welcome to Salesforce link is present in Home Page", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Home Page Links", "Welcome to Salesforce link is not present in Home Page", Status.FAIL);
+		}
+		Utility_Functions.timeWait(4);
+		if (cbreImage.isDisplayed()) {
+			report.updateTestLog("Verify Home Page Links", "CBRE image is present in Home Page", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Home Page Links", "CBRE image is not present in Home Page", Status.FAIL);
 		}
 		validate_Support_Custom_Links();
-		// verify_Welcome_Links();
-
 	}
 
 	/**
@@ -233,24 +302,15 @@ public class HomePage extends ReusableLibrary {
 	 */
 
 	public void verify_Welcome_Links() {
-		try {
-			List<WebElement> welcomeLinks = driver.findElements(By.xpath("//div[@class='slds-p-around--medium']/a"));
-			boolean salesforceTrainingLink = Utility_Functions.validateLinks(welcomeLinks,
-					"Salesforce Training Videos/Tools");
-			boolean myActivitylink = Utility_Functions.validateLinks(welcomeLinks, "My Activity List");
-			if ((salesforceTrainingLink == true) && (myActivitylink == true)) {
-				report.updateTestLog("Verify Home Page Welcome Links",
-						"Welcome Links Salesforce Training Videos/ Tools and My Activity Links are present in the Home Page",
-						Status.PASS);
-			} else {
-				report.updateTestLog("Verify Home Page Welcome Links", "Welcome Links are not present in the Home Page",
-						Status.FAIL);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
+		List<WebElement> welcomeLinks = driver.findElements(By.xpath("//div[@class='slds-p-around--medium']/a"));
+		boolean salesforceTrainingLink = Utility_Functions.validateLinks(welcomeLinks,
+				"Salesforce Training Videos/Tools");
+		boolean myActivitylink = Utility_Functions.validateLinks(welcomeLinks, "My Activity List");
+		if ((salesforceTrainingLink == true) && (myActivitylink == true)) {
+			report.updateTestLog("Verify Home Page Welcome Links", "Welcome Links Salesforce Training Videos/ Tools and My Activity Links are present in the Home Page", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Home Page Welcome Links", "Welcome Links are not present in the Home Page", Status.FAIL);
 		}
-
 	}
 
 	/**
@@ -261,26 +321,18 @@ public class HomePage extends ReusableLibrary {
 	 */
 
 	public void validate_Menu_Accounts() {
-		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 4);
-		try {
-			if (menu_Accounts.isDisplayed()) {
-				report.updateTestLog("Verify Menu - Accounts", "Accounts menu is present in Home Page", Status.PASS);
-			} else {
-				report.updateTestLog("Verify Menu - Accounts", "Accounts menu is not present in Home Page",
-						Status.FAIL);
-			}
-			menu_Accounts.click();
-			Utility_Functions.xWaitForElementPresent(driver, accounts_HomePage, 3);
-			if (accounts_HomePage.isDisplayed()) {
-				report.updateTestLog("Verify Accounts Home Page", "Accounts Home Page is displayed", Status.PASS);
-			} else {
-				report.updateTestLog("Verify Accounts Home Page", "Accounts Home Page didn't get displayed",
-						Status.FAIL);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
-			report.updateTestLog("Exception in validate Menu Accounts", e.getMessage(), Status.FAIL);
+		sf_UtilityFunctions.oneAppNavigationTab("Accounts");
+		if (menu_Accounts.isDisplayed()) {
+			report.updateTestLog("Verify Menu - Accounts", "Accounts menu is present in Home Page", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Menu - Accounts", "Accounts menu is not present in Home Page",	Status.FAIL);
+		}
+		menu_Accounts.click();
+		Utility_Functions.xWaitForElementPresent(driver, accounts_HomePage, 3);
+		if (accounts_HomePage.isDisplayed()) {
+			report.updateTestLog("Verify Accounts Home Page", "Accounts Home Page is displayed", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Accounts Home Page", "Accounts Home Page didn't get displayed", Status.FAIL);
 		}
 	}
 
@@ -293,26 +345,17 @@ public class HomePage extends ReusableLibrary {
 
 	public void validate_Menu_Opportunities() {
 		Utility_Functions.timeWait(4);
-		try {
-			if (menu_Opportunities.isDisplayed()) {
-				report.updateTestLog("Verify Menu - Opportunities", "Opportunities menu is present in Home Page",
-						Status.PASS);
-			} else {
-				report.updateTestLog("Verify Menu - Opportunities", "Opportunities menu is not present in Home Page",
-						Status.FAIL);
-			}
-			menu_Opportunities.click();
-			Utility_Functions.timeWait(3);
-			if (opportunities_HomePage.isDisplayed()) {
-				report.updateTestLog("Verify Opportunities Home Page", "Opportunities Home Page is displayed",
-						Status.PASS);
-			} else {
-				report.updateTestLog("Verify Opportunities Home Page", "Opportunities Home Page didn't get displayed",
-						Status.FAIL);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
+		if (menu_Opportunities.isDisplayed()) {
+			report.updateTestLog("Verify Menu - Opportunities", "Opportunities menu is present in Home Page", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Menu - Opportunities", "Opportunities menu is not present in Home Page", Status.FAIL);
+		}
+		sf_UtilityFunctions.oneAppNavigationTab("Opportunities");
+		Utility_Functions.timeWait(3);
+		if (opportunities_HomePage.isDisplayed()) {
+			report.updateTestLog("Verify Opportunities Home Page", "Opportunities Home Page is displayed", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Opportunities Home Page", "Opportunities Home Page didn't get displayed", Status.FAIL);
 		}
 	}
 
@@ -325,22 +368,17 @@ public class HomePage extends ReusableLibrary {
 
 	public void validate_Menu_Leads() {
 		Utility_Functions.timeWait(4);
-		try {
-			if (menu_Leads.isDisplayed()) {
-				report.updateTestLog("Verify Menu - Leads", "Leads menu is present in Home Page", Status.PASS);
-			} else {
-				report.updateTestLog("Verify Menu - Leads", "Leads menu is not present in Home Page", Status.FAIL);
-			}
-			menu_Leads.click();
-			Utility_Functions.timeWait(1);
-			if (leads_HomePage.isDisplayed()) {
-				report.updateTestLog("Verify Leads Home Page", "Leads Home Page is displayed", Status.PASS);
-			} else {
-				report.updateTestLog("Verify Leads Home Page", "Leads Home Page didn't get displayed", Status.FAIL);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
+		if (menu_Leads.isDisplayed()) {
+			report.updateTestLog("Verify Menu - Leads", "Leads menu is present in Home Page", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Menu - Leads", "Leads menu is not present in Home Page", Status.FAIL);
+		}
+		sf_UtilityFunctions.oneAppNavigationTab("Leads");
+		Utility_Functions.timeWait(1);
+		if (leads_HomePage.isDisplayed()) {
+			report.updateTestLog("Verify Leads Home Page", "Leads Home Page is displayed", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Leads Home Page", "Leads Home Page didn't get displayed", Status.FAIL);
 		}
 	}
 
@@ -379,52 +417,45 @@ public class HomePage extends ReusableLibrary {
 				.findElements(By.xpath("//b[text()='Support Links']/ancestor::h2/following-sibling::ul//a"));
 		String[] linkTexts = new String[homePageLinks.size()];
 		System.out.println(" Support links in page are :: "+linkTexts.length +" ::: "+ homePageLinks);
-	
+
 		Utility_Functions.timeWait(1);
 		int i = 0, count = 0;
-		try {
-			for (WebElement element : homePageLinks) {
-				linkTexts[i] = element.getText();
-				System.out.println("Verify Link '" + linkTexts[i] + "' with the list :: " + list.get(i));
-				
-				if (linkTexts[i].equals(list.get(i))) {
-					count++;
-					System.out.println("Link " + linkTexts[i] + " matches " + "with the list ::" + list.get(i));
-					report.updateTestLog("Verify Home Page Links", "Link " + linkTexts[i] + " present in Home Page:::",
-							Status.PASS);
-				}
-				i++;
+		for (WebElement element : homePageLinks) {
+			linkTexts[i] = element.getText();
+			System.out.println("Verify Link '" + linkTexts[i] + "' with the list :: " + list.get(i));
+
+			if (linkTexts[i].equals(list.get(i))) {
+				count++;
+				System.out.println("Link " + linkTexts[i] + " matches " + "with the list ::" + list.get(i));
+				report.updateTestLog("Verify Home Page Links", "Link " + linkTexts[i] + " present in Home Page:::", Status.PASS);
 			}
-			System.out.println(count);
-			if (count == 7) {
-				System.out.println("All the links are present in Home Page:::");
-				report.updateTestLog("Verify Home Page Links", "All the links are present in Home Page:::",
-						Status.PASS);
-			} else {
-				report.updateTestLog("Verify Home Page Links", "All the links are not present in Home Page:::",
-						Status.FAIL);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
+			i++;
+		}
+		System.out.println(count);
+		if (count == 7) {
+			System.out.println("All the links are present in Home Page:::");
+			report.updateTestLog("Verify Home Page Links", "All the links are present in Home Page:::", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Home Page Links", "All the links are not present in Home Page:::", Status.FAIL);
 		}
 	}
 
 	/**
-	 * Validating the Logout functionality
+	 * Validating the tabs on the Home Page for the SFDC Training link
 	 * 
-	 * @author Vishnuvardhan
+	 * @author Ramya
 	 *
-	 *//*
-		 * 
-		 * public void logout() { try { Utility_Functions.timeWait(2);
-		 * Utility_Functions.xClick(driver, logOutButton, true);
-		 * Utility_Functions.timeWait(1); Utility_Functions.xClick(driver,
-		 * logOut, true); report.updateTestLog("Verify Logout",
-		 * "User has been logged out successfully:::",Status.PASS); } catch
-		 * (Exception e) { e.printStackTrace(); } }
-		 */
+	 */
 
+	public void validateHomePageSFDCTrainingLink() {
+		Utility_Functions.timeWait(4);
+		if (SFDCTrainingLink.isDisplayed()) {
+			report.updateTestLog("Verify Home Page SFDC Training Link", "The SFDC Training Link is present", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Home Page SFDC Training Link", "The SFDC Training Link is not present", Status.FAIL);
+		}
+	}
+	
 	/**
 	 * Validating the tabs on Home Page for the APAC Capital Markets
 	 * 
@@ -446,11 +477,6 @@ public class HomePage extends ReusableLibrary {
 		tabsList.add("Opportunities");
 		tabsList.add("Reports");
 		tabsList.add("Dashboards");
-		
-		/*
-		 * tabsList.add("Properties"); tabsList.add("Private Tags");
-		 * tabsList.add("Bulk Tagging"); tabsList.add("Cases");
-		 */
 		System.out.println("The Home Page Tabs for the APAC Capital Markets are:::" + tabsList);
 	}
 
@@ -466,8 +492,8 @@ public class HomePage extends ReusableLibrary {
 		moreTabsList.add("Offers");
 		System.out.println("The Home Page more Tabs for the APAC Capital Markets are:::" + moreTabsList);
 	}
-	
-	
+
+
 	/**
 	 * Validating the tabs on the Home Page for the APAC broker Capital Markets
 	 * 
@@ -506,8 +532,9 @@ public class HomePage extends ReusableLibrary {
 			} else if (countLabelList < 11) {
 				report.updateTestLog("Verify Home Page Tabs", "All the Tabs are not present in Home Page", Status.FAIL);
 			}
-			Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
-			Utility_Functions.xClick(driver, menu_More, true);
+			/*Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
+			Utility_Functions.xClick(driver, menu_More, true);*/
+			sf_UtilityFunctions.oneAppNavigationTab("More");
 			List<WebElement> homePageMoreTabsList = driver.findElements(By.xpath("//one-tmp-menu-item[@class='slds-dropdown__item']//span/span"));
 			moreTabsList.clear();
 			homePageMoreTabsList();
@@ -548,57 +575,37 @@ public class HomePage extends ReusableLibrary {
 	 */
 
 	public void validateHomePageAccountUpdate() {
-		Utility_Functions.timeWait(4);
+		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, submitAccountUpdateRequest, 3);
 		Utility_Functions.xClick(driver, submitAccountUpdateRequest, true);
-		Utility_Functions.timeWait(4);
-		Utility_Functions.xWaitForElementPresent(driver, requestedFor, 3);
-		Utility_Functions.xSendKeys(driver, requestedFor, "test");
-		requestedFor.sendKeys(Keys.ARROW_DOWN);
 		Utility_Functions.timeWait(2);
-		requestedFor.sendKeys(Keys.ENTER);
-		List<WebElement> accountNamesList = driver.findElements(By.xpath(
-				"//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'005')]"));
-
-		Utility_Functions.xclickOnFirstElementfromList(accountNamesList);
+		Utility_Functions.xWaitForElementPresent(driver, requestedFor, 3);
+		Utility_Functions.xClick(driver, requestedFor, true);
+		sf_UtilityFunctions.selectObjectFromLookUpList("FirstElement");
 		Utility_Functions.xScrollWindow(driver);
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xScrollWindowTop(driver);
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, searchAccounts, 3);
-		Utility_Functions.xSendKeys(driver, searchAccounts, "test");
-		searchAccounts.sendKeys(Keys.ARROW_DOWN);
-		Utility_Functions.timeWait(2);
-		searchAccounts.sendKeys(Keys.ENTER);
-		Utility_Functions.xWaitForElementPresent(driver, region, 3);
-		Utility_Functions.xClick(driver, region, true);
-		Utility_Functions.xWaitForElementPresent(driver, description, 3);
-		Utility_Functions.xSendKeys(driver, description, "This is a case");
-		Utility_Functions.xWaitForElementPresent(driver, saveCase, 3);
-		Utility_Functions.xClick(driver, saveCase, true);
-		report.updateTestLog("Verify Home Page Account Update", "Home Page AccountUpdate is done successfully",
-				Status.PASS);
+		Utility_Functions.xClick(driver, searchAccounts, true);
+		Utility_Functions.xScrollWindowToElement(driver, searchAccounts);
+		try {
+			sf_UtilityFunctions.selectObjectFromLookUpList("SecondElement");
+			Utility_Functions.xWaitForElementPresent(driver, description, 3);
+			Utility_Functions.xSendKeys(driver, description, "This is a sample description_" + Utility_Functions.xGenerateAlphaNumericString());
+			Utility_Functions.xWaitForElementPresent(driver, regionField, 3);
+			Utility_Functions.xClick(driver, regionField, true);
+			Utility_Functions.xWaitForElementPresent(driver, region, 3);
+			Utility_Functions.xClick(driver, region, true);
+			Utility_Functions.xWaitForElementPresent(driver, saveCase, 3);
+			Utility_Functions.xClick(driver, saveCase, true);
+			report.updateTestLog("Verify Home Page Account Update", "Home Page AccountUpdate is done successfully", Status.PASS);
+		} catch (Exception e) {
+			e.printStackTrace();
+			report.updateTestLog("Verify Home Page Account Update", "There are no accounts associated::", Status.PASS);
+		}	
 	}
 
-	/**
-	 * Validating the tabs on the Home Page for the SFDC Training link
-	 * 
-	 * @author Ramya
-	 *
-	 */
-
-	public void validateHomePageSFDCTrainingLink() {
-		Utility_Functions.timeWait(4);
-		if (SFDCTrainingLink.isDisplayed()) {
-
-			report.updateTestLog("Verify Home Page SFDC Training Link", "The SFDC Training Link is present",
-					Status.PASS);
-		} else {
-			report.updateTestLog("Verify Home Page SFDC Training Link", "The SFDC Training Link is not present",
-					Status.FAIL);
-		}
-
-	}
 
 	/**
 	 * Validating the tabs on the Home Page for the Recent records
@@ -625,8 +632,9 @@ public class HomePage extends ReusableLibrary {
 	 */
 
 	public void validateHomePageMarketingLists() {
-		Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
-		Utility_Functions.xClick(driver, menu_More, true);
+		/*Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
+		Utility_Functions.xClick(driver, menu_More, true);*/
+		sf_UtilityFunctions.oneAppNavigationTab("More");
 		report.updateTestLog("Verify Home Page Marketing Lists", "Verifying Menu_more is displayed on the home page",
 				Status.PASS);
 		Utility_Functions.timeWait(2);

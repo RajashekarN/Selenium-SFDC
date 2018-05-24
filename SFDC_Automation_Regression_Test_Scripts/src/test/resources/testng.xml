@@ -426,7 +426,7 @@
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerContactsPopulatingRequiredFieldsPage"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERCSSContactsPopulatingRequiredFieldsPage"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAPACBrokerContactsReminderSentFunctionality"/>
-			<class name="testscripts.SF.UATTestScripts.TC_SF_FDIGEMEADataCloseTaskonAccount"/>
+			<!-- <class name="testscripts.SF.UATTestScripts.TC_SF_FDIGEMEADataCloseTaskonAccount"/>
 			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACAdminInstallmentOpportunityModification"/>
 			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACAdminMultipleInstallmentAmountCreateEdit"/>
 			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACManagerVerifyLeadTagging"/>
@@ -540,7 +540,7 @@
 			<class name="testscripts.SF.UATTestScripts.TC_SF_DAASIADataActivityTaskProperty"/>
 			<class name="testscripts.SF.UATTestScripts.TC_SF_DAASIADataTaskStatusSpace"/>
 			<class name="testscripts.SF.UATTestScripts.TC_SF_DAASIADataActivityTaskSpace"/>
-			<class name="testscripts.SF.UATTestScripts.TC_SF_DAASIADataTaskonComps"/>
+			<class name="testscripts.SF.UATTestScripts.TC_SF_DAASIADataTaskonComps"/> -->
 					
 		</classes>
 	</test>	

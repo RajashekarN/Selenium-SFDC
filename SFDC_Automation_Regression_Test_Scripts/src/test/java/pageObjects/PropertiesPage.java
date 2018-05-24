@@ -23,6 +23,7 @@ import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
 
 import pagesAPI.SearchTextSOQL;
+import supportLibraries.SF_UtilityFunctions;
 import supportLibraries.Utility_Functions;
 
 public class PropertiesPage extends ReusableLibrary {
@@ -62,8 +63,8 @@ public class PropertiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = /* "//div[@class='slds-media'] */ "//*[@value='Save Property']")
 	WebElement saveProperty;
-	
-	
+
+
 	@FindBy(xpath = "//label[text()='Building/Property Name']/following-sibling::div//input")
 	WebElement buildingPropertyNameEnv;
 
@@ -694,90 +695,86 @@ public class PropertiesPage extends ReusableLibrary {
 	 *
 	 */
 
-	public void validateCustomPropertyPage() {
+	SF_UtilityFunctions sf_UtilityFunctions = new SF_UtilityFunctions(scriptHelper); 
+
+	public void navigateProperties() {
 		try {
-			/*
-			 * Utility_Functions.xClick(driver, menu_More, true);
-			 * Utility_Functions.timeWait(2); Utility_Functions.xClick(driver,
-			 * properties, true); Utility_Functions.timeWait(4);
-			 */
-			try {
-				Utility_Functions.xWaitForElementPresent(driver, menu_Properties, 3);
-				Utility_Functions.xClick(driver, menu_Properties, true);
-			} catch (Exception e) {
-				Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
-				Utility_Functions.xClick(driver, menu_More, true);
-				try {
-					Utility_Functions.xWaitForElementPresent(driver, properties, 2);
-					Utility_Functions.xClick(driver, properties, true);
-				} catch (Exception e1) {
-					Utility_Functions.xWaitForElementPresent(driver, propertiesEnv, 2);
-					Utility_Functions.xClick(driver, propertiesEnv, true);
-				}
-			}
-			Utility_Functions.xClick(driver, newProperty, true);
-			Utility_Functions.timeWait(2);
-			driver.switchTo().frame(driver.findElement(By.xpath(
-					"//iframe[contains(@title,'New Property: Select Property Record Type ~ Salesforce - Enterprise Edition')]")));
-			Utility_Functions.timeWait(1);
-			Utility_Functions.xClick(driver, continueButton, true);
-			Utility_Functions.timeWait(2);
-			driver.switchTo().defaultContent();
-			Utility_Functions.xSwitchtoFrame(driver, propertyInformationFrame);
-
-			// driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@src,'recordtypeselect')]")));
-			List<WebElement> propertyEditPage = driver.findElements(By.xpath(
-					"//div[@class='slds-grid slds-wrap slds-grid slds-wrap slds-grid--pull-padded slds-form--stacked']/div/h2"));
-			int count = 0;
-			for (WebElement element : propertyEditPage) {
-				if ((count == 0) && (element.getText().contains("Property Information"))) {
-					System.out.println("Propety page contains the section - Property Information");
-					report.updateTestLog("Property Information page",
-							"Propety page contains the section - " + element.getText(), Status.PASS);
-					count++;
-				} else if ((count == 1) && (element.getText().contains("Address Information"))) {
-					System.out.println("Propety page contains the section - Address Information");
-					report.updateTestLog("Property Information page",
-							"Propety page contains the section - " + element.getText(), Status.PASS);
-					count++;
-				} else if ((count == 2) && (element.getText().contains("Property Financials"))) {
-					System.out.println("Propety page contains the section - Property Financials");
-					report.updateTestLog("Property Information page",
-							"Propety page contains the section - " + element.getText(), Status.PASS);
-					count++;
-				} else if ((count == 3) && (element.getText().contains("Property Summary"))) {
-					System.out.println("Propety page contains the section - Property Summary");
-					report.updateTestLog("Property Information page",
-							"Propety page contains the section - " + element.getText(), Status.PASS);
-					count++;
-				} else if ((count == 4) && (element.getText().contains("Property Management"))) {
-					System.out.println("Propety page contains the section - Property Management");
-					report.updateTestLog("Property Information page",
-							"Propety page contains the section - " + element.getText(), Status.PASS);
-					count++;
-				} else if ((count == 5) && (element.getText().contains("Asset Management"))) {
-					System.out.println("Propety page contains the section - Asset Management");
-					report.updateTestLog("Property Information page",
-							"Propety page contains the section - " + element.getText(), Status.PASS);
-					count++;
-				} else if ((count == 6) && (element.getText().contains("Listing Management"))) {
-					System.out.println("Propety page contains the section - Listing Management");
-					report.updateTestLog("Property Information page",
-							"Propety page contains the section - " + element.getText(), Status.PASS);
-					count++;
-				}
-			}
-			if (count != 7)
-				report.updateTestLog("Property Information page",
-						"Property Information page is not having all the fields::", Status.FAIL);
-			validateFieldsSection();
-			validateFieldsSubSections();
-			createProperty();
+			Utility_Functions.xWaitForElementPresent(driver, menu_Properties, 3);
+			Utility_Functions.xClick(driver, menu_Properties, true);
 		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
-		}
+			sf_UtilityFunctions.oneAppNavigationTab("More");
+			/*Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
+			Utility_Functions.xClick(driver, menu_More, true);*/
+			try {
+				Utility_Functions.xWaitForElementPresent(driver, properties, 2);
+				Utility_Functions.xClick(driver, properties, true);
+			} catch (Exception e1) {
+				Utility_Functions.xWaitForElementPresent(driver, propertiesEnv, 2);
+				Utility_Functions.xClick(driver, propertiesEnv, true);
+			}
+		}		
+	}
 
+	public void validateCustomPropertyPage() {
+		navigateProperties();			
+		Utility_Functions.xClick(driver, newProperty, true);
+		Utility_Functions.timeWait(2);
+		driver.switchTo().frame(driver.findElement(By.xpath(
+				"//iframe[contains(@title,'New Property: Select Property Record Type ~ Salesforce - Enterprise Edition')]")));
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xClick(driver, continueButton, true);
+		Utility_Functions.timeWait(2);
+		driver.switchTo().defaultContent();
+		Utility_Functions.xSwitchtoFrame(driver, propertyInformationFrame);
+
+		// driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@src,'recordtypeselect')]")));
+		List<WebElement> propertyEditPage = driver.findElements(By.xpath(
+				"//div[@class='slds-grid slds-wrap slds-grid slds-wrap slds-grid--pull-padded slds-form--stacked']/div/h2"));
+		int count = 0;
+		for (WebElement element : propertyEditPage) {
+			if ((count == 0) && (element.getText().contains("Property Information"))) {
+				System.out.println("Propety page contains the section - Property Information");
+				report.updateTestLog("Property Information page",
+						"Propety page contains the section - " + element.getText(), Status.PASS);
+				count++;
+			} else if ((count == 1) && (element.getText().contains("Address Information"))) {
+				System.out.println("Propety page contains the section - Address Information");
+				report.updateTestLog("Property Information page",
+						"Propety page contains the section - " + element.getText(), Status.PASS);
+				count++;
+			} else if ((count == 2) && (element.getText().contains("Property Financials"))) {
+				System.out.println("Propety page contains the section - Property Financials");
+				report.updateTestLog("Property Information page",
+						"Propety page contains the section - " + element.getText(), Status.PASS);
+				count++;
+			} else if ((count == 3) && (element.getText().contains("Property Summary"))) {
+				System.out.println("Propety page contains the section - Property Summary");
+				report.updateTestLog("Property Information page",
+						"Propety page contains the section - " + element.getText(), Status.PASS);
+				count++;
+			} else if ((count == 4) && (element.getText().contains("Property Management"))) {
+				System.out.println("Propety page contains the section - Property Management");
+				report.updateTestLog("Property Information page",
+						"Propety page contains the section - " + element.getText(), Status.PASS);
+				count++;
+			} else if ((count == 5) && (element.getText().contains("Asset Management"))) {
+				System.out.println("Propety page contains the section - Asset Management");
+				report.updateTestLog("Property Information page",
+						"Propety page contains the section - " + element.getText(), Status.PASS);
+				count++;
+			} else if ((count == 6) && (element.getText().contains("Listing Management"))) {
+				System.out.println("Propety page contains the section - Listing Management");
+				report.updateTestLog("Property Information page",
+						"Propety page contains the section - " + element.getText(), Status.PASS);
+				count++;
+			}
+		}
+		if (count != 7)
+			report.updateTestLog("Property Information page",
+					"Property Information page is not having all the fields::", Status.FAIL);
+		validateFieldsSection();
+		validateFieldsSubSections();
+		createProperty();
 	}
 
 	/**
@@ -938,27 +935,27 @@ public class PropertiesPage extends ReusableLibrary {
 				report.updateTestLog("Property Information page",
 						"Property Information page has the field" + element.getText() + ":::", Status.PASS);
 			} /*
-				 * else if(element.getText().contains("Company")) {
-				 * report.updateTestLog("Property Information page",
-				 * "Property Information page has the field" +
-				 * element.getText()+ ":::" , Status.PASS); } else
-				 * if(element.getText().contains("Address")) {
-				 * report.updateTestLog("Property Information page",
-				 * "Property Information page has the field" +
-				 * element.getText()+ ":::" , Status.PASS); } else
-				 * if(element.getText().contains("Contact Name")) {
-				 * report.updateTestLog("Property Information page",
-				 * "Property Information page has the field" +
-				 * element.getText()+ ":::" , Status.PASS); } else
-				 * if(element.getText().contains("Phon")) {
-				 * report.updateTestLog("Property Information page",
-				 * "Property Information page has the field" +
-				 * element.getText()+ ":::" , Status.PASS); } else
-				 * if(element.getText().contains("Email")) {
-				 * report.updateTestLog("Property Information page",
-				 * "Property Information page has the field" +
-				 * element.getText()+ ":::" , Status.PASS); }
-				 */
+			 * else if(element.getText().contains("Company")) {
+			 * report.updateTestLog("Property Information page",
+			 * "Property Information page has the field" +
+			 * element.getText()+ ":::" , Status.PASS); } else
+			 * if(element.getText().contains("Address")) {
+			 * report.updateTestLog("Property Information page",
+			 * "Property Information page has the field" +
+			 * element.getText()+ ":::" , Status.PASS); } else
+			 * if(element.getText().contains("Contact Name")) {
+			 * report.updateTestLog("Property Information page",
+			 * "Property Information page has the field" +
+			 * element.getText()+ ":::" , Status.PASS); } else
+			 * if(element.getText().contains("Phon")) {
+			 * report.updateTestLog("Property Information page",
+			 * "Property Information page has the field" +
+			 * element.getText()+ ":::" , Status.PASS); } else
+			 * if(element.getText().contains("Email")) {
+			 * report.updateTestLog("Property Information page",
+			 * "Property Information page has the field" +
+			 * element.getText()+ ":::" , Status.PASS); }
+			 */
 		}
 		System.out.println(count);
 		if (count != 28)
@@ -1062,26 +1059,7 @@ public class PropertiesPage extends ReusableLibrary {
 	 */
 	public void verifyCreationOfActivity() {
 		Utility_Functions.timeWait(6);
-		try {
-			Utility_Functions.xWaitForElementPresent(driver, menu_Properties, 3);
-			Utility_Functions.xClick(driver, menu_Properties, true);
-		} catch (Exception e) {
-			Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
-			Utility_Functions.xClick(driver, menu_More, true);
-			Utility_Functions.timeWait(1);
-			try {
-			//By prop_Xpath = By.xpath("//span[text()='Properties']");
-				Utility_Functions.xWaitForElementPresent(driver, properties, 5);
-				Utility_Functions.xClick(driver, properties, true);
-				
-				//Utility_Functions.xWaitForElementPresent(driver, prop_Xpath, 3);
-			//	driver.findElement(prop_Xpath).click();
-			} catch (Exception e1) {
-
-				Utility_Functions.xWaitForElementPresent(driver, propertiesEnv, 2);
-				Utility_Functions.xClick(driver, propertiesEnv, true);
-			}
-		}
+		navigateProperties();
 		report.updateTestLog("Verify Create Activity Properties ", "Properties is Displayed ", Status.PASS);
 		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
 		Utility_Functions.xClick(driver, recentlyViewed, true);
@@ -1533,20 +1511,7 @@ public class PropertiesPage extends ReusableLibrary {
 	 */
 
 	public void verifyNewActivityPropertiesPageSendNotificationEmail() {
-		try {
-			Utility_Functions.xWaitForElementPresent(driver, menu_Properties, 3);
-			Utility_Functions.xClick(driver, menu_Properties, true);
-		} catch (Exception e) {
-			Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
-			Utility_Functions.xClick(driver, menu_More, true);
-			try {
-				Utility_Functions.xWaitForElementPresent(driver, properties, 2);
-				Utility_Functions.xClick(driver, properties, true);
-			} catch (Exception e1) {
-				Utility_Functions.xWaitForElementPresent(driver, propertiesEnv, 2);
-				Utility_Functions.xClick(driver, propertiesEnv, true);
-			}
-		}
+		navigateProperties();
 		report.updateTestLog("Verify New Activity Page send Notification Email ",
 				"Verifying the Accounts is Displayed ", Status.PASS);
 
@@ -2229,10 +2194,10 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(7);
 		report.updateTestLog("Verify Custom Property Page", "The new property is saved with all the required fields",
 				Status.PASS);
-		
+
 		driver.navigate().refresh();
 		Utility_Functions.timeWait(6);
-		
+
 		if(driver.findElement(By.xpath("//span[text()='"+property_value+"']/parent::h1")).getText().equalsIgnoreCase(property_value))
 		{
 			report.updateTestLog("Verify Custom Property Page", "The Property is saved successfully", Status.PASS);
@@ -3359,16 +3324,16 @@ public class PropertiesPage extends ReusableLibrary {
 		 * Utility_Functions.xWaitForElementPresent(driver,enquiryContactValue,
 		 * 3); Utility_Functions.xClick(driver,enquiryContactValue, true);
 		 */Utility_Functions.xWaitForElementPresent(driver, enquiryAccount, 3);
-		Utility_Functions.xClick(driver, enquiryAccount, true);
-		// Utility_Functions.xSendKeys(driver,enquiryAccount, "AUCAPACBroker");
-		Utility_Functions.xWaitForElementPresent(driver, firstLookUpElement, 3);
-		Utility_Functions.xClick(driver, firstLookUpElement, true);
-		/*
-		 * Utility_Functions.xWaitForElementPresent(driver,enquiryAccountValue,
-		 * 3); Utility_Functions.xClick(driver,enquiryAccountValue, true);
-		 */
-		Utility_Functions.xWaitForElementPresent(driver, projectEnquirySave, 3);
-		Utility_Functions.xClick(driver, projectEnquirySave, true);
+		 Utility_Functions.xClick(driver, enquiryAccount, true);
+		 // Utility_Functions.xSendKeys(driver,enquiryAccount, "AUCAPACBroker");
+		 Utility_Functions.xWaitForElementPresent(driver, firstLookUpElement, 3);
+		 Utility_Functions.xClick(driver, firstLookUpElement, true);
+		 /*
+		  * Utility_Functions.xWaitForElementPresent(driver,enquiryAccountValue,
+		  * 3); Utility_Functions.xClick(driver,enquiryAccountValue, true);
+		  */
+		 Utility_Functions.xWaitForElementPresent(driver, projectEnquirySave, 3);
+		 Utility_Functions.xClick(driver, projectEnquirySave, true);
 	}
 
 	/**
@@ -3736,7 +3701,7 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.xClickVisibleListElement(driver, activityTypeList);
 		Utility_Functions.xClick(driver, activityType1, true);
 		Utility_Functions.xWaitForElementPresent(driver, activitySave, 2);
-        Utility_Functions.xClickVisibleListElement(driver, activitySave);
+		Utility_Functions.xClickVisibleListElement(driver, activitySave);
 		report.updateTestLog("Verify Task", "The Task is created successfully", Status.PASS);
 
 	}
@@ -3815,9 +3780,9 @@ public class PropertiesPage extends ReusableLibrary {
 			Utility_Functions.xClick(driver, activityType1, true);
 			Utility_Functions.timeWait(3);
 
-		  Utility_Functions.xWaitForElementPresent(driver, activitySave, 2);
-          Utility_Functions.xClickVisibleListElement(driver, activitySave);
-		  report.updateTestLog("Verify Task", "The Task is created successfully", Status.PASS);
+			Utility_Functions.xWaitForElementPresent(driver, activitySave, 2);
+			Utility_Functions.xClickVisibleListElement(driver, activitySave);
+			report.updateTestLog("Verify Task", "The Task is created successfully", Status.PASS);
 		}
 	}
 
@@ -3844,12 +3809,12 @@ public class PropertiesPage extends ReusableLibrary {
 			if(i==1)
 			{
 
-		//Utility_Functions.xWaitForElementPresent(driver, newEvent, 3);
-		Utility_Functions.timeWait(3);
-		Utility_Functions.xClickVisibleListElement(driver, newEvent);
-		Utility_Functions.xSendKeysVisibleListElement(driver, eventSubject, "Past Event");
+				//Utility_Functions.xWaitForElementPresent(driver, newEvent, 3);
+				Utility_Functions.timeWait(3);
+				Utility_Functions.xClickVisibleListElement(driver, newEvent);
+				Utility_Functions.xSendKeysVisibleListElement(driver, eventSubject, "Past Event");
 
-		/*Utility_Functions.xWaitForElementPresent(driver, eventStartDate, 3);
+				/*Utility_Functions.xWaitForElementPresent(driver, eventStartDate, 3);
 		Utility_Functions.xSendKeys(driver, eventStartDate, dateFormat.format(date).toString());
 
 		Utility_Functions.xWaitForElementPresent(driver, eventEndDate, 3);
@@ -3857,10 +3822,10 @@ public class PropertiesPage extends ReusableLibrary {
 
 			}
 			else if(i==2){
-		Utility_Functions.xClickVisibleListElement(driver, addEventActivity);
-		Utility_Functions.xSendKeysVisibleListElement(driver, eventSubject, "Present Event");
+				Utility_Functions.xClickVisibleListElement(driver, addEventActivity);
+				Utility_Functions.xSendKeysVisibleListElement(driver, eventSubject, "Present Event");
 
-		/*Calendar calendar = Calendar.getInstance();
+				/*Calendar calendar = Calendar.getInstance();
 
 	    // Move calendar to yesterday
 	    calendar.add(Calendar.DATE, -1);
@@ -3875,10 +3840,10 @@ public class PropertiesPage extends ReusableLibrary {
 
 			}
 			else{
-		Utility_Functions.xClickVisibleListElement(driver, addEventActivity);
-		Utility_Functions.xSendKeysVisibleListElement(driver, eventSubject, "Future Event");
+				Utility_Functions.xClickVisibleListElement(driver, addEventActivity);
+				Utility_Functions.xSendKeysVisibleListElement(driver, eventSubject, "Future Event");
 
-		/*Calendar calendar = Calendar.getInstance();
+				/*Calendar calendar = Calendar.getInstance();
 
 	    // Move calendar to future
 	    calendar.add(Calendar.DATE, 1);
@@ -3932,7 +3897,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 	public void addAttachment() {
 
-        Utility_Functions.timeWait(5);
+		Utility_Functions.timeWait(5);
 		Utility_Functions.xClick(driver, addAttachment, true);
 		Utility_Functions.timeWait(5);
 		Utility_Functions.xSwitchtoFrame(driver, attachFile);
@@ -3941,11 +3906,11 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(3);
 		//Utility_Functions.xClick(driver, attachFile, true);
 		// Specify the file location with extension
-				StringSelection sel = new StringSelection("\\us.cbre.net\\dardata\\Team-Cognizant\\CBRE_QA\\Mukesh Garg\\Demo.docx");
+		StringSelection sel = new StringSelection("\\us.cbre.net\\dardata\\Team-Cognizant\\CBRE_QA\\Mukesh Garg\\Demo.docx");
 
-				// Copy to clipboard
-			   Toolkit.getDefaultToolkit().getSystemClipboard().setContents(sel,null);
-				System.out.println("selection" +sel);
+		// Copy to clipboard
+		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(sel,null);
+		System.out.println("selection" +sel);
 		try {
 			Robot robot = new Robot();
 
@@ -3980,28 +3945,28 @@ public class PropertiesPage extends ReusableLibrary {
 		report.updateTestLog("Verify Edit Task status", "The Task status is changed successfully", Status.PASS);
 	}
 
-    public void validationEvent() {
+	public void validationEvent() {
 
 		if(startTimeEvent.isDisplayed()) {
-    		report.updateTestLog("Event", "Start Time", Status.PASS);
-    	}
-    	else {
-    			report.updateTestLog("Event", "Start Time", Status.FAIL);
-    		}
+			report.updateTestLog("Event", "Start Time", Status.PASS);
+		}
+		else {
+			report.updateTestLog("Event", "Start Time", Status.FAIL);
+		}
 
 		if(endTimeEvent.isDisplayed()) {
-    		report.updateTestLog("Event", "End Time", Status.PASS);
-    	}
-    	else {
-    			report.updateTestLog("Event", "End Time", Status.FAIL);
-    		}
+			report.updateTestLog("Event", "End Time", Status.PASS);
+		}
+		else {
+			report.updateTestLog("Event", "End Time", Status.FAIL);
+		}
 
 		if(commmentsEvent.isDisplayed()) {
-    		report.updateTestLog("Event", "Comments", Status.PASS);
-    	}
-    	else {
-    			report.updateTestLog("Event", "Comments", Status.FAIL);
-    		}
+			report.updateTestLog("Event", "Comments", Status.PASS);
+		}
+		else {
+			report.updateTestLog("Event", "Comments", Status.FAIL);
+		}
 	}
 	public void editEvent() {
 		Utility_Functions.xWaitForElementPresent(driver, eventName, 5);
@@ -4020,31 +3985,31 @@ public class PropertiesPage extends ReusableLibrary {
 	public void validationTask() {
 
 		if(activityTypeTask.isDisplayed()) {
-    		report.updateTestLog("Task", "Activity Type", Status.PASS);
-    	}
-    	else {
-    			report.updateTestLog("Task", "Activity Type", Status.FAIL);
-    		}
+			report.updateTestLog("Task", "Activity Type", Status.PASS);
+		}
+		else {
+			report.updateTestLog("Task", "Activity Type", Status.FAIL);
+		}
 
 		if(statusTask.isDisplayed()) {
-    		report.updateTestLog("Task", "Status", Status.PASS);
-    	}
-    	else {
-    			report.updateTestLog("Task", "Status", Status.FAIL);
-    		}
+			report.updateTestLog("Task", "Status", Status.PASS);
+		}
+		else {
+			report.updateTestLog("Task", "Status", Status.FAIL);
+		}
 
 		if(commentTask.isDisplayed()) {
-    		report.updateTestLog("Task", "Comment", Status.PASS);
-    	}
-    	else {
-    			report.updateTestLog("Task", "Comment", Status.FAIL);
-    		}
+			report.updateTestLog("Task", "Comment", Status.PASS);
+		}
+		else {
+			report.updateTestLog("Task", "Comment", Status.FAIL);
+		}
 	}
 
 
 	static ArrayList<String> activityTypeListValues = new ArrayList<String>();
 
-	    public void additionalActivityTypeList() {
+	public void additionalActivityTypeList() {
 		activityTypeListValues.add("--None--");
 		activityTypeListValues.add("Private - Client Intelligence");
 		activityTypeListValues.add("Private - Cold Call");
@@ -4064,20 +4029,20 @@ public class PropertiesPage extends ReusableLibrary {
 		System.out.println("Additional Activity Type values are added to the list successfully::::");
 	}
 
-	    public void createSpace() {
+	public void createSpace() {
 
-	    	Utility_Functions.timeWait(5);
-	    	Utility_Functions.xClickVisibleListElement(driver, relatedlnk);
-	    	Utility_Functions.xWaitForElementPresent(driver, space, 5);
-	    	Utility_Functions.xClick(driver, space, true);
-	    	Utility_Functions.timeWait(3);
-	    	Utility_Functions.xClickVisibleListElement(driver, newSpace);
-	    	Utility_Functions.xWaitForElementPresent(driver, spaceName, 3);
-	    	Utility_Functions.xSendKeys(driver, spaceName, "test");
-	    	Utility_Functions.xClick(driver, saveSpace, true);
-	    	Utility_Functions.timeWait(5);
-	    	Utility_Functions.xClick(driver, spaceNameSelect, true);
+		Utility_Functions.timeWait(5);
+		Utility_Functions.xClickVisibleListElement(driver, relatedlnk);
+		Utility_Functions.xWaitForElementPresent(driver, space, 5);
+		Utility_Functions.xClick(driver, space, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClickVisibleListElement(driver, newSpace);
+		Utility_Functions.xWaitForElementPresent(driver, spaceName, 3);
+		Utility_Functions.xSendKeys(driver, spaceName, "test");
+		Utility_Functions.xClick(driver, saveSpace, true);
+		Utility_Functions.timeWait(5);
+		Utility_Functions.xClick(driver, spaceNameSelect, true);
 
 
-	    }
+	}
 }
