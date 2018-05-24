@@ -317,6 +317,12 @@
                 <artifactId>javax.mail</artifactId>
                 <version>1.6.0</version>
             </dependency>
+           <!-- https://mvnrepository.com/artifact/com.force.api/force-metadata-api -->
+		<dependency>
+		    <groupId>com.force.api</groupId>
+		    <artifactId>force-metadata-api</artifactId>
+		    <version>41.0.0</version>
+		</dependency>
 	</dependencies>
 	
 

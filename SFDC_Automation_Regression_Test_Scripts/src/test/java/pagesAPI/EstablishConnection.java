@@ -1,16 +1,26 @@
 package pagesAPI;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
 import com.sforce.soap.partner.DeleteResult;
 import com.sforce.soap.partner.GetUserInfoResult;
 import com.sforce.soap.partner.LeadConvertResult;
+import com.sforce.soap.partner.LoginResult;
 import com.sforce.soap.partner.PartnerConnection;
 import com.sforce.soap.partner.SaveResult;
 import com.sforce.soap.partner.SetPasswordResult;
 import com.sforce.ws.ConnectionException;
 import com.sforce.ws.ConnectorConfig;
+import com.sforce.soap.metadata.Metadata;
+import com.sforce.soap.metadata.MetadataConnection;
+import com.sforce.soap.metadata.PicklistValue;
+import com.sforce.soap.metadata.ReadResult;
+import com.sforce.soap.metadata.RecordType;
+import com.sforce.soap.metadata.RecordTypePicklistValue;
 
 public class EstablishConnection extends ReusableLibrary {
 	/*
@@ -27,6 +37,8 @@ public class EstablishConnection extends ReusableLibrary {
 	public static PartnerConnection connection = null;
 	static SetPasswordResult setPasswordResults =null;
 	static ConnectorConfig config;
+	static ConnectorConfig metadataConfig;
+	static MetadataConnection metadataConnection;
 	static com.sforce.soap.partner.Error[] errors;
 	static boolean status = false;
 	static String result;
@@ -270,7 +282,114 @@ public class EstablishConnection extends ReusableLibrary {
 		}
 	}
 
+	
+	/**
+	 * Function for establishing the metadata connection
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public List<String> establishMetaDataConnection(String RecordType, String ClientName, String PickList) {
+		String apiVersion = "41.0";
+		List<String> pickListValues = null;
+		try {
+			String environment = initializeEnvironment();
+			if ((environment.equals("Devr1")) || (environment.equals("UAT")) || (environment.equals("FTE"))  || (environment.equals("FTE2"))) {
+				String Username = properties.getProperty(environment+"AdminUsername");			
+				String Password = properties.getProperty(environment+"AdminPassword");
+				String AuthEndpoint = properties.getProperty(environment+"AuthEndpoint");
+				config = new ConnectorConfig();
+				config.setUsername(Username);
+				config.setPassword(Password);
+				config.setAuthEndpoint(AuthEndpoint);
+				connection = new PartnerConnection(config);
+				LoginResult loginResult = connection.login(Username, Password);
+				metadataConfig = new ConnectorConfig();
+				metadataConfig.setServiceEndpoint(loginResult.getMetadataServerUrl());
+				metadataConfig.setSessionId(connection.getSessionHeader().getSessionId());
+				metadataConnection = com.sforce.soap.metadata.Connector.newConnection(metadataConfig);
+				config.setSessionId(config.getSessionId());
+				String soapEndpoint = config.getServiceEndpoint();
+				String restEndpoint = soapEndpoint.substring(0, soapEndpoint.indexOf("Soap/"))+ "async/" + apiVersion;
+				config.setRestEndpoint(restEndpoint);
+				config.setCompression(true);
+				config.setTraceMessage(false);
+				String sRecordTypeName = recordTypeName(ClientName);
+				sRecordTypeName = RecordType + "." + sRecordTypeName;			
+				pickListValues = getPickListValues(sRecordTypeName, PickList);
+				//pickListValues = getPickListValues("Project__c.AllState", "Use_Type__c");
+			}		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+/*		for(String value: pickListValues) {
+			if(value.contains("%2F")) {
+				try {
+					pickListValues.add(URLDecoder.decode(value, "UTf-8"));
+				} catch (UnsupportedEncodingException e) {
+					e.printStackTrace();
+				}
+			}
+		}*/
+		return pickListValues;
+	}
 
+	
+	public List<String> getPickListValues(String recordTypeName, String ProvidedpickList ) {
+		List<String> PickListValues = null;		
+		try {
+			PickListValues = new ArrayList<String>();
+			ReadResult result = metadataConnection.readMetadata("RecordType", new String[]{recordTypeName});
+			Metadata[] mds = result.getRecords();
+			for(Metadata md:mds){
+				RecordType recordType = (RecordType)md;
+				RecordTypePicklistValue[] picklistValues = recordType.getPicklistValues();
+				for (RecordTypePicklistValue picklist: picklistValues){
+					System.out.println(picklist);
+					if(picklist.getPicklist().equals(ProvidedpickList)) {
+						PicklistValue[] values = picklist.getValues();
+						for (PicklistValue value: values){
+							PickListValues.add(value.getFullName());
+						}
+						System.out.println(picklist.getValues());
+					}
+				}
+			}
+		} catch (ConnectionException e) {
+			e.printStackTrace();
+		}
+		return PickListValues;	
+	}
+
+	/**
+	 * Function for retrieving the correct Record Type Name 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public String recordTypeName(String recordTypeName) {
+		String sRecordyTypeName = null;
+		if(recordTypeName.equalsIgnoreCase("Allstate")) {
+			sRecordyTypeName = "AllState";
+		} else if(recordTypeName.equalsIgnoreCase("AJG")) {
+			sRecordyTypeName = "AJG";
+		} else if(recordTypeName.equalsIgnoreCase("Abbott")) {
+			sRecordyTypeName = "Abbott";
+		} else if(recordTypeName.equalsIgnoreCase("Akzo_Nobel")) {
+			sRecordyTypeName = "Akzo_Nobel";
+		} else if(recordTypeName.equalsIgnoreCase("CDW")) {
+			sRecordyTypeName = "Cdw";
+		} else if(recordTypeName.equalsIgnoreCase("Honeywell")) {
+			sRecordyTypeName = "Honeywell";
+		} else if(recordTypeName.equalsIgnoreCase("Mondelez")) {
+			sRecordyTypeName = "Mondelez";
+		} else if(recordTypeName.equalsIgnoreCase("US Foods")) {
+			sRecordyTypeName = "US_Foods";
+		} else if(recordTypeName.equalsIgnoreCase("Rockwell Automation")) {
+			sRecordyTypeName = "rockwell";
+		} 
+		return sRecordyTypeName;
+	}
 	/**
 	 * Function for retrieving the User Configuration
 	 * 

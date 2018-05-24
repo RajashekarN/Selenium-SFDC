@@ -272,6 +272,10 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
 				permissionSetsLabels.add("Campaigns and CampaignLogic Create/Edit Permissions");
+				permissionSetsLabels.add("Country Permissions - Australia");
+				permissionSetsLabels.add("Enquiries & Space Assessment Create/Edit Permissions");
+				permissionSetsLabels.add("Preference Edit & Marketing Lists Read Permissions");
+				permissionSetsLabels.add("APAC Landlord Listing and Deal Permissions");
 				break;
 
 			case "testuser21@cbre.com.crm.":

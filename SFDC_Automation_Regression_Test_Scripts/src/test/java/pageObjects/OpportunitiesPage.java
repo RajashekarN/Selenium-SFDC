@@ -2458,8 +2458,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 			Utility_Functions.xClick(driver, opportunityRecordTypeValueAPACLandlord, true);
 		}
 		Utility_Functions.xClick(driver, continueButton, true);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xSwitchtoFrame(driver, closeDateOpp);
+		driver.switchTo().defaultContent();
+		Utility_Functions.xSwitchtoFrame(driver, accountName);
 		Utility_Functions.timeWait(2);
 		opportunityNameAutoGenerateFuntion();
 	}
@@ -2469,27 +2469,29 @@ public class OpportunitiesPage extends ReusableLibrary {
 		if(sAccountName==null) {
 			report.updateTestLog("Opportunity Created", "There are no Opportunity records present for this record type:::", Status.PASS);
 		} else {
-			driver.switchTo().defaultContent();
-			Utility_Functions.timeWait(2);
-			Utility_Functions.xSwitchtoFrame(driver, saveButton);
-			Utility_Functions.xWaitForElementPresent(driver, saveButton, 3);
 			Utility_Functions.xSendKeys(driver, accountName, sAccountName);
-			Utility_Functions.timeWait(2);
-			accountName.sendKeys(Keys.ARROW_DOWN);
 			Utility_Functions.timeWait(2);
 			accountName.sendKeys(Keys.ENTER);
 			Utility_Functions.timeWait(2);
+			accountName.sendKeys(Keys.ENTER);
+			Utility_Functions.timeWait(2);	    	
+			Utility_Functions.xSwitchtoFrame(driver, accountName);
+			Utility_Functions.timeWait(9);
+			Utility_Functions.xScrollWindow(driver);
 			Utility_Functions.xSelectDropdownByIndex(assignmentTypeOpp, 1);
-
 			System.out.println(Calendar.getInstance());
 			DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 			Date date = new Date();
+			Utility_Functions.xWaitForElementPresent(driver, leadSource, 5);
 			Utility_Functions.xSelectDropdownByIndex(leadSource, 1);
+			Utility_Functions.xWaitForElementPresent(driver, closeDateOpp, 2);
 			Utility_Functions.xSendKeys(driver, closeDateOpp, dateFormat.format(date).toString());
 			Utility_Functions.xSendKeys(driver, closeDateOpp, Keys.TAB);
 			Random random = new Random();
 			int value = random.nextInt(999);
+			Utility_Functions.xWaitForElementPresent(driver, totalSizeOpp, 2);
 			Utility_Functions.xSendKeys(driver, totalSizeOpp, Integer.toString(value));
+			Utility_Functions.xWaitForElementPresent(driver, unitofMeasure, 2);
 			Utility_Functions.xSelectDropdownByName(unitofMeasure, "Acres");
 			Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFee, 3);
 			Utility_Functions.xClick(driver, estimatedGrossFee, true);
@@ -2509,9 +2511,10 @@ public class OpportunitiesPage extends ReusableLibrary {
 				e.printStackTrace();
 			}
 			Utility_Functions.xClick(driver, saveNewOpportunity, true);
-			Utility_Functions.timeWait(4);
+			Utility_Functions.timeWait(5);
+			driver.switchTo().defaultContent();
 			driver.navigate().refresh();
-			Utility_Functions.timeWait(2);
+			Utility_Functions.timeWait(5);
 			try {
 				Utility_Functions.xWaitForElementPresent(driver, related, 4);
 				if (related.isDisplayed()) {
@@ -2539,6 +2542,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 				report.updateTestLog("Opportunity Created",
 						"Opportunity Name created as per the format expected -- Account Name - Assignment Type - Total Size - Unit of Measure:::",
 						Status.PASS);
+				System.out.println(" Opportunity Name created as per the format expected -- Account Name - Assignment Type - Total Size - Unit of Measure successfully !!!!!");
 			} else {
 				report.updateTestLog("Opportunity Created", "Opportunity Name is not created as per the expected format:::",
 						Status.FAIL);
@@ -2645,27 +2649,28 @@ public class OpportunitiesPage extends ReusableLibrary {
 			report.updateTestLog("Opportunity Installments", "There are no Opportunities present with the provided criteria:::", Status.PASS);
 		} else {
 			driver.navigate().refresh();
-			Utility_Functions.timeWait(1);
+			Utility_Functions.timeWait(4);
 			Utility_Functions.xWaitForElementPresent(driver, editButton, 3);
 		// Utility_Functions.xWaitForElementPresent(driver, showMoreActions, 3);
 		// driver.navigate().refresh();
-		Utility_Functions.xWaitForElementPresent(driver, related, 5);
-		Utility_Functions.xClick(driver, related, true);
-		Utility_Functions.xWaitForElementPresent(driver, installmentAmount, 3);
-		String sInstallmentAmount = installmentAmount.getText();
-		sInstallmentAmount = sInstallmentAmount.split(" ")[1];
-		// String formatInstallmentAmount = sInstallmentAmount.replace(",", "");
-		if (sInstallmentAmount.equals((dataTable.getData("General_Data", "InstallmentAmount") + ".00"))) {
+			Utility_Functions.xWaitForElementPresent(driver, related, 7);
+			Utility_Functions.xClick(driver, related, true);
+			Utility_Functions.timeWait(4);
+			Utility_Functions.xWaitForElementPresent(driver, installmentAmount, 4);
+			String sInstallmentAmount = installmentAmount.getText();
+			sInstallmentAmount = sInstallmentAmount.split(" ")[1];
+			// String formatInstallmentAmount = sInstallmentAmount.replace(",", "");
+			if (sInstallmentAmount.equals((dataTable.getData("General_Data", "InstallmentAmount") + ".00"))) {
+					report.updateTestLog("Opportunities Installments",
+						"Opportunity installment amount record is present in the opportunity installment related list:::",
+						Status.PASS);
+			} else {
 				report.updateTestLog("Opportunities Installments",
-					"Opportunity installment amount record is present in the opportunity installment related list:::",
-					Status.PASS);
-		} else {
-			report.updateTestLog("Opportunities Installments",
-					"Opportunity installment amount record is present in the opportunity installment related list:::",
-					Status.PASS);
-		}
-		Utility_Functions.timeWait(2);
-		}
+						"Opportunity installment amount record is present in the opportunity installment related list:::",
+						Status.PASS);
+			}
+			Utility_Functions.timeWait(2);
+			}
 	}
 
 	/**

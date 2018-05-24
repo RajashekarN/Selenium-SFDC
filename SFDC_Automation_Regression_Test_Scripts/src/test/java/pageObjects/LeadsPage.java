@@ -6,20 +6,15 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
-import com.itextpdf.text.Utilities;
 import com.sforce.soap.partner.SaveResult;
-
 import pagesAPI.AccountsFunctions;
 import pagesAPI.EstablishConnection;
 import pagesAPI.LeadsFunctions;
@@ -864,6 +859,7 @@ public class LeadsPage extends ReusableLibrary {
 		relatedPageElementsList.add("Notes");
 		relatedPageElementsList.add("Files");
 		relatedPageElementsList.add("Lead Property");
+		relatedPageElementsList.add("Lead History");
 		System.out.println("Elements present in the Related tab on Lead Creation Page::" + relatedPageElementsList);
 	}
 
@@ -885,9 +881,9 @@ public class LeadsPage extends ReusableLibrary {
 		}*/
 		Utility_Functions.xWaitForElementPresent(driver, newButton, 3);
 		Utility_Functions.xClick(driver, newButton, true);
-		Utility_Functions.timeWait(4);
+		Utility_Functions.timeWait(5);
 		Utility_Functions.xSwitchtoFrame(driver, continueButton);
-		Utility_Functions.timeWait(3);
+		Utility_Functions.timeWait(4);
 		try {
 			if(dataTable.getData("General_Data", "TC_ID").contains("OB")) {
 				Utility_Functions.xWaitForElementPresent(driver, selectRecordType, 3);
@@ -981,9 +977,8 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, related, true);
 		Utility_Functions.timeWait(4);
 		relatedPageListElements();
- 		// List<WebElement> relatedPageList = driver.findElements(By.xpath("//*[@id='header']/a/span[1]")); --> xpath is not working 
-		List<WebElement> relatedPageList = driver.findElements(By.xpath("//*[starts-with(@id, \"header\")]/a/span[1]"));
-		//*[starts-with(@id, "header")]/a/span[1]
+		Utility_Functions.xScrollWindow(driver);
+		List<WebElement> relatedPageList = driver.findElements(By.xpath("//h2[contains(@id,'header')]/a/span[1]"));
 		try {
 			int i=0, count=0;
 			for(WebElement element: relatedPageList) {
@@ -994,7 +989,7 @@ public class LeadsPage extends ReusableLibrary {
 				} i++;
 			}
 			System.out.println(count);
-			if(count==4) {
+			if(count==5) {
 				report.updateTestLog("Verify Related Page Elements","All the elements are present on the Related Page" ,Status.PASS);
 			} else {
 				report.updateTestLog("Verify Related Page Elements","All the elements are not present on the Related Page" ,Status.FAIL);
@@ -1177,10 +1172,12 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(1);
 		createLead();
 		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
 		Utility_Functions.xWaitForElementPresent(driver, related, 3);
 		Utility_Functions.xClick(driver, related, true);
-		Utility_Functions.timeWait(2);
-		List<WebElement> relatedLists = driver.findElements(By.xpath("//*[@id='header']/a/span[1]"));
+		Utility_Functions.timeWait(4);
+		Utility_Functions.xScrollWindow(driver);
+		List<WebElement> relatedLists = driver.findElements(By.xpath("//h2[contains(@id,'header')]/a/span[1]"));
 		int count=0;
 		for(WebElement element: relatedLists) {
 			if(element.getText().contains("Private Notes")) {
@@ -1195,9 +1192,12 @@ public class LeadsPage extends ReusableLibrary {
 			} else if(element.getText().contains("Lead Property")) {
 				count++;
 				report.updateTestLog("Lead Related Section", "Lead Related Section contains the related list:::" + element.getText(),Status.PASS);
+			} else if(element.getText().contains("Lead History")) {
+				count++;
+				report.updateTestLog("Lead Related Section", "Lead Related Section contains the related list:::" + element.getText(),Status.PASS);
 			}
 		} 
-		if(count==4) {
+		if(count==5) {
 			report.updateTestLog("Lead Related Section", "Lead Related Section contains all the related lists for the lead:::",Status.PASS);
 		} else {
 			report.updateTestLog("Lead Related Section", "Lead Related Section doesn't contains all the related lists for the lead:::",Status.FAIL);

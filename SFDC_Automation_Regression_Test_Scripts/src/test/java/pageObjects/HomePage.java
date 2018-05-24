@@ -356,15 +356,11 @@ public class HomePage extends ReusableLibrary {
 	public void add_LinkstoList() {
 		list.add("Submit Support Case");
 		list.add("Submit New User Request");
-		list.add("Submit Acc Update Request");
+		list.add("Report a System Error");
+		list.add("Submit Data Migration Request");
+		list.add("Submit Acct Update Request");
 		list.add("Submit Enhancement Request");
 		list.add("My Open Salesforce Requests");
-		list.add("Global SPOC Report");
-		list.add("Finishing First");
-		list.add("Lexis Nexis");
-		list.add("Real Capital Analytics");
-		list.add("TRAC");
-		list.add("Vouchers Online");
 		System.out.println("Home Page Links added to the list are:::" + list);
 	}
 
@@ -377,26 +373,30 @@ public class HomePage extends ReusableLibrary {
 
 	public void validate_Support_Custom_Links() {
 		add_LinkstoList();
-		Utility_Functions.timeWait(2);
-		List<WebElement> homePageLinks = driver
-				.findElements(By.xpath("//ul[@class='slds-list--vertical slds-has-inline-block-links']/li/a"));
+		Utility_Functions.timeWait(6);
+		Utility_Functions.xWaitForElementPresent(driver, (driver.findElements(By.xpath("//b[text()='Support Links']/ancestor::h2/following-sibling::ul//a"))), 7);
+		List<WebElement> homePageLinks = driver  
+				.findElements(By.xpath("//b[text()='Support Links']/ancestor::h2/following-sibling::ul//a"));
 		String[] linkTexts = new String[homePageLinks.size()];
-		System.out.println(linkTexts);
+		System.out.println(" Support links in page are :: "+linkTexts.length +" ::: "+ homePageLinks);
+	
 		Utility_Functions.timeWait(1);
 		int i = 0, count = 0;
 		try {
 			for (WebElement element : homePageLinks) {
 				linkTexts[i] = element.getText();
+				System.out.println("Verify Link '" + linkTexts[i] + "' with the list :: " + list.get(i));
+				
 				if (linkTexts[i].equals(list.get(i))) {
 					count++;
-					System.out.println("Link " + linkTexts[i] + "matches " + "with the list" + list.get(i));
+					System.out.println("Link " + linkTexts[i] + " matches " + "with the list ::" + list.get(i));
 					report.updateTestLog("Verify Home Page Links", "Link " + linkTexts[i] + " present in Home Page:::",
 							Status.PASS);
 				}
 				i++;
 			}
 			System.out.println(count);
-			if (count == 10) {
+			if (count == 7) {
 				System.out.println("All the links are present in Home Page:::");
 				report.updateTestLog("Verify Home Page Links", "All the links are present in Home Page:::",
 						Status.PASS);

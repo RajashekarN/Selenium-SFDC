@@ -7,8 +7,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -1309,4 +1311,197 @@ public class Utility_Functions extends ReusableLibrary {
 		return builder.toString();
 	}
 	
+	/*
+	 * *******************************************************************
+	 * Function Name: Validate whether the page is ready
+	 * ******************************************************************
+	 */
+
+	public static void xWaitPageReady(CraftDriver driver) {
+		JavascriptExecutor js = (JavascriptExecutor) driver.getWebDriver();
+		if (js.executeScript("return document.readyState").toString().equals("complete")) {
+			try {
+				Thread.sleep(1000);
+				driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			System.out.println("Page is loaded:::");
+			return;
+		}
+		for (int i = 0; i < 10; i++) {
+			try {
+				Thread.sleep(1000);
+			} catch (Exception e) {
+				if (js.executeScript("return document.readyState").toString().equals("complete")) {
+					break;
+				}
+			}
+		}
+	}
+
+	/*
+	 * *******************************************************************
+	 * Function Name: Validate whether the fields present on the page or not
+	 * ******************************************************************
+	 */
+	
+	public static List<String> xValidateFieldsPresentonPage(List<String> List1, List<WebElement> WebElements, String TextToBeDisplayed) {
+		List<String> WebElementsList = new ArrayList<String>();
+/*		for (String element:List1){
+			List1.add(element.replace("%2F", "/"));
+		}*/
+		for(int i=0; i < List1.size(); i++) {
+			if(List1.get(i).contains("%2F")) {
+				String sElement = List1.get(i);
+				List1.remove(i);
+				String sNewElement = sElement.replace("%2F", "/");
+				List1.add(sNewElement);
+			}
+		}	
+		System.out.println("List Elements are::" + List1);
+		for(WebElement element: WebElements) {
+			WebElementsList.add(element.getText().toString());
+		}
+		System.out.println(TextToBeDisplayed +  " -- " + WebElementsList  + " are present in the page");
+		List1.removeAll(WebElementsList);
+		System.out.println(TextToBeDisplayed +  " -- " + List1  + " which aren't present in the page");
+		return List1;
+	}
+	
+	public static int xValidateFieldsPresentPage(List<String> FieldList, List<WebElement> WebElements,
+			String TextToBeDisplayed) {
+		int count = 0;
+		if (WebElements.size() == 0) {
+			System.out.println("There are no elements identified with the List<WebElement> xpath");
+		} else {
+			String labelArray[] = new String[WebElements.size()];
+			int j = 0, i1 = 0;
+			try {
+				while (j < FieldList.size()) {
+					for (WebElement element : WebElements) {
+						labelArray[i1] = element.getText();
+						labelArray[i1] = labelArray[i1].replace("\"", "");
+						if (labelArray[i1].equalsIgnoreCase(FieldList.get(j))) {
+							System.out.println("Verify the " + TextToBeDisplayed + " Fields:::" + element.getText());
+							count++;
+						}
+						i1++;
+					}
+					i1 = 0;
+					j++;
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			Utility_Functions.timeWait(1);
+		}
+		return count;
+	}
+
+	public int xValidateFieldsPresentonPage(List<WebElement> WebElements, HashMap<String, String> hashMap,
+			String TextToBeDisplayed) {
+		int count = 0;
+		String labelArray[] = new String[WebElements.size()];
+		for (int i = 0; i < WebElements.size(); i++) {
+			for (WebElement element : WebElements) {
+				labelArray[i] = element.getText();
+				for (Map.Entry<String, String> entry : hashMap.entrySet()) {
+					if (labelArray[i].equals(entry.getKey())) {
+						hashMap.put(entry.getKey(), entry.getValue());
+						break;
+					}
+				}
+			}
+		}
+		return count;
+	}
+	
+	public static int xValidateFieldsPresentonPage(String text, List<WebElement> WebElements, String TextToBeDisplayed) {
+		int count = 0;
+		if (WebElements.size() == 0) {
+			System.out.println("There are no elements identified with the List<WebElement> xpath");
+		} else {
+			String labelArray[] = new String[WebElements.size()];
+			int i1 = 0;
+			try {
+					for (WebElement element : WebElements) {
+						labelArray[i1] = element.getText();
+						if (labelArray[i1].equalsIgnoreCase(text)) {
+							System.out.println("Verify the " + TextToBeDisplayed + " Fields:::" + element.getText());
+							count++;
+						}
+						i1++;
+					}
+					i1 = 0;				
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			Utility_Functions.timeWait(1);
+		}
+		return count;
+	}
+	/*
+	 * *******************************************************************
+	 * Function Name: Click on the element from the list of elements
+	 * ******************************************************************
+	 */
+
+	public static void xClickElementFromList(List<WebElement> WebElements, String ElementToBeClicked) {
+		try {
+			for (WebElement element : WebElements) {
+				if (element.getText().equalsIgnoreCase(ElementToBeClicked)) {
+					element.click();
+					break;
+				}
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	/*
+	 * *******************************************************************
+	 * Function Name: Verify whether the element is present from the list or not
+	 * ******************************************************************
+	 */
+
+	public static int xElementPresentFromList(ArrayList<String> ArrayList, String ElementPresent) {
+		int count = 0;
+		try {
+			for (int i = 0; i < ArrayList.size(); i++) {
+				if (ArrayList.get(i).equals(ElementPresent)) {
+					count++;
+					break;
+				}
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return count;
+	}
+	
+
+	/*
+	 * *******************************************************************
+	 * Function Name: findWebElementByXpath Author : CBRE SF Automation Purpose
+	 * : Element finder by xpath
+	 * @returns WebElement
+	 * ******************************************************************
+	 */
+
+	public static WebElement findElement_ByXpath(CraftDriver driver, String element_xpath) {
+		int count = 0;
+		Utility_Functions.xWaitForElementPresent(driver, By.xpath(element_xpath), 5);
+		count = driver.findElements(By.xpath(element_xpath)).size();
+		if (count == 0) {
+			System.out.println("The element is not found " + element_xpath);
+			return null;
+		}else{
+			return driver.findElement(By.xpath(element_xpath));
+		}
+	}
+	
+	public String getRadioButton(String text){
+		return "//a/div[text()='"+text+"']";
+	}
 }
