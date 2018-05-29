@@ -1367,6 +1367,12 @@ public class Utility_Functions extends ReusableLibrary {
 		return List1;
 	}
 	
+	public static List<String> xValidatePickListValuesPage(List<String> List1, List<String> List2, String TextToBeDisplayed) {
+		List1.removeAll(List2);
+		System.out.println(TextToBeDisplayed +  " -- " + List1  + " which aren't present in the page");
+		return List1;
+	}
+	
 	public static int xValidateFieldsPresentPage(List<String> FieldList, List<WebElement> WebElements,
 			String TextToBeDisplayed) {
 		int count = 0;

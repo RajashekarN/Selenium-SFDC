@@ -1,7 +1,9 @@
 package pagesAPI;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
@@ -289,13 +291,14 @@ public class EstablishConnection extends ReusableLibrary {
 	 * @author Vishnuvardhan
 	 *
 	 */
-	public List<String> establishMetaDataConnection(String RecordType, String ClientName, String PickList) {
+	
+	public List<String> establishMetaDataConnection(String ObjectName, String RecordType, String PickList) {
 		String apiVersion = "41.0";
 		List<String> pickListValues = null;
 		try {
 			String environment = initializeEnvironment();
-			if ((environment.equals("Devr1")) || (environment.equals("UAT")) || (environment.equals("FTE"))  || (environment.equals("FTE2"))) {
-				String Username = properties.getProperty(environment+"AdminUsername");			
+			if ((environment.equals("UAT")) || (environment.equals("UAT2")) || (environment.equals("FTE"))  || (environment.equals("FTE2"))) {
+				String Username = properties.getProperty("SystemAdminUsername") + "." + environment;			
 				String Password = properties.getProperty(environment+"AdminPassword");
 				String AuthEndpoint = properties.getProperty(environment+"AuthEndpoint");
 				config = new ConnectorConfig();
@@ -314,23 +317,14 @@ public class EstablishConnection extends ReusableLibrary {
 				config.setRestEndpoint(restEndpoint);
 				config.setCompression(true);
 				config.setTraceMessage(false);
-				String sRecordTypeName = recordTypeName(ClientName);
-				sRecordTypeName = RecordType + "." + sRecordTypeName;			
-				pickListValues = getPickListValues(sRecordTypeName, PickList);
+				/*String sRecordTypeName = recordTypeName(ClientName);
+				sRecordTypeName = RecordType + "." + sRecordTypeName;	*/		
+				pickListValues = getPickListValues(ObjectName+"."+RecordType, PickList);
 				//pickListValues = getPickListValues("Project__c.AllState", "Use_Type__c");
 			}		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-/*		for(String value: pickListValues) {
-			if(value.contains("%2F")) {
-				try {
-					pickListValues.add(URLDecoder.decode(value, "UTf-8"));
-				} catch (UnsupportedEncodingException e) {
-					e.printStackTrace();
-				}
-			}
-		}*/
 		return pickListValues;
 	}
 
@@ -361,35 +355,43 @@ public class EstablishConnection extends ReusableLibrary {
 		return PickListValues;	
 	}
 
-	/**
-	 * Function for retrieving the correct Record Type Name 
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-	public String recordTypeName(String recordTypeName) {
-		String sRecordyTypeName = null;
-		if(recordTypeName.equalsIgnoreCase("Allstate")) {
-			sRecordyTypeName = "AllState";
-		} else if(recordTypeName.equalsIgnoreCase("AJG")) {
-			sRecordyTypeName = "AJG";
-		} else if(recordTypeName.equalsIgnoreCase("Abbott")) {
-			sRecordyTypeName = "Abbott";
-		} else if(recordTypeName.equalsIgnoreCase("Akzo_Nobel")) {
-			sRecordyTypeName = "Akzo_Nobel";
-		} else if(recordTypeName.equalsIgnoreCase("CDW")) {
-			sRecordyTypeName = "Cdw";
-		} else if(recordTypeName.equalsIgnoreCase("Honeywell")) {
-			sRecordyTypeName = "Honeywell";
-		} else if(recordTypeName.equalsIgnoreCase("Mondelez")) {
-			sRecordyTypeName = "Mondelez";
-		} else if(recordTypeName.equalsIgnoreCase("US Foods")) {
-			sRecordyTypeName = "US_Foods";
-		} else if(recordTypeName.equalsIgnoreCase("Rockwell Automation")) {
-			sRecordyTypeName = "rockwell";
-		} 
-		return sRecordyTypeName;
+	
+	public static Map<String, String> LayoutMapping() {
+
+		Map<String, String> map = new HashMap<String, String>();
+		//Layout and RecordType		
+		map.put("Opportunity Layout - Agency Brokerage","Agency_Brokerage");
+		map.put("Asset Services - APAC","APAC_Asset_Services");
+		map.put("APAC Capital Markets %E2%80%93 Debt and Structured Finance","APAC_Capital_Markets_Debt_and_Structured_Finance");
+		map.put("APAC Debt %26 Structured Finance","APAC_Debt_Structured_Finance");
+		map.put("APAC Global Workplace Solutions","APAC_Global_Workplace_Solutions");
+		map.put("APAC Investors%2FBuyers","APAC_Investors_Buyers");
+		map.put("APAC Occupier - Opportunity Layout","APAC_Occupier");
+		map.put("APAC Project Management","APAC_Project_Management");
+		map.put("APAC Property Purchase - Buy Side","APAC_Property_Purchase_Buy_Side");
+		map.put("APAC Property Sales","APAC_Property_Sales");
+		map.put("Asset Services - Global View","Asset_Services");
+		map.put("Opportunity Layout - Capital Markets Debt %26 Structured Finance","Capital_Markets_Debt_Structured_Finance");
+		map.put("Opportunity Layout - Capital Markets Property Sales","Capital_Markets_Property_Sales");
+		map.put("EMEA A%26T Investor Layout","EMEA_A_T_Investor");
+		map.put("EMEA A%26T Occupier Layout","EMEA_A_T_Occupier");
+		map.put("EMEA Asset Services Page Layout","EMEA_Asset_Services");
+		map.put("EMEA BC%26P Page Layout","BC_P");
+		map.put("EMEA Capital Markets Capital Advisors Page Layout","EMEA_Capital_Markets_Capital_Advisors");
+		map.put("EMEA Capital Markets Investment Properties Page Layout","EMEA_Capital_Markets_Investment_Properties");
+		map.put("EMEA Development Page Layout","EMEA_Development");
+		map.put("EMEA Valuations Page Layout","EMEA_Valuations");
+		map.put("France Consulting %26 Service Opportunity Layout","France_Consulting_Service");
+		map.put("France Investor Relations Opportunity Layout","France_Investor_Relations");
+		map.put("France Transaction Demand Agency Opportunity Layout","France_Transaction_Demand_Agency");
+		map.put("France Transaction Offer Agency Opportunity Layout","France_Transaction_Offer_Agency");
+		map.put("Asset Services - GIA","GIA");
+		map.put("Opportunity Layout - Occupier Brokerage","Occupier_Brokerage");
+		map.put("Valuations %26 Advisory Services","Valuations_Advisory_Services");
+		return map;
 	}
+	
+	
 	/**
 	 * Function for retrieving the User Configuration
 	 * 

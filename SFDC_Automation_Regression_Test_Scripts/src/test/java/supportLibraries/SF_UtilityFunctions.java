@@ -3,6 +3,7 @@ package supportLibraries;
 import java.util.ArrayList;
 import java.util.List;
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import com.cognizant.Craft.ReusableLibrary;
@@ -71,6 +72,7 @@ public class SF_UtilityFunctions extends ReusableLibrary {
 
 	public void selectExisitingObjectRecord(String tableColumn) {
 		By allRecords = By.xpath("(//span[text()='"+tableColumn+"']/ancestor::thead/following-sibling::tbody//th//a)");
+		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, driver.findElements(allRecords), 7);
 		Utility_Functions.xclickRandomElement(driver.findElements(allRecords));
 	}
@@ -350,6 +352,28 @@ public class SF_UtilityFunctions extends ReusableLibrary {
 			report.updateTestLog("Fields List", Text + " header section is having all fields present::", Status.PASS);
 		} else {
 			report.updateTestLog("Fields List", Text + " header section is having all fields present::", Status.FAIL);
+		}
+	}
+	
+	/**
+	 * Handling the Stale Element exception
+	 *
+	 * @author Ramya
+	 *
+	 */
+
+	public void staleElementHandle(WebElement element) {
+		int count = 0;
+		boolean clicked = false;
+		try {
+			while (count < 4 || !clicked) {
+				element.click();
+				clicked = true;
+			}
+		} catch (StaleElementReferenceException e) {
+			e.toString();
+			System.out.println("Trying to recover from a stale element :" + e.getMessage());
+			count = count + 1;
 		}
 	}
 	

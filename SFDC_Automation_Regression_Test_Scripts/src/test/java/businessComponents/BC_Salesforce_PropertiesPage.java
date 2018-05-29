@@ -63,30 +63,7 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 		sfPropertiesPage.bulkTaggingFunctionality();
 		
 	}
-	public void bc_verifyCreationOfActivity(){
-		sfPropertiesPage.verifyCreationOfActivity();
-	}
 
-	/**
-	 * Validating the Creation of New Activity Page Layout
-	 * 
-	 * @author Ramya
-	 *
-	 */	
-
-	public void bc_verifyPropertiesNewActivityPageLayout(){
-		sfPropertiesPage.verifyPropertiesNewActivityPageLayout();
-	}
-	/**
-	 * Validating the Creation of New Activity Page Layout
-	 * 
-	 * @author Ramya
-	 *
-	 */	
-
-	public void bc_verifyNewActivityPropertiesPageSendNotificationEmail() throws InterruptedException {
-		sfPropertiesPage.verifyNewActivityPropertiesPageSendNotificationEmail();
-	}
 
 	/**
 	 * Validating the Campaigns tab present in the dropdown after loggin in
@@ -104,8 +81,9 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	 *
 	 */	
 	public void bc_verifyNewPropertiesPage() {
-		sfPropertiesPage.verifyNewPropertiesPage();
+		sfPropertiesPage.validateCustomPropertyPage();
 	}
+	
 	/**
 	 * Validating the activity Lightning Time line fields 
 	 * 
