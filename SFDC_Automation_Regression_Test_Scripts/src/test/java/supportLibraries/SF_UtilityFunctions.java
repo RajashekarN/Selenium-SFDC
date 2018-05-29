@@ -2,30 +2,18 @@ package supportLibraries;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
-
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
+import com.cognizant.framework.Status;
 
 public class SF_UtilityFunctions extends ReusableLibrary {
 
 	public SF_UtilityFunctions(ScriptHelper scriptHelper) {
 		super(scriptHelper);
 	}
-
-
-	@FindBy(xpath = "//div[@class='linkElements']/a[contains(text(),'Switch to Lightning Experience')]")
-	WebElement switchToLightningExperience;
-
-
-
-	/*@FindBy(xpath = "//one-app-nav-bar[contains(@class,'slds-has-flexi-truncate')]//span[contains(text(),'@TabName')]")
-	WebElement oneAppNavigationBar;*/
-
 
 	/**
 	 * Switch to Lightning Experience
@@ -35,8 +23,9 @@ public class SF_UtilityFunctions extends ReusableLibrary {
 	 */
 
 	public void switchToLightningExperience() {
+		By switchToLightningExperience = By.xpath("//div[@class='linkElements']/a[contains(text(),'Switch to Lightning Experience')]");
 		Utility_Functions.xWaitForElementPresent(driver, switchToLightningExperience, 3);
-		Utility_Functions.xClick(driver, switchToLightningExperience, true);		
+		driver.findElement(switchToLightningExperience).click();
 	}
 
 	/**
@@ -111,6 +100,7 @@ public class SF_UtilityFunctions extends ReusableLibrary {
 		WebElement newAction = driver.findElement(By.xpath("//div[contains(@class,'ForceActionsContainer')]//div[text()='"+sText+"']"));
 		Utility_Functions.xWaitForElementPresent(driver, newAction, 4);
 		Utility_Functions.xClick(driver, newAction, true);
+		Utility_Functions.timeWait(2);
 	}
 
 	/**
@@ -346,4 +336,21 @@ public class SF_UtilityFunctions extends ReusableLibrary {
 			index++;
 		}		
 	}
+	
+	/**
+	 * Validate the fields section under the header in the page layout
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	
+	public void validateHeaderSectionFields(List<String> FieldsList, List<WebElement> WebElementsList, String Text) {
+		List<String> fieldsCount = Utility_Functions.xValidateFieldsPresentonPage(FieldsList, WebElementsList, Text);
+		if(fieldsCount.size()==0) {
+			report.updateTestLog("Fields List", Text + " header section is having all fields present::", Status.PASS);
+		} else {
+			report.updateTestLog("Fields List", Text + " header section is having all fields present::", Status.FAIL);
+		}
+	}
+	
 }

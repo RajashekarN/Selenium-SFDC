@@ -1577,6 +1577,7 @@ public class LeadsPage extends ReusableLibrary {
 			Utility_Functions.xClick(driver, recentlyViewed, true);
 			Utility_Functions.xWaitForElementPresent(driver, allLeadsMenu, 3);
 			Utility_Functions.xClick(driver, allLeadsMenu, true);
+			Utility_Functions.timeWait(6);
 			Utility_Functions.xWaitForElementPresent(driver, leadsList, 3);
 			Utility_Functions.xclickOnFirstElementfromList(leadsList);
 		/*} else {
@@ -1585,6 +1586,7 @@ public class LeadsPage extends ReusableLibrary {
 /*		Utility_Functions.timeWait(5);
 		Utility_Functions.xWaitForElementPresent(driver, selectNewEvent, 3);
 		Utility_Functions.xClick(driver, selectNewEvent, true);*/
+		Utility_Functions.timeWait(3);
 		Utility_Functions.xWaitForElementPresent(driver, newEvent, 3);
 		Utility_Functions.xClick(driver, newEvent, true);
 		Utility_Functions.timeWait(5);
@@ -2218,6 +2220,7 @@ public class LeadsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println("All fields are present in the Additional Information Section:::" + e.getMessage());
 		}
+		Utility_Functions.timeWait(3);
 		customPageAdditionalInformationFieldsList.clear();
 		System.out.println(leadStatus.getText());
 		System.out.println(leadSourceField.getText());
@@ -2428,7 +2431,7 @@ public class LeadsPage extends ReusableLibrary {
 				j11++;
 			}
 			System.out.println(count11);
-			if (count11!= 4) {
+			if (count11!= 5) {
 				report.updateTestLog("Verify Leads Landing Page",
 						"All fields are not present in the Additional Information section", Status.FAIL);
 			} else {
@@ -2838,7 +2841,7 @@ public class LeadsPage extends ReusableLibrary {
 		leadsDetailsPageFieldsList.add("Department");
 		leadsDetailsPageFieldsList.add("Lead Owner");
 		leadsDetailsPageFieldsList.add("Influence Level");
-		leadsDetailsPageFieldsList.add("Lead Owner User Market");
+		//leadsDetailsPageFieldsList.add("Lead Owner User Market");
 		leadsDetailsPageFieldsList.add("Company");
 		leadsDetailsPageFieldsList.add("Represented By (Firm)");
 		leadsDetailsPageFieldsList.add("Industry");

@@ -29,17 +29,17 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	PropertiesPage sfPropertiesPage = new PropertiesPage(scriptHelper);
 	PropertiesFunctions propertiesFunctions = new PropertiesFunctions(scriptHelper);
 
-	/**
+/*	*//**
 	 * Validating the Login functionality 
 	 * 
 	 * @author Vishnuvardhan
 	 *
-	 */	
+	 *//*	
 
 	public void bc_login() throws InterruptedException {
 		sfBC_Login.bc_invokeApplication();
 		sfBC_Login.bc_login();
-	}
+	}*/
 
 
 	/**

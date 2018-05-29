@@ -1264,7 +1264,6 @@ public class Utility_Functions extends ReusableLibrary {
 		driver.switchTo().defaultContent();
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
 		for (WebElement element : iframeList) {
-			
 			driver.switchTo().frame(element);
 			try {
 				boolean isTextValuePresent = Utility_Functions.xWaitForElementPresent(driver, webElement, 0);
@@ -1277,10 +1276,9 @@ public class Utility_Functions extends ReusableLibrary {
 				driver.switchTo().defaultContent();
 			}
 		}
+		Utility_Functions.timeWait(1);
 		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
-
 	}
-	
 	/*
 	 * *******************************************************************
 	 * Function Name: Random Function Author : CBRE SF Automation Purpose :
@@ -1357,11 +1355,11 @@ public class Utility_Functions extends ReusableLibrary {
 				List1.remove(i);
 				String sNewElement = sElement.replace("%2F", "/");
 				List1.add(sNewElement);
-			}
+			} 
 		}	
 		System.out.println("List Elements are::" + List1);
 		for(WebElement element: WebElements) {
-			WebElementsList.add(element.getText().toString());
+			WebElementsList.add(element.getText().toString().trim().replace("*", ""));
 		}
 		System.out.println(TextToBeDisplayed +  " -- " + WebElementsList  + " are present in the page");
 		List1.removeAll(WebElementsList);

@@ -17,11 +17,10 @@ import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
-
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
-
+import pagesAPI.EstablishConnection;
 import pagesAPI.SearchTextSOQL;
 import supportLibraries.SF_UtilityFunctions;
 import supportLibraries.Utility_Functions;
@@ -41,12 +40,20 @@ public class PropertiesPage extends ReusableLibrary {
 		// Utility_Functions utility = new Utility_Functions(scriptHelper);
 	}
 
+	/**
+	 * Page Objects for navigateProperties function
+	 *
+	 * @author Vishnuvardhan
+	 *
+	 */
+
+	@FindBy(xpath = "//span[contains(@class,'slds-truncate')][text()='Properties']")
+	WebElement menu_Properties;
+
 	@FindBy(xpath = "//*[text()='More']")
 	WebElement menu_More;
 
-	@FindBy(xpath = "//one-app-nav-bar-menu-item[@class='overflowNavItem slds-dropdown__item']//span[text()='Properties'] ")  
-	//@FindBy(xpath = "//span[text()='Properties']")
-	//@FindBy(xpath = "//span[contains(text(),'Properties')]")
+	@FindBy(xpath = "//one-app-nav-bar-menu-item[@class='overflowNavItem slds-dropdown__item']//span[text()='Properties'] ")
 	WebElement properties;
 
 	@FindBy(xpath = "//div[@class='overflowList']//a[@title='Properties'][text()='Properties']")
@@ -61,9 +68,8 @@ public class PropertiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//*[@id='bottomButtonRow']/input[1]")
 	WebElement continueButton;
 
-	@FindBy(xpath = /* "//div[@class='slds-media'] */ "//*[@value='Save Property']")
+	@FindBy(xpath = "//*[@value='Save Property']")
 	WebElement saveProperty;
-
 
 	@FindBy(xpath = "//label[text()='Building/Property Name']/following-sibling::div//input")
 	WebElement buildingPropertyNameEnv;
@@ -134,9 +140,6 @@ public class PropertiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//a[@class='tabHeader']//span[text()='Related']")
 	WebElement related;
-
-	@FindBy(xpath = "//span[contains(@class,'slds-truncate')][text()='Properties']")
-	WebElement menu_Properties;
 
 	@FindBy(xpath = "//span[contains(text(),'Activities')]/ancestor::article//div[text()='New Activity']")
 	WebElement newActivity;
@@ -576,7 +579,6 @@ public class PropertiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//div[@class='slds-truncate'][@title='New']")
 	WebElement newSpaces;
 
-
 	@FindBy(xpath = "//div[@class='slds-truncate'][@title='New']")
 	WebElement newCampaigns;
 
@@ -592,7 +594,8 @@ public class PropertiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//label/span[text()='Subject']/parent::label/parent::div/input")
 	List<WebElement> eventSubject;
 
-	@FindAll(value = {@FindBy(xpath = "//span[contains(text(),'Activity Type')]/parent::span/following-sibling::div/descendant::a[@class='select'][text()='--None--']")})
+	@FindAll(value = {
+			@FindBy(xpath = "//span[contains(text(),'Activity Type')]/parent::span/following-sibling::div/descendant::a[@class='select'][text()='--None--']") })
 	List<WebElement> eventActivityTypeList;
 
 	@FindBy(xpath = "//*[contains(@id,'g') and text()='Task']")
@@ -603,7 +606,6 @@ public class PropertiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//*[@class='slds-truncate' and @title='Edit']")
 	List<WebElement> editEvent;
-
 
 	@FindBy(xpath = "//*[@class=' input']")
 	List<WebElement> editTaskName;
@@ -681,30 +683,27 @@ public class PropertiesPage extends ReusableLibrary {
 	WebElement eventEndDate;
 
 	DateFormat dateFormat;
-	//DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+	// DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 	Date date = new Date();
 
 	LoginPage loginPage = new LoginPage(scriptHelper);
 	Actions actions = new Actions(driver.getWebDriver());
 	ActivityPage activityPage = new ActivityPage(scriptHelper);
+	EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
+	SF_UtilityFunctions sf_UtilityFunctions = new SF_UtilityFunctions(scriptHelper);
 
 	/**
-	 * Validating the Customer Property Page fields
+	 * Function for navigating to Properties section
 	 *
 	 * @author Vishnuvardhan
 	 *
 	 */
 
-	SF_UtilityFunctions sf_UtilityFunctions = new SF_UtilityFunctions(scriptHelper); 
-
 	public void navigateProperties() {
 		try {
-			Utility_Functions.xWaitForElementPresent(driver, menu_Properties, 3);
-			Utility_Functions.xClick(driver, menu_Properties, true);
+			sf_UtilityFunctions.oneAppNavigationTab("Properties");
 		} catch (Exception e) {
 			sf_UtilityFunctions.oneAppNavigationTab("More");
-			/*Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
-			Utility_Functions.xClick(driver, menu_More, true);*/
 			try {
 				Utility_Functions.xWaitForElementPresent(driver, properties, 2);
 				Utility_Functions.xClick(driver, properties, true);
@@ -712,68 +711,65 @@ public class PropertiesPage extends ReusableLibrary {
 				Utility_Functions.xWaitForElementPresent(driver, propertiesEnv, 2);
 				Utility_Functions.xClick(driver, propertiesEnv, true);
 			}
-		}		
+		}
 	}
 
-	public void validateCustomPropertyPage() {
-		navigateProperties();			
-		Utility_Functions.xClick(driver, newProperty, true);
-		Utility_Functions.timeWait(2);
-		driver.switchTo().frame(driver.findElement(By.xpath(
-				"//iframe[contains(@title,'New Property: Select Property Record Type ~ Salesforce - Enterprise Edition')]")));
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xClick(driver, continueButton, true);
-		Utility_Functions.timeWait(2);
-		driver.switchTo().defaultContent();
-		Utility_Functions.xSwitchtoFrame(driver, propertyInformationFrame);
 
-		// driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@src,'recordtypeselect')]")));
-		List<WebElement> propertyEditPage = driver.findElements(By.xpath(
-				"//div[@class='slds-grid slds-wrap slds-grid slds-wrap slds-grid--pull-padded slds-form--stacked']/div/h2"));
-		int count = 0;
-		for (WebElement element : propertyEditPage) {
-			if ((count == 0) && (element.getText().contains("Property Information"))) {
-				System.out.println("Propety page contains the section - Property Information");
-				report.updateTestLog("Property Information page",
-						"Propety page contains the section - " + element.getText(), Status.PASS);
-				count++;
-			} else if ((count == 1) && (element.getText().contains("Address Information"))) {
-				System.out.println("Propety page contains the section - Address Information");
-				report.updateTestLog("Property Information page",
-						"Propety page contains the section - " + element.getText(), Status.PASS);
-				count++;
-			} else if ((count == 2) && (element.getText().contains("Property Financials"))) {
-				System.out.println("Propety page contains the section - Property Financials");
-				report.updateTestLog("Property Information page",
-						"Propety page contains the section - " + element.getText(), Status.PASS);
-				count++;
-			} else if ((count == 3) && (element.getText().contains("Property Summary"))) {
-				System.out.println("Propety page contains the section - Property Summary");
-				report.updateTestLog("Property Information page",
-						"Propety page contains the section - " + element.getText(), Status.PASS);
-				count++;
-			} else if ((count == 4) && (element.getText().contains("Property Management"))) {
-				System.out.println("Propety page contains the section - Property Management");
-				report.updateTestLog("Property Information page",
-						"Propety page contains the section - " + element.getText(), Status.PASS);
-				count++;
-			} else if ((count == 5) && (element.getText().contains("Asset Management"))) {
-				System.out.println("Propety page contains the section - Asset Management");
-				report.updateTestLog("Property Information page",
-						"Propety page contains the section - " + element.getText(), Status.PASS);
-				count++;
-			} else if ((count == 6) && (element.getText().contains("Listing Management"))) {
-				System.out.println("Propety page contains the section - Listing Management");
-				report.updateTestLog("Property Information page",
-						"Propety page contains the section - " + element.getText(), Status.PASS);
-				count++;
-			}
+
+	/**
+	 * Function for navigating to New Property
+	 *
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void navigateNewPropertyPage() {
+		navigateProperties();
+		sf_UtilityFunctions.selectAction("New");
+		Utility_Functions.xSwitchtoFrame(driver, propertyInformationFrame);
+	}
+
+	/**
+	 * Validating the Customer Property Page headers
+	 *
+	 * @author Vishnuvardhan
+	 *
+	 */
+
+	static List<String> adminPropertyHeaderList = new ArrayList<String>();
+
+	public void adminHeaderList() {
+		adminPropertyHeaderList.add("Property Information");
+		adminPropertyHeaderList.add("Address Information");
+		adminPropertyHeaderList.add("Property Financials");
+		adminPropertyHeaderList.add("Property Summary");
+		adminPropertyHeaderList.add("Property Management");
+		adminPropertyHeaderList.add("Asset Management");
+		adminPropertyHeaderList.add("Listing Management");
+		System.out.println("Propety page contains the header section:::"+ adminPropertyHeaderList);
+	}
+
+
+	public void validateCustomPropertyPage() {
+		navigateProperties();
+		sf_UtilityFunctions.selectAction("New");
+		Utility_Functions.xSwitchtoFrame(driver, propertyInformationFrame);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, buildingPropertyName, 3);
+		Utility_Functions.xClick(driver, buildingPropertyName, true);
+		adminHeaderList();
+		Utility_Functions.timeWait(4);
+		List<WebElement> propertyHeaderList = driver.findElements(By.xpath("//h2[contains(@class,'heading') and contains(@class,'large')]"));
+		List<String> headerCount = Utility_Functions.xValidateFieldsPresentonPage(adminPropertyHeaderList, propertyHeaderList, "Property Header section is present");
+		if(headerCount.size()==0) {
+			report.updateTestLog("Property Information page", "Property Information page is having all header sections::", Status.PASS);
+		} else {
+			report.updateTestLog("Property Information page", "Property Information page is not having all the header sections::", Status.FAIL);
 		}
-		if (count != 7)
-			report.updateTestLog("Property Information page",
-					"Property Information page is not having all the fields::", Status.FAIL);
-		validateFieldsSection();
-		validateFieldsSubSections();
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(1);
+		validatePropertyFieldsSection();
 		createProperty();
 	}
 
@@ -784,229 +780,131 @@ public class PropertiesPage extends ReusableLibrary {
 	 *
 	 */
 
-	public void validateFieldsSection() {
-		List<WebElement> propertyPageLabels = driver.findElements(By.xpath(
-				"//div[@class='slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2']/div/label"));
-		int count = 0;
-		for (WebElement element : propertyPageLabels) {
-			// System.out.println("Property Information Section field
-			// lables::");
-			if (element.getText().contains("Building/Property Name")) {
-				report.updateTestLog("Property Information page",
-						"Property Information page has the field" + element.getText() + ":::", Status.PASS);
-				count++;
-			} else if (element.getText().contains("Property Website")) {
-				report.updateTestLog("Property Information page",
-						"Property Information page has the field" + element.getText() + ":::", Status.PASS);
-				count++;
-			} else if (element.getText().contains("Country")) {
-				report.updateTestLog("Property Information page",
-						"Property Information page has the field" + element.getText() + ":::", Status.PASS);
-				count++;
-			} else if (element.getText().contains("Street")) {
-				report.updateTestLog("Property Information page",
-						"Property Information page has the field" + element.getText() + ":::", Status.PASS);
-				count++;
-			} else if (element.getText().contains("City")) {
-				report.updateTestLog("Property Information page",
-						"Property Information page has the field" + element.getText() + ":::", Status.PASS);
-				count++;
-			} else if (element.getText().contains("State/ Province")) {
-				report.updateTestLog("Property Information page",
-						"Property Information page has the field" + element.getText() + ":::", Status.PASS);
-				count++;
-			} else if (element.getText().contains("Zip/ Postal Code")) {
-				report.updateTestLog("Property Information page",
-						"Property Information page has the field" + element.getText() + ":::", Status.PASS);
-				count++;
-			} else if (element.getText().contains("Region")) {
-				report.updateTestLog("Property Information page",
-						"Property Information page has the field" + element.getText() + ":::", Status.PASS);
-				count++;
-			} else if (element.getText().contains("Market")) {
-				report.updateTestLog("Property Information page",
-						"Property Information page has the field" + element.getText() + ":::", Status.PASS);
-				count++;
-			} else if (element.getText().contains("Sub Market")) {
-				report.updateTestLog("Property Information page",
-						"Property Information page has the field" + element.getText() + ":::", Status.PASS);
-				count++;
-			} else if (element.getText().contains("District")) {
-				report.updateTestLog("Property Information page",
-						"Property Information page has the field" + element.getText() + ":::", Status.PASS);
-				count++;
-			} else if (element.getText().contains("Country")) {
-				report.updateTestLog("Property Information page",
-						"Property Information page has the field" + element.getText() + ":::", Status.PASS);
-				count++;
-			} else if (element.getText().contains("Last Purchase/Sale Price")) {
-				report.updateTestLog("Property Information page",
-						"Property Information page has the field" + element.getText() + ":::", Status.PASS);
-				count++;
-			} else if (element.getText().contains("*Currency ISO Code")) {
-				report.updateTestLog("Property Information page",
-						"Property Information page has the field" + element.getText() + ":::", Status.PASS);
-				count++;
-			} else if (element.getText().contains("Last Purchase/Sale Date")) {
-				report.updateTestLog("Property Information page",
-						"Property Information page has the field" + element.getText() + ":::", Status.PASS);
-				count++;
-			} else if (element.getText().contains("Property Type")) {
-				report.updateTestLog("Property Information page",
-						"Property Information page has the field" + element.getText() + ":::", Status.PASS);
-				count++;
-			} else if (element.getText().contains("Property Sub-Type")) {
-				report.updateTestLog("Property Information page",
-						"Property Information page has the field" + element.getText() + ":::", Status.PASS);
-				count++;
-			} else if (element.getText().contains("Construction Type")) {
-				report.updateTestLog("Property Information page",
-						"Property Information page has the field" + element.getText() + ":::", Status.PASS);
-				count++;
-			} else if (element.getText().contains("Location")) {
-				report.updateTestLog("Property Information page",
-						"Property Information page has the field" + element.getText() + ":::", Status.PASS);
-				count++;
-			} else if (element.getText().contains("Class")) {
-				report.updateTestLog("Property Information page",
-						"Property Information page has the field" + element.getText() + ":::", Status.PASS);
-				count++;
-			} else if (element.getText().contains("Net Rentable Area")) {
-				report.updateTestLog("Property Information page",
-						"Property Information page has the field" + element.getText() + ":::", Status.PASS);
-				count++;
-			} else if (element.getText().contains("Total Size")) {
-				report.updateTestLog("Property Information page",
-						"Property Information page has the field" + element.getText() + ":::", Status.PASS);
-				count++;
-			} else if (element.getText().contains("Unit of Measure")) {
-				report.updateTestLog("Property Information page",
-						"Property Information page has the field" + element.getText() + ":::", Status.PASS);
-				count++;
-			} else if (element.getText().contains("Total # of Units")) {
-				report.updateTestLog("Property Information page",
-						"Property Information page has the field" + element.getText() + ":::", Status.PASS);
-				count++;
-			} else if (element.getText().contains("Unit of Comparison")) {
-				report.updateTestLog("Property Information page",
-						"Property Information page has the field" + element.getText() + ":::", Status.PASS);
-				count++;
-			} else if (element.getText().contains("Land Size(Acres)")) {
-				report.updateTestLog("Property Information page",
-						"Property Information page has the field" + element.getText() + ":::", Status.PASS);
-				count++;
-			} else if (element.getText().contains("Tenancy")) {
-				report.updateTestLog("Property Information page",
-						"Property Information page has the field" + element.getText() + ":::", Status.PASS);
-				count++;
-			} else if (element.getText().contains("# of Buildings")) {
-				report.updateTestLog("Property Information page",
-						"Property Information page has the field" + element.getText() + ":::", Status.PASS);
-				count++;
-			} else if (element.getText().contains("# of Floors")) {
-				report.updateTestLog("Property Information page",
-						"Property Information page has the field" + element.getText() + ":::", Status.PASS);
-				count++;
-			} else if (element.getText().contains("Building Status")) {
-				report.updateTestLog("Property Information page",
-						"Property Information page has the field" + element.getText() + ":::", Status.PASS);
-				count++;
-			} else if (element.getText().contains("Month Built")) {
-				report.updateTestLog("Property Information page",
-						"Property Information page has the field" + element.getText() + ":::", Status.PASS);
-				count++;
-			} else if (element.getText().contains("Year Built")) {
-				report.updateTestLog("Property Information page",
-						"Property Information page has the field" + element.getText() + ":::", Status.PASS);
-				count++;
-			} else if (element.getText().contains("Year Renovated")) {
-				report.updateTestLog("Property Information page",
-						"Property Information page has the field" + element.getText() + ":::", Status.PASS);
-				count++;
-			} else if (element.getText().contains("Occupancy Percent")) {
-				report.updateTestLog("Property Information page",
-						"Property Information page has the field" + element.getText() + ":::", Status.PASS);
-				count++;
-			} else if (element.getText().contains("Owner Occupied")) {
-				report.updateTestLog("Property Information page",
-						"Property Information page has the field" + element.getText() + ":::", Status.PASS);
-				count++;
-			} else if (element.getText().contains("Vacant")) {
-				report.updateTestLog("Property Information page",
-						"Property Information page has the field" + element.getText() + ":::", Status.PASS);
-			} /*
-			 * else if(element.getText().contains("Company")) {
-			 * report.updateTestLog("Property Information page",
-			 * "Property Information page has the field" +
-			 * element.getText()+ ":::" , Status.PASS); } else
-			 * if(element.getText().contains("Address")) {
-			 * report.updateTestLog("Property Information page",
-			 * "Property Information page has the field" +
-			 * element.getText()+ ":::" , Status.PASS); } else
-			 * if(element.getText().contains("Contact Name")) {
-			 * report.updateTestLog("Property Information page",
-			 * "Property Information page has the field" +
-			 * element.getText()+ ":::" , Status.PASS); } else
-			 * if(element.getText().contains("Phon")) {
-			 * report.updateTestLog("Property Information page",
-			 * "Property Information page has the field" +
-			 * element.getText()+ ":::" , Status.PASS); } else
-			 * if(element.getText().contains("Email")) {
-			 * report.updateTestLog("Property Information page",
-			 * "Property Information page has the field" +
-			 * element.getText()+ ":::" , Status.PASS); }
-			 */
-		}
-		System.out.println(count);
-		if (count != 28)
-			report.updateTestLog("Property Information page",
-					"Property Information page is not having all the fields:::", Status.FAIL);
+	static List<String> adminPropertyInformationLabelList = new ArrayList<String>();
+	static List<String> adminAddressInformationLabelList = new ArrayList<String>();
+	static List<String> adminPropertyFinancialsLabelList = new ArrayList<String>();
+	static List<String> adminPropertySummaryLabelList = new ArrayList<String>();
+	static List<String> adminPropertyManagementLabelList = new ArrayList<String>();
+	static List<String> adminAssetManagementLabelList = new ArrayList<String>();
+	static List<String> adminListingMangementLabelList = new ArrayList<String>();
+
+	public void adminPropertyInformationLabelList() {
+		adminPropertyInformationLabelList.add("Building/Property Name");
+		adminPropertyInformationLabelList.add("Property Website");
+		adminPropertyInformationLabelList.add("Record Type");
+		adminPropertyInformationLabelList.add("Stacking URL");
+		adminPropertyInformationLabelList.add("GRID Property Record Link");
+		System.out.println("Property Information header section contains the fields:::"+ adminPropertyInformationLabelList);
 	}
 
+	public void adminAddressInformationLabelList() {
+		adminAddressInformationLabelList.add("Country");
+		adminAddressInformationLabelList.add("Street");
+		adminAddressInformationLabelList.add("City");
+		adminAddressInformationLabelList.add("State/Province");
+		adminAddressInformationLabelList.add("Zip/Postal Code");
+		adminAddressInformationLabelList.add("Region");
+		adminAddressInformationLabelList.add("Market");
+		adminAddressInformationLabelList.add("Sub Market");
+		adminAddressInformationLabelList.add("District");
+		adminAddressInformationLabelList.add("County");
+		System.out.println("Address Information section contains the fields:::"+ adminPropertyInformationLabelList);
+	}
+
+	public void adminPropertyFinancialsLabelList() {
+		adminPropertyFinancialsLabelList.add("Last Purchase/Sale Price");
+		adminPropertyFinancialsLabelList.add("Currency ISO Code");
+		adminPropertyFinancialsLabelList.add("Last Purchase/Sale Date");
+		System.out.println("Property Financials section contains the fields:::"+ adminPropertyFinancialsLabelList);
+	}
+
+	public void adminPropertySummaryLabelList() {
+		adminPropertySummaryLabelList.add("# of Buildings");
+		adminPropertySummaryLabelList.add("# of Floors");
+		adminPropertySummaryLabelList.add("Building Status");
+		adminPropertySummaryLabelList.add("Local Property Name");
+		adminPropertySummaryLabelList.add("Month Built");
+		adminPropertySummaryLabelList.add("Year Built");
+		adminPropertySummaryLabelList.add("Year Renovated");
+		adminPropertySummaryLabelList.add("Occupancy Percent");
+		adminPropertySummaryLabelList.add("Construction Type");
+		adminPropertySummaryLabelList.add("Location");
+		adminPropertySummaryLabelList.add("Owner Occupied");
+		adminPropertySummaryLabelList.add("Vacant");
+		adminPropertySummaryLabelList.add("Class");
+		adminPropertySummaryLabelList.add("Net Rentable Area");
+		adminPropertySummaryLabelList.add("Total Size");
+		adminPropertySummaryLabelList.add("Units of Measure");
+		adminPropertySummaryLabelList.add("Total # of Units");
+		adminPropertySummaryLabelList.add("Unit of Comparison");
+		adminPropertySummaryLabelList.add("Land Size (Acres)");
+		adminPropertySummaryLabelList.add("Tenancy");
+		System.out.println("Property Summary section contains the fields:::"+ adminPropertySummaryLabelList);
+	}
+
+	public void adminPropertyManagementLabelList() {
+		adminPropertyManagementLabelList.add("Company");
+		adminPropertyManagementLabelList.add("Address");
+		adminPropertyManagementLabelList.add("Contact Name");
+		adminPropertyManagementLabelList.add("Phone");
+		adminPropertyManagementLabelList.add("Email");
+		System.out.println("Property Management section contains the fields:::"+ adminPropertyManagementLabelList);
+	}
+
+	public void adminAssetManagementLabelList() {
+		adminAssetManagementLabelList.add("Company");
+		adminAssetManagementLabelList.add("Address");
+		adminAssetManagementLabelList.add("Contact Name");
+		adminAssetManagementLabelList.add("Phone");
+		adminAssetManagementLabelList.add("Email");
+		System.out.println("Asset Management section contains the fields:::"+ adminAssetManagementLabelList);
+	}
+
+	public void adminListingMangementLabelList() {
+		adminListingMangementLabelList.add("Company");
+		adminListingMangementLabelList.add("Address");
+		adminListingMangementLabelList.add("Contact Name");
+		adminListingMangementLabelList.add("Phone");
+		adminListingMangementLabelList.add("Email");
+		System.out.println("Asset Management section contains the fields:::"+ adminAssetManagementLabelList);
+	}
+
+
 	/**
-	 * Validating the Customer Property Page fields sub sections
+	 * Validating the Property Header Fields Section
 	 *
 	 * @author Vishnuvardhan
 	 *
 	 */
 
-	public void validateFieldsSubSections() {
-		List<WebElement> propertyPageSections = driver.findElements(By.xpath(
-				"//div[@class='slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2']/div/label/parent::div/parent::div/parent::div/div/h2"));
-		int count = 0;
-		for (WebElement element : propertyPageSections) {
-			if ((element.getText().equals("Property Management")) || (element.getText().equals("Listing Management"))
-					|| (element.getText().equals("Asset Management"))) {
-				List<WebElement> propertyPageLabels = driver.findElements(By.xpath(
-						"//div[@class='slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2']/div/label"));
-				for (WebElement element1 : propertyPageLabels) {
-					if (element.getText().contains("Company")) {
-						report.updateTestLog(element.getText() + " Section",
-								"Property Management Section has the field" + element1.getText() + ":::", Status.PASS);
-						count++;
-					} else if (element1.getText().contains("Address")) {
-						report.updateTestLog(element.getText() + " Section",
-								"Property Management Section has the field" + element1.getText() + ":::", Status.PASS);
-						count++;
-					} else if (element1.getText().contains("ContactName")) {
-						report.updateTestLog(element.getText() + " Section",
-								"Property Management Section has the field" + element1.getText() + ":::", Status.PASS);
-						count++;
-					} else if (element1.getText().contains("Phone")) {
-						report.updateTestLog(element.getText() + " Section",
-								"Property Management Section has the field" + element1.getText() + ":::", Status.PASS);
-						count++;
-					} else if (element1.getText().contains("Email")) {
-						report.updateTestLog(element.getText() + " Section",
-								"Property Management Section has the field" + element1.getText() + ":::", Status.PASS);
-					}
-				}
-			}
-		}
-		if (count != 18)
-			report.updateTestLog("Property, Asset and Listing Management Sections",
-					"Sections doesn't have all the fields", Status.FAIL);
+	public void validatePropertyFieldsSection() {
+		adminPropertyInformationLabelList();
+		List<WebElement> propertyInformationFields = driver.findElements(By.xpath("//h2[text()='Property Information']/parent::div/parent::div/div[contains(@class,'slds-medium-size--1-of-1')]/div/label"));
+		sf_UtilityFunctions.validateHeaderSectionFields(adminPropertyInformationLabelList, propertyInformationFields, "Property Information Section");
 
+		adminAddressInformationLabelList();
+		List<WebElement> AddressInformationFields = driver.findElements(By.xpath("//h2[text()='Address Information']/parent::div/parent::div/div[contains(@class,'slds-medium-size--1-of-1')]/div/label"));
+		sf_UtilityFunctions.validateHeaderSectionFields(adminAddressInformationLabelList, AddressInformationFields, "Address Information Section");
+
+		adminPropertyFinancialsLabelList();
+		List<WebElement> propetyFinancialsFields = driver.findElements(By.xpath("//h2[text()='Property Financials']/parent::div/parent::div/div[contains(@class,'slds-medium-size--1-of-1')]/div/label"));
+		sf_UtilityFunctions.validateHeaderSectionFields(adminPropertyFinancialsLabelList, propetyFinancialsFields, "Property Financials Section");
+
+		adminPropertySummaryLabelList();
+		List<WebElement> propertySummaryFields = driver.findElements(By.xpath("//h2[text()='Property Summary']/parent::div/parent::div/div[contains(@class,'slds-medium-size--1-of-1')]/div/label"));
+		sf_UtilityFunctions.validateHeaderSectionFields(adminPropertySummaryLabelList, propertySummaryFields, "Property Summary Section");
+
+		adminPropertyManagementLabelList();
+		List<WebElement> propertyManagementFields = driver.findElements(By.xpath("//h2[text()='Property Management']/parent::div/parent::div/div[contains(@class,'slds-medium-size--1-of-1')]/div/label"));
+		sf_UtilityFunctions.validateHeaderSectionFields(adminPropertyManagementLabelList, propertyManagementFields, "Property Mangement Section");
+
+		adminAssetManagementLabelList();
+		List<WebElement> assetManagementFields = driver.findElements(By.xpath("//h2[text()='Listing Management']/parent::div/parent::div/div[contains(@class,'slds-medium-size--1-of-1')]/div/label"));
+		sf_UtilityFunctions.validateHeaderSectionFields(adminAssetManagementLabelList, assetManagementFields, "Asset Management Section");
+
+		adminListingMangementLabelList();
+		List<WebElement> listingManagementFields = driver.findElements(By.xpath("//h2[text()='Asset Management']/parent::div/parent::div/div[contains(@class,'slds-medium-size--1-of-1')]/div/label"));
+		sf_UtilityFunctions.validateHeaderSectionFields(adminListingMangementLabelList, listingManagementFields, "Listing Mangement Section");
 	}
 
 	/**
@@ -1018,36 +916,26 @@ public class PropertiesPage extends ReusableLibrary {
 
 	public void createProperty() {
 		Utility_Functions.timeWait(1);
-		try {
-			Utility_Functions.timeWait(1);
-			buildingPropertyName.clear();
-			Utility_Functions.timeWait(1);
-			Utility_Functions.xSendKeys(driver, buildingPropertyName,
-					dataTable.getData("General_Data", "Building/ Property Name"));
-			Utility_Functions.timeWait(1);
-			Utility_Functions.xScrollWindowOnce(driver);
-			Utility_Functions.timeWait(1);
-			// Utility_Functions.xClick(driver, countryDropdown, true);
-			Utility_Functions.xSelectDropdownByIndex(countryDropdown, 229);
-			Utility_Functions.timeWait(1);
-			Utility_Functions.xSendKeys(driver, street, dataTable.getData("General_Data", "Street"));
-			Utility_Functions.timeWait(1);
-			Utility_Functions.xSendKeys(driver, city, dataTable.getData("General_Data", "City"));
-			Utility_Functions.timeWait(1);
-			// Utility_Functions.xClick(driver, stateDropdown, true);
-			Utility_Functions.xSelectDropdownByIndex(stateDropdown, 54);
-			Utility_Functions.timeWait(1);
-			Utility_Functions.xClick(driver, saveProperty, true);
-			Utility_Functions.timeWait(4);
-			driver.switchTo().defaultContent();
-			if (createdProperty.getText().contains(dataTable.getData("General_Data", "Street"))) {
-				report.updateTestLog("Save Property", "Property has been created successfully :::", Status.PASS);
-			} else {
-				report.updateTestLog("Save Property", "Unable to save the property:::", Status.FAIL);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
+		buildingPropertyName.clear();
+		Utility_Functions.xWaitForElementPresent(driver, buildingPropertyName, 3);
+		Utility_Functions.xSendKeys(driver, buildingPropertyName, dataTable.getData("General_Data", "Building/ Property Name"));
+		Utility_Functions.xScrollWindowOnce(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xSelectDropdownByIndex(countryDropdown, 229);
+		Utility_Functions.xWaitForElementPresent(driver, street, 3);
+		Utility_Functions.xSendKeys(driver, street, dataTable.getData("General_Data", "Street"));
+		Utility_Functions.xWaitForElementPresent(driver, city, 3);
+		Utility_Functions.xSendKeys(driver, city, dataTable.getData("General_Data", "City"));
+		Utility_Functions.xWaitForElementPresent(driver, stateDropdown, 3);
+		Utility_Functions.xSelectDropdownByIndex(stateDropdown, 54);
+		Utility_Functions.xWaitForElementPresent(driver, saveProperty, 3);
+		Utility_Functions.xClick(driver, saveProperty, true);
+		Utility_Functions.timeWait(4);
+		driver.switchTo().defaultContent();
+		if (createdProperty.getText().contains(dataTable.getData("General_Data", "Street"))) {
+			report.updateTestLog("Save Property", "Property has been created successfully :::", Status.PASS);
+		} else {
+			report.updateTestLog("Save Property", "Unable to save the property:::", Status.FAIL);
 		}
 	}
 
@@ -2081,16 +1969,16 @@ public class PropertiesPage extends ReusableLibrary {
 		}
 		Utility_Functions.timeWait(8);
 		Utility_Functions.xScrollWindow(driver);
-		String property_value = "Test Automation User_" +Utility_Functions.xRandomFunction();
-		try{
+		String property_value = "Test Automation User_" + Utility_Functions.xRandomFunction();
+		try {
 			Utility_Functions.xWaitForElementPresent(driver, buildingPropertyNameEnv, 3);
 			Utility_Functions.xClick(driver, buildingPropertyNameEnv, true);
-			Utility_Functions.xSendKeys(driver, buildingPropertyNameEnv,property_value);
-		}catch(Exception e){
+			Utility_Functions.xSendKeys(driver, buildingPropertyNameEnv, property_value);
+		} catch (Exception e) {
 			Utility_Functions.xWaitForElementPresent(driver, propertyName, 3);
 			Utility_Functions.xClick(driver, propertyName, true);
-			Utility_Functions.xSendKeys(driver, propertyName,property_value);
-		}		
+			Utility_Functions.xSendKeys(driver, propertyName, property_value);
+		}
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xScrollWindow(driver);
 		Utility_Functions.timeWait(1);
@@ -2198,8 +2086,8 @@ public class PropertiesPage extends ReusableLibrary {
 		driver.navigate().refresh();
 		Utility_Functions.timeWait(6);
 
-		if(driver.findElement(By.xpath("//span[text()='"+property_value+"']/parent::h1")).getText().equalsIgnoreCase(property_value))
-		{
+		if (driver.findElement(By.xpath("//span[text()='" + property_value + "']/parent::h1")).getText()
+				.equalsIgnoreCase(property_value)) {
 			report.updateTestLog("Verify Custom Property Page", "The Property is saved successfully", Status.PASS);
 		} else {
 			report.updateTestLog("Verify Custom Property Page", "The Property is not saved successfully", Status.FAIL);
@@ -3579,8 +3467,10 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, nextBtnProperty, true);
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xSwitchtoFrame(driver, buildingPropertyName);
-		//Utility_Functions.xSendKeysVisibleListElement(driver, buildingPropertyName1, "Test");
-		Utility_Functions.xSendKeys(driver, buildingPropertyName, dataTable.getData("General_Data", "Building/ Property Name"));
+		// Utility_Functions.xSendKeysVisibleListElement(driver,
+		// buildingPropertyName1, "Test");
+		Utility_Functions.xSendKeys(driver, buildingPropertyName,
+				dataTable.getData("General_Data", "Building/ Property Name"));
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xScrollWindowOnce(driver);
 		Utility_Functions.timeWait(1);
@@ -3600,82 +3490,94 @@ public class PropertiesPage extends ReusableLibrary {
 
 		report.updateTestLog("Verify Property", "The Private is created successfully", Status.PASS);
 
-
 	}
 
 	public void addTask() {
 
-		//Utility_Functions.xWaitForElementPresent(driver, addBtnTask1, 6);
+		// Utility_Functions.xWaitForElementPresent(driver, addBtnTask1, 6);
 		Utility_Functions.timeWait(5);
 		Utility_Functions.xClickVisibleListElement(driver, addBtnTask1);
 		Utility_Functions.xWaitForElementPresent(driver, taskSubject, 2);
 		Utility_Functions.xSendKeys(driver, taskSubject, "Task");
 
-		List<WebElement> newActivityPageLayoutFields = driver.findElements(By.xpath("//div[@class='riseTransitionEnabled']//label/span"));
+		List<WebElement> newActivityPageLayoutFields = driver
+				.findElements(By.xpath("//div[@class='riseTransitionEnabled']//label/span"));
 		int countRequiredFiles = 0;
 		try {
 			for (WebElement element : newActivityPageLayoutFields) {
 				if ((element.getText().equals("Subject"))) {
 					System.out.println("Subject required field is present in the New Activity Layout Page");
-					report.updateTestLog("Verify New Activity Page Layout", "New Activity Layout Page is having the " + element.getText() + " Status field::",
+					report.updateTestLog("Verify New Activity Page Layout",
+							"New Activity Layout Page is having the " + element.getText() + " Status field::",
 							Status.PASS);
 					countRequiredFiles++;
 				} else if ((element.getText().equals("Due Date"))) {
 					System.out.println("Due Date required field is present in the New Activity Layout Page");
-					report.updateTestLog("Verify New Activity Page Layout", "New Activity Layout Page is having the " + element.getText() + " Status field::",
+					report.updateTestLog("Verify New Activity Page Layout",
+							"New Activity Layout Page is having the " + element.getText() + " Status field::",
 							Status.PASS);
 					countRequiredFiles++;
 				} else if ((element.getText().equals("Name"))) {
 					System.out.println("Name required field is present in the New Activity Layout Page");
-					report.updateTestLog("Verify New Activity Page Layout", "New Activity Layout Page is having the " + element.getText() + " Status field::",
+					report.updateTestLog("Verify New Activity Page Layout",
+							"New Activity Layout Page is having the " + element.getText() + " Status field::",
 							Status.PASS);
 					countRequiredFiles++;
 				} else if ((element.getText().equals("Related To"))) {
 					System.out.println("Related To required field is present in the New Activity Layout Page");
-					report.updateTestLog("Verify New Activity Page Layout", "New Activity Layout Page is having the " + element.getText() + " Status field::",
+					report.updateTestLog("Verify New Activity Page Layout",
+							"New Activity Layout Page is having the " + element.getText() + " Status field::",
 							Status.PASS);
 					countRequiredFiles++;
 				} else if ((element.getText().equals("Comments"))) {
 					System.out.println("Comments required field is present in the New Activity Layout Page");
-					report.updateTestLog("Verify New Activity Page Layout", "New Activity Layout Page is having the " + element.getText() + " Status field::",
+					report.updateTestLog("Verify New Activity Page Layout",
+							"New Activity Layout Page is having the " + element.getText() + " Status field::",
 							Status.PASS);
 					countRequiredFiles++;
 				} else if ((element.getText().equals("Assigned To"))) {
 					System.out.println("Assigned To required field is present in the New Activity Layout Page");
-					report.updateTestLog("Verify New Activity Page Layout", "New Activity Layout Page is having the " + element.getText() + " Status field::",
+					report.updateTestLog("Verify New Activity Page Layout",
+							"New Activity Layout Page is having the " + element.getText() + " Status field::",
 							Status.PASS);
 					countRequiredFiles++;
 				}
 			}
-			List<WebElement> newActivityPageLayoutRequiredFields = driver.findElements(By.xpath("//div[contains(@class,'forceInputPicklist')]/span[contains(@class,'uiPicklistLabel')]/span"));
+			List<WebElement> newActivityPageLayoutRequiredFields = driver.findElements(By.xpath(
+					"//div[contains(@class,'forceInputPicklist')]/span[contains(@class,'uiPicklistLabel')]/span"));
 			for (WebElement element : newActivityPageLayoutRequiredFields) {
 				if ((element.getText().equals("Activity Type"))) {
 					System.out.println("Activity Type required field is present in the New Activity Layout Page");
-					report.updateTestLog("Verify New Activity Page Layout", "New Activity Layout Page is having the " + element.getText() + " Status field::",
+					report.updateTestLog("Verify New Activity Page Layout",
+							"New Activity Layout Page is having the " + element.getText() + " Status field::",
 							Status.PASS);
 					countRequiredFiles++;
 				} else if ((element.getText().equals("Status"))) {
 					System.out.println("Status required field is present in the New Activity Layout Page");
-					report.updateTestLog("Verify New Activity Page Layout", "New Activity Layout Page is having the " + element.getText() + " Status field::",
+					report.updateTestLog("Verify New Activity Page Layout",
+							"New Activity Layout Page is having the " + element.getText() + " Status field::",
 							Status.PASS);
 					countRequiredFiles++;
 				} else if ((element.getText().equals("Priority"))) {
 					System.out.println("Priority required field is present in the New Activity Layout Page");
-					report.updateTestLog("Verify New Activity Page Layout", "New Activity Layout Page is having the " + element.getText() + " Status field::",
+					report.updateTestLog("Verify New Activity Page Layout",
+							"New Activity Layout Page is having the " + element.getText() + " Status field::",
 							Status.PASS);
 					countRequiredFiles++;
 				}
 			}
 			if (countRequiredFiles >= 9) {
 				System.out.println("New Activity Page Layout contains the required fields ");
-				report.updateTestLog("Verify New Activity Page Layout",	"New Activity Layout Page is having all the required fields", Status.PASS);
+				report.updateTestLog("Verify New Activity Page Layout",
+						"New Activity Layout Page is having all the required fields", Status.PASS);
 			} else {
-				report.updateTestLog("Verify New Activity Page Layout", "New Activity Layout Page is not having all the required fields", Status.WARNING);
+				report.updateTestLog("Verify New Activity Page Layout",
+						"New Activity Layout Page is not having all the required fields", Status.WARNING);
 			}
 
-
 		} catch (Exception e) {
-			System.out.println("Encountered an error in validating the Account New Activity Page Layout Fields::"+e.getMessage());
+			System.out.println("Encountered an error in validating the Account New Activity Page Layout Fields::"
+					+ e.getMessage());
 		}
 
 		activityTypeListValues.add("--None--");
@@ -3695,8 +3597,6 @@ public class PropertiesPage extends ReusableLibrary {
 		activityTypeListValues.add("Public - Client Meeting (CML)");
 		activityTypeListValues.add("Public - Client Meeting (Investor Services)");
 		System.out.println("Additional Activity Type values are added to the list successfully::::");
-
-
 
 		Utility_Functions.xClickVisibleListElement(driver, activityTypeList);
 		Utility_Functions.xClick(driver, activityType1, true);
@@ -3722,59 +3622,70 @@ public class PropertiesPage extends ReusableLibrary {
 
 	}
 
+	public void activityTask() {
 
-	public void activityTask () {
+		for (int i = 1; i <= 3; i++) {
 
-		for(int i=1;i<=3;i++){
-
-			if(i==1)
-			{
-				//Utility_Functions.xWaitForElementPresent(driver, addBtnTask1, 3);
+			if (i == 1) {
+				// Utility_Functions.xWaitForElementPresent(driver, addBtnTask1,
+				// 3);
 				Utility_Functions.timeWait(5);
 				Utility_Functions.xClickVisibleListElement(driver, addBtnTask1);
 				Utility_Functions.xWaitForElementPresent(driver, taskSubject, 2);
 				Utility_Functions.xSendKeys(driver, taskSubject, "Present Automation Task");
 
-				//Utility_Functions.xSendKeysVisibleListElement(driver, activityInputDate, dateFormat.format(date).toString());
-				//Utility_Functions.xSendKeys(driver, activityInputDate, dateFormat.format(date).toString());
+				// Utility_Functions.xSendKeysVisibleListElement(driver,
+				// activityInputDate, dateFormat.format(date).toString());
+				// Utility_Functions.xSendKeys(driver, activityInputDate,
+				// dateFormat.format(date).toString());
 
-
-			}else if(i==2){
-				//Utility_Functions.xWaitForElementPresent(driver, addBtnTask1, 6);
+			} else if (i == 2) {
+				// Utility_Functions.xWaitForElementPresent(driver, addBtnTask1,
+				// 6);
 				Utility_Functions.timeWait(3);
 				Utility_Functions.xClickVisibleListElement(driver, addBtnTask1);
 				Utility_Functions.xWaitForElementPresent(driver, taskSubject, 2);
 				Utility_Functions.xSendKeys(driver, taskSubject, "Past Automation Task");
-				/*Calendar calendar = Calendar.getInstance();
-
-			    // Move calendar to yesterday
-			    calendar.add(Calendar.DATE, -1);
-
-			    // Get current date of calendar which point to the yesterday now
-			    Date newDate = calendar.getTime();
-			    Utility_Functions.xWaitForElementPresent(driver, activityInputDate, 3);
-				Utility_Functions.xSendKeys(driver, activityInputDate, dateFormat.format(newDate).toString());
-				Utility_Functions.xWaitForElementPresent(driver, activitySave, 2);
-		        Utility_Functions.xClickVisibleListElement(driver, activitySave);
-				report.updateTestLog("Verify Past Task", "The Past Task is created successfully", Status.PASS);*/
-			}else{
-				//Utility_Functions.xWaitForElementPresent(driver, addBtnTask1, 6);
+				/*
+				 * Calendar calendar = Calendar.getInstance();
+				 * 
+				 * // Move calendar to yesterday calendar.add(Calendar.DATE,
+				 * -1);
+				 * 
+				 * // Get current date of calendar which point to the yesterday
+				 * now Date newDate = calendar.getTime();
+				 * Utility_Functions.xWaitForElementPresent(driver,
+				 * activityInputDate, 3); Utility_Functions.xSendKeys(driver,
+				 * activityInputDate, dateFormat.format(newDate).toString());
+				 * Utility_Functions.xWaitForElementPresent(driver,
+				 * activitySave, 2);
+				 * Utility_Functions.xClickVisibleListElement(driver,
+				 * activitySave); report.updateTestLog("Verify Past Task",
+				 * "The Past Task is created successfully", Status.PASS);
+				 */
+			} else {
+				// Utility_Functions.xWaitForElementPresent(driver, addBtnTask1,
+				// 6);
 				Utility_Functions.timeWait(3);
 				Utility_Functions.xClickVisibleListElement(driver, addBtnTask1);
 				Utility_Functions.xWaitForElementPresent(driver, taskSubject, 2);
 				Utility_Functions.xSendKeys(driver, taskSubject, "Future Automation Task");
-				/*Calendar calendar = Calendar.getInstance();
-
-			    // Move calendar to future
-			    calendar.add(Calendar.DATE, 1);
-
-			    // Get current date of calendar which point to the yesterday now
-			    Date newDate = calendar.getTime();
-			    Utility_Functions.xWaitForElementPresent(driver, activityInputDate, 3);
-				//Utility_Functions.xSendKeys(driver, activityInputDate, dateFormat.format(newDate).toString());
-				Utility_Functions.xWaitForElementPresent(driver, activitySave, 2);
-		        Utility_Functions.xClickVisibleListElement(driver, activitySave);
-				report.updateTestLog("Verify Future Task", "The Future Task is created successfully", Status.PASS);*/
+				/*
+				 * Calendar calendar = Calendar.getInstance();
+				 * 
+				 * // Move calendar to future calendar.add(Calendar.DATE, 1);
+				 * 
+				 * // Get current date of calendar which point to the yesterday
+				 * now Date newDate = calendar.getTime();
+				 * Utility_Functions.xWaitForElementPresent(driver,
+				 * activityInputDate, 3); //Utility_Functions.xSendKeys(driver,
+				 * activityInputDate, dateFormat.format(newDate).toString());
+				 * Utility_Functions.xWaitForElementPresent(driver,
+				 * activitySave, 2);
+				 * Utility_Functions.xClickVisibleListElement(driver,
+				 * activitySave); report.updateTestLog("Verify Future Task",
+				 * "The Future Task is created successfully", Status.PASS);
+				 */
 			}
 			Utility_Functions.xClickVisibleListElement(driver, activityTypeList);
 			Utility_Functions.xClick(driver, activityType1, true);
@@ -3805,56 +3716,65 @@ public class PropertiesPage extends ReusableLibrary {
 	}
 
 	public void activityEvent() {
-		for(int i=1;i<=3;i++){
-			if(i==1)
-			{
+		for (int i = 1; i <= 3; i++) {
+			if (i == 1) {
 
-				//Utility_Functions.xWaitForElementPresent(driver, newEvent, 3);
+				// Utility_Functions.xWaitForElementPresent(driver, newEvent,
+				// 3);
 				Utility_Functions.timeWait(3);
 				Utility_Functions.xClickVisibleListElement(driver, newEvent);
 				Utility_Functions.xSendKeysVisibleListElement(driver, eventSubject, "Past Event");
 
-				/*Utility_Functions.xWaitForElementPresent(driver, eventStartDate, 3);
-		Utility_Functions.xSendKeys(driver, eventStartDate, dateFormat.format(date).toString());
+				/*
+				 * Utility_Functions.xWaitForElementPresent(driver,
+				 * eventStartDate, 3); Utility_Functions.xSendKeys(driver,
+				 * eventStartDate, dateFormat.format(date).toString());
+				 * 
+				 * Utility_Functions.xWaitForElementPresent(driver,
+				 * eventEndDate, 3); Utility_Functions.xSendKeys(driver,
+				 * eventEndDate, dateFormat.format(date).toString());
+				 */
 
-		Utility_Functions.xWaitForElementPresent(driver, eventEndDate, 3);
-		Utility_Functions.xSendKeys(driver, eventEndDate, dateFormat.format(date).toString());*/
-
-			}
-			else if(i==2){
+			} else if (i == 2) {
 				Utility_Functions.xClickVisibleListElement(driver, addEventActivity);
 				Utility_Functions.xSendKeysVisibleListElement(driver, eventSubject, "Present Event");
 
-				/*Calendar calendar = Calendar.getInstance();
+				/*
+				 * Calendar calendar = Calendar.getInstance();
+				 * 
+				 * // Move calendar to yesterday calendar.add(Calendar.DATE,
+				 * -1);
+				 * 
+				 * // Get current date of calendar which point to the yesterday
+				 * now Date newDate = calendar.getTime();
+				 * Utility_Functions.xWaitForElementPresent(driver,
+				 * eventStartDate, 3); Utility_Functions.xSendKeys(driver,
+				 * eventStartDate, dateFormat.format(newDate).toString());
+				 * 
+				 * Utility_Functions.xWaitForElementPresent(driver,
+				 * eventEndDate, 3); Utility_Functions.xSendKeys(driver,
+				 * eventEndDate, dateFormat.format(newDate).toString());
+				 */
 
-	    // Move calendar to yesterday
-	    calendar.add(Calendar.DATE, -1);
-
-	    // Get current date of calendar which point to the yesterday now
-	    Date newDate = calendar.getTime();
-	    Utility_Functions.xWaitForElementPresent(driver, eventStartDate, 3);
-		Utility_Functions.xSendKeys(driver, eventStartDate, dateFormat.format(newDate).toString());
-
-		Utility_Functions.xWaitForElementPresent(driver, eventEndDate, 3);
-		Utility_Functions.xSendKeys(driver, eventEndDate, dateFormat.format(newDate).toString());*/
-
-			}
-			else{
+			} else {
 				Utility_Functions.xClickVisibleListElement(driver, addEventActivity);
 				Utility_Functions.xSendKeysVisibleListElement(driver, eventSubject, "Future Event");
 
-				/*Calendar calendar = Calendar.getInstance();
-
-	    // Move calendar to future
-	    calendar.add(Calendar.DATE, 1);
-
-	    // Get current date of calendar which point to the yesterday now
-	    Date newDate = calendar.getTime();
-	    Utility_Functions.xWaitForElementPresent(driver, eventStartDate, 3);
-		Utility_Functions.xSendKeys(driver, eventStartDate, dateFormat.format(newDate).toString());
-
-		Utility_Functions.xWaitForElementPresent(driver, eventEndDate, 3);
-		Utility_Functions.xSendKeys(driver, eventEndDate, dateFormat.format(newDate).toString());*/
+				/*
+				 * Calendar calendar = Calendar.getInstance();
+				 * 
+				 * // Move calendar to future calendar.add(Calendar.DATE, 1);
+				 * 
+				 * // Get current date of calendar which point to the yesterday
+				 * now Date newDate = calendar.getTime();
+				 * Utility_Functions.xWaitForElementPresent(driver,
+				 * eventStartDate, 3); Utility_Functions.xSendKeys(driver,
+				 * eventStartDate, dateFormat.format(newDate).toString());
+				 * 
+				 * Utility_Functions.xWaitForElementPresent(driver,
+				 * eventEndDate, 3); Utility_Functions.xSendKeys(driver,
+				 * eventEndDate, dateFormat.format(newDate).toString());
+				 */
 
 			}
 			Utility_Functions.xClickVisibleListElement(driver, eventActivityTypeList);
@@ -3867,7 +3787,7 @@ public class PropertiesPage extends ReusableLibrary {
 		}
 	}
 
-	public void addEvent () {
+	public void addEvent() {
 		Utility_Functions.timeWait(5);
 		Utility_Functions.xClickVisibleListElement(driver, newEvent);
 		Utility_Functions.xSendKeysVisibleListElement(driver, eventSubject, "Event");
@@ -3880,12 +3800,11 @@ public class PropertiesPage extends ReusableLibrary {
 
 	}
 
-
 	public void editTask() {
 		Utility_Functions.xWaitForElementPresent(driver, taskName, 5);
 		Utility_Functions.xClick(driver, taskName, true);
 		Utility_Functions.timeWait(3);
-		//Utility_Functions.xWaitForElementPresent(driver, editTask, 3);
+		// Utility_Functions.xWaitForElementPresent(driver, editTask, 3);
 		Utility_Functions.xClickVisibleListElement(driver, editTask);
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xSendKeysVisibleListElement(driver, editTaskName, "Automation");
@@ -3901,16 +3820,17 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, addAttachment, true);
 		Utility_Functions.timeWait(5);
 		Utility_Functions.xSwitchtoFrame(driver, attachFile);
-		//attachFile.sendKeys(Keys.ENTER);
+		// attachFile.sendKeys(Keys.ENTER);
 		Utility_Functions.xClickHiddenElement(driver, attachFile);
 		Utility_Functions.timeWait(3);
-		//Utility_Functions.xClick(driver, attachFile, true);
+		// Utility_Functions.xClick(driver, attachFile, true);
 		// Specify the file location with extension
-		StringSelection sel = new StringSelection("\\us.cbre.net\\dardata\\Team-Cognizant\\CBRE_QA\\Mukesh Garg\\Demo.docx");
+		StringSelection sel = new StringSelection(
+				"\\us.cbre.net\\dardata\\Team-Cognizant\\CBRE_QA\\Mukesh Garg\\Demo.docx");
 
 		// Copy to clipboard
-		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(sel,null);
-		System.out.println("selection" +sel);
+		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(sel, null);
+		System.out.println("selection" + sel);
 		try {
 			Robot robot = new Robot();
 
@@ -3922,10 +3842,9 @@ public class PropertiesPage extends ReusableLibrary {
 			robot.keyRelease(KeyEvent.VK_ENTER);
 
 		} catch (Exception e) {
-			System.out.println("The file is not uploaded"+e.getMessage());
+			System.out.println("The file is not uploaded" + e.getMessage());
 
 		}
-
 
 	}
 
@@ -3947,32 +3866,30 @@ public class PropertiesPage extends ReusableLibrary {
 
 	public void validationEvent() {
 
-		if(startTimeEvent.isDisplayed()) {
+		if (startTimeEvent.isDisplayed()) {
 			report.updateTestLog("Event", "Start Time", Status.PASS);
-		}
-		else {
+		} else {
 			report.updateTestLog("Event", "Start Time", Status.FAIL);
 		}
 
-		if(endTimeEvent.isDisplayed()) {
+		if (endTimeEvent.isDisplayed()) {
 			report.updateTestLog("Event", "End Time", Status.PASS);
-		}
-		else {
+		} else {
 			report.updateTestLog("Event", "End Time", Status.FAIL);
 		}
 
-		if(commmentsEvent.isDisplayed()) {
+		if (commmentsEvent.isDisplayed()) {
 			report.updateTestLog("Event", "Comments", Status.PASS);
-		}
-		else {
+		} else {
 			report.updateTestLog("Event", "Comments", Status.FAIL);
 		}
 	}
+
 	public void editEvent() {
 		Utility_Functions.xWaitForElementPresent(driver, eventName, 5);
 		Utility_Functions.xClick(driver, eventName, true);
 		Utility_Functions.timeWait(3);
-		//Utility_Functions.xWaitForElementPresent(driver, editTask, 3);
+		// Utility_Functions.xWaitForElementPresent(driver, editTask, 3);
 		Utility_Functions.xClickVisibleListElement(driver, editEvent);
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xSendKeysVisibleListElement(driver, editEventName, "Automation");
@@ -3984,28 +3901,24 @@ public class PropertiesPage extends ReusableLibrary {
 
 	public void validationTask() {
 
-		if(activityTypeTask.isDisplayed()) {
+		if (activityTypeTask.isDisplayed()) {
 			report.updateTestLog("Task", "Activity Type", Status.PASS);
-		}
-		else {
+		} else {
 			report.updateTestLog("Task", "Activity Type", Status.FAIL);
 		}
 
-		if(statusTask.isDisplayed()) {
+		if (statusTask.isDisplayed()) {
 			report.updateTestLog("Task", "Status", Status.PASS);
-		}
-		else {
+		} else {
 			report.updateTestLog("Task", "Status", Status.FAIL);
 		}
 
-		if(commentTask.isDisplayed()) {
+		if (commentTask.isDisplayed()) {
 			report.updateTestLog("Task", "Comment", Status.PASS);
-		}
-		else {
+		} else {
 			report.updateTestLog("Task", "Comment", Status.FAIL);
 		}
 	}
-
 
 	static ArrayList<String> activityTypeListValues = new ArrayList<String>();
 
@@ -4042,7 +3955,6 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, saveSpace, true);
 		Utility_Functions.timeWait(5);
 		Utility_Functions.xClick(driver, spaceNameSelect, true);
-
 
 	}
 }
