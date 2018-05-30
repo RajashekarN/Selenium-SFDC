@@ -709,7 +709,7 @@ public class PropertiesPage extends ReusableLibrary {
 	/**
 	 * Function for selecting the property from the list of properties
 	 *
-	 * @author Ramya
+	 * @author Vishnuvardhan
 	 *
 	 */
 
@@ -936,8 +936,7 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(1);
 		buildingPropertyName.clear();
 		Utility_Functions.xWaitForElementPresent(driver, buildingPropertyName, 3);
-		Utility_Functions.xSendKeys(driver, buildingPropertyName,
-				dataTable.getData("General_Data", "Building/ Property Name"));
+		Utility_Functions.xSendKeys(driver, buildingPropertyName, dataTable.getData("General_Data", "Building/ Property Name"));
 		Utility_Functions.xScrollWindowOnce(driver);
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xSelectDropdownByIndex(countryDropdown, 229);
@@ -1008,7 +1007,7 @@ public class PropertiesPage extends ReusableLibrary {
 	/**
 	 * Validating the Unit of Measure values list
 	 *
-	 * @author Ramya
+	 * @author Vishnuvardhan
 	 *
 	 */
 
@@ -1047,16 +1046,16 @@ public class PropertiesPage extends ReusableLibrary {
 		List<String> unitsOfMeasureList = new ArrayList<String>();
 		unitsOfMeasureList = Utility_Functions.xValidatePickListValuesPage(unitsOfMeasurePickListValues, unitOfMeasureValuesList, "Units of Measure pick list values");
 		if (unitsOfMeasureList.size()!=0) {
-			report.updateTestLog("Verify Use Type Division Fields ", "All the values are not present in the Use Type Pick List:::" + unitsOfMeasureList, Status.FAIL);
+			report.updateTestLog("Verify Units of Measure Picklist values", "All the values are not present in the Use Type Pick List:::" + unitsOfMeasureList, Status.FAIL);
 		} else {
-			report.updateTestLog("Verify Use Type Division Fields", "All the values are present in the Use Type Pick List ", Status.PASS);
+			report.updateTestLog("Verify Units of Measure Picklist values", "All the values are present in the Use Type Pick List ", Status.PASS);
 		}
 	}
 	
 	/**
 	 * Validating the activity Lightning Time line fields
 	 *
-	 * @author Ramya
+	 * @author Vishnuvardhan
 	 *
 	 */
 
@@ -1069,7 +1068,7 @@ public class PropertiesPage extends ReusableLibrary {
 	/**
 	 * Validating the Properties Private Tag functionality
 	 *
-	 * @author Ramya
+	 * @author Vishnuvardhan
 	 *
 	 */
 
@@ -1097,129 +1096,71 @@ public class PropertiesPage extends ReusableLibrary {
 		}
 	}
 
-	/**
-	 * Validating the Bulk Tagging
-	 *
-	 * @author Ramya
-	 *
-	 */
-	public void verifyBulkTaggingFunctionality() {
-
-		Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
-		Utility_Functions.xClick(driver, menu_More, true);
-		Utility_Functions.xWaitForElementPresent(driver, bulkTagging, 3);
-		Utility_Functions.xClick(driver, bulkTagging, true);
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xSwitchtoFrame(driver, accountSearch);
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xWaitForElementPresent(driver, accountSearch, 3);
-		Utility_Functions.xClick(driver, accountSearch, true);
-		Utility_Functions.xSendKeys(driver, accountSearch, "Test");
-		Utility_Functions.xWaitForElementPresent(driver, searchProperty, 3);
-		Utility_Functions.xClick(driver, searchProperty, true);
-		Utility_Functions.timeWait(2);
-
-	}
-
-	public void bulkTaggingFunctionality() {
-
-		Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
-		Utility_Functions.xClick(driver, menu_More, true);
-		Utility_Functions.xWaitForElementPresent(driver, bulkTagging, 3);
-		Utility_Functions.xClick(driver, bulkTagging, true);
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xSwitchtoFrame(driver, accountSearch);
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xWaitForElementPresent(driver, accountSearch, 3);
-		Utility_Functions.xClick(driver, accountSearch, true);
-		Utility_Functions.xSendKeys(driver, accountSearch, "Test");
-		Utility_Functions.xWaitForElementPresent(driver, searchProperty, 3);
-		Utility_Functions.xClick(driver, searchProperty, true);
-		Utility_Functions.timeWait(3);
-		for (int i = 1; i <= 3; i++) {
-			WebElement element = driver.findElement(By
-					.xpath("//h2[contains(text(),'Property Detail')]/parent::div/following-sibling::div/span/table/tbody/tr["
-							+ i + "]/td/label/input[@type='checkbox']"));
-			Utility_Functions.xClick(driver, element, true);
-		}
-
-	}
+	
 
 	/**
 	 * Validating the New Property Page Property Type field
 	 *
-	 * @author Ramya
+	 * @author Vishnuvardhan
 	 *
 	 */
 
 	static ArrayList<String> newPropertyTypeList = new ArrayList<String>();
 
 	public void newPropertyTypeFields() {
-
-		newPropertyTypeList.add("Agribusiness");
-		newPropertyTypeList.add("Health Care");
-		newPropertyTypeList.add("Hotel");
-		newPropertyTypeList.add("Industrial");
-		newPropertyTypeList.add("Land");
-		newPropertyTypeList.add("Office");
-		newPropertyTypeList.add("Residential");
-		newPropertyTypeList.add("Retail");
-		newPropertyTypeList.add("Specialty");
-
+		if(dataTable.getData("General_Data", "TC_ID").contains("AMER")) {
+			newPropertyTypeList.add("Agribusiness");
+			newPropertyTypeList.add("Health Care");
+			newPropertyTypeList.add("Hotel");
+			newPropertyTypeList.add("Industrial");
+			newPropertyTypeList.add("Land");
+			newPropertyTypeList.add("Office");
+			newPropertyTypeList.add("Residential");
+			newPropertyTypeList.add("Retail");
+			newPropertyTypeList.add("Specialty");
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("APAC")) {
+			newPropertyTypeList.add("Hotel");
+			newPropertyTypeList.add("Land");
+			newPropertyTypeList.add("Mixed-use");
+			newPropertyTypeList.add("Multi-use Portfolio");
+			newPropertyTypeList.add("Multifamily");
+			newPropertyTypeList.add("Office");
+			newPropertyTypeList.add("Residential");
+			newPropertyTypeList.add("Retail"); 
+			newPropertyTypeList.add("Industrial/Logistics");
+		}
+		
 		System.out.println("New Property Page Property Type fields are " + newPropertyTypeList);
 	}
 
 	public void newPropertiesPropertyType() {
-		try {
-			Utility_Functions.xWaitForElementPresent(driver, menu_Properties, 3);
-			Utility_Functions.xClick(driver, menu_Properties, true);
-		} catch (Exception e) {
-			Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
-			Utility_Functions.xClick(driver, menu_More, true);
-			Utility_Functions.xWaitForElementPresent(driver, properties, 2);
-			Utility_Functions.xClick(driver, properties, true);
-		}
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, newProperty, 3);
-		Utility_Functions.xClick(driver, newProperty, true);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xSwitchtoFrame(driver, propertyName);
-		Utility_Functions.timeWait(2);
-		newPropertyTypeList.clear();
 		newPropertyTypeFields();
-		int count = 0;
-		for (int i = 1; i <= newPropertyTypeList.size(); i++) {
-			String option = driver
-					.findElement(
-							By.xpath("//select[contains(@id,'propertyEditForm:APACPropertyType')]/option[" + i + "]"))
-					.getAttribute("value");
-			System.out.println(option);
-			report.updateTestLog("Verify New Property Page",
-					"Property Type field is having the  " + option + " fields ", Status.PASS);
-			count++;
+		List<String> propertyTypePickListValues = null;
+		if(dataTable.getData("General_Data", "TC_ID").contains("AMER")) {
+			propertyTypePickListValues = sf_UtilityFunctions.getPickListValues("Property__c", "AMER_Property", "Property_Type__c");
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("APAC")) {
+			propertyTypePickListValues = sf_UtilityFunctions.getPickListValues("Property__c", "APAC_Property", "Property_Type__c");
 		}
-		System.out.println(count);
-		if (count != 9) {
-			report.updateTestLog("Verify New Property Page",
-					"All values are not present in the Property Type pick list", Status.FAIL);
+		List<String> propertyTypeList = new ArrayList<String>();
+		propertyTypeList = Utility_Functions.xValidatePickListValuesPage(propertyTypePickListValues, newPropertyTypeList, "Property Type pick list values");
+		if (propertyTypeList.size()!=0) {
+			report.updateTestLog("Verify Property Type picklist values", "All the values are not present in the Property Type Pick List:::" + propertyTypeList, Status.FAIL);
 		} else {
-			report.updateTestLog("Verify New Property Page",
-					"All values are not present in the Property Type pick list", Status.PASS);
-		}
+			report.updateTestLog("Verify Property Type picklist values", "All the values are present in the Property Type Pick List ", Status.PASS);
+		}		
 	}
 
 	/**
 	 * Validating the Property Type field value
 	 *
-	 * @author Ramya
+	 * @author Vishnuvardhan
 	 *
 	 */
 
 	public void verifyPropertyTypeFieldValue() {
-		newPropertiesPropertyType();
+		navigateNewPropertyPage();
 		Utility_Functions.xWaitForElementPresent(driver, propertyName, 2);
-		Utility_Functions.xSendKeys(driver, propertyName,
-				"Test Automation Subject_" + Utility_Functions.xGenerateAlphaNumericString());
+		Utility_Functions.xSendKeys(driver, propertyName, "Test Automation Subject_" + Utility_Functions.xGenerateAlphaNumericString());
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xScrollWindow(driver);
 		Utility_Functions.timeWait(1);
@@ -1238,25 +1179,14 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, selectPropertyState, 3);
 		Utility_Functions.xClick(driver, selectPropertyState, true);
 		Utility_Functions.timeWait(2);
-		// Utility_Functions.xScrollWindowOnce(driver);
-		// Utility_Functions.timeWait(2);
-		// Utility_Functions.xWaitForElementPresent(driver,elementHidden, 3);
-		WebElement elementHidden = driver
-				.findElement(By.xpath("//select[contains(@id,'propertyEditForm:APACPropertyType')]/parent::div"));
+		WebElement elementHidden = driver.findElement(By.xpath("//select[contains(@id,'propertyEditForm:APACPropertyType')]/parent::div"));
 		Utility_Functions.xClick(driver, elementHidden, true);
-		// Utility_Functions.xWaitForElementPresent(driver,elementSelectHidden,
-		// 3);
-		WebElement elementSelectHidden = driver.findElement(
-				By.xpath("//select[contains(@id,'propertyEditForm:APACPropertyType')]/parent::div/select"));
+		WebElement elementSelectHidden = driver.findElement(By.xpath("//select[contains(@id,'propertyEditForm:APACPropertyType')]/parent::div/select"));
 		Utility_Functions.xClick(driver, elementSelectHidden, true);
 		for (int i = 1; i <= newPropertyTypeList.size(); i++) {
-			String optionValue = driver
-					.findElement(
-							By.xpath("//select[contains(@id,'propertyEditForm:APACPropertyType')]/option[" + i + "]"))
-					.getAttribute("value");
+			String optionValue = driver.findElement(By.xpath("//select[contains(@id,'propertyEditForm:APACPropertyType')]/option[" + i + "]")).getAttribute("value");
 			if (optionValue.equals("Industrial")) {
-				driver.findElement(By.xpath("//select[contains(@id,'propertyEditForm:APACPropertyType')]/option[" + "'"
-						+ optionValue + "'" + "]")).click();
+				driver.findElement(By.xpath("//select[contains(@id,'propertyEditForm:APACPropertyType')]/option[" + "'"	+ optionValue + "'" + "]")).click();
 				break;
 			}
 		}
@@ -1270,659 +1200,137 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, saveProperty, true);
 		Utility_Functions.timeWait(2);
 		if (details.isDisplayed()) {
-
-			report.updateTestLog("Verify Editing the Existing Account",
-					"The existing account can be edited and saved successfully", Status.PASS);
+			report.updateTestLog("Verify Editing the Existing Account", "The existing account can be edited and saved successfully", Status.PASS);
 		} else {
-			report.updateTestLog("Verify Editing the Existing Account",
-					"The existing account cannot be edited and saved successfully", Status.FAIL);
+			report.updateTestLog("Verify Editing the Existing Account", "The existing account cannot be edited and saved successfully", Status.FAIL);
 		}
 	}
 
-	/**
-	 * Validating the Properties Private Tags
-	 *
-	 * @author Ramya
-	 *
-	 */
-	public void verifyPropertiesPrivateTags() {
-
-		Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
-		Utility_Functions.xClick(driver, menu_More, true);
-		report.updateTestLog("Verify Properties Private Tag", "Verifying More options is displayed", Status.PASS);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, more_PrivateTags, 3);
-		Utility_Functions.xClick(driver, more_PrivateTags, true);
-		report.updateTestLog("Verify Properties Private Tag", "Verifying Private Tags is displayed", Status.PASS);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, newPrivateTag, 3);
-		Utility_Functions.xClick(driver, newPrivateTag, true);
-		report.updateTestLog("Verify Properties Private Tag", "Verifying the New Private Tags is displayed",
-				Status.PASS);
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xWaitForElementPresent(driver, privateTagName, 3);
-		Utility_Functions.xClick(driver, privateTagName, true);
-		report.updateTestLog("Verify Properties Private Tag", "Verifying the New Private Tag name is displayed",
-				Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, privateTagName, 3);
-		Utility_Functions.xSendKeys(driver, privateTagName, "Test_" + Utility_Functions.xGenerateAlphaNumericString());
-		report.updateTestLog("Verify Properties Private Tag", "Verifying the Private Tag name is entered", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, saveNewPrivateTag, 3);
-		Utility_Functions.xClick(driver, saveNewPrivateTag, true);
-		report.updateTestLog("Verify Properties Private Tag", "Verifying the Private Tag name is entered and saved",
-				Status.PASS);
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xScrollWindow(driver);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xScrollWindowTop(driver);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, newPropertiesDetailsPage, 3);
-		Utility_Functions.xClick(driver, newPropertiesDetailsPage, true);
-		report.updateTestLog("Verify Properties Private Tag", "Verifying the New Property is displayed", Status.PASS);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, newPropertiesDetailsPage, 3);
-		SearchTextSOQL property = new SearchTextSOQL(scriptHelper);
-		String propertyName = property.fetchRecord("Property__c", "Name");
-		searchPropertyWithPrivateTag.sendKeys(propertyName);
-		// Utility_Functions.xSendKeys(driver,newPropertiesDetailsPage, "T");
-		searchPropertyWithPrivateTag.sendKeys(Keys.ARROW_DOWN);
-		searchPropertyWithPrivateTag.sendKeys(Keys.ENTER);
-		report.updateTestLog("Verify Properties Private Tag",
-				"Verifying the Property name is entered in the new property page", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, savePropertyPrivateTag, 3);
-		Utility_Functions.xClick(driver, savePropertyPrivateTag, true);
-		report.updateTestLog("Verify Properties Private Tag",
-				"Verifying the Property name is entered and new property is saved", Status.PASS);
-
-	}
+	
 
 	/**
 	 * Validating the Properties Preferences Pyeong Value
 	 *
-	 * @author Ramya
+	 * @author Vishnuvardhan
 	 *
 	 */
+	
 	public void verifyPropertiesPreferencesPyeongValue() {
-
-		Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
-		Utility_Functions.xClick(driver, menu_More, true);
-		report.updateTestLog("Verify Properties Preferences Pyeong Value", "Verifying More options is displayed",
-				Status.PASS);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, more_propertyPreferences, 3);
-		Utility_Functions.xClick(driver, more_propertyPreferences, true);
-		report.updateTestLog("Verify Properties Preferences Pyeong Value",
-				"Verifying Property Preferences is displayed", Status.PASS);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, newPropertiesPreferences, 3);
-		Utility_Functions.xClick(driver, newPropertiesPreferences, true);
-		report.updateTestLog("Verify Properties Preferences Pyeong Value",
-				"Verifying the new Properties Preferences is displayed", Status.PASS);
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xScrollWindow(driver);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xScrollWindowTop(driver);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, unitOfMeasure, 3);
-		Utility_Functions.xClick(driver, unitOfMeasure, true);
-		report.updateTestLog("Verify Properties Preferences Pyeong Value ",
-				"Verifying the unit of measure is displayed and clicked", Status.PASS);
-		Utility_Functions.timeWait(1);
-		String sPyeong = "Pyeong";
-		List<WebElement> unitOfMeasurePickList = driver
-				.findElements(By.xpath("//div[@class='select-options']/ul/li/a"));
-
-		for (WebElement element : unitOfMeasurePickList) {
-			element.getText();
-			System.out.println(element.getText());
-			if (element.getText().equals(sPyeong)) {
-				System.out.println("Pyeong pick list value is present in the Unit of Measure pick list values");
-				report.updateTestLog("Verify Properties Preferences Pyeong Value",
-						"Verifying the new Properties Preferences page Pyeong Value is displayed ", Status.PASS);
-
-				break;
-			}
-		}
-
-	}
-
-	/**
-	 * Validating the Project Enquiries for the Pyeong Value
-	 *
-	 * @author Ramya
-	 *
-	 */
-	public void verifyProjectEnquiriesPyeongValue() {
-
-		Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
-		Utility_Functions.xClick(driver, menu_More, true);
-		report.updateTestLog("Verify Project Enquiries Pyeong Value", "Verifying More options is displayed",
-				Status.PASS);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, more_projectEnquiries, 3);
-		Utility_Functions.xClick(driver, more_projectEnquiries, true);
-		report.updateTestLog("Verify Project Enquiries Pyeong Value", "Verifying Project Enquiries is displayed",
-				Status.PASS);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, newPropertiesPreferences, 3);
-		Utility_Functions.xClick(driver, newPropertiesPreferences, true);
-		report.updateTestLog("Verify Project Enquiries Pyeong Value",
-				"Verifying the new Project Enquiries is displayed", Status.PASS);
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xScrollWindow(driver);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xScrollWindowTop(driver);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, unitOfMeasureProjectEnquiries, 3);
-		Utility_Functions.xClick(driver, unitOfMeasureProjectEnquiries, true);
-		report.updateTestLog("Verify Project Enquiries Pyeong Value",
-				"Verifying the unit of measure is displayed and clicked", Status.PASS);
-		Utility_Functions.timeWait(1);
-		String sPyeong = "Pyeong";
-		List<WebElement> unitOfMeasurePickList = driver
-				.findElements(By.xpath("//div[@class='select-options']/ul/li/a"));
-
-		for (WebElement element : unitOfMeasurePickList) {
-			element.getText();
-			System.out.println(element.getText());
-			if (element.getText().equals(sPyeong)) {
-				System.out.println("Pyeong pick list value is present in the Unit of Measure pick list values");
-				report.updateTestLog("Verify Project Enquiries Pyeong Value",
-						"The new Project Enquiries page Pyeong Value is displayed ", Status.PASS);
-
-				break;
-			}
-		}
-
-	}
-
-	/**
-	 * Validating the Properties Pyeong Value
-	 *
-	 * @author Ramya
-	 *
-	 */
-	public void verifyPropertiesPyeongValue() {
-
-		try {
-			Utility_Functions.xWaitForElementPresent(driver, menu_Properties, 3);
-			Utility_Functions.xClick(driver, menu_Properties, true);
-		} catch (Exception e) {
-			Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
-			Utility_Functions.xClick(driver, menu_More, true);
-			try {
-				Utility_Functions.xWaitForElementPresent(driver, properties, 2);
-				Utility_Functions.xClick(driver, properties, true);
-			} catch (Exception e1) {
-				Utility_Functions.xWaitForElementPresent(driver, propertiesEnv, 2);
-				Utility_Functions.xClick(driver, propertiesEnv, true);
-			}
-		}
-		/*
-		 * report.updateTestLog("Verify Properties Preferences Pyeong Value"
-		 * ,"Verifying More options is displayed",Status.PASS);
-		 * Utility_Functions.timeWait(2);
-		 * Utility_Functions.xWaitForElementPresent(driver,menu_Properties, 3);
-		 * Utility_Functions.xClick(driver,menu_Properties, true);
-		 * report.updateTestLog("Verify Properties Preferences Pyeong Value"
-		 * ,"Verifying Property Preferences is displayed",Status.PASS);
-		 */
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, newProperties, 2);
-		Utility_Functions.xClick(driver, newProperties, true);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xSwitchtoFrame(driver, saveProperty);
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xScrollWindow(driver);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xScrollWindowTop(driver);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, unitOfMeasureProperties, 3);
-		Utility_Functions.xClick(driver, unitOfMeasureProperties, true);
-		report.updateTestLog("Verify Properties Preferences Pyeong Value ",
-				"Verifying the unit of measure is displayed and clicked", Status.PASS);
-		Utility_Functions.timeWait(1);
-		String sPyeong = "Pyeong";
-		List<WebElement> unitOfMeasurePickList = driver
-				.findElements(By.xpath("//select[contains(@id,'UnitsofMeasureAPAC')]/option"));
-
-		for (WebElement element : unitOfMeasurePickList) {
-			element.getText();
-			System.out.println(element.getText());
-			if (element.getText().equals(sPyeong)) {
-				System.out.println("Pyeong pick list value is present in the Unit of Measure pick list values");
-				report.updateTestLog("Verify Properties Preferences Ping Value",
-						"Verifying the new Properties Preferences page Pyeong Value is displayed ", Status.PASS);
-
-				break;
-			}
-		}
-
-	}
-
-	/**
-	 * Validating the Properties Ping Value
-	 *
-	 * @author Ramya
-	 *
-	 */
-	public void verifyPropertiesPingValue() {
-		try {
-			Utility_Functions.xWaitForElementPresent(driver, menu_Properties, 3);
-			Utility_Functions.xClick(driver, menu_Properties, true);
-		} catch (Exception e) {
-			Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
-			Utility_Functions.xClick(driver, menu_More, true);
-			try {
-				Utility_Functions.xWaitForElementPresent(driver, properties, 2);
-				Utility_Functions.xClick(driver, properties, true);
-			} catch (Exception e1) {
-				Utility_Functions.xWaitForElementPresent(driver, propertiesEnv, 2);
-				Utility_Functions.xClick(driver, propertiesEnv, true);
-			}
-		}
-		/*
-		 * Utility_Functions.xWaitForElementPresent(driver,menu_More, 3);
-		 * Utility_Functions.xClick(driver, menu_More, true);
-		 * report.updateTestLog("Verify Properties Preferences Ping Value"
-		 * ,"Verifying More options is displayed",Status.PASS);
-		 * Utility_Functions.timeWait(2);
-		 * Utility_Functions.xWaitForElementPresent(driver,menu_Properties, 3);
-		 * Utility_Functions.xClick(driver,menu_Properties, true);
-		 * report.updateTestLog("Verify Properties Preferences Ping Value"
-		 * ,"Verifying Property Preferences is displayed",Status.PASS);
-		 */
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, newProperties, 2);
-		Utility_Functions.xClick(driver, newProperties, true);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xSwitchtoFrame(driver, saveProperty);
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xScrollWindow(driver);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xScrollWindowTop(driver);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, unitOfMeasureProperties, 3);
-		Utility_Functions.xClick(driver, unitOfMeasureProperties, true);
-		report.updateTestLog("Verify Properties Preferences Ping Value ",
-				"Verifying the unit of measure is displayed and clicked", Status.PASS);
-		Utility_Functions.timeWait(1);
-		String sPing = "Ping";
-		List<WebElement> unitOfMeasurePickList = driver
-				.findElements(By.xpath("//select[contains(@id,'UnitsofMeasureAPAC')]/option"));
-
-		for (WebElement element : unitOfMeasurePickList) {
-			element.getText();
-			System.out.println(element.getText());
-			if (element.getText().equals(sPing)) {
-				System.out.println("Ping pick list value is present in the Unit of Measure pick list values");
-				report.updateTestLog("Verify Properties Preferences Ping Value",
-						"Verifying the new Properties Preferences page Ping Value is displayed ", Status.PASS);
-
-				break;
-			}
-		}
-
+		sf_UtilityFunctions.verifyPickListValues("Pyeong", "Property_Preferences__c", "France_Property_Preferences", "APAC_Area_UOM__c");
 	}
 
 	/**
 	 * Validating the Properties Preferences Ping Value
 	 *
-	 * @author Ramya
+	 * @author Vishnuvardhan
 	 *
 	 */
 	public void verifyPropertiesPreferencesPingValue() {
-
-		Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
-		Utility_Functions.xClick(driver, menu_More, true);
-		report.updateTestLog("Verify Properties Preferences Ping Value", "Verifying More options is displayed",
-				Status.PASS);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, more_propertyPreferences, 3);
-		Utility_Functions.xClick(driver, more_propertyPreferences, true);
-		report.updateTestLog("Verify Properties Preferences Ping Value", "Verifying Property Preferences is displayed",
-				Status.PASS);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, newPropertiesPreferences, 3);
-		Utility_Functions.xClick(driver, newPropertiesPreferences, true);
-		report.updateTestLog("Verify Properties Preferences Ping Value",
-				"Verifying the new Properties Preferences is displayed", Status.PASS);
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xScrollWindow(driver);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xScrollWindowTop(driver);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, unitOfMeasure, 3);
-		Utility_Functions.xClick(driver, unitOfMeasure, true);
-		report.updateTestLog("Verify Properties Preferences Pyeong Value ",
-				"Verifying the unit of measure is displayed and clicked", Status.PASS);
-		Utility_Functions.timeWait(1);
-		String sPing = "Ping";
-		List<WebElement> unitOfMeasurePickList = driver
-				.findElements(By.xpath("//div[@class='select-options']/ul/li/a"));
-
-		for (WebElement element : unitOfMeasurePickList) {
-			element.getText();
-			System.out.println(element.getText());
-			if (element.getText().equals(sPing)) {
-				System.out.println("Ping pick list value is present in the Unit of Measure pick list values");
-				report.updateTestLog("Verify Properties Preferences Ping Value",
-						"Verifying the new Properties Preferences page Ping Value is displayed ", Status.PASS);
-
-				break;
-			}
-		}
-
+		sf_UtilityFunctions.verifyPickListValues("Ping", "Property_Preferences__c", "France_Property_Preferences", "APAC_Area_UOM__c");
+	}
+	
+	/**
+	 * Validating the Project Enquiries for the Pyeong Value
+	 *
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void verifyProjectEnquiriesPyeongValue() {
+		sf_UtilityFunctions.verifyPickListValues("Pyeong", "APAC_Project_Enquiries__c", "APAC_Project_Enquiry", "APAC_Total_Area_UOM__c");
 	}
 
+	
 	/**
 	 * Validating the Project Enquiries for the Ping Value
 	 *
-	 * @author Ramya
+	 * @author Vishnuvardhan
 	 *
 	 */
 	public void verifyProjectEnquiriesPingValue() {
+		sf_UtilityFunctions.verifyPickListValues("Ping", "APAC_Project_Enquiries__c", "APAC_Project_Enquiry", "APAC_Total_Area_UOM__c");
+	}	
+	
+	/**
+	 * Validating the Properties Pyeong Value
+	 *
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void verifyPropertiesPyeongValue() {
+		sf_UtilityFunctions.verifyPickListValues("Pyeong", "Property__c", "APAC_Property", "Units_of_Measure__c");
+	}
 
-		Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
-		Utility_Functions.xClick(driver, menu_More, true);
-		report.updateTestLog("Verify Project Enquiries Ping Value", "Verifying More options is displayed", Status.PASS);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, more_projectEnquiries, 3);
-		Utility_Functions.xClick(driver, more_projectEnquiries, true);
-		report.updateTestLog("Verify Project Enquiries Ping Value", "Verifying Project Enquiries is displayed",
-				Status.PASS);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, newPropertiesPreferences, 3);
-		Utility_Functions.xClick(driver, newPropertiesPreferences, true);
-		report.updateTestLog("Verify Project Enquiries Ping Value", "Verifying the new Project Enquiries is displayed",
-				Status.PASS);
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xScrollWindow(driver);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xScrollWindowTop(driver);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, unitOfMeasureProjectEnquiries, 3);
-		Utility_Functions.xClick(driver, unitOfMeasureProjectEnquiries, true);
-		report.updateTestLog("Verify Project Enquiries Ping Value",
-				"Verifying the unit of measure is displayed and clicked", Status.PASS);
-		Utility_Functions.timeWait(1);
-		String sPing = "Ping";
-		List<WebElement> unitOfMeasurePickList = driver
-				.findElements(By.xpath("//div[@class='select-options']/ul/li/a"));
-
-		for (WebElement element : unitOfMeasurePickList) {
-			element.getText();
-			System.out.println(element.getText());
-			if (element.getText().equals(sPing)) {
-				System.out.println("Ping pick list value is present in the Unit of Measure pick list values");
-				report.updateTestLog("Verify Project Enquiries Ping Value",
-						"The new Project Enquiries page Ping Value is displayed ", Status.PASS);
-
-				break;
-			}
-		}
-
+	/**
+	 * Validating the Properties Ping Value
+	 *
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void verifyPropertiesPingValue() {
+		sf_UtilityFunctions.verifyPickListValues("Ping", "Property__c", "APAC_Property", "Units_of_Measure__c");			
 	}
 
 	/**
 	 * Validating the Properties Preferences for the Preference Type values
 	 *
-	 * @author Ramya
+	 * @author Vishnuvardhan
 	 *
 	 */
 	static ArrayList<String> preferenceTypePickList = new ArrayList<String>();
 
 	public void preferenceType() {
-
 		preferenceTypePickList.add("--None--");
 		preferenceTypePickList.add("Sale");
 		preferenceTypePickList.add("Lease");
-
 		System.out.println("Preference Type Pick List values are " + preferenceTypePickList);
 	}
 
 	public void verifyPreferenceTypevalues() {
-
-		Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
-		Utility_Functions.xClick(driver, menu_More, true);
-		report.updateTestLog("Verify Preferences Type Values", "Verifying More options is displayed", Status.PASS);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, more_propertyPreferences, 3);
-		Utility_Functions.xClick(driver, more_propertyPreferences, true);
-		report.updateTestLog("Verify Preferences Type Values", "Verifying Property Preferences is displayed",
-				Status.PASS);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, newPropertiesPreferences, 3);
-		Utility_Functions.xClick(driver, newPropertiesPreferences, true);
-		report.updateTestLog("Verify Preferences Type Values", "Verifying the new Properties Preferences is displayed",
-				Status.PASS);
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xScrollWindow(driver);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xScrollWindowTop(driver);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, preferenceType, 3);
-		Utility_Functions.xClick(driver, preferenceType, true);
-		report.updateTestLog("Verify Preferences Type Values ",
-				"Verifying the unit of measure is displayed and clicked", Status.PASS);
-		List<WebElement> preferenceTypePickListValues = driver
-				.findElements(By.xpath("//div[@class='select-options']/ul/li/a"));
-		int count4 = 0, i4 = 0;
-		String fieldsArray4[] = new String[preferenceTypePickListValues.size()];
-		System.out.println(preferenceTypePickListValues.size());
-		try {
-			preferenceType();
-			for (WebElement element4 : preferenceTypePickListValues) {
-				System.out.println(element4.getText());
-				fieldsArray4[i4] = element4.getText();
-				if (fieldsArray4[i4].contains(preferenceTypePickList.get(i4))) {
-					report.updateTestLog("Verify Preferences Type Values",
-							"Preferences Type pick list is having the " + fieldsArray4[i4] + " fields ", Status.PASS);
-					count4++;
-				}
-				i4++;
-			}
-			System.out.println(count4);
-			if (count4 != 2) {
-				report.updateTestLog("Verify Preferences Type Values ",
-						"All fields are not present in the Preferences Type pick list ", Status.FAIL);
-			} else {
-
-				report.updateTestLog("Verify Preferences Type Values",
-						"All fields are present in the Preferences Type pick list", Status.PASS);
-			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-
-	}
-
-	/**
-	 * Validating the offer enquiry auto populated from the project enquiries
-	 *
-	 * @author Ramya
-	 *
-	 */
-	public void verifyOfferAutoPopulatedByProjectEnquiries() {
-
-		Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
-		Utility_Functions.xClick(driver, menu_More, true);
-		report.updateTestLog("Verify Offer Auto Populated By Project Enquiries", "Verifying More options is displayed",
-				Status.PASS);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, more_projectEnquiries, 3);
-		Utility_Functions.xClick(driver, more_projectEnquiries, true);
-		report.updateTestLog("Verify Offer Auto Populated By Project Enquiries",
-				"Verifying Project Enquiries is displayed", Status.PASS);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, newPropertiesPreferences, 3);
-		Utility_Functions.xClick(driver, newPropertiesPreferences, true);
-		report.updateTestLog("Verify Offer Auto Populated By Project Enquiries",
-				"Verifying the new Project Enquiries is displayed", Status.PASS);
-		String environment = loginPage.initializeEnvironment();
-		if (environment.equals("FTE")) {
-			Utility_Functions.xWaitForElementPresent(driver, nextNewProjectEnquiry, 3);
-			Utility_Functions.xClick(driver, nextNewProjectEnquiry, true);
-		}
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xScrollWindow(driver);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xScrollWindowTop(driver);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, projectEnquiryName, 3);
-		Utility_Functions.xSendKeys(driver, projectEnquiryName,
-				"Test Automation_" + Utility_Functions.xGenerateAlphaNumericString());
-		Utility_Functions.xWaitForElementPresent(driver, enquiryAccount, 3);
-		Utility_Functions.xClick(driver, enquiryAccount, true);
-		Utility_Functions.xWaitForElementPresent(driver, enquiryAccount, 3);
-		Utility_Functions.xSendKeys(driver, enquiryAccount, "AUCAPACBroker123");
-		Utility_Functions.xWaitForElementPresent(driver, enquiryAccountValue, 3);
-		Utility_Functions.xClick(driver, enquiryAccountValue, true);
-		Utility_Functions.xWaitForElementPresent(driver, enquiryContact, 3);
-		Utility_Functions.xClick(driver, enquiryContact, true);
-		Utility_Functions.xWaitForElementPresent(driver, enquiryContact, 3);
-		Utility_Functions.xSendKeys(driver, enquiryContact, "AUCAPACBroker123");
-		Utility_Functions.xWaitForElementPresent(driver, enquiryContactValue, 3);
-		Utility_Functions.xClick(driver, enquiryContactValue, true);
-		Utility_Functions.xWaitForElementPresent(driver, projectEnquirySave, 3);
-		Utility_Functions.xClick(driver, projectEnquirySave, true);
-
-	}
-
-	/**
-	 * Validating the Country field in the Properties
-	 *
-	 * @author Ramya
-	 *
-	 */
-	public void verifyPropertiesCountryField() {
-		try {
-			Utility_Functions.xWaitForElementPresent(driver, menu_Properties, 3);
-			Utility_Functions.xClick(driver, menu_Properties, true);
-		} catch (Exception e) {
-			Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
-			Utility_Functions.xClick(driver, menu_More, true);
-			Utility_Functions.xWaitForElementPresent(driver, properties, 2);
-			Utility_Functions.xClick(driver, properties, true);
-		}
-		report.updateTestLog("Verify Properties Country Field ", "Properties is Displayed ", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
-		Utility_Functions.xClick(driver, recentlyViewed, true);
-		report.updateTestLog("Verify Properties Country Field  ", "Recently viewed Properties are Displayed ",
-				Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, allProperties, 3);
-		Utility_Functions.xClick(driver, allProperties, true);
-		Utility_Functions.timeWait(3);
-		report.updateTestLog("Verify Properties Country Field  ", "All Properties are Displayed ", Status.PASS);
-		try {
-			List<WebElement> propertiesList = driver.findElements(
-					By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-
-			Utility_Functions.xclickOnFirstElementfromList(propertiesList);
-			Utility_Functions.timeWait(3);
-			SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
-			String queryId = "SELECT 	Sharing_Country__c, Id FROM Property__c where 	Sharing_Country__c = 'New Zealand'";
-			String propertyId = searchTextSOQL.fetchRecordFieldValue("Id", queryId);
-			String url = driver.getCurrentUrl().split("#")[0];
-			String newUrl = url + "#/sObject/" + propertyId;
-			newUrl = newUrl + "/view";
-			driver.get(newUrl);
-			driver.navigate().refresh();
-			Utility_Functions.timeWait(3);
-			if (countryFieldNewZealand.isDisplayed()) {
-
-				report.updateTestLog("Verify Properties Country Field ", "The Properties country field is New Zealand ",
-						Status.PASS);
-			} else {
-				report.updateTestLog("Verify Properties Country Field ",
-						"The Properties country field is not New Zealand", Status.FAIL);
-			}
-
-		} catch (Exception e) {
-			System.out.println("there are no properties displayed");
-			report.updateTestLog("Verify Properties Country Field", "The properties are not displayed", Status.PASS);
-
-		}
-
-	}
-
-	/**
-	 * Validating the Properties Preferences property type and region
-	 *
-	 * @author Ramya
-	 *
-	 */
-	public void verifyPreferencesPropertyType() {
-		Utility_Functions.xWaitForElementPresent(driver, applauncher, 3);
-		Utility_Functions.xClick(driver, applauncher, true);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, preferences, 3);
-		Utility_Functions.xClick(driver, preferences, true);
-		report.updateTestLog("Verify Preferences Property Type ", "Preferences is Displayed ", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
-		Utility_Functions.xClick(driver, recentlyViewed, true);
-		report.updateTestLog("Verify Preferences Property Type ", "Recently viewed Properties are Displayed ",
-				Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, allInvestorPreferences, 3);
-		Utility_Functions.xClick(driver, allInvestorPreferences, true);
-		Utility_Functions.timeWait(3);
-		report.updateTestLog("Verify Preferences Property Type", "All Properties are Displayed ", Status.PASS);
-		List<WebElement> propertiesList = driver
-				.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-		if (propertiesList.isEmpty()) {
-			report.updateTestLog("Verify Preferences Property Type", "List is Empty:::", Status.PASS);
+		preferenceType();
+		List<String> preferenceTypePickListValues = sf_UtilityFunctions.getPickListValues("Property_Preferences__c", "France_Property_Preferences", "APAC_Preference_Type__c");
+		List<String> preferenceTypeList = new ArrayList<String>();
+		preferenceTypeList = Utility_Functions.xValidatePickListValuesPage(preferenceTypePickListValues, preferenceTypePickList, "Preferecne Type pick list values");
+		if (preferenceTypeList.size()!=0) {
+			report.updateTestLog("Verify Prference Type picklist values", "All the values are not present in the Prference Type Pick List:::" + preferenceTypeList, Status.FAIL);
 		} else {
-			Utility_Functions.xclickOnFirstElementfromList(propertiesList);
-			Utility_Functions.timeWait(2);
-			if (dataTable.getData("General_Data", "TC_ID").contains("CMAPACBrokerAUS")) {
-				if ((preferenceTypeSale.isDisplayed()) && (industrialPropertyType.isDisplayed())
-						&& (regionSA.isDisplayed())) {
-					report.updateTestLog("Verify Preferences Property Type",
-							"The Preference property type is sale, Property type is Industrial and the region is SA",
-							Status.PASS);
-				} else {
-					report.updateTestLog("Verify Preferences Property Type",
-							"The Preference property type is not sale and property type is not Industrial and the region is not SA",
-							Status.FAIL);
-				}
-			} else if (dataTable.getData("General_Data", "TC_ID").contains("CMAPACBrokerNSW")) {
-				if ((preferenceTypeLease.isDisplayed()) && (retailPropertyType.isDisplayed())
-						&& (regionNSW.isDisplayed())) {
-					report.updateTestLog("Verify Preferences Property Type",
-							"The Preference property type is lease, Property type is Retail and the region is NSW",
-							Status.PASS);
-				} else {
-					report.updateTestLog("Verify Preferences Property Type",
-							"The Preference property type is not lease, Property type is not Retail and the region is not NSW",
-							Status.FAIL);
-				}
-			} else if (dataTable.getData("General_Data", "TC_ID").contains("CMAPACBrokerChristChurch")) {
-				if ((preferenceTypeLease.isDisplayed()) && (retailPropertyType.isDisplayed())
-						&& (regionChristchurch.isDisplayed())) {
-					report.updateTestLog("Verify Preferences Property Type",
-							"The Preference property type is lease, Property type is Retail and the region is Christchurch",
-							Status.PASS);
-				} else {
-					report.updateTestLog("Verify Preferences Property Type",
-							"The Preference property type is not lease, Property type is not Retail and the region is not Christchurch",
-							Status.FAIL);
-				}
-			}
-		}
-
+			report.updateTestLog("Verify Prference Type picklist values", "All the values are present in the Prference Type Pick List ", Status.PASS);
+		}	
 	}
 
 	/**
 	 * Validating the Project Enquiry page fields
 	 *
-	 * @author Ramya
+	 * @author Vishnuvardhan
 	 *
 	 */
 	static ArrayList<String> projectEnquiriesFieldsList = new ArrayList<String>();
 
 	public void projectEnquiriesFields() {
-
-		projectEnquiriesFieldsList.add("Project Enquiry Name");
+		projectEnquiriesFieldsList.add("Name");
+		projectEnquiriesFieldsList.add("APAC_Candidate__c");
+		projectEnquiriesFieldsList.add("APAC_Enquiry_Contact__c");
+		projectEnquiriesFieldsList.add("Enquiry_Primary_Campaign__c");
+		projectEnquiriesFieldsList.add("APAC_Confidential__c");
+		projectEnquiriesFieldsList.add("APAC_Rating__c");
+		projectEnquiriesFieldsList.add("APAC_Status__c");
+		projectEnquiriesFieldsList.add("APAC_Source__c");
+		projectEnquiriesFieldsList.add("Information_Memorandum_Sent_Date__c");
+		projectEnquiriesFieldsList.add("APAC_Inspection_Date__c");
+		projectEnquiriesFieldsList.add("Confidentiality_Agreement_Executed_Date__c");
+		projectEnquiriesFieldsList.add("Due_Diligence_Start_Date__c");
+		projectEnquiriesFieldsList.add("Submitted_Offer_Date__c");
+		projectEnquiriesFieldsList.add("APAC_Client_Feedback__c");
+		projectEnquiriesFieldsList.add("APAC_Broker_Feedback__c");
+		projectEnquiriesFieldsList.add("Enquiry_Contact_Phone__c");
+		projectEnquiriesFieldsList.add("Enquiry_Contact_Email__c");
+		projectEnquiriesFieldsList.add("CreatedById");
+		projectEnquiriesFieldsList.add("LastModifiedById");
+		projectEnquiriesFieldsList.add("OwnerId");
+		projectEnquiriesFieldsList.add("Enquiry_Opportunity__c");
+		projectEnquiriesFieldsList.add("Enquiry_Property__c");
+		projectEnquiriesFieldsList.add("RecordTypeId");
+		
+		/*projectEnquiriesFieldsList.add("Project Enquiry Name");
 		projectEnquiriesFieldsList.add("Enquiry Opportunity");
 		projectEnquiriesFieldsList.add("Enquiry Account");
 		projectEnquiriesFieldsList.add("Information Memorandum Sent Date");
@@ -1934,90 +1342,27 @@ public class PropertiesPage extends ReusableLibrary {
 		projectEnquiriesFieldsList.add("Due Diligence Start Date");
 		projectEnquiriesFieldsList.add("Data Room Access");
 		projectEnquiriesFieldsList.add("Client Feedback");
-		projectEnquiriesFieldsList.add("Broker Feedback");
-
+		projectEnquiriesFieldsList.add("Broker Feedback");*/
 		System.out.println("Project Enquiries fields are " + projectEnquiriesFieldsList);
 	}
 
+			
 	public void verifyProjectEnquiriesPageFields() {
-		Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
-		Utility_Functions.xClick(driver, menu_More, true);
-		report.updateTestLog("Verify Project Enquiries Page Fields", "Verifying More options is displayed",
-				Status.PASS);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, more_projectEnquiries, 3);
-		Utility_Functions.xClick(driver, more_projectEnquiries, true);
-		report.updateTestLog("Verify Project Enquiries Page Fields", "Verifying Project Enquiries is displayed",
-				Status.PASS);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, newPropertiesPreferences, 3);
-		Utility_Functions.xClick(driver, newPropertiesPreferences, true);
-		report.updateTestLog("Verify Project Enquiries Page Fields", "Verifying the new Project Enquiries is displayed",
-				Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, nextNewProjectEnquiry, 3);
-		Utility_Functions.xClick(driver, nextNewProjectEnquiry, true);
-		List<WebElement> projectEnquiryPageValues = driver
-				.findElements(By.xpath("//label[contains(@class,'inputLabel')]/span[1]"));
-		int count4 = 0, i4 = 0;
-		String fieldsArray4[] = new String[projectEnquiryPageValues.size()];
-		System.out.println(projectEnquiryPageValues.size());
-		try {
-			projectEnquiriesFields();
-			for (WebElement element4 : projectEnquiryPageValues) {
-				System.out.println(element4.getText());
-				fieldsArray4[i4] = element4.getText();
-				if (fieldsArray4[i4].contains(projectEnquiriesFieldsList.get(i4))) {
-					report.updateTestLog("Verify Project Enquiries Page Fields",
-							"Project Enquiries page is having the " + fieldsArray4[i4] + " fields ", Status.PASS);
-					count4++;
-				}
-				i4++;
-			}
-			System.out.println(count4);
-			if (count4 != 13) {
-				report.updateTestLog("Verify Project Enquiries Page Fields",
-						"All fields are not present in the Project Enquiry page ", Status.FAIL);
-			} else {
-
-				report.updateTestLog("Verify Project Enquiries Page Fields",
-						"All fields are present in the Project Enquiry page", Status.PASS);
-			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xScrollWindow(driver);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xScrollWindowTop(driver);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, projectEnquiryName, 3);
-		Utility_Functions.xSendKeys(driver, projectEnquiryName,
-				"Test Automation_" + Utility_Functions.xGenerateAlphaNumericString());
-		Utility_Functions.xWaitForElementPresent(driver, enquiryContact, 3);
-		Utility_Functions.xClick(driver, enquiryContact, true);
-		// Utility_Functions.xSendKeys(driver,enquiryContact, "AUCAPACBroker");
-		Utility_Functions.xWaitForElementPresent(driver, firstLookUpElement, 3);
-		Utility_Functions.xClick(driver, firstLookUpElement, true);
-		/*
-		 * Utility_Functions.xWaitForElementPresent(driver,enquiryContactValue,
-		 * 3); Utility_Functions.xClick(driver,enquiryContactValue, true);
-		 */Utility_Functions.xWaitForElementPresent(driver, enquiryAccount, 3);
-		Utility_Functions.xClick(driver, enquiryAccount, true);
-		// Utility_Functions.xSendKeys(driver,enquiryAccount, "AUCAPACBroker");
-		Utility_Functions.xWaitForElementPresent(driver, firstLookUpElement, 3);
-		Utility_Functions.xClick(driver, firstLookUpElement, true);
-		/*
-		 * Utility_Functions.xWaitForElementPresent(driver,enquiryAccountValue,
-		 * 3); Utility_Functions.xClick(driver,enquiryAccountValue, true);
-		 */
-		Utility_Functions.xWaitForElementPresent(driver, projectEnquirySave, 3);
-		Utility_Functions.xClick(driver, projectEnquirySave, true);
+		projectEnquiriesFields();
+		List<String> propertySalesProjectEnquiries = establishConnection.establishMetaDataConnectionPageLayouts("APAC_Project_Enquiries__c", "APAC Property Sales Project Enquiry Layout");
+		List<String> propertySalesProjectEnquiriesList = new ArrayList<String>();
+		propertySalesProjectEnquiriesList = Utility_Functions.xValidatePickListValuesPage(propertySalesProjectEnquiries, projectEnquiriesFieldsList, "Preferecne Type pick list values");
+		if (propertySalesProjectEnquiriesList.size()!=0) {
+			report.updateTestLog("Verify Project Enquiries Page Field Labels", "All the labels are not present in the Enquiries Page Field Labels:::" + propertySalesProjectEnquiriesList, Status.FAIL);
+		} else {
+			report.updateTestLog("Verify Project Enquiries Page Field Labels", "All the labels are present in the Enquiries Page Field Labels", Status.PASS);
+		}	
 	}
 
 	/**
 	 * Validating the Project Enquiries Enhancements
 	 *
-	 * @author Ramya
+	 * @author Vishnuvardhan
 	 *
 	 */
 
@@ -2030,7 +1375,7 @@ public class PropertiesPage extends ReusableLibrary {
 	/**
 	 * Validating the Properties edit page
 	 *
-	 * @author Ramya
+	 * @author Vishnuvardhan
 	 *
 	 */
 
@@ -2079,7 +1424,7 @@ public class PropertiesPage extends ReusableLibrary {
 	/**
 	 * Validating the Properties Preferences creation
 	 *
-	 * @author Ramya
+	 * @author Vishnuvardhan
 	 *
 	 */
 	public void verifyPropertiesPreferencesCreation() {
@@ -2109,7 +1454,7 @@ public class PropertiesPage extends ReusableLibrary {
 	/**
 	 * Validating the Properties Preferences creation
 	 *
-	 * @author Ramya
+	 * @author Vishnuvardhan
 	 *
 	 */
 	public void verifyPreferencesPropertiesCreation() {
@@ -2745,6 +2090,111 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, saveSpace, true);
 		Utility_Functions.timeWait(5);
 		Utility_Functions.xClick(driver, spaceNameSelect, true);
+
+	}
+	
+	/**
+	 * Validating the Properties Private Tags
+	 *
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void verifyPropertiesPrivateTags() {
+
+		Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
+		Utility_Functions.xClick(driver, menu_More, true);
+		report.updateTestLog("Verify Properties Private Tag", "Verifying More options is displayed", Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, more_PrivateTags, 3);
+		Utility_Functions.xClick(driver, more_PrivateTags, true);
+		report.updateTestLog("Verify Properties Private Tag", "Verifying Private Tags is displayed", Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, newPrivateTag, 3);
+		Utility_Functions.xClick(driver, newPrivateTag, true);
+		report.updateTestLog("Verify Properties Private Tag", "Verifying the New Private Tags is displayed",
+				Status.PASS);
+		Utility_Functions.timeWait(5);
+		Utility_Functions.xWaitForElementPresent(driver, privateTagName, 3);
+		Utility_Functions.xClick(driver, privateTagName, true);
+		report.updateTestLog("Verify Properties Private Tag", "Verifying the New Private Tag name is displayed",
+				Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, privateTagName, 3);
+		Utility_Functions.xSendKeys(driver, privateTagName, "Test_" + Utility_Functions.xGenerateAlphaNumericString());
+		report.updateTestLog("Verify Properties Private Tag", "Verifying the Private Tag name is entered", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, saveNewPrivateTag, 3);
+		Utility_Functions.xClick(driver, saveNewPrivateTag, true);
+		report.updateTestLog("Verify Properties Private Tag", "Verifying the Private Tag name is entered and saved",
+				Status.PASS);
+		Utility_Functions.timeWait(5);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, newPropertiesDetailsPage, 3);
+		Utility_Functions.xClick(driver, newPropertiesDetailsPage, true);
+		report.updateTestLog("Verify Properties Private Tag", "Verifying the New Property is displayed", Status.PASS);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, newPropertiesDetailsPage, 3);
+		SearchTextSOQL property = new SearchTextSOQL(scriptHelper);
+		String propertyName = property.fetchRecord("Property__c", "Name");
+		searchPropertyWithPrivateTag.sendKeys(propertyName);
+		// Utility_Functions.xSendKeys(driver,newPropertiesDetailsPage, "T");
+		searchPropertyWithPrivateTag.sendKeys(Keys.ARROW_DOWN);
+		searchPropertyWithPrivateTag.sendKeys(Keys.ENTER);
+		report.updateTestLog("Verify Properties Private Tag",
+				"Verifying the Property name is entered in the new property page", Status.PASS);
+		Utility_Functions.xWaitForElementPresent(driver, savePropertyPrivateTag, 3);
+		Utility_Functions.xClick(driver, savePropertyPrivateTag, true);
+		report.updateTestLog("Verify Properties Private Tag",
+				"Verifying the Property name is entered and new property is saved", Status.PASS);
+
+	}
+	
+	/**
+	 * Validating the Bulk Tagging
+	 *
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void verifyBulkTaggingFunctionality() {
+
+		Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
+		Utility_Functions.xClick(driver, menu_More, true);
+		Utility_Functions.xWaitForElementPresent(driver, bulkTagging, 3);
+		Utility_Functions.xClick(driver, bulkTagging, true);
+		Utility_Functions.timeWait(5);
+		Utility_Functions.xSwitchtoFrame(driver, accountSearch);
+		Utility_Functions.timeWait(5);
+		Utility_Functions.xWaitForElementPresent(driver, accountSearch, 3);
+		Utility_Functions.xClick(driver, accountSearch, true);
+		Utility_Functions.xSendKeys(driver, accountSearch, "Test");
+		Utility_Functions.xWaitForElementPresent(driver, searchProperty, 3);
+		Utility_Functions.xClick(driver, searchProperty, true);
+		Utility_Functions.timeWait(2);
+
+	}
+
+	public void bulkTaggingFunctionality() {
+
+		Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
+		Utility_Functions.xClick(driver, menu_More, true);
+		Utility_Functions.xWaitForElementPresent(driver, bulkTagging, 3);
+		Utility_Functions.xClick(driver, bulkTagging, true);
+		Utility_Functions.timeWait(5);
+		Utility_Functions.xSwitchtoFrame(driver, accountSearch);
+		Utility_Functions.timeWait(5);
+		Utility_Functions.xWaitForElementPresent(driver, accountSearch, 3);
+		Utility_Functions.xClick(driver, accountSearch, true);
+		Utility_Functions.xSendKeys(driver, accountSearch, "Test");
+		Utility_Functions.xWaitForElementPresent(driver, searchProperty, 3);
+		Utility_Functions.xClick(driver, searchProperty, true);
+		Utility_Functions.timeWait(3);
+		for (int i = 1; i <= 3; i++) {
+			WebElement element = driver.findElement(By
+					.xpath("//h2[contains(text(),'Property Detail')]/parent::div/following-sibling::div/span/table/tbody/tr["
+							+ i + "]/td/label/input[@type='checkbox']"));
+			Utility_Functions.xClick(driver, element, true);
+		}
 
 	}
 }

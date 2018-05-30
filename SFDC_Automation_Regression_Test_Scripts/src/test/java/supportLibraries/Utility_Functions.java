@@ -1368,6 +1368,14 @@ public class Utility_Functions extends ReusableLibrary {
 	}
 	
 	public static List<String> xValidatePickListValuesPage(List<String> List1, List<String> List2, String TextToBeDisplayed) {
+		for(int i=0; i < List1.size(); i++) {
+			if(List1.get(i).contains("%2F")) {
+				String sElement = List1.get(i);
+				List1.remove(i);
+				String sNewElement = sElement.replace("%2F", "/");
+				List1.add(sNewElement);
+			} 
+		}	
 		List1.removeAll(List2);
 		System.out.println(TextToBeDisplayed +  " -- " + List1  + " which aren't present in the page");
 		return List1;

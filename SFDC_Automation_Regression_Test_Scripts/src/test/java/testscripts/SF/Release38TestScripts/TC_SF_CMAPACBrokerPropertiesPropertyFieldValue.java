@@ -45,14 +45,3 @@ public class TC_SF_CMAPACBrokerPropertiesPropertyFieldValue extends CRAFTTestCas
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
