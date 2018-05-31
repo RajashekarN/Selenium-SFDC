@@ -53,8 +53,8 @@ public class SF_UtilityFunctions extends ReusableLibrary {
 	 */
 
 	public void oneAppNavigationTab2(String sText) {
-		By oneAppNavigationTab = By.xpath("//span[text()='"+sText+"']");
-		By oneAppNavigationMoreTab = By.xpath("//span[text()='More']");
+		By oneAppNavigationTab = By.xpath("//one-app-nav-bar[contains(@class,'slds-has-flexi-truncate')]//span[text()='"+sText+"']");
+		By oneAppNavigationMoreTab = By.xpath("//one-app-nav-bar[contains(@class,'slds-has-flexi-truncate')]//span[text()='More']");
 		
 		Utility_Functions.xWaitForElementPresent(driver, oneAppNavigationTab, 3);
 		try{

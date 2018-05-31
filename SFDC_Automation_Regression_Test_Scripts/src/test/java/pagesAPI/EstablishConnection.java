@@ -450,10 +450,14 @@ public class EstablishConnection extends ReusableLibrary {
 			for(int i=0; i < pageLabels.length; i++) {
 				for(int j=0; j < pageLayOutsFields.size(); j++) {
 					if(pageLabels[i].getName().equals(pageLayOutsFields.get(j))) {
-						if((!pageLabels[i].getType().equals("Formula (Text)")) || (!pageLabels[i].getType().equals("Lookup(User)")) || (!pageLabels[i].getType().equals("dateTime"))) {
-							UIFieldsOnPage.add(pageLabels[i].getLabel());
-							break;
-						}
+						if((pageLabels[i].getCalculatedFormula()==null)) {
+							if((pageLabels[i].getLabel().equals("Created Date ID")) || (pageLabels[i].getLabel().equals("Created By ID")) || (pageLabels[i].getLabel().equals("Last Modified By ID"))) {
+								
+							} else {
+								UIFieldsOnPage.add(pageLabels[i].getLabel());
+								break;
+							}							
+						} 
 					}
 				}
 				
