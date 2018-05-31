@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
 import com.sforce.soap.partner.DeleteResult;
+import com.sforce.soap.partner.Field;
 import com.sforce.soap.partner.GetUserInfoResult;
 import com.sforce.soap.partner.LeadConvertResult;
 import com.sforce.soap.partner.LoginResult;
@@ -441,9 +441,27 @@ public class EstablishConnection extends ReusableLibrary {
 	 */
 	
 	public List<String> establishMetaDataConnectionPageLayouts(String ObjectName, String PageLayouts) {
+		List<String> UIFieldsOnPage = new ArrayList<String>();
 		establishMetaDataConnection();
-		List<String> pageLayOuts = getFieldNamesOnLayout(ObjectName + "-" + PageLayouts);
-		return pageLayOuts;
+		List<String> pageLayOutsFields = getFieldNamesOnLayout(ObjectName + "-" + PageLayouts);
+		Field[] pageLabels = null;
+		try {
+			pageLabels = EstablishConnection.connection.describeSObject(ObjectName).getFields();
+			for(int i=0; i < pageLabels.length; i++) {
+				for(int j=0; j < pageLayOutsFields.size(); j++) {
+					if(pageLabels[i].getName().equals(pageLayOutsFields.get(j))) {
+						if((!pageLabels[i].getType().equals("Formula (Text)")) || (!pageLabels[i].getType().equals("Lookup(User)")) || (!pageLabels[i].getType().equals("dateTime"))) {
+							UIFieldsOnPage.add(pageLabels[i].getLabel());
+							break;
+						}
+					}
+				}
+				
+			}
+		} catch (ConnectionException e) {
+			e.printStackTrace();
+		}
+		return UIFieldsOnPage;
 	}
 
 	/**
@@ -547,7 +565,7 @@ public class EstablishConnection extends ReusableLibrary {
 		map.put("Valuations %26 Advisory Services", "Valuations_Advisory_Services");
 		return map;
 	}
-
+	
 	/**
 	 * Function for retrieving the User Configuration
 	 * 

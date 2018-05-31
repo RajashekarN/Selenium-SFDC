@@ -1,15 +1,11 @@
 package pageObjects;
 
-import java.awt.Robot;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.KeyEvent;
+
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindAll;
@@ -20,7 +16,6 @@ import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
 import pagesAPI.EstablishConnection;
-import pagesAPI.SearchTextSOQL;
 import supportLibraries.SF_UtilityFunctions;
 import supportLibraries.Utility_Functions;
 
@@ -1306,52 +1301,33 @@ public class PropertiesPage extends ReusableLibrary {
 	static ArrayList<String> projectEnquiriesFieldsList = new ArrayList<String>();
 
 	public void projectEnquiriesFields() {
-		projectEnquiriesFieldsList.add("Name");
-		projectEnquiriesFieldsList.add("APAC_Candidate__c");
-		projectEnquiriesFieldsList.add("APAC_Enquiry_Contact__c");
-		projectEnquiriesFieldsList.add("Enquiry_Primary_Campaign__c");
-		projectEnquiriesFieldsList.add("APAC_Confidential__c");
-		projectEnquiriesFieldsList.add("APAC_Rating__c");
-		projectEnquiriesFieldsList.add("APAC_Status__c");
-		projectEnquiriesFieldsList.add("APAC_Source__c");
-		projectEnquiriesFieldsList.add("Information_Memorandum_Sent_Date__c");
-		projectEnquiriesFieldsList.add("APAC_Inspection_Date__c");
-		projectEnquiriesFieldsList.add("Confidentiality_Agreement_Executed_Date__c");
-		projectEnquiriesFieldsList.add("Due_Diligence_Start_Date__c");
-		projectEnquiriesFieldsList.add("Submitted_Offer_Date__c");
-		projectEnquiriesFieldsList.add("APAC_Client_Feedback__c");
-		projectEnquiriesFieldsList.add("APAC_Broker_Feedback__c");
-		projectEnquiriesFieldsList.add("Enquiry_Contact_Phone__c");
-		projectEnquiriesFieldsList.add("Enquiry_Contact_Email__c");
-		projectEnquiriesFieldsList.add("CreatedById");
-		projectEnquiriesFieldsList.add("LastModifiedById");
-		projectEnquiriesFieldsList.add("OwnerId");
-		projectEnquiriesFieldsList.add("Enquiry_Opportunity__c");
-		projectEnquiriesFieldsList.add("Enquiry_Property__c");
-		projectEnquiriesFieldsList.add("RecordTypeId");
-		
-		/*projectEnquiriesFieldsList.add("Project Enquiry Name");
-		projectEnquiriesFieldsList.add("Enquiry Opportunity");
+		projectEnquiriesFieldsList.add("Project Enquiry Name");
 		projectEnquiriesFieldsList.add("Enquiry Account");
-		projectEnquiriesFieldsList.add("Information Memorandum Sent Date");
 		projectEnquiriesFieldsList.add("Enquiry Contact");
-		projectEnquiriesFieldsList.add("Inspection Date");
 		projectEnquiriesFieldsList.add("Enquiry Primary Campaign");
-		projectEnquiriesFieldsList.add("Confidentiality Agreement Executed Date");
 		projectEnquiriesFieldsList.add("Confidential");
-		projectEnquiriesFieldsList.add("Due Diligence Start Date");
-		projectEnquiriesFieldsList.add("Data Room Access");
+		projectEnquiriesFieldsList.add("Rating");
+		projectEnquiriesFieldsList.add("Status");
 		projectEnquiriesFieldsList.add("Client Feedback");
-		projectEnquiriesFieldsList.add("Broker Feedback");*/
+		projectEnquiriesFieldsList.add("Owner ID");
+		projectEnquiriesFieldsList.add("Source");
+		projectEnquiriesFieldsList.add("Information Memorandum Sent Date");
+		projectEnquiriesFieldsList.add("Inspection Date");
+		projectEnquiriesFieldsList.add("Confidentiality Agreement Executed Date");
+		projectEnquiriesFieldsList.add("Due Diligence Start Date");
+		projectEnquiriesFieldsList.add("Data Room Access Date");
+		projectEnquiriesFieldsList.add("Broker Feedback");
+		projectEnquiriesFieldsList.add("Enquiry Opportunity");
+		projectEnquiriesFieldsList.add("Record Type ID");
 		System.out.println("Project Enquiries fields are " + projectEnquiriesFieldsList);
 	}
 
-			
+		
 	public void verifyProjectEnquiriesPageFields() {
 		projectEnquiriesFields();
 		List<String> propertySalesProjectEnquiries = establishConnection.establishMetaDataConnectionPageLayouts("APAC_Project_Enquiries__c", "APAC Property Sales Project Enquiry Layout");
 		List<String> propertySalesProjectEnquiriesList = new ArrayList<String>();
-		propertySalesProjectEnquiriesList = Utility_Functions.xValidatePickListValuesPage(propertySalesProjectEnquiries, projectEnquiriesFieldsList, "Preferecne Type pick list values");
+		propertySalesProjectEnquiriesList = Utility_Functions.xValidatePickListValuesPage(projectEnquiriesFieldsList, propertySalesProjectEnquiries, "Project Enquiries field values");
 		if (propertySalesProjectEnquiriesList.size()!=0) {
 			report.updateTestLog("Verify Project Enquiries Page Field Labels", "All the labels are not present in the Enquiries Page Field Labels:::" + propertySalesProjectEnquiriesList, Status.FAIL);
 		} else {
@@ -1367,9 +1343,7 @@ public class PropertiesPage extends ReusableLibrary {
 	 */
 
 	public void verifyProjectEnquiriesEnhancements() {
-
 		verifyProjectEnquiriesPageFields();
-
 	}
 
 	/**
@@ -1380,25 +1354,8 @@ public class PropertiesPage extends ReusableLibrary {
 	 */
 
 	public void verifyPropertiesEditPage() {
-
-		try {
-			Utility_Functions.xWaitForElementPresent(driver, menu_Properties, 3);
-			Utility_Functions.xClick(driver, menu_Properties, true);
-		} catch (Exception e) {
-			Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
-			Utility_Functions.xClick(driver, menu_More, true);
-			try {
-				Utility_Functions.xWaitForElementPresent(driver, properties, 2);
-				Utility_Functions.xClick(driver, properties, true);
-			} catch (Exception e1) {
-				Utility_Functions.xWaitForElementPresent(driver, propertiesEnv, 2);
-				Utility_Functions.xClick(driver, propertiesEnv, true);
-			}
-		}
-
-		List<WebElement> recentlyViewedpropertiesList = driver
-				.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-		Utility_Functions.xclickOnFirstElementfromList(recentlyViewedpropertiesList);
+		navigateProperties();
+		selectProperty();
 		Utility_Functions.xWaitForElementPresent(driver, showMoreActions, 2);
 		Utility_Functions.xClick(driver, showMoreActions, true);
 		Utility_Functions.xWaitForElementPresent(driver, edit, 2);
@@ -1488,75 +1445,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 	}
 
-	public void propertyTagging() {
-
-		Utility_Functions.xClick(driver, menu_More, true);
-		Utility_Functions.xWaitForElementPresent(driver, properties, 3);
-		Utility_Functions.xClick(driver, properties, true);
-		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
-		Utility_Functions.xClick(driver, recentlyViewed, true);
-		Utility_Functions.xWaitForElementPresent(driver, allProperties, 3);
-		Utility_Functions.xClick(driver, allProperties, true);
-		Utility_Functions.timeWait(8);
-		Utility_Functions.xClick(driver, PropertyList, true);
-		Utility_Functions.timeWait(4);
-		Utility_Functions.xSwitchtoFrame(driver, addTag);
-		Utility_Functions.xClick(driver, addTag, true);
-		Utility_Functions.xSendKeys(driver, privatetag, dataTable.getData("General_Data", "Private Tag"));
-		Utility_Functions.xClickHiddenElement(driver, savePrivateTag);
-		Utility_Functions.xWaitForElementPresent(driver, addTag, 3);
-
-		if (addTag.isDisplayed()) {
-			report.updateTestLog("Verify Property Private Tags", "The Private Tag is saved", Status.PASS);
-		} else {
-			report.updateTestLog("Verify Property Private Tags", "The Private tag is not saved", Status.FAIL);
-		}
-
-		Utility_Functions.xClick(driver, PrivateTagged, true);
-		report.updateTestLog("Verify Property Private Tags", "The Private tag is saved in Private Tag Page",
-				Status.FAIL);
-	}
-
-	public void marketCreation() {
-		Utility_Functions.xWaitForElementPresent(driver, applauncher, 3);
-		Utility_Functions.xClick(driver, applauncher, true);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xClickHiddenElement(driver, marketingLists);
-		Utility_Functions.xWaitForElementPresent(driver, newProperty, 3);
-		Utility_Functions.xClick(driver, newProperty, true);
-		Utility_Functions.xWaitForElementPresent(driver, marketListName, 3);
-		Utility_Functions.xSendKeys(driver, marketListName, "Test");
-		Utility_Functions.xSendKeys(driver, authorContact, "Test Broker6");
-		Utility_Functions.timeWait(1);
-		authorContact.sendKeys(Keys.ARROW_DOWN);
-		authorContact.sendKeys(Keys.ENTER);
-		Utility_Functions.xWaitForElementPresent(driver, notesTxtBx, 3);
-		Utility_Functions.xSendKeys(driver, notesTxtBx, "Testing");
-		Utility_Functions.xClick(driver, saveMarketList, true);
-		Utility_Functions.xWaitForElementPresent(driver, newProperty, 3);
-	}
-
-	public void subscriptionCreation() {
-		Utility_Functions.xWaitForElementPresent(driver, applauncher, 3);
-		Utility_Functions.xClick(driver, applauncher, true);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xClickHiddenElement(driver, subscriptions);
-		Utility_Functions.xWaitForElementPresent(driver, newProperty, 3);
-		Utility_Functions.xClick(driver, newProperty, true);
-		Utility_Functions.xWaitForElementPresent(driver, saveMarketList, 3);
-		Utility_Functions.xSendKeys(driver, marketListSubscription, "Test");
-		marketListSubscription.sendKeys(Keys.ARROW_DOWN);
-		marketListSubscription.sendKeys(Keys.ENTER);
-		Utility_Functions.xClick(driver, saveMarketList, true);
-
-		if (newProperty.isDisplayed()) {
-
-			System.out.println("Subscription is created");
-		} else {
-			System.out.println("Subscription is not created");
-		}
-
-	}
+	
 
 	public void propertyPreferenceUpdateClone() {
 		Utility_Functions.xWaitForElementPresent(driver, applauncher, 3);
@@ -1590,611 +1479,7 @@ public class PropertiesPage extends ReusableLibrary {
 	}
 
 	public void addProperty() {
-
-		Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
-		Utility_Functions.xClick(driver, menu_More, true);
-		Utility_Functions.xWaitForElementPresent(driver, properties, 2);
-		Utility_Functions.xClick(driver, properties, true);
-
-		Utility_Functions.xClick(driver, newProperty, true);
-		Utility_Functions.xWaitForElementPresent(driver, nextBtnProperty, 2);
-
-		Utility_Functions.xClick(driver, nextBtnProperty, true);
-		Utility_Functions.timeWait(3);
-		Utility_Functions.xSwitchtoFrame(driver, buildingPropertyName);
-		// Utility_Functions.xSendKeysVisibleListElement(driver,
-		// buildingPropertyName1, "Test");
-		Utility_Functions.xSendKeys(driver, buildingPropertyName,
-				dataTable.getData("General_Data", "Building/ Property Name"));
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xScrollWindowOnce(driver);
-		Utility_Functions.timeWait(1);
-		// Utility_Functions.xClick(driver, countryDropdown, true);
-		Utility_Functions.xSelectDropdownByIndex(countryDropdown, 229);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xSendKeys(driver, street, dataTable.getData("General_Data", "Street"));
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xSendKeys(driver, city, dataTable.getData("General_Data", "City"));
-		Utility_Functions.timeWait(1);
-		// Utility_Functions.xClick(driver, stateDropdown, true);
-		Utility_Functions.xSelectDropdownByIndex(stateDropdown, 54);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xClick(driver, saveProperty, true);
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xSwitchtoFrame(driver, addBtnTask);
-
-		report.updateTestLog("Verify Property", "The Private is created successfully", Status.PASS);
-
-	}
-
-	public void addTask() {
-
-		// Utility_Functions.xWaitForElementPresent(driver, addBtnTask1, 6);
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xClickVisibleListElement(driver, addBtnTask1);
-		Utility_Functions.xWaitForElementPresent(driver, taskSubject, 2);
-		Utility_Functions.xSendKeys(driver, taskSubject, "Task");
-
-		List<WebElement> newActivityPageLayoutFields = driver
-				.findElements(By.xpath("//div[@class='riseTransitionEnabled']//label/span"));
-		int countRequiredFiles = 0;
-		try {
-			for (WebElement element : newActivityPageLayoutFields) {
-				if ((element.getText().equals("Subject"))) {
-					System.out.println("Subject required field is present in the New Activity Layout Page");
-					report.updateTestLog("Verify New Activity Page Layout",
-							"New Activity Layout Page is having the " + element.getText() + " Status field::",
-							Status.PASS);
-					countRequiredFiles++;
-				} else if ((element.getText().equals("Due Date"))) {
-					System.out.println("Due Date required field is present in the New Activity Layout Page");
-					report.updateTestLog("Verify New Activity Page Layout",
-							"New Activity Layout Page is having the " + element.getText() + " Status field::",
-							Status.PASS);
-					countRequiredFiles++;
-				} else if ((element.getText().equals("Name"))) {
-					System.out.println("Name required field is present in the New Activity Layout Page");
-					report.updateTestLog("Verify New Activity Page Layout",
-							"New Activity Layout Page is having the " + element.getText() + " Status field::",
-							Status.PASS);
-					countRequiredFiles++;
-				} else if ((element.getText().equals("Related To"))) {
-					System.out.println("Related To required field is present in the New Activity Layout Page");
-					report.updateTestLog("Verify New Activity Page Layout",
-							"New Activity Layout Page is having the " + element.getText() + " Status field::",
-							Status.PASS);
-					countRequiredFiles++;
-				} else if ((element.getText().equals("Comments"))) {
-					System.out.println("Comments required field is present in the New Activity Layout Page");
-					report.updateTestLog("Verify New Activity Page Layout",
-							"New Activity Layout Page is having the " + element.getText() + " Status field::",
-							Status.PASS);
-					countRequiredFiles++;
-				} else if ((element.getText().equals("Assigned To"))) {
-					System.out.println("Assigned To required field is present in the New Activity Layout Page");
-					report.updateTestLog("Verify New Activity Page Layout",
-							"New Activity Layout Page is having the " + element.getText() + " Status field::",
-							Status.PASS);
-					countRequiredFiles++;
-				}
-			}
-			List<WebElement> newActivityPageLayoutRequiredFields = driver.findElements(By.xpath(
-					"//div[contains(@class,'forceInputPicklist')]/span[contains(@class,'uiPicklistLabel')]/span"));
-			for (WebElement element : newActivityPageLayoutRequiredFields) {
-				if ((element.getText().equals("Activity Type"))) {
-					System.out.println("Activity Type required field is present in the New Activity Layout Page");
-					report.updateTestLog("Verify New Activity Page Layout",
-							"New Activity Layout Page is having the " + element.getText() + " Status field::",
-							Status.PASS);
-					countRequiredFiles++;
-				} else if ((element.getText().equals("Status"))) {
-					System.out.println("Status required field is present in the New Activity Layout Page");
-					report.updateTestLog("Verify New Activity Page Layout",
-							"New Activity Layout Page is having the " + element.getText() + " Status field::",
-							Status.PASS);
-					countRequiredFiles++;
-				} else if ((element.getText().equals("Priority"))) {
-					System.out.println("Priority required field is present in the New Activity Layout Page");
-					report.updateTestLog("Verify New Activity Page Layout",
-							"New Activity Layout Page is having the " + element.getText() + " Status field::",
-							Status.PASS);
-					countRequiredFiles++;
-				}
-			}
-			if (countRequiredFiles >= 9) {
-				System.out.println("New Activity Page Layout contains the required fields ");
-				report.updateTestLog("Verify New Activity Page Layout",
-						"New Activity Layout Page is having all the required fields", Status.PASS);
-			} else {
-				report.updateTestLog("Verify New Activity Page Layout",
-						"New Activity Layout Page is not having all the required fields", Status.WARNING);
-			}
-
-		} catch (Exception e) {
-			System.out.println("Encountered an error in validating the Account New Activity Page Layout Fields::"
-					+ e.getMessage());
-		}
-
-		activityTypeListValues.add("--None--");
-		activityTypeListValues.add("Private - Client Intelligence");
-		activityTypeListValues.add("Private - Cold Call");
-		activityTypeListValues.add("Private - Follow-Up Meeting");
-		activityTypeListValues.add("Private - Follow-Up Task");
-		activityTypeListValues.add("Private - Initial Meeting");
-		activityTypeListValues.add("Private - Networking");
-		activityTypeListValues.add("Private - Pitch");
-		activityTypeListValues.add("Private - Task");
-		activityTypeListValues.add("Private - Warm Call");
-		activityTypeListValues.add("Public - Client Intelligence (All)");
-		activityTypeListValues.add("Public - Client Intelligence (CML)");
-		activityTypeListValues.add("Public - Client Intelligence (Investor Services)");
-		activityTypeListValues.add("Public – Client Intelligence (VAS)");
-		activityTypeListValues.add("Public - Client Meeting (CML)");
-		activityTypeListValues.add("Public - Client Meeting (Investor Services)");
-		System.out.println("Additional Activity Type values are added to the list successfully::::");
-
-		Utility_Functions.xClickVisibleListElement(driver, activityTypeList);
-		Utility_Functions.xClick(driver, activityType1, true);
-		Utility_Functions.xWaitForElementPresent(driver, activitySave, 2);
-		Utility_Functions.xClickVisibleListElement(driver, activitySave);
-		report.updateTestLog("Verify Task", "The Task is created successfully", Status.PASS);
-
-	}
-
-	public void addCampaign() {
-
-		Utility_Functions.xWaitForElementPresent(driver, applauncher, 3);
-		Utility_Functions.xClick(driver, applauncher, true);
-		Utility_Functions.xWaitForElementPresent(driver, campaign, 3);
-		Utility_Functions.xClick(driver, campaign, true);
-		Utility_Functions.xWaitForElementPresent(driver, newCampaigns, 2);
-		Utility_Functions.xClick(driver, newCampaigns, true);
-		Utility_Functions.xWaitForElementPresent(driver, campaignsName, 2);
-		Utility_Functions.xSendKeysVisibleListElement(driver, campaignsName, "TestCampaigns");
-		Utility_Functions.xWaitForElementPresent(driver, saveCampaigns, 3);
-		Utility_Functions.xClick(driver, saveCampaigns, true);
-		report.updateTestLog("Verify Campaigns", "The Campaigns is created successfully", Status.PASS);
-
-	}
-
-	public void activityTask() {
-
-		for (int i = 1; i <= 3; i++) {
-
-			if (i == 1) {
-				// Utility_Functions.xWaitForElementPresent(driver, addBtnTask1,
-				// 3);
-				Utility_Functions.timeWait(5);
-				Utility_Functions.xClickVisibleListElement(driver, addBtnTask1);
-				Utility_Functions.xWaitForElementPresent(driver, taskSubject, 2);
-				Utility_Functions.xSendKeys(driver, taskSubject, "Present Automation Task");
-
-				// Utility_Functions.xSendKeysVisibleListElement(driver,
-				// activityInputDate, dateFormat.format(date).toString());
-				// Utility_Functions.xSendKeys(driver, activityInputDate,
-				// dateFormat.format(date).toString());
-
-			} else if (i == 2) {
-				// Utility_Functions.xWaitForElementPresent(driver, addBtnTask1,
-				// 6);
-				Utility_Functions.timeWait(3);
-				Utility_Functions.xClickVisibleListElement(driver, addBtnTask1);
-				Utility_Functions.xWaitForElementPresent(driver, taskSubject, 2);
-				Utility_Functions.xSendKeys(driver, taskSubject, "Past Automation Task");
-				/*
-				 * Calendar calendar = Calendar.getInstance();
-				 * 
-				 * // Move calendar to yesterday calendar.add(Calendar.DATE,
-				 * -1);
-				 * 
-				 * // Get current date of calendar which point to the yesterday
-				 * now Date newDate = calendar.getTime();
-				 * Utility_Functions.xWaitForElementPresent(driver,
-				 * activityInputDate, 3); Utility_Functions.xSendKeys(driver,
-				 * activityInputDate, dateFormat.format(newDate).toString());
-				 * Utility_Functions.xWaitForElementPresent(driver,
-				 * activitySave, 2);
-				 * Utility_Functions.xClickVisibleListElement(driver,
-				 * activitySave); report.updateTestLog("Verify Past Task",
-				 * "The Past Task is created successfully", Status.PASS);
-				 */
-			} else {
-				// Utility_Functions.xWaitForElementPresent(driver, addBtnTask1,
-				// 6);
-				Utility_Functions.timeWait(3);
-				Utility_Functions.xClickVisibleListElement(driver, addBtnTask1);
-				Utility_Functions.xWaitForElementPresent(driver, taskSubject, 2);
-				Utility_Functions.xSendKeys(driver, taskSubject, "Future Automation Task");
-				/*
-				 * Calendar calendar = Calendar.getInstance();
-				 * 
-				 * // Move calendar to future calendar.add(Calendar.DATE, 1);
-				 * 
-				 * // Get current date of calendar which point to the yesterday
-				 * now Date newDate = calendar.getTime();
-				 * Utility_Functions.xWaitForElementPresent(driver,
-				 * activityInputDate, 3); //Utility_Functions.xSendKeys(driver,
-				 * activityInputDate, dateFormat.format(newDate).toString());
-				 * Utility_Functions.xWaitForElementPresent(driver,
-				 * activitySave, 2);
-				 * Utility_Functions.xClickVisibleListElement(driver,
-				 * activitySave); report.updateTestLog("Verify Future Task",
-				 * "The Future Task is created successfully", Status.PASS);
-				 */
-			}
-			Utility_Functions.xClickVisibleListElement(driver, activityTypeList);
-			Utility_Functions.xClick(driver, activityType1, true);
-			Utility_Functions.timeWait(3);
-
-			Utility_Functions.xWaitForElementPresent(driver, activitySave, 2);
-			Utility_Functions.xClickVisibleListElement(driver, activitySave);
-			report.updateTestLog("Verify Task", "The Task is created successfully", Status.PASS);
-		}
-	}
-
-	public void addComp() {
-
-		Utility_Functions.xWaitForElementPresent(driver, applauncher, 3);
-		Utility_Functions.xClick(driver, applauncher, true);
-		Utility_Functions.xWaitForElementPresent(driver, comps, 3);
-		Utility_Functions.xClick(driver, comps, true);
-		Utility_Functions.xWaitForElementPresent(driver, newComps, 2);
-		Utility_Functions.xClick(driver, newComps, true);
-		Utility_Functions.xWaitForElementPresent(driver, nextBtnComps, 2);
-		Utility_Functions.xClick(driver, nextBtnComps, true);
-		Utility_Functions.xWaitForElementPresent(driver, compsName, 2);
-		Utility_Functions.xSendKeysVisibleListElement(driver, compsName, "Test");
-		Utility_Functions.xWaitForElementPresent(driver, saveComps, 3);
-		Utility_Functions.xClick(driver, saveComps, true);
-		report.updateTestLog("Verify Comps", "The Comps is created successfully", Status.PASS);
-
-	}
-
-	public void activityEvent() {
-		for (int i = 1; i <= 3; i++) {
-			if (i == 1) {
-
-				// Utility_Functions.xWaitForElementPresent(driver, newEvent,
-				// 3);
-				Utility_Functions.timeWait(3);
-				Utility_Functions.xClickVisibleListElement(driver, newEvent);
-				Utility_Functions.xSendKeysVisibleListElement(driver, eventSubject, "Past Event");
-
-				/*
-				 * Utility_Functions.xWaitForElementPresent(driver,
-				 * eventStartDate, 3); Utility_Functions.xSendKeys(driver,
-				 * eventStartDate, dateFormat.format(date).toString());
-				 * 
-				 * Utility_Functions.xWaitForElementPresent(driver,
-				 * eventEndDate, 3); Utility_Functions.xSendKeys(driver,
-				 * eventEndDate, dateFormat.format(date).toString());
-				 */
-
-			} else if (i == 2) {
-				Utility_Functions.xClickVisibleListElement(driver, addEventActivity);
-				Utility_Functions.xSendKeysVisibleListElement(driver, eventSubject, "Present Event");
-
-				/*
-				 * Calendar calendar = Calendar.getInstance();
-				 * 
-				 * // Move calendar to yesterday calendar.add(Calendar.DATE,
-				 * -1);
-				 * 
-				 * // Get current date of calendar which point to the yesterday
-				 * now Date newDate = calendar.getTime();
-				 * Utility_Functions.xWaitForElementPresent(driver,
-				 * eventStartDate, 3); Utility_Functions.xSendKeys(driver,
-				 * eventStartDate, dateFormat.format(newDate).toString());
-				 * 
-				 * Utility_Functions.xWaitForElementPresent(driver,
-				 * eventEndDate, 3); Utility_Functions.xSendKeys(driver,
-				 * eventEndDate, dateFormat.format(newDate).toString());
-				 */
-
-			} else {
-				Utility_Functions.xClickVisibleListElement(driver, addEventActivity);
-				Utility_Functions.xSendKeysVisibleListElement(driver, eventSubject, "Future Event");
-
-				/*
-				 * Calendar calendar = Calendar.getInstance();
-				 * 
-				 * // Move calendar to future calendar.add(Calendar.DATE, 1);
-				 * 
-				 * // Get current date of calendar which point to the yesterday
-				 * now Date newDate = calendar.getTime();
-				 * Utility_Functions.xWaitForElementPresent(driver,
-				 * eventStartDate, 3); Utility_Functions.xSendKeys(driver,
-				 * eventStartDate, dateFormat.format(newDate).toString());
-				 * 
-				 * Utility_Functions.xWaitForElementPresent(driver,
-				 * eventEndDate, 3); Utility_Functions.xSendKeys(driver,
-				 * eventEndDate, dateFormat.format(newDate).toString());
-				 */
-
-			}
-			Utility_Functions.xClickVisibleListElement(driver, eventActivityTypeList);
-			Utility_Functions.xWaitForElementPresent(driver, newActivityType, 3);
-			Utility_Functions.xClickVisibleListElement(driver, newActivityType);
-			Utility_Functions.xWaitForElementPresent(driver, activitySave, 3);
-			Utility_Functions.xClickVisibleListElement(driver, activitySave);
-			report.updateTestLog("Verify Event", "The Event is created successfully", Status.PASS);
-			Utility_Functions.timeWait(3);
-		}
-	}
-
-	public void addEvent() {
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xClickVisibleListElement(driver, newEvent);
-		Utility_Functions.xSendKeysVisibleListElement(driver, eventSubject, "Event");
-		Utility_Functions.xClickVisibleListElement(driver, eventActivityTypeList);
-		Utility_Functions.xWaitForElementPresent(driver, newActivityType, 3);
-		Utility_Functions.xClickVisibleListElement(driver, newActivityType);
-		Utility_Functions.xWaitForElementPresent(driver, activitySave, 3);
-		Utility_Functions.xClickVisibleListElement(driver, activitySave);
-		report.updateTestLog("Verify Event", "The Event is created successfully", Status.PASS);
-
-	}
-
-	public void editTask() {
-		Utility_Functions.xWaitForElementPresent(driver, taskName, 5);
-		Utility_Functions.xClick(driver, taskName, true);
-		Utility_Functions.timeWait(3);
-		// Utility_Functions.xWaitForElementPresent(driver, editTask, 3);
-		Utility_Functions.xClickVisibleListElement(driver, editTask);
-		Utility_Functions.timeWait(3);
-		Utility_Functions.xSendKeysVisibleListElement(driver, editTaskName, "Automation");
-		Utility_Functions.xWaitForElementPresent(driver, saveBtnTask, 3);
-		Utility_Functions.xClick(driver, saveBtnTask, true);
-		report.updateTestLog("Verify Edit Task", "The Task is edited successfully", Status.PASS);
-
-	}
-
-	public void addAttachment() {
-
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xClick(driver, addAttachment, true);
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xSwitchtoFrame(driver, attachFile);
-		// attachFile.sendKeys(Keys.ENTER);
-		Utility_Functions.xClickHiddenElement(driver, attachFile);
-		Utility_Functions.timeWait(3);
-		// Utility_Functions.xClick(driver, attachFile, true);
-		// Specify the file location with extension
-		StringSelection sel = new StringSelection(
-				"\\us.cbre.net\\dardata\\Team-Cognizant\\CBRE_QA\\Mukesh Garg\\Demo.docx");
-
-		// Copy to clipboard
-		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(sel, null);
-		System.out.println("selection" + sel);
-		try {
-			Robot robot = new Robot();
-
-			robot.keyPress(KeyEvent.VK_CONTROL);
-			robot.keyPress(KeyEvent.VK_V);
-			robot.keyRelease(KeyEvent.VK_CONTROL);
-			robot.keyRelease(KeyEvent.VK_V);
-			robot.keyPress(KeyEvent.VK_ENTER);
-			robot.keyRelease(KeyEvent.VK_ENTER);
-
-		} catch (Exception e) {
-			System.out.println("The file is not uploaded" + e.getMessage());
-
-		}
-
-	}
-
-	public void deleteTask() {
-		Utility_Functions.timeWait(3);
-		Utility_Functions.xClickVisibleListElement(driver, deleteTask);
-		Utility_Functions.xClick(driver, deleteTaskPopup, true);
-
-	}
-
-	public void editStatusTask() {
-		Utility_Functions.timeWait(3);
-		Utility_Functions.xClickVisibleListElement(driver, checkBoxTask);
-		Utility_Functions.xWaitForElementPresent(driver, taskName, 5);
-		Utility_Functions.xClick(driver, taskName, true);
-		Utility_Functions.timeWait(3);
-		report.updateTestLog("Verify Edit Task status", "The Task status is changed successfully", Status.PASS);
-	}
-
-	public void validationEvent() {
-
-		if (startTimeEvent.isDisplayed()) {
-			report.updateTestLog("Event", "Start Time", Status.PASS);
-		} else {
-			report.updateTestLog("Event", "Start Time", Status.FAIL);
-		}
-
-		if (endTimeEvent.isDisplayed()) {
-			report.updateTestLog("Event", "End Time", Status.PASS);
-		} else {
-			report.updateTestLog("Event", "End Time", Status.FAIL);
-		}
-
-		if (commmentsEvent.isDisplayed()) {
-			report.updateTestLog("Event", "Comments", Status.PASS);
-		} else {
-			report.updateTestLog("Event", "Comments", Status.FAIL);
-		}
-	}
-
-	public void editEvent() {
-		Utility_Functions.xWaitForElementPresent(driver, eventName, 5);
-		Utility_Functions.xClick(driver, eventName, true);
-		Utility_Functions.timeWait(3);
-		// Utility_Functions.xWaitForElementPresent(driver, editTask, 3);
-		Utility_Functions.xClickVisibleListElement(driver, editEvent);
-		Utility_Functions.timeWait(3);
-		Utility_Functions.xSendKeysVisibleListElement(driver, editEventName, "Automation");
-		Utility_Functions.xWaitForElementPresent(driver, saveBtnEvent, 3);
-		Utility_Functions.xClick(driver, saveBtnEvent, true);
-		report.updateTestLog("Verify Edit Event", "The Event is edited successfully", Status.PASS);
-
-	}
-
-	public void validationTask() {
-
-		if (activityTypeTask.isDisplayed()) {
-			report.updateTestLog("Task", "Activity Type", Status.PASS);
-		} else {
-			report.updateTestLog("Task", "Activity Type", Status.FAIL);
-		}
-
-		if (statusTask.isDisplayed()) {
-			report.updateTestLog("Task", "Status", Status.PASS);
-		} else {
-			report.updateTestLog("Task", "Status", Status.FAIL);
-		}
-
-		if (commentTask.isDisplayed()) {
-			report.updateTestLog("Task", "Comment", Status.PASS);
-		} else {
-			report.updateTestLog("Task", "Comment", Status.FAIL);
-		}
-	}
-
-	static ArrayList<String> activityTypeListValues = new ArrayList<String>();
-
-	public void additionalActivityTypeList() {
-		activityTypeListValues.add("--None--");
-		activityTypeListValues.add("Private - Client Intelligence");
-		activityTypeListValues.add("Private - Cold Call");
-		activityTypeListValues.add("Private - Follow-Up Meeting");
-		activityTypeListValues.add("Private - Follow-Up Task");
-		activityTypeListValues.add("Private - Initial Meeting");
-		activityTypeListValues.add("Private - Networking");
-		activityTypeListValues.add("Private - Pitch");
-		activityTypeListValues.add("Private - Task");
-		activityTypeListValues.add("Private - Warm Call");
-		activityTypeListValues.add("Public - Client Intelligence (All)");
-		activityTypeListValues.add("Public - Client Intelligence (CML)");
-		activityTypeListValues.add("Public - Client Intelligence (Investor Services)");
-		activityTypeListValues.add("Public – Client Intelligence (VAS)");
-		activityTypeListValues.add("Public - Client Meeting (CML)");
-		activityTypeListValues.add("Public - Client Meeting (Investor Services)");
-		System.out.println("Additional Activity Type values are added to the list successfully::::");
-	}
-
-	public void createSpace() {
-
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xClickVisibleListElement(driver, relatedlnk);
-		Utility_Functions.xWaitForElementPresent(driver, space, 5);
-		Utility_Functions.xClick(driver, space, true);
-		Utility_Functions.timeWait(3);
-		Utility_Functions.xClickVisibleListElement(driver, newSpace);
-		Utility_Functions.xWaitForElementPresent(driver, spaceName, 3);
-		Utility_Functions.xSendKeys(driver, spaceName, "test");
-		Utility_Functions.xClick(driver, saveSpace, true);
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xClick(driver, spaceNameSelect, true);
-
-	}
-	
-	/**
-	 * Validating the Properties Private Tags
-	 *
-	 * @author Vishnuvardhan
-	 *
-	 */
-	public void verifyPropertiesPrivateTags() {
-
-		Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
-		Utility_Functions.xClick(driver, menu_More, true);
-		report.updateTestLog("Verify Properties Private Tag", "Verifying More options is displayed", Status.PASS);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, more_PrivateTags, 3);
-		Utility_Functions.xClick(driver, more_PrivateTags, true);
-		report.updateTestLog("Verify Properties Private Tag", "Verifying Private Tags is displayed", Status.PASS);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, newPrivateTag, 3);
-		Utility_Functions.xClick(driver, newPrivateTag, true);
-		report.updateTestLog("Verify Properties Private Tag", "Verifying the New Private Tags is displayed",
-				Status.PASS);
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xWaitForElementPresent(driver, privateTagName, 3);
-		Utility_Functions.xClick(driver, privateTagName, true);
-		report.updateTestLog("Verify Properties Private Tag", "Verifying the New Private Tag name is displayed",
-				Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, privateTagName, 3);
-		Utility_Functions.xSendKeys(driver, privateTagName, "Test_" + Utility_Functions.xGenerateAlphaNumericString());
-		report.updateTestLog("Verify Properties Private Tag", "Verifying the Private Tag name is entered", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, saveNewPrivateTag, 3);
-		Utility_Functions.xClick(driver, saveNewPrivateTag, true);
-		report.updateTestLog("Verify Properties Private Tag", "Verifying the Private Tag name is entered and saved",
-				Status.PASS);
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xScrollWindow(driver);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xScrollWindowTop(driver);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, newPropertiesDetailsPage, 3);
-		Utility_Functions.xClick(driver, newPropertiesDetailsPage, true);
-		report.updateTestLog("Verify Properties Private Tag", "Verifying the New Property is displayed", Status.PASS);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, newPropertiesDetailsPage, 3);
-		SearchTextSOQL property = new SearchTextSOQL(scriptHelper);
-		String propertyName = property.fetchRecord("Property__c", "Name");
-		searchPropertyWithPrivateTag.sendKeys(propertyName);
-		// Utility_Functions.xSendKeys(driver,newPropertiesDetailsPage, "T");
-		searchPropertyWithPrivateTag.sendKeys(Keys.ARROW_DOWN);
-		searchPropertyWithPrivateTag.sendKeys(Keys.ENTER);
-		report.updateTestLog("Verify Properties Private Tag",
-				"Verifying the Property name is entered in the new property page", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, savePropertyPrivateTag, 3);
-		Utility_Functions.xClick(driver, savePropertyPrivateTag, true);
-		report.updateTestLog("Verify Properties Private Tag",
-				"Verifying the Property name is entered and new property is saved", Status.PASS);
-
-	}
-	
-	/**
-	 * Validating the Bulk Tagging
-	 *
-	 * @author Vishnuvardhan
-	 *
-	 */
-	public void verifyBulkTaggingFunctionality() {
-
-		Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
-		Utility_Functions.xClick(driver, menu_More, true);
-		Utility_Functions.xWaitForElementPresent(driver, bulkTagging, 3);
-		Utility_Functions.xClick(driver, bulkTagging, true);
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xSwitchtoFrame(driver, accountSearch);
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xWaitForElementPresent(driver, accountSearch, 3);
-		Utility_Functions.xClick(driver, accountSearch, true);
-		Utility_Functions.xSendKeys(driver, accountSearch, "Test");
-		Utility_Functions.xWaitForElementPresent(driver, searchProperty, 3);
-		Utility_Functions.xClick(driver, searchProperty, true);
-		Utility_Functions.timeWait(2);
-
-	}
-
-	public void bulkTaggingFunctionality() {
-
-		Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
-		Utility_Functions.xClick(driver, menu_More, true);
-		Utility_Functions.xWaitForElementPresent(driver, bulkTagging, 3);
-		Utility_Functions.xClick(driver, bulkTagging, true);
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xSwitchtoFrame(driver, accountSearch);
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xWaitForElementPresent(driver, accountSearch, 3);
-		Utility_Functions.xClick(driver, accountSearch, true);
-		Utility_Functions.xSendKeys(driver, accountSearch, "Test");
-		Utility_Functions.xWaitForElementPresent(driver, searchProperty, 3);
-		Utility_Functions.xClick(driver, searchProperty, true);
-		Utility_Functions.timeWait(3);
-		for (int i = 1; i <= 3; i++) {
-			WebElement element = driver.findElement(By
-					.xpath("//h2[contains(text(),'Property Detail')]/parent::div/following-sibling::div/span/table/tbody/tr["
-							+ i + "]/td/label/input[@type='checkbox']"));
-			Utility_Functions.xClick(driver, element, true);
-		}
-
-	}
+		navigateNewPropertyPage();
+		createProperty();
+	}	
 }

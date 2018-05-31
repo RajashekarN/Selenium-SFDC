@@ -4,6 +4,7 @@ import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 
 import pageObjects.PropertiesPage;
+import pageObjects.TaggingPage;
 import pagesAPI.PropertiesFunctions;
 
 /**
@@ -28,6 +29,7 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	BC_Salesforce_Login sfBC_Login = new BC_Salesforce_Login(scriptHelper);
 	PropertiesPage sfPropertiesPage = new PropertiesPage(scriptHelper);
 	PropertiesFunctions propertiesFunctions = new PropertiesFunctions(scriptHelper);
+	TaggingPage taggingPage = new TaggingPage(scriptHelper);
 
 /*	*//**
 	 * Validating the Login functionality 
@@ -60,7 +62,7 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	 */	
 
 	public void bc_bulkTagging(){
-		sfPropertiesPage.bulkTaggingFunctionality();
+		taggingPage.bulkTaggingFunctionality();
 		
 	}
 
@@ -111,7 +113,7 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_verifyBulkTaggingFunctionality() throws InterruptedException {
-		sfPropertiesPage.verifyBulkTaggingFunctionality();
+		taggingPage.verifyBulkTaggingFunctionality();
 	}
 	/**
 	 *  Validating the New properties page Property Type pick list field
@@ -129,7 +131,7 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_verifyPropertiesPrivateTags() throws InterruptedException {
-		sfPropertiesPage.verifyPropertiesPrivateTags();
+		taggingPage.verifyPropertiesPrivateTags();
 	}
 
 	/**
@@ -252,7 +254,7 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_propertyTagging() throws InterruptedException {
-		sfPropertiesPage.propertyTagging();
+		taggingPage.propertyTagging();
 	}
 	
 	/**
@@ -262,7 +264,7 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_marketCreation() throws InterruptedException {
-		sfPropertiesPage.marketCreation();
+		taggingPage.marketCreation();
 	}
 	/**
 	 * Validating the subscription creation
@@ -271,7 +273,7 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_subscriptionCreation() throws InterruptedException {
-		sfPropertiesPage.subscriptionCreation();
+		taggingPage.subscriptionCreation();
 	}
 	
 	/**
@@ -301,7 +303,7 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_addTask() throws InterruptedException {
-		sfPropertiesPage.addTask();
+		taggingPage.addTask();
 	}
 	
 	/**
@@ -311,7 +313,7 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_addCampaign() throws InterruptedException {
-		sfPropertiesPage.addCampaign();
+		taggingPage.addCampaign();
 	}
 	
 	/**
@@ -321,7 +323,7 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_addComp() throws InterruptedException {
-		sfPropertiesPage.addComp();
+		taggingPage.addComp();
 	}
 	
 	/**
@@ -331,7 +333,7 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_activityTask() throws InterruptedException {
-		sfPropertiesPage.activityTask();
+		taggingPage.activityTask();
 	}
 	
 	/**
@@ -341,7 +343,7 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_activityEvent() throws InterruptedException {
-		sfPropertiesPage.activityEvent();
+		taggingPage.activityEvent();
 	}
 	
 	/**
@@ -351,7 +353,7 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_addEvent() throws InterruptedException {
-		sfPropertiesPage.	addEvent();
+		taggingPage.addEvent();
 	}
 
 	/**
@@ -361,7 +363,7 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_editTask() throws InterruptedException {
-		sfPropertiesPage.editTask();
+		taggingPage.editTask();
 	}
 
 	/**
@@ -371,7 +373,7 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_addAttachment() throws InterruptedException {
-		sfPropertiesPage.addAttachment();
+		taggingPage.addAttachment();
 	}
 	
 	/**
@@ -381,7 +383,7 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_deleteTask() throws InterruptedException {
-		sfPropertiesPage.deleteTask();
+		taggingPage.deleteTask();
 	}
 	
 	/**
@@ -391,7 +393,7 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_editCloseTask() throws InterruptedException {
-		sfPropertiesPage.editStatusTask();
+		taggingPage.editStatusTask();
 	}
 	
 	/**
@@ -401,7 +403,7 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_editEvent() throws InterruptedException {
-		sfPropertiesPage.editEvent();
+		taggingPage.editEvent();
 	}
 	
 	/**
@@ -411,7 +413,7 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_validationTask() throws InterruptedException {
-		sfPropertiesPage.validationTask();
+		taggingPage.validationTask();
 	}
 	
 	/**
@@ -421,7 +423,7 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_validationEvent() throws InterruptedException {
-		sfPropertiesPage.validationEvent();
+		taggingPage.validationEvent();
 	}
 	
 	/**
@@ -431,7 +433,7 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_createSpace() throws InterruptedException {
-		sfPropertiesPage.createSpace();
+		taggingPage.createSpace();
 	}
 	
 }

@@ -1367,6 +1367,13 @@ public class Utility_Functions extends ReusableLibrary {
 		return List1;
 	}
 	
+	/*
+	 * *******************************************************************
+	 * Function Name: Validate whether the fields present on the page or not
+	 * ******************************************************************
+	 */
+	
+	
 	public static List<String> xValidatePickListValuesPage(List<String> List1, List<String> List2, String TextToBeDisplayed) {
 		for(int i=0; i < List1.size(); i++) {
 			if(List1.get(i).contains("%2F")) {
@@ -1380,6 +1387,13 @@ public class Utility_Functions extends ReusableLibrary {
 		System.out.println(TextToBeDisplayed +  " -- " + List1  + " which aren't present in the page");
 		return List1;
 	}
+	
+	/*
+	 * *******************************************************************
+	 * Function Name: Validate whether the fields present on the page or not
+	 * ******************************************************************
+	 */
+	
 	
 	public static int xValidateFieldsPresentPage(List<String> FieldList, List<WebElement> WebElements,
 			String TextToBeDisplayed) {
@@ -1410,6 +1424,13 @@ public class Utility_Functions extends ReusableLibrary {
 		}
 		return count;
 	}
+	
+	/*
+	 * *******************************************************************
+	 * Function Name: Validate whether the fields present on the page or not
+	 * ******************************************************************
+	 */
+	
 
 	public int xValidateFieldsPresentonPage(List<WebElement> WebElements, HashMap<String, String> hashMap,
 			String TextToBeDisplayed) {
@@ -1428,6 +1449,13 @@ public class Utility_Functions extends ReusableLibrary {
 		}
 		return count;
 	}
+	
+	/*
+	 * *******************************************************************
+	 * Function Name: Validate whether the fields present on the page or not
+	 * ******************************************************************
+	 */
+	
 	
 	public static int xValidateFieldsPresentonPage(String text, List<WebElement> WebElements, String TextToBeDisplayed) {
 		int count = 0;
