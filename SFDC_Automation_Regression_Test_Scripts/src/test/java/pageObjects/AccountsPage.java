@@ -18,7 +18,6 @@ import org.openqa.selenium.support.PageFactory;
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
-import com.sforce.soap.partner.SaveResult;
 
 import pagesAPI.AccountsFunctions;
 import pagesAPI.SearchTextSOQL;

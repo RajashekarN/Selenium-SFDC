@@ -17,6 +17,10 @@ import com.sforce.soap.partner.SaveResult;
 import com.sforce.soap.partner.SetPasswordResult;
 import com.sforce.ws.ConnectionException;
 import com.sforce.ws.ConnectorConfig;
+import com.sforce.soap.metadata.Layout;
+import com.sforce.soap.metadata.LayoutColumn;
+import com.sforce.soap.metadata.LayoutItem;
+import com.sforce.soap.metadata.LayoutSection;
 import com.sforce.soap.metadata.Metadata;
 import com.sforce.soap.metadata.MetadataConnection;
 import com.sforce.soap.metadata.PicklistValue;
@@ -37,7 +41,7 @@ public class EstablishConnection extends ReusableLibrary {
 	}
 
 	public static PartnerConnection connection = null;
-	static SetPasswordResult setPasswordResults =null;
+	static SetPasswordResult setPasswordResults = null;
 	static ConnectorConfig config;
 	static ConnectorConfig metadataConfig;
 	static MetadataConnection metadataConnection;
@@ -66,7 +70,6 @@ public class EstablishConnection extends ReusableLibrary {
 		return environment;
 	}
 
-
 	/**
 	 * Function for establishing the connection
 	 * 
@@ -79,118 +82,225 @@ public class EstablishConnection extends ReusableLibrary {
 			String environment = initializeEnvironment();
 			System.out.println(environment);
 			String Username = null, Password;
-			if ((environment.equals("UAT")) || (environment.equals("UAT2")) || (environment.equals("FTE")) || (environment.equals("FTE2"))) {
-				if ((dataTable.getData("General_Data", "TC_ID").contains("OBEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))  
-					Username = properties.getProperty("OBEMEABroker")+ "." + environment;
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("OBEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("OBEMEAManager")+ "." + environment;
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("OBEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("OBEMEACSS")+ "." + environment;	
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("CMAPACBroker")+ "." + environment;		
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("CMAPACManager")+ "." + environment;		
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
-					Username = properties.getProperty("CMAPACCSS")+ "." + environment;	
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("CMEMEABroker")+ "." + environment;		
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("CMEMEAManager")+ "." + environment;		
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("CMEMEACSS")+ "." + environment;	
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("ABEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("ABEMEABroker")+ "." + environment;	
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("ABEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("ABEMEAManager")+ "." + environment;	
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("ABEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("ABEMEACSS")+ "." + environment;	
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Admin")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("SystemAdminUsername")+ "." + environment;	
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("ABAMERBroker")+ "." + environment;	
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("ABAMERManager")+ "." + environment;	
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("ABAMERCSS")+ "." + environment;	
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("OBAMERBroker")+ "." + environment;	
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("OBAMERManager")+ "." + environment;	
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("OBAMERCSS")+ "." + environment;	
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Admin")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("SystemAdminUsername")+ "." + environment;	
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("OBAPACBroker")+ "." + environment;
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("OBAPACManager")+ "." + environment;
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("OBAPACCSS")+ "." + environment;
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("CMAMERBroker")+ "." + environment;	
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))  
-					Username = properties.getProperty("CMAMERManager")+ "." + environment;	
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("CMAMERCSS")+ "." + environment;		
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("CMEMEABroker")+ "." + environment;	
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("CMEMEAManager")+ "." + environment;	
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("CMEMEACSS")+ "." + environment;		
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("ASAPACBroker")+ "." + environment;	
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("ASAPACManager")+ "." + environment;		
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("ASAPACCSS")+ "." + environment;		
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("GWSAPACBroker")+ "." + environment;	
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("GWSAPACManager")+ "." + environment;		
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))  
-					Username = properties.getProperty("GWSAPACCSS")+ "." + environment;	
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("GWSEMEABroker")+ "." + environment;	
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("GWSEMEAManager")+ "." + environment;		
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("GWSEMEACSS")+ "." + environment;
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("VASAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))  
-					Username = properties.getProperty("VASAMERBroker")+ "." + environment;	
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("VASAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))  
-					Username = properties.getProperty("VASAMERManager")+ "." + environment;		
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("VASAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
-					Username = properties.getProperty("VASAMERCSS")+ "." + environment;
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("VASEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
-					Username = properties.getProperty("VASEMEABroker")+ "." + environment;	
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("VASEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
-					Username = properties.getProperty("VASEMEAManager")+ "." + environment;		
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("VASEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
-					Username = properties.getProperty("VASEMEACSS")+ "." + environment;
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("FRANEMEAManager")+ "." + environment;	
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("FDIGEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("FDIGEMEAManager")+ "." + environment;	
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("FDIREMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("FDIREMEAManager")+ "." + environment;	
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("FDIGEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Data")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("FDIGEMEAData")+ "." + environment;
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("DAASIA")) && (dataTable.getData("General_Data", "TC_ID").contains("Data")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("DAASIAData")+ "." + environment;	
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("DAPACI")) && (dataTable.getData("General_Data", "TC_ID").contains("Data")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin"))) 
-					Username = properties.getProperty("DAPACIData")+ "." + environment;	
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
-					Username = properties.getProperty("ABAPACBroker")+ "." + environment;
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
-					Username = properties.getProperty("ABAPACManager")+ "." + environment;
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS")) && (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))  
-					Username = properties.getProperty("ABAPACCSS")+ "." + environment;
-				else if (dataTable.getData("General_Data", "TC_ID").contains("Admin")) 
-					Username = properties.getProperty("SystemAdminUsername")+ "." + environment;
-			}	
+			if ((environment.equals("UAT")) || (environment.equals("UAT2")) || (environment.equals("FTE"))
+					|| (environment.equals("FTE2"))) {
+				if ((dataTable.getData("General_Data", "TC_ID").contains("OBEMEA"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Broker"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("OBEMEABroker") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("OBEMEA"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("OBEMEAManager") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("OBEMEA"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("CSS"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("OBEMEACSS") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAPAC"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Broker"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("CMAPACBroker") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAPAC"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("CMAPACManager") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAPAC"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("CSS"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("CMAPACCSS") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Broker"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("CMEMEABroker") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("CMEMEAManager") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("CSS"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("CMEMEACSS") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("ABEMEA"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Broker"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("ABEMEABroker") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("ABEMEA"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("ABEMEAManager") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("ABEMEA"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("CSS"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("ABEMEACSS") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAMER"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Admin"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("SystemAdminUsername") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAMER"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Broker"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("ABAMERBroker") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAMER"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("ABAMERManager") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAMER"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("CSS"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("ABAMERCSS") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Broker"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("OBAMERBroker") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("OBAMERManager") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("CSS"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("OBAMERCSS") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Admin"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("SystemAdminUsername") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAPAC"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Broker"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("OBAPACBroker") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAPAC"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("OBAPACManager") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAPAC"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("CSS"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("OBAPACCSS") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Broker"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("CMAMERBroker") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("CMAMERManager") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("CSS"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("CMAMERCSS") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Broker"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("CMEMEABroker") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("CMEMEAManager") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("CSS"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("CMEMEACSS") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAPAC"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Broker"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("ASAPACBroker") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAPAC"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("ASAPACManager") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAPAC"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("CSS"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("ASAPACCSS") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAPAC"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Broker"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("GWSAPACBroker") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAPAC"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("GWSAPACManager") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAPAC"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("CSS"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("GWSAPACCSS") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSEMEA"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Broker"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("GWSEMEABroker") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSEMEA"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("GWSEMEAManager") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSEMEA"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("CSS"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("GWSEMEACSS") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("VASAMER"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Broker"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("VASAMERBroker") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("VASAMER"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("VASAMERManager") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("VASAMER"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("CSS"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("VASAMERCSS") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("VASEMEA"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Broker"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("VASEMEABroker") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("VASEMEA"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("VASEMEAManager") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("VASEMEA"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("CSS"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("VASEMEACSS") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("FRANEMEAManager") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("FDIGEMEA"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("FDIGEMEAManager") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("FDIREMEA"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("FDIREMEAManager") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("FDIGEMEA"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Data"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("FDIGEMEAData") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("DAASIA"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Data"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("DAASIAData") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("DAPACI"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Data"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("DAPACIData") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAPAC"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Broker"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("ABAPACBroker") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAPAC"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("ABAPACManager") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAPAC"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("CSS"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("ABAPACCSS") + "." + environment;
+				else if (dataTable.getData("General_Data", "TC_ID").contains("Admin"))
+					Username = properties.getProperty("SystemAdminUsername") + "." + environment;
+			}
 
-			if (environment.equals("UAT")) { 			
+			if (environment.equals("UAT")) {
 				Password = properties.getProperty("UATPassword");
 				String UAT_AuthEndpoint = properties.getProperty("UATAuthEndpoint");
 				config = new ConnectorConfig();
@@ -200,7 +310,7 @@ public class EstablishConnection extends ReusableLibrary {
 				config.setAuthEndpoint(UAT_AuthEndpoint);
 				connection = new PartnerConnection(config);
 				System.out.println(connection);
-			} else if (environment.equals("UAT2")) {				
+			} else if (environment.equals("UAT2")) {
 				Password = properties.getProperty("UAT2Password");
 				String UAT2_AuthEndpoint = properties.getProperty("UAT2AuthEndpoint");
 				config = new ConnectorConfig();
@@ -209,7 +319,7 @@ public class EstablishConnection extends ReusableLibrary {
 				System.out.println("AuthEndPoint: " + UAT2_AuthEndpoint);
 				config.setAuthEndpoint(UAT2_AuthEndpoint);
 				connection = new PartnerConnection(config);
-			} else if (environment.equals("FTE")) {				
+			} else if (environment.equals("FTE")) {
 				Password = properties.getProperty("FTEPassword");
 				String FTE_AuthEndpoint = properties.getProperty("FTEAuthEndpoint");
 				config = new ConnectorConfig();
@@ -218,7 +328,7 @@ public class EstablishConnection extends ReusableLibrary {
 				System.out.println("AuthEndPoint: " + FTE_AuthEndpoint);
 				config.setAuthEndpoint(FTE_AuthEndpoint);
 				connection = new PartnerConnection(config);
-			} else if (environment.equals("FTE2")) {				
+			} else if (environment.equals("FTE2")) {
 				Password = properties.getProperty("FTE2Password");
 				String FTE2_AuthEndpoint = properties.getProperty("FTE2AuthEndpoint");
 				config = new ConnectorConfig();
@@ -238,10 +348,11 @@ public class EstablishConnection extends ReusableLibrary {
 			String environment = initializeEnvironment();
 			System.out.println(environment);
 			String Username = null, Password;
-			if ((environment.equals("UAT")) || (environment.equals("UAT2")) || (environment.equals("FTE")) || (environment.equals("FTE2"))) {
-				Username = properties.getProperty("SystemAdminUsername")+ "." + environment;
-			}				
-			if (environment.equals("UAT")) { 			
+			if ((environment.equals("UAT")) || (environment.equals("UAT2")) || (environment.equals("FTE"))
+					|| (environment.equals("FTE2"))) {
+				Username = properties.getProperty("SystemAdminUsername") + "." + environment;
+			}
+			if (environment.equals("UAT")) {
 				Password = properties.getProperty("UATAdminPassword");
 				String UAT_AuthEndpoint = properties.getProperty("UATAuthEndpoint");
 				config = new ConnectorConfig();
@@ -251,7 +362,7 @@ public class EstablishConnection extends ReusableLibrary {
 				config.setAuthEndpoint(UAT_AuthEndpoint);
 				connection = new PartnerConnection(config);
 				System.out.println(connection);
-			} else if (environment.equals("UAT2")) {				
+			} else if (environment.equals("UAT2")) {
 				Password = properties.getProperty("UAT2AdminPassword");
 				String UAT2_AuthEndpoint = properties.getProperty("UAT2AuthEndpoint");
 				config = new ConnectorConfig();
@@ -260,7 +371,7 @@ public class EstablishConnection extends ReusableLibrary {
 				System.out.println("AuthEndPoint: " + UAT2_AuthEndpoint);
 				config.setAuthEndpoint(UAT2_AuthEndpoint);
 				connection = new PartnerConnection(config);
-			} else if (environment.equals("FTE")) {				
+			} else if (environment.equals("FTE")) {
 				Password = properties.getProperty("FTEAdminPassword");
 				String FTE_AuthEndpoint = properties.getProperty("FTEAuthEndpoint");
 				config = new ConnectorConfig();
@@ -269,7 +380,7 @@ public class EstablishConnection extends ReusableLibrary {
 				System.out.println("AuthEndPoint: " + FTE_AuthEndpoint);
 				config.setAuthEndpoint(FTE_AuthEndpoint);
 				connection = new PartnerConnection(config);
-			} else if (environment.equals("FTE2")) {				
+			} else if (environment.equals("FTE2")) {
 				Password = properties.getProperty("FTE2AdminPassword");
 				String FTE2_AuthEndpoint = properties.getProperty("FTE2AuthEndpoint");
 				config = new ConnectorConfig();
@@ -284,23 +395,22 @@ public class EstablishConnection extends ReusableLibrary {
 		}
 	}
 
-	
 	/**
-	 * Function for establishing the metadata connection
+	 * Function for establishing the metadata connection 
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */
 	
-	public List<String> establishMetaDataConnection(String ObjectName, String RecordType, String PickList) {
+	public void establishMetaDataConnection() {
 		String apiVersion = "41.0";
-		List<String> pickListValues = null;
 		try {
 			String environment = initializeEnvironment();
-			if ((environment.equals("UAT")) || (environment.equals("UAT2")) || (environment.equals("FTE"))  || (environment.equals("FTE2"))) {
-				String Username = properties.getProperty("SystemAdminUsername") + "." + environment;			
-				String Password = properties.getProperty(environment+"AdminPassword");
-				String AuthEndpoint = properties.getProperty(environment+"AuthEndpoint");
+			if ((environment.equals("UAT")) || (environment.equals("UAT2")) || (environment.equals("FTE"))
+					|| (environment.equals("FTE2"))) {
+				String Username = properties.getProperty("SystemAdminUsername") + "." + environment;
+				String Password = properties.getProperty(environment + "AdminPassword");
+				String AuthEndpoint = properties.getProperty(environment + "AuthEndpoint");
 				config = new ConnectorConfig();
 				config.setUsername(Username);
 				config.setPassword(Password);
@@ -313,36 +423,56 @@ public class EstablishConnection extends ReusableLibrary {
 				metadataConnection = com.sforce.soap.metadata.Connector.newConnection(metadataConfig);
 				config.setSessionId(config.getSessionId());
 				String soapEndpoint = config.getServiceEndpoint();
-				String restEndpoint = soapEndpoint.substring(0, soapEndpoint.indexOf("Soap/"))+ "async/" + apiVersion;
+				String restEndpoint = soapEndpoint.substring(0, soapEndpoint.indexOf("Soap/")) + "async/" + apiVersion;
 				config.setRestEndpoint(restEndpoint);
 				config.setCompression(true);
-				config.setTraceMessage(false);
-				/*String sRecordTypeName = recordTypeName(ClientName);
-				sRecordTypeName = RecordType + "." + sRecordTypeName;	*/		
-				pickListValues = getPickListValues(ObjectName+"."+RecordType, PickList);
-				//pickListValues = getPickListValues("Project__c.AllState", "Use_Type__c");
-			}		
+				config.setTraceMessage(false);				
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * Function for establishing the metadata connection for page layouts 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	
+	public List<String> establishMetaDataConnectionPageLayouts(String ObjectName, String PageLayouts) {
+		establishMetaDataConnection();
+		List<String> pageLayOuts = getFieldNamesOnLayout(ObjectName + "-" + PageLayouts);
+		return pageLayOuts;
+	}
+
+	/**
+	 * Function for establishing the metadata connection for picklist values
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+
+	public List<String> establishMetaDataConnection(String ObjectName, String RecordType, String PickList) {
+		establishMetaDataConnection();
+		List<String> pickListValues = getPickListValues(ObjectName + "." + RecordType, PickList);
 		return pickListValues;
 	}
 
-	
-	public List<String> getPickListValues(String recordTypeName, String ProvidedpickList ) {
-		List<String> PickListValues = null;		
+	public List<String> getPickListValues(String recordTypeName, String ProvidedpickList) {
+		List<String> PickListValues = null;
 		try {
 			PickListValues = new ArrayList<String>();
-			ReadResult result = metadataConnection.readMetadata("RecordType", new String[]{recordTypeName});
+			ReadResult result = metadataConnection.readMetadata("RecordType", new String[] { recordTypeName });
 			Metadata[] mds = result.getRecords();
-			for(Metadata md:mds){
-				RecordType recordType = (RecordType)md;
+			for (Metadata md : mds) {
+				RecordType recordType = (RecordType) md;
 				RecordTypePicklistValue[] picklistValues = recordType.getPicklistValues();
-				for (RecordTypePicklistValue picklist: picklistValues){
+				for (RecordTypePicklistValue picklist : picklistValues) {
 					System.out.println(picklist);
-					if(picklist.getPicklist().equals(ProvidedpickList)) {
+					if (picklist.getPicklist().equals(ProvidedpickList)) {
 						PicklistValue[] values = picklist.getValues();
-						for (PicklistValue value: values){
+						for (PicklistValue value : values) {
 							PickListValues.add(value.getFullName());
 						}
 						System.out.println(picklist.getValues());
@@ -352,46 +482,72 @@ public class EstablishConnection extends ReusableLibrary {
 		} catch (ConnectionException e) {
 			e.printStackTrace();
 		}
-		return PickListValues;	
+		return PickListValues;
 	}
 
-	
+	public static List<String> getFieldNamesOnLayout(String layoutName) {
+		List<String> LayOutValues = new ArrayList<String>();
+		try {
+			ReadResult result = metadataConnection.readMetadata("Layout", new String[] { layoutName });
+			Metadata[] mds = result.getRecords();
+			for (Metadata md : mds) {
+				Layout layOut = (Layout) md;
+				LayoutSection[] sections = layOut.getLayoutSections();
+				for (LayoutSection section : sections) {
+						LayoutColumn[] columns = section.getLayoutColumns();
+						for (LayoutColumn column : columns) {
+							LayoutItem[] items = column.getLayoutItems();
+							for (LayoutItem item : items) {
+								if (item.getField() != null) {
+									LayOutValues.add(item.getField());
+								}
+							}
+						}			
+				}
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return LayOutValues;
+	}
+
 	public static Map<String, String> LayoutMapping() {
 
 		Map<String, String> map = new HashMap<String, String>();
-		//Layout and RecordType		
-		map.put("Opportunity Layout - Agency Brokerage","Agency_Brokerage");
-		map.put("Asset Services - APAC","APAC_Asset_Services");
-		map.put("APAC Capital Markets %E2%80%93 Debt and Structured Finance","APAC_Capital_Markets_Debt_and_Structured_Finance");
-		map.put("APAC Debt %26 Structured Finance","APAC_Debt_Structured_Finance");
-		map.put("APAC Global Workplace Solutions","APAC_Global_Workplace_Solutions");
-		map.put("APAC Investors%2FBuyers","APAC_Investors_Buyers");
-		map.put("APAC Occupier - Opportunity Layout","APAC_Occupier");
-		map.put("APAC Project Management","APAC_Project_Management");
-		map.put("APAC Property Purchase - Buy Side","APAC_Property_Purchase_Buy_Side");
-		map.put("APAC Property Sales","APAC_Property_Sales");
-		map.put("Asset Services - Global View","Asset_Services");
-		map.put("Opportunity Layout - Capital Markets Debt %26 Structured Finance","Capital_Markets_Debt_Structured_Finance");
-		map.put("Opportunity Layout - Capital Markets Property Sales","Capital_Markets_Property_Sales");
-		map.put("EMEA A%26T Investor Layout","EMEA_A_T_Investor");
-		map.put("EMEA A%26T Occupier Layout","EMEA_A_T_Occupier");
-		map.put("EMEA Asset Services Page Layout","EMEA_Asset_Services");
-		map.put("EMEA BC%26P Page Layout","BC_P");
-		map.put("EMEA Capital Markets Capital Advisors Page Layout","EMEA_Capital_Markets_Capital_Advisors");
-		map.put("EMEA Capital Markets Investment Properties Page Layout","EMEA_Capital_Markets_Investment_Properties");
-		map.put("EMEA Development Page Layout","EMEA_Development");
-		map.put("EMEA Valuations Page Layout","EMEA_Valuations");
-		map.put("France Consulting %26 Service Opportunity Layout","France_Consulting_Service");
-		map.put("France Investor Relations Opportunity Layout","France_Investor_Relations");
-		map.put("France Transaction Demand Agency Opportunity Layout","France_Transaction_Demand_Agency");
-		map.put("France Transaction Offer Agency Opportunity Layout","France_Transaction_Offer_Agency");
-		map.put("Asset Services - GIA","GIA");
-		map.put("Opportunity Layout - Occupier Brokerage","Occupier_Brokerage");
-		map.put("Valuations %26 Advisory Services","Valuations_Advisory_Services");
+		// Layout and RecordType
+		map.put("Opportunity Layout - Agency Brokerage", "Agency_Brokerage");
+		map.put("Asset Services - APAC", "APAC_Asset_Services");
+		map.put("APAC Capital Markets %E2%80%93 Debt and Structured Finance",
+				"APAC_Capital_Markets_Debt_and_Structured_Finance");
+		map.put("APAC Debt %26 Structured Finance", "APAC_Debt_Structured_Finance");
+		map.put("APAC Global Workplace Solutions", "APAC_Global_Workplace_Solutions");
+		map.put("APAC Investors%2FBuyers", "APAC_Investors_Buyers");
+		map.put("APAC Occupier - Opportunity Layout", "APAC_Occupier");
+		map.put("APAC Project Management", "APAC_Project_Management");
+		map.put("APAC Property Purchase - Buy Side", "APAC_Property_Purchase_Buy_Side");
+		map.put("APAC Property Sales", "APAC_Property_Sales");
+		map.put("Asset Services - Global View", "Asset_Services");
+		map.put("Opportunity Layout - Capital Markets Debt %26 Structured Finance",
+				"Capital_Markets_Debt_Structured_Finance");
+		map.put("Opportunity Layout - Capital Markets Property Sales", "Capital_Markets_Property_Sales");
+		map.put("EMEA A%26T Investor Layout", "EMEA_A_T_Investor");
+		map.put("EMEA A%26T Occupier Layout", "EMEA_A_T_Occupier");
+		map.put("EMEA Asset Services Page Layout", "EMEA_Asset_Services");
+		map.put("EMEA BC%26P Page Layout", "BC_P");
+		map.put("EMEA Capital Markets Capital Advisors Page Layout", "EMEA_Capital_Markets_Capital_Advisors");
+		map.put("EMEA Capital Markets Investment Properties Page Layout", "EMEA_Capital_Markets_Investment_Properties");
+		map.put("EMEA Development Page Layout", "EMEA_Development");
+		map.put("EMEA Valuations Page Layout", "EMEA_Valuations");
+		map.put("France Consulting %26 Service Opportunity Layout", "France_Consulting_Service");
+		map.put("France Investor Relations Opportunity Layout", "France_Investor_Relations");
+		map.put("France Transaction Demand Agency Opportunity Layout", "France_Transaction_Demand_Agency");
+		map.put("France Transaction Offer Agency Opportunity Layout", "France_Transaction_Offer_Agency");
+		map.put("Asset Services - GIA", "GIA");
+		map.put("Opportunity Layout - Occupier Brokerage", "Occupier_Brokerage");
+		map.put("Valuations %26 Advisory Services", "Valuations_Advisory_Services");
 		return map;
 	}
-	
-	
+
 	/**
 	 * Function for retrieving the User Configuration
 	 * 
@@ -444,38 +600,39 @@ public class EstablishConnection extends ReusableLibrary {
 				System.out.println("Save Results:::" + result);
 				report.updateTestLog("Verify Create/ Update Account", "Result :: " + result, Status.PASS);
 				String query = null;
-				if(result.contains("001")) {
+				if (result.contains("001")) {
 					query = "Select Name from Account where Id = " + "'" + result + "'";
-				} else if(result.contains("003")) {
+				} else if (result.contains("003")) {
 					query = "Select Name from Contact where Id = " + "'" + result + "'";
-				} else if(result.contains("006")) {
+				} else if (result.contains("006")) {
 					query = "Select Name from Opportunity where Id = " + "'" + result + "'";
-				} else if(result.startsWith("a0")) {
+				} else if (result.startsWith("a0")) {
 					query = "Select Name from Property__c where Id = " + "'" + result + "'";
-				} else if(result.startsWith("002")) {
+				} else if (result.startsWith("002")) {
 					query = "Select Title from Note where Id = " + "'" + result + "'";
-				} else if(result.startsWith("00P")) {
+				} else if (result.startsWith("00P")) {
 					query = "Select Title from Attachment where Id = " + "'" + result + "'";
-				} else if(result.startsWith("00Q")) {
+				} else if (result.startsWith("00Q")) {
 					query = "Select Id from Lead where Id = " + "'" + result + "'";
-				} else if(result.startsWith("005")) {
+				} else if (result.startsWith("005")) {
 					query = "Select Id from User where Id = " + "'" + result + "'";
-				} else if(result.startsWith("00U")) {
+				} else if (result.startsWith("00U")) {
 					query = "Select Id from Event where Id = " + "'" + result + "'";
-				}					
+				}
 				SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
 				String name = searchTextSOQL.fetchRecordFieldValue("Name", query);
-				report.updateTestLog("Verify Create/ Update Account/ Contact/ Opportuntiy", "Name of the Account/ Contact/ Opportunity :: " + name, Status.PASS);
+				report.updateTestLog("Verify Create/ Update Account/ Contact/ Opportuntiy",
+						"Name of the Account/ Contact/ Opportunity :: " + name, Status.PASS);
 				status = true;
 			} else {
 				for (int i = 0; i < results[j].getErrors().length; i++) {
 					com.sforce.soap.partner.Error err = results[j].getErrors()[i];
-					report.updateTestLog("Verify Create/ Update Account, Contact, Lead, Opportunities", "Errors were found on item:::" + j,
-							Status.FAIL);
+					report.updateTestLog("Verify Create/ Update Account, Contact, Lead, Opportunities",
+							"Errors were found on item:::" + j, Status.FAIL);
 					report.updateTestLog("Verify Create/ Update Account",
 							"Errors code:::" + err.getStatusCode().toString(), Status.FAIL);
-					report.updateTestLog("Verify Create/ Update Account, Contact, Lead, Opportunities", "Errors message:::" + err.getMessage(),
-							Status.FAIL);
+					report.updateTestLog("Verify Create/ Update Account, Contact, Lead, Opportunities",
+							"Errors message:::" + err.getMessage(), Status.FAIL);
 					System.out.println("Errors were found on item " + j);
 					System.out.println("Error code::" + err.getStatusCode().toString());
 					System.out.println("Error message::" + err.getMessage());
@@ -486,7 +643,6 @@ public class EstablishConnection extends ReusableLibrary {
 		return status;
 	}
 
-
 	/**
 	 * Function for saving the lead conversion results
 	 * 
@@ -496,7 +652,7 @@ public class EstablishConnection extends ReusableLibrary {
 
 	public String leadConvertResults(LeadConvertResult[] Results) {
 		LeadConvertResult[] results = Results;
-		String sAccountID =null, sContactID =null, sOpportunityID =null, sLeadID =null;
+		String sAccountID = null, sContactID = null, sOpportunityID = null, sLeadID = null;
 		String sIDs = null;
 		System.out.println("Results:::" + results);
 		for (int j = 0; j < results.length; j++) {
@@ -513,12 +669,12 @@ public class EstablishConnection extends ReusableLibrary {
 			} else {
 				for (int i = 0; i < results[j].getErrors().length; i++) {
 					com.sforce.soap.partner.Error err = results[j].getErrors()[i];
-					report.updateTestLog("Verify Create/ Update Account, Contact, Lead, Opportunities", "Errors were found on item:::" + j,
-							Status.FAIL);
+					report.updateTestLog("Verify Create/ Update Account, Contact, Lead, Opportunities",
+							"Errors were found on item:::" + j, Status.FAIL);
 					report.updateTestLog("Verify Create/ Update Account",
 							"Errors code:::" + err.getStatusCode().toString(), Status.FAIL);
-					report.updateTestLog("Verify Create/ Update Account, Contact, Lead, Opportunities", "Errors message:::" + err.getMessage(),
-							Status.FAIL);
+					report.updateTestLog("Verify Create/ Update Account, Contact, Lead, Opportunities",
+							"Errors message:::" + err.getMessage(), Status.FAIL);
 					System.out.println("Errors were found on item " + j);
 					System.out.println("Error code::" + err.getStatusCode().toString());
 					System.out.println("Error message::" + err.getMessage());
@@ -528,6 +684,7 @@ public class EstablishConnection extends ReusableLibrary {
 		}
 		return sIDs;
 	}
+
 	/**
 	 * Function for the getting the Id from results array
 	 * 
@@ -544,12 +701,12 @@ public class EstablishConnection extends ReusableLibrary {
 			} else {
 				for (int i = 0; i < results[j].getErrors().length; i++) {
 					com.sforce.soap.partner.Error err = results[j].getErrors()[i];
-					report.updateTestLog("Verify Create/ Update Account, Contact, Lead, Opportunities", "Errors were found on item:::" + j,
-							Status.FAIL);
+					report.updateTestLog("Verify Create/ Update Account, Contact, Lead, Opportunities",
+							"Errors were found on item:::" + j, Status.FAIL);
 					report.updateTestLog("Verify Create/ Update Account",
 							"Errors code:::" + err.getStatusCode().toString(), Status.FAIL);
-					report.updateTestLog("Verify Create/ Update Account, Contact, Lead, Opportunities", "Errors message:::" + err.getMessage(),
-							Status.FAIL);
+					report.updateTestLog("Verify Create/ Update Account, Contact, Lead, Opportunities",
+							"Errors message:::" + err.getMessage(), Status.FAIL);
 					System.out.println("Errors were found on item " + j);
 					System.out.println("Error code::" + err.getStatusCode().toString());
 					System.out.println("Error message::" + err.getMessage());
@@ -559,7 +716,6 @@ public class EstablishConnection extends ReusableLibrary {
 		}
 		return result;
 	}
-
 
 	/**
 	 * Function for deleting the results
@@ -575,20 +731,20 @@ public class EstablishConnection extends ReusableLibrary {
 			if (deleteResults[j].isSuccess()) {
 				deleteResults[j].getId();
 				System.out.println("Delete Results:::" + deleteResults[j].getId());
-				report.updateTestLog("Verify Delete Account, Contact, Lead, Opportunities", "Result :: " + deleteResults[j].getId(), Status.PASS);
+				report.updateTestLog("Verify Delete Account, Contact, Lead, Opportunities",
+						"Result :: " + deleteResults[j].getId(), Status.PASS);
 				status = true;
 			} else {
 				errors = deleteResults[j].getErrors();
 				for (int i = 0; i < errors.length; i++) {
-					report.updateTestLog("Verify Delete Account, Contact, Lead, Opportunities", "Errors message:::" + errors[i].getMessage(),
-							Status.FAIL);
+					report.updateTestLog("Verify Delete Account, Contact, Lead, Opportunities",
+							"Errors message:::" + errors[i].getMessage(), Status.FAIL);
 					System.out.println("Error message::" + errors[i].getMessage());
 					status = false;
 				}
 			}
 		}
 		return status;
-	}	
-
+	}
 
 }

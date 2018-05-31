@@ -10,6 +10,7 @@ import org.testng.Assert;
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
+import pagesAPI.EstablishConnection;
 
 public class SF_UtilityFunctions extends ReusableLibrary {
 
@@ -97,8 +98,17 @@ public class SF_UtilityFunctions extends ReusableLibrary {
 	public void selectExisitingObjectRecord(String tableColumn) {
 		By allRecords = By.xpath("(//span[text()='"+tableColumn+"']/ancestor::thead/following-sibling::tbody//th//a)");
 		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, driver.findElements(allRecords), 7);
-		Utility_Functions.xclickRandomElement(driver.findElements(allRecords));
+		try {
+			Utility_Functions.xWaitForElementPresent(driver, driver.findElements(allRecords), 7);
+			Utility_Functions.xclickRandomElement(driver.findElements(allRecords));
+		} catch (Exception e) {
+			By recentlyViewed = By.xpath("//h1//span[text()='Recently Viewed']");
+			By all = By.xpath("//span[contains(@class,'virtualAutocompleteOptionText')][contains(text(),'All')]");
+			Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
+			driver.findElement(recentlyViewed).click();
+			Utility_Functions.xWaitForElementPresent(driver, all, 5);
+			driver.findElement(all).click();
+		}
 	}
 
 
@@ -401,7 +411,6 @@ public class SF_UtilityFunctions extends ReusableLibrary {
 		}
 	}
 	
-	
 	/** 
 	 * @throws Exception 
 	 * @Description: This method opens the detail page of the specified object in lightening view
@@ -423,4 +432,41 @@ public class SF_UtilityFunctions extends ReusableLibrary {
 		}
 	}
 	
+	/**
+	 * Returns the picklist values when we pass the object name, record type and picklist value
+	 *
+	 * @author Vishnuvardhan
+	 *
+	 */
+	
+	public List<String> getPickListValues(String ObjectName, String RecordType, String PickListName) {
+		EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
+		List<String> pickListValues = establishConnection.establishMetaDataConnection(ObjectName, RecordType, PickListName);
+		return pickListValues;
+	}
+	
+	
+	/**
+	 * Validates the picklist value from the passed pick list in Properties, Project Enquiries and Property Enquiries 
+	 *
+	 * @author Vishnuvardhan
+	 *
+	 */
+	
+	public void verifyPickListValues(String Value, String ObjectName, String RecordType, String PickListName) {
+		int count=0;
+		List<String> PickListValues = getPickListValues(ObjectName, RecordType, PickListName);
+		for(int i=0; i < PickListValues.size(); i++) {
+			if(PickListValues.get(i).equals(Value)) {
+				count++;
+				break;
+			}
+				
+		}
+		if (count==1) {
+			report.updateTestLog("Verify picklist value", "Pick list value:: " + Value + "is present in the Area UOM Pick List::: " + PickListName, Status.PASS);
+		} else {
+			report.updateTestLog("Verify picklist value", "Pick list value:: " + Value + "is not present in the Area UOM Pick List::: " + PickListName, Status.FAIL);
+		}		
+	}
 }

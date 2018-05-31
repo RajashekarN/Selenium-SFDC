@@ -45,15 +45,3 @@ public class TC_SF_CMAPACBrokerPropertiesPreferenceTypeValue extends CRAFTTestCa
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
