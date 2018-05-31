@@ -1,5 +1,6 @@
 package supportLibraries;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import org.openqa.selenium.By;
@@ -42,6 +43,29 @@ public class SF_UtilityFunctions extends ReusableLibrary {
 		Utility_Functions.xClick(driver, oneAppNavigatioBar, true);
 	}
 
+	
+	/**
+	 * Select the Home Page menu items from One App Navigation Bar
+	 * 
+	 * @author Swapna
+	 *
+	 */
+
+	public void oneAppNavigationTab2(String sText) {
+		By oneAppNavigationTab = By.xpath("//span[text()='"+sText+"']");
+		By oneAppNavigationMoreTab = By.xpath("//span[text()='More']");
+		
+		Utility_Functions.xWaitForElementPresent(driver, oneAppNavigationTab, 3);
+		try{
+			Utility_Functions.xClick(driver,driver.findElement(oneAppNavigationTab), true);
+		}catch(Exception e){
+			Utility_Functions.xWaitForElementPresent(driver, oneAppNavigationMoreTab, 3);
+			Utility_Functions.xClick(driver, driver.findElement(oneAppNavigationMoreTab), true);
+			Utility_Functions.xWaitForElementPresent(driver, oneAppNavigationTab, 1);
+			Utility_Functions.xClick(driver, driver.findElement(oneAppNavigationTab), true);
+		
+		}
+	}
 
 	/**
 	 * Select Accounts, Contacts, Opp's etc from the list of Accounts
@@ -374,6 +398,28 @@ public class SF_UtilityFunctions extends ReusableLibrary {
 			e.toString();
 			System.out.println("Trying to recover from a stale element :" + e.getMessage());
 			count = count + 1;
+		}
+	}
+	
+	
+	/** 
+	 * @throws Exception 
+	 * @Description: This method opens the detail page of the specified object in lightening view
+	 * @Author     : Swapna
+	 */
+	public void openDetailPage(String testObjectId) throws Exception {
+		try{ 
+			Utility_Functions.timeWait(2);
+			String curentUrl = driver.getCurrentUrl();
+			URL url = new URL(curentUrl);
+			String base  = url.getAuthority();
+			String serverUrl = curentUrl.substring(0,curentUrl.indexOf(base) + base.length());
+			String fullUrl = serverUrl + "/" + testObjectId;
+			driver.get(fullUrl);
+			Utility_Functions.timeWait(2);	
+		}catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Not able to open detail page with ID ["+testObjectId+"] " +e.getMessage());
 		}
 	}
 	
