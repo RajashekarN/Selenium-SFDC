@@ -1,15 +1,11 @@
 package pagesAPI;
 
 import java.util.ArrayList;
+import java.util.List;
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
 import com.sforce.soap.partner.DeleteResult;
-import com.sforce.soap.partner.DescribeLayout;
-import com.sforce.soap.partner.DescribeLayoutItem;
-import com.sforce.soap.partner.DescribeLayoutResult;
-import com.sforce.soap.partner.DescribeLayoutRow;
-import com.sforce.soap.partner.DescribeLayoutSection;
 import com.sforce.soap.partner.QueryResult;
 import com.sforce.soap.partner.SaveResult;
 import com.sforce.soap.partner.sobject.SObject;
@@ -137,37 +133,6 @@ public class PropertiesFunctions extends ReusableLibrary {
 			report.updateTestLog("Verify Create Property", "Property updation failed", Status.FAIL);
 		}
 	}
-
-	/**
-	 * Function for deleting the Lead
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-
-	public boolean deleteLead() {
-		try {
-			establishConnection.establishConnection();
-			String[] records = new String[1];
-			QueryResult queryResults = EstablishConnection.connection
-					.query("SELECT Id, Name FROM Lead ORDER BY CreatedDate DESC LIMIT 1");
-			if (queryResults.getSize() > 0) {
-				for (int i = 0; i < queryResults.getRecords().length; i++) {
-					SObject so = (SObject) queryResults.getRecords()[i];
-					records[i] = so.getId();
-					System.out.println("Deleting Id: " + so.getId() + " - Name: " + so.getField("Name"));
-					report.updateTestLog("Verify Delete Account", "Account has been deleted successfully:::"
-							+ "Deleting Id: " + so.getId() + " - Name: " + so.getField("Name"), Status.PASS);
-				}
-			}
-			deleteResults = EstablishConnection.connection.delete(records);
-			System.out.println("Result:::" + deleteResults);
-			status = establishConnection.deleteResults(deleteResults);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		return status;
-	}
 	
 	/**
 	 * Function for creation the Property Preferences
@@ -204,150 +169,104 @@ public class PropertiesFunctions extends ReusableLibrary {
 		}
 	}
 	
-
 	/**
-	 * Function for validating the Property Preferences page layout
+	 * Function for validating the Property Preferences header section
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */
 	
 
-	static ArrayList<String> AdminHeader = new ArrayList<String>();
+	static ArrayList<String> propertyPreferecenceHeaderList = new ArrayList<String>();
 
-	public void AdminHeadings() {
-		AdminHeader.add("Information");
-		AdminHeader.add("Preferences");
-		AdminHeader.add("Sale Requirement Criteria");
-		AdminHeader.add("Lease Requirement Criteria");
-		AdminHeader.add("Additional Information");
-		System.out.println("Admin Headers List are::" + AdminHeader);
+	public void propertyPreferenceHeaderList() {
+		propertyPreferecenceHeaderList.add("Information");
+		propertyPreferecenceHeaderList.add("Preferences");
+		propertyPreferecenceHeaderList.add("Sale Requirement Criteria");
+		propertyPreferecenceHeaderList.add("Lease Requirement Criteria");
+		propertyPreferecenceHeaderList.add("Additional Information");
+		System.out.println("Property Preference Header List ::" + propertyPreferecenceHeaderList);
 	}
 	
-	static ArrayList<String> AdminFields = new ArrayList<String>();
+	/**
+	 * Validating the Property Preferences fields
+	 *
+	 * @author Vishnuvardhan
+	 *
+	 */
+	static ArrayList<String> propertyPreferencesFieldsList = new ArrayList<String>();
 
-	public void AdminFields() {
-		AdminFields.add("Contact__c");
-		AdminFields.add("APAC_Status__c");
-		AdminFields.add("Name1__c");
-		AdminFields.add("APAC_Opt_Out_Date__c");
-		AdminFields.add("Name");
-		AdminFields.add("APAC_Opt_Out_Reason__c");
-		AdminFields.add("OwnerId");
-		AdminFields.add("APAC_Preference_Type__c");
-		AdminFields.add("APAC_Country__c");
-		AdminFields.add("Preference_Type__c");
-		AdminFields.add("APAC_Region__c");
-		AdminFields.add("APAC_Retail_Usage__c");
-		AdminFields.add("Market_Preference__c");
-		AdminFields.add("APAC_Building_Grade__c");
-		AdminFields.add("APAC_Minimum_Price__c");
-		AdminFields.add("APAC_Hotel_Market_Scale__c");
-		AdminFields.add("APAC_Maximum_Price__c");
-		AdminFields.add("APAC_Hotel_Star_Rating__c");
-		AdminFields.add("APAC_Minimum_Total_Area__c");
-		AdminFields.add("APAC_Hotel_Transaction_Type__c");
-		AdminFields.add("APAC_Maximum_Total_Area__c");
-		AdminFields.add("APAC_Gaming_Machines__c");
-		AdminFields.add("APAC_Area_UOM__c");
-		AdminFields.add("APAC_Additional_Comments__c");
-		AdminFields.add("APAC_Minimum_Units__c");
-		AdminFields.add("APAC_Maximum_Units__c");
-		AdminFields.add("APAC_Unit_Type__c");
-		AdminFields.add("APAC_Investment_Strategy__c");
-		AdminFields.add("APAC_Yield_Minimum__c");
-		AdminFields.add("APAC_Ownership_Structure__c");
-		AdminFields.add("APAC_Deal_Type__c");
-		AdminFields.add("APAC_Reason_for_Requirement__c");
-		AdminFields.add("APAC_Lease_Term_Required__c");
-		AdminFields.add("APAC_Fitout_Required__c");
-		AdminFields.add("APAC_Car_Parking_Requirement__c");
-		AdminFields.add("APAC_NABERS_Rating_Preference__c");
-		AdminFields.add("Sharing_Property_Type__c");
-		AdminFields.add("Sharing_Country__c");
-		AdminFields.add("Sharing_Region__c");
-
-		System.out.println("Capital Markets APAC Fields List are::" + AdminFields);
+	public void propertyPreferencesFields() {
+		propertyPreferencesFieldsList.add("Owner ID");
+		propertyPreferencesFieldsList.add("Preferences Name");
+		propertyPreferencesFieldsList.add("Additional Comments");
+		propertyPreferencesFieldsList.add("Area UOM");
+		propertyPreferencesFieldsList.add("Building Grade");
+		propertyPreferencesFieldsList.add("Car Parking Requirement");
+		propertyPreferencesFieldsList.add("APAC Country");
+		propertyPreferencesFieldsList.add("Deal Type");
+		propertyPreferencesFieldsList.add("Fitout Required");
+		propertyPreferencesFieldsList.add("Gaming Machines");
+		propertyPreferencesFieldsList.add("Hotel Market Scale");
+		propertyPreferencesFieldsList.add("Hotel Star Rating");
+		propertyPreferencesFieldsList.add("Hotel Transaction Type");
+		propertyPreferencesFieldsList.add("Investment Strategy");
+		propertyPreferencesFieldsList.add("Lease Term Required");
+		propertyPreferencesFieldsList.add("Maximum Price");
+		propertyPreferencesFieldsList.add("Maximum Total Area");
+		propertyPreferencesFieldsList.add("Maximum Units");
+		propertyPreferencesFieldsList.add("Minimum Price");
+		propertyPreferencesFieldsList.add("Minimum Total Area");
+		propertyPreferencesFieldsList.add("Minimum Units");
+		propertyPreferencesFieldsList.add("NABERS Rating Preference");
+		propertyPreferencesFieldsList.add("Opt Out Date");
+		propertyPreferencesFieldsList.add("Opt Out Reason");
+		propertyPreferencesFieldsList.add("Ownership Structure");
+		propertyPreferencesFieldsList.add("Preference Type");
+		propertyPreferencesFieldsList.add("Reason for Requirement");
+		propertyPreferencesFieldsList.add("APAC Region");
+		propertyPreferencesFieldsList.add("Retail Usage");
+		propertyPreferencesFieldsList.add("Status");
+		propertyPreferencesFieldsList.add("Unit Type");
+		propertyPreferencesFieldsList.add("Yield Minimum");
+		propertyPreferencesFieldsList.add("Contact");
+		propertyPreferencesFieldsList.add("Market Preference");
+		propertyPreferencesFieldsList.add("Sharing Country");
+		propertyPreferencesFieldsList.add("Sharing Property Type");
+		propertyPreferencesFieldsList.add("Sharing Region");
+		propertyPreferencesFieldsList.add("Property Type");
+		propertyPreferencesFieldsList.add("Name1");
+		propertyPreferencesFieldsList.add("Preference Comms Type");
+		System.out.println("Property Preferences fields are " + propertyPreferencesFieldsList);
 	}
 	
+	/**
+	 * Function for Validating the Property Preferences Headers and Fields
+	 *
+	 * @author Vishnuvardhan
+	 *
+	 */
 	
-	static ArrayList<String> AdminFieldLabelsAPI = new ArrayList<String>();
-
 	public void propertyPreferenceValidation() {
-		establishConnection.establishConnection();
-		AdminHeadings();
-		AdminFields();
-		DescribeLayoutResult dlr = null;
-		try {
-			dlr = EstablishConnection.connection.describeLayout("Property_Preferences__c", null, null);
-		} catch (ConnectionException e1) {
-			e1.printStackTrace();
-		}
-		int count=0, countLabelList = 0;
-		for (int i = 0; i < dlr.getLayouts().length; i++) {
-			DescribeLayout layout = dlr.getLayouts()[i];
-			DescribeLayoutSection[] editLayoutSectionList = layout.getEditLayoutSections();
-			// Write the headings of the edit layout sections
-			for (int x = 0; x < editLayoutSectionList.length; x++) {
-				if(dataTable.getData("General_Data", "TC_ID").contains("CMAPAC")) {
-					if(editLayoutSectionList.length==5) {
-						if(editLayoutSectionList[x].getHeading().equals(AdminHeader.get(x))) {
-							System.out.println(x + ":::Capital Markets APAC has the heading layout section:::" + editLayoutSectionList[x].getHeading());
-							report.updateTestLog(x + ":::Capital Markets APAC", " has the heading layout section:::" + editLayoutSectionList[x].getHeading(), Status.PASS);
-							count++;
-						}
-					}				
-				}
-			}		
-			System.out.println(count);
-			if(dataTable.getData("General_Data", "TC_ID").contains("CMAPAC")) {
-				if(editLayoutSectionList.length==5) {
-					for (int k = 0; k < editLayoutSectionList.length; k++) {
-						DescribeLayoutSection els = editLayoutSectionList[k];
-						DescribeLayoutRow[] dlrList = els.getLayoutRows();
-						for (int m = 0; m < dlrList.length; m++) {
-							DescribeLayoutRow lr = dlrList[m];
-							DescribeLayoutItem[] dliList = lr.getLayoutItems();
-							for (int n = 0; n < dliList.length; n++) {
-								DescribeLayoutItem li = dliList[n];
-								if ((li.getLayoutComponents() != null) && (li.getLayoutComponents().length > 0)) {
-									try {
-										String value = li.getLayoutComponents()[0].getValue();
-										if(value!=null) {
-											AdminFieldLabelsAPI.add(value);
-										}
-									} catch (Exception e) {
-										e.printStackTrace();
-									}
-								}
-							}
-						}
-					}	
-					System.out.println("CM APAC Admin Field Label::: " + AdminFieldLabelsAPI);
-					for(int i1=0; i1 < AdminFields.size(); i1++) {
-						if(AdminFieldLabelsAPI.get(i1).equals(AdminFields.get(i1))) {						
-							System.out.println("Field Label:::" + AdminFieldLabelsAPI.get(i1) + " -- is present in OB EMEA:::");
-							report.updateTestLog("Verify Field Labels", " has the field label:::" + AdminFieldLabelsAPI.get(i1), Status.PASS);
-							countLabelList++;
-						}			 
-					}
-					System.out.println("Count of fields present in Capital Markets APAC::" + countLabelList);						
-				}
-			}	
+		propertyPreferenceHeaderList();
+		List<String> propertyPreferencesHeader = establishConnection.establishMetaDataConnectionPageHeaders("Property_Preferences__c", 5);
+		List<String> propertyPreferncesHeadersList = new ArrayList<String>();
+		propertyPreferncesHeadersList = Utility_Functions.xValidatePickListValuesPage(propertyPreferencesHeader, propertyPreferecenceHeaderList, "Property Prefernces Header values");
+		if (propertyPreferncesHeadersList.size()!=0) {
+			report.updateTestLog("Verify Property Prefernces Page Header Fields ", "All the labels are not present in the Property Prefernces Page Header Fields:::" + propertyPreferncesHeadersList, Status.FAIL);
+		} else {
+			report.updateTestLog("Verify Property Prefernces Page Header Fields", "All the labels are present in the Property Prefernces Page Header Fields", Status.PASS);
+		}		
+		
+		propertyPreferencesFields();
+		List<String> propertyPreferences = establishConnection.establishMetaDataConnectionPageLayouts("Property_Preferences__c", "APAC Property Preferences Layout");
+		List<String> propertyPreferncesList = new ArrayList<String>();
+		propertyPreferncesList = Utility_Functions.xValidatePickListValuesPage(propertyPreferences, propertyPreferencesFieldsList, "Property Prefernces field values");
+		if (propertyPreferncesList.size()!=0) {
+			report.updateTestLog("Verify Property Prefernces Page Field Labels", "All the labels are not present in the Property Prefernces Page Field Labels:::" + propertyPreferncesList, Status.FAIL);
+		} else {
+			report.updateTestLog("Verify Property Prefernces Page Field Labels", "All the labels are present in the Property Prefernces Page Field Labels", Status.PASS);
 		}	
-		if(dataTable.getData("General_Data", "TC_ID").contains("CMAPAC")) {
-			if(count==5) {
-				System.out.println("Captial Markets APAC have all the header sections present::");
-				report.updateTestLog("Validating Header Sections", "Captial Markets APAC - All the headers are present", Status.PASS);
-				AdminHeader.clear();
-			}						
-		if (countLabelList == 39) {
-			AdminFields.clear();
-			report.updateTestLog("Count of fields present in Occupier Brokerage/ Agency Brokerage EMEA", "All the fields are present in Occupier Brokerage/ Agency Brokerage EMEA", Status.PASS);
-		} else
-			report.updateTestLog("Count of fields present in Capital Markets APAC", "All the fields are presentin Capital Markets", Status.FAIL);
-		} 	
 		createPropertyPreference();
-	}
-	
+	}	
 }

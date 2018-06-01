@@ -27,6 +27,7 @@ import com.sforce.ws.ConnectorConfig;
 import pagesAPI.EstablishConnection;
 import pagesAPI.OpportunitiesFunctions;
 import pagesAPI.SearchTextSOQL;
+import supportLibraries.SF_UtilityFunctions;
 import supportLibraries.Utility_Functions;
 
 /**
@@ -1471,191 +1472,243 @@ public class OpportunitiesPage extends ReusableLibrary {
 	
 	
 	
-	
-		
-	
 	HomePage hp = new HomePage(scriptHelper);
 	SearchTextSOQL searchOpportunity = new SearchTextSOQL(scriptHelper);
 	OpportunitiesFunctions opportunitiesFunctions = new OpportunitiesFunctions(scriptHelper);
 	Actions actions = new Actions(driver.getWebDriver());
 	EventPage eventPage = new EventPage(scriptHelper);
 	ActivityPage activityPage = new ActivityPage(scriptHelper);
-	
+	SF_UtilityFunctions sf_UtilityFunctions = new SF_UtilityFunctions(scriptHelper);
 	int offsetValue = new Random().nextInt(9);
+	EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
 
-	
+
 	/**
-	 * Adding the Web Elements to the Label List
+	 * Function for selecting the Opportunity 
 	 * 
 	 * @author Vishnuvardhan
-	 *
-	 */
-
-	static ArrayList<String> labelList = new ArrayList<String>();
-
-	/**
-	 * Selecting the Contact from a list of contacts
-	 * 
-	 * @author Cognizant
 	 *
 	 */
 
 	public void selectOpportunity() {
 		Utility_Functions.timeWait(1);
-		Utility_Functions.xClick(driver, menu_Opportunities, true);
-		Utility_Functions.timeWait(1);
-		report.updateTestLog("Verify Create Activity Opportunity", "Opportunity are Displayed ", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
-		Utility_Functions.xClick(driver, recentlyViewed, true);
-		report.updateTestLog("Verify Create Activity Opportunity", "Recently viewed Opportunity are Displayed ",
-				Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, allOpportunities, 3);
-		Utility_Functions.xClick(driver, allOpportunities, true);
-		Utility_Functions.timeWait(7);
-		report.updateTestLog("Verify Create Activity Opportunity", "All Opportunity are displayed successfully:::",
-				Status.PASS);
-		List<WebElement> oppList = driver.findElements(By.xpath(
-				"//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'006')]"));
-		Utility_Functions.xclickRandomElement(oppList);
+		sf_UtilityFunctions.oneAppNavigationTab("Opportunities");
+		report.updateTestLog("Verify Opportunity", "Opportunities are Displayed ", Status.PASS);
+		sf_UtilityFunctions.selectExisitingObjectRecord("Opportunity Name");
 		Utility_Functions.timeWait(2);
+		report.updateTestLog("Verify Opportunity", "Clicked on Opportunity and Opportunity page displayed successfully:::", Status.PASS);
 	}
+	
+	/**
+	 * Function for replacing the Opportunity with new Opportunity Id 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
 
 	public String selectOpportunityById(String Id) {
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xClick(driver, menu_Opportunities, true);
-		Utility_Functions.timeWait(1);
-		report.updateTestLog("Verify Create Activity Opportunity", "Opportunity are Displayed ", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
-		Utility_Functions.xClick(driver, recentlyViewed, true);
-		report.updateTestLog("Verify Create Activity Opportunity", "Recently viewed Opportunity are Displayed ",
-				Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, allOpportunities, 3);
-		Utility_Functions.xClick(driver, allOpportunities, true);
-		Utility_Functions.timeWait(7);
-		report.updateTestLog("Verify Create Activity Opportunity", "All Opportunity are displayed successfully:::",
-				Status.PASS);
-		List<WebElement> contactList = driver.findElements(By.xpath(
-				"//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'006')]"));
-		Utility_Functions.xclickRandomElement(contactList);
-		Utility_Functions.timeWait(2);
-		report.updateTestLog("Verify Create Activity Account ", "The Account is Displayed ", Status.PASS);
+		selectOpportunity();
+		report.updateTestLog("Verify Opportunity", "Clicked on Opportunity and Opportunity page displayed successfully", Status.PASS);
 		String url = driver.getCurrentUrl().split("#")[0];
 		String newUrl = url + "#/sObject/" + Id;
 		newUrl = newUrl + "/view";
-		report.updateTestLog("Verify Create Accounts View Hierarchy",
-				"Verifying the URL has been replaced with the new URL having the retrieved Account" + newUrl,
-				Status.PASS);
+		report.updateTestLog("Verify Opportunity", "Opportunity has been replaced with new Opportunity" + newUrl, Status.PASS);
 		driver.get(newUrl);
 		Utility_Functions.timeWait(3);
-		// String accountName=accountNameSaved.getText();
 		String accountName = Utility_Functions.xGetTextVisibleListElement(driver, accountNameSaved);
 		System.out.println(accountName);
 		return accountName;
 	}
 
-	public void labelsOpportunityPage() {
-		labelList.add("Record Type");
-		labelList.add("Account Name");
-		labelList.add("Billing City");
-		labelList.add("Billing Street");
-		labelList.add("Billing State/Province");
-		labelList.add("Billing Country");
-		labelList.add("Billing Zip/Postal Code");
-		labelList.add("Website");
-		labelList.add("Phone");
-		labelList.add("Industry");
-		labelList.add("Account Name");
-		labelList.add("Assignment Type");
-		labelList.add("Assignment Sub-Type");
-		labelList.add("Lead Source");
-		labelList.add("Close Date");
-		labelList.add("Total Size");
-		labelList.add("Unit of Measure");
-		labelList.add("Preferred Property Type");
-		labelList.add("Preferred Property Sub-Type");
-		labelList.add("Opportunity Name");
-		labelList.add("Sales Stage");
-		labelList.add("Phase");
-		labelList.add("Probability (%)");
-		labelList.add("Estimated Gross Fee/Commission");
-		labelList.add("Currency");
-		labelList.add("Requirement/Building Details");
-		labelList.add("Speciality Group");
-		labelList.add("Parent Opportunity");
-		labelList.add("Cross Sell");
-		labelList.add("Confidential Opportunity");
-		labelList.add("Opportunity Location");
-		labelList.add("Priority");
-		labelList.add("Hire Date");
-		labelList.add("Migrated Opportunity");
-		labelList.add("Opportunity Record Type");
-		labelList.add("On Hold");
-		labelList.add("On Hold Date");
-		labelList.add("On Hold Comments");
-		labelList.add("Total # of Units");
-		labelList.add("Unit of Comparison");
-		labelList.add("Status Comments");
-		labelList.add("Listing Type");
-		labelList.add("Availability Date");
-		labelList.add("Next Steps");
-		labelList.add("Engagement Commencement");
-		labelList.add("Engagement Expiration");
-		labelList.add("% Commission");
-		labelList.add("% Occupied");
-		labelList.add("Outside Broker Company");
-		labelList.add("Outside Broker Name");
-		labelList.add("CBRE Role");
-		labelList.add("Next Steps");
-		labelList.add("Reason for Loss");
-		labelList.add("Reason Lost Comments");
-		labelList.add("Competitor");
-		labelList.add("Opportunity Owner");
-		labelList.add("External Deal ID");
-		labelList.add("Existing Termination/Break Option");
-		labelList.add("New Termination/Break Option");
-		labelList.add("Lease From");
-		labelList.add("Lease To");
-		labelList.add("Lease Term (Months)");
-		labelList.add("Lease Rate/Rent");
-		labelList.add("Lease Rate/Rent Basis");
-		labelList.add("Outside Broker Company");
-		labelList.add("CBRE Role");
-		System.out.println("Label List of Opportunity Page:::" + labelList);
-		System.out.println("Total Labels present in Opportunity Page are:::" + labelList.size());
-
-	}
-
+		
 	/**
-	 * Adding the Web Elements to the Header Section List
+	 * Function validating the page layout headers for ABAMER, OBAMER, ABAPAC and CMAMER
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */
-	static ArrayList<String> headerSectionList = new ArrayList<String>();
+	
+	static ArrayList<String> OpportunityPageHeadersCapitalMarkets = new ArrayList<String>();
 
-	public void headerSectionOpportunityPage() {
-		// headerSectionList.add("Quick Create");
-		headerSectionList.add("Opportunity Information");
-		headerSectionList.add("Services");
-		headerSectionList.add("Close Information");
-		headerSectionList.add("Loss Information");
-		headerSectionList.add("System Information");
-		System.out.println("Header Section Details present in the new account page are:: " + headerSectionList);
+	
+	public void OpportunityPageHeadersCapitalMarkets() {
+		OpportunityPageHeadersCapitalMarkets.add("Opportunity Information");
+		OpportunityPageHeadersCapitalMarkets.add("Line of Business Information");
+		OpportunityPageHeadersCapitalMarkets.add("Deal Metrics");
+		OpportunityPageHeadersCapitalMarkets.add("Financial Information");
+		OpportunityPageHeadersCapitalMarkets.add("Close Information");
+		OpportunityPageHeadersCapitalMarkets.add("Loss Information");
+		OpportunityPageHeadersCapitalMarkets.add("System Information");
+		report.updateTestLog("Verify Opportunity Page Headers", "Opportunity page headers are:::" + OpportunityPageHeadersList, Status.PASS);
 	}
 	
-/*	public List<WebElement> findLabelElements(String commonXpath,ArrayList<String> labels){
-		
-		List<WebElement> labelElements = null;
-		String[] elementsXpaths = null;
-		for(int i=0;i<labels.size();i++){
-			String eleXpath = 
-					elementsXpaths[i] = commonXpath.replace("@TEMP", labels.get(i));
-			labelElements.add(driver.findElement(By.xpath(elementsXpaths[i])));
-		}
-		
-		return labelElements;
+	
+
+	/**
+	 * Function validating the page layout headers for ABAMER, OBAMER, ABAPAC and CMAMER
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	
+	static ArrayList<String> OpportunityPageHeadersAPAC = new ArrayList<String>();
+
+	
+	public void OpportunityPageHeadersAPAC() {
+		OpportunityPageHeadersAPAC.add("Opportunity Information");
+		OpportunityPageHeadersAPAC.add("Financial Information");
+		//OpportunityPageHeadersAPAC.add("Services");
+		OpportunityPageHeadersAPAC.add("Additional Information");
+		OpportunityPageHeadersAPAC.add("Close Information");
+		OpportunityPageHeadersAPAC.add("Loss Information");
+		OpportunityPageHeadersAPAC.add("System Information");
+		report.updateTestLog("Verify Opportunity Page Headers", "Opportunity page headers are:::" + OpportunityPageHeadersAPAC, Status.PASS);
 	}
-*/
+	
+	/**
+	 * Function validating the page layout headers for ABAMER, OBAMER, ABAPAC and CMAMER
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	
+	static ArrayList<String> OpportunityPageHeadersList = new ArrayList<String>();
+
+	
+	public void OpportunityPageHeaders() {
+		OpportunityPageHeadersList.add("Opportunity Information");
+		OpportunityPageHeadersList.add("Services");
+		OpportunityPageHeadersList.add("Additional Information");
+		OpportunityPageHeadersList.add("Close Information");
+		OpportunityPageHeadersList.add("Loss Information");
+		OpportunityPageHeadersList.add("System Information");
+		report.updateTestLog("Verify Opportunity Page Headers", "Opportunity page headers are:::" + OpportunityPageHeadersList, Status.PASS);
+	}
+	
+	
+	/**
+	 * Function validating the page layout labels for ABAMER, OBAMER, ABAPAC and CMAMER
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	
+	static ArrayList<String> OpportunityPageLabelsList = new ArrayList<String>();
+
+	
+	public void OpportunityPageFieldLabels() {
+		OpportunityPageLabelsList.add("Account ID");
+		OpportunityPageLabelsList.add("Record Type ID");
+		OpportunityPageLabelsList.add("Name");
+		OpportunityPageLabelsList.add("Sales Stage");
+		OpportunityPageLabelsList.add("Estimated Gross Fee/Commission");
+		OpportunityPageLabelsList.add("Probability (%)");
+		OpportunityPageLabelsList.add("Close Date");
+		OpportunityPageLabelsList.add("Lead Source");
+		OpportunityPageLabelsList.add("Opportunity Currency");
+		OpportunityPageLabelsList.add("Owner ID");
+		OpportunityPageLabelsList.add("Competitor");
+		OpportunityPageLabelsList.add("Confidential Opportunity");
+		OpportunityPageLabelsList.add("Cross Sell");
+		OpportunityPageLabelsList.add("Reason Lost Comments");
+		OpportunityPageLabelsList.add("Parent Opportunity");
+		OpportunityPageLabelsList.add("Priority");
+		OpportunityPageLabelsList.add("Reason for Loss");
+		OpportunityPageLabelsList.add("Requirement/Building Details");
+		OpportunityPageLabelsList.add("Assignment Sub-Type");
+		OpportunityPageLabelsList.add("Assignment Type");
+		OpportunityPageLabelsList.add("Total Size");
+		OpportunityPageLabelsList.add("Unit of Measure");
+		OpportunityPageLabelsList.add("Opportunity No.");
+		OpportunityPageLabelsList.add("Location");
+		OpportunityPageLabelsList.add("Status Comments");
+		OpportunityPageLabelsList.add("Source System");
+		OpportunityPageLabelsList.add("Total # of Units");
+		OpportunityPageLabelsList.add("Unit of Comparison");
+		OpportunityPageLabelsList.add("Availability Date");
+		OpportunityPageLabelsList.add("% Commission");
+		OpportunityPageLabelsList.add("Engagement Commencement");
+		OpportunityPageLabelsList.add("Engagement Expiration");
+		OpportunityPageLabelsList.add("Hire Date");
+		OpportunityPageLabelsList.add("% Occupied");
+		OpportunityPageLabelsList.add("Next Steps");
+		OpportunityPageLabelsList.add("CBRE Role");
+		OpportunityPageLabelsList.add("External Deal ID");
+		OpportunityPageLabelsList.add("Floor Number");
+		OpportunityPageLabelsList.add("Migrated Opportunity");
+		OpportunityPageLabelsList.add("Outside Broker Company");
+		OpportunityPageLabelsList.add("Outside Broker Name");
+		OpportunityPageLabelsList.add("Preferred Property Sub-Type");
+		OpportunityPageLabelsList.add("On Hold Comments");
+		OpportunityPageLabelsList.add("On Hold Date");
+		OpportunityPageLabelsList.add("On Hold");
+		OpportunityPageLabelsList.add("Listing Type");
+		OpportunityPageLabelsList.add("Special Economic Zone");
+		OpportunityPageLabelsList.add("Phase");
+		OpportunityPageLabelsList.add("Preferred Property Type");
+		OpportunityPageLabelsList.add("Installment Count");
+		OpportunityPageLabelsList.add("Deal IQ URL");
+		OpportunityPageLabelsList.add("Change Opportunity Owner");
+		OpportunityPageLabelsList.add("Specialty Group");
+	/*	OpportunityPageLabelsList.add("Last Manually Modified By");
+		OpportunityPageLabelsList.add("Last Manually Modified Date");*/
+		report.updateTestLog("Verify Opportunity Field Labels", "Opportunity field labels are:::" + OpportunityPageLabelsList, Status.PASS);
+	}
+	
+	
+	public void validateNewOpportunityPage() {
+		List<String> opportunityHeaders = null;
+		List<String> opportunityHeadersList = new ArrayList<String>();
+		if(dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) {
+			OpportunityPageHeaders();
+			opportunityHeaders = establishConnection.establishMetaDataConnectionPageHeaders("Opportunity", 6);
+			opportunityHeadersList = Utility_Functions.xValidatePickListValuesPage(OpportunityPageHeadersList, opportunityHeaders, "Opportunity page Header values");
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) {
+			OpportunityPageHeaders();
+			opportunityHeaders = establishConnection.establishMetaDataConnectionPageHeaders("Opportunity", 6);
+			opportunityHeadersList = Utility_Functions.xValidatePickListValuesPage(OpportunityPageHeadersList, opportunityHeaders, "Opportunity page Header values");
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("CMAMERPS")) {
+			OpportunityPageHeadersCapitalMarkets();
+			opportunityHeaders = establishConnection.establishMetaDataConnectionPageHeaders("Opportunity", 7);
+			opportunityHeadersList = Utility_Functions.xValidatePickListValuesPage(OpportunityPageHeadersCapitalMarkets, opportunityHeaders, "Opportunity page Header values");
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) {
+			OpportunityPageHeadersCapitalMarkets();
+			opportunityHeaders = establishConnection.establishMetaDataConnectionPageHeaders("Opportunity", 7);
+			opportunityHeadersList = Utility_Functions.xValidatePickListValuesPage(OpportunityPageHeadersCapitalMarkets, opportunityHeaders, "Opportunity page Header values");
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("ABAPAC")) {
+			OpportunityPageHeadersAPAC();			
+			opportunityHeaders = establishConnection.establishMetaDataConnectionPageHeaders("Opportunity", 7);
+			opportunityHeadersList = Utility_Functions.xValidatePickListValuesPage(OpportunityPageHeadersAPAC, opportunityHeaders, "Opportunity page Header values");
+		}
+		if (opportunityHeadersList.size()!=0) {
+			report.updateTestLog("Verify Opportunity Headers", "All the Headers are not present in the Opportunity Page:::" + opportunityHeadersList, Status.FAIL);
+		} else {
+			report.updateTestLog("Verify Opportunity Headers", "All the Headers are present in the Opportunity Page", Status.PASS);
+		}			
+		
+		List<String> opportunityLabels = null;
+		if(dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) {
+			opportunityLabels = establishConnection.establishMetaDataConnectionPageLayouts("Opportunity", "Opportunity Layout - Agency Brokerage");
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) {
+			opportunityLabels = establishConnection.establishMetaDataConnectionPageLayouts("Opportunity", "Opportunity Layout - Occupier Brokerage");
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("CMAMERPS")) {
+			opportunityLabels = establishConnection.establishMetaDataConnectionPageLayouts("Opportunity", "Opportunity Layout - Capital Markets Property Sales");
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) {
+			opportunityLabels = establishConnection.establishMetaDataConnectionPageLayouts("Opportunity", "Opportunity Layout - Capital Markets Debt & Structured Finance");
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("ABAPAC")) {
+			opportunityLabels = establishConnection.establishMetaDataConnectionPageLayouts("Opportunity", "Opportunity Layout - Agency Brokerage");
+		}
+		List<String> opportunityLabelsList = new ArrayList<String>();
+		OpportunityPageFieldLabels();
+		opportunityLabelsList = Utility_Functions.xValidatePickListValuesPage(opportunityLabels, OpportunityPageLabelsList, "Opportunity page field values");
+		if (opportunityLabelsList.size()!=0) {
+			report.updateTestLog("Verify Opportunity Field Labels", "All the labels are not present in the Opportunity Page:::" + opportunityLabelsList, Status.FAIL);
+		} else {
+			report.updateTestLog("Verify Opportunity Field Labels", "All the labels are present in the Opportunity Page", Status.PASS);
+		}	
+	}
+	
+	
 	/**
 	 * Validating the New Opportunities Page Layout fields
 	 * 
@@ -1664,137 +1717,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void newOpportunityPageLayout() {
-		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
-		Utility_Functions.xClick(driver, menu_Opportunities, true);
-		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
-		Utility_Functions.xClick(driver, newOpportunity, true);
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xSwitchtoFrame(driver, continueButton);
-		Utility_Functions.xWaitForElementPresent(driver, continueButton, 5);
-		Utility_Functions.xClick(driver, continueButton, true);
-		Utility_Functions.timeWait(2);
-		//driver.switchTo().defaultContent();
-		Utility_Functions.xScrollWindow(driver);
-		Utility_Functions.xSwitchtoFrame(driver, viewAllFieldsButton);
-		Utility_Functions.xWaitForElementPresent(driver, viewAllFieldsButton, 5);
-		Utility_Functions.xClick(driver, viewAllFieldsButton, true);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xScrollWindow(driver);
-		headerSectionOpportunityPage();
-		labelsOpportunityPage();
-		Utility_Functions.xWaitForElementPresent(driver, headerList, 5);
-		System.out.println("Number of headers found  :: "+headerList.size());
-		try {
-			int i2 = 0, count = 0;
-			String[] headerTexts = new String[headerList.size()];
-			for (WebElement element : headerList) {
-				headerTexts[i2] = element.getText();
-				System.out.println("Element found :"+headerTexts[i2]+"  ---  label should be :"+headerSectionList.get(i2));
-				if (headerTexts[i2].contains(headerSectionList.get(i2))) {
-					count++;
-					System.out.println("Verify Add Opportunity Header List  :: " + element.getText());
-					report.updateTestLog("Verify Add Opportunity Header List",
-							element.getText() + " header is present in Add Opportunity Page", Status.PASS);
-				}
-				i2++;				
-				
-			}
-			System.out.println(count);
-			if (count == 5) {
-				report.updateTestLog("Verify Add Opportunity Header List",
-						"Headers are present in Add Opportunity Page:::", Status.PASS);
-			} else {
-				report.updateTestLog("Verify Add Opportunity Header List",
-						"Header are not present in Add Opportunity Page:::", Status.FAIL);
-			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		try {
-			//Utility_Functions.xSwitchtoFrame(driver, OpportunityPageLabel);
-			//System.out.println("Switched to frame");
-			Utility_Functions.xScrollWindowTop(driver);
-			//Utility_Functions.xWaitForElementPresent(driver, labelListOpportunitiesPage, 6);
-			List<WebElement> OpportunitiesPageLabels = driver.findElements(By.xpath("//*[@class='slds-form-element__label']"));
-			System.out.println("Number of Labels found in Opportunity page :: "+ OpportunitiesPageLabels.size());
-			System.out.println("Number of label text verified "+labelList.size());
-			int i1 = 0, j = 0, countLabelList = 0;
-			String[] labelTexts = new String[OpportunitiesPageLabels.size()];
-			for (WebElement element : OpportunitiesPageLabels) {
-					labelTexts[i1] = element.getText();
-					j=0;
-					while (j < labelList.size()) {
-					if (labelTexts[i1].contains(labelList.get(j))) {
-						System.out.println("Verify Add Opportunity Page Label List  : " + element.getText());
-						report.updateTestLog("Verify Add Opportunity Page Label List",
-								element.getText() + "::::label list is present in Add Opportunity Page", Status.PASS);
-						countLabelList++;
-					 }
-					j++;
-					}
-			  }
-			System.out.println("Count of Label List::" + countLabelList);
-			if (dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) {
-				countLabelList = 104;
-			} else if (dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) {
-				countLabelList = 108;
-			} else if (dataTable.getData("General_Data", "TC_ID").contains("ABAPAC")) {
-				countLabelList = 138;
-			} else if (dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) {
-				countLabelList = 66;
-			}
-			if ((countLabelList == 104) || (countLabelList == 108) || (countLabelList == 138)
-					|| (countLabelList == 66)) {
-				report.updateTestLog("Verify Add Opportunity Page Label List",
-						"Labels are present in Add Opportunity Page", Status.PASS);
-			} else {
-				report.updateTestLog("Verify Add Opportunity Page Label List",
-						"Labels are not present in Add Opportunity Page", Status.FAIL);
-			}
-
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		validateFielsOpportunityPageLayout();
-	}
-
-	/**
-	 * Validating the field values in New Opportunities Page Layout fields
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-
-	public void validateFielsOpportunityPageLayout() {
-		try {
-			if ((dataTable.getData("General_Data", "TC_ID").contains("ABAMER"))
-					|| (dataTable.getData("General_Data", "TC_ID").contains("OBAMER"))) {
-				if ((!opportunityName.getText().equals(" ")) && (!salesStage.getText().equals(" "))
-						&& (!probabilityField.getText().equals(" ") && (!phaseField.getText().equals(" ")))) {
-					report.updateTestLog("Verify Add Opportunity Page Fields",
-							"Opportunity fields are having values present in the corresponding fields:::", Status.PASS);
-				} else {
-					report.updateTestLog("Verify Add Opportunity Page Fields",
-							"Opportunity fields are not having values present in the corresponding fields:::",
-							Status.FAIL);
-				}
-			} else if (dataTable.getData("General_Data", "TC_ID").contains("ABAPAC")) {
-				if ((!opportunityName.getText().equals(" ")) && (!salesStage.getText().equals(" "))
-						&& (!probabilityField.getText().equals(" "))) {
-					report.updateTestLog("Verify Add Opportunity Page Fields",
-							"Opportunity fields are having values present in the corresponding fields:::", Status.PASS);
-				} else {
-					report.updateTestLog("Verify Add Opportunity Page Fields",
-							"Opportunity fields are not having values present in the corresponding fields:::",
-							Status.FAIL);
-				}
-			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-	}
-
-	
+		validateNewOpportunityPage();
+	}	
 
 	/**
 	 * Validating the required fields based on Sales Stage selected between

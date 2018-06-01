@@ -124,30 +124,67 @@ public abstract class CRAFTTestCase {
 			currentPacakage = testParameters.getCurrentScenario();
 			failedTestCase.add("testscripts." + testParameters.getCurrentScenario() + "." + testParameters.getCurrentTestcase());
 			properties = Settings.getInstance();
-			if(getCounter()<Integer.parseInt(properties.getProperty("ReRunTimes"))) {
-				Assert.fail(driverScript.getFailureDescription());				
-			} else if((getCounter()==Integer.parseInt(properties.getProperty("ReRunTimes")))) {
-				if(properties.get("DefectLogging").equals("True")) {
-					//sResponseMessage = DefectFiling.searchDefect(testParameters.getCurrentTestDescription());		
-					sResponseMessage = CreateDefectTFS.searchBugInTFS(testParameters.getCurrentTestDescription());					
-					if(sResponseMessage==false) {
-						System.out.println("Defect doesn't exists:::");						
-						/*sResponseMessage = DefectFiling.createDefect(currentPacakage + "_" + testParameters.getCurrentTestcase() + "-" +testParameters.getCurrentTestDescription(), 
-								testParameters.getCurrentTestDescription() + "_" + driverScript.getFailureDescription());*/
+			try {
+				if(getCounter()<Integer.parseInt(properties.getProperty("ReRunTimes"))) {
+					Assert.fail(driverScript.getFailureDescription());				
+				} else if((getCounter()==Integer.parseInt(properties.getProperty("ReRunTimes")))) {
+					if(properties.get("DefectLogging").equals("True")) {
+						//sResponseMessage = DefectFiling.searchDefect(testParameters.getCurrentTestDescription());		
+						/*sResponseMessage = CreateDefectTFS.searchBugInTFS(testParameters.getCurrentTestDescription());					
+						if(sResponseMessage==false) {
+							System.out.println("Defect doesn't exists:::");						
+							sResponseMessage = DefectFiling.createDefect(currentPacakage + "_" + testParameters.getCurrentTestcase() + "-" +testParameters.getCurrentTestDescription(), 
+									testParameters.getCurrentTestDescription() + "_" + driverScript.getFailureDescription());
+							sResponseMessage = CreateDefectTFS.createBugInTFS(currentPacakage + "_" + testParameters.getCurrentTestcase() + "-" +testParameters.getCurrentTestDescription(), 
+									testParameters.getCurrentTestDescription() + "_" + driverScript.getFailureDescription());
+									if(sResponseMessage==false) 
+										System.out.println("Defect filing failed to log the defect for the issue:::" + driverScript.getFailureDescription());
+									else if (sResponseMessage==true)
+								System.out.println("Defect filed successfully for the issue:::" + testParameters.getCurrentTestcase() + "-" + driverScript.getFailureDescription());
+						} else if(sResponseMessage==true) {
+							System.out.println("Defect already exists, no need to log a new defect:::");						
+						}*/
 						sResponseMessage = CreateDefectTFS.createBugInTFS(currentPacakage + "_" + testParameters.getCurrentTestcase() + "-" +testParameters.getCurrentTestDescription(), 
 								testParameters.getCurrentTestDescription() + "_" + driverScript.getFailureDescription());
-								if(sResponseMessage==false) 
-									System.out.println("Defect filing failed to log the defect for the issue:::" + driverScript.getFailureDescription());
-								else if (sResponseMessage==true)
-							System.out.println("Defect filed successfully for the issue:::" + testParameters.getCurrentTestcase() + "-" + driverScript.getFailureDescription());
-					} else if(sResponseMessage==true) {
-						System.out.println("Defect already exists, no need to log a new defect:::");						
+						if(sResponseMessage==false) 
+							System.out.println("Defect filing failed to log the defect for the issue:::" + driverScript.getFailureDescription());
+						else if (sResponseMessage==true)
+							System.out.println("Defect filed successfully for the issue:::");
+					} else {
+						System.out.println("Defect logging feature disabled:::");						
 					}
-				} else {
-					System.out.println("Defect logging feature disabled:::");						
+					Assert.fail(driverScript.getFailureDescription());
 				}
-				Assert.fail(driverScript.getFailureDescription());
-			}						
+			} catch (NumberFormatException e) {
+				if(getCounter()<Integer.parseInt(properties.getProperty("ReRunTimes"))) {
+					Assert.fail(driverScript.getFailureDescription());				
+				} else if((getCounter()==Integer.parseInt(properties.getProperty("ReRunTimes")))) {
+					if(properties.get("DefectLogging").equals("True")) {
+						/*sResponseMessage = CreateDefectTFS.searchBugInTFS(testParameters.getCurrentTestDescription());					
+						if(sResponseMessage==false) {
+							System.out.println("Defect doesn't exists:::");						
+							sResponseMessage = CreateDefectTFS.createBugInTFS(currentPacakage + "_" + testParameters.getCurrentTestcase() + "-" +testParameters.getCurrentTestDescription(), 
+									testParameters.getCurrentTestDescription() + "_" + driverScript.getFailureDescription());
+							sResponseMessage = CreateDefectTFS.createBugInTFS(testParameters.getCurrentTestDescription(), driverScript.getFailureDescription());
+									if(sResponseMessage==false) 
+										System.out.println("Defect filing failed to log the defect for the issue:::" + driverScript.getFailureDescription());
+									else if (sResponseMessage==true)
+								System.out.println("Defect filed successfully for the issue:::");
+						} else if(sResponseMessage==true) {
+							System.out.println("Defect already exists, no need to log a new defect:::");						
+						}*/
+						sResponseMessage = CreateDefectTFS.createBugInTFS(currentPacakage + "_" + testParameters.getCurrentTestcase() + "-" +testParameters.getCurrentTestDescription(), 
+								testParameters.getCurrentTestDescription() + "_" + driverScript.getFailureDescription());
+						if(sResponseMessage==false) 
+							System.out.println("Defect filing failed to log the defect for the issue:::" + driverScript.getFailureDescription());
+						else if (sResponseMessage==true)
+							System.out.println("Defect filed successfully for the issue:::");
+					} else {
+						System.out.println("Defect logging feature disabled:::");						
+					}
+					Assert.fail(driverScript.getFailureDescription());
+				}		
+			}
 		}
 	}
 
