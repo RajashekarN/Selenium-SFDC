@@ -71,6 +71,7 @@ public class SF_UtilityFunctions extends ReusableLibrary {
 			By all = By.xpath("//span[contains(@class,'virtualAutocompleteOptionText')][contains(text(),'All')]");
 			Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
 			driver.findElement(recentlyViewed).click();
+			report.updateTestLog("Verify Recently Viewed", "Recently viewed dropdown is clicked::: ", Status.PASS);
 			Utility_Functions.xWaitForElementPresent(driver, all, 5);
 			driver.findElement(all).click();
 			Utility_Functions.xWaitForElementPresent(driver, driver.findElements(visibleRecords), 7);

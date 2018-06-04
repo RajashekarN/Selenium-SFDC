@@ -8,6 +8,9 @@ import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
 import com.sforce.soap.partner.DeleteResult;
+import com.sforce.soap.partner.DescribeLayout;
+import com.sforce.soap.partner.DescribeLayoutResult;
+import com.sforce.soap.partner.DescribeLayoutSection;
 import com.sforce.soap.partner.Field;
 import com.sforce.soap.partner.GetUserInfoResult;
 import com.sforce.soap.partner.LeadConvertResult;
@@ -433,41 +436,7 @@ public class EstablishConnection extends ReusableLibrary {
 		}
 	}
 	
-	/**
-	 * Function for establishing the metadata connection for page layouts 
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
 	
-	public List<String> establishMetaDataConnectionPageLayouts(String ObjectName, String PageLayouts) {
-		List<String> UIFieldsOnPage = new ArrayList<String>();
-		establishMetaDataConnection();
-		List<String> pageLayOutsFields = getFieldNamesOnLayout(ObjectName + "-" + PageLayouts);
-		Field[] pageLabels = null;
-		try {
-			pageLabels = EstablishConnection.connection.describeSObject(ObjectName).getFields();
-			for(int i=0; i < pageLabels.length; i++) {
-				for(int j=0; j < pageLayOutsFields.size(); j++) {
-					if(pageLabels[i].getName().equals(pageLayOutsFields.get(j))) {
-						if((pageLabels[i].getCalculatedFormula()==null)) {
-							if((pageLabels[i].getLabel().equals("Created Date ID")) || (pageLabels[i].getLabel().equals("Created By ID")) || (pageLabels[i].getLabel().equals("Last Modified By ID"))) {
-								
-							} else {
-								UIFieldsOnPage.add(pageLabels[i].getLabel());
-								break;
-							}							
-						} 
-					}
-				}
-				
-			}
-		} catch (ConnectionException e) {
-			e.printStackTrace();
-		}
-		return UIFieldsOnPage;
-	}
-
 	/**
 	 * Function for establishing the metadata connection for picklist values
 	 * 
@@ -506,6 +475,43 @@ public class EstablishConnection extends ReusableLibrary {
 		}
 		return PickListValues;
 	}
+	
+	/**
+	 * Function for establishing the metadata connection for page layouts 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	
+	public List<String> establishMetaDataConnectionPageLayouts(String ObjectName, String PageLayouts) {
+		List<String> UIFieldsOnPage = new ArrayList<String>();
+		establishMetaDataConnection();
+		List<String> pageLayOutsFields = getFieldNamesOnLayout(ObjectName + "-" + PageLayouts);
+		Field[] pageLabels = null;
+		try {
+			pageLabels = EstablishConnection.connection.describeSObject(ObjectName).getFields();
+			for(int i=0; i < pageLabels.length; i++) {
+				for(int j=0; j < pageLayOutsFields.size(); j++) {
+					if(pageLabels[i].getName().equals(pageLayOutsFields.get(j))) {
+						if((pageLabels[i].getCalculatedFormula()==null)) {
+							if((pageLabels[i].getLabel().equals("Created Date ID")) || (pageLabels[i].getLabel().equals("Created By ID")) || (pageLabels[i].getLabel().equals("Last Modified By ID"))
+									|| (pageLabels[i].getLabel().equals("Last Manually Modified By")) || (pageLabels[i].getLabel().equals("Last Manually Modified Date"))) {
+								System.out.println("Not adding the above fields as they are common for all the objects:::");
+							} else {
+								UIFieldsOnPage.add(pageLabels[i].getLabel());
+								break;
+							}							
+						} 
+					}
+				}
+				
+			}
+		} catch (ConnectionException e) {
+			e.printStackTrace();
+		}
+		return UIFieldsOnPage;
+	}
+	
 
 	public static List<String> getFieldNamesOnLayout(String layoutName) {
 		List<String> LayOutValues = new ArrayList<String>();
@@ -531,6 +537,39 @@ public class EstablishConnection extends ReusableLibrary {
 			ex.printStackTrace();
 		}
 		return LayOutValues;
+	}
+	
+	/**
+	 * Function for getting the page headers 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	
+	
+	public List<String> establishMetaDataConnectionPageHeaders(String ObjectName, int HeaderCount) {
+		establishMetaDataConnection();
+		DescribeLayoutResult dlr = null;
+		try {
+			dlr = EstablishConnection.connection.describeLayout(ObjectName, null, null);
+		} catch (ConnectionException e1) {
+			e1.printStackTrace();
+		}
+		List<String> headersList = new ArrayList<String>();
+		for (int i = 0; i < dlr.getLayouts().length; i++) {
+			DescribeLayout layout = dlr.getLayouts()[i];
+			DescribeLayoutSection[] editLayoutSectionList = layout.getEditLayoutSections();
+			// Write the headings of the edit layout sections
+			for (int x = 0; x < editLayoutSectionList.length; x++) {
+					if(editLayoutSectionList.length==HeaderCount) {
+						headersList.add(editLayoutSectionList[x].getHeading());
+						System.out.println(x + ":::Has the heading layout section:::" + editLayoutSectionList[x].getHeading());
+						report.updateTestLog(x + ":::Header Section", " has the heading layout section:::" + editLayoutSectionList[x].getHeading(), Status.PASS);
+					}				
+				
+			}
+		}
+		return headersList;
 	}
 
 	public static Map<String, String> LayoutMapping() {

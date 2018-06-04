@@ -677,7 +677,7 @@ public class TaggingPage extends ReusableLibrary {
 	public void propertyTagging() {
 		sf_UtilityFunctions.oneAppNavigationTab("Properties");
 		sf_UtilityFunctions.selectAction("New");
-		sf_UtilityFunctions.selectExisitingObjectRecord("Propery Name");
+		sf_UtilityFunctions.selectExistingObjectRecord("Propery Name");
 	
 		/*Utility_Functions.xClick(driver, menu_More, true);
 		Utility_Functions.xWaitForElementPresent(driver, properties, 3);
