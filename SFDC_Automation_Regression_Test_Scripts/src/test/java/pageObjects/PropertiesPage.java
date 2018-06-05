@@ -543,7 +543,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 	public void propertiesActivityLightningTimeline() {
 		selectProperty();
-		ActivityPage activityPage = new ActivityPage(scriptHelper);
+		TasksPage activityPage = new TasksPage(scriptHelper);
 		activityPage.validateActivityTimeLine();
 	}
 

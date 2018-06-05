@@ -904,7 +904,7 @@ public class AccountsPage extends ReusableLibrary {
 	HomePage hp = new HomePage(scriptHelper);
 	LoginPage loginPage = new LoginPage(scriptHelper);
 	SearchTextSOQL searchAccount = new SearchTextSOQL(scriptHelper);
-	ActivityPage activityPage = new ActivityPage(scriptHelper);
+	TasksPage activityPage = new TasksPage(scriptHelper);
 	static ArrayList<String> accountsPageDetailsList = new ArrayList<String>();
 
 	

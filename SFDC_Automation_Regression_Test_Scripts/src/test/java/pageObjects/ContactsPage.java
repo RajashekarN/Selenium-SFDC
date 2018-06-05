@@ -468,7 +468,7 @@ public class ContactsPage extends ReusableLibrary {
 
 	SearchTextSOQL searchAccountName = new SearchTextSOQL(scriptHelper);
 	LoginPage loginPage = new LoginPage(scriptHelper);
-	ActivityPage activityPage = new ActivityPage(scriptHelper);
+	TasksPage activityPage = new TasksPage(scriptHelper);
 
 	/**
 	 * Selecting the Contact from a list of contacts

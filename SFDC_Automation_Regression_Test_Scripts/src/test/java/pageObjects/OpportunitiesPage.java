@@ -1474,7 +1474,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	OpportunitiesFunctions opportunitiesFunctions = new OpportunitiesFunctions(scriptHelper);
 	Actions actions = new Actions(driver.getWebDriver());
 	EventPage eventPage = new EventPage(scriptHelper);
-	ActivityPage activityPage = new ActivityPage(scriptHelper);
+	TasksPage activityPage = new TasksPage(scriptHelper);
 	SF_UtilityFunctions sf_UtilityFunctions = new SF_UtilityFunctions(scriptHelper);
 	int offsetValue = new Random().nextInt(9);
 	EstablishConnection establishConnection = new EstablishConnection(scriptHelper);

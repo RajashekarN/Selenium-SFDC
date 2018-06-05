@@ -4,7 +4,7 @@ import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 
 import pageObjects.AccountsPage;
-import pageObjects.ActivityPage;
+import pageObjects.TasksPage;
 import pagesAPI.AccountsFunctions;
 import pagesAPI.TaggingFunctions;
 import pagesAPI.TaskEventsFunctions;
@@ -34,7 +34,7 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 	AccountsFunctions accountsFunctions = new AccountsFunctions(scriptHelper);
 	TaskEventsFunctions taskEventsFunctions = new TaskEventsFunctions(scriptHelper);
 	TaggingFunctions tagging = new TaggingFunctions(scriptHelper);
-	ActivityPage sfActivityPage=new ActivityPage(scriptHelper);
+	TasksPage sfActivityPage=new TasksPage(scriptHelper);
 	/**
 	 * Validating the Login functionality
 	 * 
