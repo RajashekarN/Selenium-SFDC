@@ -21,7 +21,7 @@ import pagesAPI.SearchTextSOQL;
 import supportLibraries.Utility_Functions;
 
 
-public class ActivityPage extends ReusableLibrary {
+public class TasksPage extends ReusableLibrary {
 	/*
 	 * Constructor to initialize the business component library
 	 * 
@@ -29,7 +29,7 @@ public class ActivityPage extends ReusableLibrary {
 	 * {@link DriverScript}
 	 */
 
-	public ActivityPage(ScriptHelper scriptHelper) {
+	public TasksPage(ScriptHelper scriptHelper) {
 		super(scriptHelper);
 		PageFactory.initElements(driver.getWebDriver(), this);
 	}

@@ -131,7 +131,7 @@ public class DefectFiling {
 		fileDefect();
 	}*/
 	
-	public static boolean searchDefect(String testDescritpion) {
+/*	public static boolean searchDefect(String testDescritpion) {
 		JSONObject json = new JSONObject();
 		String sTestDesctiption= testDescritpion;
 		try {
@@ -142,6 +142,6 @@ public class DefectFiling {
 			e.printStackTrace();
 		}
 		return sResponseMessage = fileDefect(json, "SearchDefect");
-	}
+	}*/
 	
 }

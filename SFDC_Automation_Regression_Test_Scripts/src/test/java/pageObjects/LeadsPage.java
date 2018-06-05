@@ -105,16 +105,16 @@ public class LeadsPage extends ReusableLibrary {
 	@FindBy(xpath = "//input[contains(@id,'CustomLeadConversionFrom:OwnerName']")
 	WebElement recordOwner;	
 
-	@FindBy(xpath = "//div[@class='slds-form-element__row']//label[@for='first-name']/parent::div//input")
+	@FindBy(xpath = "//label/span[text()='First Name']/following::input[1]")
 	WebElement firstName;
 	
-	@FindBy(xpath = "//div[@class='slds-form-element__row']//label[@for='last-name']/parent::div//input")
+	@FindBy(xpath = "//label/span[text()='Last Name']/following::input[1]")
 	WebElement lastName;
 	
-	@FindBy(xpath = "//label[@for='company']/following-sibling::div//input")
+	@FindBy(xpath = "//label/span[text()='Company']/following::input[1]")
 	WebElement company;	
 
-	@FindBy(xpath = "//input[@class='btn slds-button slds-button--neutral slds-m-left--small'][@value='Save']")
+	@FindBy(xpath = "(//button/span[text()='Save'])[2]")
 	WebElement saveButton;
 	
 	@FindBy(xpath = "//p[text()='Lead']/parent::div/h1/span")
@@ -384,7 +384,7 @@ public class LeadsPage extends ReusableLibrary {
 	@FindBy(xpath="//h2[@id='header']/a/span[text()='Private Notes'] ")
 	WebElement privateNotes;
 
-	@FindBy(xpath="//label[text()='Email']/parent::div//div/input")
+	@FindBy(xpath="//label/span[text()='Email']/following::input[1]")
 	WebElement emailLead;
 
 	@FindBy(xpath="//li[contains(@class,'oneActionsDropDown')]//a")
@@ -886,27 +886,27 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(4);
 		try {
 			if(dataTable.getData("General_Data", "TC_ID").contains("OB")) {
-				Utility_Functions.xWaitForElementPresent(driver, selectRecordType, 3);
+				Utility_Functions.xWaitForElementPresent(driver, selectRecordType, 5);
 				Utility_Functions.xClick(driver, selectRecordType, true);
-				Utility_Functions.xWaitForElementPresent(driver, occupierBrokerage, 3);
+				Utility_Functions.xWaitForElementPresent(driver, occupierBrokerage, 5);
 				Utility_Functions.xClick(driver, occupierBrokerage, true);
-			} else if(dataTable.getData("General_Data", "TC_ID").equals("AB")) {
+			} else if(dataTable.getData("General_Data", "TC_ID").contains("AB")) {
 										
-				Utility_Functions.xWaitForElementPresent(driver, selectRecordType, 3);
+				Utility_Functions.xWaitForElementPresent(driver, selectRecordType, 5);
 				Utility_Functions.xClick(driver, selectRecordType, true);
-				Utility_Functions.xWaitForElementPresent(driver, agencyBroker, 3);
+				Utility_Functions.xWaitForElementPresent(driver, agencyBroker, 5);
 				Utility_Functions.xClick(driver, agencyBroker, true);
-			} else if(dataTable.getData("General_Data", "TC_ID").equals("CM")) {
-				Utility_Functions.xWaitForElementPresent(driver, selectRecordType, 3);
+			} else if(dataTable.getData("General_Data", "TC_ID").contains("CM")) {
+				Utility_Functions.xWaitForElementPresent(driver, selectRecordType, 5);
 				Utility_Functions.xClick(driver, selectRecordType, true);
-				Utility_Functions.xWaitForElementPresent(driver, capitalMarkets, 3);
+				Utility_Functions.xWaitForElementPresent(driver, capitalMarkets, 5);
 				Utility_Functions.xClick(driver, capitalMarkets, true);
 			}			
 		} catch (Exception e) {
 			System.out.println("Unable to select the lead record type encountered an error:::" + e.getMessage());
 		}
 		/*Utility_Functions.xSwitchtoFrame(driver, continueButton);*/
-		Utility_Functions.xWaitForElementPresent(driver, continueButton, 3);
+		Utility_Functions.xWaitForElementPresent(driver, continueButton, 5);
 		Utility_Functions.xClick(driver, continueButton, true);
 		Utility_Functions.timeWait(2);
 		//String value = Utility_Functions.xGenerateAlphaNumericString();
@@ -915,8 +915,6 @@ public class LeadsPage extends ReusableLibrary {
 		String sCompanyName = searchTextSOQL.fetchRecordFieldValueAdminLogin("Name", queryAccount);
 		//String companyName = value  + "_" + dataTable.getData("General_Data", "Company") ;	
 		driver.switchTo().defaultContent();
-		Utility_Functions.xSwitchtoFrame(driver, firstName);
-		Utility_Functions.timeWait(3);
 		Utility_Functions.xWaitForElementPresent(driver, firstName, 5);
 		String sFirstName = Utility_Functions.xRandomFunction() + "_" + dataTable.getData("General_Data", "First Name");
 		String sLastName =  Utility_Functions.xRandomFunction() + "_" +  dataTable.getData("General_Data", "Last Name");
@@ -958,8 +956,6 @@ public class LeadsPage extends ReusableLibrary {
 		createLeadFunction();
 		Utility_Functions.xWaitForElementPresent(driver, saveButton, 3);
 		Utility_Functions.xClick(driver, saveButton, true);
-		Utility_Functions.timeWait(3);
-		driver.switchTo().defaultContent();
 		Utility_Functions.timeWait(3);
 		try {
 			//String companyText = dataTable.getData("General_Data", "Company");

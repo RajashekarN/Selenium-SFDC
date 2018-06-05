@@ -21,6 +21,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.internal.Coordinates;
+import org.openqa.selenium.interactions.internal.Locatable;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -338,7 +340,7 @@ public class Utility_Functions extends ReusableLibrary {
 
 	public static boolean xHoverElementclicks(WebElement el, CraftDriver driver) {
 		Actions builder = new Actions(driver.getWebDriver());
-		builder.moveToElement(el).build().perform();
+		builder.moveToElement(el).click().build().perform();
 		timeWait(2);
 		//builder.click().perform();
 		return true;
@@ -1544,4 +1546,32 @@ public class Utility_Functions extends ReusableLibrary {
 	public String getRadioButton(String text){
 		return "//a/div[text()='"+text+"']";
 	}
+	
+	
+
+    public static java.util.List<String> InitiateListValues(String[] values) {
+ 	   List<String> ListValues = new java.util.ArrayList<String>();
+        for(int i = 0;i<values.length;i++){
+          ListValues.add(values[i]);
+        }
+		return ListValues;
+    }
+    
+
+	public static void scrollToViewElementAndClick(WebElement element) throws Exception{	
+		try {
+			Coordinates coordinate = ((Locatable)element).getCoordinates();
+			int verticalY = coordinate.inViewPort().getY();
+			int horiX = coordinate.inViewPort().getX();
+			coordinate.inViewPort().moveBy(horiX, verticalY);
+			timeWait(1);
+			element.click();
+			timeWait(2);
+		} catch (Exception e) {
+			// Added to prevent false erroring for referencing a "hidden" object
+			System.out.println("Internal error: " + e.getMessage() + "\nContinuing after error.");
+			e.printStackTrace();
+		}
+	  }
+	
 }

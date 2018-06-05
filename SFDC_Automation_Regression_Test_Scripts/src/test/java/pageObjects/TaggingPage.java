@@ -328,8 +328,7 @@ public class TaggingPage extends ReusableLibrary {
 	public void propertyTagging() {
 		sf_UtilityFunctions.oneAppNavigationTab("Properties");
 		sf_UtilityFunctions.selectAction("New");
-		sf_UtilityFunctions.selectExisitingObjectRecord("Property Name");
-	
+		sf_UtilityFunctions.selectExistingObjectRecord("Property Name");
 		/*Utility_Functions.xClick(driver, menu_More, true);
 		Utility_Functions.xWaitForElementPresent(driver, properties, 3);
 		Utility_Functions.xClick(driver, properties, true);
@@ -988,7 +987,7 @@ public class TaggingPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, privateTagName, 3);
 		Utility_Functions.xSendKeys(driver, privateTagName, "Test_" + Utility_Functions.xGenerateAlphaNumericString());*/
 		
-		sf_UtilityFunctions.selectExisitingObjectRecord("Private tag");
+		sf_UtilityFunctions.selectExistingObjectRecord("Private tag");
 		report.updateTestLog("Verify Properties Private Tag", "Verifying the Private Tag name is entered", Status.PASS);
 		Utility_Functions.xWaitForElementPresent(driver, saveNewPrivateTag, 3);
 		Utility_Functions.xClick(driver, saveNewPrivateTag, true);

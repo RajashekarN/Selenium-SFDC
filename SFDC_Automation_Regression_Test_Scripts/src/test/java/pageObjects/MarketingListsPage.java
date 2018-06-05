@@ -1,17 +1,13 @@
 package pageObjects;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
-
 import supportLibraries.Utility_Functions;
 
 /**
@@ -127,16 +123,16 @@ public class MarketingListsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		List<WebElement> extFrame = driver.findElements(By.tagName("iframe"));
 		driver.switchTo().frame(extFrame.get(extFrame.size() - 1));
-		List<WebElement> intFrame = driver.findElements(By.tagName("iframe"));
+		/*List<WebElement> intFrame = */driver.findElements(By.tagName("iframe"));
 		driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='Content']")));
 		Utility_Functions.xWaitForElementPresent(driver, buttonAdd, 5);
 		Utility_Functions.xClick(driver, buttonAdd, true);
 		driver.switchTo().defaultContent();
 
 		// Select 'Users' option from search dropdown
-		List<WebElement> extFrame1 = driver.findElements(By.tagName("iframe"));
+		/*List<WebElement> extFrame1 = */driver.findElements(By.tagName("iframe"));
 		driver.switchTo().frame(extFrame.get(extFrame.size() - 1));
-		List<WebElement> intFrame1 = driver.findElements(By.tagName("iframe"));
+		/*List<WebElement> intFrame1 = */driver.findElements(By.tagName("iframe"));
 		driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='Content']")));
 
 		Utility_Functions.timeWait(4);

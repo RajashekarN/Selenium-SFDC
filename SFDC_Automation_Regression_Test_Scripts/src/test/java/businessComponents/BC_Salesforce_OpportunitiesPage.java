@@ -3,6 +3,7 @@ package businessComponents;
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 
+import pageObjects.OpportunitiesInstallments;
 import pageObjects.OpportunitiesPage;
 import pagesAPI.OpportunitiesFunctions;
 
@@ -28,6 +29,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 
 	BC_Salesforce_Login sfBC_Login = new BC_Salesforce_Login(scriptHelper);
 	OpportunitiesPage sfOpportunitiesPage = new OpportunitiesPage(scriptHelper);
+	OpportunitiesInstallments opportunityInstallments = new OpportunitiesInstallments(scriptHelper);
 	OpportunitiesFunctions opportunitiesFunctions = new OpportunitiesFunctions(scriptHelper);
 	/**
 	 * Validating the Login functionality
@@ -122,7 +124,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void bc_opportunityNameAutoGenerate() {
-		sfOpportunitiesPage.opportunityNameAutoGenerate();
+		sfOpportunitiesPage.navigateOpportunityNewLayoutPage();
 	}
 
 	/**
@@ -134,7 +136,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void bc_opportunityMultipleInstallmentsEven() {
-		sfOpportunitiesPage.multipleInstallmentsOpportunityEvenPercent();
+		opportunityInstallments.multipleInstallmentsOpportunityEvenPercent();
 		// sfOpportunitiesPage.multipleInstallmentsOpportunityEvenPercent_API();
 	}
 
@@ -147,7 +149,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void bc_opportunityMultipleInstallmentsUnEven() {
-		sfOpportunitiesPage.multipleInstallmentsUnEvenPercent();
+		opportunityInstallments.multipleInstallmentsUnEvenPercent();
 		// sfOpportunitiesPage.multipleInstallmentsOpportunityEvenPercent_API();
 	}
 
@@ -171,20 +173,8 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 *
 	 */
 
-	public void bc_opportunityInstallmentsPendingPaid() {
-		sfOpportunitiesPage.multipleInstallmentsPendingPaid();
-	}
-
-	/**
-	 * Verify editing of multiple Installments from Opportunity based Pending
-	 * and Paid Status
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-
 	public void bc_estimatedGrossFeeCommissionRollingUp() {
-		sfOpportunitiesPage.multipleInstallmentsOpportunityEvenPercent();
+		opportunityInstallments.multipleInstallmentsOpportunityEvenPercent();
 	}
 
 	/**
@@ -196,7 +186,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void bc_inLineEditEvenPercent() {
-		sfOpportunitiesPage.multipleInstallmentsOpportunityEvenPercent();
+		opportunityInstallments.multipleInstallmentsOpportunityEvenPercent();
 	}
 
 	/**
@@ -208,7 +198,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void bc_inLineEditUnEvenPercent() {
-		sfOpportunitiesPage.multipleInstallmentsUnEvenPercent();
+		opportunityInstallments.multipleInstallmentsUnEvenPercent();
 	}
 
 	/**
@@ -219,7 +209,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void bc_recalculateRoundOffRule() {
-		sfOpportunitiesPage.recalculateRoundOffRule();
+		opportunityInstallments.recalculateRoundOffRule();
 	}
 
 	/**
@@ -230,7 +220,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void bc_deleteInstallment() {
-		sfOpportunitiesPage.deleteInstallment();
+		opportunityInstallments.deleteInstallment();
 	}
 
 	/**
@@ -241,7 +231,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void bc_editingPaidInstallmentAmount() {
-		sfOpportunitiesPage.editPaidInstallmentAmount();
+		opportunityInstallments.editPaidInstallmentAmount();
 	}
 
 	/**
@@ -1254,7 +1244,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_opportunityNameAutoGenerateFuntion() {
-		sfOpportunitiesPage.opportunityNameAutoGenerateFuntion();
+		sfOpportunitiesPage.navigateOpportunityNewLayoutPage();
 	}
 	
 	/**
@@ -1264,50 +1254,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_multipleInstallmentsFunction() {
-		sfOpportunitiesPage.multipleInstallmentsFunction();
-	}
-	
-	
-	
-	/**
-	 * Validating the adding installment
-	 * 
-	 * @author  Cognizant
-	 *
-	 */
-	public void bc_addingInstallmentsOpportunities() {
-		sfOpportunitiesPage.addingInstallmentsOpportunities();
-	}
-	
-
-	/**
-	 * Validating the Opportunities installment update
-	 * 
-	 * @author  Cognizant
-	 *
-	 */
-	public void bc_installmentsOpportunityUpdate() {
-		sfOpportunitiesPage.installmentsOpportunityUpdate();
-	}
-	
-	/**
-	 * Validating the Opportunities close date
-	 * 
-	 * @author  Cognizant
-	 *
-	 */
-	public void bc_editCloseDate() {
-		sfOpportunitiesPage.editCloseDate();
-	}
-	
-	/**
-	 * Validating the Opportunities installment add
-	 * 
-	 * @author  Cognizant
-	 *
-	 */
-	public void bc_addingInstallmentsAmount() {
-		sfOpportunitiesPage.addingInstallmentsAmount();
+		opportunityInstallments.multipleInstallmentsFunction();
 	}
 	
 	/**

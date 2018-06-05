@@ -1,8 +1,6 @@
 package pageObjects;
 
-import java.math.BigDecimal;
 import java.text.DateFormat;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -20,13 +18,13 @@ import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
 import com.sforce.soap.partner.PartnerConnection;
 import com.sforce.soap.partner.QueryResult;
-import com.sforce.soap.partner.SaveResult;
 import com.sforce.soap.partner.sobject.SObject;
 import com.sforce.ws.ConnectionException;
 import com.sforce.ws.ConnectorConfig;
 import pagesAPI.EstablishConnection;
 import pagesAPI.OpportunitiesFunctions;
 import pagesAPI.SearchTextSOQL;
+import supportLibraries.SF_UtilityFunctions;
 import supportLibraries.Utility_Functions;
 
 /**
@@ -1471,191 +1469,343 @@ public class OpportunitiesPage extends ReusableLibrary {
 	
 	
 	
-	
-		
-	
 	HomePage hp = new HomePage(scriptHelper);
-	SearchTextSOQL searchOpportunity = new SearchTextSOQL(scriptHelper);
+	SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
 	OpportunitiesFunctions opportunitiesFunctions = new OpportunitiesFunctions(scriptHelper);
 	Actions actions = new Actions(driver.getWebDriver());
 	EventPage eventPage = new EventPage(scriptHelper);
-	ActivityPage activityPage = new ActivityPage(scriptHelper);
-	
+	TasksPage activityPage = new TasksPage(scriptHelper);
+	SF_UtilityFunctions sf_UtilityFunctions = new SF_UtilityFunctions(scriptHelper);
 	int offsetValue = new Random().nextInt(9);
+	EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
+
 
 	
+	
 	/**
-	 * Adding the Web Elements to the Label List
+	 * Function for establishing the connection in order to create the Opportunity
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */
 
-	static ArrayList<String> labelList = new ArrayList<String>();
-
+	public void establishConnection() {
+		try {
+			String environment = loginPage.initializeEnvironment();
+			config = new ConnectorConfig();
+			if ((environment.equals("UAT")) || (environment.equals("UAT2")) || (environment.equals("FTE")) || (environment.equals("FTE2"))) {
+				if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
+					config.setUsername(properties.getProperty("GWSAPACManager") + "." + environment);
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSEMEA"))	&& (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
+					config.setUsername(properties.getProperty("GWSEMEABroker") + "." + environment);
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VASAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
+					config.setUsername(properties.getProperty("VASAMERManager") + "." + environment);
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VASEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
+					config.setUsername(properties.getProperty("VASEMEABroker") + "." + environment);
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
+					config.setUsername(properties.getProperty("ASAMERManager") + "." + environment);
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
+					config.setUsername(properties.getProperty("ASAPACBroker") + "." + environment);
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
+					config.setUsername(properties.getProperty("ABAMERCSS") + "." + environment);
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
+					config.setUsername(properties.getProperty("ABAPACManager") + "." + environment);
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
+					config.setUsername(properties.getProperty("OBAMERCSS") + "." + environment);
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
+					config.setUsername(properties.getProperty("OBAMERManager") + "." + environment);
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
+					config.setUsername(properties.getProperty("CMAMERBroker") + "." + environment);
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
+					config.setUsername(properties.getProperty("CMAMERManager") + "." + environment);
+				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
+					config.setUsername(properties.getProperty("CMAMERCSS") + "." + environment);
+				}
+			}
+			if (environment.equals("FTE")) {				
+				config.setPassword(properties.getProperty("FTEPassword"));
+				config.setAuthEndpoint(properties.getProperty("FTEAuthEndpoint"));				
+			} else if (environment.equals("FTE2")) {			
+				config.setPassword(properties.getProperty("FTE2Password"));
+				config.setAuthEndpoint(properties.getProperty("FTE2AuthEndpoint"));
+			} else if (environment.equals("UAT2")) {			
+				config.setPassword(properties.getProperty("UAT2Password"));
+				config.setAuthEndpoint(properties.getProperty("UAT2AuthEndpoint"));
+			} else if (environment.equals("UAT")) {
+				config.setPassword(properties.getProperty("UATPassword"));
+				config.setAuthEndpoint(properties.getProperty("UATAuthEndpoint"));
+			}
+			connection = new PartnerConnection(config);
+		} catch (ConnectionException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/**
-	 * Selecting the Contact from a list of contacts
+	 * Verify for validating the Opportunity eligibility
 	 * 
-	 * @author Cognizant
+	 * @author Vishnuvardhan
+	 *
+	 */
+
+	public void opportunityEligibility() {
+		selectOpportunity();
+	}
+	
+	/**
+	 * Function for selecting the Opportunity from the list of Opportunities
+	 * 
+	 * @author Vishnuvardhan
 	 *
 	 */
 
 	public void selectOpportunity() {
 		Utility_Functions.timeWait(1);
-		Utility_Functions.xClick(driver, menu_Opportunities, true);
-		Utility_Functions.timeWait(1);
-		report.updateTestLog("Verify Create Activity Opportunity", "Opportunity are Displayed ", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
-		Utility_Functions.xClick(driver, recentlyViewed, true);
-		report.updateTestLog("Verify Create Activity Opportunity", "Recently viewed Opportunity are Displayed ",
-				Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, allOpportunities, 3);
-		Utility_Functions.xClick(driver, allOpportunities, true);
-		Utility_Functions.timeWait(7);
-		report.updateTestLog("Verify Create Activity Opportunity", "All Opportunity are displayed successfully:::",
-				Status.PASS);
-		List<WebElement> oppList = driver.findElements(By.xpath(
-				"//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'006')]"));
-		Utility_Functions.xclickRandomElement(oppList);
+		sf_UtilityFunctions.oneAppNavigationTab("Opportunities");
+		report.updateTestLog("Verify Opportunity", "Opportunities are Displayed ", Status.PASS);
+		sf_UtilityFunctions.selectExistingObjectRecord("Opportunity Name");
 		Utility_Functions.timeWait(2);
-	}
-
-	public String selectOpportunityById(String Id) {
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xClick(driver, menu_Opportunities, true);
-		Utility_Functions.timeWait(1);
-		report.updateTestLog("Verify Create Activity Opportunity", "Opportunity are Displayed ", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
-		Utility_Functions.xClick(driver, recentlyViewed, true);
-		report.updateTestLog("Verify Create Activity Opportunity", "Recently viewed Opportunity are Displayed ",
-				Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, allOpportunities, 3);
-		Utility_Functions.xClick(driver, allOpportunities, true);
-		Utility_Functions.timeWait(7);
-		report.updateTestLog("Verify Create Activity Opportunity", "All Opportunity are displayed successfully:::",
-				Status.PASS);
-		List<WebElement> contactList = driver.findElements(By.xpath(
-				"//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'006')]"));
-		Utility_Functions.xclickRandomElement(contactList);
-		Utility_Functions.timeWait(2);
-		report.updateTestLog("Verify Create Activity Account ", "The Account is Displayed ", Status.PASS);
-		String url = driver.getCurrentUrl().split("#")[0];
-		String newUrl = url + "#/sObject/" + Id;
-		newUrl = newUrl + "/view";
-		report.updateTestLog("Verify Create Accounts View Hierarchy",
-				"Verifying the URL has been replaced with the new URL having the retrieved Account" + newUrl,
-				Status.PASS);
-		driver.get(newUrl);
-		Utility_Functions.timeWait(3);
-		// String accountName=accountNameSaved.getText();
-		String accountName = Utility_Functions.xGetTextVisibleListElement(driver, accountNameSaved);
-		System.out.println(accountName);
-		return accountName;
-	}
-
-	public void labelsOpportunityPage() {
-		labelList.add("Record Type");
-		labelList.add("Account Name");
-		labelList.add("Billing City");
-		labelList.add("Billing Street");
-		labelList.add("Billing State/Province");
-		labelList.add("Billing Country");
-		labelList.add("Billing Zip/Postal Code");
-		labelList.add("Website");
-		labelList.add("Phone");
-		labelList.add("Industry");
-		labelList.add("Account Name");
-		labelList.add("Assignment Type");
-		labelList.add("Assignment Sub-Type");
-		labelList.add("Lead Source");
-		labelList.add("Close Date");
-		labelList.add("Total Size");
-		labelList.add("Unit of Measure");
-		labelList.add("Preferred Property Type");
-		labelList.add("Preferred Property Sub-Type");
-		labelList.add("Opportunity Name");
-		labelList.add("Sales Stage");
-		labelList.add("Phase");
-		labelList.add("Probability (%)");
-		labelList.add("Estimated Gross Fee/Commission");
-		labelList.add("Currency");
-		labelList.add("Requirement/Building Details");
-		labelList.add("Speciality Group");
-		labelList.add("Parent Opportunity");
-		labelList.add("Cross Sell");
-		labelList.add("Confidential Opportunity");
-		labelList.add("Opportunity Location");
-		labelList.add("Priority");
-		labelList.add("Hire Date");
-		labelList.add("Migrated Opportunity");
-		labelList.add("Opportunity Record Type");
-		labelList.add("On Hold");
-		labelList.add("On Hold Date");
-		labelList.add("On Hold Comments");
-		labelList.add("Total # of Units");
-		labelList.add("Unit of Comparison");
-		labelList.add("Status Comments");
-		labelList.add("Listing Type");
-		labelList.add("Availability Date");
-		labelList.add("Next Steps");
-		labelList.add("Engagement Commencement");
-		labelList.add("Engagement Expiration");
-		labelList.add("% Commission");
-		labelList.add("% Occupied");
-		labelList.add("Outside Broker Company");
-		labelList.add("Outside Broker Name");
-		labelList.add("CBRE Role");
-		labelList.add("Next Steps");
-		labelList.add("Reason for Loss");
-		labelList.add("Reason Lost Comments");
-		labelList.add("Competitor");
-		labelList.add("Opportunity Owner");
-		labelList.add("External Deal ID");
-		labelList.add("Existing Termination/Break Option");
-		labelList.add("New Termination/Break Option");
-		labelList.add("Lease From");
-		labelList.add("Lease To");
-		labelList.add("Lease Term (Months)");
-		labelList.add("Lease Rate/Rent");
-		labelList.add("Lease Rate/Rent Basis");
-		labelList.add("Outside Broker Company");
-		labelList.add("CBRE Role");
-		System.out.println("Label List of Opportunity Page:::" + labelList);
-		System.out.println("Total Labels present in Opportunity Page are:::" + labelList.size());
-
+		report.updateTestLog("Verify Opportunity", "Clicked on Opportunity and Opportunity page displayed successfully:::", Status.PASS);
 	}
 
 	/**
-	 * Adding the Web Elements to the Header Section List
+	 * Function for clicking on New creating a new Opport the Opportunity from the list of Opportunities
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */
-	static ArrayList<String> headerSectionList = new ArrayList<String>();
 
-	public void headerSectionOpportunityPage() {
-		// headerSectionList.add("Quick Create");
-		headerSectionList.add("Opportunity Information");
-		headerSectionList.add("Services");
-		headerSectionList.add("Close Information");
-		headerSectionList.add("Loss Information");
-		headerSectionList.add("System Information");
-		System.out.println("Header Section Details present in the new account page are:: " + headerSectionList);
+	public void selectNewOpportunity() {
+		Utility_Functions.timeWait(1);
+		sf_UtilityFunctions.oneAppNavigationTab("Opportunities");
+		report.updateTestLog("Verify Opportunity", "Opportunities are Displayed ", Status.PASS);
+		sf_UtilityFunctions.selectAction("New");
+		report.updateTestLog("Verify Opportunity", "New Opportunity button clicked successfully:::", Status.PASS);
 	}
 	
-/*	public List<WebElement> findLabelElements(String commonXpath,ArrayList<String> labels){
-		
-		List<WebElement> labelElements = null;
-		String[] elementsXpaths = null;
-		for(int i=0;i<labels.size();i++){
-			String eleXpath = 
-					elementsXpaths[i] = commonXpath.replace("@TEMP", labels.get(i));
-			labelElements.add(driver.findElement(By.xpath(elementsXpaths[i])));
-		}
-		
-		return labelElements;
+	
+	
+	/**
+	 * Function for replacing the Opportunity with new Opportunity Id 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+
+	public String selectOpportunityById(String OpportunityId) {
+		selectOpportunity();
+		report.updateTestLog("Verify Opportunity", "Clicked on Opportunity and Opportunity page displayed successfully", Status.PASS);
+		replaceOpportunityId(OpportunityId);
+		String accountName = Utility_Functions.xGetTextVisibleListElement(driver, accountNameSaved);
+		System.out.println(accountName);
+		return accountName;
 	}
-*/
+	
+	/**
+	 * Function that reads the Opportunity ID and replaces the Opportunity with new Opportunity Id 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	
+	public void replaceOpportunityId(String OpportunityId) {
+		String url = driver.getCurrentUrl().split("#")[0];
+		String newUrl = url + "#/sObject/" + OpportunityId;
+		newUrl = newUrl + "/view";
+		report.updateTestLog("Verify Opportunity", "Opportunity has been replaced with new Opportunity" + newUrl, Status.PASS);
+		driver.get(newUrl);
+		Utility_Functions.timeWait(2);
+	}
+
+		
+	/**
+	 * Function validating the page layout headers for ABAMER, OBAMER, ABAPAC and CMAMER
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	
+	static ArrayList<String> OpportunityPageHeadersCapitalMarkets = new ArrayList<String>();
+
+	
+	public void OpportunityPageHeadersCapitalMarkets() {
+		OpportunityPageHeadersCapitalMarkets.add("Opportunity Information");
+		OpportunityPageHeadersCapitalMarkets.add("Line of Business Information");
+		OpportunityPageHeadersCapitalMarkets.add("Deal Metrics");
+		OpportunityPageHeadersCapitalMarkets.add("Financial Information");
+		OpportunityPageHeadersCapitalMarkets.add("Close Information");
+		OpportunityPageHeadersCapitalMarkets.add("Loss Information");
+		OpportunityPageHeadersCapitalMarkets.add("System Information");
+		report.updateTestLog("Verify Opportunity Page Headers", "Opportunity page headers are:::" + OpportunityPageHeadersList, Status.PASS);
+	}
+	
+	
+
+	/**
+	 * Function validating the page layout headers for ABAMER, OBAMER, ABAPAC and CMAMER
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	
+	static ArrayList<String> OpportunityPageHeadersAPAC = new ArrayList<String>();
+
+	
+	public void OpportunityPageHeadersAPAC() {
+		OpportunityPageHeadersAPAC.add("Opportunity Information");
+		OpportunityPageHeadersAPAC.add("Financial Information");
+		//OpportunityPageHeadersAPAC.add("Services");
+		OpportunityPageHeadersAPAC.add("Additional Information");
+		OpportunityPageHeadersAPAC.add("Close Information");
+		OpportunityPageHeadersAPAC.add("Loss Information");
+		OpportunityPageHeadersAPAC.add("System Information");
+		report.updateTestLog("Verify Opportunity Page Headers", "Opportunity page headers are:::" + OpportunityPageHeadersAPAC, Status.PASS);
+	}
+	
+	/**
+	 * Function validating the page layout headers for ABAMER, OBAMER, ABAPAC and CMAMER
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	
+	static ArrayList<String> OpportunityPageHeadersList = new ArrayList<String>();
+
+	
+	public void OpportunityPageHeaders() {
+		OpportunityPageHeadersList.add("Opportunity Information");
+		OpportunityPageHeadersList.add("Services");
+		OpportunityPageHeadersList.add("Additional Information");
+		OpportunityPageHeadersList.add("Close Information");
+		OpportunityPageHeadersList.add("Loss Information");
+		OpportunityPageHeadersList.add("System Information");
+		report.updateTestLog("Verify Opportunity Page Headers", "Opportunity page headers are:::" + OpportunityPageHeadersList, Status.PASS);
+	}
+	
+	
+	/**
+	 * Function validating the page layout labels for ABAMER, OBAMER, ABAPAC and CMAMER
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	
+	static ArrayList<String> OpportunityPageLabelsList = new ArrayList<String>();
+
+	
+	public void OpportunityPageFieldLabels() {
+		OpportunityPageLabelsList.add("Account ID");
+		OpportunityPageLabelsList.add("Record Type ID");
+		OpportunityPageLabelsList.add("Name");
+		OpportunityPageLabelsList.add("Sales Stage");
+		OpportunityPageLabelsList.add("Estimated Gross Fee/Commission");
+		OpportunityPageLabelsList.add("Probability (%)");
+		OpportunityPageLabelsList.add("Close Date");
+		OpportunityPageLabelsList.add("Lead Source");
+		OpportunityPageLabelsList.add("Opportunity Currency");
+		OpportunityPageLabelsList.add("Owner ID");
+		OpportunityPageLabelsList.add("Competitor");
+		OpportunityPageLabelsList.add("Confidential Opportunity");
+		OpportunityPageLabelsList.add("Cross Sell");
+		OpportunityPageLabelsList.add("Reason Lost Comments");
+		OpportunityPageLabelsList.add("Parent Opportunity");
+		OpportunityPageLabelsList.add("Priority");
+		OpportunityPageLabelsList.add("Reason for Loss");
+		OpportunityPageLabelsList.add("Requirement/Building Details");
+		OpportunityPageLabelsList.add("Assignment Sub-Type");
+		OpportunityPageLabelsList.add("Assignment Type");
+		OpportunityPageLabelsList.add("Total Size");
+		OpportunityPageLabelsList.add("Unit of Measure");
+		OpportunityPageLabelsList.add("Opportunity No.");
+		OpportunityPageLabelsList.add("Location");
+		OpportunityPageLabelsList.add("Status Comments");
+		OpportunityPageLabelsList.add("Source System");
+		OpportunityPageLabelsList.add("Total # of Units");
+		OpportunityPageLabelsList.add("Unit of Comparison");
+		OpportunityPageLabelsList.add("Availability Date");
+		OpportunityPageLabelsList.add("% Commission");
+		OpportunityPageLabelsList.add("Engagement Commencement");
+		OpportunityPageLabelsList.add("Engagement Expiration");
+		OpportunityPageLabelsList.add("Hire Date");
+		OpportunityPageLabelsList.add("% Occupied");
+		OpportunityPageLabelsList.add("Next Steps");
+		OpportunityPageLabelsList.add("CBRE Role");
+		OpportunityPageLabelsList.add("External Deal ID");
+		OpportunityPageLabelsList.add("Floor Number");
+		OpportunityPageLabelsList.add("Migrated Opportunity");
+		OpportunityPageLabelsList.add("Outside Broker Company");
+		OpportunityPageLabelsList.add("Outside Broker Name");
+		OpportunityPageLabelsList.add("Preferred Property Sub-Type");
+		OpportunityPageLabelsList.add("On Hold Comments");
+		OpportunityPageLabelsList.add("On Hold Date");
+		OpportunityPageLabelsList.add("On Hold");
+		OpportunityPageLabelsList.add("Listing Type");
+		OpportunityPageLabelsList.add("Special Economic Zone");
+		OpportunityPageLabelsList.add("Phase");
+		OpportunityPageLabelsList.add("Preferred Property Type");
+		OpportunityPageLabelsList.add("Installment Count");
+		OpportunityPageLabelsList.add("Deal IQ URL");
+		OpportunityPageLabelsList.add("Change Opportunity Owner");
+		OpportunityPageLabelsList.add("Specialty Group");
+	/*	OpportunityPageLabelsList.add("Last Manually Modified By");
+		OpportunityPageLabelsList.add("Last Manually Modified Date");*/
+		report.updateTestLog("Verify Opportunity Field Labels", "Opportunity field labels are:::" + OpportunityPageLabelsList, Status.PASS);
+	}
+	
+	
+	public void validateNewOpportunityPage() {
+		List<String> opportunityHeaders = null;
+		List<String> opportunityHeadersList = new ArrayList<String>();
+		if(dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) {
+			OpportunityPageHeaders();
+			opportunityHeaders = establishConnection.establishMetaDataConnectionPageHeaders("Opportunity", 6);
+			opportunityHeadersList = Utility_Functions.xValidatePickListValuesPage(OpportunityPageHeadersList, opportunityHeaders, "Opportunity page Header values");
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) {
+			OpportunityPageHeaders();
+			opportunityHeaders = establishConnection.establishMetaDataConnectionPageHeaders("Opportunity", 6);
+			opportunityHeadersList = Utility_Functions.xValidatePickListValuesPage(OpportunityPageHeadersList, opportunityHeaders, "Opportunity page Header values");
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("CMAMERPS")) {
+			OpportunityPageHeadersCapitalMarkets();
+			opportunityHeaders = establishConnection.establishMetaDataConnectionPageHeaders("Opportunity", 7);
+			opportunityHeadersList = Utility_Functions.xValidatePickListValuesPage(OpportunityPageHeadersCapitalMarkets, opportunityHeaders, "Opportunity page Header values");
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) {
+			OpportunityPageHeadersCapitalMarkets();
+			opportunityHeaders = establishConnection.establishMetaDataConnectionPageHeaders("Opportunity", 7);
+			opportunityHeadersList = Utility_Functions.xValidatePickListValuesPage(OpportunityPageHeadersCapitalMarkets, opportunityHeaders, "Opportunity page Header values");
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("ABAPAC")) {
+			OpportunityPageHeadersAPAC();			
+			opportunityHeaders = establishConnection.establishMetaDataConnectionPageHeaders("Opportunity", 7);
+			opportunityHeadersList = Utility_Functions.xValidatePickListValuesPage(OpportunityPageHeadersAPAC, opportunityHeaders, "Opportunity page Header values");
+		}
+		if (opportunityHeadersList.size()!=0) {
+			report.updateTestLog("Verify Opportunity Headers", "All the Headers are not present in the Opportunity Page:::" + opportunityHeadersList, Status.FAIL);
+		} else {
+			report.updateTestLog("Verify Opportunity Headers", "All the Headers are present in the Opportunity Page", Status.PASS);
+		}			
+		
+		List<String> opportunityLabels = null;
+		if(dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) {
+			opportunityLabels = establishConnection.establishMetaDataConnectionPageLayouts("Opportunity", "Opportunity Layout - Agency Brokerage");
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) {
+			opportunityLabels = establishConnection.establishMetaDataConnectionPageLayouts("Opportunity", "Opportunity Layout - Occupier Brokerage");
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("CMAMERPS")) {
+			opportunityLabels = establishConnection.establishMetaDataConnectionPageLayouts("Opportunity", "Opportunity Layout - Capital Markets Property Sales");
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) {
+			opportunityLabels = establishConnection.establishMetaDataConnectionPageLayouts("Opportunity", "Opportunity Layout - Capital Markets Debt & Structured Finance");
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("ABAPAC")) {
+			opportunityLabels = establishConnection.establishMetaDataConnectionPageLayouts("Opportunity", "Opportunity Layout - Agency Brokerage");
+		}
+		List<String> opportunityLabelsList = new ArrayList<String>();
+		OpportunityPageFieldLabels();
+		opportunityLabelsList = Utility_Functions.xValidatePickListValuesPage(opportunityLabels, OpportunityPageLabelsList, "Opportunity page field values");
+		if (opportunityLabelsList.size()!=0) {
+			report.updateTestLog("Verify Opportunity Field Labels", "All the labels are not present in the Opportunity Page:::" + opportunityLabelsList, Status.FAIL);
+		} else {
+			report.updateTestLog("Verify Opportunity Field Labels", "All the labels are present in the Opportunity Page", Status.PASS);
+		}	
+	}
+	
+	
 	/**
 	 * Validating the New Opportunities Page Layout fields
 	 * 
@@ -1664,137 +1814,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void newOpportunityPageLayout() {
-		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
-		Utility_Functions.xClick(driver, menu_Opportunities, true);
-		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
-		Utility_Functions.xClick(driver, newOpportunity, true);
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xSwitchtoFrame(driver, continueButton);
-		Utility_Functions.xWaitForElementPresent(driver, continueButton, 5);
-		Utility_Functions.xClick(driver, continueButton, true);
-		Utility_Functions.timeWait(2);
-		//driver.switchTo().defaultContent();
-		Utility_Functions.xScrollWindow(driver);
-		Utility_Functions.xSwitchtoFrame(driver, viewAllFieldsButton);
-		Utility_Functions.xWaitForElementPresent(driver, viewAllFieldsButton, 5);
-		Utility_Functions.xClick(driver, viewAllFieldsButton, true);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xScrollWindow(driver);
-		headerSectionOpportunityPage();
-		labelsOpportunityPage();
-		Utility_Functions.xWaitForElementPresent(driver, headerList, 5);
-		System.out.println("Number of headers found  :: "+headerList.size());
-		try {
-			int i2 = 0, count = 0;
-			String[] headerTexts = new String[headerList.size()];
-			for (WebElement element : headerList) {
-				headerTexts[i2] = element.getText();
-				System.out.println("Element found :"+headerTexts[i2]+"  ---  label should be :"+headerSectionList.get(i2));
-				if (headerTexts[i2].contains(headerSectionList.get(i2))) {
-					count++;
-					System.out.println("Verify Add Opportunity Header List  :: " + element.getText());
-					report.updateTestLog("Verify Add Opportunity Header List",
-							element.getText() + " header is present in Add Opportunity Page", Status.PASS);
-				}
-				i2++;				
-				
-			}
-			System.out.println(count);
-			if (count == 5) {
-				report.updateTestLog("Verify Add Opportunity Header List",
-						"Headers are present in Add Opportunity Page:::", Status.PASS);
-			} else {
-				report.updateTestLog("Verify Add Opportunity Header List",
-						"Header are not present in Add Opportunity Page:::", Status.FAIL);
-			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		try {
-			//Utility_Functions.xSwitchtoFrame(driver, OpportunityPageLabel);
-			//System.out.println("Switched to frame");
-			Utility_Functions.xScrollWindowTop(driver);
-			//Utility_Functions.xWaitForElementPresent(driver, labelListOpportunitiesPage, 6);
-			List<WebElement> OpportunitiesPageLabels = driver.findElements(By.xpath("//*[@class='slds-form-element__label']"));
-			System.out.println("Number of Labels found in Opportunity page :: "+ OpportunitiesPageLabels.size());
-			System.out.println("Number of label text verified "+labelList.size());
-			int i1 = 0, j = 0, countLabelList = 0;
-			String[] labelTexts = new String[OpportunitiesPageLabels.size()];
-			for (WebElement element : OpportunitiesPageLabels) {
-					labelTexts[i1] = element.getText();
-					j=0;
-					while (j < labelList.size()) {
-					if (labelTexts[i1].contains(labelList.get(j))) {
-						System.out.println("Verify Add Opportunity Page Label List  : " + element.getText());
-						report.updateTestLog("Verify Add Opportunity Page Label List",
-								element.getText() + "::::label list is present in Add Opportunity Page", Status.PASS);
-						countLabelList++;
-					 }
-					j++;
-					}
-			  }
-			System.out.println("Count of Label List::" + countLabelList);
-			if (dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) {
-				countLabelList = 104;
-			} else if (dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) {
-				countLabelList = 108;
-			} else if (dataTable.getData("General_Data", "TC_ID").contains("ABAPAC")) {
-				countLabelList = 138;
-			} else if (dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) {
-				countLabelList = 66;
-			}
-			if ((countLabelList == 104) || (countLabelList == 108) || (countLabelList == 138)
-					|| (countLabelList == 66)) {
-				report.updateTestLog("Verify Add Opportunity Page Label List",
-						"Labels are present in Add Opportunity Page", Status.PASS);
-			} else {
-				report.updateTestLog("Verify Add Opportunity Page Label List",
-						"Labels are not present in Add Opportunity Page", Status.FAIL);
-			}
-
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		validateFielsOpportunityPageLayout();
-	}
-
-	/**
-	 * Validating the field values in New Opportunities Page Layout fields
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-
-	public void validateFielsOpportunityPageLayout() {
-		try {
-			if ((dataTable.getData("General_Data", "TC_ID").contains("ABAMER"))
-					|| (dataTable.getData("General_Data", "TC_ID").contains("OBAMER"))) {
-				if ((!opportunityName.getText().equals(" ")) && (!salesStage.getText().equals(" "))
-						&& (!probabilityField.getText().equals(" ") && (!phaseField.getText().equals(" ")))) {
-					report.updateTestLog("Verify Add Opportunity Page Fields",
-							"Opportunity fields are having values present in the corresponding fields:::", Status.PASS);
-				} else {
-					report.updateTestLog("Verify Add Opportunity Page Fields",
-							"Opportunity fields are not having values present in the corresponding fields:::",
-							Status.FAIL);
-				}
-			} else if (dataTable.getData("General_Data", "TC_ID").contains("ABAPAC")) {
-				if ((!opportunityName.getText().equals(" ")) && (!salesStage.getText().equals(" "))
-						&& (!probabilityField.getText().equals(" "))) {
-					report.updateTestLog("Verify Add Opportunity Page Fields",
-							"Opportunity fields are having values present in the corresponding fields:::", Status.PASS);
-				} else {
-					report.updateTestLog("Verify Add Opportunity Page Fields",
-							"Opportunity fields are not having values present in the corresponding fields:::",
-							Status.FAIL);
-				}
-			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-	}
-
-	
+		validateNewOpportunityPage();
+	}	
 
 	/**
 	 * Validating the required fields based on Sales Stage selected between
@@ -1806,7 +1827,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	public void requiredFieldsbetweenw16_19Stages() {
 		String query = "SELECT Id, Name FROM Opportunity where StageName > '16-In Escrow' and StageName < '19-Closed' and Total_Size__c !=null limit 10";
-		String OpportunityID = searchOpportunity.searchOpportunity(query);
+		String OpportunityID = searchTextSOQL.searchOpportunity(query);
 		System.out.println(OpportunityID);
 		if (OpportunityID == null) {
 			report.updateTestLog("Verify Opportunity", "There are no Opportunities that falls under this category:::",
@@ -1814,161 +1835,11 @@ public class OpportunitiesPage extends ReusableLibrary {
 		} else {
 			report.updateTestLog("Verify Opportunity Required Fields",
 					"Opportunity retrived from database is:::" + OpportunityID, Status.PASS);
-			String url = driver.getCurrentUrl().split("#")[0];
-			String newUrl = url + "#/sObject/" + OpportunityID;
-			newUrl = newUrl + "/view";
-			report.updateTestLog("Verify Add Opportunity Page Fields",
-					"URL has been replaced with the new URL having the retrieved Opportunity:::" + newUrl, Status.PASS);
-			driver.get(newUrl);
-			Utility_Functions.timeWait(1);
+			replaceOpportunityId(OpportunityID);
 			validateOpportunityFields(OpportunityID);
 		}
 	}
 
-	/**
-	 * Validating the add Opportunity sharing from the Broker profile
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-
-	public void opportunitySharing() {
-
-		String queryOpp = "SELECT Id, Name FROM Opportunity where StageName > '16-In Escrow' and StageName < '17-Closed' and Total_Size__c !=null limit 10";
-		String Opportunity = searchOpportunity.searchOpportunity(queryOpp);
-		/*Utility_Functions.xClick(driver, menu_Opportunities, true);
-		Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
-		Utility_Functions.xclickRandomElement(opportunitiesList);*/
-		selectOpportunity();
-		Utility_Functions.timeWait(1);
-		String url = driver.getCurrentUrl().split("#")[0];
-		String newUrl = url + "#/sObject/" + Opportunity;
-		newUrl = newUrl + "/view";
-		driver.get(newUrl);
-		driver.navigate().refresh();
-		try {
-			Utility_Functions.xWaitForElementPresent(driver, sharingButton, 5);
-			Utility_Functions.xClick(driver, sharingButton, true);
-			Utility_Functions.timeWait(2);
-			Utility_Functions.xSwitchtoFrame(driver, opportunitySharing);
-			Utility_Functions.xWaitForElementPresent(driver, opportunitySharing, 4);
-			// driver.switchTo().defaultContent();
-			Utility_Functions.timeWait(2);
-			driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='Content']")));
-			Utility_Functions.xWaitForElementPresent(driver, addButtonSharing, 5);
-			Utility_Functions.xClick(driver, addButtonSharing, true);
-			Utility_Functions.xWaitForElementPresent(driver, searchUsers, 3);
-			Utility_Functions.xSelectDropdownByName(searchUsers, "Users");
-			Utility_Functions.timeWait(1);
-			Utility_Functions.xSendKeys(driver, searchUserName, "bommisetty");
-			Utility_Functions.timeWait(1);
-			Utility_Functions.xClick(driver, findValue, true);
-			Utility_Functions.timeWait(1);
-			String environment = loginPage.initializeEnvironment();
-			if (environment.equals("UAT")) {
-				Utility_Functions.xSelectDropdownByName(selectUser, "User: vishnuvardhan bommisetty");
-			} else {
-				Utility_Functions.xSelectDropdownByName(selectUser, "User: vishnuvardhan bommisetty");
-			}
-			Utility_Functions.timeWait(1);
-			Utility_Functions.xClick(driver, rightArrow, true);
-			Utility_Functions.timeWait(1);
-			Utility_Functions.xSelectDropdownByName(access, "Read Only");
-			Utility_Functions.xClick(driver, saveButton, true);
-			Utility_Functions.timeWait(1);
-			driver.switchTo().defaultContent();
-			LoginPage login = new LoginPage(scriptHelper);
-			login.logout();
-
-			String newopportunityID = "'" + Opportunity + "' ";
-			updateOpportunityStatus("StageName", newopportunityID);
-			String updateQuery = "SELECT Id, Name, StageName FROM Opportunity where Id = " + newopportunityID;
-			searchOpportunity.searchOpportunity(updateQuery);
-			String resultQuery = "SELECT Id, Name, StageName FROM Opportunity where Id = " + newopportunityID;
-			String opportunityStage = searchOpportunity.fetchRecordFieldValue("StageName", resultQuery);
-			System.out.println(opportunityStage);
-			if (opportunityStage.contains("Closed")) {
-				report.updateTestLog("Verify Opportunity Update", "Opportunity has been updated successfully",
-						Status.FAIL);
-			} else {
-				report.updateTestLog("Verify Opportunity Update",
-						"Sales Stage updation has been failed which is working as expected", Status.PASS);
-			}
-		} catch (Exception e) {
-			report.updateTestLog("Verify Opportunity Update",
-					"You do not have the level of access necessary to perform the operation you requested. "
-							+ "Please contact the owner of the record or your administrator if access is necessary.",
-					Status.PASS);
-		}
-
-	}
-
-	/**
-	 * Validating the Opportunity Status field update
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-	static PartnerConnection connection = null;
-	static ConnectorConfig config;
-
-	// public String environment = properties.getProperty("RunEnvironment");
-	// public String environment = System.getProperty("RunEnvironment");
-	LoginPage loginPage = new LoginPage(scriptHelper);
-
-	public void updateOpportunityStatus(String FieldName, String OpportunityID) {
-		try {
-			String environment = loginPage.initializeEnvironment();
-			if (environment.equals("UAT")) {
-				String UAT_AuthEndpoint = properties.getProperty("UATAuthEndpoint");
-				config = new ConnectorConfig();
-				config.setUsername(properties.getProperty("SystemAdminUsername")+ "." + environment);
-				config.setPassword(properties.getProperty("UATAdminPassword"));
-				config.setAuthEndpoint(UAT_AuthEndpoint);
-			} else if (environment.equals("UAT2")) {
-				String UAT2_AuthEndpoint = properties.getProperty("UAT2AuthEndpoint");
-				config = new ConnectorConfig();
-				config.setUsername(properties.getProperty("SystemAdminUsername")+ "." + environment);
-				config.setPassword(properties.getProperty("UAT2AdminPassword"));
-				config.setAuthEndpoint(UAT2_AuthEndpoint);
-			} else if (environment.equals("FTE")) {
-				String FTE_AuthEndpoint = properties.getProperty("FTEAuthEndpoint");
-				config = new ConnectorConfig();
-				config.setUsername(properties.getProperty("SystemAdminUsername")+ "." + environment);
-				config.setPassword(properties.getProperty("FTEAdminPassword"));
-				config.setAuthEndpoint(FTE_AuthEndpoint);
-			} else if (environment.equals("FTE2")) {
-				String FTE2_AuthEndpoint = properties.getProperty("FTE2AuthEndpoint");
-				config = new ConnectorConfig();
-				config.setUsername(properties.getProperty("SystemAdminUsername")+ "." + environment);
-				config.setPassword(properties.getProperty("FTE2AdminPassword"));
-				config.setAuthEndpoint(FTE2_AuthEndpoint);
-			}
-			connection = new PartnerConnection(config);
-
-			String fieldName = FieldName;
-			String opportunityID = OpportunityID;
-			SObject[] records = new SObject[1];
-			QueryResult queryResults = connection.query("SELECT Id FROM Opportunity Where ID = " + opportunityID);
-			System.out.println(queryResults);
-			if (queryResults.getSize() > 0) {
-				for (int i = 0; i < queryResults.getRecords().length; i++) {
-					SObject so = (SObject) queryResults.getRecords()[i];
-					SObject soUpdate = new SObject();
-					soUpdate.setType("Opportunity");
-					soUpdate.setId(so.getId());
-					if (fieldName.equals("StageName")) {
-						soUpdate.setField(fieldName, "17-Closed");
-					}
-					records[i] = soUpdate;
-					System.out.println(records[i]);
-				}
-			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getStackTrace());
-		}
-	}
 
 	/**
 	 * Function for validating the Opportunity fields
@@ -2134,30 +2005,155 @@ public class OpportunitiesPage extends ReusableLibrary {
 		}
 
 	}
+	/**
+	 * Validating the Opportunity sharing functionality 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+
+	public void opportunitySharing() {
+		String queryOpp = "SELECT Id, Name FROM Opportunity where StageName > '16-In Escrow' and StageName < '17-Closed' and Total_Size__c !=null limit 10";
+		String Opportunity = searchTextSOQL.searchOpportunity(queryOpp);
+		selectOpportunity();
+		Utility_Functions.timeWait(1);
+		replaceOpportunityId(Opportunity);
+		driver.navigate().refresh();
+		sf_UtilityFunctions.clickOnDetailAction("Sharing");
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xSwitchtoFrame(driver, opportunitySharing);
+		Utility_Functions.xWaitForElementPresent(driver, opportunitySharing, 4);
+		Utility_Functions.timeWait(2);
+		driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='Content']")));
+		Utility_Functions.xWaitForElementPresent(driver, addButtonSharing, 5);
+		Utility_Functions.xClick(driver, addButtonSharing, true);
+		Utility_Functions.xWaitForElementPresent(driver, searchUsers, 3);
+		Utility_Functions.xSelectDropdownByName(searchUsers, "Users");
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xSendKeys(driver, searchUserName, "bommisetty");
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xClick(driver, findValue, true);
+		Utility_Functions.timeWait(1);
+		String environment = loginPage.initializeEnvironment();
+		if (environment.equals("UAT")) {
+			Utility_Functions.xSelectDropdownByName(selectUser, "User: vishnuvardhan bommisetty");
+		} else {
+			Utility_Functions.xSelectDropdownByName(selectUser, "User: vishnuvardhan bommisetty");
+		}
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xClick(driver, rightArrow, true);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xSelectDropdownByName(access, "Read Only");
+		Utility_Functions.xClick(driver, saveButton, true);
+		Utility_Functions.timeWait(1);
+		driver.switchTo().defaultContent();
+		LoginPage login = new LoginPage(scriptHelper);
+		login.logout();
+		try {
+			String newopportunityID = "'" + Opportunity + "' ";
+			updateOpportunityStatus("StageName", newopportunityID);
+			String updateQuery = "SELECT Id, Name, StageName FROM Opportunity where Id = " + newopportunityID;
+			searchTextSOQL.searchOpportunity(updateQuery);
+			String resultQuery = "SELECT Id, Name, StageName FROM Opportunity where Id = " + newopportunityID;
+			String opportunityStage = searchTextSOQL.fetchRecordFieldValue("StageName", resultQuery);
+			System.out.println(opportunityStage);
+			if (opportunityStage.contains("Closed")) {
+				report.updateTestLog("Verify Opportunity Update", "Opportunity has been updated successfully",
+						Status.FAIL);
+			} else {
+				report.updateTestLog("Verify Opportunity Update",
+						"Sales Stage updation has been failed which is working as expected", Status.PASS);
+			}
+		} catch (Exception e) {
+			report.updateTestLog("Verify Opportunity Update",
+					"You do not have the level of access necessary to perform the operation you requested. "
+							+ "Please contact the owner of the record or your administrator if access is necessary.",
+					Status.PASS);
+		}
+	}
 
 	/**
-	 * Validating the functionality for association of property to an
-	 * Opportunity
+	 * Validating the Opportunity Status field update
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	static PartnerConnection connection = null;
+	static ConnectorConfig config;
+
+	LoginPage loginPage = new LoginPage(scriptHelper);
+
+	public void updateOpportunityStatus(String FieldName, String OpportunityID) {
+		try {
+			String environment = loginPage.initializeEnvironment();
+			if (environment.equals("UAT")) {
+				String UAT_AuthEndpoint = properties.getProperty("UATAuthEndpoint");
+				config = new ConnectorConfig();
+				config.setUsername(properties.getProperty("SystemAdminUsername")+ "." + environment);
+				config.setPassword(properties.getProperty("UATAdminPassword"));
+				config.setAuthEndpoint(UAT_AuthEndpoint);
+			} else if (environment.equals("UAT2")) {
+				String UAT2_AuthEndpoint = properties.getProperty("UAT2AuthEndpoint");
+				config = new ConnectorConfig();
+				config.setUsername(properties.getProperty("SystemAdminUsername")+ "." + environment);
+				config.setPassword(properties.getProperty("UAT2AdminPassword"));
+				config.setAuthEndpoint(UAT2_AuthEndpoint);
+			} else if (environment.equals("FTE")) {
+				String FTE_AuthEndpoint = properties.getProperty("FTEAuthEndpoint");
+				config = new ConnectorConfig();
+				config.setUsername(properties.getProperty("SystemAdminUsername")+ "." + environment);
+				config.setPassword(properties.getProperty("FTEAdminPassword"));
+				config.setAuthEndpoint(FTE_AuthEndpoint);
+			} else if (environment.equals("FTE2")) {
+				String FTE2_AuthEndpoint = properties.getProperty("FTE2AuthEndpoint");
+				config = new ConnectorConfig();
+				config.setUsername(properties.getProperty("SystemAdminUsername")+ "." + environment);
+				config.setPassword(properties.getProperty("FTE2AdminPassword"));
+				config.setAuthEndpoint(FTE2_AuthEndpoint);
+			}
+			connection = new PartnerConnection(config);
+
+			String fieldName = FieldName;
+			String opportunityID = OpportunityID;
+			SObject[] records = new SObject[1];
+			QueryResult queryResults = connection.query("SELECT Id FROM Opportunity Where ID = " + opportunityID);
+			System.out.println(queryResults);
+			if (queryResults.getSize() > 0) {
+				for (int i = 0; i < queryResults.getRecords().length; i++) {
+					SObject so = (SObject) queryResults.getRecords()[i];
+					SObject soUpdate = new SObject();
+					soUpdate.setType("Opportunity");
+					soUpdate.setId(so.getId());
+					if (fieldName.equals("StageName")) {
+						soUpdate.setField(fieldName, "17-Closed");
+					}
+					records[i] = soUpdate;
+					System.out.println(records[i]);
+				}
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println(e.getStackTrace());
+		}
+	}
+
+
+	/**
+	 * Validating the functionality for association of property to an Opportunity
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */
 	public void associateProperty() {
-		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
-		Utility_Functions.xClick(driver, menu_Opportunities, true);
-		Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
-		Utility_Functions.xclickOnFirstElementfromList(opportunitiesList);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xWaitForElementPresent(driver, related, 3);
-		Utility_Functions.xClick(driver, related, true);
+		selectOpportunity();
+		sf_UtilityFunctions.selectTabUIHeaders("Related");
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xScrollWindow(driver);
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xScrollWindowTop(driver);
 		Utility_Functions.timeWait(3);
 		try {
-			Utility_Functions.xWaitForElementPresent(driver, associateProperty, 3);
-			Utility_Functions.xClick(driver, associateProperty, true);
+			sf_UtilityFunctions.selectRelatedListsButton("Property", "Associate Property");
 			Utility_Functions.xWaitForElementVisible(driver, opportunityLabel, 5);
 			Utility_Functions.timeWait(1);
 			if (!opportunitySelected.getText().equals(" ")) {
@@ -2186,7 +2182,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 				report.updateTestLog("Verify Opportunity", "Associate property to an opportunity successfully ",
 						Status.PASS);
 			} else {
-				report.updateTestLog("Verify Opportunity", "Associat property to an opportunity failed ", Status.FAIL);
+				report.updateTestLog("Verify Opportunity", "Associate property to an opportunity failed ", Status.FAIL);
 			}
 		} catch (Exception e) {
 			Utility_Functions.xWaitForElementPresent(driver, associatePropertyCapitalMarkets, 3);
@@ -2217,13 +2213,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void opportunitySplitFunctionality() {
-		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
-		Utility_Functions.xClick(driver, menu_Opportunities, true);
-		Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
-		Utility_Functions.xclickgetTextofFirstElementfromList(opportunitiesList);
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xClick(driver, editButton, true);
-		Utility_Functions.timeWait(4);
+		selectOpportunity();
+		sf_UtilityFunctions.clickOnDetailAction("Edit");
+		Utility_Functions.timeWait(2);
 		Utility_Functions.xScrollWindowToElement(driver, estimatedGrossFeeField);
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xClick(driver, estimatedGrossFeeField, true);
@@ -2232,14 +2224,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xClick(driver, save, true);
 		Utility_Functions.timeWait(3);
-		Utility_Functions.xClick(driver, related, true);
-		Utility_Functions.timeWait(5);
-
-		/*
-		 * Utility_Functions.xClick(driver, addButton, true);
-		 * Utility_Functions.timeWait(3);
-		 */
-
+		sf_UtilityFunctions.selectTabUIHeaders("Related");
 		Utility_Functions.xClick(driver, addButtonshareOpportunity, true);
 		Utility_Functions.timeWait(3);
 
@@ -2253,7 +2238,6 @@ public class OpportunitiesPage extends ReusableLibrary {
 		}
 		driver.switchTo().frame(4);
 		Utility_Functions.xSwitchtoFrame(driver, saveButtonSplit);
-		// System.out.println("Frame Identified");
 		Utility_Functions.timeWait(5);
 		List<WebElement> opportunityList = driver.findElements(By.xpath("//div[contains(@class, 'slds-truncate')]"));
 		int count = 0;
@@ -2347,101 +2331,26 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 * @author Vishnuvardhan
 	 *
 	 */
-
+	
 	public String retriveOpportunity() {
 		String query = "SELECT Id, Name FROM Opportunity where StageName < '16-In Escrow'";
-		String OpportunityID = searchOpportunity.searchOpportunity(query);
+		String OpportunityID = searchTextSOQL.searchOpportunity(query);
 		report.updateTestLog("Verify Opportunity Required Fields",
 				"Opportunity retrived from database is:::" + OpportunityID, Status.PASS);
-		String url = driver.getCurrentUrl().split("#")[0];
-		String newUrl = url + "#/sObject/" + OpportunityID;
-		newUrl = newUrl + "/view";
-		driver.get(newUrl);
+		replaceOpportunityId(OpportunityID);
 		Utility_Functions.timeWait(1);
 		return OpportunityID;
 	}
 
 	/**
-	 * Validate Opportunity Name is not auto generated when manually added by
-	 * the user
+	 * Validate Opportunity Name is not auto generated when manually added by the user
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */
 
-	/**
-	 * Function for establishing the connection
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-
-	public void establishConnection() {
-		try {
-			String environment = loginPage.initializeEnvironment();
-			config = new ConnectorConfig();
-			if ((environment.equals("UAT")) || (environment.equals("UAT2")) || (environment.equals("FTE")) || (environment.equals("FTE2"))) {
-				if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
-					config.setUsername(properties.getProperty("GWSAPACManager") + "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSEMEA"))	&& (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
-					config.setUsername(properties.getProperty("GWSEMEABroker") + "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VASAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
-					config.setUsername(properties.getProperty("VASAMERManager") + "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("VASEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
-					config.setUsername(properties.getProperty("VASEMEABroker") + "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
-					config.setUsername(properties.getProperty("ASAMERManager") + "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
-					config.setUsername(properties.getProperty("ASAPACBroker") + "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
-					config.setUsername(properties.getProperty("ABAMERCSS") + "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
-					config.setUsername(properties.getProperty("ABAPACManager") + "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
-					config.setUsername(properties.getProperty("OBAMERCSS") + "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
-					config.setUsername(properties.getProperty("OBAMERManager") + "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
-					config.setUsername(properties.getProperty("CMAMERBroker") + "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
-					config.setUsername(properties.getProperty("CMAMERManager") + "." + environment);
-				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
-					config.setUsername(properties.getProperty("CMAMERCSS") + "." + environment);
-				}
-			}
-			if (environment.equals("FTE")) {				
-				config.setPassword(properties.getProperty("FTEPassword"));
-				config.setAuthEndpoint(properties.getProperty("FTEAuthEndpoint"));				
-			} else if (environment.equals("FTE2")) {			
-				config.setPassword(properties.getProperty("FTE2Password"));
-				config.setAuthEndpoint(properties.getProperty("FTE2AuthEndpoint"));
-			} else if (environment.equals("UAT2")) {			
-				config.setPassword(properties.getProperty("UAT2Password"));
-				config.setAuthEndpoint(properties.getProperty("UAT2AuthEndpoint"));
-			} else if (environment.equals("UAT")) {
-				config.setPassword(properties.getProperty("UATPassword"));
-				config.setAuthEndpoint(properties.getProperty("UATAuthEndpoint"));
-			}
-			connection = new PartnerConnection(config);
-		} catch (ConnectionException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Validate Opportunity Name is not auto generated when manually added by
-	 * the user
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-
-	public void opportunityNameAutoGenerate() {
-		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
-		Utility_Functions.xClick(driver, menu_Opportunities, true);
-		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 5);
-		Utility_Functions.xClick(driver, newOpportunity, true);
-		Utility_Functions.timeWait(7);
+	public void navigateOpportunityNewLayoutPage() {
+		selectNewOpportunity();
 		Utility_Functions.xSwitchtoFrame(driver, continueButton);
 		Utility_Functions.xWaitForElementPresent(driver, continueButton, 3);
 		if (dataTable.getData("General_Data", "TC_ID").contains("DSFOpportunity")) {
@@ -2461,56 +2370,15 @@ public class OpportunitiesPage extends ReusableLibrary {
 		driver.switchTo().defaultContent();
 		Utility_Functions.xSwitchtoFrame(driver, accountName);
 		Utility_Functions.timeWait(2);
-		opportunityNameAutoGenerateFuntion();
+		opportunityCreationNewPageLayoutPage();
 	}
 
-	public void opportunityNameAutoGenerateFuntion() {
-		String sAccountName = searchOpportunity.fetchRecord("Account", "Name");	
+	public void opportunityCreationNewPageLayoutPage() {
+		String sAccountName = searchTextSOQL.fetchRecord("Account", "Name");	
 		if(sAccountName==null) {
 			report.updateTestLog("Opportunity Created", "There are no Opportunity records present for this record type:::", Status.PASS);
 		} else {
-			Utility_Functions.xSendKeys(driver, accountName, sAccountName);
-			Utility_Functions.timeWait(2);
-			accountName.sendKeys(Keys.ENTER);
-			Utility_Functions.timeWait(2);
-			accountName.sendKeys(Keys.ENTER);
-			Utility_Functions.timeWait(2);	    	
-			Utility_Functions.xSwitchtoFrame(driver, accountName);
-			Utility_Functions.timeWait(9);
-			Utility_Functions.xScrollWindow(driver);
-			Utility_Functions.xSelectDropdownByIndex(assignmentTypeOpp, 1);
-			System.out.println(Calendar.getInstance());
-			DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-			Date date = new Date();
-			Utility_Functions.xWaitForElementPresent(driver, leadSource, 5);
-			Utility_Functions.xSelectDropdownByIndex(leadSource, 1);
-			Utility_Functions.xWaitForElementPresent(driver, closeDateOpp, 2);
-			Utility_Functions.xSendKeys(driver, closeDateOpp, dateFormat.format(date).toString());
-			Utility_Functions.xSendKeys(driver, closeDateOpp, Keys.TAB);
-			Random random = new Random();
-			int value = random.nextInt(999);
-			Utility_Functions.xWaitForElementPresent(driver, totalSizeOpp, 2);
-			Utility_Functions.xSendKeys(driver, totalSizeOpp, Integer.toString(value));
-			Utility_Functions.xWaitForElementPresent(driver, unitofMeasure, 2);
-			Utility_Functions.xSelectDropdownByName(unitofMeasure, "Acres");
-			Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFee, 3);
-			Utility_Functions.xClick(driver, estimatedGrossFee, true);
-			Utility_Functions.xSendKeys(driver, estimatedGrossFee, "10000");
-			/*
-			 * Utility_Functions.xClick(driver, estimatedGrossFee, true);
-			 * Utility_Functions.timeWait(4); Utility_Functions.xSendKeys(driver,
-			 * estimatedGrossFee, "10,000.00"); Utility_Functions.timeWait(3);
-			 * Utility_Functions.xWaitForElementPresent(driver,
-			 * estimatedGrossFeeField, 3); Utility_Functions.xSendKeys(driver,
-			 * estimatedGrossFeeField, dataTable.getData("General_Data",
-			 * "InstallmentAmount"));
-			 */
-			try {
-				Utility_Functions.xSelectDropdownByIndex(preferredPropertyTypeOpp, 1);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			Utility_Functions.xClick(driver, saveNewOpportunity, true);
+			int value = opportunityCreation(sAccountName);
 			Utility_Functions.timeWait(5);
 			driver.switchTo().defaultContent();
 			driver.navigate().refresh();
@@ -2526,15 +2394,10 @@ public class OpportunitiesPage extends ReusableLibrary {
 				report.updateTestLog("Opportunity Related Tab", "System was unable to find the Related tab:::", Status.WARNING);
 			}
 			Utility_Functions.timeWait(2);
-			/*
-			 * String sTotalSize = Integer.toString(value); String formatTotalSize =
-			 * sTotalSize.substring(0,1) + "," + sTotalSize.substring(1,3);
-			 * System.out.println(formatTotalSize);
-			 */
 			String query = "Select Name from opportunity where Name like  " + "'" + sAccountName + "-" + '%' + "-" + value
 					+ "-" + "Acres" + "'";
 			Utility_Functions.timeWait(1);
-			String opportunityName = searchOpportunity.fetchRecordFieldValue("Name", query);
+			String opportunityName = searchTextSOQL.fetchRecordFieldValue("Name", query);
 			report.updateTestLog("Opportunity Created", "Opportunity Name:::" + opportunityName, Status.PASS);
 
 			if (opportunityName.contains(sAccountName) && opportunityName.contains(Integer.toString(value))
@@ -2550,833 +2413,50 @@ public class OpportunitiesPage extends ReusableLibrary {
 		}		
 	}
 	
-	public void opportunityCreation() {
-		String sAccountName = searchOpportunity.fetchRecord("Account", "Name");
+
+	/**
+	 * Function for creating the Opportunity
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	
+	public int opportunityCreation(String sAccountName) {
 		Utility_Functions.xSendKeys(driver, accountName, sAccountName);
-		Utility_Functions.timeWait(2);
-		accountName.sendKeys(Keys.ARROW_DOWN);
-		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(1);
 		accountName.sendKeys(Keys.ENTER);
 		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindow(driver);
 		Utility_Functions.xSelectDropdownByIndex(assignmentTypeOpp, 1);
-
 		System.out.println(Calendar.getInstance());
 		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 		Date date = new Date();
+		Utility_Functions.xWaitForElementPresent(driver, leadSource, 5);
 		Utility_Functions.xSelectDropdownByIndex(leadSource, 1);
+		Utility_Functions.xWaitForElementPresent(driver, closeDateOpp, 2);
 		Utility_Functions.xSendKeys(driver, closeDateOpp, dateFormat.format(date).toString());
 		Utility_Functions.xSendKeys(driver, closeDateOpp, Keys.TAB);
 		Random random = new Random();
 		int value = random.nextInt(999);
+		Utility_Functions.xWaitForElementPresent(driver, totalSizeOpp, 2);
 		Utility_Functions.xSendKeys(driver, totalSizeOpp, Integer.toString(value));
+		Utility_Functions.xWaitForElementPresent(driver, unitofMeasure, 2);
 		Utility_Functions.xSelectDropdownByName(unitofMeasure, "Acres");
 		Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFee, 3);
 		Utility_Functions.xClick(driver, estimatedGrossFee, true);
 		Utility_Functions.xSendKeys(driver, estimatedGrossFee, "10000");
-		/*
-		 * Utility_Functions.xClick(driver, estimatedGrossFee, true);
-		 * Utility_Functions.timeWait(4); Utility_Functions.xSendKeys(driver,
-		 * estimatedGrossFee, "10,000.00"); Utility_Functions.timeWait(3);
-		 * Utility_Functions.xWaitForElementPresent(driver,
-		 * estimatedGrossFeeField, 3); Utility_Functions.xSendKeys(driver,
-		 * estimatedGrossFeeField, dataTable.getData("General_Data",
-		 * "InstallmentAmount"));
-		 */
 		try {
 			Utility_Functions.xSelectDropdownByIndex(preferredPropertyTypeOpp, 1);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		Utility_Functions.xClick(driver, saveNewOpportunity, true);
-	}
-	/**
-	 * Function for edit opportunity
-	 * 
-	 * @author cognizant
-	 *
-	 */
-	public void editCloseDate() {
-		Utility_Functions.xClick(driver, editOpportunity, true);
-		Utility_Functions.timeWait(3);
-		Utility_Functions.xClick(driver, CloseDateEditOpportunity, true);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xClick(driver, DateTodayEdit, true);
-		Utility_Functions.timeWait(2);
-
-		Utility_Functions.xClick(driver, SaveEditOpportunity, true);
-		Utility_Functions.timeWait(2);
-
+		report.updateTestLog("Opportunity Created", "Clicked on Opportunity save button successfully:::", Status.PASS);
+		return value;
 	}
 
-	public void addingInstallmentsAmount() {
-		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
-		Utility_Functions.xClick(driver, menu_Opportunities, true);
-		Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 5);
-		Utility_Functions.xclickgetTextofFirstElementfromList(opportunitiesList);
-		// Utility_Functions.xWaitForElementPresent(driver, editButton, 3);
-		Utility_Functions.xWaitForElementPresent(driver, showMoreActions, 4);
-		Utility_Functions.xClick(driver, showMoreActions, true);
-		Utility_Functions.xWaitForElementPresent(driver, recalculate, 2);
-		Utility_Functions.xClick(driver, recalculate, true);
-		
-		Utility_Functions.timeWait(4);
-		Utility_Functions.xSwitchtoFrame(driver, installmentQuantity);
-		Utility_Functions.xWaitForElementPresent(driver, installmentQuantity, 3);
-		InstallmentAmountEdit.clear();
-		Utility_Functions.xSendKeys(driver, InstallmentAmountEdit, "50000");
-		Utility_Functions.xWaitForElementPresent(driver, proceed, 3);
-		Utility_Functions.xClick(driver, proceed, true);
-		Utility_Functions.xWaitForElementPresent(driver, continueButtonInstallment, 3);
-		Utility_Functions.xClick(driver, continueButtonInstallment, true);
-		driver.switchTo().defaultContent();
-		Utility_Functions.timeWait(2);
-	}
-
-	/**
-	 * Function for multiple installments
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-
-	public void multipleInstallmentsFunction() {
-		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
-		Utility_Functions.xClick(driver, menu_Opportunities, true);
-		Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
-		Utility_Functions.xclickRandomElement(opportunitiesList);		
-		String oppportunityID = retriveOpportunityforInstallments();
-		if (oppportunityID == null) {
-			report.updateTestLog("Opportunity Installments", "There are no Opportunities present with the provided criteria:::", Status.PASS);
-		} else {
-			driver.navigate().refresh();
-			Utility_Functions.timeWait(4);
-			Utility_Functions.xWaitForElementPresent(driver, editButton, 3);
-		// Utility_Functions.xWaitForElementPresent(driver, showMoreActions, 3);
-		// driver.navigate().refresh();
-			Utility_Functions.xWaitForElementPresent(driver, related, 7);
-			Utility_Functions.xClick(driver, related, true);
-			Utility_Functions.timeWait(4);
-			Utility_Functions.xWaitForElementPresent(driver, installmentAmount, 4);
-			String sInstallmentAmount = installmentAmount.getText();
-			sInstallmentAmount = sInstallmentAmount.split(" ")[1];
-			// String formatInstallmentAmount = sInstallmentAmount.replace(",", "");
-			if (sInstallmentAmount.equals((dataTable.getData("General_Data", "InstallmentAmount") + ".00"))) {
-					report.updateTestLog("Opportunities Installments",
-						"Opportunity installment amount record is present in the opportunity installment related list:::",
-						Status.PASS);
-			} else {
-				report.updateTestLog("Opportunities Installments",
-						"Opportunity installment amount record is present in the opportunity installment related list:::",
-						Status.PASS);
-			}
-			Utility_Functions.timeWait(2);
-			}
-	}
-
-	/**
-	 * Verify editing of multiple Installments functions for Opportunity based
-	 * on Even Percent Occupier Brokerage
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-
-	public void occupierBrokerage() {
-		Utility_Functions.xScrollWindow(driver);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xScrollWindowTop(driver);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeEdit, 3);
-		estimatedGrossFeeEdit.clear();
-		if ((dataTable.getData("General_Data", "TC_ID").contains("MultipleInstallmentsEven"))
-				|| (dataTable.getData("General_Data", "TC_ID").contains("EstimatedGrossFeeCommission"))
-				|| (dataTable.getData("General_Data", "TC_ID").contains("InLineEditEvenPercent"))) {
-			Utility_Functions.xSendKeys(driver, estimatedGrossFeeEdit, "20,000");
-			report.updateTestLog("Opportunities Installments",
-					"Opportunity installment entered as 20,000 successfully:::", Status.PASS);
-		} else if ((dataTable.getData("General_Data", "TC_ID").contains("MultipleInstallmentsUnEven"))
-				|| (dataTable.getData("General_Data", "TC_ID").contains("InLineEditUnEvenPercent"))) {
-			Utility_Functions.xSendKeys(driver, estimatedGrossFeeEdit, "6,000");
-			report.updateTestLog("Opportunities Installments",
-					"Opportunity installment entered as 6,000 successfully:::", Status.PASS);
-		}
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xWaitForElementPresent(driver, save, 4);
-		Utility_Functions.xHighlight(driver, save, "yellow");
-		actions.moveToElement(save).click().perform();
-		Utility_Functions.timeWait(4);
-	}
-
-	/**
-	 * Verify editing of multiple Installments functions for Opportunity based
-	 * on Even Percent Agency Brokerage
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-
-	public void agencyBrokerage() {
-		driver.navigate().refresh();
-		Utility_Functions.xSwitchtoFrame(driver, agencyBrokerageFrame);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xScrollWindow(driver);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xScrollWindowTop(driver);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFee, 3);
-		estimatedGrossFee.clear();
-		if ((dataTable.getData("General_Data", "TC_ID").contains("MultipleInstallmentsEven"))
-				|| (dataTable.getData("General_Data", "TC_ID").contains("EstimatedGrossFeeCommission"))
-				|| (dataTable.getData("General_Data", "TC_ID").contains("InLineEditEvenPercent"))) {
-			Utility_Functions.xSendKeys(driver, estimatedGrossFee, "20,000");
-			report.updateTestLog("Opportunities Installments",
-					"Opportunity installment entered as 20,000 successfully:::", Status.PASS);
-		} else if ((dataTable.getData("General_Data", "TC_ID").contains("MultipleInstallmentsUnEven"))
-				|| (dataTable.getData("General_Data", "TC_ID").contains("InLineEditUnEvenPercent"))) {
-			Utility_Functions.xSendKeys(driver, estimatedGrossFee, "6,000");
-			report.updateTestLog("Opportunities Installments",
-					"Opportunity installment entered as 6,000 successfully:::", Status.PASS);
-		}
-		Utility_Functions.timeWait(3);
-		Utility_Functions.xWaitForElementPresent(driver, saveButton_AB, 3);
-		Utility_Functions.xClick(driver, saveButton_AB, true);
-		Utility_Functions.timeWait(1);
-		driver.switchTo().defaultContent();
-		// Utility_Functions.xSwitchtoFrame(driver, related);
-		Utility_Functions.timeWait(2);
-	}
-
-	/**
-	 * Function for adding the installments for Opportunities
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-
-	public void addingInstallmentsOpportunities() {
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xWaitForElementPresent(driver, showMoreActions, 4);
-		Utility_Functions.xClick(driver, showMoreActions, true);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xWaitForElementPresent(driver, recalculate, 2);
-		Utility_Functions.xClick(driver, recalculate, true);
-		Utility_Functions.timeWait(4);
-		Utility_Functions.xSwitchtoFrame(driver, installmentQuantity);
-		Utility_Functions.xWaitForElementPresent(driver, installmentQuantity, 3);
-		installmentQuantity.clear();
-		Utility_Functions.xSendKeys(driver, installmentQuantity, "4");
-		InstallmentAmountEdit.clear();
-		Utility_Functions.xSendKeys(driver, InstallmentAmountEdit, "50000");
-		Utility_Functions.xWaitForElementPresent(driver, proceed, 3);
-		Utility_Functions.xClick(driver, proceed, true);
-		try {
-			Utility_Functions.xSelectDropdownByIndex(preferredPropertyTypeOpp, 1);
-			Utility_Functions.xWaitForElementPresent(driver, continueButtonInstallment, 3);
-			Utility_Functions.xClick(driver, continueButtonInstallment, true);
-		} catch (Exception e) {
-			Utility_Functions.xWaitForElementPresent(driver, continueButtonInstallment, 3);
-			Utility_Functions.xClick(driver, continueButtonInstallment, true);
-		}		
-		driver.switchTo().defaultContent();
-		Utility_Functions.timeWait(2);
-	}
-
-	/**
-	 * Verify editing of multiple Installments from Opportunity based on Even
-	 * Percent
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-
-	public void multipleInstallmentsOpportunityEvenPercent() {
-		multipleInstallmentsFunction();
-		/*
-		 * Utility_Functions.xWaitForElementPresent(driver, showMoreActions, 2);
-		 * Utility_Functions.xClick(driver, showMoreActions, true);
-		 * Utility_Functions.timeWait(1);
-		 * Utility_Functions.xWaitForElementPresent(driver, recalculate, 2);
-		 * Utility_Functions.xClick(driver, recalculate, true);
-		 * Utility_Functions.xSwitchtoFrame(driver, installmentQuantity);
-		 * Utility_Functions.xWaitForElementPresent(driver, installmentQuantity,
-		 * 3); installmentQuantity.clear(); Utility_Functions.xSendKeys(driver,
-		 * installmentQuantity, "2");
-		 * Utility_Functions.xWaitForElementPresent(driver, proceed, 3);
-		 * Utility_Functions.xClick(driver, proceed, true);
-		 * Utility_Functions.xWaitForElementPresent(driver,
-		 * continueButtonInstallment, 3); Utility_Functions.xClick(driver,
-		 * continueButtonInstallment, true); driver.switchTo().defaultContent();
-		 */
-		addingInstallmentsOpportunities();
-		Utility_Functions.xWaitForElementPresent(driver, related, 4);
-		Utility_Functions.xClick(driver, related, true);
-		Utility_Functions.xWaitForElementPresent(driver, installmentsViewAll, 3);
-		Utility_Functions.xClick(driver, installmentsViewAll, true);
-		Utility_Functions.xWaitForElementPresent(driver, opportunityNameLink, 3);
-		Utility_Functions.xClick(driver, opportunityNameLink, true);
-		Utility_Functions.xWaitForElementPresent(driver, related, 3);
-		Utility_Functions.xClick(driver, related, true);
-		Utility_Functions.xWaitForElementPresent(driver, installmentAmountOne, 3);
-		Utility_Functions.xWaitForElementPresent(driver, installmentAmountTwo, 3);
-		String sInstallmentAmountOne = installmentAmountOne.getText();
-		String sInstallmentAmountTwo = installmentAmountTwo.getText();
-		report.updateTestLog("Opportunities Installments",
-				"Opportunity installment amount one and two after changing the quantity to two from one:::"
-						+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo,
-				Status.PASS);
-
-		Utility_Functions.xWaitForElementPresent(driver, editButtonInstallment, 5);
-		Utility_Functions.xClick(driver, editButtonInstallment, true);
-		if (dataTable.getData("General_Data", "TC_ID").contains("OB")) {
-			occupierBrokerage();
-		} else if (dataTable.getData("General_Data", "TC_ID").contains("AB")) {
-			agencyBrokerage();
-		}
-		Utility_Functions.timeWait(2);
-		/*
-		 * Utility_Functions.xWaitForElementPresent(driver, related, 3);
-		 * Utility_Functions.xClick(driver, related, true);
-		 */
-		driver.navigate().refresh();
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xWaitForElementPresent(driver, related, 3);
-		Utility_Functions.xClick(driver, related, true);
-		sInstallmentAmountOne = installmentAmountOne.getText();
-		sInstallmentAmountTwo = installmentAmountTwo.getText();
-		System.out.println(sInstallmentAmountOne);
-		System.out.println(sInstallmentAmountTwo);
-		if (sInstallmentAmountOne.equals("USD 5,000.00") && sInstallmentAmountTwo.equals("USD 5,000.00")) {
-			report.updateTestLog("Opportunities Installments",
-					"Opportunity installment amounts recalculated successfully after editing the Estimated Gross Fee:::"
-							+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo,
-					Status.PASS);
-		} else {
-			report.updateTestLog("Opportunities Installments", "Opportunity installment amounts recalculation failed:::"
-					+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo, Status.FAIL);
-		}
-
-	}
-
-	/**
-	 * Verify editing of multiple Installments from Opportunity based on UnEven
-	 * Percent
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-	public void multipleInstallmentsUnEvenPercent() {
-		multipleInstallmentsFunction();
-		Utility_Functions.xWaitForElementPresent(driver, editButtonInstallment, 5);
-		Utility_Functions.xClick(driver, editButtonInstallment, true);
-		if (dataTable.getData("General_Data", "TC_ID").contains("OB")) {
-			occupierBrokerage();
-		} else if (dataTable.getData("General_Data", "TC_ID").contains("AB")) {
-			agencyBrokerage();
-		}
-		Utility_Functions.xWaitForElementPresent(driver, showMoreActions, 2);
-		Utility_Functions.xClick(driver, showMoreActions, true);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xWaitForElementPresent(driver, newOpportunityInstallment, 2);
-		Utility_Functions.xClick(driver, newOpportunityInstallment, true);
-		Utility_Functions.xWaitForElementPresent(driver, installmentNumber, 4);
-		Utility_Functions.xSendKeys(driver, installmentNumber, "2");
-		Utility_Functions.xSendKeys(driver, editInstallmentAmount, "4,000");
-		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-		Date date = new Date();
-		Utility_Functions.xSendKeys(driver, installmentDate, dateFormat.format(date).toString());
-		actions.moveToElement(saveNewOpportunityInstallment).click().perform();
-		Utility_Functions.timeWait(3);
-		Utility_Functions.xWaitForElementPresent(driver, related, 3);
-		Utility_Functions.xClick(driver, related, true);
-		Utility_Functions.xWaitForElementPresent(driver, installmentsViewAll, 3);
-		Utility_Functions.xClick(driver, installmentsViewAll, true);
-		Utility_Functions.xWaitForElementPresent(driver, opportunityNameLink, 3);
-		Utility_Functions.xClick(driver, opportunityNameLink, true);
-		Utility_Functions.xWaitForElementPresent(driver, related, 3);
-		Utility_Functions.xClick(driver, related, true);
-		String sInstallmentAmountOne = installmentAmountOne.getText();
-		String sInstallmentAmountTwo = installmentAmountTwo.getText();
-		System.out.println("installmentAmountOne"+sInstallmentAmountOne);
-		System.out.println("installmentAmountTwo"+sInstallmentAmountTwo);
-		if (sInstallmentAmountOne.equals("USD 6,000.00") && sInstallmentAmountTwo.equals("USD 4,000.00")) {
-			report.updateTestLog("Opportunities Installments",
-					"Opportunity installment amounts recalculated successfully after editing the Estimated Gross Fee:::"
-							+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo,
-					Status.PASS);
-		} else {
-			report.updateTestLog("Opportunities Installments", "Opportunity installment amounts recalculation failed:::"
-					+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo, Status.WARNING);
-		}
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, editButtonInstallment, 5);
-		Utility_Functions.xClick(driver, editButtonInstallment, true);
-		if (dataTable.getData("General_Data", "TC_ID").contains("OB")) {
-			Utility_Functions.xScrollWindow(driver);
-			Utility_Functions.timeWait(1);
-			Utility_Functions.xScrollWindowTop(driver);
-			Utility_Functions.timeWait(3);
-			Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeEdit, 3);
-			estimatedGrossFeeEdit.clear();
-			Utility_Functions.xSendKeys(driver, estimatedGrossFeeEdit, "20,000");
-			Utility_Functions.timeWait(5);
-			Utility_Functions.xWaitForElementPresent(driver, save, 4);
-			Utility_Functions.xHighlight(driver, save, "yellow");
-			actions.moveToElement(save).click().perform();
-			Utility_Functions.timeWait(4);
-		} else if (dataTable.getData("General_Data", "TC_ID").contains("AB")) {
-			driver.navigate().refresh();
-			Utility_Functions.xSwitchtoFrame(driver, agencyBrokerageFrame);
-			Utility_Functions.timeWait(2);
-			Utility_Functions.xScrollWindow(driver);
-			Utility_Functions.timeWait(1);
-			Utility_Functions.xScrollWindowTop(driver);
-			Utility_Functions.timeWait(2);
-			Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFee, 3);
-			estimatedGrossFee.clear();
-			Utility_Functions.xSendKeys(driver, estimatedGrossFee, "20,000");
-			Utility_Functions.xWaitForElementPresent(driver, saveButton_AB, 3);
-			Utility_Functions.xClick(driver, saveButton_AB, true);
-			Utility_Functions.timeWait(1);
-			driver.switchTo().defaultContent();
-			// Utility_Functions.xSwitchtoFrame(driver, related);
-			Utility_Functions.timeWait(2);
-		}
-		Utility_Functions.xWaitForElementPresent(driver, related, 3);
-		Utility_Functions.xClick(driver, related, true);
-		sInstallmentAmountOne = installmentAmountOne.getText();
-		sInstallmentAmountTwo = installmentAmountTwo.getText();
-		System.out.println(sInstallmentAmountOne);
-		System.out.println(sInstallmentAmountTwo);
-		if (sInstallmentAmountOne.equals("USD 12,000.00") && sInstallmentAmountTwo.equals("USD 8,000.00")) {
-			report.updateTestLog("Opportunities Installments",
-					"Opportunity installment amounts recalculated successfully after editing the Estimated Gross Fee:::"
-							+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo,
-					Status.PASS);
-		} else {
-			report.updateTestLog("Opportunities Installments", "Opportunity installment amounts recalculation failed:::"
-					+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo, Status.WARNING);
-		}
-
-	}
-
-	/**
-	 * Verify editing of multiple Installments from Opportunity based on Uneven
-	 * Percent using API
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-	static SaveResult[] results;
-	static String result;
-
-	public String opportunityWithInstallmentAmount() {
-		EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
-		try {
-			establishConnection.establishConnection();
-			SObject opportunity = new SObject();
-			opportunity.setType("Opportunity");
-			String accountId = searchOpportunity.fetchRecord("Account", "Id");
-			int value = Utility_Functions.xRandomFunction();
-			opportunity.setField("Name", "Test Automation_" + value);
-			opportunity.setField("AccountId", accountId);
-			opportunity.setField("CloseDate", Calendar.getInstance());
-			opportunity.setField("RecordTypeId", "012i0000000405nAAA");
-			opportunity.setField("StageName", "02-Meeting");
-			opportunity.setField("Service__c", "Occupier Buyer");
-			opportunity.setField("Total_Size__c", 5000);
-			opportunity.setField("Unit_of_Measure__c", "Acres");
-			opportunity.setField("Amount", "50000");
-
-			SObject[] opportunities = new SObject[1];
-			opportunities[0] = opportunity;
-			results = EstablishConnection.connection.create(opportunities);
-			report.updateTestLog("Opportunity Name",
-					"Opportunity for the record type Asset Services is created successfully:::", Status.PASS);
-			System.out.println("Result:::" + results);
-			for (int j = 0; j < results.length; j++) {
-				if (results[j].isSuccess()) {
-					result = results[j].getId();
-					System.out.println("Save Results:::" + result);
-					report.updateTestLog("Opportunity Name", "Opportunity Id:::" + result + " successfully:::",
-							Status.PASS);
-				}
-			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getStackTrace());
-		}
-		String queryAmount = "Select Estimated_Gross_Fee_Commission__c from opportunity where Id = " + "'" + result
-				+ "'";
-		String queryCount = "Select Installment_Count__c from opportunity where Id = " + "'" + result + "'";
-		String queryQuantity = "Select Installment_Quantity__c from opportunity where Id = " + "'" + result + "'";
-		String queryTotal = "Select Installments_Total__c from opportunity where Id = " + "'" + result + "'";
-
-		String sInstallmentAmount = searchOpportunity.fetchRecordFieldValue("Estimated_Gross_Fee_Commission__c",
-				queryAmount);
-		String sInstallmentCount = searchOpportunity.fetchRecordFieldValue("Installment_Count__c", queryCount);
-		String sInstallmentQuantity = searchOpportunity.fetchRecordFieldValue("Installment_Quantity__c", queryQuantity);
-		String sInstallmentTotal = searchOpportunity.fetchRecordFieldValue("Installments_Total__c", queryTotal);
-
-		System.out.println("Installment Amount:: " + sInstallmentAmount);
-		if (sInstallmentAmount.equals("50000.0")) {
-			report.updateTestLog("Opportunity Name", "Installment Record has been created successfully:::" + result
-					+ ":::InstallmentAmount:::" + sInstallmentAmount + ":::", Status.PASS);
-			report.updateTestLog("Opportunity Name", "Installment Record has been created successfully:::" + result
-					+ ":::InstallmentCount:::" + sInstallmentCount + ":::", Status.PASS);
-			report.updateTestLog("Opportunity Name", "Installment Record has been created successfully:::" + result
-					+ ":::InstallmentQuanity:::" + sInstallmentQuantity + ":::", Status.PASS);
-			report.updateTestLog("Opportunity Name", "Installment Record has been created successfully:::" + result
-					+ ":::InstallmentTotal:::" + sInstallmentTotal + ":::", Status.PASS);
-		} else {
-			report.updateTestLog("Opportunity Name",
-					"Installment Record creation failed:::" + result + ":::" + sInstallmentAmount + ":::", Status.FAIL);
-		}
-		return result;
-
-	}
-
-	/**
-	 * Verify editing of multiple Installments for Opportunity Even Percent
-	 * using API
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-
-	public void multipleInstallmentsOpportunityEvenPercent_API() {
-		String opportunityID = opportunityWithInstallmentAmount();
-
-		String queryQuantity = "Select Installment_Quantity__c from opportunity where Id = " + "'" + result + "'";
-		opportunitiesFunctions.updateOpportunityField("Installment_Quantity__c", opportunityID);
-		String siInstallmentQuantity = searchOpportunity.fetchRecordFieldValue("Installment_Quantity__c",
-				queryQuantity);
-		if (siInstallmentQuantity.equals("2.0")) {
-			report.updateTestLog("Opportunity Name", "Installment Quantity has been created successfully:::" + result
-					+ ":::InstallmentQuanity:::" + siInstallmentQuantity + ":::", Status.PASS);
-		} else {
-			report.updateTestLog("Opportunity Name", "Installment Quantity updation failed:::" + result
-					+ ":::InstallmentQuanity:::" + siInstallmentQuantity + ":::", Status.FAIL);
-		}
-	}
-
-	/**
-	 * Verify mutiple installments based on Pending and Paid Status
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-
-	public void multipleInstallmentsPendingPaid() {
-
-	}
-
-	/**
-	 * Verify the ability of deleting an installment
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-
-	public void deleteInstallment() {
-		try {
-			// multipleInstallmentsOpportunityEvenPercent();
-			Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
-			Utility_Functions.xClick(driver, menu_Opportunities, true);
-			Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
-			Utility_Functions.xclickRandomElement(opportunitiesList);
-			Utility_Functions.timeWait(1);
-			Utility_Functions.xWaitForElementPresent(driver, related, 4);
-			Utility_Functions.xClick(driver, related, true);
-			Utility_Functions.xWaitForElementPresent(driver, arrowDown, 3);
-			Utility_Functions.xClick(driver, arrowDown, true);
-			Utility_Functions.timeWait(1);
-			List<WebElement> actionList = driver.findElements(By.xpath("//div[@class='actionMenu']//a"));
-			for (WebElement element : actionList) {
-				if (!element.getText().contains("Delete")) {
-					report.updateTestLog("Opportunities Installments",
-							"Installment cannot be deleted as the Delete button is not getting displayed when we try to delete the installment via script:",
-							Status.PASS);
-				} else {
-					report.updateTestLog("Opportunities Installments", "Installment Deletion Failed", Status.FAIL);
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Verify the round off functionality for Opportunity Installments
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-
-	static ArrayList<String> installmentList = new ArrayList<String>();
-	static ArrayList<String> installmentList1 = new ArrayList<String>();
-
-	public void recalculateRoundOffRule() {
-		multipleInstallmentsFunction();
-		addingInstallmentsOpportunities();
-		Utility_Functions.xWaitForElementPresent(driver, related, 3);
-		Utility_Functions.xClick(driver, related, true);
-		Utility_Functions.xWaitForElementPresent(driver, installmentsViewAll, 3);
-		Utility_Functions.xClick(driver, installmentsViewAll, true);
-		Utility_Functions.xWaitForElementPresent(driver, opportunityNameLink, 3);
-		Utility_Functions.xClick(driver, opportunityNameLink, true);
-		Utility_Functions.xWaitForElementPresent(driver, related, 3);
-		Utility_Functions.xClick(driver, related, true);
-		Utility_Functions.xWaitForElementPresent(driver, installmentAmountOne, 3);
-		Utility_Functions.xWaitForElementPresent(driver, installmentAmountTwo, 3);
-		Utility_Functions.xWaitForElementPresent(driver, installmentAmountThree, 3);
-		String sInstallmentAmountOne = installmentAmountOne.getText();
-		String sInstallmentAmountTwo = installmentAmountTwo.getText();
-		String sInstallmentAmountThree = installmentAmountThree.getText();
-		report.updateTestLog("Opportunities Installments",
-				"Opportunity installment amount one and two after changing the quantity to two from one:::"
-						+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo + ":::" + sInstallmentAmountThree,
-				Status.PASS);
-		String sEstimatedGrossAmount = dataTable.getData("General_Data", "InstallmentAmount").replace(",", "");
-		String sInstallments = dataTable.getData("General_Data", "InstallmentQuantity");
-		double dInstallment = ((double) Integer.parseInt(sEstimatedGrossAmount)) / Integer.parseInt(sInstallments);
-		System.out.println(dInstallment);
-		BigDecimal bFirstInstallmentAmount = truncateDecimal(dInstallment, 2);
-		String sThirdInstallment = (new DecimalFormat(".##").format(dInstallment));
-		System.out.println(sThirdInstallment);
-		installmentList.add(sThirdInstallment);
-		installmentList.add(sThirdInstallment);
-		installmentList.add(bFirstInstallmentAmount.toString());
-		int count = 0;
-		for (int i = 0; i < installmentList.size(); i++) {
-			if (sInstallmentAmountOne.replaceAll(",", "").contains(installmentList.get(i))) {
-				count++;
-			} else if (sInstallmentAmountTwo.replaceAll(",", "").contains(installmentList.get(i))) {
-				count++;
-			} else if (sInstallmentAmountThree.replaceAll(",", "").contains(installmentList.get(i))) {
-				count++;
-			}
-		}
-		if (count == 3) {
-			report.updateTestLog("Opportunities Installments",
-					"First, Second and Third Installment amounts calculated successfully:::" + bFirstInstallmentAmount
-							+ "::::" + bFirstInstallmentAmount + "::::" + sThirdInstallment,
-					Status.PASS);
-		} else {
-			installmentList1.add(bFirstInstallmentAmount.toString());
-			installmentList1.add(bFirstInstallmentAmount.toString());
-			installmentList1.add(sThirdInstallment);
-			int count1 = 0;
-			for (int i = 0; i < installmentList1.size(); i++) {
-				if (sInstallmentAmountOne.replaceAll(",", "").contains(installmentList1.get(i))) {
-					count++;
-				} else if (sInstallmentAmountTwo.replaceAll(",", "").contains(installmentList1.get(i))) {
-					count++;
-				} else if (sInstallmentAmountThree.replaceAll(",", "").contains(installmentList1.get(i))) {
-					count++;
-				}
-			}
-			if (count1 == 3) {
-				report.updateTestLog("Opportunities Installments",
-						"First, Second and Third Installment amounts calculated successfully:::"
-								+ bFirstInstallmentAmount + "::::" + bFirstInstallmentAmount + "::::"
-								+ sThirdInstallment,
-						Status.PASS);
-			} else {
-				report.updateTestLog("Opportunities Installments",
-						"First, Second and Third Installment calculation failed:::" + bFirstInstallmentAmount + "::::"
-								+ bFirstInstallmentAmount + "::::" + sThirdInstallment,
-						Status.WARNING);
-			}
-		}
-	}
-
-	private static BigDecimal truncateDecimal(double installmentAmount, int numberofDecimals) {
-		if (installmentAmount > 0) {
-			return new BigDecimal(String.valueOf(installmentAmount)).setScale(numberofDecimals, BigDecimal.ROUND_FLOOR);
-		} else {
-			return new BigDecimal(String.valueOf(installmentAmount)).setScale(numberofDecimals,
-					BigDecimal.ROUND_CEILING);
-		}
-	}
-
-	/**
-	 * Verify for validating the Opportunity eligibility
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-
-	public void opportunityEligibility() {
-		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
-		Utility_Functions.xClick(driver, menu_Opportunities, true);
-		// Utility_Functions.xWaitForElementPresent(driver, opportunitiesList,
-		// 3);
-		Utility_Functions.timeWait(1);
-		if (opportunitiesList.isEmpty()) {
-			Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
-			Utility_Functions.xClick(driver, recentlyViewed, true);
-			Utility_Functions.xWaitForElementPresent(driver, allActiveOpportunities, 3);
-			Utility_Functions.xClick(driver, allActiveOpportunities, true);
-			Utility_Functions.timeWait(2);
-			Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
-			Utility_Functions.xclickRandomElement(opportunitiesList);
-		}
-		Utility_Functions.xclickRandomElement(opportunitiesList);
-		Utility_Functions.timeWait(1);
-	}
-
-	/**
-	 * Verify whether the user able to edit the paid installment
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-
-	public void editPaidInstallmentAmount() {
-		/*
-		 * String query =
-		 * "SELECT Opportunity_ID__c FROM Opportunity_Installments__c WHERE Installment_Amount__c != 0 limit 1"
-		 * ; String sOpportunityID =
-		 * searchOpportunity.fetchRecordFieldValue("Opportunity_ID__c", query);
-		 * report.updateTestLog("Verify Opportunity",
-		 * "Opportunity retrived from database successfully:::" +
-		 * sOpportunityID, Status.PASS); String url =
-		 * driver.getCurrentUrl().split("#")[0]; String newUrl = url +
-		 * "#/sObject/" + sOpportunityID; newUrl = newUrl + "/view";
-		 * report.updateTestLog("Verify Opportunity"
-		 * ,"URL has been replaced with the new URL having the retrieved Opportunity:::"
-		 * + newUrl, Status.PASS); driver.get(newUrl);
-		 */
-
-		boolean isStatus = false;
-		int iInstallmentAmountOne = 0;
-		while (!isStatus) {
-			labelA: {
-				opportunityEligibility();
-				Utility_Functions.timeWait(4);
-				driver.navigate().refresh();
-				Utility_Functions.xWaitForElementPresent(driver, related, 5);
-				Utility_Functions.xClick(driver, related, true);
-				Utility_Functions.xWaitForElementPresent(driver, installmentAmountOne, 3);
-				String sInstallmentAmountOne = installmentAmountOne.getText();
-				sInstallmentAmountOne = sInstallmentAmountOne.split(" ")[1];
-				sInstallmentAmountOne = sInstallmentAmountOne.replaceAll(",", "");
-				double dInstallmentAmountOne = Double.parseDouble(sInstallmentAmountOne);
-				iInstallmentAmountOne = Double.valueOf(dInstallmentAmountOne).intValue();
-				if (iInstallmentAmountOne > 0) {
-					report.updateTestLog("Opportunities Installments",
-							"Opportunity is eligible for editing the Installments::", Status.PASS);
-					
-					
-					Utility_Functions.xWaitForElementPresent(driver, arrowDown, 3); 
-					Utility_Functions.xClick(driver, arrowDown, true);
-					Utility_Functions.timeWait(2);
-				
-					/*
-					List<WebElement> actionList = driver.findElements(By.xpath("//div[contains(@class,'actionMenu')]//a/div"));
-					Utility_Functions.timeWait(1);
-					for (WebElement element : actionList) {
-						System.out.println("e:"+element.getText()+"-");
-						if (element.getText().contains("Edit")) {
-							element.click();
-							System.out.println("clicked on Edit");
-							report.updateTestLog("Opportunities Installments",
-									"Clicked on edit installments button successfully::", Status.PASS);
-						} else {
-							report.updateTestLog("Opportunities Installments",
-									"Unable to click on edit installment button", Status.FAIL);
-						}
-					}*/
-					
-					//WebElement 
-					Utility_Functions.xWaitForElementPresent(driver, editBtn, 3);
-					Utility_Functions.xClick(driver, editBtn, true);
-					Utility_Functions.timeWait(1);
-						
-					Utility_Functions.xWaitForElementPresent(driver, installmentOption, 3);
-					Utility_Functions.xClick(driver, installmentOption, true);
-					if (installmentOption.getText().contains("Paid")) {
-						report.updateTestLog("Opportunities Installments",
-								"Opportunity not is eligible as the installment amount is already paid::",
-								Status.WARNING);
-						isStatus = false;
-						Utility_Functions.xWaitForElementPresent(driver, cancel, 3);
-						Utility_Functions.xClick(driver, cancel, true);
-						Utility_Functions.timeWait(2);
-						break labelA;
-					}
-					DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-					Date date = new Date();
-					Utility_Functions.timeWait(1);
-					Utility_Functions.xClick(driver, installmentStatus, true);
-					Utility_Functions.xSendKeys(driver, datePaid, dateFormat.format(date).toString());
-					Utility_Functions.xWaitForElementPresent(driver, accountRoleOption, 3);
-					Utility_Functions.xClick(driver, accountRoleOption, true);
-					Utility_Functions.timeWait(1);
-					Utility_Functions.xClick(driver, accountRole, true);
-					Utility_Functions.timeWait(2);
-					Utility_Functions.xWaitForElementPresent(driver, save, 4);
-					Utility_Functions.xClick(driver, save, true);
-					report.updateTestLog("Opportunities Installments",
-							"Installment Amount has been paid successfully::", Status.PASS);
-					Utility_Functions.xWaitForElementPresent(driver, related, 3);
-					driver.navigate().refresh();
-					Utility_Functions.xWaitForElementPresent(driver, related, 3);
-					Utility_Functions.xClick(driver, related, true);
-					Utility_Functions.xWaitForElementPresent(driver, arrowDown, 3);
-					Utility_Functions.xClick(driver, arrowDown, true);
-					Utility_Functions.timeWait(1);
-					List<WebElement> actionListEdit = driver.findElements(By.xpath("//div[@class='actionMenu']//a"));
-					for (WebElement element : actionListEdit) {
-						if (element.getText().contains("Edit")) {
-							Utility_Functions.xWaitForElementPresent(driver, element, 3);
-							element.click();
-							report.updateTestLog("Opportunities Installments",
-									"Clicked on edit installments button successfully::", Status.PASS);
-						} else {
-							report.updateTestLog("Opportunities Installments",
-									"Unable to click on edit installment button", Status.FAIL);
-						}
-					}
-					try {
-						Utility_Functions.xWaitForElementPresent(driver, installmentAmountEdit, 3);
-						int iInstallmentAmount = iInstallmentAmountOne + 100;
-						Utility_Functions.xSendKeys(driver, installmentAmountEdit,
-								Integer.toString(iInstallmentAmount));
-						Utility_Functions.timeWait(2);
-						Utility_Functions.xWaitForElementPresent(driver, save, 3);
-						Utility_Functions.xClick(driver, save, true);
-						Utility_Functions.timeWait(2);
-						Utility_Functions.xWaitForElementPresent(driver, related, 3);
-						if (related.isDisplayed()) {
-							report.updateTestLog("Opportunities Installments",
-									"Editing the Paid installment amount is successfull::", Status.PASS);
-							isStatus = true;
-							break;
-						} else {
-							report.updateTestLog("Opportunities Installments",
-									"Editing the Paid installment amount is failed::", Status.FAIL);
-							isStatus = true;
-							break;
-						}
-					} catch (Exception e) {
-						report.updateTestLog("Opportunities Installments", "Unable to edit the installments:::",
-								Status.PASS);
-						isStatus = true;
-						break;
-					}
-				} else {
-					report.updateTestLog("Opportunities Installments",
-							"Opportunity not is eligible for editing the Installments::", Status.WARNING);
-					isStatus = false;
-					break labelA;
-				}
-
-			}
-		}
-
-	}
-
+	
+	
 	/**
 	 * Validating the manage Opportunity verify Custom Event Page
 	 * 
@@ -3413,143 +2493,10 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void opportunityVerifyCustomEventPage() {
-
-		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
-		Utility_Functions.xClick(driver, menu_Opportunities, true);
-		Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
-		Utility_Functions.xclickRandomElement(opportunitiesList);
+		selectOpportunity();
 		Utility_Functions.xWaitForElementPresent(driver, newEventOpp, 3);
 		Utility_Functions.xClick(driver, newEventOpp, true);
 		eventPage.verifyNewEventPageLayout();
-
-		/*
-		 * Utility_Functions.timeWait(5);
-		 * Utility_Functions.xWaitForElementPresent(driver, selectNewEvent, 3);
-		 * Utility_Functions.xClick(driver, selectNewEvent, true);
-		 * Utility_Functions.xWaitForElementPresent(driver, newEvent, 3);
-		 * actions.moveToElement(newEvent); actions.click();
-		 * actions.build().perform(); Utility_Functions.timeWait(3); //
-		 * driver.switchTo().frame(4); Utility_Functions.xSwitchtoFrame(driver,
-		 * saveEventCustomEventPageButton); Utility_Functions.timeWait(5);
-		 * 
-		 * if (addAnEventPage.getText().contains("Add an Event")) {
-		 * 
-		 * System.out.println("The New Custom Event Page is displayed");
-		 * report.updateTestLog("Verify Opportunity Custom Event Page",
-		 * "The New Custom Event Page is Displayed", Status.PASS); } else {
-		 * System.out.println("The New Custom Event Page is not displayed");
-		 * report.updateTestLog("Verify Opportunity Custom Event Page",
-		 * "The New Custom Event Page is not Displayed", Status.FAIL); }
-		 * 
-		 * List<WebElement> drop =
-		 * driver.findElements(By.xpath("//div[@class='slds-select_container']")
-		 * );
-		 * 
-		 * java.util.Iterator<WebElement> i = drop.iterator(); while
-		 * (i.hasNext()) { WebElement row = i.next();
-		 * System.out.println(row.getText()); if (!row.getText().equals("")) {
-		 * System.out.println(
-		 * "All the values for the Activity Type and Type pick list are present in  the Add an Event page"
-		 * ); report.updateTestLog("Verify New Opportunity Custom Event Page",
-		 * "Verifying the Activity Type and Type pick list values",
-		 * Status.PASS); } else { System.out.println(
-		 * "All the values for the Activity Type and Type pick list are not present in  the Add an Event page"
-		 * ); report.updateTestLog("Verify New Opportunity Custom Event Page",
-		 * "Verifying the Activity Type and Type pick list values",
-		 * Status.FAIL); }
-		 * 
-		 * }
-		 * 
-		 * if (relatedTo.getText().contains("Related To")) { System.out.
-		 * println("Related To section is present in the New Activity Layout Page"
-		 * ); report.updateTestLog("Verify New Opportunity Custom Event Page ",
-		 * "Related To section is present in the New Custom Event Page",
-		 * Status.PASS); } else { System.out.
-		 * println("Related To section is not present in the New Activity Layout Page"
-		 * ); report.updateTestLog("Verify New Opportunity Custom Event Page ",
-		 * "Related To section is not present in the New Custom Event Page",
-		 * Status.FAIL);
-		 * 
-		 * } if (quickCreateanEvent.getText().contains("Quick Create an Event"))
-		 * { System.out.
-		 * println("Quick Create an Event section is present in the New Activity Layout Page"
-		 * ); report.updateTestLog("Verify New Opportunity Custom Event Page ",
-		 * "Quick Create an Event section is present in the New Activity Page",
-		 * Status.PASS); } else { System.out.
-		 * println("Quick Create an Event section is not present in the New Activity Layout Page"
-		 * ); report.updateTestLog("Verify New Opportunity Custom Event Page ",
-		 * "Quick Create an Event section is not present in the New Activity Page"
-		 * , Status.FAIL);
-		 * 
-		 * }
-		 * 
-		 * if (!setReminderCheckBox.isSelected()) { System.out.
-		 * println("Set Reminder check box is present and not checked");
-		 * report.updateTestLog("Verify New Opportunity Custom Event Page ",
-		 * "Set Reminder checkbox is present in the New Custom Event Page",
-		 * Status.PASS);
-		 * 
-		 * } else {
-		 * System.out.println("Set Reminder check box is not present ");
-		 * report.updateTestLog("Verify New Opportunity Custom Event Page ",
-		 * "Set Reminder checkbox is not present in the New Custom Event Page",
-		 * Status.FAIL); } if
-		 * ((!cancelCustomEventPageButton.getText().equals(" ")) ||
-		 * (!saveAndNewEventCustomEventPageButton.getText().equals(" ")) ||
-		 * (!saveEventCustomEventPageButton.getText().equals(" "))) {
-		 * System.out.
-		 * println("Save, Save and New and Cancel buttons are prsent in the New Activity Layout Page "
-		 * ); report.updateTestLog("Verify New Opportunity Custom Event Page  ",
-		 * "Verifying New Custom Event Page is having the Save, Save and New and Cancel buttons "
-		 * , Status.PASS); } else { System.out
-		 * .println("Save, Save and New and Cancel buttons are not prsent in the New Activity Layout Page  "
-		 * ); report.updateTestLog("Verify New Opportunity Custom Event Page ",
-		 * "Verifying New Custom Event Page is having the Save, Save and New and Cancel buttons"
-		 * , Status.FAIL); }
-		 * 
-		 * try {
-		 * 
-		 * if ((!assignedToNewCustomEventPage.getAttribute("value").equals(""))
-		 * || (!startDateNewCustomEventPage.getAttribute("value").equals("")) ||
-		 * (!startTimeNewCustomEventPage.getAttribute("value").equals("")) ||
-		 * (!endDateNewCustomEventPage.getAttribute("value").equals("")) ||
-		 * (!endTimeNewCustomEventPage.getAttribute("value").equals(""))) {
-		 * System.out.println(
-		 * "Assigned To, Start Date, Start Time, End Date and End Time fields are having the values "
-		 * ); report.updateTestLog("Verify New Opportunity Custom Event Page ",
-		 * "Verify New Opportunity Custom Event Page is having the default values in the required fields "
-		 * , Status.PASS); } else { System.out.
-		 * println("New Activity Layout Page is not having the deafault values "
-		 * ); report.updateTestLog("Verify New Opportunity Custom Event Page",
-		 * "Verify New Opportunity Custom Event Page is not having the default values in the required fields"
-		 * , Status.FAIL); } } catch (Exception e) { e.printStackTrace();
-		 * System.out.println(e.getMessage()); }
-		 * 
-		 * List<WebElement> customEventpageFields = driver.findElements(By
-		 * .xpath("//div[contains(@class,'slds-col--padded') and contains(@class,' slds-size--1-of-1')]//label"
-		 * )); int count = 0, i1 = 0; String labelArray[] = new
-		 * String[customEventpageFields.size()];
-		 * System.out.println(customEventpageFields.size());
-		 * 
-		 * try { labelsOpportunitiesNewCustomEvent(); for (WebElement element :
-		 * customEventpageFields) { labelArray[i1] = element.getText(); if
-		 * (labelArray[i1].contains(labelsOpportunitiesNewCustomEvent.get(i1)))
-		 * { report.updateTestLog("Verify New Opportunity Custom Event Page",
-		 * "New Opportunity Custom Event Page is having the " + labelArray[i1] +
-		 * " field ", Status.PASS); count++; } i1++; }
-		 * labelsOpportunitiesNewCustomEvent.clear();
-		 * customEventpageFields.clear(); System.out.println(count); if (count
-		 * != 15) {
-		 * report.updateTestLog("Verify New Opportunity Custom Event Page",
-		 * "All Labels are not present in the Add New Event Page", Status.FAIL);
-		 * } else {
-		 * 
-		 * report.updateTestLog("Verify New Opportunity Custom Event Page",
-		 * "All Labels are present in the Add New Event Page", Status.PASS); }
-		 * 
-		 * } catch (Exception e) { System.out.println(e.getMessage()); }
-		 */
-
 	}
 
 	/**
@@ -3658,7 +2605,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	}
 
 	public void opportunitySplitRegression() {
-		opportunityNameAutoGenerate();
+		navigateOpportunityNewLayoutPage();
           
 		Utility_Functions.xClick(driver, related, true);
 		Utility_Functions.timeWait(5);
@@ -4995,7 +3942,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	public String retriveAccountOpp() {
 		String query = "SELECT Id, Total_Number_Of_Opps__c FROM Account where Total_Number_Of_Opps__c > 1 limit 1 offset 9";
-		String sAccountID = searchOpportunity.fetchRecordFieldValueAdminLogin("Id", query);
+		String sAccountID = searchTextSOQL.fetchRecordFieldValueAdminLogin("Id", query);
 		report.updateTestLog("Verify Active Opportunities", "Account ID retrived from database is:::" + sAccountID,
 				Status.PASS);
 		String url = driver.getCurrentUrl().split("#")[0];
@@ -5006,23 +3953,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		return sAccountID;
 	}
 
-	public String retriveOpportunityforInstallments() {
-		String query = "SELECT Id, Installment_Quantity__c, CBRE_Preferred_Property_Type_c__c, Total_Size__c, Service__c  FROM"
-				+ " Opportunity where Installment_Quantity__c = 1 and  CBRE_Preferred_Property_Type_c__c !=null and"
-				+ " Total_Size__c != null and Service__c  != null ORDER BY CreatedDate DESC"  + " limit 1 offset " + offsetValue;
-		String sOpportunityId = searchOpportunity.fetchRecordFieldValue("Id", query);
-		if(sOpportunityId==null) {
-			report.updateTestLog("Verify Active Opportunities", "No Opportunities are present:::", Status.PASS);
-		} else {
-			report.updateTestLog("Verify Active Opportunities", "Opportunity ID retrived from database is:::" + sOpportunityId, Status.PASS);
-			String url = driver.getCurrentUrl().split("#")[0];
-			String newUrl = url + "#/sObject/" + sOpportunityId;
-			newUrl = newUrl + "/view";
-			driver.get(newUrl);
-			Utility_Functions.timeWait(1);
-		}
-		return sOpportunityId;
-	}
+	
 	
 	public void validateActiveOpportunities() {
 		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
@@ -5203,7 +4134,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 				}
 			}
 			Utility_Functions.timeWait(2);
-			opportunityCreation();
+			String sAccountName = searchTextSOQL.fetchRecord("Account", "Name");	
+			opportunityCreation(sAccountName);
 		} else if (dataTable.getData("General_Data", "TC_ID").contains("ABEMEA")) {
 			try {
 				Utility_Functions.xSwitchtoFrame(driver, salesStageSelectedEMEA);
@@ -5711,7 +4643,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	public void salesStage08_ClosedPartial_09_ClosedPaidFull() {
 		String query = "SELECT Estimated_Gross_Fee_Commission__c , Id, Name FROM Opportunity where StageName > '08-Closed - Paid Partial' and StageName < '09-Closed - Paid Full' and Estimated_Gross_Fee_Commission__c = 0.0 "
 				+ " and Created_By_User_Role__c != null limit 1 offset 9";
-		String OpportunityID = searchOpportunity.searchOpportunity(query);
+		String OpportunityID = searchTextSOQL.searchOpportunity(query);
 		System.out.println(OpportunityID);
 
 		try {
@@ -5746,7 +4678,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	}
 
 	public String salesStage08_09ClosedFunction() {
-		opportunityNameAutoGenerate();
+		navigateOpportunityNewLayoutPage();
 		String oppUrl = driver.getCurrentUrl().split("#/sObject/")[1];
 		System.out.println("Opp URL" + oppUrl);
 		String OpportunityId = oppUrl.split("/view")[0];
@@ -5803,7 +4735,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	public void salesStage16_In_Escrow_19_Closed() {
 		String query = "SELECT Estimated_Gross_Fee_Commission__c , Id, Name FROM Opportunity where StageName > '16-In Escrow' and StageName < '19-Closed' and Estimated_Gross_Fee_Commission__c = 0.0 "
 				+ " and Created_By_User_Role__c != null limit 1 offset 9";
-		String OpportunityID = searchOpportunity.searchOpportunity(query);
+		String OpportunityID = searchTextSOQL.searchOpportunity(query);
 		System.out.println(OpportunityID);
 
 		try {
@@ -6481,7 +5413,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xSendKeys(driver, opportunityName,
 				"Test Automation Opportunity_" + Utility_Functions.xGenerateAlphaNumericString());
 		String query = "SELECT Id, Name, EMEA_Searchable__c FROM Account where EMEA_Searchable__c = true limit 1 offset 9";
-		String sAccountName = searchOpportunity.fetchRecordFieldValue("Name", query);
+		String sAccountName = searchTextSOQL.fetchRecordFieldValue("Name", query);
 		Utility_Functions.xSendKeys(driver, accountName, sAccountName);
 		accountName.sendKeys(Keys.ARROW_DOWN);
 		Utility_Functions.timeWait(2);
@@ -6561,7 +5493,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			Utility_Functions.xClick(driver, preferedPropertyTypeValueAdmin, true);
 		} else {
 			String query = "SELECT Id, Name, EMEA_Searchable__c FROM Account where EMEA_Searchable__c = true limit 1 offset 9";
-			String sAccountName = searchOpportunity.fetchRecordFieldValue("Name", query);
+			String sAccountName = searchTextSOQL.fetchRecordFieldValue("Name", query);
 			Utility_Functions.xSendKeys(driver, accountName, sAccountName);
 			accountName.sendKeys(Keys.ARROW_DOWN);
 			Utility_Functions.timeWait(2);
@@ -6906,7 +5838,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xSendKeys(driver, opportunityName,
 				"Test Automation Opportunity_" + Utility_Functions.xGenerateAlphaNumericString());
 		String query = "SELECT Id, Name, EMEA_Searchable__c FROM Account where EMEA_Searchable__c = true limit 1 offset 9";
-		String sAccountName = searchOpportunity.fetchRecordFieldValue("Name", query);
+		String sAccountName = searchTextSOQL.fetchRecordFieldValue("Name", query);
 		Utility_Functions.xSendKeys(driver, accountName, sAccountName);
 		accountName.sendKeys(Keys.ARROW_DOWN);
 		Utility_Functions.timeWait(2);
@@ -7189,7 +6121,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			Utility_Functions.xSendKeys(driver, opportunityName,
 					"Test Automation Opportunity_" + Utility_Functions.xGenerateAlphaNumericString());
 			String query = "SELECT Id, Name, EMEA_Searchable__c FROM Account where EMEA_Searchable__c = true limit 1 offset 9";
-			String sAccountName = searchOpportunity.fetchRecordFieldValue("Name", query);
+			String sAccountName = searchTextSOQL.fetchRecordFieldValue("Name", query);
 			Utility_Functions.xSendKeys(driver, accountName, sAccountName);
 			accountName.sendKeys(Keys.ARROW_DOWN);
 			Utility_Functions.timeWait(2);
@@ -7670,7 +6602,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xSendKeys(driver, opportunityName,
 				"Test Automation Opportunity_" + Utility_Functions.xGenerateAlphaNumericString());
 		String query = "SELECT Id, Name, EMEA_Searchable__c FROM Account where EMEA_Searchable__c = true limit 1 offset 9";
-		String sAccountName = searchOpportunity.fetchRecordFieldValue("Name", query);
+		String sAccountName = searchTextSOQL.fetchRecordFieldValue("Name", query);
 		Utility_Functions.xSendKeys(driver, accountName, sAccountName);
 		accountName.sendKeys(Keys.ARROW_DOWN);
 		Utility_Functions.timeWait(2);
@@ -7994,7 +6926,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xSendKeys(driver, opportunityName,
 				"Test Automation Opportunity_" + Utility_Functions.xGenerateAlphaNumericString());
 		String query = "SELECT Id, Name, EMEA_Searchable__c FROM Account where EMEA_Searchable__c = true limit 1 offset 9";
-		String sAccountName = searchOpportunity.fetchRecordFieldValue("Name", query);
+		String sAccountName = searchTextSOQL.fetchRecordFieldValue("Name", query);
 		Utility_Functions.xSendKeys(driver, accountName, sAccountName);
 		accountName.sendKeys(Keys.ARROW_DOWN);
 		Utility_Functions.timeWait(2);
@@ -8125,7 +7057,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xSendKeys(driver, opportunityName,
 				"Test Automation Opportunity_" + Utility_Functions.xGenerateAlphaNumericString());
 		String query = "SELECT Id, Name, EMEA_Searchable__c FROM Account where EMEA_Searchable__c = true limit 1 offset 9";
-		String sAccountName = searchOpportunity.fetchRecordFieldValue("Name", query);
+		String sAccountName = searchTextSOQL.fetchRecordFieldValue("Name", query);
 		Utility_Functions.xSendKeys(driver, accountName, sAccountName);
 		accountName.sendKeys(Keys.ARROW_DOWN);
 		Utility_Functions.timeWait(2);
@@ -8241,7 +7173,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xSendKeys(driver, opportunityName,
 				"Test Automation Opportunity_" + Utility_Functions.xGenerateAlphaNumericString());
 		String query = "SELECT Id, Name, EMEA_Searchable__c FROM Account where EMEA_Searchable__c = true limit 1 offset 9";
-		String sAccountName = searchOpportunity.fetchRecordFieldValue("Name", query);
+		String sAccountName = searchTextSOQL.fetchRecordFieldValue("Name", query);
 		Utility_Functions.xSendKeys(driver, accountName, sAccountName);
 		accountName.sendKeys(Keys.ARROW_DOWN);
 		Utility_Functions.timeWait(2);
@@ -8720,7 +7652,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xSwitchtoFrame(driver, closeDateOpp);
 		Utility_Functions.timeWait(2);		
-		String sAccountName = searchOpportunity.fetchRecord("Account", "Name");
+		String sAccountName = searchTextSOQL.fetchRecord("Account", "Name");
 		Utility_Functions.xSendKeys(driver, accountName, sAccountName);
 		accountName.sendKeys(Keys.ARROW_DOWN);
 		Utility_Functions.timeWait(2);
@@ -8795,7 +7727,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			if (related.isDisplayed()) {
 				String OpportunityQuery = "Select Name from opportunity where Name like  " + "'" + sAccountName + "-"
 						+ '%' + "-" + value + "-" + "Acres" + "'";
-				String OpportunityName = searchOpportunity.fetchRecordFieldValue("Name", OpportunityQuery);
+				String OpportunityName = searchTextSOQL.fetchRecordFieldValue("Name", OpportunityQuery);
 				report.updateTestLog("Opportunity Created",
 						"Opportunity created successfully:::" + OpportunityName + ":::", Status.PASS);
 			} else {
@@ -8813,8 +7745,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 		String probabilityQuery = "Select Probability from opportunity where Name like  " + "'" + sAccountName + "-"
 				+ '%' + "-" + value + "-" + "Acres" + "'";
 		Utility_Functions.timeWait(1);
-		String phasePopulated = searchOpportunity.fetchRecordFieldValue("Phase__c", phaseQuery);
-		String probabilityPopulated = searchOpportunity.fetchRecordFieldValue("Probability", probabilityQuery);
+		String phasePopulated = searchTextSOQL.fetchRecordFieldValue("Phase__c", phaseQuery);
+		String probabilityPopulated = searchTextSOQL.fetchRecordFieldValue("Probability", probabilityQuery);
 
 		if (dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage01")) {
 			if (phasePopulated.equals("Prospecting") && (probabilityPopulated).equals("10.0")) {
@@ -9584,7 +8516,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xSendKeys(driver, opportunityName,
 				"Test Automation Opportunity_" + Utility_Functions.xGenerateAlphaNumericString());
 		String query = "SELECT Id, Name, EMEA_Searchable__c FROM Account where EMEA_Searchable__c = true limit 1 offset 9";
-		String sAccountName = searchOpportunity.fetchRecordFieldValue("Name", query);
+		String sAccountName = searchTextSOQL.fetchRecordFieldValue("Name", query);
 		Utility_Functions.xSendKeys(driver, accountName, sAccountName);
 		accountName.sendKeys(Keys.ARROW_DOWN);
 		Utility_Functions.timeWait(2);
@@ -9772,7 +8704,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xSendKeys(driver, opportunityName,
 				"Test Automation Opportunity_" + Utility_Functions.xGenerateAlphaNumericString());
 		String query = "SELECT Id, Name, EMEA_Searchable__c FROM Account where EMEA_Searchable__c = true limit 1 offset 9";
-		String sAccountName = searchOpportunity.fetchRecordFieldValue("Name", query);
+		String sAccountName = searchTextSOQL.fetchRecordFieldValue("Name", query);
 		Utility_Functions.xSendKeys(driver, accountName, sAccountName);
 		accountName.sendKeys(Keys.ARROW_DOWN);
 		Utility_Functions.timeWait(2);
@@ -10155,7 +9087,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			System.out.println(e.getMessage());
 		}
 		Utility_Functions.xWaitForElementPresent(driver, targetProperty, 3);
-		String targetPropertyName = searchOpportunity.fetchRecord("Property__c ", "Name");
+		String targetPropertyName = searchTextSOQL.fetchRecord("Property__c ", "Name");
 		Utility_Functions.xSendKeys(driver, targetProperty, targetPropertyName);
 		WebElement firstLookupElement = driver
 				.findElement(By.cssSelector("ul>li.forceSearchInputLookupDesktopOption:nth-child(1)"));
@@ -10165,7 +9097,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xSendKeys(driver, opportunityNameAS,
 				"Test Automation Opportunity_" + Utility_Functions.xGenerateAlphaNumericString());
 		Utility_Functions.xWaitForElementPresent(driver, accountNameNewOpportunity, 3);
-		String accountName = searchOpportunity.fetchRecord("Account", "Name");
+		String accountName = searchTextSOQL.fetchRecord("Account", "Name");
 		Utility_Functions.xSendKeys(driver, accountNameNewOpportunity, accountName);
 		WebElement firstLookupElementAccount = driver
 				.findElement(By.cssSelector("ul>li.forceSearchInputLookupDesktopOption:nth-child(1)"));
@@ -12139,36 +11071,6 @@ public class OpportunitiesPage extends ReusableLibrary {
 		report.updateTestLog("Opportunity Saved", "Opportunity Saved successfully::", Status.PASS);
 		Utility_Functions.timeWait(3);
 
-	}
-
-	public void installmentsOpportunityUpdate() {
-		multipleInstallmentsFunction();
-		/*
-		 * Utility_Functions.xWaitForElementPresent(driver, showMoreActions, 2);
-		 * Utility_Functions.xClick(driver, showMoreActions, true);
-		 * Utility_Functions.timeWait(1);
-		 * Utility_Functions.xWaitForElementPresent(driver, recalculate, 2);
-		 * Utility_Functions.xClick(driver, recalculate, true);
-		 * Utility_Functions.xSwitchtoFrame(driver, installmentQuantity);
-		 * Utility_Functions.xWaitForElementPresent(driver, installmentQuantity,
-		 * 3); installmentQuantity.clear(); Utility_Functions.xSendKeys(driver,
-		 * installmentQuantity, "2");
-		 * Utility_Functions.xWaitForElementPresent(driver, proceed, 3);
-		 * Utility_Functions.xClick(driver, proceed, true);
-		 * Utility_Functions.xWaitForElementPresent(driver,
-		 * continueButtonInstallment, 3); Utility_Functions.xClick(driver,
-		 * continueButtonInstallment, true); driver.switchTo().defaultContent();
-		 */
-		addingInstallmentsOpportunities();
-		Utility_Functions.xWaitForElementPresent(driver, related, 4);
-		Utility_Functions.xClick(driver, related, true);
-		Utility_Functions.xWaitForElementPresent(driver, installmentsViewAll, 3);
-		Utility_Functions.xClickHiddenElement(driver, installmentsViewAll);
-		//Utility_Functions.xClick(driver, installmentsViewAll, true);
-		Utility_Functions.xWaitForElementPresent(driver, opportunityNameLink, 3);
-		Utility_Functions.xClick(driver, opportunityNameLink, true);
-		Utility_Functions.xWaitForElementPresent(driver, related, 3);
-		Utility_Functions.xClick(driver, related, true);
 	}
 
 	public void opportunityTeamMember() {

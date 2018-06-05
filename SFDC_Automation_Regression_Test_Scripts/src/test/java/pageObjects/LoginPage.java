@@ -196,7 +196,7 @@ public class LoginPage extends ReusableLibrary {
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
 					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("CMAMERManager") + "." + environment);
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("CMAMERBroker"));
+					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("CMAMERBroker") + "." + environment);
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMEMEA")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS")) && (!dataTable.getData("General_Data", "TC_ID").contains("BCP")) 
 						&& (!dataTable.getData("General_Data", "TC_ID").contains("Dev")) && (!dataTable.getData("General_Data", "TC_ID").contains("IP") && (!dataTable.getData("General_Data", "TC_ID").contains("CA")
 						&& (!dataTable.getData("General_Data", "TC_ID").contains("SuperUser"))))){
@@ -333,7 +333,7 @@ public class LoginPage extends ReusableLibrary {
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSEMEA"))	&& (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
 					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("GWSEMEACSS")+ "." + environment);
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
-					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("GWSAPACManager"));
+					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("GWSAPACManager")+ "." + environment);
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAPAC")) && (dataTable.getData("General_Data", "TC_ID").contains("Broker"))) {
 					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("GWSAPACBroker")+ "." + environment);
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAPAC"))	&& (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
