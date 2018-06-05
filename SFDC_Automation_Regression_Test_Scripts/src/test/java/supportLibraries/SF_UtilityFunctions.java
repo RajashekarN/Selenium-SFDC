@@ -299,6 +299,18 @@ public class SF_UtilityFunctions extends ReusableLibrary {
 			}
 		}
 	}
+	
+	/**
+	 * Select a tab from the UI tab Details, Related and More 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void selectTabUIHeaders(String TabName) {
+		By buttonName = By.xpath("//div[@class='uiTabBar']//span[text()='"+TabName+"']");
+		Utility_Functions.xWaitForElementPresent(driver, buttonName, 3);
+		driver.findElement(buttonName).click();	   
+	}
 
 	/**
 	 * Select a button from the related list 
