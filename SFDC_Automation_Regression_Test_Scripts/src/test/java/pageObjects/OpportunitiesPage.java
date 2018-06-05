@@ -1563,7 +1563,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(1);
 		sf_UtilityFunctions.oneAppNavigationTab("Opportunities");
 		report.updateTestLog("Verify Opportunity", "Opportunities are Displayed ", Status.PASS);
-		sf_UtilityFunctions.selectExisitingObjectRecord("Opportunity Name");
+		sf_UtilityFunctions.selectExistingObjectRecord("Opportunity Name");
 		Utility_Functions.timeWait(2);
 		report.updateTestLog("Verify Opportunity", "Clicked on Opportunity and Opportunity page displayed successfully:::", Status.PASS);
 	}

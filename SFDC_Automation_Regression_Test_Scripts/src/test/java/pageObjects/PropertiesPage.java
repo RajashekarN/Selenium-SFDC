@@ -186,7 +186,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 	public void selectProperty() {
 		navigateProperties();
-		sf_UtilityFunctions.selectExisitingObjectRecord("Property Name");
+		sf_UtilityFunctions.selectExistingObjectRecord("Property Name");
 	}
 
 
