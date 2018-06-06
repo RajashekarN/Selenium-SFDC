@@ -18,6 +18,7 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -1573,5 +1574,23 @@ public class Utility_Functions extends ReusableLibrary {
 			e.printStackTrace();
 		}
 	  }
+	
+	/**
+	 * This method checks if an element is present or not, and returns true or false accordingly
+	 * @param driver
+	 * @param by
+	 * @return
+	 */
+	
+	public boolean isElementPresent(CraftDriver driver, By by) {  
+	    driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);  
+	    try {  
+	    	driver.findElement(by);
+	        return true;  
+	    } 
+	    catch (NoSuchElementException e) {  
+	        return false;  
+	    } 
+	}
 	
 }

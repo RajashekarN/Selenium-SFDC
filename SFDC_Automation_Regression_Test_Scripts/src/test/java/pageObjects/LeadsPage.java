@@ -626,7 +626,8 @@ public class LeadsPage extends ReusableLibrary {
 	@FindBy(xpath ="//span[text()='All Leads']")
 	WebElement allLeads;
 	
-	
+	@FindBy(xpath = "//button/span[text()='View All Fields']")
+	WebElement ViewAllFieldsButton;
 	
 	
 
@@ -1986,12 +1987,29 @@ public class LeadsPage extends ReusableLibrary {
 
 		System.out.println("Custom Page Additional Information fields are " + customPageAdditionalInformationFieldsList);
 	}
-	public void verifyLeadsNewCustomPage(){
-		Utility_Functions.xWaitForElementPresent(driver,menu_Leads, 3);
+	
+	/**
+	 * Validating the Create New Lead Custom Page.
+	 * @author SChandran
+	 */
+	
+	static List<String> createNewLeadSectionHeadersList = new ArrayList<String>();
+
+	public void createNewLeadSectionHeadersList() {
+		createNewLeadSectionHeadersList.add("Quick Create");
+		createNewLeadSectionHeadersList.add("Address and Contact Information");
+		createNewLeadSectionHeadersList.add("Additional Lead Information");
+		createNewLeadSectionHeadersList.add("Communication Preferences");
+		createNewLeadSectionHeadersList.add("Prospect Requirements");
+		createNewLeadSectionHeadersList.add("Additional Information");
+		System.out.println("Propety page contains the header section:::" + createNewLeadSectionHeadersList);
+	}	
+	
+	public void verifyLeadsNewCustomPage() {
+		Utility_Functions.xWaitForElementPresent(driver, menu_Leads, 5);
 		Utility_Functions.xClick(driver, menu_Leads, true);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, newLeads, 2);
-		Utility_Functions.xClick(driver, newLeads, true);	
+		Utility_Functions.xWaitForElementPresent(driver, newLeads, 5);
+		Utility_Functions.xClick(driver, newLeads, true);
 		Utility_Functions.timeWait(4);
 		Utility_Functions.xSwitchtoFrame(driver, continueButton);
 		Utility_Functions.timeWait(2);
@@ -2000,501 +2018,137 @@ public class LeadsPage extends ReusableLibrary {
 		driver.switchTo().defaultContent();
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xSwitchtoFrame(driver, saveLead);
-		Utility_Functions.timeWait(5);
-				
-		List<WebElement> customPageQuickCreateSectionFieldsList = driver.findElements(
-				By.xpath("//h2[text()='Quick Create']/parent::span/parent::div/div[1]//label[@class='slds-form-element__label']"));
-		
-		int count1 = 0, i1 = 0;
-		String fieldsArray[] = new String[customPageQuickCreateSectionFieldsList.size()];
-		System.out.println(customPageQuickCreateSectionFieldsList.size());
 
-		try {
-			customPageQuickCreateFields();
-			for (WebElement element1 : customPageQuickCreateSectionFieldsList) {
-				System.out.println(element1.getText());
-				fieldsArray[i1] = element1.getText().replace("*", "").replace(" ", "");
-				if (fieldsArray[i1].contains(customPageQuickCreateFieldsList.get(i1).replace("*", "").replace(" ", ""))) {
-					report.updateTestLog("Verify Custom Leads Page",
-							" Custom  page is having the " + fieldsArray[i1] + " fields ",
-							Status.PASS);
-					count1++;
-				}
-				if((i1==4)/* && (dataTable.getData("General_Data", "TC_ID").contains("OBAMER"))*/) {
-					if(fieldsArray[i1].contains("ExistingLeaseExpiration")) {
-						count1++;
-					}
-				}
-				i1++;
-			}
-			System.out.println(count1);
-			if (count1 != 12) {
-				report.updateTestLog("Verify Custom Leads Page",
-						"All fields are not present in the Quick Create Section", Status.FAIL);
-			} else {
+		Utility_Functions.xWaitForElementPresent(driver, ViewAllFieldsButton, 5);
+		Utility_Functions.xClick(driver, ViewAllFieldsButton, true);
 
-				report.updateTestLog("Verify Custom Leads Page",
-						"All fields are present in the Quick Create Section", Status.PASS);
-			}
-			
-		} catch (Exception e) {
-			System.out.println("All fields are present in the Quick Create Section:::" +e.getMessage());
-		}
-		customPageQuickCreateFieldsList.clear();
-		List<WebElement> customPageContactInformationSectionFieldsList = driver.findElements(
-				By.xpath("//h2[text()='Address and Contact Information']/parent::div/div[2]//label[@class='slds-form-element__label']"));
-		int count2 = 0, i2 = 0;
-		String fieldsArray1[] = new String[customPageContactInformationSectionFieldsList.size()];
-		System.out.println(customPageContactInformationSectionFieldsList.size());
+		/***** Validating the Header Sections *****/
 
-		try {
-			customPageContactInformationFields();
-			for (WebElement element2 : customPageContactInformationSectionFieldsList) {
-				System.out.println(element2.getText());
-				fieldsArray1[i2] = element2.getText();
-				if (fieldsArray1[i2].equalsIgnoreCase(customPageContactInformationFieldsList.get(i2))) {
-					report.updateTestLog("Verify Custom Leads Page",
-							" Custom  page is having the " + fieldsArray1[i2] + " fields ",
-							Status.PASS);
-					count2++;
-				}
-				i2++;
-			}
-			System.out.println(count2);
-			if (count2 != 10) {
-				report.updateTestLog("Verify Custom Leads Page",
-						"All fields are not present in the Contact Information section", Status.FAIL);
-			} else {
-
-				report.updateTestLog("Verify Custom Leads Page",
-						"All fields are present in the Contact Information section", Status.PASS);
-			}
-
-		} catch (Exception e) {
-			System.out.println("All fields are present in the Contact Information section:::" +e.getMessage());
-		}
-		customPageContactInformationFieldsList.clear();
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xScrollWindow(driver);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xScrollWindowTop(driver);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xClick(driver, viewAllFieldsButton, true);
-		Utility_Functions.timeWait(2);
-		List<WebElement> customPageAdditionalLeadInformationSectionFieldsList = driver.findElements(
-				By.xpath("//h2[text()='Additional Lead Information']/parent::div/div[1]//label[@class='slds-form-element__label']"));
-		int count3 = 0, i3 = 0;
-		String fieldsArray2[] = new String[customPageAdditionalLeadInformationSectionFieldsList.size()];
-		System.out.println(customPageAdditionalLeadInformationSectionFieldsList.size());
-
-		try {
-			customPageLeadInformationFields();
-			for (WebElement element3 : customPageAdditionalLeadInformationSectionFieldsList) {
-				System.out.println(element3.getText());
-				fieldsArray2[i3] = element3.getText();
-				if (fieldsArray2[i3].equalsIgnoreCase(customPageLeadInformationFieldsList.get(i3))) {
-					report.updateTestLog("Verify Custom Leads Page",
-							" Custom  page is having the " + fieldsArray2[i3] + " fields ",
-							Status.PASS);
-					count3++;
-				}
-				i3++;
-			}
-			System.out.println(count3);
-			if (count3 != 11) {
-				report.updateTestLog("Verify Custom Leads Page",
-						"All fields are not present in the Additional Leads Information Section", Status.FAIL);
-			} else {
-
-				report.updateTestLog("Verify Custom Leads Page",
-						"All fields are present in the Additional Leads Information Section", Status.PASS);
-			}
-
-		} catch (Exception e) {
-			System.out.println("All fields are present in the Additional Leads Information Section:::" + e.getMessage());
-		}
-		customPageLeadInformationFieldsList.clear();
-		List<WebElement> customPageCommunicationPreferencesSectionFieldsList = driver.findElements(
-				By.xpath("//h2[text()='Communication Preferences']/parent::div/div[2]//label[@class='slds-form-element__label']"));
-		int count4 = 0, i4 = 0;
-		String fieldsArray3[] = new String[customPageCommunicationPreferencesSectionFieldsList.size()];
-		System.out.println(customPageCommunicationPreferencesSectionFieldsList.size());
-
-		try {
-			customPageCommunicationPreferencesFields();
-			for (WebElement element4 : customPageCommunicationPreferencesSectionFieldsList) {
-				System.out.println(element4.getText());
-				fieldsArray3[i4] = element4.getText();
-				if (fieldsArray3[i4].equalsIgnoreCase(customPageCommunicationPreferencesFieldsList.get(i4))) {
-					report.updateTestLog("Verify Custom Leads Page",
-							" Custom  page is having the " + fieldsArray3[i4] + " fields ",
-							Status.PASS);
-					count4++;
-				}
-				i4++;
-			}
-			System.out.println(count4);
-			if (count4 != 3) {
-				report.updateTestLog("Verify Custom Leads Page",
-						"All fields are not present in the new Leads Page Communication Preferences Section", Status.FAIL);
-			} else {
-
-				report.updateTestLog("Verify Custom Leads Page",
-						"All fields are present in the new Leads Page Communication Preferences Section", Status.PASS);
-			}		
-		}catch (Exception e) {
-			System.out.println("All fields are present in the Communication Preferences Section:::" + e.getMessage());
-		}
-		customPageCommunicationPreferencesFieldsList.clear();
-		List<WebElement> customPageProspectRequirementsSectionFieldsList = driver.findElements(
-				By.xpath("//h2[text()='Prospect Requirements']/parent::div/div[3]//label[@class='slds-form-element__label']"));
-		int count5 = 0, i5 = 0;
-		String fieldsArray4[] = new String[customPageProspectRequirementsSectionFieldsList.size()];
-		System.out.println(customPageProspectRequirementsSectionFieldsList.size());
-
-		try {
-			customPageProspectRequirementsFields();
-			for (WebElement element5 : customPageProspectRequirementsSectionFieldsList) {
-				System.out.println(element5.getText());
-				fieldsArray4[i5] = element5.getText();
-				if (fieldsArray4[i5].equalsIgnoreCase(customPageProspectRequirementsFieldsList.get(i5))) {
-					report.updateTestLog("Verify Custom Leads Page",
-							" Custom  page is having the " + fieldsArray4[i5] + " fields ",
-							Status.PASS);
-					count5++;
-				}
-				i5++;
-				if(i5==1) {
-					if(fieldsArray4[i5].contains("Existing Termination/Break Option")) {
-						count5++;
-					}
-				}
-			}
-			System.out.println(count5);
-			if (count5 != 2) {
-				report.updateTestLog("Verify Custom Leads Page",
-						"All fields are not present in the Prospect Requirements Section", Status.FAIL);
-			} else {
-
-				report.updateTestLog("Verify Custom Leads Page",
-						"All fields are present in the Prospect Requirements Section", Status.PASS);
-			}
-
-		} catch (Exception e) {
-			System.out.println("All fields are present in the Prospect Requirements Section:::" + e.getMessage());
-		}
-		customPageProspectRequirementsFieldsList.clear();
-		List<WebElement> customPageAditionalInformationSectionFieldsList = driver.findElements(
-				By.xpath("//h2[text()='Additional Information']/parent::div/div[4]//label[@class='slds-form-element__label']"));
-		int count6 = 0, i6 = 0;
-		String fieldsArray5[] = new String[customPageAditionalInformationSectionFieldsList.size()];
-		System.out.println(customPageAditionalInformationSectionFieldsList.size());
-
-		try {
-			customPageAdditionalInformationFields();
-			for (WebElement element6 : customPageAditionalInformationSectionFieldsList) {
-				System.out.println(element6.getText());
-				fieldsArray5[i6] = element6.getText();
-				if (fieldsArray5[i6].equalsIgnoreCase(customPageAdditionalInformationFieldsList.get(i6))) {
-					report.updateTestLog("Verify Custom Leads Page",
-							" Custom  page is having the " + fieldsArray5[i6] + " fields ",
-							Status.PASS);
-					count6++;
-				}
-				i6++;
-			}
-			System.out.println(count6);
-			if (count6 != 4) {
-				report.updateTestLog("Verify Custom Leads Page",
-						"All fields are not present in the Additional Information Section", Status.FAIL);
-			} else {
-
-				report.updateTestLog("Verify Custom Leads Page",
-						"All fields are present in the Additional Information Section", Status.PASS);
-			}
-
-		} catch (Exception e) {
-			System.out.println("All fields are present in the Additional Information Section:::" + e.getMessage());
-		}
-		Utility_Functions.timeWait(3);
-		customPageAdditionalInformationFieldsList.clear();
-		System.out.println(leadStatus.getText());
-		System.out.println(leadSourceField.getText());
-
-		if((leadStatus.getText().contains("Status")) && (leadSourceField.getText().contains("Lead Source"))) {
-			System.out.println("Lead Status is followed by the requirement details and the Lead Source is followed by the Lead Status");
-		} else{
-			System.out.println("Lead Status is not followed by the requirement details and the Lead Source is not followed by the Lead Status");
-		}
-		Utility_Functions.timeWait(2);
-		int value = Utility_Functions.xRandomFunction();
-		String companyName = dataTable.getData("General_Data", "Company") + value;		
-		Utility_Functions.xScrollWindowTop(driver);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, firstName, 5);
-		Utility_Functions.xSendKeys(driver, firstName, dataTable.getData("General_Data", "First Name"));
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xSendKeys(driver, lastName, dataTable.getData("General_Data", "Last Name"));
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xSendKeys(driver, company, companyName);
-		Utility_Functions.xWaitForElementPresent(driver,saveLead, 3);
-		Utility_Functions.xClick(driver, saveLead, true);
-		Utility_Functions.timeWait(5);
-		report.updateTestLog("Verify Custom Leads Page", "The Lead is saved with all the required fields", Status.PASS);
-		Utility_Functions.timeWait(3);
-		Utility_Functions.xScrollWindow(driver);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xScrollWindowTop(driver);
-		Utility_Functions.timeWait(2);
-		List<WebElement> contactDetailsPageHeadersList = driver.findElements(By.xpath("//span[contains(@class,'header-title')]"));
-		int count0 = 0, i0 = 0;
-		String fieldsArray0[] = new String[contactDetailsPageHeadersList.size()];
-		System.out.println(contactDetailsPageHeadersList.size());
-
-		try {
-			leadsDetailsPageHeaders();
-			for (WebElement element0 : contactDetailsPageHeadersList) {
-				System.out.println(element0.getText());
-				fieldsArray0[i0] = element0.getText();
-				if (fieldsArray0[i0].contains(leadsDeatilsPageHeadersList.get(i0))) {
-					report.updateTestLog("Verify Leads Landing Page",
-							"Accounts Details  page is having the " + fieldsArray0[i0] + " Headers ",
-							Status.PASS);
-					count0++;
-				}
-				i0++;
-			}
-			System.out.println(count0);
-			if (count0 != 9) {
-				report.updateTestLog("Verify Leads Landing Page",
-						"All sections are not present in the Leads Details Page", Status.FAIL);
-			} else {
-
-				report.updateTestLog("Verify Leads Landing Page",
-						"All sections are present in the Leads Details Page", Status.PASS);
-			}
-
-		} catch (Exception e) {
-			System.out.println("All sections are not present in the Leads Details Page:::" + e.getMessage());
+		List<WebElement> createNewLeadSectionHeadersPresentOnPage = driver.findElements(By.xpath("//h2[contains(@class,'heading') and contains(@class,'large')]"));
+		List<String> createNewLeadSectionHeadersFound = new ArrayList<String>();
+		for (WebElement element : createNewLeadSectionHeadersPresentOnPage) {
+			createNewLeadSectionHeadersFound.add(element.getText());
 		}
 
-		List<WebElement> leadInformationFieldsList = driver.findElements(
-				By.xpath("//h3//span[text()='Lead Information']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
-		int count7 = 0, i7 = 0;
-		String fieldsArray7[] = new String[leadInformationFieldsList.size()];
-		System.out.println(leadInformationFieldsList.size());
-
-		try {
-			leadsDetailsPageFields();
-			for (WebElement element7 :leadInformationFieldsList) {
-				System.out.println(element7.getText());
-				fieldsArray7[i7] = element7.getText();
-				if (fieldsArray7[i7].equalsIgnoreCase(leadsDetailsPageFieldsList.get(i7))) {
-					report.updateTestLog("Verify Leads Landing Page",
-							" Lead Information section is having the " + fieldsArray7[i7] + " fields ",
-							Status.PASS);
-					count7++;
-				}
-				i7++;
-			}
-			leadsDetailsPageFieldsList.clear();
-			System.out.println(count7);
-			if (count7!= 16) {
-				report.updateTestLog("Verify Leads Landing Page",
-						"All fields are not present in the Lead Information Section", Status.FAIL);
-			} else {
-
-				report.updateTestLog("Verify Leads Landing Page",
-						"All fields are present in the Lead Information Section", Status.PASS);
-			}
-		} catch (Exception e) {
-			System.out.println("All fields are not present in the Lead Information Section:::" + e.getMessage());
+		createNewLeadSectionHeadersList();
+		List<String> sectionHeadersCount = Utility_Functions.xValidatePickListValuesPage(createNewLeadSectionHeadersList, createNewLeadSectionHeadersFound, "Create New Lead Section Headers");
+		if (sectionHeadersCount.size() == 0) {
+			report.updateTestLog("Create New Lead Custom Page",
+					"Create New Lead Custom Page has all the expected header sections", Status.PASS);
+		} else {
+			report.updateTestLog("Create New Lead Custom Page",
+					"Create New Lead Custom Page does not have all the expected header sections", Status.FAIL);
 		}
-		List<WebElement> addressInformationFieldsList = driver.findElements(
-				By.xpath("//h3//span[text()='Address Information']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
-		int count8 = 0, i8 = 0;
-		String fieldsArray8[] = new String[addressInformationFieldsList.size()];
-		System.out.println(addressInformationFieldsList.size());
 
-		try {
-			addressInformationFields();
-			for (WebElement element1 :addressInformationFieldsList) {
-				System.out.println(element1.getText());
-				fieldsArray8[i8] = element1.getText();
-				if (fieldsArray8[i8].equalsIgnoreCase(addressInformationSectionFieldsList.get(i8))) {
-					report.updateTestLog("Verify Leads Landing Page",
-							" Address Information Section is having the " + fieldsArray8[i8] + " fields ",
-							Status.PASS);
-					count8++;
-				}
-				i8++;
-			}
-			System.out.println(count8);
-			if (count8!= 1) {
-				report.updateTestLog("Verify Leads Landing Page",
-						"All fields are not present in the Address Information Section", Status.FAIL);
-			} else {
+		/***** Validating Quick Create Section *****/
 
-				report.updateTestLog("Verify Leads Landing Page",
-						"All fields are present in the Address Information Section", Status.PASS);
-			}
-
-		} catch (Exception e) {
-			System.out.println("All fields are not present in the Address Information Section:::" + e.getMessage());
+		List<WebElement> createNewLeadQuickCreateSectionFieldsOnPage = driver.findElements(By.xpath("//h2[contains(@class,'heading') and contains(@class,'large') and text()='Quick Create']/following::div[1]//label[@class='slds-form-element__label']"));
+		List<String> createNewLeadQuickCreateSectionFieldsFound = new ArrayList<String>();
+		for (WebElement element : createNewLeadQuickCreateSectionFieldsOnPage) {
+			createNewLeadQuickCreateSectionFieldsFound.add(element.getText());
 		}
-		List<WebElement> communicationPreferencesFieldsList = driver.findElements(
-				By.xpath("//h3//span[text()='Communication Preferences']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
-		int count9 = 0, i9 = 0;
-		String fieldsArray9[] = new String[communicationPreferencesFieldsList.size()];
-		System.out.println(communicationPreferencesFieldsList.size());
 
-		try {
-			communicationPreferencesFields();
-			for (WebElement element9 :communicationPreferencesFieldsList) {
-				System.out.println(element9.getText());
-				fieldsArray9[i9] = element9.getText();
-				if (fieldsArray9[i9].equalsIgnoreCase(communicationPreferencesSectionFieldsList.get(i9))) {
-					report.updateTestLog("Verify Leads Landing Page",
-							" Communication Preferences is having the " + fieldsArray9[i9] + " fields ",
-							Status.PASS);
-					count9++;
-				}
-				i9++;
-			}
-			System.out.println(count9);
-			if (count9!= 3) {
-				report.updateTestLog("Verify Leads Landing Page",
-						"All fields are not present in the Communication Preferences Section", Status.FAIL);
-			} else {
+		customPageQuickCreateFields();
+		List<String> sectionFieldsCount = Utility_Functions.xValidatePickListValuesPage(customPageQuickCreateFieldsList, createNewLeadQuickCreateSectionFieldsFound, "Quick Create Section Fields");
+		if (sectionFieldsCount.size() == 0) {
+			report.updateTestLog("Create New Lead Custom Page - Quick Create Section",
+					"Quick Create section has all the expected fields", Status.PASS);
+		} else {
+			report.updateTestLog("Create New Lead Custom Page - Quick Create Section",
+					"Quick Create section does not have all the expected fields", Status.FAIL);
+		}
 
-				report.updateTestLog("Verify Leads Landing Page",
-						"All fields are present in the Communication Preferences Section", Status.PASS);
-			}
+		/***** Validating Address and Contact Information Section *****/
 
-		} catch (Exception e) {
-			System.out.println("All fields are not present in the Communication Preferences Section:::" + e.getMessage());
+		List<WebElement> createNewLeadAddressAndContactInformationSectionFieldsOnPage = driver.findElements(By.xpath("//h2[contains(@class,'heading') and contains(@class,'large') and text()='Address and Contact Information']/following::div[1]//label[@class='slds-form-element__label']"));
+		List<String> createNewLeadAddressAndContactInformationSectionFieldsFound = new ArrayList<String>();
+		for (WebElement element : createNewLeadAddressAndContactInformationSectionFieldsOnPage) {
+			createNewLeadAddressAndContactInformationSectionFieldsFound.add(element.getText());
 		}
-		List<WebElement> prospectRequirementsFieldsList = driver.findElements(
-				By.xpath("//h3//span[text()='Prospect Requirements']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
-		int count10 = 0, i10 = 0;
-		String fieldsArray10[] = new String[prospectRequirementsFieldsList.size()];
-		System.out.println(prospectRequirementsFieldsList.size());
 
-		try {
-			prospectRequirementsFields();
-			for (WebElement element10 :prospectRequirementsFieldsList) {
-				System.out.println(element10.getText());
-				fieldsArray10[i10] = element10.getText();
-				if (fieldsArray10[i10].equalsIgnoreCase(prospectRequirementsSectionFieldsList.get(i10))) {
-					report.updateTestLog("Verify Leads Landing Page",
-							"Prospect Requirements Section is having the " + fieldsArray10[i10] + " fields ",
-							Status.PASS);
-					count10++;
-				}
-				i10++;
-			}
-			System.out.println(count10);
-			if (count10 >= 7) {
-				report.updateTestLog("Verify Leads Landing Page",
-						"All fields are present in the Prospect Requirements Section", Status.PASS);
-			} else {
+		customPageContactInformationFields();
+		sectionFieldsCount = Utility_Functions.xValidatePickListValuesPage(customPageContactInformationFieldsList, createNewLeadAddressAndContactInformationSectionFieldsFound, "Address and Contact Information Section Fields");
+		if (sectionFieldsCount.size() == 0) {
+			report.updateTestLog("Create New Lead Custom Page - Address and Contact Information Section",
+					"Address and Contact Information section has all the expected fields", Status.PASS);
+		} else {
+			report.updateTestLog("Create New Lead Custom Page - Address and Contact Information Section",
+					"Address and Contact Information section doe not have all the expected fields", Status.FAIL);
+		}
 
-				report.updateTestLog("Verify Leads Landing Page",
-						"All fields are not present in the Prospect Requirements Section", Status.FAIL);
-			}
+		/***** Validating Additional Lead Information Section *****/
 
-		} catch (Exception e) {
-			System.out.println("All fields are not present in the Prospect Requirements Section:::"+ e.getMessage());
+		List<WebElement> createNewLeadAdditionalLeadInformationSectionFieldsOnPage = driver.findElements(By.xpath("//h2[contains(@class,'heading') and contains(@class,'large') and text()='Additional Lead Information']/following::div[1]//label[@class='slds-form-element__label']"));
+		List<String> createNewLeadAdditionalLeadInformationSectionFieldsFound = new ArrayList<String>();
+		for (WebElement element : createNewLeadAdditionalLeadInformationSectionFieldsOnPage) {
+			createNewLeadAdditionalLeadInformationSectionFieldsFound.add(element.getText());
 		}
-		List<WebElement> additionalInformationList = driver.findElements(By.xpath("//h3//span[text()='Additional Information']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
-		int count11 = 0, i11 = 0,j11=0;
-		String fieldsArray11[] = new String[additionalInformationList.size()];
-		System.out.println(additionalInformationList.size());
-		try {
-			additionalInformationFieldsList.clear();
-			additionalInformationFields();
-			while(j11<additionalInformationList.size()) {
-				for (WebElement element11 : additionalInformationList) {
-					fieldsArray11[i11] = element11.getText();
-					if (fieldsArray11[i11].contains(additionalInformationFieldsList.get(j11))) {
-						System.out.println("Additional Information fields are " + element11.getText());
-						report.updateTestLog("Verify Leads Landing Page ", element11.getText() + "labels  present in the Additional Information fields ", Status.PASS);
-						count11++;
-					}
-					i11++;
-				}
-				i11=0;
-				j11++;
-			}
-			System.out.println(count11);
-			if (count11!= 5) {
-				report.updateTestLog("Verify Leads Landing Page",
-						"All fields are not present in the Additional Information section", Status.FAIL);
-			} else {
-				report.updateTestLog("Verify Leads Landing Page",
-						"All fields are present in the Additional Information section", Status.PASS);
-			}
-		} catch (Exception e) {
-			System.out.println("All fields are not present in the Additional Information section:::" + e.getMessage());
+
+		customPageLeadInformationFields();
+		sectionFieldsCount = Utility_Functions.xValidatePickListValuesPage(customPageLeadInformationFieldsList,	createNewLeadAdditionalLeadInformationSectionFieldsFound, "Additional Lead Information Section Fields");
+		if (sectionFieldsCount.size() == 0) {
+			report.updateTestLog("Create New Lead Custom Page - Additional Lead Information Section",
+					"Additional Lead Information section has all the expected fields", Status.PASS);
+		} else {
+			report.updateTestLog("Create New Lead Custom Page - Additional Lead Information Section",
+					"Additional Lead Information section does not have all the expected fields", Status.FAIL);
 		}
-		additionalInformationFieldsList.clear();
-		List<WebElement> contactInformationList = driver.findElements(By.xpath("//h3//span[text()='Contact Information']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
-		int count12 = 0, i12 = 0,j12=0;
-		String fieldsArray12[] = new String[contactInformationList.size()];
-		System.out.println(contactInformationList.size());
-		try {
-			contactInformationFields();
-			while(j12<contactInformationList.size()) {
-				for (WebElement element12 :contactInformationList) {
-					fieldsArray12[i12] = element12.getText();
-					if (fieldsArray12[i12].contains(contactInformationFieldsList.get(j12))) {
-						System.out.println("Contact Information fields are " + element12.getText());
-						report.updateTestLog("Verify Leads Landing Page ", element12.getText() + "labels  present in the Account Detailed Page ", Status.PASS);
-						count12++;
-					}
-					i12++;
-				}
-				i12=0;
-				j12++;
-			}
-			System.out.println(count12);
-			if (count12!= 5) {
-				report.updateTestLog("Verify Leads Landing Page","All fields are not present in the Contact Information section", Status.FAIL);
-			} else {
-				report.updateTestLog("Verify Leads Landing Page","All fields are present in the Contact Information section", Status.PASS);
-			}
-		} catch (Exception e) {
-			System.out.println("All fields are not present in the Contact Information section:::"+ e.getMessage());
+
+		/***** Validating Communication Preferences Section *******/
+
+		List<WebElement> createNewLeadCommunicationPreferencesSectionFieldsOnPage = driver.findElements(By.xpath("//h2[contains(@class,'heading') and contains(@class,'large') and text()='Communication Preferences']/following::div[1]//label[@class='slds-form-element__label']"));
+		List<String> createNewLeadCommunicationPreferencesSectionFieldsFound = new ArrayList<String>();
+		for (WebElement element : createNewLeadCommunicationPreferencesSectionFieldsOnPage) {
+			createNewLeadCommunicationPreferencesSectionFieldsFound.add(element.getText());
 		}
-		List<WebElement> customLinksList = driver.findElements(By.xpath("//h3//span[text()='Custom Links']/ancestor::h3/parent::div/div[1]//a"));
-		int count13 = 0, i13 = 0,j13=0;
-		String fieldsArray13[] = new String[customLinksList.size()];
-		System.out.println(customLinksList.size());
-		try {
-			customLinksFields();
-			while(j13<customLinksList.size()) {
-				for (WebElement element13 : customLinksList) {
-					fieldsArray13[i13] = element13.getText();
-					if (fieldsArray13[i13].contains(customLinksSectionFieldsList.get(j13))) {
-						System.out.println("Custom Link fields are " + element13.getText());
-						report.updateTestLog("Verify Leads Landing Page ", element13.getText() + "labels  present in the Account Detailed Page ", Status.PASS);
-						count13++;
-					}
-					i13++;
-				}
-				i13=0;
-				j13++;
-			}
-			System.out.println(count13);
-			if (count13 != 3) {
-				report.updateTestLog("Verify Leads Landing Page","All fields are not present in the Custom Links section", Status.FAIL);
-			} else {
-				report.updateTestLog("Verify Leads Landing Page","All fields are present in the Custom Links section", Status.PASS);
-			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
+
+		customPageCommunicationPreferencesFields();
+		sectionFieldsCount = Utility_Functions.xValidatePickListValuesPage(customPageCommunicationPreferencesFieldsList, createNewLeadCommunicationPreferencesSectionFieldsFound, "Communication Preferences Section Fields");
+		if (sectionFieldsCount.size() == 0) {
+			report.updateTestLog("Create New Lead Custom Page - Communication Preferences Section",
+					"Communication Preferences section has all the expected fields", Status.PASS);
+		} else {
+			report.updateTestLog("Create New Lead Custom Page - Communication Preferences Section",
+					"Communication Preferences section does not have all the expected fields", Status.FAIL);
 		}
+
+		/***** Validating Prospect Requirements Section *****/
+
+		List<WebElement> createNewLeadProspectRequirementsSectionFieldsOnPage = driver.findElements(By.xpath("//h2[contains(@class,'heading') and contains(@class,'large') and text()='Prospect Requirements']/following::div[1]//label[@class='slds-form-element__label']"));
+		List<String> createNewLeadProspectRequirementsSectionFieldsFound = new ArrayList<String>();
+		for (WebElement element : createNewLeadProspectRequirementsSectionFieldsOnPage) {
+			createNewLeadProspectRequirementsSectionFieldsFound.add(element.getText());
 		}
+
+		customPageProspectRequirementsFields();
+		sectionFieldsCount = Utility_Functions.xValidatePickListValuesPage(customPageProspectRequirementsFieldsList, createNewLeadProspectRequirementsSectionFieldsFound, "Prospect Requirements Section Fields");
+		if (sectionFieldsCount.size() == 0) {
+			report.updateTestLog("Create New Lead Custom Page - Prospect Requirements Section",
+					"Prospect Requirements section has all the expected fields", Status.PASS);
+		} else {
+			report.updateTestLog("Create New Lead Custom Page - Prospect Requirements Section",
+					"Prospect Requirements section does not have all the expected fields", Status.FAIL);
+		}
+
+		/***** Validating Additional Information Section *****/
+
+		List<WebElement> createNewLeadAdditionalInformationSectionFieldsOnPage = driver.findElements(By.xpath("//h2[contains(@class,'heading') and contains(@class,'large') and text()='Additional Information']/following::div[1]//label[@class='slds-form-element__label']"));
+		List<String> createNewLeadAdditionalInformationSectionFieldsFound = new ArrayList<String>();
+		for (WebElement element : createNewLeadAdditionalInformationSectionFieldsOnPage) {
+			createNewLeadAdditionalInformationSectionFieldsFound.add(element.getText());
+		}
+
+		customPageAdditionalInformationFields();
+		sectionFieldsCount = Utility_Functions.xValidatePickListValuesPage(customPageAdditionalInformationFieldsList, createNewLeadAdditionalInformationSectionFieldsFound, "Additional Information Section Fields");
+		if (sectionFieldsCount.size() == 0) {
+			report.updateTestLog("Create New Lead Custom Page - Additional Information Section",
+					"Additional Information section has all the expected fields", Status.PASS);
+		} else {
+			report.updateTestLog("Create New Lead Custom Page - Additional Information Section",
+					"Additional Information section does not have all the expected fields", Status.FAIL);
+		}
+	}
+	
 
 	/**
 	 * Validating the Convert Lead with Direct Line and Private Note
