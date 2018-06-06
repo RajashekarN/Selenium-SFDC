@@ -3,8 +3,11 @@ package businessComponents;
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 
+import pageObjects.OpportunitiesDefaultRecordType;
 import pageObjects.OpportunitiesInstallments;
 import pageObjects.OpportunitiesPage;
+import pageObjects.OpportunityPageLayout;
+import pageObjects.OpportunitySplit;
 import pagesAPI.OpportunitiesFunctions;
 
 /**
@@ -30,6 +33,9 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	BC_Salesforce_Login sfBC_Login = new BC_Salesforce_Login(scriptHelper);
 	OpportunitiesPage sfOpportunitiesPage = new OpportunitiesPage(scriptHelper);
 	OpportunitiesInstallments opportunityInstallments = new OpportunitiesInstallments(scriptHelper);
+	OpportunitiesDefaultRecordType opportunitiesDefaultRecordType = new OpportunitiesDefaultRecordType(scriptHelper);
+	OpportunitySplit opportunitySplit = new OpportunitySplit(scriptHelper);
+	OpportunityPageLayout opportunityPageLayout = new OpportunityPageLayout(scriptHelper);
 	OpportunitiesFunctions opportunitiesFunctions = new OpportunitiesFunctions(scriptHelper);
 	/**
 	 * Validating the Login functionality
@@ -254,7 +260,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void bc_verifyOpportunityRecordTypeForOccupancyBrokerage() {
-		sfOpportunitiesPage.verifyOpportunityRecordTypeForOccupancyBrokerage();
+		opportunitiesDefaultRecordType.verifyOpportunityRecordTypeForOccupancyBrokerage();
 	}
 
 	/**
@@ -266,7 +272,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void bc_verifyOpportunityRecordTypeForAgencyBroker() {
-		sfOpportunitiesPage.verifyOpportunityRecordTypeForAgencyBroker();
+		opportunitiesDefaultRecordType.verifyOpportunityRecordTypeForAgencyBroker();
 	}
 
 	/**
@@ -278,7 +284,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void bc_verifyOpportunityRecordTypeForCapitalMarkets() {
-		sfOpportunitiesPage.verifyOpportunityRecordTypeForCapitalMarkets();
+		opportunitiesDefaultRecordType.verifyOpportunityRecordTypeForCapitalMarkets();
 	}
 
 	/**
@@ -290,7 +296,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void bc_opportunitySplitRegression() {
-		sfOpportunitiesPage.opportunitySplitRegression();
+		sfOpportunitiesPage.opportunitySplit();
 	}
 
 	/**
@@ -302,19 +308,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void bc_OpportunityOccupierRecordType() {
-		sfOpportunitiesPage.occupierRecordType();
-	}
-
-	/**
-	 * Verify the Annual Revenue field is renamed to Management Annual Revenue
-	 * for Broker Profile
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-
-	public void bc_ManagementAnnualRevenue() {
-		sfOpportunitiesPage.managementAnnualRevenue();
+		opportunitiesDefaultRecordType.verifyOpportunityRecordTypeforEMEAATT();
 	}
 
 	/**
@@ -378,18 +372,6 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 
 	/**
 	 * Validating the Quick create Opportunity page from the Opportunity tab
-	 * from Asset Services for Term of Contract field
-	 * 
-	 * @author Ramya
-	 *
-	 */
-
-	public void bc_verifyNewOpportunityPageTermOfContract() {
-		sfOpportunitiesPage.verifyNewOpportunityPageTermOfContract();
-	}
-
-	/**
-	 * Validating the Quick create Opportunity page from the Opportunity tab
 	 * from Asset Services for Lead Source
 	 * 
 	 * @author Ramya
@@ -398,18 +380,6 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 
 	public void bc_verifyNewOpportunityPageLeadSource() {
 		sfOpportunitiesPage.verifyNewOpportunityPageLeadSource();
-	}
-
-	/**
-	 * Validating the Quick create Opportunity page from the Opportunity tab
-	 * from Asset Services for Annual Revenue Fields
-	 * 
-	 * @author Ramya
-	 *
-	 */
-
-	public void bc_verifyOpportunityLeasingAnnualRevenueField() {
-		sfOpportunitiesPage.verifyOpportunityLeasingAnnualRevenueField();
 	}
 
 	/**
@@ -436,17 +406,6 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	}
 
 	/**
-	 * Validating the Speciality Group Field in New Opportunity Page
-	 * 
-	 * @author Ramya
-	 *
-	 */
-
-	public void bc_verifySpecialityGroupAttribute() {
-		sfOpportunitiesPage.verifySpecialityGroupAttribute();
-	}
-
-	/**
 	 * Validating the RFP and Pitch Due Date Fields in New Opportunity Page
 	 * 
 	 * @author Ramya
@@ -457,64 +416,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 		sfOpportunitiesPage.verifyRFPAndPitchDueDateNewopportunityPage();
 	}
 
-	/**
-	 * Validating the Average Annual Leasing Commission in New Opportunity Page
-	 * 
-	 * @author Ramya
-	 *
-	 */
-
-	public void bc_verifyOpportunityAverageAnnualLeasingCommissionField() {
-		sfOpportunitiesPage.verifyOpportunityAverageAnnualLeasingCommissionField();
-	}
-
-	/**
-	 * Validating the Average Annual Leasing Commission in New Opportunity Page
-	 * for the AMER Broker/Manager
-	 * 
-	 * @author Ramya
-	 *
-	 */
-
-	public void bc_verifyOpportunityAverageAnnualLeasingCommissionFieldForAMERManager() {
-		sfOpportunitiesPage.verifyOpportunityAverageAnnualLeasingCommissionFieldForAMERManager();
-	}
-
-	/**
-	 * Validating the Prefered Property Type Mandatory Field in New Opportunity
-	 * Page
-	 * 
-	 * @author Ramya
-	 *
-	 */
-
-	public void bc_verifyPreferedPropertyTypeMandatoryField() {
-		sfOpportunitiesPage.verifyPreferedPropertyTypeMandatoryField();
-	}
-
-	/**
-	 * Validating the Management Annual Revenue Field in New Opportunity Page
-	 * 
-	 * @author Ramya
-	 *
-	 */
-
-	public void bc_verifyManagementAnnualRevenueField() {
-		sfOpportunitiesPage.verifyManagementAnnualRevenueField();
-	}
-
-	/**
-	 * Validating the Quick create Opportunity page from the Opportunity tab
-	 * from Asset Services for Term of Contract field for the APAC Manager
-	 * 
-	 * @author Ramya
-	 *
-	 */
-
-	public void bc_verifyNewOpportunityPageTermOfContractForAPACManager() {
-		sfOpportunitiesPage.verifyNewOpportunityPageTermOfContractForAPACManager();
-	}
-
+	
 	/**
 	 * Validating the Active Opportunities related to Account
 	 * 
@@ -534,7 +436,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void bc_occupierRecordType() {
-		sfOpportunitiesPage.defaultOppRecordType();
+		opportunitiesDefaultRecordType.defaultOppRecordType();
 	}
 
 	/**
@@ -546,7 +448,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void bc_defaultLandingPageDetailsPage() {
-		sfOpportunitiesPage.defaultLandingPageDetailsPage();
+		opportunitiesDefaultRecordType.defaultLandingPageDetailsPage();
 	}
 
 	/**
@@ -558,7 +460,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void bc_defaultSalesStageandPhaseField() {
-		sfOpportunitiesPage.defaultSalesStageandPhaseField();
+		opportunitiesDefaultRecordType.defaultSalesStageandPhaseField();
 	}
 
 	/**
@@ -568,7 +470,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_customOpportunityPageLayout() {
-		sfOpportunitiesPage.customOpportunityPageLayout();
+		opportunityPageLayout.customOpportunityPageLayout();
 	}
 
 	/**
@@ -601,7 +503,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void bc_validateOpportunityTechnologyToolsField() {
-		sfOpportunitiesPage.validateOpportunityTechnologyToolsField();
+		sfOpportunitiesPage.validateOpportunityTargetingInitiativeField();
 	}
 
 	/**
@@ -623,7 +525,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void bc_opportunityQuickCreatePage() {
-		sfOpportunitiesPage.opportunityQuickCreatePage();
+		opportunityPageLayout.opportunityQuickCreatePage();
 	}
 
 	/**
