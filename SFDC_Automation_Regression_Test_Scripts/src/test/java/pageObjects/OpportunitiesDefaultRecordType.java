@@ -76,6 +76,9 @@ public class OpportunitiesDefaultRecordType extends ReusableLibrary {
 	@FindBy(xpath = "//input[contains(@id,'closeDate')]")
 	WebElement closeDateOpp;
 	
+	@FindBy(xpath = "//span[text()='Opportunity Name']/parent::label/parent::div//input")
+	WebElement opportunityName_AS;
+	
 	OpportunitiesPage opportunitiesPage = new OpportunitiesPage(scriptHelper);
 	SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
 
@@ -324,6 +327,30 @@ public class OpportunitiesDefaultRecordType extends ReusableLibrary {
 						"Sales Stage doesn't have the value as expected:::" + salesStageSelectedEMEA.getText(),
 						Status.FAIL);
 			}
+		}
+	}
+	
+	/**
+	 * Validating the Opportunities Quick create page Comments field
+	 * 
+	 * @author Ramya
+	 *
+	 */
+
+	public void validateOpportunityNameQuickCreate() {
+		opportunitiesPage.selectNewOpportunity();
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xScrollWindowTop(driver);
+		Utility_Functions.timeWait(2);
+		if (opportunityName_AS.getText().equals("")) {
+			System.out.println("The opportunity name is not populated with the default value");
+			report.updateTestLog("Verify Opportunities Quick Create Opportunity Name ",
+					"Verifying the opportunity name is not populated with the default value ", Status.PASS);
+		} else {
+			System.out.println("The opportunity name is populated with the default value");
+			report.updateTestLog("Verify Opportunities Quick Create Opportunity Name",
+					"Verifying the opportunity name is populated with the default value", Status.FAIL);
 		}
 	}
 

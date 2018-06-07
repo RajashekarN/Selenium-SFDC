@@ -528,16 +528,6 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 		opportunityPageLayout.opportunityQuickCreatePage();
 	}
 
-	/**
-	 * Validating the Opportunities Quick create page mandatory fields
-	 * 
-	 * @author Ramya
-	 *
-	 */
-
-	public void bc_opportunityQuickCreatePageMandatoryFields() {
-		sfOpportunitiesPage.opportunityQuickCreatePageMandatoryFields();
-	}
 
 	/**
 	 * Validating the Opportunities Quick create page Assignment Type field
@@ -550,38 +540,6 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 		sfOpportunitiesPage.opportunityQuickCreateAssignmentType();
 	}
 
-	/**
-	 * Validating the Opportunities Team related list columns
-	 * 
-	 * @author Ramya
-	 *
-	 */
-
-	public void bc_opportunityTeamRelatedList() {
-		sfOpportunitiesPage.opportunityTeamRelatedList();
-	}
-
-	/**
-	 * Validating the Opportunities Lead Source field
-	 * 
-	 * @author Ramya
-	 *
-	 */
-
-	public void bc_opportunityQuickCreateLeadSource() {
-		sfOpportunitiesPage.opportunityQuickCreateLeadSource();
-	}
-
-	/**
-	 * Validating the Opportunities Quick create Comments field
-	 * 
-	 * @author Ramya
-	 *
-	 */
-
-	public void bc_opportunityQuickCreateCommentsField() {
-		sfOpportunitiesPage.opportunityQuickCreateCommentsField();
-	}
 
 	/**
 	 * Validating the Opportunities Quick create Comments field
@@ -602,7 +560,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void bc_validateOpportunityNameQuickCreate() {
-		sfOpportunitiesPage.validateOpportunityNameQuickCreate();
+		opportunitiesDefaultRecordType.validateOpportunityNameQuickCreate();
 	}
 
 	/**
@@ -626,18 +584,6 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 
 	public void bc_verifyPyeongValueInUOMPickList() {
 		sfOpportunitiesPage.verifyPyeongValueInUOMPickList();
-	}
-
-	/**
-	 * Validating the Opportunities Quick create page mandatory fields for the
-	 * Auckland Broker
-	 * 
-	 * @author Ramya
-	 *
-	 */
-
-	public void bc_validateOpportunityMandatoryFieldsForAucklandBroker() {
-		sfOpportunitiesPage.validateOpportunityMandatoryFieldsForAucklandBroker();
 	}
 
 	/**
@@ -977,7 +923,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_opportunityRecordLayoutVAS() {
-		sfOpportunitiesPage.opportunityRecordLayoutVAS();
+		opportunityPageLayout.opportunityRecordLayoutVAS();
 	}
 	/**
 	 * Validating the  Opportunities calculated Annual Leasing Commission
@@ -1023,7 +969,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_validateOpportunityQuickCreatePage() {
-		sfOpportunitiesPage.validateOpportunityQuickCreatePage();
+		opportunityPageLayout.validateOpportunityQuickCreatePage();
 	}
 	/**
 	 * Validating the  Opportunities edit page layout
@@ -1032,7 +978,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_validateOpportunitiesEditPageLayout() {
-		sfOpportunitiesPage.validateOpportunitiesEditPageLayout();
+		opportunityPageLayout.validateOpportunitiesEditPageLayout();
 	}
 	/**
 	 * Validating the  Opportunities edit page layout
@@ -1041,7 +987,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_validateOpportunitiesValuationsEditPage() {
-		sfOpportunitiesPage.validateOpportunitiesValuationsEditPage();
+		opportunityPageLayout.validateOpportunitiesValuationsEditPage();
 	}
 	/**
 	 * Validating the  Opportunities page layout
@@ -1050,7 +996,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_validateNewOpportunitiesPage() {
-		sfOpportunitiesPage.validateNewOpportunitiesPage();
+		opportunityPageLayout.validateNewOpportunitiesPage();
 	}
 	/**
 	 * Validating the  Opportunities Related objects
@@ -1096,7 +1042,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_validateOpportunitySystemInformationFields() {
-		sfOpportunitiesPage.validateOpportunitySystemInformationFields();
+		opportunityPageLayout.validateOpportunitySystemInformationFields();
 	}
 	/**
 	 * Validating the Opportunities required fields at sales stage 02
