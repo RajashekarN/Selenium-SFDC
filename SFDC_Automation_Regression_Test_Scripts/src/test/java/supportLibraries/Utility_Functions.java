@@ -1582,7 +1582,7 @@ public class Utility_Functions extends ReusableLibrary {
 	 * @return
 	 */
 	
-	public boolean isElementPresent(CraftDriver driver, By by) {  
+	public static boolean isElementPresent(CraftDriver driver, By by) {  
 	    driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);  
 	    try {  
 	    	driver.findElement(by);

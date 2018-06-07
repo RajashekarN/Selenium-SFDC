@@ -882,7 +882,7 @@ public class LeadsPage extends ReusableLibrary {
 		}*/
 		Utility_Functions.xWaitForElementPresent(driver, newButton, 3);
 		Utility_Functions.xClick(driver, newButton, true);
-		Utility_Functions.timeWait(5);
+		Utility_Functions.timeWait(4);
 		Utility_Functions.xSwitchtoFrame(driver, continueButton);
 		Utility_Functions.timeWait(4);
 		try {
@@ -1923,14 +1923,22 @@ public class LeadsPage extends ReusableLibrary {
 
 		System.out.println("Custom Page Quick create fields are " + customPageQuickCreateFieldsList);
 	}
+	static ArrayList<String> customPageAddressInformationFieldsList = new ArrayList<String>();
+
+	public void customPageAddressInformationFields() {
+		customPageAddressInformationFieldsList.add("Address");
+		customPageAddressInformationFieldsList.add("Country Code");
+		customPageAddressInformationFieldsList.add("Street");
+		customPageAddressInformationFieldsList.add("City");
+		customPageAddressInformationFieldsList.add("State/Province");
+		customPageAddressInformationFieldsList.add("Zip/Postal Code");
+
+
+		System.out.println("Custom Page Contact Information fields are " + customPageAddressInformationFieldsList);
+	}
 	static ArrayList<String> customPageContactInformationFieldsList = new ArrayList<String>();
 
 	public void customPageContactInformationFields() {
-		customPageContactInformationFieldsList.add("Country");
-		customPageContactInformationFieldsList.add("Street");
-		customPageContactInformationFieldsList.add("City");
-		customPageContactInformationFieldsList.add("State/Province");
-		customPageContactInformationFieldsList.add("Zip/Postal Code");
 		customPageContactInformationFieldsList.add("Direct Line");
 		customPageContactInformationFieldsList.add("Mobile");
 		customPageContactInformationFieldsList.add("Main Phone");
@@ -1943,18 +1951,25 @@ public class LeadsPage extends ReusableLibrary {
 	static ArrayList<String> customPageLeadInformationFieldsList = new ArrayList<String>();
 
 	public void customPageLeadInformationFields() {
-		customPageLeadInformationFieldsList.add("Record Type");
-		customPageLeadInformationFieldsList.add("Nickname");
+		customPageLeadInformationFieldsList.add("Salutation");
+		customPageLeadInformationFieldsList.add("First Name");
+		customPageLeadInformationFieldsList.add("* Last Name");
+		customPageLeadInformationFieldsList.add("Rating");
 		customPageLeadInformationFieldsList.add("Middle Name");
+		customPageLeadInformationFieldsList.add("Lead Source");
+		customPageLeadInformationFieldsList.add("Nickname");
+		customPageLeadInformationFieldsList.add("* Lead Status");
 		customPageLeadInformationFieldsList.add("Title");
+		customPageLeadInformationFieldsList.add("Lead Record Type");
 		customPageLeadInformationFieldsList.add("Department");
+		customPageLeadInformationFieldsList.add("Lead Owner");
 		customPageLeadInformationFieldsList.add("Influence Level");
-		customPageLeadInformationFieldsList.add("Owner");
+		customPageLeadInformationFieldsList.add("Lead Owner User Market");
+		customPageLeadInformationFieldsList.add("* Company");
+		customPageLeadInformationFieldsList.add("Represented By (Firm)");
 		customPageLeadInformationFieldsList.add("Industry");
 		customPageLeadInformationFieldsList.add("Website");
-		customPageLeadInformationFieldsList.add("Rating");
-		customPageLeadInformationFieldsList.add("Represented By (Firm)");
-
+		customPageLeadInformationFieldsList.add("Lead Record Counter");
 
 		System.out.println("Custom Page Lead Information fields are " + customPageLeadInformationFieldsList);
 	}
@@ -1971,9 +1986,16 @@ public class LeadsPage extends ReusableLibrary {
 	static ArrayList<String> customPageProspectRequirementsFieldsList = new ArrayList<String>();
 
 	public void customPageProspectRequirementsFields() {
+		customPageProspectRequirementsFieldsList.add("Preferred Property Type");
+		customPageProspectRequirementsFieldsList.add("Total Size");
+		customPageProspectRequirementsFieldsList.add("Preferred Property Sub-Type");
+		customPageProspectRequirementsFieldsList.add("Unit of Measure");
 		customPageProspectRequirementsFieldsList.add("Total # of Units");
+		customPageProspectRequirementsFieldsList.add("Requirement Details");
 		customPageProspectRequirementsFieldsList.add("Unit of Comparison");
-
+		customPageProspectRequirementsFieldsList.add("Existing Lease Expiration");
+		customPageProspectRequirementsFieldsList.add("Existing Termination/Break Option");
+		
 
 		System.out.println("Custom Page Prospect requirements fields are " + customPageProspectRequirementsFieldsList);
 	}
@@ -1981,9 +2003,12 @@ public class LeadsPage extends ReusableLibrary {
 
 	public void customPageAdditionalInformationFields() {
 		customPageAdditionalInformationFieldsList.add("Assistant Name");
+		customPageAdditionalInformationFieldsList.add("Invalid");
 		customPageAdditionalInformationFieldsList.add("Assistant Phone");
+		customPageAdditionalInformationFieldsList.add("Date Verified");
 		customPageAdditionalInformationFieldsList.add("Assistant Email");
 		customPageAdditionalInformationFieldsList.add("Unmapped Fields");
+		customPageAdditionalInformationFieldsList.add("Next Steps");
 
 		System.out.println("Custom Page Additional Information fields are " + customPageAdditionalInformationFieldsList);
 	}
@@ -1996,9 +2021,9 @@ public class LeadsPage extends ReusableLibrary {
 	static List<String> createNewLeadSectionHeadersList = new ArrayList<String>();
 
 	public void createNewLeadSectionHeadersList() {
-		createNewLeadSectionHeadersList.add("Quick Create");
-		createNewLeadSectionHeadersList.add("Address and Contact Information");
-		createNewLeadSectionHeadersList.add("Additional Lead Information");
+		createNewLeadSectionHeadersList.add("Lead Information");
+		createNewLeadSectionHeadersList.add("Address Information");
+		createNewLeadSectionHeadersList.add("Contact Information");
 		createNewLeadSectionHeadersList.add("Communication Preferences");
 		createNewLeadSectionHeadersList.add("Prospect Requirements");
 		createNewLeadSectionHeadersList.add("Additional Information");
@@ -2019,12 +2044,9 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xSwitchtoFrame(driver, saveLead);
 
-		Utility_Functions.xWaitForElementPresent(driver, ViewAllFieldsButton, 5);
-		Utility_Functions.xClick(driver, ViewAllFieldsButton, true);
-
 		/***** Validating the Header Sections *****/
 
-		List<WebElement> createNewLeadSectionHeadersPresentOnPage = driver.findElements(By.xpath("//h2[contains(@class,'heading') and contains(@class,'large')]"));
+		List<WebElement> createNewLeadSectionHeadersPresentOnPage = driver.findElements(By.xpath("//h3[contains(@class,'section__title') and contains(@class,'section-header')]"));
 		List<String> createNewLeadSectionHeadersFound = new ArrayList<String>();
 		for (WebElement element : createNewLeadSectionHeadersPresentOnPage) {
 			createNewLeadSectionHeadersFound.add(element.getText());
@@ -2040,63 +2062,69 @@ public class LeadsPage extends ReusableLibrary {
 					"Create New Lead Custom Page does not have all the expected header sections", Status.FAIL);
 		}
 
-		/***** Validating Quick Create Section *****/
+		/***** Validating Lead Information Section *****/
 
-		List<WebElement> createNewLeadQuickCreateSectionFieldsOnPage = driver.findElements(By.xpath("//h2[contains(@class,'heading') and contains(@class,'large') and text()='Quick Create']/following::div[1]//label[@class='slds-form-element__label']"));
-		List<String> createNewLeadQuickCreateSectionFieldsFound = new ArrayList<String>();
-		for (WebElement element : createNewLeadQuickCreateSectionFieldsOnPage) {
-			createNewLeadQuickCreateSectionFieldsFound.add(element.getText());
-		}
-
-		customPageQuickCreateFields();
-		List<String> sectionFieldsCount = Utility_Functions.xValidatePickListValuesPage(customPageQuickCreateFieldsList, createNewLeadQuickCreateSectionFieldsFound, "Quick Create Section Fields");
-		if (sectionFieldsCount.size() == 0) {
-			report.updateTestLog("Create New Lead Custom Page - Quick Create Section",
-					"Quick Create section has all the expected fields", Status.PASS);
-		} else {
-			report.updateTestLog("Create New Lead Custom Page - Quick Create Section",
-					"Quick Create section does not have all the expected fields", Status.FAIL);
-		}
-
-		/***** Validating Address and Contact Information Section *****/
-
-		List<WebElement> createNewLeadAddressAndContactInformationSectionFieldsOnPage = driver.findElements(By.xpath("//h2[contains(@class,'heading') and contains(@class,'large') and text()='Address and Contact Information']/following::div[1]//label[@class='slds-form-element__label']"));
-		List<String> createNewLeadAddressAndContactInformationSectionFieldsFound = new ArrayList<String>();
-		for (WebElement element : createNewLeadAddressAndContactInformationSectionFieldsOnPage) {
-			createNewLeadAddressAndContactInformationSectionFieldsFound.add(element.getText());
-		}
-
-		customPageContactInformationFields();
-		sectionFieldsCount = Utility_Functions.xValidatePickListValuesPage(customPageContactInformationFieldsList, createNewLeadAddressAndContactInformationSectionFieldsFound, "Address and Contact Information Section Fields");
-		if (sectionFieldsCount.size() == 0) {
-			report.updateTestLog("Create New Lead Custom Page - Address and Contact Information Section",
-					"Address and Contact Information section has all the expected fields", Status.PASS);
-		} else {
-			report.updateTestLog("Create New Lead Custom Page - Address and Contact Information Section",
-					"Address and Contact Information section doe not have all the expected fields", Status.FAIL);
-		}
-
-		/***** Validating Additional Lead Information Section *****/
-
-		List<WebElement> createNewLeadAdditionalLeadInformationSectionFieldsOnPage = driver.findElements(By.xpath("//h2[contains(@class,'heading') and contains(@class,'large') and text()='Additional Lead Information']/following::div[1]//label[@class='slds-form-element__label']"));
-		List<String> createNewLeadAdditionalLeadInformationSectionFieldsFound = new ArrayList<String>();
-		for (WebElement element : createNewLeadAdditionalLeadInformationSectionFieldsOnPage) {
-			createNewLeadAdditionalLeadInformationSectionFieldsFound.add(element.getText());
+		List<WebElement> createNewLeadLeadInformationSectionFieldsOnPage = driver.findElements(By.xpath("//h3[contains(@class,'section__title') and contains(@class,'section-header')]/span[text()='Lead Information']/following::div[1]//label"
+																								+ "|//h3[contains(@class,'section__title') and contains(@class,'section-header')]/span[text()='Lead Information']/following::div[1]//span[contains(@id,'a-label')]"
+																								+ "|//h3[contains(@class,'section__title') and contains(@class,'section-header')]/span[text()='Lead Information']/following::div[1]//div[contains(@class,'full forcePageBlockItem')]//span[contains(@class,'field-label')]"));
+		List<String> createNewLeadLeadInformationSectionFieldsFound = new ArrayList<String>();
+		for (WebElement element : createNewLeadLeadInformationSectionFieldsOnPage) {
+			createNewLeadLeadInformationSectionFieldsFound.add(element.getText());
 		}
 
 		customPageLeadInformationFields();
-		sectionFieldsCount = Utility_Functions.xValidatePickListValuesPage(customPageLeadInformationFieldsList,	createNewLeadAdditionalLeadInformationSectionFieldsFound, "Additional Lead Information Section Fields");
+		List<String> sectionFieldsCount = Utility_Functions.xValidatePickListValuesPage(customPageLeadInformationFieldsList, createNewLeadLeadInformationSectionFieldsFound, "Lead Information Section Fields");
 		if (sectionFieldsCount.size() == 0) {
-			report.updateTestLog("Create New Lead Custom Page - Additional Lead Information Section",
-					"Additional Lead Information section has all the expected fields", Status.PASS);
+			report.updateTestLog("Create New Lead Custom Page - Lead Information Section",
+					"Lead Information section has all the expected fields", Status.PASS);
 		} else {
-			report.updateTestLog("Create New Lead Custom Page - Additional Lead Information Section",
-					"Additional Lead Information section does not have all the expected fields", Status.FAIL);
+			report.updateTestLog("Create New Lead Custom Page - Lead Information Section",
+					"Lead Information section does not have all the expected fields", Status.FAIL);
+		}
+
+		/***** Validating Address Information Section *****/
+
+		List<WebElement> createNewLeadAddressInformationSectionFieldsOnPage = driver.findElements(By.xpath("//h3[contains(@class,'section__title') and contains(@class,'section-header')]/span[text()='Address Information']/following::div[1]//label"
+																												+"|//h3[contains(@class,'section__title') and contains(@class,'section-header')]/span[text()='Address Information']/following::div[1]//span[contains(@id,'a-label')]"
+																												+"|//h3[contains(@class,'section__title') and contains(@class,'section-header')]/span[text()='Address Information']/following::div[1]//legend[contains(@class,'label inputLabel')]"));
+		List<String> createNewLeadAddressInformationSectionFieldsFound = new ArrayList<String>();
+		for (WebElement element : createNewLeadAddressInformationSectionFieldsOnPage) {
+			createNewLeadAddressInformationSectionFieldsFound.add(element.getText());
+		}
+
+		customPageAddressInformationFields();
+		sectionFieldsCount = Utility_Functions.xValidatePickListValuesPage(customPageAddressInformationFieldsList, createNewLeadAddressInformationSectionFieldsFound, "Address Information Section Fields");
+		if (sectionFieldsCount.size() == 0) {
+			report.updateTestLog("Create New Lead Custom Page - Address Information Section",
+					"Address Information section has all the expected fields", Status.PASS);
+		} else {
+			report.updateTestLog("Create New Lead Custom Page - Address Information Section",
+					"Address Information section doe not have all the expected fields", Status.FAIL);
+		}
+
+		/***** Validating Contact Information Section *****/
+
+		List<WebElement> createNewLeadContactInformationSectionFieldsOnPage = driver.findElements(By.xpath("//h3[contains(@class,'section__title') and contains(@class,'section-header')]/span[text()='Contact Information']/following::div[1]//label"
+																											+"|//h3[contains(@class,'section__title') and contains(@class,'section-header')]/span[text()='Contact Information']/following::div[1]//span[contains(@id,'a-label')]"));
+		List<String> createNewLeadContactInformationSectionFieldsFound = new ArrayList<String>();
+		for (WebElement element : createNewLeadContactInformationSectionFieldsOnPage) {
+			createNewLeadContactInformationSectionFieldsFound.add(element.getText());
+		}
+
+		customPageContactInformationFields();
+		sectionFieldsCount = Utility_Functions.xValidatePickListValuesPage(customPageContactInformationFieldsList,	createNewLeadContactInformationSectionFieldsFound, "Contact Information Section Fields");
+		if (sectionFieldsCount.size() == 0) {
+			report.updateTestLog("Create New Lead Custom Page - Contact Information Section",
+					"Contact Information section has all the expected fields", Status.PASS);
+		} else {
+			report.updateTestLog("Create New Lead Custom Page - Contact Information Section",
+					"Contact Information section does not have all the expected fields", Status.FAIL);
 		}
 
 		/***** Validating Communication Preferences Section *******/
 
-		List<WebElement> createNewLeadCommunicationPreferencesSectionFieldsOnPage = driver.findElements(By.xpath("//h2[contains(@class,'heading') and contains(@class,'large') and text()='Communication Preferences']/following::div[1]//label[@class='slds-form-element__label']"));
+		List<WebElement> createNewLeadCommunicationPreferencesSectionFieldsOnPage = driver.findElements(By.xpath("//h3[contains(@class,'section__title') and contains(@class,'section-header')]/span[text()='Communication Preferences']/following::div[1]//label"
+																											+"|//h3[contains(@class,'section__title') and contains(@class,'section-header')]/span[text()='Communication Preferences']/following::div[1]//span[contains(@id,'a-label')]"));
 		List<String> createNewLeadCommunicationPreferencesSectionFieldsFound = new ArrayList<String>();
 		for (WebElement element : createNewLeadCommunicationPreferencesSectionFieldsOnPage) {
 			createNewLeadCommunicationPreferencesSectionFieldsFound.add(element.getText());
@@ -2114,7 +2142,8 @@ public class LeadsPage extends ReusableLibrary {
 
 		/***** Validating Prospect Requirements Section *****/
 
-		List<WebElement> createNewLeadProspectRequirementsSectionFieldsOnPage = driver.findElements(By.xpath("//h2[contains(@class,'heading') and contains(@class,'large') and text()='Prospect Requirements']/following::div[1]//label[@class='slds-form-element__label']"));
+		List<WebElement> createNewLeadProspectRequirementsSectionFieldsOnPage = driver.findElements(By.xpath("//h3[contains(@class,'section__title') and contains(@class,'section-header')]/span[text()='Prospect Requirements']/following::div[1]//label"
+																										+"|//h3[contains(@class,'section__title') and contains(@class,'section-header')]/span[text()='Prospect Requirements']/following::div[1]//span[contains(@id,'a-label')]"));
 		List<String> createNewLeadProspectRequirementsSectionFieldsFound = new ArrayList<String>();
 		for (WebElement element : createNewLeadProspectRequirementsSectionFieldsOnPage) {
 			createNewLeadProspectRequirementsSectionFieldsFound.add(element.getText());
@@ -2132,7 +2161,8 @@ public class LeadsPage extends ReusableLibrary {
 
 		/***** Validating Additional Information Section *****/
 
-		List<WebElement> createNewLeadAdditionalInformationSectionFieldsOnPage = driver.findElements(By.xpath("//h2[contains(@class,'heading') and contains(@class,'large') and text()='Additional Information']/following::div[1]//label[@class='slds-form-element__label']"));
+		List<WebElement> createNewLeadAdditionalInformationSectionFieldsOnPage = driver.findElements(By.xpath("//h3[contains(@class,'section__title') and contains(@class,'section-header')]/span[text()='Additional Information']/following::div[1]//label"
+																										+"|//h3[contains(@class,'section__title') and contains(@class,'section-header')]/span[text()='Additional Information']/following::div[1]//span[contains(@id,'a-label')]"));
 		List<String> createNewLeadAdditionalInformationSectionFieldsFound = new ArrayList<String>();
 		for (WebElement element : createNewLeadAdditionalInformationSectionFieldsOnPage) {
 			createNewLeadAdditionalInformationSectionFieldsFound.add(element.getText());
