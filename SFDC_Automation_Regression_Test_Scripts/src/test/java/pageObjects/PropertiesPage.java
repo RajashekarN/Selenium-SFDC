@@ -1,6 +1,5 @@
 package pageObjects;
 
-
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -187,7 +186,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 	public void selectProperty() {
 		navigateProperties();
-		sf_UtilityFunctions.selectExisitingObjectRecord("Property Name");
+		sf_UtilityFunctions.selectExistingObjectRecord("Property Name");
 	}
 
 
@@ -544,7 +543,7 @@ public class PropertiesPage extends ReusableLibrary {
 
 	public void propertiesActivityLightningTimeline() {
 		selectProperty();
-		ActivityPage activityPage = new ActivityPage(scriptHelper);
+		TasksPage activityPage = new TasksPage(scriptHelper);
 		activityPage.validateActivityTimeLine();
 	}
 
@@ -813,7 +812,8 @@ public class PropertiesPage extends ReusableLibrary {
 		
 	public void verifyProjectEnquiriesPageFields() {
 		projectEnquiriesFields();
-		List<String> propertySalesProjectEnquiries = establishConnection.establishMetaDataConnectionPageLayouts("APAC_Project_Enquiries__c", "APAC Property Sales Project Enquiry Layout");
+		List<String> propertySalesProjectEnquiries = establishConnection.establishMetaDataConnectionPageLayouts("Property_Preferences__c", "APAC Property Preferences Layout");
+		//List<String> propertySalesProjectEnquiries = establishConnection.establishMetaDataConnectionPageLayouts("APAC_Project_Enquiries__c", "APAC Property Sales Project Enquiry Layout");
 		List<String> propertySalesProjectEnquiriesList = new ArrayList<String>();
 		propertySalesProjectEnquiriesList = Utility_Functions.xValidatePickListValuesPage(propertySalesProjectEnquiries, projectEnquiriesFieldsList, "Project Enquiries field values");
 		if (propertySalesProjectEnquiriesList.size()!=0) {
@@ -823,6 +823,9 @@ public class PropertiesPage extends ReusableLibrary {
 		}	
 	}
 
+	
+	
+			
 	/**
 	 * Validating the Project Enquiries Enhancements
 	 *
@@ -832,5 +835,5 @@ public class PropertiesPage extends ReusableLibrary {
 
 	public void verifyProjectEnquiriesEnhancements() {
 		verifyProjectEnquiriesPageFields();
-	}
+	}	
 }

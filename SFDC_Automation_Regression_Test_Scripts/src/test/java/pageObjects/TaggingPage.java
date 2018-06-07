@@ -22,6 +22,14 @@ import supportLibraries.SF_UtilityFunctions;
 import supportLibraries.Utility_Functions;
 
 
+/*
+* Page Object Class for Tagging Page
+* 
+* @author Haritha
+*
+*/
+
+
 public class TaggingPage extends ReusableLibrary {
 	/*
 	 * Constructor to initialize the business component library
@@ -35,237 +43,243 @@ public class TaggingPage extends ReusableLibrary {
 		PageFactory.initElements(driver.getWebDriver(), this);
 	}
 	
+	/**
+	 * Validating the Properties Preferences creation
+	 *
+	 */
+	@FindBy(xpath = "//a[contains(@id,'tag_edit_link')]")
+	WebElement addTag;
 	
-	@FindBy(xpath = "//span[contains(@class,'slds-truncate')][text()='Properties']")
-	WebElement menu_Properties;
+	@FindBy(xpath = "//textarea[@id='ptag_edit_area']")
+	WebElement privatetag;
+	
+	@FindBy(xpath = "//input[@id='tag_save_btn']")
+	WebElement savePrivateTag;
+	
+	@FindBy(xpath = "//*[contains(@title,'View records tagged')]")
+	WebElement PrivateTagged;
+	
+	/**
+	 * Validating the creation of the Marketing list
+	 * 
+	 */
+	@FindBy(xpath = "//one-app-launcher-header/button")
+	WebElement applauncher;
 
-	@FindBy(xpath = "//*[text()='More']")
-	WebElement menu_More;
-
-	@FindBy(xpath = "//one-app-nav-bar-menu-item[@class='overflowNavItem slds-dropdown__item']//span[text()='Properties'] ")
-	WebElement properties;
-
-	@FindBy(xpath = "//div[@class='overflowList']//a[@title='Properties'][text()='Properties']")
-	WebElement propertiesEnv;
+	@FindBy(xpath = "//li/a[@title='Marketing Lists']")
+	WebElement marketingLists;
 
 	@FindBy(xpath = "//div[@class='slds-truncate'][@title='New']")
 	WebElement newProperty;
+    
+	@FindBy(xpath = "//*[@class=' input' and @maxlength]")
+	WebElement marketingListName; 
+	
+	@FindBy(xpath = "//*[@placeholder='Search Contacts...']")
+	WebElement authorContact;
+	
+	@FindBy(xpath = "//*[@class=' textarea']")
+	WebElement notesTxtBx;
+	
+	@FindBy(xpath = "//*[@title='Save']")
+	WebElement saveMarketList;
+	
+	/**
+	 * Validating the Subscription page fields
+	 */
+	@FindBy(xpath = "//*[@title='Subscriptions']")
+	WebElement subscriptions;
+	
+	@FindBy(xpath = "//input[@title='Search Marketing Lists']")
+	WebElement marketListSubscription;
+	
+	/**
+	 * Validating the creation of New Task
+	 */
+    
+	@FindBy(xpath = "//button[@title='Add']")
+	List<WebElement> addBtnTask1;
+	
+	@FindBy(xpath = "//label/span[text()='Subject']/parent::label/parent::div/input")
+	WebElement taskSubject;
+	
+	@FindAll(value = { @FindBy(xpath = "//a[@class='select'][text()='--None--']") })
+	List<WebElement> activityTypeList;
+	
+	@FindBy(xpath = "//a[text()='Private - Initial Meeting']")
+	WebElement activityType1;
+	
+	@FindAll(value = { @FindBy(xpath = "//div[contains(@class,'bottomBarRight')]//span[text()='Save']") })
+	List<WebElement> activitySave;
+	
+	/**
+	 * Validating the creation of Campaigns
+	 */
+	
+	@FindBy(xpath = "//*[contains(@class ,'label') and text()='Campaigns']")
+	WebElement campaign;
+	
+	@FindBy(xpath = "//div[@class='slds-truncate'][@title='New']")
+	WebElement newCampaigns;
+	
+	@FindBy(xpath = "//input[@class=' input' and @maxlength = '80']")
+	List<WebElement> campaignsName;
+
+	@FindBy(xpath = "//button[contains(@class, 'Button-') and @title='Save']")
+	WebElement saveCampaigns;
+
+	
+	/**
+	 * Validating the creation of Comps 
+	 */
+	
+	@FindBy(xpath = "//*[contains(@class ,'label') and text()='Comps']")
+	WebElement comps;
+	
+	@FindBy(xpath = "//div[@class='slds-truncate'][@title='New']")
+	WebElement newComps;
 
 	@FindBy(xpath = "//button[contains(@class,'neutral uiButton--default uiButton--br')]")
-	WebElement nextBtnProperty;
+	WebElement nextBtnComps;
+	
+	@FindBy(xpath = "//input[@class=' input' and @maxlength = '80']")
+	List<WebElement> compsName;
+	
+	@FindBy(xpath = "//button[contains(@class, 'Button-') and @title='Save']")
+	WebElement saveComps;
+	
+	/*
+	 * Validating the creation of an event on Comp's page
+	 */
+	@FindBy(xpath = "//span[text()='New Event']")
+	List<WebElement> newEvent;
 
-	@FindBy(xpath = "//*[@id='bottomButtonRow']/input[1]")
-	WebElement continueButton;
+	@FindBy(xpath = "//label/span[text()='Subject']/parent::label/parent::div/input")
+	List<WebElement> eventSubject;
+	
+	@FindBy(xpath = "//button[@title='Add']")
+	List<WebElement> addEventActivity;
+	
+	@FindAll(value = {@FindBy(xpath = "//span[contains(text(),'Activity Type')]/parent::span/following-sibling::div/descendant::a[@class='select'][text()='--None--']") })
+	List<WebElement> eventActivityTypeList;
+	
+	@FindAll(value = { @FindBy(xpath = "//div[@class='select-options']/ul/li/a[text()='Private - Initial Meeting']") })
+	List<WebElement> newActivityType;
+	
+	/*
+	 * Validating the edit page of newly created Comp 
+	 */
 
-	@FindBy(xpath = "//*[@value='Save Property']")
-	WebElement saveProperty;
+	@FindBy(xpath = "//*[contains(@id,'g') and text()='Task']")
+	WebElement taskName;
 
-	@FindBy(xpath = "//label[text()='Building/Property Name']/following-sibling::div//input")
-	WebElement buildingPropertyNameEnv;
+	@FindBy(xpath = "//*[@title='Edit']")
+	List<WebElement> editTask;
+              
+	@FindBy(xpath = "//*[@class=' input']")
+	List<WebElement> editTaskName;
 
-	@FindBy(xpath = "//div[@class='slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2']/div/label[@for='property-name']/parent::div//div/input")
-	List<WebElement> buildingPropertyName1;
+	@FindBy(xpath = "//button[contains(@class, 'Button-') and @title='Save']")
+	WebElement saveBtnTask;
 
-	@FindBy(xpath = "//div[@class='slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2']/div/label[@for='property-name']/parent::div//div/input")
-	WebElement buildingPropertyName;
+	/*
+	 * Validating the file attachment on Comp's Task page
+	 */
 
-	@FindBy(xpath = "//*[contains(@id,'propertyEditForm:countryPicklist']/option")
-	WebElement countrySelect;
 
-	@FindBy(xpath = "//*[contains(@id,'propertyEditForm:countryPicklist')]")
-	WebElement countryDropdown;
+	@FindBy(xpath = "//a[@title='Add Attachment']")
+	WebElement addAttachment;
 
-	@FindBy(xpath = "//*[contains(@id,'propertyEditForm:statePicklist')]")
-	WebElement stateDropdown;
+	@FindBy(xpath = "//input[@class= 'slds-input']")
+	WebElement attachFile;
 
-	@FindBy(xpath = "//*[contains(@id,'propertyEditForm:statePicklist)']/option")
-	WebElement stateSelect;
+	/*
+	 * Validating the Task deletion on Comp's Task page
+	 */
 
-	@FindBy(xpath = "//*[contains(@id,'propertyEditForm:City')]")
-	WebElement city;
+	@FindBy(xpath = "//*[contains(@class,'slds-truncate') and @title ='Delete']")
+	List<WebElement> deleteTask;
 
-	@FindBy(xpath = "//*[contains(@id,'propertyEditForm:Street')]")
-	WebElement street;
+	@FindBy(xpath = "//*[contains(@class,'slds-button') and @title ='Delete']")
+	WebElement deleteTaskPopup;
 
-	@FindBy(xpath = "//h1[@class='slds-page-header__title slds-m-right--small slds-truncate slds-align-middle']/span")
-	WebElement createdProperty;
+	/*
+	 * Validating the status change on Comp's Task page
+	 */
 
-	@FindBy(xpath = "//h2[contains(@class,'slds-m-bottom--large')][text()='Property Information']")
-	WebElement propertyInformationFrame;
+	@FindBy(xpath = "//*[@class='slds-checkbox--faux']")
+	List<WebElement> checkBoxTask;
+	
+	/*
+	 * Validating the status of event on Comp's page
+	 */
 
-	@FindBy(xpath = "//*[@id='assignedToBox']")
-	WebElement assignedTo;
+	@FindBy(xpath = "//div[contains(text(),'Start Time')]")
+	WebElement startTimeEvent;
 
-	@FindBy(xpath = "//*[@id='relatedAccountBox']")
-	WebElement accountSelected;
+	@FindBy(xpath = "//div[contains(text(),'End Time')]")
+	WebElement endTimeEvent;
 
-	@FindBy(xpath = "//select[@class='slds-select']/option[@value='Normal']")
-	WebElement priority;
+	@FindBy(xpath = "//div[contains(text(),'Comments')]")
+	WebElement commmentsEvent;
 
-	@FindBy(xpath = "//div[@class='slds-form-element__control slds-has-divider--bottom']")
-	WebElement owner;
+	/*
+	 * Validating the Event Edit on Comp's page
+	 */
 
-	@FindBy(xpath = "//select[@class='slds-select']/option[@value='Open']")
-	WebElement status;
+	@FindBy(xpath = "//*[contains(@id,'g') and text()='Event']")
+	WebElement eventName;
+	
+	@FindBy(xpath = "//*[@class='slds-truncate' and @title='Edit']")
+	List<WebElement> editEvent;	
 
-	@FindBy(xpath = "//a[@role='menuitem']/span[contains(@class,'slds-truncate')][text()='Campaigns']")
-	WebElement campaigns;
+	@FindBy(xpath = "//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Subject']//parent::label/following-sibling::input")
+	List<WebElement> editEventName;
 
-	@FindBy(xpath = "//div[@role='menu']//a/span/span[text()='Campaigns']")
-	WebElement campaignsEnv;
+	@FindBy(xpath = "//button[contains(@class, 'Button-') and @title='Save']")
+	WebElement saveBtnEvent;
+	
+	/*
+	 * Validating the status of task on Comp's page
+	 */
 
-	@FindBy(xpath = "//h1//span[text()='Recently Viewed']")
-	WebElement recentlyViewed;
+	@FindBy(xpath = "//div[text()='Activity Type']")
+	WebElement activityTypeTask;
 
-	@FindBy(xpath = "//span[contains(@class,'virtualAutocompleteOptionText')][text()='All Properties']")
-	WebElement allProperties;
+	@FindBy(xpath = "//div[text()='Status']")
+	WebElement statusTask;
+
+	@FindBy(xpath = "//div[text()='Comments']")
+	WebElement commentTask;
+
+	/*
+	 * Validating the Space creation
+	 */
 
 	@FindBy(xpath = "//a[@class='tabHeader']//span[text()='Related']")
-	WebElement related;
+	List<WebElement> relatedlnk;
 
-	@FindBy(xpath = "//span[contains(text(),'Activities')]/ancestor::article//div[text()='New Activity']")
-	WebElement newActivity;
+	@FindBy(xpath = "//span[@title='Spaces']")
+	WebElement space;
 
-	@FindBy(xpath = "//input[@class='slds-input'][@type='text']")
-	WebElement subject;
+	@FindBy(xpath = "//div[@class='slds-truncate'][@title='New']")
+	List<WebElement> newSpace;
 
-	@FindBy(xpath = "//select[@class='slds-select']/option[@value='Private - Client Intelligence']")
-	WebElement activityType;
+	@FindBy(xpath = "//input[@class=' input' and @maxlength='80']")
+	WebElement spaceName;
 
-	@FindBy(xpath = "// input [@value= 'Save & New']")
-	WebElement saveAndNewActivity;
+	@FindBy(xpath = "//button[contains(@class, 'Button-') and @title='Save']")
+	WebElement saveSpace;
 
-	@FindBy(xpath = "//select[@class='slds-select']/option[@value='Private - Initial Meeting']")
-	WebElement activityType2;
+	@FindBy(xpath = "//a[@title='test']")
+	WebElement spaceNameSelect;
+	
+	/*
+	 * Validating the creation of the private tag
+	 */
 
-	@FindBy(xpath = "// input [@value= 'Save']")
-	WebElement saveActivity;
-
-	@FindBy(xpath = "//span[contains(@class, 'slds-text-heading--small slds-truncate') and text() = 'Activities']")
-	WebElement relatedActivities;
-
-	@FindBy(xpath = "//a[contains(@title,'Show') and contains(@title,'more action')]")
-	WebElement selectCreateFollowUpCustomActivity;
-
-	@FindBy(xpath = "//div[contains(@title, 'Create Follow-up Custom Activity')]")
-	WebElement createCustomActivity;
-
-	@FindBy(xpath = "//select[@class='slds-select']/option[@value='Private - Follow-Up Meeting']")
-	WebElement activityType3;
-
-	@FindBy(xpath = "//span[text()='Send Notification Email']/parent::label/parent::div//input")
-	WebElement notificationEmail;
-
-	@FindBy(xpath = "// input [@value= 'Save']")
-	WebElement saveNewActivityLayoutPage;
-
-	@FindBy(xpath = "// input [@value= 'Save & New']")
-	WebElement saveAndNewActivityLayoutPage;
-
-	@FindBy(xpath = "// input [@value= 'Cancel']")
-	WebElement cancelNewActivityLayoutPage;
-
-	@FindBy(xpath = "//a[@title='New']/div[text()='New']")
-	WebElement newProperties;
-
-	@FindBy(xpath = "//label[text()='Building/Property Name']/parent::div/parent::div//div[contains(@class,'requiredInput')]//input[contains(@id,'propertyEditForm')]")
-	WebElement propertyName;
-
-	@FindBy(xpath = "//select[contains(@id,'countryPicklist')]")
-	WebElement propertyCountry;
-
-	@FindBy(xpath = "//select[contains(@id,'countryPicklist')]/option[text()='United States']")
-	WebElement selectPropertyCountry;
-
-	@FindBy(xpath = "//textarea[contains(@id,'propertyEditForm:Street')]")
-	WebElement propertyStreet;
-
-	@FindBy(xpath = "//input[contains(@id,'propertyEditForm:City')]")
-	WebElement propertyCity;
-
-	@FindBy(xpath = "//select[contains(@id,'propertyEditForm:statePicklist')]")
-	WebElement statePickList;
-
-	@FindBy(xpath = "//select[contains(@id,'statePicklist')]/option[text()='Texas']")
-	WebElement selectPropertyState;
-
-	@FindBy(xpath = "//h1[contains(@class,'slds-page-header__title')]/span")
-	WebElement propertySaved;
-
-	@FindBy(xpath = "//*[text()='No Next Steps. Open And Upcoming Activities Show Up Here.']")
-	WebElement activityTimeline;
-
-	@FindBy(xpath = "//p[@class='slds-tile__title slds-truncate']/a")
-	WebElement activity;
-
-	@FindBy(xpath = "//p[@class='slds-tile__title slds-truncate']/a/parent::p/parent::div/parent::div//div[2]")
-	WebElement activityTypeProperty;
-
-	@FindBy(xpath = "//p[@class='slds-tile__title slds-truncate']/a/parent::p/parent::div/parent::div//div[3]")
-	WebElement statusProperty;
-
-	@FindBy(xpath = "//p[@class='slds-tile__title slds-truncate']/a/parent::p/parent::div/parent::div//div[4]")
-	WebElement comments;
-
-	@FindBy(xpath = "//div[@class='slds-media']//p[@class='slds-timeline__date']")
-	WebElement dueDate;
-
-	@FindBy(xpath = "//span[@class='slds-checkbox--faux']")
-	WebElement statusCheckbox;
-
-	@FindBy(xpath = "//button[@title='Past Activity']")
-	WebElement pastActivityButton;
-
-	@FindBy(xpath = "//select[@class='slds-select']/option[@value='Private - Follow-Up Task']")
-	WebElement activityTypeFollowUpTaskValue;
-
-	@FindBy(xpath = "//input[contains(@id,'dueDate')]")
-	WebElement newActivityDueDate;
-
-	@FindBy(xpath = "//button[@title='Past Activity']")
-	WebElement pastActivity;
-
-	@FindBy(xpath = "//button[@title='More Activities']")
-	WebElement moreActivities;
-
-	@FindBy(xpath = "//a[@class='tabHeader']/span[text()='Activity']")
-	WebElement activityTab;
-
-	@FindBy(xpath = "//div[@id='activityPanelContainer']//a[text()='Expand All']")
-	WebElement expandAll;
-
-	@FindBy(xpath = "//div[@id='activityPanelContainer']//span[text()='Filter Timeline']")
-	WebElement filterTimeline;
-
-	@FindBy(xpath = "//div[contains(@id,'recordLayoutPlaceholder')]//div[@title='Status']")
-	WebElement statusActivityTimeline;
-
-	@FindBy(xpath = "//div[contains(@id,'recordLayoutPlaceholder')]//div/span")
-	WebElement openActivityTimeline;
-
-	@FindBy(xpath = "//div[contains(@id,'recordLayoutPlaceholder')]//div[@title='Description']")
-	WebElement descriptionActivityTimeline;
-
-	@FindBy(xpath = "//a[contains(@id,'tag_edit_link')]")
-	WebElement addTag;
-
-	@FindBy(xpath = "//textarea[@id='ptag_edit_area']")
-	WebElement privatetag;
-
-	@FindBy(xpath = "//input[@id='tag_save_btn']")
-	WebElement savePrivateTag;
-
-	@FindBy(xpath = "//a[@role='menuitem']/span[contains(@class,'slds-truncate')][text()='Bulk Tagging']")
-	WebElement bulkTagging;
-
-	@FindBy(xpath = "//input[@value='Search']")
-	WebElement searchProperty;
-
-	@FindBy(xpath = "//input[contains(@id,'SearchBlock:propertyEditForm:SearchBox')][contains(@placeholder,'Search Account/Contact')]")
-	WebElement accountSearch;
-
-	@FindBy(xpath = "//div[@class='slds-form-element ']//input[@value='Search']")
-	WebElement search;
+	@FindBy(xpath = "//*[text()='More']")
+	WebElement menu_More;
 
 	@FindBy(xpath = "//a[@role='menuitem']/span[contains(@class,'slds-truncate')][text()='Private Tags']")
 	WebElement more_PrivateTags;
@@ -287,382 +301,19 @@ public class TaggingPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//div[contains(@class,'modal-footer') and contains(@class,'slds-modal__footer')]//button/span[text()='Save']")
 	WebElement savePropertyPrivateTag;
-
+	
 	/*
-	 * @FindBy(xpath=
-	 * "//select[contains(@id,'propertyEditForm:APACPropertyType_unselected')]/option[@value='Industrial']")
-	 * WebElement propertyTypeValue;
+	 * Validating the Account search functionality in Bulk Tagging
 	 */
 
-	@FindBy(xpath = "//select[contains(@id,'propertyEditForm:APACPropertyType_unselected')]/option[text()='Industrial']")
-	WebElement propertyTypeValue;
+	@FindBy(xpath = "//a[@role='menuitem']/span[contains(@class,'slds-truncate')][text()='Bulk Tagging']")
+	WebElement bulkTagging;
 
-	@FindBy(xpath = "//td[@class='multiSelectPicklistCell']/a[@title='Add']")
-	WebElement addValuetoCheckList;
+    @FindBy(xpath = "//input[contains(@id,'SearchBlock:propertyEditForm:SearchBox')][contains(@placeholder,'Search Account/Contact')]")
+	WebElement accountSearch;
 
-	@FindBy(xpath = "//select[contains(@id,'propertyEditForm:APACPropertyType')]/parent::div")
-	WebElement elementHidden;
-
-	@FindBy(xpath = "//select[contains(@id,'propertyEditForm:APACPropertyType')]/parent::div/select")
-	WebElement elementSelectHidden;
-
-	@FindBy(xpath = "//select[contains(@id,'propertyEditForm:Class')]")
-	WebElement buildingClass;
-
-	@FindBy(xpath = "//select[contains(@id,'propertyEditForm:Class')]/option[@value='A']")
-	WebElement buildingClassValue;
-
-	@FindBy(xpath = "//a[@class='tabHeader']//span[text()='Details']")
-	WebElement details;
-
-	@FindBy(xpath = "//a[@role='menuitem']/span[contains(@class,'slds-truncate')][text()='Property Preferences']")
-	WebElement more_propertyPreferences;
-
-	@FindBy(xpath = "//div[@class='slds-truncate'][text()='New']")
-	WebElement newPropertiesPreferences;
-
-	@FindBy(xpath = "//a[@aria-label='Area UOM']")
-	WebElement unitOfMeasure;
-
-	@FindBy(xpath = "//a[@role='menuitem']/span[contains(@class,'slds-truncate')][text()='Project Enquiries']")
-	WebElement more_projectEnquiries;
-
-	@FindBy(xpath = "//a[@aria-label='Total Area UOM']")
-	WebElement unitOfMeasureProjectEnquiries;
-
-	@FindBy(xpath = "//select[contains(@id,'UnitsofMeasureAPAC')]")
-	WebElement unitOfMeasureProperties;
-
-	@FindBy(xpath = "//a[contains(@aria-label,'Preference Type')]")
-	WebElement preferenceType;
-
-	@FindBy(xpath = "//span[text()='Project Enquiry Name']/parent::label/parent::div/input")
-	WebElement projectEnquiryName;
-
-	@FindBy(xpath = "//input[contains(@placeholder,'Search Accounts')]")
-	WebElement enquiryAccount;
-
-	@FindBy(xpath = "//div[contains(@class,'primaryLabel')][@title='AUCAPACBroker123']")
-	WebElement enquiryAccountValue;
-
-	@FindBy(xpath = "//input[contains(@placeholder,'Search Contacts')]")
-	WebElement enquiryContact;
-
-	@FindBy(xpath = "//div[contains(@class,'secondaryLabel')][@title='AUCAPACBroker123']")
-	WebElement enquiryContactValue;
-
-	@FindBy(xpath = "//div[contains(@class,'slds-modal__footer')]//span[text()='Save']")
-	WebElement projectEnquirySave;
-
-	@FindBy(xpath = "//div[@class='forceChangeRecordTypeFooter']/button[contains(@class,'slds-button')]/span[text()='Next']")
-	WebElement nextNewProjectEnquiry;
-
-	@FindBy(xpath = "//span[contains(text(),'Country')]/parent::div/following-sibling::div//a[contains(text(),'New Zealand')]")
-	WebElement countryFieldNewZealand;
-
-	@FindBy(xpath = "//one-app-launcher-header/button")
-	WebElement applauncher;
-
-	@FindBy(xpath = "//a[contains(@title,'Preferences')]/span/span[contains(text(),'Preferences')]")
-	WebElement preferences;
-
-	@FindBy(xpath = "//span[contains(@class,'virtualAutocompleteOptionText')][contains(text(),'All property preferences')]")
-	WebElement allInvestorPreferences;
-
-	@FindBy(xpath = "//span[contains(text(),'Preference Type')]/parent::div/following-sibling::div//span[contains(text(),'Sale')]")
-	WebElement preferenceTypeSale;
-
-	@FindBy(xpath = "//span[contains(text(),'Property Type')]/parent::div/following-sibling::div//span[contains(text(),'Industrial')]")
-	WebElement industrialPropertyType;
-
-	@FindBy(xpath = "//span[contains(text(),'APAC Region')]/parent::div/following-sibling::div//a[contains(text(),'SA')]")
-	WebElement regionSA;
-
-	@FindBy(xpath = "//span[contains(text(),'Preference Type')]/parent::div/following-sibling::div//span[contains(text(),'Lease')]")
-	WebElement preferenceTypeLease;
-
-	@FindBy(xpath = "//span[contains(text(),'Property Type')]/parent::div/following-sibling::div//span[contains(text(),'Retail')]")
-	WebElement retailPropertyType;
-
-	@FindBy(xpath = "//span[contains(text(),'APAC Region')]/parent::div/following-sibling::div//a[contains(text(),'NSW')]")
-	WebElement regionNSW;
-
-	@FindBy(xpath = "//span[contains(text(),'APAC Region')]/parent::div/following-sibling::div//a[contains(text(),'Christchurch')]")
-	WebElement regionChristchurch;
-
-	@FindBy(xpath = "//select[contains(@id,'countryPicklist')]/option[text()='Japan']")
-	WebElement selectCountryJapan;
-
-	@FindBy(xpath = "//select[contains(@id,'UnitsofMeasureAPAC')]/option[contains(@value,'Tsubo')]")
-	WebElement japanUnitOfMeasure;
-
-	@FindBy(xpath = "//select[contains(@id,'statePicklist')]/option[text()='Tokyo']")
-	WebElement selectStateTokyo;
-
-	@FindBy(xpath = "//input[contains(@id,'TotalSize')]")
-	WebElement totalSize;
-
-	@FindBy(xpath = "//select[contains(@id,'APACPropertyType_unselected')]")
-	WebElement propertyTypeHotel;
-
-	@FindBy(xpath = "//span[contains(@id,'propertyEditForm:prpType')]//a[contains(@title,'Add')]/img")
-	WebElement addButton;
-
-	@FindBy(xpath = "//li[contains(@id,'Serviced-Apartment')]//span[contains(text(),'Serviced Apartment')]")
-	WebElement servicedApartment;
-
-	@FindBy(xpath = "//a[@role='menuitem']/div[@class='forceActionLink'][text()='Edit']")
-	WebElement edit;
-
-	@FindBy(xpath = "//li[contains(@class,'oneActionsDropDown')]//a")
-	WebElement showMoreActions;
-
-	@FindBy(xpath = "//li[contains(@id,'Commercial-Building')]//span[contains(text(),'Commercial Building')]")
-	WebElement commercialBuilding;
-
-	@FindBy(xpath = "//span[contains(text(),'APAC Property Preferences')]/parent::div/preceding-sibling::div/span[contains(@class,'slds-radio--faux')]")
-	WebElement apacPropertyPreferences;
-
-	@FindBy(xpath = "//span[contains(text(),'Next')]/parent::button")
-	WebElement nextPropertyPreferences;
-
-	@FindBy(xpath = "//input[contains(@placeholder,'Search Contacts')]")
-	WebElement searchContacts;
-
-	@FindBy(xpath = "//div[contains(@class,'primaryLabel')][contains(@title,'TestAMER CMBroker')]")
-	WebElement contactsValue;
-
-	@FindBy(xpath = "//a[contains(@title,'Sale')]")
-	WebElement preferenceTypeValue;
-
-	@FindBy(xpath = "//a[contains(@aria-label,'Property Type')]")
-	WebElement propertyType;
-
-	@FindBy(xpath = "//a[contains(@title,'Hotel')]")
-	WebElement propertyTypeHotelValue;
-
-	@FindBy(css = "ul>li.forceSearchInputLookupDesktopOption:nth-child(1)")
-	WebElement firstLookUpElement;
-
-	@FindBy(xpath = "//ul[@class='tabs__nav']//a[@title='New Event']")
-	WebElement newEventOpp;
-
-	@FindBy(xpath = "//span[text()='Add']")
-	WebElement addActivity;
-
-	@FindBy(xpath = "//button[@title='Add']")
-	List<WebElement> addEventActivity;
-
-	@FindBy(xpath = "//a[contains(@title,'Automation')]")
-	WebElement ExistingProperty;
-
-	@FindBy(xpath = "//*[contains(@title,'View records tagged')]")
-	WebElement PrivateTagged;
-
-	@FindBy(xpath = " //*[contains(@class,'entityNameTitle slds-breadcrumb__item slds-line-height--reset')]")
-	WebElement PrivateTagPage;
-
-	@FindBy(xpath = "//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']")
-	WebElement PropertyList;
-
-	@FindBy(xpath = "//li/a[@title='Marketing Lists']")
-	WebElement marketingLists;
-
-	@FindBy(xpath = "//*[@class=' input' and @maxlength]")
-	WebElement marketListName;
-
-	@FindBy(xpath = "//*[@placeholder='Search Contacts...']")
-	WebElement authorContact;
-
-	@FindBy(xpath = "//div[@class='form-element']")
-	WebElement publicationDate;
-
-	@FindBy(xpath = "//input[@title='Search Marketing Lists']")
-	WebElement marketListSubscription;
-
-	@FindBy(xpath = "//*[@class=' textarea']")
-	WebElement notesTxtBx;
-
-	@FindBy(xpath = "//*[@title='Save']")
-	WebElement saveMarketList;
-
-	@FindBy(xpath = "//*[@title='Subscriptions']")
-	WebElement subscriptions;
-
-	@FindBy(xpath = "//button[@title='Save']")
-	WebElement saveSubscription;
-
-	@FindBy(xpath = "//li/a[@title='Property Preferences']")
-	WebElement propertyPreferences;
-
-	@FindBy(xpath = "//*[contains(@class,'slds-dropdown__item has-icon--left   f')]")
-	WebElement allPropertyPreferences;
-
-	@FindBy(xpath = "//*[@class='slds-cell-edit cellContainer'][@tabindex='-1'][@scope='row']")
-	WebElement allPropertyPreferenceslist;
-
-	@FindBy(xpath = "//li/a[@title='Edit']")
-	WebElement editProperty;
-
-	@FindBy(xpath = "//span[text()='Minimum Price']/parent::label/parent::div/input")
-	WebElement minimumPriceProperty;
-
-	@FindBy(xpath = "//*[@title='Save']")
-	WebElement savePropertypreference;
-
-	@FindBy(xpath = "//li/a[@title='Clone']")
-	WebElement cloneProperty;
-
-	@FindBy(xpath = "//*[@class=' select'][@data-interactive-lib-uid='115']")
-	WebElement hotelStar;
-
-	@FindBy(xpath = "//button[@title='Add']")
-	WebElement addBtnTask;
-
-	@FindBy(xpath = "//button[@title='Add']")
-	List<WebElement> addBtnTask1;
-
-	@FindBy(xpath = "//label/span[text()='Subject']/parent::label/parent::div/input")
-	WebElement taskSubject;
-
-	@FindAll(value = { @FindBy(xpath = "//a[@class='select'][text()='--None--']") })
-	List<WebElement> activityTypeList;
-
-	@FindAll(value = { @FindBy(xpath = "//div[@class='select-options']/ul/li/a[text()='Private - Initial Meeting']") })
-	List<WebElement> newActivityType;
-
-	@FindAll(value = { @FindBy(xpath = "//div[contains(@class,'bottomBarRight')]//span[text()='Save']") })
-	List<WebElement> activitySave;
-
-	@FindBy(xpath = "//a[text()='Private - Initial Meeting']")
-	WebElement activityType1;
-
-	@FindBy(xpath = "//*[contains(@class ,'label') and text()='Campaigns']")
-	WebElement campaign;
-
-	@FindBy(xpath = "//*[contains(@class ,'label') and text()='Comps']")
-	WebElement comps;
-
-	@FindBy(xpath = "//div[@class='slds-truncate'][@title='New']")
-	WebElement newComps;
-
-	@FindBy(xpath = "//button[contains(@class,'neutral uiButton--default uiButton--br')]")
-	WebElement nextBtnComps;
-
-	@FindBy(xpath = "//input[@class=' input' and @maxlength = '80']")
-	List<WebElement> compsName;
-
-	@FindBy(xpath = "//button[contains(@class, 'Button-') and @title='Save']")
-	WebElement saveComps;
-
-	@FindBy(xpath = "//*[contains(@class ,'label') and text()='Space Assessments']")
-	WebElement spaces;
-
-	@FindBy(xpath = "//div[@class='slds-truncate'][@title='New']")
-	WebElement newSpaces;
-
-	@FindBy(xpath = "//div[@class='slds-truncate'][@title='New']")
-	WebElement newCampaigns;
-
-	@FindBy(xpath = "//input[@class=' input' and @maxlength = '80']")
-	List<WebElement> campaignsName;
-
-	@FindBy(xpath = "//button[contains(@class, 'Button-') and @title='Save']")
-	WebElement saveCampaigns;
-
-	@FindBy(xpath = "//span[text()='New Event']")
-	List<WebElement> newEvent;
-
-	@FindBy(xpath = "//label/span[text()='Subject']/parent::label/parent::div/input")
-	List<WebElement> eventSubject;
-
-	@FindAll(value = {
-			@FindBy(xpath = "//span[contains(text(),'Activity Type')]/parent::span/following-sibling::div/descendant::a[@class='select'][text()='--None--']") })
-	List<WebElement> eventActivityTypeList;
-
-	@FindBy(xpath = "//*[contains(@id,'g') and text()='Task']")
-	WebElement taskName;
-
-	@FindBy(xpath = "//*[@title='Edit']")
-	List<WebElement> editTask;
-
-	@FindBy(xpath = "//*[@class='slds-truncate' and @title='Edit']")
-	List<WebElement> editEvent;
-
-	@FindBy(xpath = "//*[@class=' input']")
-	List<WebElement> editTaskName;
-
-	@FindBy(xpath = "//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Subject']//parent::label/following-sibling::input")
-	List<WebElement> editEventName;
-
-	@FindBy(xpath = "//input[contains(@class,'inputDate')]")
-	List<WebElement> activityInputDate;
-
-	@FindBy(xpath = "//button[contains(@class, 'Button-') and @title='Save']")
-	WebElement saveBtnTask;
-
-	@FindBy(xpath = "//button[contains(@class, 'Button-') and @title='Save']")
-	WebElement saveBtnEvent;
-
-	@FindBy(xpath = "//a[@title='Add Attachment']")
-	WebElement addAttachment;
-
-	@FindBy(xpath = "//input[@class= 'slds-input']")
-	WebElement attachFile;
-
-	@FindBy(xpath = "//*[contains(@class,'slds-truncate') and @title ='Delete']")
-	List<WebElement> deleteTask;
-
-	@FindBy(xpath = "//*[contains(@class,'slds-button') and @title ='Delete']")
-	WebElement deleteTaskPopup;
-
-	@FindBy(xpath = "//*[@class='slds-checkbox--faux']")
-	List<WebElement> checkBoxTask;
-
-	@FindBy(xpath = "//*[contains(@id,'g') and text()='Event']")
-	WebElement eventName;
-
-	@FindBy(xpath = "//div[text()='Activity Type']")
-	WebElement activityTypeTask;
-
-	@FindBy(xpath = "//div[text()='Status']")
-	WebElement statusTask;
-
-	@FindBy(xpath = "//div[text()='Comments']")
-	WebElement commentTask;
-
-	@FindBy(xpath = "//div[contains(text(),'Start Time')]")
-	WebElement startTimeEvent;
-
-	@FindBy(xpath = "//div[contains(text(),'End Time')]")
-	WebElement endTimeEvent;
-
-	@FindBy(xpath = "//div[contains(text(),'Comments')]")
-	WebElement commmentsEvent;
-
-	@FindBy(xpath = "//a[@class='tabHeader']//span[text()='Related']")
-	List<WebElement> relatedlnk;
-
-	@FindBy(xpath = "//span[@title='Spaces']")
-	WebElement space;
-
-	@FindBy(xpath = "//div[@class='slds-truncate'][@title='New']")
-	List<WebElement> newSpace;
-
-	@FindBy(xpath = "//input[@class=' input' and @maxlength='80']")
-	WebElement spaceName;
-
-	@FindBy(xpath = "//button[contains(@class, 'Button-') and @title='Save']")
-	WebElement saveSpace;
-
-	@FindBy(xpath = "//a[@title='test']")
-	WebElement spaceNameSelect;
-
-	@FindBy(xpath = "//span[contains(text(),'Start')]/parent::legend/following-sibling::div/div/input")
-	WebElement eventStartDate;
-
-	@FindBy(xpath = "//span[contains(text(),'End')]/parent::legend/following-sibling::div/div/input")
-	WebElement eventEndDate;
+	@FindBy(xpath = "//input[@value='Search']")
+	WebElement searchProperty;
 
 	
 	SF_UtilityFunctions sf_UtilityFunctions = new SF_UtilityFunctions(scriptHelper);
@@ -677,8 +328,7 @@ public class TaggingPage extends ReusableLibrary {
 	public void propertyTagging() {
 		sf_UtilityFunctions.oneAppNavigationTab("Properties");
 		sf_UtilityFunctions.selectAction("New");
-		sf_UtilityFunctions.selectExisitingObjectRecord("Propery Name");
-	
+		sf_UtilityFunctions.selectExistingObjectRecord("Property Name");
 		/*Utility_Functions.xClick(driver, menu_More, true);
 		Utility_Functions.xWaitForElementPresent(driver, properties, 3);
 		Utility_Functions.xClick(driver, properties, true);
@@ -706,15 +356,20 @@ public class TaggingPage extends ReusableLibrary {
 				Status.FAIL);
 	}
 
+	/**
+	 * Validating the creation of the Marketing list
+	 * 
+	 * @author Haritha
+	 */
 	public void marketCreation() {
 		Utility_Functions.xWaitForElementPresent(driver, applauncher, 3);
 		Utility_Functions.xClick(driver, applauncher, true);
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xClickHiddenElement(driver, marketingLists);
 		Utility_Functions.xWaitForElementPresent(driver, newProperty, 3);
-		Utility_Functions.xClick(driver, newProperty, true);
-		Utility_Functions.xWaitForElementPresent(driver, marketListName, 3);
-		Utility_Functions.xSendKeys(driver, marketListName, "Test");
+		Utility_Functions.xClick(driver, newProperty, true);	
+		Utility_Functions.xWaitForElementPresent(driver, marketingListName, 3);
+		Utility_Functions.xSendKeys(driver, marketingListName, "Test");
 		Utility_Functions.xSendKeys(driver, authorContact, "Test Broker6");
 		Utility_Functions.timeWait(1);
 		authorContact.sendKeys(Keys.ARROW_DOWN);
@@ -723,8 +378,14 @@ public class TaggingPage extends ReusableLibrary {
 		Utility_Functions.xSendKeys(driver, notesTxtBx, "Testing");
 		Utility_Functions.xClick(driver, saveMarketList, true);
 		Utility_Functions.xWaitForElementPresent(driver, newProperty, 3);
+		report.updateTestLog("Verify Marketing List Tags","The Marketing tag is saved in Marketing Tag Page", Status.PASS);
 	}
 
+	/**
+	 * Validating the creation of Subscription page fields
+	 * 
+	 * @author Haritha
+	 */
 	public void subscriptionCreation() {
 		Utility_Functions.xWaitForElementPresent(driver, applauncher, 3);
 		Utility_Functions.xClick(driver, applauncher, true);
@@ -739,17 +400,23 @@ public class TaggingPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, saveMarketList, true);
 
 		if (newProperty.isDisplayed()) {
-
 			System.out.println("Subscription is created");
+			report.updateTestLog("Verify Subscription Tags","The Subscription tag is saved in Subscription Tag Page", Status.PASS);
 		} else {
 			System.out.println("Subscription is not created");
+			report.updateTestLog("Verify Subscription Tags","The Subscription tag is not saved in Subscription Tag Page", Status.FAIL);
 		}
-
 	}
 	
+	/**
+	 * Validating the creation of New Task
+	 * 
+	 * @author Haritha
+	 */
 	public void addTask() {
-
-		// Utility_Functions.xWaitForElementPresent(driver, addBtnTask1, 6);
+        Utility_Functions.xWaitForElementPresent(driver, applauncher, 3);
+		Utility_Functions.xClick(driver, applauncher, true);
+		Utility_Functions.xWaitForElementPresent(driver, addBtnTask1, 6);
 		Utility_Functions.timeWait(5);
 		Utility_Functions.xClickVisibleListElement(driver, addBtnTask1);
 		Utility_Functions.xWaitForElementPresent(driver, taskSubject, 2);
@@ -860,6 +527,12 @@ public class TaggingPage extends ReusableLibrary {
 		report.updateTestLog("Verify Task", "The Task is created successfully", Status.PASS);
 
 	}
+	
+	/**
+	 * Validating the creation of Campaigns
+	 * 
+	 * @author Haritha
+	 */
 
 	public void addCampaign() {
 
@@ -876,7 +549,7 @@ public class TaggingPage extends ReusableLibrary {
 		report.updateTestLog("Verify Campaigns", "The Campaigns is created successfully", Status.PASS);
 
 	}
-
+	
 	public void activityTask() {
 
 		for (int i = 1; i <= 3; i++) {
@@ -951,6 +624,12 @@ public class TaggingPage extends ReusableLibrary {
 			report.updateTestLog("Verify Task", "The Task is created successfully", Status.PASS);
 		}
 	}
+	
+	/**
+	 * Validating the creation of the Comps page 
+	 * 
+	 * @author Haritha
+	 */
 
 
 	public void addComp() {
@@ -970,6 +649,7 @@ public class TaggingPage extends ReusableLibrary {
 		report.updateTestLog("Verify Comps", "The Comps is created successfully", Status.PASS);
 
 	}
+	
 
 	public void activityEvent() {
 		for (int i = 1; i <= 3; i++) {
@@ -1043,6 +723,12 @@ public class TaggingPage extends ReusableLibrary {
 		}
 	}
 	
+	/**
+	 * Validating the creation of Event on Comp's page
+	 * 
+	 * @author Haritha
+	 */
+	
 	public void addEvent() {
 		Utility_Functions.timeWait(5);
 		Utility_Functions.xClickVisibleListElement(driver, newEvent);
@@ -1055,6 +741,11 @@ public class TaggingPage extends ReusableLibrary {
 		report.updateTestLog("Verify Event", "The Event is created successfully", Status.PASS);
 
 	}
+	
+	/**
+	 * Validating editing an Task on Comp's page
+	 * @author Haritha
+	 */
 
 	public void editTask() {
 		Utility_Functions.xWaitForElementPresent(driver, taskName, 5);
@@ -1069,6 +760,12 @@ public class TaggingPage extends ReusableLibrary {
 		report.updateTestLog("Verify Edit Task", "The Task is edited successfully", Status.PASS);
 
 	}
+	
+	/**
+	 * Validating adding an attachment on Comp's page
+	 * 
+	 * @author Haritha
+	 */
 
 	public void addAttachment() {
 
@@ -1101,16 +798,27 @@ public class TaggingPage extends ReusableLibrary {
 			System.out.println("The file is not uploaded" + e.getMessage());
 
 		}
-
+		report.updateTestLog("Verify Adding Attachment", "The file is attached successfully ", Status.PASS);
 	}
+	
+	/**
+	 * Validating the deletion of an attachment on Comp's page
+	 * 
+	 * @author Haritha
+	 */
 
 	public void deleteTask() {
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xClickVisibleListElement(driver, deleteTask);
 		Utility_Functions.xClick(driver, deleteTaskPopup, true);
-
+		report.updateTestLog("Verify Delete Task", "The Task was deleted successfully", Status.PASS);
 	}
 
+	/**
+	 * Validating Edit of Task on Comp's page
+	 * 
+	 * @author Haritha
+	 */
 	public void editStatusTask() {
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xClickVisibleListElement(driver, checkBoxTask);
@@ -1119,6 +827,12 @@ public class TaggingPage extends ReusableLibrary {
 		Utility_Functions.timeWait(3);
 		report.updateTestLog("Verify Edit Task status", "The Task status is changed successfully", Status.PASS);
 	}
+	
+	/**
+	 * Validating the Event status on Comp's page
+	 * 
+	 * @author Haritha
+	 */
 
 	public void validationEvent() {
 
@@ -1140,6 +854,12 @@ public class TaggingPage extends ReusableLibrary {
 			report.updateTestLog("Event", "Comments", Status.FAIL);
 		}
 	}
+	
+	/**
+	 * Validating Editing an Event on Comp's page
+	 * 
+	 * @author Haritha
+	 */
 
 	public void editEvent() {
 		Utility_Functions.xWaitForElementPresent(driver, eventName, 5);
@@ -1154,6 +874,13 @@ public class TaggingPage extends ReusableLibrary {
 		report.updateTestLog("Verify Edit Event", "The Event is edited successfully", Status.PASS);
 
 	}
+	
+	/**
+	 * Validating the Task status on Comp's page
+	 * 
+	 * @author Haritha
+	 */
+	
 
 	public void validationTask() {
 
@@ -1174,7 +901,15 @@ public class TaggingPage extends ReusableLibrary {
 		} else {
 			report.updateTestLog("Task", "Comment", Status.FAIL);
 		}
+		
+		report.updateTestLog("Verify the Task", "The Task has been validated successfully", Status.PASS);
 	}
+	
+	/**
+	 * Validating the Activity Type on Comp's page
+	 * 
+	 * @author Haritha
+	 */
 
 	static ArrayList<String> activityTypeListValues = new ArrayList<String>();
 
@@ -1196,8 +931,15 @@ public class TaggingPage extends ReusableLibrary {
 		activityTypeListValues.add("Public - Client Meeting (CML)");
 		activityTypeListValues.add("Public - Client Meeting (Investor Services)");
 		System.out.println("Additional Activity Type values are added to the list successfully::::");
+		
+		report.updateTestLog("Verify the Activity Type list picklist values", "Additional Activity Type values are added to the list successfully", Status.PASS);
 	}
 
+	/**
+	 * Validating the Space creation
+	 * 
+	 * @author Haritha
+	 */
 	public void createSpace() {
 
 		Utility_Functions.timeWait(5);
@@ -1211,13 +953,20 @@ public class TaggingPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, saveSpace, true);
 		Utility_Functions.timeWait(5);
 		Utility_Functions.xClick(driver, spaceNameSelect, true);
+		report.updateTestLog("verify Create Space", "Verifying New Space is created and new space is saved", Status.PASS);
 
 	}
 	
+	/**
+	 * Validating the Properties Private tags
+	 * 
+	 * @author Haritha
+	 */
 
 	public void verifyPropertiesPrivateTags() {
+		sf_UtilityFunctions.oneAppNavigationTab("Private Tags");
 
-		Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
+		/*Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
 		Utility_Functions.xClick(driver, menu_More, true);
 		report.updateTestLog("Verify Properties Private Tag", "Verifying More options is displayed", Status.PASS);
 		Utility_Functions.timeWait(2);
@@ -1226,16 +975,19 @@ public class TaggingPage extends ReusableLibrary {
 		report.updateTestLog("Verify Properties Private Tag", "Verifying Private Tags is displayed", Status.PASS);
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, newPrivateTag, 3);
-		Utility_Functions.xClick(driver, newPrivateTag, true);
+		Utility_Functions.xClick(driver, newPrivateTag, true);*/
+		sf_UtilityFunctions.selectAction("New");
 		report.updateTestLog("Verify Properties Private Tag", "Verifying the New Private Tags is displayed",
 				Status.PASS);
-		Utility_Functions.timeWait(5);
+		/*Utility_Functions.timeWait(5);
 		Utility_Functions.xWaitForElementPresent(driver, privateTagName, 3);
 		Utility_Functions.xClick(driver, privateTagName, true);
 		report.updateTestLog("Verify Properties Private Tag", "Verifying the New Private Tag name is displayed",
 				Status.PASS);
 		Utility_Functions.xWaitForElementPresent(driver, privateTagName, 3);
-		Utility_Functions.xSendKeys(driver, privateTagName, "Test_" + Utility_Functions.xGenerateAlphaNumericString());
+		Utility_Functions.xSendKeys(driver, privateTagName, "Test_" + Utility_Functions.xGenerateAlphaNumericString());*/
+		
+		sf_UtilityFunctions.selectExistingObjectRecord("Private tag");
 		report.updateTestLog("Verify Properties Private Tag", "Verifying the Private Tag name is entered", Status.PASS);
 		Utility_Functions.xWaitForElementPresent(driver, saveNewPrivateTag, 3);
 		Utility_Functions.xClick(driver, saveNewPrivateTag, true);
@@ -1266,13 +1018,19 @@ public class TaggingPage extends ReusableLibrary {
 
 	}
 	
-
+	/**
+	 * Validating the Bulk tagging functionality
+	 * 
+	 * @author Haritha
+	 */
+	
 	public void verifyBulkTaggingFunctionality() {
 
-		Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
+		/*Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
 		Utility_Functions.xClick(driver, menu_More, true);
 		Utility_Functions.xWaitForElementPresent(driver, bulkTagging, 3);
-		Utility_Functions.xClick(driver, bulkTagging, true);
+		Utility_Functions.xClick(driver, bulkTagging, true);*/
+		sf_UtilityFunctions.oneAppNavigationTab("Bulk Tagging");
 		Utility_Functions.timeWait(5);
 		Utility_Functions.xSwitchtoFrame(driver, accountSearch);
 		Utility_Functions.timeWait(5);
@@ -1282,15 +1040,14 @@ public class TaggingPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, searchProperty, 3);
 		Utility_Functions.xClick(driver, searchProperty, true);
 		Utility_Functions.timeWait(2);
-
+		report.updateTestLog("Account Search", "Verify the Account name is entered and searched account is displayed", Status.PASS);
 	}
 
 	public void bulkTaggingFunctionality() {
 
-		Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
-		Utility_Functions.xClick(driver, menu_More, true);
-		Utility_Functions.xWaitForElementPresent(driver, bulkTagging, 3);
-		Utility_Functions.xClick(driver, bulkTagging, true);
+		/*Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
+		Utility_Functions.xClick(driver, menu_More, true);*/
+		sf_UtilityFunctions.oneAppNavigationTab("Bulk tagging");
 		Utility_Functions.timeWait(5);
 		Utility_Functions.xSwitchtoFrame(driver, accountSearch);
 		Utility_Functions.timeWait(5);
@@ -1305,6 +1062,7 @@ public class TaggingPage extends ReusableLibrary {
 					.xpath("//h2[contains(text(),'Property Detail')]/parent::div/following-sibling::div/span/table/tbody/tr["
 							+ i + "]/td/label/input[@type='checkbox']"));
 			Utility_Functions.xClick(driver, element, true);
+			report.updateTestLog("Selecting the Account", "Verifying the account search and Selecting the account", Status.PASS);
 		}
 
 	}

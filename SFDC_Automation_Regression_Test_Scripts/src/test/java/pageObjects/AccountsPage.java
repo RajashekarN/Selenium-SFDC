@@ -35,7 +35,7 @@ public class AccountsPage extends ReusableLibrary {
 	HomePage hp = new HomePage(scriptHelper);
 	LoginPage loginPage = new LoginPage(scriptHelper);
 	SearchTextSOQL searchAccount = new SearchTextSOQL(scriptHelper);
-	ActivityPage activityPage = new ActivityPage(scriptHelper);
+	TasksPage tasksPage = new TasksPage(scriptHelper);
 	SF_UtilityFunctions sf_UtilityFunctions = new SF_UtilityFunctions(scriptHelper);
 	EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
 	static ArrayList<String> accountsPageDetailsList = new ArrayList<String>();
@@ -3900,7 +3900,7 @@ public class AccountsPage extends ReusableLibrary {
 		accountname = Utility_Functions.xGetTextVisibleListElement(driver, accountNameSaved);
 		System.out.println(accountname);
 		// Utility_Functions.timeWait(2);
-		activityPage.createNewActivity();
+		tasksPage.createNewActivity();
 	}
 
 	/**
@@ -3925,7 +3925,7 @@ public class AccountsPage extends ReusableLibrary {
 		List<WebElement> accountNamesList = driver.findElements(By.xpath(
 				".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'001')]"));
 		Utility_Functions.xclickOnFirstElementfromList(accountNamesList);
-		activityPage.createNewActivity();
+		tasksPage.createNewActivity();
 	}
 
 	/**
@@ -4096,7 +4096,7 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, addActivity, true);
 		report.updateTestLog("Verify New Activity Page Layout ", "The New Activity in the Details page is Displayed ",
 				Status.PASS);
-		activityPage.verifyNewActivityPageLayout();
+		tasksPage.verifyNewActivityPageLayout();
 	}
 
 	/**
@@ -4179,7 +4179,7 @@ public class AccountsPage extends ReusableLibrary {
 				"Verifying the selected Account is Displayed ", Status.PASS);
 		report.updateTestLog("Verify New Activity Page Layout ", "The New Activity in the Details page is Displayed ",
 				Status.PASS);
-		activityPage.createNewActivity();
+		tasksPage.createNewActivity();
 	}
 
 	/**
@@ -4506,7 +4506,7 @@ public class AccountsPage extends ReusableLibrary {
 	 */
 	public void additionalActivityTypes() {
 		accountsFunction();
-		activityPage.validateActivityTypeValues();
+		tasksPage.validateActivityTypeValues();
 	}
 
 	/**
@@ -4596,7 +4596,7 @@ public class AccountsPage extends ReusableLibrary {
 		accountsFunction();
 		Utility_Functions.xWaitForElementPresent(driver, addActivity, 3);
 		Utility_Functions.xClick(driver, addActivity, true);
-		activityPage.createNewActivity();
+		tasksPage.createNewActivity();
 	}
 
 	/**
@@ -4697,8 +4697,8 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xclickRandomElement(accountNamesList);
 		Utility_Functions.xWaitForElementPresent(driver, addActivity, 4);
 		Utility_Functions.xClick(driver, addActivity, true);
-		activityPage.verifyNewActivityPageLayout();
-		activityPage.validateActivityTimeLine();
+		tasksPage.verifyNewActivityPageLayout();
+		tasksPage.validateActivityTimeLine();
 	}
 
 	/**

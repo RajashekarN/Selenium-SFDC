@@ -6,7 +6,7 @@ import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
 import pageObjects.*;
 import pageObjects.LoginPage;
-import pageObjects.ActivityPage;
+import pageObjects.TasksPage;
 import pagesAPI.AccountsFunctions;
 import pagesAPI.ActivityFunctions;
 import pagesAPI.AttachmentsFunctions;
@@ -57,7 +57,7 @@ public class BC_UI_API_Test extends ReusableLibrary {
 	AttachmentsFunctions attachmentsFunctions = new AttachmentsFunctions(scriptHelper);
 	TaggingFunctions tagging= new TaggingFunctions(scriptHelper);
 	BudgetsTargetsFunctions budgetsTargetsFunctions = new BudgetsTargetsFunctions(scriptHelper);
-	ActivityPage sfActivityPage = new ActivityPage(scriptHelper);
+	TasksPage sfActivityPage = new TasksPage(scriptHelper);
 	ContactsPage sfContactsPage=new ContactsPage(scriptHelper);
 	LeadsPage sfLeadPage=new LeadsPage(scriptHelper);
 	OpportunitiesPage sfOppPage=new OpportunitiesPage(scriptHelper);
