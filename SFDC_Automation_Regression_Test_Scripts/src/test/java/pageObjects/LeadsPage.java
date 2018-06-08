@@ -1570,12 +1570,11 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);		
 		if(leadsList.isEmpty()) {
 		*/
-		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
+		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 5);
 			Utility_Functions.xClick(driver, recentlyViewed, true);
-			Utility_Functions.xWaitForElementPresent(driver, allLeadsMenu, 3);
+			Utility_Functions.xWaitForElementPresent(driver, allLeadsMenu, 5);
 			Utility_Functions.xClick(driver, allLeadsMenu, true);
-			Utility_Functions.timeWait(6);
-			Utility_Functions.xWaitForElementPresent(driver, leadsList, 3);
+			Utility_Functions.xWaitForElementPresent(driver, leadsList, 9);
 			Utility_Functions.xclickOnFirstElementfromList(leadsList);
 		/*} else {
 			Utility_Functions.xclickOnFirstElementfromList(leadsList);
@@ -1583,8 +1582,7 @@ public class LeadsPage extends ReusableLibrary {
 /*		Utility_Functions.timeWait(5);
 		Utility_Functions.xWaitForElementPresent(driver, selectNewEvent, 3);
 		Utility_Functions.xClick(driver, selectNewEvent, true);*/
-		Utility_Functions.timeWait(3);
-		Utility_Functions.xWaitForElementPresent(driver, newEvent, 3);
+		Utility_Functions.xWaitForElementPresent(driver, newEvent, 6);
 		Utility_Functions.xClick(driver, newEvent, true);
 		Utility_Functions.timeWait(5);
 		eventPage.verifyNewEventPageLayout();
@@ -1994,7 +1992,12 @@ public class LeadsPage extends ReusableLibrary {
 		customPageProspectRequirementsFieldsList.add("Total # of Units");
 		customPageProspectRequirementsFieldsList.add("Requirement Details");
 		customPageProspectRequirementsFieldsList.add("Unit of Comparison");
-		customPageProspectRequirementsFieldsList.add("Existing Engagement Expiration");
+		if(dataTable.getData("General_Data", "TC_ID").contains("OB")) {
+			customPageProspectRequirementsFieldsList.add("Existing Lease Expiration");
+			customPageProspectRequirementsFieldsList.add("Existing Termination/Break Option");
+		}
+		else
+			customPageProspectRequirementsFieldsList.add("Existing Engagement Expiration");
 		
 
 		System.out.println("Custom Page Prospect requirements fields are " + customPageProspectRequirementsFieldsList);
@@ -2031,9 +2034,9 @@ public class LeadsPage extends ReusableLibrary {
 	}	
 	
 	public void verifyLeadsNewCustomPage() {
-		Utility_Functions.xWaitForElementPresent(driver, menu_Leads, 5);
+		Utility_Functions.xWaitForElementPresent(driver, menu_Leads, 8);
 		Utility_Functions.xClick(driver, menu_Leads, true);
-		Utility_Functions.xWaitForElementPresent(driver, newLeads, 5);
+		Utility_Functions.xWaitForElementPresent(driver, newLeads, 8);
 		Utility_Functions.xClick(driver, newLeads, true);
 		Utility_Functions.timeWait(4);
 		Utility_Functions.xSwitchtoFrame(driver, continueButton);
