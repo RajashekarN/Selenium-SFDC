@@ -16,8 +16,6 @@ import org.openqa.selenium.support.PageFactory;
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
-
-import pagesAPI.SearchTextSOQL;
 import supportLibraries.SF_UtilityFunctions;
 import supportLibraries.Utility_Functions;
 
@@ -201,8 +199,6 @@ public class TasksPage extends ReusableLibrary {
 	DateFormat dateFormat;
 	// DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 	Date date = new Date();
-	SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
-
 	SF_UtilityFunctions sf_UtilityFunctions = new SF_UtilityFunctions(scriptHelper);
 
 	/**

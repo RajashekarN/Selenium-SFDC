@@ -31,7 +31,6 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 		super(scriptHelper);
 	}
 
-	BC_Salesforce_Login sfBC_Login = new BC_Salesforce_Login(scriptHelper);
 	OpportunitiesPage sfOpportunitiesPage = new OpportunitiesPage(scriptHelper);
 	OpportunitiesInstallments opportunityInstallments = new OpportunitiesInstallments(scriptHelper);
 	OpportunitiesDefaultRecordType opportunitiesDefaultRecordType = new OpportunitiesDefaultRecordType(scriptHelper);
@@ -40,17 +39,17 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	OpportunitiesFunctions opportunitiesFunctions = new OpportunitiesFunctions(scriptHelper);
 	OfferPage offerPage = new OfferPage(scriptHelper);
 	
-	/**
+/*	*//**
 	 * Validating the Login functionality
 	 * 
 	 * @author Vishnuvardhan
 	 *
-	 */
+	 *//*
 
 	public void bc_login() throws InterruptedException {
 		sfBC_Login.bc_invokeApplication();
 		sfBC_Login.bc_login();
-	}
+	}*/
 	
 	
 	public void bc_selectOpportunity(){

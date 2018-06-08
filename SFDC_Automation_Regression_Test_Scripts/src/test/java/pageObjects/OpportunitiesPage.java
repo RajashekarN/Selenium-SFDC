@@ -1468,12 +1468,10 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//label[text() = 'Account Name']")
 	WebElement OpportunityPageLabel;
 
-	HomePage hp = new HomePage(scriptHelper);
 	SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
-	OpportunitiesFunctions opportunitiesFunctions = new OpportunitiesFunctions(scriptHelper);
 	Actions actions = new Actions(driver.getWebDriver());
 	EventPage eventPage = new EventPage(scriptHelper);
-	TasksPage activityPage = new TasksPage(scriptHelper);
+	TasksPage tasksPage = new TasksPage(scriptHelper);
 	SF_UtilityFunctions sf_UtilityFunctions = new SF_UtilityFunctions(scriptHelper);
 	int offsetValue = new Random().nextInt(9);
 	EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
@@ -4903,7 +4901,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			report.updateTestLog("Verify Opportunity Related List Object", "Activity and chatter are not displayed",
 					Status.FAIL);
 		}
-		activityPage.createNewActivity();
+		tasksPage.createNewActivity();
 	}
 
 	/**

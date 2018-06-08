@@ -2,11 +2,8 @@ package businessComponents;
 
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
-
-import pageObjects.AccountsPage;
-import pageObjects.HomePage;
 import pageObjects.LoginPage;
-import pageObjects.OpportunitiesPage;
+
 
 /**
  * Business Components Class for validating functionalities related to Login Page
@@ -28,9 +25,6 @@ public class BC_Salesforce_Login extends ReusableLibrary {
 	}
 
 	LoginPage sfLogin = new LoginPage(scriptHelper);
-	HomePage sfHomePage = new HomePage(scriptHelper);
-	AccountsPage sfAccountPage = new AccountsPage(scriptHelper);
-	OpportunitiesPage sfOpportunityPage = new OpportunitiesPage(scriptHelper);
 	
 	/**
 	 * Validating the launching the browser functionality 

@@ -29,7 +29,6 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 		super(scriptHelper);
 	}
 
-	BC_Salesforce_Login sfBC_Login = new BC_Salesforce_Login(scriptHelper);
 	PropertiesPage sfPropertiesPage = new PropertiesPage(scriptHelper);
 	PropertiesFunctions propertiesFunctions = new PropertiesFunctions(scriptHelper);
 	TaggingPage taggingPage = new TaggingPage(scriptHelper);

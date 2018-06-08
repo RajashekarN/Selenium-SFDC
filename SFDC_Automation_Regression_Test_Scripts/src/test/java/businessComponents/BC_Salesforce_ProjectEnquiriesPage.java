@@ -17,18 +17,17 @@ public class BC_Salesforce_ProjectEnquiriesPage extends ReusableLibrary {
 		super(scriptHelper);
 	}
 
-	BC_Salesforce_Login sfBC_Login = new BC_Salesforce_Login(scriptHelper);
 	ProjectEnquiriesPage projectEnquiriesPage= new ProjectEnquiriesPage(scriptHelper);
-	/**
+/*	*//**
 	 * Validating the Login functionality
 	 * 
 	 * @author Vishnuvardhan
 	 *
-	 */
+	 *//*
 	public void bc_login() throws InterruptedException {
 		sfBC_Login.bc_invokeApplication();
 		sfBC_Login.bc_login();
-	}
+	}*/
 
 	public void bc_verifyAccountOnContactRequired() {
 		projectEnquiriesPage.verifyAccountOnContactRequired();
