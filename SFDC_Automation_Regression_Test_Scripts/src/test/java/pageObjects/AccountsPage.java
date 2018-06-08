@@ -1685,7 +1685,7 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, allAccounts, true);
 		Utility_Functions.timeWait(2);
 		report.updateTestLog("Verify Create Activity Account", "All accounts are displayed successfully:::", Status.PASS);
-		List<WebElement> accountNamesList = driver.findElements(By.xpath(".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'001')]"));
+		List<WebElement> accountNamesList = driver.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'001')]"));
 		Utility_Functions.xclickOnFirstElementfromList(accountNamesList);
 		activityPage.createNewActivity();
 	}
