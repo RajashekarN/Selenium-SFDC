@@ -1902,6 +1902,7 @@ public class LeadsPage extends ReusableLibrary {
 	 * Validating the Leads custom Page
 	 * 
 	 * @author Ramya
+	 * @author SChandran
 	 *
 	 */	
 
@@ -1930,7 +1931,7 @@ public class LeadsPage extends ReusableLibrary {
 		customPageAddressInformationFieldsList.add("Country Code");
 		customPageAddressInformationFieldsList.add("Street");
 		customPageAddressInformationFieldsList.add("City");
-		customPageAddressInformationFieldsList.add("State/Province");
+		customPageAddressInformationFieldsList.add("State/Province Code");
 		customPageAddressInformationFieldsList.add("Zip/Postal Code");
 
 
@@ -1953,19 +1954,19 @@ public class LeadsPage extends ReusableLibrary {
 	public void customPageLeadInformationFields() {
 		customPageLeadInformationFieldsList.add("Salutation");
 		customPageLeadInformationFieldsList.add("First Name");
-		customPageLeadInformationFieldsList.add("* Last Name");
+		customPageLeadInformationFieldsList.add("Last Name\n*");
 		customPageLeadInformationFieldsList.add("Rating");
 		customPageLeadInformationFieldsList.add("Middle Name");
 		customPageLeadInformationFieldsList.add("Lead Source");
 		customPageLeadInformationFieldsList.add("Nickname");
-		customPageLeadInformationFieldsList.add("* Lead Status");
+		customPageLeadInformationFieldsList.add("Lead Status\n*");
 		customPageLeadInformationFieldsList.add("Title");
 		customPageLeadInformationFieldsList.add("Lead Record Type");
 		customPageLeadInformationFieldsList.add("Department");
 		customPageLeadInformationFieldsList.add("Lead Owner");
 		customPageLeadInformationFieldsList.add("Influence Level");
-		customPageLeadInformationFieldsList.add("Lead Owner User Market");
-		customPageLeadInformationFieldsList.add("* Company");
+		customPageLeadInformationFieldsList.add("Lead Owner");
+		customPageLeadInformationFieldsList.add("Company\n*");
 		customPageLeadInformationFieldsList.add("Represented By (Firm)");
 		customPageLeadInformationFieldsList.add("Industry");
 		customPageLeadInformationFieldsList.add("Website");
@@ -1993,8 +1994,7 @@ public class LeadsPage extends ReusableLibrary {
 		customPageProspectRequirementsFieldsList.add("Total # of Units");
 		customPageProspectRequirementsFieldsList.add("Requirement Details");
 		customPageProspectRequirementsFieldsList.add("Unit of Comparison");
-		customPageProspectRequirementsFieldsList.add("Existing Lease Expiration");
-		customPageProspectRequirementsFieldsList.add("Existing Termination/Break Option");
+		customPageProspectRequirementsFieldsList.add("Existing Engagement Expiration");
 		
 
 		System.out.println("Custom Page Prospect requirements fields are " + customPageProspectRequirementsFieldsList);
@@ -2003,9 +2003,9 @@ public class LeadsPage extends ReusableLibrary {
 
 	public void customPageAdditionalInformationFields() {
 		customPageAdditionalInformationFieldsList.add("Assistant Name");
-		customPageAdditionalInformationFieldsList.add("Invalid");
+//		customPageAdditionalInformationFieldsList.add("Invalid");
 		customPageAdditionalInformationFieldsList.add("Assistant Phone");
-		customPageAdditionalInformationFieldsList.add("Date Verified");
+//		customPageAdditionalInformationFieldsList.add("Date Verified");
 		customPageAdditionalInformationFieldsList.add("Assistant Email");
 		customPageAdditionalInformationFieldsList.add("Unmapped Fields");
 		customPageAdditionalInformationFieldsList.add("Next Steps");
@@ -2064,12 +2064,15 @@ public class LeadsPage extends ReusableLibrary {
 
 		/***** Validating Lead Information Section *****/
 
-		List<WebElement> createNewLeadLeadInformationSectionFieldsOnPage = driver.findElements(By.xpath("//h3[contains(@class,'section__title') and contains(@class,'section-header')]/span[text()='Lead Information']/following::div[1]//label"
-																								+ "|//h3[contains(@class,'section__title') and contains(@class,'section-header')]/span[text()='Lead Information']/following::div[1]//span[contains(@id,'a-label')]"
+		List<WebElement> createNewLeadLeadInformationSectionFieldsOnPage = driver.findElements(By.xpath("//h3[contains(@class,'section__title') and contains(@class,'section-header')]/span[text()='Lead Information']/following::div[1]//label/span"
+																								+ "|//h3[contains(@class,'section__title') and contains(@class,'section-header')]/span[text()='Lead Information']/following::div[1]//span[contains(@class,'field-label') or contains(@id,'a-label')]/parent::span[contains(@class,'form-element__label')]/span"
 																								+ "|//h3[contains(@class,'section__title') and contains(@class,'section-header')]/span[text()='Lead Information']/following::div[1]//div[contains(@class,'full forcePageBlockItem')]//span[contains(@class,'field-label')]"));
-		List<String> createNewLeadLeadInformationSectionFieldsFound = new ArrayList<String>();
-		for (WebElement element : createNewLeadLeadInformationSectionFieldsOnPage) {
-			createNewLeadLeadInformationSectionFieldsFound.add(element.getText());
+		List<String> createNewLeadLeadInformationSectionFieldsFound = new ArrayList<String>();	
+		for(int i=0; i<createNewLeadLeadInformationSectionFieldsOnPage.size(); i++)
+		{
+			createNewLeadLeadInformationSectionFieldsFound.add(createNewLeadLeadInformationSectionFieldsOnPage.get(i).getText());
+			if(createNewLeadLeadInformationSectionFieldsFound.get(i).equals("*"))
+				createNewLeadLeadInformationSectionFieldsFound.set(i-1, createNewLeadLeadInformationSectionFieldsFound.get(i-1)+"\n*");
 		}
 
 		customPageLeadInformationFields();
@@ -2084,7 +2087,7 @@ public class LeadsPage extends ReusableLibrary {
 
 		/***** Validating Address Information Section *****/
 
-		List<WebElement> createNewLeadAddressInformationSectionFieldsOnPage = driver.findElements(By.xpath("//h3[contains(@class,'section__title') and contains(@class,'section-header')]/span[text()='Address Information']/following::div[1]//label"
+		List<WebElement> createNewLeadAddressInformationSectionFieldsOnPage = driver.findElements(By.xpath("//h3[contains(@class,'section__title') and contains(@class,'section-header')]/span[text()='Address Information']/following::div[1]//label/span"
 																												+"|//h3[contains(@class,'section__title') and contains(@class,'section-header')]/span[text()='Address Information']/following::div[1]//span[contains(@id,'a-label')]"
 																												+"|//h3[contains(@class,'section__title') and contains(@class,'section-header')]/span[text()='Address Information']/following::div[1]//legend[contains(@class,'label inputLabel')]"));
 		List<String> createNewLeadAddressInformationSectionFieldsFound = new ArrayList<String>();
@@ -2104,7 +2107,7 @@ public class LeadsPage extends ReusableLibrary {
 
 		/***** Validating Contact Information Section *****/
 
-		List<WebElement> createNewLeadContactInformationSectionFieldsOnPage = driver.findElements(By.xpath("//h3[contains(@class,'section__title') and contains(@class,'section-header')]/span[text()='Contact Information']/following::div[1]//label"
+		List<WebElement> createNewLeadContactInformationSectionFieldsOnPage = driver.findElements(By.xpath("//h3[contains(@class,'section__title') and contains(@class,'section-header')]/span[text()='Contact Information']/following::div[1]//label/span"
 																											+"|//h3[contains(@class,'section__title') and contains(@class,'section-header')]/span[text()='Contact Information']/following::div[1]//span[contains(@id,'a-label')]"));
 		List<String> createNewLeadContactInformationSectionFieldsFound = new ArrayList<String>();
 		for (WebElement element : createNewLeadContactInformationSectionFieldsOnPage) {
@@ -2123,7 +2126,7 @@ public class LeadsPage extends ReusableLibrary {
 
 		/***** Validating Communication Preferences Section *******/
 
-		List<WebElement> createNewLeadCommunicationPreferencesSectionFieldsOnPage = driver.findElements(By.xpath("//h3[contains(@class,'section__title') and contains(@class,'section-header')]/span[text()='Communication Preferences']/following::div[1]//label"
+		List<WebElement> createNewLeadCommunicationPreferencesSectionFieldsOnPage = driver.findElements(By.xpath("//h3[contains(@class,'section__title') and contains(@class,'section-header')]/span[text()='Communication Preferences']/following::div[1]//label/span"
 																											+"|//h3[contains(@class,'section__title') and contains(@class,'section-header')]/span[text()='Communication Preferences']/following::div[1]//span[contains(@id,'a-label')]"));
 		List<String> createNewLeadCommunicationPreferencesSectionFieldsFound = new ArrayList<String>();
 		for (WebElement element : createNewLeadCommunicationPreferencesSectionFieldsOnPage) {
@@ -2142,7 +2145,7 @@ public class LeadsPage extends ReusableLibrary {
 
 		/***** Validating Prospect Requirements Section *****/
 
-		List<WebElement> createNewLeadProspectRequirementsSectionFieldsOnPage = driver.findElements(By.xpath("//h3[contains(@class,'section__title') and contains(@class,'section-header')]/span[text()='Prospect Requirements']/following::div[1]//label"
+		List<WebElement> createNewLeadProspectRequirementsSectionFieldsOnPage = driver.findElements(By.xpath("//h3[contains(@class,'section__title') and contains(@class,'section-header')]/span[text()='Prospect Requirements']/following::div[1]//label/span"
 																										+"|//h3[contains(@class,'section__title') and contains(@class,'section-header')]/span[text()='Prospect Requirements']/following::div[1]//span[contains(@id,'a-label')]"));
 		List<String> createNewLeadProspectRequirementsSectionFieldsFound = new ArrayList<String>();
 		for (WebElement element : createNewLeadProspectRequirementsSectionFieldsOnPage) {
@@ -2161,7 +2164,7 @@ public class LeadsPage extends ReusableLibrary {
 
 		/***** Validating Additional Information Section *****/
 
-		List<WebElement> createNewLeadAdditionalInformationSectionFieldsOnPage = driver.findElements(By.xpath("//h3[contains(@class,'section__title') and contains(@class,'section-header')]/span[text()='Additional Information']/following::div[1]//label"
+		List<WebElement> createNewLeadAdditionalInformationSectionFieldsOnPage = driver.findElements(By.xpath("//h3[contains(@class,'section__title') and contains(@class,'section-header')]/span[text()='Additional Information']/following::div[1]//label/span"
 																										+"|//h3[contains(@class,'section__title') and contains(@class,'section-header')]/span[text()='Additional Information']/following::div[1]//span[contains(@id,'a-label')]"));
 		List<String> createNewLeadAdditionalInformationSectionFieldsFound = new ArrayList<String>();
 		for (WebElement element : createNewLeadAdditionalInformationSectionFieldsOnPage) {
