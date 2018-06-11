@@ -152,10 +152,10 @@ public class BC_UI_API_Test extends ReusableLibrary {
 		sfActivityPage.validateEventActivity(returnmapEvent.get("past"),returnmapEvent.get("present"),returnmapEvent.get("future"));
 	}
 	
-	public void bc_createContactActivityAPI() throws InterruptedException{
+	public void bc_createContactActivityAPI() throws Exception{
 		HashMap<String,String> returnmap=taskEventsFunctions.createTaskbyActivityDate();
 		bc_loginApi();
-		String accountName= sfContactsPage.selectContactById(returnmap.get("contactId"));
+		String accountName= sfContactsPage.getAccountNameOnContact(returnmap.get("contactId"));
 		if(dataTable.getData("General_Data", "TC_ID").contains("Activity") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") && dataTable.getData("General_Data", "TC_ID").contains("Expand") ){
 			sfActivityPage.validateActivityExpandAll(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
 		} else if(dataTable.getData("General_Data", "TC_ID").contains("Activity") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") && dataTable.getData("General_Data", "TC_ID").contains("CreationDates") ){
@@ -164,11 +164,11 @@ public class BC_UI_API_Test extends ReusableLibrary {
 			sfActivityPage.validateAccountActivity(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
 		}
 	}
-	public void bc_createContactEventAPI() throws InterruptedException{
+	public void bc_createContactEventAPI() throws Exception{
 		HashMap<String,String> returnmap=taskEventsFunctions.createEventbyActivityDate(null);
 		bc_loginApi();
 		
-		sfContactsPage.selectContactById(returnmap.get("contactId"));
+		sfContactsPage.selectExistingContactById(returnmap.get("contactId"));
 		if(dataTable.getData("General_Data", "TC_ID").contains("Event") && dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA") && !dataTable.getData("General_Data", "TC_ID").contains("Expand") ){
 			sfActivityPage.validateEventActivity(returnmap.get("past"),returnmap.get("present"),returnmap.get("future"));
 		}
