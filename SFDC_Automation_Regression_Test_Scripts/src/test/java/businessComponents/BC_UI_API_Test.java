@@ -60,7 +60,6 @@ public class BC_UI_API_Test extends ReusableLibrary {
 	TasksPage sfActivityPage = new TasksPage(scriptHelper);
 	ContactsPage sfContactsPage=new ContactsPage(scriptHelper);
 	LeadsPage sfLeadPage=new LeadsPage(scriptHelper);
-	OpportunitiesPage sfOppPage=new OpportunitiesPage(scriptHelper);
 	CampaignsFunctions campaignsFunctions = new CampaignsFunctions(scriptHelper);
 	SubscriptionsFunctions subscriptionsFunctions = new SubscriptionsFunctions(scriptHelper);
 	
@@ -184,6 +183,7 @@ public class BC_UI_API_Test extends ReusableLibrary {
 	}
 	
 	public void bc_createOpportunityActivityAPI() throws InterruptedException{
+		OpportunitiesPage sfOppPage=new OpportunitiesPage(scriptHelper);
 		HashMap<String,String> returnmap=taskEventsFunctions.createTaskbyActivityDate();
 		bc_loginApi();
 		String accountName= sfOppPage.selectOpportunityById(returnmap.get("opportunityId"));
@@ -197,6 +197,7 @@ public class BC_UI_API_Test extends ReusableLibrary {
 	}
 	
 	public void bc_createOpportunityEventAPI() throws InterruptedException{
+		OpportunitiesPage sfOppPage=new OpportunitiesPage(scriptHelper);
 		HashMap<String,String> returnmap=taskEventsFunctions.createEventbyActivityDate(null);
 		bc_loginApi();
 		sfOppPage.selectOpportunityById(returnmap.get("opportunityId"));
