@@ -34,14 +34,16 @@ public class PropertiesPage extends ReusableLibrary {
 	 * @author Vishnuvardhan
 	 *
 	 */	
-
+	
 	@FindBy(xpath = "//one-app-nav-bar-menu-item[@class='overflowNavItem slds-dropdown__item']//span[text()='Properties'] ")
 	WebElement properties;
 
 	@FindBy(xpath = "//div[@class='overflowList']//a[@title='Properties'][text()='Properties']")
 	WebElement propertiesEnv;
-
 	
+	@FindBy(xpath = "//one-app-nav-bar[contains(@class,'slds-has-flexi-truncate')]//span[text()='More']")
+	WebElement more;
+		
 	/**
 	 * Page Objects for navigateNewPropertyPage function
 	 *
@@ -59,7 +61,7 @@ public class PropertiesPage extends ReusableLibrary {
 	 *
 	 */	
 
-	@FindBy(xpath = "//div[@class='slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2']/div/label[@for='property-name']/parent::div//div/input")
+	@FindBy(xpath = "//label[text()='Building/Property Name']/parent::div/div/div/input")
 	WebElement buildingPropertyName;
 	
 	/**
@@ -164,9 +166,11 @@ public class PropertiesPage extends ReusableLibrary {
 
 	public void navigateProperties() {
 		try {
-			sf_UtilityFunctions.oneAppNavigationTab("Properties");
+			Utility_Functions.xWaitForElementPresent(driver, properties, 2);
+			Utility_Functions.xClick(driver, properties, true);
 		} catch (Exception e) {
-			sf_UtilityFunctions.oneAppNavigationTab("More");
+			Utility_Functions.xWaitForElementPresent(driver, more, 2);
+			Utility_Functions.xClick(driver, more, true);
 			try {
 				Utility_Functions.xWaitForElementPresent(driver, properties, 2);
 				Utility_Functions.xClick(driver, properties, true);
@@ -239,7 +243,7 @@ public class PropertiesPage extends ReusableLibrary {
 		navigateProperties();
 		sf_UtilityFunctions.selectAction("New");
 		Utility_Functions.xSwitchtoFrame(driver, propertyInformationFrame);
-		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(4);
 		Utility_Functions.xWaitForElementPresent(driver, buildingPropertyName, 3);
 		Utility_Functions.xClick(driver, buildingPropertyName, true);
 		adminHeaderList();

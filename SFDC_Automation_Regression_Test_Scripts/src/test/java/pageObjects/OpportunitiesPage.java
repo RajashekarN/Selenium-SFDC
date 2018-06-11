@@ -202,14 +202,13 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//a[@class='tabHeader']//span[text()='Related']")
 	WebElement related;
 
-	/*
-	 * @FindBy(xpath =
-	 * "//article[contains(@class,'Property')]//div[text()='Associate Property']"
-	 * ) WebElement associateProperty;
-	 */
-
-	@FindBy(xpath = "//span[contains(text(),'Property')]//ancestor::article//div[text()='Associate Property']")
+	
+	@FindBy(xpath ="//article[contains(@class,'Property')]//div[text()='Associate Property']") 
 	WebElement associateProperty;
+	 
+
+	/*@FindBy(xpath = "//span[contains(text(),'Property')]//ancestor::article//div[text()='Associate Property']")
+	WebElement associateProperty;*/
 
 	@FindBy(xpath = "//div[@class='slds-form-element']/label[text()='Opportunity']")
 	WebElement opportunityLabel;
@@ -494,15 +493,12 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//span[text()='Market']/parent::label/parent::div//option[1]")
 	WebElement market_AS;
 
-	@FindBy(xpath = "//select[@id='record-type-select']/option[@selected='selected']")
+	/*@FindBy(xpath = "//select[@id='record-type-select']/option[@selected='selected']")
 	WebElement defaultOpportutnityRecordType;
-
-	/*
-	 * @FindBy(xpath =
-	 * "//div[@class='slds-form-element']/span[text()='Opportunity Record Type']/parent::div/div/span"
-	 * ) WebElement opportunityRecordTypeByDefault;
-	 */
-
+*/
+	@FindBy(xpath ="//div[@class='slds-form-element']/span[text()='Opportunity Record Type']/parent::div/div/span") 
+	WebElement opportunityRecordTypeByDefault;
+	 
 	@FindBy(xpath = "//h2[contains(@class,'slds-text-heading--medium') and contains(@class,'slds-m-bottom--small')]")
 	WebElement opportunityRecordTypeQuickCreate;
 
@@ -1973,11 +1969,11 @@ public class OpportunitiesPage extends ReusableLibrary {
 	public void associateProperty() {
 		selectOpportunity();
 		sf_UtilityFunctions.selectTabUIHeaders("Related");
-		Utility_Functions.timeWait(2);
+		/*Utility_Functions.timeWait(2);
 		Utility_Functions.xScrollWindow(driver);
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xScrollWindowTop(driver);
-		Utility_Functions.timeWait(3);
+		Utility_Functions.timeWait(3);*/
 		try {
 			sf_UtilityFunctions.selectRelatedListsButton("Property", "Associate Property");
 			Utility_Functions.xWaitForElementVisible(driver, opportunityLabel, 5);
