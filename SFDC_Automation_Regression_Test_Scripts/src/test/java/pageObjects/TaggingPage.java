@@ -4,13 +4,10 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import com.cognizant.Craft.ReusableLibrary;
@@ -41,13 +38,6 @@ public class TaggingPage extends ReusableLibrary {
 		PageFactory.initElements(driver.getWebDriver(), this);
 	}
 
-	/**
-	 * 
-	 * Object Initiation
-	 */
-
-	TasksPage tasksPage = new TasksPage(scriptHelper);
-	EventPage eventPage = new EventPage(scriptHelper);
 
 	/**
 	 * Validating the Properties Preferences creation
@@ -207,8 +197,9 @@ public class TaggingPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//input[@value='Search']")
 	WebElement searchProperty;
-
 	
+	TasksPage tasksPage = new TasksPage(scriptHelper);
+	EventPage eventPage = new EventPage(scriptHelper);
 	SF_UtilityFunctions sf_UtilityFunctions = new SF_UtilityFunctions(scriptHelper);
 
 	/**

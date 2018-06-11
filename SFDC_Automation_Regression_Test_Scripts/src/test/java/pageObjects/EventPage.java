@@ -24,6 +24,12 @@ public class EventPage  extends ReusableLibrary {
 	 * {@link DriverScript}
 	 */
 	
+ 	
+	public EventPage(ScriptHelper scriptHelper) {
+		super(scriptHelper);
+		PageFactory.initElements(driver.getWebDriver(), this);
+	}
+	
 	/**
 	 * Validating the creation of an Activityevent on Comp's page
 	 */
@@ -78,11 +84,7 @@ public class EventPage  extends ReusableLibrary {
 
  	
  	
- 	
-	public EventPage(ScriptHelper scriptHelper) {
-		super(scriptHelper);
-		PageFactory.initElements(driver.getWebDriver(), this);
-	}
+
 	
 	public void verifyNewEventPageLayout() {
 		List<WebElement> newEventPageLayoutFields = driver.findElements(By.xpath("//div[@class='riseTransitionEnabled']//label/span"));

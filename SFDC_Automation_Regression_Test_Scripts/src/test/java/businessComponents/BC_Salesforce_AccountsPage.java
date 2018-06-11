@@ -2,12 +2,8 @@ package businessComponents;
 
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
-
 import pageObjects.AccountsPage;
-import pageObjects.TasksPage;
-import pagesAPI.AccountsFunctions;
-import pagesAPI.TaggingFunctions;
-import pagesAPI.TaskEventsFunctions;
+
 
 /**
  * Business Components Class for validating functionalities related to Accounts
@@ -29,23 +25,19 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 		super(scriptHelper);
 	}
 
-	BC_Salesforce_Login sfBC_Login = new BC_Salesforce_Login(scriptHelper);
 	AccountsPage sfAccountsPage = new AccountsPage(scriptHelper);
-	AccountsFunctions accountsFunctions = new AccountsFunctions(scriptHelper);
-	TaskEventsFunctions taskEventsFunctions = new TaskEventsFunctions(scriptHelper);
-	TaggingFunctions tagging = new TaggingFunctions(scriptHelper);
-	TasksPage sfActivityPage=new TasksPage(scriptHelper);
-	/**
+
+/*	*//**
 	 * Validating the Login functionality
 	 * 
 	 * @author Vishnuvardhan
 	 *
-	 */
+	 *//*
 
 	public void bc_login() throws InterruptedException {
 		sfBC_Login.bc_invokeApplication();
 		sfBC_Login.bc_login();
-	}
+	}*/
 	
 	public void bc_accountActivity(){
 		sfAccountsPage.verifyCreateActivityAccount();

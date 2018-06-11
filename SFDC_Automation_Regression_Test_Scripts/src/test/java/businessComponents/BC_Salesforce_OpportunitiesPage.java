@@ -3,6 +3,7 @@ package businessComponents;
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 
+import pageObjects.OfferPage;
 import pageObjects.OpportunitiesDefaultRecordType;
 import pageObjects.OpportunitiesInstallments;
 import pageObjects.OpportunitiesPage;
@@ -30,24 +31,25 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 		super(scriptHelper);
 	}
 
-	BC_Salesforce_Login sfBC_Login = new BC_Salesforce_Login(scriptHelper);
 	OpportunitiesPage sfOpportunitiesPage = new OpportunitiesPage(scriptHelper);
 	OpportunitiesInstallments opportunityInstallments = new OpportunitiesInstallments(scriptHelper);
 	OpportunitiesDefaultRecordType opportunitiesDefaultRecordType = new OpportunitiesDefaultRecordType(scriptHelper);
 	OpportunitySplit opportunitySplit = new OpportunitySplit(scriptHelper);
 	OpportunityPageLayout opportunityPageLayout = new OpportunityPageLayout(scriptHelper);
 	OpportunitiesFunctions opportunitiesFunctions = new OpportunitiesFunctions(scriptHelper);
-	/**
+	OfferPage offerPage = new OfferPage(scriptHelper);
+	
+/*	*//**
 	 * Validating the Login functionality
 	 * 
 	 * @author Vishnuvardhan
 	 *
-	 */
+	 *//*
 
 	public void bc_login() throws InterruptedException {
 		sfBC_Login.bc_invokeApplication();
 		sfBC_Login.bc_login();
-	}
+	}*/
 	
 	
 	public void bc_selectOpportunity(){
@@ -287,17 +289,6 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 		opportunitiesDefaultRecordType.verifyOpportunityRecordTypeForCapitalMarkets();
 	}
 
-	/**
-	 * Validating the Opportunity record type from the opportunity for Capital
-	 * Markets
-	 * 
-	 * @author Ramya
-	 *
-	 */
-
-	public void bc_opportunitySplitRegression() {
-		sfOpportunitiesPage.opportunitySplit();
-	}
 
 	/**
 	 * Verify the Occupier Record Type should default to 'Occupier' opportunity
@@ -707,7 +698,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void bc_verifyNewOfferCreationPage() {
-		sfOpportunitiesPage.verifyNewOfferCreationPage();
+		offerPage.verifyNewOfferCreationPage();
 	}
 
 	/**
@@ -717,7 +708,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_verifyOfferCreationPageFields() {
-		sfOpportunitiesPage.verifyOfferCreationPageFields();
+		offerPage.verifyOfferCreationPageFields();
 
 	}
 
@@ -729,7 +720,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_namingConventionOfOfferObject() {
-		sfOpportunitiesPage.namingConventionOfOfferObject();
+		offerPage.namingConventionOfOfferObject();
 
 	}
 
@@ -740,7 +731,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_relatedListOfOfferObject() {
-		sfOpportunitiesPage.relatedListOfOfferObject();
+		offerPage.relatedListOfOfferObject();
 
 	}
 
@@ -751,7 +742,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_buttonsOnOfferObject() {
-		sfOpportunitiesPage.buttonsOnOfferObject();
+		offerPage.buttonsOnOfferObject();
 
 	}
 
@@ -762,7 +753,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_headersOfOfferObject() {
-		sfOpportunitiesPage.headersOfOfferObject();
+		offerPage.headersOfOfferObject();
 
 	}
 
@@ -864,7 +855,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_APACOfferCreationPageFields() {
-		sfOpportunitiesPage.offerCreationPageFieldsAPAC();
+		offerPage.offerCreationPageFieldsAPAC();
 	}
 	
 	/**
@@ -874,7 +865,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_APACCampaignRecordOffersRelatedLists() {
-		sfOpportunitiesPage.offersReleatedListsCampaignAPAC();
+		offerPage.offersReleatedListsCampaignAPAC();
 	}
 	
 	/**
@@ -959,7 +950,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_createOfferOpportunityPage() {
-		sfOpportunitiesPage.createOfferOpportunityPage();
+		offerPage.createOfferOpportunityPage();
 	}
 	
 	/**
@@ -1106,34 +1097,13 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	}
 	
 	/**
-	 * Validating the Opportunities TeamMember
-	 * 
-	 * @author  Cognizant
-	 *
-	 */
-	public void bc_opportunityTeamMember() {
-		sfOpportunitiesPage.opportunityTeamMember();
-	}
-	
-	
-	/**
-	 * Validating the Opportunities TeamMember
-	 * 
-	 * @author  Cognizant
-	 *
-	 */
-	public void bc_opportunitySplit() {
-		sfOpportunitiesPage.opportunitySplit();
-	}
-	
-	/**
 	 * Validating the Opportunities split percentage
 	 * 
 	 * @author  Cognizant
 	 *
 	 */
 	public void bc_opportunitySplitPercentage() {
-		sfOpportunitiesPage.opportunitySplitPercentage();
+		opportunitySplit.opportunitySplitPercentage();
 	}
 	
 	

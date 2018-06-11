@@ -1464,12 +1464,10 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//label[text() = 'Account Name']")
 	WebElement OpportunityPageLabel;
 
-	HomePage hp = new HomePage(scriptHelper);
 	SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
-	OpportunitiesFunctions opportunitiesFunctions = new OpportunitiesFunctions(scriptHelper);
 	Actions actions = new Actions(driver.getWebDriver());
 	EventPage eventPage = new EventPage(scriptHelper);
-	TasksPage activityPage = new TasksPage(scriptHelper);
+	TasksPage tasksPage = new TasksPage(scriptHelper);
 	SF_UtilityFunctions sf_UtilityFunctions = new SF_UtilityFunctions(scriptHelper);
 	int offsetValue = new Random().nextInt(9);
 	EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
@@ -3434,266 +3432,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	}
 
-	/**
-	 * Validating the Opportunities and the create offer page fields for the
-	 * Auckland Broker
-	 * 
-	 * @author Ramya
-	 *
-	 */
-
-	public void verifyNewOfferCreationPage() {
-		selectNewOpportunity();
-		report.updateTestLog("Verify Quick Create Opportunity Page State Street Pick List ",
-				"Verifying the Opportunities page is displayed", Status.PASS);
-
-		report.updateTestLog("Verify Quick Create Opportunity Page State Street Pick List  ",
-				"Verifying the new opportunity page is displayed", Status.PASS);
-		Utility_Functions.xSwitchtoFrame(driver, continueButton);
-		Utility_Functions.xWaitForElementPresent(driver, continueButton, 3);
-		Utility_Functions.xClick(driver, continueButton, true);
-		Utility_Functions.timeWait(2);
-		driver.switchTo().defaultContent();
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, searchProperties, 3);
-		Utility_Functions.xClick(driver, searchProperties, true);
-		String environment = loginPage.initializeEnvironment();
-		if (environment.equals("FTE")) {
-			Utility_Functions.xWaitForElementPresent(driver, searchProperties, 3);
-			Utility_Functions.xSendKeys(driver, searchProperties, "UOM Auckland Broker");
-			Utility_Functions.xWaitForElementPresent(driver, propertyValue2, 3);
-			Utility_Functions.xClick(driver, propertyValue2, true);
-		} else {
-			Utility_Functions.xWaitForElementPresent(driver, searchProperties, 3);
-			Utility_Functions.xSendKeys(driver, searchProperties, "APAC Property Test - Test CM");
-			Utility_Functions.xWaitForElementPresent(driver, propertyValue, 3);
-			Utility_Functions.xClick(driver, propertyValue, true);
-		}
-		Utility_Functions.xWaitForElementPresent(driver, opportunityName_AS, 3);
-		Utility_Functions.xSendKeys(driver, opportunityName_AS,
-				"Test Automation Opportunity_" + Utility_Functions.xGenerateAlphaNumericString());
-
-		String environment1 = loginPage.initializeEnvironment();
-		if (environment1.equals("FTE")) {
-			Utility_Functions.xWaitForElementPresent(driver, searchAccountsNewOpportunity, 3);
-			Utility_Functions.xClick(driver, searchAccountsNewOpportunity, true);
-			Utility_Functions.xWaitForElementPresent(driver, searchAccountsNewOpportunity, 3);
-			Utility_Functions.xSendKeys(driver, searchAccountsNewOpportunity, "Account APAC");
-			Utility_Functions.xWaitForElementPresent(driver, accountValue2, 3);
-			Utility_Functions.xClick(driver, accountValue2, true);
-		} else {
-			Utility_Functions.xWaitForElementPresent(driver, searchAccountsNewOpportunity, 3);
-			Utility_Functions.xClick(driver, searchAccountsNewOpportunity, true);
-			Utility_Functions.xWaitForElementPresent(driver, searchAccountsNewOpportunity, 3);
-			Utility_Functions.xSendKeys(driver, searchAccountsNewOpportunity,
-					"01BQ2Q8NMECBRE Test SFDC Automation_0401");
-			Utility_Functions.xWaitForElementPresent(driver, searchAccountValue, 3);
-			Utility_Functions.xClick(driver, searchAccountValue, true);
-		}
-		Utility_Functions.xWaitForElementPresent(driver, leadSourceNewOpportunity, 4);
-		Utility_Functions.xClick(driver, leadSourceNewOpportunity, true);
-		Utility_Functions.xWaitForElementPresent(driver, leadSourceValue, 4);
-		Utility_Functions.xClick(driver, leadSourceValue, true);
-		Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeField, 3);
-		Utility_Functions.xSendKeys(driver, estimatedGrossFeeField,
-				dataTable.getData("General_Data", "InstallmentAmount"));
-		Utility_Functions.xWaitForElementPresent(driver, estimatedTransactionValue, 4);
-		Utility_Functions.xSendKeys(driver, estimatedTransactionValue,
-				dataTable.getData("General_Data", "InstallmentAmount"));
-		System.out.println(Calendar.getInstance());
-		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-		Date date = new Date();
-		Utility_Functions.xWaitForElementPresent(driver, closeDate_AS, 3);
-		Utility_Functions.xSendKeys(driver, closeDate_AS, dateFormat.format(date).toString());
-		Utility_Functions.xWaitForElementPresent(driver, salesStage_AS, 4);
-		Utility_Functions.xClick(driver, salesStage_AS, true);
-		Utility_Functions.xWaitForElementPresent(driver, selectStageValue, 4);
-		Utility_Functions.xClick(driver, selectStageValue, true);
-		Utility_Functions.xWaitForElementPresent(driver, saveNewOpportunity_AS, 4);
-		Utility_Functions.xClick(driver, saveNewOpportunity_AS, true);
-	}
-
-	/**
-	 * Validating the Opportunities and the create offer page fields for the
-	 * Auckland Broker
-	 * 
-	 * @author Ramya
-	 *
-	 */
-	static ArrayList<String> createOfferFieldsList = new ArrayList<String>();
-
-	public void createOfferPageFields() {
-
-		createOfferFieldsList.add("Offeror Contact");
-		createOfferFieldsList.add("Deposit");
-		createOfferFieldsList.add("Offer Date");
-		createOfferFieldsList.add("Offer Due Diligence Days");
-		createOfferFieldsList.add("Offer Price");
-		createOfferFieldsList.add("Offer Estimated Settlement Date");
-		createOfferFieldsList.add("Source of Financing");
-		createOfferFieldsList.add("Winner Offer");
-		createOfferFieldsList.add("Approvals/Condition of Sale");
-		createOfferFieldsList.add("Comments");
-		createOfferFieldsList.add("Offer Name");
-
-		System.out.println("The Fields present in the account details page are " + createOfferFieldsList);
-
-	}
-
-	public void verifyOfferCreationPageFields() {
-
-		verifyNewOfferCreationPage();
-		Utility_Functions.xWaitForElementPresent(driver, showMoreActions, 4);
-		Utility_Functions.xClick(driver, showMoreActions, true);
-		Utility_Functions.xWaitForElementPresent(driver, createOffer, 4);
-		Utility_Functions.xClick(driver, createOffer, true);
-		Utility_Functions.timeWait(3);
-		List<WebElement> createOfferPageList = driver
-				.findElements(By.xpath("//label[contains(@class,'form-element__label')]/span[1]"));
-		int count1 = 0, i1 = 0, j1 = 0;
-		String fieldsArray[] = new String[createOfferPageList.size()];
-		System.out.println(createOfferPageList.size());
-		try {
-			createOfferPageFields();
-			while (j1 < createOfferPageList.size()) {
-				for (WebElement element1 : createOfferPageList) {
-					fieldsArray[i1] = element1.getText();
-					if (fieldsArray[i1].equalsIgnoreCase(createOfferFieldsList.get(j1))) {
-						System.out.println("Verify Account Details Page " + element1.getText());
-						report.updateTestLog("Verify Account Details Page ",
-								element1.getText() + "labels  present in the Account Detailed Page ", Status.PASS);
-						count1++;
-					}
-					i1++;
-				}
-				i1 = 0;
-				j1++;
-			}
-			System.out.println(count1);
-			if (count1 != 10) {
-				report.updateTestLog("Verify Accounts Details Page",
-						"All fields are not present in the Accounts Details Page", Status.FAIL);
-			} else {
-				report.updateTestLog("Verify Accounts Details Page",
-						"All fields are present in the Accounts Details Page", Status.PASS);
-			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-
-	}
-
-	/**
-	 * Validating the Opportunities create offer page by filling all the
-	 * mandatory fields for the Auckland Broker
-	 * 
-	 * @author Ramya
-	 *
-	 */
-
-	public void namingConventionOfOfferObject() {
-
-		verifyOfferCreationPageFields();
-		Utility_Functions.timeWait(3);
-		Utility_Functions.xWaitForElementPresent(driver, offerorAccount, 3);
-		Utility_Functions.xClick(driver, offerorAccount, true);
-		Utility_Functions.xWaitForElementPresent(driver, offerorAccount, 3);
-		Utility_Functions.xSendKeys(driver, offerorAccount, "AUCAPACBroker123");
-		Utility_Functions.xWaitForElementPresent(driver, offerorAccountValue, 3);
-		Utility_Functions.xClick(driver, offerorAccountValue, true);
-		Utility_Functions.xWaitForElementPresent(driver, offerorContact, 3);
-		Utility_Functions.xClick(driver, offerorContact, true);
-		Utility_Functions.xWaitForElementPresent(driver, offerorContact, 3);
-		Utility_Functions.xSendKeys(driver, offerorContact, "AUCAPACBroker123");
-		Utility_Functions.xWaitForElementPresent(driver, offerorContactValue, 3);
-		Utility_Functions.xClick(driver, offerorContactValue, true);
-		Utility_Functions.xWaitForElementPresent(driver, offerPrice, 3);
-		Utility_Functions.xSendKeys(driver, offerPrice, dataTable.getData("General_Data", "InstallmentAmount"));
-		Utility_Functions.xWaitForElementPresent(driver, createOfferSave, 3);
-		Utility_Functions.xClick(driver, createOfferSave, true);
-		Utility_Functions.timeWait(3);
-
-	}
-
-	/**
-	 * Validating the related list of offer objects
-	 * 
-	 * @author Ramya
-	 *
-	 */
-
-	public void relatedListOfOfferObject() {
-		namingConventionOfOfferObject();
-		Utility_Functions.timeWait(3);
-		Utility_Functions.xWaitForElementPresent(driver, showMoreActions, 4);
-		Utility_Functions.xClick(driver, showMoreActions, true);
-		if (/* (newEvent.isDisplayed())&& */(newTask.isDisplayed())) {
-			System.out.println("New Event and New task are displayed");
-			report.updateTestLog("Verify Related List of Offer Objects ",
-					"Verifying the New Event and New Task are displayed ", Status.PASS);
-		} else {
-			System.out.println("New Event and New task are not displayed");
-			report.updateTestLog("Verify Related List of Offer Objects ",
-					"Verifying the New Event and New Task are not displayed", Status.FAIL);
-		}
-
-	}
-
-	/**
-	 * Validating the buttons on the offer object
-	 * 
-	 * @author Ramya
-	 *
-	 */
-
-	public void buttonsOnOfferObject() {
-		namingConventionOfOfferObject();
-		if ((edit.isDisplayed()) && (clone.isDisplayed())) {
-			System.out.println("Edit and Clone buttons are displayed");
-			report.updateTestLog("Verify Buttons on Offer Object ", "The Edit and Clone buttons are displayed ",
-					Status.PASS);
-		} else {
-			System.out.println("New Event and New task are not displayed");
-			report.updateTestLog("Verify Buttons on Offer Object ", "The Edit and Clone buttons are not displayed",
-					Status.FAIL);
-		}
-
-	}
-
-	/**
-	 * Validating the headers of the offer object
-	 * 
-	 * @author Ramya
-	 * 
-	 *
-	 */
-	public void headersOfOfferObject() {
-		namingConventionOfOfferObject();
-		sf_UtilityFunctions.selectTabUIHeaders("Related");
-		Utility_Functions.xWaitForElementPresent(driver, offers, 3);
-		Utility_Functions.xClick(driver, offers, true);
-		Utility_Functions.timeWait(3);
-		List<WebElement> accountNamesList = driver.findElements(By.xpath(
-				"//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'a2V')]"));
-		Utility_Functions.xclickOnFirstElementfromList(accountNamesList);
-		Utility_Functions.timeWait(3);
-		if ((offerOpportunity.isDisplayed()) && (offerProperty.isDisplayed()) && (offerEnquiry.isDisplayed())
-				&& (offerorAccountHeader.isDisplayed()) && (offerorContactHeader.isDisplayed())
-				&& (offerDate.isDisplayed())) {
-			System.out.println(
-					"Offer Opportunity, Offer Property, Offer Enquiry, Offeror Account, Offeror Contact and Offer Date are displayed on the Offer Header page");
-			report.updateTestLog("Verify Offer Header Page",
-					"Offer Opportunity, Offer Property, Offer Enquiry, Offeror Account, Offeror Contact and Offer Date are displayed on the Offer Header page",
-					Status.PASS);
-		} else {
-			System.out.println("New Event and New task are not displayed");
-			report.updateTestLog("Verify Offer Header Page",
-					"Offer Opportunity, Offer Property, Offer Enquiry, Offeror Account, Offeror Contact and Offer Date are not displayed on the Offer Header page",
-					Status.FAIL);
-		}
-
-	}
-
+	
 	/**
 	 * Validating the Discretionary Fee check box in the New Opportunity
 	 * creation page
@@ -3882,11 +3621,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void opportunityDiscretionayFeeUnChecked() {
-		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
-		Utility_Functions.xClick(driver, menu_Opportunities, true);
-		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
-		Utility_Functions.xClick(driver, newOpportunity, true);
-		Utility_Functions.timeWait(2);
+		selectNewOpportunity();
 		Utility_Functions.xSwitchtoFrame(driver, viewAllFieldsButton);
 		Utility_Functions.xWaitForElementPresent(driver, viewAllFieldsButton, 5);
 		Utility_Functions.xClick(driver, viewAllFieldsButton, true);
@@ -3914,11 +3649,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void opportunityNetFeeFieldMandatory() {
-		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
-		Utility_Functions.xClick(driver, menu_Opportunities, true);
-		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
-		Utility_Functions.xClick(driver, newOpportunity, true);
-		Utility_Functions.timeWait(2);
+		selectNewOpportunity();
 		if ((dataTable.getData("General_Data", "TC_ID").contains("AMER"))
 				|| (dataTable.getData("General_Data", "TC_ID").contains("APAC"))) {
 			Utility_Functions.xSwitchtoFrame(driver, continueButton);
@@ -3967,13 +3698,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeNewOpportunity, 3);
 			Utility_Functions.xSendKeys(driver, estimatedGrossFeeNewOpportunity,
 					dataTable.getData("General_Data", "InstallmentAmount"));
-		} /*
-			 * else { Utility_Functions.xWaitForElementPresent(driver,
-			 * salesStageEMEAEstimatedGrossCommission, 3);
-			 * Utility_Functions.xSendKeys(driver,
-			 * salesStageEMEAEstimatedGrossCommission,
-			 * dataTable.getData("General_Data", "InstallmentAmount")); }
-			 */
+		} 
 		System.out.println(Calendar.getInstance());
 		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 		Date date = new Date();
@@ -4172,22 +3897,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 	}
 
 	public void validateCreationOfNewInstallment() {
-		/*
-		 * Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities,
-		 * 4); Utility_Functions.xClick(driver, menu_Opportunities, true);
-		 * Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 4);
-		 * Utility_Functions.xClick(driver, recentlyViewed, true);
-		 * Utility_Functions.xWaitForElementPresent(driver,
-		 * allActiveOpportunities, 4); Utility_Functions.xClick(driver,
-		 * allActiveOpportunities, true);
-		 * Utility_Functions.xWaitForElementPresent(driver, opportunitiesList,
-		 * 3); Utility_Functions.xclickRandomElement(opportunitiesList);
-		 */
-		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
-		Utility_Functions.xClick(driver, menu_Opportunities, true);
-		Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
-		Utility_Functions.xclickgetTextofFirstElementfromList(opportunitiesList);
-		// Utility_Functions.xWaitForElementPresent(driver, editButton, 3);
+		sf_UtilityFunctions.oneAppNavigationTab("Opportunity");
+		sf_UtilityFunctions.selectExistingObjectRecord("Opportunity Name");
 		Utility_Functions.xWaitForElementPresent(driver, showMoreActions, 3);
 		Utility_Functions.xClick(driver, showMoreActions, true);
 		Utility_Functions.xWaitForElementPresent(driver, newInstallment, 3);
@@ -4255,16 +3966,6 @@ public class OpportunitiesPage extends ReusableLibrary {
 	public void cloneAndEditButtonsOpportunity() {
 		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
 		opportunityEligibility();
-		/*
-		 * SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
-		 * String query = "SELECT Id FROM Opportunity limit 1 offset 9"; String
-		 * OpportunityID = searchTextSOQL.fetchRecordFieldValue("Id", query);
-		 * report.updateTestLog("Verify Opportunity Required Fields",
-		 * "Opportunity retrived from database is:::" + OpportunityID,
-		 * Status.PASS); String url = driver.getCurrentUrl().split("#")[0];
-		 * String newUrl = url + "#/sObject/" + OpportunityID; newUrl = newUrl +
-		 * "/view"; driver.get(newUrl); driver.navigate().refresh();
-		 */
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, edit, 3);
 		Utility_Functions.xClick(driver, edit, true);
@@ -4614,141 +4315,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		}
 	}
 
-	/**
-	 * Validating the APAC Offers Creation Page fields
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-
-	static ArrayList<String> OfferCreationPageAPAC = new ArrayList<String>();
-
-	public void OfferCreationPageAPACList() {
-		OfferCreationPageAPAC.add("Offer Enquiry");
-		OfferCreationPageAPAC.add("Offeror Contact");
-		OfferCreationPageAPAC.add("Deposit");
-		OfferCreationPageAPAC.add("Offeror Account");
-		OfferCreationPageAPAC.add("Offer Due Diligence Days");
-		OfferCreationPageAPAC.add("Offer Campaign");
-		OfferCreationPageAPAC.add("Offer Estimated Settlement Date");
-		OfferCreationPageAPAC.add("Offer Date");
-		OfferCreationPageAPAC.add("Source of Financing");
-		OfferCreationPageAPAC.add("Offer Price");
-		OfferCreationPageAPAC.add("Approvals/Condition of Sale");
-		OfferCreationPageAPAC.add("Winner Offer");
-		OfferCreationPageAPAC.add("Comments");
-		OfferCreationPageAPAC.add("Offer Name");
-		System.out.println("Offer Creation Page fields in APAC are:::" + OfferCreationPageAPAC);
-	}
-
-	public void offerCreationPageFieldsAPAC() {
-		opportunityEligibility();
-		Utility_Functions.xWaitForElementPresent(driver, selectNewEvent, 3);
-		Utility_Functions.xClick(driver, selectNewEvent, true);
-		Utility_Functions.xWaitForElementPresent(driver, createOffer, 3);
-		Utility_Functions.xClick(driver, createOffer, true);
-		Utility_Functions.timeWait(2);
-		OfferCreationPageAPACList();
-		List<WebElement> createOfferPageFieldsList = driver
-				.findElements(By.xpath("//label[contains(@class,'form-element__label')]/span[1]"));
-		int i1 = 0, j = 0, countLabelList = 0;
-		String[] labelTexts = new String[createOfferPageFieldsList.size()];
-		while (j < OfferCreationPageAPAC.size()) {
-			for (WebElement element : createOfferPageFieldsList) {
-				labelTexts[i1] = element.getText();
-				if (labelTexts[i1].contains(OfferCreationPageAPAC.get(j))) {
-					System.out.println("Verify Offer Creatiom Page Fields List" + element.getText());
-					report.updateTestLog("Verify Offer Creatiom Page Fields List",
-							element.getText() + "::::label is present in Offer Creation Page for APAC", Status.PASS);
-					countLabelList++;
-				}
-				i1++;
-			}
-			i1 = 0;
-			j++;
-		}
-		System.out.println("Count of labels present in Offer Creation Page are::" + countLabelList);
-		if (countLabelList >= 11) {
-			report.updateTestLog("Verify Offer Creatiom Page Fields List",
-					"All the fields are present in Offer Creation Page for APAC", Status.PASS);
-		} else {
-			report.updateTestLog("Verify Offer Creatiom Page Fields List",
-					"Not all the fields are present in Offer Creation Page for APAC", Status.FAIL);
-		}
-	}
-
-	public void campaignsList() {
-		Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
-		Utility_Functions.xClick(driver, menu_More, true);
-		Utility_Functions.xWaitForElementPresent(driver, campaigns, 3);
-		Utility_Functions.xClick(driver, campaigns, true);
-		List<WebElement> campaignsList = driver
-				.findElements(By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-		if (campaignsList.isEmpty()) {
-			Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
-			Utility_Functions.xClick(driver, recentlyViewed, true);
-			Utility_Functions.xWaitForElementPresent(driver, allActiveCampaigns, 3);
-			Utility_Functions.xClick(driver, allActiveCampaigns, true);
-			Utility_Functions.timeWait(2);
-			List<WebElement> campaignsListActive = driver.findElements(
-					By.xpath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-			if (campaignsListActive.isEmpty()) {
-				report.updateTestLog("Active Campaigns List", "There are no Active Campaigns present", Status.PASS);
-			} else {
-				Utility_Functions.xclickRandomElement(campaignsListActive);
-			}
-		}
-		Utility_Functions.xclickRandomElement(campaignsList);
-	}
-
-	/**
-	 * Validating the Offers Related List from the APAC Campaign Record
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-	public void offersReleatedListsCampaignAPAC() {
-		campaignsList();
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, related, 3);
-		Utility_Functions.xClick(driver, related, true);
-		Utility_Functions.xScrollWindow(driver);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xScrollWindowTop(driver);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xWaitForElementPresent(driver, offersNew, 3);
-		Utility_Functions.xClick(driver, offersNew, true);
-		Utility_Functions.xWaitForElementPresent(driver, offersNextButton, 3);
-		Utility_Functions.xClick(driver, offersNextButton, true);
-		OfferCreationPageAPACList();
-		Utility_Functions.timeWait(2);
-		List<WebElement> createOfferPageFieldsList = driver
-				.findElements(By.xpath("//label[contains(@class,'form-element__label')]/span[1]"));
-		int i1 = 0, j = 0, countLabelList = 0;
-		String[] labelTexts = new String[createOfferPageFieldsList.size()];
-		while (j < OfferCreationPageAPAC.size()) {
-			for (WebElement element : createOfferPageFieldsList) {
-				labelTexts[i1] = element.getText();
-				if (labelTexts[i1].contains(OfferCreationPageAPAC.get(j))) {
-					System.out.println("Verify Offer Creatiom Page Fields List" + element.getText());
-					report.updateTestLog("Verify Offer Creatiom Page Fields List",
-							element.getText() + "::::label is present in Offer Creation Page for APAC", Status.PASS);
-					countLabelList++;
-				}
-				i1++;
-			}
-			i1 = 0;
-			j++;
-		}
-		System.out.println("Count of labels present in Offer Creation Page are::" + countLabelList);
-		if (countLabelList >= 4) {
-			report.updateTestLog("Verify Offer Creation Page Fields List",
-					"All the fields are present in Offer Creation Page for APAC", Status.PASS);
-		} else {
-			report.updateTestLog("Verify Offer Creation Page Fields List",
-					"Not all the fields are present in Offer Creation Page for APAC", Status.FAIL);
-		}
-	}
+	
 
 	/**
 	 * Validating the Project Enquiries Page Fiels List from the APAC Campaign
@@ -4769,8 +4336,10 @@ public class OpportunitiesPage extends ReusableLibrary {
 		System.out.println("ProjectEnquiries Page Fields in APAC are:::" + ProjectEnquiriesPageFields);
 	}
 
+	OfferPage offerPage = new OfferPage(scriptHelper);
+	
 	public void projectEnquiriesReleatedListsAPAC() {
-		campaignsList();
+		offerPage.campaignsList();
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, related, 3);
 		Utility_Functions.xClick(driver, related, true);
@@ -4857,8 +4426,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	public void projectEnquiriesPropertiesListsAPAC() {
 		selectProperties();
 		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, related, 3);
-		Utility_Functions.xClick(driver, related, true);
+		sf_UtilityFunctions.selectTabUIHeaders("Related");
 		Utility_Functions.xScrollWindow(driver);
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xScrollWindowTop(driver);
@@ -4906,10 +4474,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void opportunityConfidential() {
-		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
-		Utility_Functions.xClick(driver, menu_Opportunities, true);
-		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
-		Utility_Functions.xClick(driver, newOpportunity, true);
+		selectNewOpportunity();
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xSwitchtoFrame(driver, accountName);
 		Utility_Functions.timeWait(2);
@@ -4971,10 +4536,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	}
 
 	public void opportunityTypePickList() {
-		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
-		Utility_Functions.xClick(driver, menu_Opportunities, true);
-		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
-		Utility_Functions.xClick(driver, newOpportunity, true);
+		selectNewOpportunity();
 		/*
 		 * Utility_Functions.timeWait(2);
 		 * Utility_Functions.xSwitchtoFrame(driver, continueButton);
@@ -5158,94 +4720,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	}
 
-	/**
-	 * Validating the Opportunity create offer quick action drop down
-	 * 
-	 * @author Ramya
-	 * 
-	 *
-	 */
-	public void createOfferOpportunityPage() {
-		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
-		Utility_Functions.xClick(driver, menu_Opportunities, true);
-		Utility_Functions.xWaitForElementPresent(driver, newOpportunity, 3);
-		Utility_Functions.xClick(driver, newOpportunity, true);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xSwitchtoFrame(driver, continueButton);
-		Utility_Functions.xWaitForElementPresent(driver, continueButton, 3);
-		Utility_Functions.xClick(driver, continueButton, true);
-		Utility_Functions.timeWait(2);
-		driver.switchTo().defaultContent();
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, targetProperty, 3);
-		// String targetPropertyName =
-		// searchOpportunity.fetchRecord("Property__c ", "Name");
-		// Utility_Functions.xSendKeys(driver,targetProperty,
-		// targetPropertyName);
-		// Utility_Functions.timeWait(1);
-		WebElement firstLookupElement = driver
-				.findElement(By.cssSelector("ul>li.forceSearchInputLookupDesktopOption:nth-child(1)"));
-		Utility_Functions.xWaitForElementPresent(driver, firstLookupElement, 3);
-		Utility_Functions.xClick(driver, firstLookupElement, true);
-		Utility_Functions.xSendKeys(driver, opportunityNameAS,
-				"Test Automation Opportunity_" + Utility_Functions.xGenerateAlphaNumericString());
-		Utility_Functions.xWaitForElementPresent(driver, accountNameNewOpportunity, 3);
-		Utility_Functions.xClick(driver, accountNameNewOpportunity, true);
-		/*
-		 * String accountName = searchOpportunity.fetchRecord("Account",
-		 * "Name");
-		 * Utility_Functions.xSendKeys(driver,accountNameNewOpportunity,
-		 * accountName);
-		 */
-		WebElement firstLookupAccount = driver
-				.findElement(By.cssSelector("ul>li.forceSearchInputLookupDesktopOption:nth-child(1)"));
-		Utility_Functions.xWaitForElementPresent(driver, firstLookupAccount, 3);
-		Utility_Functions.xClick(driver, firstLookupAccount, true);
-		Utility_Functions.xWaitForElementPresent(driver, leadSourceNewOpp, 3);
-		Utility_Functions.xClick(driver, leadSourceNewOpp, true);
-		Utility_Functions.xWaitForElementPresent(driver, leadSourceNewOppValue, 3);
-		Utility_Functions.xClick(driver, leadSourceNewOppValue, true);
-		System.out.println(Calendar.getInstance());
-		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-		Date date = new Date();
-		Utility_Functions.xWaitForElementPresent(driver, closeDate_AS, 3);
-		Utility_Functions.xSendKeys(driver, closeDate_AS, dateFormat.format(date).toString());
-		Utility_Functions.xWaitForElementPresent(driver, estiamtedGrossFeeCommissionValue, 5);
-		Utility_Functions.xSendKeys(driver, estiamtedGrossFeeCommissionValue,
-				dataTable.getData("General_Data", "InstallmentAmount"));
-		Utility_Functions.xWaitForElementPresent(driver, estimatedTransactionValue, 5);
-		Utility_Functions.xSendKeys(driver, estimatedTransactionValue,
-				dataTable.getData("General_Data", "InstallmentAmount"));
-		Utility_Functions.xWaitForElementPresent(driver, saveNewOpportunity_AS, 3);
-		Utility_Functions.xClick(driver, saveNewOpportunity_AS, true);
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xWaitForElementPresent(driver, showMoreActions, 3);
-		Utility_Functions.xClick(driver, showMoreActions, true);
-		Utility_Functions.xWaitForElementPresent(driver, createOffer, 3);
-		Utility_Functions.xClick(driver, createOffer, true);
-		Utility_Functions.xWaitForElementPresent(driver, offerorAccount, 3);
-		Utility_Functions.xSendKeys(driver, offerorAccount, "Test Automation 0100");
-		Utility_Functions.xWaitForElementPresent(driver, offerorAccountName, 3);
-		Utility_Functions.xClick(driver, offerorAccountName, true);
-		Utility_Functions.xWaitForElementPresent(driver, offerorContact, 3);
-		Utility_Functions.xSendKeys(driver, offerorContact, "Test Automation 0100");
-		Utility_Functions.xWaitForElementPresent(driver, offerorContactName, 3);
-		Utility_Functions.xClick(driver, offerorContactName, true);
-		Utility_Functions.xWaitForElementPresent(driver, offerPrice, 5);
-		Utility_Functions.xSendKeys(driver, offerPrice, dataTable.getData("General_Data", "InstallmentAmount"));
-		Utility_Functions.xWaitForElementPresent(driver, createOfferSave, 5);
-		Utility_Functions.xClick(driver, createOfferSave, true);
-		Utility_Functions.timeWait(2);
-		if (details.isDisplayed()) {
 
-			report.updateTestLog("Verify Create Offer from Opportunity",
-					"The offer is saved with the mandatory fields ", Status.PASS);
-		} else {
-			report.updateTestLog("Verify Create Offer from Opportunity",
-					"The offer is not saved with the mandatory fields", Status.FAIL);
-		}
-
-	}
 
 	/**
 	 * Validating the Opportunities create new installment
@@ -5422,7 +4897,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			report.updateTestLog("Verify Opportunity Related List Object", "Activity and chatter are not displayed",
 					Status.FAIL);
 		}
-		activityPage.createNewActivity();
+		tasksPage.createNewActivity();
 	}
 
 	/**
@@ -6009,170 +5484,5 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	}
 
-	public void opportunitySplit() {
-
-		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
-		Utility_Functions.xClick(driver, menu_Opportunities, true);
-		Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
-		Utility_Functions.xclickgetTextofFirstElementfromList(opportunitiesList);
-		Utility_Functions.xWaitForElementPresent(driver, editButton, 3);
-		Utility_Functions.xClick(driver, editButton, true);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xScrollWindowToElement(driver, estimatedGrossFeeField);
-		Utility_Functions.xClick(driver, estimatedGrossFeeField, true);
-		Utility_Functions.xSendKeys(driver, estimatedGrossFeeField, "10,000.00");
-		Utility_Functions.xClick(driver, save, true);
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xClick(driver, related, true);
-		Utility_Functions.timeWait(4);
-		Utility_Functions.xClickHiddenElement(driver, addButtonshareOpportunity);
-		// Utility_Functions.xClick(driver, addButtonshareOpportunity, true);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xSwitchtoFrame(driver, SearchUserTeamRole);
-		Utility_Functions.xClickHiddenElement(driver, SearchUserTeamRole);
-		Utility_Functions.xSendKeys(driver, user1, "Inactive User");
-		Utility_Functions.timeWait(1);
-		user1.sendKeys(Keys.ARROW_DOWN);
-		user1.sendKeys(Keys.ENTER);
-
-		Utility_Functions.xClick(driver, selectTeamRole, true);
-		// Utility_Functions.xWaitForElementPresent(driver,
-		// selectSecondaryMemberRole, 3);
-		// Utility_Functions.xClick(driver, selectSecondaryMemberRole, true);
-		Utility_Functions.xClick(driver, selectOpportunityAccess, true);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xSendKeys(driver, user2, "Test Broker6");
-		Utility_Functions.timeWait(1);
-		user2.sendKeys(Keys.ARROW_DOWN);
-		user2.sendKeys(Keys.ENTER);
-		Utility_Functions.xClick(driver, selectTeamRole2, true);
-		Utility_Functions.xWaitForElementPresent(driver, saveButtonSplit, 3);
-		Utility_Functions.xClick(driver, saveButtonSplit, true);
-		Utility_Functions.timeWait(3);
-		driver.navigate().refresh();
-		Utility_Functions.timeWait(1);
-		driver.switchTo().defaultContent();
-		driver.navigate().refresh();
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xClick(driver, manageOpportunitySplits, true);
-		Utility_Functions.timeWait(4);
-		driver.switchTo().frame(driver.findElement(By.xpath("//iframe")));
-		splitPercent.clear();
-		Utility_Functions.timeWait(3);
-		splitPercent.sendKeys("0");
-		SplitSecond.clear();
-		SplitSecond.sendKeys("0");
-
-		try {
-			Utility_Functions.xClick(driver, saveOpportunitySplit, true);
-
-		} catch (Exception e) {
-			Utility_Functions.xClick(driver, saveOpportunitySplitUAT, true);
-		}
-		report.updateTestLog("Opportunity Saved", "Opportunity Saved successfully::", Status.PASS);
-		Utility_Functions.timeWait(3);
-
-	}
-
-	public void opportunityTeamMember() {
-		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
-		Utility_Functions.xClick(driver, menu_Opportunities, true);
-		Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
-		Utility_Functions.xclickgetTextofFirstElementfromList(opportunitiesList);
-		Utility_Functions.xWaitForElementPresent(driver, editButton, 3);
-		/*
-		 * Utility_Functions.xClick(driver, editButton, true);
-		 * Utility_Functions.timeWait(2);
-		 * Utility_Functions.xScrollWindowToElement(driver,
-		 * estimatedGrossFeeField); Utility_Functions.xClick(driver,
-		 * estimatedGrossFeeField, true); Utility_Functions.xSendKeys(driver,
-		 * estimatedGrossFeeField, "10,000.00");
-		 * Utility_Functions.xClick(driver, save, true);
-		 * Utility_Functions.timeWait(2);
-		 */
-		Utility_Functions.xClick(driver, related, true);
-		Utility_Functions.timeWait(4);
-		Utility_Functions.xClickHiddenElement(driver, addButtonshareOpportunity);
-		// Utility_Functions.xClick(driver, addButtonshareOpportunity, true);
-		Utility_Functions.timeWait(3);
-		Utility_Functions.xSwitchtoFrame(driver, SearchUserTeamRole);
-		Utility_Functions.xClickHiddenElement(driver, SearchUserTeamRole);
-		Utility_Functions.xSendKeys(driver, user1, "Inactive User");
-		Utility_Functions.timeWait(1);
-		user1.sendKeys(Keys.ARROW_DOWN);
-		user1.sendKeys(Keys.ENTER);
-		Utility_Functions.xClick(driver, selectTeamRole, true);
-		Utility_Functions.xWaitForElementPresent(driver, selectSecondaryMemberRole, 3);
-		Utility_Functions.xClick(driver, selectSecondaryMemberRole, true);
-		Utility_Functions.xWaitForElementPresent(driver, selectOpportunityAccess, 3);
-		Utility_Functions.xClick(driver, selectOpportunityAccess, true);
-		Utility_Functions.xWaitForElementPresent(driver, saveButtonSplit, 3);
-		Utility_Functions.xClick(driver, saveButtonSplit, true);
-		Utility_Functions.timeWait(2);
-
-	}
-
-	public void opportunitySplitPercentage() {
-		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
-		Utility_Functions.xClick(driver, menu_Opportunities, true);
-		Utility_Functions.xWaitForElementPresent(driver, opportunitiesList, 3);
-		Utility_Functions.xclickgetTextofFirstElementfromList(opportunitiesList);
-		Utility_Functions.xWaitForElementPresent(driver, editButton, 3);
-		Utility_Functions.xClick(driver, editButton, true);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xScrollWindowToElement(driver, estimatedGrossFeeField);
-		Utility_Functions.xClick(driver, estimatedGrossFeeField, true);
-		Utility_Functions.xSendKeys(driver, estimatedGrossFeeField, "10,000.00");
-		Utility_Functions.xClick(driver, save, true);
-		Utility_Functions.timeWait(6);
-		Utility_Functions.xClick(driver, related, true);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xClickHiddenElement(driver, addButtonshareOpportunity);
-		// Utility_Functions.xClick(driver, addButtonshareOpportunity, true);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xSwitchtoFrame(driver, SearchUserTeamRole);
-		Utility_Functions.xClickHiddenElement(driver, SearchUserTeamRole);
-		Utility_Functions.xSendKeys(driver, user1, "Inactive User");
-		Utility_Functions.timeWait(1);
-		user1.sendKeys(Keys.ARROW_DOWN);
-		user1.sendKeys(Keys.ENTER);
-
-		Utility_Functions.xClick(driver, selectTeamRole, true);
-		// Utility_Functions.xWaitForElementPresent(driver,
-		// selectSecondaryMemberRole, 3);
-		// Utility_Functions.xClick(driver, selectSecondaryMemberRole, true);
-		Utility_Functions.xClick(driver, selectOpportunityAccess, true);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xSendKeys(driver, user2, "Test Broker6");
-		Utility_Functions.timeWait(1);
-		user2.sendKeys(Keys.ARROW_DOWN);
-		user2.sendKeys(Keys.ENTER);
-		Utility_Functions.xClick(driver, selectTeamRole2, true);
-		Utility_Functions.xWaitForElementPresent(driver, saveButtonSplit, 3);
-		Utility_Functions.xClick(driver, saveButtonSplit, true);
-		Utility_Functions.timeWait(3);
-		driver.navigate().refresh();
-		Utility_Functions.timeWait(1);
-		driver.switchTo().defaultContent();
-		driver.navigate().refresh();
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xClick(driver, manageOpportunitySplits, true);
-		Utility_Functions.timeWait(4);
-		driver.switchTo().frame(driver.findElement(By.xpath("//iframe")));
-		splitPercent.clear();
-		Utility_Functions.timeWait(3);
-		splitPercent.sendKeys("0");
-		SplitSecond.clear();
-		Utility_Functions.timeWait(3);
-		SplitSecond.sendKeys("0");
-		try {
-			Utility_Functions.xClick(driver, saveOpportunitySplit, true);
-		} catch (Exception e) {
-			Utility_Functions.xClick(driver, saveOpportunitySplitUAT, true);
-		}
-		report.updateTestLog("Opportunity Saved", "Opportunity Saved successfully::", Status.PASS);
-		Utility_Functions.timeWait(3);
-
-	}
-
+	
 }

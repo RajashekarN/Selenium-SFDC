@@ -79,6 +79,21 @@ public class OpportunitySplit extends ReusableLibrary {
 
 	@FindBy(xpath = "//td[contains(@data-label,'Split Percent')]//input")
 	WebElement splitPercent;
+	
+	@FindBy(xpath = "//li[contains(@class,'slds-button slds-button--neutral slds-truncate')]//a[@class='forceActionLink']/div[@class='slds-truncate'][text()='Edit']")
+	WebElement editButton;
+	
+	@FindBy(xpath = ".//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[contains(text(),'Estimated Gross Fee/Commission')]/parent::label/parent::div/input")
+	WebElement estimatedGrossFeeField;
+	
+	@FindBy(css = ".modal-footer [title='Save']")
+	WebElement save;
+	
+	@FindBy(xpath = "//*[@id='acctSearchBox2']")
+	WebElement SearchUserTeamRole;
+
+	@FindBy(xpath = "//*[contains(@id,'1:j_id56')]")
+	WebElement SplitSecond;
 
 	
 	OpportunitiesPage opportunitiesPage =new OpportunitiesPage(scriptHelper);
@@ -197,6 +212,68 @@ public class OpportunitySplit extends ReusableLibrary {
 				"Opportunity Saved successfully::", Status.PASS);
 		Utility_Functions.timeWait(3);
 	}
+	
+
+	public void opportunitySplitPercentage() {
+		sf_UtilityFunctions.oneAppNavigationTab("Opportunity");
+		sf_UtilityFunctions.selectExistingObjectRecord("Opportunity Name");
+		Utility_Functions.xWaitForElementPresent(driver, editButton, 3);
+		Utility_Functions.xClick(driver, editButton, true);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindowToElement(driver, estimatedGrossFeeField);
+		Utility_Functions.xClick(driver, estimatedGrossFeeField, true);
+		Utility_Functions.xSendKeys(driver, estimatedGrossFeeField, "10,000.00");
+		Utility_Functions.xClick(driver, save, true);
+		Utility_Functions.timeWait(6);
+		sf_UtilityFunctions.selectTabUIHeaders("Related");
+		Utility_Functions.xClickHiddenElement(driver, addButtonshareOpportunity);
+		// Utility_Functions.xClick(driver, addButtonshareOpportunity, true);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xSwitchtoFrame(driver, SearchUserTeamRole);
+		Utility_Functions.xClickHiddenElement(driver, SearchUserTeamRole);
+		Utility_Functions.xSendKeys(driver, user1, "Inactive User");
+		Utility_Functions.timeWait(1);
+		user1.sendKeys(Keys.ARROW_DOWN);
+		user1.sendKeys(Keys.ENTER);
+
+		Utility_Functions.xClick(driver, selectTeamRole, true);
+		// Utility_Functions.xWaitForElementPresent(driver,
+		// selectSecondaryMemberRole, 3);
+		// Utility_Functions.xClick(driver, selectSecondaryMemberRole, true);
+		Utility_Functions.xClick(driver, selectOpportunityAccess, true);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xSendKeys(driver, user2, "Test Broker6");
+		Utility_Functions.timeWait(1);
+		user2.sendKeys(Keys.ARROW_DOWN);
+		user2.sendKeys(Keys.ENTER);
+		Utility_Functions.xClick(driver, selectTeamRole2, true);
+		Utility_Functions.xWaitForElementPresent(driver, saveButtonSplit, 3);
+		Utility_Functions.xClick(driver, saveButtonSplit, true);
+		Utility_Functions.timeWait(3);
+		driver.navigate().refresh();
+		Utility_Functions.timeWait(1);
+		driver.switchTo().defaultContent();
+		driver.navigate().refresh();
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xClick(driver, manageOpportunitySplits, true);
+		Utility_Functions.timeWait(4);
+		driver.switchTo().frame(driver.findElement(By.xpath("//iframe")));
+		splitPercent.clear();
+		Utility_Functions.timeWait(3);
+		splitPercent.sendKeys("0");
+		SplitSecond.clear();
+		Utility_Functions.timeWait(3);
+		SplitSecond.sendKeys("0");
+		try {
+			Utility_Functions.xClick(driver, saveOpportunitySplit, true);
+		} catch (Exception e) {
+			Utility_Functions.xClick(driver, saveOpportunitySplitUAT, true);
+		}
+		report.updateTestLog("Opportunity Saved", "Opportunity Saved successfully::", Status.PASS);
+		Utility_Functions.timeWait(3);
+
+	}
+
 
 
 }
