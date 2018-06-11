@@ -39,9 +39,7 @@ public class ContactsPage extends ReusableLibrary {
 	}
 
 	// Initialization
-	LoginPage loginPage = new LoginPage(scriptHelper);
 	Actions actions = new Actions(driver.getWebDriver());
-	ActivityPage activityPage = new ActivityPage(scriptHelper);
 	EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
 	SearchTextSOQL searchSOQL = new SearchTextSOQL(scriptHelper);
 	AccountsFunctions accountFunctions = new AccountsFunctions(scriptHelper);
@@ -88,6 +86,7 @@ public class ContactsPage extends ReusableLibrary {
 		sf_UtilityFunctions.selectExistingObjectRecord("Name");
 
 	}
+
 
 	/**
 	 * This function navigates to Contact Tab and selects an existing Contact

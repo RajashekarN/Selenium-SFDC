@@ -47,6 +47,3 @@ public class TC_SF_VASAMERManagerOpportunityNameAutoGenerate extends CRAFTTestCa
 	}
 
 }
-
-
-

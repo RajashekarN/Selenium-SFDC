@@ -2,9 +2,7 @@ package businessComponents;
 
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
-
 import pageObjects.HomePage;
-import pageObjects.LoginPage;
 
 /**
  * Business Components Class for validating functionalities related to Home Page
@@ -25,20 +23,18 @@ public class BC_Salesforce_HomePage extends ReusableLibrary {
 		super(scriptHelper);
 	}
 	
-	BC_Salesforce_Login sfBC_Login = new BC_Salesforce_Login(scriptHelper);
 	HomePage sfHomePage = new HomePage(scriptHelper);
-	LoginPage sfLogin = new LoginPage(scriptHelper);
 	
-	/**
+/*	*//**
 	 * Validating the Login functionality 
 	 * 
 	 * @author Vishnuvardhan
 	 *
-	 */	
+	 *//*	
 	public void bc_login() throws InterruptedException {
 		sfBC_Login.bc_invokeApplication();
 		sfBC_Login.bc_login();
-	}
+	}*/
 
 	/**
 	 * Validating the Home Page and Welcome Links
@@ -69,16 +65,16 @@ public class BC_Salesforce_HomePage extends ReusableLibrary {
 		}
 	}
 	
-	/**
+/*	*//**
 	 * Validating the Logout functionality 
 	 * 
 	 * @author Vishnuvardhan
 	 *
-	 */	
+	 *//*	
 	
 	public void bc_logout() throws InterruptedException {
 		sfLogin.logout();
-	}
+	}*/
 	
 	/**
 	 * Validating the tabs on the Home Page for the APAC broker Capital Markets

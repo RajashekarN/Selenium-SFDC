@@ -3,8 +3,10 @@ package businessComponents;
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 
+import pageObjects.EventPage;
 import pageObjects.PropertiesPage;
 import pageObjects.TaggingPage;
+import pageObjects.TasksPage;
 import pagesAPI.PropertiesFunctions;
 
 /**
@@ -27,21 +29,12 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 		super(scriptHelper);
 	}
 
-	BC_Salesforce_Login sfBC_Login = new BC_Salesforce_Login(scriptHelper);
 	PropertiesPage sfPropertiesPage = new PropertiesPage(scriptHelper);
 	PropertiesFunctions propertiesFunctions = new PropertiesFunctions(scriptHelper);
 	TaggingPage taggingPage = new TaggingPage(scriptHelper);
+	TasksPage tasksPage = new TasksPage(scriptHelper);
+	EventPage eventPage = new EventPage(scriptHelper);
 
-	/*	*//**
-			 * Validating the Login functionality
-			 * 
-			 * @author Vishnuvardhan
-			 *
-			 *//*
-			 * 
-			 * public void bc_login() throws InterruptedException {
-			 * sfBC_Login.bc_invokeApplication(); sfBC_Login.bc_login(); }
-			 */
 
 	/**
 	 * Validating the Customer Property Page fields
@@ -285,7 +278,7 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_addTask() throws InterruptedException {
-		taggingPage.addTask();
+		tasksPage.addTask();
 	}
 
 	/**
@@ -315,7 +308,7 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_activityTask() throws InterruptedException {
-		taggingPage.activityTask();
+		tasksPage.activityTask();
 	}
 
 	/**
@@ -325,7 +318,7 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_activityEvent() throws InterruptedException {
-		taggingPage.activityEvent();
+		eventPage.activityEvent();
 	}
 
 	/**
@@ -335,7 +328,7 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_addEvent() throws InterruptedException {
-		taggingPage.addEvent();
+		eventPage.addEvent();
 	}
 
 	/**
@@ -345,7 +338,7 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_editTask() throws InterruptedException {
-		taggingPage.editTask();
+		tasksPage.editTask();
 	}
 
 	/**
@@ -365,7 +358,7 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_deleteTask() throws InterruptedException {
-		taggingPage.deleteTask();
+		tasksPage.deleteTask();
 	}
 
 	/**
@@ -375,7 +368,7 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_editCloseTask() throws InterruptedException {
-		taggingPage.editStatusTask();
+		tasksPage.editStatusTask();
 	}
 
 	/**
@@ -385,7 +378,7 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_editEvent() throws InterruptedException {
-		taggingPage.editEvent();
+		eventPage.editEvent();
 	}
 
 	/**
@@ -395,7 +388,7 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_validationTask() throws InterruptedException {
-		taggingPage.validationTask();
+		tasksPage.validationTask();
 	}
 
 	/**
@@ -405,7 +398,7 @@ public class BC_Salesforce_PropertiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_validationEvent() throws InterruptedException {
-		taggingPage.validationEvent();
+		eventPage.validationEvent();
 	}
 
 	/**

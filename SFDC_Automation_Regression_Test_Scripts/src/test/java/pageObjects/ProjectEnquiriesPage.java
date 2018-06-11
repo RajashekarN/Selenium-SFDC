@@ -15,8 +15,6 @@ public class ProjectEnquiriesPage extends ReusableLibrary  {
 	public ProjectEnquiriesPage(ScriptHelper scriptHelper) {
 		super(scriptHelper);
 		PageFactory.initElements(driver.getWebDriver(), this);
-		// new WebDriverUtil(driver);
-		// Utility_Functions utility = new Utility_Functions(scriptHelper);
 	}
 
 	String tabName ="//span[text()='@TABNAME']";

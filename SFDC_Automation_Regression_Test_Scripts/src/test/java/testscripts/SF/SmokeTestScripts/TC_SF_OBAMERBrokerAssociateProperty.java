@@ -43,8 +43,3 @@ public class TC_SF_OBAMERBrokerAssociateProperty extends CRAFTTestCase
 			};
 	}
 }
-
-
-
-
-

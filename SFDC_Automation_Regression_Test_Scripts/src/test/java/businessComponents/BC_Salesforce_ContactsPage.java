@@ -2,7 +2,7 @@ package businessComponents;
 
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
-import pageObjects.ActivityPage;
+import pageObjects.TasksPage;
 import pageObjects.ContactsPage;
 
 /**
@@ -24,21 +24,20 @@ public class BC_Salesforce_ContactsPage extends ReusableLibrary {
 		super(scriptHelper);
 	}
 
-	BC_Salesforce_Login sfBC_Login = new BC_Salesforce_Login(scriptHelper);
 	ContactsPage sfContactsPage = new ContactsPage(scriptHelper);
-	ActivityPage sfActivityPage = new ActivityPage(scriptHelper);
+	TasksPage sfActivityPage = new TasksPage(scriptHelper);
 
-	/**
+/*	*//**
 	 * Validating the Login functionality 
 	 * 
 	 * @author Vishnuvardhan
 	 *
-	 */	
+	 *//*	
 
 	public void bc_login() throws InterruptedException {
 		sfBC_Login.bc_invokeApplication();
 		sfBC_Login.bc_login();
-	}
+	}*/
 
 	/**
 	 * Validating the activity Lightning Time line fields 

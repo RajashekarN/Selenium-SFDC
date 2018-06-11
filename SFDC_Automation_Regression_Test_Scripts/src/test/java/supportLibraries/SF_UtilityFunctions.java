@@ -41,6 +41,7 @@ public class SF_UtilityFunctions extends ReusableLibrary {
 	public void oneAppNavigationTab(String sText) {
 		By oneAppNavigationTab = By.xpath("//one-app-nav-bar[contains(@class,'slds-has-flexi-truncate')]//span[text()='"+sText+"']");
 		By oneAppNavigationMoreTab = By.xpath("//one-app-nav-bar[contains(@class,'slds-has-flexi-truncate')]//span[text()='More']");
+		By overFlowObjectTab = By.xpath("//span[text()='"+sText+"']");
 		
 		Utility_Functions.xWaitForElementPresent(driver, oneAppNavigationTab, 3);
 		try{
@@ -48,8 +49,8 @@ public class SF_UtilityFunctions extends ReusableLibrary {
 		}catch(Exception e){
 			Utility_Functions.xWaitForElementPresent(driver, oneAppNavigationMoreTab, 3);
 			Utility_Functions.xClick(driver, driver.findElement(oneAppNavigationMoreTab), true);
-			Utility_Functions.xWaitForElementPresent(driver, oneAppNavigationTab, 1);
-			Utility_Functions.xClick(driver, driver.findElement(oneAppNavigationTab), true);
+			Utility_Functions.xWaitForElementPresent(driver, overFlowObjectTab, 1);
+			Utility_Functions.xClick(driver, driver.findElement(overFlowObjectTab), true);
 		
 		}
 	}
@@ -310,6 +311,18 @@ public class SF_UtilityFunctions extends ReusableLibrary {
 		}
 		Utility_Functions.timeWait(2);
 	}
+	
+	/**
+	 * Select a tab from the UI tab Details, Related and More 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	public void selectTabUIHeaders(String TabName) {
+		By buttonName = By.xpath("//div[@class='uiTabBar']//span[text()='"+TabName+"']");
+		Utility_Functions.xWaitForElementPresent(driver, buttonName, 3);
+		driver.findElement(buttonName).click();	   
+	}
 
 	/**
 	 * Select a button from the related list 
@@ -319,8 +332,11 @@ public class SF_UtilityFunctions extends ReusableLibrary {
 	 */
 	public void selectRelatedListsButton(String RelatedListName, String ButtonName) {
 		By buttonName = By.xpath("//span[text()='"+RelatedListName+"']/ancestor::header/following-sibling::div//*[text()='"+ButtonName+"']");
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.timeWait(1);
 		Utility_Functions.xScrollWindowTop(driver);
-		Utility_Functions.xScrollWindowToElement(driver, driver.findElement(buttonName));
+		Utility_Functions.timeWait(1);
+		//Utility_Functions.xScrollWindowToElement(driver, driver.findElement(buttonName));
 		driver.findElement(buttonName).click();	 
 	}
 
