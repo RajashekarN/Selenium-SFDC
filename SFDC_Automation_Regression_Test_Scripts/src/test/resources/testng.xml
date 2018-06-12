@@ -58,7 +58,6 @@
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERManagerContactsCustomActivityTimeline"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERCSSContactsCreationOfNewActivityPage"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_CMAMERManagerOpportunitiesNewCustomEventPage"/>
-			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_CMEMACSSDSFOpportunityNameAutoGenerate"/>
 			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_CMAMERBrokerSalesStage03_07"/>
 			<class name="testscripts.SF.Release37TestScripts.TC_SF_ASAMERBrokerAccountsAdditionalActivity"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerLeadsCustomEventPage"/>
