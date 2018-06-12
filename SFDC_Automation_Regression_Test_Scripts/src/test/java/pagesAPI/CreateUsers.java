@@ -109,6 +109,9 @@ public class CreateUsers extends ReusableLibrary {
 		if(environment.equals("FTE2")) {
 			userNamesFTE2();
 			UserNameList = FTE2userNamesList;
+		} else if(environment.equals("UAT")) {
+			userNamesUAT();
+			UserNameList = UATuserNamesList;
 		}
 		try {			
 			for(int i=0; i < UserNameList.size(); i++) {
@@ -256,7 +259,7 @@ public class CreateUsers extends ReusableLibrary {
 
 	public void userNamesUAT() {
 		
-		/*UATuserNamesList.add("0050x0000018PG6AAM");
+		UATuserNamesList.add("0050x0000018PG6AAM");
 		UATuserNamesList.add("0050x0000018OnXAAU");
 		UATuserNamesList.add("0050x0000018OnhAAE");
 		UATuserNamesList.add("0050x0000018Oo1AAE");
@@ -335,11 +338,7 @@ public class CreateUsers extends ReusableLibrary {
 		UATuserNamesList.add("0050x0000018PFHAA2");
 		UATuserNamesList.add("0050x0000018PGPAA2");
 		UATuserNamesList.add("0050x0000018PGyAAM");
-		UATuserNamesList.add("0050x0000018P44AAE");*/
-		
-		
-
-
+		UATuserNamesList.add("0050x0000018P44AAE");
 		System.out.println("User Names List are::::" + UATuserNamesList);
 	}
 	

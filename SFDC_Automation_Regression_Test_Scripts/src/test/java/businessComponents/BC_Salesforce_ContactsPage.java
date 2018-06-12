@@ -2,7 +2,6 @@ package businessComponents;
 
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
-
 import pageObjects.TasksPage;
 import pageObjects.ContactsPage;
 
@@ -73,7 +72,7 @@ public class BC_Salesforce_ContactsPage extends ReusableLibrary {
 	 */	
 
 	public void bc_selectContact() throws InterruptedException {
-		sfContactsPage.selectContact();
+		sfContactsPage.selectExistingContact("CBRE Client Contact");
 	}
 	
 	/**
@@ -117,18 +116,9 @@ public class BC_Salesforce_ContactsPage extends ReusableLibrary {
 	 *
 	 */	
 	public void bc_verifyNewNotesAndFileAttachment()throws InterruptedException{
-		sfContactsPage.verifyNewNotesAndFileAttachment();
+		sfContactsPage.verifyNewNotesAndFileAttachment("CBRE Client Contact");
 	}
-	/**
-	 * Validating the Attachment of new notes and files in Contact 
-	 * 
-	 * @author Ramya
-	 *
-	 */	
-
-	public void bc_verifyClientContactsNewNotesAndFileAttachment()throws InterruptedException{
-		sfContactsPage.verifyClientContactsNewNotesAndFileAttachment();
-	}
+	
 	/**
 	 * Validating the creation of new Activity in Contact 
 	 * 
@@ -165,7 +155,7 @@ public class BC_Salesforce_ContactsPage extends ReusableLibrary {
 	 */	
 
 	public void bc_hyperlinkContacts() {
-		sfContactsPage.validateHyperlinkContacts();		
+		//sfContactsPage.validateHyperlinkContacts();		
 	}
 
 	/**
@@ -175,7 +165,7 @@ public class BC_Salesforce_ContactsPage extends ReusableLibrary {
 	 *
 	 */	
 	public void bc_newContactPageLayoutFields()throws InterruptedException{
-		sfContactsPage.newContactPageLayoutFields();
+		sfContactsPage.newContactPageLayout();
 	}
 	/**
 	 * Validating the Activity Sent Reminder functionality for the Contacts
@@ -194,7 +184,7 @@ public class BC_Salesforce_ContactsPage extends ReusableLibrary {
 	 *
 	 */	
 	public void bc_contactsVerifyLandingPage()throws InterruptedException{
-		sfContactsPage.contactsVerifyLandingPage();
+		sfContactsPage.validateContactPageLayout("CBRE Client Contact");
 	}
 	/**
 	 * Validating the Contacts Activity Timeline
@@ -210,20 +200,14 @@ public class BC_Salesforce_ContactsPage extends ReusableLibrary {
 	 * Validating the Contacts Updation of contact records
 	 * 
 	 * @author Ramya
+	 * @throws Exception 
 	 *
 	 */	
-	public void bc_verifyUpdationOfContactRecord()throws InterruptedException{
+	public void bc_verifyUpdationOfContactRecord()throws Exception{
 		sfContactsPage.verifyUpdationOfContactRecord();
 	}
 
-	/**
-	 * Validating the status and Reason for Inactivation fields in the Contacts edit page
-	 * @author Ramya
-	 *
-	 */
-	public void bc_verifyContactEditPageFields()throws InterruptedException{
-		sfContactsPage.verifyContactEditPageFields();
-	}
+	
 	/**
 	 * Validating the status and Reason for Inactivation fields in the Contacts edit page
 	 * @author Ramya
@@ -235,9 +219,10 @@ public class BC_Salesforce_ContactsPage extends ReusableLibrary {
 	/**
 	 * Validating the Contacts marketing segmentation fields for the Occupier Client care
 	 * @author Ramya
+	 * @throws Exception 
 	 *
 	 */
-	public void bc_contactsMarketingSegmentationFields()throws InterruptedException{
+	public void bc_contactsMarketingSegmentationFields()throws Exception{
 		sfContactsPage.contactsMarketingSegmentationFields();
 	}
 	
@@ -249,4 +234,9 @@ public class BC_Salesforce_ContactsPage extends ReusableLibrary {
 	public void bc_contactTagging()throws InterruptedException{
 		sfContactsPage.contactTagging();
 	}
+	
+	
+	
+	
+
 }

@@ -62,7 +62,7 @@ public class SF_UtilityFunctions extends ReusableLibrary {
 	 *
 	 */
 	public void selectExistingObjectRecord(String tableColumn) {
-		By visibleRecords = By.xpath("(//span[text()='"+tableColumn+"']/ancestor::thead/following-sibling::tbody//th//a)");
+		By visibleRecords = By.xpath("(//span[text()='"+tableColumn+"')]/ancestor::thead/following-sibling::tbody//th//a)");
 		Utility_Functions.timeWait(2);
 		try {
 			Utility_Functions.xWaitForElementPresent(driver, driver.findElements(visibleRecords), 7);
@@ -301,17 +301,15 @@ public class SF_UtilityFunctions extends ReusableLibrary {
 
 
 	public void clickOnDetailAction(String buttonName) {
-		By ButtonName = By.xpath("//div[text()='"+buttonName+"']/parent::a");
-		List<WebElement> elements = driver.findElements(ButtonName);
-		int Size = elements.size();
-		for(int i=1; i<=Size;i++){
-			String elementNumber = Integer.toString(i);
-			By iButtonName = By.xpath("(//div[text()='"+buttonName+"']/parent::a)["+elementNumber+"]");
-			boolean isElementDisplayed = driver.findElement(iButtonName).isDisplayed();
-			if(isElementDisplayed != false){
-				driver.findElement(iButtonName).click();
-			}
+		By ButtonName = By.xpath("(//div[text()='"+buttonName+"']/parent::a)[1]");
+		By MoreAction = By.xpath("(//span[text()='Show more actions']/ancestor::a)[1]");
+		try{
+		    driver.findElement(ButtonName).click();
+		}catch(Exception e){
+			driver.findElement(MoreAction).click();
+			driver.findElement(ButtonName).click();
 		}
+		Utility_Functions.timeWait(2);
 	}
 	
 	/**
@@ -425,14 +423,21 @@ public class SF_UtilityFunctions extends ReusableLibrary {
     */
     
 	public void verifyElementsArePresentInSection(String SectionName,List<String> listValues) throws Exception{
-          ArrayList<String> actualElementNames = new ArrayList<String>();
+          List<String> actualElementNames = new ArrayList<String>();
           Utility_Functions.xScrollWindowTop(driver);
+          WebElement Field = null;
           try{ 
         	  for(int i =0;i<listValues.size();i++){ 
         		  String FieldName = listValues.get(i);
-        		  By Field_Under_Section =By.xpath("//span[text()='"+SectionName+"']/parent::h3/following-sibling::div//span[string-length(text()) > 0 and text()='"+FieldName+"']");
-        		  Utility_Functions.xScrollWindowToElement(driver, driver.findElement(Field_Under_Section));
-                  actualElementNames.add(driver.findElement(Field_Under_Section).getText());
+        		  By Field_Under_SectionInPopup =By.xpath("//span[text()='"+SectionName+"']/parent::h3/following-sibling::div//span[string-length(text()) > 0 and text()='"+FieldName+"']");
+        		  By Field_Under_SectionInDetail =By.xpath("//span[text()='"+SectionName+"']/ancestor::h3/following-sibling::div//span[string-length(text()) > 0 and text()='"+FieldName+"']");
+        		  try{
+        			  Field =  driver.findElement(Field_Under_SectionInPopup);
+        		  }catch(Exception e){
+        			  Field =  driver.findElement(Field_Under_SectionInDetail);
+        	      }
+        		  Utility_Functions.xScrollWindowToElement(driver,Field);
+                  actualElementNames.add(Field.getText());
              }
                   Object[] actualEleNames = actualElementNames.toArray();
                   Object[] ExpectedNames = listValues.toArray();

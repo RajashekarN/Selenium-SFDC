@@ -408,11 +408,11 @@ public class SearchTextSOQL extends ReusableLibrary {
 				boolean done = false;
 				while (!done) {
 					for (SObject record : result.getRecords()) {
-						if (fieldname.equals("Name")) {
+						if (fieldname.equalsIgnoreCase("Name")) {
 							recordID = (String) record.getField("Name");
 							report.updateTestLog("Verify Fetch Record",
 									"Record has been fetched successfully:::" + recordID, Status.PASS);
-						} else if (fieldname.equals("Id")) {
+						} else if (fieldname.equalsIgnoreCase("Id")) {
 							recordID = (String) record.getField("Id");
 							report.updateTestLog("Verify Fetch Record",
 									"Record has been fetched successfully:::" + recordID, Status.PASS);
