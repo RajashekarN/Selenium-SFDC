@@ -50,9 +50,9 @@ public class SF_UtilityFunctions extends ReusableLibrary {
 			Utility_Functions.xWaitForElementPresent(driver, oneAppNavigationMoreTab, 3);
 			Utility_Functions.xClick(driver, driver.findElement(oneAppNavigationMoreTab), true);
 			Utility_Functions.xWaitForElementPresent(driver, overFlowObjectTab, 1);
-			Utility_Functions.xClick(driver, driver.findElement(overFlowObjectTab), true);
-		
+			Utility_Functions.xClick(driver, driver.findElement(overFlowObjectTab), true);		
 		}
+		Utility_Functions.timeWait(2);
 	}
 
 	/**

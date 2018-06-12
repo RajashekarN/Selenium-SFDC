@@ -470,15 +470,9 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 					opportunity.setField("RecordTypeId", "012i0000000405lAAA");
 					// opportunity.setField("Estimated_Gross_Fee_Commission__c", 10000);
 					report.updateTestLog("Opportunity Name", "Record type is set as Capital Markets - Debt & Structured Finance:::", Status.PASS);
-				} else if ((dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_CM")) && (dataTable.getData("General_Data", "TC_ID").contains("PS"))
-						|| (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_CMEMEA"))) {
-					if(dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_CMEMEA")) {
-						opportunity.setField("RecordTypeId", "012i0000000tvThAAI");
-						report.updateTestLog("Opportunity Name", "Record type is set as Capital Markets Capital Advisors", Status.PASS);
-					} else {
+				} else if ((dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_CM")) && (dataTable.getData("General_Data", "TC_ID").contains("PS"))) {
 						opportunity.setField("RecordTypeId", "012i0000000405kAAA");
-						report.updateTestLog("Opportunity Name", "Record type is set as Property Sales", Status.PASS);
-					}					
+						report.updateTestLog("Opportunity Name", "Record type is set as Property Sales", Status.PASS);									
 				} else if ((dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_GWSAMER"))
 						|| (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_GWSAPAC"))) {
 						opportunity.setField("RecordTypeId", "012i0000000405mAAA");
