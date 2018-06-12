@@ -1290,7 +1290,7 @@ public class Utility_Functions extends ReusableLibrary {
 	
 	public static int xRandomFunction() {
 		Random random = new Random();
-		int value = random.nextInt();
+		int value = random.nextInt(9000000) + 1000000;
 		return value;
 	}
 	
