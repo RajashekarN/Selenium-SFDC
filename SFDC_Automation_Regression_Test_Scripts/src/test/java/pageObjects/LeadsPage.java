@@ -959,23 +959,7 @@ public class LeadsPage extends ReusableLibrary {
 		} catch (Exception e) {
 			System.out.println("Lead creation failed:::" + e.getMessage());
 		}
-		Utility_Functions.xClick(driver, related, true);
-		relatedPageListElements();
-		Utility_Functions.xWaitForElementPresent(driver, driver.findElements(By.xpath("//h2[contains(@id,'header')]/a/span[1]")), 5);
-		List<WebElement> relatedPageListOnPage = driver.findElements(By.xpath("//h2[contains(@id,'header')]/a/span[1]"));
-		List<String> relatedPageListFound = new ArrayList<String>();
-		for (WebElement element : relatedPageListOnPage) {
-			relatedPageListFound.add(element.getText());
-		}
-		relatedPageListElements();
-		List<String> relatedPageElementsCount = Utility_Functions.xValidatePickListValuesPage(relatedPageElementsList, relatedPageListFound, "Related Page Elements");
-		if (relatedPageElementsCount.size() == 0) {
-			report.updateTestLog("Verify Related Page Elements",
-					"Related Page has all the elements present", Status.PASS);
-		} else {
-			report.updateTestLog("Verify Related Page Elements",
-					"Related Page does not have all the elements present", Status.FAIL);
-		}
+		
 	}
 
 	/**
@@ -1055,73 +1039,49 @@ public class LeadsPage extends ReusableLibrary {
 	 */
 
 	public void cloneAndEditButtons() {
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xClick(driver, leads, true);
-		Utility_Functions.xWaitForElementPresent(driver, leadsList, 3);
-		Utility_Functions.xclickgetTextofFirstElementfromList(leadsList);
-		Utility_Functions.timeWait(2);
-		buttonsListLeadDetailPage();
-		List<WebElement> buttonsList = driver.findElements(By.xpath("//div[contains(@class,'flexipagePage')]//a[contains(@class,'forceActionLink')]/div"));
-		int i =0, count =0;
-		System.out.println("Number of buttons found  ::  "+buttonsList.size());
-		try {
-			for(WebElement element: buttonsList) {
-				System.out.println(element.getText() + buttonList.get(i));
-				if(element.getText().equals(buttonList.get(i))) {
-					System.out.println("Button List present on the Lead Details Page::::" + element.getText());
-					report.updateTestLog("Lead Details Page", "Buttons present on the Leads Details Page:::"+ element.getText(),Status.PASS);
-					count++;
-				} 
-				i++;
-			}
-			System.out.println(count);
-			if(count==3) {
-				report.updateTestLog("Lead Details Page", "Edit, Convert and Clone buttons present on the Leads Details Page:::",Status.PASS);
-			} else {
-				report.updateTestLog("Lead Details Page", "Not all the buttons are present on the Leads Details Page:::",Status.FAIL);
-			}
-		} catch (Exception e) {
-			System.out.println("Not all the buttons are present on the Leads Details Page:::" + e.getMessage());
+		selectALeadInRandom();
+		List<WebElement> buttonsListOnPage = driver.findElements(By.xpath("//div[contains(@class,'flexipagePage')]//a[contains(@class,'forceActionLink')]/div"));
+		List<String> buttonsListFound = new ArrayList<String>();
+		for (WebElement element : buttonsListOnPage) {
+			buttonsListFound.add(element.getText());
 		}
+		buttonsListLeadDetailPage();
+		List<String> buttonsCount = Utility_Functions.xValidatePickListValuesPage(buttonList, buttonsListFound, "Lead Details Page Button List");
+		if (buttonsCount.size() == 0) {
+			report.updateTestLog("Verify Clone Convert and Edit Buttons",
+					"Lead Details Page has the Edit Convert and Clone buttons present", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Clone Convert and Edit Buttons",
+					"Lead Details Page does not have the required buttons present", Status.FAIL);
+		}
+		
 		Utility_Functions.xClick(driver, showMoreActions, true);
 		Utility_Functions.timeWait(2);
-		moreActionsListLeadDetailPage();
-		List<WebElement> showMoreActionsList = driver.findElements(By.xpath(" //div[contains(@class,'actionMenu')]//li/a/div"));
-		System.out.println("Number of More Action buttons found :: "+ showMoreActionsList.size());
-		int i1 =0, count1=0;
-		try {
-			for(WebElement element: showMoreActionsList) {
-				System.out.println(element.getText() + moreActionsList.get(i1));
-				if(element.getText().equals(moreActionsList.get(i1))) {
-					System.out.println("Show more actions List present on the Lead Details Page::::" + element.getText());
-					report.updateTestLog("Lead Details Page", "Show more actions list present on the Leads Details Page:::"+ element.getText(),Status.PASS);
-					count1++;
-				} 
-				i1++;
-			}
-			System.out.println(count1);
-			if(count1==4) {
-				report.updateTestLog("Lead Details Page", "All the menu buttons are present on the Leads Details Page:::",Status.PASS);
-			} else {
-				report.updateTestLog("Lead Details Page", "Not all the menu buttons are present on the Leads Details Page:::",Status.FAIL);
-			}
-		} catch (Exception e) {
-			System.out.println("Not all the menu buttons are present on the Leads Details Page:::" + e.getMessage());
+		
+		List<WebElement> showMoreActionsListOnPage = driver.findElements(By.xpath("//div[contains(@class,'actionMenu')]//li/a/div"));
+		List<String> showMoreActionsListFound = new ArrayList<String>();
+		for (WebElement element : showMoreActionsListOnPage) {
+			showMoreActionsListFound.add(element.getText());
 		}
+		moreActionsListLeadDetailPage();
+		List<String> moreButtonsCount = Utility_Functions.xValidatePickListValuesPage(buttonList, buttonsListFound, "Lead Details Page Button List");
+		if (moreButtonsCount.size() == 0) {
+			report.updateTestLog("Verify More Button List",
+					"Lead Details Page has all the required buttons present", Status.PASS);
+		} else {
+			report.updateTestLog("Verify More Button List",
+					"Lead Details Page does not have all the required buttons", Status.FAIL);
+		}
+		
 		Utility_Functions.xClick(driver, editButton, true);
-		Utility_Functions.timeWait(2);
-		//Utility_Functions.xScrollWindowOnce(driver);
-		Utility_Functions.timeWait(1);
-		/*String firstName = editFirstName.getText();
-		firstName.concat("__Updated");*/
+		Utility_Functions.xWaitForElementPresent(driver, editFirstName, 5);
 		editFirstName.clear();
 		Utility_Functions.timeWait(1);
-		Random random = new Random();
-		int value = random.nextInt(1000);
-		Utility_Functions.xSendKeys(driver, editFirstName, "__Updated Name" + value);
+		Utility_Functions.xSendKeys(driver, editFirstName, "__Updated Name" + Utility_Functions.xRandomFunction());
+		Utility_Functions.timeWait(1);
 		Utility_Functions.xClick(driver, editSaveButton, true);
 		//Utility_Functions.xSendKeys(driver, editFirstName, "__Updated");
-		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, nameText, 5);
 		String updatedName = nameText.getText();
 		String updatedFirstName = updatedName.split(" ")[0];
 		if(updatedFirstName.contains("__Updated")) {
@@ -1143,38 +1103,24 @@ public class LeadsPage extends ReusableLibrary {
 	 *
 	 */	
 	public void relatedListsLeadLandingPage() {
-		Utility_Functions.timeWait(1);
 		createLead();
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xScrollWindowTop(driver);
-		Utility_Functions.xWaitForElementPresent(driver, related, 3);
+		Utility_Functions.xWaitForElementPresent(driver, related, 5);
 		Utility_Functions.xClick(driver, related, true);
-		Utility_Functions.timeWait(4);
-		Utility_Functions.xScrollWindow(driver);
-		List<WebElement> relatedLists = driver.findElements(By.xpath("//h2[contains(@id,'header')]/a/span[1]"));
-		int count=0;
-		for(WebElement element: relatedLists) {
-			if(element.getText().contains("Private Notes")) {
-				count++;
-				report.updateTestLog("Lead Related Section", "Lead Related Section contains the related list:::" + element.getText(),Status.PASS);
-			} else if(element.getText().contains("Notes")) {
-				count++;
-				report.updateTestLog("Lead Related Section", "Lead Related Section contains the related list:::" + element.getText(),Status.PASS);
-			} else if(element.getText().contains("Files")) {
-				count++;
-				report.updateTestLog("Lead Related Section", "Lead Related Section contains the related list:::" + element.getText(),Status.PASS);
-			} else if(element.getText().contains("Lead Property")) {
-				count++;
-				report.updateTestLog("Lead Related Section", "Lead Related Section contains the related list:::" + element.getText(),Status.PASS);
-			} else if(element.getText().contains("Lead History")) {
-				count++;
-				report.updateTestLog("Lead Related Section", "Lead Related Section contains the related list:::" + element.getText(),Status.PASS);
-			}
-		} 
-		if(count==5) {
-			report.updateTestLog("Lead Related Section", "Lead Related Section contains all the related lists for the lead:::",Status.PASS);
+		relatedPageListElements();
+		Utility_Functions.xWaitForElementPresent(driver, driver.findElements(By.xpath("//h2[contains(@id,'header')]/a/span[1]")), 5);
+		List<WebElement> relatedPageListOnPage = driver.findElements(By.xpath("//h2[contains(@id,'header')]/a/span[1]"));
+		List<String> relatedPageListFound = new ArrayList<String>();
+		for (WebElement element : relatedPageListOnPage) {
+			relatedPageListFound.add(element.getText());
+		}
+		relatedPageListElements();
+		List<String> relatedPageElementsCount = Utility_Functions.xValidatePickListValuesPage(relatedPageElementsList, relatedPageListFound, "Related Page Elements");
+		if (relatedPageElementsCount.size() == 0) {
+			report.updateTestLog("Verify Related Page Elements",
+					"Related Page has all the elements present", Status.PASS);
 		} else {
-			report.updateTestLog("Lead Related Section", "Lead Related Section doesn't contains all the related lists for the lead:::",Status.FAIL);
+			report.updateTestLog("Verify Related Page Elements",
+					"Related Page does not have all the elements present", Status.FAIL);
 		}
 	}
 
