@@ -47,29 +47,25 @@ public class OpportunitiesPage extends ReusableLibrary {
 		PageFactory.initElements(driver.getWebDriver(), this);
 	}
 
-	@FindBy(xpath = "//div[@class='bBottom']//span[text()='Home']")
-	WebElement menu_home;
+	/**
+	 * Function for replacing the Opportunity with new Opportunity Id
+	 * 
+	 * @author Vishnuvardhan
+	 */
+	@FindBy(xpath = "//h1[contains(@class,'slds-page-header__title')]/span")
+	List<WebElement> accountNameSaved;
 
-	@FindBy(xpath = "//div[@class='bBottom']//span[text()='Opportunities']")
-	WebElement menu_Opportunities;
-
-	@FindBy(xpath = "//div[@class='bBottom']//span[text()='Accounts']")
-	WebElement menu_Accounts;
-
-	@FindBy(xpath = "//div[@class='slds-truncate'][@title='Sharing'][text()='Sharing']")
-	WebElement sharingButton;
-
+	/**
+	 * Validating the Opportunity sharing functionality
+	 * 
+	 * @author Vishnuvardhan
+	 */
+	
 	@FindBy(xpath = "//p[text()='Opportunity Sharing']")
 	WebElement opportunitySharing;
 
-	@FindBy(xpath = "//div[contains(@title, 'Add')]")
-	WebElement addButton;
-
 	@FindBy(xpath = "//input[@name='new'][contains(@value,'Add')]")
 	WebElement addButtonSharing;
-
-	@FindBy(xpath = "//a[contains(text(),'Create')]")
-	WebElement createNewLink;
 
 	@FindBy(xpath = "//*[contains(@id,'sharing_search')]")
 	WebElement searchUsers;
@@ -91,124 +87,12 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//*[@id='bottomButtonRow']/input[@name='save']")
 	WebElement saveButton;
-
-	@FindBy(xpath = "//div[@class='mainBody']//span[contains(text(), 'Total Size')]/parent::div/parent::div/div[2]/div/span")
-	WebElement totalSize;
-
-	@FindBy(xpath = "//div[@class='mainBody']//span[contains(text(), 'Preferred Property Type')]/parent::div/parent::div/div[2]/div/span")
-	WebElement preferredPropertyType;
-
-	@FindBy(xpath = "//div[@class='mainBody']//span[contains(text(), 'Lease From')]/parent::div/parent::div/div[2]/div/span")
-	WebElement leaseFrom;
-
-	@FindBy(xpath = "//div[@class='mainBody']//span[contains(text(), 'Lease To')]/parent::div/parent::div/div[2]/div/span")
-	WebElement leaseTo;
-
-	@FindBy(xpath = "//div[@class='mainBody']//span[contains(text(), 'Lease Term (Months)')]/parent::div/parent::div/div[2]/div/span")
-	WebElement leaseTerm;
-
-	@FindBy(xpath = "//div[@class='mainBody']//span[contains(text(), 'Lease Rate/Rent')]/parent::div/parent::div/div[2]/div/span")
-	WebElement leaseRate;
-
-	@FindBy(xpath = "//div[@class='mainBody']//span[contains(text(), 'Lease Rate/Rent Basis')]/parent::div/parent::div/div[2]/div/span")
-	WebElement leaseRateRentBasis;
-
-	@FindBy(xpath = "//a[@class='forceActionLink']/div[@class='slds-truncate'][text()='Edit']")
-	WebElement edit;
-
-	@FindBy(xpath = "//div[@class='select-options']/ul/li")
-	WebElement occupierLease;
-
-	@FindBy(xpath = "//span[@class='label inputLabel uiPicklistLabel-left form-element__label uiPicklistLabel']/span[text()='Assignment Type']i")
-	WebElement assignmentType;
-
-	@FindBy(xpath = "//div[@class='select-options']/ul[@role='presentation']/li")
-	WebElement selectStage;
-
-	@FindBy(css = ".modal-footer [title='Save']")
-	WebElement save;
-
-	@FindBy(css = ".modal-footer [title='Cancel']")
-	WebElement cancel;
-
-	@FindBy(xpath = "//div[@class='slds-media']//input[@value='Save']")
-	WebElement saveButton_AB;
-
-	@FindBy(xpath = "//span[contains(@class,'virtualAutocompleteOptionText')][text()='All Active Opportunities']")
-	WebElement allOpportunities;
-
-	@FindBy(xpath = ".modal-footer [title='Save & New']")
-	WebElement saveAndNew;
-
-	@FindBy(xpath = "//div[@class='toastContent']//span[@class='slds-icon_container slds-icon-utility-success toastIcon slds-button__icon forceIcon']")
-	WebElement opportunitySaved;
-
-	@FindBy(xpath = "//div[@class='slds-truncate'][text()='New']")
-	WebElement newOpportunity;
-
-	@FindBy(xpath = "//button[text()='Continue']")
-	WebElement continueButton;
-
-	@FindBy(xpath = "//button/span[text()='View All Fields']")
-	WebElement viewAllFieldsButton;
-
-	@FindBy(xpath = "//*[contains(@id,'oppForm:oppName')]")
-	WebElement opportunityName;
-
-	@FindBy(xpath = "//*[contains(@id,'oppForm:salesStage')]")
-	WebElement salesStage;
-
-	@FindBy(xpath = "//*[contains(@id,'oppForm:phaseField')]")
-	WebElement phaseField;
-
-	@FindBy(xpath = "//*[contains(@id,'oppForm:probabilityField')]")
-	WebElement probabilityField;
-
-	@FindBy(xpath = ".//span[text()='Sales Stage']")
-	WebElement salesStageLabel;
-
-	@FindBy(xpath = "//span[text()='Total Size']/parent::div/parent::div/div[2]/div/span")
-	WebElement totalSizeValue;
-
-	@FindBy(xpath = "//span[text()='Preferred Property Type']/parent::div/parent::div/div[2]/div/span")
-	WebElement preferredPropertyTypeValue;
-
-	/*
-	 * @FindBy(xpath =
-	 * "//*[text()='Clone']/parent::a/parent::li/parent::ul/li/a/div[text()='Edit']")
-	 * WebElement editButton;
-	 */
-
-	@FindBy(xpath = "//li[contains(@class,'slds-button slds-button--neutral slds-truncate')]//a[@class='forceActionLink']/div[@class='slds-truncate'][text()='Edit']")
-	WebElement editButton;
-
-	@FindBy(xpath = "//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Opportunity Name']/parent::label/parent::div/input")
-	WebElement opportunityNameUpdate;
-
-	@FindBy(xpath = ".//button[@class='slds-button slds-button--neutral uiButton--default uiButton--brand uiButton forceActionButton']/span[text()='Save']")
-	WebElement saveOpportunityUpdate;
-
-	/*
-	 * @FindBy(xpath = "//*[text()='Sales Stage']/parent::li/p[2]/span")
-	 * WebElement currentSalesStage;
-	 * 
-	 * @FindBy(xpath = "//li[@class='uiMenuItem uiRadioMenuItem'][17]")
-	 * WebElement selectSalesStage;
-	 */
-
-	@FindBy(xpath = "//*[text()='Save & New']/parent::button/parent::div/button[3]/span[text()='Save']")
-	WebElement saveButtonSalesStage;
-
-	@FindBy(xpath = "//a[@class='tabHeader']//span[text()='Related']")
-	WebElement related;
-
 	
-	@FindBy(xpath ="//article[contains(@class,'Property')]//div[text()='Associate Property']") 
-	WebElement associateProperty;
-	 
-
-	/*@FindBy(xpath = "//span[contains(text(),'Property')]//ancestor::article//div[text()='Associate Property']")
-	WebElement associateProperty;*/
+	/**
+	*Validating the functionality for association of property to an Opportunity
+	*
+	*@author Vishnuvardhan
+	*/
 
 	@FindBy(xpath = "//div[@class='slds-form-element']/label[text()='Opportunity']")
 	WebElement opportunityLabel;
@@ -228,26 +112,32 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//div[@class='slds-text-heading--medium slds-m-bottom--x-large']/parent::div//button/span[text()='Save']")
 	WebElement saveButtonProperty;
 
+	@FindBy(xpath = "//span[text()='Property']/ancestor::article//div[text()='New']")
+	WebElement associatePropertyCapitalMarkets;
+
+	@FindBy(xpath = "//input[contains(@placeholder,'Search Properties')]")
+	WebElement searchProperties;
+
+	@FindBy(css = ".modal-footer [title='Save']")
+	WebElement save;
+
+	@FindBy(xpath = "//span[contains(@class,'toastMessage') and contains(@class,'slds-text-heading--small')]")
+	WebElement opportunityPropertyCreated;
+
+	/**
+	*Validating the manage Opportunity split functionality
+	*
+	*@author Vishnuvardhan
+	*/
+
 	@FindBy(xpath = ".//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[contains(text(),'Estimated Gross Fee/Commission')]/parent::label/parent::div/input")
 	WebElement estimatedGrossFeeField;
 
-	@FindBy(xpath = "//span[text()='Management Annual Revenue']/parent::label/parent::div//input")
-	WebElement managementAnnualRevenue;
+	@FindBy(xpath = "//button[text()='Add']")
+	WebElement addButtonshareOpportunity;
 
 	@FindBy(xpath = "//tr[contains(@class,'parent')][1]//input[contains(@id,'acctSearchBox')]")
 	WebElement user1;
-
-	@FindBy(xpath = "//tr[contains(@class,'parent')][2]//input[contains(@id,'acctSearchBox')]")
-	WebElement user2;
-
-	@FindBy(xpath = "//tr[contains(@class,'parent')][3]//input[contains(@id,'acctSearchBox')]")
-	WebElement user3;
-
-	@FindBy(xpath = "//input[@id='acctSearchBox2'][@class='tt-search-box slds-input tt-input']")
-	WebElement userField1;
-
-	@FindBy(xpath = "//input[@id='acctSearchBox3'][@class='tt-search-box slds-input tt-input']")
-	WebElement userField2;
 
 	@FindBy(xpath = "//select[@class='slds-select']/option[@value='Team Member']")
 	WebElement selectTeamRole;
@@ -258,14 +148,17 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//select[@class='slds-select']/option[@value='Edit']")
 	WebElement selectOpportunityAccess;
 
+	@FindBy(xpath = "//tr[contains(@class,'parent')][2]//input[contains(@id,'acctSearchBox')]")
+	WebElement user2;
+
 	@FindBy(xpath = "//table[@class='slds-table slds-no-row-hover']//tr[2]/td[3]//option[@value='Revenue Partner']")
 	WebElement selectTeamRole2;
 
-	@FindBy(xpath = "//select[contains(@name,'TeamMemberForm:j_id51:2')]/option[@value='Team Support']")
-	WebElement selectTeamRole3;
-
 	@FindBy(xpath = "//table[@class='slds-table slds-no-row-hover']//tr[2]/td[4]//option[@value='Receiving Broker']")
 	WebElement selectSecondaryMemberRole2;
+
+	@FindBy(xpath = "//input[@value= 'Save']")
+	WebElement saveButtonSplit;
 
 	@FindBy(xpath = "//div[contains(@class, 'slds-truncate') and text()='Manage Opportunity Splits']")
 	WebElement manageOpportunitySplits;
@@ -275,63 +168,50 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//input[@value='Save']")
 	WebElement saveOpportunitySplitUAT;
-
+	
 	@FindBy(xpath = "//td[contains(@data-label,'Split Percent')]//input")
 	WebElement splitPercent;
 
-	@FindBy(xpath = "//input[@value= 'Save']")
-	WebElement saveButtonSplit;
+	/**
+	* Validate Opportunity Name is not auto generated when manually added by the user
+	* 
+	* @author Vishnuvardhan
+	*/
+	@FindBy(xpath = "//button[text()='Continue']")
+	WebElement continueButton;
 
-	@FindBy(xpath = "//span[text()='Press Delete to Remove']/parent::a/span[@class='deleteIcon']")
-	WebElement deleteAccountName;
+	@FindBy(xpath = "//*[@id='record-type-select']")
+	WebElement opportunityRecordType;
 
-	@FindBy(xpath = "//input[@placeholder='Search Accounts']")
-	WebElement enterNewAccountName;
+	@FindBy(xpath = "//*[@id='record-type-select']/option[text()='Capital Markets – Debt & Structured Finance']")
+	WebElement opportunityRecordTypeDebtStructuredFinance;
 
-	@FindBy(xpath = "//div[@class='dotSpinner']")
-	WebElement dotSpinner;
+	@FindBy(xpath = "//*[@id='record-type-select']/option[text()='Capital Markets – Property Sales']")
+	WebElement opportunityRecordTypeValuePropertySales;
 
-	@FindBy(xpath = "//h1//span[text()='Recently Viewed']")
-	WebElement recentlyViewed;
+	@FindBy(xpath = "//*[@id='record-type-select']/option[text()='APAC Landlord and Sale Pursuits']")
+	WebElement opportunityRecordTypeValueAPACLandlord;
 
-	@FindBy(xpath = "//span[contains(@class,'virtualAutocompleteOptionText')][text()='All Active Opportunities']")
-	WebElement allActiveOpportunities;
+	@FindBy(xpath = "//a[@class='tabHeader']//span[text()='Related']")
+	WebElement related;
 
-	@FindBy(xpath = "//span[contains(@class,'virtualAutocompleteOptionText')][text()='All Accounts']")
-	WebElement allAccounts;
-
-	@FindBy(xpath = "//h2[contains(@id,'title')]")
-	WebElement title;
+	/**
+	* Function for creating the Opportunity
+	* 
+	* @author Vishnuvardhan
+	*/
 
 	@FindBy(xpath = "//input[@id='acctSearchBox']")
 	WebElement accountName;
 
-	@FindBy(xpath = "//input[@title='Search Accounts']")
-	WebElement accountNameSearchBox;
-
-	@FindBy(xpath = "//p[contains(@class,'slds-page-header__title')][@title='Add an Opportunity'][text()='Add an Opportunity']")
-	WebElement addAnOpportunityTitle;
-
 	@FindBy(xpath = "//select[contains(@id,'assignmentType')]")
 	WebElement assignmentTypeOpp;
 
-	@FindBy(xpath = "//select[contains(@id,'salesStage')]")
-	WebElement salesStageOpp;
-
-	@FindBy(xpath = "//label[text()='Reason for Loss']/parent::div//select")
-	WebElement reasonForLossOpp;
-
-	@FindBy(xpath = "//label[text()='Reason Lost Comments']/parent::div//div/textarea")
-	WebElement reasonForLossOppText;
-
-	@FindBy(xpath = "//select[contains(@id,'assignmentType')]//option[@selected='selected']")
-	WebElement assignmentTypeOppValue;
+	@FindBy(xpath = "//label[contains(text(),'Lead Source')]/parent::div//select")
+	WebElement leadSource;
 
 	@FindBy(xpath = "//input[contains(@id,'closeDate')]")
 	WebElement closeDateOpp;
-
-	@FindBy(xpath = "//input[contains(@id,'close') and contains(@id,'Date')]")
-	WebElement closeDateOppSpell;
 
 	@FindBy(xpath = "//span[text()='Total Size']/parent::div//input")
 	WebElement totalSizeOpp;
@@ -342,398 +222,47 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//span[contains(text(),'Commission')]/parent::span//input")
 	WebElement estimatedGrossFee;
 
-	@FindBy(xpath = "//label[contains(text(),'Lead Source')]/parent::div//select")
-	WebElement leadSource;
-
 	@FindBy(xpath = "//span[contains(text(),'Preferred')][contains(text(),'Property')]/parent::div//select")
 	WebElement preferredPropertyTypeOpp;
 
 	@FindBy(xpath = "//div[contains(@class,'slds-media__body')]//input[@value='Save']")
 	WebElement saveNewOpportunity;
 
-	@FindBy(xpath = "h1[contains(@class,'slds-page-header__title')]//span[contains(text(),'-')]")
-	WebElement newOpportunityName;
-
-	@FindBy(xpath = "//table[contains(@class,'forceRecordLayout')]//span[contains(@class,'forceOutputCurrency')]")
-	WebElement installmentAmount;
-
-	@FindBy(xpath = "//table[contains(@class,'forceRecordLayout')]//tr[1]//span[contains(@class,'forceOutputCurrency')]")
-	WebElement installmentAmountOne;
-
-	@FindBy(xpath = "//table[contains(@class,'forceRecordLayout')]//tr[2]//span[contains(@class,'forceOutputCurrency')]")
-	WebElement installmentAmountTwo;
-
-	@FindBy(xpath = "//span[text()='Opportunity Installments']/parent::span[text()='View All']")
-	WebElement installmentsViewAll;
-
-	@FindBy(xpath = "//nav[@role='navigation']/ol[contains(@class,'slds-breadcrumb')]/li[2]")
-	WebElement opportunityNameLink;
-
-	@FindBy(xpath = "//table[contains(@class,'forceRecordLayout')]//tr[3]//span[contains(@class,'forceOutputCurrency')]")
-	WebElement installmentAmountThree;
-
-	@FindBy(xpath = "//li[contains(@class,'oneActionsDropDown')]//a")
-	WebElement showMoreActions;
-
-	@FindBy(xpath = "//a[contains(@title,'Recalculate')]")
-	WebElement recalculate;
-
-	@FindBy(xpath = "//a[contains(@title,'New') and contains(@title,'Installment')]")
-	WebElement newOpportunityInstallment;
-
-	@FindBy(xpath = "//input[contains(@id,'opportunityRefractorPageLightningForm') and contains(@id,'Quantity')]")
-	WebElement installmentQuantity;
-
-	@FindBy(xpath = "//*[@id='Page:opportunityRefractorPageLightningForm:saveButton']")
-	WebElement proceed;
-
-	@FindBy(xpath = "//*[@id='Page:opportunityRefractorPageLightningForm:ContinueButton']")
-	WebElement continueButtonInstallment;
-
-	@FindBy(xpath = "//div[contains(@class,'actionsContainer')]//div[text()='Edit']")
-	WebElement editButtonInstallment;
-
-	@FindBy(xpath = "//span[text()='Estimated Gross Fee/Commission']/parent::label/following-sibling::input")
-	WebElement estimatedGrossFeeEdit;
-
-	@FindBy(xpath = "//span[@class='slds-form-element__label'][text()='Estimated Gross Fee/Commission']/parent::span//input")
-	WebElement estimatedGrossFeeEdit_AB;
-
-	@FindBy(xpath = "//div[@class='slds-form-element__control']//span[text()='Installment Number']/parent::label/parent::div/input")
-	WebElement installmentNumber;
-
-	@FindBy(xpath = "//div[@class='slds-form-element__control']//span[text()='Installment Amount']/parent::label/parent::div/input")
-	WebElement editInstallmentAmount;
-
-	@FindBy(xpath = "//div[@class='slds-form-element__control']//span[text()='Installment Date']/parent::label/parent::div/div/input")
-	WebElement installmentDate;
-
-	@FindBy(xpath = "//div[contains(@class,'modal-footer')]//span[text()='Save']")
-	WebElement saveNewOpportunityInstallment;
-
-	@FindBy(xpath = "//span[@class='uiOutputNumber'][text()='1']/ancestor::tr//div[contains(@class,'forceVirtualActionMarker')]//a//span[@class='lightningPrimitiveIcon']")
-	WebElement arrowDown;
-
-	@FindBy(xpath = "//a[@title='Edit']")
-	WebElement editBtn;
-
-	@FindBy(xpath = "//div[@class='actionMenu']//a[@title='Delete']")
-	WebElement deleteInstallment;
-
-	@FindBy(xpath = "div[contains(@class,'slds-modal__footer')]//button[@title='Delete']")
-	WebElement deleteButton;
-
-	@FindBy(xpath = "//h2[text()='Quick Create: Agency Brokerage']")
-	WebElement agencyBrokerageFrame;
-
-	@FindBy(xpath = "//span[text()='Installment Status']/parent::span/parent::div//a")
-	WebElement installmentOption;
-
-	@FindBy(xpath = "//div[@class='select-options']/ul/li[contains(@class,'uiMenuItem') and contains(@class,'uiRadioMenuItem')]/a[@title='Paid']")
-	WebElement installmentStatus;
-
-	@FindBy(xpath = "//span[text()='Date Paid']/parent::label/parent::div//input")
-	WebElement datePaid;
-
-	@FindBy(xpath = "//span[text()='Account Role']/parent::span/parent::div//a")
-	WebElement accountRoleOption;
-
-	@FindBy(xpath = "//div[@class='select-options']/ul/li[contains(@class,'uiMenuItem') and contains(@class,'uiRadioMenuItem')]/a[@title='Developer']")
-	WebElement accountRole;
-
-	@FindBy(xpath = "//span[text()='Installment Amount']/parent::label/parent::div//input")
-	WebElement installmentAmountEdit;
-
-	@FindBy(xpath = "//span[text()='Opportunity Name']/parent::label/parent::div//input")
-	WebElement opportunityName_AS;
-
-	@FindBy(xpath = "//span[text()='Area']/parent::label/parent::div//input")
-	WebElement totalSize_AS;
-
-	@FindBy(xpath = "//a[@aria-label='Unit of Measure']")
-	WebElement unitofMeasure_AS;
-
-	@FindBy(xpath = "//a[@title='Square Feet']")
-	WebElement unitofMeasureValue_AS;
-
-	@FindBy(xpath = "//a[@aria-label='Type']")
-	WebElement type_AS;
-
-	@FindBy(xpath = "//a[@title='New Business']")
-	WebElement typeNewBusiness_AS;
-
-	@FindBy(xpath = "//a[@aria-label='Region']")
-	WebElement region_AS;
-
-	@FindBy(xpath = "//a[@title='APAC']")
-	WebElement regionValue_AS;
-
-	@FindBy(xpath = "//label/span[text()='Close Date']")
-	WebElement CloseDateEditOpportunity;
-
-	@FindBy(xpath = "//*[contains(@class,'today slds-s')]")
-	WebElement DateTodayEdit;
-
-	/*
-	 * @FindBy(xpath =
-	 * "//span[text()='Sales Stage']/parent::label/parent::div//a") WebElement
-	 * salesStage_AS;
-	 * 
-	 * @FindBy(xpath = "//a[@title='2-Client Engaged']") WebElement
-	 * salesStageValue_AS;
-	 * 
-	 * @FindBy(xpath =
-	 * "//span[text()='Close Date']/parent::label/parent::div//input")
-	 * WebElement closeDate_AS;
-	 * 
-	 * @FindBy(xpath = "//input[@placeholder='Search Accounts']") WebElement
-	 * accountName_AS;
-	 */
-
-	@FindBy(xpath = "//span[text()='Market']/parent::label/parent::div//option[1]")
-	WebElement market_AS;
-
-	/*@FindBy(xpath = "//select[@id='record-type-select']/option[@selected='selected']")
-	WebElement defaultOpportutnityRecordType;
-*/
-	@FindBy(xpath ="//div[@class='slds-form-element']/span[text()='Opportunity Record Type']/parent::div/div/span") 
-	WebElement opportunityRecordTypeByDefault;
-	 
-	@FindBy(xpath = "//h2[contains(@class,'slds-text-heading--medium') and contains(@class,'slds-m-bottom--small')]")
-	WebElement opportunityRecordTypeQuickCreate;
-
-	@FindBy(xpath = "//span[text()='Property']/ancestor::article//div[text()='New']")
-	WebElement associatePropertyCapitalMarkets;
-
-	@FindBy(xpath = "//input[contains(@placeholder,'Search Properties')]")
-	WebElement searchProperties;
-
-	@FindBy(xpath = "//span[contains(@class,'toastMessage') and contains(@class,'slds-text-heading--small')]")
-	WebElement opportunityPropertyCreated;
-
-	@FindBy(xpath = "//h2[@id='header']//span[1]")
-	WebElement headerSectionsOpp;
-
-	/****
-	 * Ramya
-	 */
-	@FindBy(xpath = "//a[contains(@title,'Show') and contains(@title,'more actions')]")
-	WebElement selectNewEvent;
-
-	@FindBy(xpath = "//div[@class='forceActionLink'][@title='New Event']")
-	WebElement newEvent;
-
-	@FindBy(xpath = "//div[@class='slds-media__body']")
-	WebElement addAnEventPage;
-
-	@FindBy(xpath = "//input[@class='slds-input'][@type='text'][@required='required']")
-	WebElement subject;
-
-	@FindBy(xpath = "//*[@id='assignedToBox']")
-	WebElement assignedTo;
-
-	@FindBy(xpath = "//input[@value='Cancel']")
-	WebElement cancelCustomEventPageButton;
-
-	@FindBy(xpath = "//input[@value='Save & New Event']")
-	WebElement saveAndNewEventCustomEventPageButton;
-
-	@FindBy(xpath = "//input[@value='Save Event']")
-	WebElement saveEventCustomEventPageButton;
-
-	@FindBy(xpath = "//span[text()='Quick Create an Event']")
-	WebElement quickCreateanEvent;
-
-	@FindBy(xpath = " //div[@class='slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2']/h2")
-	WebElement relatedTo;
-
-	@FindBy(xpath = "//input[@class='slds-input'][@type='checkbox']")
-	WebElement setReminderCheckBox;
-
-	@FindBy(xpath = ".//*[@id='assignedToBox']")
-	WebElement assignedToNewCustomEventPage;
-
-	@FindBy(xpath = "//input[contains(@id,'StartDate')]")
-	WebElement startDateNewCustomEventPage;
-
-	@FindBy(xpath = "//input[contains(@id,'StartTime')]")
-	WebElement startTimeNewCustomEventPage;
-
-	@FindBy(xpath = "//input[contains(@id,'EndDate')]")
-	WebElement endDateNewCustomEventPage;
-
-	@FindBy(xpath = "//input[contains(@id,'EndTime')]")
-	WebElement endTimeNewCustomEventPage;
-
-	@FindBy(xpath = "//*[@id='record-type-select']")
-	WebElement opportunityRecordType;
-
-	@FindBy(xpath = "//*[@id='record-type-select']/option[text()='Capital Markets – Property Sales']")
-	WebElement opportunityRecordTypeValuePropertySales;
-
-	@FindBy(xpath = "//*[@id='record-type-select']/option[text()='APAC Landlord and Sale Pursuits']")
-	WebElement opportunityRecordTypeValueAPACLandlord;
-
-	@FindBy(xpath = "//*[@id='record-type-select']/option[text()='Capital Markets – Debt & Structured Finance']")
-	WebElement opportunityRecordTypeDebtStructuredFinance;
-
-	@FindBy(xpath = "//*[@id='record-type-select']/option[text()='APAC Global Workplace Solutions']")
-	WebElement opportunityRecordTypeGlobalWorkplaceSolutions;
-
-	@FindBy(xpath = "//*[@id='record-type-select']/option[text()='EMEA BC&P']")
-	WebElement opportunityRecordTypeBCP;
-
-	@FindBy(xpath = "//div/a[@class='select'][text()='Occupier Lease']")
-	WebElement assignmentTypeEditPage;
-
-	@FindBy(xpath = "//span[text()='Unit of Measure']/parent::span/parent::div/parent::div//a[text()='Assets']")
-	WebElement unitOfMeasureDefaultValue;
-
-	@FindBy(xpath = "//span[contains(text(),'Region')]/parent::span/parent::div//a")
-	WebElement regionMenu;
-
-	@FindBy(xpath = "//span[text()='Opportunity Currency']")
-	WebElement opportunityCurrency;
-
+	/**
+	* Validating the manage Opportunity verify Custom Event Page
+	* 
+	* @author Vishnuvardhan
+	*/
+
+	@FindBy(xpath = "//ul[@class='tabs__nav']//a[@title='New Event']")
+	WebElement newEventOpp;
+
+	/**
+	* Validating the Quick create Opportunity page from the Opportunity tab with existing Account
+	* 
+	* @author Vishnuvardhan
+	*/
+
+	@FindBy(xpath = "//*[@class='slds-form-element__label']")
+	List<WebElement> labelListOpportunitiesPage;
+	
+	/**
+	* Validating the Quick create Opportunity page from the Opportunity tab
+	* with existing Account for Asset Services
+	* 
+	* @author Vishnuvardhan
+	*/
 	@FindBy(xpath = "//span[text()='Reason for Loss']/parent::span/following-sibling::div//a")
 	WebElement reasonForLoss;
 
 	@FindBy(xpath = "//div[@class='select-options']//a[@title='Client Action Postponed']/parent::li/parent::ul/li")
-	WebElement reasonForLossValuesList;
+	List<WebElement> reasonForLossValuesPickList;
 
-	@FindBy(xpath = "//span[text()='Accounting Awarded To:']/parent::span/following-sibling::div//a")
-	WebElement accountingAwardedTo;
-
-	@FindBy(xpath = "//span[text()= 'Mgmt Awarded To:']/parent::span/following-sibling::div//a")
-	WebElement mgmtAwardedTo;
-
-	@FindBy(xpath = "//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Term of Contract']/parent::label/parent::div/input")
-	WebElement termOfContract;
-
-	@FindBy(xpath = "//span[text() = 'Lead Source']/parent::span/following-sibling::div//a")
-	WebElement leadSourceNewOpportunity;
-
-	@FindBy(xpath = "//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Opportunity Name']/parent::label/parent::div/input")
-	WebElement opportunityNameNewOpportunity;
-
-	@FindBy(xpath = "//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Total Size']/parent::label/parent::div/input")
-	WebElement totalSizeNewOpportunity;
-
-	@FindBy(xpath = "//span[text()='Unit of Measure']/parent::span/following-sibling::div//a")
-	WebElement unitOfMeasureNewOpportunity;
-
-	@FindBy(xpath = "//a[@title='Square Feet']")
-	WebElement selectUnitOfMeasureNewOpportunity;
-
-	@FindBy(xpath = "//span[text()='Region']/parent::span/following-sibling::div//a")
-	WebElement regionNewOpportunity;
-
-	@FindBy(xpath = "//a[@title='US National']")
-	WebElement selectRegionNewOpportunity;
-
-	@FindBy(xpath = "//select[@class=' select']/option[@value='Dallas/Ft. Worth']")
-	WebElement selectMarket;
-
-	/*
-	 * @FindBy(xpath="//input[@placeholder='Search Accounts']") WebElement
-	 * searchAccountsNewOpportunity;
-	 */
-
-	@FindBy(xpath = "//input[contains(@placeholder,'Search Accounts')]")
-	WebElement searchAccountsNewOpportunity;
-
-	@FindBy(xpath = "//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Sales Stage']")
-	WebElement salesStageNewopportunity;
-
-	@FindBy(xpath = "//a[@class='select'][text()='1-Target']")
-	WebElement selectSalesStageNewOpportunity;
-
-	@FindBy(xpath = "//div[@class='form-element']/a[@class='datePicker-openIcon display']/span[text()='Date Picker']")
-	WebElement closeDateCreateopportunity;
-
-	@FindBy(xpath = "//div[@class='uiDatePickerGrid--default uiDatePickerGrid']/table/thead/tr/th[4]")
-	WebElement selectCloseDateCreateOpportunity;
-
-	@FindBy(xpath = "//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Capital Markets Revenue']/parent::label/parent::div/input")
-	WebElement capitalRevenueFieldNewOpportunity;
-
-	@FindBy(xpath = "//span[text()='Sales Stage']/parent::label/parent::div//a")
-	WebElement salesStage_AS;
-
-	@FindBy(xpath = "//a[@title='2-Client Engaged']")
-	WebElement salesStageValue_AS;
-
-	@FindBy(xpath = "//span[text()='Close Date']/parent::label/parent::div//input")
-	WebElement closeDate_AS;
-
-	@FindBy(xpath = "//input[@placeholder='Search Accounts']")
-	WebElement accountName_AS;
-
-	@FindBy(xpath = "//button[@class='slds-button slds-button--neutral uiButton--default uiButton--brand uiButton forceActionButton']/span[text()='Save']")
-	WebElement saveNewOpportunity_AS;
-
-	@FindBy(xpath = "//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Est. EBITDA ($) - Won']/parent::label/parent::div/input")
-	WebElement newOpportunityEBITDAWon;
-
-	@FindBy(xpath = "//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Est. EBITDA ($) - Lost']/parent::label/parent::div/input")
-	WebElement newOpportunityEBITDALost;
-
-	@FindBy(xpath = "//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Est. EBITDA ($)']/parent::label/parent::div/input")
-	WebElement newOpportunityEBITDA;
-
-	@FindBy(xpath = "//div[@class='slds-form-element']/label[contains(text(),'Specialty Group')]")
-	WebElement specialityGroup;
-
-	@FindBy(xpath = "//select[@class='slds-select']/option[@value='Occupier Buyer']")
-	WebElement selectAssignmentType;
-
-	@FindBy(xpath = "//span[text()='RFP Due Date']/parent::label/parent::div//input")
-	WebElement rfpDueDate;
-
-	@FindBy(xpath = "//span[text()='Pitch Date']/parent::label/parent::div//input")
-	WebElement pitchDueDate;
-
-	@FindBy(xpath = "//span[text()='Average Annual Leasing Commission']/parent::label/parent::div//input")
-	WebElement annualAverageLeasingCommission;
-
-	@FindBy(xpath = "//span[contains(text(),'Preferred Property Type')]/span/abbr[text()='*']")
-	WebElement preferedPropertyTypeRequiredField;
-
-	@FindBy(xpath = "//li[contains(text(),'Preferred Property Type: You must enter a value')]")
-	WebElement errorMessageForPreferedPropertyType;
-
-	@FindBy(xpath = "//a[@aria-label='Leasing']")
-	WebElement leasing;
-
-	@FindBy(xpath = "//a[@aria-label='Leasing'][text()='No']")
-	WebElement selectleasing;
-
-	@FindBy(xpath = "//div[@class='select-options']/ul/li[3]/a[@title='No']")
-	WebElement noOption;
-
-	@FindBy(xpath = "//label[contains(@class,'label') and contains(@class,'inputLabel') and contains(@class,'uiLabel-left') and contains(@class,'form-element__label') and contains(@class,'uiLabel')]/span[contains(text(),'Probability (%)')]/parent::label/parent::div/input")
-	WebElement successProbability;
-
-	@FindBy(xpath = "//select[contains(@id,'oppForm:salesStage')]/option[@selected='selected']")
-	WebElement salesStageSelected;
-
-	/*
-	 * @FindBy(xpath =
-	 * "//select[contains(@id,'oppForm:salesStage') or contains(@id,'oppForm:stage')]/option[@value='']"
-	 * ) WebElement salesStageSelectedEMEA;
-	 */
-
-	@FindBy(xpath = "//span[text()='Sales Stage']/parent::label/parent::div//a[@class='select']")
-	WebElement salesStageSelectedEMEA;
-
-	/*
-	 * @FindBy(xpath=
-	 * "//select[contains(@id,'oppForm:salesStage')]/option[@selected='selected']")
-	 * WebElement salesStageSelectedCapitalMarkets;
-	 */
-
-	@FindBy(xpath = "//span[contains(@id,'oppForm:phaseField')]/span")
-	WebElement phasePresent;
+	/**
+	*  Verify the required fields based on Sales Stage selected between 08-Closed - Paid * Partial to 09-Closed - Paid Full
+	*  
+	*  @author Vishnuvardhan
+	**/
 
 	@FindBy(xpath = "//div[contains(@class,'error strength') and contains(@class,'forceMessage')]//p[contains(text(),'Looks like')]")
 	WebElement accessOpportunity;
@@ -741,17 +270,17 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//div[@class='slds-truncate'][@title='Edit']")
 	WebElement opportunityEdit;
 
-	@FindBy(xpath = "//a[@aria-label='Assignment Type']")
-	WebElement assignmentTypeOpportunity;
-
-	@FindBy(xpath = "//a[@role='menuitemradio'][text()='Sale']")
-	WebElement assignmentTypeSaleOpportunity;
-
 	@FindBy(xpath = "//label[contains(@class,'label inputLabel')]/parent::div//a[@class='select']")
 	WebElement salesStageOppClosed;
 
 	@FindBy(xpath = "//div[@class='select-options']//a[contains(@title,'08-Closed')]")
 	WebElement salesStageOppClosedOption;
+
+	@FindBy(xpath = "//a[@aria-label='Assignment Type']")
+	WebElement assignmentTypeOpportunity;
+
+	@FindBy(xpath = "//a[@role='menuitemradio'][text()='Sale']")
+	WebElement assignmentTypeSaleOpportunity;
 
 	@FindBy(xpath = "//div[contains(@class,'modal-footer')]//button[@title='Save']")
 	WebElement saveStageOpp;
@@ -763,55 +292,83 @@ public class OpportunitiesPage extends ReusableLibrary {
 	WebElement estimatedTransactionValue;
 
 	@FindBy(xpath = "//span[text()='Estimated Gross Fee/Commission']/parent::label/parent::div/input")
-	WebElement estiamtedGrossFeeCommissionValue;
+	WebElement estimatedGrossFeeCommissionValue;
 
 	@FindBy(xpath = "//span[text()='Final Transaction Value']/parent::label/parent::div/input")
 	WebElement finalTransactionValue;
 
 	@FindBy(xpath = "//span[text()='Actual CBRE Gross Fee']/parent::label/parent::div/input")
 	WebElement ActualCBREGrossFeeValue;
+	
+	/**
+	*Validating the Opportunities Quick create page mandatory fields 
+	*
+	* @author Vishnuvardhan
+	*/
+	
+	@FindBy(xpath = "//button/span[text()='View All Fields']")
+	WebElement viewAllFieldsButton;
 
-	@FindBy(xpath = "//button[text()='Add']")
-	WebElement addButtonshareOpportunity;
+	@FindBy(xpath = "//*[contains(@id,'oppForm:oppName')]")
+	WebElement opportunityName;
 
-	@FindBy(xpath = "//span[text()='Technology Tools']")
-	WebElement technologyToolsField;
+	@FindBy(xpath = "//p/strong[contains(text(),'-963425397_Test Automation_0131')]")
+	WebElement accountNameValueAdmin;
 
-	@FindBy(xpath = "//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[text()='Targeting Initiative']/parent::label/parent::div/select/option[@value='US Retail Strike']")
-	WebElement targetingInitiativeField;
+	@FindBy(xpath = "//select[contains(@id,'oppForm:assignmentType')]/option[@value='Consulting']")
+	WebElement assignmentTypeValue;
 
-	@FindBy(xpath = "//input[contains(@id,'oppForm:closeDate')]")
-	WebElement closeDateNewOpportunity;
+	@FindBy(xpath = "//span[contains(text(),'Preferred Property Type')]/following-sibling::div/select")
+	WebElement preferedPropertyTypeAdmin;
+
+	@FindBy(xpath = "//span[contains(text(),'Preferred Property Type')]/following-sibling::div/select/option[@value='Hotel']")
+	WebElement preferedPropertyTypeValueAdmin;
 
 	@FindBy(xpath = "//select[contains(@id,'oppForm:salesStage')]")
 	WebElement salesStageEMEANewOpportunity;
 
-	@FindBy(xpath = "//select[contains(@id,'oppForm:salesStage')]/option[@value='Target']")
+	@FindBy(xpath =   "//select[contains(@id,'oppForm:salesStage')]/option[@value='Target']")
 	WebElement salesStageEMEANewOpportunityValue;
 
 	@FindBy(xpath = "//div[@class='slds-form-element']//span[text()='Estimated Gross Fee/Commission']/parent::div/input")
 	WebElement salesStageEMEAEstimatedGrossCommission;
 
-	@FindBy(xpath = "//label[text()='Assignment Type']")
-	WebElement assignmentTypeField;
+	@FindBy(xpath = "//input[contains(@id,'oppForm:closeDate')]")
+	WebElement closeDateNewOpportunity;
 
-	@FindBy(xpath = "//label[contains(text(),'Lead Source')]")
-	WebElement leadSourceField;
+	@FindBy(xpath = "//span[contains(text(),'Engagement Commencement')]/following-sibling::div//input")
+	WebElement engagementCommencement;
 
-	@FindBy(xpath = "//label[text()='Comments']")
-	WebElement opportunityComments;
+	/**
+	* Validating the Opportunities Quick create page mandatory fields
+	* 
+	* @author Vishnuvardhan
+	*/
 
-	@FindBy(xpath = "//span[text()='Pitch Advisor']")
-	WebElement pitchAdvisor;
+	@FindBy(xpath = "//span[text()='Estimated Gross Fee/Commission']/following-sibling::div[@class='requiredInput']/input")
+	WebElement estimatedGrossFeeNewOpportunity;
 
-	@FindBy(xpath = "//span[text()='Average Annual Leasing Commission']")
-	WebElement averageAnnualLeasingCommission;
+	/**
+	* Validating the Opportunities Quick create page for the default
+	* opportunity name
+	* 
+	* @author Vishnuvardhan
+	*/
 
-	@FindBy(xpath = "//span[text()='Unit of Measure']/parent::div/select[contains(@id,'oppForm')]")
-	WebElement unitOfMeasure;
+	@FindBy(xpath = "//span[text()='Opportunity Name']/parent::label/parent::div//input")
+	WebElement opportunityName_AS;
 
 	@FindBy(xpath = "//input[contains(@id,'oppForm:oppName')][@value='TBD']")
 	WebElement OppName;
+
+	@FindBy(xpath = "//a[@class='tabHeader']//span[text()='Details']")
+	WebElement details;
+
+	/**
+	* Validating the Opportunities Installment status functionality
+	* 
+	* @author Vishnuvardhan
+	*/
 
 	@FindBy(xpath = "//h2[@id='header']/a/span[text()='Opportunity Installments']")
 	WebElement opportunityInstallments;
@@ -819,35 +376,40 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//button[@title='Edit Installment Status']")
 	WebElement editInstallmentStatus;
 
+	@FindBy(xpath = "//span[text()='Date Paid']/parent::label/parent::div//input")
+	WebElement datePaid;
+
 	@FindBy(xpath = "//textarea[@role='textbox']")
 	WebElement commentsField;
 
-	@FindBy(xpath = "//button[@title='Edit Installment Status']/parent::div")
-	WebElement installmentStatusEditOpportunity;
-
-	@FindBy(xpath = "//a[@title='Pending']")
-	WebElement installmentStatusValue;
-
 	@FindBy(xpath = "//section[@class='tabs__content active uiTab']//button/span[text()='Save']")
 	WebElement saveEditOpportunity;
-
+	
+	/**
+	* Validating the Opportunities Close Date field
+	* 
+	* @author 
+	*/
 	@FindBy(xpath = "//div[contains(@class,'active')]//a/div[@title='Edit']")
 	WebElement editOpportunity;
 
-	@FindBy(xpath = "//select[@id='record-type-select']")
-	WebElement selectOpportunityRecordType;
+	/**
+	* Validating the Opportunities My Active Listings
+	* 
+	* @author Vishnuvardhan
+	*/
 
-	@FindBy(xpath = "//select[@id='record-type-select']/option[@value='012i0000000tvTeAAI']")
-	WebElement selectOpportunityRecordTypeValue;
-
-	@FindBy(xpath = "//input[@id='userAdvisorSearchBox']")
-	WebElement pitchAdvisorField;
+	@FindBy(xpath = "//h1//span[text()='Recently Viewed']")
+	WebElement recentlyViewed;
 
 	@FindBy(xpath = "//span[contains(@class,'virtualAutocompleteOptionText')][text()='My Active Listings']")
 	WebElement myActiveListings;
 
-	@FindBy(xpath = "//button[@title='Show filters']")
-	WebElement toggleFilters;
+	/**
+	* Validating the Opportunities My Active Listings filters
+	* 
+	* @author Vishnuvardhan
+	*/
 
 	@FindBy(xpath = "//button[@title='Display as Table']")
 	WebElement squareTable;
@@ -855,119 +417,44 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//span[text()='Kanban']")
 	WebElement kanban;
 
+	/**
+	* Validating the Opportunities My Active Listings filters
+	* 
+	* @author Vishnuvardhan
+	*/
+
+	@FindBy(xpath = "//button[@title='Show filters']")
+	WebElement toggleFilters;
+
 	@FindBy(xpath = "//span[@class='fieldLabel'][text()='Opportunity Record Type']")
 	WebElement opportunityRecordTypeFilters;
 
 	@FindBy(xpath = "//span[@class='fieldLabel'][text()='Phase']")
 	WebElement phaseFilters;
 
-	@FindBy(xpath = "//label[text()='Property Market Value']")
-	WebElement propertyMarketValue;
-
-	@FindBy(xpath = "//select[contains(@id,'record-type-select')]")
-	WebElement selectRecordType;
-
-	@FindBy(xpath = "//select[contains(@id,'record-type-select')]/option[text()='APAC Capital Markets – Debt & Structured Finance']")
-	WebElement recordTypeValue;
-
-	@FindBy(xpath = "//select[contains(@id,'record-type-select')]/option[text()='APAC Property Sales']")
-	WebElement recordTypePropertySalesValue;
-
-	@FindBy(xpath = "//span[text()='Unit of Measure']")
-	WebElement unitOfMeasureLabel;
-
-	@FindBy(xpath = "//label[text()='CBRE Market Group']")
-	WebElement marketGroup;
-
-	@FindBy(xpath = "//label[text()='CBRE Submarket Group']")
-	WebElement subMarketGroup;
-
-	@FindBy(xpath = "//select[contains(@id,'oppForm:salesStage')]/option[@value='Prospecting']")
-	WebElement salesStageValue;
-
-	@FindBy(xpath = "//span[contains(@id,'oppForm:pgMsg')]/ul/li[contains(text(),'Please fill out CBRE Market Group')]")
-	WebElement marketGroupMandatory;
-
-	@FindBy(xpath = "//div[@title='APAC Property Test - Test CM']")
-	WebElement propertyValue;
-
-	@FindBy(xpath = "//div[@title='01BQ2Q8NMECBRE Test SFDC Automation_0401']")
-	WebElement searchAccountValue;
-
-	@FindBy(xpath = "//a[@title='01-Prospect']")
-	WebElement selectStageValue;
-
-	@FindBy(xpath = "//a[@title='Business Relationship']")
-	WebElement leadSourceValue;
-
-	@FindBy(xpath = "//a[contains(@title,'Create Offer')]")
-	WebElement createOffer;
-
-	@FindBy(xpath = "//input[contains(@placeholder,'Search Contacts')] ")
-	WebElement offerorContact;
-
-	@FindBy(xpath = "//div[contains(@class,'secondaryLabel')][@title='AUCAPACBroker123']")
-	WebElement offerorContactValue;
-
-	@FindBy(xpath = "//input[contains(@placeholder,'Search Accounts')]")
-	WebElement offerorAccount;
-
-	@FindBy(xpath = "//div[@title='AUCAPACBroker123']/following-sibling::div[@title='2100 Ross Avenue, Dallas, United States']")
-	WebElement offerorAccountValue;
-
-	@FindBy(xpath = "//span[contains(text(),'Offer Price')]/parent::label/parent::div/input")
-	WebElement offerPrice;
-
-	@FindBy(xpath = "//div[contains(@class,'slds-modal__footer')]//span[text()='Save']")
-	WebElement createOfferSave;
-
-	@FindBy(xpath = "//a[contains(@title,'New Task')]")
-	WebElement newTask;
-
-	@FindBy(xpath = "//a[@class='forceActionLink']/div[@class='slds-truncate'][text()='Clone']")
-	WebElement clone;
-
-	@FindBy(xpath = "//div[@title='Test UOM Auckland Broker']")
-	WebElement propertyValue2;
-
-	@FindBy(xpath = "//div[@title='Test Account APAC']")
-	WebElement accountValue2;
-
-	@FindBy(xpath = "//article[contains(@class,'forceRelatedListCardDesktop')]//span[text()='Offers']")
-	WebElement offers;
-
-	@FindBy(xpath = "//p[@title='Offer Opportunity']")
-	WebElement offerOpportunity;
-
-	@FindBy(xpath = "//p[@title='Offer Property']")
-	WebElement offerProperty;
-
-	@FindBy(xpath = "//p[@title='Offer Enquiry']")
-	WebElement offerEnquiry;
-
-	@FindBy(xpath = "//p[@title='Offeror Account']")
-	WebElement offerorAccountHeader;
-
-	@FindBy(xpath = "//p[@title='Offeror Contact']")
-	WebElement offerorContactHeader;
-
-	@FindBy(xpath = "//p[@title='Offer Date']")
-	WebElement offerDate;
-
-	@FindBy(xpath = "//div/p[text()='031EHXL93ZQT9CKTQD786WCN0']")
-	WebElement accountNameValue;
-
-	@FindBy(xpath = "//span[text()='Estimated Gross Fee/Commission']/following-sibling::div[@class='requiredInput']/input")
-	WebElement estimatedGrossFeeNewOpportunity;
+	/**
+	* Validating the Discretionary Fee check box in the New Opportunity creation page
+	* 
+	* @author Vishnuvardhan
+	*/
 
 	@FindBy(xpath = "//label[contains(text(),' Discretionary Fee')]/following-sibling::div/label/span[contains(@class,'checkbox')]")
 	WebElement discretionaryFeeCheckBox;
 
 	@FindBy(xpath = "//label[contains(text(),'Discretionary Amount')]/following-sibling::div/input")
 	WebElement discretionaryAmount;
+	
+	
+	/**
+	* Validating the Opportunity Quick create page for the Total size to be mandatory for * the sales stage Prospecting
+	* 
+	* @author Vishnuvardhan
+	*/
+	@FindBy(xpath = "//div[@class='bBottom']//span[text()='Opportunities']")
+	WebElement menu_Opportunities;
 
-	@FindBy(xpath = "//label[contains(text(),'Conversion Type')]/following-sibling::div/div/select")
-	WebElement conversionType;
+	@FindBy(xpath = "//div[@class='slds-truncate'][text()='New']")
+	WebElement newOpportunity;
 
 	@FindBy(xpath = "//select[contains(@id,'oppForm:salesStage')]/option[@value='Prospecting']")
 	WebElement salesStageNewOppValue;
@@ -981,9 +468,6 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//span[contains(@id,'pgMsg')]//li[contains(text(),'Please fill out Total Size')]")
 	WebElement errorMessage;
 
-	@FindBy(xpath = "//*[@id='Page:opportunityRefractorPageLightningForm:slds-Amount']")
-	WebElement InstallmentAmountEdit;
-
 	@FindBy(xpath = "//label[contains(text(),' Total Size')]/following-sibling::input")
 	WebElement totalSizeNewOpp;
 
@@ -996,11 +480,22 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//div[contains(@class,'slds-modal__footer')]//button[@title='Save']")
 	WebElement saveEditOpp;
 
-	@FindBy(xpath = "//span[contains(text(),'Total Size')]/parent::label/following-sibling::input")
-	WebElement totalSizeEditOpp;
+	/*
+	* Validating the Net Fee Field Mandatory in the New Opportunity creation page
+	* 
+	* @author Vishnuvardhan
+	*/
 
-	@FindBy(xpath = "//select[contains(@id,'oppForm:salesStage')]/option[text()='19-Closed']")
-	WebElement salesStageNewOpportunityValueClosed;
+	@FindBy(xpath = "//select[contains(@id,'assignmentType')]//option[@value='Consulting']")
+	WebElement assignmentTypeValueNewOpp;
+
+	@FindBy(xpath = "//select[contains(@id,'oppForm:salesStage')]/option[text()='02-Meeting']")
+	WebElement salesStageNewOpportunityValue;
+	@FindBy(xpath = "//a[contains(text(),'Closed')]")
+	WebElement salesStageEditOpportunityValue;
+
+	@FindBy(xpath = "//span[text()='Total Size']/following-sibling::div//input")
+	WebElement totalSizeOpportunityQuickCreate;
 
 	@FindBy(xpath = "//span[text()='Preferred Property Type']/following-sibling::div/div/select")
 	WebElement preferedPropertyType;
@@ -1008,46 +503,16 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//span[text()='Preferred Property Type']/following-sibling::div/div/select/option[@value='Hotel']")
 	WebElement preferedPropertyTypeValue;
 
-	@FindBy(xpath = "//span[text()='Total Size']/following-sibling::div//input")
-	WebElement totalSizeOpportunityQuickCreate;
-
-	@FindBy(xpath = "//select[contains(@id,'assignmentType')]/option[@value='Consulting']")
-	WebElement assignmentTypeOppValueClone;
-
-	@FindBy(xpath = "//select[contains(@id,'oppForm:salesStage')]/option[text()='02-Meeting']")
-	WebElement salesStageNewOpportunityValue;
-
-	@FindBy(xpath = "//a[contains(text(),'Closed')]")
-	WebElement salesStageEditOpportunityValue;
-
 	@FindBy(xpath = "//label[contains(text(),'Lead Source')]/parent::div//select/option[@value='Business Relationship']")
 	WebElement leadSourceValueNewOpportunity;
-
-	@FindBy(xpath = "//span[contains(text(),'Net Fee')]/parent::label/following-sibling::input")
-	WebElement netFeeOpportunityEdit;
-
-	@FindBy(xpath = "//a[contains(@title,'New Installment')]")
-	WebElement newInstallment;
-
-	@FindBy(xpath = "//span[contains(text(),'Installment Amount')]/parent::label/parent::div//input")
-	WebElement installmentAmountNewOpportunityInstallment;
-
-	@FindBy(xpath = "//div[contains(@class,'slds-modal__footer')]/button/span[text()='Save']")
-	WebElement newInstallmentSave;
-
-	@FindBy(xpath = "//a[@class='tabHeader']//span[text()='Details']")
-	WebElement details;
-
-	@FindBy(xpath = "//button[contains(text(), 'Add')]")
-	WebElement addButtonOpportunitySharing;
 
 	@FindBy(xpath = "//span[contains(text(),'Lease From')]/parent::label/parent::div//input")
 	WebElement leaseFromEditOpportunity;
 
-	@FindBy(xpath = "//span[contains(text(),'Lease To')]/parent::label/parent::div//input")
+	@FindBy(xpath = "//span[contains(text(),'LeaseTo')]/parent::label/parent::div//input")
 	WebElement leaseToEditOpportunity;
 
-	@FindBy(xpath = "//span[contains(text(),'Lease Term (Months)')]/parent::label/following-sibling::input")
+	@FindBy(xpath = "//span[contains(text(),'Lease Term(Months)')]/parent::label/following-sibling::input")
 	WebElement leaseTermEditOpportunity;
 
 	@FindBy(xpath = "//span[contains(text(),'Lease Rate/Rent')]/parent::label/following-sibling::input")
@@ -1070,36 +535,18 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//a[contains(@title,'Full Service Gross')]")
 	WebElement leaseRentTypeValue;
-
-	@FindBy(xpath = "//select[contains(@id,'assignmentType')]//option[@value='Consulting']")
-	WebElement assignmentTypeValueNewOpp;
-
+	
 	@FindBy(xpath = "//span[contains(text(),'Remarks')]/parent::label/following-sibling::textarea")
 	WebElement remarks;
 
-	@FindBy(xpath = "//span[contains(text(),'Other Incentives')]/parent::label/following-sibling::textarea")
-	WebElement otherIncentives;
+	@FindBy(xpath = "//span[contains(text(),'CBRE Market Group')]/parent::span/following-sibling::div//a[contains(@class,'select')]")
+	WebElement cbreMarketGroupEMEA;
 
-	@FindBy(xpath = "//span[contains(text(),'Rent Per Annum')]/parent::label/following-sibling::input")
-	WebElement rentPerAnnum;
+	@FindBy(xpath = "//a[contains(@title,'City')]")
+	WebElement cbreMarketGroupEMEAValue;
 
-	@FindBy(xpath = "//span[contains(text(),'Months Rent Free')]/parent::label/following-sibling::input")
-	WebElement monthsRentFree;
-
-	@FindBy(xpath = "//span[contains(text(),'Rent Review Date')]/parent::label/parent::div//input")
-	WebElement rentReviewDate;
-
-	@FindBy(xpath = "//span[contains(text(),'Break Date')]/parent::label/parent::div//input")
-	WebElement breakDate;
-
-	@FindBy(xpath = "//span[contains(text(),'Conversion Type')]/parent::span/following-sibling::div//a[contains(@class,'select')]")
-	WebElement emeaConversionType;
-
-	@FindBy(xpath = "//a[contains(@title,'Pitch')]")
-	WebElement emeaConversionTypeValue;
-
-	@FindBy(xpath = "//span[contains(text(),'Pitch Date')]/parent::label/parent::div//input")
-	WebElement pitchDate;
+	@FindBy(xpath = "//span[contains(text(),'Net Fee')]/parent::label/following-sibling::input")
+	WebElement netFeeOpportunityEdit;
 
 	@FindBy(xpath = "//span[contains(text(),'Address Line 1')]/parent::label/following-sibling::input")
 	WebElement addressLine1;
@@ -1113,56 +560,201 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//span[contains(text(),'Postcode')]/parent::label/following-sibling::input")
 	WebElement postCode;
 
-	@FindBy(xpath = "//span[contains(text(),'CBRE Market Group')]/parent::span/following-sibling::div//a[contains(@class,'select')]")
-	WebElement cbreMarketGroupEMEA;
+	@FindBy(xpath = "//span[contains(text(),'Conversion Type')]/parent::span/following-sibling::div//a[contains(@class,'select')]")
+	WebElement emeaConversionType;
 
-	@FindBy(xpath = "//a[contains(@title,'City')]")
-	WebElement cbreMarketGroupEMEAValue;
+	@FindBy(xpath = "//a[contains(@title,'Pitch')]")
+	WebElement emeaConversionTypeValue;
 
-	@FindBy(xpath = "//*[text()='More']")
-	WebElement menu_More;
+	@FindBy(xpath = "//span[contains(text(),'Pitch Date')]/parent::label/parent::div//input")
+	WebElement pitchDate;
 
-	@FindBy(xpath = "//a[@role='menuitem']/span[contains(@class,'slds-truncate')][text()='Campaigns']")
-	WebElement campaigns;
+	@FindBy(xpath = "//span[contains(text(),'Other Incentives')]/parent::label/following-sibling::textarea")
+		WebElement otherIncentives;
 
-	@FindBy(xpath = "//span[contains(@class,'virtualAutocompleteOptionText')][text()='All Active Campaigns']")
-	WebElement allActiveCampaigns;
+	@FindBy(xpath = "//span[contains(text(),'Rent Per Annum')]/parent::label/following-sibling::input")
+	WebElement rentPerAnnum;
 
-	@FindBy(xpath = "//span[contains(text(),'Offers')]/ancestor::article//div[text()='New']")
-	WebElement offersNew;
+	@FindBy(xpath = "//span[contains(text(),'Months Rent Free')]/parent::label/following-sibling::input")
+	WebElement monthsRentFree;
 
-	@FindBy(xpath = "//span[contains(text(),'Project Enquiries')]/ancestor::article//div[text()='New']")
-	WebElement projectEnquiries;
+	@FindBy(xpath = "//span[contains(text(),'Rent Review Date')]/parent::label/parent::div//input")
+	WebElement rentReviewDate;
 
-	@FindBy(xpath = "//div[contains(text(),'APAC Property Sale Offers')]/parent::div/parent::label//span[@class='slds-radio--faux']")
-	WebElement offersRadioButton;
+	@FindBy(xpath = "//span[contains(text(),'Break Date')]/parent::label/parent::div//input")
+	WebElement breakDate;
 
+
+
+
+
+
+	
+	/**
+	* Validating the Opportunities create new installment
+	* 
+	* @author Vishnuvardhan
+	*/
+
+	@FindBy(xpath = "//li[contains(@class,'oneActionsDropDown')]//a")
+	WebElement showMoreActions;
+
+	@FindBy(xpath = "//a[contains(@title,'New Installment')]")
+	WebElement newInstallment;
+
+	@FindBy(xpath = "//div[@class='slds-form-element__control']//span[text()='Installment Number']/parent::label/parent::div/input")
+	WebElement installmentNumber;
+
+	@FindBy(xpath = "//span[contains(text(),'Installment Amount')]/parent::label/parent::div//input")
+	WebElement installmentAmountNewOpportunityInstallment;
+
+	@FindBy(xpath = "//div[@class='slds-form-element__control']//span[text()='Installment Date']/parent::label/parent::div/div/input")
+	WebElement installmentDate;
+
+	@FindBy(xpath = "//div[contains(@class,'slds-modal__footer')]/button/span[text()='Save']")
+	WebElement newInstallmentSave;
+	
+	@FindBy(xpath = "//span[text()='Close Date']/parent::label/parent::div//input")
+	WebElement closeDate_AS;
+
+	@FindBy(xpath = "//span[contains(text(),'Lead Source')]/parent::span/following-sibling::div//a")
+	WebElement leadSourceNewOpp;
+
+	@FindBy(xpath = "//a[contains(@title,'Business Relationship')]")
+	WebElement leadSourceNewOppValue;
+
+	@FindBy(xpath = "//button[contains(@class,'forceActionButton')]/span[text()='Save']")
+	WebElement saveNewOpp;
+
+	@FindBy(xpath = "//span[contains(@class,'title')][contains(text(),'Activity')]")
+	WebElement activity;
+
+	@FindBy(xpath = "//span[text()='Installment Date']/parent::div/following-sibling::div")
+	WebElement installmentDateEditOpp;
+	
+	@FindBy(xpath = "//div[@class='bBottom']//span[text()='Home']")
+	WebElement menu_home;
+	
+	@FindBy(xpath = "//a[contains(@title,'Chatter')]//span[contains(text(),'Chatter')]")
+	WebElement chatter;
+
+
+	/**
+	* Validating the Clone and Edit buttons in Opportunity VF Page
+	* 
+	* @author Vishnuvardhan
+	*/
+	
+	@FindBy(xpath = "//a[@class='forceActionLink']/div[@class='slds-truncate'][text()='Edit']")
+	WebElement edit;
+	
+	@FindBy(xpath = "//select[contains(@id,'assignmentType')]/option[@value='Consulting']")
+	WebElement assignmentTypeOppValueClone;
+	
+	@FindBy(xpath = "//a[@class='forceActionLink']/div[@class='slds-truncate'][text()='Clone']")
+	WebElement clone;
+	
 	@FindBy(xpath = "//span[text()='Next']")
 	WebElement offersNextButton;
-
+	
+	@FindBy(xpath = "//span[text()='Management Annual Revenue']/parent::label/parent::div//input")
+	WebElement managementAnnualRevenue;
+	
+	/**
+	* Validating the Phase and Probability field when Sales stage is selected
+	* 
+	* @author Vishnuvardhan
+	*/
+	
+	@FindBy(xpath = "//*[@id='record-type-select']/option[text()='APAC Global Workplace Solutions']")
+	WebElement opportunityRecordTypeGlobalWorkplaceSolutions;
+	
+	@FindBy(xpath = "//input[@title='Search Accounts']")
+	WebElement accountNameSearchBox;
+	
+	@FindBy(xpath = "//*[contains(@id,'oppForm:salesStage')]")
+	WebElement salesStage;
+	
+	@FindBy(xpath = "//label[text()='Reason for Loss']/parent::div//select")
+	WebElement reasonForLossOpp;
+	
+	@FindBy(xpath = "//label[text()='Reason Lost Comments']/parent::div//div/textarea")
+	WebElement reasonForLossOppText;
+	
+	/**
+	* Validating the Project Enquiries Page Fiels List from the APAC Campaign Record
+	* 
+	* @author Vishnuvardhan
+	*/
+	
+	@FindBy(xpath = "//span[contains(text(),'Project Enquiries')]/ancestor::article//div[text()='New']")
+	WebElement projectEnquiries;
+	
+	/**
+	* Validating the Offers Related List from the APAC Property Record
+	* 
+	* @author Vishnuvardhan
+	*
+	*/
+	
 	@FindBy(xpath = "//span[contains(@class,'slds-truncate')][text()='Properties']")
 	WebElement menu_Properties;
-
-	@FindBy(xpath = "//div[@class='overflowList']//a[@title='Properties'][text()='Properties']")
-	WebElement propertiesEnv;
-
+	
+	@FindBy(xpath = "//*[text()='More']")
+	WebElement menu_More;
+	
 	@FindBy(xpath = "//a[@role='menuitem']/span[contains(@class,'slds-truncate')][text()='Properties']")
 	WebElement propertiesRecord;
-
+	
+	@FindBy(xpath = "//div[@class='overflowList']//a[@title='Properties'][text()='Properties']")
+	WebElement propertiesEnv;
+	
+	@FindBy(xpath = "//span[contains(@class,'virtualAutocompleteOptionText')][text()='All Active Campaigns']")
+	WebElement allActiveCampaigns;
+	
+	/**
+	* Validating Multi Business Line- Do not add Account Name to Opportunity Name when Opportunity is Marked as Confidential
+	* 
+	* @author Vishnuvardhan
+	*/
+	
 	@FindBy(xpath = "//label[contains(text(),'Confidential Opportunity')]/parent::div//label[@class='slds-checkbox']/span[@class='slds-checkbox--faux']")
 	WebElement confidentialCheckboxOpp;
+	
+	@FindBy(xpath = "//span[text()='Estimated Gross Fee/Commission']/parent::div/div[@class='requiredInput']/input")
+	WebElement estimatedGrossFeeCommissionEMEA;
 
 	@FindBy(xpath = "//span[contains(text(),'Sales')][contains(text(),'Stage')]/parent::div//select")
 	WebElement salesStageEMEAOpp;
 
 	@FindBy(xpath = "//h1[contains(@class,'slds-page-header__title') and contains(@class,'slds-truncate')]/span")
 	WebElement opportunityConfidentialName;
-
-	@FindBy(xpath = "//span[text()='Estimated Gross Fee/Commission']/parent::div/div[@class='requiredInput']/input")
-	WebElement estimatedGrossFeeCommissionEMEA;
-
+	
+	/**
+	* Validating the Opportunity Calculated Annual Leasing Commission
+	* 
+	* 
+	* @author Vishnuvardhan
+	*/
+	
 	@FindBy(xpath = "//span[contains(text(),'Opportunity Name')]/parent::label/following-sibling::input")
 	WebElement opportunityNameAS;
+	
+	@FindBy(xpath = "//label[contains(text(),'Lease Period (in months)')]")
+	WebElement leasePeriodNewOpportunity;
+
+	@FindBy(xpath = "//label[contains(text(),'Other Incentives')]")
+	WebElement otherIncentivesNewOpportunity;
+
+	@FindBy(xpath = "//label[contains(text(),'Landlord & Tenant Act 1954')]")
+	WebElement landlordTenantAct;
+
+    /* @FindBy(xpath="//input[@placeholder='Search Accounts']") 
+    *WebElement searchAccountsNewOpportunity;
+    */
+
+	@FindBy(xpath = "//input[contains(@placeholder,'Search Accounts')]")
+	WebElement searchAccountsNewOpportunity;
 
 	@FindBy(xpath = "//span[text()='Total Size']/parent::label/following-sibling::input")
 	WebElement totalSizeAS;
@@ -1188,117 +780,52 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//a[@title='Yes']")
 	WebElement valueAS;
 
-	@FindBy(xpath = "//input[contains(@title,'Search Properties')]")
-	WebElement targetProperty;
-
+	@FindBy(xpath = "//span[contains(text(),'City')]/parent::label/parent::div/input")
+	WebElement opportunityCity;
+	
+	/**
+	* Validating the Opportunities page for Recalculate and new installment button
+	* 
+	* @author Vishnuvardhan
+	*/
+	
+	@FindBy(xpath = "//select[@id='record-type-select']")
+	WebElement selectOpportunityRecordType;
+	
+	/**
+	* Validating the Opportunities creation for the japan users
+	* 
+	* @author Vishnuvardhan
+	*/
+	
+	@FindBy(xpath = "//div[contains(@class,'pbBottomButtons')]//input[contains(@id,'next')]")
+	WebElement nextForJapan;
+	
 	@FindBy(xpath = "//span[contains(text(),'Account Name')]/parent::label/following-sibling::div//input[contains(@title,'Search Accounts')]")
 	WebElement accountNameNewOpportunity;
 
-	@FindBy(xpath = "//div[contains(@class,'primaryLabel')][@title='01R4597B21CBRE Test SFDC Automation_0401']")
-	WebElement accountNameValueNewOpp;
-
-	@FindBy(xpath = "//span[contains(text(),'Lead Source')]/parent::span/following-sibling::div//a")
-	WebElement leadSourceNewOpp;
-
-	@FindBy(xpath = "//a[contains(@title,'Business Relationship')]")
-	WebElement leadSourceNewOppValue;
-
-	@FindBy(xpath = "//div[contains(@class,'primaryLabel')][contains(@title,'Test Automation Subject_G7XRIZ51NS - 2100 Ross Avenue')]")
-	WebElement targetPropertyValue;
-
-	@FindBy(xpath = "//label[contains(text(),'Lease Period (in months)')]")
-	WebElement leasePeriodNewOpportunity;
-
-	@FindBy(xpath = "//label[contains(text(),'Other Incentives')]")
-	WebElement otherIncentivesNewOpportunity;
-
-	@FindBy(xpath = "//label[contains(text(),'Landlord & Tenant Act 1954')]")
-	WebElement landlordTenantAct;
-
-	@FindBy(xpath = "//span[text()='Installment Date']/parent::div/following-sibling::div")
-	WebElement installmentDateEditOpp;
-
-	@FindBy(xpath = "//span[contains(text(),'Engagement Commencement')]/following-sibling::div//input")
-	WebElement engagementCommencement;
-
-	@FindBy(xpath = "//h2[contains(@class,'slds-text-heading--medium slds-m-top--x-large slds-m-bottom--large')]")
-	List<WebElement> headerList;
-
-	@FindBy(xpath = "//*[@class='slds-form-element__label']")
-	List<WebElement> labelListOpportunitiesPage;
-
-	@FindBy(xpath = "//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'006')]")
-	List<WebElement> opportunitiesList;
-
-	@FindBy(xpath = "//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'001')]")
-	List<WebElement> accountsList;
-
-	/*
-	 * @FindBy(
-	 * xpath="//div[@class='undefined lookup__menu uiAbstractList uiAutocompleteList uiInput uiAutocomplete uiInput--default uiInput--lookup']//div[@class='listContent']/ul/li"
-	 * ) List<WebElement> propertiesList;
+     /**
+	 * Validating the Opportunities APAC DSF for Financial Details for pacific users
+	 * 
+	 * @author Vishnuvardhan
 	 */
-
-	@FindBy(xpath = "//div[@class='select-options']//a[@title='Client Action Postponed']/parent::li/parent::ul/li")
-	List<WebElement> reasonForLossValuesPickList;
-
-	@FindBy(xpath = "//div[@class='select-options']//a[@title='BNP']/parent::li/parent::ul/li")
-	List<WebElement> awardedToList;
-
-	@FindBy(xpath = "//div[contains(@class,'primaryLabel')]/mark[contains(text(),'Test')]")
-	WebElement offerorContactName;
-
-	@FindBy(xpath = "//div[contains(@class,'primaryLabel') and @title='Test Automation 0100']/following-sibling::div[contains(@title,'2100 Ross Avenue, Dallas, United States')]")
-	WebElement offerorAccountName;
-
-	@FindBy(xpath = "//p/strong[contains(text(),'-963425397_Test Automation_0131')]")
-	WebElement accountNameValueAdmin;
-
-	@FindBy(xpath = "//select[contains(@id,'oppForm:assignmentType')]/option[@value='Consulting']")
-	WebElement assignmentTypeValue;
-
-	@FindBy(xpath = "//span[contains(text(),'Preferred Property Type')]/following-sibling::div/select")
-	WebElement preferedPropertyTypeAdmin;
-
-	@FindBy(xpath = "//span[contains(text(),'Preferred Property Type')]/following-sibling::div/select/option[@value='Hotel']")
-	WebElement preferedPropertyTypeValueAdmin;
-
+	
 	@FindBy(xpath = "//select[@id='record-type-select']/option[contains(text(),'APAC Debt & Structured Finance')]")
 	WebElement opportunityDSFValue;
+	
+	@FindBy(xpath = "//span[text()='Opportunity Currency']")
+	WebElement opportunityCurrency;
+
+
+	/**
+	* Validating the Opportunities creation for the project manager
+	* 
+	* @author Ramya
+	*/
 
 	@FindBy(xpath = "//div[contains(@class,'primaryLabel')][contains(@title,'Test Automation_0101')]")
 	WebElement accountNameNewOpp;
-
-	@FindBy(xpath = "//button[contains(@class,'forceActionButton')]/span[text()='Save']")
-	WebElement saveNewOpp;
-
-	@FindBy(xpath = "//span[contains(@class,'title')][contains(text(),'Activity')]")
-	WebElement activity;
-
-	@FindBy(xpath = "//a[contains(@title,'Chatter')]//span[contains(text(),'Chatter')]")
-	WebElement chatter;
-
-	@FindBy(xpath = "//input[contains(@id,'subject')]")
-	WebElement subjectNewTask;
-
-	@FindBy(xpath = "//select[@class='slds-select']/option[@value='Private - Client Intelligence']")
-	WebElement activityType;
-
-	@FindBy(xpath = "//input[contains(@id,'dueDate')]")
-	WebElement newActivityDueDate;
-
-	@FindBy(xpath = "//input[contains(@id,'saveButton')]")
-	WebElement saveActivity;
-
-	@FindBy(xpath = "//a[contains(@aria-label,'Opportunity Currency')]")
-	WebElement selectOpportunityCurrency;
-
-	@FindBy(xpath = "//a[contains(@title,'Indian Rupee')]")
-	WebElement opportunityCurrencyValue;
-
-	@FindBy(xpath = "//span[contains(text(),'City')]/parent::label/parent::div/input")
-	WebElement opportunityCity;
-
+	
 	@FindBy(xpath = "//span[text()='Assignment Start Date']/parent::label/parent::div//input")
 	WebElement assignmentStartDate;
 
@@ -1320,20 +847,43 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//a[@title='Office']")
 	WebElement assetTypeValue;
 
-	@FindBy(xpath = "//div[@id='rlql-showAllShowLess']/a")
-	WebElement showAll;
+	@FindBy(xpath = "//a[contains(@aria-label,'Opportunity Currency')]")
+	WebElement selectOpportunityCurrency;
 
-	@FindBy(xpath = "//span[contains(@title,'Opportunity Field History')]")
-	WebElement opportunityFieldHistory;
+	@FindBy(xpath = "//a[contains(@title,'Indian Rupee')]")
+	WebElement opportunityCurrencyValue;
 
-	@FindBy(xpath = "//span[contains(@title,'Phase History ')]")
-	WebElement phaseHistory;
+	@FindBy(xpath = "//span[contains(text(),'City Tier')]/parent::span/following-sibling::div//a[contains(@aria-label,'City Tier')]")
+	WebElement cityTier;
 
-	@FindBy(xpath = "//a[contains(text(),'01-Intro Meeting / Relationship Building')]")
-	WebElement salesStageDefaultValue;
+	@FindBy(xpath = "//a[contains(@title,'Tier 1')]")
+	WebElement cityTierValue;
 
-	@FindBy(xpath = "//li[contains(text(),'Please enter Assignment Start Date for Sales Stages 02-09')]")
-	WebElement assignmentStartDateMandatory;
+
+
+	/**
+	* Validating the Opportunities required fields at sales stage 03
+	* 
+	* @author Ramya
+	*/
+
+	@FindBy(xpath = "//span[contains(text(),'Opportunity Details')]/parent::label/parent::div//textarea")
+	WebElement opportunityDetails;
+	
+	@FindBy(xpath = "//span[text()='Sales Stage']/parent::label/parent::div//a")
+	WebElement salesStage_AS;
+
+	@FindBy(xpath = "//a[contains(@title,'03-Proposal Submitted')][contains(text(),'03-Proposal Submitted')]")
+	WebElement salesStageValue03;
+
+	@FindBy(xpath = "//a[contains(@title,'04-Shortlisted')][contains(text(),'04-Shortlisted')]")
+	WebElement salesStageValue04;
+
+	@FindBy(xpath = "//a[contains(@title,'06-Contract Signed')][contains(text(),'06-Contract Signed')]")
+	WebElement salesStageValue06;
+
+	@FindBy(xpath = "//a[contains(@title,'07-Project Completed')][contains(text(),'07-Project Completed')]")
+	WebElement salesStageValue07;
 
 	@FindBy(xpath = "//span[contains(text(),'Identification Date')]/parent::label/parent::div//input")
 	WebElement identificationDate;
@@ -1344,11 +894,11 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//span[contains(text(),'Completion Date')]/parent::label/parent::div//input")
 	WebElement completionDate;
 
-	@FindBy(xpath = "//span[contains(text(),'City Tier')]/parent::span/following-sibling::div//a[contains(@aria-label,'City Tier')]")
-	WebElement cityTier;
+	@FindBy(xpath = "//span[contains(text(),'Outcome Date')]/parent::label/parent::div//input")
+	WebElement outcomeDate;
 
-	@FindBy(xpath = "//a[contains(@title,'Tier 1')]")
-	WebElement cityTierValue;
+	@FindBy(xpath = "//span[text()='Area']/parent::label/parent::div//input")
+	WebElement totalSize_AS;
 
 	@FindBy(xpath = "//a[@title='Construction Management']")
 	WebElement assignmentTypeValueOpportunity;
@@ -1365,6 +915,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//a[@title='New Build']")
 	WebElement constructionTypeValue;
 
+	@FindBy(xpath = "//span[contains(text(),'Location')]/parent::label/parent::div//input")
+	WebElement opportunityLocation;
+		
 	@FindBy(xpath = "//span[contains(text(),'Site Area')]/parent::label/parent::div//input")
 	WebElement siteArea;
 
@@ -1374,35 +927,18 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//span[contains(text(),'Consultancy Fee')]/parent::label/parent::div//input")
 	WebElement consultancyFee;
 
-	@FindBy(xpath = "//span[contains(text(),'Location')]/parent::label/parent::div//input")
-	WebElement opportunityLocation;
 
-	@FindBy(xpath = "//span[contains(text(),'Opportunity Details')]/parent::label/parent::div//textarea")
-	WebElement opportunityDetails;
+	/**
+	* Validating the Creation of opportunities with the record type DSF
+	* 
+	* @author Ramya
+	*/
 
-	@FindBy(xpath = "//span[contains(text(),'Outcome Date')]/parent::label/parent::div//input")
-	WebElement outcomeDate;
-
-	@FindBy(xpath = "//a[contains(@title,'03-Proposal Submitted')][contains(text(),'03-Proposal Submitted')]")
-	WebElement salesStageValue03;
-
-	@FindBy(xpath = "//a[contains(@title,'04-Shortlisted')][contains(text(),'04-Shortlisted')]")
-	WebElement salesStageValue04;
-
-	@FindBy(xpath = "//a[contains(@title,'06-Contract Signed')][contains(text(),'06-Contract Signed')]")
-	WebElement salesStageValue06;
-
-	@FindBy(xpath = "//a[contains(@title,'07-Project Completed')][contains(text(),'07-Project Completed')]")
-	WebElement salesStageValue07;
-
-	@FindBy(xpath = "//div[contains(@class,'pbBottomButtons')]//input[contains(@id,'next')]")
-	WebElement nextForJapan;
-
-	@FindBy(xpath = "//ul[@class='tabs__nav']//a[@title='New Event']")
-	WebElement newEventOpp;
-
-	@FindBy(xpath = "//a[contains(@title,'Automation')]")
-	WebElement ExistingOpportunity;
+	@FindBy(xpath = "//span[contains(@class,'virtualAutocompleteOptionText')][text()='All Active Opportunities']")
+	WebElement allActiveOpportunities;
+	
+	@FindBy(xpath = "//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']")
+	WebElement OpportunityList;
 
 	@FindBy(xpath = "//*[@id='tag_edit_link']")
 	WebElement addTag;
@@ -1413,57 +949,51 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//input[@id='tag_save_btn']")
 	WebElement savePrivateTag;
 
-	@FindBy(xpath = "//*[contains(@title,'View records tagged')]")
-	WebElement PrivateTagged;
 
-	@FindBy(xpath = " //*[contains(@class,'entityNameTitle slds-breadcrumb__item slds-line-height--reset')]")
-	WebElement PrivateTagPage;
 
-	@FindBy(xpath = "//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']")
-	WebElement OpportunityList;
+	/**
+	 * Validating the Opportunities pitch Advisor field
+	 * 
+	 * @author Vishnuvardhan
+	 */
+	
+	@FindBy(xpath = "//select[@id='record-type-select']/option[@value='012i0000000tvTeAAI']")
+	WebElement selectOpportunityRecordTypeValue;
+	
+	@FindBy(xpath = "//span[text()='Pitch Advisor']")
+	WebElement pitchAdvisor;
+	
+	/**
+	 * Validating the Opportunity Quick create page for the Total size to be mandatory for the sales stage Prospecting
+	 * 
+	 * @author Vishnuvardhan
+	 */
+	 
+	@FindBy(xpath = "//span[contains(text(),'Total Size')]/parent::label/following-sibling::input")
+	WebElement totalSizeEditOpp;
+	
+	/** 
+	 * Validating the Opportunities page for Recalculate and new installment button
+	 * 
+	 * @author Vishnuvardhan
+	 */
+	@FindBy(xpath = "//a[contains(@title,'Recalculate')]")
+	WebElement recalculate;
+	
+	/** 
+	 * Validating the Opportunities required fields at sales stage 02
+	 * 
+	 * @author Vishnuvardhan
+	 */
+ 
+	@FindBy(xpath = "//a[contains(text(),'01-Intro Meeting / Relationship Building')]")
+	WebElement salesStageDefaultValue;
 
-	@FindBy(xpath = "//*[contains(@id,'58578:0')]")
-	WebElement EditGrossFee;
-
-	@FindBy(xpath = "//*[(@class='slds-icon_container slds-icon-utility-down')]")
-	WebElement InstallmentIcon;
-
-	@FindBy(xpath = "//label/span[text()='Estimated Gross Fee/Commission']/parent::label/following-sibling::input")
-	WebElement EditEstimatedGrossFee;
-
-	@FindBy(xpath = "//*[@title='Save' and @class ='slds-button slds-button--neutral uiButton--default uiButton--brand uiButton forceActionButton']")
-	WebElement SaveEditOpportunity;
-
-	@FindBy(xpath = "//div/button[text()='Add']")
-	WebElement AddTeamMember;
-
-	@FindBy(xpath = "//*[@id='acctSearchBox2']")
-	WebElement SearchUserTeamRole;
-
-	@FindBy(xpath = "//td/input[contains(@id,'addTeamMemberForm:j_id51:0')]")
-	WebElement TeamMemberDescription;
-
-	@FindBy(xpath = "//span/select[contains(@id,'addTeamMemberForm:j_id51:0')]")
-	WebElement TeamRole;
-
-	@FindBy(xpath = "//td/select[contains(@id,'addTeamMemberForm:j_id51:0')]")
-	WebElement SecondaryMemberRole;
-
-	@FindBy(xpath = "//*[@id='j_id0:addTeamMemberForm']/div[1]/input[1]")
-	WebElement SaveTeamMember;
-
-	@FindBy(xpath = "//*[(@title='Test Broker6')]")
-	WebElement SelectTestBroker;
-
-	@FindBy(xpath = "//h1[contains(@class,'slds-page-header__title')]/span")
-	List<WebElement> accountNameSaved;
-
-	@FindBy(xpath = "//*[contains(@id,'1:j_id56')]")
-	WebElement SplitSecond;
-
-	@FindBy(xpath = "//label[text() = 'Account Name']")
-	WebElement OpportunityPageLabel;
-
+	
+	/*
+	 * 
+	 */
+	
 	SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
 	Actions actions = new Actions(driver.getWebDriver());
 	EventPage eventPage = new EventPage(scriptHelper);
@@ -1605,6 +1135,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		String accountName = Utility_Functions.xGetTextVisibleListElement(driver, accountNameSaved);
 		System.out.println(accountName);
 		return accountName;
+		
 	}
 
 	/**
@@ -1635,11 +1166,11 @@ public class OpportunitiesPage extends ReusableLibrary {
 	public void newOpportunityPageLayout() {
 		OpportunityPageLayout opportunityPageLaout = new OpportunityPageLayout(scriptHelper);
 		opportunityPageLaout.validateNewOpportunityPage();
+		report.updateTestLog("Verify the Oppoertunity page layout", "New Opportunity page layout fields are verified", Status.PASS);
 	}
 
 	/**
-	 * Validating the required fields based on Sales Stage selected between
-	 * 16-In Escrow to 19-Closed Lease on Opportunity from a broker profile
+	 * Validating the required fields based on Sales Stage selected between 16-In Escrow to 19-Closed Lease on Opportunity from a broker profile
 	 * 
 	 * @author Vishnuvardhan
 	 *
@@ -1658,6 +1189,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			replaceOpportunityId(OpportunityID);
 			validateOpportunityFields(OpportunityID);
 		}
+		report.updateTestLog("Verify the Fields between Sales stage 16 and 19", "Verified the fields between the Sales stage 16 and 19 on Opportunity for broker profile", Status.PASS);
 	}
 
 	/**
@@ -2673,9 +2205,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 		}
 	}
 
+
 	/**
-	 * Verify the required fields based on Sales Stage selected between
-	 * 08-Closed - Paid Partial to 09-Closed - Paid Full
+	 * Verify the required fields based on Sales stage selected between 08-Closed - Paid Partial to 09-Closed - Paid Full
 	 * 
 	 * @author Vishnuvardhan
 	 *
@@ -2686,8 +2218,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		System.out.println(OpportunityID);
 		try {
 			if (OpportunityID == null) {
-				report.updateTestLog("Verify Opportunity",
-						"There are no Opportunities that falls under this category:::", Status.PASS);
+				report.updateTestLog("Verify Opportunity","There are no Opportunities that falls under this category:::", Status.PASS);
 				salesStage08_09ClosedFunction();
 				salesStage08_08ClosedSubFunction();
 			} else {
@@ -2747,8 +2278,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 			Utility_Functions.xWaitForElementPresent(driver, estimatedTransactionValue, 3);
 			Utility_Functions.xSendKeys(driver, estimatedTransactionValue,
 					dataTable.getData("General_Data", "InstallmentAmount"));
-			Utility_Functions.xWaitForElementPresent(driver, estiamtedGrossFeeCommissionValue, 3);
-			Utility_Functions.xSendKeys(driver, estiamtedGrossFeeCommissionValue,
+			Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeCommissionValue, 3);
+			Utility_Functions.xSendKeys(driver, estimatedGrossFeeCommissionValue,
 					dataTable.getData("General_Data", "InstallmentAmount"));
 			Utility_Functions.xWaitForElementPresent(driver, finalTransactionValue, 3);
 			Utility_Functions.xSendKeys(driver, finalTransactionValue,
@@ -2800,9 +2331,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 			report.updateTestLog("Verify Opportunities Technology Tools Field", "The Technology tools field is present",
 					Status.PASS);
 		} else {
-			report.updateTestLog("Verify Opportunities Technology Tools Field",
-					"The Technology tools field is not present", Status.FAIL);
-		}
+			report.updateTestLog("Verify Opportunities Technology Tools Field","The Technology tools field is not present", Status.FAIL);
+			}
 		return TargetInitiativeField;
 	}
 
@@ -2828,14 +2358,11 @@ public class OpportunitiesPage extends ReusableLibrary {
 		targetingInitiativeFieldsListValues = sf_UtilityFunctions.getPickListValues("Opportunity",
 				"APAC Asset Services", "Targeting_Initiative__c");
 		List<String> targetingInitiativeFieldsList = new ArrayList<String>();
-		targetingInitiativeFieldsList = Utility_Functions.xValidatePickListValuesPage(
-				targetingInitiativeFieldsListValues, targetingInitiativeFieldsList, "Project Enquiries field values");
+		targetingInitiativeFieldsList = Utility_Functions.xValidatePickListValuesPage(targetingInitiativeFieldsListValues, targetingInitiativeFieldsList, "Project Enquiries field values");
 		if (targetingInitiativeFieldsList.size() != 0) {
-			report.updateTestLog("Verify Opportunities Targeting Initiative PickList Value",
-					"The Targeting Initiative PickList Values are not present", Status.FAIL);
+			report.updateTestLog("Verify Opportunities Targeting Initiative PickList Value","The Targeting Initiative PickList Values are not present", Status.FAIL);
 		} else {
-			report.updateTestLog("Verify Opportunities Targeting Initiative PickList Value",
-					"The Targeting Initiative PickList Value is present", Status.PASS);
+			report.updateTestLog("Verify Opportunities Targeting Initiative PickList Value", "The Targeting Initiative PickList Value is present", Status.PASS);
 		}
 	}
 
@@ -2919,11 +2446,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		if (details.isDisplayed()) {
 
-			report.updateTestLog("Verify Opportunity Quick Create Mandatory Fields",
-					"The opportunity is saved with all the mandatory fields", Status.PASS);
+			report.updateTestLog("Verify Opportunity Quick Create Mandatory Fields","The opportunity is saved with all the mandatory fields",Status.PASS);
 		} else {
-			report.updateTestLog("Verify Opportunity Quick Create Mandatory Fields",
-					"The opportunity is not saved with all the mandatory fields", Status.FAIL);
+			report.updateTestLog("Verify Opportunity Quick Create Mandatory Fields","The opportunity is not saved with all the mandatory fields", Status.FAIL);
 		}
 	}
 
@@ -2979,7 +2504,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			Utility_Functions.xWaitForElementPresent(driver, selectOpportunityRecordType, 5);
 			Utility_Functions.xClick(driver, selectOpportunityRecordType, true);
 			Utility_Functions.xWaitForElementPresent(driver, selectOpportunityRecordTypeValue, 5);
-			Utility_Functions.xClick(driver, selectOpportunityRecordTypeValue, true);
+         	Utility_Functions.xClick(driver, selectOpportunityRecordTypeValue, true);
 			Utility_Functions.xWaitForElementPresent(driver, continueButton, 5);
 			Utility_Functions.xClick(driver, continueButton, true);
 			Utility_Functions.timeWait(2);
@@ -3014,7 +2539,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Date date = new Date();
 		Utility_Functions.xWaitForElementPresent(driver, closeDateNewOpportunity, 3);
 		Utility_Functions.xSendKeys(driver, closeDateNewOpportunity, dateFormat.format(date).toString());
-		Utility_Functions.xWaitForElementPresent(driver, saveOpportunitySplitUAT, 4);
+		Utility_Functions.xWaitForElementPresent(driver, saveOpportunitySplitUAT, 4 );
 		Utility_Functions.xClick(driver, saveOpportunitySplitUAT, true);
 		Utility_Functions.timeWait(4);
 		Utility_Functions.xScrollWindow(driver);
@@ -3184,7 +2709,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 						Status.PASS);
 			} else {
 				report.updateTestLog("Verify Quick Create Opportunity Page Discretionary Fee",
-						"The opportunity is not saved with the Discretionary Fee check box checked and the Discretionary amount",
+						"The opportunity is not saved with the Discretionary Fee check box checked and the Discretionary amount ",
 						Status.FAIL);
 			}
 
@@ -3207,8 +2732,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, opportunityInstallments, 3);
 		Utility_Functions.xClick(driver, opportunityInstallments, true);
 		Utility_Functions.timeWait(2);
-		List<WebElement> opportunitiesInstallmentsList = driver.findElements(By.xpath(
-				"//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'a16')]"));
+		List<WebElement> opportunitiesInstallmentsList = driver.findElementsByXPath("//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'a16')]");
 		Utility_Functions.xclickOnFirstElementfromList(opportunitiesInstallmentsList);
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xWaitForElementPresent(driver, editInstallmentStatus, 3);
@@ -3360,9 +2884,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 		if (propertyMarketPickListValues.size() != 0) {
 			report.updateTestLog("Verify Proeprty Type picklist values",
 					"All the values are not present in the Property Market Type Pick List:::"
-							+ propertyMarketPickListValues,
-					Status.FAIL);
-		} else {
+							+ propertyMarketPickListValues, Status.FAIL);
+			}else {
 			report.updateTestLog("Verify Proeprty Type picklist values",
 					"All the values are present in the Property Market Pick List ", Status.PASS);
 		}
@@ -3486,8 +3009,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		if (details.isDisplayed()) {
 
 			report.updateTestLog("Verify Quick Create Opportunity Page Discretionary Fee",
-					"The opportunity is saved with the Discretionary Fee check box checked and the Discretionary amount ",
-					Status.PASS);
+					"The opportunity is saved with the Discretionary Fee check box checked and the Discretionary amount", Status.PASS);
 		} else {
 			report.updateTestLog("Verify Quick Create Opportunity Page Discretionary Fee",
 					"The opportunity is not saved with the Discretionary Fee check box checked and the Discretionary amount",
@@ -3641,8 +3163,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	}
 
 	/**
-	 * Validating the Net Fee Field Mandatory in the New Opportunity creation
-	 * page
+	 * Validating the Net Fee Field Mandatory in the New Opportunity creation page
 	 * 
 	 * @author Ramya
 	 * 
@@ -3964,7 +3485,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void cloneAndEditButtonsOpportunity() {
-		Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
+		//Utility_Functions.xWaitForElementPresent(driver, menu_Opportunities, 3);
+		sf_UtilityFunctions.oneAppNavigationTab("Opportunities");
 		opportunityEligibility();
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, edit, 3);
@@ -4295,7 +3817,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 				report.updateTestLog("Opportunity Phase and Probability",
 						"Phase and Probability populated are as expected:::", Status.PASS);
 				report.updateTestLog("Opportunity Phase and Probability",
-						"Phase:::" + phasePopulated + ":::Probability:::" + probabilityPopulated, Status.PASS);
+						"Phase:::" + phasePopulated + ":::Probability:::"+ probabilityPopulated, Status.PASS);
 			} else {
 				report.updateTestLog("Opportunity Phase and Probability",
 						"Phase and Probability populated are not as expected:::", Status.FAIL);
@@ -4437,8 +3959,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, offersNextButton, true);
 		ProjectEnquiriesPageFieldsList();
 		Utility_Functions.timeWait(2);
-		List<WebElement> projectEnquiryPageFieldsList = driver
-				.findElements(By.xpath("//label[contains(@class,'form-element__label')]/span[1]"));
+		List<WebElement> projectEnquiryPageFieldsList = driver.findElementsByXPath("//label[contains(@class,'form-element__label')]/span[1]");
 		int i1 = 0, j = 0, countLabelList = 0;
 		String[] labelTexts = new String[projectEnquiryPageFieldsList.size()];
 		while (j < ProjectEnquiriesPageFields.size()) {
@@ -4846,8 +4367,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, leadSourceNewOpp, true);
 		Utility_Functions.xWaitForElementPresent(driver, leadSourceNewOppValue, 3);
 		Utility_Functions.xClick(driver, leadSourceNewOppValue, true);
-		Utility_Functions.xWaitForElementPresent(driver, estiamtedGrossFeeCommissionValue, 3);
-		Utility_Functions.xSendKeys(driver, estiamtedGrossFeeCommissionValue,
+		Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeCommissionValue, 3);
+		Utility_Functions.xSendKeys(driver, estimatedGrossFeeCommissionValue,
 				dataTable.getData("General_Data", "InstallmentAmount"));
 		Utility_Functions.xWaitForElementPresent(driver, estimatedTransactionValue, 3);
 		Utility_Functions.xSendKeys(driver, estimatedTransactionValue,
@@ -4903,6 +4424,10 @@ public class OpportunitiesPage extends ReusableLibrary {
 	/**
 	 * Validating the Opportunities page for Recalculate and new installment
 	 * button
+	 * @FindBy(xpath = "//a[contains(@title,'Recalculate')]")
+	WebElement recalculate;
+
+
 	 * 
 	 * @author Ramya
 	 *
@@ -4946,8 +4471,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, leadSourceNewOpp, true);
 		Utility_Functions.xWaitForElementPresent(driver, leadSourceNewOppValue, 3);
 		Utility_Functions.xClick(driver, leadSourceNewOppValue, true);
-		Utility_Functions.xWaitForElementPresent(driver, estiamtedGrossFeeCommissionValue, 3);
-		Utility_Functions.xSendKeys(driver, estiamtedGrossFeeCommissionValue,
+		Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeCommissionValue, 3);
+		Utility_Functions.xSendKeys(driver, estimatedGrossFeeCommissionValue,
 				dataTable.getData("General_Data", "InstallmentAmount"));
 		Utility_Functions.xWaitForElementPresent(driver, estimatedTransactionValue, 3);
 		Utility_Functions.xSendKeys(driver, estimatedTransactionValue,
@@ -5009,8 +4534,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, leadSourceNewOpp, true);
 		Utility_Functions.xWaitForElementPresent(driver, leadSourceNewOppValue, 3);
 		Utility_Functions.xClick(driver, leadSourceNewOppValue, true);
-		Utility_Functions.xWaitForElementPresent(driver, estiamtedGrossFeeCommissionValue, 3);
-		Utility_Functions.xSendKeys(driver, estiamtedGrossFeeCommissionValue,
+		Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeCommissionValue, 3);
+		Utility_Functions.xSendKeys(driver, estimatedGrossFeeCommissionValue,
 				dataTable.getData("General_Data", "InstallmentAmount"));
 		Utility_Functions.xWaitForElementPresent(driver, estimatedTransactionValue, 3);
 		Utility_Functions.xSendKeys(driver, estimatedTransactionValue,
@@ -5066,7 +4591,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, leadSourceNewOpp, true);
 		Utility_Functions.xWaitForElementPresent(driver, leadSourceNewOppValue, 3);
 		Utility_Functions.xClick(driver, leadSourceNewOppValue, true);
-		if ((estiamtedGrossFeeCommissionValue.isDisplayed())
+		if ((estimatedGrossFeeCommissionValue.isDisplayed())
 				&& (estimatedTransactionValue.isDisplayed() && (opportunityCurrency.isDisplayed()))) {
 
 			report.updateTestLog("Verify Opportunities Financial Details",
@@ -5077,8 +4602,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 					"The Estimated Gross Fee Commission, Estimated Transaction value and the Opportunity Currency are not displayed in the financial details section",
 					Status.FAIL);
 		}
-		Utility_Functions.xWaitForElementPresent(driver, estiamtedGrossFeeCommissionValue, 3);
-		Utility_Functions.xSendKeys(driver, estiamtedGrossFeeCommissionValue,
+		Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeCommissionValue, 3);
+		Utility_Functions.xSendKeys(driver, estimatedGrossFeeCommissionValue,
 				dataTable.getData("General_Data", "InstallmentAmount"));
 		Utility_Functions.xWaitForElementPresent(driver, estimatedTransactionValue, 3);
 		Utility_Functions.xSendKeys(driver, estimatedTransactionValue,
@@ -5454,8 +4979,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Date date = new Date();
 		Utility_Functions.xWaitForElementPresent(driver, closeDate_AS, 3);
 		Utility_Functions.xSendKeys(driver, closeDate_AS, dateFormat.format(date).toString());
-		Utility_Functions.xWaitForElementPresent(driver, estiamtedGrossFeeCommissionValue, 3);
-		Utility_Functions.xSendKeys(driver, estiamtedGrossFeeCommissionValue,
+		Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeCommissionValue, 3);
+		Utility_Functions.xSendKeys(driver, estimatedGrossFeeCommissionValue,
 				dataTable.getData("General_Data", "InstallmentAmount"));
 		Utility_Functions.xWaitForElementPresent(driver, estimatedTransactionValue, 3);
 		Utility_Functions.xSendKeys(driver, estimatedTransactionValue,
