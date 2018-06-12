@@ -63,7 +63,7 @@ public class SF_UtilityFunctions extends ReusableLibrary {
 	 */
 	public void selectExistingObjectRecord(String tableColumn) {
 		By visibleRecords = By.xpath("(//span[text()='"+tableColumn+"')]/ancestor::thead/following-sibling::tbody//th//a)");
-		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(3);
 		try {
 			Utility_Functions.xWaitForElementPresent(driver, driver.findElements(visibleRecords), 7);
 			Utility_Functions.xclickRandomElement(driver.findElements(visibleRecords));

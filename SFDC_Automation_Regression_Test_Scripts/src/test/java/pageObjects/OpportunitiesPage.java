@@ -1470,7 +1470,6 @@ public class OpportunitiesPage extends ReusableLibrary {
 	TasksPage tasksPage = new TasksPage(scriptHelper);
 	SF_UtilityFunctions sf_UtilityFunctions = new SF_UtilityFunctions(scriptHelper);
 	int offsetValue = new Random().nextInt(9);
-	EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
 
 	/**
 	 * Function for establishing the connection in order to create the
@@ -2453,6 +2452,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	static ArrayList<String> awardToArrayList = new ArrayList<String>();
 
 	public List<String> verifyQuickCreateOpportunityPageAwardedPickList() {
+		EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
 		managementAwardToList();
 		List<String> managementAwardToPickList = establishConnection.establishMetaDataConnection("Opportunity",
 				"APAC_Asset_Services", "Mgmt_Awarded_To__c");
@@ -2524,6 +2524,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	public void verifyNewOpportunityPageLeadSource() {
 		leadSourceCapitalMarkets();
+		EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
 		List<String> leadSourceCapitalMarketsPickList = establishConnection.establishMetaDataConnection("Opportunity",
 				"Capital_Markets_Property_Sales", "LeadSource");
 		List<String> leadSourceCapitalMarketList = new ArrayList<String>();
@@ -2550,8 +2551,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 	public void verifyCapitalMarketsRevenueField() {
 		String sFieldName = "Capital Markets Revnue";
 		int count = 0;
-		List<String> capitalMarketsRevenueFieldList = establishConnection
-				.establishMetaDataConnectionPageLayouts("Opportunity", "Asset Services - APAC");
+		EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
+		List<String> capitalMarketsRevenueFieldList = establishConnection.establishMetaDataConnectionPageLayouts("Opportunity", "Asset Services - APAC");
 		for (int i = 0; i < capitalMarketsRevenueFieldList.size(); i++) {
 			if (capitalMarketsRevenueFieldList.get(i).equals(sFieldName)) {
 				count++;
@@ -2575,6 +2576,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void verifyNewOpportunityEBIDTAFields() {
+		EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
 		String sFieldName = "Est. EBITDA ($)";
 		int count = 0;
 		List<String> EBITDAFieldList = establishConnection.establishMetaDataConnectionPageLayouts("Opportunity",
@@ -2606,6 +2608,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		String sRFPDueDate = "RFP Due Date";
 		String sPitchDate = "Pitch Date";
 		int count = 0;
+		EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
 		List<String> RFPPitchDate = establishConnection.establishMetaDataConnectionPageLayouts("Opportunity",
 				"Asset Services - APAC");
 		for (int i = 0; i < RFPPitchDate.size(); i++) {
@@ -2788,6 +2791,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	public List<String> validateOpportunityTargetingInitiativeField() {
 		String sTargetingInitiative = "Targeting Initiative";
 		int count = 0;
+		EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
 		List<String> TargetInitiativeField = establishConnection.establishMetaDataConnectionPageLayouts("Opportunity",
 				"Asset Services - APAC");
 		for (int i = 0; i < TargetInitiativeField.size(); i++) {
@@ -3414,6 +3418,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	public void verifyCBREMarketGroup() {
 		String sCBREMarketGroup = "CBRE Market Group";
 		int count = 0;
+		EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
 		List<String> CBREMarketGropupList = establishConnection.establishMetaDataConnectionPageLayouts("Opportunity",
 				"EMEA A&T Occupier Layout");
 		for (int i = 0; i < CBREMarketGropupList.size(); i++) {
@@ -4336,9 +4341,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 		System.out.println("ProjectEnquiries Page Fields in APAC are:::" + ProjectEnquiriesPageFields);
 	}
 
-	OfferPage offerPage = new OfferPage(scriptHelper);
 	
 	public void projectEnquiriesReleatedListsAPAC() {
+		OfferPage offerPage = new OfferPage(scriptHelper);
 		offerPage.campaignsList();
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, related, 3);

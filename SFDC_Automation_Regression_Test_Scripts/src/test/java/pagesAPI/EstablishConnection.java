@@ -227,18 +227,18 @@ public class EstablishConnection extends ReusableLibrary {
 						&& (dataTable.getData("General_Data", "TC_ID").contains("CSS"))
 						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
 					Username = properties.getProperty("GWSAPACCSS") + "." + environment;
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSEMEA"))
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAMER"))
 						&& (dataTable.getData("General_Data", "TC_ID").contains("Broker"))
 						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
-					Username = properties.getProperty("GWSEMEABroker") + "." + environment;
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSEMEA"))
+					Username = properties.getProperty("GWSAMERBroker") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAMER"))
 						&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))
 						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
-					Username = properties.getProperty("GWSEMEAManager") + "." + environment;
-				else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSEMEA"))
+					Username = properties.getProperty("GWSAMERManager") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAMER"))
 						&& (dataTable.getData("General_Data", "TC_ID").contains("CSS"))
 						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
-					Username = properties.getProperty("GWSEMEACSS") + "." + environment;
+					Username = properties.getProperty("GWSAMERCSS") + "." + environment;
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("VASAMER"))
 						&& (dataTable.getData("General_Data", "TC_ID").contains("Broker"))
 						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
@@ -299,6 +299,10 @@ public class EstablishConnection extends ReusableLibrary {
 						&& (dataTable.getData("General_Data", "TC_ID").contains("CSS"))
 						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
 					Username = properties.getProperty("ABAPACCSS") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("ASAMER"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("ASAMERManager") + "." + environment;
 				else if (dataTable.getData("General_Data", "TC_ID").contains("Admin"))
 					Username = properties.getProperty("SystemAdminUsername") + "." + environment;
 			}

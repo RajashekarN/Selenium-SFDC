@@ -34,8 +34,6 @@ public class HomePage extends ReusableLibrary {
 	public HomePage(ScriptHelper scriptHelper) {
 		super(scriptHelper);
 		PageFactory.initElements(driver.getWebDriver(), this);
-		// new WebDriverUtil(driver);
-		// Utility_Functions utility = new Utility_Functions(scriptHelper);
 	}
 
 	/**
@@ -325,6 +323,7 @@ public class HomePage extends ReusableLibrary {
 		}
 		menu_Accounts.click();
 		Utility_Functions.xWaitForElementPresent(driver, accounts_HomePage, 3);
+		Utility_Functions.timeWait(2);
 		if (accounts_HomePage.isDisplayed()) {
 			report.updateTestLog("Verify Accounts Home Page", "Accounts Home Page is displayed", Status.PASS);
 		} else {

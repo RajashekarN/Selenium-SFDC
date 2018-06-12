@@ -480,23 +480,15 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 						report.updateTestLog("Opportunity Name", "Record type is set as Property Sales", Status.PASS);
 					}					
 				} else if ((dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_GWSAMER"))
-						|| (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_GWSAPAC"))
-						|| (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_GWSEMEA"))) {
-					if(dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_GWSEMEA")) {
-						opportunity.setField("RecordTypeId", "012i0000000405n");
-					} else {
+						|| (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_GWSAPAC"))) {
 						opportunity.setField("RecordTypeId", "012i0000000405mAAA");
 						opportunity.setField("Service__c", "Service Contract Exclusive");
 						report.updateTestLog("Opportunity Name", "Record type is set as Global Workplace Solutions",
-								Status.PASS);
-					}				
+								Status.PASS);			
 				} else if ((dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_VASAMER"))
-						|| (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_VASAPAC"))
-						|| (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_VASEMEA"))) {
+						|| (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_VASAPAC"))) {
 					
-					if(dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_VASEMEA")) {
-						opportunity.setField("RecordTypeId", "012i0000000tvTkAAI");
-					} else if (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_VASAPAC")) {
+					if (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_VASAPAC")) {
 						opportunity.setField("RecordTypeId", "012i0000001QOXkAAO");
 					} else {
 						opportunity.setField("RecordTypeId", "0121Y000001EVzFQAW");
@@ -517,7 +509,7 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 				} else if ((dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_ABAMER"))
 						|| (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_ABAPAC"))
 						|| (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_ABEMEA"))) {
-					opportunity.setField("RecordTypeId", "012i0000001622CAAQ");
+					opportunity.setField("RecordTypeId", "012i0000000405jAAA");
 					opportunity.setField("Service__c", "Consulting");
 					opportunity.setField("Total_Size__c", 999);
 					opportunity.setField("CBRE_Preferred_Property_Type_c__c", "Hotel");
@@ -629,15 +621,13 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 					|| (dataTable.getData("General_Data", "TC_ID").contains("ASEMEA"))) {
 				opportunity.setField("RecordTypeId", "012i0000000405jAAA");
 			} else if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAMER"))
-					|| (dataTable.getData("General_Data", "TC_ID").contains("GWSAPAC"))
-					|| (dataTable.getData("General_Data", "TC_ID").contains("GWSEMEA"))) {
+					|| (dataTable.getData("General_Data", "TC_ID").contains("GWSAPAC"))) {
 				opportunity.setField("RecordTypeId", "012i0000000405mAAA");
 			} else if (dataTable.getData("General_Data", "TC_ID").contains("CM")
 					&& (dataTable.getData("General_Data", "TC_ID").contains("DSF"))) {
 				opportunity.setField("RecordTypeId", "012i0000000405lAAA");
 			} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER"))
-					|| (dataTable.getData("General_Data", "TC_ID").contains("OBAPAC"))
-					|| (dataTable.getData("General_Data", "TC_ID").contains("OBEMEA"))) {
+					|| (dataTable.getData("General_Data", "TC_ID").contains("OBAPAC"))) {
 				opportunity.setField("RecordTypeId", "012i0000000405nAAA");
 			}
 
@@ -655,7 +645,7 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 			opportunity.setField("Project_Management__c	", "Yes");
 			opportunity.setField("Sustainability__c", "Yes");
 			opportunity.setField("Consultancy__c", "Yes");
-			opportunity.setField("FM_Lite__c", "Yes");
+			//opportunity.setField("FM_Lite__c", "Yes");
 
 			if (dataTable.getData("General_Data", "TC_ID").contains("AMER")) {
 				opportunity.setField("Region__c	", "US National");
