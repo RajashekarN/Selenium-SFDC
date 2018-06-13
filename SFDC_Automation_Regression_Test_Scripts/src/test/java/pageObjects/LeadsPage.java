@@ -124,7 +124,7 @@ public class LeadsPage extends ReusableLibrary {
 	@FindBy(xpath = "//label/span[text()='Company']/following::input[1]")
 	WebElement company;	
 
-	@FindBy(xpath = "(//button/span[text()='Save'])[2]")
+	@FindBy(xpath = "//button[@title='Save']")
 	WebElement saveButton;
 	
 	@FindBy(xpath = "//p[text()='Lead']/parent::div/h1/span")
@@ -397,7 +397,7 @@ public class LeadsPage extends ReusableLibrary {
 	@FindBy(xpath="//label/span[text()='Email']/following::input[1]")
 	WebElement emailLead;
 
-	@FindBy(xpath="//li[contains(@class,'oneActionsDropDown')]//a")
+	@FindBy(xpath="(//li[contains(@class,'oneActionsDropDown')]//a)[2]")
 	WebElement showMoreActionsDetailsPage;
 
 	@FindBy(xpath="//div[contains(@class,'actionMenu')]//a[@title='Sharing']")
@@ -556,7 +556,7 @@ public class LeadsPage extends ReusableLibrary {
 	@FindBy(xpath = "//input[contains(@id,'searchValue_sharing_search')]")
 	WebElement searchUserName;
 
-	@FindBy(xpath = "//*[contains(@title,'Find')]")
+	@FindBy(xpath = "//input[@type='button' and @title='Find' and @value=' Find ']")
 	WebElement findValue;
 
 	@FindBy(xpath = "//label[text()='Available']/parent::div/parent::td/select[@id='duel_select_0']")
@@ -1035,6 +1035,7 @@ public class LeadsPage extends ReusableLibrary {
 	 * Validating the Clone and Edit buttons on the Lead Details Page
 	 * 
 	 * @author Vishnuvardhan
+	 * @author SChandran
 	 *
 	 */
 
@@ -1100,6 +1101,7 @@ public class LeadsPage extends ReusableLibrary {
 	 * Validating the Related lists of a Lead in the Lead Landing page
 	 * 
 	 * @author Vishnuvardhan
+	 * @author SChandran
 	 *
 	 */	
 	public void relatedListsLeadLandingPage() {
@@ -1131,54 +1133,35 @@ public class LeadsPage extends ReusableLibrary {
 	 *
 	 */	
 	public void privateNoteLead() {
-		Utility_Functions.xWaitForElementPresent(driver, leads, 3);
-		Utility_Functions.xClick(driver, leads, true);
-		Utility_Functions.xWaitForElementPresent(driver, leadsList, 3);
-		String leadSelected = Utility_Functions.xclickRandomElement(leadsList);
+		selectALeadInRandom();
+		String leadSelected = accountNameSaved.get(0).getText();
 		Utility_Functions.xWaitForElementPresent(driver, related, 3);
-		/*		
-		searchTextSOQL searchRecord = new searchTextSOQL(scriptHelper);
-		String recordID = searchRecord.fetchRecord("lead");
-		String url = driver.getCurrentUrl();
-		url.replaceAll("sObject/", "sObject/"+recordID);*/
-
 		Utility_Functions.xClick(driver, related, true);
-		Utility_Functions.timeWait(2);
-
-		Utility_Functions.xScrollWindow(driver);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xScrollWindowTop(driver);
-		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, new_PrivateNotes, 3);
 		Utility_Functions.xClick(driver, new_PrivateNotes, true);
 		Utility_Functions.xWaitForElementPresent(driver, next_PrivateNotes, 3);
 		Utility_Functions.xClick(driver, next_PrivateNotes, true);
+		Utility_Functions.xWaitForElementPresent(driver, lead_PrivateNotes, 5);
 		String leadPopulated = lead_PrivateNotes.getText();
 		Utility_Functions.xSendKeys(driver, title_PrivateNotes, dataTable.getData("General_Data", "Title"));
 		Utility_Functions.timeWait(1);
 		try {
 			if (leadSelected.equals(leadPopulated)) {
-				report.updateTestLog("Verify Private Note", "Lead populated on Private Note is same as the one "
-						+ "selected while creating the Private Note", Status.PASS);
+				report.updateTestLog("Verify Private Note", "Lead populated on Private Note is same as the one selected while creating the Private Note", Status.PASS);
 			} else {
-				report.updateTestLog("Verify Private Note", "Lead populated on Private Note is not the one "
-						+ "selected while creating the Private Note", Status.WARNING);
+				report.updateTestLog("Verify Private Note", "Lead populated on Private Note is not the one selected while creating the Private Note", Status.WARNING);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		Utility_Functions.timeWait(1);
 		Utility_Functions.xClick(driver, searchContacts, true);
-	/*	List<WebElement> contactsList = driver.findElements(By.xpath(
-				"//div[@class='lookup__menu uiAbstractList uiAutocompleteList uiInput uiAutocomplete uiInput--default uiInput--lookup']//div[@class='listContent']/ul/li"));
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xclickOnFirstElementfromList(contactsList);*/
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xWaitForElementPresent(driver, driver.findElement(By.cssSelector("ul>li.forceSearchInputLookupDesktopOption:nth-child(1)")), 4);
 		WebElement firstLookupElement = driver.findElement(By.cssSelector("ul>li.forceSearchInputLookupDesktopOption:nth-child(1)"));
-		Utility_Functions.xWaitForElementPresent(driver, firstLookupElement, 4);
-		Utility_Functions.xClick(driver, firstLookupElement, false);		
-		Utility_Functions.timeWait(2);
+		Utility_Functions.xClick(driver, firstLookupElement, false);	
+		Utility_Functions.xWaitForElementPresent(driver, body, 2);
 		Utility_Functions.xSendKeys(driver, body, dataTable.getData("General_Data", "Body"));
-		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(1);
 		if(savePrivateNote.isDisplayed()) {
 			Utility_Functions.xClick(driver, savePrivateNote, true);
 			report.updateTestLog("Verify Private Note", "Private Note is created successfully", Status.PASS);
@@ -1196,7 +1179,6 @@ public class LeadsPage extends ReusableLibrary {
 	 */	
 
 	public void privateNoteSharing() {
-		Utility_Functions.timeWait(3);
 		try {
 			Utility_Functions.xWaitForElementPresent(driver,showMoreActionsDetailsPage, 3);
 			Utility_Functions.xClick(driver,showMoreActionsDetailsPage, true);
@@ -1208,13 +1190,8 @@ public class LeadsPage extends ReusableLibrary {
 		}
 		Utility_Functions.timeWait(5);
 		Utility_Functions.xSwitchtoFrame(driver, leadSharing);
-		Utility_Functions.xWaitForElementPresent(driver, leadSharing, 4);
-		Utility_Functions.timeWait(5);
-		driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='Content']")));
-
 		Utility_Functions.xWaitForElementPresent(driver, addButtonSharing, 5);
 		Utility_Functions.xClick(driver, addButtonSharing, true);
-		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, searchUsers, 5);
 		Utility_Functions.xSelectDropdownByName(searchUsers, "Users");
 		Utility_Functions.timeWait(1);
@@ -1222,20 +1199,21 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xClick(driver, findValue, true);
 		Utility_Functions.timeWait(3);
-		String environment = loginPage.initializeEnvironment();
-		if (environment.equals("UAT")) {
-			Utility_Functions.xSelectDropdownByName(selectUser, "User: vishnuvardhan bommisetty");
-		} else {
-			Utility_Functions.xSelectDropdownByName(selectUser, "User: vishnuvardhan bommisetty");
-		}
+		Utility_Functions.xSelectDropdownByName(selectUser, "User: vishnuvardhan bommisetty");
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xClick(driver, rightArrow, true);
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xSelectDropdownByName(access, "Read Only");
 		Utility_Functions.timeWait(1);
-		Utility_Functions.xClick(driver, saveButtonSharing, true);
-		report.updateTestLog("Verify Lead Sharing", "Lead Sharing functioanlity is working as expected", Status.PASS);			
-		System.out.println("Lead Sharing functionality is working as expected");
+		try {
+			Utility_Functions.xClick(driver, saveButtonSharing, true);
+			report.updateTestLog("Verify Lead Sharing", "Lead Sharing functioanlity is working as expected", Status.PASS);			
+			System.out.println("Lead Sharing functionality is working as expected");
+		}
+		catch (Exception e) {
+			report.updateTestLog("Verify Lead Sharing", "Lead Sharing functioanlity is not working as expected", Status.FAIL);	
+			System.out.println("Lead Sharing functionality is working as expected");
+		}
 	}
 
 	/**
@@ -1246,22 +1224,12 @@ public class LeadsPage extends ReusableLibrary {
 	 */	
 	public void convertLeadNewAccount() {
 		createLeadFunction();				
-		/*searchTextSOQL searchRecord = new searchTextSOQL(scriptHelper);
-		String accountName= searchRecord.fetchRecord("account", "Name");
-		company.clear();
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xSendKeys(driver, company, accountName);*/
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xScrollWindow(driver);
-		Utility_Functions.timeWait(1);
 		Utility_Functions.xSendKeys(driver, directLineLead, dataTable.getData("General_Data", "Phone"));
-		Utility_Functions.timeWait(2);
+		Utility_Functions.timeWait(1);
 		Utility_Functions.xClick(driver, saveButton, true);
 		Utility_Functions.timeWait(3);		
 		Utility_Functions.xClick(driver, saveConvertButton, true);
 		Utility_Functions.timeWait(3);
-		//driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@src,'LeadConversionRed')]")));
-		driver.switchTo().defaultContent();
 		Utility_Functions.xSwitchtoFrame(driver, streetField);
 		Utility_Functions.xWaitForElementPresent(driver, streetField, 5);
 		convertListValidation();
@@ -2836,11 +2804,7 @@ public class LeadsPage extends ReusableLibrary {
 	LoginPage loginPage = new LoginPage(scriptHelper);
 
 	public void leadsSharingFunctionality() {
-
-		Utility_Functions.xWaitForElementPresent(driver, leads, 3);
-		Utility_Functions.xClick(driver, leads, true);
-		Utility_Functions.xWaitForElementPresent(driver, leadsList, 3);
-		Utility_Functions.xclickRandomElement(leadsList);
+		selectALeadInRandom();
 		privateNoteSharing();
 	}
 
