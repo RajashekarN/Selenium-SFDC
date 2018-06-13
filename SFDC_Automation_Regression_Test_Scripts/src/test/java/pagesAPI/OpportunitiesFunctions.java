@@ -503,7 +503,7 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 				} else if ((dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_ABAMER"))
 						|| (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_ABAPAC"))
 						|| (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_ABEMEA"))) {
-					opportunity.setField("RecordTypeId", "012i0000000405jAAA");
+					opportunity.setField("RecordTypeId", "012i0000001622CAAQ");
 					opportunity.setField("Service__c", "Consulting");
 					opportunity.setField("Total_Size__c", 999);
 					opportunity.setField("CBRE_Preferred_Property_Type_c__c", "Hotel");

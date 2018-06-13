@@ -62,8 +62,8 @@ public class SF_UtilityFunctions extends ReusableLibrary {
 	 *
 	 */
 	public void selectExistingObjectRecord(String tableColumn) {
-		By visibleRecords = By.xpath("(//span[text()='"+tableColumn+"')]/ancestor::thead/following-sibling::tbody//th//a)");
-		Utility_Functions.timeWait(3);
+		By visibleRecords = By.xpath("//span[@title='"+tableColumn+"']/ancestor::thead/following-sibling::tbody//th//a");
+		Utility_Functions.timeWait(2);
 		try {
 			Utility_Functions.xWaitForElementPresent(driver, driver.findElements(visibleRecords), 7);
 			Utility_Functions.xclickRandomElement(driver.findElements(visibleRecords));
@@ -75,6 +75,7 @@ public class SF_UtilityFunctions extends ReusableLibrary {
 			report.updateTestLog("Verify Recently Viewed", "Recently viewed dropdown is clicked::: ", Status.PASS);
 			Utility_Functions.xWaitForElementPresent(driver, all, 5);
 			driver.findElement(all).click();
+			Utility_Functions.timeWait(2);
 			Utility_Functions.xWaitForElementPresent(driver, driver.findElements(visibleRecords), 7);
 			Utility_Functions.xclickRandomElement(driver.findElements(visibleRecords));
 		}

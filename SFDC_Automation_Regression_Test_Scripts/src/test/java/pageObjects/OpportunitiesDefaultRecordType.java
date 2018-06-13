@@ -79,6 +79,9 @@ public class OpportunitiesDefaultRecordType extends ReusableLibrary {
 	@FindBy(xpath = "//span[text()='Opportunity Name']/parent::label/parent::div//input")
 	WebElement opportunityName_AS;
 	
+	@FindBy(xpath = "//span[contains(text(),'Preferred')][contains(text(),'Property')]/parent::div//select")
+	WebElement preferredPropertyTypeOpp;
+	
 	OpportunitiesPage opportunitiesPage = new OpportunitiesPage(scriptHelper);
 	SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
 
@@ -262,6 +265,12 @@ public class OpportunitiesDefaultRecordType extends ReusableLibrary {
 			}
 			Utility_Functions.xClick(driver, continueButton, true);
 			Utility_Functions.timeWait(2);
+			driver.switchTo().defaultContent();
+			try {
+				Utility_Functions.xSelectDropdownByIndex(preferredPropertyTypeOpp, 1);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			Utility_Functions.xSwitchtoFrame(driver, salesStageSelected);
 			Utility_Functions.xWaitForElementPresent(driver, salesStageSelected, 3);
 			if ((dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) || (dataTable.getData("General_Data", "TC_ID").contains("OBAMER"))) {

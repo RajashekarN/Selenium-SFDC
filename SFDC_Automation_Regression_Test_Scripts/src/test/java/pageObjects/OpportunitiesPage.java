@@ -3643,9 +3643,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		String sAccountName = searchTextSOQL.fetchRecord("Account", "Name");
 		Utility_Functions.xSendKeys(driver, accountNameSearchBox, sAccountName);
-		accountName.sendKeys(Keys.ARROW_DOWN);
+		accountNameSearchBox.sendKeys(Keys.ARROW_DOWN);
 		Utility_Functions.timeWait(2);
-		accountName.sendKeys(Keys.ENTER);
+		accountNameSearchBox.sendKeys(Keys.ENTER);
 		Utility_Functions.xSelectDropdownByIndex(assignmentTypeOpp, 1);
 		System.out.println(Calendar.getInstance());
 		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");

@@ -754,9 +754,7 @@ public class OpportunitiesInstallments extends ReusableLibrary {
 				iInstallmentAmountOne = Double.valueOf(dInstallmentAmountOne).intValue();
 				if (iInstallmentAmountOne > 0) {
 					report.updateTestLog("Opportunities Installments",
-							"Opportunity is eligible for editing the Installments::", Status.PASS);
-					
-					
+							"Opportunity is eligible for editing the Installments::", Status.PASS);					
 					Utility_Functions.xWaitForElementPresent(driver, arrowDown, 3); 
 					Utility_Functions.xClick(driver, arrowDown, true);
 					Utility_Functions.timeWait(2);
