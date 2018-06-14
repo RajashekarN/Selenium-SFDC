@@ -1408,167 +1408,73 @@ public class LeadsPage extends ReusableLibrary {
 	 * @author Ramya
 	 *
 	 */	
+	
+	static ArrayList<String> personalInformationFieldsList = new ArrayList<String>(); 
+	public void personalInformationFieldsList(){
+		personalInformationFieldsList.add("Title\n*");
+		personalInformationFieldsList.add("Lead");
+		personalInformationFieldsList.add("Account");
+		personalInformationFieldsList.add("SPOC");
+		personalInformationFieldsList.add("Contact");
+		personalInformationFieldsList.add("Property");
+		personalInformationFieldsList.add("Direct Line");
+		personalInformationFieldsList.add("Personal Email");
+		personalInformationFieldsList.add("Mobile");
+		personalInformationFieldsList.add("Entertainment Preferences");
+		System.out.println("New Private Note Personal Information Page contains the fields :::" + personalInformationFieldsList);
+	}
+
 	public void leadsVerifyPrivateNotePersonalInformation() {
-		Utility_Functions.xWaitForElementPresent(driver, leads, 3);
-		Utility_Functions.xClick(driver, leads, true);
-		Utility_Functions.xWaitForElementPresent(driver, leadsList, 3);
-		Utility_Functions.xclickgetTextofFirstElementfromList(leadsList);
+		selectALeadInRandom();
 		Utility_Functions.xWaitForElementPresent(driver, related, 3);
 		Utility_Functions.xClick(driver, related, true);
-		Utility_Functions.timeWait(3);
-		Utility_Functions.xScrollWindow(driver);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xScrollWindowTop(driver);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, new_PrivateNotes, 3);
+		Utility_Functions.xWaitForElementVisible(driver, new_PrivateNotes, 3);
 		Utility_Functions.xClick(driver, new_PrivateNotes, true);
-		Utility_Functions.xWaitForElementPresent(driver, selectPersonalInformation, 3);
+		Utility_Functions.xWaitForElementVisible(driver, selectPersonalInformation, 3);
 		Utility_Functions.xClick(driver, selectPersonalInformation, true);
-		Utility_Functions.timeWait(3);
+		Utility_Functions.timeWait(1);
 		Utility_Functions.xClick(driver, next, true);
-		Utility_Functions.timeWait(3);
-		Utility_Functions.xClick(driver, titleName, true);
-		Utility_Functions.xClick(driver, account_PrivateNotes, true);
-		Utility_Functions.timeWait(2);
-		Random random = new Random();
-		int value = random.nextInt();
-		Utility_Functions.xSendKeys(driver, titleName, "Test Personal Information Note" + value);
-		Utility_Functions.timeWait(5);
+		Utility_Functions.xWaitForElementVisible(driver, titleName, 3);
+		Utility_Functions.xSendKeys(driver, titleName, "Test Personal Information Note" + Utility_Functions.xRandomFunction());
+		Utility_Functions.timeWait(1);
 
 		try {
 			if ((!titleName.getText().equals("")) || (!account_PrivateNotes.getText().equals(""))) {
 				System.out.println("Title Name and Accounts fields are having the values:::");
-				report.updateTestLog("Accounts New Personal Information Page",
-						"Title Name and  Accounts fields are having the values::", Status.PASS);
+				report.updateTestLog("Accounts New Personal Information Page", "Title Name and  Accounts fields are having the values::", Status.PASS);
 			} else {
 				System.out.println("Title Name and Account fields are not having the values:::");
-				report.updateTestLog("Accounts New Personal Information Page ",
-						"Title Name and Accounts fields are not having the values::", Status.FAIL);
+				report.updateTestLog("Accounts New Personal Information Page ", "Title Name and Accounts fields are not having the values::", Status.FAIL);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
 		}
-		List<WebElement> personalInformation = driver
-				.findElements(By.xpath(".//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']"));
-		int count = 0;
-		try {
-			for (WebElement element : personalInformation) {
-				if ((count == 0) && (element.getText().contains("Title"))) {
-					System.out.println("Title field is present in the Create Private Notes Personal Information Page");
-					report.updateTestLog("Create Private Note Personal Information Page",
-							"Create Private Note Personal Information Page is having the " + element.getText()
-							+ " Status field::",
-							Status.PASS);
-					count++;
-				} else if ((count == 1) && (element.getText().contains("Lead"))) {
-					System.out.println("Lead field is present in the Create Private Notes Personal Information Page");
-					report.updateTestLog("Create Private Notes Personal Information Page",
-							"Create Private Notes Personal Information Page is having the " + element.getText()
-							+ " Status field::",
-							Status.PASS);
-					count++;
-				} else if ((count == 2) && (element.getText().contains("Account"))) {
-					System.out
-					.println("Account field is present in the Create Private Notes Personal Information Page");
-					report.updateTestLog("Create Private Notes Personal Information Page",
-							"Create Private Notes Personal Information Page is having the " + element.getText()
-							+ " Status field::",
-							Status.PASS);
-					count++;
-				} else if ((count == 3) && (element.getText().contains("Property"))) {
-					System.out
-					.println("Property field is present in the Create Private Notes Personal Information Page");
-					report.updateTestLog("Create Private Notes Personal Information Page",
-							"Create Private Notes Personal Information Page is having the " + element.getText()
-							+ " Status field::",
-							Status.PASS);
-					count++;
-				} else if ((count == 4) && (element.getText().contains("Contact"))) {
-					System.out
-					.println("Contact field is present in the Create Private Notes Personal Information Page");
-					report.updateTestLog("Create Private Notes Personal Information Page",
-							"Create Private Notes Personal Information Page is having the " + element.getText()
-							+ " Status field::",
-							Status.PASS);
-					count++;
-				} else if ((count == 5) && (element.getText().contains("Opportunity"))) {
-					System.out
-					.println("Opportunity field is present in the Create Private Notes Personal Information Page");
-					report.updateTestLog("Create Private Notes Personal Information Page",
-							"Create Private Notes Personal Information Page is having the " + element.getText()
-							+ " Status field::",
-							Status.PASS);
-					count++;
-				} else if ((count == 6) && (element.getText().contains("Direct Line"))) {
-					System.out.println(
-							"Direct Line field is present in the Create Private Notes Personal Information Page");
-					report.updateTestLog("Create Private Notes Personal Information Page",
-							"Create Private Notes Personal Information Page is having the " + element.getText()
-							+ " Status field::",
-							Status.PASS);
-					count++;
-				} else if ((count == 7) && (element.getText().contains("Personal Email"))) {
-					System.out.println(
-							"Personal Email field is present in the Create Private Notes Personal Information Page");
-					report.updateTestLog("Create Private Notes Personal Information Page",
-							"Create Private Notes Personal Information Page is having the " + element.getText()
-							+ " Status field::",
-							Status.PASS);
-					count++;
-				} else if ((count == 8) && (element.getText().contains("Mobile"))) {
-					System.out.println("Mobile field is present in the Create Private Notes Personal Information Page");
-					report.updateTestLog("Create Private Notes Personal Information Page",
-							"Create Private Notes Personal Information Page is having the " + element.getText()
-							+ " Status field::",
-							Status.PASS);
-					count++;
-
-				} else if ((count == 9) && (element.getText().contains("Entertainment Preferences"))) {
-					System.out.println(
-							"Entertainment Preferences field is present in the Create Private Notes Personal Information Page");
-					report.updateTestLog("Create Private Notes Personal Information Page",
-							"Create Private Notes Personal Information Page is having the " + element.getText()
-							+ " Status field::",
-							Status.PASS);
-
-				}
-			}
-
-			System.out.println(count);
-			if (count < 5) {
-
-				System.out.println(
-						"All the fields are not present in the new personal information page");
-				report.updateTestLog("Create Private Notes Personal Information Page",
-						"Create Private Notes Personal Information Page is not having all the fields::", Status.FAIL);
-
-			}else{
-
-				System.out.println(
-						"All the fields are present in the new personal information page");
-				report.updateTestLog("Create Private Notes Personal Information Page",
-						"Create Private Notes Personal Information Page is not having all the fields::", Status.PASS);
-
-
-			}
-		} catch (Exception e) {
-			System.out.println("Create Private Notes Personal Information Page is not having all the fields:::" + e.getMessage());
+		List<WebElement> personalInformationFieldsOnPage = driver.findElements(By.xpath(".//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']"));
+		List<String> personalInformationFieldsFound = new ArrayList<String>();
+		for(int i=0; i<personalInformationFieldsOnPage.size(); i++)
+		{
+			personalInformationFieldsFound.add(personalInformationFieldsOnPage.get(i).getText());
+			if(personalInformationFieldsFound.get(i).equals("*"))
+				personalInformationFieldsFound.set(i-1, personalInformationFieldsFound.get(i-1)+"\n*");
 		}
-
+		
+		personalInformationFieldsList();
+		List<String> fieldsCount = Utility_Functions.xValidatePickListValuesPage(personalInformationFieldsList, personalInformationFieldsFound, "New Private Note Personal Information Page Fields");
+		if (fieldsCount.size() == 0) {
+			report.updateTestLog("New Private Note Personal Information Page Fields", "New Private Note Personal Information Page has all the expected fields", Status.PASS);
+		}
+		else {
+			report.updateTestLog("New Private Note Personal Information Page Fields", "New Private Note Personal Information Page does not have all the expected fields", Status.FAIL);
+		}
 		Utility_Functions.xClick(driver, savePersonalInformation, true);
-		Utility_Functions.timeWait(3);
-		Utility_Functions.xScrollWindow(driver);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xScrollWindowTop(driver);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xClick(driver, viewAllButton, true);
-		Utility_Functions.xWaitForElementPresent(driver, privateNotesList, 3);
+		Utility_Functions.xWaitForElementVisible(driver, viewAllButton, 3);
+		Utility_Functions.xWaitForElementPresent(driver, privateNotesList, 5);
 		for (WebElement element : privateNotesList) {
 			if ((!element.getText().equals(" "))){
-				report.updateTestLog("Verify Create Activity Account","The New Activity for Accounts are created ",Status.PASS);
+				report.updateTestLog("Verify New Private Note Personal Information","Private Notes Personal Information are created ",Status.PASS);
 			} else {
-				report.updateTestLog("Verify Create Activity Account","The New Activity for Accounts are not created ",Status.FAIL);
+				report.updateTestLog("Verify New Private Note Personal Information","Private Notes Personal Information are not created ",Status.FAIL);
 			}
 		}
 
