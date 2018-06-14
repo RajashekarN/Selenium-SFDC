@@ -672,15 +672,39 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//input[@title='Search Accounts']")
 	WebElement accountNameSearchBox;
 	
-	@FindBy(xpath = "//*[contains(@id,'oppForm:salesStage')]")
-	WebElement salesStage;
+	@FindBy(xpath = "//span[text()='Sales Stage']/parent::label/parent::div//a")
+	WebElement salesStageGWS;
 	
-	@FindBy(xpath = "//label[text()='Reason for Loss']/parent::div//select")
-	WebElement reasonForLossOpp;
+	@FindBy(xpath = "//span[text()='Reason for Loss']/parent::span/parent::div//a")
+	WebElement reasonForLossOppGWS;
 	
-	@FindBy(xpath = "//label[text()='Reason Lost Comments']/parent::div//div/textarea")
-	WebElement reasonForLossOppText;
+	@FindBy(xpath = "//span[text()='Reason Lost Comments']/parent::label/parent::div//textarea")
+	WebElement reasonLostCommentsGWS;
 	
+	@FindBy(xpath = "//span[text()='Assignment Type']/parent::span/parent::div//a")
+    WebElement assignmentTypeOppGWS;
+    
+    @FindBy(xpath = "//span[text()='Lead Source']/parent::span/parent::div//a")
+    WebElement leadSourceGWS;
+
+    @FindBy(xpath = "//span[text()='Close Date']/parent::label/parent::div//div/input")
+    WebElement closeDateOppGWS;
+
+    @FindBy(xpath = "//span[text()='Total Size']/parent::label/parent::div//input")
+    WebElement totalSizeOppGWS;
+
+    @FindBy(xpath = "//span[text()='Unit of Measure']/parent::span/parent::div//a")
+    WebElement unitofMeasureGWS;
+
+    @FindBy(xpath = "//span[text()='Estimated Gross Fee/Commission']/parent::label/parent::div//input")
+    WebElement estimatedGrossFeeGWS;    
+
+    @FindBy(xpath = "//ul[@class='scrollable']/li")
+    List<WebElement> dropDownList;
+    
+    @FindBy(xpath = "//div[@class='modal-footer slds-modal__footer']//span[text()='Save']")
+    WebElement saveOpportunityGWS;    
+     
 	/**
 	* Validating the Project Enquiries Page Fiels List from the APAC Campaign Record
 	* 
@@ -3636,79 +3660,83 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, opportunityRecordTypeGlobalWorkplaceSolutions, 2);
 		Utility_Functions.xClick(driver, opportunityRecordTypeGlobalWorkplaceSolutions, true);
 		Utility_Functions.xClick(driver, continueButton, true);
-		/*
-		 * Utility_Functions.timeWait(2);
-		 * Utility_Functions.xSwitchtoFrame(driver, closeDateOpp);
-		 */
+		driver.switchTo().defaultContent();
 		Utility_Functions.timeWait(2);
 		String sAccountName = searchTextSOQL.fetchRecord("Account", "Name");
 		Utility_Functions.xSendKeys(driver, accountNameSearchBox, sAccountName);
-		accountNameSearchBox.sendKeys(Keys.ARROW_DOWN);
+		sf_UtilityFunctions.selectObjectFromLookUpList();
+		/*accountNameSearchBox.sendKeys(Keys.ARROW_DOWN);
 		Utility_Functions.timeWait(2);
-		accountNameSearchBox.sendKeys(Keys.ENTER);
-		Utility_Functions.xSelectDropdownByIndex(assignmentTypeOpp, 1);
-		System.out.println(Calendar.getInstance());
-		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-		Date date = new Date();
-		Utility_Functions.xSelectDropdownByIndex(leadSource, 1);
-		Utility_Functions.xSendKeys(driver, closeDateOpp, dateFormat.format(date).toString());
-		Utility_Functions.xSendKeys(driver, closeDateOpp, Keys.TAB);
-		Random random = new Random();
-		int value = random.nextInt(999);
-		Utility_Functions.xSendKeys(driver, totalSizeOpp, Integer.toString(value));
-		Utility_Functions.xSelectDropdownByName(unitofMeasure, "Acres");
-		Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFee, 3);
-		Utility_Functions.xSendKeys(driver, estimatedGrossFee, dataTable.getData("General_Data", "InstallmentAmount"));
+		accountNameSearchBox.sendKeys(Keys.ENTER);	*/	
+        Utility_Functions.xScrollWindow(driver);
+        Utility_Functions.xClick(driver,assignmentTypeOppGWS , true);
+        sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "Consulting");
+        System.out.println(Calendar.getInstance());
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        Date date = new Date();
+        Utility_Functions.xScrollWindowTop(driver);
+        Utility_Functions.timeWait(2);
+        Utility_Functions.xClick(driver,leadSourceGWS, true);
+        sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "CBRE Cross Sell");      
+        Utility_Functions.xSendKeys(driver, closeDateOppGWS, dateFormat.format(date).toString());
+        Utility_Functions.xSendKeys(driver, closeDateOppGWS, Keys.TAB);
+        Random random = new Random();
+        int value = random.nextInt(999);
+        Utility_Functions.xSendKeys(driver, totalSizeOppGWS, Integer.toString(value));
+        Utility_Functions.xClick(driver,unitofMeasureGWS, true);
+        sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "Acres");
+        Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeGWS, 3);
+        Utility_Functions.xSendKeys(driver, estimatedGrossFeeGWS, dataTable.getData("General_Data", "InstallmentAmount")); 
+
 		try {
 			Utility_Functions.xSelectDropdownByIndex(preferredPropertyTypeOpp, 1);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+        Utility_Functions.xClick(driver,salesStageGWS, true);
 		if (dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage01")) {
-			Utility_Functions.xSelectDropdownByIndex(salesStage, 0);
+            sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "01-Intro Meeting/Discovery");
 		} else if (dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage02")) {
-			Utility_Functions.xSelectDropdownByIndex(salesStage, 1);
+            sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "02-Relationship Building");
 		} else if (dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage03")) {
-			Utility_Functions.xSelectDropdownByIndex(salesStage, 2);
+            sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "03-Opportunity Identification");
 		} else if (dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage04")) {
-			Utility_Functions.xSelectDropdownByIndex(salesStage, 3);
+            sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "04-Solution/Submit RFI");
 		} else if (dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage05")) {
-			Utility_Functions.xSelectDropdownByIndex(salesStage, 4);
+            sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "05-Solution/Submit RFP");
 		} else if (dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage06")) {
-			Utility_Functions.xSelectDropdownByIndex(salesStage, 5);
+            sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "06-Solution/Submit Pre-emptive Bid");
 		} else if (dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage07")) {
-			Utility_Functions.xSelectDropdownByIndex(salesStage, 6);
+            sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "07-Presentation/Pitching");
 		} else if (dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage08")) {
-			Utility_Functions.xSelectDropdownByIndex(salesStage, 7);
+            sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "08-Red Zone/Awarded");
 		} else if (dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage09")) {
-			Utility_Functions.xSelectDropdownByIndex(salesStage, 8);
+            sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "09-Closed - Paid Full");
 		} else if (dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage10")) {
-			Utility_Functions.xSelectDropdownByIndex(salesStage, 9);
+            sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "10-Loss");
 		} else if (dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage11")) {
-			Utility_Functions.xSelectDropdownByIndex(salesStage, 10);
+            sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "11-Declined");
 		} else if (dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage12")) {
-			Utility_Functions.xSelectDropdownByIndex(salesStage, 11);
+            sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "12-Dead");
 		}
-
-		Utility_Functions.xSelectDropdownByIndex(assignmentTypeOpp, 1);
-		Utility_Functions.timeWait(1);
-		if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage09"))
+        Utility_Functions.xSendKeys(driver, salesStageGWS, Keys.TAB);
+       /* if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage09"))
 				|| (dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage10"))) {
 			Utility_Functions.xWaitForElementPresent(driver, viewAllFieldsButton, 5);
 			Utility_Functions.xScrollWindow(driver);
 			Utility_Functions.xClick(driver, viewAllFieldsButton, true);
 			Utility_Functions.timeWait(1);
 			Utility_Functions.xScrollWindowTop(driver);
-		}
+		}*/
 		if (dataTable.getData("General_Data", "TC_ID").contains("GWSAPACBrokerStage10")) {
-			Utility_Functions.xWaitForElementPresent(driver, reasonForLossOpp, 3);
-			Utility_Functions.xSelectDropdownByIndex(reasonForLossOpp, 1);
-			Utility_Functions.xWaitForElementPresent(driver, reasonForLossOppText, 3);
-			Utility_Functions.xSendKeys(driver, reasonForLossOppText,
-					"Validating the Phase and Probaility by Selecting the Sales Stage");
+			Utility_Functions.xWaitForElementPresent(driver, reasonForLossOppGWS, 3);
+			Utility_Functions.xClick(driver, reasonForLossOppGWS, true);
+            sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "Dead, Business Conducted In-House");
+            Utility_Functions.xWaitForElementPresent(driver, reasonLostCommentsGWS, 3);
+			Utility_Functions.xSendKeys(driver, reasonLostCommentsGWS, "Validating the Phase and Probaility by Selecting the Sales Stage");
 			Utility_Functions.timeWait(1);
 		}
-		Utility_Functions.xClick(driver, saveNewOpportunity, true);
+		Utility_Functions.xClick(driver, saveOpportunityGWS, true);
 		Utility_Functions.timeWait(4);
 
 		try {

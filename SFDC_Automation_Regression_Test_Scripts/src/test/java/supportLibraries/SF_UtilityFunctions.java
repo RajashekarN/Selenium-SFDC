@@ -569,4 +569,18 @@ public class SF_UtilityFunctions extends ReusableLibrary {
 		}
 	}
 	
+    /**
+    * This method selects the pick list values from the drop down list
+    * 
+     * @author Vishnuvardhan
+    */
+    
+    public void selectValueFromDropdownList(List<WebElement> list, String Text) {
+           for(WebElement element: driver.findElements(By.xpath("//ul[@class='scrollable']/li"))) {
+                  if(element.getText().equals(Text)) {
+                        Utility_Functions.xClick(driver, element, true);
+                  }
+           }
+    }
+
 }
