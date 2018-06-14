@@ -119,9 +119,9 @@ public class LoginPage extends ReusableLibrary {
 	}
 
 	public void invokeApplication() {
-		String environment = initializeEnvironment();
+		initializeEnvironment();
 		report.updateTestLog("Invoke Application",
-				"Invoke the application under test @ " + properties.getProperty("Application" + environment + "Url"),
+				"Invoke the application under test @ " + properties.getProperty("ApplicationUrl"),
 				Status.PASS);
 /*		if (environment.equals("UAT")) {
 			driver.get(properties.getProperty("ApplicationUATUrl"));
