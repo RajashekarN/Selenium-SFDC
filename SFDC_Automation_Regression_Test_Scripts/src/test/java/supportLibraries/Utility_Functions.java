@@ -1593,4 +1593,25 @@ public class Utility_Functions extends ReusableLibrary {
 	    } 
 	}
 	
+	/**
+	 * When a WebElement identifier identifies multiple elements, this method returns the element that's visible on the page
+	 * @param webElement
+	 * @return
+	 */
+	
+	public static WebElement selectVisibleElementFromElementList(CraftDriver driver, List<WebElement> webElement){
+		WebElement visibleElement = null;
+		Utility_Functions.xWaitForElementPresent(driver, webElement, 6);
+		for(WebElement element : webElement) {
+			try {
+				if(element.isDisplayed())
+					visibleElement = element;
+			}
+			catch(Exception e) {
+				continue;
+			}
+		}
+		return visibleElement;
+	}
+	
 }
