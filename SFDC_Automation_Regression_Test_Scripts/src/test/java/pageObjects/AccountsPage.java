@@ -2216,7 +2216,7 @@ public class AccountsPage extends ReusableLibrary {
 			} else {
 				Utility_Functions.xclickRandomElement(accountNamesList);
 			}
-			Utility_Functions.timeWait(1);
+			Utility_Functions.timeWait(3);
 		} catch (Exception e2) {
 			e2.printStackTrace();
 			System.out.println(e2.getMessage());
@@ -3907,24 +3907,12 @@ public class AccountsPage extends ReusableLibrary {
 	 * Validating the Follow Up Custom Activity
 	 * 
 	 * @author Ramya
+	 * @modfiedBy Raj
 	 *
 	 */
 
 	public void verifyFollowUpCustomActivity() {
-		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
-		Utility_Functions.xClick(driver, menu_Accounts, true);
-		report.updateTestLog("Verify Create Activity Account", "Accounts is Displayed ", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
-		Utility_Functions.xClick(driver, recentlyViewed, true);
-		report.updateTestLog("Verify Create Activity Account", "Recently viewed Accounts are Displayed ", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, allAccounts, 3);
-		Utility_Functions.xClick(driver, allAccounts, true);
-		Utility_Functions.timeWait(2);
-		report.updateTestLog("Verify Create Activity Account", "All accounts are displayed successfully:::",
-				Status.PASS);
-		List<WebElement> accountNamesList = driver.findElements(By.xpath(
-				".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'001')]"));
-		Utility_Functions.xclickOnFirstElementfromList(accountNamesList);
+		accountsFunction();
 		tasksPage.createNewActivity();
 	}
 
