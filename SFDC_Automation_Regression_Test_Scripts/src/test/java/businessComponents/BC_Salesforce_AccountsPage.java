@@ -39,6 +39,12 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 		sfBC_Login.bc_login();
 	}*/
 	
+	
+	
+	public void bc_accountPageDetailFieldsValidation() {
+		sfAccountsPage.accountPageFieldsValidation();
+	}
+	
 	public void bc_accountActivity(){
 		sfAccountsPage.verifyCreateActivityAccount();
 	}

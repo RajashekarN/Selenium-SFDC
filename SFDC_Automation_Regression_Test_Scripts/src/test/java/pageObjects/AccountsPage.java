@@ -3,7 +3,9 @@ package pageObjects;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -38,6 +40,8 @@ public class AccountsPage extends ReusableLibrary {
 	TasksPage tasksPage = new TasksPage(scriptHelper);
 	SF_UtilityFunctions sf_UtilityFunctions = new SF_UtilityFunctions(scriptHelper);
 	EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
+	Utility_Functions utility_Functions = new Utility_Functions(scriptHelper);
+
 	static ArrayList<String> accountsPageDetailsList = new ArrayList<String>();
 
 	// Accounts home page
@@ -1092,6 +1096,7 @@ public class AccountsPage extends ReusableLibrary {
 
 	public void detailsPageFields() {
 
+		// Account Information
 		deatilsPageFieldsList.add("Account Name");
 		deatilsPageFieldsList.add("Original Account Name");
 		deatilsPageFieldsList.add("Account Site");
@@ -1106,12 +1111,20 @@ public class AccountsPage extends ReusableLibrary {
 		deatilsPageFieldsList.add("Brand Parent");
 		deatilsPageFieldsList.add("Migrated Account");
 		deatilsPageFieldsList.add("Global Brand");
+
+		// Account Segmentation
 		deatilsPageFieldsList.add("Client Type");
 		deatilsPageFieldsList.add("Key Client Account for:");
 		deatilsPageFieldsList.add("Client Type Rollup");
 		deatilsPageFieldsList.add("Key Pursuit Account for:");
+
+		// Account Hierarchy
+
+		// Address Information
 		deatilsPageFieldsList.add("Billing Address ");
 		deatilsPageFieldsList.add("Shipping Address");
+
+		// Local Address Information
 		deatilsPageFieldsList.add("Local Billing Country");
 		deatilsPageFieldsList.add("Local Shipping Country");
 		deatilsPageFieldsList.add("Local Billing Street");
@@ -1122,6 +1135,8 @@ public class AccountsPage extends ReusableLibrary {
 		deatilsPageFieldsList.add("Local Shipping State/Province");
 		deatilsPageFieldsList.add("Local Billing Zip/Postal Code");
 		deatilsPageFieldsList.add("Local Shipping Zip/Postal Code");
+
+		// Additional Information
 		deatilsPageFieldsList.add("Industry");
 		deatilsPageFieldsList.add("Data Type");
 		deatilsPageFieldsList.add("Employees Here");
@@ -1140,6 +1155,8 @@ public class AccountsPage extends ReusableLibrary {
 		deatilsPageFieldsList.add("Tax Code 1");
 		deatilsPageFieldsList.add("Verified Date");
 		deatilsPageFieldsList.add("Inactivation Date");
+
+		// SIC NAICS Codes
 		deatilsPageFieldsList.add("NAICS Code");
 		deatilsPageFieldsList.add("NAICS Code Description");
 		deatilsPageFieldsList.add("SIC Code 1");
@@ -1154,7 +1171,11 @@ public class AccountsPage extends ReusableLibrary {
 		deatilsPageFieldsList.add("SIC Code 5 Description");
 		deatilsPageFieldsList.add("SIC Code 6");
 		deatilsPageFieldsList.add("SIC Code 6 Description");
+
+		// Description Information
 		deatilsPageFieldsList.add("Description");
+
+		// System Information
 		deatilsPageFieldsList.add("Created By");
 		deatilsPageFieldsList.add("Account Owner");
 		deatilsPageFieldsList.add("Last Manually Modified Date");
@@ -1191,6 +1212,7 @@ public class AccountsPage extends ReusableLibrary {
 		accountsRelatedPageHeadersList.add("Related Contacts");
 		accountsRelatedPageHeadersList.add("Opportunities");
 		accountsRelatedPageHeadersList.add("Deal Relationships");
+
 		accountsRelatedPageHeadersList.add("Property Relationships");
 		accountsRelatedPageHeadersList.add("Activities");
 		accountsRelatedPageHeadersList.add("Private Notes");
@@ -1722,6 +1744,71 @@ public class AccountsPage extends ReusableLibrary {
 	}
 
 	/**
+	 * 
+	 */
+	public void accountPageFieldsValidation() {
+		//ABAMER Headers array
+		String[] ABAMERHeaders = {"Account Information","Account Segmentation","Address Information","Local Address Information","Additional Information","SIC/NAICS Codes","Description Information","System Information" };
+		
+		//Admin Headers
+		String[] adminHeaders  = {"Tagging","Account Information","Account Segmentation","Address Information","Local Address Information","Additional Information",
+				"SIC/NAICS Codes",	"Description Information", "APAC Fields", "EMEA Fields", "France Fields", "Rollup Summary Fields","System Information"}; 
+		//CMAPAC Headers
+		String[] CMAPACHeaders = {"Account Details","Address Information","Segmentation","Additional Information","System Information" };
+		
+		
+		
+		sf_UtilityFunctions.oneAppNavigationTab("Accounts");
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, newAccount, true);
+		Utility_Functions.timeWait(1);
+		
+		//Header validation	
+		if(dataTable.getData("General_Data", "TC_ID").contains("Admin")) {
+			Utility_Functions.xClick(driver, next, true);
+			Utility_Functions.timeWait(1);
+			List<WebElement> accountHeaders = driver.findElements(By.xpath("//span[contains(@class,'header-title')]"));
+			int adminHeadersCount = Utility_Functions.xValidateFieldsPresentPage(Arrays.asList(adminHeaders),accountHeaders,"Admin account Headers ");
+			if (adminHeadersCount!=adminHeaders.length) {
+				report.updateTestLog("Admin Detail age ",
+						"Admin - ALL Account Details page headers are not displaying::", Status.FAIL);
+			}
+			
+		}
+		else if(dataTable.getData("General_Data", "TC_ID").contains("CMAPAC")) {
+			List<WebElement> accountHeaders = driver.findElements(By.xpath("//span[contains(@class,'header-title')]"));
+			int CMAPACHeadersCount  = Utility_Functions.xValidateFieldsPresentPage(Arrays.asList(CMAPACHeaders),accountHeaders,"APAC account Headers ");
+			if (CMAPACHeadersCount!=CMAPACHeaders.length) {
+				report.updateTestLog("CMAPAC Detail age ",
+						"CMAPAC - ALL Account Details page headers are not displaying::", Status.FAIL);
+			}
+			
+		}	
+		
+		else if(dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) {
+			List<WebElement> accountHeaders = driver.findElements(By.xpath("//span[contains(@class,'header-title')]"));
+			int ABAMERHeadersCount  = Utility_Functions.xValidateFieldsPresentPage(Arrays.asList(ABAMERHeaders),accountHeaders,"AMER account Headers ");
+			if (ABAMERHeadersCount != ABAMERHeaders.length) {
+				report.updateTestLog("CMAPAC Detail age ",
+						"AMER - ALL Account Details page headers are not displaying::", Status.FAIL);
+			}
+			
+		}	
+			
+				
+		
+		
+
+		
+		
+		
+		
+		
+		
+		
+	}
+
+	/**
 	 * Validating the addition of New Personal information
 	 * 
 	 * @author Ramya
@@ -1730,6 +1817,13 @@ public class AccountsPage extends ReusableLibrary {
 	 *
 	 */
 	public void addNewPersonalInformation() {
+		String[] adminPersonalInformationLabelsArray = { "Title", "Lead", "Account", "SPOC", "Contact", "Property",
+				"Direct Line", "Personal Email", "Mobile", "Entertainment Preferences" };
+
+		String[] brokerPersonalInformationLabelsArray = { "Title", "Lead", "Account", "Contact", "Property",
+				"Direct Line", "Personal Email", "Mobile", "Entertainment Preferences" };
+
+		Arrays.sort(brokerPersonalInformationLabelsArray);
 		// Navigates to Account Menu and Clicks on existing Account in recently
 		// viewed/All Accounts
 		accountsFunction();
@@ -1761,102 +1855,21 @@ public class AccountsPage extends ReusableLibrary {
 			System.out.println(e.getMessage());
 		}
 
-		List<WebElement> personalInformation = driver
-				.findElements(By.xpath(".//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']"));
-		int count = 0;
-		try {
-			for (WebElement element : personalInformation) {
-				if ((count == 0) && (element.getText().contains("Title"))) {
-					System.out.println("Title field is present in the Create Private Notes Personal Information Page");
-					report.updateTestLog("Create Private Note Personal Information Page",
-							"Create Private Note Personal Information Page is having the " + element.getText()
-									+ " Status field::",
-							Status.PASS);
-					count++;
-				} else if ((count == 1) && (element.getText().contains("Lead"))) {
-					System.out.println("Lead field is present in the Create Private Notes Personal Information Page");
-					report.updateTestLog("Create Private Notes Personal Information Page",
-							"Create Private Notes Personal Information Page is having the " + element.getText()
-									+ " Status field::",
-							Status.PASS);
-					count++;
-				} else if ((count == 2) && (element.getText().contains("Account"))) {
-					System.out
-							.println("Account field is present in the Create Private Notes Personal Information Page");
-					report.updateTestLog("Create Private Notes Personal Information Page",
-							"Create Private Notes Personal Information Page is having the " + element.getText()
-									+ " Status field::",
-							Status.PASS);
-					count++;
-				} else if ((count == 3) && (element.getText().contains("SPOC"))) {
-					System.out
-							.println("Account field is present in the Create Private Notes Personal Information Page");
-					report.updateTestLog("Create Private Notes Personal Information Page",
-							"Create Private Notes Personal Information Page is having the " + element.getText()
-									+ " Status field::",
-							Status.PASS);
-					count++;
-				} else if ((count == 4) && (element.getText().contains("Contact"))) {
-					System.out
-							.println("Contact field is present in the Create Private Notes Personal Information Page");
-					report.updateTestLog("Create Private Notes Personal Information Page",
-							"Create Private Notes Personal Information Page is having the " + element.getText()
-									+ " Status field::",
-							Status.PASS);
-					count++;
-				} else if ((count == 5) && (element.getText().contains("Property"))) {
-					System.out
-							.println("Property field is present in the Create Private Notes Personal Information Page");
-					report.updateTestLog("Create Private Notes Personal Information Page",
-							"Create Private Notes Personal Information Page is having the " + element.getText()
-									+ " Status field::",
-							Status.PASS);
-					count++;
-				} else if ((count == 6) && (element.getText().contains("Direct Line"))) {
-					System.out.println(
-							"Direct Line field is present in the Create Private Notes Personal Information Page");
-					report.updateTestLog("Create Private Notes Personal Information Page",
-							"Create Private Notes Personal Information Page is having the " + element.getText()
-									+ " Status field::",
-							Status.PASS);
-					count++;
-				} else if ((count == 7) && (element.getText().contains("Personal Email"))) {
-					System.out.println(
-							"Personal Email field is present in the Create Private Notes Personal Information Page");
-					report.updateTestLog("Create Private Notes Personal Information Page",
-							"Create Private Notes Personal Information Page is having the " + element.getText()
-									+ " Status field::",
-							Status.PASS);
-					count++;
-				} else if ((count == 8) && (element.getText().contains("Mobile"))) {
-					System.out.println("Mobile field is present in the Create Private Notes Personal Information Page");
-					report.updateTestLog("Create Private Notes Personal Information Page",
-							"Create Private Notes Personal Information Page is having the " + element.getText()
-									+ " Status field::",
-							Status.PASS);
-					count++;
+		List<WebElement> personalInformation = driver.findElements(
+				By.xpath(".//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[1]"));
+		int returnElements = 0;
+		if (dataTable.getData("General_Data", "TC_ID").contains("Broker")) {
+			returnElements = Utility_Functions.xValidateFieldsPresentPage(
+					Arrays.asList(brokerPersonalInformationLabelsArray), personalInformation,
+					"New Private note :Personal Information ");
 
-				} else if ((count == 9) && (element.getText().contains("Entertainment Preferences"))) {
-					System.out.println(
-							"Entertainment Preferences field is present in the Create Private Notes Personal Information Page");
-					report.updateTestLog("Create Private Notes Personal Information Page",
-							"Create Private Notes Personal Information Page is having the " + element.getText()
-									+ " Status field::",
-							Status.PASS);
-
-				}
-			}
-
-			System.out.println(count);
-			if (count != 3) {
-				report.updateTestLog("Create Private Notes Personal Information Page",
-						"Create Private Notes Personal Information Page is not having all the fields::", Status.FAIL);
-
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
 		}
+		if (returnElements != 9) {
+			report.updateTestLog("Create Private Notes Personal Information Page",
+					"Create Private Notes Personal Information Page is not having all the fields::", Status.FAIL);
+
+		}
+
 		Utility_Functions.xClick(driver, saveButton, true);
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xScrollWindow(driver);
@@ -1999,7 +2012,7 @@ public class AccountsPage extends ReusableLibrary {
 		headerSectionAccountPage();
 		labelsAccountPage();
 		sf_UtilityFunctions.oneAppNavigationTab("Accounts");
-		//clickNewAccountButton();
+		// clickNewAccountButton();
 
 		headerSectionsInAccountDetail();
 
@@ -2469,92 +2482,52 @@ public class AccountsPage extends ReusableLibrary {
 	}
 
 	public void verifyAccountsLandingPageDetailsLayout() {
+
+		String[] accountDetailsPageHeaders = { "Tagging", "Account Information", "Account Segmentation",
+				"Account Hierarchy", "Address Information", "Local Address Information", "Additional Information",
+				"SIC/NAICS Codes", "Description Information", "System Information" };
+		String[] accountRelatedPageHeaders = { "SPOCs", "Related Contacts", "Opportunities",
+				"Opportunity Related Parties", "Property Relationships", "Activities", "Private Notes", "Notes",
+				"Files" };
+
 		accountsFunction();
-		Utility_Functions.timeWait(5);
+		Utility_Functions.timeWait(3);
 		detailsPageFields();
-		List<String> accountDetailsPageList = establishConnection.establishMetaDataConnectionPageLayouts("Account",
-				"CBRE APAC & JP - Account Layout");
-		List<String> accDetailsFieldsList = new ArrayList<String>();
 
-		accDetailsFieldsList = Utility_Functions.xValidatePickListValuesPage(accountDetailsPageList,
-				deatilsPageFieldsList, "Account Details page field values");
-		if (accDetailsFieldsList.size() != 0) {
-			report.updateTestLog("Verify  Account Details Page Page Field Labels",
-					"All the labels are not present in the  Account Details Page Page Field Labels:::"
-							+ accDetailsFieldsList,
-					Status.FAIL);
-		} else {
-			report.updateTestLog("Verify Account Details Page Field Labels",
-					"All the labels are present in the  Account Details Page Field Labels", Status.PASS);
+		List<WebElement> accountDetailPageFields = driver
+				.findElements(By.xpath("//span[contains(@class,'field-label')]"));
+		System.out.println(accountDetailPageFields.size());
+		int accountDetailPageFieldsCount = Utility_Functions.xValidateFieldsPresentPage(deatilsPageFieldsList,
+				accountDetailPageFields, "Account Details Page fields");
+		if (accountDetailPageFieldsCount >= accountDetailPageFields.size()) {
+			report.updateTestLog("Verify Accounts Details Page",
+					"All fields are not present in the Accounts Details Page", Status.FAIL);
+
+			System.out.println("All fields are not present in the Accounts Details Page");
 		}
 
-		List<WebElement> accountDetailsPageHeadersList = driver
-				.findElements(By.xpath("//span[contains(@class,'header-title')]"));
-		int count2 = 0, i2 = 0;
-		String fieldsArray2[] = new String[accountDetailsPageHeadersList.size()];
-		System.out.println(accountDetailsPageHeadersList.size());
+		// accountDetailsPageHeaders
+		List<WebElement> accountHeaders = driver.findElements(By.xpath("//span[contains(@class,'header-title')]"));
+		int accountHeadersCount = Utility_Functions.xValidateFieldsPresentPage(Arrays.asList(accountDetailsPageHeaders),
+				accountHeaders, "Account Details Page Headers");
+		if (accountHeadersCount != accountDetailsPageHeaders.length) {
+			report.updateTestLog("Verify Accounts Details Page",
+					"All headers are not present in the Accounts Details Page", Status.FAIL);
 
-		try {
-			accountDetailsPageHeaders();
-			for (WebElement element2 : accountDetailsPageHeadersList) {
-				System.out.println(element2.getText());
-				fieldsArray2[i2] = element2.getText();
-				if (fieldsArray2[i2].contains(accountsDeatilsPageHeadersList.get(i2))) {
-					report.updateTestLog("Verify Accounts Details Page",
-							"Accounts Details  page is having the " + fieldsArray2[i2] + " Headers ", Status.PASS);
-					count2++;
-				}
-				i2++;
-			}
-			System.out.println(count2);
-			if (count2 != 10) {
-				report.updateTestLog("Verify Accounts Details Page",
-						"All sections are not present in the Accounts Details Page", Status.FAIL);
-			} else {
-
-				report.updateTestLog("Verify Accounts Details Page",
-						"All sections are present in the Accounts Details Page", Status.PASS);
-			}
-
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println("All headers are not present in the Accounts Details Page");
 		}
 
+		// Account Related Page Headers
 		Utility_Functions.xClickVisibleListElement(driver, related_Accounts);
-		Utility_Functions.timeWait(5);
+		Utility_Functions.timeWait(3);
 		List<WebElement> accountRelatedPageHeadersList = driver
 				.findElements(By.xpath("//h2[starts-with(@id,'header_')]/a/span[1]"));
-		int count3 = 0, i3 = 0, j = 0;
-		String fieldsArray3[] = new String[accountRelatedPageHeadersList.size()];
-		System.out.println(accountRelatedPageHeadersList.size());
-		try {
-			accountRelatedPageHeaders();
-			while (j < accountRelatedPageHeadersList.size()) {
-				for (WebElement element3 : accountRelatedPageHeadersList) {
-					fieldsArray3[i3] = element3.getText();
-					if (fieldsArray3[i3].equalsIgnoreCase(accountsRelatedPageHeadersList.get(j))) {
-						System.out.println("Verify Account Details Page " + element3.getText());
-						report.updateTestLog("Verify Account Details Page ",
-								element3.getText() + "Headers are  present in the Account Related Page ", Status.PASS);
-						count3++;
-					}
-					i3++;
-					if (count3 == 6)
-						break;
-				}
-				i3 = 0;
-				j++;
-			}
-			System.out.println(count3);
-			if (count3 >= 6) {
-				report.updateTestLog("Verify Accounts Details Page",
-						"All sections are present in the Accounts Related Page", Status.PASS);
-			} else {
-				report.updateTestLog("Verify Accounts Details Page",
-						"All sections are not present in the Accounts Related Page", Status.FAIL);
-			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
+		int relatedTabSectionCount = Utility_Functions.xValidateFieldsPresentPage(
+				Arrays.asList(accountRelatedPageHeaders), accountRelatedPageHeadersList,
+				"Account Related Page Headers");
+		if (relatedTabSectionCount != accountRelatedPageHeaders.length) {
+			report.updateTestLog("Verify Accounts Details Page",
+					"All sections are not present in the Accounts Related Page", Status.FAIL);
 		}
 
 	}
