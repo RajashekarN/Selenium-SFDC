@@ -34,12 +34,7 @@ public class TC_SF_ABAMERCSSAccountsPopulatingAllFields extends CRAFTTestCase
 		tearDownTestRunner(testParameters, driverScript);
 	}
 
-	/*private void runDriverScript(DriverScript driverScript, SeleniumTestParameters testParameters){
-		driverScript.setIsAPITest(true);
-		driverScript.driveTestExecution();
-		tearDownTestRunner(testParameters, driverScript);
-	}*/
-	
+
 	@DataProvider(name = "RegressionTestScripts", parallel = false)
 	public Object[][] dataTC2() {
 		return new Object[][] { { "Instance1", ExecutionMode.LOCAL, Platform.WINDOWS /*ExecutionMode.LOCAL,
