@@ -1747,65 +1747,59 @@ public class AccountsPage extends ReusableLibrary {
 	 * 
 	 */
 	public void accountPageFieldsValidation() {
-		//ABAMER Headers array
-		String[] ABAMERHeaders = {"Account Information","Account Segmentation","Address Information","Local Address Information","Additional Information","SIC/NAICS Codes","Description Information","System Information" };
+		// ABAMER Headers array
+		String[] ABAMERHeaders = { "Account Information", "Account Segmentation", "Address Information",
+				"Local Address Information", "Additional Information", "SIC/NAICS Codes", "Description Information",
+				"System Information" };
+
+		// Admin Headers
+		String[] adminHeaders = { "Tagging", "Account Information", "Account Segmentation", "Address Information",
+				"Local Address Information", "Additional Information", "SIC/NAICS Codes", "Description Information",
+				"APAC Fields", "EMEA Fields", "France Fields", "Rollup Summary Fields", "System Information" };
 		
-		//Admin Headers
-		String[] adminHeaders  = {"Tagging","Account Information","Account Segmentation","Address Information","Local Address Information","Additional Information",
-				"SIC/NAICS Codes",	"Description Information", "APAC Fields", "EMEA Fields", "France Fields", "Rollup Summary Fields","System Information"}; 
-		//CMAPAC Headers
-		String[] CMAPACHeaders = {"Account Details","Address Information","Segmentation","Additional Information","System Information" };
-		
-		
-		
+		// CMAPAC Headers
+		String[] CMAPACHeaders = { "Account Details", "Address Information", "Segmentation", "Additional Information",
+				"System Information" };
+
 		sf_UtilityFunctions.oneAppNavigationTab("Accounts");
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xClick(driver, newAccount, true);
 		Utility_Functions.timeWait(1);
-		
-		//Header validation	
-		if(dataTable.getData("General_Data", "TC_ID").contains("Admin")) {
+
+		// Header validation for Admin profile
+		if (dataTable.getData("General_Data", "TC_ID").contains("Admin")) {
 			Utility_Functions.xClick(driver, next, true);
 			Utility_Functions.timeWait(1);
 			List<WebElement> accountHeaders = driver.findElements(By.xpath("//span[contains(@class,'header-title')]"));
-			int adminHeadersCount = Utility_Functions.xValidateFieldsPresentPage(Arrays.asList(adminHeaders),accountHeaders,"Admin account Headers ");
-			if (adminHeadersCount!=adminHeaders.length) {
+			int adminHeadersCount = Utility_Functions.xValidateFieldsPresentPage(Arrays.asList(adminHeaders),
+					accountHeaders, "Admin account Headers ");
+			if (adminHeadersCount != adminHeaders.length) {
 				report.updateTestLog("Admin Detail age ",
 						"Admin - ALL Account Details page headers are not displaying::", Status.FAIL);
 			}
-			
-		}
-		else if(dataTable.getData("General_Data", "TC_ID").contains("CMAPAC")) {
+			// Header validation for APAC profile
+		} else if (dataTable.getData("General_Data", "TC_ID").contains("CMAPAC")) {
 			List<WebElement> accountHeaders = driver.findElements(By.xpath("//span[contains(@class,'header-title')]"));
-			int CMAPACHeadersCount  = Utility_Functions.xValidateFieldsPresentPage(Arrays.asList(CMAPACHeaders),accountHeaders,"APAC account Headers ");
-			if (CMAPACHeadersCount!=CMAPACHeaders.length) {
+			int CMAPACHeadersCount = Utility_Functions.xValidateFieldsPresentPage(Arrays.asList(CMAPACHeaders),
+					accountHeaders, "APAC account Headers ");
+			if (CMAPACHeadersCount != CMAPACHeaders.length) {
 				report.updateTestLog("CMAPAC Detail age ",
 						"CMAPAC - ALL Account Details page headers are not displaying::", Status.FAIL);
 			}
-			
-		}	
-		
-		else if(dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) {
+
+		}
+		// Header validation for AMER profile
+		else if (dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) {
 			List<WebElement> accountHeaders = driver.findElements(By.xpath("//span[contains(@class,'header-title')]"));
-			int ABAMERHeadersCount  = Utility_Functions.xValidateFieldsPresentPage(Arrays.asList(ABAMERHeaders),accountHeaders,"AMER account Headers ");
+			int ABAMERHeadersCount = Utility_Functions.xValidateFieldsPresentPage(Arrays.asList(ABAMERHeaders),
+					accountHeaders, "AMER account Headers ");
 			if (ABAMERHeadersCount != ABAMERHeaders.length) {
 				report.updateTestLog("CMAPAC Detail age ",
 						"AMER - ALL Account Details page headers are not displaying::", Status.FAIL);
 			}
-			
-		}	
-			
-				
-		
-		
 
-		
-		
-		
-		
-		
-		
-		
+		}
+
 	}
 
 	/**
