@@ -1939,18 +1939,28 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 *
 	 */
 
+	List<String> reasonForLossPickList = new ArrayList<String>();
+	
+	public void ReasonForLossPickListAssetServices() {
+		reasonForLossPickList.add("");
+		reasonForLossPickList.add("--None--");
+		reasonForLossPickList.add("Client Action Postponed");
+		reasonForLossPickList.add("Fee Too High");
+		reasonForLossPickList.add("Not Right Service /Product Fit");
+		reasonForLossPickList.add("Prior Relationship");
+		reasonForLossPickList.add("Property Not Sold");
+		reasonForLossPickList.add("Self Perform");
+		reasonForLossPickList.add("Stayed with Incumbent");
+		System.out.println("Reason for Loss Picklist values for Asser Services AMER are:::" + reasonForLossPickList);
+	}
+	
+	
 	public void verifyQuickCreateOpportunityPageAssetServices() {
 		selectNewOpportunity();
 		report.updateTestLog("Verify Quick Create Opportunity Page Asset Services ",
 				"Verifying the Opportunities page is displayed", Status.PASS);
 		report.updateTestLog("Verify Quick Create Opportunity Page Asset Services   ",
 				"Verifying the new opportunity page is displayed", Status.PASS);
-		Utility_Functions.timeWait(3);
-		Utility_Functions.xSwitchtoFrame(driver, continueButton);
-		Utility_Functions.timeWait(3);
-		Utility_Functions.xClick(driver, continueButton, true);
-		driver.switchTo().defaultContent();
-		Utility_Functions.timeWait(2);
 		Utility_Functions.xScrollWindow(driver);
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xScrollWindowTop(driver);
@@ -1958,13 +1968,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, reasonForLoss, 3);
 		Utility_Functions.xClick(driver, reasonForLoss, true);
 		Utility_Functions.xWaitForElementPresent(driver, reasonForLossValuesPickList, 3);
-		for (WebElement element : reasonForLossValuesPickList) {
-			element.getText();
-			System.out.println(element.getText());
-			report.updateTestLog("Verify Quick Create Opportunity Page Asset Services   ",
-					"Verifying the new opportunity page Reason For Loss Pick list values are present", Status.PASS);
-		}
-
+		Utility_Functions.xValidateFieldsPresentonPage(reasonForLossPickList, reasonForLossValuesPickList, "Reason for loss pick list values for Asset Services AMER are:::");
 	}
 
 	/**
@@ -2105,10 +2109,15 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void verifyCapitalMarketsRevenueField() {
-		String sFieldName = "Capital Markets Revnue";
+		String sFieldName = "Capital Markets Revenue";
 		int count = 0;
 		EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
-		List<String> capitalMarketsRevenueFieldList = establishConnection.establishMetaDataConnectionPageLayouts("Opportunity", "Asset Services - APAC");
+		List<String> capitalMarketsRevenueFieldList = new ArrayList<String>();
+		if(dataTable.getData("General_Data", "TC_ID").contains("ASAMER")) {
+			capitalMarketsRevenueFieldList = establishConnection.establishMetaDataConnectionPageLayouts("Opportunity", "Asset Services - AMER");
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("ASAPAC")) {
+			capitalMarketsRevenueFieldList = establishConnection.establishMetaDataConnectionPageLayouts("Opportunity", "Asset Services - APAC");
+		}
 		for (int i = 0; i < capitalMarketsRevenueFieldList.size(); i++) {
 			if (capitalMarketsRevenueFieldList.get(i).equals(sFieldName)) {
 				count++;

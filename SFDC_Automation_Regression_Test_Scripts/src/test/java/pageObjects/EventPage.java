@@ -1,5 +1,6 @@
 package pageObjects;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -81,107 +82,66 @@ public class EventPage  extends ReusableLibrary {
 	WebElement saveBtnEvent;
 
 
+	/**
+	 * Validating the Create New Event Custom Page Layout.
+	 * @author SChandran
+	 */
+	
+	static List<String> customCreateNewEventPageLayoutFieldsList = new ArrayList<String>();
+	static List<String> startEndDateTimeFieldsList = new ArrayList<String>();
 
- 	
- 	
-
+	public void customCreateNewEventPageLayoutFieldsList() {
+		customCreateNewEventPageLayoutFieldsList.add("Subject\n*");
+		customCreateNewEventPageLayoutFieldsList.add("Activity Type\n*");
+		customCreateNewEventPageLayoutFieldsList.add("Type");
+		customCreateNewEventPageLayoutFieldsList.add("Location");
+		customCreateNewEventPageLayoutFieldsList.add("Start\n*");
+		customCreateNewEventPageLayoutFieldsList.add("End\n*");
+		customCreateNewEventPageLayoutFieldsList.add("All-Day Event");
+		customCreateNewEventPageLayoutFieldsList.add("Name");
+		customCreateNewEventPageLayoutFieldsList.add("Assigned To\n*");
+		customCreateNewEventPageLayoutFieldsList.add("Description");
+		customCreateNewEventPageLayoutFieldsList.add("Related To");
+		customCreateNewEventPageLayoutFieldsList.add("Send Notification Email");
+		System.out.println("Create New Event Custom Page contains the fields :::" + customCreateNewEventPageLayoutFieldsList);
+	}	
+	
+	public void startEndDateTimeFieldsList() {
+		startEndDateTimeFieldsList.add("Date");
+		startEndDateTimeFieldsList.add("Time");
+		startEndDateTimeFieldsList.add("Date");
+		startEndDateTimeFieldsList.add("Time");
+		System.out.println("Create New Event Custom Page contains Date and Time fields for Start and End");
+	}
 	
 	public void verifyNewEventPageLayout() {
-		List<WebElement> newEventPageLayoutFields = driver.findElements(By.xpath("//div[@class='riseTransitionEnabled']//label/span"));
-		int countRequiredFiles = 0;
-		try {
-			for (WebElement element : newEventPageLayoutFields) {
-				if ((element.getText().equals("Subject"))) {
-					System.out.println("Subject required field is present in the New Event Layout Page");
-					report.updateTestLog("Verify New Event Page Layout", "New Event Layout Page is having the " + element.getText() + " Status field::",
-							Status.PASS);
-					countRequiredFiles++;
-				} else if ((element.getText().equals("Location"))) {
-					System.out.println("Location required field is present in the New Event Layout Page");
-					report.updateTestLog("Verify New Event Page Layout", "New Event Layout Page is having the " + element.getText() + " Status field::",
-							Status.PASS);
-					countRequiredFiles++;
-				} else if ((element.getText().equals("All-Day Event"))) {
-					System.out.println("All-Day Event required field is present in the New Event Layout Page");
-					report.updateTestLog("Verify New Event Page Layout", "New Event Layout Page is having the " + element.getText() + " Status field::",
-							Status.PASS);
-					countRequiredFiles++;
-				} else if ((element.getText().equals("Name"))) {
-					System.out.println("Name To required field is present in the New Event Layout Page");
-					report.updateTestLog("Verify New Event Page Layout", "New Event Layout Page is having the " + element.getText() + " Status field::",
-							Status.PASS);
-					countRequiredFiles++;
-				} else if ((element.getText().equals("Related To"))) {
-					System.out.println("Related To required field is present in the New Event Layout Page");
-					report.updateTestLog("Verify New Event Page Layout", "New Event Layout Page is having the " + element.getText() + " Status field::",
-							Status.PASS);
-					countRequiredFiles++;
-				} else if ((element.getText().equals("Description"))) {
-					System.out.println("Description required field is present in the New Event Layout Page");
-					report.updateTestLog("Verify New Event Page Layout", "New Event Layout Page is having the " + element.getText() + " Status field::",
-							Status.PASS);
-					countRequiredFiles++;
-				} else if ((element.getText().equals("Assigned To"))) {
-					System.out.println("Assigned To required field is present in the New Event Layout Page");
-					report.updateTestLog("Verify New Event Page Layout", "New Event Layout Page is having the " + element.getText() + " Status field::",
-							Status.PASS);
-					countRequiredFiles++;
-				}
-			}
-			List<WebElement> newEventPageLayoutRequiredFields = driver.findElements(By.xpath("//div[contains(@class,'forceInputPicklist')]/span[contains(@class,'uiPicklistLabel')]/span"));
-			for (WebElement element : newEventPageLayoutRequiredFields) {
-				if ((element.getText().equals("Activity Type"))) {
-					System.out.println("Activity Type required field is present in the New Event Layout Page");
-					report.updateTestLog("Verify New Event Page Layout", "New Event Layout Page is having the " + element.getText() + " Status field::",
-							Status.PASS);
-					countRequiredFiles++;
-				} else if ((element.getText().equals("Priority"))) {
-					System.out.println("Priority required field is present in the New Event Layout Page");
-					report.updateTestLog("Verify New Event Page Layout", "New Event Layout Page is having the " + element.getText() + " Status field::",
-							Status.PASS);
-					countRequiredFiles++;
-				}
-			}		
-			
-			List<WebElement> newEventStartEndFields = driver.findElements(By.xpath("//div[@class='uiInput uiInput--default']//span"));
-			for (WebElement element : newEventStartEndFields) {
-				if ((element.getText().equals("Start"))) {
-					System.out.println("Start Type required field is present in the New Event Layout Page");
-					report.updateTestLog("Verify New Event Page Layout", "New Event Layout Page is having the " + element.getText() + " Status field::",
-							Status.PASS);
-					countRequiredFiles++;
-				} else if ((element.getText().equals("End"))) {
-					System.out.println("End required field is present in the New Event Layout Page");
-					report.updateTestLog("Verify New Event Page Layout", "New Event Layout Page is having the " + element.getText() + " Status field::",
-							Status.PASS);
-					countRequiredFiles++;
-				}
-			}
-			
-			List<WebElement> newEventDateTimeFields = driver.findElements(By.xpath("//div[@class='uiInput uiInput--default']//label"));
-			for (WebElement element : newEventDateTimeFields) {
-				if ((element.getText().equals("Date"))) {
-					System.out.println("Date required field is present in the New Event Layout Page");
-					report.updateTestLog("Verify New Event Page Layout", "New Event Layout Page is having the " + element.getText() + " Status field::",
-							Status.PASS);
-					countRequiredFiles++;
-				} else if ((element.getText().equals("Time"))) {
-					System.out.println("Time required field is present in the New Event Layout Page");
-					report.updateTestLog("Verify New Event Page Layout", "New Event Layout Page is having the " + element.getText() + " Status field::",
-							Status.PASS);
-					countRequiredFiles++;
-				}
-			}
-			System.out.println("Total no of fields on Event Page::" + countRequiredFiles);
-			if (countRequiredFiles >= 16) {
-				System.out.println("New Event Page Layout contains the required fields ");
-				report.updateTestLog("Verify New Event Page Layout", "New Event Layout Page is having all the required fields", Status.PASS);
-			} else {
-				report.updateTestLog("Verify New Event Page Layout", "New Event Layout Page is not having all the required fields", Status.WARNING);
-			}			
-			
-		} catch (Exception e) {
-			System.out.println("Encountered an error in validating the New Event Page Layout Fields::"+e.getMessage());
+		List<WebElement> createNewEventPageLayoutFieldsOnPage = driver.findElements(By.xpath("//label/span[text()='Subject']/following::input[1]//ancestor::section[1]//legend[contains(@class,'form-element__label uiLegend')]"
+																						+ "|//label/span[text()='Subject']/following::input[1]//ancestor::section[1]//span[contains(@class,'label inputLabel')]/span"
+																						+ "|//label/span[text()='Subject']/following::input[1]//ancestor::section[1]//label[contains(@class,'label inputLabel uiLabel-left')]"));
+		List<String> createNewEventPageLayoutFieldsFound = new ArrayList<String>();
+		for(int i=0; i<createNewEventPageLayoutFieldsOnPage.size(); i++)
+		{
+			createNewEventPageLayoutFieldsFound.add(createNewEventPageLayoutFieldsOnPage.get(i).getText());
+			if(createNewEventPageLayoutFieldsFound.get(i).equals("*"))
+				createNewEventPageLayoutFieldsFound.set(i-1, createNewEventPageLayoutFieldsFound.get(i-1)+"\n*");
+		}
+		customCreateNewEventPageLayoutFieldsList();
+		List<String> fieldsCount = Utility_Functions.xValidatePickListValuesPage(customCreateNewEventPageLayoutFieldsList, createNewEventPageLayoutFieldsFound, "Create New Event Page Fields");
+		
+		List<WebElement> startEndDateTimeFieldsOnPage = driver.findElements(By.xpath("//label/span[text()='Subject']/following::input[1]//ancestor::section[1]//legend[contains(@class,'form-element__label uiLegend')]/following-sibling::div//label"));
+		List<String> startEndDateTimeFieldsFound = new ArrayList<String>();
+		for(WebElement element : startEndDateTimeFieldsOnPage)
+		{
+			startEndDateTimeFieldsFound.add(element.getText());
+		}
+		startEndDateTimeFieldsList();
+		List<String> dateTimeFieldsCount = Utility_Functions.xValidatePickListValuesPage(startEndDateTimeFieldsList, startEndDateTimeFieldsFound, "Create New Event Page Fields");
+		
+		if (fieldsCount.size() == 0 && dateTimeFieldsCount.size() == 0) {
+			report.updateTestLog("Create New Event Page Fields", "Create New Event Page has all the expected fields", Status.PASS);
+		}
+		else {
+			report.updateTestLog("Create New Event Page Fields", "Create New Event Page does not have all the expected fields", Status.FAIL);
 		}
 	}
 	

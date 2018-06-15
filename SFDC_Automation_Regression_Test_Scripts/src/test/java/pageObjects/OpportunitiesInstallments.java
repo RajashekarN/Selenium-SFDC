@@ -124,10 +124,10 @@ public class OpportunitiesInstallments extends ReusableLibrary {
 	@FindBy(xpath = "//div[contains(@class,'modal-footer')]//span[text()='Save']")
 	WebElement saveNewOpportunityInstallment;
 	
-	@FindBy(xpath = "//span[@class='uiOutputNumber'][text()='1']/ancestor::tr//div[contains(@class,'forceVirtualActionMarker')]//a//span[@class='lightningPrimitiveIcon']")
+	@FindBy(xpath = "//span[@class='uiOutputNumber'][text()='1']/ancestor::tr//div[contains(@class,'forceVirtualActionMarker')]//a")
 	WebElement arrowDown;
 	
-	@FindBy(xpath = "//a[@title='Edit']")
+	@FindBy(xpath = "//a[@role='menuitem'][@title='Edit']")
 	WebElement editBtn;
 	
 	@FindBy(xpath = "//span[text()='Installment Status']/parent::span/parent::div//a")
@@ -176,6 +176,7 @@ public class OpportunitiesInstallments extends ReusableLibrary {
 				+ " Opportunity where Installment_Quantity__c = 1 and  CBRE_Preferred_Property_Type_c__c !=null and"
 				+ " Total_Size__c != null and Service__c  != null ORDER BY CreatedDate DESC"  + " limit 1 offset " + offsetValue;
 		String sOpportunityId = searchTextSOQL.fetchRecordFieldValue("Id", query);
+		opportunitiesFunctions.updateOpportunityField("CBRE_Preferred_Property_Type_c__c", sOpportunityId);
 		if(sOpportunityId==null) {
 			report.updateTestLog("Verify Active Opportunities", "No Opportunities are present:::", Status.PASS);
 		} else {
@@ -291,7 +292,7 @@ public class OpportunitiesInstallments extends ReusableLibrary {
 	 */
 
 	public void agencyBrokerage() {
-		driver.navigate().refresh();
+		//driver.navigate().refresh();
 		Utility_Functions.xSwitchtoFrame(driver, agencyBrokerageFrame);
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xScrollWindow(driver);
@@ -755,13 +756,7 @@ public class OpportunitiesInstallments extends ReusableLibrary {
 				if (iInstallmentAmountOne > 0) {
 					report.updateTestLog("Opportunities Installments",
 							"Opportunity is eligible for editing the Installments::", Status.PASS);					
-					Utility_Functions.xWaitForElementPresent(driver, arrowDown, 3); 
-					Utility_Functions.xClick(driver, arrowDown, true);
-					Utility_Functions.timeWait(2);
-					Utility_Functions.xWaitForElementPresent(driver, editBtn, 3);
-					Utility_Functions.xClick(driver, editBtn, true);
-					Utility_Functions.timeWait(1);
-						
+					selectEditInstallmentDropdown();						
 					Utility_Functions.xWaitForElementPresent(driver, installmentOption, 3);
 					Utility_Functions.xClick(driver, installmentOption, true);
 					if (installmentOption.getText().contains("Paid")) {
@@ -788,25 +783,12 @@ public class OpportunitiesInstallments extends ReusableLibrary {
 					Utility_Functions.xClick(driver, save, true);
 					report.updateTestLog("Opportunities Installments",
 							"Installment Amount has been paid successfully::", Status.PASS);
+					Utility_Functions.timeWait(2);
 					Utility_Functions.xWaitForElementPresent(driver, related, 3);
 					driver.navigate().refresh();
 					sf_UtilityFunctions.selectTabUIHeaders("Related");
-					Utility_Functions.xWaitForElementPresent(driver, arrowDown, 3);
-					Utility_Functions.xClick(driver, arrowDown, true);
-					Utility_Functions.timeWait(1);
-					List<WebElement> actionListEdit = driver.findElements(By.xpath("//div[@class='actionMenu']//a"));
-					for (WebElement element : actionListEdit) {
-						if (element.getText().contains("Edit")) {
-							Utility_Functions.xWaitForElementPresent(driver, element, 3);
-							element.click();
-							report.updateTestLog("Opportunities Installments",
-									"Clicked on edit installments button successfully::", Status.PASS);
-						} else {
-							report.updateTestLog("Opportunities Installments",
-									"Unable to click on edit installment button", Status.FAIL);
-						}
-					}
 					try {
+						selectEditInstallmentDropdown();
 						Utility_Functions.xWaitForElementPresent(driver, installmentAmountEdit, 3);
 						int iInstallmentAmount = iInstallmentAmountOne + 100;
 						Utility_Functions.xSendKeys(driver, installmentAmountEdit,
@@ -814,7 +796,7 @@ public class OpportunitiesInstallments extends ReusableLibrary {
 						Utility_Functions.timeWait(2);
 						Utility_Functions.xWaitForElementPresent(driver, save, 3);
 						Utility_Functions.xClick(driver, save, true);
-						Utility_Functions.timeWait(2);
+						Utility_Functions.timeWait(3);
 						Utility_Functions.xWaitForElementPresent(driver, related, 3);
 						if (related.isDisplayed()) {
 							report.updateTestLog("Opportunities Installments",
@@ -844,4 +826,13 @@ public class OpportunitiesInstallments extends ReusableLibrary {
 		}
 
 	}	
+	
+	public void selectEditInstallmentDropdown() {
+		Utility_Functions.xWaitForElementPresent(driver, arrowDown, 3); 
+		Utility_Functions.xClick(driver, arrowDown, true);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, editBtn, 3);
+		Utility_Functions.xClick(driver, editBtn, true);
+		Utility_Functions.timeWait(1);
+	}
 }
