@@ -92,7 +92,7 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 	 */
 
 	public void bc_accountDetailsLandingPage() throws InterruptedException {
-		sfAccountsPage.accountDetailsPagebyDefault();
+		sfAccountsPage.accountPageFieldsValidation();
 	}
 
 	/**
@@ -104,17 +104,6 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 
 	public void bc_addPrivateNote() throws InterruptedException {
 		sfAccountsPage.addPrivateNote();
-	}
-
-	/**
-	 * Validating the New Account Page Layout fields
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-
-	public void bc_newAccountPageLayout() throws InterruptedException {
-		sfAccountsPage.newAccountPageLayout();
 	}
 
 	/**

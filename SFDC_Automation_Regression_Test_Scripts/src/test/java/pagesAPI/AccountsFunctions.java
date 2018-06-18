@@ -53,11 +53,11 @@ public class AccountsFunctions extends ReusableLibrary {
 			account.setType("Account");
 			String accountName = Utility_Functions.xRandomFunction() + "-" + dataTable.getData("General_Data", "Name");
 			account.setField("Name", accountName);
-			account.setField("BillingCountry", dataTable.getData("General_Data", "BillingCountry"));
-			account.setField("BillingStreet", dataTable.getData("General_Data", "BillingStreet"));
-			account.setField("BillingCity", dataTable.getData("General_Data", "BillingCity"));
-			account.setField("BillingState", dataTable.getData("General_Data", "BillingState"));
-			account.setField("BillingPostalCode ", dataTable.getData("General_Data", "BillingZipcode"));
+			account.setField("BillingCountry", dataTable.getData("General_Data", "Country"));
+			account.setField("BillingStreet", dataTable.getData("General_Data", "Street"));
+			account.setField("BillingCity", dataTable.getData("General_Data", "City"));
+			account.setField("BillingState", dataTable.getData("General_Data", "State"));
+			account.setField("BillingPostalCode ", dataTable.getData("General_Data", "Zipcode"));
 
 			SObject[] accounts = new SObject[1];
 			accounts[0] = account;

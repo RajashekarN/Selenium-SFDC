@@ -5,10 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -16,11 +14,9 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
-
 import pagesAPI.AccountsFunctions;
 import pagesAPI.EstablishConnection;
 import pagesAPI.SearchTextSOQL;
@@ -949,142 +945,9 @@ public class AccountsPage extends ReusableLibrary {
 		PageFactory.initElements(driver.getWebDriver(), this);
 	}
 
-	/**
-	 * Validating the Account Details Page header section
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-	public void accountDetailsPage() {
-		accountsPageDetailsList.add("Tagging");
-		accountsPageDetailsList.add("Account Information");
-		accountsPageDetailsList.add("Account Segmentation");
-		accountsPageDetailsList.add("Account Hierarchy");
-		accountsPageDetailsList.add("Address Information");
-		accountsPageDetailsList.add("Local Address Information");
-		accountsPageDetailsList.add("Additional Information");
-		accountsPageDetailsList.add("SIC/NAICS Codes");
-		accountsPageDetailsList.add("Description Information");
-		accountsPageDetailsList.add("APAC Fields");
-		accountsPageDetailsList.add("EMEA Fields");
-		accountsPageDetailsList.add("Rollup Summary Fields");
-		accountsPageDetailsList.add("System Information");
-		accountsPageDetailsList.add("Custom Links");
-		System.out.println("Account Details Page information are:: " + accountsPageDetailsList);
-	}
+	
 
-	/**
-	 * Accounts Page Label List
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-
-	static ArrayList<String> labelList = new ArrayList<String>();
-
-	public void labelsAccountPage() {
-		labelList.add("Account Name");
-		labelList.add("Billing Street");
-		labelList.add("Billing City");
-		labelList.add("Billing Country");
-		labelList.add("Billing State/Province");
-		labelList.add("Billing Zip/Postal Code");
-		labelList.add("Website");
-		labelList.add("Phone");
-		labelList.add("Industry");
-
-		labelList.add("Account Site");
-		labelList.add("Tradestyle Name");
-		labelList.add("Legal Status");
-		labelList.add("Account Opportunity History");
-		labelList.add("Tax Label 1");
-		labelList.add("Tax Label2");
-		labelList.add("Tax Code 1");
-		labelList.add("Tax Code 2");
-		labelList.add("Staging Record Id");
-		labelList.add("Created By Country");
-		labelList.add("Last updated by Country");
-		labelList.add("Original Account Name");
-		labelList.add("Local Account Name");
-		labelList.add("Account Fax");
-		labelList.add("Immediate Parent Account");
-		labelList.add("Brand Parent");
-		labelList.add("Global Brand");
-
-		labelList.add("Client Type");
-		labelList.add("Key Client Account for");
-		labelList.add("Key Pursuit Account for");
-
-		labelList.add("Shipping Street");
-		labelList.add("Shipping City");
-		labelList.add("Shipping Country]");
-		labelList.add("Shipping State/Province");
-		labelList.add("Shipping Zip/Postal Code");
-
-		labelList.add("Local Billing Country");
-		labelList.add("Local Billing Street");
-		labelList.add("Local Billing City");
-		labelList.add("Local Billing Zip/Postal Code");
-		labelList.add("Local Shipping Zip/Postal Code");
-		labelList.add("Local Shipping Country");
-		labelList.add("Local Shipping Street");
-		labelList.add("Local Shipping City");
-		labelList.add("Local Billing State/Province");
-		labelList.add("Local Shipping State/Province");
-
-		labelList.add("Number of Family Members");
-		labelList.add("Investor Profile");
-		labelList.add("Lender Type");
-		labelList.add("D-U-N-S #");
-		labelList.add("Previous D-U-N-S #");
-		labelList.add("Integration Id");
-		labelList.add("Tax Code Label Type");
-		labelList.add("Status");
-		labelList.add("Reason for Inactivating");
-		labelList.add("Inactivation Date");
-		labelList.add("Marketability");
-		labelList.add("Account Source");
-		labelList.add("Ticker Symbol");
-		labelList.add("Annual Revenue");
-		labelList.add("Australian Business Number(ABN)");
-		labelList.add("Teikoku Databank Code (TBD)");
-		labelList.add("Verified System Id");
-		labelList.add("Verified Date");
-		labelList.add("Source Created Date Time");
-		labelList.add("Source Last Updated Date Time");
-
-		labelList.add("NAICS Code");
-		labelList.add("SIC Code 1");
-		labelList.add("SIC Code 2");
-		labelList.add("SIC Code 3");
-		labelList.add("SIC Code 4");
-		labelList.add("SIC Code 5");
-		labelList.add("SIC Code 6");
-		labelList.add("TBD Industry Code");
-		labelList.add("NAICS Code Description");
-		labelList.add("SIC Code 1 Description");
-		labelList.add("SIC Code 2 Description");
-		labelList.add("SIC Code 3 Description");
-		labelList.add("SIC Code 4 Description");
-		labelList.add("SIC Code 5 Description");
-		labelList.add("SIC Code 6 Description");
-		labelList.add("TBD Industry Code Description");
-
-		labelList.add("Account Description");
-
-		labelList.add("Created By");
-		labelList.add("Record Type");
-		labelList.add("Translation Status");
-		labelList.add("Account Creator Country");
-		labelList.add("DIG Review Comments");
-		labelList.add("Hiearchy Code");
-		labelList.add("Account Owner");
-		labelList.add("Unique Account ID");
-		labelList.add("Family Id Formula");
-		labelList.add("Source System");
-		System.out.println("Labels present in the new account page are:: " + labelList);
-
-	}
+	
 
 	/**
 	 * Validating the Accounts page Layout
@@ -1186,24 +1049,6 @@ public class AccountsPage extends ReusableLibrary {
 
 	}
 
-	static ArrayList<String> accountsDeatilsPageHeadersList = new ArrayList<String>();
-
-	public void accountDetailsPageHeaders() {
-
-		accountsDeatilsPageHeadersList.add("Tagging");
-		accountsDeatilsPageHeadersList.add("Account Information");
-		accountsDeatilsPageHeadersList.add("Account Segmentation");
-		accountsDeatilsPageHeadersList.add("Account Hierarchy");
-		accountsDeatilsPageHeadersList.add("Address Information");
-		accountsDeatilsPageHeadersList.add("Local Address Information");
-		accountsDeatilsPageHeadersList.add("Additional Information");
-		accountsDeatilsPageHeadersList.add("SIC/NAICS Codes");
-		accountsDeatilsPageHeadersList.add("Description Information");
-		accountsDeatilsPageHeadersList.add("System Information");
-
-		System.out.println("Account Details Page headers are:: " + accountsDeatilsPageHeadersList);
-	}
-
 	static ArrayList<String> accountsRelatedPageHeadersList = new ArrayList<String>();
 
 	public void accountRelatedPageHeaders() {
@@ -1220,505 +1065,6 @@ public class AccountsPage extends ReusableLibrary {
 		accountsRelatedPageHeadersList.add("Files");
 
 		System.out.println("Account related Page sections  are:: " + accountsRelatedPageHeadersList);
-	}
-
-	/**
-	 * Validating the New Account page layout
-	 * 
-	 * @author Ramya
-	 *
-	 */
-
-	static ArrayList<String> newAccountInformationSectionList = new ArrayList<String>();
-
-	public void newAccountInformationSection() {
-		newAccountInformationSectionList.add("Account Site");
-		newAccountInformationSectionList.add("Tradestyle Name");
-		newAccountInformationSectionList.add("Legal Status");
-		newAccountInformationSectionList.add("Account Opportunity History");
-		newAccountInformationSectionList.add("Tax Label 1");
-		newAccountInformationSectionList.add("Tax Label 2");
-		newAccountInformationSectionList.add("Tax Code 1");
-		newAccountInformationSectionList.add("Tax Code 2");
-		newAccountInformationSectionList.add("Staging Record Id");
-		newAccountInformationSectionList.add("Created By Country");
-		newAccountInformationSectionList.add("Last updated by Country");
-		newAccountInformationSectionList.add("Original Account Name");
-		newAccountInformationSectionList.add("Local Account Name");
-		newAccountInformationSectionList.add("Account Fax");
-		newAccountInformationSectionList.add("Immediate Parent Account");
-		newAccountInformationSectionList.add("Brand Parent");
-		newAccountInformationSectionList.add("Global Brand");
-		System.out.println("Account Information section fields  are:: " + newAccountInformationSectionList);
-	}
-
-	/**
-	 * Validating the New Account page layout
-	 * 
-	 * @author Ramya
-	 *
-	 */
-
-	static ArrayList<String> legalStatusPickListValuesList = new ArrayList<String>();
-
-	public void legalStatusPickList() {
-		legalStatusPickListValuesList.add("--None--");
-		legalStatusPickListValuesList.add("Corporation");
-		legalStatusPickListValuesList.add("Estate");
-		legalStatusPickListValuesList.add("Foundation");
-		legalStatusPickListValuesList.add("Limited Liability Corporation");
-		legalStatusPickListValuesList.add("Non Profit Organization");
-		legalStatusPickListValuesList.add("Sole Proprietorship");
-		legalStatusPickListValuesList.add("Trust");
-		System.out.println("Legal status pick list values are:: " + legalStatusPickListValuesList);
-	}
-
-	/**
-	 * Validating the New Account page layout
-	 * 
-	 * @author Ramya
-	 *
-	 */
-	static ArrayList<String> accountSegmentationFieldsList = new ArrayList<String>();
-
-	public void accountSegmentationFields() {
-		accountSegmentationFieldsList.add("Client Type");
-		System.out.println("Account segmentation section fields are:: " + accountSegmentationFieldsList);
-	}
-
-	/**
-	 * Validating the New Account page layout
-	 * 
-	 * @author Ramya
-	 *
-	 */
-	static ArrayList<String> clientTypeFieldPickListValuesList = new ArrayList<String>();
-
-	public void clientTypeFieldPickList() {
-		clientTypeFieldPickListValuesList.add("Developer");
-		clientTypeFieldPickListValuesList.add("Investor/Owner");
-		clientTypeFieldPickListValuesList.add("Lender");
-		clientTypeFieldPickListValuesList.add("Occupier");
-		clientTypeFieldPickListValuesList.add("Service Provider");
-		clientTypeFieldPickListValuesList.add("Corporate");
-		clientTypeFieldPickListValuesList.add("Government");
-		clientTypeFieldPickListValuesList.add("Institutional");
-		clientTypeFieldPickListValuesList.add("International");
-		clientTypeFieldPickListValuesList.add("Other");
-		clientTypeFieldPickListValuesList.add("Private");
-		clientTypeFieldPickListValuesList.add("REIT");
-		System.out.println("Client Type field pick list values  are:: " + clientTypeFieldPickListValuesList);
-	}
-
-	/**
-	 * Validating the New Account page layout
-	 * 
-	 * @author Ramya
-	 *
-	 */
-
-	static ArrayList<String> addressInformationSectionFieldsList = new ArrayList<String>();
-
-	public void addressInformationFields() {
-		addressInformationSectionFieldsList.add("Shipping Street");
-		addressInformationSectionFieldsList.add("Shipping City");
-		addressInformationSectionFieldsList.add("Shipping Country");
-		addressInformationSectionFieldsList.add("Shipping State/Province");
-		addressInformationSectionFieldsList.add("Shipping Zip/Postal Code");
-		System.out.println("Address Information section fields  are:: " + addressInformationSectionFieldsList);
-	}
-
-	static ArrayList<String> localAddressInformationFieldsList = new ArrayList<String>();
-
-	public void localAddressInformationFields() {
-		localAddressInformationFieldsList.add("Local Billing Country");
-		localAddressInformationFieldsList.add("Local Billing Street");
-		localAddressInformationFieldsList.add("Local Billing City");
-		localAddressInformationFieldsList.add("Local Billing State/Province");
-		localAddressInformationFieldsList.add("Local Billing Zip/Postal Code");
-		localAddressInformationFieldsList.add("Local Shipping Country");
-		localAddressInformationFieldsList.add("Local Shipping Street");
-		localAddressInformationFieldsList.add("Local Shipping City");
-		localAddressInformationFieldsList.add("Local Shipping State/Province");
-		localAddressInformationFieldsList.add("Local Shipping Zip/Postal Code");
-		System.out.println("Local address infomation fields are:: " + localAddressInformationFieldsList);
-	}
-
-	static ArrayList<String> additionalInformationFieldsList = new ArrayList<String>();
-
-	public void additionalInformationFields() {
-		if ((dataTable.getData("General_Data", "TC_ID").contains("ABAMERCSSAccountsPopulatingAllFields"))
-				|| (dataTable.getData("General_Data", "TC_ID").contains("ABAMERBrokerAccountsPopulatingAllFields"))
-				|| (dataTable.getData("General_Data", "TC_ID").contains("OBAMERAdminAccountsPopulatingAllFields"))) {
-			additionalInformationFieldsList.add("Number of Family Members");
-		}
-		additionalInformationFieldsList.add("Investor Profile");
-		additionalInformationFieldsList.add("Lender Type");
-		additionalInformationFieldsList.add("D-U-N-S #");
-		additionalInformationFieldsList.add("Previous D-U-N-S #");
-		additionalInformationFieldsList.add("Integration Id");
-		additionalInformationFieldsList.add("Tax Code Label Type");
-		additionalInformationFieldsList.add("Status");
-		additionalInformationFieldsList.add("Reason for Inactivating");
-		additionalInformationFieldsList.add("Inactivation Date");
-		additionalInformationFieldsList.add("Account Source");
-		additionalInformationFieldsList.add("Ticker Symbol");
-		additionalInformationFieldsList.add("Annual Revenue");
-		additionalInformationFieldsList.add("Verified System Id");
-		additionalInformationFieldsList.add("Verified Date");
-		additionalInformationFieldsList.add("Source Created Date Time");
-		additionalInformationFieldsList.add("Source Last Updated Date Time");
-		System.out.println("Additional Information section fields are :: " + additionalInformationFieldsList);
-	}
-
-	static ArrayList<String> investorProfileFieldsList = new ArrayList<String>();
-
-	public void investorProfilePickListFields() {
-		investorProfileFieldsList.add("--None--");
-		investorProfileFieldsList.add("High-Net-Worth Individual/Private Syndicate");
-		investorProfileFieldsList.add("Insurance Company");
-		investorProfileFieldsList.add("Non-Listed Property Company/Developer (non-REIT)");
-		investorProfileFieldsList.add("Occupier");
-		investorProfileFieldsList.add("Pension Fund");
-		investorProfileFieldsList.add("Private Equity");
-		investorProfileFieldsList.add("Private REIT");
-		investorProfileFieldsList.add("Property Fund");
-		investorProfileFieldsList.add("Public Sector/Non-Profit/Corporate");
-		investorProfileFieldsList.add("REIT/Listed Property Company");
-		investorProfileFieldsList.add("Sovereign Wealth Fund");
-		System.out.println("Investor profile field pick list values  are:: " + investorProfileFieldsList);
-	}
-
-	static ArrayList<String> lenderTypeFieldsList = new ArrayList<String>();
-
-	public void lenderTypeFields() {
-		lenderTypeFieldsList.add("--None--");
-		lenderTypeFieldsList.add("Agency");
-		lenderTypeFieldsList.add("Bank");
-		lenderTypeFieldsList.add("Credit Company");
-		lenderTypeFieldsList.add("Life Insurance Company");
-		lenderTypeFieldsList.add("Pension Fund");
-		lenderTypeFieldsList.add("Private Investor");
-		lenderTypeFieldsList.add("REIT");
-		lenderTypeFieldsList.add("Savings and Loan");
-		lenderTypeFieldsList.add("Special Servicer");
-		lenderTypeFieldsList.add("Wall St./Securitization/Conduit/CMBS");
-		lenderTypeFieldsList.add("Other");
-		System.out.println("Lender Type field pick list values  are:: " + lenderTypeFieldsList);
-	}
-
-	static ArrayList<String> accountSourceTypeFieldsList = new ArrayList<String>();
-
-	public void accountSourceTypeFields() {
-		accountSourceTypeFieldsList.add("--None--");
-		accountSourceTypeFieldsList.add("Business Relationship");
-		accountSourceTypeFieldsList.add("Canvass/Cold Call");
-		accountSourceTypeFieldsList.add("CBRE Cross Sell");
-		accountSourceTypeFieldsList.add("CBRE Referral/Existing Mandate");
-		accountSourceTypeFieldsList.add("Direct Award");
-		accountSourceTypeFieldsList.add("Greenspace");
-		accountSourceTypeFieldsList.add("Non CBRE Referral");
-		accountSourceTypeFieldsList.add("Other");
-		accountSourceTypeFieldsList.add("Personal Relationship");
-		accountSourceTypeFieldsList.add("RFP/Proposal/Pitch");
-		accountSourceTypeFieldsList.add("Sales Management");
-		accountSourceTypeFieldsList.add("Speculative Marketing/Business Dev");
-		System.out.println("Account source Type field pick list values  are:: " + accountSourceTypeFieldsList);
-	}
-
-	static ArrayList<String> SICFieldsList = new ArrayList<String>();
-
-	public void SICSectionFields() {
-		SICFieldsList.add("NAICS Code");
-		SICFieldsList.add("SIC Code 1");
-		SICFieldsList.add("SIC Code 2");
-		SICFieldsList.add("SIC Code 3");
-		SICFieldsList.add("SIC Code 4");
-		SICFieldsList.add("SIC Code 5");
-		SICFieldsList.add("SIC Code 6");
-		SICFieldsList.add("TDB Industry Code");
-		SICFieldsList.add("NAICS Code Description");
-		SICFieldsList.add("SIC Code 1 Description");
-		SICFieldsList.add("SIC Code 2 Description");
-		SICFieldsList.add("SIC Code 3 Description");
-		SICFieldsList.add("SIC Code 4 Description");
-		SICFieldsList.add("SIC Code 5 Description");
-		SICFieldsList.add("SIC Code 6 Description");
-		SICFieldsList.add("TDB Industry Code Description");
-		System.out.println("SIC section fields are:: " + SICFieldsList);
-	}
-
-	static ArrayList<String> descriptionInformationFieldsList = new ArrayList<String>();
-
-	public void descriptionInformationFields() {
-		descriptionInformationFieldsList.add("Account Description");
-		System.out.println("Description Information section fields are:: " + descriptionInformationFieldsList);
-	}
-
-	static ArrayList<String> systemInformationFieldsList = new ArrayList<String>();
-
-	public void systemInformationFields() {
-		systemInformationFieldsList.add("CreatedBy");
-		systemInformationFieldsList.add("Record Type");
-		systemInformationFieldsList.add("Translation Status");
-		systemInformationFieldsList.add("Account Creator Country");
-		systemInformationFieldsList.add("DIG Review Comments");
-		systemInformationFieldsList.add("Hierarchy Code");
-		systemInformationFieldsList.add("Account Owner");
-		systemInformationFieldsList.add("Unique Account ID");
-		systemInformationFieldsList.add("Family Id Formula");
-		systemInformationFieldsList.add("Source System");
-		System.out.println("System information fields are:: " + systemInformationFieldsList);
-	}
-
-	static ArrayList<String> countryList = new ArrayList<String>();
-
-	public void countryList() {
-		countryList.add("--None--");
-		countryList.add("Afghanistan");
-		countryList.add("Aland Islands");
-		countryList.add("Albania");
-		countryList.add("Algeria");
-		countryList.add("American Samoa");
-		countryList.add("Andorra");
-		countryList.add("Angola");
-		countryList.add("Anguilla");
-		countryList.add("Antarctica");
-		countryList.add("Antigua And Barbuda");
-		countryList.add("Argentina");
-		countryList.add("Armenia");
-		countryList.add("Aruba");
-		countryList.add("Australia");
-		countryList.add("Austria");
-		countryList.add("Azerbaijan");
-		countryList.add("Bahamas");
-		countryList.add("Bahrain");
-		countryList.add("Bangladesh");
-		countryList.add("Barbados");
-		countryList.add("Belarus");
-		countryList.add("Belgium");
-		countryList.add("Belize");
-		countryList.add("Benin");
-		countryList.add("Bermuda");
-		countryList.add("Bhutan");
-		countryList.add("Bolivia");
-		countryList.add("Bosnia And Herzegovina");
-		countryList.add("Botswana");
-		countryList.add("Bouvet Island");
-		countryList.add("Brazil");
-		countryList.add("British Indian Ocean Territory");
-		countryList.add("Brunei Darussalam");
-		countryList.add("Bulgaria");
-		countryList.add("Burkina Faso");
-		countryList.add("Burundi");
-		countryList.add("Cambodia");
-		countryList.add("Cameroon");
-		countryList.add("Canada");
-		countryList.add("Cape Verde");
-		countryList.add("Cayman Islands");
-		countryList.add("Central African Republic");
-		countryList.add("Chad");
-		countryList.add("Chile");
-		countryList.add("China");
-		countryList.add("Christmas Island");
-		countryList.add("Cocos (Keeling) Islands");
-		countryList.add("Colombia");
-		countryList.add("Comoros");
-		countryList.add("Congo");
-		countryList.add("Congo, The Democratic Republic Of The");
-		countryList.add("Cook Islands");
-		countryList.add("Costa Rica");
-		countryList.add("Cote D'Ivoire");
-		countryList.add("Croatia");
-		countryList.add("Cuba");
-		countryList.add("Cyprus");
-		countryList.add("Czech Republic");
-		countryList.add("Denmark");
-		countryList.add("Djibouti");
-		countryList.add("Dominica");
-		countryList.add("Dominican Republic");
-		countryList.add("Ecuador");
-		countryList.add("Egypt");
-		countryList.add("El Salvador");
-		countryList.add("Equatorial Guinea");
-		countryList.add("Eritrea");
-		countryList.add("Estonia");
-		countryList.add("Ethiopia");
-		countryList.add("Falkland Islands (Malvinas)");
-		countryList.add("Faroe Islands");
-		countryList.add("Fiji");
-		countryList.add("Finland");
-		countryList.add("France");
-		countryList.add("French Guiana");
-		countryList.add("French Polynesia");
-		countryList.add("French Southern Territories");
-		countryList.add("Gabon");
-		countryList.add("Gambia");
-		countryList.add("Georgia");
-		countryList.add("Germany");
-		countryList.add("Ghana");
-		countryList.add("Gibraltar");
-		countryList.add("Greece");
-		countryList.add("Greenland");
-		countryList.add("Grenada");
-		countryList.add("Guadeloupe");
-		countryList.add("Guam");
-		countryList.add("Guatemala");
-		countryList.add("Guernsey");
-		countryList.add("Guinea");
-		countryList.add("Guinea-Bissau");
-		countryList.add("Guyana");
-		countryList.add("Haiti");
-		countryList.add("Heard Island And Mcdonald Islands");
-		countryList.add("Holy See (Vatican City State)");
-		countryList.add("Honduras");
-		countryList.add("Hong Kong");
-		countryList.add("Hungary");
-		countryList.add("Iceland");
-		countryList.add("India");
-		countryList.add("Indonesia");
-		countryList.add("Iran, Islamic Republic Of");
-		countryList.add("Iraq");
-		countryList.add("Ireland");
-		countryList.add("Isle Of Man");
-		countryList.add("Israel");
-		countryList.add("Italy");
-		countryList.add("Jamaica");
-		countryList.add("Japan");
-		countryList.add("Jersey");
-		countryList.add("Jordan");
-		countryList.add("Kazakhstan");
-		countryList.add("Kenya");
-		countryList.add("Kiribati");
-		countryList.add("Korea, Democratic People'S Republic Of");
-		countryList.add("Korea, Republic Of");
-		countryList.add("Kuwait");
-		countryList.add("Kyrgyzstan");
-		countryList.add("Lao People'S Democratic Republic");
-		countryList.add("Latvia");
-		countryList.add("Lebanon");
-		countryList.add("Lesotho");
-		countryList.add("Liberia");
-		countryList.add("Libyan Arab Jamahiriya");
-		countryList.add("Liechtenstein");
-		countryList.add("Lithuania");
-		countryList.add("Luxembourg");
-		countryList.add("Macau");
-		countryList.add("Macedonia, The Former Yugoslav Republic Of");
-		countryList.add("Madagascar");
-		countryList.add("Malawi");
-		countryList.add("Malaysia");
-		countryList.add("Maldives");
-		countryList.add("Mali");
-		countryList.add("Malta");
-		countryList.add("Marshall Islands");
-		countryList.add("Martinique");
-		countryList.add("Mauritania");
-		countryList.add("Mauritius");
-		countryList.add("Mayotte");
-		countryList.add("Mexico");
-		countryList.add("Micronesia, Federated States Of");
-		countryList.add("Moldova, Republic Of");
-		countryList.add("Monaco");
-		countryList.add("Mongolia");
-		countryList.add("Montserrat");
-		countryList.add("Morocco");
-		countryList.add("Mozambique");
-		countryList.add("Myanmar");
-		countryList.add("Namibia");
-		countryList.add("Nauru");
-		countryList.add("Nepal");
-		countryList.add("Netherlands");
-		countryList.add("Netherlands Antilles");
-		countryList.add("New Caledonia");
-		countryList.add("New Zealand");
-		countryList.add("Nicaragua");
-		countryList.add("Niger");
-		countryList.add("Nigeria");
-		countryList.add("Niue");
-		countryList.add("Norfolk Island");
-		countryList.add("Northern Mariana Islands");
-		countryList.add("Norway");
-		countryList.add("Oman");
-		countryList.add("Pakistan");
-		countryList.add("Palau");
-		countryList.add("Palestinian Territory, Occupied");
-		countryList.add("Panama");
-		countryList.add("Papua New Guinea");
-		countryList.add("Paraguay");
-		countryList.add("Peru");
-		countryList.add("Philippines");
-		countryList.add("Pitcairn");
-		countryList.add("Poland");
-		countryList.add("Portugal");
-		countryList.add("Puerto Rico");
-		countryList.add("Qatar");
-		countryList.add("Reunion");
-		countryList.add("Romania");
-		countryList.add("Russian Federation");
-		countryList.add("Rwanda");
-		countryList.add("Saint Helena");
-		countryList.add("Saint Kitts And Nevis");
-		countryList.add("Saint Lucia");
-		countryList.add("Saint Pierre And Miquelon");
-		countryList.add("Saint Vincent And The Grenadines");
-		countryList.add("Samoa");
-		countryList.add("San Marino");
-		countryList.add("Sao Tome And Principe");
-		countryList.add("Saudi Arabia");
-		countryList.add("Senegal");
-		countryList.add("Serbia And Montenegro");
-		countryList.add("Seychelles");
-		countryList.add("Sierra Leone");
-		countryList.add("Singapore");
-		countryList.add("Slovakia");
-		countryList.add("Slovenia");
-		countryList.add("Solomon Islands");
-		countryList.add("Somalia");
-		countryList.add("South Africa");
-		countryList.add("South Georgia And The South Sandwich Islands");
-		countryList.add("Spain");
-		countryList.add("Sri Lanka");
-		countryList.add("Sudan");
-		countryList.add("Suriname");
-		countryList.add("Svalbard And Jan Mayen");
-		countryList.add("Swaziland");
-		countryList.add("Sweden");
-		countryList.add("Switzerland");
-		countryList.add("Syrian Arab Republic");
-		countryList.add("Taiwan");
-		countryList.add("Tajikistan");
-		countryList.add("Tanzania, United Republic Of");
-		countryList.add("Thailand");
-		countryList.add("Timor-Leste");
-		countryList.add("Togo");
-		countryList.add("Tokelau");
-		countryList.add("Tonga");
-		countryList.add("Trinidad And Tobago");
-		countryList.add("Tunisia");
-		countryList.add("Turkey");
-		countryList.add("Turkmenistan");
-		countryList.add("Turks And Caicos Islands");
-		countryList.add("Tuvalu");
-		countryList.add("Uganda");
-		countryList.add("Ukraine");
-		countryList.add("United Arab Emirates");
-		countryList.add("United Kingdom");
-		countryList.add("United States");
-		countryList.add("United States Minor Outlying Islands");
-		countryList.add("Uruguay");
-		countryList.add("Uzbekistan");
-		countryList.add("Vanuatu");
-		countryList.add("Venezuela");
-		countryList.add("Viet Nam");
-		countryList.add("Virgin Islands, British");
-		countryList.add("Virgin Islands, U.S.");
-		countryList.add("Wallis And Futuna");
-		countryList.add("Western Sahara");
-		countryList.add("Yemen");
-		countryList.add("Zambia");
-		countryList.add("Zimbabwe");
-		System.out.println("Country List are:::+ " + countryList);
 	}
 
 	/**
@@ -1744,22 +1090,103 @@ public class AccountsPage extends ReusableLibrary {
 	}
 
 	/**
+	 * validates new account details page Headers and labels for AMER Profiles
+	 * 
+	 * 
+	 * @author RNallapat
 	 * 
 	 */
-	public void accountPageFieldsValidation() {
+	public void validateAccountDetail_AMERHeaderLabel() {
+
 		// ABAMER Headers array
 		String[] ABAMERHeaders = { "Account Information", "Account Segmentation", "Address Information",
 				"Local Address Information", "Additional Information", "SIC/NAICS Codes", "Description Information",
 				"System Information" };
+		List<WebElement> accountHeaders = driver.findElements(By.xpath("//span[contains(@class,'header-title')]"));
+		int ABAMERHeadersCount = Utility_Functions.xValidateFieldsPresentPage(Arrays.asList(ABAMERHeaders),
+				accountHeaders, "AMER account Headers ");
+		if (ABAMERHeadersCount != ABAMERHeaders.length) {
+			report.updateTestLog("CMAPAC Detail age ", "AMER - ALL Account Details page headers are not displaying::",
+					Status.FAIL);
+		}
+	}
 
+	/**
+	 * validates new account details page Headers and labels for Admin Profiles
+	 * 
+	 * 
+	 * @author RNallapat
+	 * 
+	 */
+	public void validateAccountDetail_AdminHeaderLabel() {
 		// Admin Headers
 		String[] adminHeaders = { "Tagging", "Account Information", "Account Segmentation", "Address Information",
 				"Local Address Information", "Additional Information", "SIC/NAICS Codes", "Description Information",
 				"APAC Fields", "EMEA Fields", "France Fields", "Rollup Summary Fields", "System Information" };
-		
+
+		Utility_Functions.xClick(driver, next, true);
+		Utility_Functions.timeWait(1);
+		List<WebElement> accountHeaders = driver.findElements(By.xpath("//span[contains(@class,'header-title')]"));
+		int adminHeadersCount = Utility_Functions.xValidateFieldsPresentPage(Arrays.asList(adminHeaders),
+				accountHeaders, "Admin account Headers ");
+		/*List<WebElement> labels =*/ driver.findElements(By.xpath("//span[contains(@class,'header-title')]"));
+		if (adminHeadersCount != adminHeaders.length) {
+			report.updateTestLog("Admin Detail age ", "Admin - ALL Account Details page headers are not displaying::",
+					Status.FAIL);
+		}
+
+	}
+
+	/**
+	 * validates new account details page Headers and labels for APAC Profiles
+	 * 
+	 * 
+	 * @author RNallapat
+	 * 
+	 */
+	public void validateAccountDetail_APACHeaderLabel() {
+
 		// CMAPAC Headers
 		String[] CMAPACHeaders = { "Account Details", "Address Information", "Segmentation", "Additional Information",
 				"System Information" };
+
+		// CMAPAC Account Labels
+
+		String[] APACAccountLabels = { "Account Name", "Local Account Name", "Client Type", "Phone", "Website",
+				"Billing Address", "Billing Country", "Billing Street", "Billing City", "Billing Zip/Postal Code",
+				"Billing State/Province", "Local Billing Street", "Local Billing City", "Local Billing State/Province",
+				"Local Billing Zip/Postal Code", "Local Billing Country", "APAC Industry Type", "APAC Strategic Client",
+				"APAC Sub Industry", "Headquarter Country", "Legal Status", "Account Source", "Description",
+				"Australian Business Number (ABN)", "Last Manually Modified Date", "Last Manually Modified By",
+				"Status", "Reason for Inactivating", "Ultimate Parent", "Inactivation Date" };
+
+		List<WebElement> accountHeaders = driver.findElements(By.xpath("//span[contains(@class,'header-title')]"));
+
+		int CMAPACHeadersCount = Utility_Functions.xValidateFieldsPresentPage(Arrays.asList(CMAPACHeaders),
+				accountHeaders, "APAC account Headers ");
+		if (CMAPACHeadersCount != CMAPACHeaders.length) {
+			report.updateTestLog("CMAPAC Detail age ", "CMAPAC - ALL Account Details page headers are not displaying::",
+					Status.FAIL);
+		}
+
+		WebElement newAccountPage = driver
+				.findElement(By.xpath("//h2[text()='New Account: CBRE Account']/../../div[2]"));
+
+		List<WebElement> accountLabels = newAccountPage
+				.findElements(By.xpath(".//*[contains(@class,'form-element__label')]/span[1]"));
+
+		int accountLabelsCount = Utility_Functions.xValidateFieldsPresentPage(Arrays.asList(APACAccountLabels),
+				accountLabels, "APAC account labels ");
+		if (accountLabelsCount != APACAccountLabels.length) {
+			report.updateTestLog("CMAPAC Detail age ", "CMAPAC - ALL Account Details page Labels  are not displaying::",
+					Status.FAIL);
+		}
+	}
+
+	/**
+	 * @author RNallapat
+	 */
+	public void accountPageFieldsValidation() {
 
 		sf_UtilityFunctions.oneAppNavigationTab("Accounts");
 		Utility_Functions.timeWait(3);
@@ -1768,36 +1195,16 @@ public class AccountsPage extends ReusableLibrary {
 
 		// Header validation for Admin profile
 		if (dataTable.getData("General_Data", "TC_ID").contains("Admin")) {
-			Utility_Functions.xClick(driver, next, true);
-			Utility_Functions.timeWait(1);
-			List<WebElement> accountHeaders = driver.findElements(By.xpath("//span[contains(@class,'header-title')]"));
-			int adminHeadersCount = Utility_Functions.xValidateFieldsPresentPage(Arrays.asList(adminHeaders),
-					accountHeaders, "Admin account Headers ");
-			if (adminHeadersCount != adminHeaders.length) {
-				report.updateTestLog("Admin Detail age ",
-						"Admin - ALL Account Details page headers are not displaying::", Status.FAIL);
-			}
+			validateAccountDetail_AdminHeaderLabel();
+
 			// Header validation for APAC profile
 		} else if (dataTable.getData("General_Data", "TC_ID").contains("CMAPAC")) {
-			List<WebElement> accountHeaders = driver.findElements(By.xpath("//span[contains(@class,'header-title')]"));
-			int CMAPACHeadersCount = Utility_Functions.xValidateFieldsPresentPage(Arrays.asList(CMAPACHeaders),
-					accountHeaders, "APAC account Headers ");
-			if (CMAPACHeadersCount != CMAPACHeaders.length) {
-				report.updateTestLog("CMAPAC Detail age ",
-						"CMAPAC - ALL Account Details page headers are not displaying::", Status.FAIL);
-			}
-
+			validateAccountDetail_APACHeaderLabel();
 		}
-		// Header validation for AMER profile
-		else if (dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) {
-			List<WebElement> accountHeaders = driver.findElements(By.xpath("//span[contains(@class,'header-title')]"));
-			int ABAMERHeadersCount = Utility_Functions.xValidateFieldsPresentPage(Arrays.asList(ABAMERHeaders),
-					accountHeaders, "AMER account Headers ");
-			if (ABAMERHeadersCount != ABAMERHeaders.length) {
-				report.updateTestLog("CMAPAC Detail age ",
-						"AMER - ALL Account Details page headers are not displaying::", Status.FAIL);
-			}
 
+		// Header validation for AMER profile
+		else if (dataTable.getData("General_Data", "TC_ID").contains("AMER")) {
+			validateAccountDetail_AMERHeaderLabel();
 		}
 
 	}
@@ -1811,8 +1218,8 @@ public class AccountsPage extends ReusableLibrary {
 	 *
 	 */
 	public void addNewPersonalInformation() {
-		String[] adminPersonalInformationLabelsArray = { "Title", "Lead", "Account", "SPOC", "Contact", "Property",
-				"Direct Line", "Personal Email", "Mobile", "Entertainment Preferences" };
+		/*String[] adminPersonalInformationLabelsArray = { "Title", "Lead", "Account", "SPOC", "Contact", "Property",
+				"Direct Line", "Personal Email", "Mobile", "Entertainment Preferences" };*/
 
 		String[] brokerPersonalInformationLabelsArray = { "Title", "Lead", "Account", "Contact", "Property",
 				"Direct Line", "Personal Email", "Mobile", "Entertainment Preferences" };
@@ -1894,151 +1301,7 @@ public class AccountsPage extends ReusableLibrary {
 		Utility_Functions.timeWait(3);
 	}
 
-	/**
-	 * Validating the Account Landing Page functionality
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-
-	public void accountDetailsPagebyDefault() {
-		accountDetailsPage();
-
-		accountsFunction();
-
-		List<WebElement> accountsPageInfoList = driver
-				.findElements(By.xpath("//span[contains(@class,'header-title')]"));
-
-		Utility_Functions.xScrollWindow(driver);
-
-		String[] linkTexts = new String[accountsPageInfoList.size()];
-		int i = 0, count = 0;
-		try {
-			for (WebElement element : accountsPageInfoList) {
-				linkTexts[i] = element.getText();
-				if (linkTexts[i].equals(accountsPageDetailsList.get(i))) {
-					count++;
-					System.out.println("Account Page Details is having all the fields::: " + linkTexts[i] + ":::"
-							+ accountsPageDetailsList.get(i));
-					report.updateTestLog("Verify Account Landing Page Information",
-							"Landing page of Account Details is having all the fields:::" + linkTexts[i] + ":::",
-							Status.PASS);
-				}
-				i++;
-			}
-			if (dataTable.getData("General_Data", "TC_ID").contains("Broker")) {
-				if (count == 9) {
-					System.out.println("All the links are present in Home Page:::");
-					report.updateTestLog("Verify Account Landing Page Information",
-							"Account Details Page is having all the details in account landing page:::", Status.PASS);
-				}
-			} else if (!dataTable.getData("General_Data", "TC_ID").contains("Broker")) {
-				if (count == 14) {
-					System.out.println("All the links are present in Home Page:::");
-					report.updateTestLog("Verify Account Landing Page Information",
-							"Account Details Page is having all the details in account landing page:::", Status.PASS);
-				}
-			} else {
-				report.updateTestLog("Verify Account Landing Page Information",
-						"Account Details Page is not having all the details in account landing page:::", Status.FAIL);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			report.updateTestLog("Exception occurred in acccount Detail Landing Page", e.getMessage() + ":::",
-					Status.FAIL);
-		}
-
-	}
-
-	/**
-	 * Validate accounts header sections
-	 * 
-	 * @author RNallapati
-	 * 
-	 */
-
-	public void headerSectionsInAccountDetail() {
-		List<WebElement> headerList = driver.findElements(By.xpath("//span[contains(@class,'header-title')]"));
-		try {
-			int i2 = 0, count = 0;
-			String[] headerTexts = new String[headerList.size()];
-			for (WebElement element : headerList) {
-				headerTexts[i2] = element.getText();
-				if (headerTexts[i2].contains(headerSectionList.get(i2))) {
-					count++;
-					System.out.println("Verify Add Account Header List" + element.getText());
-					report.updateTestLog("Verify Add Account Header List",
-							element.getText() + " header is present in Add Account Page", Status.PASS);
-				}
-				i2++;
-			}
-
-			if (dataTable.getData("General_Data", "TC_ID").contains("Broker")) {
-				if (count == 8) {
-					System.out.println("All the links are present in Home Page:::");
-					report.updateTestLog("Verify Account Landing Page Information",
-							"Account Details Page is having all the details in account landing page:::", Status.PASS);
-				}
-			} else if (!dataTable.getData("General_Data", "TC_ID").contains("Broker")) {
-				if (count == 14) {
-					System.out.println("All the links are present in Home Page:::");
-					report.updateTestLog("Verify Account Landing Page Information",
-							"Account Details Page is having all the details in account landing page:::", Status.PASS);
-				}
-			} else {
-				report.updateTestLog("Verify Account Landing Page Information",
-						"Account Details Page is not having all the details in account landing page:::", Status.FAIL);
-			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-
-	}
-
-	/**
-	 * Validating the New Account Page Layout fields
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-
-	public void newAccountPageLayout() {
-		headerSectionAccountPage();
-		labelsAccountPage();
-		sf_UtilityFunctions.oneAppNavigationTab("Accounts");
-		// clickNewAccountButton();
-
-		headerSectionsInAccountDetail();
-
-		try {
-			List<WebElement> labelListAccountPage = driver
-					.findElements(By.xpath("//label[@class='slds-fsorm-element__label']"));
-			int i1 = 0, countLabelList = 0;
-			String[] labelTexts = new String[labelListAccountPage.size()];
-			for (WebElement element : labelListAccountPage) {
-				labelTexts[i1] = element.getText();
-				if (labelTexts[i1].contains(labelList.get(i1))) {
-					System.out.println("Verify Add Account Page Label List" + element.getText());
-					report.updateTestLog("Verify Add Account Page Label List",
-							element.getText() + " label list is present in Add Account Page", Status.PASS);
-					countLabelList++;
-				}
-				i1++;
-			}
-
-			System.out.println(countLabelList);
-			if (countLabelList == 79) {
-				report.updateTestLog("Verify Add Account Page Label List", "Labels are present in Add Account Page",
-						Status.PASS);
-			} else {
-				report.updateTestLog("Verify Add Account Page Label List", "Labels are not present in Add Account Page",
-						Status.FAIL);
-			}
-
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-	}
+		
 
 	public void verifyNewNotesAndFilesAttachment() {
 		sf_UtilityFunctions.oneAppNavigationTab("Accounts");
@@ -2141,6 +1404,9 @@ public class AccountsPage extends ReusableLibrary {
 		report.updateTestLog("File is present in the Accounts Page Elements", "File is present in the Accounts bPage",
 				Status.PASS);
 	}
+	
+	
+	
 
 	/**
 	 * Validating the creation of New Activity Page in the Accounts
@@ -2263,7 +1529,7 @@ public class AccountsPage extends ReusableLibrary {
 	 */
 
 	public void accountRecordTypeField() {
-		accountsFunction();
+		sf_UtilityFunctions.oneAppNavigationTab("Accounts");
 		List<WebElement> columnList = driver.findElements(By.xpath(
 				"//table[contains(@class,'uiVirtualDataTable')]//div[@class='slds-cell-fixed']//span[@class='slds-truncate']"));
 		int count = 0;
@@ -2480,6 +1746,7 @@ public class AccountsPage extends ReusableLibrary {
 		String[] accountDetailsPageHeaders = { "Tagging", "Account Information", "Account Segmentation",
 				"Account Hierarchy", "Address Information", "Local Address Information", "Additional Information",
 				"SIC/NAICS Codes", "Description Information", "System Information" };
+
 		String[] accountRelatedPageHeaders = { "SPOCs", "Related Contacts", "Opportunities",
 				"Opportunity Related Parties", "Property Relationships", "Activities", "Private Notes", "Notes",
 				"Files" };
@@ -2671,15 +1938,7 @@ public class AccountsPage extends ReusableLibrary {
 		}
 
 		accountRelatedObjectNewBtnClick(spocNew);
-		/*
-		 * Utility_Functions.xScrollWindow(driver); Utility_Functions.timeWait(1);
-		 * Utility_Functions.xScrollWindowTop(driver); Utility_Functions.timeWait(2);
-		 * Utility_Functions.xWaitForElementPresent(driver, spocNew, 3);
-		 * Utility_Functions.xClick(driver, spocNew, true);
-		 * Utility_Functions.timeWait(2);
-		 * report.updateTestLog("Verify SPOC from Account ",
-		 * "The New SPOCs in the related page is Displayed ", Status.PASS);
-		 */
+
 		Utility_Functions.xSwitchtoFrame(driver, spocEmployee);
 		Utility_Functions.timeWait(2);
 
@@ -4600,9 +3859,9 @@ public class AccountsPage extends ReusableLibrary {
 			Utility_Functions.xClick(driver, menu_More, true);
 			Utility_Functions.timeWait(1);
 		} catch (Exception e) {
-			Utility_Functions.xWaitForElementPresent(driver, more, 3);
-			Utility_Functions.xClick(driver, more, true);
-			Utility_Functions.timeWait(1);
+			// Utility_Functions.xWaitForElementPresent(driver, more, 3);
+			// Utility_Functions.xClick(driver, more, true);
+			// Utility_Functions.timeWait(1);
 		}
 		try {
 			Utility_Functions.xWaitForElementPresent(driver, more_privateTags, 3);

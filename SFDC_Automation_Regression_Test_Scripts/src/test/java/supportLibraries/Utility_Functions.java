@@ -1282,6 +1282,33 @@ public class Utility_Functions extends ReusableLibrary {
 		Utility_Functions.timeWait(1);
 		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
 	}
+	
+	/*
+	 * *******************************************************************
+	 * Function Name: xSwitchToFrameInsideAnotherFrame Author : CBRE SF Automation Purpose :
+	 * 
+	 * ******************************************************************
+	 */
+	public static void xSwitchToFrameInsideAnotherFrame(CraftDriver driver, WebElement webElement) {
+		List<WebElement> iframeList = driver.findElements(By.tagName("iframe"));
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
+		for (WebElement element : iframeList) {
+			driver.switchTo().frame(element);
+			try {
+				boolean isTextValuePresent = Utility_Functions.xWaitForElementPresent(driver, webElement, 0);
+				if (isTextValuePresent) {
+					break;
+				} else {
+					driver.switchTo().defaultContent();
+				}
+			} catch (Exception ex) {
+				driver.switchTo().defaultContent();
+			}
+		}
+		Utility_Functions.timeWait(1);
+		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
+	}
+	
 	/*
 	 * *******************************************************************
 	 * Function Name: Random Function Author : CBRE SF Automation Purpose :

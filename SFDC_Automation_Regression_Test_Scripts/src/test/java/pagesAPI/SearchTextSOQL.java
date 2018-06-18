@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
@@ -81,6 +83,42 @@ public class SearchTextSOQL extends ReusableLibrary {
 		} catch (Exception ex) {
 			System.out.println("Exception in main : " + ex);
 		}
+	}
+
+	/**
+	 * Function to fetch an existing Account record.
+	 * 
+	 * @author SChandran
+	 * @return 
+	 *
+	 */
+
+	public Map<String, String> searchAccount() {
+		Map<String, String> recordID = new HashMap<String, String>();
+		try {
+			establishConnection.establishConnection();
+			String query = "SELECT Id, Name FROM Account WHERE BillingCountry != 'NULL' limit 1 offset " + offsetValue;
+			QueryResult result = EstablishConnection.connection.query(query);
+			if (result.getSize() > 0) {
+				boolean done = false;
+				while (!done) {
+					for (SObject record : result.getRecords()) {
+						System.out.println("###### record.Id: " + (String) record.getField("Id"));
+						System.out.println("###### record.Name: " + (String) record.getField("Name"));
+						recordID.put("ID", (String) record.getField("Id"));
+						recordID.put("Name", (String) record.getField("Name"));
+					}
+					if (result.isDone()) {
+						done = true;
+					} else {
+						result = EstablishConnection.connection.queryMore(result.getQueryLocator());
+					}
+				}
+			}
+		} catch (Exception ex) {
+			System.out.println("Exception in main : " + ex);
+		}
+		return recordID;
 	}
 
 	/**
