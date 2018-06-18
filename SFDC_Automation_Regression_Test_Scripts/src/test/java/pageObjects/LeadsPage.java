@@ -10,6 +10,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
+
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
@@ -21,6 +23,7 @@ import pagesAPI.SearchTextSOQL;
 import supportLibraries.SF_UtilityFunctions;
 import supportLibraries.Utility_Functions;
 import pagesAPI.TaskEventsFunctions;
+import pagesAPI.SearchTextSOQL;
 
 
 /**
@@ -702,7 +705,7 @@ public class LeadsPage extends ReusableLibrary {
 				Utility_Functions.xClick(driver, recentlyViewed, true);
 				Utility_Functions.xWaitForElementVisible(driver, allLeadsMenu, 3);
 				Utility_Functions.xClick(driver, allLeadsMenu, true);	
-				Utility_Functions.xWaitForElementVisible(driver, allLeadNames, 8);	
+				Utility_Functions.xWaitForElementVisible(driver, allLeadNames, 12);	
 				sf_UtilityFunctions.selectExistingObjectRecord("Name");
 			} else {
 				sf_UtilityFunctions.selectExistingObjectRecord("Name");
@@ -1458,116 +1461,116 @@ public class LeadsPage extends ReusableLibrary {
 	 *
 	 */	
 
-	static ArrayList<String> customPageQuickCreateFieldsList = new ArrayList<String>();
+	static ArrayList<String> createNewLeadCustomPageQuickCreateFieldsList = new ArrayList<String>();
 
-	public void customPageQuickCreateFields() {
-		customPageQuickCreateFieldsList.add("Salutation");
-		customPageQuickCreateFieldsList.add("* First Name");
-		customPageQuickCreateFieldsList.add("* Last Name");
-		customPageQuickCreateFieldsList.add("* Company");
-		customPageQuickCreateFieldsList.add("Existing Engagement Expiration");
-		customPageQuickCreateFieldsList.add("Total Size");
-		customPageQuickCreateFieldsList.add("Unit of Measure");
-		customPageQuickCreateFieldsList.add("Preferred Property Type");
-		customPageQuickCreateFieldsList.add("Preferred Property Sub-Type");
-		customPageQuickCreateFieldsList.add("Requirement Details");
-		customPageQuickCreateFieldsList.add("* Status");
-		customPageQuickCreateFieldsList.add("Lead Source");
+	public void createNewLeadCustomPageQuickCreateFields() {
+		createNewLeadCustomPageQuickCreateFieldsList.add("Salutation");
+		createNewLeadCustomPageQuickCreateFieldsList.add("* First Name");
+		createNewLeadCustomPageQuickCreateFieldsList.add("* Last Name");
+		createNewLeadCustomPageQuickCreateFieldsList.add("* Company");
+		createNewLeadCustomPageQuickCreateFieldsList.add("Existing Engagement Expiration");
+		createNewLeadCustomPageQuickCreateFieldsList.add("Total Size");
+		createNewLeadCustomPageQuickCreateFieldsList.add("Unit of Measure");
+		createNewLeadCustomPageQuickCreateFieldsList.add("Preferred Property Type");
+		createNewLeadCustomPageQuickCreateFieldsList.add("Preferred Property Sub-Type");
+		createNewLeadCustomPageQuickCreateFieldsList.add("Requirement Details");
+		createNewLeadCustomPageQuickCreateFieldsList.add("* Status");
+		createNewLeadCustomPageQuickCreateFieldsList.add("Lead Source");
 
-		System.out.println("Custom Page Quick create fields are " + customPageQuickCreateFieldsList);
+		System.out.println("Custom Page Quick create fields are " + createNewLeadCustomPageQuickCreateFieldsList);
 	}
-	static ArrayList<String> customPageAddressInformationFieldsList = new ArrayList<String>();
+	static ArrayList<String> createNewLeadCustomPageAddressInformationFieldsList = new ArrayList<String>();
 
-	public void customPageAddressInformationFields() {
-		customPageAddressInformationFieldsList.add("Address");
-		customPageAddressInformationFieldsList.add("Country Code");
-		customPageAddressInformationFieldsList.add("Street");
-		customPageAddressInformationFieldsList.add("City");
-		customPageAddressInformationFieldsList.add("State/Province Code");
-		customPageAddressInformationFieldsList.add("Zip/Postal Code");
+	public void createNewLeadCustomPageAddressInformationFields() {
+		createNewLeadCustomPageAddressInformationFieldsList.add("Address");
+		createNewLeadCustomPageAddressInformationFieldsList.add("Country Code");
+		createNewLeadCustomPageAddressInformationFieldsList.add("Street");
+		createNewLeadCustomPageAddressInformationFieldsList.add("City");
+		createNewLeadCustomPageAddressInformationFieldsList.add("State/Province Code");
+		createNewLeadCustomPageAddressInformationFieldsList.add("Zip/Postal Code");
 
 
-		System.out.println("Custom Page Contact Information fields are " + customPageAddressInformationFieldsList);
+		System.out.println("Custom Page Contact Information fields are " + createNewLeadCustomPageAddressInformationFieldsList);
 	}
-	static ArrayList<String> customPageContactInformationFieldsList = new ArrayList<String>();
+	static ArrayList<String> createNewLeadCustomPageContactInformationFieldsList = new ArrayList<String>();
 
-	public void customPageContactInformationFields() {
-		customPageContactInformationFieldsList.add("Direct Line");
-		customPageContactInformationFieldsList.add("Mobile");
-		customPageContactInformationFieldsList.add("Main Phone");
-		customPageContactInformationFieldsList.add("Email");
-		customPageContactInformationFieldsList.add("Fax");
+	public void createNewLeadCustomPageContactInformationFields() {
+		createNewLeadCustomPageContactInformationFieldsList.add("Direct Line");
+		createNewLeadCustomPageContactInformationFieldsList.add("Mobile");
+		createNewLeadCustomPageContactInformationFieldsList.add("Main Phone");
+		createNewLeadCustomPageContactInformationFieldsList.add("Email");
+		createNewLeadCustomPageContactInformationFieldsList.add("Fax");
 
 
-		System.out.println("Custom Page Contact Information fields are " + customPageContactInformationFieldsList);
+		System.out.println("Custom Page Contact Information fields are " + createNewLeadCustomPageContactInformationFieldsList);
 	}
-	static ArrayList<String> customPageLeadInformationFieldsList = new ArrayList<String>();
+	static ArrayList<String> createNewLeadCustomPageLeadInformationFieldsList = new ArrayList<String>();
 
-	public void customPageLeadInformationFields() {
-		customPageLeadInformationFieldsList.add("Salutation");
-		customPageLeadInformationFieldsList.add("First Name");
-		customPageLeadInformationFieldsList.add("Last Name\n*");
-		customPageLeadInformationFieldsList.add("Rating");
-		customPageLeadInformationFieldsList.add("Middle Name");
-		customPageLeadInformationFieldsList.add("Lead Source");
-		customPageLeadInformationFieldsList.add("Nickname");
-		customPageLeadInformationFieldsList.add("Lead Status\n*");
-		customPageLeadInformationFieldsList.add("Title");
-		customPageLeadInformationFieldsList.add("Lead Record Type");
-		customPageLeadInformationFieldsList.add("Department");
-		customPageLeadInformationFieldsList.add("Lead Owner");
-		customPageLeadInformationFieldsList.add("Influence Level");
-		customPageLeadInformationFieldsList.add("Lead Owner");
-		customPageLeadInformationFieldsList.add("Company\n*");
-		customPageLeadInformationFieldsList.add("Represented By (Firm)");
-		customPageLeadInformationFieldsList.add("Industry");
-		customPageLeadInformationFieldsList.add("Website");
-		customPageLeadInformationFieldsList.add("Lead Record Counter");
+	public void createNewLeadCustomPageLeadInformationFields() {
+		createNewLeadCustomPageLeadInformationFieldsList.add("Salutation");
+		createNewLeadCustomPageLeadInformationFieldsList.add("First Name");
+		createNewLeadCustomPageLeadInformationFieldsList.add("Last Name\n*");
+		createNewLeadCustomPageLeadInformationFieldsList.add("Rating");
+		createNewLeadCustomPageLeadInformationFieldsList.add("Middle Name");
+		createNewLeadCustomPageLeadInformationFieldsList.add("Lead Source");
+		createNewLeadCustomPageLeadInformationFieldsList.add("Nickname");
+		createNewLeadCustomPageLeadInformationFieldsList.add("Lead Status\n*");
+		createNewLeadCustomPageLeadInformationFieldsList.add("Title");
+		createNewLeadCustomPageLeadInformationFieldsList.add("Lead Record Type");
+		createNewLeadCustomPageLeadInformationFieldsList.add("Department");
+		createNewLeadCustomPageLeadInformationFieldsList.add("Lead Owner");
+		createNewLeadCustomPageLeadInformationFieldsList.add("Influence Level");
+		createNewLeadCustomPageLeadInformationFieldsList.add("Lead Owner");
+		createNewLeadCustomPageLeadInformationFieldsList.add("Company\n*");
+		createNewLeadCustomPageLeadInformationFieldsList.add("Represented By (Firm)");
+		createNewLeadCustomPageLeadInformationFieldsList.add("Industry");
+		createNewLeadCustomPageLeadInformationFieldsList.add("Website");
+		createNewLeadCustomPageLeadInformationFieldsList.add("Lead Record Counter");
 
-		System.out.println("Custom Page Lead Information fields are " + customPageLeadInformationFieldsList);
+		System.out.println("Custom Page Lead Information fields are " + createNewLeadCustomPageLeadInformationFieldsList);
 	}
 
-	static ArrayList<String> customPageCommunicationPreferencesFieldsList = new ArrayList<String>();
+	static ArrayList<String> createNewLeadCustomPageCommunicationPreferencesFieldsList = new ArrayList<String>();
 
-	public void customPageCommunicationPreferencesFields() {
-		customPageCommunicationPreferencesFieldsList.add("Email Options");
-		customPageCommunicationPreferencesFieldsList.add("Call Options");
-		customPageCommunicationPreferencesFieldsList.add("Mail Options");
+	public void createNewLeadCustomPageCommunicationPreferencesFields() {
+		createNewLeadCustomPageCommunicationPreferencesFieldsList.add("Email Options");
+		createNewLeadCustomPageCommunicationPreferencesFieldsList.add("Call Options");
+		createNewLeadCustomPageCommunicationPreferencesFieldsList.add("Mail Options");
 
-		System.out.println("Custom Page Communication Preferences fields are " + customPageCommunicationPreferencesFieldsList);
+		System.out.println("Custom Page Communication Preferences fields are " + createNewLeadCustomPageCommunicationPreferencesFieldsList);
 	}
-	static ArrayList<String> customPageProspectRequirementsFieldsList = new ArrayList<String>();
+	static ArrayList<String> createNewLeadCustomPageProspectRequirementsFieldsList = new ArrayList<String>();
 
-	public void customPageProspectRequirementsFields() {
-		customPageProspectRequirementsFieldsList.add("Preferred Property Type");
-		customPageProspectRequirementsFieldsList.add("Total Size");
-		customPageProspectRequirementsFieldsList.add("Preferred Property Sub-Type");
-		customPageProspectRequirementsFieldsList.add("Unit of Measure");
-		customPageProspectRequirementsFieldsList.add("Total # of Units");
-		customPageProspectRequirementsFieldsList.add("Requirement Details");
-		customPageProspectRequirementsFieldsList.add("Unit of Comparison");
+	public void createNewLeadCustomPageProspectRequirementsFields() {
+		createNewLeadCustomPageProspectRequirementsFieldsList.add("Preferred Property Type");
+		createNewLeadCustomPageProspectRequirementsFieldsList.add("Total Size");
+		createNewLeadCustomPageProspectRequirementsFieldsList.add("Preferred Property Sub-Type");
+		createNewLeadCustomPageProspectRequirementsFieldsList.add("Unit of Measure");
+		createNewLeadCustomPageProspectRequirementsFieldsList.add("Total # of Units");
+		createNewLeadCustomPageProspectRequirementsFieldsList.add("Requirement Details");
+		createNewLeadCustomPageProspectRequirementsFieldsList.add("Unit of Comparison");
 		if(dataTable.getData("General_Data", "TC_ID").contains("OB")) {
-			customPageProspectRequirementsFieldsList.add("Existing Lease Expiration");
-			customPageProspectRequirementsFieldsList.add("Existing Termination/Break Option");
+			createNewLeadCustomPageProspectRequirementsFieldsList.add("Existing Lease Expiration");
+			createNewLeadCustomPageProspectRequirementsFieldsList.add("Existing Termination/Break Option");
 		}
 		else
-			customPageProspectRequirementsFieldsList.add("Existing Engagement Expiration");
+			createNewLeadCustomPageProspectRequirementsFieldsList.add("Existing Engagement Expiration");
 		
 
-		System.out.println("Custom Page Prospect requirements fields are " + customPageProspectRequirementsFieldsList);
+		System.out.println("Custom Page Prospect requirements fields are " + createNewLeadCustomPageProspectRequirementsFieldsList);
 	}
-	static ArrayList<String> customPageAdditionalInformationFieldsList = new ArrayList<String>();
+	static ArrayList<String> createNewLeadCustomPageAdditionalInformationFieldsList = new ArrayList<String>();
 
-	public void customPageAdditionalInformationFields() {
-		customPageAdditionalInformationFieldsList.add("Assistant Name");
-//		customPageAdditionalInformationFieldsList.add("Invalid");
-		customPageAdditionalInformationFieldsList.add("Assistant Phone");
-//		customPageAdditionalInformationFieldsList.add("Date Verified");
-		customPageAdditionalInformationFieldsList.add("Assistant Email");
-		customPageAdditionalInformationFieldsList.add("Unmapped Fields");
-		customPageAdditionalInformationFieldsList.add("Next Steps");
+	public void createNewLeadCustomPageAdditionalInformationFields() {
+		createNewLeadCustomPageAdditionalInformationFieldsList.add("Assistant Name");
+//		createNewLeadCustomPageAdditionalInformationFieldsList.add("Invalid");
+		createNewLeadCustomPageAdditionalInformationFieldsList.add("Assistant Phone");
+//		createNewLeadCustomPageAdditionalInformationFieldsList.add("Date Verified");
+		createNewLeadCustomPageAdditionalInformationFieldsList.add("Assistant Email");
+		createNewLeadCustomPageAdditionalInformationFieldsList.add("Unmapped Fields");
+		createNewLeadCustomPageAdditionalInformationFieldsList.add("Next Steps");
 
-		System.out.println("Custom Page Additional Information fields are " + customPageAdditionalInformationFieldsList);
+		System.out.println("Custom Page Additional Information fields are " + createNewLeadCustomPageAdditionalInformationFieldsList);
 	}
 	
 	/**
@@ -1625,8 +1628,8 @@ public class LeadsPage extends ReusableLibrary {
 				createNewLeadLeadInformationSectionFieldsFound.set(i-1, createNewLeadLeadInformationSectionFieldsFound.get(i-1)+"\n*");
 		}
 
-		customPageLeadInformationFields();
-		List<String> sectionFieldsCount = Utility_Functions.xValidatePickListValuesPage(customPageLeadInformationFieldsList, createNewLeadLeadInformationSectionFieldsFound, "Lead Information Section Fields");
+		createNewLeadCustomPageLeadInformationFields();
+		List<String> sectionFieldsCount = Utility_Functions.xValidatePickListValuesPage(createNewLeadCustomPageLeadInformationFieldsList, createNewLeadLeadInformationSectionFieldsFound, "Lead Information Section Fields");
 		if (sectionFieldsCount.size() == 0) {
 			report.updateTestLog("Create New Lead Custom Page - Lead Information Section",
 					"Lead Information section has all the expected fields", Status.PASS);
@@ -1645,8 +1648,8 @@ public class LeadsPage extends ReusableLibrary {
 			createNewLeadAddressInformationSectionFieldsFound.add(element.getText());
 		}
 
-		customPageAddressInformationFields();
-		sectionFieldsCount = Utility_Functions.xValidatePickListValuesPage(customPageAddressInformationFieldsList, createNewLeadAddressInformationSectionFieldsFound, "Address Information Section Fields");
+		createNewLeadCustomPageAddressInformationFields();
+		sectionFieldsCount = Utility_Functions.xValidatePickListValuesPage(createNewLeadCustomPageAddressInformationFieldsList, createNewLeadAddressInformationSectionFieldsFound, "Address Information Section Fields");
 		if (sectionFieldsCount.size() == 0) {
 			report.updateTestLog("Create New Lead Custom Page - Address Information Section",
 					"Address Information section has all the expected fields", Status.PASS);
@@ -1664,8 +1667,8 @@ public class LeadsPage extends ReusableLibrary {
 			createNewLeadContactInformationSectionFieldsFound.add(element.getText());
 		}
 
-		customPageContactInformationFields();
-		sectionFieldsCount = Utility_Functions.xValidatePickListValuesPage(customPageContactInformationFieldsList,	createNewLeadContactInformationSectionFieldsFound, "Contact Information Section Fields");
+		createNewLeadCustomPageContactInformationFields();
+		sectionFieldsCount = Utility_Functions.xValidatePickListValuesPage(createNewLeadCustomPageContactInformationFieldsList,	createNewLeadContactInformationSectionFieldsFound, "Contact Information Section Fields");
 		if (sectionFieldsCount.size() == 0) {
 			report.updateTestLog("Create New Lead Custom Page - Contact Information Section",
 					"Contact Information section has all the expected fields", Status.PASS);
@@ -1683,8 +1686,8 @@ public class LeadsPage extends ReusableLibrary {
 			createNewLeadCommunicationPreferencesSectionFieldsFound.add(element.getText());
 		}
 
-		customPageCommunicationPreferencesFields();
-		sectionFieldsCount = Utility_Functions.xValidatePickListValuesPage(customPageCommunicationPreferencesFieldsList, createNewLeadCommunicationPreferencesSectionFieldsFound, "Communication Preferences Section Fields");
+		createNewLeadCustomPageCommunicationPreferencesFields();
+		sectionFieldsCount = Utility_Functions.xValidatePickListValuesPage(createNewLeadCustomPageCommunicationPreferencesFieldsList, createNewLeadCommunicationPreferencesSectionFieldsFound, "Communication Preferences Section Fields");
 		if (sectionFieldsCount.size() == 0) {
 			report.updateTestLog("Create New Lead Custom Page - Communication Preferences Section",
 					"Communication Preferences section has all the expected fields", Status.PASS);
@@ -1702,8 +1705,8 @@ public class LeadsPage extends ReusableLibrary {
 			createNewLeadProspectRequirementsSectionFieldsFound.add(element.getText());
 		}
 
-		customPageProspectRequirementsFields();
-		sectionFieldsCount = Utility_Functions.xValidatePickListValuesPage(customPageProspectRequirementsFieldsList, createNewLeadProspectRequirementsSectionFieldsFound, "Prospect Requirements Section Fields");
+		createNewLeadCustomPageProspectRequirementsFields();
+		sectionFieldsCount = Utility_Functions.xValidatePickListValuesPage(createNewLeadCustomPageProspectRequirementsFieldsList, createNewLeadProspectRequirementsSectionFieldsFound, "Prospect Requirements Section Fields");
 		if (sectionFieldsCount.size() == 0) {
 			report.updateTestLog("Create New Lead Custom Page - Prospect Requirements Section",
 					"Prospect Requirements section has all the expected fields", Status.PASS);
@@ -1721,8 +1724,8 @@ public class LeadsPage extends ReusableLibrary {
 			createNewLeadAdditionalInformationSectionFieldsFound.add(element.getText());
 		}
 
-		customPageAdditionalInformationFields();
-		sectionFieldsCount = Utility_Functions.xValidatePickListValuesPage(customPageAdditionalInformationFieldsList, createNewLeadAdditionalInformationSectionFieldsFound, "Additional Information Section Fields");
+		createNewLeadCustomPageAdditionalInformationFields();
+		sectionFieldsCount = Utility_Functions.xValidatePickListValuesPage(createNewLeadCustomPageAdditionalInformationFieldsList, createNewLeadAdditionalInformationSectionFieldsFound, "Additional Information Section Fields");
 		if (sectionFieldsCount.size() == 0) {
 			report.updateTestLog("Create New Lead Custom Page - Additional Information Section",
 					"Additional Information section has all the expected fields", Status.PASS);
@@ -2024,401 +2027,276 @@ public class LeadsPage extends ReusableLibrary {
 		}
 	}
 	/**
-	 * Validating the Leads Landing Page 
+	 * Validating the Lead Details Landing Page 
 	 * 
 	 * @author Ramya
+	 * @author SChandran
 	 *
 	 */	
 
-	static ArrayList<String> leadsDetailsPageFieldsList = new ArrayList<String>();
+	static ArrayList<String> leadsDetailsPageHeadersSectionsList = new ArrayList<String>();
 
-	public void leadsDetailsPageFields() {
-		leadsDetailsPageFieldsList.add("Name");
-		leadsDetailsPageFieldsList.add("Rating");
-		leadsDetailsPageFieldsList.add("Middle Name");
-		leadsDetailsPageFieldsList.add("Lead Source");
-		leadsDetailsPageFieldsList.add("Nickname");
-		leadsDetailsPageFieldsList.add("Lead Status");
-		leadsDetailsPageFieldsList.add("Title");
-		leadsDetailsPageFieldsList.add("Lead Record Type");
-		leadsDetailsPageFieldsList.add("Department");
-		leadsDetailsPageFieldsList.add("Lead Owner");
-		leadsDetailsPageFieldsList.add("Influence Level");
-		//leadsDetailsPageFieldsList.add("Lead Owner User Market");
-		leadsDetailsPageFieldsList.add("Company");
-		leadsDetailsPageFieldsList.add("Represented By (Firm)");
-		leadsDetailsPageFieldsList.add("Industry");
-		leadsDetailsPageFieldsList.add("Website");
-		leadsDetailsPageFieldsList.add("Lead Record Counter");
+	public void leadsDetailsPageHeadersSectionsList() {
+		leadsDetailsPageHeadersSectionsList.add("Tagging");
+		leadsDetailsPageHeadersSectionsList.add("Lead Information");
+		leadsDetailsPageHeadersSectionsList.add("Address Information");
+		leadsDetailsPageHeadersSectionsList.add("Contact Information");
+		leadsDetailsPageHeadersSectionsList.add("Communication Preferences");
+		leadsDetailsPageHeadersSectionsList.add("Prospect Requirements");
+		leadsDetailsPageHeadersSectionsList.add("Additional Information");
+		leadsDetailsPageHeadersSectionsList.add("System Information");
+		leadsDetailsPageHeadersSectionsList.add("Custom Links");
 
+		System.out.println("Contact Details Page headers are:: " +leadsDetailsPageHeadersSectionsList);
+	}
+	
+	static ArrayList<String> leadDetailsPageLeadInformationSectionFieldsList = new ArrayList<String>();
 
-		System.out.println("Leads Details Page Lead Information fields are " + leadsDetailsPageFieldsList);
+	public void leadDetailsPageLeadInformationSectionFieldsList() {
+		leadDetailsPageLeadInformationSectionFieldsList.add("Name");
+		leadDetailsPageLeadInformationSectionFieldsList.add("Rating");
+		leadDetailsPageLeadInformationSectionFieldsList.add("Middle Name");
+		leadDetailsPageLeadInformationSectionFieldsList.add("Lead Source");
+		leadDetailsPageLeadInformationSectionFieldsList.add("Nickname");
+		leadDetailsPageLeadInformationSectionFieldsList.add("Lead Status");
+		leadDetailsPageLeadInformationSectionFieldsList.add("Title");
+		leadDetailsPageLeadInformationSectionFieldsList.add("Lead Record Type");
+		leadDetailsPageLeadInformationSectionFieldsList.add("Department");
+		leadDetailsPageLeadInformationSectionFieldsList.add("Lead Owner");
+		leadDetailsPageLeadInformationSectionFieldsList.add("Influence Level");
+		leadDetailsPageLeadInformationSectionFieldsList.add("Company");
+		leadDetailsPageLeadInformationSectionFieldsList.add("Represented By (Firm)");
+		leadDetailsPageLeadInformationSectionFieldsList.add("Industry");
+		leadDetailsPageLeadInformationSectionFieldsList.add("Website");
+		leadDetailsPageLeadInformationSectionFieldsList.add("Lead Record Counter");
+
+		System.out.println("Leads Details Page Lead Information fields are " + leadDetailsPageLeadInformationSectionFieldsList);
 	}
 
-	static ArrayList<String> addressInformationSectionFieldsList = new ArrayList<String>();
+	static ArrayList<String> leadDetailsPageAddressInformationSectionFieldsList = new ArrayList<String>();
 
-	public void addressInformationFields() {
+	public void leadDetailsPageAddressInformationSectionFieldsList() {
 
-		addressInformationSectionFieldsList.add("Address");
+		leadDetailsPageAddressInformationSectionFieldsList.add("Address");
 
-		System.out.println("Address Information section fields are " +addressInformationSectionFieldsList );
+		System.out.println("Address Information section fields are " +leadDetailsPageAddressInformationSectionFieldsList );
+	}
+	
+	static ArrayList<String> leadDetailsPageContactInformationSectionFieldsList = new ArrayList<String>();
+	
+	public void leadDetailsPageContactInformationSectionFieldsList() {
+		leadDetailsPageContactInformationSectionFieldsList.add("Direct Line");
+		leadDetailsPageContactInformationSectionFieldsList.add("Mobile");
+		leadDetailsPageContactInformationSectionFieldsList.add("Main Phone");
+		leadDetailsPageContactInformationSectionFieldsList.add("Email");
+		leadDetailsPageContactInformationSectionFieldsList.add("Fax");
+
+		System.out.println("Contact Information fields are " +leadDetailsPageContactInformationSectionFieldsList);
 	}
 
-	static ArrayList<String> communicationPreferencesSectionFieldsList = new ArrayList<String>();
+	static ArrayList<String> leadDetailsPageCommunicationPreferencesSectionFieldsList = new ArrayList<String>();
 
-	public void communicationPreferencesFields() {
-		communicationPreferencesSectionFieldsList.add("Email Options");
-		communicationPreferencesSectionFieldsList.add("Call Options");
-		communicationPreferencesSectionFieldsList.add("Mail Options");
+	public void leadDetailsPageCommunicationPreferencesSectionFieldsList() {
+		leadDetailsPageCommunicationPreferencesSectionFieldsList.add("Email Options");
+		leadDetailsPageCommunicationPreferencesSectionFieldsList.add("Call Options");
+		leadDetailsPageCommunicationPreferencesSectionFieldsList.add("Mail Options");
 
-		System.out.println("Communication Preferences fields are " +communicationPreferencesSectionFieldsList);
+		System.out.println("Communication Preferences fields are " +leadDetailsPageCommunicationPreferencesSectionFieldsList);
 	}
-	static ArrayList<String> prospectRequirementsSectionFieldsList = new ArrayList<String>();
+	static ArrayList<String> leadDetailsPageProspectRequirementsSectionFieldsList = new ArrayList<String>();
 
-	public void prospectRequirementsFields() {
-		prospectRequirementsSectionFieldsList.add("Preferred Property Type");
-		prospectRequirementsSectionFieldsList.add("Total Size");
-		prospectRequirementsSectionFieldsList.add("Preferred Property Sub-Type");
-		prospectRequirementsSectionFieldsList.add("Unit of Measure");
-		prospectRequirementsSectionFieldsList.add("Total # of Units");
-		prospectRequirementsSectionFieldsList.add("Requirement Details");
-		prospectRequirementsSectionFieldsList.add("Unit of Comparison");
-		prospectRequirementsSectionFieldsList.add("Existing Lease Expiration");
-		prospectRequirementsSectionFieldsList.add("Existing Termination/Break Option");
+	public void leadDetailsPageProspectRequirementsSectionFieldsList() {
+		leadDetailsPageProspectRequirementsSectionFieldsList.add("Preferred Property Type");
+		leadDetailsPageProspectRequirementsSectionFieldsList.add("Total Size");
+		leadDetailsPageProspectRequirementsSectionFieldsList.add("Preferred Property Sub-Type");
+		leadDetailsPageProspectRequirementsSectionFieldsList.add("Unit of Measure");
+		leadDetailsPageProspectRequirementsSectionFieldsList.add("Total # of Units");
+		leadDetailsPageProspectRequirementsSectionFieldsList.add("Requirement Details");
+		leadDetailsPageProspectRequirementsSectionFieldsList.add("Unit of Comparison");
+		leadDetailsPageProspectRequirementsSectionFieldsList.add("Existing Lease Expiration");
+		leadDetailsPageProspectRequirementsSectionFieldsList.add("Existing Termination/Break Option");
 
-		System.out.println("Prospect Requirements fields are " + prospectRequirementsSectionFieldsList);
+		System.out.println("Prospect Requirements fields are " + leadDetailsPageProspectRequirementsSectionFieldsList);
 	}
+	
+	static ArrayList<String> leadDetailsPageAdditionalInformationSectionFieldsList = new ArrayList<String>();
 
-	static ArrayList<String> customLinksSectionFieldsList = new ArrayList<String>();
-
-	public void customLinksFields() {
-		customLinksSectionFieldsList.add("LinkedIn");
-		customLinksSectionFieldsList.add("Google Maps");
-		customLinksSectionFieldsList.add("Google News");
-
-		System.out.println("Custom Links fields are " +customLinksSectionFieldsList);
+	public void leadDetailsPageAdditionalInformationSectionFieldsList() {
+		leadDetailsPageAdditionalInformationSectionFieldsList.add("Assistant Name");
+		leadDetailsPageAdditionalInformationSectionFieldsList.add("Assistant Phone");
+		leadDetailsPageAdditionalInformationSectionFieldsList.add("Assistant Email");	
+		leadDetailsPageAdditionalInformationSectionFieldsList.add("Unmapped Fields");
+		leadDetailsPageAdditionalInformationSectionFieldsList.add("Next Steps");
+			
+		
+		System.out.println("Additional Information fields are " +leadDetailsPageAdditionalInformationSectionFieldsList);
 	}
-	static ArrayList<String> additionalInformationFieldsList = new ArrayList<String>();
+	
+	static ArrayList<String> leadDetailsPageCustomLinksSectionFieldsList = new ArrayList<String>();
 
-	public void additionalInformationFields() {
-		additionalInformationFieldsList.add("Assistant Name");
-		additionalInformationFieldsList.add("Unmapped Fields");
-		additionalInformationFieldsList.add("Assistant Phone");
-		additionalInformationFieldsList.add("Next Steps");
-		additionalInformationFieldsList.add("Assistant Email");		
-		System.out.println("Additional Information fields are " +additionalInformationFieldsList);
+	public void leadDetailsPageCustomLinksSectionFieldsList() {
+		leadDetailsPageCustomLinksSectionFieldsList.add("LinkedIn Profile");
+		leadDetailsPageCustomLinksSectionFieldsList.add("Google Maps");
+		leadDetailsPageCustomLinksSectionFieldsList.add("Google News");
+
+		System.out.println("Custom Links fields are " +leadDetailsPageCustomLinksSectionFieldsList);
 	}
-
-	static ArrayList<String> contactInformationFieldsList = new ArrayList<String>();
-
-	public void contactInformationFields() {
-		contactInformationFieldsList.add("Direct Line");
-		contactInformationFieldsList.add("Mobile");
-		contactInformationFieldsList.add("Main Phone");
-		contactInformationFieldsList.add("Email");
-		contactInformationFieldsList.add("Fax");
-
-		System.out.println("Contact Information fields are " +contactInformationFieldsList);
-	}
-
-	static ArrayList<String> leadsDeatilsPageHeadersList = new ArrayList<String>();
-
-	public void leadsDetailsPageHeaders() {
-		leadsDeatilsPageHeadersList.add("Tagging");
-		leadsDeatilsPageHeadersList.add("Lead Information");
-		leadsDeatilsPageHeadersList.add("Address Information");
-		leadsDeatilsPageHeadersList.add("Contact Information");
-		leadsDeatilsPageHeadersList.add("Communication Preferences");
-		leadsDeatilsPageHeadersList.add("Prospect Requirements");
-		leadsDeatilsPageHeadersList.add("Additional Information");
-		leadsDeatilsPageHeadersList.add("System Information");
-		leadsDeatilsPageHeadersList.add("Custom Links");
-
-		System.out.println("Contact Details Page headers are:: " +leadsDeatilsPageHeadersList);
-	}
+	
 
 	public void leadsVerifyLandingPage() {
-		Utility_Functions.xWaitForElementPresent(driver, leads, 3);
-		Utility_Functions.xClick(driver, leads, true);
+		selectALeadInRandom();
 		
-		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
-		Utility_Functions.xClick(driver, recentlyViewed, true);
-		Utility_Functions.xWaitForElementPresent(driver, allLeads, 3);
-		Utility_Functions.xClick(driver, allLeads, true);
-		Utility_Functions.timeWait(3);
-		List<WebElement> leadsList = driver.findElements(By.xpath(
-				"//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup']"));
-		Utility_Functions.xWaitForElementPresent(driver, leadsList, 3);
-		Utility_Functions.xclickRandomElement(leadsList);
-		Utility_Functions.timeWait(3);
-		Utility_Functions.xScrollWindow(driver);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xScrollWindowTop(driver);
-		Utility_Functions.timeWait(2);
-		
-		List<WebElement> contactDetailsPageHeadersList = driver.findElements(By.xpath("//span[contains(@class,'header-title')]"));
-		int count0 = 0, i0 = 0;
-		String fieldsArray0[] = new String[contactDetailsPageHeadersList.size()];
-		System.out.println(contactDetailsPageHeadersList.size());
+		/***** Validating the Header Sections *****/
 
-		try {
-			leadsDetailsPageHeaders();
-			for (WebElement element0 : contactDetailsPageHeadersList) {
-				System.out.println(element0.getText());
-				fieldsArray0[i0] = element0.getText();
-				if (fieldsArray0[i0].contains(leadsDeatilsPageHeadersList.get(i0))) {
-					report.updateTestLog("Verify Leads Landing Page",
-							"Leads Details  page is having the " + fieldsArray0[i0] + " Headers ",
-							Status.PASS);
-					count0++;
-				}
-				i0++;
-			}
-			System.out.println(count0);
-			if (count0 != 9) {
-				report.updateTestLog("Verify Leads Landing Page",
-						"All sections are not present in the Leads Details Page", Status.FAIL);
-			} else {
-				System.out.println("All sections are present::"+leadsDeatilsPageHeadersList);
-				report.updateTestLog("Verify Leads Landing Page",
-						"All sections are present in the Leads Details Page", Status.PASS);
-			}
-			leadsDeatilsPageHeadersList.clear();
-		} catch (Exception e) {
-			System.out.println("All sections are not present in the Leads Details Page:::" + e.getMessage());
+		List<WebElement> leadDetailPageSectionHeadersPresentOnPage = driver.findElements(By.xpath("//h3[contains(@class,'section__title') and contains(@class,'section-header')]"));
+		List<String> leadDetailPageSectionHeadersFound = new ArrayList<String>();
+		for (WebElement element : leadDetailPageSectionHeadersPresentOnPage) {
+			leadDetailPageSectionHeadersFound.add(element.getText());
 		}
 
-		List<WebElement> leadInformationFieldsList = driver.findElements(
-				By.xpath("//h3//span[text()='Lead Information']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
-		int count = 0, i = 0;
-		String fieldsArray[] = new String[leadInformationFieldsList.size()];
-		System.out.println(leadInformationFieldsList.size());
+		leadsDetailsPageHeadersSectionsList();
+		List<String> sectionHeadersCount = Utility_Functions.xValidatePickListValuesPage(leadsDetailsPageHeadersSectionsList, leadDetailPageSectionHeadersFound, "Lead Details Page Section Headers");
+		if (sectionHeadersCount.size() == 0) {
+			report.updateTestLog("Lead Details Page",
+					"Lead Details Page has all the expected header sections", Status.PASS);
+		} else {
+			report.updateTestLog("Lead Details Page",
+					"Lead Details Page does not have all the expected header sections", Status.FAIL);
+		}
 
-		try {
-			leadsDetailsPageFields();
-			for (WebElement element :leadInformationFieldsList) {
-				System.out.println(element.getText());
-				fieldsArray[i] = element.getText();
-				if (fieldsArray[i].equalsIgnoreCase(leadsDetailsPageFieldsList.get(i))) {
-					report.updateTestLog("Verify Leads Landing Page",
-							" Lead Information section is having the " + fieldsArray[i] + " fields ",
-							Status.PASS);
-					count++;
-				}
-				i++;
-			}
-			leadsDetailsPageFieldsList.clear();
-			System.out.println(count);
-			if (count != 17) {
-				report.updateTestLog("Verify Leads Landing Page",
-						"All fields are not present in the Lead Information Section", Status.FAIL);
-			} else {
+		/***** Validating Lead Information Section *****/
 
-				report.updateTestLog("Verify Leads Landing Page",
-						"All fields are present in the Lead Information Section", Status.PASS);
-			}
+		List<WebElement> leadDetailPageLeadInformationSectionFieldsOnPage = driver.findElements(By.xpath("//h3//span[text()='Lead Information']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
+		List<String> leadDetailPageLeadInformationSectionFieldsFound = new ArrayList<String>();	
+		for (WebElement element : leadDetailPageLeadInformationSectionFieldsOnPage)
+		{
+			leadDetailPageLeadInformationSectionFieldsFound.add(element.getText());
+		}
+
+		leadDetailsPageLeadInformationSectionFieldsList();
+		List<String> sectionFieldsCount = Utility_Functions.xValidatePickListValuesPage(leadDetailsPageLeadInformationSectionFieldsList, leadDetailPageLeadInformationSectionFieldsFound, "Lead Details Page - Lead Information Section Fields");
+		if (sectionFieldsCount.size() == 0) {
+			report.updateTestLog("Lead Details Page - Lead Information Section",
+					"Lead Information section has all the expected fields", Status.PASS);
+		} else {
+			report.updateTestLog("Lead Details Page - Lead Information Section",
+					"Lead Information section does not have all the expected fields", Status.FAIL);
+		}
+		
+		/***** Validating Address Information Section *****/
+
+		List<WebElement> leadDetailPageAddressInformationSectionFieldsOnPage = driver.findElements(By.xpath("//h3//span[text()='Address Information']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
+		List<String> leadDetailPageAdressInformationSectionFieldsFound = new ArrayList<String>();	
+		for (WebElement element : leadDetailPageAddressInformationSectionFieldsOnPage)
+		{
+			leadDetailPageAdressInformationSectionFieldsFound.add(element.getText());
+		}
+
+		leadDetailsPageAddressInformationSectionFieldsList();
+		sectionFieldsCount = Utility_Functions.xValidatePickListValuesPage(leadDetailsPageAddressInformationSectionFieldsList, leadDetailPageAdressInformationSectionFieldsFound, "Lead Details Page - Address Information Section Fields");
+		if (sectionFieldsCount.size() == 0) {
+			report.updateTestLog("Lead Details Page - Address Information Section",
+					"Address Information Section has all the expected fields", Status.PASS);
+		} else {
+			report.updateTestLog("Lead Details Page - Address Information Section",
+					"Address Information Section does not have all the expected fields", Status.FAIL);
+		}
+		
+		/***** Validating Contact Information Section *****/
+
+		List<WebElement> leadDetailPageContactInformationSectionFieldsOnPage = driver.findElements(By.xpath("//h3//span[text()='Contact Information']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
+		List<String> leadDetailPageContactInformationSectionFieldsFound = new ArrayList<String>();	
+		for (WebElement element : leadDetailPageContactInformationSectionFieldsOnPage)
+		{
+			leadDetailPageContactInformationSectionFieldsFound.add(element.getText());
+		}
+
+		leadDetailsPageContactInformationSectionFieldsList();
+		sectionFieldsCount = Utility_Functions.xValidatePickListValuesPage(leadDetailsPageContactInformationSectionFieldsList, leadDetailPageContactInformationSectionFieldsFound, "Lead Details Page - Contact Information Section Fields");
+		if (sectionFieldsCount.size() == 0) {
+			report.updateTestLog("Lead Details Page - Contact Information Section",
+					"Contact Information Section has all the expected fields", Status.PASS);
+		} else {
+			report.updateTestLog("Lead Details Page - Contact Information Section",
+					"Contact Information Section does not have all the expected fields", Status.FAIL);
+		}
+		
+		/***** Validating Communication Preferences Section *****/
+
+		List<WebElement> leadDetailPageCommunicationPreferencesSectionFieldsOnPage = driver.findElements(By.xpath("//h3//span[text()='Communication Preferences']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
+		List<String> leadDetailPageCommunicationPreferencesSectionFieldsFound = new ArrayList<String>();	
+		for (WebElement element : leadDetailPageCommunicationPreferencesSectionFieldsOnPage)
+		{
+			leadDetailPageCommunicationPreferencesSectionFieldsFound.add(element.getText());
+		}
+
+		leadDetailsPageCommunicationPreferencesSectionFieldsList();
+		sectionFieldsCount = Utility_Functions.xValidatePickListValuesPage(leadDetailsPageCommunicationPreferencesSectionFieldsList, leadDetailPageCommunicationPreferencesSectionFieldsFound, "Lead Details Page - Communication Preferences Section Fields");
+		if (sectionFieldsCount.size() == 0) {
+			report.updateTestLog("Lead Details Page - Communication Preferences Section",
+					"Communication Preferences Section has all the expected fields", Status.PASS);
+		} else {
+			report.updateTestLog("Lead Details Page - Communication Preferences Section",
+					"Communication Preferences Section does not have all the expected fields", Status.FAIL);
+		}
+		
+		/***** Validating Prospect Requirements Section *****/
+
+		List<WebElement> leadDetailPageProspectRequirementsSectionFieldsOnPage = driver.findElements(By.xpath("//h3//span[text()='Prospect Requirements']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
+		List<String> leadDetailPageProspectRequirementsSectionFieldsFound = new ArrayList<String>();	
+		for (WebElement element : leadDetailPageProspectRequirementsSectionFieldsOnPage)
+		{
+			leadDetailPageProspectRequirementsSectionFieldsFound.add(element.getText());
+		}
+
+		leadDetailsPageProspectRequirementsSectionFieldsList();
+		sectionFieldsCount = Utility_Functions.xValidatePickListValuesPage(leadDetailsPageProspectRequirementsSectionFieldsList, leadDetailPageProspectRequirementsSectionFieldsFound, "Lead Details Page - Prospect Requirements Section Fields");
+		if (sectionFieldsCount.size() == 0) {
+			report.updateTestLog("Lead Details Page - Prospect Requirements Section",
+					"Prospect Requirements Section has all the expected fields", Status.PASS);
+		} else {
+			report.updateTestLog("Lead Details Page - Prospect Requirements Section",
+					"Prospect Requirements Section does not have all the expected fields", Status.FAIL);
+		}
 			
-		} catch (Exception e) {
-			System.out.println("All fields are not present in the Lead Information Section:::" + e.getMessage());
+		/***** Validating Additional Information Section *****/
+
+		List<WebElement> leadDetailPageAdditionalInformationSectionFieldsOnPage = driver.findElements(By.xpath("//h3//span[text()='Additional Information']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
+		List<String> leadDetailPageAdditionalInformationSectionFieldsFound = new ArrayList<String>();	
+		for (WebElement element : leadDetailPageAdditionalInformationSectionFieldsOnPage)
+		{
+			leadDetailPageAdditionalInformationSectionFieldsFound.add(element.getText());
 		}
-		List<WebElement> addressInformationFieldsList = driver.findElements(
-				By.xpath("//h3//span[text()='Address Information']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
-		int count1 = 0, i1 = 0;
-		String fieldsArray1[] = new String[addressInformationFieldsList.size()];
-		System.out.println(addressInformationFieldsList.size());
 
-		try {
-			addressInformationFields();
-			for (WebElement element1 :addressInformationFieldsList) {
-				System.out.println(element1.getText());
-				fieldsArray1[i1] = element1.getText();
-				if (fieldsArray1[i1].equalsIgnoreCase(addressInformationSectionFieldsList.get(i1))) {
-					report.updateTestLog("Verify Leads Landing Page",
-							" Address Information Section is having the " + fieldsArray1[i1] + " fields ",
-							Status.PASS);
-					count1++;
-				}
-				i1++;
-			}
-			System.out.println(count1);
-			if (count1!= 1) {
-				report.updateTestLog("Verify Leads Landing Page",
-						"All fields are not present in the Address Information Section", Status.FAIL);
-			} else {
-
-				report.updateTestLog("Verify Leads Landing Page",
-						"All fields are present in the Address Information Section", Status.PASS);
-			}
-			addressInformationSectionFieldsList.clear();
-		} catch (Exception e) {
-			System.out.println("All fields are not present in the Address Information Section:::" + e.getMessage());
+		leadDetailsPageAdditionalInformationSectionFieldsList();
+		sectionFieldsCount = Utility_Functions.xValidatePickListValuesPage(leadDetailsPageAdditionalInformationSectionFieldsList, leadDetailPageAdditionalInformationSectionFieldsFound, "Lead Details Page - Additional Information Section Fields");
+		if (sectionFieldsCount.size() == 0) {
+			report.updateTestLog("Lead Details Page - Additional Information Section",
+					"Additional Information Section has all the expected fields", Status.PASS);
+		} else {
+			report.updateTestLog("Lead Details Page - Additional Information Section",
+					"Additional Information Section does not have all the expected fields", Status.FAIL);
 		}
 		
-		Utility_Functions.xScrollWindowOnce(driver);
-		Utility_Functions.timeWait(2);
-		
-		List<WebElement> communicationPreferencesFieldsList = driver.findElements(
-				By.xpath("//h3//span[text()='Communication Preferences']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
-		int count3 = 0, i3 = 0;
-		String fieldsArray3[] = new String[communicationPreferencesFieldsList.size()];
-		System.out.println(communicationPreferencesFieldsList.size());
+		/***** Validating Custom Links Section *****/
 
-		try {
-			communicationPreferencesFields();
-			for (WebElement element3 :communicationPreferencesFieldsList) {
-				System.out.println(element3.getText());
-				fieldsArray3[i3] = element3.getText();
-				if (fieldsArray3[i3].equalsIgnoreCase(communicationPreferencesSectionFieldsList.get(i3))) {
-					report.updateTestLog("Verify Leads Landing Page",
-							" Communication Preferences is having the " + fieldsArray3[i3] + " fields ",
-							Status.PASS);
-					count3++;
-				}
-				i3++;
-			}
-			System.out.println(count3);
-			if (count3!= 3) {
-				report.updateTestLog("Verify Leads Landing Page",
-						"All fields are not present in the Communication Preferences Section", Status.FAIL);
-			} else {
+		List<WebElement> leadDetailPageCustomLinksSectionFieldsOnPage = driver.findElements(By.xpath("//h3//span[text()='Custom Links']/ancestor::h3/parent::div/div[1]//a"));
+		List<String> leadDetailPageCustomLinksSectionFieldsFound = new ArrayList<String>();	
+		for (WebElement element : leadDetailPageCustomLinksSectionFieldsOnPage)
+		{
+			leadDetailPageCustomLinksSectionFieldsFound.add(element.getText());
+		}
 
-				report.updateTestLog("Verify Leads Landing Page",
-						"All fields are present in the Communication Preferences Section", Status.PASS);
-			}
-			communicationPreferencesSectionFieldsList.clear();
-		} catch (Exception e) {
-			System.out.println("All fields are not present in the Communication Preferences Section:::" + e.getMessage());
+		leadDetailsPageCustomLinksSectionFieldsList();
+		sectionFieldsCount = Utility_Functions.xValidatePickListValuesPage(leadDetailsPageCustomLinksSectionFieldsList, leadDetailPageCustomLinksSectionFieldsFound, "Lead Details Page - Custom Links Section Fields");
+		if (sectionFieldsCount.size() == 0) {
+			report.updateTestLog("Lead Details Page - Custom Links Section",
+					"Custom Links Section has all the expected fields", Status.PASS);
+		} else {
+			report.updateTestLog("Lead Details Page - Custom Links Section",
+					"Custom Links Section does not have all the expected fields", Status.FAIL);
 		}
 		
-		Utility_Functions.xScrollWindowOnce(driver);
-		Utility_Functions.timeWait(2);
-		
-		List<WebElement> prospectRequirementsFieldsList = driver.findElements(
-				By.xpath("//h3//span[text()='Prospect Requirements']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
-		int count4 = 0, i4 = 0;
-		String fieldsArray4[] = new String[prospectRequirementsFieldsList.size()];
-		System.out.println(prospectRequirementsFieldsList.size());
-
-		try {
-			prospectRequirementsFields();
-			for (WebElement element4 :prospectRequirementsFieldsList) {
-				System.out.println(element4.getText());
-				fieldsArray4[i4] = element4.getText();
-				if (fieldsArray4[i4].equalsIgnoreCase(prospectRequirementsSectionFieldsList.get(i4))) {
-					report.updateTestLog("Verify Leads Landing Page",
-							" Communication Preferences is having the " + fieldsArray4[i4] + " fields ",
-							Status.PASS);
-					count4++;
-				}
-				i4++;
-			}
-			System.out.println(count4);
-			if (count4 >= 7) {
-				report.updateTestLog("Verify Leads Landing Page",
-						"All fields are present in the Communication Preferences Section", Status.PASS);
-			} else {
-
-				report.updateTestLog("Verify Leads Landing Page",
-						"All fields are not present in the Communication Preferences Section", Status.FAIL);
-			}
-			prospectRequirementsSectionFieldsList.clear();
-		} catch (Exception e) {
-			System.out.println("All fields are not present in the Communication Preferences Section:::"+ e.getMessage());
-		}
-		List<WebElement> additionalInformationList = driver.findElements(By.xpath("//h3//span[text()='Additional Information']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
-		int count5 = 0, i5 = 0,j=0;
-		String fieldsArray5[] = new String[additionalInformationList.size()];
-		System.out.println(additionalInformationList.size());
-		try {
-			additionalInformationFieldsList.clear();
-			additionalInformationFields();
-			while(j<additionalInformationList.size()) {
-				for (WebElement element5 : additionalInformationList) {
-					fieldsArray5[i5] = element5.getText();
-					if (fieldsArray5[i5].contains(additionalInformationFieldsList.get(j))) {
-						System.out.println("Additional Information fields are " + element5.getText());
-						report.updateTestLog("Verify Leads Landing Page ", element5.getText() + "labels  present in the Additional Information fields ", Status.PASS);
-						count5++;
-					}
-					i5++;
-				}
-				i5=0;
-				j++;
-			}
-			System.out.println(count5);
-			if (count5!= 5) {
-				report.updateTestLog("Verify Leads Landing Page",
-						"All fields are not present in the Additional Information section", Status.FAIL);
-			} else {
-				report.updateTestLog("Verify Leads Landing Page",
-						"All fields are present in the Additional Information section", Status.PASS);
-			}
-			
-		} catch (Exception e) {
-			System.out.println("All fields are not present in the Additional Information section:::" + e.getMessage());
-		}
-		additionalInformationFieldsList.clear();
-		Utility_Functions.xScrollWindowOnce(driver);
-		Utility_Functions.timeWait(2);
-		
-		List<WebElement> contactInformationList = driver.findElements(By.xpath("//h3//span[text()='Contact Information']/ancestor::h3/parent::div/div[1]//span[contains(@class,'test-id__field-label')and text()!='']"));
-		int count6 = 0, i6 = 0,j2=0;
-		String fieldsArray6[] = new String[contactInformationList.size()];
-		System.out.println(contactInformationList.size());
-		try {
-			contactInformationFields();
-			while(j2<contactInformationList.size()) {
-				for (WebElement element6 :contactInformationList) {
-					fieldsArray6[i6] = element6.getText();
-					if (fieldsArray6[i6].contains(contactInformationFieldsList.get(j2))) {
-						System.out.println("Contact Information fields are " + element6.getText());
-						report.updateTestLog("Verify Leads Landing Page ", element6.getText() + "labels  present in the Account Detailed Page ", Status.PASS);
-						count6++;
-					}
-					i6++;
-				}
-				i6=0;
-				j2++;
-			}
-			System.out.println(count6);
-			if (count6!= 5) {
-				report.updateTestLog("Verify Leads Landing Page","All fields are not present in the Contact Information section", Status.FAIL);
-			} else {
-				report.updateTestLog("Verify Leads Landing Page","All fields are present in the Contact Information section", Status.PASS);
-			}
-		} catch (Exception e) {
-			System.out.println("All fields are not present in the Contact Information section:::"+ e.getMessage());
-		}
-		contactInformationFieldsList.clear();
-		List<WebElement> customLinksList = driver.findElements(By.xpath("//h3//span[text()='Custom Links']/ancestor::h3/parent::div/div[1]//a"));
-		int count7 = 0, i7 = 0,j1=0;
-		String fieldsArray7[] = new String[customLinksList.size()];
-		System.out.println(customLinksList.size());
-		try {
-			customLinksFields();
-			while(j1<customLinksList.size()) {
-				for (WebElement element7 : customLinksList) {
-					fieldsArray7[i7] = element7.getText();
-					if (fieldsArray7[i7].contains(customLinksSectionFieldsList.get(j1))) {
-						System.out.println("Custom Link fields are " + element7.getText());
-						report.updateTestLog("Verify Leads Landing Page ", element7.getText() + "labels  present in the Account Detailed Page ", Status.PASS);
-						count7++;
-					}
-					i7++;
-				}
-				i7=0;
-				j1++;
-			}
-			System.out.println(count7);
-			if (count7 != 3) {
-				report.updateTestLog("Verify Leads Landing Page","All fields are not present in the Custom Links section", Status.FAIL);
-			} else {
-				report.updateTestLog("Verify Leads Landing Page","All fields are present in the Custom Links section", Status.PASS);
-			}
-			customLinksSectionFieldsList.clear();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
 	}
 	/**
 	 * Validating the Lead Sharing functionality
@@ -3317,5 +3195,5 @@ public class LeadsPage extends ReusableLibrary {
 			
 	    }
 	    	
-}
+} 
 
