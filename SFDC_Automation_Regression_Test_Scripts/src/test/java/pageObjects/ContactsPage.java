@@ -4,19 +4,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
 import com.sforce.soap.partner.SaveResult;
 import com.sforce.soap.partner.sobject.SObject;
 import com.sforce.ws.ConnectionException;
-
 import pagesAPI.AccountsFunctions;
 import pagesAPI.EstablishConnection;
 import pagesAPI.SearchTextSOQL;
@@ -45,7 +44,8 @@ public class ContactsPage extends ReusableLibrary {
 	AccountsFunctions accountFunctions = new AccountsFunctions(scriptHelper);
 	SF_UtilityFunctions sf_UtilityFunctions = new SF_UtilityFunctions(scriptHelper);
 	SaveResult[] results;
-
+	
+	
 	/**
 	 * This function navigates to Contact Tab
 	 * 
@@ -202,7 +202,7 @@ public class ContactsPage extends ReusableLibrary {
 
 	/**
 	 * This is a API function validating new Contact Page Layout for
-	 * ABAMER,OBAMER,OBAPAC,CMAPAC,ADMIN profiles
+	 * ABAMER,OBAMER,OBAPAC,CMAPAC,ADMIN profiles (uses above function)
 	 * 
 	 * @author Swapna
 	 */
@@ -248,7 +248,8 @@ public class ContactsPage extends ReusableLibrary {
 	 */
 	public String getContactPageLayout(String recordType) {
 		String pageLayout = null;
-
+		
+		System.out.println("Contact RecordType :::"+recordType);
 		// CBREEMEADataAdmin
 		if ((dataTable.getData("General_Data", "TC_ID").contains("EMEA"))
 				&& (dataTable.getData("General_Data", "TC_ID").contains("Data"))
@@ -324,136 +325,196 @@ public class ContactsPage extends ReusableLibrary {
 	 * @returns MapObj (SectionName and FieldNames)
 	 * @author Swapna
 	 */
-	public Map<String, List<String>> getContactPageElements(String pageLayout) {
-		Map<String, List<String>> mapObj = new HashMap<String, List<String>>();
-		List<String> ContactLabelList = null;
+		Map<String, List<String>> pgSectionElements = new HashMap<String, List<String>>();
+		String pgFollowButton = null;
+		List<String> pgActionButtons = new ArrayList<String>();
+		List<String> pgHeaderFields = new ArrayList<String>();
+		Map<String, List<String>> pgRelatedSections = new HashMap<String, List<String>>();
+		Map<String, List<String>> pgActivityComponents = new HashMap<String, List<String>>();
+		
+/*	public void getContactPageLayoutElements2(String pageLayout) {
+		String ContactKey = null;
+		String[] ContactFields = null;
+		List<String> ContactFieldList = null;
+		System.out.println("Contact Page Layout ::"+ pageLayout);
 		if (pageLayout == "CBRE Broker - Contact Layout") {
+		  for(int i=1;i<7;i++){
+			  ContactKey = pageProperties.getProperty("BRContactLayoutSection"+i);
+			ContactFields = pageProperties.getProperty("BRContactLayoutFields"+i).split(",");
+			ContactFieldList = Utility_Functions.InitiateListValues(ContactFields);
+			pgSectionElements.put(ContactKey, ContactFieldList);
+		   }
+		 }
+		
+		ContactFields = pageProperties.getProperty("BRContactLayoutActionButtons").split(",");
+		pgActionButtons = Utility_Functions.InitiateListValues(ContactFields);
+		
+		ContactFields = pageProperties.getProperty("BRContactPageHeaderFields").split(",");
+		pgHeaderFields = Utility_Functions.InitiateListValues(ContactFields);
+		
+		for(int i=1;i<6;i++){
+			ContactKey = pageProperties.getProperty("BRContactLayoutRelatedTab"+i);
+			ContactFields = pageProperties.getProperty("BRContactLayoutRelatedSections"+i).split(",");
+			ContactFieldList = Utility_Functions.InitiateListValues(ContactFields);
+			pgSectionElements.put(ContactKey, ContactFieldList);
+		   }
+			
+			ContactKey = pageProperties.getProperty("BRContactLayoutActivityComponentTab1");
+			ContactFields = pageProperties.getProperty("BRContactLayoutActivityComponents1").split(",");
+			ContactFieldList = Utility_Functions.InitiateListValues(ContactFields);
+			pgActivityComponents.put(ContactKey, ContactFieldList);
+		 
+	 }
+	*/
+	
+	public void getContactPageLayoutElements(String pageLayout) {
+			List<String> ContactLabelList = null;
+		System.out.println("Contact Page Layout ::"+ pageLayout);
+		if (pageLayout == "CBRE Broker - Contact Layout") {
+			pgSectionElements.put("Tagging", ContactLabelList);
+			
 			String[] values1 = { "Name", "Middle Name", "Nickname", "Title", "Department", "Influence Level",
 					"Reports To", "Do Not Call", "CreatedByCountry", "Fee Share Partner", "Account Name", "Direct Line",
 					"Mobile", "Main Phone", "Email", "Status", "Inactive Contact", "Contact Record Type" };
 			ContactLabelList = Utility_Functions.InitiateListValues(values1);
-			mapObj.put("Contact Information", ContactLabelList);
+			pgSectionElements.put("Contact Information", ContactLabelList);
 
 			String[] values2 = { "Email Options", "Mail Options", "Call Options" };
 			ContactLabelList = Utility_Functions.InitiateListValues(values2);
-			mapObj.put("Communication Preferences", ContactLabelList);
+			pgSectionElements.put("Communication Preferences", ContactLabelList);
 
 			String[] values3 = { "Address" };
 			ContactLabelList = Utility_Functions.InitiateListValues(values3);
-			mapObj.put("Address Information", ContactLabelList);
+			pgSectionElements.put("Address Information", ContactLabelList);
 
 			String[] values4 = { "Fax", "Preferred Comm Method", "Comm Email Sent", "Reason for Inactivating",
 					"Inactivation Date", "Assistant Name", "Assistant Phone", "Assistant Email" };
 			ContactLabelList = Utility_Functions.InitiateListValues(values4);
-			mapObj.put("Additional Information", ContactLabelList);
+			pgSectionElements.put("Additional Information", ContactLabelList);
 
 			String[] values5 = { "LinkedIn", "Google Maps", "Google Search" };
 			ContactLabelList = Utility_Functions.InitiateListValues(values5);
-			mapObj.put("Custom Links", ContactLabelList);
+			pgSectionElements.put("Custom Links", ContactLabelList);
 
 			String[] values6 = { "Contact Owner", "Last Manually Modified Date", "Created By",
 					"Last Manually Modified By" };
 			ContactLabelList = Utility_Functions.InitiateListValues(values6);
-			mapObj.put("System Information", ContactLabelList);
-
+			pgSectionElements.put("System Information", ContactLabelList);
+			
+			//page Action button values
+			String[] values7 = {"Edit","Clone","New Private Note","New Personal Information","Move Contact"};
+			pgActionButtons =  Utility_Functions.InitiateListValues(values7);
+			
+			//page Header fields
+			String[] values8 = {"Title","Account Name","Phone(2)","Email","Contact Owner"};
+			pgHeaderFields =  Utility_Functions.InitiateListValues(values8);
+			
+			//page Related sections
+			String[] values9 = {"Opportunities","Property Relationships"};
+			pgRelatedSections.put("Opportunities & Comps", Utility_Functions.InitiateListValues(values9));
+			
+			String[] values10 = {"Opportunities","Property Relationships"};
+			pgRelatedSections.put("Opportunities & Comps", Utility_Functions.InitiateListValues(values10));
+			
+			ContactLabelList = null;
+			pgRelatedSections.put("Preferences & Marketing",ContactLabelList);
+			
+			pgRelatedSections.put("Enquiry & Offers",ContactLabelList);
+			
+			String[] values11 = {"Activities","Contact Relationships","Related Accounts","Private Notes","Notes","Files"};
+			pgRelatedSections.put("Other Related", Utility_Functions.InitiateListValues(values11));
+			
+			String[] values12 = {"News"};
+			pgRelatedSections.put("News", Utility_Functions.InitiateListValues(values12));
+			
+			String[] values13 = {"New Task","New Event","Activity Timeline"};
+			pgActivityComponents.put("Activity", Utility_Functions.InitiateListValues(values13));
+			
 		} else if (pageLayout == "CBRE APAC & JP - Contact Layout") {
-			String[] values1 = { "Name", "Title", "Department", "Contact Profile", "Contact Type", "Account Name",
-					"Email", "Direct Line", "Mobile", "Influence Level" };
+			String[] values1 = { "Name", "Account Name", "Title", "Email", "Department",
+					"Direct Line", "Contact Profile", "Mobile", "Contact Type", "Influence Level" };
 			ContactLabelList = Utility_Functions.InitiateListValues(values1);
-			mapObj.put("Contact Information", ContactLabelList);
+			pgSectionElements.put("Contact Information", ContactLabelList);
 
 			String[] values2 = { "Address" };
 			ContactLabelList = Utility_Functions.InitiateListValues(values2);
-			mapObj.put("Address Information", ContactLabelList);
+			pgSectionElements.put("Address Information", ContactLabelList);
 
 			String[] values3 = { "Preferred Comm Method", "Email Options", "Mail Options", "Call Options",
 					"Exclude Reason", "Excluded On", "Excluded By" };
 			ContactLabelList = Utility_Functions.InitiateListValues(values3);
-			mapObj.put("Communication Preferences", ContactLabelList);
+			pgSectionElements.put("Communication Preferences", ContactLabelList);
 
 			String[] values4 = { "Nickname", "Reports To", "Assistant Name", "Assistant Phone", "Assistant Email" };
 			ContactLabelList = Utility_Functions.InitiateListValues(values4);
-			mapObj.put("Additional Information", ContactLabelList);
-
+			pgSectionElements.put("Additional Information", ContactLabelList);
+			
+			ContactLabelList = null;
+			pgSectionElements.put("Tagging", ContactLabelList);
+			
 			String[] values5 = { "Created By", "Last Manually Modified Date", "Last Manually Modified By", "Status",
 					"Reason for Inactivating", "Inactivation Date", "Inactive Contact" };
 			ContactLabelList = Utility_Functions.InitiateListValues(values5);
-			mapObj.put("System Information", ContactLabelList);
+			pgSectionElements.put("System Information", ContactLabelList);
+			
+			//page Action button values
+			String[] values7 = {"Edit","Clone","New Private Note","New Contact Relationship","Move Contact"};
+			pgActionButtons =  Utility_Functions.InitiateListValues(values7);
+			
+			//page Header fields
+			String[] values8 = {"Title","Account Name","Phone(2)","Email","Contact Owner"};
+			pgHeaderFields =  Utility_Functions.InitiateListValues(values8);
+			
+			//page Related sections
+			String[] values9 = {"Opportunities","Property Relationships","Space Relationships","Comp Relationships"};
+			pgRelatedSections.put("Opportunities & Comps", Utility_Functions.InitiateListValues(values9));
+			
+			String[] values10 = {"Opportunities","Property Relationships"};
+			pgRelatedSections.put("Opportunities & Comps", Utility_Functions.InitiateListValues(values10));
+			
+			String[] values11 = {"Subscriptions","Property Preferences","Campaign History"};
+			pgRelatedSections.put("Preferences & Marketing",Utility_Functions.InitiateListValues(values11));
+			
+			String[] values12 = {"Enquiries (Enquiry Contact)"};
+			pgRelatedSections.put("Enquiry & Offers",Utility_Functions.InitiateListValues(values12));
+			
+			String[] values13 = {"Activities","Contact Relationships","Related Accounts","Private Notes","Notes","Files"};
+			pgRelatedSections.put("Other Related", Utility_Functions.InitiateListValues(values13));
+			
+			String[] values14 = {"News"};
+			pgRelatedSections.put("News", Utility_Functions.InitiateListValues(values14));	
 		}
-		return mapObj;
 	}
 
 	/**
-	 * This function validates Field Labels under each section in Contact Page
-	 * Layout
-	 * 
-	 * @param MapObj
-	 *            (SectionName and FieldNames)
-	 * @author Swapna
-	 */
-	public void verifySectionElementsInPage(Map<String, List<String>> mapObj) {
-		WebElement Field = null;
-		String sectionName = null;
-		Map<String, List<String>> mapObject = mapObj;
-		for (Map.Entry<String, List<String>> entry : mapObject.entrySet()) {
-			Utility_Functions.xScrollWindowTop(driver);
-			sectionName = entry.getKey();
-			System.out.println("Key " + entry.getKey());
-			System.out.println("Value " + entry.getValue() + " __");
-			if (entry.getValue() != null || entry.getValue().size() > 0) {
-				System.out.println("Key " + entry.getValue().size());
-				for (String fieldName : entry.getValue()) {
-					By Field_Under_SectionInPopup = By.xpath("//span[text()='" + sectionName
-							+ "']/parent::h3/following-sibling::div//span[string-length(text()) > 0 and text()='"
-							+ fieldName + "']");
-					By Field_Under_SectionInDetail = By.xpath("//span[text()='" + sectionName
-							+ "']/ancestor::h3/following-sibling::div//span[string-length(text()) > 0 and text()='"
-							+ fieldName + "']");
-					try {
-						Utility_Functions.xScrollWindowToElement(driver,
-								driver.findElement(Field_Under_SectionInPopup));
-					} catch (Exception e) {
-						Utility_Functions.xScrollWindowToElement(driver,
-								driver.findElement(Field_Under_SectionInDetail));
-					}
-				}
-				System.out.println("Verified Field Names : " + entry.getValue() + " are present under the section : "
-						+ sectionName + " ::::passed");
-			} else {
-				By sectionName_InPopup = By.xpath("//span[text()='" + sectionName + "']/parent::h3/span");
-				By sectionName_InDetail = By.xpath("//span[text()='" + sectionName + "']/ancestor::h3//span");
-				try {
-					Utility_Functions.xScrollWindowToElement(driver, driver.findElement(sectionName_InPopup));
-					Field = driver.findElement(sectionName_InPopup);
-				} catch (Exception e) {
-					Utility_Functions.xScrollWindowToElement(driver, driver.findElement(sectionName_InDetail));
-					Field = driver.findElement(sectionName_InDetail);
-				}
-			  System.out.println("label is present on the Contact Page ..."+ Field.getText());
-			}
-		}
-		System.out.println("Test completed successfully!!");
-	}
-
-	/**
-	 * This function validates Contact Page Layout
+	 * This function validates Contact Page Layout based on the parameter Record Type
 	 * 
 	 * @param recordType
 	 * @author Swapna
+	 * @throws Exception 
 	 */
-	public void validateContactPageLayout(String recordType) {
+	public void validateContactPageLayout(String recordType) throws Exception {
+		pgSectionElements.clear();
+		pgActionButtons.clear();
+		pgHeaderFields.clear();
+		pgRelatedSections.clear();
+		pgActivityComponents.clear();
+		pgFollowButton = null;
 		String pageLayout = getContactPageLayout(recordType);
-		Map<String, List<String>> sectionfields = getContactPageElements(pageLayout);
-		verifySectionElementsInPage(sectionfields);
-		if (pageLayout == "CBRE APAC & JP - Contact Layout" || pageLayout == "CBRE Broker - Contact Layout") {
-			// verify section name is present
-			By sectionName = By.xpath("//span[text()='Tagging']/ancestor::h3");
-			Utility_Functions.xScrollWindowToElement(driver, driver.findElement(sectionName));
-			if (driver.findElement(sectionName).isDisplayed()) {
-				System.out.println("Verified 'Tagging' Section Name is present ::::passed");
-			}
+		getContactPageLayoutElements(pageLayout);
+		String contactId = createContact(recordType);
+		sf_UtilityFunctions.openDetailPage(contactId);
+		String contactName = searchSOQL.fetchRecordFieldValue("Name", "Select Name from Contact where Id = '"+contactId+"'");
+		Assert.assertTrue(sf_UtilityFunctions.getPageHeaderTitle("Contact").contains(contactName));
+		sf_UtilityFunctions.verifyAllSectionElementsInPage(pgSectionElements);
+		if(pgFollowButton != null){
+			Assert.assertTrue(driver.findElement(By.xpath("//span[text()='Follow']/parent::button")).isDisplayed());
 		}
-
+		sf_UtilityFunctions.validatePageActionButtons(pgActionButtons);
+		sf_UtilityFunctions.validatePageHeaderFields(pgHeaderFields);
+		sf_UtilityFunctions.validatePageRelatedSection(pgRelatedSections);
+		sf_UtilityFunctions.validatePageActivityComponents(pgActivityComponents);
+		System.out.println("Test completed successfully!!");
 	}
 
 	/**
@@ -465,7 +526,7 @@ public class ContactsPage extends ReusableLibrary {
 		try {
 			String note = "Test Note" + Utility_Functions.xRandomFunction();
 			selectExistingContact(contactRecordType);
-			String contactName = sf_UtilityFunctions.getPageHeader("Contact");
+			String contactName = sf_UtilityFunctions.getPageHeaderTitle("Contact");
 			System.out.println("Selected Contact ::" + contactName);
 			sf_UtilityFunctions.selectRelatedTab("Other Related");
 			sf_UtilityFunctions.verifyRelatedListPresent("Notes");
@@ -568,10 +629,10 @@ public class ContactsPage extends ReusableLibrary {
 	 * @author Swapna
 	 * @throws Exception
 	 */
-	@FindBy(xpath = "//span[text()='Name']/parent::div/following-sibling::div/span/span")
-	WebElement contactFName;
-	@FindBy(xpath = "//span[text()='Name']/parent::div/following-sibling::div/span/span")
-	WebElement contactName;
+		@FindBy(xpath = "//span[text()='First Name']/parent::label/following-sibling::input")
+		WebElement contactFName;
+		@FindBy(xpath = "//span[text()='Name']/parent::div/following-sibling::div/span/span")
+		WebElement contactName;
 
 	public void verifyUpdationOfContactRecord() throws Exception {
 		try {
@@ -616,6 +677,39 @@ public class ContactsPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, savePrivateTag, 2);
 		savePrivateTag.click();
 	}
+	
+	
+	/**
+	 * This function verifies contacts on a Account are hyperlink
+	 * 
+	 * @author Swapna
+	 */
+	public void validateHyperlinkContacts() {
+	  try{
+		 String accountID = searchSOQL.fetchRecordFieldValueAdminLogin("Id",
+				"SELECT Id FROM Account where Number_of_Contacts__c > 1.0 limit 1 offset 9");
+		 if(accountID != null){
+			sf_UtilityFunctions.openDetailPage(accountID);
+		 }
+		 sf_UtilityFunctions.selectRelatedTab("Related");
+		 int count = 0;
+		 List<WebElement> contactsList = driver.findElements(By
+					.xpath("//img[@title='Contact']/ancestor::span/following-sibling::a[contains(@href,'003')]"));
+		 for (WebElement element : contactsList) {
+			report.updateTestLog("Verify Contact hyperlink",
+				"Contacts associated to this Account are :::" + element.getText(), Status.PASS);
+    		count++;
+	      }
+	     if (count == 0) {
+			report.updateTestLog("Verify Contact hyperlink",
+				"Contacts hyperlinks are not present in Related section for Account", Status.FAIL);
+		  }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+
 
 	public void activityLightningTimeline() {
 	} // related to activity

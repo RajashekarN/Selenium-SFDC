@@ -278,15 +278,7 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 		sfAccountsPage.verifyAccountsNewActivityType();
 	}
 
-	/**
-	 * Validating the New Accounts, Leads and Private Tags
-	 * 
-	 * @author Ramya
-	 *
-	 */
-	public void bc_verifyAccountsLeadsAndPrivateTags() throws InterruptedException {
-		sfAccountsPage.verifyAccountsLeadsAndPrivateTags();
-	}
+
 
 	/**
 	 * Validating the view Hierarchy for the existing Accounts

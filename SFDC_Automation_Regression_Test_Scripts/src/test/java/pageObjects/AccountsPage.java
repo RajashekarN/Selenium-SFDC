@@ -1169,15 +1169,12 @@ public class AccountsPage extends ReusableLibrary {
 					Status.FAIL);
 		}
 
-		WebElement newAccountPage = driver
-				.findElement(By.xpath("//h2[text()='New Account: CBRE Account']/../../div[2]"));
-
-		List<WebElement> accountLabels = newAccountPage
-				.findElements(By.xpath(".//*[contains(@class,'form-element__label')]/span[1]"));
+		List<WebElement> accountLabels = driver
+				.findElements(By.xpath("//h2[text()='New Account: CBRE Account']/../../div[2]//*[contains(@class,'form-element__label')]"));
 
 		int accountLabelsCount = Utility_Functions.xValidateFieldsPresentPage(Arrays.asList(APACAccountLabels),
 				accountLabels, "APAC account labels ");
-		if (accountLabelsCount != APACAccountLabels.length) {
+		if (accountLabelsCount >= APACAccountLabels.length) {
 			report.updateTestLog("CMAPAC Detail age ", "CMAPAC - ALL Account Details page Labels  are not displaying::",
 					Status.FAIL);
 		}
@@ -3290,22 +3287,7 @@ public class AccountsPage extends ReusableLibrary {
 	 */
 
 	public void verifyNewActivityPageLayout() {
-		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
-		Utility_Functions.xClick(driver, menu_Accounts, true);
-		report.updateTestLog("Verify New Activity Page Layout ", "Accounts is Displayed ", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
-		Utility_Functions.xClick(driver, recentlyViewed, true);
-		report.updateTestLog("Verify New Activity Page Layout ", "Recently viewed Accounts are Displayed ",
-				Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, allAccounts, 3);
-		Utility_Functions.xClick(driver, allAccounts, true);
-		Utility_Functions.timeWait(3);
-		report.updateTestLog("Verify New Activity Page Layout ", "All Accounts are Displayed ", Status.PASS);
-		List<WebElement> accountNamesList = driver.findElements(By.xpath(
-				".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'001')]"));
-		Utility_Functions.xclickOnFirstElementfromList(accountNamesList);
-		Utility_Functions.timeWait(3);
-		report.updateTestLog("Verify New Activity Page Layout ", "The Account is Displayed ", Status.PASS);
+		accountsFunction();
 		Utility_Functions.xWaitForElementPresent(driver, addActivity, 3);
 		Utility_Functions.xClick(driver, addActivity, true);
 		report.updateTestLog("Verify New Activity Page Layout ", "The New Activity in the Details page is Displayed ",
@@ -3847,44 +3829,7 @@ public class AccountsPage extends ReusableLibrary {
 
 	}
 
-	/**
-	 * Validating the Accounts, Leads and Private Tags
-	 * 
-	 * @author Ramya
-	 *
-	 */
-	public void verifyAccountsLeadsAndPrivateTags() {
-		try {
-			Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
-			Utility_Functions.xClick(driver, menu_More, true);
-			Utility_Functions.timeWait(1);
-		} catch (Exception e) {
-			// Utility_Functions.xWaitForElementPresent(driver, more, 3);
-			// Utility_Functions.xClick(driver, more, true);
-			// Utility_Functions.timeWait(1);
-		}
-		try {
-			Utility_Functions.xWaitForElementPresent(driver, more_privateTags, 3);
-			Utility_Functions.xClick(driver, more_privateTags, true);
-		} catch (Exception e) {
-			Utility_Functions.xWaitForElementPresent(driver, more_PrivateTags, 2);
-			Utility_Functions.xClick(driver, more_PrivateTags, true);
-		}
-		Utility_Functions.xWaitForElementPresent(driver, newAccounts, 3);
-		Utility_Functions.xClick(driver, newAccounts, true);
-		report.updateTestLog("Verify Accounts Leads And PrivateTags ", "Verifying New Private Tags is Displayed ",
-				Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, privateTagName, 3);
-		Utility_Functions.xSendKeys(driver, privateTagName,
-				"Test Automation Priavate Tag_" + Utility_Functions.xGenerateAlphaNumericString());
-		report.updateTestLog("Verify Accounts Leads And PrivateTags ", "Verifying the Private Tag name is entered ",
-				Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, saveNewPrivateTag, 3);
-		Utility_Functions.xClick(driver, saveNewPrivateTag, true);
-		report.updateTestLog("Verify Accounts Leads And PrivateTags ", "Verifying the Private Tag is saved ",
-				Status.PASS);
-
-	}
+	
 
 	/**
 	 * Validating the Accounts Activity Timeline

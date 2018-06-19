@@ -155,12 +155,11 @@ public class BC_Salesforce_ContactsPage extends ReusableLibrary {
 	 */	
 
 	public void bc_hyperlinkContacts() {
-		//sfContactsPage.validateHyperlinkContacts();		
+		sfContactsPage.validateHyperlinkContacts();		
 	}
 
 	/**
 	 * Validating the all the fields in the new contact page
-	 * 
 	 * @author Ramya
 	 *
 	 */	
@@ -181,9 +180,10 @@ public class BC_Salesforce_ContactsPage extends ReusableLibrary {
 	 * Validating the Contacts Landing page
 	 * 
 	 * @author Ramya
+	 * @throws Exception 
 	 *
 	 */	
-	public void bc_contactsVerifyLandingPage()throws InterruptedException{
+	public void bc_contactsVerifyLandingPage()throws Exception{
 		sfContactsPage.validateContactPageLayout("CBRE Client Contact");
 	}
 	/**
@@ -234,9 +234,4 @@ public class BC_Salesforce_ContactsPage extends ReusableLibrary {
 	public void bc_contactTagging()throws InterruptedException{
 		sfContactsPage.contactTagging();
 	}
-	
-	
-	
-	
-
 }
