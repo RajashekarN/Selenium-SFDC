@@ -865,7 +865,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//a[(@title='India')]")
 	WebElement opportunityCountryValue;
 
-	@FindBy(xpath = "//span[contains(text(),'Asset Type')]/parent::span/following-sibling::div//a[contains(@aria-label,'Asset Type')]")
+	@FindBy(xpath = "//*[@class='required ']//*[text()='Asset Type']//parent::span/following-sibling::div//a")
 	WebElement assetType;
 
 	@FindBy(xpath = "//a[@title='Office']")
@@ -1829,6 +1829,29 @@ public class OpportunitiesPage extends ReusableLibrary {
 		}
 		Utility_Functions.xClick(driver, saveNewOpportunity, true);
 		report.updateTestLog("Opportunity Created", "Clicked on Opportunity save button successfully:::", Status.PASS);
+	
+		try {		
+			List<WebElement> accountErrorMessageList = driver.findElements(By.xpath("//div[@class='message errorM3']//li[text()='Account Name: You must select a value']"));
+			int count=0;
+			for(WebElement element: accountErrorMessageList) {
+				if(count==0) {
+					System.out.println("Skipping the first element");
+				} else if((count==1) && (element.getText().contains("Account Name"))) {
+						accountName.clear();
+						Utility_Functions.xSendKeys(driver, accountName, sAccountName);
+						Utility_Functions.timeWait(1);
+						accountName.sendKeys(Keys.TAB);
+						Utility_Functions.timeWait(1);
+						accountName.sendKeys(Keys.ENTER);
+						Utility_Functions.xClick(driver, saveNewOpportunity, true);
+						report.updateTestLog("Opportunity Created", "Clicked on Opportunity save button successfully:::", Status.PASS);
+						break;
+				}			
+				count++;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
 		return value;
 	}
 
@@ -3626,6 +3649,19 @@ public class OpportunitiesPage extends ReusableLibrary {
 			Utility_Functions.xWaitForElementPresent(driver, managementAnnualRevenue, 3);
 			Utility_Functions.xClick(driver, managementAnnualRevenue, true);
 			Utility_Functions.xSendKeys(driver, managementAnnualRevenue, "2,00,000.00");
+			Utility_Functions.xWaitForElementPresent(driver, save, 3);
+			Utility_Functions.xClick(driver, save, true);
+			Utility_Functions.timeWait(1);
+			Utility_Functions.xWaitForElementPresent(driver, related, 3);
+			report.updateTestLog("Verify Opportunity Edit/Clone", "Opportunity edited and saved successfully",
+					Status.PASS);
+		} else if (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_VASAPACBroker")) {
+			Utility_Functions.timeWait(2);
+			/*Utility_Functions.xScrollWindowToElement(driver, assetType);
+			Utility_Functions.xWaitForElementPresent(driver, assetType, 3);*/
+			Utility_Functions.xScrollWindow(driver);
+	        Utility_Functions.xClick(driver,assetType , true);
+			sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "Education");
 			Utility_Functions.xWaitForElementPresent(driver, save, 3);
 			Utility_Functions.xClick(driver, save, true);
 			Utility_Functions.timeWait(1);

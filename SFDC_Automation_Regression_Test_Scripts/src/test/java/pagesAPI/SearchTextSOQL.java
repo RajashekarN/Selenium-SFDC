@@ -177,7 +177,7 @@ public class SearchTextSOQL extends ReusableLibrary {
 			establishConnection.establishConnection();
 			String tableName = table;
 			//String query = "select Id, Name from " + tableName + " limit 1 offset " + offsetValue;
-			String query = "select Id, Name from " + tableName + " limit 1 offset 1";
+			String query = "select Id, Name from " + tableName + " limit 1 offset 1" + offsetValue;
 			QueryResult result = EstablishConnection.connection.query(query);
 			if (result.getSize() > 0) {
 				boolean done = false;
