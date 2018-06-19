@@ -882,13 +882,13 @@ public class LeadsPage extends ReusableLibrary {
 		String sCompanyName = searchTextSOQL.fetchRecordFieldValueAdminLogin("Name", queryAccount);
 		
 		driver.switchTo().defaultContent();
-		Utility_Functions.xWaitForElementPresent(driver, firstName, 5);
+		Utility_Functions.xWaitForElementVisible(driver, firstName, 8);
 		String sFirstName = Utility_Functions.xRandomFunction() + "_" + dataTable.getData("General_Data", "First Name");
 		String sLastName =  Utility_Functions.xRandomFunction() + "_" +  dataTable.getData("General_Data", "Last Name");
 		Utility_Functions.xSendKeys(driver, firstName, sFirstName);
-		Utility_Functions.xWaitForElementPresent(driver, lastName, 3);
+		Utility_Functions.xWaitForElementVisible(driver, lastName, 3);
 		Utility_Functions.xSendKeys(driver, lastName, sLastName);
-		Utility_Functions.xWaitForElementPresent(driver, company, 3);
+		Utility_Functions.xWaitForElementVisible(driver, company, 3);
 		Utility_Functions.xSendKeys(driver, company, sCompanyName);
 		if(dataTable.getData("General_Data", "TC_ID").contains("LeadsConvertPageWithEmail")) {
 			Utility_Functions.xWaitForElementPresent(driver, selectPreferedPropertyType, 2);
