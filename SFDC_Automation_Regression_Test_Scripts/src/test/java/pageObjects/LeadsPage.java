@@ -702,8 +702,9 @@ public class LeadsPage extends ReusableLibrary {
 		try {
 			if(leadsList.isEmpty()) {
 				System.out.println("Recently Viewed List is empty");
+				Utility_Functions.xWaitForElementVisible(driver, recentlyViewed, 5);
 				Utility_Functions.xClick(driver, recentlyViewed, true);
-				Utility_Functions.xWaitForElementVisible(driver, allLeadsMenu, 3);
+				Utility_Functions.xWaitForElementVisible(driver, allLeadsMenu, 5);
 				Utility_Functions.xClick(driver, allLeadsMenu, true);	
 				Utility_Functions.xWaitForElementVisible(driver, allLeadNames, 12);	
 				sf_UtilityFunctions.selectExistingObjectRecord("Name");
@@ -944,7 +945,10 @@ public class LeadsPage extends ReusableLibrary {
 	public void createGreenspaceLead() {
 		createLeadFunction();
 		Utility_Functions.timeWait(1);
-		Utility_Functions.xSelectDropdownByIndex(leadSource, 6);
+		Utility_Functions.xWaitForElementVisible(driver, leadSource, 5);
+		Utility_Functions.xClick(driver, leadSource, true);
+		Utility_Functions.timeWait(1);
+		Utility_Functions.xClick(driver, driver.findElement(By.xpath("//div[contains(@class,'select-options')]//a[@title='Greenspace']")), true);
 		Utility_Functions.timeWait(1);
 		if(leadStatusField.getText().equals("Open")) {
 			report.updateTestLog("Verify Lead Status Field","By default the Lead Status Field is having the option as 'Open'" ,Status.PASS);
@@ -1382,7 +1386,6 @@ public class LeadsPage extends ReusableLibrary {
 		personalInformationFieldsList.add("Title\n*");
 		personalInformationFieldsList.add("Lead");
 		personalInformationFieldsList.add("Account");
-		personalInformationFieldsList.add("SPOC");
 		personalInformationFieldsList.add("Contact");
 		personalInformationFieldsList.add("Property");
 		personalInformationFieldsList.add("Direct Line");
@@ -1394,6 +1397,7 @@ public class LeadsPage extends ReusableLibrary {
 
 	public void leadsVerifyPrivateNotePersonalInformation() {
 		selectALeadInRandom();
+		String currentUrl = driver.getCurrentUrl();
 		Utility_Functions.xWaitForElementPresent(driver, related, 3);
 		Utility_Functions.xClick(driver, related, true);
 		Utility_Functions.xWaitForElementVisible(driver, new_PrivateNotes, 3);
@@ -1441,7 +1445,7 @@ public class LeadsPage extends ReusableLibrary {
 			report.updateTestLog("New Private Note Personal Information Page Fields", "New Private Note Personal Information Page does not have all the expected fields", Status.FAIL);
 		}
 		Utility_Functions.xClick(driver, savePersonalInformation, true);
-		Utility_Functions.xWaitForElementVisible(driver, viewAllButton, 3);
+		Utility_Functions.xWaitForElementVisible(driver, viewAllButton, 5);
 		Utility_Functions.xClick(driver, viewAllButton, true);
 		Utility_Functions.xWaitForElementPresent(driver, privateNotesList, 5);
 		for (WebElement element : privateNotesList) {
