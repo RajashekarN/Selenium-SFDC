@@ -3829,44 +3829,7 @@ public class AccountsPage extends ReusableLibrary {
 
 	}
 
-	/**
-	 * Validating the Accounts, Leads and Private Tags
-	 * 
-	 * @author Ramya
-	 *
-	 */
-	public void verifyAccountsLeadsAndPrivateTags() {
-		try {
-			Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
-			Utility_Functions.xClick(driver, menu_More, true);
-			Utility_Functions.timeWait(1);
-		} catch (Exception e) {
-			// Utility_Functions.xWaitForElementPresent(driver, more, 3);
-			// Utility_Functions.xClick(driver, more, true);
-			// Utility_Functions.timeWait(1);
-		}
-		try {
-			Utility_Functions.xWaitForElementPresent(driver, more_privateTags, 3);
-			Utility_Functions.xClick(driver, more_privateTags, true);
-		} catch (Exception e) {
-			Utility_Functions.xWaitForElementPresent(driver, more_PrivateTags, 2);
-			Utility_Functions.xClick(driver, more_PrivateTags, true);
-		}
-		Utility_Functions.xWaitForElementPresent(driver, newAccounts, 3);
-		Utility_Functions.xClick(driver, newAccounts, true);
-		report.updateTestLog("Verify Accounts Leads And PrivateTags ", "Verifying New Private Tags is Displayed ",
-				Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, privateTagName, 3);
-		Utility_Functions.xSendKeys(driver, privateTagName,
-				"Test Automation Priavate Tag_" + Utility_Functions.xGenerateAlphaNumericString());
-		report.updateTestLog("Verify Accounts Leads And PrivateTags ", "Verifying the Private Tag name is entered ",
-				Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, saveNewPrivateTag, 3);
-		Utility_Functions.xClick(driver, saveNewPrivateTag, true);
-		report.updateTestLog("Verify Accounts Leads And PrivateTags ", "Verifying the Private Tag is saved ",
-				Status.PASS);
-
-	}
+	
 
 	/**
 	 * Validating the Accounts Activity Timeline
