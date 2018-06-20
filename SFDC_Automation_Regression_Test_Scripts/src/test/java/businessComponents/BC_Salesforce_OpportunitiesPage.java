@@ -101,17 +101,6 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 		sfOpportunitiesPage.opportunitySharing();
 	}
 
-	/*	*//**
-			 * Validating the required fields at SalesStage in Opportunities
-			 * 
-			 * @author Vishnuvardhan
-			 *
-			 *//*
-			 * public void bc_opportunityBrokerProfile() throws
-			 * InterruptedException {
-			 * sfOpportunitiesPage.requiredFields_SalesStage_Opportunities(); }
-			 */
-
 	/**
 	 * Validating the manage Opportunity split functionality
 	 * 
@@ -120,7 +109,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void bc_opportunitySplitFunctionality() throws InterruptedException {
-		sfOpportunitiesPage.opportunitySplitFunctionality();
+		opportunitySplit.opportunitySplitFunctionality();
 	}
 
 	/**
@@ -1103,7 +1092,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	 *
 	 */
 	public void bc_opportunitySplitPercentage() {
-		opportunitySplit.opportunitySplitPercentage();
+		opportunitySplit.opportunitySplitFunctionality();
 	}
 	
 	
