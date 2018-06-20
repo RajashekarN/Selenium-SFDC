@@ -3838,22 +3838,7 @@ public class AccountsPage extends ReusableLibrary {
 	 *
 	 */
 	public void verifyAccountsActivityTimeline() {
-		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
-		Utility_Functions.xClick(driver, menu_Accounts, true);
-		report.updateTestLog("Verify Accounts Activity Timeline", "Accounts is Displayed ", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
-		Utility_Functions.xClick(driver, recentlyViewed, true);
-		report.updateTestLog("Verify Accounts Activity Timeline", "Recently viewed Accounts are Displayed ",
-				Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, allAccounts, 3);
-		Utility_Functions.xClick(driver, allAccounts, true);
-		Utility_Functions.timeWait(3);
-		report.updateTestLog("Verify Accounts Activity Timeline", "All accounts are displayed successfully:::",
-				Status.PASS);
-		List<WebElement> accountNamesList = driver.findElements(By.xpath(
-				".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'001')]"));
-
-		Utility_Functions.xclickRandomElement(accountNamesList);
+		accountsFunction();
 		Utility_Functions.xWaitForElementPresent(driver, addActivity, 4);
 		Utility_Functions.xClick(driver, addActivity, true);
 		tasksPage.verifyNewActivityPageLayout();
