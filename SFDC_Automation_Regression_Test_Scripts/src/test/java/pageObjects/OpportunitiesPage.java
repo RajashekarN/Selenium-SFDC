@@ -1864,7 +1864,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	
 	
 	public void verifyQuickCreateOpportunityPageAssetServices() {
-		selectNewOpportunity();
+	/*	selectOpportunity();
 		report.updateTestLog("Verify Quick Create Opportunity Page Asset Services ",
 				"Verifying the Opportunities page is displayed", Status.PASS);
 		report.updateTestLog("Verify Quick Create Opportunity Page Asset Services   ",
@@ -1876,7 +1876,18 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, reasonForLoss, 3);
 		Utility_Functions.xClick(driver, reasonForLoss, true);
 		Utility_Functions.xWaitForElementPresent(driver, reasonForLossValuesPickList, 3);
-		Utility_Functions.xValidateFieldsPresentonPage(reasonForLossPickList, reasonForLossValuesPickList, "Reason for loss pick list values for Asset Services AMER are:::");
+		Utility_Functions.xValidateFieldsPresentonPage(reasonForLossPickList, reasonForLossValuesPickList, "Reason for loss pick list values for Asset Services AMER are:::");*/
+		EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
+		ReasonForLossPickListAssetServices();
+		List<String> reasonForLossPickList = establishConnection.establishMetaDataConnection("Opportunity", "APAC_Asset_Services", "Reason_for_Loss__c");
+		List<String> reasonForLossListValues = new ArrayList<String>();
+		reasonForLossListValues = Utility_Functions.xValidatePickListValuesPage(reasonForLossPickList, reasonForLossPickList, "Reason for loss pick list values");
+		if (reasonForLossListValues.size() != 0) {
+			report.updateTestLog("Verify Opportunity",
+					"All the values are not present in the reason for loss Pick List:::"+ reasonForLossListValues, Status.FAIL);
+		} else {
+			report.updateTestLog("Verify Opportunity", "All the values are present in the Management Award To Pick List ", Status.PASS);
+		}
 	}
 
 	/**
