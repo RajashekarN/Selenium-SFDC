@@ -1,6 +1,7 @@
 package pageObjects;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -115,7 +116,15 @@ public class EventPage  extends ReusableLibrary {
 	}
 	
 	public void verifyNewEventPageLayout() {
-		List<WebElement> createNewEventPageLayoutFieldsOnPage = driver.findElements(By.xpath("//label/span[text()='Subject']/following::input[1]//ancestor::section[1]//legend[contains(@class,'form-element__label uiLegend')]"
+		String[] eventPageLabels = {"Subject","Activity Type", "Type", "Location","Start","End","All-Day Event","Name","Assigned To","Description","Related To","Send Notification Email" };
+		List<WebElement> eventPageLabelsLocator = driver.findElements(By.xpath("//div[@data-aura-class='forcePageBlockItem forcePageBlockItemEdit']//*[contains(@class,'form-element')]/span[1]"));
+		int eventPageLabelsCount = Utility_Functions.xValidateFieldsPresentPage(Arrays.asList(eventPageLabels),
+				eventPageLabelsLocator, "Opportunity - New Custom event page labels");
+		if (eventPageLabelsCount <= eventPageLabels.length) {
+			report.updateTestLog("Opportunity - new custom events page labels", "Opportunity - new custom events page labels are not displaying::",
+					Status.FAIL);
+		}  
+		/*List<WebElement> createNewEventPageLayoutFieldsOnPage = driver.findElements(By.xpath("//label/span[text()='Subject']/following::input[1]//ancestor::section[1]//legend[contains(@class,'form-element__label uiLegend')]"
 																						+ "|//label/span[text()='Subject']/following::input[1]//ancestor::section[1]//span[contains(@class,'label inputLabel')]/span"
 																						+ "|//label/span[text()='Subject']/following::input[1]//ancestor::section[1]//label[contains(@class,'label inputLabel uiLabel-left')]"));
 		List<String> createNewEventPageLayoutFieldsFound = new ArrayList<String>();
@@ -142,7 +151,7 @@ public class EventPage  extends ReusableLibrary {
 		}
 		else {
 			report.updateTestLog("Create New Event Page Fields", "Create New Event Page does not have all the expected fields", Status.FAIL);
-		}
+		}*/
 	}
 	
 	/**

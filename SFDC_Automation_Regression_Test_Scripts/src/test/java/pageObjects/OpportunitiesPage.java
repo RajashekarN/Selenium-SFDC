@@ -240,6 +240,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//ul[@class='tabs__nav']//a[@title='New Event']")
 	WebElement newEventOpp;
 
+	@FindBy(xpath="//span[text()='Add']")
+    WebElement newEventAddButton; 
+	
 	/**
 	* Validating the Quick create Opportunity page from the Opportunity tab with existing Account
 	* 
@@ -1779,8 +1782,13 @@ public class OpportunitiesPage extends ReusableLibrary {
 		selectOpportunity();
 		Utility_Functions.xWaitForElementPresent(driver, newEventOpp, 3);
 		Utility_Functions.xClick(driver, newEventOpp, true);
+		Utility_Functions.timeWait(3);
+		if (newEventAddButton.isDisplayed()) {
+			Utility_Functions.xWaitForElementPresent(driver, newEventAddButton, 3);
+			Utility_Functions.xClick(driver, newEventAddButton, true);
+		}		
 		eventPage.verifyNewEventPageLayout();
-	}
+	} 
 
 	/**
 	 * Validating the Quick create Opportunity page from the Opportunity tab
