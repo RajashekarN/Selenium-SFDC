@@ -1445,6 +1445,7 @@ public class LeadsPage extends ReusableLibrary {
 			report.updateTestLog("New Private Note Personal Information Page Fields", "New Private Note Personal Information Page does not have all the expected fields", Status.FAIL);
 		}
 		Utility_Functions.xClick(driver, savePersonalInformation, true);
+		Utility_Functions.timeWait(3);
 		Utility_Functions.xWaitForElementVisible(driver, viewAllButton, 5);
 		Utility_Functions.xClick(driver, viewAllButton, true);
 		Utility_Functions.xWaitForElementPresent(driver, privateNotesList, 5);
