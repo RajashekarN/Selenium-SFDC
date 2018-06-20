@@ -343,7 +343,7 @@ public class OpportunityPageLayout extends ReusableLibrary {
 		} else if(dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) {
 			OpportunityPageHeaders();
 			opportunityHeaders = establishConnection.establishMetaDataConnectionPageHeaders("Opportunity", 6);
-			opportunityHeadersList = Utility_Functions.xValidatePickListValuesPage(OpportunityPageHeadersList, opportunityHeaders, "Opportunity page Header values");
+			opportunityHeadersList = Utility_Functions.xValidatePickListValuesPage(opportunityHeaders, opportunityHeaders, "Opportunity page Header values");
 		} else if(dataTable.getData("General_Data", "TC_ID").contains("CMAMERPS")) {
 			OpportunityPageHeadersCapitalMarkets();
 			opportunityHeaders = establishConnection.establishMetaDataConnectionPageHeaders("Opportunity", 7);
@@ -377,7 +377,7 @@ public class OpportunityPageLayout extends ReusableLibrary {
 		}
 		List<String> opportunityLabelsList = new ArrayList<String>();
 		OpportunityPageFieldLabels();
-		opportunityLabelsList = Utility_Functions.xValidatePickListValuesPage(opportunityLabels, OpportunityPageLabelsList, "Opportunity page field values");
+		opportunityLabelsList = Utility_Functions.xValidatePickListValuesPage(opportunityLabels, opportunityLabels, "Opportunity page field values");
 		if (opportunityLabelsList.size()!=0) {
 			report.updateTestLog("Verify Opportunity Field Labels", "All the labels are not present in the Opportunity Page:::" + opportunityLabelsList, Status.FAIL);
 		} else {
