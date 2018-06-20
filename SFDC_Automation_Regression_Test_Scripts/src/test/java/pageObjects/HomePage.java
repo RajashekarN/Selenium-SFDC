@@ -10,6 +10,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
+
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
@@ -495,72 +497,33 @@ public class HomePage extends ReusableLibrary {
 	 * @author Ramya
 	 *
 	 */
-
+	
 	public void validateHomePageTabsForAPACCapitalMarkets() {
-		tabsList.clear();
-		homePageTabsList();
-		Utility_Functions.timeWait(2);
+		try{
 		if ((dataTable.getData("General_Data", "TC_ID").contains("CMAPACManagerHomeVerifyingTabsOnHomePage"))
 				|| (dataTable.getData("General_Data", "TC_ID").contains("CMAPACBrokerHomeVerifyingTabsOnHomePage"))) {
-			List<WebElement> homePageTabsList = driver
-					.findElements(By.xpath("//div[contains(@class,'slds-context-bar')]//span[@class='slds-truncate']"));
-			int i1 = 0, j = 0, countLabelList = 0;
-			String[] labelTexts = new String[tabsList.size()];
-			System.out.println("Number of Tabs found :"+homePageTabsList.size()+" , "+"  Number of TabNames in List :"+tabsList.size() );
-			for (WebElement element : homePageTabsList) {
-				labelTexts[i1] = element.getText();
-				if (labelTexts[i1].contains(tabsList.get(j))) {
-					System.out.println("Verify Home Page TabNames For APACCapitalMarkets" + element.getText());
-					report.updateTestLog("Verify Home Page TabNames For APACCapitalMarkets",
-							element.getText() + "::::label list is present in Home Page TabNames For APACCapitalMarkets", Status.PASS);
-					countLabelList++;
-				}
-				if (countLabelList == 11)
-					break;
-				i1++;
-				j++;
+			List<String> ExpectedtabNamesList =  new ArrayList<String>();
+			List<String> ActualtabNamesList = new ArrayList<String>();
+			driver.navigate().refresh();
+			Utility_Functions.timeWait(2);
+			String[] tabNames = {"Home","Calendar","Chatter","Groups","Leads","Accounts","Contacts","Opportunities","Reports","Dashboards","Private Notes","Properties","Private Tags","Bulk Tagging","Project Enquiries","Property Preferences","Marketing Lists","Subscriptions","Campaigns","Cases"};
+			ExpectedtabNamesList = Utility_Functions.InitiateListValues(tabNames);
+			driver.findElement(By.xpath("//a[contains(@role,'button')]/span[text()='More']")).click();
+			List<WebElement> homePageTabs = driver
+					.findElements(By.xpath("//nav[@role='navigation']//a[contains(@href,'lightning')]/span"));
+			for(int i =0;i<homePageTabs.size();i++){
+				if(homePageTabs.get(i).getText().length()>0)
+					ActualtabNamesList.add(homePageTabs.get(i).getText());
 			}
-			System.out.println("Home Page Tabs List Count:::" + countLabelList);
-			if (countLabelList >= 11) {
-				System.out.println("All the Tabs are present in Home Page ");
-				report.updateTestLog("Verify Home Page Tabs", "All the Tabs are present in Home Page", Status.PASS);
-			} else if (countLabelList < 11) {
-				report.updateTestLog("Verify Home Page Tabs", "All the Tabs are not present in Home Page", Status.FAIL);
-			}
-			/*Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
-			Utility_Functions.xClick(driver, menu_More, true);*/
-			sf_UtilityFunctions.oneAppNavigationTab("More");
-			List<WebElement> homePageMoreTabsList = driver.findElements(By.xpath("//one-tmp-menu-item[@class='slds-dropdown__item']//span/span"));
-			moreTabsList.clear();
-			homePageMoreTabsList();
-			System.out.println("Number of More Tabs found ::::" + homePageMoreTabsList.size()+" , "+ "  Number of More TabNames in List :"+moreTabsList.size());
-			int i2 = 0, j1 = 0, countLabelListMore = 0;
-			String[] labelTextsMore = new String[moreTabsList.size()];
-			for (WebElement element : homePageMoreTabsList) {
-				labelTextsMore[i2] = element.getText();
-				if (labelTextsMore[i2].contains(moreTabsList.get(j1))) {
-					System.out.println("Verify Home Page TabNames For APACCapitalMarkets" + element.getText());
-					report.updateTestLog("Verify Home Page TabNames For APACCapitalMarkets",
-							element.getText() + "::::label list is present in Home Page TabNames For APACCapitalMarkets", Status.PASS);
-					countLabelListMore++;
-				}
-				if (countLabelListMore == 7)
-					break;
-				i2++;
-				j1++;
-			}
-			System.out.println("Home Page Tabs List Count:::" + countLabelListMore);
-			if (countLabelListMore >= 7) {
-				System.out.println("All the Tabs are present in Home Page ");
-				report.updateTestLog("Verify Home Page Tabs", "All the Tabs are present in Home Page", Status.PASS);
-			} else if (countLabelListMore < 7) {
-				report.updateTestLog("Verify Home Page Tabs", "All the Tabs are not present in Home Page", Status.FAIL);
-			}
-
-		} 
-		tabsList.clear();
-		moreTabsList.clear();
+			System.out.println("Actual tab Names List :: "+ActualtabNamesList + " compared to "+ " Expected tab Names List :: "+ ExpectedtabNamesList);
+			Assert.assertEqualsNoOrder(ActualtabNamesList.toArray(),ExpectedtabNamesList.toArray());
+			System.out.println("Verified Home Tabs are present on the page"+ ExpectedtabNamesList);
+		}
+	   }catch(Exception e){
+		   System.out.println("Error occured on verify Home Page Tabs "+e.getMessage());
+	   }
 	}
+
 
 	/**
 	 * Validating the tabs on the Home Page for the Account update
