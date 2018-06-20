@@ -175,6 +175,12 @@ public class OpportunitiesInstallments extends ReusableLibrary {
 		String query = "SELECT Id, Installment_Quantity__c, CBRE_Preferred_Property_Type_c__c, Total_Size__c, Service__c  FROM"
 				+ " Opportunity where Installment_Quantity__c = 1 and  CBRE_Preferred_Property_Type_c__c !=null and"
 				+ " Total_Size__c != null and Service__c  != null ORDER BY CreatedDate DESC"  + " limit 1 offset " + offsetValue;
+		
+		if(dataTable.getData("General_Data","TC_ID").contains("Split")) {
+			query = "SELECT Id, CBRE_Preferred_Property_Type_c__c, Total_Size__c, Service__c  FROM"
+				+ " Opportunity where CBRE_Preferred_Property_Type_c__c !=null and"
+				+ " Total_Size__c != null and Service__c  != null ORDER BY CreatedDate DESC"  + " limit 1 offset " + offsetValue;
+		}
 		String sOpportunityId = searchTextSOQL.fetchRecordFieldValue("Id", query);
 		opportunitiesFunctions.updateOpportunityField("CBRE_Preferred_Property_Type_c__c", sOpportunityId);
 		if(sOpportunityId==null) {
@@ -187,7 +193,7 @@ public class OpportunitiesInstallments extends ReusableLibrary {
 			driver.get(newUrl);
 			Utility_Functions.timeWait(1);
 	}
-		return sOpportunityId;
+	return sOpportunityId;
 	}
 	
 	/**

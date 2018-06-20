@@ -130,8 +130,11 @@ public class OpportunitiesPage extends ReusableLibrary {
 	*@author Vishnuvardhan
 	*/
 
-	@FindBy(xpath = ".//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[contains(text(),'Estimated Gross Fee/Commission')]/parent::label/parent::div/input")
+	@FindBy(xpath = "//span[text()='Estimated Gross Fee/Commission']/parent::span//input")
 	WebElement estimatedGrossFeeField;
+	
+	@FindBy(xpath = "//div[contains(@class,'slds-page-header')]//input[@value='Save']")
+	WebElement saveOpportunity;	
 
 	@FindBy(xpath = "//button[text()='Add']")
 	WebElement addButtonshareOpportunity;
@@ -1579,124 +1582,6 @@ public class OpportunitiesPage extends ReusableLibrary {
 				report.updateTestLog("Verify Opportunity", "Associate property to an opportunity failed ", Status.FAIL);
 			}
 		}
-	}
-
-	/**
-	 * Validating the manage Opportunity split functionality
-	 * 
-	 * @author Ramya
-	 *
-	 */
-	public void opportunitySplitFunctionality() {
-		selectOpportunity();
-		sf_UtilityFunctions.clickOnDetailAction("Edit");
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xScrollWindowToElement(driver, estimatedGrossFeeField);
-		Utility_Functions.timeWait(3);
-		Utility_Functions.xClick(driver, estimatedGrossFeeField, true);
-		Utility_Functions.timeWait(4);
-		Utility_Functions.xSendKeys(driver, estimatedGrossFeeField, "10,000.00");
-		Utility_Functions.timeWait(3);
-		Utility_Functions.xClick(driver, save, true);
-		Utility_Functions.timeWait(3);
-		sf_UtilityFunctions.selectTabUIHeaders("Related");
-		Utility_Functions.xClick(driver, addButtonshareOpportunity, true);
-		Utility_Functions.timeWait(3);
-
-		int size = driver.findElements(By.tagName("iframe")).size();
-		System.out.println(size);
-		Utility_Functions.timeWait(2);
-		List<WebElement> iframeList = driver.findElements(By.tagName("iframe"));
-		System.out.println(iframeList.size());
-		for (WebElement element : iframeList) {
-			System.out.println(element.getAttribute("id"));
-		}
-		driver.switchTo().frame(4);
-		Utility_Functions.xSwitchtoFrame(driver, saveButtonSplit);
-		Utility_Functions.timeWait(5);
-		List<WebElement> opportunityList = driver.findElements(By.xpath("//div[contains(@class, 'slds-truncate')]"));
-		int count = 0;
-		System.out.println(opportunityList.size());
-		try {
-			for (WebElement element : opportunityList) {
-
-				if ((count == 0) && (element.getText().equals("USER"))) {
-					System.out.println("USER  field is present in the Add New Team Member Page");
-					report.updateTestLog("Add New Team Member Page",
-							"Add New Team Member Page is having the " + element.getText() + " Status field::",
-							Status.PASS);
-					count++;
-				} else if ((count == 1) && (element.getText().equals("TEAM MEMBER DESCRIPTION"))) {
-					System.out.println("Team Member Description field is present in the Add New Team Member Page");
-					report.updateTestLog("Add New Team Member Page",
-							"Add New Team Member Page is having the " + element.getText() + " Status field::",
-							Status.PASS);
-					count++;
-				} else if ((count == 2) && (element.getText().equals("TEAM ROLE"))) {
-					System.out.println("TEAM ROLE field is present in the Add New Team Member Page");
-					report.updateTestLog("Add New Team Member Page",
-							"Add New Team Member Page is having the " + element.getText() + " Status field::",
-							Status.PASS);
-					count++;
-				} else if ((count == 3) && (element.getText().equals("SECONDARY MEMBER ROLE"))) {
-					System.out.println("SECONDARY MEMBER ROLE field is present in the Add New Team Member Page");
-					report.updateTestLog("Add New Team Member Page",
-							"Add New Team Member Page is having the " + element.getText() + " Status field::",
-							Status.PASS);
-					count++;
-				} else if ((count == 4) && (element.getText().equals("OPPORTUNITY ACCESS"))) {
-					System.out.println("OPPORTUNITY ACCESS field is present in the Add New Team Member Page");
-					report.updateTestLog("Add New Team Member Page",
-							"Add New Team Member Page is having the " + element.getText() + " Status field::",
-							Status.PASS);
-
-				}
-			}
-			if (count != 4)
-				report.updateTestLog("Add New Team Member Page",
-						"Add New Team Member Page is not having all the fields::", Status.FAIL);
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
-		}
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xSendKeys(driver, user1, "Inactive User");
-		Utility_Functions.timeWait(1);
-		user1.sendKeys(Keys.ARROW_DOWN);
-		user1.sendKeys(Keys.ENTER);
-		Utility_Functions.xClick(driver, selectTeamRole, true);
-		Utility_Functions.timeWait(3);
-		Utility_Functions.xClick(driver, selectSecondaryMemberRole, true);
-		Utility_Functions.timeWait(3);
-		Utility_Functions.xClick(driver, selectOpportunityAccess, true);
-		Utility_Functions.timeWait(3);
-		Utility_Functions.xSendKeys(driver, user2, "Test Broker1");
-		Utility_Functions.timeWait(2);
-		user2.sendKeys(Keys.ARROW_DOWN);
-		user2.sendKeys(Keys.ENTER);
-		Utility_Functions.xClick(driver, selectTeamRole2, true);
-		Utility_Functions.timeWait(3);
-		Utility_Functions.xClick(driver, selectSecondaryMemberRole2, true);
-		Utility_Functions.timeWait(3);
-		Utility_Functions.xClick(driver, saveButtonSplit, true);
-		Utility_Functions.timeWait(3);
-		driver.navigate().refresh();
-		Utility_Functions.timeWait(1);
-		driver.switchTo().defaultContent();
-		driver.navigate().refresh();
-		Utility_Functions.xWaitForElementVisible(driver, manageOpportunitySplits, 3);
-		Utility_Functions.xClick(driver, manageOpportunitySplits, true);
-		Utility_Functions.timeWait(4);
-		driver.switchTo().frame(driver.findElement(By.xpath("//iframe")));
-		splitPercent.clear();
-		Utility_Functions.timeWait(3);
-		splitPercent.sendKeys("100");
-		try {
-			Utility_Functions.xClick(driver, saveOpportunitySplit, true);
-		} catch (Exception e) {
-			Utility_Functions.xClick(driver, saveOpportunitySplitUAT, true);
-		}
-		report.updateTestLog("Opportunity Saved", "Opportunity Saved successfully::", Status.PASS);
 	}
 
 	/**
@@ -3783,15 +3668,16 @@ public class OpportunitiesPage extends ReusableLibrary {
 		}
 		Utility_Functions.xClick(driver, saveOpportunityGWS, true);
 		Utility_Functions.timeWait(4);
-
+		String sOpportunityName = null;
 		try {
 			Utility_Functions.xWaitForElementPresent(driver, related, 4);
 			if (related.isDisplayed()) {
-				String OpportunityQuery = "Select Name from opportunity where Name like  " + "'" + sAccountName + "-"
-						+ '%' + "-" + value + "-" + "Acres" + "'";
-				String OpportunityName = searchTextSOQL.fetchRecordFieldValue("Name", OpportunityQuery);
+				/*String OpportunityQuery = "Select Name from opportunity where Name like  "+ '%' + "-" + value + "-" + "Acres" + "'";
+				String OpportunityName = searchTextSOQL.fetchRecordFieldValue("Name", OpportunityQuery);*/
+				WebElement opportunityName = driver.findElement(By.xpath("//h1[contains(@class,'slds-page-header__title')]/span"));
+				sOpportunityName = opportunityName.getText();
 				report.updateTestLog("Opportunity Created",
-						"Opportunity created successfully:::" + OpportunityName + ":::", Status.PASS);
+						"Opportunity created successfully:::" + sOpportunityName + ":::", Status.PASS);
 			} else {
 				report.updateTestLog("Opportunity Created", "Opportunity creation failed:::", Status.FAIL);
 			}
@@ -3802,10 +3688,12 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 		Utility_Functions.timeWait(2);
 
-		String phaseQuery = "Select Phase__c from opportunity where Name like  " + "'" + sAccountName + "-" + '%' + "-"
+/*		String phaseQuery = "Select Phase__c from opportunity where Name like  " + "'" + sAccountName + "-" + '%' + "-"
 				+ value + "-" + "Acres" + "'";
 		String probabilityQuery = "Select Probability from opportunity where Name like  " + "'" + sAccountName + "-"
-				+ '%' + "-" + value + "-" + "Acres" + "'";
+				+ '%' + "-" + value + "-" + "Acres" + "'";*/
+		String phaseQuery = "Select Phase__c from opportunity where Name = " + "'" + sOpportunityName + "'";
+		String probabilityQuery = "Select Probability from opportunity where Name =  " + "'" + sOpportunityName + "'";
 		Utility_Functions.timeWait(1);
 		String phasePopulated = searchTextSOQL.fetchRecordFieldValue("Phase__c", phaseQuery);
 		String probabilityPopulated = searchTextSOQL.fetchRecordFieldValue("Probability", probabilityQuery);
