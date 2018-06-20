@@ -484,9 +484,12 @@ public class HomePage extends ReusableLibrary {
 		moreTabsList.add("Properties");
 		moreTabsList.add("Private Tags");
 		moreTabsList.add("Bulk Tagging");
+		moreTabsList.add("Project Enquiries");
+		moreTabsList.add("Property Preferences");
+		moreTabsList.add("Marketing Lists");
+		moreTabsList.add("Subscriptions");
 		moreTabsList.add("Campaigns");
 		moreTabsList.add("Cases");
-		moreTabsList.add("Offers");
 		System.out.println("The Home Page more Tabs for the APAC Capital Markets are:::" + moreTabsList);
 	}
 
@@ -499,7 +502,6 @@ public class HomePage extends ReusableLibrary {
 	 */
 	
 	public void validateHomePageTabsForAPACCapitalMarkets() {
-		try{
 		if ((dataTable.getData("General_Data", "TC_ID").contains("CMAPACManagerHomeVerifyingTabsOnHomePage"))
 				|| (dataTable.getData("General_Data", "TC_ID").contains("CMAPACBrokerHomeVerifyingTabsOnHomePage"))) {
 			List<String> ExpectedtabNamesList =  new ArrayList<String>();
@@ -513,15 +515,12 @@ public class HomePage extends ReusableLibrary {
 					.findElements(By.xpath("//nav[@role='navigation']//a[contains(@href,'lightning')]/span"));
 			for(int i =0;i<homePageTabs.size();i++){
 				if(homePageTabs.get(i).getText().length()>0)
-					ActualtabNamesList.add(homePageTabs.get(i).getText());
+					ActualtabNamesList.add(homePageTabs.get(i).getText());		
 			}
 			System.out.println("Actual tab Names List :: "+ActualtabNamesList + " compared to "+ " Expected tab Names List :: "+ ExpectedtabNamesList);
 			Assert.assertEqualsNoOrder(ActualtabNamesList.toArray(),ExpectedtabNamesList.toArray());
 			System.out.println("Verified Home Tabs are present on the page"+ ExpectedtabNamesList);
 		}
-	   }catch(Exception e){
-		   System.out.println("Error occured on verify Home Page Tabs "+e.getMessage());
-	   }
 	}
 
 

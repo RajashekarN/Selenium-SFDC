@@ -700,10 +700,10 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 			} else if (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_AS")) {
 				recordTypeId = "012i0000000405jAAA";
 				report.updateTestLog("Opportunity Name", "Record type is set as Asset Services", Status.PASS);
-			} else if (dataTable.getData("General_Data", "TC_ID").contains("AB")) {
+			} else if (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_AB")) {
 				recordTypeId = "012i0000001622CAAQ";
 				report.updateTestLog("Opportunity Name", "Record type is set as Agency Brokerage", Status.PASS);
-			} else if (dataTable.getData("General_Data", "TC_ID").contains("OB")) {
+			} else if (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_OB")) {
 				recordTypeId = "012i0000000405nAAA";
 				report.updateTestLog("Opportunity Name", "Record type is set as Occupier Brokerage", Status.PASS);
 			} else {
@@ -722,10 +722,11 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 					isStatus = false;
 					break;
 				} else {
-					String opportunityName = searchTextSOQL.fetchRecordFieldValue("Name", query);
-					String assignmentType = searchTextSOQL.fetchRecordFieldValue("Service__c", query);
-					String totalSize = searchTextSOQL.fetchRecordFieldValue("Total_Size__c", query);
-					String unitOfMeasure = searchTextSOQL.fetchRecordFieldValue("Unit_of_Measure__c", query);
+					String sQuery = "Select Name from Opportunity where Id = " +"'" + opportunityID +"'";
+					String opportunityName = searchTextSOQL.fetchRecordFieldValue("Name", sQuery);
+					String assignmentType = searchTextSOQL.fetchRecordFieldValue("Service__c", sQuery);
+					String totalSize = searchTextSOQL.fetchRecordFieldValue("Total_Size__c", sQuery);
+					String unitOfMeasure = searchTextSOQL.fetchRecordFieldValue("Unit_of_Measure__c", sQuery);
 					report.updateTestLog("Fetched Opportunity Name", "Opportunity Name:::" + opportunityName,
 							Status.PASS);
 					report.updateTestLog("Fetched Opportunity Name", "Opportunity Assignment Type:::" + assignmentType,
@@ -738,9 +739,9 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 					updateOpportunityField("Total_Size__c", opportunityID);
 					updateOpportunityField("Unit_of_Measure__c", opportunityID);
 
-					String updatedAssignmentType = searchTextSOQL.fetchRecordFieldValue("Service__c", query);
-					String updatedTotalSize = searchTextSOQL.fetchRecordFieldValue("Total_Size__c", query);
-					String updatedUnitOfMeasure = searchTextSOQL.fetchRecordFieldValue("Unit_of_Measure__c", query);
+					String updatedAssignmentType = searchTextSOQL.fetchRecordFieldValue("Service__c", sQuery);
+					String updatedTotalSize = searchTextSOQL.fetchRecordFieldValue("Total_Size__c", sQuery);
+					String updatedUnitOfMeasure = searchTextSOQL.fetchRecordFieldValue("Unit_of_Measure__c", sQuery);
 					if (updatedAssignmentType.equals("Project Management")) {
 						report.updateTestLog("Modified Opportunity Name",
 								"Opportunity Name modified according to the AssignmentType selected:::"
