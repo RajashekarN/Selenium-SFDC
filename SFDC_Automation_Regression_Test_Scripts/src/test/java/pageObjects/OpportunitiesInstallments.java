@@ -181,12 +181,12 @@ public class OpportunitiesInstallments extends ReusableLibrary {
 			report.updateTestLog("Verify Active Opportunities", "No Opportunities are present:::", Status.PASS);
 		} else {
 			report.updateTestLog("Verify Active Opportunities", "Opportunity ID retrived from database is:::" + sOpportunityId, Status.PASS);
-			String url = driver.getCurrentUrl().split("#")[0];
-			String newUrl = url + "#/sObject/" + sOpportunityId;
+			String url = driver.getCurrentUrl().split("Opportunity/")[0];
+			String newUrl = url + "Opportunity/" +sOpportunityId;
 			newUrl = newUrl + "/view";
 			driver.get(newUrl);
 			Utility_Functions.timeWait(1);
-		}
+	}
 		return sOpportunityId;
 	}
 	
@@ -230,7 +230,6 @@ public class OpportunitiesInstallments extends ReusableLibrary {
 		if (oppportunityID == null) {
 			report.updateTestLog("Opportunity Installments", "There are no Opportunities present with the provided criteria:::", Status.PASS);
 		} else {
-			driver.navigate().refresh();
 			Utility_Functions.timeWait(4);
 			Utility_Functions.xWaitForElementPresent(driver, editButton, 3);
 			sf_UtilityFunctions.selectTabUIHeaders("Related");
@@ -245,7 +244,7 @@ public class OpportunitiesInstallments extends ReusableLibrary {
 			} else {
 				report.updateTestLog("Opportunities Installments",
 						"Opportunity installment amount record is present in the opportunity installment related list:::",
-						Status.PASS);
+						Status.WARNING);
 			}
 			Utility_Functions.timeWait(2);
 			}
@@ -277,7 +276,7 @@ public class OpportunitiesInstallments extends ReusableLibrary {
 			report.updateTestLog("Opportunities Installments",
 					"Opportunity installment entered as 6,000 successfully:::", Status.PASS);
 		}
-		Utility_Functions.timeWait(5);
+		Utility_Functions.timeWait(3);
 		Utility_Functions.xWaitForElementPresent(driver, save, 4);
 		Utility_Functions.xHighlight(driver, save, "yellow");
 		actions.moveToElement(save).click().perform();
@@ -390,10 +389,6 @@ public class OpportunitiesInstallments extends ReusableLibrary {
 			agencyBrokerage();
 		}
 		Utility_Functions.timeWait(2);
-		/*
-		 * Utility_Functions.xWaitForElementPresent(driver, related, 3);
-		 * Utility_Functions.xClick(driver, related, true);
-		 */
 		driver.navigate().refresh();
 		Utility_Functions.timeWait(1);
 		sf_UtilityFunctions.selectTabUIHeaders("Related");
@@ -441,7 +436,7 @@ public class OpportunitiesInstallments extends ReusableLibrary {
 		Date date = new Date();
 		Utility_Functions.xSendKeys(driver, installmentDate, dateFormat.format(date).toString());
 		actions.moveToElement(saveNewOpportunityInstallment).click().perform();
-		Utility_Functions.timeWait(3);
+		Utility_Functions.timeWait(5);
 		sf_UtilityFunctions.selectTabUIHeaders("Related");
 		Utility_Functions.xWaitForElementPresent(driver, installmentsViewAll, 3);
 		Utility_Functions.xClick(driver, installmentsViewAll, true);
