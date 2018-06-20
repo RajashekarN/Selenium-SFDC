@@ -482,9 +482,12 @@ public class HomePage extends ReusableLibrary {
 		moreTabsList.add("Properties");
 		moreTabsList.add("Private Tags");
 		moreTabsList.add("Bulk Tagging");
+		moreTabsList.add("Project Enquiries");
+		moreTabsList.add("Property Preferences");
+		moreTabsList.add("Marketing Lists");
+		moreTabsList.add("Subscriptions");
 		moreTabsList.add("Campaigns");
 		moreTabsList.add("Cases");
-		moreTabsList.add("Offers");
 		System.out.println("The Home Page more Tabs for the APAC Capital Markets are:::" + moreTabsList);
 	}
 
@@ -527,10 +530,8 @@ public class HomePage extends ReusableLibrary {
 			} else if (countLabelList < 11) {
 				report.updateTestLog("Verify Home Page Tabs", "All the Tabs are not present in Home Page", Status.FAIL);
 			}
-			/*Utility_Functions.xWaitForElementPresent(driver, menu_More, 3);
-			Utility_Functions.xClick(driver, menu_More, true);*/
 			sf_UtilityFunctions.oneAppNavigationTab("More");
-			List<WebElement> homePageMoreTabsList = driver.findElements(By.xpath("//one-tmp-menu-item[@class='slds-dropdown__item']//span/span"));
+			List<WebElement> homePageMoreTabsList = driver.findElements(By.xpath("//one-app-nav-bar-menu-item[contains(@class,'overflowNavItem')]//span[@class='slds-truncate']/span"));
 			moreTabsList.clear();
 			homePageMoreTabsList();
 			System.out.println("Number of More Tabs found ::::" + homePageMoreTabsList.size()+" , "+ "  Number of More TabNames in List :"+moreTabsList.size());
@@ -544,13 +545,13 @@ public class HomePage extends ReusableLibrary {
 							element.getText() + "::::label list is present in Home Page TabNames For APACCapitalMarkets", Status.PASS);
 					countLabelListMore++;
 				}
-				if (countLabelListMore == 7)
+				if (countLabelListMore == 10)
 					break;
 				i2++;
 				j1++;
 			}
 			System.out.println("Home Page Tabs List Count:::" + countLabelListMore);
-			if (countLabelListMore >= 7) {
+			if (countLabelListMore >= 10) {
 				System.out.println("All the Tabs are present in Home Page ");
 				report.updateTestLog("Verify Home Page Tabs", "All the Tabs are present in Home Page", Status.PASS);
 			} else if (countLabelListMore < 7) {
