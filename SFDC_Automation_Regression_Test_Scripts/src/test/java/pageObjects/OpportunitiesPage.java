@@ -676,7 +676,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	* @author Vishnuvardhan
 	*/
 	
-	@FindBy(xpath = "//*[@id='record-type-select']/option[text()='APAC Global Workplace Solutions']")
+	@FindBy(xpath = "//*[@id='record-type-select']/option[text()='APAC Advisory/Consulting Services and GWS']")
 	WebElement opportunityRecordTypeGlobalWorkplaceSolutions;
 	
 	@FindBy(xpath = "//input[@title='Search Accounts']")
@@ -3633,8 +3633,8 @@ public class OpportunitiesPage extends ReusableLibrary {
         Utility_Functions.xSendKeys(driver, totalSizeOppGWS, Integer.toString(value));
         Utility_Functions.xClick(driver,unitofMeasureGWS, true);
         sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "Acres");
-        Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeGWS, 3);
-        Utility_Functions.xSendKeys(driver, estimatedGrossFeeGWS, dataTable.getData("General_Data", "InstallmentAmount")); 
+    /*    Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeGWS, 3);
+        Utility_Functions.xSendKeys(driver, estimatedGrossFeeGWS, dataTable.getData("General_Data", "InstallmentAmount")); */
 
 		try {
 			Utility_Functions.xSelectDropdownByIndex(preferredPropertyTypeOpp, 1);
@@ -3685,10 +3685,10 @@ public class OpportunitiesPage extends ReusableLibrary {
 			Utility_Functions.timeWait(1);
 		}
 		Utility_Functions.xClick(driver, saveOpportunityGWS, true);
-		Utility_Functions.timeWait(4);
+		Utility_Functions.timeWait(6);
 		String sOpportunityName = null;
 		try {
-			Utility_Functions.xWaitForElementPresent(driver, related, 4);
+			Utility_Functions.xWaitForElementPresent(driver, related, 8);
 			if (related.isDisplayed()) {
 				/*String OpportunityQuery = "Select Name from opportunity where Name like  "+ '%' + "-" + value + "-" + "Acres" + "'";
 				String OpportunityName = searchTextSOQL.fetchRecordFieldValue("Name", OpportunityQuery);*/
