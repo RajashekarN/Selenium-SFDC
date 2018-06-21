@@ -61,13 +61,13 @@ public class OpportunitiesDefaultRecordType extends ReusableLibrary {
 	@FindBy(xpath = "//*[@id='record-type-select']/option[text()='Capital Markets – Debt & Structured Finance']")
 	WebElement opportunityRecordTypeDebtStructuredFinance;
 
-	@FindBy(xpath = "//select[contains(@id,'oppForm:salesStage')]/option[@selected='selected']")
+	@FindBy(xpath = "//span[text()='Sales Stage']/parent::label/parent::div//a[@class='select']")
 	WebElement salesStageSelected;
 
-	@FindBy(xpath = "//*[contains(@id,'oppForm:phaseField')]")
+	@FindBy(xpath = "//span[text()='Phase']/parent::div/parent::div/div[contains(@class,'slds-grid itemBody')]/span/span")
 	WebElement phaseField;
 	
-	@FindBy(xpath = "//span[contains(@id,'oppForm:phaseField')]/span")
+	@FindBy(xpath = "//span[text()='Phase']/parent::div/parent::div/div[contains(@class,'slds-grid itemBody')]/span/span")
 	WebElement phasePresent;
 	
 	@FindBy(xpath = "//span[text()='Sales Stage']/parent::label/parent::div//a[@class='select']")
@@ -314,8 +314,8 @@ public class OpportunitiesDefaultRecordType extends ReusableLibrary {
 				}
 			}
 			Utility_Functions.timeWait(2);
-			String sAccountName = searchTextSOQL.fetchRecord("Account", "Name");	
-			opportunitiesPage.opportunityCreation(sAccountName);
+			/*String sAccountName = searchTextSOQL.fetchRecord("Account", "Name");	
+			opportunitiesPage.opportunityCreation(sAccountName);*/
 		} else if (dataTable.getData("General_Data", "TC_ID").contains("ABEMEA")) {
 			try {
 				Utility_Functions.xSwitchtoFrame(driver, salesStageSelectedEMEA);

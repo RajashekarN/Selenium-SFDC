@@ -397,7 +397,7 @@ public class AccountsPage extends ReusableLibrary {
 	@FindBy(xpath = "//li[contains(@class,'oneActionsDropDown')]//a")
 	WebElement showMoreActions;
 
-	@FindBy(xpath = "//div[contains(@class,'actionMenu')]//a[@title='View Hierarchy']")
+	@FindBy(xpath = "//div[@title='View Hierarchy']")
 	WebElement selectViewHierarchy;
 
 	@FindBy(xpath = "//input[contains(@id,'LocalAcctName')]")
@@ -3103,26 +3103,8 @@ public class AccountsPage extends ReusableLibrary {
 	 *
 	 */
 	public void verifyCreateActivityAccount() {
-		Utility_Functions.xWaitForElementPresent(driver, menu_Accounts, 3);
-		Utility_Functions.xClick(driver, menu_Accounts, true);
-		report.updateTestLog("Verify Create Activity Account", "Accounts is Displayed ", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, recentlyViewed, 3);
-		Utility_Functions.xClick(driver, recentlyViewed, true);
-		report.updateTestLog("Verify Create Activity Account", "Recently viewed Accounts are Displayed ", Status.PASS);
-		Utility_Functions.xWaitForElementPresent(driver, allAccounts, 3);
-		Utility_Functions.xClick(driver, allAccounts, true);
-		Utility_Functions.timeWait(5);
-		report.updateTestLog("Verify Create Activity Account", "All accounts are displayed successfully:::",
-				Status.PASS);
-		List<WebElement> accountNamesList = driver.findElements(By.xpath(
-				".//a[@class='slds-truncate outputLookupLink slds-truncate forceOutputLookup'][contains(@data-recordid,'001')]"));
-		Utility_Functions.xclickRandomElement(accountNamesList);
-		Utility_Functions.timeWait(3);
-		report.updateTestLog("Verify Create Activity Account ", "The Account is Displayed ", Status.PASS);
-		// accountname=accountNameSaved.getText();
-		accountname = Utility_Functions.xGetTextVisibleListElement(driver, accountNameSaved);
-		System.out.println(accountname);
-		// Utility_Functions.timeWait(2);
+		accountsFunction();
+		Utility_Functions.timeWait(4);
 		tasksPage.createNewActivity();
 	}
 

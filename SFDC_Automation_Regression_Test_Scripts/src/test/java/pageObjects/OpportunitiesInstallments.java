@@ -82,7 +82,7 @@ public class OpportunitiesInstallments extends ReusableLibrary {
 	@FindBy(xpath = "//h2[text()='Quick Create: Agency Brokerage']")
 	WebElement agencyBrokerageFrame;
 	
-	@FindBy(xpath = "//span[contains(text(),'Commission')]/parent::span//input")
+	@FindBy(xpath = "//span[text()='Estimated Gross Fee/Commission']/parent::label/parent::div//input")
 	WebElement estimatedGrossFee;
 	
 	@FindBy(xpath = "//div[@class='slds-media']//input[@value='Save']")
@@ -319,8 +319,8 @@ public class OpportunitiesInstallments extends ReusableLibrary {
 					"Opportunity installment entered as 6,000 successfully:::", Status.PASS);
 		}
 		Utility_Functions.timeWait(3);
-		Utility_Functions.xWaitForElementPresent(driver, saveButton_AB, 3);
-		Utility_Functions.xClick(driver, saveButton_AB, true);
+		Utility_Functions.xWaitForElementPresent(driver, save, 3);
+		Utility_Functions.xClick(driver, save, true);
 		Utility_Functions.timeWait(1);
 		driver.switchTo().defaultContent();
 		Utility_Functions.timeWait(2);
