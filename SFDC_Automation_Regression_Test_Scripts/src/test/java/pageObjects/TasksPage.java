@@ -3,6 +3,7 @@ package pageObjects;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -902,7 +903,7 @@ public class TasksPage extends ReusableLibrary {
 	static ArrayList<String> activityTypeListValues = new ArrayList<String>();
 
 	public void additionalActivityTypeList() {
-		activityTypeListValues.add("");
+		activityTypeListValues.add("--None--");
 		activityTypeListValues.add("Private - Client Intelligence");
 		activityTypeListValues.add("Private - Cold Call");
 		activityTypeListValues.add("Private - Follow-Up Meeting");
@@ -929,9 +930,25 @@ public class TasksPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, activitySubject, 3);
 		// Utility_Functions.xWaitForElementPresent(driver, activityTypeList, 3);
 		Utility_Functions.xClickVisibleListElement(driver, activityTypeList);
+		Utility_Functions.timeWait(1);
 		List<WebElement> activityTypeValues = driver.findElements(By.xpath("//div[@class='select-options']/ul/li/a"));
 		additionalActivityTypeList();
-		String[] linkTexts = new String[activityTypeValues.size()];
+		
+		
+		int accountTypePickListCount = Utility_Functions.xValidateFieldsPresentPage(activityTypeListValues,
+				activityTypeValues, "Account Type pick list values");
+		
+		System.out.println("Account Type pick list values"+accountTypePickListCount);
+		System.out.println("activityTypeListValues"+activityTypeListValues.size());
+		
+		if (accountTypePickListCount != activityTypeListValues.size()) {
+			report.updateTestLog("Account Type pick list values", "Account Type pick list values are not displaying",
+					Status.FAIL);
+		}
+		
+		
+		
+	/*	String[] linkTexts = new String[activityTypeValues.size()];
 		int i = 0, count = 0;
 		try {
 			for (WebElement element : activityTypeValues) {
@@ -956,7 +973,7 @@ public class TasksPage extends ReusableLibrary {
 		} else {
 			report.updateTestLog("Verify Additional Acitivty",
 					"All the values are not present under Additional Activity List", Status.FAIL);
-		}
+		}*/
 	}
 
 	static ArrayList<String> pastActivityListValues = new ArrayList<String>();

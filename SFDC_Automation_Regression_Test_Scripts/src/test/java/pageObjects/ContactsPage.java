@@ -42,6 +42,7 @@ public class ContactsPage extends ReusableLibrary {
 	EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
 	SearchTextSOQL searchSOQL = new SearchTextSOQL(scriptHelper);
 	AccountsFunctions accountFunctions = new AccountsFunctions(scriptHelper);
+	TasksPage taskPage = new TasksPage(scriptHelper);
 	SF_UtilityFunctions sf_UtilityFunctions = new SF_UtilityFunctions(scriptHelper);
 	SaveResult[] results;
 	
@@ -710,24 +711,33 @@ public class ContactsPage extends ReusableLibrary {
 	}
 
 
-
-	public void activityLightningTimeline() {
+	public void verifyContactsActivityTimeline() {
+			selectExistingContact();
+			taskPage.validateActivityTimeLine();
+		
 	} // related to activity
 
 	public void verifyCreateActivityContact() {
+		selectExistingContact();
+		taskPage.createNewActivity();
+
 	}
 
 	public void verifyContactNewActivityPageLayout() {
+		selectExistingContact();
+		taskPage.verifyNewActivityPageLayout();
+		
 	}
 
 	public void verifyContactNewActivityPageSendNotificationEmail() {
-	}
+	}     // this test case validating Activity page layout only, not sure about the actual test steps
 
 	public void verifyContactActivityReminderSentFunctionality() {
-	}
-
-	public void verifyContactsActivityTimeline() {
-	}
+	}   // this test case is only creating new activity, not sure about the test steps
+	
+	
+	public void activityLightningTimeline() {
+	}  // same as verifyContactsActivityTimeline
 
 	public void verifyContactEditPageNotEditableFields() {  //changed to verifyUpdationOfContactRecord
 	}
