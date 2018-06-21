@@ -204,7 +204,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	* @author Vishnuvardhan
 	*/
 
-	@FindBy(xpath = "//input[@id='acctSearchBox']")
+    @FindBy(xpath = "//input[@id='acctSearchBox']")
 	WebElement accountName;
 
 	@FindBy(xpath = "//select[contains(@id,'assignmentType')]")
@@ -225,7 +225,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//span[contains(text(),'Commission')]/parent::span//input")
 	WebElement estimatedGrossFee;
 
-	@FindBy(xpath = "//span[contains(text(),'Preferred')][contains(text(),'Property')]/parent::div//select")
+    @FindBy(xpath = "//span[contains(text(),'Preferred')][contains(text(),'Property')]/parent::div//select[@class='slds-select']")
 	WebElement preferredPropertyTypeOpp;
 
 	@FindBy(xpath = "//div[contains(@class,'slds-media__body')]//input[@value='Save']")
@@ -651,8 +651,12 @@ public class OpportunitiesPage extends ReusableLibrary {
 	* @author Vishnuvardhan
 	*/
 	
+	
 	@FindBy(xpath = "//a[@class='forceActionLink']/div[@class='slds-truncate'][text()='Edit']")
 	WebElement edit;
+	
+	@FindBy(xpath ="//span[contains(text(),'Preferred')][contains(text(),'Property')]/parent::div//select")
+	WebElement preferredPropType;
 	
 	@FindBy(xpath = "//select[contains(@id,'assignmentType')]/option[@value='Consulting']")
 	WebElement assignmentTypeOppValueClone;
@@ -871,7 +875,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//a[(@title='India')]")
 	WebElement opportunityCountryValue;
 
-	@FindBy(xpath = "//*[@class='required ']//*[text()='Asset Type']//parent::span/following-sibling::div//a")
+    @FindBy(xpath = "//*[@class='required ']/..//*[text()='Asset Type']//parent::span/following-sibling::div//a")
 	WebElement assetType;
 
 	@FindBy(xpath = "//a[@title='Office']")
@@ -3474,12 +3478,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 					Utility_Functions.xSelectDropdownByIndex(assignmentTypeOpp, 3);
 				} else if (assignmentTypeOppValueClone.getText().equals("Consulting")) {
 					Utility_Functions.xSelectDropdownByIndex(assignmentTypeOpp, 2);
-				}
-				// if (preferredPropertyTypeOpp.getText().equals("--None--")){
-				Utility_Functions.xWaitForElementPresent(driver, preferredPropertyTypeOpp, 3);
-				Utility_Functions.xSelectDropdownByIndex(preferredPropertyTypeOpp, 1);
-				// }
-			} catch (Exception e) {
+				} 
+		} catch (Exception e) {
 				Utility_Functions.xSelectDropdownByIndex(assignmentTypeOpp, 1);
 			}
 			report.updateTestLog("Verify Opportunity Edit/Clone", "Oportunity Assignment Type is changed to Consulting",
@@ -3491,11 +3491,10 @@ public class OpportunitiesPage extends ReusableLibrary {
 			if (totalSizeOpp.getText().equals("")) {
 				Utility_Functions.xSendKeys(driver, totalSizeOpp, Integer.toString(value));
 			}
-
-			Utility_Functions.xWaitForElementPresent(driver, preferredPropertyTypeOpp, 3);
-			if (preferredPropertyTypeOpp.getText().equals("--None--")) {
-				Utility_Functions.xSelectDropdownByIndex(preferredPropertyTypeOpp, 1);
-			}
+			Utility_Functions.xWaitForElementPresent(driver, preferredPropType, 3);
+			if (preferredPropType.getText().equals("Hotel")){
+			Utility_Functions.xSelectDropdownByIndex(preferredPropType, 2);
+			} 
 
 			Utility_Functions.xWaitForElementPresent(driver, saveNewOpportunity, 4);
 			Utility_Functions.xClick(driver, saveNewOpportunity, true);
@@ -3517,16 +3516,16 @@ public class OpportunitiesPage extends ReusableLibrary {
 				|| (dataTable.getData("General_Data", "TC_ID").contains("CMEMEA"))
 				|| (dataTable.getData("General_Data", "TC_ID").contains("GWSAMERManager"))
 				|| (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_ASAMERManager"))
-				|| (!dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_VASAMERManager"))
+				|| (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_VASAMERManager"))
 				|| (dataTable.getData("General_Data", "TC_ID").contains("GWSAMERBroker"))) {
 			Utility_Functions.timeWait(2);
-			Utility_Functions.xScrollWindowToElement(driver, estimatedGrossFeeField);
-			Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeField, 3);
-			Utility_Functions.xClick(driver, estimatedGrossFeeField, true);
-			if (estimatedGrossFeeField.getText().equals("10,000.00")) {
-				Utility_Functions.xSendKeys(driver, estimatedGrossFeeField, "15,000.00");
+			Utility_Functions.xScrollWindowToElement(driver, estimatedGrossFeeCommissionValue);
+			Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeCommissionValue, 3);
+			Utility_Functions.xClick(driver, estimatedGrossFeeCommissionValue, true);
+			if (estimatedGrossFeeCommissionValue.getText().equals("10,000.00")) {
+				Utility_Functions.xSendKeys(driver, estimatedGrossFeeCommissionValue, "15,000.00");
 			} else {
-				Utility_Functions.xSendKeys(driver, estimatedGrossFeeField, "10,000.00");
+				Utility_Functions.xSendKeys(driver, estimatedGrossFeeCommissionValue, "10,000.00");
 			}
 			Utility_Functions.xWaitForElementPresent(driver, save, 3);
 			Utility_Functions.xClick(driver, save, true);
