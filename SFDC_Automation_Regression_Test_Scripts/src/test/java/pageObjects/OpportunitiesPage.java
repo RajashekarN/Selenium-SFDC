@@ -486,7 +486,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//div[contains(@class,'slds-modal__footer')]//button[@title='Save']")
 	WebElement saveEditOpp;
 
-	/*
+	/**
 	* Validating the Net Fee Field Mandatory in the New Opportunity creation page
 	* 
 	* @author Vishnuvardhan
@@ -497,6 +497,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	@FindBy(xpath = "//select[contains(@id,'oppForm:salesStage')]/option[text()='02-Meeting']")
 	WebElement salesStageNewOpportunityValue;
+	
 	@FindBy(xpath = "//a[contains(text(),'Closed')]")
 	WebElement salesStageEditOpportunityValue;
 
@@ -655,11 +656,20 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//a[@class='forceActionLink']/div[@class='slds-truncate'][text()='Edit']")
 	WebElement edit;
 	
-	@FindBy(xpath ="//span[contains(text(),'Preferred')][contains(text(),'Property')]/parent::div//select")
+	@FindBy(xpath = "//span[text()='Close Date']/parent::label/following-sibling::div//input")
+	WebElement closeDate;
+	
+	@FindBy(xpath = "//div[@class='modal-container slds-modal__container']//span[text()='Total Size']/parent::div/following-sibling::div/span ")
+	WebElement totalSize;
+	
+	@FindBy(xpath ="//span[text()='Preferred Property Type']/parent::span/following-sibling::div//a")
 	WebElement preferredPropType;
 	
-	@FindBy(xpath = "//select[contains(@id,'assignmentType')]/option[@value='Consulting']")
-	WebElement assignmentTypeOppValueClone;
+	@FindBy(css = ".modal-footer [title='Save']")
+	WebElement saveOpp;
+	
+	@FindBy(xpath = "//span[text()='Assignment Type']/parent::span/following-sibling::div//a")
+	WebElement assignmentTypeOppValue;
 	
 	@FindBy(xpath = "//a[@class='forceActionLink']/div[@class='slds-truncate'][text()='Clone']")
 	WebElement clone;
@@ -3446,7 +3456,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		}
 
 	}
-	/*
+	/**
 	 * Validating the Clone and Edit buttons in Opportunity VF Page
 	 * 
 	 * @author Vishnuvardhan
@@ -3464,40 +3474,45 @@ public class OpportunitiesPage extends ReusableLibrary {
 		if (dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) {
 			Utility_Functions.timeWait(4);
 			try {
-				Utility_Functions.xSwitchtoFrame(driver, closeDateOpp);
+				
+				Utility_Functions.xWaitForElementPresent(driver, closeDate, 3);
+				Utility_Functions.xClick(driver, closeDate, true);
 				Utility_Functions.timeWait(2);
-				Utility_Functions.xWaitForElementPresent(driver, closeDateOpp, 3);
+				
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
-			Utility_Functions.xWaitForElementPresent(driver, assignmentTypeOpp, 3);
-			try {
+			Utility_Functions.xScrollWindowToElement(driver, assignmentTypeOppValue);
+			Utility_Functions.xWaitForElementPresent(driver, assignmentTypeOppValue, 3);
+			Utility_Functions.xClick(driver, assignmentTypeOppValue, true);
+			sf_UtilityFunctions.selectStandardDropdownOption("Assignment Type", "Consulting");
+			
+			/*try {
 				if (assignmentTypeOppValueClone.getText().equals("Building Agency Lease")) {
-					Utility_Functions.xSelectDropdownByIndex(assignmentTypeOpp, 2);
+					Utility_Functions.xSelectDropdownByIndex(assignmentTypeOppValueClone, 2);
 				} else if (assignmentTypeOppValueClone.getText().equals("Building Agency Sale")) {
-					Utility_Functions.xSelectDropdownByIndex(assignmentTypeOpp, 3);
+					Utility_Functions.xSelectDropdownByIndex(assignmentTypeOppValueClone, 3);
 				} else if (assignmentTypeOppValueClone.getText().equals("Consulting")) {
-					Utility_Functions.xSelectDropdownByIndex(assignmentTypeOpp, 2);
+					Utility_Functions.xSelectDropdownByIndex(assignmentTypeOppValueClone, 2);
 				} 
 		} catch (Exception e) {
-				Utility_Functions.xSelectDropdownByIndex(assignmentTypeOpp, 1);
-			}
+				Utility_Functions.xSelectDropdownByIndex(assignmentTypeOppValueClone, 1);
+			}*/
 			report.updateTestLog("Verify Opportunity Edit/Clone", "Oportunity Assignment Type is changed to Consulting",
 					Status.PASS);
 			Utility_Functions.timeWait(1);
 			Random random = new Random();
 			int value = random.nextInt(999);
-			Utility_Functions.xWaitForElementPresent(driver, totalSizeOpp, 3);
-			if (totalSizeOpp.getText().equals("")) {
-				Utility_Functions.xSendKeys(driver, totalSizeOpp, Integer.toString(value));
+			Utility_Functions.xWaitForElementPresent(driver, totalSize, 3);
+			if (totalSize.getText().equals("")) {
+				Utility_Functions.xSendKeys(driver, totalSize, Integer.toString(value));
 			}
 			Utility_Functions.xWaitForElementPresent(driver, preferredPropType, 3);
-			if (preferredPropType.getText().equals("Hotel")){
-			Utility_Functions.xSelectDropdownByIndex(preferredPropType, 2);
-			} 
-
-			Utility_Functions.xWaitForElementPresent(driver, saveNewOpportunity, 4);
-			Utility_Functions.xClick(driver, saveNewOpportunity, true);
+			Utility_Functions.xClick(driver, preferredPropType, true);
+			sf_UtilityFunctions.selectStandardDropdownOption("Preferred Property Type", "Hotel");
+		
+			Utility_Functions.xWaitForElementPresent(driver, saveOpp, 4);
+			Utility_Functions.xClick(driver, saveOpp, true);
 			Utility_Functions.timeWait(2);
 			report.updateTestLog("Verify Opportunity Edit/Clone", "Opportunity edited and saved successfully",
 					Status.PASS);
@@ -3605,8 +3620,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xSwitchtoFrame(driver, continueButton);
 		Utility_Functions.xWaitForElementPresent(driver, continueButton, 3);
 		Utility_Functions.xClick(driver, opportunityRecordType, true);
-		Utility_Functions.xWaitForElementPresent(driver, opportunityRecordTypeGlobalWorkplaceSolutions, 2);
-		Utility_Functions.xClick(driver, opportunityRecordTypeGlobalWorkplaceSolutions, true);
+		Utility_Functions.xSelectDropdownByName(opportunityRecordType, "APAC Advisory/Consulting Services and GWS");
+		/*Utility_Functions.xWaitForElementPresent(driver, opportunityRecordTypeGlobalWorkplaceSolutions, 2);
+		Utility_Functions.xClick(driver, opportunityRecordTypeGlobalWorkplaceSolutions, true);*/
 		Utility_Functions.xClick(driver, continueButton, true);
 		driver.switchTo().defaultContent();
 		Utility_Functions.timeWait(2);
@@ -3617,6 +3633,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.timeWait(2);
 		accountNameSearchBox.sendKeys(Keys.ENTER);	*/	
         Utility_Functions.xScrollWindow(driver);
+        Utility_Functions.timeWait(2);
         Utility_Functions.xClick(driver,assignmentTypeOppGWS , true);
         sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "Consulting");
         System.out.println(Calendar.getInstance());
@@ -3634,6 +3651,7 @@ public class OpportunitiesPage extends ReusableLibrary {
         Utility_Functions.xClick(driver,unitofMeasureGWS, true);
         sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "Acres");
         Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeGWS, 3);
+        Utility_Functions.xClick(driver, estimatedGrossFeeGWS, true);
         Utility_Functions.xSendKeys(driver, estimatedGrossFeeGWS, dataTable.getData("General_Data", "InstallmentAmount")); 
 
 		try {
