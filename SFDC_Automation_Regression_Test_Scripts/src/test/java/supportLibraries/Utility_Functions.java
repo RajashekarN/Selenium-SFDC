@@ -1263,6 +1263,7 @@ public class Utility_Functions extends ReusableLibrary {
 	 * ******************************************************************
 	 */
 	public static void xSwitchtoFrame(CraftDriver driver, WebElement webElement) {
+		driver.switchTo().defaultContent();
 		List<WebElement> iframeList = driver.findElements(By.tagName("iframe"));
 		driver.switchTo().defaultContent();
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);

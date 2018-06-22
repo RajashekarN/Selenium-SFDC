@@ -4,6 +4,8 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -61,7 +63,8 @@ public class PropertiesPage extends ReusableLibrary {
 	 *
 	 */	
 
-	@FindBy(xpath = "//label[text()='Building/Property Name']/parent::div/div/div/input")
+	//@FindBy(xpath = "//label[text()='Building/Property Name']/parent::div/div/div/input")
+	@FindBy(xpath="//label[@for='property-name']/parent::div//input")
 	WebElement buildingPropertyName;
 	
 	/**
@@ -242,7 +245,12 @@ public class PropertiesPage extends ReusableLibrary {
 		verifyUnitsOfMeasurePickListValues();
 		navigateProperties();
 		sf_UtilityFunctions.selectAction("New");
-		Utility_Functions.xSwitchtoFrame(driver, propertyInformationFrame);
+		
+		driver.switchTo().defaultContent();
+		List<WebElement> iframeList = driver.findElements(By.tagName("iframe"));
+		driver.switchTo().frame(iframeList.size()-1);
+				
+		//Utility_Functions.xSwitchtoFrame(driver, buildingPropertyName);
 		Utility_Functions.timeWait(4);
 		Utility_Functions.xWaitForElementPresent(driver, buildingPropertyName, 3);
 		Utility_Functions.xClick(driver, buildingPropertyName, true);
@@ -427,6 +435,7 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.xScrollWindowOnce(driver);
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xSelectDropdownByIndex(countryDropdown, 229);
+		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, street, 3);
 		Utility_Functions.xSendKeys(driver, street, dataTable.getData("General_Data", "Street"));
 		Utility_Functions.xWaitForElementPresent(driver, city, 3);
