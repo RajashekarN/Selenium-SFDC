@@ -1700,7 +1700,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 							"Opportunity Name is not created as per the expected format:::", Status.FAIL);
 				}
 			} else {
-				if ((sOpportunityName.contains(sAccountName)) && (sOpportunityName.contains("Consulting")) && (sOpportunityName.contains(Integer.toString(value)))
+				if ((sOpportunityName.contains(sAccountName)) && (sOpportunityName.contains(Integer.toString(value)))
 						&& (sOpportunityName.contains("Acres"))) {
 						report.updateTestLog("Opportunity Created",
 								"Opportunity Name created as per the format expected -- Account Name - Assignment Type - Total Size - Unit of Measure:::",
