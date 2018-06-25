@@ -234,7 +234,7 @@ public class OpportunityPageLayout extends ReusableLibrary {
 	public void OpportunityPageHeadersAPAC() {
 		OpportunityPageHeadersAPAC.add("Opportunity Information");
 		OpportunityPageHeadersAPAC.add("Financial Information");
-		//OpportunityPageHeadersAPAC.add("Services");
+		OpportunityPageHeadersAPAC.add("Assignment Details");
 		OpportunityPageHeadersAPAC.add("Additional Information");
 		OpportunityPageHeadersAPAC.add("Close Information");
 		OpportunityPageHeadersAPAC.add("Loss Information");
@@ -254,7 +254,7 @@ public class OpportunityPageLayout extends ReusableLibrary {
 	
 	public void OpportunityPageHeaders() {
 		OpportunityPageHeadersList.add("Opportunity Information");
-		OpportunityPageHeadersList.add("Services");
+		OpportunityPageHeadersList.add("Assignment Details");
 		OpportunityPageHeadersList.add("Additional Information");
 		OpportunityPageHeadersList.add("Close Information");
 		OpportunityPageHeadersList.add("Loss Information");

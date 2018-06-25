@@ -50,7 +50,7 @@ public class OpportunitySplit extends ReusableLibrary {
 	@FindBy(xpath = "//button[text()='Add']")
 	WebElement addButtonshareOpportunity;
 
-	@FindBy(xpath = "//tr[contains(@class,'parent')][1]//input[contains(@id,'acctSearchBox')]")
+	@FindBy(xpath = "//form[contains(@id,'addTeamMemberForm')]//tr[contains(@class,'parent')][1]//input[contains(@id,'acctSearchBox')]")
 	WebElement user1;
 
 	@FindBy(xpath = "//select[@class='slds-select']/option[@value='Team Member']")
@@ -107,20 +107,11 @@ public class OpportunitySplit extends ReusableLibrary {
 		opportunitiesPage.selectOpportunity();
 		OpportunitiesInstallments opportunitiesInstallments = new OpportunitiesInstallments(scriptHelper);
 		opportunitiesInstallments.retriveOpportunityforInstallments();
-		sf_UtilityFunctions.clickOnDetailAction("Edit");
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xSwitchtoFrame(driver, estimatedGrossFeeField);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xClick(driver, estimatedGrossFeeField, true);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xSendKeys(driver, estimatedGrossFeeField, "10,000.00");	
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xClick(driver, saveOpportunity, true);		
-		Utility_Functions.timeWait(4);
 		sf_UtilityFunctions.selectTabUIHeaders("Related");
 		Utility_Functions.xClick(driver, addButtonshareOpportunity, true);
-		Utility_Functions.xSwitchtoFrame(driver, saveButtonSplit);
 		Utility_Functions.timeWait(2);
+		Utility_Functions.xSwitchtoFrame(driver, user1);
+		Utility_Functions.timeWait(3);
 		List<WebElement> opportunityList = driver.findElements(By.xpath("//tr[@class='slds-text-heading--label']//div"));
 		int count = 0;
 		System.out.println(opportunityList.size());
@@ -159,9 +150,15 @@ public class OpportunitySplit extends ReusableLibrary {
 
 				}
 			}
-			if (count != 4)
-				report.updateTestLog("Add New Team Member Page",
-						"Add New Team Member Page is not having all the fields::", Status.FAIL);
+			if(dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_CM")) {
+				if (count != 3)
+					report.updateTestLog("Add New Team Member Page",
+							"Add New Team Member Page is not having all the fields::", Status.FAIL);
+			} else {
+				if (count != 4)
+					report.updateTestLog("Add New Team Member Page",
+							"Add New Team Member Page is not having all the fields::", Status.FAIL);	
+			}			
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
@@ -187,10 +184,9 @@ public class OpportunitySplit extends ReusableLibrary {
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xClick(driver, saveButtonSplit, true);
 		Utility_Functions.timeWait(3);
-		driver.navigate().refresh();
-		Utility_Functions.timeWait(1);
 		driver.switchTo().defaultContent();
 		driver.navigate().refresh();
+		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementVisible(driver, manageOpportunitySplits, 3);
 		Utility_Functions.xClick(driver, manageOpportunitySplits, true);
 		Utility_Functions.timeWait(4);
