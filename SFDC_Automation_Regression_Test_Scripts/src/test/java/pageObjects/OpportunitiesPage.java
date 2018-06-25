@@ -1667,26 +1667,30 @@ public class OpportunitiesPage extends ReusableLibrary {
 
 	public void navigateOpportunityNewLayoutPage() {
 		selectNewOpportunity();
-		Utility_Functions.xSwitchtoFrame(driver, continueButton);
-		Utility_Functions.xWaitForElementPresent(driver, continueButton, 3);
-		if (dataTable.getData("General_Data", "TC_ID").contains("DSFOpportunity")) {
-			Utility_Functions.xClick(driver, opportunityRecordType, true);
-			Utility_Functions.xWaitForElementPresent(driver, opportunityRecordTypeDebtStructuredFinance, 2);
-			Utility_Functions.xClick(driver, opportunityRecordTypeDebtStructuredFinance, true);
-		} else if ((dataTable.getData("General_Data", "TC_ID").contains("PSOpportunity"))) {
-			Utility_Functions.xClick(driver, opportunityRecordType, true);
-			Utility_Functions.xWaitForElementPresent(driver, opportunityRecordTypeValuePropertySales, 2);
-			Utility_Functions.xClick(driver, opportunityRecordTypeValuePropertySales, true);
-		} else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAPAC"))) {
-			Utility_Functions.xClick(driver, opportunityRecordType, true);
-			Utility_Functions.xWaitForElementPresent(driver, opportunityRecordTypeValueAPACLandlord, 2);
-			Utility_Functions.xClick(driver, opportunityRecordTypeValueAPACLandlord, true);
+		if(dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_VAS")) {
+			opportunityCreationNewPageLayoutPage();
+		} else {
+			Utility_Functions.xSwitchtoFrame(driver, continueButton);
+			Utility_Functions.xWaitForElementPresent(driver, continueButton, 3);
+			if (dataTable.getData("General_Data", "TC_ID").contains("DSFOpportunity")) {
+				Utility_Functions.xClick(driver, opportunityRecordType, true);
+				Utility_Functions.xWaitForElementPresent(driver, opportunityRecordTypeDebtStructuredFinance, 2);
+				Utility_Functions.xClick(driver, opportunityRecordTypeDebtStructuredFinance, true);
+			} else if ((dataTable.getData("General_Data", "TC_ID").contains("PSOpportunity"))) {
+				Utility_Functions.xClick(driver, opportunityRecordType, true);
+				Utility_Functions.xWaitForElementPresent(driver, opportunityRecordTypeValuePropertySales, 2);
+				Utility_Functions.xClick(driver, opportunityRecordTypeValuePropertySales, true);
+			} else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAPAC"))) {
+				Utility_Functions.xClick(driver, opportunityRecordType, true);
+				Utility_Functions.xWaitForElementPresent(driver, opportunityRecordTypeValueAPACLandlord, 2);
+				Utility_Functions.xClick(driver, opportunityRecordTypeValueAPACLandlord, true);
+			}
+			Utility_Functions.xClick(driver, continueButton, true);
+			driver.switchTo().defaultContent();
+			Utility_Functions.xSwitchtoFrame(driver, accountName);
+			Utility_Functions.timeWait(3);
+			opportunityCreationNewPageLayoutPage();
 		}
-		Utility_Functions.xClick(driver, continueButton, true);
-		driver.switchTo().defaultContent();
-		Utility_Functions.xSwitchtoFrame(driver, accountName);
-		Utility_Functions.timeWait(2);
-		opportunityCreationNewPageLayoutPage();
 	}
 
 	public void opportunityCreationNewPageLayoutPage() {
@@ -1696,7 +1700,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			report.updateTestLog("Opportunity Created",
 					"There are no Opportunity records present for this record type:::", Status.PASS);
 		} else {
-			if((dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_OB")) || (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_AB")))
+			if((dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_OB")) || (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_AB")) || (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_VAS")))
 			{
 				sSelectedAccount = opportunityCreationPopUp(sAccountName);
 			} else {
@@ -1739,6 +1743,17 @@ public class OpportunitiesPage extends ReusableLibrary {
 					report.updateTestLog("Opportunity Created",
 							"Opportunity Name is not created as per the expected format:::", Status.FAIL);
 				}
+			} else if(dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_VAS")) {
+				if ((sOpportunityName.contains(sSelectedAccount)) && (sOpportunityName.contains("Beijing")) && (sOpportunityName.contains("Industrial"))) {
+						report.updateTestLog("Opportunity Created",
+								"Opportunity Name created as per the format expected -- Account Name - Assignment Type - Total Size - Unit of Measure:::",
+								Status.PASS);
+						System.out.println(
+								" Opportunity Name created as per the format expected -- Account Name - Assignment Type - Total Size - Unit of Measure successfully !!!!!");
+					} else {
+						report.updateTestLog("Opportunity Created",
+								"Opportunity Name is not created as per the expected format:::", Status.FAIL);
+					}
 			} else {
 				if ((sOpportunityName.contains(sAccountName)) && (sOpportunityName.contains(Integer.toString(value)))
 						&& (sOpportunityName.contains("Acres"))) {
@@ -1834,39 +1849,90 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//span[@class='pillText']")
     WebElement selectedAccount;	
 	
-    	
+	@FindBy(xpath = "//span[text()='Lead Source']/parent::span/parent::div/parent::div//a")
+	WebElement leadSourceVAS;
+	
+	@FindBy(xpath = "//span[text()='CBRE Office']/parent::span/parent::div/parent::div//a")
+	WebElement CBREOfficeVAS;	
+	
+	@FindBy(xpath = "//span[text()='Country']/parent::span/parent::div/parent::div//a")
+	WebElement countryVAS;	
+	
+	@FindBy(xpath = "//span[text()='City Tier']/parent::span/parent::div/parent::div//a")
+	WebElement cityTierVAS;	
+	
+	@FindBy(xpath = "//span[text()='City']/parent::label/parent::div/parent::div/parent::div//input")
+	WebElement cityVAS;	
+	
+	@FindBy(xpath = "//span[text()='Asset Type']/parent::span/parent::div/parent::div//a")
+	WebElement AssetTypeVAS;	
+	
 	public String opportunityCreationPopUp(String sAccountName) {
-		Utility_Functions.xSendKeys(driver, accountNameSearchBox, sAccountName);
-		sf_UtilityFunctions.selectObjectFromLookUpList();
-		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-	    Date date = new Date();
-	    Utility_Functions.xScrollWindow(driver);
-	    Utility_Functions.timeWait(2);
-	    Utility_Functions.xScrollWindowTop(driver);
-	    Utility_Functions.timeWait(2);
-		String sAccountNameSelected = selectedAccount.getText();
-	    Utility_Functions.xSendKeys(driver, closeDateOppGWS, dateFormat.format(date).toString());
-        Utility_Functions.xSendKeys(driver, closeDateOppGWS, Keys.TAB);
-        Utility_Functions.xClick(driver,assignmentTypeOppGWS , true);
-        sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "Consulting");
-        Random random = new Random();
-        int value = random.nextInt(999);
-		Utility_Functions.xWaitForElementPresent(driver, totalSizeOppPop, 2);
-		Utility_Functions.xSendKeys(driver, totalSizeOppPop, Integer.toString(value));
-    	try {
-    		 Utility_Functions.xClick(driver,preferredPropertyTypeOppGWS , true);
-    	     sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "Hotel");		
-    	     } catch (Exception e) {
-			e.printStackTrace();
-		}
-    	Utility_Functions.xClick(driver, saveOpportunityGWS, true);
-		Utility_Functions.timeWait(5);
-		Utility_Functions.xWaitForElementPresent(driver, related, 6);
-		if(related.isDisplayed()) {
-			report.updateTestLog("Verify Opportunity Creation", "New Opportunity created successfully:::", Status.PASS);
+		String sAccountNameSelected = null;
+		if(dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_VAS")) {
+			Utility_Functions.xSendKeys(driver, accountNameSearchBox, sAccountName);
+			sf_UtilityFunctions.selectObjectFromLookUpList();
+			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		    Date date = new Date();
+		    Utility_Functions.xScrollWindow(driver);
+		    Utility_Functions.timeWait(2);
+		    Utility_Functions.xScrollWindowTop(driver);
+		    Utility_Functions.timeWait(2);
+			sAccountNameSelected = selectedAccount.getText();
+		    Utility_Functions.xSendKeys(driver, closeDateOppGWS, dateFormat.format(date).toString());
+	        Utility_Functions.xSendKeys(driver, closeDateOppGWS, Keys.TAB);
+	        Utility_Functions.xClick(driver, leadSourceVAS, true);
+		    sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "Business Relationship");
+		    Utility_Functions.xClick(driver, CBREOfficeVAS, true);
+		    sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "China – Beijing");
+		    Utility_Functions.xClick(driver, countryVAS, true);
+		    sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "China");
+		    Utility_Functions.xClick(driver, cityTierVAS, true);
+		    sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "Tier 1");
+		    Utility_Functions.xSendKeys(driver, cityVAS, "Beijing");
+		    Utility_Functions.xClick(driver, AssetTypeVAS, true);
+		    sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "Industrial");		    
+		    Utility_Functions.xClick(driver, saveOpportunityGWS, true);
+			Utility_Functions.timeWait(5);
+			Utility_Functions.xWaitForElementPresent(driver, related, 6);
+			if(related.isDisplayed()) {
+				report.updateTestLog("Verify Opportunity Creation", "New Opportunity created successfully:::", Status.PASS);
+			} else {
+				report.updateTestLog("Verify Opportunity Creation", "New Opportunity creation failed:::", Status.FAIL);
+			}
 		} else {
-			report.updateTestLog("Verify Opportunity Creation", "New Opportunity creation failed:::", Status.FAIL);
-		}
+			Utility_Functions.xSendKeys(driver, accountNameSearchBox, sAccountName);
+			sf_UtilityFunctions.selectObjectFromLookUpList();
+			DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		    Date date = new Date();
+		    Utility_Functions.xScrollWindow(driver);
+		    Utility_Functions.timeWait(2);
+		    Utility_Functions.xScrollWindowTop(driver);
+		    Utility_Functions.timeWait(2);
+			sAccountNameSelected = selectedAccount.getText();
+		    Utility_Functions.xSendKeys(driver, closeDateOppGWS, dateFormat.format(date).toString());
+	        Utility_Functions.xSendKeys(driver, closeDateOppGWS, Keys.TAB);
+	        Utility_Functions.xClick(driver,assignmentTypeOppGWS , true);
+	        sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "Consulting");
+	        Random random = new Random();
+	        int value = random.nextInt(999);
+			Utility_Functions.xWaitForElementPresent(driver, totalSizeOppPop, 2);
+			Utility_Functions.xSendKeys(driver, totalSizeOppPop, Integer.toString(value));
+	    	try {
+	    		 Utility_Functions.xClick(driver,preferredPropertyTypeOppGWS , true);
+	    	     sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "Hotel");		
+	    	     } catch (Exception e) {
+				e.printStackTrace();
+			}
+	    	Utility_Functions.xClick(driver, saveOpportunityGWS, true);
+			Utility_Functions.timeWait(5);
+			Utility_Functions.xWaitForElementPresent(driver, related, 6);
+			if(related.isDisplayed()) {
+				report.updateTestLog("Verify Opportunity Creation", "New Opportunity created successfully:::", Status.PASS);
+			} else {
+				report.updateTestLog("Verify Opportunity Creation", "New Opportunity creation failed:::", Status.FAIL);
+			}
+		}		
 		return sAccountNameSelected;
 	}
 
@@ -3585,32 +3651,12 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, edit, true);
 		report.updateTestLog("Verify Opportunity Edit/Clone", "Edit button is present on Opportunity", Status.PASS);
 		if (dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) {
-			Utility_Functions.timeWait(4);
-			try {
-				
-				Utility_Functions.xWaitForElementPresent(driver, closeDate, 3);
-				Utility_Functions.xClick(driver, closeDate, true);
-				Utility_Functions.timeWait(2);
-				
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
-			Utility_Functions.xScrollWindowToElement(driver, assignmentTypeOppValue);
-			Utility_Functions.xWaitForElementPresent(driver, assignmentTypeOppValue, 3);
-			Utility_Functions.xClick(driver, assignmentTypeOppValue, true);
-			sf_UtilityFunctions.selectStandardDropdownOption("Assignment Type", "Consulting");
-			
-			/*try {
-				if (assignmentTypeOppValueClone.getText().equals("Building Agency Lease")) {
-					Utility_Functions.xSelectDropdownByIndex(assignmentTypeOppValueClone, 2);
-				} else if (assignmentTypeOppValueClone.getText().equals("Building Agency Sale")) {
-					Utility_Functions.xSelectDropdownByIndex(assignmentTypeOppValueClone, 3);
-				} else if (assignmentTypeOppValueClone.getText().equals("Consulting")) {
-					Utility_Functions.xSelectDropdownByIndex(assignmentTypeOppValueClone, 2);
-				} 
-		} catch (Exception e) {
-				Utility_Functions.xSelectDropdownByIndex(assignmentTypeOppValueClone, 1);
-			}*/
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xScrollWindow(driver);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xScrollWindowTop(driver);
+			Utility_Functions.xClick(driver,assignmentTypeOppGWS , true);
+		    sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "Consulting");
 			report.updateTestLog("Verify Opportunity Edit/Clone", "Oportunity Assignment Type is changed to Consulting",
 					Status.PASS);
 			Utility_Functions.timeWait(1);
