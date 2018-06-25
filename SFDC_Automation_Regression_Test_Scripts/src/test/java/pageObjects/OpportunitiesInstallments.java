@@ -349,6 +349,7 @@ public class OpportunitiesInstallments extends ReusableLibrary {
 		Utility_Functions.xSendKeys(driver, InstallmentAmountEdit, "50000");
 		Utility_Functions.xWaitForElementPresent(driver, proceed, 3);
 		Utility_Functions.xClick(driver, proceed, true);
+		
 		try {
 			Utility_Functions.xSelectDropdownByIndex(preferredPropertyTypeOpp, 1);
 			Utility_Functions.xWaitForElementPresent(driver, continueButtonInstallment, 3);
@@ -357,8 +358,8 @@ public class OpportunitiesInstallments extends ReusableLibrary {
 			Utility_Functions.xWaitForElementPresent(driver, continueButtonInstallment, 3);
 			Utility_Functions.xClick(driver, continueButtonInstallment, true);
 		}		
+		Utility_Functions.timeWait(4);
 		driver.switchTo().defaultContent();
-		Utility_Functions.timeWait(2);
 	}
 
 	/**
@@ -371,7 +372,7 @@ public class OpportunitiesInstallments extends ReusableLibrary {
 
 	public void multipleInstallmentsOpportunityEvenPercent() {
 		multipleInstallmentsFunction();
-		addingInstallmentsOpportunities();
+		addingInstallmentsOpportunities();	
 		sf_UtilityFunctions.selectTabUIHeaders("Related");
 		Utility_Functions.xWaitForElementPresent(driver, installmentsViewAll, 3);
 		Utility_Functions.xClick(driver, installmentsViewAll, true);
@@ -394,6 +395,7 @@ public class OpportunitiesInstallments extends ReusableLibrary {
 		} else if (dataTable.getData("General_Data", "TC_ID").contains("AB")) {
 			agencyBrokerage();
 		}
+		//driver.switchTo().defaultContent();
 		Utility_Functions.timeWait(2);
 		driver.navigate().refresh();
 		Utility_Functions.timeWait(1);
