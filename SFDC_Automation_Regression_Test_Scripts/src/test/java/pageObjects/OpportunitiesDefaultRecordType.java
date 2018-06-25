@@ -11,6 +11,7 @@ import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
 
 import pagesAPI.SearchTextSOQL;
+import supportLibraries.SF_UtilityFunctions;
 import supportLibraries.Utility_Functions;
 
 /**
@@ -61,9 +62,15 @@ public class OpportunitiesDefaultRecordType extends ReusableLibrary {
 	@FindBy(xpath = "//*[@id='record-type-select']/option[text()='Capital Markets – Debt & Structured Finance']")
 	WebElement opportunityRecordTypeDebtStructuredFinance;
 
-	@FindBy(xpath = "//span[text()='Sales Stage']/parent::label/parent::div//a[@class='select']")
+    @FindBy(xpath = "//span[text()='Sales Stage']/parent::label/parent::div//a[@class='select']")
 	WebElement salesStageSelected;
+	
+	@FindBy(xpath = "//select[contains(@id,'oppForm:salesStage')]")
+	WebElement salesStageSelectedOpp;
 
+	@FindBy(xpath = "//span[text()='Phase']/following-sibling::span//span")
+	WebElement phaseFieldOpp;
+	
 	@FindBy(xpath = "//span[text()='Phase']/parent::div/parent::div/div[contains(@class,'slds-grid itemBody')]/span/span")
 	WebElement phaseField;
 	
@@ -266,13 +273,8 @@ public class OpportunitiesDefaultRecordType extends ReusableLibrary {
 			Utility_Functions.xClick(driver, continueButton, true);
 			Utility_Functions.timeWait(2);
 			driver.switchTo().defaultContent();
-			try {
-				Utility_Functions.xSelectDropdownByIndex(preferredPropertyTypeOpp, 1);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			Utility_Functions.xSwitchtoFrame(driver, salesStageSelected);
-			Utility_Functions.xWaitForElementPresent(driver, salesStageSelected, 3);
+			
+			Utility_Functions.xSwitchtoFrame(driver, salesStageSelectedOpp);
 			if ((dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) || (dataTable.getData("General_Data", "TC_ID").contains("OBAMER"))) {
 				if ((salesStageSelected.getText().equals("02-Meeting"))
 						&& (phasePresent.getText().equals("Prospecting"))) {
@@ -287,29 +289,31 @@ public class OpportunitiesDefaultRecordType extends ReusableLibrary {
 							Status.FAIL);
 				}
 			} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("PS"))) {
-				if ((salesStageSelected.getText().equals("01-Preliminary"))
-						&& (phasePresent.getText().equals("Prospecting"))) {
+				if ((Utility_Functions.xGetSelectedDropdownValue(salesStageSelectedOpp).equals("01-Preliminary"))
+						&& (phaseFieldOpp.getText().equals("Prospecting"))) {
 					report.updateTestLog("Verify New Opportunity Page",
-							"Sales Stage and Phase field are having the values as:::" + salesStageSelected.getText()
-									+ ":::" + phaseField.getText(),
+							"Sales Stage and Phase field are having the values as:::" + salesStageSelectedOpp.getText()
+									+ ":::" + phaseFieldOpp.getText(),
 							Status.PASS);
 				} else {
 					report.updateTestLog("Verify New Opportunity Page",
 							"Sales Stage and Phase field doesn't have the values as expected:::"
-									+ salesStageSelected.getText() + ":::" + phaseField.getText(),
+									+ salesStageSelectedOpp.getText() + ":::" + phaseFieldOpp.getText(),
 							Status.FAIL);
 				}
 			} else if ((dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("DSF"))) {
-				if ((salesStageSelected.getText().equals("01-Screening"))
-						&& (phasePresent.getText().equals("Prospecting"))) {
+				if ((Utility_Functions.xGetSelectedDropdownValue(salesStageSelectedOpp).equals("01-Screening"))
+						&& (phaseFieldOpp.getText().equals("Prospecting"))) {
+					
+					
 					report.updateTestLog("Verify New Opportunity Page",
-							"Sales Stage and Phase field are having the values as:::" + salesStageSelected.getText()
-									+ ":::" + phaseField.getText(),
+							"Sales Stage and Phase field are having the values as:::" + salesStageSelectedOpp.getText()
+									+ ":::" + phaseFieldOpp.getText(),
 							Status.PASS);
 				} else {
 					report.updateTestLog("Verify New Opportunity Page",
 							"Sales Stage and Phase field doesn't have the values as expected:::"
-									+ salesStageSelected.getText() + ":::" + phaseField.getText(),
+									+ salesStageSelectedOpp.getText() + ":::" + phaseFieldOpp.getText(),
 							Status.FAIL);
 				}
 			}

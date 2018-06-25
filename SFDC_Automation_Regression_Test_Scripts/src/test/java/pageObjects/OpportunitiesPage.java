@@ -206,6 +206,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 
     @FindBy(xpath = "//input[@id='acctSearchBox']")
 	WebElement accountName;
+    
+    @FindBy(xpath = "//label[text()='Account Name']/following-sibling::div")
+    WebElement accName;
 
 	@FindBy(xpath = "//select[contains(@id,'assignmentType')]")
 	WebElement assignmentTypeOpp;
@@ -674,6 +677,42 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//a[@class='forceActionLink']/div[@class='slds-truncate'][text()='Clone']")
 	WebElement clone;
 	
+	@FindBy(xpath = "//*[@class='required ']/..//*[text()='Asset Type']//parent::span/following-sibling::div//a")
+	WebElement assetTypeVASAPAC;
+	
+	@FindBy(xpath = "//span[text()='Area']/parent::label/parent::div//input")
+	WebElement areaVASAPAC;
+
+	@FindBy(xpath = "//span[text()='Unit of Measure']/parent::span/parent::div//a")
+	WebElement unitOfMeasureVASAPAC;
+
+	@FindBy(xpath = "//span[text()='Consultancy Fee']/parent::label/parent::div//input")
+	WebElement consultancyFeeVASAPAC;
+
+	@FindBy(xpath = "//span[contains(text(),'Project Value')]/parent::label/parent::div//input")
+	WebElement projectValueVASAPAC;
+
+	@FindBy(xpath = "//span[contains(text(),'Identification Date')]/parent::label/parent::div//input")
+	WebElement identificationDateVASAPAC;
+
+	@FindBy(xpath = "//span[contains(text(),'Submission Date')]/parent::label/parent::div//input")
+	WebElement submissionDateVASAPAC;
+
+	@FindBy(xpath = "//span[text()='Assignment Type']/parent::span/following-sibling::div//a")
+	WebElement assignmentTypeVASAPAC;
+
+	@FindBy(xpath = "//span[contains(text(),'Outcome Date')]/parent::label/parent::div//input")
+	WebElement outcomeDateVASAPAC;
+
+	@FindBy(xpath ="//span[text()='Construction Type']/parent::span/following-sibling::div//a")
+	WebElement constructionTypeVASAPAC;
+
+	@FindBy(xpath = "//span[contains(text(),'Site Area')]/parent::label/parent::div//input")
+	WebElement siteAreaVASAPAC;
+
+	@FindBy(xpath = "//span[text()='Area UOM']/parent::span/following-sibling::div//a")
+	WebElement areaUOMVASAPAC;
+
 	@FindBy(xpath = "//span[text()='Next']")
 	WebElement offersNextButton;
 	
@@ -1657,7 +1696,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 			report.updateTestLog("Opportunity Created",
 					"There are no Opportunity records present for this record type:::", Status.PASS);
 		} else {
-			if((dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_OB")) || (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_AB"))) {
+			if((dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_OB")) || (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_AB")))
+			{
 				sSelectedAccount = opportunityCreationPopUp(sAccountName);
 			} else {
 				value = opportunityCreation(sAccountName);
@@ -1722,62 +1762,64 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 *
 	 */
 
+
 	public int opportunityCreation(String sAccountName) {
 		Utility_Functions.xSendKeys(driver, accountName, sAccountName);
-		Utility_Functions.timeWait(1);
-		accountName.sendKeys(Keys.ENTER);
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xScrollWindow(driver);
-		Utility_Functions.xSelectDropdownByIndex(assignmentTypeOpp, 1);
-		System.out.println(Calendar.getInstance());
-		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-		Date date = new Date();
-		Utility_Functions.xWaitForElementPresent(driver, leadSource, 5);
-		Utility_Functions.xSelectDropdownByIndex(leadSource, 1);
-		Utility_Functions.xWaitForElementPresent(driver, closeDateOpp, 2);
-		Utility_Functions.xSendKeys(driver, closeDateOpp, dateFormat.format(date).toString());
-		Utility_Functions.xSendKeys(driver, closeDateOpp, Keys.TAB);
-		Random random = new Random();
-		int value = random.nextInt(999);
-		Utility_Functions.xWaitForElementPresent(driver, totalSizeOpp, 2);
-		Utility_Functions.xSendKeys(driver, totalSizeOpp, Integer.toString(value));
-		Utility_Functions.xWaitForElementPresent(driver, unitofMeasure, 2);
-		Utility_Functions.xSelectDropdownByName(unitofMeasure, "Acres");
-		Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFee, 3);
-		Utility_Functions.xClick(driver, estimatedGrossFee, true);
-		Utility_Functions.xSendKeys(driver, estimatedGrossFee, "10000");
-		try {
-			Utility_Functions.xSelectDropdownByIndex(preferredPropertyTypeOpp, 1);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		Utility_Functions.xClick(driver, saveNewOpportunity, true);
-		report.updateTestLog("Opportunity Created", "Clicked on Opportunity save button successfully:::", Status.PASS);
-	
-		try {		
-			List<WebElement> accountErrorMessageList = driver.findElements(By.xpath("//div[@class='message errorM3']//li[text()='Account Name: You must select a value']"));
-			int count=0;
-			for(WebElement element: accountErrorMessageList) {
-				if(count==0) {
-					System.out.println("Skipping the first element");
-				} else if((count==1) && (element.getText().contains("Account Name"))) {
-						accountName.clear();
-						Utility_Functions.xSendKeys(driver, accountName, sAccountName);
-						Utility_Functions.timeWait(1);
-						accountName.sendKeys(Keys.TAB);
-						Utility_Functions.timeWait(1);
-						accountName.sendKeys(Keys.ENTER);
-						Utility_Functions.xClick(driver, saveNewOpportunity, true);
-						report.updateTestLog("Opportunity Created", "Clicked on Opportunity save button successfully:::", Status.PASS);
-						break;
-				}			
-				count++;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}		
-		return value;
-	}
+        Utility_Functions.timeWait(1);
+        accountName.sendKeys(Keys.ENTER);
+        Utility_Functions.timeWait(2);
+        Utility_Functions.xScrollWindow(driver);
+        Utility_Functions.xSelectDropdownByIndex(assignmentTypeOpp, 1);
+        System.out.println(Calendar.getInstance());
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        Date date = new Date();
+        Utility_Functions.xWaitForElementPresent(driver, leadSource, 5);
+        Utility_Functions.xSelectDropdownByIndex(leadSource, 1);
+        Utility_Functions.xWaitForElementPresent(driver, closeDateOpp, 2);
+        Utility_Functions.xSendKeys(driver, closeDateOpp, dateFormat.format(date).toString());
+        Utility_Functions.xSendKeys(driver, closeDateOpp, Keys.TAB);
+        Random random = new Random();
+        int value = random.nextInt(999);
+        Utility_Functions.xWaitForElementPresent(driver, totalSizeOpp, 2);
+        Utility_Functions.xSendKeys(driver, totalSizeOpp, Integer.toString(value));
+        Utility_Functions.xWaitForElementPresent(driver, unitofMeasure, 2);
+        Utility_Functions.xSelectDropdownByName(unitofMeasure, "Acres");
+        Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFee, 3);
+        Utility_Functions.xClick(driver, estimatedGrossFee, true);
+        Utility_Functions.xSendKeys(driver, estimatedGrossFee, "10000");
+        try {
+               Utility_Functions.xSelectDropdownByIndex(preferredPropertyTypeOpp, 1);
+        } catch (Exception e) {
+               e.printStackTrace();
+        }
+        Utility_Functions.xClick(driver, saveNewOpportunity, true);
+        report.updateTestLog("Opportunity Created", "Clicked on Opportunity save button successfully:::", Status.PASS);
+ 
+        try {        
+               List<WebElement> accountErrorMessageList = driver.findElements(By.xpath("//div[@class='message errorM3']//li[text()='Account Name: You must select a value']"));
+               int count=0;
+               for(WebElement element: accountErrorMessageList) {
+                     if(count==0) {
+                            System.out.println("Skipping the first element");
+                     } else if((count==1) && (element.getText().contains("Account Name"))) {
+                                   accountName.clear();
+                                   Utility_Functions.xSendKeys(driver, accountName, sAccountName);
+                                   Utility_Functions.timeWait(1);
+                                   accountName.sendKeys(Keys.TAB);
+                                   Utility_Functions.timeWait(1);
+                                   accountName.sendKeys(Keys.ENTER);
+                                   Utility_Functions.xClick(driver, saveNewOpportunity, true);
+                                   report.updateTestLog("Opportunity Created", "Clicked on Opportunity save button successfully:::", Status.PASS);
+                                   break;
+                     }                    
+                     count++;
+               }
+        } catch (Exception e) {
+               e.printStackTrace();
+        }             
+        return value;
+ }
+
 	
 	
 	@FindBy(xpath = "//span[text()='Preferred Property Type']/parent::span/parent::div//a")
@@ -3646,14 +3688,39 @@ public class OpportunitiesPage extends ReusableLibrary {
 					Status.PASS);
 		} else if (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_VASAPACBroker")) {
 			Utility_Functions.timeWait(2);
-			/*Utility_Functions.xScrollWindowToElement(driver, assetType);
-			Utility_Functions.xWaitForElementPresent(driver, assetType, 3);*/
+			
 			Utility_Functions.xScrollWindow(driver);
-	        Utility_Functions.xClick(driver,assetType , true);
+	        Utility_Functions.xClick(driver,assetTypeVASAPAC , true);
 			sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "Education");
+			Utility_Functions.xWaitForElementPresent(driver, areaVASAPAC,3);
+			Utility_Functions.xSendKeys(driver, areaVASAPAC, "25000");
+			Utility_Functions.xClick(driver,unitOfMeasureVASAPAC, true);
+	        sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "Acres");
+	        Utility_Functions.xClick(driver,assignmentTypeVASAPAC , true);
+			sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "Design Services");
+			Utility_Functions.xClick(driver,constructionTypeVASAPAC , true);
+			sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "Fitout");
+			Utility_Functions.xWaitForElementPresent(driver, siteAreaVASAPAC,3);
+			Utility_Functions.xSendKeys(driver, siteAreaVASAPAC, "25000");
+			 Utility_Functions.xClick(driver,areaUOMVASAPAC , true);
+			sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "Acres");
+	        Utility_Functions.xWaitForElementPresent(driver, consultancyFeeVASAPAC, 3);
+			Utility_Functions.xSendKeys(driver, consultancyFeeVASAPAC,"4567");
+			Utility_Functions.xWaitForElementPresent(driver, projectValueVASAPAC, 3);
+			Utility_Functions.xSendKeys(driver, projectValueVASAPAC,"53,60,000");
+			
+			System.out.println(Calendar.getInstance());
+			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			Date date = new Date();
+			Utility_Functions.xSendKeys(driver, identificationDateVASAPAC, dateFormat.format(date).toString());
+			Utility_Functions.xSendKeys(driver, identificationDateVASAPAC, Keys.TAB);
+			
+			Utility_Functions.xSendKeys(driver, submissionDateVASAPAC, dateFormat.format(date).toString());
+			Utility_Functions.xSendKeys(driver, submissionDateVASAPAC, Keys.TAB);
+			
 			Utility_Functions.xWaitForElementPresent(driver, save, 3);
 			Utility_Functions.xClick(driver, save, true);
-			Utility_Functions.timeWait(1);
+
 			Utility_Functions.xWaitForElementPresent(driver, related, 3);
 			report.updateTestLog("Verify Opportunity Edit/Clone", "Opportunity edited and saved successfully",
 					Status.PASS);

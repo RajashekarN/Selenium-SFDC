@@ -609,6 +609,13 @@ public class Utility_Functions extends ReusableLibrary {
 		Select dropdown = new Select(e);
 		dropdown.selectByVisibleText(visibleName);
 	}
+	
+	
+	public static String xGetSelectedDropdownValue(WebElement e) {
+		Select dropdown = new Select(e);
+		return dropdown.getFirstSelectedOption().getText();
+	}
+	
 
 	public static void xSelectDropdownByValue(WebElement e, String value) {
 		Select dropdown = new Select(e);
