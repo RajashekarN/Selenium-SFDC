@@ -323,7 +323,7 @@ public class SF_UtilityFunctions extends ReusableLibrary {
 	 */
 	public void selectTabUIHeaders(String TabName) {
 		By buttonName = By.xpath("//div[@class='uiTabBar']//span[text()='"+TabName+"']");
-		Utility_Functions.xWaitForElementPresent(driver, buttonName, 3);
+		Utility_Functions.xWaitForElementPresent(driver, buttonName, 4);
 		driver.findElement(buttonName).click();	   
 	}
 
