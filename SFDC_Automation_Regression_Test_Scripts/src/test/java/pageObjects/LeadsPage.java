@@ -1794,12 +1794,9 @@ public class LeadsPage extends ReusableLibrary {
 		}
 		convertLeadPageSectionsAndFieldsList();
 		List<String> SectionsAndFieldsCount = Utility_Functions.xValidatePickListValuesPage(convertLeadPageSectionsAndFieldsList, convertLeadPageSectionsAndFieldsFound, "Convert Lead Page Fields");
-
 		
-		Utility_Functions.xClick(driver, driver.findElement(By.xpath("(//h2[text()='Convert Lead ']/parent::div/following-sibling::div[1]//fieldset[contains(@class,'runtime_sales_leadConvertSectionDesktop')]//span[contains(@class,'slds-text-heading_x-small')])[1]")), true);
-		Utility_Functions.timeWait(1);
-		List<WebElement> convertLeadPageAccountSectionFieldsOnPage = driver.findElements(By.xpath("(//h2[text()='Convert Lead ']/parent::div/following-sibling::div[1]//fieldset[contains(@class,'runtime_sales_leadConvertSectionDesktop')]//span[contains(@class,'slds-text-heading_x-small')])[1]//ancestor::div[@class='col1']/following-sibling::div//label" 
-				+ "|(//h2[text()='Convert Lead ']/parent::div/following-sibling::div[1]//fieldset[contains(@class,'runtime_sales_leadConvertSectionDesktop')]//span[contains(@class,'slds-text-heading_x-small')])[1]//ancestor::div[@class='col1']/following-sibling::div//span[contains(@id,'a-label')]"));
+		List<WebElement> convertLeadPageAccountSectionFieldsOnPage = driver.findElements(By.xpath("(//h2[text()='Convert Lead ']/parent::div/following-sibling::div[1]//fieldset[contains(@class,'runtime_sales_leadConvertSectionDesktop')])[1]//span[contains(@class,'slds-text-heading_x-small')]//ancestor::div[@class='col1']/following-sibling::div//label/span" 
+				+ "|(//h2[text()='Convert Lead ']/parent::div/following-sibling::div[1]//fieldset[contains(@class,'runtime_sales_leadConvertSectionDesktop')])[1]//span[contains(@class,'slds-text-heading_x-small')]//ancestor::div[@class='col1']/following-sibling::div//span[contains(@id,'a-label')]"));
 		List<String> convertLeadPageAccountSectionFieldsFound = new ArrayList<String>();
 		for(int i=0; i<convertLeadPageAccountSectionFieldsOnPage.size(); i++)
 		{
@@ -1811,10 +1808,10 @@ public class LeadsPage extends ReusableLibrary {
 		List<String> accountSectionFieldsCount = Utility_Functions.xValidatePickListValuesPage(convertLeadPageAccountSectionFieldsList, convertLeadPageAccountSectionFieldsFound, "Convert Lead Page Fields");
 
 		
-		Utility_Functions.xClick(driver, driver.findElement(By.xpath("(//h2[text()='Convert Lead ']/parent::div/following-sibling::div[1]//fieldset[contains(@class,'runtime_sales_leadConvertSectionDesktop')]//span[contains(@class,'slds-text-heading_x-small')])[2]")), true);
+		Utility_Functions.xClick(driver, driver.findElement(By.xpath("(//h2[text()='Convert Lead ']/parent::div/following-sibling::div[1]//fieldset[contains(@class,'runtime_sales_leadConvertSectionDesktop')])[2]//span[contains(@class,'slds-text-heading_x-small')]")), true);
 		Utility_Functions.timeWait(1);
-		List<WebElement> convertLeadPageContactSectionFieldsOnPage = driver.findElements(By.xpath("(//h2[text()='Convert Lead ']/parent::div/following-sibling::div[1]//fieldset[contains(@class,'runtime_sales_leadConvertSectionDesktop')]//span[contains(@class,'slds-text-heading_x-small')])[2]//ancestor::div[@class='col1']/following-sibling::div//label"
-				+ "|(//h2[text()='Convert Lead ']/parent::div/following-sibling::div[1]//fieldset[contains(@class,'runtime_sales_leadConvertSectionDesktop')]//span[contains(@class,'slds-text-heading_x-small')])[2]//ancestor::div[@class='col1']/following-sibling::div//span[contains(@id,'a-label')]"));
+		List<WebElement> convertLeadPageContactSectionFieldsOnPage = driver.findElements(By.xpath("(//h2[text()='Convert Lead ']/parent::div/following-sibling::div[1]//fieldset[contains(@class,'runtime_sales_leadConvertSectionDesktop')])[2]//span[contains(@class,'slds-text-heading_x-small')]//ancestor::div[@class='col1']/following-sibling::div//label/span"
+				+ "|(//h2[text()='Convert Lead ']/parent::div/following-sibling::div[1]//fieldset[contains(@class,'runtime_sales_leadConvertSectionDesktop')])[2]//span[contains(@class,'slds-text-heading_x-small')]//ancestor::div[@class='col1']/following-sibling::div//span[contains(@id,'a-label')]"));
 		List<String> convertLeadPageContactSectionFieldsFound = new ArrayList<String>();
 		for(int i=0; i<convertLeadPageContactSectionFieldsOnPage.size(); i++)
 		{
@@ -1826,10 +1823,10 @@ public class LeadsPage extends ReusableLibrary {
 		List<String> contactSectionFieldsCount = Utility_Functions.xValidatePickListValuesPage(convertLeadPageContactSectionFieldsList, convertLeadPageContactSectionFieldsFound, "Convert Lead Page Fields");
 
 
-		Utility_Functions.xClick(driver, driver.findElement(By.xpath("(//h2[text()='Convert Lead ']/parent::div/following-sibling::div[1]//fieldset[contains(@class,'runtime_sales_leadConvertSectionDesktop')]//span[contains(@class,'slds-text-heading_x-small')])[3]")), true);
+		Utility_Functions.xClick(driver, driver.findElement(By.xpath("(//h2[text()='Convert Lead ']/parent::div/following-sibling::div[1]//fieldset[contains(@class,'runtime_sales_leadConvertSectionDesktop')])[3]//span[contains(@class,'slds-text-heading_x-small')]")), true);
 		Utility_Functions.timeWait(1);
-		List<WebElement> convertLeadPageOpportunitySectionFieldsOnPage = driver.findElements(By.xpath("(//h2[text()='Convert Lead ']/parent::div/following-sibling::div[1]//fieldset[contains(@class,'runtime_sales_leadConvertSectionDesktop')]//span[contains(@class,'slds-text-heading_x-small')])[3]//ancestor::div[@class='col1']/following-sibling::div//label"
-				+ "|(//h2[text()='Convert Lead ']/parent::div/following-sibling::div[1]//fieldset[contains(@class,'runtime_sales_leadConvertSectionDesktop')]//span[contains(@class,'slds-text-heading_x-small')])[3]//ancestor::div[@class='col1']/following-sibling::div//span[contains(@id,'a-label')]"));
+		List<WebElement> convertLeadPageOpportunitySectionFieldsOnPage = driver.findElements(By.xpath("(//h2[text()='Convert Lead ']/parent::div/following-sibling::div[1]//fieldset[contains(@class,'runtime_sales_leadConvertSectionDesktop')])[3]//span[contains(@class,'slds-text-heading_x-small')]//ancestor::div[@class='col1']/following-sibling::div//label"
+				+ "|(//h2[text()='Convert Lead ']/parent::div/following-sibling::div[1]//fieldset[contains(@class,'runtime_sales_leadConvertSectionDesktop')])[3]//span[contains(@class,'slds-text-heading_x-small')]//ancestor::div[@class='col1']/following-sibling::div//span[contains(@id,'a-label')]"));
 		List<String> convertLeadPageOpportunitySectionFieldsFound = new ArrayList<String>();
 		for(int i=0; i<convertLeadPageOpportunitySectionFieldsOnPage.size(); i++)
 		{
