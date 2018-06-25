@@ -644,6 +644,9 @@ public class LeadsPage extends ReusableLibrary {
 	@FindBy(xpath = "//span[text()='Your lead has been converted']")
 	WebElement leadConverted;
 	
+	@FindBy(xpath = "(//h2[text()='Convert Lead ']/parent::div/following-sibling::div[1]//fieldset[contains(@class,'runtime_sales_leadConvertSectionDesktop')])[1]//span[contains(@class,'slds-text-heading_x-small')]//ancestor::div[@class='col1']/following-sibling::div//label/span[text()='Choose Existing']")
+	WebElement chooseExistingAccOnLeadConvertPage;
+	
 	@FindBy(xpath = "//input[@title='Search for matching accounts']")
 	WebElement searchExistingAccOnLeadConvertPage;
 	
@@ -1211,13 +1214,18 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.xClick(driver, saveButton, true);
 		Utility_Functions.timeWait(3);		
 		Utility_Functions.xClick(driver, convert, true);
-		Utility_Functions.xWaitForElementVisible(driver, accountNameConvert, 5);
+		Utility_Functions.xWaitForElementVisible(driver, chooseExistingAccOnLeadConvertPage, 5);
 		convertLeadPageValidation();
-		Utility_Functions.xSendKeys(driver, accountNameConvert, dataTable.getData("General_Data", "Account Name"));
+		Utility_Functions.xClick(driver, chooseExistingAccOnLeadConvertPage, true);
+		Utility_Functions.timeWait(1);
+		String accountName = new SearchTextSOQL(scriptHelper).searchAccount().get("Name");
+		Utility_Functions.xSendKeys(driver, searchExistingAccOnLeadConvertPage, accountName);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xClick(driver, driver.findElement(By.xpath("//div[@title='"+accountName+"']")), true);
 		Utility_Functions.timeWait(1);
 		Utility_Functions.xClick(driver, convertButton, true);
 		try {
-			Utility_Functions.xWaitForElementVisible(driver, leadConverted, 20);
+			Utility_Functions.xWaitForElementVisible(driver, leadConverted, 30);
 			report.updateTestLog("Verify Convert Lead with Existing Account", "Lead associated with an Existing Account is converted successfully", Status.PASS);
 		} catch(Exception e) {
 			report.updateTestLog("Verify Convert Lead with Existing Account", "Lead associated with an Existing Account is not converted successfully", Status.FAIL);
