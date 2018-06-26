@@ -173,7 +173,7 @@ public class OpportunitiesInstallments extends ReusableLibrary {
 	
 	public String retriveOpportunityforInstallments() {
 		String query = "SELECT Id, Installment_Quantity__c, CBRE_Preferred_Property_Type_c__c, Total_Size__c, Service__c  FROM"
-				+ " Opportunity where Installment_Quantity__c <= 1 and  CBRE_Preferred_Property_Type_c__c !=null and"
+				+ " Opportunity where Installment_Quantity__c <= 1 and Installment_Count__c = 1 and CBRE_Preferred_Property_Type_c__c !=null and"
 				+ " Total_Size__c != null and Service__c  != null ORDER BY CreatedDate DESC"  + " limit 1 offset " + offsetValue;
 		
 		if(dataTable.getData("General_Data","TC_ID").contains("Split")) {
@@ -286,7 +286,7 @@ public class OpportunitiesInstallments extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, save, 4);
 		Utility_Functions.xHighlight(driver, save, "yellow");
 		actions.moveToElement(save).click().perform();
-		Utility_Functions.timeWait(4);
+		Utility_Functions.timeWait(6);
 	}
 
 	/**
@@ -444,7 +444,9 @@ public class OpportunitiesInstallments extends ReusableLibrary {
 		Date date = new Date();
 		Utility_Functions.xSendKeys(driver, installmentDate, dateFormat.format(date).toString());
 		actions.moveToElement(saveNewOpportunityInstallment).click().perform();
-		Utility_Functions.timeWait(5);
+		Utility_Functions.timeWait(7);
+		driver.switchTo().defaultContent();
+		Utility_Functions.xWaitForElementPresent(driver, related, 4);
 		sf_UtilityFunctions.selectTabUIHeaders("Related");
 		Utility_Functions.xWaitForElementPresent(driver, installmentsViewAll, 3);
 		Utility_Functions.xClick(driver, installmentsViewAll, true);

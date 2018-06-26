@@ -112,6 +112,7 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 		opportunities[0] = opportunity;
 		try {
 			results = EstablishConnection.connection.create(opportunities);
+			establishConnection.saveResultsId(results);
 		} catch (ConnectionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -153,6 +154,7 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 			Notes[0]= Note;
 			try {
 				results = EstablishConnection.connection.create(Notes);
+				establishConnection.saveResultsId(results);
 			} catch (ConnectionException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -284,6 +286,7 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 			} 
 			results = EstablishConnection.connection.update(records);
 			System.out.println("Result:::" + results);
+			establishConnection.saveResultsId(results);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println(e.getStackTrace());
@@ -525,6 +528,7 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 				opportunities[0] = opportunity;
 				try {
 					results = EstablishConnection.connection.create(opportunities);
+					establishConnection.saveResultsId(results);
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
 					e.printStackTrace();
@@ -654,6 +658,7 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 			SObject[] opportunities = new SObject[1];
 			opportunities[0] = opportunity;
 			results = EstablishConnection.connection.create(opportunities);
+			establishConnection.saveResultsId(results);
 			report.updateTestLog("Opportunity Name",
 					"Opportunity for the record type Asset Services is created successfully:::", Status.PASS);
 			System.out.println("Result:::" + results);
