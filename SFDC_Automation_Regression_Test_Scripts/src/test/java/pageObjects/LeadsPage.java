@@ -10,21 +10,16 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
-
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
 import com.sforce.soap.partner.SaveResult;
 import pagesAPI.AccountsFunctions;
 import pagesAPI.EstablishConnection;
-import pagesAPI.LeadsFunctions;
 import pagesAPI.SearchTextSOQL;
 import supportLibraries.SF_UtilityFunctions;
 import supportLibraries.Utility_Functions;
 import pagesAPI.TaskEventsFunctions;
-import pagesAPI.SearchTextSOQL;
-
 
 /**
  * Page Object Class for Leads Page
@@ -1250,7 +1245,7 @@ public class LeadsPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, saveButton, 3);
 		Utility_Functions.xClick(driver, saveButton, true);
 		Utility_Functions.xWaitForElementVisible(driver, convert, 5);
-		String currentUrl = driver.getCurrentUrl();
+		/*String currentUrl = */driver.getCurrentUrl();
 		Utility_Functions.xClick(driver, convert, true);
 		Utility_Functions.xWaitForElementVisible(driver, convertButton, 4);
 		convertLeadPageValidation();
@@ -1386,7 +1381,7 @@ public class LeadsPage extends ReusableLibrary {
 
 	public void leadsVerifyPrivateNotePersonalInformation() {
 		selectALeadInRandom();
-		String currentUrl = driver.getCurrentUrl();
+		/*String currentUrl = */driver.getCurrentUrl();
 		Utility_Functions.xWaitForElementPresent(driver, related, 3);
 		Utility_Functions.xClick(driver, related, true);
 		Utility_Functions.xWaitForElementVisible(driver, new_PrivateNotes, 3);
