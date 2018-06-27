@@ -174,7 +174,7 @@ public class OpportunitiesInstallments extends ReusableLibrary {
 	public String retriveOpportunityforInstallments() {
 		String query = "SELECT Id, Installment_Quantity__c, CBRE_Preferred_Property_Type_c__c, Total_Size__c, Service__c  FROM"
 				+ " Opportunity where Installment_Quantity__c <= 1 and Installment_Count__c = 1 and CBRE_Preferred_Property_Type_c__c !=null and"
-				+ " Total_Size__c != null and Service__c  != null ORDER BY CreatedDate DESC"  + " limit 1 offset " + offsetValue;
+				+ " Total_Size__c != null and Service__c  != null and Installments_Total__c = 0 ORDER BY CreatedDate DESC"  + " limit 1 offset " + offsetValue;
 		
 		if(dataTable.getData("General_Data","TC_ID").contains("Split")) {
 			query = "SELECT Id, CBRE_Preferred_Property_Type_c__c, Total_Size__c, Service__c  FROM"
@@ -182,6 +182,7 @@ public class OpportunitiesInstallments extends ReusableLibrary {
 				+ " Total_Size__c != null and Service__c  != null ORDER BY CreatedDate DESC"  + " limit 1 offset " + offsetValue;
 		}
 		String sOpportunityId = searchTextSOQL.fetchRecordFieldValue("Id", query);
+		opportunitiesFunctions.updateOpportunityField("APAC_Minimum_Total_Area__c", sOpportunityId);
 		opportunitiesFunctions.updateOpportunityField("CBRE_Preferred_Property_Type_c__c", sOpportunityId);
 		if(sOpportunityId==null) {
 			report.updateTestLog("Verify Active Opportunities", "No Opportunities are present:::", Status.PASS);

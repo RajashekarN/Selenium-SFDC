@@ -275,6 +275,8 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 							soUpdate.setField(fieldName,"30,000");
 						} else if(fieldName.equals("Installment_Status__c")) {
 							soUpdate.setField(fieldName,"Pending");
+						} else if(fieldName.equals("APAC_Minimum_Total_Area__c")) {
+							soUpdate.setField(fieldName, "1988");
 						} else if(fieldName.equals("CloseDate")) {
 							Calendar calendar = Calendar.getInstance();
 							calendar.add(Calendar.DAY_OF_MONTH, 365);
