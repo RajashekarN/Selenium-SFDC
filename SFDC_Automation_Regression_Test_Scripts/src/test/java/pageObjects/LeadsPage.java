@@ -1480,10 +1480,10 @@ public class LeadsPage extends ReusableLibrary {
 
 	public void createNewLeadCustomPageAddressInformationFields() {
 		createNewLeadCustomPageAddressInformationFieldsList.add("Address");
-		createNewLeadCustomPageAddressInformationFieldsList.add("Country Code");
+		createNewLeadCustomPageAddressInformationFieldsList.add("Country");
 		createNewLeadCustomPageAddressInformationFieldsList.add("Street");
 		createNewLeadCustomPageAddressInformationFieldsList.add("City");
-		createNewLeadCustomPageAddressInformationFieldsList.add("State/Province Code");
+		createNewLeadCustomPageAddressInformationFieldsList.add("State/Province");
 		createNewLeadCustomPageAddressInformationFieldsList.add("Zip/Postal Code");
 
 
