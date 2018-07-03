@@ -1235,7 +1235,7 @@ public class LeadsPage extends ReusableLibrary {
 	 */	
 	public WebElement convertLeadNewAccount() {
 		String accountName;
-		SaveResult[] resultAccountName = createAccount.createAccount();
+		SaveResult[] resultAccountName = createAccount.createAccount(null);
 		String result = establishConnection.saveResultsId(resultAccountName);
 		if(result.contains("001")) {
 			System.out.println("Account got created successfully:::" + result);

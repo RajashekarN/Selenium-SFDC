@@ -45,18 +45,23 @@ public class AccountsFunctions extends ReusableLibrary {
 	 * @author Vishnuvardhan
 	 *
 	 */
-	public SaveResult[] createAccount() {
+	public SaveResult[] createAccount(String RecordType) {
 		try {
 			establishConnection.establishConnection();
 			SObject account = new SObject();
 
 			account.setType("Account");
+			if(RecordType==null) {
+				System.out.println("Default CBRE Account is selected:::");
+				account.setField("BillingState", dataTable.getData("General_Data", "State"));
+			} else if(RecordType.equals("EMEA_Sites")) {
+				account.setField("RecordTypeId", "012i0000000tvTaAAI");
+			}
 			String accountName = Utility_Functions.xRandomFunction() + "-" + dataTable.getData("General_Data", "Name");
 			account.setField("Name", accountName);
 			account.setField("BillingCountry", dataTable.getData("General_Data", "Country"));
 			account.setField("BillingStreet", dataTable.getData("General_Data", "Street"));
-			account.setField("BillingCity", dataTable.getData("General_Data", "City"));
-			account.setField("BillingState", dataTable.getData("General_Data", "State"));
+			account.setField("BillingCity", dataTable.getData("General_Data", "City"));		
 			account.setField("BillingPostalCode ", dataTable.getData("General_Data", "Zipcode"));
 
 			SObject[] accounts = new SObject[1];

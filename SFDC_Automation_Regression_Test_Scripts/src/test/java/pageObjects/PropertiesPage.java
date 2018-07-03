@@ -432,7 +432,7 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.xSendKeys(driver, buildingPropertyName, dataTable.getData("General_Data", "Building/ Property Name"));
 		Utility_Functions.xScrollWindowOnce(driver);
 		Utility_Functions.timeWait(1);
-		Utility_Functions.xSelectDropdownByIndex(countryDropdown, 229);
+		Utility_Functions.xSelectDropdownByIndex(countryDropdown, 230);
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, street, 3);
 		Utility_Functions.xSendKeys(driver, street, dataTable.getData("General_Data", "Street"));

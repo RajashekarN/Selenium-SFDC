@@ -86,6 +86,44 @@ public class PropertiesFunctions extends ReusableLibrary {
 	}
 
 	/**
+	 * Function for the creation of Property
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+
+	
+	public String createProperty(String Street, String City, String State, String Country, String Zipcode) {
+		establishConnection.establishConnection();
+		SObject property = new SObject();
+		String query_Country = "SELECT Id, Name FROM Country__c where Name = " + "'" + dataTable.getData("General_Data", "Country") + "'";
+		String countryId = searchTextSOQL.fetchRecordFieldValue("Id", query_Country);	
+		property.setType("Property__c");
+		property.setField("Building_Property_Name__c", Utility_Functions.xRandomFunction() + "_" + "Test Automation Project");
+		property.setField("Street__c", Street);
+		property.setField("City__c", City);
+		property.setField("Country__c", countryId);
+		property.setField("Zip_Postal_Code__c ", Zipcode);
+		SObject[] properties = new SObject[1];
+		properties[0] = property;
+		try {
+			results = EstablishConnection.connection.create(properties);
+		} catch (ConnectionException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Result:::" + results);
+		String result = establishConnection.saveResultsId(results);
+		status = establishConnection.saveResults(results);
+		if (status == true) {
+			report.updateTestLog("Verify Create Property", "Property has been created successfully", Status.PASS);
+		} else {
+			report.updateTestLog("Verify Create Property", "Property creation failed", Status.FAIL);
+		}
+		return result; 		
+	}
+	
+	
+	/**
 	 * Function for updating the Property
 	 * 
 	 * @author Vishnuvardhan

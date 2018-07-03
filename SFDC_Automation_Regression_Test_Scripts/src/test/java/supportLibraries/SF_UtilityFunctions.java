@@ -792,5 +792,22 @@ public class SF_UtilityFunctions extends ReusableLibrary {
 		}
 		return headerString;
 	}
+	
+	/**
+	 * Replaces the URL with the specified Object 
+	 * 
+	 * @author Vishnuvardhan
+	 * @return 
+	 *
+	 */
+	
+	public void replaceURL(String objectName, String objectID) {
+		String url = driver.getCurrentUrl().split(objectName+"/")[0];
+		String newUrl = url + objectName + "/" + objectID;
+		newUrl = newUrl + "/view";
+		report.updateTestLog("Verify "+ objectName, objectName + " has been replaced succesfully" + newUrl, Status.PASS);
+		driver.get(newUrl);
+		Utility_Functions.timeWait(2);
+	}
 
 }

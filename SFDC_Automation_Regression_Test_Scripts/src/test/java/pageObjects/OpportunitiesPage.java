@@ -1229,11 +1229,16 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void replaceOpportunityId(String OpportunityId) {
-		String url = driver.getCurrentUrl().split("#")[0];
+/*		String url = driver.getCurrentUrl().split("#")[0];
 		String newUrl = url + "#/sObject/" + OpportunityId;
 		newUrl = newUrl + "/view";
 		report.updateTestLog("Verify Opportunity", "Opportunity has been replaced with new Opportunity" + newUrl,
 				Status.PASS);
+		driver.get(newUrl);*/		
+		String url = driver.getCurrentUrl().split("Opportunity/")[0];
+		String newUrl = url + "Opportunity/" +OpportunityId;
+		newUrl = newUrl + "/view";
+		report.updateTestLog("Verify Opportunity", "Opportunity has been replaced with new Opportunity" + newUrl, Status.PASS);
 		driver.get(newUrl);
 		Utility_Functions.timeWait(2);
 	}
