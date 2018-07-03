@@ -432,95 +432,99 @@ public class OpportunitiesInstallments extends ReusableLibrary {
 	 */
 	public void multipleInstallmentsUnEvenPercent() {
 		String sOpportunityID = multipleInstallmentsFunction();
-		Utility_Functions.xWaitForElementPresent(driver, editButtonInstallment, 5);
-		Utility_Functions.xClick(driver, editButtonInstallment, true);
-		if (dataTable.getData("General_Data", "TC_ID").contains("OB")) {
-			occupierBrokerage();
-		} else if (dataTable.getData("General_Data", "TC_ID").contains("AB")) {
-			agencyBrokerage();
-		}
-		Utility_Functions.xWaitForElementPresent(driver, showMoreActions, 2);
-		Utility_Functions.xClick(driver, showMoreActions, true);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xWaitForElementPresent(driver, newOpportunityInstallment, 2);
-		Utility_Functions.xClick(driver, newOpportunityInstallment, true);
-		Utility_Functions.xWaitForElementPresent(driver, installmentNumber, 4);
-		Utility_Functions.xSendKeys(driver, installmentNumber, "2");
-		Utility_Functions.xSendKeys(driver, editInstallmentAmount, "4,000");
-		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-		Date date = new Date();
-		Utility_Functions.xSendKeys(driver, installmentDate, dateFormat.format(date).toString());
-		actions.moveToElement(saveNewOpportunityInstallment).click().perform();
-		Utility_Functions.timeWait(7);
-		driver.switchTo().defaultContent();
-		Utility_Functions.xWaitForElementPresent(driver, related, 4);
-		sf_UtilityFunctions.selectTabUIHeaders("Related");
-		Utility_Functions.xWaitForElementPresent(driver, installmentsViewAll, 3);
-		Utility_Functions.xClick(driver, installmentsViewAll, true);
-		Utility_Functions.xWaitForElementPresent(driver, opportunityNameLink, 3);
-		Utility_Functions.xClick(driver, opportunityNameLink, true);
-		sf_UtilityFunctions.selectTabUIHeaders("Related");
-		String sInstallmentAmountOne = installmentAmountOne.getText();
-		String sInstallmentAmountTwo = installmentAmountTwo.getText();
-		System.out.println("installmentAmountOne"+sInstallmentAmountOne);
-		System.out.println("installmentAmountTwo"+sInstallmentAmountTwo);
-		if (sInstallmentAmountOne.equals("USD 6,000.00") && sInstallmentAmountTwo.equals("USD 4,000.00")) {
-			report.updateTestLog("Opportunities Installments",
-					"Opportunity installment amounts recalculated successfully after editing the Estimated Gross Fee:::"
-							+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo,
-					Status.PASS);
+		if(sOpportunityID==null) {
+			report.updateTestLog("Opportunity Installments", "There are no Opportunities present with the provided criteria:::", Status.PASS);
 		} else {
-			report.updateTestLog("Opportunities Installments", "Opportunity installment amounts recalculation failed:::"
-					+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo, Status.WARNING);
-		}
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xWaitForElementPresent(driver, editButtonInstallment, 5);
-		Utility_Functions.xClick(driver, editButtonInstallment, true);
-		if (dataTable.getData("General_Data", "TC_ID").contains("OB")) {
-			Utility_Functions.xScrollWindow(driver);
+			Utility_Functions.xWaitForElementPresent(driver, editButtonInstallment, 5);
+			Utility_Functions.xClick(driver, editButtonInstallment, true);
+			if (dataTable.getData("General_Data", "TC_ID").contains("OB")) {
+				occupierBrokerage();
+			} else if (dataTable.getData("General_Data", "TC_ID").contains("AB")) {
+				agencyBrokerage();
+			}
+			Utility_Functions.xWaitForElementPresent(driver, showMoreActions, 2);
+			Utility_Functions.xClick(driver, showMoreActions, true);
 			Utility_Functions.timeWait(1);
-			Utility_Functions.xScrollWindowTop(driver);
-			Utility_Functions.timeWait(3);
-			Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeEdit, 3);
-			estimatedGrossFeeEdit.clear();
-			Utility_Functions.xSendKeys(driver, estimatedGrossFeeEdit, "20,000");
-			Utility_Functions.timeWait(5);
-			Utility_Functions.xWaitForElementPresent(driver, save, 4);
-			Utility_Functions.xHighlight(driver, save, "yellow");
-			actions.moveToElement(save).click().perform();
-			Utility_Functions.timeWait(4);
-		} else if (dataTable.getData("General_Data", "TC_ID").contains("AB")) {
-			driver.navigate().refresh();
-			Utility_Functions.xSwitchtoFrame(driver, agencyBrokerageFrame);
-			Utility_Functions.timeWait(2);
-			Utility_Functions.xScrollWindow(driver);
-			Utility_Functions.timeWait(1);
-			Utility_Functions.xScrollWindowTop(driver);
-			Utility_Functions.timeWait(2);
-			Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFee, 3);
-			estimatedGrossFee.clear();
-			Utility_Functions.xSendKeys(driver, estimatedGrossFee, "20,000");
-			Utility_Functions.xWaitForElementPresent(driver, saveButton_AB, 3);
-			Utility_Functions.xClick(driver, saveButton_AB, true);
-			Utility_Functions.timeWait(1);
+			Utility_Functions.xWaitForElementPresent(driver, newOpportunityInstallment, 2);
+			Utility_Functions.xClick(driver, newOpportunityInstallment, true);
+			Utility_Functions.xWaitForElementPresent(driver, installmentNumber, 4);
+			Utility_Functions.xSendKeys(driver, installmentNumber, "2");
+			Utility_Functions.xSendKeys(driver, editInstallmentAmount, "4,000");
+			DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+			Date date = new Date();
+			Utility_Functions.xSendKeys(driver, installmentDate, dateFormat.format(date).toString());
+			actions.moveToElement(saveNewOpportunityInstallment).click().perform();
+			Utility_Functions.timeWait(7);
 			driver.switchTo().defaultContent();
-			// Utility_Functions.xSwitchtoFrame(driver, related);
+			Utility_Functions.xWaitForElementPresent(driver, related, 4);
+			sf_UtilityFunctions.selectTabUIHeaders("Related");
+			Utility_Functions.xWaitForElementPresent(driver, installmentsViewAll, 3);
+			Utility_Functions.xClick(driver, installmentsViewAll, true);
+			Utility_Functions.xWaitForElementPresent(driver, opportunityNameLink, 3);
+			Utility_Functions.xClick(driver, opportunityNameLink, true);
+			sf_UtilityFunctions.selectTabUIHeaders("Related");
+			String sInstallmentAmountOne = installmentAmountOne.getText();
+			String sInstallmentAmountTwo = installmentAmountTwo.getText();
+			System.out.println("installmentAmountOne"+sInstallmentAmountOne);
+			System.out.println("installmentAmountTwo"+sInstallmentAmountTwo);
+			if (sInstallmentAmountOne.equals("USD 6,000.00") && sInstallmentAmountTwo.equals("USD 4,000.00")) {
+				report.updateTestLog("Opportunities Installments",
+						"Opportunity installment amounts recalculated successfully after editing the Estimated Gross Fee:::"
+								+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo,
+						Status.PASS);
+			} else {
+				report.updateTestLog("Opportunities Installments", "Opportunity installment amounts recalculation failed:::"
+						+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo, Status.WARNING);
+			}
 			Utility_Functions.timeWait(2);
-		}
-		sf_UtilityFunctions.selectTabUIHeaders("Related");
-		sInstallmentAmountOne = installmentAmountOne.getText();
-		sInstallmentAmountTwo = installmentAmountTwo.getText();
-		System.out.println(sInstallmentAmountOne);
-		System.out.println(sInstallmentAmountTwo);
-		if (sInstallmentAmountOne.equals("USD 12,000.00") && sInstallmentAmountTwo.equals("USD 8,000.00")) {
-			report.updateTestLog("Opportunities Installments",
-					"Opportunity installment amounts recalculated successfully after editing the Estimated Gross Fee:::"
-							+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo,
-					Status.PASS);
-		} else {
-			report.updateTestLog("Opportunities Installments", "Opportunity installment amounts recalculation failed:::"
-					+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo, Status.WARNING);
-		}
+			Utility_Functions.xWaitForElementPresent(driver, editButtonInstallment, 5);
+			Utility_Functions.xClick(driver, editButtonInstallment, true);
+			if (dataTable.getData("General_Data", "TC_ID").contains("OB")) {
+				Utility_Functions.xScrollWindow(driver);
+				Utility_Functions.timeWait(1);
+				Utility_Functions.xScrollWindowTop(driver);
+				Utility_Functions.timeWait(3);
+				Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeEdit, 3);
+				estimatedGrossFeeEdit.clear();
+				Utility_Functions.xSendKeys(driver, estimatedGrossFeeEdit, "20,000");
+				Utility_Functions.timeWait(5);
+				Utility_Functions.xWaitForElementPresent(driver, save, 4);
+				Utility_Functions.xHighlight(driver, save, "yellow");
+				actions.moveToElement(save).click().perform();
+				Utility_Functions.timeWait(4);
+			} else if (dataTable.getData("General_Data", "TC_ID").contains("AB")) {
+				driver.navigate().refresh();
+				Utility_Functions.xSwitchtoFrame(driver, agencyBrokerageFrame);
+				Utility_Functions.timeWait(2);
+				Utility_Functions.xScrollWindow(driver);
+				Utility_Functions.timeWait(1);
+				Utility_Functions.xScrollWindowTop(driver);
+				Utility_Functions.timeWait(2);
+				Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFee, 3);
+				estimatedGrossFee.clear();
+				Utility_Functions.xSendKeys(driver, estimatedGrossFee, "20,000");
+				Utility_Functions.xWaitForElementPresent(driver, saveButton_AB, 3);
+				Utility_Functions.xClick(driver, saveButton_AB, true);
+				Utility_Functions.timeWait(1);
+				driver.switchTo().defaultContent();
+				// Utility_Functions.xSwitchtoFrame(driver, related);
+				Utility_Functions.timeWait(2);
+			}
+			sf_UtilityFunctions.selectTabUIHeaders("Related");
+			sInstallmentAmountOne = installmentAmountOne.getText();
+			sInstallmentAmountTwo = installmentAmountTwo.getText();
+			System.out.println(sInstallmentAmountOne);
+			System.out.println(sInstallmentAmountTwo);
+			if (sInstallmentAmountOne.equals("USD 12,000.00") && sInstallmentAmountTwo.equals("USD 8,000.00")) {
+				report.updateTestLog("Opportunities Installments",
+						"Opportunity installment amounts recalculated successfully after editing the Estimated Gross Fee:::"
+								+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo,
+						Status.PASS);
+			} else {
+				report.updateTestLog("Opportunities Installments", "Opportunity installment amounts recalculation failed:::"
+						+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo, Status.WARNING);
+			}
+		}		
 
 	}
 
