@@ -666,76 +666,80 @@ public class OpportunitiesInstallments extends ReusableLibrary {
 	static ArrayList<String> installmentList1 = new ArrayList<String>();
 
 	public void recalculateRoundOffRule() {
-		multipleInstallmentsFunction();
-		addingInstallmentsOpportunities();
-		sf_UtilityFunctions.selectTabUIHeaders("Related");
-		Utility_Functions.xWaitForElementPresent(driver, installmentsViewAll, 3);
-		Utility_Functions.xClick(driver, installmentsViewAll, true);
-		Utility_Functions.xWaitForElementPresent(driver, opportunityNameLink, 3);
-		Utility_Functions.xClick(driver, opportunityNameLink, true);
-		sf_UtilityFunctions.selectTabUIHeaders("Related");
-		Utility_Functions.xWaitForElementPresent(driver, installmentAmountOne, 3);
-		Utility_Functions.xWaitForElementPresent(driver, installmentAmountTwo, 3);
-		Utility_Functions.xWaitForElementPresent(driver, installmentAmountThree, 3);
-		String sInstallmentAmountOne = installmentAmountOne.getText();
-		String sInstallmentAmountTwo = installmentAmountTwo.getText();
-		String sInstallmentAmountThree = installmentAmountThree.getText();
-		report.updateTestLog("Opportunities Installments",
-				"Opportunity installment amount one and two after changing the quantity to two from one:::"
-						+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo + ":::" + sInstallmentAmountThree,
-				Status.PASS);
-		String sEstimatedGrossAmount = dataTable.getData("General_Data", "InstallmentAmount").replace(",", "");
-		String sInstallments = dataTable.getData("General_Data", "InstallmentQuantity");
-		double dInstallment = ((double) Integer.parseInt(sEstimatedGrossAmount)) / Integer.parseInt(sInstallments);
-		System.out.println(dInstallment);
-		BigDecimal bFirstInstallmentAmount = truncateDecimal(dInstallment, 2);
-		String sThirdInstallment = (new DecimalFormat(".##").format(dInstallment));
-		System.out.println(sThirdInstallment);
-		installmentList.add(sThirdInstallment);
-		installmentList.add(sThirdInstallment);
-		installmentList.add(bFirstInstallmentAmount.toString());
-		int count = 0;
-		for (int i = 0; i < installmentList.size(); i++) {
-			if (sInstallmentAmountOne.replaceAll(",", "").contains(installmentList.get(i))) {
-				count++;
-			} else if (sInstallmentAmountTwo.replaceAll(",", "").contains(installmentList.get(i))) {
-				count++;
-			} else if (sInstallmentAmountThree.replaceAll(",", "").contains(installmentList.get(i))) {
-				count++;
-			}
-		}
-		if (count == 3) {
-			report.updateTestLog("Opportunities Installments",
-					"First, Second and Third Installment amounts calculated successfully:::" + bFirstInstallmentAmount
-							+ "::::" + bFirstInstallmentAmount + "::::" + sThirdInstallment,
-					Status.PASS);
+		String sOpportunityID = multipleInstallmentsFunction();
+		if(sOpportunityID==null) {
+			report.updateTestLog("Opportunities Installments", "There are no Opportunities present with the provided criteria:::", Status.PASS);
 		} else {
-			installmentList1.add(bFirstInstallmentAmount.toString());
-			installmentList1.add(bFirstInstallmentAmount.toString());
-			installmentList1.add(sThirdInstallment);
-			int count1 = 0;
-			for (int i = 0; i < installmentList1.size(); i++) {
-				if (sInstallmentAmountOne.replaceAll(",", "").contains(installmentList1.get(i))) {
+			addingInstallmentsOpportunities();
+			sf_UtilityFunctions.selectTabUIHeaders("Related");
+			Utility_Functions.xWaitForElementPresent(driver, installmentsViewAll, 3);
+			Utility_Functions.xClick(driver, installmentsViewAll, true);
+			Utility_Functions.xWaitForElementPresent(driver, opportunityNameLink, 3);
+			Utility_Functions.xClick(driver, opportunityNameLink, true);
+			sf_UtilityFunctions.selectTabUIHeaders("Related");
+			Utility_Functions.xWaitForElementPresent(driver, installmentAmountOne, 3);
+			Utility_Functions.xWaitForElementPresent(driver, installmentAmountTwo, 3);
+			Utility_Functions.xWaitForElementPresent(driver, installmentAmountThree, 3);
+			String sInstallmentAmountOne = installmentAmountOne.getText();
+			String sInstallmentAmountTwo = installmentAmountTwo.getText();
+			String sInstallmentAmountThree = installmentAmountThree.getText();
+			report.updateTestLog("Opportunities Installments",
+					"Opportunity installment amount one and two after changing the quantity to two from one:::"
+							+ sInstallmentAmountOne + ":::" + sInstallmentAmountTwo + ":::" + sInstallmentAmountThree,
+					Status.PASS);
+			String sEstimatedGrossAmount = dataTable.getData("General_Data", "InstallmentAmount").replace(",", "");
+			String sInstallments = dataTable.getData("General_Data", "InstallmentQuantity");
+			double dInstallment = ((double) Integer.parseInt(sEstimatedGrossAmount)) / Integer.parseInt(sInstallments);
+			System.out.println(dInstallment);
+			BigDecimal bFirstInstallmentAmount = truncateDecimal(dInstallment, 2);
+			String sThirdInstallment = (new DecimalFormat(".##").format(dInstallment));
+			System.out.println(sThirdInstallment);
+			installmentList.add(sThirdInstallment);
+			installmentList.add(sThirdInstallment);
+			installmentList.add(bFirstInstallmentAmount.toString());
+			int count = 0;
+			for (int i = 0; i < installmentList.size(); i++) {
+				if (sInstallmentAmountOne.replaceAll(",", "").contains(installmentList.get(i))) {
 					count++;
-				} else if (sInstallmentAmountTwo.replaceAll(",", "").contains(installmentList1.get(i))) {
+				} else if (sInstallmentAmountTwo.replaceAll(",", "").contains(installmentList.get(i))) {
 					count++;
-				} else if (sInstallmentAmountThree.replaceAll(",", "").contains(installmentList1.get(i))) {
+				} else if (sInstallmentAmountThree.replaceAll(",", "").contains(installmentList.get(i))) {
 					count++;
 				}
 			}
-			if (count1 == 3) {
+			if (count == 3) {
 				report.updateTestLog("Opportunities Installments",
-						"First, Second and Third Installment amounts calculated successfully:::"
-								+ bFirstInstallmentAmount + "::::" + bFirstInstallmentAmount + "::::"
-								+ sThirdInstallment,
+						"First, Second and Third Installment amounts calculated successfully:::" + bFirstInstallmentAmount
+								+ "::::" + bFirstInstallmentAmount + "::::" + sThirdInstallment,
 						Status.PASS);
 			} else {
-				report.updateTestLog("Opportunities Installments",
-						"First, Second and Third Installment calculation failed:::" + bFirstInstallmentAmount + "::::"
-								+ bFirstInstallmentAmount + "::::" + sThirdInstallment,
-						Status.WARNING);
+				installmentList1.add(bFirstInstallmentAmount.toString());
+				installmentList1.add(bFirstInstallmentAmount.toString());
+				installmentList1.add(sThirdInstallment);
+				int count1 = 0;
+				for (int i = 0; i < installmentList1.size(); i++) {
+					if (sInstallmentAmountOne.replaceAll(",", "").contains(installmentList1.get(i))) {
+						count++;
+					} else if (sInstallmentAmountTwo.replaceAll(",", "").contains(installmentList1.get(i))) {
+						count++;
+					} else if (sInstallmentAmountThree.replaceAll(",", "").contains(installmentList1.get(i))) {
+						count++;
+					}
+				}
+				if (count1 == 3) {
+					report.updateTestLog("Opportunities Installments",
+							"First, Second and Third Installment amounts calculated successfully:::"
+									+ bFirstInstallmentAmount + "::::" + bFirstInstallmentAmount + "::::"
+									+ sThirdInstallment,
+							Status.PASS);
+				} else {
+					report.updateTestLog("Opportunities Installments",
+							"First, Second and Third Installment calculation failed:::" + bFirstInstallmentAmount + "::::"
+									+ bFirstInstallmentAmount + "::::" + sThirdInstallment,
+							Status.WARNING);
+				}
 			}
-		}
+		}		
 	}
 
 	private static BigDecimal truncateDecimal(double installmentAmount, int numberofDecimals) {
