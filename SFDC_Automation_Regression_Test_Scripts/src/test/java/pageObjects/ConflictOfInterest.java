@@ -165,12 +165,23 @@ public class ConflictOfInterest extends ReusableLibrary {
 		} else {
 			report.updateTestLog("Verify COI Check", "Status didn't get changed " + status.getText(), Status.FAIL);
 		}
-		Utility_Functions.timeWait(120);
+		Utility_Functions.timeWait(60);
 		driver.navigate().refresh();
 		if(status.getText().equals("Processed")) {
 			report.updateTestLog("Verify COI Check", "Status is changed to " + status.getText() + "successfully", Status.PASS);
 		} else {
-			report.updateTestLog("Verify COI Check", "Status didn't get changed " + status.getText(), Status.WARNING);
+			Utility_Functions.timeWait(60);
+			driver.navigate().refresh();
+			if(status.getText().equals("Processed")) 
+				report.updateTestLog("Verify COI Check", "Status is changed to " + status.getText() + "successfully", Status.PASS);
+			else { 
+				Utility_Functions.timeWait(20);
+				driver.navigate().refresh();
+				if(status.getText().equals("Processed")) 
+					report.updateTestLog("Verify COI Check", "Status is changed to " + status.getText() + "successfully", Status.PASS);
+				else
+				report.updateTestLog("Verify COI Check", "Status didn't get changed " + status.getText(), Status.FAIL);
+			}
 		}
 		System.out.println("COI Check ---" + sCoICheck);
 		String sFirstPart, sSecondPart;
