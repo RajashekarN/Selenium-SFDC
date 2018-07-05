@@ -1452,63 +1452,67 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void opportunitySharing() {
-		String queryOpp = "SELECT Id, Name FROM Opportunity where StageName > '16-In Escrow' and StageName < '17-Closed' and Total_Size__c !=null limit 10";
+		String queryOpp = "SELECT Id, Name FROM Opportunity where StageName > '16-In Escrow' and StageName < '19-Closed' and Total_Size__c !=null limit 10";
 		String Opportunity = searchTextSOQL.searchOpportunity(queryOpp);
-		selectOpportunity();
-		Utility_Functions.timeWait(1);
-		replaceOpportunityId(Opportunity);
-		driver.navigate().refresh();
-		sf_UtilityFunctions.clickOnDetailAction("Sharing");
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xSwitchtoFrame(driver, opportunitySharing);
-		Utility_Functions.xWaitForElementPresent(driver, opportunitySharing, 4);
-		Utility_Functions.timeWait(2);
-		driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='Content']")));
-		Utility_Functions.xWaitForElementPresent(driver, addButtonSharing, 5);
-		Utility_Functions.xClick(driver, addButtonSharing, true);
-		Utility_Functions.xWaitForElementPresent(driver, searchUsers, 3);
-		Utility_Functions.xSelectDropdownByName(searchUsers, "Users");
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xSendKeys(driver, searchUserName, "bommisetty");
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xClick(driver, findValue, true);
-		Utility_Functions.timeWait(1);
-		String environment = loginPage.initializeEnvironment();
-		if (environment.equals("UAT")) {
-			Utility_Functions.xSelectDropdownByName(selectUser, "User: vishnuvardhan bommisetty");
+		if(Opportunity==null) {
+			report.updateTestLog("Verify Opportunity", "There are no opportunities present for the above category", Status.PASS);
 		} else {
-			Utility_Functions.xSelectDropdownByName(selectUser, "User: vishnuvardhan bommisetty");
-		}
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xClick(driver, rightArrow, true);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xSelectDropdownByName(access, "Read Only");
-		Utility_Functions.xClick(driver, saveButton, true);
-		Utility_Functions.timeWait(1);
-		driver.switchTo().defaultContent();
-		LoginPage login = new LoginPage(scriptHelper);
-		login.logout();
-		try {
-			String newopportunityID = "'" + Opportunity + "' ";
-			updateOpportunityStatus("StageName", newopportunityID);
-			String updateQuery = "SELECT Id, Name, StageName FROM Opportunity where Id = " + newopportunityID;
-			searchTextSOQL.searchOpportunity(updateQuery);
-			String resultQuery = "SELECT Id, Name, StageName FROM Opportunity where Id = " + newopportunityID;
-			String opportunityStage = searchTextSOQL.fetchRecordFieldValue("StageName", resultQuery);
-			System.out.println(opportunityStage);
-			if (opportunityStage.contains("Closed")) {
-				report.updateTestLog("Verify Opportunity Update", "Opportunity has been updated successfully",
-						Status.FAIL);
+			selectOpportunity();
+			Utility_Functions.timeWait(1);
+			replaceOpportunityId(Opportunity);
+			driver.navigate().refresh();
+			sf_UtilityFunctions.clickOnDetailAction("Sharing");
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xSwitchtoFrame(driver, opportunitySharing);
+			Utility_Functions.xWaitForElementPresent(driver, opportunitySharing, 4);
+			Utility_Functions.timeWait(2);
+			driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='Content']")));
+			Utility_Functions.xWaitForElementPresent(driver, addButtonSharing, 5);
+			Utility_Functions.xClick(driver, addButtonSharing, true);
+			Utility_Functions.xWaitForElementPresent(driver, searchUsers, 3);
+			Utility_Functions.xSelectDropdownByName(searchUsers, "Users");
+			Utility_Functions.timeWait(1);
+			Utility_Functions.xSendKeys(driver, searchUserName, "bommisetty");
+			Utility_Functions.timeWait(1);
+			Utility_Functions.xClick(driver, findValue, true);
+			Utility_Functions.timeWait(1);
+			String environment = loginPage.initializeEnvironment();
+			if (environment.equals("UAT")) {
+				Utility_Functions.xSelectDropdownByName(selectUser, "User: vishnuvardhan bommisetty");
 			} else {
-				report.updateTestLog("Verify Opportunity Update",
-						"Sales Stage updation has been failed which is working as expected", Status.PASS);
+				Utility_Functions.xSelectDropdownByName(selectUser, "User: vishnuvardhan bommisetty");
 			}
-		} catch (Exception e) {
-			report.updateTestLog("Verify Opportunity Update",
-					"You do not have the level of access necessary to perform the operation you requested. "
-							+ "Please contact the owner of the record or your administrator if access is necessary.",
-					Status.PASS);
-		}
+			Utility_Functions.timeWait(1);
+			Utility_Functions.xClick(driver, rightArrow, true);
+			Utility_Functions.timeWait(1);
+			Utility_Functions.xSelectDropdownByName(access, "Read Only");
+			Utility_Functions.xClick(driver, saveButton, true);
+			Utility_Functions.timeWait(1);
+			driver.switchTo().defaultContent();
+			LoginPage login = new LoginPage(scriptHelper);
+			login.logout();
+			try {
+				String newopportunityID = "'" + Opportunity + "' ";
+				updateOpportunityStatus("StageName", newopportunityID);
+				String updateQuery = "SELECT Id, Name, StageName FROM Opportunity where Id = " + newopportunityID;
+				searchTextSOQL.searchOpportunity(updateQuery);
+				String resultQuery = "SELECT Id, Name, StageName FROM Opportunity where Id = " + newopportunityID;
+				String opportunityStage = searchTextSOQL.fetchRecordFieldValue("StageName", resultQuery);
+				System.out.println(opportunityStage);
+				if (opportunityStage.contains("Closed")) {
+					report.updateTestLog("Verify Opportunity Update", "Opportunity has been updated successfully",
+							Status.FAIL);
+				} else {
+					report.updateTestLog("Verify Opportunity Update",
+							"Sales Stage updation has been failed which is working as expected", Status.PASS);
+				}
+			} catch (Exception e) {
+				report.updateTestLog("Verify Opportunity Update",
+						"You do not have the level of access necessary to perform the operation you requested. "
+								+ "Please contact the owner of the record or your administrator if access is necessary.",
+						Status.PASS);
+			}
+		}		
 	}
 
 	/**

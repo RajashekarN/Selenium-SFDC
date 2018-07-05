@@ -69,6 +69,7 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 				opportunity.setField("RecordTypeId", "012i0000001QOXfAAO");
 			} else if((!dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_FRAN")) 
 					&& (!dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_FDIG")) && (!dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_FDIR"))
+					&& (!dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_DAEMEA"))
 					&& (dataTable.getData("General_Data", "TC_ID").contains("EMEA"))) /*&& (!dataTable.getData("General_Data", "TC_ID").startsWith("VAS")) && 
 					(!dataTable.getData("General_Data", "TC_ID").startsWith("GWS")) && (!dataTable.getData("General_Data", "TC_ID").startsWith("OB"))  &&
 					(!dataTable.getData("General_Data", "TC_ID").startsWith("AB")))*/ {
