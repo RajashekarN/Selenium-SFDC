@@ -1235,9 +1235,16 @@ public class OpportunitiesPage extends ReusableLibrary {
 		report.updateTestLog("Verify Opportunity", "Opportunity has been replaced with new Opportunity" + newUrl,
 				Status.PASS);
 		driver.get(newUrl);*/		
-		String url = driver.getCurrentUrl().split("Opportunity/")[0];
-		String newUrl = url + "Opportunity/" +OpportunityId;
-		newUrl = newUrl + "/view";
+		String newUrl =null;
+		if(OpportunityId.startsWith("001")) {
+			String url = driver.getCurrentUrl().split("Account/")[0];
+			newUrl = url + "Account/" +OpportunityId;
+			newUrl = newUrl + "/view";
+		} else {
+			String url = driver.getCurrentUrl().split("Opportunity/")[0];
+			newUrl = url + "Opportunity/" +OpportunityId;
+			newUrl = newUrl + "/view";
+		}	
 		report.updateTestLog("Verify Opportunity", "Opportunity has been replaced with new Opportunity" + newUrl, Status.PASS);
 		driver.get(newUrl);
 		Utility_Functions.timeWait(2);
@@ -3684,8 +3691,8 @@ public class OpportunitiesPage extends ReusableLibrary {
 			Utility_Functions.timeWait(2);
 			report.updateTestLog("Verify Opportunity Edit/Clone", "Opportunity edited and saved successfully",
 					Status.PASS);
-			Utility_Functions.timeWait(2);
-			Utility_Functions.xWaitForElementPresent(driver, clone, 3);
+			Utility_Functions.timeWait(4);
+			Utility_Functions.xWaitForElementPresent(driver, clone, 5);
 			Utility_Functions.xSwitchtoFrame(driver, clone);
 			Utility_Functions.timeWait(2);
 			Utility_Functions.xWaitForElementPresent(driver, clone, 3);
@@ -3702,14 +3709,16 @@ public class OpportunitiesPage extends ReusableLibrary {
 				|| (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_VASAMERManager"))
 				|| (dataTable.getData("General_Data", "TC_ID").contains("GWSAMERBroker"))) {
 			Utility_Functions.timeWait(2);
-			Utility_Functions.xScrollWindowToElement(driver, estimatedGrossFeeCommissionValue);
-			Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeCommissionValue, 3);
-			Utility_Functions.xClick(driver, estimatedGrossFeeCommissionValue, true);
-			if (estimatedGrossFeeCommissionValue.getText().equals("10,000.00")) {
-				Utility_Functions.xSendKeys(driver, estimatedGrossFeeCommissionValue, "15,000.00");
-			} else {
-				Utility_Functions.xSendKeys(driver, estimatedGrossFeeCommissionValue, "10,000.00");
-			}
+			if(!dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_ASAMERManager")) {
+				Utility_Functions.xScrollWindowToElement(driver, estimatedGrossFeeCommissionValue);
+				Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeCommissionValue, 3);
+				Utility_Functions.xClick(driver, estimatedGrossFeeCommissionValue, true);
+				if (estimatedGrossFeeCommissionValue.getText().equals("10,000.00")) {
+					Utility_Functions.xSendKeys(driver, estimatedGrossFeeCommissionValue, "15,000.00");
+				} else {
+					Utility_Functions.xSendKeys(driver, estimatedGrossFeeCommissionValue, "10,000.00");
+				}
+			}						
 			Utility_Functions.xWaitForElementPresent(driver, save, 3);
 			Utility_Functions.xClick(driver, save, true);
 			Utility_Functions.timeWait(1);
