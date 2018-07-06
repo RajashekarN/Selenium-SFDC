@@ -333,40 +333,7 @@ public class ContactsPage extends ReusableLibrary {
 		Map<String, List<String>> pgRelatedSections = new HashMap<String, List<String>>();
 		Map<String, List<String>> pgActivityComponents = new HashMap<String, List<String>>();
 		
-/*	public void getContactPageLayoutElements2(String pageLayout) {
-		String ContactKey = null;
-		String[] ContactFields = null;
-		List<String> ContactFieldList = null;
-		System.out.println("Contact Page Layout ::"+ pageLayout);
-		if (pageLayout == "CBRE Broker - Contact Layout") {
-		  for(int i=1;i<7;i++){
-			  ContactKey = pageProperties.getProperty("BRContactLayoutSection"+i);
-			ContactFields = pageProperties.getProperty("BRContactLayoutFields"+i).split(",");
-			ContactFieldList = Utility_Functions.InitiateListValues(ContactFields);
-			pgSectionElements.put(ContactKey, ContactFieldList);
-		   }
-		 }
-		
-		ContactFields = pageProperties.getProperty("BRContactLayoutActionButtons").split(",");
-		pgActionButtons = Utility_Functions.InitiateListValues(ContactFields);
-		
-		ContactFields = pageProperties.getProperty("BRContactPageHeaderFields").split(",");
-		pgHeaderFields = Utility_Functions.InitiateListValues(ContactFields);
-		
-		for(int i=1;i<6;i++){
-			ContactKey = pageProperties.getProperty("BRContactLayoutRelatedTab"+i);
-			ContactFields = pageProperties.getProperty("BRContactLayoutRelatedSections"+i).split(",");
-			ContactFieldList = Utility_Functions.InitiateListValues(ContactFields);
-			pgSectionElements.put(ContactKey, ContactFieldList);
-		   }
-			
-			ContactKey = pageProperties.getProperty("BRContactLayoutActivityComponentTab1");
-			ContactFields = pageProperties.getProperty("BRContactLayoutActivityComponents1").split(",");
-			ContactFieldList = Utility_Functions.InitiateListValues(ContactFields);
-			pgActivityComponents.put(ContactKey, ContactFieldList);
-		 
-	 }
-	*/
+
 	
 	public void getContactPageLayoutElements(String pageLayout) {
 			List<String> ContactLabelList = null;

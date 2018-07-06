@@ -33,17 +33,17 @@ public class OpportunitySplit extends ReusableLibrary {
 		super(scriptHelper);
 		PageFactory.initElements(driver.getWebDriver(), this);
 	}
-	
-	
+
+
 	/**
-	*Validating the manage Opportunity split functionality
-	*
-	*@author Vishnuvardhan
-	*/
+	 *Validating the manage Opportunity split functionality
+	 *
+	 *@author Vishnuvardhan
+	 */
 
 	@FindBy(xpath = "//span[text()='Estimated Gross Fee/Commission']/parent::span//input")
 	WebElement estimatedGrossFeeField;
-	
+
 	@FindBy(xpath = "//div[contains(@class,'slds-page-header')]//input[@value='Save']")
 	WebElement saveOpportunity;	
 
@@ -82,21 +82,21 @@ public class OpportunitySplit extends ReusableLibrary {
 
 	@FindBy(xpath = "//input[@value='Save']")
 	WebElement saveOpportunitySplitUAT;
-	
+
 	@FindBy(xpath = "//td[contains(@data-label,'Split Percent')]//input")
 	WebElement splitPercent;
 
-	
+
 	OpportunitiesPage opportunitiesPage =new OpportunitiesPage(scriptHelper);
 	SF_UtilityFunctions sf_UtilityFunctions = new SF_UtilityFunctions(scriptHelper);
-	
+
 	/**
 	 * Validating the Opportunity record type for the Capital Markets
 	 * 
 	 * @author Ramya
 	 *
 	 */
-	
+
 	/**
 	 * Validating the manage Opportunity split functionality
 	 * 
@@ -148,6 +148,13 @@ public class OpportunitySplit extends ReusableLibrary {
 							"Add New Team Member Page is having the " + element.getText() + " Status field::",
 							Status.PASS);
 
+				} if(dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_CM")) {
+					if ((count == 3) && (element.getText().equals("OPPORTUNITY ACCESS"))) {
+						System.out.println("OPPORTUNITY ACCESS field is present in the Add New Team Member Page");
+						report.updateTestLog("Add New Team Member Page",
+								"Add New Team Member Page is having the " + element.getText() + " Status field::",
+								Status.PASS);
+					}
 				}
 			}
 			if(dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_CM")) {
@@ -170,8 +177,10 @@ public class OpportunitySplit extends ReusableLibrary {
 		user1.sendKeys(Keys.ENTER);
 		Utility_Functions.xClick(driver, selectTeamRole, true);
 		Utility_Functions.timeWait(3);
-		Utility_Functions.xClick(driver, selectSecondaryMemberRole, true);
-		Utility_Functions.timeWait(3);
+		if(!dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_CM")) {
+			Utility_Functions.xClick(driver, selectSecondaryMemberRole, true);
+			Utility_Functions.timeWait(3);			
+		}
 		Utility_Functions.xClick(driver, selectOpportunityAccess, true);
 		Utility_Functions.timeWait(3);
 		Utility_Functions.xSendKeys(driver, user2, "Test Broker1");
@@ -180,8 +189,10 @@ public class OpportunitySplit extends ReusableLibrary {
 		user2.sendKeys(Keys.ENTER);
 		Utility_Functions.xClick(driver, selectTeamRole2, true);
 		Utility_Functions.timeWait(3);
-		Utility_Functions.xClick(driver, selectSecondaryMemberRole2, true);
-		Utility_Functions.timeWait(3);
+		if(!dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_CM")) {
+			Utility_Functions.xClick(driver, selectSecondaryMemberRole2, true);
+			Utility_Functions.timeWait(3);
+		}		
 		Utility_Functions.xClick(driver, saveButtonSplit, true);
 		Utility_Functions.timeWait(3);
 		driver.switchTo().defaultContent();
@@ -199,6 +210,8 @@ public class OpportunitySplit extends ReusableLibrary {
 		} catch (Exception e) {
 			Utility_Functions.xClick(driver, saveOpportunitySplitUAT, true);
 		}
+		Utility_Functions.timeWait(3);
+
 		report.updateTestLog("Opportunity Saved", "Opportunity Saved successfully::", Status.PASS);
 	}
 }

@@ -1270,11 +1270,23 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void replaceOpportunityId(String OpportunityId) {
-		String url = driver.getCurrentUrl().split("#")[0];
+/*		String url = driver.getCurrentUrl().split("#")[0];
 		String newUrl = url + "#/sObject/" + OpportunityId;
 		newUrl = newUrl + "/view";
 		report.updateTestLog("Verify Opportunity", "Opportunity has been replaced with new Opportunity" + newUrl,
 				Status.PASS);
+		driver.get(newUrl);*/		
+		String newUrl =null;
+		if(OpportunityId.startsWith("001")) {
+			String url = driver.getCurrentUrl().split("Account/")[0];
+			newUrl = url + "Account/" +OpportunityId;
+			newUrl = newUrl + "/view";
+		} else {
+			String url = driver.getCurrentUrl().split("Opportunity/")[0];
+			newUrl = url + "Opportunity/" +OpportunityId;
+			newUrl = newUrl + "/view";
+		}	
+		report.updateTestLog("Verify Opportunity", "Opportunity has been replaced with new Opportunity" + newUrl, Status.PASS);
 		driver.get(newUrl);
 		Utility_Functions.timeWait(2);
 	}
@@ -1488,63 +1500,67 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 */
 
 	public void opportunitySharing() {
-		String queryOpp = "SELECT Id, Name FROM Opportunity where StageName > '16-In Escrow' and StageName < '17-Closed' and Total_Size__c !=null limit 10";
+		String queryOpp = "SELECT Id, Name FROM Opportunity where StageName > '16-In Escrow' and StageName < '19-Closed' and Total_Size__c !=null limit 10";
 		String Opportunity = searchTextSOQL.searchOpportunity(queryOpp);
-		selectOpportunity();
-		Utility_Functions.timeWait(1);
-		replaceOpportunityId(Opportunity);
-		driver.navigate().refresh();
-		sf_UtilityFunctions.clickOnDetailAction("Sharing");
-		Utility_Functions.timeWait(2);
-		Utility_Functions.xSwitchtoFrame(driver, opportunitySharing);
-		Utility_Functions.xWaitForElementPresent(driver, opportunitySharing, 4);
-		Utility_Functions.timeWait(2);
-		driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='Content']")));
-		Utility_Functions.xWaitForElementPresent(driver, addButtonSharing, 5);
-		Utility_Functions.xClick(driver, addButtonSharing, true);
-		Utility_Functions.xWaitForElementPresent(driver, searchUsers, 3);
-		Utility_Functions.xSelectDropdownByName(searchUsers, "Users");
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xSendKeys(driver, searchUserName, "bommisetty");
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xClick(driver, findValue, true);
-		Utility_Functions.timeWait(1);
-		String environment = loginPage.initializeEnvironment();
-		if (environment.equals("UAT")) {
-			Utility_Functions.xSelectDropdownByName(selectUser, "User: vishnuvardhan bommisetty");
+		if(Opportunity==null) {
+			report.updateTestLog("Verify Opportunity", "There are no opportunities present for the above category", Status.PASS);
 		} else {
-			Utility_Functions.xSelectDropdownByName(selectUser, "User: vishnuvardhan bommisetty");
-		}
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xClick(driver, rightArrow, true);
-		Utility_Functions.timeWait(1);
-		Utility_Functions.xSelectDropdownByName(access, "Read Only");
-		Utility_Functions.xClick(driver, saveButton, true);
-		Utility_Functions.timeWait(1);
-		driver.switchTo().defaultContent();
-		LoginPage login = new LoginPage(scriptHelper);
-		login.logout();
-		try {
-			String newopportunityID = "'" + Opportunity + "' ";
-			updateOpportunityStatus("StageName", newopportunityID);
-			String updateQuery = "SELECT Id, Name, StageName FROM Opportunity where Id = " + newopportunityID;
-			searchTextSOQL.searchOpportunity(updateQuery);
-			String resultQuery = "SELECT Id, Name, StageName FROM Opportunity where Id = " + newopportunityID;
-			String opportunityStage = searchTextSOQL.fetchRecordFieldValue("StageName", resultQuery);
-			System.out.println(opportunityStage);
-			if (opportunityStage.contains("Closed")) {
-				report.updateTestLog("Verify Opportunity Update", "Opportunity has been updated successfully",
-						Status.FAIL);
+			selectOpportunity();
+			Utility_Functions.timeWait(1);
+			replaceOpportunityId(Opportunity);
+			driver.navigate().refresh();
+			sf_UtilityFunctions.clickOnDetailAction("Sharing");
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xSwitchtoFrame(driver, opportunitySharing);
+			Utility_Functions.xWaitForElementPresent(driver, opportunitySharing, 4);
+			Utility_Functions.timeWait(2);
+			driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='Content']")));
+			Utility_Functions.xWaitForElementPresent(driver, addButtonSharing, 5);
+			Utility_Functions.xClick(driver, addButtonSharing, true);
+			Utility_Functions.xWaitForElementPresent(driver, searchUsers, 3);
+			Utility_Functions.xSelectDropdownByName(searchUsers, "Users");
+			Utility_Functions.timeWait(1);
+			Utility_Functions.xSendKeys(driver, searchUserName, "bommisetty");
+			Utility_Functions.timeWait(1);
+			Utility_Functions.xClick(driver, findValue, true);
+			Utility_Functions.timeWait(1);
+			String environment = loginPage.initializeEnvironment();
+			if (environment.equals("UAT")) {
+				Utility_Functions.xSelectDropdownByName(selectUser, "User: vishnuvardhan bommisetty");
 			} else {
-				report.updateTestLog("Verify Opportunity Update",
-						"Sales Stage updation has been failed which is working as expected", Status.PASS);
+				Utility_Functions.xSelectDropdownByName(selectUser, "User: vishnuvardhan bommisetty");
 			}
-		} catch (Exception e) {
-			report.updateTestLog("Verify Opportunity Update",
-					"You do not have the level of access necessary to perform the operation you requested. "
-							+ "Please contact the owner of the record or your administrator if access is necessary.",
-					Status.PASS);
-		}
+			Utility_Functions.timeWait(1);
+			Utility_Functions.xClick(driver, rightArrow, true);
+			Utility_Functions.timeWait(1);
+			Utility_Functions.xSelectDropdownByName(access, "Read Only");
+			Utility_Functions.xClick(driver, saveButton, true);
+			Utility_Functions.timeWait(1);
+			driver.switchTo().defaultContent();
+			LoginPage login = new LoginPage(scriptHelper);
+			login.logout();
+			try {
+				String newopportunityID = "'" + Opportunity + "' ";
+				updateOpportunityStatus("StageName", newopportunityID);
+				String updateQuery = "SELECT Id, Name, StageName FROM Opportunity where Id = " + newopportunityID;
+				searchTextSOQL.searchOpportunity(updateQuery);
+				String resultQuery = "SELECT Id, Name, StageName FROM Opportunity where Id = " + newopportunityID;
+				String opportunityStage = searchTextSOQL.fetchRecordFieldValue("StageName", resultQuery);
+				System.out.println(opportunityStage);
+				if (opportunityStage.contains("Closed")) {
+					report.updateTestLog("Verify Opportunity Update", "Opportunity has been updated successfully",
+							Status.FAIL);
+				} else {
+					report.updateTestLog("Verify Opportunity Update",
+							"Sales Stage updation has been failed which is working as expected", Status.PASS);
+				}
+			} catch (Exception e) {
+				report.updateTestLog("Verify Opportunity Update",
+						"You do not have the level of access necessary to perform the operation you requested. "
+								+ "Please contact the owner of the record or your administrator if access is necessary.",
+						Status.PASS);
+			}
+		}		
 	}
 
 	/**
@@ -3700,30 +3716,30 @@ public class OpportunitiesPage extends ReusableLibrary {
 		    sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "Consulting");
 			report.updateTestLog("Verify Opportunity Edit/Clone", "Oportunity Assignment Type is changed to Consulting",
 					Status.PASS);
-			Utility_Functions.timeWait(1);
+			/*Utility_Functions.timeWait(1);
 			Random random = new Random();
 			int value = random.nextInt(999);
 			Utility_Functions.xWaitForElementPresent(driver, totalSize, 3);
 			if (totalSize.getText().equals("")) {
 				Utility_Functions.xSendKeys(driver, totalSize, Integer.toString(value));
-			}
+			}*/
 			Utility_Functions.xWaitForElementPresent(driver, preferredPropType, 3);
 			Utility_Functions.xClick(driver, preferredPropType, true);
-			sf_UtilityFunctions.selectStandardDropdownOption("Preferred Property Type", "Hotel");
-		
+			sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "Office");
 			Utility_Functions.xWaitForElementPresent(driver, saveOpp, 4);
 			Utility_Functions.xClick(driver, saveOpp, true);
 			Utility_Functions.timeWait(2);
 			report.updateTestLog("Verify Opportunity Edit/Clone", "Opportunity edited and saved successfully",
 					Status.PASS);
-			Utility_Functions.timeWait(2);
-			Utility_Functions.xWaitForElementPresent(driver, clone, 3);
+			Utility_Functions.timeWait(4);
+			Utility_Functions.xWaitForElementPresent(driver, clone, 5);
 			Utility_Functions.xSwitchtoFrame(driver, clone);
 			Utility_Functions.timeWait(2);
 			Utility_Functions.xWaitForElementPresent(driver, clone, 3);
 			Utility_Functions.xClick(driver, clone, true);
 			report.updateTestLog("Verify Opportunity Edit/Clone", "Clone button is present on Opportunity",
 					Status.PASS);
+			Utility_Functions.timeWait(2);
 			Utility_Functions.xWaitForElementPresent(driver, save, 3);
 			Utility_Functions.xClick(driver, save, true);
 			report.updateTestLog("Verify Opportunity Edit/Clone", "Opportunity is cloned successfully", Status.PASS);
@@ -3734,14 +3750,16 @@ public class OpportunitiesPage extends ReusableLibrary {
 				|| (dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_VASAMERManager"))
 				|| (dataTable.getData("General_Data", "TC_ID").contains("GWSAMERBroker"))) {
 			Utility_Functions.timeWait(2);
-			Utility_Functions.xScrollWindowToElement(driver, estimatedGrossFeeCommissionValue);
-			Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeCommissionValue, 3);
-			Utility_Functions.xClick(driver, estimatedGrossFeeCommissionValue, true);
-			if (estimatedGrossFeeCommissionValue.getText().equals("10,000.00")) {
-				Utility_Functions.xSendKeys(driver, estimatedGrossFeeCommissionValue, "15,000.00");
-			} else {
-				Utility_Functions.xSendKeys(driver, estimatedGrossFeeCommissionValue, "10,000.00");
-			}
+			if(!dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_ASAMERManager")) {
+				Utility_Functions.xScrollWindowToElement(driver, estimatedGrossFeeCommissionValue);
+				Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeCommissionValue, 3);
+				Utility_Functions.xClick(driver, estimatedGrossFeeCommissionValue, true);
+				if (estimatedGrossFeeCommissionValue.getText().equals("10,000.00")) {
+					Utility_Functions.xSendKeys(driver, estimatedGrossFeeCommissionValue, "15,000.00");
+				} else {
+					Utility_Functions.xSendKeys(driver, estimatedGrossFeeCommissionValue, "10,000.00");
+				}
+			}						
 			Utility_Functions.xWaitForElementPresent(driver, save, 3);
 			Utility_Functions.xClick(driver, save, true);
 			Utility_Functions.timeWait(1);

@@ -4,8 +4,6 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -434,7 +432,7 @@ public class PropertiesPage extends ReusableLibrary {
 		Utility_Functions.xSendKeys(driver, buildingPropertyName, dataTable.getData("General_Data", "Building/ Property Name"));
 		Utility_Functions.xScrollWindowOnce(driver);
 		Utility_Functions.timeWait(1);
-		Utility_Functions.xSelectDropdownByIndex(countryDropdown, 229);
+		Utility_Functions.xSelectDropdownByName(countryDropdown, "United States");
 		Utility_Functions.timeWait(2);
 		Utility_Functions.xWaitForElementPresent(driver, street, 3);
 		Utility_Functions.xSendKeys(driver, street, dataTable.getData("General_Data", "Street"));

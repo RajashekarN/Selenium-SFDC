@@ -445,6 +445,16 @@ public class PermissionSetsUsers extends ReusableLibrary {
 				System.out.println("DataAdmin EMEA Data User - :::" + userNameList.get(i)
 				+ ":::is having the permission set::: Lightning Experience");
 				permissionSetsLabels.add("Lightning Experience");
+				permissionSetsLabels.add("Conflict of Interest EMEA");
+				permissionSetsLabels.add("EMEA Property Permissions");
+				permissionSetsLabels.add("EMEA A&T Investor");
+				permissionSetsLabels.add("EMEA A&T Occupier");
+				permissionSetsLabels.add("EMEA BC&P");
+				permissionSetsLabels.add("EMEA Capital Markets Capital Advisors");
+				permissionSetsLabels.add("EMEA Capital Markets Investment Properties");
+				permissionSetsLabels.add("EMEA Development");
+				permissionSetsLabels.add("EMEA Leads Permissions");
+				permissionSetsLabels.add("EMEA Property Permissions");
 				break;
 			case "testuser62@cbre.com.crm.":
 				System.out.println("GWS APAC Manager User - :::" + userNameList.get(i)

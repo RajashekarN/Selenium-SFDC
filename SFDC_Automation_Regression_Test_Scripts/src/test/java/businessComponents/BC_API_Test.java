@@ -118,7 +118,7 @@ public class BC_API_Test extends ReusableLibrary {
 	 *
 	 */
 	public void bc_validateOpportunity() {
-		opportunitiesFunctions.createOpportunity();
+		opportunitiesFunctions.createOpportunity(null);
 	}
 	
 	/**
@@ -251,7 +251,7 @@ public class BC_API_Test extends ReusableLibrary {
 	 */
 	
 	public void bc_createOpportunityNoteAttachment(){
-		String opportunityId = opportunitiesFunctions.createOpportunity();
+		String opportunityId = opportunitiesFunctions.createOpportunity(null);
 		boolean oppStatus = opportunitiesFunctions.createNote(opportunityId);
 		if(oppStatus) {
 			report.updateTestLog("Verify opportunity Note","Note has been created", Status.PASS);

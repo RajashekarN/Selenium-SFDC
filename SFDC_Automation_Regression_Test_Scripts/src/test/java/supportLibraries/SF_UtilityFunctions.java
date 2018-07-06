@@ -316,6 +316,36 @@ public class SF_UtilityFunctions extends ReusableLibrary {
 	}
 	
 	/**
+	 * Select actions like Add Property, Edit, Delete, Run Check for COI
+	 * 
+	 * @author Swapna
+	 *
+	 */
+
+
+	public void clickOnDetailActionButton(String sButton, String sButtonName) {
+		By ButtonName = By.xpath("//div[text()='"+sButton+"']/parent::a/parent::li/parent::ul//li//div[text()='"+sButtonName+"']");
+		By Buttons = By.xpath("//div[text()='"+sButton+"']/parent::a/parent::li/parent::ul//li");
+		By MoreActionButton = By.xpath("//ul[@class='scrollable']//a[@title='"+sButtonName+"']");
+		try {
+			int count=1; 
+			int size = driver.findElements(Buttons).size();
+			for(WebElement element: driver.findElements(Buttons)) {
+				if(size==count) {
+					element.click();
+					break;
+				} 
+				count++;
+			}
+			Utility_Functions.timeWait(1);
+			driver.findElement(MoreActionButton).click();
+		} catch (Exception e) {
+			driver.findElement(ButtonName);
+		}
+		Utility_Functions.timeWait(1);
+	}
+	
+	/**
 	 * Select a tab from the UI tab Details, Related and More 
 	 * 
 	 * @author Vishnuvardhan
@@ -417,6 +447,25 @@ public class SF_UtilityFunctions extends ReusableLibrary {
 				}
 			}
 			index++;
+		}		
+	}
+	
+	/**
+	 * Select the 2nd object from the lookup list
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	
+	public void selectObjectFromLookUpList(String sText, int iElementNumber) {
+		List<WebElement> firstLookupElements = driver.findElements(By.cssSelector("ul>li.forceSearchInputLookupDesktopOption:nth-child(1)"));
+		int count=0;
+		for(WebElement element: firstLookupElements) {
+			if(iElementNumber==count) {
+					Utility_Functions.xWaitForElementPresent(driver, element, 4);
+					Utility_Functions.xClick(driver, element, false);
+			}			 
+			count++;
 		}		
 	}
 	
@@ -817,6 +866,23 @@ public class SF_UtilityFunctions extends ReusableLibrary {
 			headerString = driver.findElement(detailHeaderSec_LinkTextTitle).getText();			
 		}
 		return headerString;
+	}
+	
+	/**
+	 * Replaces the URL with the specified Object 
+	 * 
+	 * @author Vishnuvardhan
+	 * @return 
+	 *
+	 */
+	
+	public void replaceURL(String objectName, String objectID) {
+		String url = driver.getCurrentUrl().split(objectName+"/")[0];
+		String newUrl = url + objectName + "/" + objectID;
+		newUrl = newUrl + "/view";
+		report.updateTestLog("Verify "+ objectName, objectName + " has been replaced succesfully" + newUrl, Status.PASS);
+		driver.get(newUrl);
+		Utility_Functions.timeWait(2);
 	}
 
 }

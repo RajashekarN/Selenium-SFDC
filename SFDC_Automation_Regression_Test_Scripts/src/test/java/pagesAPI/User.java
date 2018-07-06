@@ -1,7 +1,6 @@
 package pagesAPI;
 
 
-import com.cognizant.Craft.ScriptHelper;
 import com.sforce.soap.partner.QueryResult;
 import com.sforce.soap.partner.sobject.SObject;
 import pagesAPI.EstablishConnection;
@@ -18,7 +17,6 @@ public class User extends Object{
 	private String Id;
 	private String name;
 	private String userName;
-	private ScriptHelper scriptHelper;
 	
  // EstablishApiConnection establishConnection = new EstablishApiConnection(scriptHelper);
 	

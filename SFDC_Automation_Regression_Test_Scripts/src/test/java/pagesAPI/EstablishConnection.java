@@ -287,6 +287,10 @@ public class EstablishConnection extends ReusableLibrary {
 						&& (dataTable.getData("General_Data", "TC_ID").contains("Data"))
 						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
 					Username = properties.getProperty("DAPACIData") + "." + environment;
+				else if ((dataTable.getData("General_Data", "TC_ID").contains("DAEMEA"))
+						&& (dataTable.getData("General_Data", "TC_ID").contains("Data"))
+						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
+					Username = properties.getProperty("DAPACIData") + "." + environment;			
 				else if ((dataTable.getData("General_Data", "TC_ID").contains("ABAPAC"))
 						&& (dataTable.getData("General_Data", "TC_ID").contains("Broker"))
 						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
@@ -782,11 +786,9 @@ public class EstablishConnection extends ReusableLibrary {
 			} else {
 				for (int i = 0; i < results[j].getErrors().length; i++) {
 					com.sforce.soap.partner.Error err = results[j].getErrors()[i];
-					report.updateTestLog("Verify Create/ Update Account, Contact, Lead, Opportunities",
-							"Errors were found on item:::" + j, Status.FAIL);
-					report.updateTestLog("Verify Create/ Update Account",
+						report.updateTestLog("Verify Results",
 							"Errors code:::" + err.getStatusCode().toString(), Status.FAIL);
-					report.updateTestLog("Verify Create/ Update Account, Contact, Lead, Opportunities",
+					report.updateTestLog("Verify Results",
 							"Errors message:::" + err.getMessage(), Status.FAIL);
 					System.out.println("Errors were found on item " + j);
 					System.out.println("Error code::" + err.getStatusCode().toString());

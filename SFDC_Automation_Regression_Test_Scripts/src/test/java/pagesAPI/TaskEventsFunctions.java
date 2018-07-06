@@ -66,7 +66,7 @@ public class TaskEventsFunctions extends ReusableLibrary {
 		String sOpportunityID = searchTextSOQL.fetchRecordFieldValue("Id", queryOpportunityID);
 		if(sOpportunityID==null) {
 			OpportunitiesFunctions opportunitiesFunctions = new OpportunitiesFunctions(scriptHelper);
-			sNewOpportunity = opportunitiesFunctions.createOpportunity();
+			sNewOpportunity = opportunitiesFunctions.createOpportunity(null);
 		}
 		//String sLeadID = searchTextSOQL.fetchRecordFieldValue("Id", queryLeadID);	
 		String sNewLeadID = null;

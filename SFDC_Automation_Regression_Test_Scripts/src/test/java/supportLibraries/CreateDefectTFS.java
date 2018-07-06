@@ -38,6 +38,7 @@ public class CreateDefectTFS  {
 			JSONObject json = new JSONObject();
 			json.put("action", "create");
 			json.put("application_id", properties.getProperty("ApplicationId"));
+			json.put("automation_tool_id", properties.getProperty("AutomationToolId"));
 			json.put("title", sTestTitle ); 
 			json.put("repro_steps", sTestRetroSteps);
 			json.put("project_name_in_TFS", properties.getProperty("ProjectNameinTFS"));

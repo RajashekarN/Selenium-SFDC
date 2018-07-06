@@ -107,7 +107,7 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<testNG.suiteXmlFilereRun>src/test/resources/testng_UAT.xml</testNG.suiteXmlFilereRun>
+				<testNG.suiteXmlFilereRun>src/test/resources/testngUAT.xml</testNG.suiteXmlFilereRun>
 			</properties>
 			<build>
 				<plugins>

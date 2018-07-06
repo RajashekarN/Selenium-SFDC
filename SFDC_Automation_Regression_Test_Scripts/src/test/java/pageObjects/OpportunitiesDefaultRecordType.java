@@ -9,9 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
-
 import pagesAPI.SearchTextSOQL;
-import supportLibraries.SF_UtilityFunctions;
 import supportLibraries.Utility_Functions;
 
 /**
