@@ -932,6 +932,31 @@ public class AccountsPage extends ReusableLibrary {
 
 	@FindBy(xpath = ".//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']/span[contains(text(),'Title')]/parent::label/parent::div/input")
 	WebElement titleName;
+	
+	/**
+	 * Function for creating and searching an account
+	 * 
+	 * @author Haritha
+	 */
+	@FindBy(xpath="//span[text()='Account Name']/parent::label/parent::div//input")
+	WebElement accountNameEmea;
+	
+	@FindBy(xpath="//input[@placeholder='Search Account']")
+	WebElement accountSearchEmea;
+	
+	@FindBy(xpath="//input[@value='Search']")
+	WebElement searchEmea;
+	
+	@FindBy(xpath="(//td[@data-label='Account Name']//a)[1]")
+	WebElement selectFirstAccountEmea;
+	
+	
+	@FindBy(xpath="//span[text()='Area of Operations']/parent::span/following-sibling::div//a")
+	WebElement areaOfOperations;
+	
+	@FindBy(xpath="//button[@class='slds-button slds-button--neutral uiButton--default uiButton--brand uiButton forceActionButton'][contains(@title,'Save')]")
+	WebElement saveEmeaAccount;
+	
 
 	/*
 	 * Constructor to initialize the business component library
@@ -3938,5 +3963,78 @@ public class AccountsPage extends ReusableLibrary {
 		}
 
 	}
+	/**
+	 * Function for creating an EMEA reporting account
+	* 
+	* @author Haritha
+	*/
+	
+		public void emeaReportingAccount() {
+		//areaOfOperationsAccountCreation();
+		sf_UtilityFunctions.oneAppNavigationTab("Accounts");
+		Utility_Functions.xWaitForElementPresent(driver, newAccount, 3);
+		Utility_Functions.xClick(driver, newAccount, true);
+		Utility_Functions.timeWait(2);
+		sf_UtilityFunctions.selectRecordTypeRadioButton("EMEA Reporting Account");
+		Utility_Functions.xSwitchtoFrame(driver, newAccountEMEAnext);
+		Utility_Functions.xClick(driver, newAccountEMEAnext, true);
+		driver.switchTo().defaultContent();
+		Utility_Functions.xClick(driver, accountNameEmea, true);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xSendKeys(driver, accountNameEmea, "Test Automation");
+		Utility_Functions.timeWait(2);
+		accountNameEmea.sendKeys(Keys.ARROW_DOWN);
+		Utility_Functions.timeWait(2);
+		accountNameEmea.sendKeys(Keys.ENTER);
+		Utility_Functions.xWaitForElementPresent(driver, areaOfOperations, 3);
+		sf_UtilityFunctions.selectStandardDropdownOption("Area of Operations", "Global");
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, saveEmeaAccount, 3);
+		Utility_Functions.xClick(driver, saveEmeaAccount, true);
+		Utility_Functions.timeWait(5);
+		sf_UtilityFunctions.oneAppNavigationTab("Account Search");
+		Utility_Functions.timeWait(5);
+		Utility_Functions.xSwitchtoFrame(driver, accountSearchEmea);
+		//Utility_Functions.xWaitForElementPresent(driver, accountSearchEmea, 3);
+		Utility_Functions.xSendKeys(driver,accountSearchEmea, "Test Automation Services LLC");
+		Utility_Functions.xClick(driver, searchEmea, true);
+		Utility_Functions.timeWait(2);
+		String accountName =selectFirstAccountEmea.getText();
+		if(accountName.contains("Test Automation Services LLC")) {
+			report.updateTestLog("Verify Area of Operations", "Account creation is successful:::", Status.PASS);
+		}
+		else
+		{
+			report.updateTestLog("Verify Area of Operations", "Account creation is Failed:::", Status.FAIL);
+		}
+    
+	}
+		
+		/**
+		 * Validating the Account's Opportunities Field in Record Type of Accounts for France users
+		 * 
+		 * @author Haritha
+		 *
+		 */
 
+		public void accountsOpportunitiesTypeField() {
+			sf_UtilityFunctions.oneAppNavigationTab("Accounts");
+			List<WebElement> columnList = driver.findElements(By.xpath(
+					"//table[contains(@class,'uiVirtualDataTable')]//div[@class='slds-cell-fixed']//span[@class='slds-truncate']"));
+			int count = 0;
+			for (WebElement element : columnList) {
+				String sColumnList = element.getText();
+				System.out.println(sColumnList);
+				if (sColumnList.contains("ACCOUNT'S OPPORTUNITIES")) {
+					count++;
+				}
+			}
+			if (count == 1) {
+				report.updateTestLog("Verify Account's Opportunities Type Field", "Account's Opportunities Type column is present:::",
+						Status.PASS);
+			} else {
+				report.updateTestLog("Verify Account's Opportunities Type Field", "Account's Opportunities Type column is not there:::",
+						Status.FAIL);
+			}
+		}
 }

@@ -554,6 +554,32 @@ public class SF_UtilityFunctions extends ReusableLibrary {
 		}		
 	}
 	
+	/**
+	 * Validates the picklist value from the passed pick list in Properties, Project Enquiries and Property Enquiries 
+	 *
+	 * @author Vishnuvardhan
+	 *
+	 */
+	
+	public void verifyPickListValues(List<String> Values, String ObjectName, String RecordType, String PickListName) {
+		int count=0;
+		List<String> PickListValues = getPickListValues(ObjectName, RecordType, PickListName);
+		for(int j=0; j < Values.size(); j++) {
+			for(int i=0; i < PickListValues.size(); i++) {
+				if(PickListValues.get(i).equals(Values.get(i))) {
+					count++;
+					break;
+				}
+					
+			}
+		}
+		if (count==Values.size()) {
+			report.updateTestLog("Verify picklist value", "Pick list value are present in the Area UOM Pick List::: " + PickListName, Status.PASS);
+		} else {
+			report.updateTestLog("Verify picklist value", "Pick list value are not present in the Area UOM Pick List::: " + PickListName, Status.FAIL);
+		}		
+	}
+	
     /**
     * This method selects the pick list values from the drop down list
     * 

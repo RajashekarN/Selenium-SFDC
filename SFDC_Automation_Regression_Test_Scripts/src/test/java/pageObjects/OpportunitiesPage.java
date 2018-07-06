@@ -886,6 +886,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 	
 	@FindBy(xpath = "//span[contains(text(),'Account Name')]/parent::label/following-sibling::div//input[contains(@title,'Search Accounts')]")
 	WebElement accountNameNewOpportunity;
+	
+	@FindBy(xpath="//select[@id='record-type-select']/option[contains(text(),'France Consulting & Service')]")
+	WebElement franceConsultingAndService;
 
      /**
 	 * Validating the Opportunities APAC DSF for Financial Details for pacific users
@@ -1071,6 +1074,44 @@ public class OpportunitiesPage extends ReusableLibrary {
  
 	@FindBy(xpath = "//a[contains(text(),'01-Intro Meeting / Relationship Building')]")
 	WebElement salesStageDefaultValue;
+	
+	/**
+	 * Validating the CBRE 360 Field on Opportunities page
+	 * 
+	 * @author Haritha
+	 */
+
+	@FindBy(xpath="//span[text()='Opportunity Name']/parent::label/parent::div//input")
+	WebElement oppName_AS;
+
+	@FindBy(xpath ="//span[contains(text(),'Account Name')]/parent::label/following-sibling::div//input[contains(@title,'Search Accounts')]")
+	WebElement accountNameAssetOpp;
+		
+	@FindBy(xpath = "//span[text()='Total Size']/parent::label/parent::div//input")
+	WebElement totalSizeAssetServices;
+
+	@FindBy(xpath = "//span[text()='Unit of Measure']/parent::span/parent::div//a")
+	WebElement unitOfMeasureAssetServices;
+
+	@FindBy(xpath = "//span[contains(text(),'Region')]/parent::span/following-sibling::div//a")
+	WebElement regionAssetServices;
+	
+	@FindBy(xpath = "//span[text()='Market']/parent::label/following-sibling::select")
+	WebElement marketAssetServices;
+
+	@FindBy(xpath="//span[text()='CBRE 360']/parent::span/following-sibling::div//a")
+	WebElement cbre360;
+	
+	@FindBy(xpath="//span[text()='Close Date']/parent::label/parent::div//input")
+	WebElement closeDateAssetServices;
+	
+	@FindBy(xpath="//span[text()='Sales Stage']/parent::label/parent::div//a")
+	WebElement salesStageAssetServices;
+	
+	@FindBy(xpath="//button[contains(@class,'forceActionButton')]/span[text()='Save']")
+	WebElement saveOppAssetServices;
+	
+
 
 	
 	/*
@@ -4679,7 +4720,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	}
 
 	/**
-	 * Validating the Opportunities creation for the japan users
+	 * Validating the Opportunities creation for the Japan users & France users
 	 * 
 	 * @author Ramya
 	 *
@@ -4738,7 +4779,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			report.updateTestLog("Verify Recalculate and New Installment",
 					"The Recalculate and new Installment buttons are not present", Status.FAIL);
 		}
-	}
+		}
 
 	/**
 	 * Validating the Opportunities APAC DSF for Financial Details for pacific
@@ -5193,6 +5234,100 @@ public class OpportunitiesPage extends ReusableLibrary {
 				Status.PASS);
 
 	}
+	
+	/**
+	 * Function for validating the CBRE 360 Field on Opportunity page layout
+	 * 
+	 * @author Haritha
+	 */
+	
+	public void validateOpportunityCbre360Field() {
+		selectNewOpportunity();
+		Utility_Functions.xWaitForElementPresent(driver, oppName_AS, 3);
+		Utility_Functions.xClick(driver, oppName_AS, true);
+		Utility_Functions.xWaitForElementPresent(driver, oppName_AS, 3);
+		Utility_Functions.xSendKeys(driver, oppName_AS,
+				"Test Automation Opportunity_" + Utility_Functions.xGenerateAlphaNumericString());
+		Utility_Functions.xWaitForElementPresent(driver, accountNameAssetOpp, 4);
+		//sf_UtilityFunctions.selectObjectFromLookUpList();
+		Utility_Functions.xSendKeys(driver, accountNameAssetOpp, "Test Automation_0105");
+		Utility_Functions.timeWait(2);	
+		accountNameAssetOpp.sendKeys(Keys.ARROW_DOWN);	
+		accountNameAssetOpp.sendKeys(Keys.ENTER);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xWaitForElementPresent(driver, totalSizeAssetServices, 5);
+		Utility_Functions.xSendKeys(driver, totalSizeAssetServices, dataTable.getData("General_Data", "InstallmentAmount"));
+        Utility_Functions.xWaitForElementPresent(driver, unitOfMeasureAssetServices, 2);
+        sf_UtilityFunctions.selectStandardDropdownOption("Unit of Measure", "Square Feet");
+        Utility_Functions.xWaitForElementPresent(driver, regionAssetServices, 3);
+        sf_UtilityFunctions.selectStandardDropdownOption("Region", "APAC");
+        Utility_Functions.xScrollWindow(driver);
+        Utility_Functions.xWaitForElementPresent(driver, marketAssetServices, 3);
+        Utility_Functions.xSelectDropdownByName(marketAssetServices, "Australia");
+        Utility_Functions.xWaitForElementPresent(driver, cbre360, 3);
+        sf_UtilityFunctions.selectStandardDropdownOption("CBRE 360", "Yes");
+		System.out.println(Calendar.getInstance());
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		Date date = new Date();
+		Utility_Functions.xWaitForElementPresent(driver, closeDateAssetServices, 3);
+		Utility_Functions.xSendKeys(driver, closeDateAssetServices, dateFormat.format(date).toString());
+		Calendar calendar1 = Calendar.getInstance();
+		calendar1.add(Calendar.DAY_OF_MONTH, -20);
+		SimpleDateFormat dateFormat1 = new SimpleDateFormat("MM/dd/yyyy");
+		System.out.println("Date : " + dateFormat1.format(calendar1.getTime()));
+		Utility_Functions.xWaitForElementPresent(driver, salesStageAssetServices, 3);
+		sf_UtilityFunctions.selectStandardDropdownOption("Sales Stage", "1-Target");
+		Utility_Functions.xWaitForElementPresent(driver, saveOppAssetServices, 3);
+		Utility_Functions.xClick(driver, saveOppAssetServices, true);
+		Utility_Functions.timeWait(5);
+		sf_UtilityFunctions.selectTabUIHeaders("Details");
+		if (details.isDisplayed()) {
+			report.updateTestLog("Verify Home Page Tabs", "The opportunity is saved with the all the required fields",
+					Status.PASS);
+		} else {
+			report.updateTestLog("Verify Home Page Tabs",
+					"The opportunity is not saved with the all the required fields", Status.FAIL);
+		}	
+	}
+	
+	/**
+	 * Function for Validating the picklist values in Referral Recipient Business Line on Opportunities page
+	 * 
+	 * @author Haritha
+	 */
+	
+	static ArrayList<String> referralRecipientBusinessLine = new ArrayList<String>();
 
+	public void referralRecipientBusinessLine() {
+		referralRecipientBusinessLine.add("Investment");
+		referralRecipientBusinessLine.add("Property");
+		referralRecipientBusinessLine.add("Advisory %26 Transaction");
+		referralRecipientBusinessLine.add("Asset Services");		
+		System.out.println("Referral Recipient Business Line Pick List values are " + referralRecipientBusinessLine);
+	}
+
+	
+	public void validateReferralRecipientBusinessLine() {
+		referralRecipientBusinessLine();
+		List<String> referralRecipientBusinessLineValues = sf_UtilityFunctions.getPickListValues("Opportunity", "France_Consulting_Service", "Referral_Recipient_Business_Line__c");
+		List<String> referralRecipientBusinessLineList = new ArrayList<String>();
+		referralRecipientBusinessLineList = Utility_Functions.xValidatePickListValuesPage(referralRecipientBusinessLine, referralRecipientBusinessLineValues, "Reference Recipient Business Line pick list values");
+		if (referralRecipientBusinessLineList.size()!=0) {
+			report.updateTestLog("Verify Referral Recipient Business Line picklist values", "All the values are not present in the Referral Recipient Business Line :::" + referralRecipientBusinessLineList, Status.FAIL);
+		} else {
+			report.updateTestLog("Verify Referral Recipient Business Line picklist values", "All the values are present in the Referral Recipient Business Line Pick List ", Status.PASS);
+		}	
+	}
+	
+	/**
+	 * Function for Validating the picklist values for Lead source & Reason field on Opportunities page
+	 * 
+	 * @author Haritha
+	 */
+	public void verifyPickListValuesFranceUser() {		
+		sf_UtilityFunctions.verifyPickListValues("Fusion %2F Acquisition", "Opportunity", "France_Transaction_Demand_Agency", "Reason__c");	
+		sf_UtilityFunctions.verifyPickListValues("Other", "Opportunity", "France_Transaction_Demand_Agency", "LeadSource");
+	}
+	
 	
 }

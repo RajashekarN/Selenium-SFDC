@@ -474,4 +474,26 @@ public class BC_Salesforce_AccountsPage extends ReusableLibrary {
 	public void bc_cloningBudgetTarget() throws InterruptedException {
 		sfAccountsPage.cloningBudgetTarget();
 		}
+	
+	
+	/**
+	 * Function for creating an EMEA reporting account
+	 * 
+	 * @author Haritha
+	 */
+	public void bc_emeaReportingAccount() throws InterruptedException {
+		sfAccountsPage.emeaReportingAccount();
+	}
+	
+	/**
+	 * Validating the Account's Opportunities Field in Record Type of Accounts for France users
+	 * 
+	 * @author Haritha
+	 *
+	 */
+	public void bc_accountsOpportunitiesTypeField() throws InterruptedException {
+		sfAccountsPage.accountsOpportunitiesTypeField();
+	}
+	
+	
 }

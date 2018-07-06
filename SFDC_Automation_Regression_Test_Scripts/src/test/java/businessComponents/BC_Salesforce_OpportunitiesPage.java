@@ -65,6 +65,17 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	public void bc_newOpportunityPageLayout() throws InterruptedException {
 		sfOpportunitiesPage.newOpportunityPageLayout();
 	}
+	
+	/**
+	 * Validating the  Opportunity Page Layout fields for France users
+	 * 
+	 * @author Haritha
+	 *
+	 */
+
+	public void bc_validateNewOpportunityPage() throws InterruptedException {
+		opportunityPageLayout.validateNewOpportunityPage();
+	}
 
 	/**
 	 * Validating the required fields based on Sales Stage selected between 16 -
@@ -1095,6 +1106,34 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 		opportunitySplit.opportunitySplitFunctionality();
 	}
 	
+	/**
+	 * Function for validating the CBRE 360 Field on Opportunity page layout
+	 * 
+	 * @author Haritha
+	 */
 	
+	public void bc_validateOpportunityCbre360Field() {
+		sfOpportunitiesPage.validateOpportunityCbre360Field();
+	}
+	
+
+	
+	/**
+	 * Function for Validating the picklist values in Referral Recipient Business Line on Opportunities page
+	 * 
+	 * @author Haritha
+	 */
+	public void bc_validateReferralRecipientBusinessLine() {
+	sfOpportunitiesPage.validateReferralRecipientBusinessLine();
+	}
+	
+	/**
+	 * Function for Validating the picklist values for Lead source & Reason field on Opportunities page
+	 * 
+	 * @author Haritha
+	 */
+	public void bc_verifyPickListValuesFranceUser() {
+	sfOpportunitiesPage.verifyPickListValuesFranceUser();
+	}
 	
 }

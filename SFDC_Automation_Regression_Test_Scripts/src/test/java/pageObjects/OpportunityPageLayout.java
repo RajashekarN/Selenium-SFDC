@@ -192,6 +192,45 @@ public class OpportunityPageLayout extends ReusableLibrary {
 	@FindBy(xpath = "//a[@class='forceActionLink']/div[@class='slds-truncate'][text()='Edit']")
 	WebElement edit;
 	
+	@FindBy(xpath = "//select[@id='record-type-select']/option[contains(text(),'France Transaction Demand Agency')]")
+	WebElement opportunityFSTAValue;
+	
+	/**
+	 * Function for validating the Mandate Information section on Opp page layout
+	 */
+	@FindBy(xpath = "//select[@id='record-type-select']")
+	WebElement selectFrOpportunityRecordType;
+	
+	@FindBy(xpath="//span[text()='Lead Source']/parent::span/parent::div//a")
+	WebElement leadSource_FR;
+	
+	@FindBy(xpath = "//span[text()='Appointment Type']/parent::span/following-sibling::div//a")
+	WebElement appointmentType;
+	
+	@FindBy(xpath="//span[text()='Opportunity Name']/parent::label/parent::div//input")
+	WebElement opportunityName_FR;
+	
+	@FindBy(xpath="//span[text()='Estimated Gross Fee/Commission']/parent::label/parent::div/input")
+	WebElement estimatedGrossFeeCommissionFr;
+	
+	@FindBy(xpath="//span[text()='Close Date']/parent::label/parent::div//input")
+	WebElement closeDate_FR;
+	
+	@FindBy(xpath="//span[text()='Sales Stage']/parent::label/parent::div//a")
+	WebElement salesStage_FR;
+	
+	@FindBy(xpath ="//span[contains(text(),'Account Name')]/parent::label/following-sibling::div//input[contains(@title,'Search Accounts')]")
+	WebElement accountNameFrOpportunity;
+	
+	@FindBy(xpath = "//span[text()='Pitch Competitors']/parent::label/following-sibling::select")
+	WebElement pitchCompetitors;
+
+	@FindBy(xpath= "//span[text()='Pitch Competitor Other']/parent::label/following-sibling::input")
+	WebElement pitchCompetitorOther;
+	
+	@FindBy(xpath="//button[contains(@class,'forceActionButton')]/span[text()='Save']")
+	WebElement saveNewOpp_FR;
+	
 
 	SF_UtilityFunctions sf_UtilityFunctions = new SF_UtilityFunctions(scriptHelper);
 	OpportunitiesPage opportunitiesPage = new OpportunitiesPage(scriptHelper);
@@ -262,6 +301,41 @@ public class OpportunityPageLayout extends ReusableLibrary {
 		report.updateTestLog("Verify Opportunity Page Headers", "Opportunity page headers are:::" + OpportunityPageHeadersList, Status.PASS);
 	}
 	
+	/**
+	 * Function validating the page layout headers for FRANEMEA
+	 * 
+	 * @author Haritha
+	 *
+	 */
+	
+	static ArrayList<String> OpportunityPageHeadersListFR = new ArrayList<String>();
+
+	public void OpportunityPageHeadersFR() {
+		OpportunityPageHeadersListFR.add("Related Information");
+		OpportunityPageHeadersListFR.add("Demand Details");
+		OpportunityPageHeadersListFR.add("Mandate Information");
+		OpportunityPageHeadersListFR.add("Other Information");
+		OpportunityPageHeadersListFR.add("Confidentiality");
+		OpportunityPageHeadersList.add("Immagine Information");
+		OpportunityPageHeadersList.add("System Information");
+		report.updateTestLog("Verify Opportunity Page Headers for France users", "Opportunity page headers are:::" + OpportunityPageHeadersListFR, Status.PASS);
+	}
+	
+	/**
+	 * Function validating the page layout labels for FRANEMEA
+	 * 
+	 * @author Haritha
+	 *
+	 */
+	
+	static ArrayList<String> franEMEAOppNewLabels = new ArrayList<String>();
+
+	public void franEMEAOppNewLabelsList() {	
+		franEMEAOppNewLabels.add("Appointment Type");
+		franEMEAOppNewLabels.add("Pitch Competitors");
+		franEMEAOppNewLabels.add("Pitch Competitor Other");
+		franEMEAOppNewLabels.add("Parent Opportunity");
+	}
 	
 	/**
 	 * Function validating the page layout labels for ABAMER, OBAMER, ABAPAC and CMAMER
@@ -356,6 +430,10 @@ public class OpportunityPageLayout extends ReusableLibrary {
 			OpportunityPageHeadersAPAC();			
 			opportunityHeaders = establishConnection.establishMetaDataConnectionPageHeaders("Opportunity", 7);
 			opportunityHeadersList = Utility_Functions.xValidatePickListValuesPage(OpportunityPageHeadersAPAC, opportunityHeaders, "Opportunity page Header values");
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA")){
+			OpportunityPageHeadersFR();
+			opportunityHeaders = establishConnection.establishMetaDataConnectionPageHeaders("Opportunity", 7);
+			opportunityHeadersList = Utility_Functions.xValidatePickListValuesPage(OpportunityPageHeadersListFR, opportunityHeaders, "Opportunity - FRANEMEA page Header values");
 		}
 		if (opportunityHeadersList.size()!=0) {
 			report.updateTestLog("Verify Opportunity Headers", "All the Headers are not present in the Opportunity Page:::" + opportunityHeadersList, Status.FAIL);
@@ -374,15 +452,29 @@ public class OpportunityPageLayout extends ReusableLibrary {
 			opportunityLabels = establishConnection.establishMetaDataConnectionPageLayouts("Opportunity", "Opportunity Layout - Capital Markets Debt & Structured Finance");
 		} else if(dataTable.getData("General_Data", "TC_ID").contains("ABAPAC")) {
 			opportunityLabels = establishConnection.establishMetaDataConnectionPageLayouts("Opportunity", "Opportunity Layout - Agency Brokerage");
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA")){
+			opportunityLabels = establishConnection.establishMetaDataConnectionPageLayouts("Opportunity", "France Transaction Demand Agency Opportunity Layout");
 		}
 		List<String> opportunityLabelsList = new ArrayList<String>();
-		OpportunityPageFieldLabels();
-		opportunityLabelsList = Utility_Functions.xValidatePickListValuesPage(opportunityLabels, opportunityLabels, "Opportunity page field values");
-		if (opportunityLabelsList.size()!=0) {
-			report.updateTestLog("Verify Opportunity Field Labels", "All the labels are not present in the Opportunity Page:::" + opportunityLabelsList, Status.FAIL);
-		} else {
-			report.updateTestLog("Verify Opportunity Field Labels", "All the labels are present in the Opportunity Page", Status.PASS);
-		}	
+		
+		if(dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA")) {
+			franEMEAOppNewLabelsList();
+			opportunityLabelsList = Utility_Functions.xValidatePickListValuesPage(franEMEAOppNewLabels, opportunityLabels, "Opportunity page field values");
+			if (opportunityLabelsList.size()!=0) {
+				report.updateTestLog("Verify Opportunity Field Labels", "All the labels are not present in the Opportunity Page:::" + opportunityLabelsList, Status.FAIL);
+			} else {
+				report.updateTestLog("Verify Opportunity Field Labels", "All the labels are present in the Opportunity Page", Status.PASS);
+			}
+		}else {
+			OpportunityPageFieldLabels();
+			opportunityLabelsList = Utility_Functions.xValidatePickListValuesPage(opportunityLabels, opportunityLabels, "Opportunity page field values");
+			if (opportunityLabelsList.size()!=0) {
+				report.updateTestLog("Verify Opportunity Field Labels", "All the labels are not present in the Opportunity Page:::" + opportunityLabelsList, Status.FAIL);
+			} else {
+				report.updateTestLog("Verify Opportunity Field Labels", "All the labels are present in the Opportunity Page", Status.PASS);
+			}	
+		}
+		
 	}
 	
 	
@@ -3140,5 +3232,7 @@ public class OpportunityPageLayout extends ReusableLibrary {
 					Status.FAIL);
 		}
 	}
-
+	
+	
+		
 }
