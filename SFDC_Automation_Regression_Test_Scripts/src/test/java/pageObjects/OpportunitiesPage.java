@@ -3675,17 +3675,16 @@ public class OpportunitiesPage extends ReusableLibrary {
 		    sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "Consulting");
 			report.updateTestLog("Verify Opportunity Edit/Clone", "Oportunity Assignment Type is changed to Consulting",
 					Status.PASS);
-			Utility_Functions.timeWait(1);
+			/*Utility_Functions.timeWait(1);
 			Random random = new Random();
 			int value = random.nextInt(999);
 			Utility_Functions.xWaitForElementPresent(driver, totalSize, 3);
 			if (totalSize.getText().equals("")) {
 				Utility_Functions.xSendKeys(driver, totalSize, Integer.toString(value));
-			}
+			}*/
 			Utility_Functions.xWaitForElementPresent(driver, preferredPropType, 3);
 			Utility_Functions.xClick(driver, preferredPropType, true);
-			sf_UtilityFunctions.selectStandardDropdownOption("Preferred Property Type", "Hotel");
-		
+			sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "Office");
 			Utility_Functions.xWaitForElementPresent(driver, saveOpp, 4);
 			Utility_Functions.xClick(driver, saveOpp, true);
 			Utility_Functions.timeWait(2);
@@ -3699,6 +3698,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			Utility_Functions.xClick(driver, clone, true);
 			report.updateTestLog("Verify Opportunity Edit/Clone", "Clone button is present on Opportunity",
 					Status.PASS);
+			Utility_Functions.timeWait(2);
 			Utility_Functions.xWaitForElementPresent(driver, save, 3);
 			Utility_Functions.xClick(driver, save, true);
 			report.updateTestLog("Verify Opportunity Edit/Clone", "Opportunity is cloned successfully", Status.PASS);
