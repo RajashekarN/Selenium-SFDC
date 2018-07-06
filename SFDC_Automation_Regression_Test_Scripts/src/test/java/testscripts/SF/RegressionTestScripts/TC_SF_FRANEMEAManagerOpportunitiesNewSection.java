@@ -3,14 +3,12 @@ package testscripts.SF.RegressionTestScripts;
 import org.openqa.selenium.Platform;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
 import com.cognizant.Craft.CRAFTTestCase;
 import com.cognizant.Craft.DriverScript;
 import com.cognizant.framework.IterationOptions;
 import com.cognizant.framework.selenium.Browser;
 import com.cognizant.framework.selenium.ExecutionMode;
 import com.cognizant.framework.selenium.SeleniumTestParameters;
-
 	
 /**
  * Test Script for validating the Mandate Field on the Opportunities Page for France Manager profile
@@ -26,8 +24,6 @@ public class TC_SF_FRANEMEAManagerOpportunitiesNewSection extends CRAFTTestCase{
 			/*MobileToolName mobileToolName,
 			MobileExecutionPlatform executionPlatform, String deviceName*/)
 	{
-
-		
 		SeleniumTestParameters testParameters = new SeleniumTestParameters(currentScenario, currentTestcase);
 		testParameters.setCurrentTestDescription("Test Script for validating the Opportunities New Section");
 		testParameters.setIterationMode(IterationOptions.RUN_ONE_ITERATION_ONLY);
@@ -36,15 +32,7 @@ public class TC_SF_FRANEMEAManagerOpportunitiesNewSection extends CRAFTTestCase{
 		testParameters.setPlatform(platform);
 		DriverScript driverScript = new DriverScript(testParameters);		
 		driverScript.driveTestExecution();
-		tearDownTestRunner(testParameters, driverScript);
-		
-		
-	}
-	
-	private void runDriverScript(DriverScript driverScript, SeleniumTestParameters testParameters){
-		driverScript.setIsAPITest(true);
-		driverScript.driveTestExecution();
-		tearDownTestRunner(testParameters, driverScript);
+		tearDownTestRunner(testParameters, driverScript);		
 	}
 	
 	@DataProvider(name = "RegressionTestScripts", parallel = false)
@@ -53,7 +41,6 @@ public class TC_SF_FRANEMEAManagerOpportunitiesNewSection extends CRAFTTestCase{
 				MobileToolName.APPIUM, MobileExecutionPlatform.IOS,
 				"4d005cb2c4938197"*/ },
 			};
-	}
-	
+	}	
 
 }
