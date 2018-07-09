@@ -533,6 +533,7 @@ public class EstablishConnection extends ReusableLibrary {
 		} catch (ConnectionException e) {
 			e.printStackTrace();
 		}
+		System.out.println("Opportunity Labels are:::" + UIFieldsOnPage);
 		return UIFieldsOnPage;
 	}
 	
@@ -571,11 +572,11 @@ public class EstablishConnection extends ReusableLibrary {
 	 */
 	
 	
-	public List<String> establishMetaDataConnectionPageHeaders(String ObjectName, int HeaderCount) {
+	public List<String> establishMetaDataConnectionPageHeaders(String ObjectName, String[] recordID) {
 		establishMetaDataConnection();
 		DescribeLayoutResult dlr = null;
 		try {
-			dlr = EstablishConnection.connection.describeLayout(ObjectName, null, null);
+			dlr = EstablishConnection.connection.describeLayout(ObjectName, null, recordID);
 		} catch (ConnectionException e1) {
 			e1.printStackTrace();
 		}
@@ -585,12 +586,9 @@ public class EstablishConnection extends ReusableLibrary {
 			DescribeLayoutSection[] editLayoutSectionList = layout.getEditLayoutSections();
 			// Write the headings of the edit layout sections
 			for (int x = 0; x < editLayoutSectionList.length; x++) {
-					if(editLayoutSectionList.length==HeaderCount) {
 						headersList.add(editLayoutSectionList[x].getHeading());
 						System.out.println(x + ":::Has the heading layout section:::" + editLayoutSectionList[x].getHeading());
-						report.updateTestLog(x + ":::Header Section", " has the heading layout section:::" + editLayoutSectionList[x].getHeading(), Status.PASS);
-					}				
-				
+						report.updateTestLog(x + ":::Header Section", " has the heading layout section:::" + editLayoutSectionList[x].getHeading(), Status.PASS);				
 			}
 		}
 		return headersList;

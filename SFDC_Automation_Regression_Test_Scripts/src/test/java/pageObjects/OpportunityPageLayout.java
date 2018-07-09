@@ -255,9 +255,74 @@ public class OpportunityPageLayout extends ReusableLibrary {
 		OpportunityPageHeadersCapitalMarkets.add("Close Information");
 		OpportunityPageHeadersCapitalMarkets.add("Loss Information");
 		OpportunityPageHeadersCapitalMarkets.add("System Information");
-		report.updateTestLog("Verify Opportunity Page Headers", "Opportunity page headers are:::" + OpportunityPageHeadersList, Status.PASS);
+		report.updateTestLog("Verify Opportunity Page Headers", "Opportunity page headers are:::" + OpportunityPageHeadersCapitalMarkets, Status.PASS);
 	}
 	
+
+	static ArrayList<String> OpportunityPageLabelsCMAMERList = new ArrayList<String>();
+
+	
+	public void OpportunityPageFieldLabelsCMAMER() {
+		OpportunityPageLabelsCMAMERList.add("Account ID");
+		OpportunityPageLabelsCMAMERList.add("Assignment Type");
+		OpportunityPageLabelsCMAMERList.add("Assignment Sub-Type");
+		OpportunityPageLabelsCMAMERList.add("Lead Source");
+		OpportunityPageLabelsCMAMERList.add("Close Date");
+		OpportunityPageLabelsCMAMERList.add("Total Size");
+		OpportunityPageLabelsCMAMERList.add("Unit of Measure");
+		OpportunityPageLabelsCMAMERList.add("Name");
+		OpportunityPageLabelsCMAMERList.add("Sales Stage");
+		OpportunityPageLabelsCMAMERList.add("Phase");
+		OpportunityPageLabelsCMAMERList.add("Probability (%)");
+		OpportunityPageLabelsCMAMERList.add("Estimated Gross Fee/Commission");
+		
+		OpportunityPageLabelsCMAMERList.add("Specialty Group");
+		OpportunityPageLabelsCMAMERList.add("Parent Opportunity");
+		OpportunityPageLabelsCMAMERList.add("Cross Sell");
+		OpportunityPageLabelsCMAMERList.add("Confidential Opportunity");
+		OpportunityPageLabelsCMAMERList.add("Priority");
+		OpportunityPageLabelsCMAMERList.add("Hire Date");
+		
+
+		OpportunityPageLabelsCMAMERList.add("Record Type ID");
+		OpportunityPageLabelsCMAMERList.add("On Hold");
+		OpportunityPageLabelsCMAMERList.add("On Hold Comments");
+		OpportunityPageLabelsCMAMERList.add("On Hold Comments");
+		OpportunityPageLabelsCMAMERList.add("Sales Stage");
+		OpportunityPageLabelsCMAMERList.add("Phase");
+		OpportunityPageLabelsCMAMERList.add("Probability (%)");
+		OpportunityPageLabelsCMAMERList.add("On Hold");
+		OpportunityPageLabelsCMAMERList.add("On Hold Date");
+		OpportunityPageLabelsCMAMERList.add("On Hold Comments");
+
+	
+		OpportunityPageLabelsCMAMERList.add("Investment Profile");
+		OpportunityPageLabelsCMAMERList.add("Total # of Units");
+		OpportunityPageLabelsCMAMERList.add("Unit of Comparison");
+		OpportunityPageLabelsCMAMERList.add("Opportunity Details");
+		OpportunityPageLabelsCMAMERList.add("Listing Price");
+		OpportunityPageLabelsCMAMERList.add("Listing Expiration");
+		OpportunityPageLabelsCMAMERList.add("Portfolio");
+		OpportunityPageLabelsCMAMERList.add("Preferred Property Type");
+		OpportunityPageLabelsCMAMERList.add("Preferred Property Sub-Type");
+		
+		
+		OpportunityPageLabelsCMAMERList.add("Estimated Transaction Value");
+		OpportunityPageLabelsCMAMERList.add("Status Comments");
+		OpportunityPageLabelsCMAMERList.add("Next Steps");
+		
+		OpportunityPageLabelsCMAMERList.add("Final Transaction Value");
+		
+			
+		OpportunityPageLabelsCMAMERList.add("Reason for Loss");
+		OpportunityPageLabelsCMAMERList.add("Reason Lost Comments");
+		OpportunityPageLabelsCMAMERList.add("Competitor");
+		
+		OpportunityPageLabelsCMAMERList.add("Owner ID");
+		//OpportunityPageLabelsCMAMERList.add("External Deal ID");
+		report.updateTestLog("Verify Opportunity Field Labels", "Opportunity field labels are:::" + OpportunityPageLabelsCMAMERList, Status.PASS);
+
+	}
 	
 
 	/**
@@ -266,41 +331,7 @@ public class OpportunityPageLayout extends ReusableLibrary {
 	 * @author Vishnuvardhan
 	 *
 	 */
-	
-	static ArrayList<String> OpportunityPageHeadersAPAC = new ArrayList<String>();
 
-	
-	public void OpportunityPageHeadersAPAC() {
-		OpportunityPageHeadersAPAC.add("Opportunity Information");
-		OpportunityPageHeadersAPAC.add("Financial Information");
-		OpportunityPageHeadersAPAC.add("Assignment Details");
-		OpportunityPageHeadersAPAC.add("Additional Information");
-		OpportunityPageHeadersAPAC.add("Close Information");
-		OpportunityPageHeadersAPAC.add("Loss Information");
-		OpportunityPageHeadersAPAC.add("System Information");
-		report.updateTestLog("Verify Opportunity Page Headers", "Opportunity page headers are:::" + OpportunityPageHeadersAPAC, Status.PASS);
-	}
-	
-	/**
-	 * Function validating the page layout headers for ABAMER, OBAMER, ABAPAC and CMAMER
-	 * 
-	 * @author Vishnuvardhan
-	 *
-	 */
-	
-	static ArrayList<String> OpportunityPageHeadersList = new ArrayList<String>();
-
-	
-	public void OpportunityPageHeaders() {
-		OpportunityPageHeadersList.add("Opportunity Information");
-		OpportunityPageHeadersList.add("Assignment Details");
-		OpportunityPageHeadersList.add("Additional Information");
-		OpportunityPageHeadersList.add("Close Information");
-		OpportunityPageHeadersList.add("Loss Information");
-		OpportunityPageHeadersList.add("System Information");
-		report.updateTestLog("Verify Opportunity Page Headers", "Opportunity page headers are:::" + OpportunityPageHeadersList, Status.PASS);
-	}
-	
 	/**
 	 * Function validating the page layout headers for FRANEMEA
 	 * 
@@ -311,13 +342,14 @@ public class OpportunityPageLayout extends ReusableLibrary {
 	static ArrayList<String> OpportunityPageHeadersListFR = new ArrayList<String>();
 
 	public void OpportunityPageHeadersFR() {
+		OpportunityPageHeadersListFR.add("Fields");
 		OpportunityPageHeadersListFR.add("Related Information");
 		OpportunityPageHeadersListFR.add("Demand Details");
 		OpportunityPageHeadersListFR.add("Mandate Information");
 		OpportunityPageHeadersListFR.add("Other Information");
 		OpportunityPageHeadersListFR.add("Confidentiality");
-		OpportunityPageHeadersList.add("Immagine Information");
-		OpportunityPageHeadersList.add("System Information");
+		OpportunityPageHeadersListFR.add("Immagine Information");
+		OpportunityPageHeadersListFR.add("System Information");
 		report.updateTestLog("Verify Opportunity Page Headers for France users", "Opportunity page headers are:::" + OpportunityPageHeadersListFR, Status.PASS);
 	}
 	
@@ -343,96 +375,231 @@ public class OpportunityPageLayout extends ReusableLibrary {
 	 * @author Vishnuvardhan
 	 *
 	 */
-	
-	static ArrayList<String> OpportunityPageLabelsList = new ArrayList<String>();
+
+	static ArrayList<String> OpportunityPageHeadersOBAMERList = new ArrayList<String>();
 
 	
-	public void OpportunityPageFieldLabels() {
-		OpportunityPageLabelsList.add("Account ID");
-		OpportunityPageLabelsList.add("Record Type ID");
-		OpportunityPageLabelsList.add("Name");
-		OpportunityPageLabelsList.add("Sales Stage");
-		OpportunityPageLabelsList.add("Estimated Gross Fee/Commission");
-		OpportunityPageLabelsList.add("Probability (%)");
-		OpportunityPageLabelsList.add("Close Date");
-		OpportunityPageLabelsList.add("Lead Source");
-		OpportunityPageLabelsList.add("Opportunity Currency");
-		OpportunityPageLabelsList.add("Owner ID");
-		OpportunityPageLabelsList.add("Competitor");
-		OpportunityPageLabelsList.add("Confidential Opportunity");
-		OpportunityPageLabelsList.add("Cross Sell");
-		OpportunityPageLabelsList.add("Reason Lost Comments");
-		OpportunityPageLabelsList.add("Parent Opportunity");
-		OpportunityPageLabelsList.add("Priority");
-		OpportunityPageLabelsList.add("Reason for Loss");
-		OpportunityPageLabelsList.add("Requirement/Building Details");
-		OpportunityPageLabelsList.add("Assignment Sub-Type");
-		OpportunityPageLabelsList.add("Assignment Type");
-		OpportunityPageLabelsList.add("Total Size");
-		OpportunityPageLabelsList.add("Unit of Measure");
-		OpportunityPageLabelsList.add("Opportunity No.");
-		OpportunityPageLabelsList.add("Location");
-		OpportunityPageLabelsList.add("Status Comments");
-		OpportunityPageLabelsList.add("Source System");
-		OpportunityPageLabelsList.add("Total # of Units");
-		OpportunityPageLabelsList.add("Unit of Comparison");
-		OpportunityPageLabelsList.add("Availability Date");
-		OpportunityPageLabelsList.add("% Commission");
-		OpportunityPageLabelsList.add("Engagement Commencement");
-		OpportunityPageLabelsList.add("Engagement Expiration");
-		OpportunityPageLabelsList.add("Hire Date");
-		OpportunityPageLabelsList.add("% Occupied");
-		OpportunityPageLabelsList.add("Next Steps");
-		OpportunityPageLabelsList.add("CBRE Role");
-		OpportunityPageLabelsList.add("External Deal ID");
-		OpportunityPageLabelsList.add("Floor Number");
-		OpportunityPageLabelsList.add("Migrated Opportunity");
-		OpportunityPageLabelsList.add("Outside Broker Company");
-		OpportunityPageLabelsList.add("Outside Broker Name");
-		OpportunityPageLabelsList.add("Preferred Property Sub-Type");
-		OpportunityPageLabelsList.add("On Hold Comments");
-		OpportunityPageLabelsList.add("On Hold Date");
-		OpportunityPageLabelsList.add("On Hold");
-		OpportunityPageLabelsList.add("Listing Type");
-		OpportunityPageLabelsList.add("Special Economic Zone");
-		OpportunityPageLabelsList.add("Phase");
-		OpportunityPageLabelsList.add("Preferred Property Type");
-		OpportunityPageLabelsList.add("Installment Count");
-		OpportunityPageLabelsList.add("Deal IQ URL");
-		OpportunityPageLabelsList.add("Change Opportunity Owner");
-		OpportunityPageLabelsList.add("Specialty Group");
-	/*	OpportunityPageLabelsList.add("Last Manually Modified By");
-		OpportunityPageLabelsList.add("Last Manually Modified Date");*/
-		report.updateTestLog("Verify Opportunity Field Labels", "Opportunity field labels are:::" + OpportunityPageLabelsList, Status.PASS);
+	public void OpportunityPageHeadersOBAMERList() {
+		OpportunityPageHeadersOBAMERList.add("Opportunity Information");
+		OpportunityPageHeadersOBAMERList.add("Assignment Details");
+		OpportunityPageHeadersOBAMERList.add("Financial Inforamtion");
+		OpportunityPageHeadersOBAMERList.add("Additional Information");
+		OpportunityPageHeadersOBAMERList.add("Pursuit Information");
+		OpportunityPageHeadersOBAMERList.add("Win / Loss Information");
+		OpportunityPageHeadersOBAMERList.add("Close Information");
+		OpportunityPageHeadersOBAMERList.add("System Information");
+		report.updateTestLog("Verify Opportunity Page Headers", "Opportunity page headers are:::" + OpportunityPageHeadersOBAMERList, Status.PASS);
 	}
 	
+	static ArrayList<String> OpportunityPageLabelsOBAMERList = new ArrayList<String>();
+
+	
+	public void OpportunityPageFieldLabelsOBAMER() {
+		OpportunityPageLabelsOBAMERList.add("Opportunity No.");
+		OpportunityPageLabelsOBAMERList.add("Name");
+		OpportunityPageLabelsOBAMERList.add("Parent Opportunity");
+		OpportunityPageLabelsOBAMERList.add("Lead Source");
+		OpportunityPageLabelsOBAMERList.add("Cross Sell");
+		OpportunityPageLabelsOBAMERList.add("Confidential Opportunity");
+		OpportunityPageLabelsOBAMERList.add("Auto Approve Forecast");
+		OpportunityPageLabelsOBAMERList.add("Account ID");
+		OpportunityPageLabelsOBAMERList.add("Location");
+		OpportunityPageLabelsOBAMERList.add("Priority");
+		OpportunityPageLabelsOBAMERList.add("Hire Date");
+		OpportunityPageLabelsOBAMERList.add("Close Date");
+		OpportunityPageLabelsOBAMERList.add("Migrated Opportunity"); 
+		
+		OpportunityPageLabelsOBAMERList.add("Record Type ID");
+		OpportunityPageLabelsOBAMERList.add("Assignment Type");
+		OpportunityPageLabelsOBAMERList.add("Assignment Sub-Type");
+		OpportunityPageLabelsOBAMERList.add("Specialty Group");
+		OpportunityPageLabelsOBAMERList.add("Sales Stage");
+		OpportunityPageLabelsOBAMERList.add("Phase");
+		OpportunityPageLabelsOBAMERList.add("Probability (%)");
+		OpportunityPageLabelsOBAMERList.add("On Hold");
+		OpportunityPageLabelsOBAMERList.add("On Hold Date");
+		OpportunityPageLabelsOBAMERList.add("On Hold Comments");
+
+		OpportunityPageLabelsOBAMERList.add("Estimated Gross Fee/Commission");
+		OpportunityPageLabelsOBAMERList.add("Opportunity Currency");
+		
+		OpportunityPageLabelsOBAMERList.add("Requirement/Building Details");
+		OpportunityPageLabelsOBAMERList.add("Minimum Total Size");
+		OpportunityPageLabelsOBAMERList.add("Maximum Total Size");
+		OpportunityPageLabelsOBAMERList.add("Total Size");
+		OpportunityPageLabelsOBAMERList.add("Unit of Measure");
+		OpportunityPageLabelsOBAMERList.add("Total # of Units");
+		OpportunityPageLabelsOBAMERList.add("Floor Number");
+		OpportunityPageLabelsOBAMERList.add("Deal IQ URL");
+		OpportunityPageLabelsOBAMERList.add("Status Comments");
+		OpportunityPageLabelsOBAMERList.add("Special Economic Zone");
+		OpportunityPageLabelsOBAMERList.add("Preferred Property Type");
+		OpportunityPageLabelsOBAMERList.add("Preferred Property Sub-Type");
+		OpportunityPageLabelsOBAMERList.add("Desired Commencement");
+		OpportunityPageLabelsOBAMERList.add("Existing Lease Expiration");
+		OpportunityPageLabelsOBAMERList.add("Existing Termination/Break Option");
+		OpportunityPageLabelsOBAMERList.add("New Termination/Break Option");
+		OpportunityPageLabelsOBAMERList.add("Next Steps");
+		
+		OpportunityPageLabelsOBAMERList.add("Pitch Date");
+		OpportunityPageLabelsOBAMERList.add("Client Type");
+		OpportunityPageLabelsOBAMERList.add("Opportunity Type");
+		OpportunityPageLabelsOBAMERList.add("Pursuit Source");
+		OpportunityPageLabelsOBAMERList.add("Pursuit LOBs");
+		OpportunityPageLabelsOBAMERList.add("Pitch Technology");
+		OpportunityPageLabelsOBAMERList.add("Pitch Competitors");
+		OpportunityPageLabelsOBAMERList.add("Pitch Competitor Other");
+		OpportunityPageLabelsOBAMERList.add("Incumbent");
+		
+		OpportunityPageLabelsOBAMERList.add("Win / Loss");
+		OpportunityPageLabelsOBAMERList.add("Win / Loss Date");
+		OpportunityPageLabelsOBAMERList.add("Business Awarded To");
+		OpportunityPageLabelsOBAMERList.add("Business Awarded To Other");
+		OpportunityPageLabelsOBAMERList.add("Attached LOBs");
+		OpportunityPageLabelsOBAMERList.add("Reason for Loss");
+		OpportunityPageLabelsOBAMERList.add("Reason Lost Comments");
+		OpportunityPageLabelsOBAMERList.add("Big Wins");
+
+		OpportunityPageLabelsOBAMERList.add("Lease From");
+		OpportunityPageLabelsOBAMERList.add("Lease To");
+		OpportunityPageLabelsOBAMERList.add("Lease Term (Months)");
+		OpportunityPageLabelsOBAMERList.add("Lease Rate/Rent");
+		OpportunityPageLabelsOBAMERList.add("Lease Rate/Rent Basis");
+		OpportunityPageLabelsOBAMERList.add("Outside Broker Company");
+		OpportunityPageLabelsOBAMERList.add("Outside Broker Name");
+		OpportunityPageLabelsOBAMERList.add("CBRE Role");
+		OpportunityPageLabelsOBAMERList.add("Sub Lease");
+		OpportunityPageLabelsOBAMERList.add("Lease Rate/Rent Type");
+		
+		OpportunityPageLabelsOBAMERList.add("Owner ID");
+		OpportunityPageLabelsOBAMERList.add("Change Opportunity Owner");
+		/*OpportunityPageLabelsOBAMERList.add("Last Manually Modified By");
+		OpportunityPageLabelsOBAMERList.add("Last Manually Modified Date");
+		OpportunityPageLabelsOBAMERList.add("Date");
+		OpportunityPageLabelsOBAMERList.add("Time");*/
+		OpportunityPageLabelsOBAMERList.add("External Deal ID");
+		OpportunityPageLabelsOBAMERList.add("Source System");
+		OpportunityPageLabelsOBAMERList.add("Integration Id");
+		OpportunityPageLabelsOBAMERList.add("CIF Source System ID");
+		OpportunityPageLabelsOBAMERList.add("CBRE Role");
+		OpportunityPageLabelsOBAMERList.add("CBRE Role");
+		report.updateTestLog("Verify Opportunity Field Labels", "Opportunity field labels are:::" + OpportunityPageLabelsOBAMERList, Status.PASS);
+
+	}
+	
+	static ArrayList<String> OpportunityPageHeadersABAMERList = new ArrayList<String>();
+
+	
+	public void OpportunityPageHeadersABAMER() {
+		OpportunityPageHeadersABAMERList.add("Opportunity Information");
+		OpportunityPageHeadersABAMERList.add("Services");
+		OpportunityPageHeadersABAMERList.add("Financial Information");
+		OpportunityPageHeadersABAMERList.add("Additional Information");
+		OpportunityPageHeadersABAMERList.add("Close Information");
+		OpportunityPageHeadersABAMERList.add("Loss Information");
+		OpportunityPageHeadersABAMERList.add("System Information");
+		report.updateTestLog("Verify Opportunity Page Headers", "Opportunity page headers are:::" + OpportunityPageHeadersABAMERList, Status.PASS);
+	}
+	
+	static ArrayList<String> OpportunityPageLabelsABAMERList = new ArrayList<String>();
+
+	
+	public void OpportunityPageFieldLabelsABAMER() {
+		OpportunityPageLabelsABAMERList.add("Opportunity No.");
+		OpportunityPageLabelsABAMERList.add("Name");
+		OpportunityPageLabelsABAMERList.add("Parent Opportunity");
+		OpportunityPageLabelsABAMERList.add("Lead Source");
+		OpportunityPageLabelsABAMERList.add("Cross Sell");
+		OpportunityPageLabelsABAMERList.add("Confidential Opportunity");
+		OpportunityPageLabelsABAMERList.add("Account ID");
+		OpportunityPageLabelsABAMERList.add("Location");
+		OpportunityPageLabelsABAMERList.add("Priority");
+		OpportunityPageLabelsABAMERList.add("Hire Date");
+		OpportunityPageLabelsABAMERList.add("Close Date");
+		OpportunityPageLabelsABAMERList.add("Migrated Opportunity"); 
+		
+		OpportunityPageLabelsABAMERList.add("Record Type ID");
+		OpportunityPageLabelsABAMERList.add("Assignment Type");
+		OpportunityPageLabelsABAMERList.add("Assignment Sub-Type");
+		OpportunityPageLabelsABAMERList.add("Specialty Group");
+		OpportunityPageLabelsABAMERList.add("Sales Stage");
+		OpportunityPageLabelsABAMERList.add("Phase");
+		OpportunityPageLabelsABAMERList.add("Probability (%)");
+		OpportunityPageLabelsABAMERList.add("On Hold");
+		OpportunityPageLabelsABAMERList.add("On Hold Date");
+		OpportunityPageLabelsABAMERList.add("On Hold Comments");
+
+		OpportunityPageLabelsABAMERList.add("Estimated Gross Fee/Commission");
+		OpportunityPageLabelsABAMERList.add("Opportunity Currency");
+		
+		OpportunityPageLabelsABAMERList.add("Requirement/Building Details");
+		OpportunityPageLabelsABAMERList.add("Minimum Total Size");
+		OpportunityPageLabelsABAMERList.add("Maximum Total Size");
+		OpportunityPageLabelsABAMERList.add("Total Size");
+		OpportunityPageLabelsABAMERList.add("Unit of Measure");
+		OpportunityPageLabelsABAMERList.add("Total # of Units");
+		OpportunityPageLabelsABAMERList.add("Floor Number");
+		OpportunityPageLabelsABAMERList.add("Deal IQ URL");
+		OpportunityPageLabelsABAMERList.add("Status Comments");
+		OpportunityPageLabelsABAMERList.add("Special Economic Zone");
+		OpportunityPageLabelsABAMERList.add("Preferred Property Type");
+		OpportunityPageLabelsABAMERList.add("Preferred Property Sub-Type");
+		OpportunityPageLabelsABAMERList.add("Listing Type");
+		OpportunityPageLabelsABAMERList.add("Availability Date");
+		OpportunityPageLabelsABAMERList.add("Next Steps");
+		
+		OpportunityPageLabelsABAMERList.add("Engagement Commencement");
+		OpportunityPageLabelsABAMERList.add("Engagement Expiration");
+		OpportunityPageLabelsABAMERList.add("% Commission");
+		OpportunityPageLabelsABAMERList.add("% Occupied");
+		OpportunityPageLabelsABAMERList.add("Outside Broker Company");
+		OpportunityPageLabelsABAMERList.add("Outside Broker Name");
+		OpportunityPageLabelsABAMERList.add("CBRE Role");
+		
+		
+		OpportunityPageLabelsABAMERList.add("Reason for Loss");
+		OpportunityPageLabelsABAMERList.add("Reason Lost Comments");
+		OpportunityPageLabelsABAMERList.add("Competitor");
+		
+		OpportunityPageLabelsABAMERList.add("Owner ID");
+		OpportunityPageLabelsABAMERList.add("Change Opportunity Owner");
+		/*OpportunityPageLabelsABAMERList.add("Last Manually Modified By");
+		OpportunityPageLabelsABAMERList.add("Last Manually Modified Date");
+		OpportunityPageLabelsABAMERList.add("Date");
+		OpportunityPageLabelsABAMERList.add("Time");*/
+		OpportunityPageLabelsABAMERList.add("External Deal ID");
+		OpportunityPageLabelsABAMERList.add("Source System");
+		report.updateTestLog("Verify Opportunity Field Labels", "Opportunity field labels are:::" + OpportunityPageLabelsABAMERList, Status.PASS);
+
+	}
 	
 	public void validateNewOpportunityPage() {
 		List<String> opportunityHeaders = null;
 		List<String> opportunityHeadersList = new ArrayList<String>();
 		if(dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) {
-			OpportunityPageHeaders();
-			opportunityHeaders = establishConnection.establishMetaDataConnectionPageHeaders("Opportunity", 6);
-			opportunityHeadersList = Utility_Functions.xValidatePickListValuesPage(OpportunityPageHeadersList, opportunityHeaders, "Opportunity page Header values");
+			OpportunityPageHeadersABAMER();
+			String[] recordID = {"012i0000001622CAAQ"};
+			opportunityHeaders = establishConnection.establishMetaDataConnectionPageHeaders("Opportunity", recordID);
+			opportunityHeadersList = Utility_Functions.xValidatePickListValuesPage(OpportunityPageHeadersABAMERList, opportunityHeaders, "Opportunity page Header values");
 		} else if(dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) {
-			OpportunityPageHeaders();
-			opportunityHeaders = establishConnection.establishMetaDataConnectionPageHeaders("Opportunity", 6);
+			OpportunityPageHeadersOBAMERList();
+			String[] recordID = {"012i0000000405nAAA"};
+			opportunityHeaders = establishConnection.establishMetaDataConnectionPageHeaders("Opportunity", recordID);
 			opportunityHeadersList = Utility_Functions.xValidatePickListValuesPage(opportunityHeaders, opportunityHeaders, "Opportunity page Header values");
 		} else if(dataTable.getData("General_Data", "TC_ID").contains("CMAMERPS")) {
+			String[] recordID = {"012i0000000405kAAA"};
 			OpportunityPageHeadersCapitalMarkets();
-			opportunityHeaders = establishConnection.establishMetaDataConnectionPageHeaders("Opportunity", 7);
+			opportunityHeaders = establishConnection.establishMetaDataConnectionPageHeaders("Opportunity", recordID);
 			opportunityHeadersList = Utility_Functions.xValidatePickListValuesPage(OpportunityPageHeadersCapitalMarkets, opportunityHeaders, "Opportunity page Header values");
 		} else if(dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) {
+			String[] recordID = {"012i0000000405lAAA"};
 			OpportunityPageHeadersCapitalMarkets();
-			opportunityHeaders = establishConnection.establishMetaDataConnectionPageHeaders("Opportunity", 7);
+			opportunityHeaders = establishConnection.establishMetaDataConnectionPageHeaders("Opportunity", recordID);
 			opportunityHeadersList = Utility_Functions.xValidatePickListValuesPage(OpportunityPageHeadersCapitalMarkets, opportunityHeaders, "Opportunity page Header values");
-		} else if(dataTable.getData("General_Data", "TC_ID").contains("ABAPAC")) {
-			OpportunityPageHeadersAPAC();			
-			opportunityHeaders = establishConnection.establishMetaDataConnectionPageHeaders("Opportunity", 7);
-			opportunityHeadersList = Utility_Functions.xValidatePickListValuesPage(OpportunityPageHeadersAPAC, opportunityHeaders, "Opportunity page Header values");
 		} else if(dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA")){
 			OpportunityPageHeadersFR();
-			opportunityHeaders = establishConnection.establishMetaDataConnectionPageHeaders("Opportunity", 7);
+			String[] recordID = {"0121Y000001EVzDQAW"};
+			opportunityHeaders = establishConnection.establishMetaDataConnectionPageHeaders("Opportunity", recordID);
 			opportunityHeadersList = Utility_Functions.xValidatePickListValuesPage(OpportunityPageHeadersListFR, opportunityHeaders, "Opportunity - FRANEMEA page Header values");
 		}
 		if (opportunityHeadersList.size()!=0) {
@@ -465,14 +632,30 @@ public class OpportunityPageLayout extends ReusableLibrary {
 			} else {
 				report.updateTestLog("Verify Opportunity Field Labels", "All the labels are present in the Opportunity Page", Status.PASS);
 			}
-		}else {
-			OpportunityPageFieldLabels();
-			opportunityLabelsList = Utility_Functions.xValidatePickListValuesPage(opportunityLabels, opportunityLabels, "Opportunity page field values");
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) {
+			OpportunityPageFieldLabelsOBAMER();
+			opportunityLabelsList = Utility_Functions.xValidatePickListValuesPage(OpportunityPageLabelsOBAMERList, opportunityLabels, "Opportunity page field values");
 			if (opportunityLabelsList.size()!=0) {
 				report.updateTestLog("Verify Opportunity Field Labels", "All the labels are not present in the Opportunity Page:::" + opportunityLabelsList, Status.FAIL);
 			} else {
 				report.updateTestLog("Verify Opportunity Field Labels", "All the labels are present in the Opportunity Page", Status.PASS);
-			}	
+			}
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) {
+			OpportunityPageFieldLabelsABAMER();
+			opportunityLabelsList = Utility_Functions.xValidatePickListValuesPage(OpportunityPageLabelsABAMERList, opportunityLabels, "Opportunity page field values");
+			if (opportunityLabelsList.size()!=0) {
+				report.updateTestLog("Verify Opportunity Field Labels", "All the labels are not present in the Opportunity Page:::" + opportunityLabelsList, Status.FAIL);
+			} else {
+				report.updateTestLog("Verify Opportunity Field Labels", "All the labels are present in the Opportunity Page", Status.PASS);
+			}
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) {
+			OpportunityPageFieldLabelsCMAMER();
+			opportunityLabelsList = Utility_Functions.xValidatePickListValuesPage(OpportunityPageLabelsCMAMERList, opportunityLabels, "Opportunity page field values");
+			if (opportunityLabelsList.size()!=0) {
+				report.updateTestLog("Verify Opportunity Field Labels", "All the labels are not present in the Opportunity Page:::" + opportunityLabelsList, Status.FAIL);
+			} else {
+				report.updateTestLog("Verify Opportunity Field Labels", "All the labels are present in the Opportunity Page", Status.PASS);
+			}
 		}
 		
 	}

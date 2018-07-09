@@ -350,7 +350,7 @@
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERManagerAccountsNewActivityLayoutPage"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERBrokerLeadsVerifyNewPersonalInformationPage"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerAccountsVerifyDetailsPage"/>
-			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_ABAPACManagerNewOpportunityPageLayout"/>
+			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_CMAMERPSManagerNewOpportunityPageLayout"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAPACBrokerAccountsDetailsEditPage"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerContactsNewActivityLayoutPage"/>
 			<class name="testscripts.SF.RegressionTestScriptsOpp.TC_SF_GWSAMERManagerOpportunityCloneEdit"/>
@@ -402,6 +402,14 @@
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERManagerContactsPopulatingRequiredFieldsPage"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_OBAMERCSSContactsPopulatingRequiredFieldsPage"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAPACBrokerContactsReminderSentFunctionality"/>
+			<class name="testscripts.SF.RegressionTestScripts.TC_SF_FRANEMEAManagerOpportunitiesNewSection"/>
+			<class name="testscripts.SF.RegressionTestScripts.TC_SF_ASAMERBrokerOpportunitiesCbre360Field"/>
+			<class name="testscripts.SF.RegressionTestScripts.TC_SF_DAEMEADataAccountSearchFunc"/>
+			<class name="testscripts.SF.RegressionTestScripts.TC_SF_FDIGEMEADataOpportunitiesReferralRecipientValues"/>
+			<class name="testscripts.SF.RegressionTestScripts.TC_SF_FDIGEMEADataOpportunitiesLeadAndReasonField"/>
+			<class name="testscripts.SF.RegressionTestScripts.TC_SF_FDIGEMEADataAccountsField"/>
+			<class name="testscripts.SF.RegressionTestScripts.TC_SF_FRANEMEAManagerOpportunitiesNewField"/>
+									
 			<!-- <class name="testscripts.SF.UATTestScripts.TC_SF_FDIGEMEADataCloseTaskonAccount"/>
 			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACAdminInstallmentOpportunityModification"/>
 			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACAdminMultipleInstallmentAmountCreateEdit"/>

@@ -287,7 +287,8 @@ public class PropertiesFunctions extends ReusableLibrary {
 	
 	public void propertyPreferenceValidation() {
 		propertyPreferenceHeaderList();
-		List<String> propertyPreferencesHeader = establishConnection.establishMetaDataConnectionPageHeaders("Property_Preferences__c", 5);
+		String[] recordID = {"00hi000000dz7c7AAA"};
+		List<String> propertyPreferencesHeader = establishConnection.establishMetaDataConnectionPageHeaders("Property_Preferences__c", recordID);
 		List<String> propertyPreferncesHeadersList = new ArrayList<String>();
 		propertyPreferncesHeadersList = Utility_Functions.xValidatePickListValuesPage(propertyPreferencesHeader, propertyPreferecenceHeaderList, "Property Prefernces Header values");
 		if (propertyPreferncesHeadersList.size()!=0) {
