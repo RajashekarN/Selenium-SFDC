@@ -174,7 +174,6 @@ public class CreateUsers extends ReusableLibrary {
 		FTE2userNamesList.add("0051Y000009gz6uQAA");
 		FTE2userNamesList.add("0051Y000009gz6zQAA");
 		FTE2userNamesList.add("0051Y000009gz79QAA");
-		FTE2userNamesList.add("005m00000034ni8AAA");
 		FTE2userNamesList.add("0051Y000009gz7OQAQ");
 		FTE2userNamesList.add("0051Y000009gz7dQAA");
 		FTE2userNamesList.add("0051Y000009gz82QAA");
