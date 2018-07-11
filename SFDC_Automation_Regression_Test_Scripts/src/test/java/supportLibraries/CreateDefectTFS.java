@@ -57,7 +57,7 @@ public class CreateDefectTFS  {
 			httpcon.setRequestProperty("Content-type", "application/json");
 			httpcon.connect();
 			httpcon.setConnectTimeout(20);
-			Utility_Functions.timeWait(25);
+			Utility_Functions.timeWait(5);
 			OutputStreamWriter output = new OutputStreamWriter(httpcon.getOutputStream());
 			output.write(json.toString());
 			output.flush();
