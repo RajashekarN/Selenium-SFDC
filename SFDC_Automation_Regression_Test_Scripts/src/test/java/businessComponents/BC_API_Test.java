@@ -17,6 +17,7 @@ import pagesAPI.PropertiesFunctions;
 import pagesAPI.SubscriptionsFunctions;
 import pagesAPI.TaggingFunctions;
 import pagesAPI.TaskEventsFunctions;
+import pagesAPI.UnitOfMeasurementFunctions;
 
 /**
  * Business Components Class for validating the API calls 
@@ -48,6 +49,7 @@ public class BC_API_Test extends ReusableLibrary {
 	BudgetsTargetsFunctions budgetsTargetsFunctions = new BudgetsTargetsFunctions(scriptHelper);
 	CampaignsFunctions campaignsFunctions = new CampaignsFunctions(scriptHelper);
 	SubscriptionsFunctions subscriptionsFunctions = new SubscriptionsFunctions(scriptHelper);
+	UnitOfMeasurementFunctions unitOfMeasurementFunctions = new UnitOfMeasurementFunctions(scriptHelper);
 	
 	/**
 	 * Account Creation and Validation of fields
@@ -449,6 +451,13 @@ public class BC_API_Test extends ReusableLibrary {
 		opportunitiesFunctions.requiredFieldsbetweenw03_15Stages();
 	}
 	
-	
+	/**
+	 * Validate that all the countries have the right Unit of Measure assigned to it
+	 * Validate that the UOM gets updated for the user, when wither the Country's UOM is updated or the User's country is updated
+	 * @author SChandran
+	 */
+	public void bc_validateUnitOfMeasurementForUserAndCountry() {
+		unitOfMeasurementFunctions.validateUOMForUserAndCountry();
+	}
 	
 }
