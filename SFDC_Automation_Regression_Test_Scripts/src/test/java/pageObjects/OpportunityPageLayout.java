@@ -649,39 +649,30 @@ public class OpportunityPageLayout extends ReusableLibrary {
 			} else {
 				report.updateTestLog("Verify Opportunity Field Labels", "All the labels are present in the Opportunity Page", Status.PASS);
 			}
-<<<<<<< HEAD
 		} else if(dataTable.getData("General_Data", "TC_ID").contains("ASEMEA")){
 			ASEMEAOppNewLabelsList();
 			opportunityLabelsList = Utility_Functions.xValidatePickListValuesPage(AssetServicesEMEAOppNewLabels, opportunityLabels, "Opportunity page field values");
-=======
+			if (opportunityLabelsList.size()!=0) {
+				report.updateTestLog("Verify Opportunity Field Labels", "All the labels are not present in the Opportunity Page:::" + opportunityLabelsList, Status.FAIL);
+			} else {
+				report.updateTestLog("Verify Opportunity Field Labels", "All the labels are present in the Opportunity Page", Status.PASS);
+			}	
 		} else if(dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) {
 			OpportunityPageFieldLabelsOBAMER();
 			opportunityLabelsList = Utility_Functions.xValidatePickListValuesPage(OpportunityPageLabelsOBAMERList, opportunityLabels, "Opportunity page field values");
->>>>>>> 190defc5474f6ae34bc8b0b959924ab086ea9f09
 			if (opportunityLabelsList.size()!=0) {
 				report.updateTestLog("Verify Opportunity Field Labels", "All the labels are not present in the Opportunity Page:::" + opportunityLabelsList, Status.FAIL);
 			} else {
 				report.updateTestLog("Verify Opportunity Field Labels", "All the labels are present in the Opportunity Page", Status.PASS);
-			}
-<<<<<<< HEAD
-			
-		}else {
-		
-			OpportunityPageFieldLabels();
-			opportunityLabelsList = Utility_Functions.xValidatePickListValuesPage(opportunityLabels, opportunityLabels, "Opportunity page field values");
-=======
+			}			
 		} else if(dataTable.getData("General_Data", "TC_ID").contains("ABAMER")) {
 			OpportunityPageFieldLabelsABAMER();
 			opportunityLabelsList = Utility_Functions.xValidatePickListValuesPage(OpportunityPageLabelsABAMERList, opportunityLabels, "Opportunity page field values");
->>>>>>> 190defc5474f6ae34bc8b0b959924ab086ea9f09
 			if (opportunityLabelsList.size()!=0) {
 				report.updateTestLog("Verify Opportunity Field Labels", "All the labels are not present in the Opportunity Page:::" + opportunityLabelsList, Status.FAIL);
 			} else {
 				report.updateTestLog("Verify Opportunity Field Labels", "All the labels are present in the Opportunity Page", Status.PASS);
 			}
-<<<<<<< HEAD
-		}
-=======
 		} else if(dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) {
 			OpportunityPageFieldLabelsCMAMER();
 			opportunityLabelsList = Utility_Functions.xValidatePickListValuesPage(OpportunityPageLabelsCMAMERList, opportunityLabels, "Opportunity page field values");
@@ -690,9 +681,8 @@ public class OpportunityPageLayout extends ReusableLibrary {
 			} else {
 				report.updateTestLog("Verify Opportunity Field Labels", "All the labels are present in the Opportunity Page", Status.PASS);
 			}
->>>>>>> 190defc5474f6ae34bc8b0b959924ab086ea9f09
 		}
-		
+	}
 	
 	
 	/**
