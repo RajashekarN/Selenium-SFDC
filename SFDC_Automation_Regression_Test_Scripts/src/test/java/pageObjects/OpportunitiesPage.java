@@ -887,9 +887,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//span[contains(text(),'Account Name')]/parent::label/following-sibling::div//input[contains(@title,'Search Accounts')]")
 	WebElement accountNameNewOpportunity;
 	
-	@FindBy(xpath="//select[@id='record-type-select']/option[contains(text(),'France Consulting & Service')]")
-	WebElement franceConsultingAndService;
-
+	
      /**
 	 * Validating the Opportunities APAC DSF for Financial Details for pacific users
 	 * 
@@ -1111,6 +1109,51 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath="//button[contains(@class,'forceActionButton')]/span[text()='Save']")
 	WebElement saveOppAssetServices;
 	
+	/**
+	 * Function for validating the Picklist Field on Opportunity page layout
+	 * 
+	 * @author Haritha
+	 */
+	
+	@FindBy(xpath="//select[@id='record-type-select']/option[contains(text(),'France Consulting & Service')]")
+	WebElement franceConsultingAndService;
+	
+	@FindBy(xpath="//span[contains(text(),'Sales Stage')]/parent::label/following-sibling::div//a")
+	WebElement salesStagePitch;
+	
+	@FindBy(xpath="//a[contains(@title,'Pitch Alert')]/parent::li/parent::ul")
+	WebElement pitchAlert;
+	
+	@FindBy(xpath="//span[contains(text(),'Pitch Alert Date')]/parent::div/following-sibling::div//span")
+	WebElement pitchAlertDate;
+	
+	@FindBy(xpath="//span[text()='Save'][contains(@class,' label bBody')]/parent::button[@class='slds-button slds-button--brand cuf-publisherShareButton undefined uiButton']")
+	WebElement savePitchAlert;
+	
+	/**
+	 * 
+	 * 
+	 */
+	@FindBy(xpath="//input[@id='acctSearchBox']")
+	WebElement accountNameEmea;
+	
+	@FindBy(xpath="//span[text()='Close Date']/parent::label/parent::div//input")
+    WebElement closeDateEmea;
+	
+	@FindBy(xpath="//span[text()='Lead Source']/parent::span/parent::div/parent::div//a")
+	WebElement leadSourceEmea;
+	
+	@FindBy(xpath = "//span[contains(text(),'Sales Stage')]/parent::label/following-sibling::div//a[contains(@class,'select')]")
+	WebElement salesStageEmea;
+			
+	@FindBy(xpath = "(//lightning-icon/span[text()='Show More'])[1]")
+	WebElement firstShowActions;
+	
+	@FindBy(xpath = "//a[@title='Delete']/parent::li")
+	WebElement deleteAction;
+	
+	@FindBy(xpath = "//span[text()='Delete']/parent::button")
+	WebElement deleteOpportunity;
 
 
 	
@@ -4738,7 +4781,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	}
 
 	/**
-	 * Validating the Opportunities creation for the Japan users & France users
+	 * Validating the Opportunities creation for the Japan users 
 	 * 
 	 * @author Ramya
 	 *
@@ -5347,5 +5390,140 @@ public class OpportunitiesPage extends ReusableLibrary {
 		sf_UtilityFunctions.verifyPickListValues("Other", "Opportunity", "France_Transaction_Demand_Agency", "LeadSource");
 	}
 	
+	/**
+	 * Function for validating the Picklist Field on Opportunity page layout
+	 * 
+	 * @author Haritha
+	 */
 	
+	public void validatePitchAlertDate() {
+		selectNewOpportunity();
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xSwitchtoFrame(driver, continueButton);
+		Utility_Functions.xWaitForElementPresent(driver, selectOpportunityRecordType, 3);
+		Utility_Functions.xClick(driver, selectOpportunityRecordType, true);
+		Utility_Functions.xWaitForElementPresent(driver, franceConsultingAndService, 3);
+		Utility_Functions.xClick(driver, franceConsultingAndService, true);
+		Utility_Functions.xClick(driver, continueButton, true);
+		Utility_Functions.timeWait(2);
+		driver.switchTo().defaultContent();
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, opportunityName_AS, 3);
+		Utility_Functions.xSendKeys(driver, opportunityName_AS,
+				"Test Automation Opportunity_" + Utility_Functions.xGenerateAlphaNumericString());
+		Utility_Functions.xWaitForElementPresent(driver, accountNameNewOpportunity, 4);
+		Utility_Functions.xSendKeys(driver, accountNameNewOpportunity, "Test");
+		Utility_Functions.timeWait(2);
+		accountNameNewOpportunity.sendKeys(Keys.ARROW_DOWN);
+		Utility_Functions.timeWait(2);
+		accountNameNewOpportunity.sendKeys(Keys.ENTER);
+		System.out.println(Calendar.getInstance());
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		Date date = new Date();
+		Utility_Functions.xWaitForElementPresent(driver, closeDate_AS, 3);
+		Utility_Functions.xSendKeys(driver, closeDate_AS, dateFormat.format(date).toString());
+		Utility_Functions.xWaitForElementPresent(driver, leadSourceNewOpp, 3);
+		Utility_Functions.xClick(driver, leadSourceNewOpp, true);
+		Utility_Functions.timeWait(2);
+		sf_UtilityFunctions.selectValueFromDropdownList(dropDownList,"Advertising board");
+		Utility_Functions.xWaitForElementPresent(driver, salesStagePitch, 3);
+		Utility_Functions.xClick(driver, salesStagePitch, true);
+		Utility_Functions.timeWait(2);
+		sf_UtilityFunctions.selectValueFromDropdownList(dropDownList,"Qualification");
+		Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeCommissionValue, 3);
+		Utility_Functions.xSendKeys(driver, estimatedGrossFeeCommissionValue,
+				dataTable.getData("General_Data", "InstallmentAmount"));
+		Utility_Functions.xWaitForElementPresent(driver, saveNewOpp, 3);
+		Utility_Functions.xClick(driver, saveNewOpp, true);
+		Utility_Functions.timeWait(5);
+		sf_UtilityFunctions.clickOnDetailAction("Pitch Alert");
+		Utility_Functions.xWaitForElementPresent(driver, savePitchAlert, 3);
+		Utility_Functions.xClick(driver, savePitchAlert, true);
+		Utility_Functions.xScrollWindowToElement(driver, pitchAlertDate);
+		String accountName = pitchAlertDate.getText();
+		if(accountName.contains("")) {
+			report.updateTestLog("Verify Pitch Alert Date", "Pitch Alert Date was auto-populated:::", Status.PASS);
+		}
+		else
+		{
+			report.updateTestLog("Verify Pitch Alert Date", "Pitch Alert Date wasn't auto-populated:::", Status.FAIL);
+		}
+	}
+	
+	/**
+	 * Function for validating the Sales Stage Closed Value on Opportunity page layout
+	 * 
+	 * @author Haritha
+	 */
+	public void salesStageClosedValue() {	
+		boolean isStatus = new EstablishConnection(scriptHelper).getStageValues("Opportunity", "05-Closed", "StageName");	
+		if(isStatus==true) {
+			report.updateTestLog("Opportunity Sales Stage", "Opportunity Sales Stage has the value:::", Status.PASS);
+		}
+		else {
+			report.updateTestLog("Opportunity Sales Stage", "Opportunity Sales Stage doesn't has the value:::", Status.FAIL);
+		}
+	}
+	
+	/**
+	 * Function for validating the Delete option on all opportunities page
+	 *
+	 *@author Haritha
+	 */
+	public void deleteCreatedOpportunity() {
+		selectNewOpportunity();
+		Utility_Functions.timeWait(5);
+		Utility_Functions.xSwitchtoFrame(driver, selectOpportunityRecordType);
+		Utility_Functions.xClick(driver, selectOpportunityRecordType, true);
+		Utility_Functions.xSelectDropdownByName(selectOpportunityRecordType, "EMEA A&T Investor");
+		Utility_Functions.xClick(driver, continueButton, true);
+		Utility_Functions.timeWait(2);
+		driver.switchTo().defaultContent();
+		Utility_Functions.xWaitForElementPresent(driver, opportunityName_AS, 5);
+		Utility_Functions.xClick(driver, opportunityName_AS, true);
+		Utility_Functions.xSendKeys(driver, opportunityName_AS,
+				"Test Automation Opportunity_" + Utility_Functions.xGenerateAlphaNumericString());
+		
+		Utility_Functions.xWaitForElementPresent(driver, accountNameNewOpportunity,3);
+		Utility_Functions.xClick(driver, accountNameNewOpportunity, true);			
+		Utility_Functions.timeWait(3);
+		accountNameNewOpportunity.sendKeys(Keys.ARROW_DOWN);	
+		Utility_Functions.timeWait(2);
+		accountNameNewOpportunity.sendKeys(Keys.ENTER);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xWaitForElementPresent(driver, estimatedGrossFeeCommissionValue, 5);
+		Utility_Functions.xSendKeys(driver, estimatedGrossFeeCommissionValue,
+				dataTable.getData("General_Data", "InstallmentAmount"));
+		System.out.println(Calendar.getInstance());
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		Date date = new Date();
+		Utility_Functions.xWaitForElementPresent(driver, closeDateEmea, 3);
+		Utility_Functions.xSendKeys(driver, closeDateEmea, dateFormat.format(date).toString());
+		Utility_Functions.xWaitForElementPresent(driver, salesStageEmea, 3);
+		//Utility_Functions.xClick(driver, salesStageEmea, true);
+		sf_UtilityFunctions.selectStandardDropdownOption("Sales Stage", "Target");
+		Utility_Functions.xWaitForElementPresent(driver, saveStageOpp, 3);
+		Utility_Functions.xClick(driver, saveStageOpp, true);
+		
+		Utility_Functions.timeWait(10);
+		sf_UtilityFunctions.oneAppNavigationTab("Opportunities");
+		Utility_Functions.xSwitchtoFrame(driver, firstShowActions);
+		//Utility_Functions.xWaitForElementPresent(driver, showActions, 3);
+		Utility_Functions.xClickHiddenElement(driver, firstShowActions);
+		if ((dataTable.getData("General_Data", "TC_ID").contains("EMEA"))){
+		Utility_Functions.xWaitForElementPresent(driver, deleteAction, 3);
+		Utility_Functions.xClick(driver, deleteAction, true);
+		Utility_Functions.xWaitForElementPresent(driver, deleteOpportunity, 3);
+		Utility_Functions.xClick(driver, deleteOpportunity, true);
+		report.updateTestLog("Deletion of an Opportunity", "Opportunity was successfuly deleted", Status.PASS);
+		}else {
+			report.updateTestLog("Deletion of an Opportunity", "Opportunity wasn't deleted", Status.FAIL);
+		}
+		
+		
+		
+		
+	}
+	
+
 }

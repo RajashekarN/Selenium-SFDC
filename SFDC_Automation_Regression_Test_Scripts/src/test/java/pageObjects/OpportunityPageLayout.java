@@ -322,6 +322,21 @@ public class OpportunityPageLayout extends ReusableLibrary {
 	}
 	
 	/**
+	 * Function validating the page layout labels for ASEMEA
+	 * 
+	 * @author Haritha
+	 */
+	
+	static ArrayList<String> AssetServicesEMEAOppNewLabels = new ArrayList<String>();
+
+	public void ASEMEAOppNewLabelsList() {	
+		AssetServicesEMEAOppNewLabels.add("Sub Market");
+		report.updateTestLog("Verify Opportunity Field Labels", "Opportunity field labels are:::" + AssetServicesEMEAOppNewLabels, Status.PASS);
+	}
+	
+	
+	
+	/**
 	 * Function validating the page layout labels for FRANEMEA
 	 * 
 	 * @author Haritha
@@ -434,7 +449,7 @@ public class OpportunityPageLayout extends ReusableLibrary {
 			OpportunityPageHeadersFR();
 			opportunityHeaders = establishConnection.establishMetaDataConnectionPageHeaders("Opportunity", 7);
 			opportunityHeadersList = Utility_Functions.xValidatePickListValuesPage(OpportunityPageHeadersListFR, opportunityHeaders, "Opportunity - FRANEMEA page Header values");
-		}
+		} 
 		if (opportunityHeadersList.size()!=0) {
 			report.updateTestLog("Verify Opportunity Headers", "All the Headers are not present in the Opportunity Page:::" + opportunityHeadersList, Status.FAIL);
 		} else {
@@ -454,6 +469,8 @@ public class OpportunityPageLayout extends ReusableLibrary {
 			opportunityLabels = establishConnection.establishMetaDataConnectionPageLayouts("Opportunity", "Opportunity Layout - Agency Brokerage");
 		} else if(dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA")){
 			opportunityLabels = establishConnection.establishMetaDataConnectionPageLayouts("Opportunity", "France Transaction Demand Agency Opportunity Layout");
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("ASEMEA")){
+			opportunityLabels = establishConnection.establishMetaDataConnectionPageLayouts("Opportunity", "EMEA Asset Services Page Layout");
 		}
 		List<String> opportunityLabelsList = new ArrayList<String>();
 		
@@ -465,17 +482,27 @@ public class OpportunityPageLayout extends ReusableLibrary {
 			} else {
 				report.updateTestLog("Verify Opportunity Field Labels", "All the labels are present in the Opportunity Page", Status.PASS);
 			}
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("ASEMEA")){
+			ASEMEAOppNewLabelsList();
+			opportunityLabelsList = Utility_Functions.xValidatePickListValuesPage(AssetServicesEMEAOppNewLabels, opportunityLabels, "Opportunity page field values");
+			if (opportunityLabelsList.size()!=0) {
+				report.updateTestLog("Verify Opportunity Field Labels", "All the labels are not present in the Opportunity Page:::" + opportunityLabelsList, Status.FAIL);
+			} else {
+				report.updateTestLog("Verify Opportunity Field Labels", "All the labels are present in the Opportunity Page", Status.PASS);
+			}
+			
 		}else {
+		
 			OpportunityPageFieldLabels();
 			opportunityLabelsList = Utility_Functions.xValidatePickListValuesPage(opportunityLabels, opportunityLabels, "Opportunity page field values");
 			if (opportunityLabelsList.size()!=0) {
 				report.updateTestLog("Verify Opportunity Field Labels", "All the labels are not present in the Opportunity Page:::" + opportunityLabelsList, Status.FAIL);
 			} else {
 				report.updateTestLog("Verify Opportunity Field Labels", "All the labels are present in the Opportunity Page", Status.PASS);
-			}	
+			}
+		}
 		}
 		
-	}
 	
 	
 	/**
