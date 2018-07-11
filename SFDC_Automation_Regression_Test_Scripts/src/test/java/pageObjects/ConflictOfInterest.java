@@ -156,7 +156,8 @@ public class ConflictOfInterest extends ReusableLibrary {
 			report.updateTestLog("Verify COI Check", "Status didn't get changed " + status.getText(), Status.WARNING);
 		}
 		report.updateTestLog("Verify COI Check Status", "CoI Check Status value is:::" + status.getText(), Status.PASS);
-		sf_UtilityFunctions.clickOnDetailActionButton("Add Property", "Run Check");
+		sf_UtilityFunctions.clickOnDetailAction("Run Check");
+		//sf_UtilityFunctions.clickOnDetailActionButton("Delete", "Run Check");
 		Utility_Functions.xClick(driver, saveButtonRunCheck, true);
 		Utility_Functions.timeWait(2);
 		driver.navigate().refresh();

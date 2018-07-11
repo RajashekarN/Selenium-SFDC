@@ -54,6 +54,7 @@ public class CreateDefectTFS  {
 			httpcon.setDoInput(true);
 			httpcon.setRequestMethod("POST");
 			httpcon.setRequestProperty("Accept", "application/json");
+			httpcon.setRequestProperty("Content-type", "application/json");
 			httpcon.connect();
 			httpcon.setConnectTimeout(20);
 			Utility_Functions.timeWait(25);

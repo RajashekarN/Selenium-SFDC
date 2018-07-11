@@ -689,4 +689,53 @@ public class SearchTextSOQL extends ReusableLibrary {
 		System.out.println("Result:::" + results);
 		status = establishConnection.saveResults(results);
 	}
+	
+	public SObject fetchCountryAndUOMForUser(String username) {
+		QueryResult result = null;
+		try {
+			establishConnection.establishConnection();
+			String query = "SELECT Id, Username, Country, UoM__c FROM user WHERE Username = '"+username+"'";
+			result = EstablishConnection.connection.query(query);
+			if (result.getSize() > 0) {
+				boolean done = false;
+				while (!done) {
+					if (result.isDone()) {
+						done = true;
+					} else {
+						result = EstablishConnection.connection.queryMore(result.getQueryLocator());
+					}
+				}
+			}
+		} catch (Exception ex) {
+			System.out.println("Exception in main : " + ex);
+		}
+		return result.getRecords()[0];
+		//(String) record.getField("UoM__c"));
+	}
+	
+	public Map<String, String> fetchAllUsersFromCountry(String country) {
+		Map<String, String> recordID = new HashMap<String, String>();
+		QueryResult result = null;
+		try {
+			establishConnection.establishConnection();
+			String query = "SELECT Id, Username, UoM__c FROM user WHERE Country = '"+country+"'";
+			result = EstablishConnection.connection.query(query);
+			if (result.getSize() > 0) {
+				boolean done = false;
+				while (!done) {
+					for (SObject record : result.getRecords()) {
+						recordID.put((String) record.getField("Id"), (String) record.getField("UoM__c"));
+					}
+					if (result.isDone()) {
+						done = true;
+					} else {
+						result = EstablishConnection.connection.queryMore(result.getQueryLocator());
+					}
+				}
+			}
+		} catch (Exception ex) {
+			System.out.println("Exception in main : " + ex);
+		}
+		return recordID;
+	}
 }
