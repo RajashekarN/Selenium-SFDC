@@ -11,11 +11,13 @@ import com.sforce.soap.partner.DeleteResult;
 import com.sforce.soap.partner.DescribeLayout;
 import com.sforce.soap.partner.DescribeLayoutResult;
 import com.sforce.soap.partner.DescribeLayoutSection;
+import com.sforce.soap.partner.DescribeSObjectResult;
 import com.sforce.soap.partner.Field;
 import com.sforce.soap.partner.GetUserInfoResult;
 import com.sforce.soap.partner.LeadConvertResult;
 import com.sforce.soap.partner.LoginResult;
 import com.sforce.soap.partner.PartnerConnection;
+import com.sforce.soap.partner.PicklistEntry;
 import com.sforce.soap.partner.SaveResult;
 import com.sforce.soap.partner.SetPasswordResult;
 import com.sforce.ws.ConnectionException;
@@ -428,7 +430,7 @@ public class EstablishConnection extends ReusableLibrary {
 	 * @author Vishnuvardhan
 	 *
 	 */
-	
+
 	public void establishMetaDataConnection() {
 		String apiVersion = "41.0";
 		try {
@@ -459,8 +461,8 @@ public class EstablishConnection extends ReusableLibrary {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
+
 	/**
 	 * Function for establishing the metadata connection for picklist values
 	 * 
@@ -497,16 +499,57 @@ public class EstablishConnection extends ReusableLibrary {
 		} catch (ConnectionException e) {
 			e.printStackTrace();
 		}
+		System.out.println("Pick List values are :::" + PickListValues);
 		return PickListValues;
 	}
-	
+
+	public boolean getStageValues(String ObjectName, String PickListValue, String ProvidedPickList) {
+		establishMetaDataConnection(); boolean isStatus = false;
+		DescribeSObjectResult describeSObjectResult = null;
+		PicklistEntry[] picklistValues = null;
+		try {
+			describeSObjectResult = connection.describeSObject(ObjectName);
+			Field[] fields = describeSObjectResult.getFields();
+			for (int i = 0; i < fields.length; i++) {
+				Field field = fields[i];
+				if(field.getName().equals(ProvidedPickList)) {
+					if (field.isUpdateable()) {
+						if(field.getName().equals(ProvidedPickList)) {
+							picklistValues = field.getPicklistValues();
+							List<String> picklistItems = new ArrayList<String>();
+							if (picklistValues != null && picklistValues[0] != null) {
+								System.out.println("\t\tPicklist values = ");
+								for (int k = 0; k < picklistValues.length; k++) {
+									picklistItems.add(picklistValues[k].getLabel());										
+									System.out.println("\t\t\tItem: " + picklistValues[k].getLabel());
+								}
+							}
+						}
+						System.out.println("Field name: " + field.getName());
+						System.out.println("Field label: " + field.getLabel());            
+					}
+					break;
+				}
+			}
+			for(int i=0; i < picklistValues.length; i++) {
+				if(picklistValues[i].getValue().equals(PickListValue)) {
+					isStatus = true;
+					break;
+				}
+			}
+		} catch (ConnectionException e1) {
+			e1.printStackTrace();
+		}
+		return isStatus;
+	}
+
 	/**
 	 * Function for establishing the metadata connection for page layouts 
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */
-	
+
 	public List<String> establishMetaDataConnectionPageLayouts(String ObjectName, String PageLayouts) {
 		List<String> UIFieldsOnPage = new ArrayList<String>();
 		establishMetaDataConnection();
@@ -528,7 +571,7 @@ public class EstablishConnection extends ReusableLibrary {
 						} 
 					}
 				}
-				
+
 			}
 		} catch (ConnectionException e) {
 			e.printStackTrace();
@@ -536,7 +579,7 @@ public class EstablishConnection extends ReusableLibrary {
 		System.out.println("Opportunity Labels are:::" + UIFieldsOnPage);
 		return UIFieldsOnPage;
 	}
-	
+
 
 	public static List<String> getFieldNamesOnLayout(String layoutName) {
 		List<String> LayOutValues = new ArrayList<String>();
@@ -547,15 +590,15 @@ public class EstablishConnection extends ReusableLibrary {
 				Layout layOut = (Layout) md;
 				LayoutSection[] sections = layOut.getLayoutSections();
 				for (LayoutSection section : sections) {
-						LayoutColumn[] columns = section.getLayoutColumns();
-						for (LayoutColumn column : columns) {
-							LayoutItem[] items = column.getLayoutItems();
-							for (LayoutItem item : items) {
-								if (item.getField() != null) {
-									LayOutValues.add(item.getField());
-								}
+					LayoutColumn[] columns = section.getLayoutColumns();
+					for (LayoutColumn column : columns) {
+						LayoutItem[] items = column.getLayoutItems();
+						for (LayoutItem item : items) {
+							if (item.getField() != null) {
+								LayOutValues.add(item.getField());
 							}
-						}			
+						}
+					}			
 				}
 			}
 		} catch (Exception ex) {
@@ -563,15 +606,13 @@ public class EstablishConnection extends ReusableLibrary {
 		}
 		return LayOutValues;
 	}
-	
+
 	/**
 	 * Function for getting the page headers 
 	 * 
 	 * @author Vishnuvardhan
 	 *
 	 */
-	
-	
 	public List<String> establishMetaDataConnectionPageHeaders(String ObjectName, String[] recordID) {
 		establishMetaDataConnection();
 		DescribeLayoutResult dlr = null;
@@ -630,7 +671,7 @@ public class EstablishConnection extends ReusableLibrary {
 		map.put("Valuations %26 Advisory Services", "Valuations_Advisory_Services");
 		return map;
 	}
-	
+
 	/**
 	 * Function for retrieving the User Configuration
 	 * 
@@ -784,7 +825,7 @@ public class EstablishConnection extends ReusableLibrary {
 			} else {
 				for (int i = 0; i < results[j].getErrors().length; i++) {
 					com.sforce.soap.partner.Error err = results[j].getErrors()[i];
-						report.updateTestLog("Verify Results",
+					report.updateTestLog("Verify Results",
 							"Errors code:::" + err.getStatusCode().toString(), Status.FAIL);
 					report.updateTestLog("Verify Results",
 							"Errors message:::" + err.getMessage(), Status.FAIL);

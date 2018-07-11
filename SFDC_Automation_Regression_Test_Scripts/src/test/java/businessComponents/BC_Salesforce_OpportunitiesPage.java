@@ -33,6 +33,7 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 
 	OpportunitiesPage sfOpportunitiesPage = new OpportunitiesPage(scriptHelper);
 	OpportunitiesInstallments opportunityInstallments = new OpportunitiesInstallments(scriptHelper);
+	
 	OpportunitiesDefaultRecordType opportunitiesDefaultRecordType = new OpportunitiesDefaultRecordType(scriptHelper);
 	OpportunitySplit opportunitySplit = new OpportunitySplit(scriptHelper);
 	OpportunityPageLayout opportunityPageLayout = new OpportunityPageLayout(scriptHelper);
@@ -1135,5 +1136,34 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	public void bc_verifyPickListValuesFranceUser() {
 	sfOpportunitiesPage.verifyPickListValuesFranceUser();
 	}
+	
+	/**
+	 * Function for validating the Picklist Field on Opportunity page layout
+	 * 
+	 * @author Haritha
+	 */
+	
+	public void bc_validatePitchAlertDate() {
+	sfOpportunitiesPage.validatePitchAlertDate();
+	}
+	
+	/**
+	 * Function for validating the Delete option on all opportunities page
+	 *
+	 *@author Haritha
+	 */
+	public void bc_deleteCreatedOpportunity() {
+		sfOpportunitiesPage.deleteCreatedOpportunity();
+	}
+	
+	/**
+	 * Function for validating the Sales Stage Closed Value on Opportunity page layout
+	 * 
+	 * @author Haritha
+	 */
+	public void bc_salesStageClosedValue() {	
+		sfOpportunitiesPage.salesStageClosedValue();
+	}
+	
 	
 }
