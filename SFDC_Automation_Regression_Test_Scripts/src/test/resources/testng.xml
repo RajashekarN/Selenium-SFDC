@@ -6,6 +6,10 @@
 	 </listeners> -->
 	<test name="SmokeRegTests">
 		<classes>	
+			<class name="testscripts.SF.RegressionTestScripts.TC_SF_FDIGEMEADataOpportunitiesPitchAlertDate"/>
+			<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAPACCSSOpportunitiesSalesStage"/>
+			<class name="testscripts.SF.RegressionTestScripts.TC_SF_DAEMEADataDeleteOpportunity"/>
+			<class name="testscripts.SF.RegressionTestScripts.TC_SF_ASEMEAManagerOpportuntiesSubMarketField"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_DAEMEADataCoICheckStatus"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerContactsPopulatingRequiredFieldsPage"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_CMAPACManagerAccountsPopulatingAllFields"/>
