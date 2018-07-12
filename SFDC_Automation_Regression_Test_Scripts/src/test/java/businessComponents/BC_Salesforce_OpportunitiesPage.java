@@ -1165,5 +1165,30 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 		sfOpportunitiesPage.salesStageClosedValue();
 	}
 	
+	/**
+	 * @author RNallapati
+	 */
+	public void bc_associatePropertyFromOpportunity() {
+		sfOpportunitiesPage.associatePropertyFromOpportunity();
+	}
+	
+	/**
+	 * @author RNallapati
+	 */
+
+	public void bc_EMEAPropertySalesSellSidePageLayout() {
+		sfOpportunitiesPage.EMEAPropertySalesSellSidePageLayout();
+	}
+	
+	
+	/**
+	 * @author RNallapati
+	 */
+
+	public void bc_EMEAPropertySalesSellSideOpptCreation() {
+		sfOpportunitiesPage.EMEAPropertySalesSellSideOpptCreation();
+	}
+	
+	
 	
 }
