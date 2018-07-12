@@ -3,6 +3,7 @@ package pageObjects;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -1967,6 +1968,10 @@ public class OpportunitiesPage extends ReusableLibrary {
 	@FindBy(xpath = "//span[text()='Asset Type']/parent::span/parent::div/parent::div//a")
 	WebElement AssetTypeVAS;	
 	
+
+	@FindBy(xpath = "//a[@title='Targeting']")
+	WebElement salesStageTarget;
+	
 	public String opportunityCreationPopUp(String sAccountName) {
 		String sAccountNameSelected = null;
 		if(dataTable.getData("General_Data", "TC_ID").startsWith("TC_SF_VAS")) {
@@ -2000,7 +2005,36 @@ public class OpportunitiesPage extends ReusableLibrary {
 			} else {
 				report.updateTestLog("Verify Opportunity Creation", "New Opportunity creation failed:::", Status.FAIL);
 			}
-		} else {
+		} else if (dataTable.getData("General_Data", "TC_ID").contains("PropertySalesSellSide")) {
+			String opptName = "PropSaleSellSide" + Utility_Functions.xRandomFunction();
+			//
+			Utility_Functions.xSendKeys(driver, opportunityName_AS, opptName);
+			Utility_Functions.xSendKeys(driver, accountNameSearchBox, "Test");
+			Utility_Functions.timeWait(2);
+			accountNameSearchBox.sendKeys(Keys.ARROW_DOWN);
+			accountNameSearchBox.sendKeys(Keys.ENTER);
+			Utility_Functions.timeWait(2);
+			Utility_Functions.xWaitForElementPresent(driver, leadSourceNewOpp, 3);
+			Utility_Functions.xClick(driver, leadSourceNewOpp, true);
+			Utility_Functions.xWaitForElementPresent(driver, leadSourceNewOppValue, 3);
+			Utility_Functions.xClick(driver, leadSourceNewOppValue, true);
+			
+			Utility_Functions.xWaitForElementPresent(driver, estimatedTransactionValue, 3);
+			Utility_Functions.xSendKeys(driver, estimatedTransactionValue,String.valueOf(1000));
+			
+			Utility_Functions.xWaitForElementPresent(driver, salesStageGWS, 4);
+			Utility_Functions.xClick(driver, salesStageGWS, true);
+			Utility_Functions.xWaitForElementPresent(driver, salesStageTarget, 4);
+			Utility_Functions.xClick(driver, salesStageTarget, true);
+			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			Date date = new Date();
+			Utility_Functions.xSendKeys(driver, closeDateOppGWS, dateFormat.format(date).toString());
+			Utility_Functions.xSendKeys(driver, closeDateOppGWS, Keys.TAB);
+			Utility_Functions.xClick(driver, saveOpportunityGWS, true);
+			Utility_Functions.timeWait(3);
+		}		
+		
+		else {
 			Utility_Functions.xSendKeys(driver, accountNameSearchBox, sAccountName);
 			sf_UtilityFunctions.selectObjectFromLookUpList();
 			DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -5521,8 +5555,211 @@ public class OpportunitiesPage extends ReusableLibrary {
 		}
 		
 		
-		
-		
+	}
+	
+	
+	/**
+	 * Select Opportunity Record Type
+	 * 
+	 * @author Rajashekar Nallapati
+	 * @Date : 07/03/2018
+	 * 
+	 */
+
+	@FindBy(xpath = "//select[@id='record-type-select']")
+	WebElement opptyRecordType;
+
+	public void selectOpptRecordType(String OpptRecordType) {
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xSwitchtoFrame(driver, opptyRecordType);
+		Utility_Functions.xSelectDropdownByName(opptyRecordType, OpptRecordType);
+		report.updateTestLog("Verify display of record type: " + OpptRecordType, OpptRecordType + "is displaying",
+				Status.PASS);
+		Utility_Functions.xClick(driver, continueButton, true);
+		driver.switchTo().defaultContent();
+		Utility_Functions.timeWait(3);
+	}
+
+	/**
+	 * Validating association of multiple properties to an opportunity of record
+	 * type "APAC Broker"
+	 * 
+	 * @author Rajashekar Nallapati
+	 * @Date : 07/03/2018
+	 * @Release : R49
+	 * @UserStory : 275050 - APAC: [Production Bug] Associate Property error
+	 * 
+	 * 
+	 */
+	
+	@FindBy(xpath = "//span[text()='Property']/parent::a/parent::h2/parent::div/parent::header/following-sibling::div//*[text()='New']")
+	WebElement propertyNew;
+	
+	@FindBy(xpath = "//input[@title='Search Properties']")
+	WebElement propertyInput;
+	
+	@FindBy(xpath = "//span[text()='Existing Property']/parent::label/parent::div/input")
+	WebElement existingProperty;
+
+	public void associatePropertyFromOpportunity() {
+		selectNewOpportunity();
+		selectOpptRecordType("APAC Occupier");
+		createOpportunity("test");
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xClick(driver, related, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xScrollWindowToElement(driver, propertyNew);
+		if (Utility_Functions.getText(driver, propertyNew).equals("New")) {
+			report.updateTestLog("Verify New button in Property related tab section", "New button is displaying",
+					Status.PASS);
+		} else {
+			report.updateTestLog("Verify New button in Property related tab section", "New button is not displaying",
+					Status.FAIL);
+		}
+		Utility_Functions.xClick(driver, propertyNew, true);
+		Utility_Functions.timeWait(3);
+		Utility_Functions.xSendKeys(driver, propertyInput, "test");
+		propertyInput.sendKeys(Keys.ARROW_DOWN);
+		propertyInput.sendKeys(Keys.ENTER);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xClick(driver, existingProperty, true);
+		Utility_Functions.xClick(driver, finalPropertyCheckbox, true);
+
+		if (saveButtonProperty.isDisplayed()) {
+			Utility_Functions.xClick(driver, saveButtonProperty, true);
+			report.updateTestLog("Verify Opportunity", "Associate property to an opportunity successfully ",
+					Status.PASS);
+		} else {
+			report.updateTestLog("Verify Opportunity", "Associate property to an opportunity failed ", Status.FAIL);
+		}
+
+	}
+
+	/**
+	 * Create opportunity type "APAC Broker"
+	 * 
+	 * @author Rajashekar Nallapati
+	 * @Date : 07/05/2018
+	 * @Release : R49
+	 * @UserStory : 275050 - APAC: [Production Bug] Associate Property error
+	 * 
+	 */
+
+	@FindBy(xpath = "//a[@title='Occupier Buyer']")
+	WebElement OccupierBuyerAssignmentType;
+	
+	
+	private void createOpportunity(String sAccountName) {
+		// TODO Auto-generated method stub
+		Utility_Functions.xSendKeys(driver, accountName, sAccountName);
+		accountName.sendKeys(Keys.ARROW_DOWN);
+		accountName.sendKeys(Keys.ENTER);
+		Utility_Functions.timeWait(2);
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.xWaitForElementPresent(driver, leadSourceNewOpp, 3);
+		Utility_Functions.xClick(driver, leadSourceNewOpp, true);
+		Utility_Functions.xWaitForElementPresent(driver, leadSourceNewOppValue, 3);
+		Utility_Functions.xClick(driver, leadSourceNewOppValue, true);
+
+		Utility_Functions.xWaitForElementPresent(driver, assignmentTypeOppValue, 3);
+		Utility_Functions.xClick(driver, assignmentTypeOppValue, true);
+		Utility_Functions.xWaitForElementPresent(driver, OccupierBuyerAssignmentType, 3);
+		Utility_Functions.xClick(driver, OccupierBuyerAssignmentType, true);
+
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		Date date = new Date();
+		Utility_Functions.xScrollWindow(driver);
+		Utility_Functions.xScrollWindowToElement(driver, closeDate_AS);
+		Utility_Functions.xWaitForElementPresent(driver, closeDate_AS, 2);
+		Utility_Functions.xSendKeys(driver, closeDate_AS, dateFormat.format(date).toString());
+		Utility_Functions.xSendKeys(driver, closeDate_AS, Keys.TAB);
+
+		Utility_Functions.xClick(driver, save, true);
+		report.updateTestLog("Opportunity Created", "Clicked on Opportunity save button successfully:::", Status.PASS);
+		Utility_Functions.timeWait(3);
+	}
+
+	/**
+	 * EMEA Property sales - Sell Side - Opportunity
+	 * 
+	 * 
+	 * @author Rajashekar Nallapati
+	 * @Date : 07/12/2018
+	 * @Release : R50
+	 * @UserStory : 282546:EMEA: Property Sales - Sell Side - Creating new
+	 *            Opportunity
+	 * 
+	 */
+
+	public void EMEAPropertySalesSellSidePageLayout() {
+
+		// **************************************************************************************************
+
+		// EMEA Property Sales Sell Side - Opportunity page Labels
+		String[] opptLabels = { "Opportunity Name", "Account Name", "Lead Source", "Primary Contact", "Assignment Type",
+				"Investment Profile", "Assignment Sub-Type", "Parent Opportunity", "Conversion Type", "Comments",
+				"Conversion Type Other", "Pitch Date", "Description", "Estimated Transaction Value",
+				"Confidential Opportunity", "Yield (%)", "Confidential Information", "Yield/Return Type",
+				"Opportunity Currency", "Probability (%)", "Mandate Agreement Status", "Sales Stage",
+				"Engagement Commencement", "Close Date", "Engagement Expiration", "Settlement/Completion Date",
+				"Appointment Type", "Condition of Sale", "Total Size", "% Occupied", "Reason for Loss", "Competitor",
+				"Reason Lost Comments" };
+
+		// Clicks on New button
+		selectNewOpportunity();
+		// Selects Opportunity record type based on parameter text
+		selectOpptRecordType("EMEA Property Sales - Sell Side");
+		Utility_Functions.timeWait(5);
+
+		List<WebElement> opptLabelElements = driver.findElements(By.xpath(
+				"//div[@class='modal-container slds-modal__container']/div[2]//*[contains(@class,'form-element__label')]/span[1]"));
+		int opptLabelsCount = Utility_Functions.xValidateFieldsPresentPage(Arrays.asList(opptLabels), opptLabelElements,
+				"Oppt account labels");
+		System.out.println(opptLabelsCount);
+		if (opptLabelsCount > 33) {
+			report.updateTestLog("EMEA Property sales Sell Side Opportunity page layout",
+					"all fields are not displaying", Status.FAIL);
+		}
+
+		// **************************************************************************************************
+
+		// Lead source pick list values
+
+		String[] leadSourcePickListValues = { "(Ext) Business Relationship (Non CBRE)",
+				"(Ext) Marketing Activity (Broker Led)", "(Ext) Marketing/Research (Central)", "(Ext) MSA Referral",
+				"(Ext) Personal Relationship", "(Ext) Client Networking Event", "(Ext) Repeat Business (Non Referred)",
+				"A&T - Investor Leasing (Industrial)", "A&T - Investor Leasing (Office)",
+				"A&T - Investor Leasing (Retail)", "A&T - Occupier Transactions (Industrial)",
+				"A&T - Occupier Transactions (Office)", "A&T - Occupier Transactions (Retail)",
+				"A&T - Portfolio & Location", "A&T - Portfolio Services", "A&T - Retail Analytics",
+				"A&T - Supply Chain", "A&T - Workplace", "APAC Referral", "Building Consultancy", "Capital Advisors",
+				"Capital Markets", "Client Solutions", "Hotels", "Land & Development", "Lease Consultancy", "PJM",
+				"Planning", "Rating", "Residential", "US Referral", "Valuations", "Asset Services", "Capital Advisors",
+				"GWS", "Other", "Residential", "Retail", "RFP/Proposal/Pitch" };
+
+		// Lead source pick list values validation
+		sf_UtilityFunctions.verifyPickListValues(Arrays.asList(leadSourcePickListValues), "Opportunity",
+				"EMEA_Property_Sales_Sell_Side", "LeadSource");
+
+		// **************************************************************************************************
+
+		// Assignment type pick list value validation
+		String[] assignmentTypePickListValues = { "Purchase", "Sale", "Sale & Purchase" };
+		sf_UtilityFunctions.verifyPickListValues(Arrays.asList(assignmentTypePickListValues), "Opportunity",
+				"EMEA_Property_Sales_Sell_Side", "Service__c");
+
+	}
+
+	public void EMEAPropertySalesSellSideOpptCreation() {
+		// Clicks on New button
+		selectNewOpportunity();
+		// Selects Opportunity record type based on parameter text
+		selectOpptRecordType("EMEA Property Sales - Sell Side");
+		Utility_Functions.timeWait(5);
+
+		String sAccountName = searchTextSOQL.fetchRecord("Account", "Name");
+		opportunityCreationPopUp(sAccountName);
+
 	}
 	
 
