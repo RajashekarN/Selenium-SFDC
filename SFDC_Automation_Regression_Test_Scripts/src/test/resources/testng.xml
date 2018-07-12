@@ -413,6 +413,10 @@
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_FDIGEMEADataOpportunitiesLeadAndReasonField"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_FDIGEMEADataAccountsField"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_FRANEMEAManagerOpportunitiesNewField"/>
+			<class name="testscripts.SF.Release50TestScripts.TC_SF_ABEMEAManagerPropertySalesSellSideOpptCreation"/>
+			<class name="testscripts.SF.Release50TestScripts.TC_SF_ABEMEAManagerPropertySalesSellSidePagelayOut"/>
+			
+			
 									
 			<!-- <class name="testscripts.SF.UATTestScripts.TC_SF_FDIGEMEADataCloseTaskonAccount"/>
 			<class name="testscripts.SF.UATTestScripts.TC_SF_CMAPACAdminInstallmentOpportunityModification"/>

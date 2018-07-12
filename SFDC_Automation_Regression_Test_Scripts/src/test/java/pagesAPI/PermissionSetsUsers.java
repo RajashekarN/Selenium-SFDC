@@ -109,6 +109,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 	 * @author Vishnuvardhan
 	 *
 	 */
+	
 	public void updateRoleProfile() {
 		environment = loginPage.initializeEnvironment();
 		loginPage.userNames();
@@ -129,6 +130,49 @@ public class PermissionSetsUsers extends ReusableLibrary {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * Function for updating Role Profile for the user (providing role and profile)
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	
+	public void updateRoleProfile(String Username, String Role, String Profile) {
+		String userResultId;
+		try {
+			roleProfileTimeZoneResult = setRoleProfileTimeZone(Username);				
+			String query = "Select Id from User where username ='" + Username + "'";
+			userResultId = searchTextSOQL.fetchRecordFieldValue("Id", query);
+			String sRoleId = getRoleId(Role);
+			String sProfileId = getProfileId(Profile);
+			System.out.println("User ID is :::"+ userResultId);
+			System.out.println("Role and Profile ID's are:::"+ sRoleId + "::::" + sProfileId);
+			setRole(userResultId, sRoleId);
+			setProfile(userResultId, sProfileId);			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Function for changing the role, profile to original values 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	
+	public void changeRoleProfileOriginalValues(String Username) {
+		try {
+			String roleProfileTimeZoneResult = setRoleProfileTimeZone(Username);
+			String role = roleProfileTimeZoneResult.split("-")[0];
+			String profile = roleProfileTimeZoneResult.split("-")[1];
+			updateRoleProfile(Username, role, profile);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	/**
