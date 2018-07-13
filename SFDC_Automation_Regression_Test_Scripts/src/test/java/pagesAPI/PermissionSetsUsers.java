@@ -139,18 +139,28 @@ public class PermissionSetsUsers extends ReusableLibrary {
 	 *
 	 */
 	
-	public void updateRoleProfile(String Username, String Role, String Profile) {
+	public void updateRoleProfile(String Username, String Role, String Profile, String sText) {
 		String userResultId;
+		String sEnvironment = loginPage.initializeEnvironment();
+		Username = Username + "." + sEnvironment;
+		String sProfileId =null; String sRoleId = null;
 		try {
-			roleProfileTimeZoneResult = setRoleProfileTimeZone(Username);				
 			String query = "Select Id from User where username ='" + Username + "'";
 			userResultId = searchTextSOQL.fetchRecordFieldValue("Id", query);
-			String sRoleId = getRoleId(Role);
-			String sProfileId = getProfileId(Profile);
+			if(sText.equals("Role-Only")) {
+				sRoleId = getRoleId(Role);
+				setRole(userResultId, sRoleId);
+			} else if(sText.equals("Profile-Only")) {
+				sProfileId = getProfileId(Profile);
+				setProfile(userResultId, sProfileId);
+			} else if(sText.equals("Role-Profile")) {
+				sRoleId = getRoleId(Role);
+				setRole(userResultId, sRoleId);
+				sProfileId = getProfileId(Profile);
+				setProfile(userResultId, sProfileId);
+			}
 			System.out.println("User ID is :::"+ userResultId);
 			System.out.println("Role and Profile ID's are:::"+ sRoleId + "::::" + sProfileId);
-			setRole(userResultId, sRoleId);
-			setProfile(userResultId, sProfileId);			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -163,16 +173,29 @@ public class PermissionSetsUsers extends ReusableLibrary {
 	 *
 	 */
 	
-	public void changeRoleProfileOriginalValues(String Username) {
+	public void changeRoleProfileOriginalValues(String Username, String sText) {
 		try {
+			String sEnvironment = loginPage.initializeEnvironment();
+			Username = Username + "." + sEnvironment;
 			String roleProfileTimeZoneResult = setRoleProfileTimeZone(Username);
 			String role = roleProfileTimeZoneResult.split("-")[0];
 			String profile = roleProfileTimeZoneResult.split("-")[1];
-			updateRoleProfile(Username, role, profile);
+			String userResultId;
+			String query = "Select Id from User where username ='" + Username + "'";
+			userResultId = searchTextSOQL.fetchRecordFieldValue("Id", query);
+			if(sText.equals("Role-Only")) {
+				setRole(userResultId, role);
+			} else if(sText.equals("Profile-Only")) {
+				setProfile(userResultId, profile);
+			} else if(sText.equals("Role-Profile")) {
+				setRole(userResultId, role);
+				setProfile(userResultId, profile);
+			}
+			System.out.println("User ID is :::"+ userResultId);
+			System.out.println("Role and Profile ID's are:::"+ role + "::::" + profile);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		
+		}		
 	}
 
 	/**
@@ -829,7 +852,8 @@ public class PermissionSetsUsers extends ReusableLibrary {
 	 *
 	 */
 	public String setRoleProfileTimeZone(String userName) throws Exception {
-		String roleProfileTimeZone = null;				
+		String roleProfileTimeZone = null;	
+		environment = loginPage.initializeEnvironment();
 		if ((environment.equalsIgnoreCase("FTE2")) || (environment.equalsIgnoreCase("UAT2"))) {
 			userName = userName.substring(0, userName.length() - 4);
 		} else {
