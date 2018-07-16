@@ -58,7 +58,7 @@ public class BC_AdminReleaseR49 extends ReusableLibrary {
 	
 	public void bc_CBRE360CloseDate() {
 		String sFieldName = "CBRE 360 Close Date"; String sUsername = "testuser6@cbre.com.crm";
-		new PermissionSetsUsers(scriptHelper).updateRoleProfile(sUsername, "Asset Services AMER", null);
+		new PermissionSetsUsers(scriptHelper).updateRoleProfile(sUsername, "Asset Services AMER", null, "Role-Only");
 		List<String> pageFields = new EstablishConnection(scriptHelper).establishMetaDataConnectionPageLayouts("Opportunity_Reporting__c", "Asset Services - CBRE 360");
 		int count=0;
 		for(int i=0; i < pageFields.size(); i++) {
@@ -73,7 +73,7 @@ public class BC_AdminReleaseR49 extends ReusableLibrary {
 		} else {
 			report.updateTestLog("Verify Field", "Field ::  " + sFieldName + " is not present in the page layout:::", Status.FAIL);
 		}	
-		new PermissionSetsUsers(scriptHelper).changeRoleProfileOriginalValues(sUsername);
+		new PermissionSetsUsers(scriptHelper).changeRoleProfileOriginalValues(sUsername, "Role-Only");
 	}
 	
 
@@ -143,9 +143,5 @@ public class BC_AdminReleaseR49 extends ReusableLibrary {
 			new SF_UtilityFunctions(scriptHelper).verifyPickListValues("Square Wah", "Property_Preferences__c", "APAC_Property_Preferences", "APAC_Area_UOM__c");
 			new SF_UtilityFunctions(scriptHelper).verifyPickListValues("Square Wah", "Opportunity", "APAC_Landlord_Deal", "Unit_of_Measure__c");
 		}
-
-
-	
-	
 	
 }
