@@ -597,9 +597,9 @@ public class SF_UtilityFunctions extends ReusableLibrary {
 				
 		}
 		if (count==1) {
-			report.updateTestLog("Verify picklist value", "Pick list value:: " + Value + "is present in the Area UOM Pick List::: " + PickListName, Status.PASS);
+			report.updateTestLog("Verify picklist value", "Pick list value::  " + Value + " is present in the " + PickListName + " Pick List::: " + PickListName, Status.PASS);
 		} else {
-			report.updateTestLog("Verify picklist value", "Pick list value:: " + Value + "is not present in the Area UOM Pick List::: " + PickListName, Status.FAIL);
+			report.updateTestLog("Verify picklist value", "Pick list value::  " + Value + " is not present in the " + PickListName + " Pick List::: " + PickListName, Status.FAIL);
 		}		
 	}
 	

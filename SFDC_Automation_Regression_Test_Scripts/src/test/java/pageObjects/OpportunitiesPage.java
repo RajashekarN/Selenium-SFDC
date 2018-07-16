@@ -1967,10 +1967,16 @@ public class OpportunitiesPage extends ReusableLibrary {
 	
 	@FindBy(xpath = "//span[text()='Asset Type']/parent::span/parent::div/parent::div//a")
 	WebElement AssetTypeVAS;	
-	
 
 	@FindBy(xpath = "//a[@title='Targeting']")
 	WebElement salesStageTarget;
+	
+	@FindBy(xpath = "//a[@title='Closed Won']")
+	WebElement closedWon;
+	
+	@FindBy(xpath = "//li[text()='Please fill out Net Fee']")
+	WebElement netFeeValidation;
+	
 	
 	public String opportunityCreationPopUp(String sAccountName) {
 		String sAccountNameSelected = null;
@@ -2032,7 +2038,33 @@ public class OpportunitiesPage extends ReusableLibrary {
 			Utility_Functions.xSendKeys(driver, closeDateOppGWS, Keys.TAB);
 			Utility_Functions.xClick(driver, saveOpportunityGWS, true);
 			Utility_Functions.timeWait(3);
-		}		
+			
+		}	else if(dataTable.getData("General_Data", "TC_ID").contains("OpportunitiesNetFee"))  {
+			
+			String opptName = "OppNetFee" + Utility_Functions.xRandomFunction();
+			Utility_Functions.xSendKeys(driver, opportunityName_AS, opptName);
+			Utility_Functions.xSendKeys(driver, accountNameSearchBox, "Test");
+			Utility_Functions.timeWait(2);
+			accountNameSearchBox.sendKeys(Keys.ARROW_DOWN);
+			accountNameSearchBox.sendKeys(Keys.ENTER);
+			Utility_Functions.timeWait(2);
+			DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+			Date date = new Date();
+			Utility_Functions.xSendKeys(driver, closeDateOppGWS, dateFormat.format(date).toString());
+			Utility_Functions.xSendKeys(driver, closeDateOppGWS, Keys.TAB);
+			Utility_Functions.xWaitForElementPresent(driver, salesStageGWS, 4);
+			Utility_Functions.xClick(driver, salesStageGWS, true);
+			Utility_Functions.xWaitForElementPresent(driver, closedWon, 4);
+			Utility_Functions.xClick(driver, closedWon, true);
+			Utility_Functions.xClick(driver, saveOpportunityGWS, true);
+			Utility_Functions.timeWait(3);
+			Utility_Functions.xWaitForElementPresent(driver, netFeeValidation, 5);
+			if(netFeeValidation.isDisplayed()) {
+				report.updateTestLog("Net Fee Validation", "Net Fee field is filled", Status.PASS);
+			} else {
+				report.updateTestLog("Net Fee Validation", "Net Fee field isn't filled", Status.FAIL);
+			}
+		}
 		
 		else {
 			Utility_Functions.xSendKeys(driver, accountNameSearchBox, sAccountName);
@@ -5761,6 +5793,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		opportunityCreationPopUp(sAccountName);
 
 	}
+	
 	
 
 }
