@@ -1,13 +1,17 @@
 package pagesAPI;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
 import com.sforce.soap.partner.SaveResult;
 import com.sforce.soap.partner.sobject.SObject;
+
+import pageObjects.LoginPage;
 
 public class UnitOfMeasurementFunctions extends ReusableLibrary{
 
@@ -97,7 +101,7 @@ public class UnitOfMeasurementFunctions extends ReusableLibrary{
 			
 			SObject[] countries = new SObject[1];
 			countries[0] = country;
-			results = EstablishConnection.connection.create(countries);
+			results = EstablishConnection.connection.update(countries);
 			System.out.println("Result:::" + results);
 			status = establishConnection.saveResults(results);
 		} catch (Exception e) {
@@ -111,13 +115,12 @@ public class UnitOfMeasurementFunctions extends ReusableLibrary{
 			SObject user = new SObject();
 
 			user.setType("User");
-			user.setField("Id", "005m0000003UY45AAG");
-			user.setField("City", "Aukland");
-			user.setField("Country", "New Zealand");
+			user.setField("Id", userId);
+			user.setField("Country", country);
 			
 			SObject[] users = new SObject[1];
 			users[0] = user;
-			results = EstablishConnection.connection.create(users);
+			results = EstablishConnection.connection.update(users);
 			System.out.println("Result:::" + results);
 			status = establishConnection.saveResults(results);
 		} catch (Exception e) {
@@ -125,31 +128,44 @@ public class UnitOfMeasurementFunctions extends ReusableLibrary{
 		}
 	}
 	
+	
 	public void validateUOMForUserAndCountry() {
 		SearchTextSOQL soql = new SearchTextSOQL(scriptHelper);
 		Map<String, String> uomForCountriesList = unitOfMeasurementForCountries();
 		SObject countryUOM = null;
-		
-		try {
-			countryUOM = soql.fetchCountryAndUOMForUser(dataTable.getData("General_Data", "Username"));
-			if(countryUOM != null) {
-				if(uomForCountriesList.containsKey((String) countryUOM.getField("Country"))){
-					if(uomForCountriesList.get((String) countryUOM.getField("Country")).equals((String) countryUOM.getField("UoM__c")))
-						report.updateTestLog("Validate Unit of Measurement value for Country", "The user has the correct value populated for UnitOfMeasurement, as per the user's country", Status.PASS);
-					else
-						report.updateTestLog("Validate Unit of Measurement value for Country", "The user does not have the correct value populated for UnitOfMeasurement, as per the user's country", Status.FAIL);
+		new LoginPage(scriptHelper).userNames();
+
+		/**
+		 * Validating the Unit of Measurement for all the Users based on the User's country
+		 */
+		for(String user:LoginPage.userNamesList) {
+			try {
+				countryUOM = soql.fetchCountryAndUOMForUser(user);
+				if(countryUOM != null) {
+					if((String) countryUOM.getField("Country")!=null)
+					{
+						if(uomForCountriesList.containsKey((String) countryUOM.getField("Country"))){
+							if(uomForCountriesList.get((String) countryUOM.getField("Country")).equals((String) countryUOM.getField("UoM__c")))
+								report.updateTestLog("Validate Unit of Measurement value for Country", "The user has the correct value populated for UnitOfMeasurement, as per the user's country", Status.PASS);
+							else
+								report.updateTestLog("Validate Unit of Measurement value for Country", "The user does not have the correct value populated for UnitOfMeasurement, as per the user's country", Status.FAIL);
+						}
+						else
+							report.updateTestLog("Validate Unit of Measurement value for Country", "The country of the user is not present in the Country object", Status.FAIL);
+					}
 				}
 				else
-					report.updateTestLog("Validate Unit of Measurement value for Country", "The country of the user is not present in the Country object", Status.FAIL);
+					report.updateTestLog("Validate Unit of Measurement value for Country", "The user record is not present in the database", Status.FAIL);
+					
+			} catch(Exception e) {
+				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
-			else
-				report.updateTestLog("Validate Unit of Measurement value for Country", "The user record is not present in the database", Status.FAIL);
-				
-		} catch(Exception e) {
-			System.out.println(e.getMessage());
-			e.printStackTrace();
 		}
 		
+		/**
+		 * Validating that when Unit of Measurement is changed for a Country, all the users belonging to that country also have their Unit of Measurement updated accordingly 
+		 */
 		String countryId = soql.fetchRecordFieldValue("Id", "Select Id from Country__c where Name ='"+dataTable.getData("General_Data", "Country")+"'");
 		changeUOMForCountry(countryId, "Square Yards");
 		Map<String, String> usersFromCountry = soql.fetchAllUsersFromCountry(dataTable.getData("General_Data", "Country"));
@@ -162,13 +178,24 @@ public class UnitOfMeasurementFunctions extends ReusableLibrary{
 				report.updateTestLog("Validate Unit of Measurement value for Country", "The user's UOM did not get updated, when the user's country's UOM was changed", Status.FAIL);
 		}
 		
+		/**
+		 * Validating that when a User's country is changed, the User's Unit of Measurement gets updated accordingly
+		 */
+		String userIdToChangeCountry = soql.fetchRecordFieldValue("Id", "Select Id from User where Country ='"+dataTable.getData("General_Data", "Country")+"' and isactive = true limit 1");
+		String usernameForUserId = soql.fetchRecordFieldValue("Username", "Select Username from User where Id ='"+userIdToChangeCountry+"'");
 		
-		updateUserCountry((String) countryUOM.getField("Id"), "Australia");
-		countryUOM = soql.fetchCountryAndUOMForUser(dataTable.getData("General_Data", "Username"));
-		if(((String) countryUOM.getField("UoM__c")).equals(uomForCountriesList.get("Australia")))
+		updateUserCountry(userIdToChangeCountry, "China");
+		
+		countryUOM = soql.fetchCountryAndUOMForUser(usernameForUserId);
+		if(((String) countryUOM.getField("UoM__c")).equals(uomForCountriesList.get("China")))
 			report.updateTestLog("Validate Unit of Measurement value for Country", "The user's UOM got updated successfully when the user's country was changed", Status.PASS);
 		else
 			report.updateTestLog("Validate Unit of Measurement value for Country", "The user's UOM did not get updated, when the user's country was changed", Status.FAIL);
+		
+		updateUserCountry(userIdToChangeCountry, dataTable.getData("General_Data", "Country"));
+		System.out.println("Changing back UOM");
+		changeUOMForCountry(countryId, uomForCountriesList.get(dataTable.getData("General_Data", "Country")));
+		
 	}
 	
 	

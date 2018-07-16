@@ -19,9 +19,12 @@ import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
 import com.sforce.soap.partner.PartnerConnection;
 import com.sforce.soap.partner.QueryResult;
+import com.sforce.soap.partner.SaveResult;
 import com.sforce.soap.partner.sobject.SObject;
 import com.sforce.ws.ConnectionException;
 import com.sforce.ws.ConnectorConfig;
+
+import pagesAPI.CreateObjects;
 import pagesAPI.EstablishConnection;
 import pagesAPI.OpportunitiesFunctions;
 import pagesAPI.SearchTextSOQL;
@@ -5369,7 +5372,15 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 */
 	
 	public void validateOpportunityCbre360Field() {
-		selectNewOpportunity();
+		SaveResult[] sResults = new CreateObjects(scriptHelper).createObject("Opportunity", "012i0000000405jAAA", "2000", "Square Feet", "APAC", "Australia", "Yes", null, null);
+		boolean isStatus = new EstablishConnection(scriptHelper).saveResults(sResults);
+		if (isStatus==true) {
+			report.updateTestLog("Verify Home Page Tabs", "The opportunity is saved with the all the required fields",
+					Status.PASS);
+		} else {
+			report.updateTestLog("Verify Home Page Tabs", "The opportunity is not saved with the all the required fields", Status.FAIL);
+		}			
+/*		selectNewOpportunity();
 		Utility_Functions.xWaitForElementPresent(driver, oppName_AS, 3);
 		Utility_Functions.xClick(driver, oppName_AS, true);
 		Utility_Functions.xWaitForElementPresent(driver, oppName_AS, 3);
@@ -5385,8 +5396,10 @@ public class OpportunitiesPage extends ReusableLibrary {
 		Utility_Functions.xWaitForElementPresent(driver, totalSizeAssetServices, 5);
 		Utility_Functions.xSendKeys(driver, totalSizeAssetServices, dataTable.getData("General_Data", "InstallmentAmount"));
         Utility_Functions.xWaitForElementPresent(driver, unitOfMeasureAssetServices, 2);
-        sf_UtilityFunctions.selectStandardDropdownOption("Unit of Measure", "Square Feet");
-        Utility_Functions.xWaitForElementPresent(driver, regionAssetServices, 3);
+        //sf_UtilityFunctions.selectStandardDropdownOption("Unit of Measure", "Square Feet");
+        Utility_Functions.xClick(driver, unitOfMeasureAssetServices, true);
+	    sf_UtilityFunctions.selectValueFromDropdownList(dropDownList, "Square Feet");
+	    Utility_Functions.xWaitForElementPresent(driver, regionAssetServices, 3);
         sf_UtilityFunctions.selectStandardDropdownOption("Region", "APAC");
         Utility_Functions.xScrollWindow(driver);
         Utility_Functions.xWaitForElementPresent(driver, marketAssetServices, 3);
@@ -5414,7 +5427,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 		} else {
 			report.updateTestLog("Verify Home Page Tabs",
 					"The opportunity is not saved with the all the required fields", Status.FAIL);
-		}	
+		}	*/
 	}
 	
 	/**
