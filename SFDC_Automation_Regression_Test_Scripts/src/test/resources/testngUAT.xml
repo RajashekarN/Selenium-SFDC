@@ -6,6 +6,20 @@
 	 </listeners> -->
 	<test name="SmokeRegTests">
 		<classes>	
+			<class name="testscripts.SF.AdminRelease49TestScripts.TC_SF_ASEMEABrokerOpportunitiesCbreOfficeField"/>
+			<class name="testscripts.SF.AdminRelease49TestScripts.TC_SF_ASAMERManagerOppReportingAccount"/>
+			<class name="testscripts.SF.AdminRelease49TestScripts.TC_SF_DAPACIDataContactObjectPicklistValues"/>
+			<class name="testscripts.SF.AdminRelease49TestScripts.TC_SF_CMEMEABrokerCAOpportunitiesNetFee"/>
+			<class name="testscripts.SF.AdminRelease49TestScripts.TC_SF_DAPACIDataUomPicklistValues"/>
+			<class name="testscripts.SF.RegressionTestScripts.TC_SF_FRANEMEAManagerOpportunitiesNewSection"/>
+			<class name="testscripts.SF.RegressionTestScripts.TC_SF_ASAMERBrokerOpportunitiesCbre360Field"/>
+			<class name="testscripts.SF.RegressionTestScripts.TC_SF_DAEMEADataAccountSearchFunc"/>
+			<class name="testscripts.SF.RegressionTestScripts.TC_SF_FDIGEMEADataOpportunitiesReferralRecipientValues"/>
+			<class name="testscripts.SF.RegressionTestScripts.TC_SF_FDIGEMEADataOpportunitiesLeadAndReasonField"/>
+			<class name="testscripts.SF.RegressionTestScripts.TC_SF_FDIGEMEADataAccountsField"/>
+			<class name="testscripts.SF.RegressionTestScripts.TC_SF_FRANEMEAManagerOpportunitiesNewField"/>
+			<class name="testscripts.SF.Release50TestScripts.TC_SF_ABEMEAManagerPropertySalesSellSideOpptCreation"/>
+			<class name="testscripts.SF.Release50TestScripts.TC_SF_ABEMEAManagerPropertySalesSellSidePagelayOut"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_ABAMERBrokerContactsPopulatingRequiredFieldsPage"/>
 			<class name="testscripts.SF.RegressionTestScripts.TC_SF_CMAPACManagerAccountsPopulatingAllFields"/>
 			<class name="testscripts.SF.Release37TestScripts.TC_SF_ASAPACBrokerInvestorServices"/>

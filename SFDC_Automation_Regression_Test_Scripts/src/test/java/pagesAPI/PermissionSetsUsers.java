@@ -38,7 +38,6 @@ public class PermissionSetsUsers extends ReusableLibrary {
 
 	EstablishConnection establishConnection = new EstablishConnection(scriptHelper);
 	CreateUsers createUsers = new CreateUsers(scriptHelper);
-	LoginPage loginPage = new LoginPage(scriptHelper);
 	SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
 
 	/**
@@ -49,7 +48,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 	 */
 	public void validatePermissionSets() {
 		establishConnection.establishConnection();
-		loginPage.userNames();
+		new LoginPage(scriptHelper).userNames();
 		try {
 			setPermissionSets(LoginPage.userNamesList, permissionSetsLabels);
 		} catch (Exception e) {
@@ -67,8 +66,8 @@ public class PermissionSetsUsers extends ReusableLibrary {
 
 	public void fectchOrCreateUser() {
 		try {
-			environment = loginPage.initializeEnvironment();
-			loginPage.userNames();
+			environment = new LoginPage(scriptHelper).initializeEnvironment();
+			new LoginPage(scriptHelper).userNames();
 			String userName, userResultId;
 			for (int i = 0; i < LoginPage.userNamesList.size(); i++) {
 				userName = LoginPage.userNamesList.get(i);
@@ -111,8 +110,8 @@ public class PermissionSetsUsers extends ReusableLibrary {
 	 */
 	
 	public void updateRoleProfile() {
-		environment = loginPage.initializeEnvironment();
-		loginPage.userNames();
+		environment = new LoginPage(scriptHelper).initializeEnvironment();
+		new LoginPage(scriptHelper).userNames();
 		String userName, userResultId;
 		try {
 			for (int i = 0; i < LoginPage.userNamesList.size(); i++) {
@@ -140,8 +139,9 @@ public class PermissionSetsUsers extends ReusableLibrary {
 	 */
 	
 	public void updateRoleProfile(String Username, String Role, String Profile, String sText) {
+		//new EstablishConnection(scriptHelper).establishConnectionAdminLogin();
 		String userResultId;
-		String sEnvironment = loginPage.initializeEnvironment();
+		String sEnvironment = new LoginPage(scriptHelper).initializeEnvironment();
 		Username = Username + "." + sEnvironment;
 		String sProfileId =null; String sRoleId = null;
 		try {
@@ -175,7 +175,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 	
 	public void changeRoleProfileOriginalValues(String Username, String sText) {
 		try {
-			String sEnvironment = loginPage.initializeEnvironment();
+			String sEnvironment = new LoginPage(scriptHelper).initializeEnvironment();
 			Username = Username + "." + sEnvironment;
 			String roleProfileTimeZoneResult = setRoleProfileTimeZone(Username);
 			String role = roleProfileTimeZoneResult.split("-")[0];
@@ -853,7 +853,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 	 */
 	public String setRoleProfileTimeZone(String userName) throws Exception {
 		String roleProfileTimeZone = null;	
-		environment = loginPage.initializeEnvironment();
+		environment = new LoginPage(scriptHelper).initializeEnvironment();
 		if ((environment.equalsIgnoreCase("FTE2")) || (environment.equalsIgnoreCase("UAT2"))) {
 			userName = userName.substring(0, userName.length() - 4);
 		} else {
