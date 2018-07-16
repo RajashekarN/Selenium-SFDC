@@ -34,7 +34,7 @@ public class CreateObjects extends ReusableLibrary {
 	 *
 	 */
 
-	public SaveResult[] createObject(String Object, String RecordType) {
+	public SaveResult[] createObject(String Object, String RecordType, String Field1, String Field2, String Field3, String Field4, String Field5, String Field6, String Field7) {
 		establishConnection.establishConnection();
 		SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
 		try {
@@ -88,20 +88,28 @@ public class CreateObjects extends ReusableLibrary {
 				break;
 			case "Opportunity":
 				sObject.setType("Opportunity");
-				sObject.setField("Name","Test Automation_Opportunity");
+				sObject.setField("Name", sName);
 				AccountsFunctions accountsFunctions = new AccountsFunctions(scriptHelper);
 				String sAccountId = accountsFunctions.createAccountRequiredFields();		
 				sObject.setField("AccountId", sAccountId);
 				sObject.setField("RecordTypeId", RecordType);
 				sObject.setField("CloseDate",Calendar.getInstance());
 				sObject.setField("Service__c", "Consulting");
-				if(dataTable.getData("General_Data", "TC_ID").startsWith("AS")) {
+				/*if(dataTable.getData("General_Data", "TC_ID").startsWith("AS")) {
 					sObject.setField("AS_Lead_Source__c", "Business Relationship");
 				} else {
 					sObject.setField("LeadSource", "Business Relationship");	
-				}		
+				}	*/	
 				sObject.setField("Amount", "20000");
 				sObject.setField("StageName","02-Meeting");
+				if(dataTable.getData("General_Data", "TC_ID").contains("OpportunitiesCbre360Field")) {
+					int iSize = Integer.parseInt(Field1);
+					sObject.setField("Total_Size__c", iSize);
+					sObject.setField("Unit_of_Measure__c ", "Square Feet");
+					sObject.setField("Region__c", "APAC");
+					sObject.setField("Market__c", "Australia");
+					sObject.setField("CBRE_360__c", "Yes");
+				}
 				break;
 			case "Property":
 				sObject.setType("Property__c");

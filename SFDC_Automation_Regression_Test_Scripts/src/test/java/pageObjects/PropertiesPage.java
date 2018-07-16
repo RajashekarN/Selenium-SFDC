@@ -513,6 +513,7 @@ public class PropertiesPage extends ReusableLibrary {
 			unitOfMeasureValuesList.add("Hectares");
 			unitOfMeasureValuesList.add("Square Feet");
 			unitOfMeasureValuesList.add("Square Meters");
+			unitOfMeasureValuesList.add("Square Wah");
 			unitOfMeasureValuesList.add("Square Yards");
 			unitOfMeasureValuesList.add("Tsubo");			
 		} 		

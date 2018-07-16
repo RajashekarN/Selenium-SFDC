@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -25,6 +26,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.internal.Coordinates;
 import org.openqa.selenium.interactions.internal.Locatable;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import com.cognizant.Craft.ReusableLibrary;
@@ -1647,5 +1649,24 @@ public class Utility_Functions extends ReusableLibrary {
 		}
 		return visibleElement;
 	}
+	
+	/**
+	 * Fluent wait for finding an element using polling 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	
+	public static void xWaitforVisibilityOfElementClickable(CraftDriver driver, WebElement Element) {
+		FluentWait<WebDriver> wait = new FluentWait<WebDriver>(driver.getWebDriver());
+		 wait.pollingEvery(3, TimeUnit.SECONDS);
+		 wait.withTimeout(10, TimeUnit.SECONDS);
+		 Element = wait.until(new Function<WebDriver, WebElement>() {
+			 @Override
+			 public WebElement apply(WebDriver driver) {
+				 return driver.findElement(By.xpath("Element"));
+			 }
+		 });
+	}	
 	
 }
