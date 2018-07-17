@@ -7,7 +7,7 @@
 	<test name="SmokeRegTests">
 		<classes>	
 			<class name="testscripts.SF.AdminRelease49TestScripts.TC_SF_ASEMEABrokerOpportunitiesCbreOfficeField"/>
-			<class name="testscripts.SF.AdminRelease49TestScripts.TC_SF_ASAMERManagerOppReportingAccount"/>
+			<class name="testscripts.SF.AdminRelease49TestScripts.TC_SF_ASAMERManagerAdminOppReportingAccount"/>
 			<class name="testscripts.SF.AdminRelease49TestScripts.TC_SF_DAPACIDataContactObjectPicklistValues"/>
 			<class name="testscripts.SF.AdminRelease49TestScripts.TC_SF_CMEMEABrokerCAOpportunitiesNetFee"/>
 			<class name="testscripts.SF.AdminRelease49TestScripts.TC_SF_DAPACIDataUomPicklistValues"/>
