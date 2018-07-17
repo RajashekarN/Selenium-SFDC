@@ -114,7 +114,7 @@ public class CreateObjects extends ReusableLibrary {
 					sObject.setField("Market__c", "Australia");
 					sObject.setField("CBRE_360__c", "Yes");
 				} else if(dataTable.getData("General_Data","TC_ID").contains("ApacGwsOppFields")){
-					sObject.setField("LeadSource", Field7);					
+					sObject.setField("LeadSource", Field1);					
 				} else if(dataTable.getData("General_Data","TC_ID").contains("OppAssignmentTypeFields")){
 					sObject.setField("Service_Sub_Type__c", "Commute");
 				}
@@ -149,8 +149,7 @@ public class CreateObjects extends ReusableLibrary {
 				sObject.setType("Property_Preferences__c");
 				if(dataTable.getData("General_Data", "TC_ID").contains("PropertyPreferenceDetailPage")) {
 					sObject.setField("Contact__c", Field1);
-					String sAccountID = accountsFunctions.createAccountRequiredFields();		
-					sObject.setField("AccountId", sAccountID);
+					sObject.setField("AccountId", Field2);
 				}	
 				break;
 			}

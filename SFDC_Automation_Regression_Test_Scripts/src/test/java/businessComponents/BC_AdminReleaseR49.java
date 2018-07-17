@@ -160,8 +160,18 @@ public class BC_AdminReleaseR49 extends ReusableLibrary {
 		public void bc_propertyPreferencesRelatedList() {
 			SaveResult[] results = new CreateObjects(scriptHelper).createObject("Contact", "CBRE Client Contact", null, null, null, null, null, null, null);
 			String sContactID = new EstablishConnection(scriptHelper).saveResultsId(results);
-			SaveResult[] propertyPreferencesResults = new CreateObjects(scriptHelper).createObject("Property_Preference", "EMEA Property Preferences", sContactID, null, null, null, null, null, null);
-			new EstablishConnection(scriptHelper).saveResultsId(propertyPreferencesResults);
+			String sQuery = "Select Account_ID__c from Contact where Id = " +"'"+ sContactID + "'";
+			String sAccountID = new SearchTextSOQL(scriptHelper).fetchRecordFieldValue("AccountID__c", sQuery);
+			SaveResult[] propertyPreferencesResults = new CreateObjects(scriptHelper).createObject("Property_Preference", "EMEA Property Preferences", sContactID, sAccountID, null, null, null, null, null);
+		    String sPropertyPreferenceID = new EstablishConnection(scriptHelper).saveResultsId(propertyPreferencesResults);
+		    String sQueryAssociation = "Select Contact__c from Property_Preferences__c where Id =" + "'" + sPropertyPreferenceID + "'";
+		    String sRetrievedContatID = new SearchTextSOQL(scriptHelper).fetchRecordFieldValue("Contact__c", sQueryAssociation);
+		    if(sRetrievedContatID.equals(sContactID)) {
+				report.updateTestLog("Validating Contact Property Preference", "Contact has been associated with the property preference successfully:::", Status.PASS);				
+			} else {
+				report.updateTestLog("Validating Contact Property Preference", "Contact association failed with property preference:::", Status.FAIL);
+				
+			}
 		}
 		
 		/**
@@ -190,7 +200,7 @@ public class BC_AdminReleaseR49 extends ReusableLibrary {
 		 * @author Haritha
 		 *
 		 */
-		public void bc_verifyPropertyTypeTotalSizeFields() {
+		public void bc_verifyPropertyTotalSizeFields() {
 			SaveResult[] results = new CreateObjects(scriptHelper).createObject("Property", "APAC Property", "3500", null, null, null, null, null, null);
 			String sPropertyID = new EstablishConnection(scriptHelper).saveResultsId(results);
 			String sQuery = "Select Total_Property_SF__c from Property__c where Id = " + "'" + sPropertyID + "'";
