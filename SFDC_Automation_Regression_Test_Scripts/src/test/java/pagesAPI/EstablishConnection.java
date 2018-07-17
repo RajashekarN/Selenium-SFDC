@@ -742,6 +742,8 @@ public class EstablishConnection extends ReusableLibrary {
 					query = "Select Id from User where Id = " + "'" + result + "'";
 				} else if (result.startsWith("00U")) {
 					query = "Select Id from Event where Id = " + "'" + result + "'";
+				} else if (result.startsWith("a2I")) {
+					query = "Select Id from Property_Preference where Id = " + "'" + result + "'";
 				}
 				SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
 				String name = searchTextSOQL.fetchRecordFieldValue("Name", query);

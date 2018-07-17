@@ -414,6 +414,30 @@ public class SearchTextSOQL extends ReusableLibrary {
 							recordID = (String) record.getField("Outcome_Color__c");
 							report.updateTestLog("Verify Fetch Record",
 									"Record has been fetched successfully:::" + recordID, Status.PASS);
+						}  else if (fieldname.equals("LeadSource")) {
+							recordID = (String) record.getField("LeadSource");
+							report.updateTestLog("Verify Fetch Record",
+									"Record has been fetched successfully:::" + recordID, Status.PASS);
+						} else if (fieldname.equals("Total_Property_SF__c")) {
+							recordID = (String) record.getField("Total_Property_SF__c");
+							report.updateTestLog("Verify Fetch Record",
+									"Record has been fetched successfully:::" + recordID, Status.PASS);
+						} else if (fieldname.equals("Property_Type__c")) {
+							recordID = (String) record.getField("Property_Type__c");
+							report.updateTestLog("Verify Fetch Record",
+									"Record has been fetched successfully:::" + recordID, Status.PASS);
+						} else if (fieldname.equals("Assignment_Start_Date__c")) {
+							recordID = (String) record.getField("Assignment_Start_Date__c");
+							report.updateTestLog("Verify Fetch Record",
+									"Record has been fetched successfully:::" + recordID, Status.PASS);
+						} else if (fieldname.equals("Assignment_End_Date__c")) {
+							recordID = (String) record.getField("Assignment_End_Date__c");
+							report.updateTestLog("Verify Fetch Record",
+									"Record has been fetched successfully:::" + recordID, Status.PASS);
+						} else if (fieldname.equals("Service_Sub_Type__c")) {
+							recordID = (String) record.getField("Service_Sub_Type__c");
+							report.updateTestLog("Verify Fetch Record",
+									"Record has been fetched successfully:::" + recordID, Status.PASS);
 						} else {
 							recordID = (String) record.getField("Id");
 							report.updateTestLog("Verify Fetch Record",

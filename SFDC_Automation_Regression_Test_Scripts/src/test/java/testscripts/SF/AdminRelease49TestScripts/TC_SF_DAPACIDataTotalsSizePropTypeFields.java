@@ -23,8 +23,8 @@ import com.cognizant.framework.selenium.SeleniumTestParameters;
   public class TC_SF_DAPACIDataTotalsSizePropTypeFields extends CRAFTTestCase {
 	  
   
-		@Test(groups= {"REGRESSION","UI","Manager","Opportunity","Field"},dataProvider = "AdminRelease49TestScripts")
-		public void runTC_SF_CMEMEABrokerCAOpportunitiesNetFee(String testInstance, ExecutionMode executionMode, Platform platform
+		@Test(groups= {"REGRESSION","API","Manager","Property","Field"},dataProvider = "RegressionTestScripts")
+		public void runTC_SF_DAPACIDataTotalsSizePropTypeFields(String testInstance, ExecutionMode executionMode, Platform platform
 				/*MobileToolName mobileToolName,
 						MobileExecutionPlatform executionPlatform, String deviceName*/)
 		{
@@ -34,18 +34,24 @@ import com.cognizant.framework.selenium.SeleniumTestParameters;
 			testParameters.setBrowser(Browser.CHROME);
 			testParameters.setExecutionMode(executionMode);
 			testParameters.setPlatform(platform);
-			DriverScript driverScript = new DriverScript(testParameters);
-			driverScript.driveTestExecution();
-			tearDownTestRunner(testParameters, driverScript);
-		}
+			DriverScript driverScript = new DriverScript(testParameters);		
+			driverScript = new DriverScript(testParameters);
+			runDriverScript(driverScript, testParameters);
+			}
 
-		@DataProvider(name = "AdminRelease49TestScripts", parallel = false)
-		public Object[][] dataTC2() {
-			return new Object[][] { { "Instance1", ExecutionMode.LOCAL, Platform.WINDOWS /*ExecutionMode.LOCAL,
-							MobileToolName.APPIUM, MobileExecutionPlatform.IOS,
-							"4d005cb2c4938197"*/ },
-			};
-		}
+			private void runDriverScript(DriverScript driverScript, SeleniumTestParameters testParameters){
+				driverScript.setIsAPITest(true);
+				driverScript.driveTestExecution();
+				tearDownTestRunner(testParameters, driverScript);
+			}
+
+			@DataProvider(name = "RegressionTestScripts", parallel = false)
+			public Object[][] dataTC2() {
+				return new Object[][] { { "Instance1", ExecutionMode.LOCAL, Platform.WINDOWS /*ExecutionMode.LOCAL,
+								MobileToolName.APPIUM, MobileExecutionPlatform.IOS,
+								"4d005cb2c4938197"*/ },
+				};
+			}
   }
 	
 

@@ -5372,7 +5372,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 	 */
 	
 	public void validateOpportunityCbre360Field() {
-		SaveResult[] sResults = new CreateObjects(scriptHelper).createObject("Opportunity", "012i0000000405jAAA", "2000", "Square Feet", "APAC", "Australia", "Yes", null, null);
+		SaveResult[] sResults = new CreateObjects(scriptHelper).createObject("Opportunity", "Asset Services", "2000", "Square Feet", "APAC", "Australia", "Yes", null, null);
 		boolean isStatus = new EstablishConnection(scriptHelper).saveResults(sResults);
 		if (isStatus==true) {
 			report.updateTestLog("Verify Home Page Tabs", "The opportunity is saved with the all the required fields",
