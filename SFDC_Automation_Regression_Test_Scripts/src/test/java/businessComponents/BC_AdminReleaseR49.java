@@ -64,6 +64,7 @@ public class BC_AdminReleaseR49 extends ReusableLibrary {
 	
 	public void bc_CBRE360CloseDate() {
 		String sFieldName = "CBRE 360 Close Date"; String sUsername = "testuser6@cbre.com.crm";
+		new EstablishConnection(scriptHelper).establishConnectionAdminLogin();
 		new PermissionSetsUsers(scriptHelper).updateRoleProfile(sUsername, "Asset Services AMER", null, "Role-Only");
 		List<String> pageFields = new EstablishConnection(scriptHelper).establishMetaDataConnectionPageLayouts("Opportunity_Reporting__c", "Asset Services - CBRE 360");
 		int count=0;
@@ -90,17 +91,17 @@ public class BC_AdminReleaseR49 extends ReusableLibrary {
 	 *
 	 */
 	public void bc_pacCmMetroSpecialCategories() {
-		pacCmMetroSpecialCategories();
+		validatePacCmMetroSpecialCategories();
 	}
 	
 		static ArrayList<String> pacCmMetroSpecialCategories = new ArrayList<String>();
 
 		public void pacCmMetroSpecialCategories() { 
-			pacCmMetroSpecialCategories.add("Investor ($5m+)");
-			pacCmMetroSpecialCategories.add("Investor Medium (Under $5m)");
+			pacCmMetroSpecialCategories.add("Investor %28%245m%2B%29");
+			pacCmMetroSpecialCategories.add("Investor Medium %28Under %245m%29");
 			pacCmMetroSpecialCategories.add("North Shore Investor");
 			pacCmMetroSpecialCategories.add("West Auckland Investor");
-			pacCmMetroSpecialCategories.add("Industrial Investor – Medium (Under $5m)");
+			pacCmMetroSpecialCategories.add("Industrial Investor %E2%80%93 Medium %28Under %245m%29");
 			pacCmMetroSpecialCategories.add("Childcare Investor");
 			pacCmMetroSpecialCategories.add("Childcare Operator");
 			pacCmMetroSpecialCategories.add("North Shore Office Tenant");
@@ -114,7 +115,7 @@ public class BC_AdminReleaseR49 extends ReusableLibrary {
 		
 		public void validatePacCmMetroSpecialCategories() {
 			pacCmMetroSpecialCategories();
-			List<String> newContactPacCmPicklistValues = new SF_UtilityFunctions(scriptHelper).getPickListValues("Opportunity", "France_Consulting_Service", "Referral_Recipient_Business_Line__c");
+			List<String> newContactPacCmPicklistValues = new SF_UtilityFunctions(scriptHelper).getPickListValues("Contact", "CBRE_Client_Contact", "PAC_Capital_Markets_Metro_special_catego__c");
 			List<String> pacCmMetroSpecialCategoriesList = new ArrayList<String>();
 			pacCmMetroSpecialCategoriesList = Utility_Functions.xValidatePickListValuesPage(pacCmMetroSpecialCategories, newContactPacCmPicklistValues, "New Contact PAC CM field pick list values");
 			if (pacCmMetroSpecialCategoriesList.size()!=0) {
