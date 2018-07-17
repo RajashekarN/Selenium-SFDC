@@ -1185,7 +1185,7 @@ public class OpportunitiesPage extends ReusableLibrary {
 			String environment = loginPage.initializeEnvironment();
 			config = new ConnectorConfig();
 			if ((environment.equals("UAT")) || (environment.equals("UAT2")) || (environment.equals("FTE"))
-					|| (environment.equals("FTE2"))) {
+					|| (environment.equals("FTE2")) || (environment.equals("FTE4"))) {
 				if ((dataTable.getData("General_Data", "TC_ID").contains("GWSAPAC"))
 						&& (dataTable.getData("General_Data", "TC_ID").contains("Manager"))) {
 					config.setUsername(properties.getProperty("GWSAPACManager") + "." + environment);
@@ -1233,6 +1233,9 @@ public class OpportunitiesPage extends ReusableLibrary {
 			} else if (environment.equals("FTE2")) {
 				config.setPassword(properties.getProperty("FTE2Password"));
 				config.setAuthEndpoint(properties.getProperty("FTE2AuthEndpoint"));
+			} else if (environment.equals("FTE4")) {
+				config.setPassword(properties.getProperty("FTE4Password"));
+				config.setAuthEndpoint(properties.getProperty("FTE4AuthEndpoint"));
 			} else if (environment.equals("UAT2")) {
 				config.setPassword(properties.getProperty("UAT2Password"));
 				config.setAuthEndpoint(properties.getProperty("UAT2AuthEndpoint"));
@@ -1648,6 +1651,12 @@ public class OpportunitiesPage extends ReusableLibrary {
 				config.setUsername(properties.getProperty("SystemAdminUsername") + "." + environment);
 				config.setPassword(properties.getProperty("FTE2AdminPassword"));
 				config.setAuthEndpoint(FTE2_AuthEndpoint);
+			} else if (environment.equals("FTE4")) {
+				String FTE4_AuthEndpoint = properties.getProperty("FTE4AuthEndpoint");
+				config = new ConnectorConfig();
+				config.setUsername(properties.getProperty("SystemAdminUsername") + "." + environment);
+				config.setPassword(properties.getProperty("FTE4AdminPassword"));
+				config.setAuthEndpoint(FTE4_AuthEndpoint);
 			}
 			connection = new PartnerConnection(config);
 

@@ -148,7 +148,7 @@ public class LoginPage extends ReusableLibrary {
 		invokeApplication();
 		try {
 			if ((environment.equals("UAT")) || (environment.equals("UAT2")) || (environment.equals("FTE"))
-					|| (environment.equals("FTE2"))) {
+					|| (environment.equals("FTE2")) || (environment.equals("FTE4"))) {
 				if (dataTable.getData("General_Data", "TC_ID").contains("Admin")) {
 					Utility_Functions.xSendKeys(driver, txt_userName, properties.getProperty("SystemAdminUsername") + "." + environment);
 				} else if ((dataTable.getData("General_Data", "TC_ID").contains("OBAMER")) && (dataTable.getData("General_Data", "TC_ID").contains("CSS"))) {
@@ -383,8 +383,13 @@ public class LoginPage extends ReusableLibrary {
 				} else {
 					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTE2Password"));
 				}
-			}
-			if (environment.equals("UAT2")) {
+			} else if (environment.equals("FTE4")) {
+				if (dataTable.getData("General_Data", "TC_ID").contains("Admin")) {
+					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTE4AdminPassword"));
+				} else {
+					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("FTE4Password"));
+				}
+			} else if (environment.equals("UAT2")) {
 				if (dataTable.getData("General_Data", "TC_ID").contains("Admin")) {
 					Utility_Functions.xSendKeys(driver, txt_password, properties.getProperty("UAT2AdminPassword"));
 				} else {
@@ -493,7 +498,7 @@ public class LoginPage extends ReusableLibrary {
 		String sCurrentPassword = dataTable.getData("General_Data", "Password");
 		String sNewPassword = dataTable.getData("General_Data", "NewPassword");
 		if ((environment.equals("UAT")) || (environment.equals("UAT2")) || (environment.equals("FTE"))
-				|| (environment.equals("FTE2"))) {
+				|| (environment.equals("FTE2")) || (environment.equals("FTE4"))) {
 			for (int i = 0; i < userNamesList.size(); i++) {
 				Utility_Functions.timeWait(1);
 				invokeApplication();
@@ -551,7 +556,7 @@ public class LoginPage extends ReusableLibrary {
 		userNames();
 		String sCurrentPassword = environment+dataTable.getData("General_Data", "Password");
 		if ((environment.equals("UAT")) || (environment.equals("UAT2")) || (environment.equals("FTE"))
-				|| (environment.equals("FTE2"))) {
+				|| (environment.equals("FTE2")) || (environment.equals("FTE4"))) {
 			for (int i = 0; i < userNamesList.size(); i++) {
 				Utility_Functions.timeWait(1);
 				invokeApplication();
@@ -604,7 +609,7 @@ public class LoginPage extends ReusableLibrary {
 		environment = environment.toLowerCase();
 
 		//userNamesList.add("testuser1@cbre.com.crm." + environment);
-		userNamesList.add("testuser10@cbre.com.crm." + environment);
+		/*userNamesList.add("testuser10@cbre.com.crm." + environment);
 		userNamesList.add("testuser11@cbre.com.crm." + environment);
 		userNamesList.add("testuser12@cbre.com.crm." + environment);
 		userNamesList.add("testuser13@cbre.com.crm." + environment);
@@ -678,7 +683,7 @@ public class LoginPage extends ReusableLibrary {
 		userNamesList.add("testuser94@cbre.com.crm." + environment);
 		userNamesList.add("testuser95@cbre.com.crm." + environment);
 		userNamesList.add("testuser96@cbre.com.crm." + environment);
-		userNamesList.add("testuser97@cbre.com.crm." + environment);   
+		userNamesList.add("testuser97@cbre.com.crm." + environment);   */
 		userNamesList.add("testuser98@cbre.com.crm." + environment);
 		userNamesList.add("testuser99@cbre.com.crm." + environment);
 		userNamesList.add("testuser100@cbre.com.crm." + environment);
@@ -701,7 +706,7 @@ public class LoginPage extends ReusableLibrary {
 		int count = 0;
 		try {
 			if ((environment.equals("UAT")) || (environment.equals("UAT2")) || (environment.equals("FTE"))
-					|| (environment.equals("FTE2"))) {
+					|| (environment.equals("FTE2")) || (environment.equals("FTE4"))) {
 				for (int i = 0; i < userNamesList.size(); i++) {
 					Utility_Functions.timeWait(1);
 					invokeApplication();

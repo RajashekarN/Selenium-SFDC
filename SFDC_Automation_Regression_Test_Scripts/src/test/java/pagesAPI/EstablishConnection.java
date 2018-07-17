@@ -88,7 +88,7 @@ public class EstablishConnection extends ReusableLibrary {
 			System.out.println(environment);
 			String Username = null, Password = null;
 			if ((environment.equals("UAT")) || (environment.equals("UAT2")) || (environment.equals("FTE"))
-					|| (environment.equals("FTE2"))) {
+					|| (environment.equals("FTE2")) || (environment.equals("FTE4"))) {
 				if ((dataTable.getData("General_Data", "TC_ID").contains("OBEMEA"))
 						&& (dataTable.getData("General_Data", "TC_ID").contains("Broker"))
 						&& (!dataTable.getData("General_Data", "TC_ID").contains("Admin")))
@@ -344,7 +344,7 @@ public class EstablishConnection extends ReusableLibrary {
 				if (dataTable.getData("General_Data", "TC_ID").contains("Admin")) {
 					Password = properties.getProperty("FTEAdminPassword");
 				} else {
-					Password = properties.getProperty("FTE2Password");
+					Password = properties.getProperty("FTEPassword");
 				}
 				String FTE_AuthEndpoint = properties.getProperty("FTEAuthEndpoint");
 				config = new ConnectorConfig();
@@ -366,6 +366,19 @@ public class EstablishConnection extends ReusableLibrary {
 				System.out.println("AuthEndPoint: " + FTE2_AuthEndpoint);
 				config.setAuthEndpoint(FTE2_AuthEndpoint);
 				connection = new PartnerConnection(config);
+			} else if (environment.equals("FTE4")) {
+				if (dataTable.getData("General_Data", "TC_ID").contains("Admin")) {
+					Password = properties.getProperty("FTE4AdminPassword");
+				} else {
+					Password = properties.getProperty("FTE4Password");
+				}
+				String FTE4_AuthEndpoint = properties.getProperty("FTE4AuthEndpoint");
+				config = new ConnectorConfig();
+				config.setUsername(Username);
+				config.setPassword(Password);
+				System.out.println("AuthEndPoint: " + FTE4_AuthEndpoint);
+				config.setAuthEndpoint(FTE4_AuthEndpoint);
+				connection = new PartnerConnection(config);
 			}
 		} catch (ConnectionException e) {
 			e.printStackTrace();
@@ -378,7 +391,7 @@ public class EstablishConnection extends ReusableLibrary {
 			System.out.println(environment);
 			String Username = null, Password;
 			if ((environment.equals("UAT")) || (environment.equals("UAT2")) || (environment.equals("FTE"))
-					|| (environment.equals("FTE2"))) {
+					|| (environment.equals("FTE2")) || (environment.equals("FTE4"))) {
 				Username = properties.getProperty("SystemAdminUsername") + "." + environment;
 			}
 			if (environment.equals("UAT")) {
@@ -418,6 +431,15 @@ public class EstablishConnection extends ReusableLibrary {
 				System.out.println("AuthEndPoint: " + FTE2_AuthEndpoint);
 				config.setAuthEndpoint(FTE2_AuthEndpoint);
 				connection = new PartnerConnection(config);
+			} else if (environment.equals("FTE4")) {
+				Password = properties.getProperty("FTE4AdminPassword");
+				String FTE4_AuthEndpoint = properties.getProperty("FTE4AuthEndpoint");
+				config = new ConnectorConfig();
+				config.setUsername(Username);
+				config.setPassword(Password);
+				System.out.println("AuthEndPoint: " + FTE4_AuthEndpoint);
+				config.setAuthEndpoint(FTE4_AuthEndpoint);
+				connection = new PartnerConnection(config);
 			}
 		} catch (ConnectionException e) {
 			e.printStackTrace();
@@ -436,7 +458,7 @@ public class EstablishConnection extends ReusableLibrary {
 		try {
 			String environment = initializeEnvironment();
 			if ((environment.equals("UAT")) || (environment.equals("UAT2")) || (environment.equals("FTE"))
-					|| (environment.equals("FTE2"))) {
+					|| (environment.equals("FTE2")) || (environment.equals("FTE4"))) {
 				String Username = properties.getProperty("SystemAdminUsername") + "." + environment;
 				String Password = properties.getProperty(environment + "AdminPassword");
 				String AuthEndpoint = properties.getProperty(environment + "AuthEndpoint");

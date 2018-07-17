@@ -216,7 +216,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 			String userName;
 			LoginPage loginPage = new LoginPage(scriptHelper);
 			String environment = loginPage.initializeEnvironment();
-			if ((environment.equalsIgnoreCase("FTE2")) || (environment.equalsIgnoreCase("UAT2"))) {
+			if ((environment.equalsIgnoreCase("FTE2")) || (environment.equalsIgnoreCase("UAT2")) || (environment.equalsIgnoreCase("FTE4"))) {
 				userName = userNameList.get(i).substring(0, userNameList.get(i).length() - 4);
 			} else {
 				userName = userNameList.get(i).substring(0, userNameList.get(i).length() - 3);
@@ -854,7 +854,7 @@ public class PermissionSetsUsers extends ReusableLibrary {
 	public String setRoleProfileTimeZone(String userName) throws Exception {
 		String roleProfileTimeZone = null;	
 		environment = new LoginPage(scriptHelper).initializeEnvironment();
-		if ((environment.equalsIgnoreCase("FTE2")) || (environment.equalsIgnoreCase("UAT2"))) {
+		if ((environment.equalsIgnoreCase("FTE2")) || (environment.equalsIgnoreCase("UAT2")) || (environment.equalsIgnoreCase("FTE4"))) {
 			userName = userName.substring(0, userName.length() - 4);
 		} else {
 			userName = userName.substring(0, userName.length() - 3);
