@@ -406,6 +406,23 @@ public class OpportunityPageLayout extends ReusableLibrary {
 		report.updateTestLog("Verify Opportunity Page Headers", "Opportunity page headers are:::" + OpportunityPageHeadersOBAMERList, Status.PASS);
 	}
 	
+	static ArrayList<String> OpportunityPageHeadersAPAC = new ArrayList<String>();
+	
+	public void OpportunityPageHeadersAPAC() {
+		OpportunityPageHeadersAPAC.add("Opportunity Information");
+		OpportunityPageHeadersAPAC.add("Financial Details/Sales Stages");
+		OpportunityPageHeadersAPAC.add("Pursuit/Appointment Information");
+		OpportunityPageHeadersAPAC.add("Requirements");
+		OpportunityPageHeadersAPAC.add("Close Information");
+		OpportunityPageHeadersAPAC.add("Loss/Cancel Information");
+		OpportunityPageHeadersAPAC.add("Related Opportunities");
+		OpportunityPageHeadersAPAC.add("Tagging");
+		OpportunityPageHeadersAPAC.add("System Information");
+		report.updateTestLog("Verify Opportunity Page Headers", "Opportunity page headers are:::" + OpportunityPageHeadersAPAC, Status.PASS);
+	}
+	
+	
+	
 	static ArrayList<String> OpportunityPageLabelsOBAMERList = new ArrayList<String>();
 
 	
@@ -588,6 +605,87 @@ public class OpportunityPageLayout extends ReusableLibrary {
 
 	}
 	
+	static ArrayList<String> OpportunityPageFieldLabelsAPACList = new ArrayList<String>();
+	
+	public void OpportunityPageFieldLabelsAPAC() {
+		//Opportunity Information
+		
+		OpportunityPageFieldLabelsAPACList.add("Account Name");
+		OpportunityPageFieldLabelsAPACList.add("Opportunity Name");
+		OpportunityPageFieldLabelsAPACList.add("Primary Contact");
+		OpportunityPageFieldLabelsAPACList.add("Location");
+		OpportunityPageFieldLabelsAPACList.add("Lead Source");
+		OpportunityPageFieldLabelsAPACList.add("Parent Opportunity");
+		OpportunityPageFieldLabelsAPACList.add("Assignment Type");
+		OpportunityPageFieldLabelsAPACList.add("Priority");
+		OpportunityPageFieldLabelsAPACList.add("Assignment Sub-Type");
+		OpportunityPageFieldLabelsAPACList.add("Confidential Opportunity");
+		OpportunityPageFieldLabelsAPACList.add("Assignment Sub-Type Reason");
+		OpportunityPageFieldLabelsAPACList.add("Property Use"); 
+		OpportunityPageFieldLabelsAPACList.add("Opportunity Details");
+		OpportunityPageFieldLabelsAPACList.add("Status Comments");
+		
+	    //Financial Details / Sales Stages
+		
+		
+		OpportunityPageFieldLabelsAPACList.add("Estimated Gross Fee/Commission");
+		OpportunityPageFieldLabelsAPACList.add("Close Date");
+		OpportunityPageFieldLabelsAPACList.add("Sales Stage");
+		OpportunityPageFieldLabelsAPACList.add("On Hold");
+		OpportunityPageFieldLabelsAPACList.add("Probability (%)");
+		OpportunityPageFieldLabelsAPACList.add("On Hold Comments");
+		OpportunityPageFieldLabelsAPACList.add("Opportunity Currency");
+		
+		
+		//Pursuit/Appointment Information
+		
+		OpportunityPageFieldLabelsAPACList.add("Submission Date");
+		OpportunityPageFieldLabelsAPACList.add("Pursuit LOBs");
+		OpportunityPageFieldLabelsAPACList.add("Outcome Date");
+		OpportunityPageFieldLabelsAPACList.add("RFP");		
+		OpportunityPageFieldLabelsAPACList.add("Win / Loss");
+		OpportunityPageFieldLabelsAPACList.add("Appointment Type");
+		OpportunityPageFieldLabelsAPACList.add("Likelihood of Winning");
+		
+		
+		//Requirements
+		OpportunityPageFieldLabelsAPACList.add("Preferred Property Type");
+		OpportunityPageFieldLabelsAPACList.add("Desired Commencement");
+		OpportunityPageFieldLabelsAPACList.add("Preferred Property Sub-Type");
+		OpportunityPageFieldLabelsAPACList.add("Existing Lease Expiration");
+		OpportunityPageFieldLabelsAPACList.add("Total Size");
+		OpportunityPageFieldLabelsAPACList.add("Existing Termination/Break Option");
+		OpportunityPageFieldLabelsAPACList.add("Unit of Measure");
+		OpportunityPageFieldLabelsAPACList.add("Japan Existing Lease Type");
+		OpportunityPageFieldLabelsAPACList.add("Total # of Units");	
+		OpportunityPageFieldLabelsAPACList.add("Japan Area Code");	
+		OpportunityPageFieldLabelsAPACList.add("Unit of Comparison");	
+		OpportunityPageFieldLabelsAPACList.add("Japan Sub-Area Code 1");	
+		OpportunityPageFieldLabelsAPACList.add("Special Economic Zone");	
+		OpportunityPageFieldLabelsAPACList.add("Japan Sub-Area Code 2");	
+		OpportunityPageFieldLabelsAPACList.add("Japan Sub-Area Code 3");
+		
+		//Close Information
+		OpportunityPageFieldLabelsAPACList.add("Lease From");	
+		OpportunityPageFieldLabelsAPACList.add("Lease Term (Months)");	
+		OpportunityPageFieldLabelsAPACList.add("Lease To");	
+		OpportunityPageFieldLabelsAPACList.add("CBRE Role");	
+		OpportunityPageFieldLabelsAPACList.add("Lease Rate/Rent");	
+		OpportunityPageFieldLabelsAPACList.add("Japan Lease Type");	
+		OpportunityPageFieldLabelsAPACList.add("Lease Rate/Rent BasisThis");	
+		OpportunityPageFieldLabelsAPACList.add("Remarks");	
+		OpportunityPageFieldLabelsAPACList.add("Target Property");	
+		
+		
+		//Loss/Cancel Information
+		OpportunityPageFieldLabelsAPACList.add("Reason for Loss");	
+		OpportunityPageFieldLabelsAPACList.add("Competitor");	
+		OpportunityPageFieldLabelsAPACList.add("Reason Lost Comments");	
+		
+		
+	}
+	
+	
 	public void validateNewOpportunityPage() {
 		List<String> opportunityHeaders = null;
 		List<String> opportunityHeadersList = new ArrayList<String>();
@@ -616,7 +714,13 @@ public class OpportunityPageLayout extends ReusableLibrary {
 			String[] recordID = {"0121Y000001EVzDQAW"};
 			opportunityHeaders = establishConnection.establishMetaDataConnectionPageHeaders("Opportunity", recordID);
 			opportunityHeadersList = Utility_Functions.xValidatePickListValuesPage(OpportunityPageHeadersListFR, opportunityHeaders, "Opportunity - FRANEMEA page Header values");
-		} 
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("APACAdmin")) {
+			String[] recordID = {"012m000000016cRAAQ"};
+			OpportunityPageHeadersAPAC();
+			opportunityHeaders = establishConnection.establishMetaDataConnectionPageHeaders("Opportunity", recordID);
+			opportunityHeadersList = Utility_Functions.xValidatePickListValuesPage(OpportunityPageHeadersCapitalMarkets, opportunityHeaders, "Opportunity page Header values");
+		}
+	
 		if (opportunityHeadersList.size()!=0) {
 			report.updateTestLog("Verify Opportunity Headers", "All the Headers are not present in the Opportunity Page:::" + opportunityHeadersList, Status.FAIL);
 		} else {
@@ -638,7 +742,9 @@ public class OpportunityPageLayout extends ReusableLibrary {
 			opportunityLabels = establishConnection.establishMetaDataConnectionPageLayouts("Opportunity", "France Transaction Demand Agency Opportunity Layout");
 		} else if(dataTable.getData("General_Data", "TC_ID").contains("ASEMEA")){
 			opportunityLabels = establishConnection.establishMetaDataConnectionPageLayouts("Opportunity", "EMEA Asset Services Page Layout");
-		}
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("APACAdmin")){
+			opportunityLabels = establishConnection.establishMetaDataConnectionPageLayouts("Opportunity", "APAC Consulting");
+		}	
 		List<String> opportunityLabelsList = new ArrayList<String>();
 		
 		if(dataTable.getData("General_Data", "TC_ID").contains("FRANEMEA")) {
@@ -676,6 +782,16 @@ public class OpportunityPageLayout extends ReusableLibrary {
 		} else if(dataTable.getData("General_Data", "TC_ID").contains("CMAMER")) {
 			OpportunityPageFieldLabelsCMAMER();
 			opportunityLabelsList = Utility_Functions.xValidatePickListValuesPage(OpportunityPageLabelsCMAMERList, opportunityLabels, "Opportunity page field values");
+			if (opportunityLabelsList.size()!=0) {
+				report.updateTestLog("Verify Opportunity Field Labels", "All the labels are not present in the Opportunity Page:::" + opportunityLabelsList, Status.FAIL);
+			} else {
+				report.updateTestLog("Verify Opportunity Field Labels", "All the labels are present in the Opportunity Page", Status.PASS);
+			}
+		} else if(dataTable.getData("General_Data", "TC_ID").contains("APACAdmin")) {
+			System.out.println(opportunityLabels);
+			OpportunityPageFieldLabelsAPAC();
+			
+			opportunityLabelsList = Utility_Functions.xValidatePickListValuesPage(OpportunityPageFieldLabelsAPACList, opportunityLabels, "Opportunity page field values");
 			if (opportunityLabelsList.size()!=0) {
 				report.updateTestLog("Verify Opportunity Field Labels", "All the labels are not present in the Opportunity Page:::" + opportunityLabelsList, Status.FAIL);
 			} else {

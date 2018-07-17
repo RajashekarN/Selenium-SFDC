@@ -1190,5 +1190,13 @@ public class BC_Salesforce_OpportunitiesPage extends ReusableLibrary {
 	}
 	
 	
+	/**
+	 * @author RNallapati
+	 */
+
+	public void bc_createAPACConsultingOpportunity() {
+		sfOpportunitiesPage.createAPACConsultingOpportunity();
+	}
+	
 	
 }
