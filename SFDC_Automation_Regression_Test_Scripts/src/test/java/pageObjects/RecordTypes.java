@@ -9,6 +9,8 @@ import org.openqa.selenium.support.PageFactory;
 import com.cognizant.Craft.ReusableLibrary;
 import com.cognizant.Craft.ScriptHelper;
 import com.cognizant.framework.Status;
+
+import pagesAPI.SearchTextSOQL;
 import supportLibraries.Utility_Functions;
 
 /**
@@ -106,6 +108,28 @@ public class RecordTypes extends ReusableLibrary {
 		Utility_Functions.xSwitchtoFrame(driver, accountName);		
 		Utility_Functions.timeWait(2);
 	}
+	
+
+	/**
+	 * Retrive Opportunity Record Id 
+	 * 
+	 * @author Vishnuvardhan
+	 *
+	 */
+	
+	public String retriveOppRecordID(String RecordTypeName) {
+		opportunityRecordTypesList();
+		String sRecordID = null;
+		for(int i=0; i < opportunityRecordTypes.size(); i++) {
+			if(opportunityRecordTypes.get(i).equals(RecordTypeName)) {				
+				String sQuery = "Select Id from RecordType where Name = " + "'" + RecordTypeName + "'";
+				sRecordID = new SearchTextSOQL(scriptHelper).fetchRecordFieldValue("Id", sQuery);
+				break;
+			}		
+		}
+		return sRecordID;
+	}	
+	
 	
 	/**
 	 * Page Object Class for Account Record Types

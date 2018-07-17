@@ -810,8 +810,11 @@ public class OpportunitiesFunctions extends ReusableLibrary {
 	SearchTextSOQL searchTextSOQL = new SearchTextSOQL(scriptHelper);
 	
 	public void salesStage03_RFPProposal_07UnderContract() {
+		String sQuery = "Select Id from RecordType where Name = 'Capital Markets – Property Sales' ";
+		String sRecordID = searchTextSOQL.fetchRecordFieldValue("Id", sQuery);
 		String query = "SELECT Estimated_Gross_Fee_Commission__c , Id, Name FROM Opportunity where StageName > '03-RFP/Proposal' and "
-				+ "StageName < '07-Under Contract' and Estimated_Gross_Fee_Commission__c = 0.0 and CBRE_Preferred_Property_Type_c__c !=null limit 10";
+				+ "StageName < '07-Under Contract' and RecordTypeId = " +"'"+sRecordID + "'"+ " and Unit_of_Measure__c !=null and "
+				+ "Estimated_Gross_Fee_Commission__c = 0.0 and CBRE_Preferred_Property_Type_c__c !=null limit 10";
 		String OpportunityID = searchTextSOQL.searchOpportunity(query);
 		System.out.println(OpportunityID);
 		if (OpportunityID == null) {
