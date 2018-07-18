@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="1" total="1" passed="0">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="31921" started-at="2018-07-17T18:58:49Z" finished-at="2018-07-17T18:59:21Z">
+    <groups>
+      <group name="Broker">
+        <method signature="TC_SF_APACAdminCreateAPACConsultingOpportunity.runAPACAdminCreateAPACConsultingOpportunity(java.lang.String, com.cognizant.framework.selenium.ExecutionMode, org.openqa.selenium.Platform)[pri:0, instance:testscripts.SF.Release50TestScripts.TC_SF_APACAdminCreateAPACConsultingOpportunity@31ef45e3]" name="runAPACAdminCreateAPACConsultingOpportunity" class="testscripts.SF.Release50TestScripts.TC_SF_APACAdminCreateAPACConsultingOpportunity"/>
+      </group> <!-- Broker -->
+      <group name="UI">
+        <method signature="TC_SF_APACAdminCreateAPACConsultingOpportunity.runAPACAdminCreateAPACConsultingOpportunity(java.lang.String, com.cognizant.framework.selenium.ExecutionMode, org.openqa.selenium.Platform)[pri:0, instance:testscripts.SF.Release50TestScripts.TC_SF_APACAdminCreateAPACConsultingOpportunity@31ef45e3]" name="runAPACAdminCreateAPACConsultingOpportunity" class="testscripts.SF.Release50TestScripts.TC_SF_APACAdminCreateAPACConsultingOpportunity"/>
+      </group> <!-- UI -->
+      <group name="Project Enquiries">
+        <method signature="TC_SF_APACAdminCreateAPACConsultingOpportunity.runAPACAdminCreateAPACConsultingOpportunity(java.lang.String, com.cognizant.framework.selenium.ExecutionMode, org.openqa.selenium.Platform)[pri:0, instance:testscripts.SF.Release50TestScripts.TC_SF_APACAdminCreateAPACConsultingOpportunity@31ef45e3]" name="runAPACAdminCreateAPACConsultingOpportunity" class="testscripts.SF.Release50TestScripts.TC_SF_APACAdminCreateAPACConsultingOpportunity"/>
+      </group> <!-- Project Enquiries -->
+      <group name="Generate">
+        <method signature="TC_SF_APACAdminCreateAPACConsultingOpportunity.runAPACAdminCreateAPACConsultingOpportunity(java.lang.String, com.cognizant.framework.selenium.ExecutionMode, org.openqa.selenium.Platform)[pri:0, instance:testscripts.SF.Release50TestScripts.TC_SF_APACAdminCreateAPACConsultingOpportunity@31ef45e3]" name="runAPACAdminCreateAPACConsultingOpportunity" class="testscripts.SF.Release50TestScripts.TC_SF_APACAdminCreateAPACConsultingOpportunity"/>
+      </group> <!-- Generate -->
+      <group name="Regression">
+        <method signature="TC_SF_APACAdminCreateAPACConsultingOpportunity.runAPACAdminCreateAPACConsultingOpportunity(java.lang.String, com.cognizant.framework.selenium.ExecutionMode, org.openqa.selenium.Platform)[pri:0, instance:testscripts.SF.Release50TestScripts.TC_SF_APACAdminCreateAPACConsultingOpportunity@31ef45e3]" name="runAPACAdminCreateAPACConsultingOpportunity" class="testscripts.SF.Release50TestScripts.TC_SF_APACAdminCreateAPACConsultingOpportunity"/>
+      </group> <!-- Regression -->
+    </groups>
+    <test name="Default test" duration-ms="31921" started-at="2018-07-17T18:58:49Z" finished-at="2018-07-17T18:59:21Z">
+      <class name="testscripts.SF.Release50TestScripts.TC_SF_APACAdminCreateAPACConsultingOpportunity">
+        <test-method status="PASS" signature="setUpTestSuite(org.testng.ITestContext)[pri:0, instance:testscripts.SF.Release50TestScripts.TC_SF_APACAdminCreateAPACConsultingOpportunity@31ef45e3]" name="setUpTestSuite" is-config="true" duration-ms="49" started-at="2018-07-17T13:58:49Z" finished-at="2018-07-17T13:58:49Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@3d3f761a]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpTestSuite -->
+        <test-method status="FAIL" signature="runAPACAdminCreateAPACConsultingOpportunity(java.lang.String, com.cognizant.framework.selenium.ExecutionMode, org.openqa.selenium.Platform)[pri:0, instance:testscripts.SF.Release50TestScripts.TC_SF_APACAdminCreateAPACConsultingOpportunity@31ef45e3]" name="runAPACAdminCreateAPACConsultingOpportunity" duration-ms="31919" started-at="2018-07-17T13:58:49Z" data-provider="RegressionTestScripts" finished-at="2018-07-17T13:59:21Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Instance1]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[LOCAL]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[WINDOWS]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Cannot locate element with text: APAC Consulting
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.6.0', revision: '6fbf3ec767', time: '2017-09-27T15:28:36.4Z'
+System info: host: 'TX590-5R10QN2', ip: '10.22.20.80', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_171'
+Driver info: driver.version: unknown]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Cannot locate element with text: APAC Consulting
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.6.0', revision: '6fbf3ec767', time: '2017-09-27T15:28:36.4Z'
+System info: host: 'TX590-5R10QN2', ip: '10.22.20.80', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_171'
+Driver info: driver.version: unknown
+	at org.testng.Assert.fail(Assert.java:94)
+	at com.cognizant.Craft.CRAFTTestCase.tearDownTestRunner(CRAFTTestCase.java:156)
+	at testscripts.SF.Release50TestScripts.TC_SF_APACAdminCreateAPACConsultingOpportunity.runAPACAdminCreateAPACConsultingOpportunity(TC_SF_APACAdminCreateAPACConsultingOpportunity.java:28)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:86)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:643)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:820)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1128)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:782)
+	at org.testng.TestRunner.run(TestRunner.java:632)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:366)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:361)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:319)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:268)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1244)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1169)
+	at org.testng.TestNG.run(TestNG.java:1064)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runAPACAdminCreateAPACConsultingOpportunity -->
+        <test-method status="PASS" signature="setUpTestRunner()[pri:0, instance:testscripts.SF.Release50TestScripts.TC_SF_APACAdminCreateAPACConsultingOpportunity@31ef45e3]" name="setUpTestRunner" is-config="true" duration-ms="0" started-at="2018-07-17T13:58:49Z" finished-at="2018-07-17T13:58:49Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpTestRunner -->
+        <test-method status="PASS" signature="tearDownTestSuite()[pri:0, instance:testscripts.SF.Release50TestScripts.TC_SF_APACAdminCreateAPACConsultingOpportunity@31ef45e3]" name="tearDownTestSuite" is-config="true" duration-ms="33" started-at="2018-07-17T13:59:21Z" finished-at="2018-07-17T13:59:21Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownTestSuite -->
+      </class> <!-- testscripts.SF.Release50TestScripts.TC_SF_APACAdminCreateAPACConsultingOpportunity -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
